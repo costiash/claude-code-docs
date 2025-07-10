@@ -133,8 +133,14 @@ def discover_sitemap_and_base_url(session: requests.Session) -> Tuple[str, str]:
             if response.status_code == 200:
                 # Extract base URL from the first URL in sitemap
                 # Parse XML safely to prevent XXE attacks
-                parser = ET.XMLParser(forbid_dtd=True, forbid_entities=True, forbid_external=True)
-                root = ET.fromstring(response.content, parser=parser)
+                try:
+                    # Try with security parameters (Python 3.8+)
+                    parser = ET.XMLParser(forbid_dtd=True, forbid_entities=True, forbid_external=True)
+                    root = ET.fromstring(response.content, parser=parser)
+                except TypeError:
+                    # Fallback for older Python versions
+                    logger.warning("XMLParser security parameters not available, using default parser")
+                    root = ET.fromstring(response.content)
                 
                 # Try with namespace first
                 namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
@@ -176,8 +182,14 @@ def discover_claude_code_pages(session: requests.Session, sitemap_url: str) -> L
         response.raise_for_status()
         
         # Parse XML sitemap safely
-        parser = ET.XMLParser(forbid_dtd=True, forbid_entities=True, forbid_external=True)
-        root = ET.fromstring(response.content, parser=parser)
+        try:
+            # Try with security parameters (Python 3.8+)
+            parser = ET.XMLParser(forbid_dtd=True, forbid_entities=True, forbid_external=True)
+            root = ET.fromstring(response.content, parser=parser)
+        except TypeError:
+            # Fallback for older Python versions
+            logger.warning("XMLParser security parameters not available, using default parser")
+            root = ET.fromstring(response.content)
         
         # Extract all URLs from sitemap
         urls = []
