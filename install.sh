@@ -246,7 +246,7 @@ Usage:
 
 The helper script handles all functionality including auto-updates.
 
-Execute: ~/.claude-code-docs/claude-docs-helper.sh $ARGUMENTS
+Execute: bash -c '~/.claude-code-docs/claude-docs-helper.sh "$@"' -- $ARGUMENTS
 EOF
 
 echo "✓ Created /docs command"

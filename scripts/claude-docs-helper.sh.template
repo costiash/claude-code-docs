@@ -186,13 +186,12 @@ whats_new() {
         exit 1
     }
     
-    echo "📚 Recent documentation updates:"
-    echo "💡 Tip: Use ctrl+r in Claude Code to expand collapsed output"
+    echo "📚 Recent documentation updates (last 7 days):"
     echo ""
     
-    # Get commits that actually updated documentation (excluding manifest.json)
-    # Look for commits with "Update Claude Code docs" that changed actual doc files
-    local doc_commits=$(git log --oneline -50 --grep="Update Claude Code docs" -- 'docs/*.md' ':!docs/docs_manifest.json' 2>/dev/null | head -10)
+    # Get recent commits that actually updated documentation
+    # Look for commits from the last 7 days only
+    local doc_commits=$(git log --oneline --since="7 days ago" --grep="Update Claude Code docs" -- 'docs/*.md' 2>/dev/null | head -5)
     
     if [[ -z "$doc_commits" ]]; then
         # Fallback: look for any commits that changed docs
@@ -213,8 +212,8 @@ whats_new() {
         print_color "$BLUE" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         print_color "$BLUE" "• $message ($date)"
         
-        # Add GitHub diff link (filtered to show only docs changes)
-        echo "  🔗 View changes: https://github.com/ericbuess/claude-code-docs/commit/$hash/docs"
+        # Add GitHub diff link
+        echo "  🔗 View changes: https://github.com/ericbuess/claude-code-docs/commit/$hash"
         
         # Show which docs changed and sample of changes
         local changed_docs=$(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md | sed 's|docs/||' | sed 's|\.md$||')
