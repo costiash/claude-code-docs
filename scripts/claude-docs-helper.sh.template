@@ -282,6 +282,15 @@ whats_new() {
     echo ""
     echo "💡 For detailed explanations of any changes, read the specific documentation"
     echo "   using: /docs <topic> (e.g., /docs hooks, /docs setup)"
+    
+    # Summary for easy reference
+    echo ""
+    echo "📊 Summary of changes:"
+    while IFS= read -r commit; do
+        local hash=$(echo "$commit" | cut -d' ' -f1)
+        local date=$(git show -s --format=%cr "$hash")
+        echo "• $date: https://github.com/ericbuess/claude-code-docs/commit/$hash"
+    done <<< "$doc_commits"
 }
 
 # Function for uninstall
@@ -325,6 +334,9 @@ uninstall() {
     print_color "$GREEN" "✅ Uninstall complete!"
 }
 
+# Combine all arguments into one string for easier parsing
+FULL_ARGS="$*"
+
 # Main command handling
 case "${1:-}" in
     -t|--check)
@@ -347,11 +359,8 @@ case "${1:-}" in
         list_docs
         ;;
     *)
-        # Check various forms of "what's new" command
-        if [[ "$1" == "what's" && "${2:-}" == "new" ]] || \
-           [[ "$1" == "whats" && "${2:-}" == "new" ]] || \
-           [[ "$1 ${2:-}" == "what's new" ]] || \
-           [[ "$1" == "what" && "${2:-}" == "is" && "${3:-}" == "new" ]]; then
+        # Check if the full arguments match "what's new" pattern
+        if [[ "$FULL_ARGS" =~ ^what.?s?\ ?new.*$ ]]; then
             whats_new
         else
             # Check migration notice before reading docs
