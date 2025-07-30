@@ -329,55 +329,40 @@ whats_new() {
 # Function for uninstall
 uninstall() {
     print_doc_header
-    print_color "$GREEN" "Claude Code Documentation Mirror - Uninstaller"
-    print_color "$GREEN" "============================================="
+    print_color "$GREEN" "Uninstall Information"
+    print_color "$GREEN" "===================="
+    echo ""
+    
+    # Show docs mirror uninstall info
+    echo "📚 To uninstall Claude Code Documentation Mirror:"
+    print_color "$YELLOW" "~/.claude-code-docs/uninstall.sh"
     echo ""
     echo "This will remove:"
-    echo "  1. The docs command: ~/.claude/commands/docs.md"
-    echo "  2. The auto-update hook from: ~/.claude/settings.json"
-    echo "  3. The installation directory: ~/.claude-code-docs"
+    echo "  • The /docs command from ~/.claude/commands/docs.md"
+    echo "  • The auto-update hook from ~/.claude/settings.json"
+    echo "  • The installation directory ~/.claude-code-docs"
     echo ""
     
-    # Check if running interactively
-    if [[ ! -t 0 ]]; then
-        echo "To uninstall Claude Code Documentation Mirror, run this command directly in your terminal:"
-        echo ""
-        print_color "$YELLOW" "~/.claude-code-docs/uninstall.sh"
-        echo ""
-        echo "Or use the helper script directly:"
-        echo ""
-        print_color "$YELLOW" "~/.claude-code-docs/claude-docs-helper.sh uninstall"
-        exit 0
+    # Search for Claude Code uninstall info in docs
+    echo "💻 To uninstall Claude Code itself:"
+    
+    # Check setup.md for uninstall info
+    if [[ -f "$DOCS_PATH/docs/setup.md" ]]; then
+        local uninstall_info=$(grep -i -A 5 -B 2 "uninstall" "$DOCS_PATH/docs/setup.md" 2>/dev/null | head -20)
+        if [[ -n "$uninstall_info" ]]; then
+            echo "From the setup documentation:"
+            echo "$uninstall_info" | sed 's/^/  /'
+        else
+            echo "• For installation-specific uninstall instructions, see: /docs setup"
+            echo "• Or check: /docs troubleshooting"
+        fi
+    else
+        echo "• For installation-specific uninstall instructions, see: /docs setup"
+        echo "• Or check: /docs troubleshooting"
     fi
-    
-    read -p "Are you sure? (y/N): " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        echo "Cancelled."
-        exit 0
-    fi
-    
-    # Remove command
-    rm -f ~/.claude/commands/docs.md
-    print_color "$GREEN" "✓ Removed command file"
-    
-    # Remove hook
-    if [[ -f ~/.claude/settings.json ]]; then
-        cp ~/.claude/settings.json ~/.claude/settings.json.backup
-        jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.hooks[0].command | contains("claude-code-docs") | not)]' ~/.claude/settings.json > ~/.claude/settings.json.tmp
-        
-        # Clean up empty arrays/objects
-        jq 'if .hooks.PreToolUse == [] then .hooks |= if . == {PreToolUse: []} then {} else del(.PreToolUse) end else . end | if .hooks == {} then del(.hooks) else . end' ~/.claude/settings.json.tmp > ~/.claude/settings.json
-        rm -f ~/.claude/settings.json.tmp
-        print_color "$GREEN" "✓ Removed hook from settings"
-    fi
-    
-    # Remove directory
-    cd "$HOME"  # Move out of the directory
-    rm -rf "$DOCS_PATH"
-    print_color "$GREEN" "✓ Removed installation directory"
     echo ""
-    print_color "$GREEN" "✅ Uninstall complete!"
+    echo "For more details on Claude Code uninstallation, visit:"
+    echo "https://docs.anthropic.com/en/docs/claude-code/setup"
 }
 
 # Combine all arguments into one string for easier parsing
