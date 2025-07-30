@@ -1,12 +1,13 @@
 # Claude Code Docs v0.3 Implementation Status
 
-## Current Status - FINAL FIX COMPLETE! 🚀
+## Current Status - ALL FIXES COMPLETE! 🚀
 - **Branch**: dev-v0.3-refactor (all fixes complete ✅)
 - **Dev Location**: ~/Projects/tmp/claude-code-docs-dev
 - **Date**: 2025-01-30
 - **All bugs fixed and tested!**
 - **v0.2 to v0.3 auto-update tested and working!**
 - **What's new output now concise (30 lines) with inline links!**
+- **Fixed -t flag parsing when Claude Code passes args as single string!**
 
 ## Major Improvements Complete! 🎉
 1. ✅ **Auto-update on every request** - No manual syncing needed
@@ -24,6 +25,7 @@
 13. ✅ **Fixed EOF error** - Properly quoted $ARGUMENTS in command file
 14. ✅ **Fixed bash syntax** - Removed 'local' from case statement
 15. ✅ **Concise what's new** - Only 30 lines with inline links, no collapse!
+16. ✅ **Fixed -t flag parsing** - Works with "what's new" and doc topics
 
 ## Implementation Complete (40/40 tasks) ✅
 - Fixed installation location at ~/.claude-code-docs
