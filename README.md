@@ -6,19 +6,20 @@ Local mirror of Claude Code documentation files from https://docs.anthropic.com/
 
 ## Why This Exists
 
-- **Faster than web fetching** - Read from local files instantly
-- **Works offline** - No internet required after cloning
+- **Faster than web fetching** - Read from local files
 - **Always up-to-date** - Auto-updates every 3 hours via GitHub Actions
+- **Track documentation evolution** - See exactly what changed in docs over time with git diffs
+- **Empower Claude Code** - Gives Claude the ability to deeply explore many doc files easily by referencing the manifest
 
 ## Prerequisites
 
 This tool requires the following to be installed:
-- **git** - For cloning and updating the repository
-- **jq** - For JSON processing in the auto-update hook
-- **curl** - For downloading the installation script
+- **git** - For cloning and updating the repository (usually pre-installed)
+- **jq** - For JSON processing in the auto-update hook (pre-installed on macOS; Linux users may need `apt install jq` or `yum install jq`)
+- **curl** - For downloading the installation script (usually pre-installed)
 - **Claude Code** - Obviously :)
 
-**Platform Support**: macOS and Linux. Windows support contributions welcome!
+**Platform Support**: macOS and Linux are fully supported. Windows support contributions welcome!
 
 ## Installation
 
@@ -28,31 +29,33 @@ Run this single command from wherever you want to store the docs:
 curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
 ```
 
+**Having sync issues?** If `/docs -t` shows your docs are >3 hours out of date, you may have an older version with a sync bug. Just re-run the installer above to fix it - it's safe to run multiple times.
+
 This will:
 1. Clone the repository (or use existing if found)
-2. Create the `/user:docs` slash command
+2. Create the `/docs` slash command
 3. Set up automatic git pull when reading docs
 
-**Note**: The command is `/user:docs` (not `/docs`). If you have a different docs command from another installation, both will coexist.
+**Note**: The command is `/docs (user)` - it will show in your command list with "(user)" after it to indicate it's a user-created command.
 
 ## Usage
 
-The `/user:docs` command provides instant access to documentation with optional freshness checking.
+The `/docs` command provides instant access to documentation with optional freshness checking.
 
 ### Default: Lightning-fast access (no checks)
 ```bash
-/user:docs hooks        # Instantly read hooks documentation
-/user:docs mcp          # Instantly read MCP documentation  
-/user:docs memory       # Instantly read memory documentation
+/docs hooks        # Instantly read hooks documentation
+/docs mcp          # Instantly read MCP documentation  
+/docs memory       # Instantly read memory documentation
 ```
 
-You'll see: `📚 Reading from local docs (run /user:docs -t to check freshness)`
+You'll see: `📚 Reading from local docs (run /docs -t to check freshness)`
 
 ### Optional: Check documentation freshness with -t flag
 ```bash
-/user:docs -t           # Show when docs were last updated
-/user:docs -t hooks     # Check freshness, then read hooks docs
-/user:docs -t mcp       # Check freshness, then read MCP docs
+/docs -t           # Show when docs were last updated
+/docs -t hooks     # Check freshness, then read hooks docs
+/docs -t mcp       # Check freshness, then read MCP docs
 ```
 
 The `-t` flag shows:
@@ -63,15 +66,15 @@ The `-t` flag shows:
 ### Creative usage examples
 ```bash
 # Natural language queries work great
-/user:docs what environment variables exist and how do I use them?
-/user:docs explain the differences between hooks and MCP
+/docs what environment variables exist and how do I use them?
+/docs explain the differences between hooks and MCP
 
 # Check for recent changes
-/user:docs -t what's new in the latest documentation?
+/docs -t what's new in the latest documentation?
 
 # Search across all docs
-/user:docs find all mentions of authentication
-/user:docs how do I customize Claude Code's behavior?
+/docs find all mentions of authentication
+/docs how do I customize Claude Code's behavior?
 ```
 
 ### Performance notes
@@ -88,21 +91,21 @@ The docs automatically stay up-to-date:
 - You'll see "🔄 Updating docs to latest version..." when this happens
 - No manual updates needed!
 
-**Performance**: 
-- `/user:docs` reads instantly and the hook ensures content is always current
-- `/user:docs -t` shows you exact timestamps of GitHub updates vs local sync
+**Performance**:
+- `/docs` reads instantly and the hook ensures content is always current
+- `/docs -t` shows you exact timestamps of GitHub updates vs local sync
 
 ## Troubleshooting
 
 ### Command not found
-If `/user:docs` returns "command not found":
+If `/docs` returns "command not found":
 1. Check if the command file exists: `ls ~/.claude/commands/docs.md`
 2. Restart Claude Code to reload commands
 3. Re-run the installation script
 
 ### Documentation not updating
 If documentation seems outdated:
-1. Run `/user:docs -t` to check sync status and force an update
+1. Run `/docs -t` to check sync status and force an update
 2. Manually update: `cd /path/to/claude-code-docs && git pull`
 3. Check if GitHub Actions are running: [View Actions](https://github.com/ericbuess/claude-code-docs/actions)
 

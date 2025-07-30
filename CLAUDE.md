@@ -10,9 +10,9 @@ The docs are automatically updated every 3 hours via GitHub Actions.
 - For Windows support, please test thoroughly before submitting PRs
 - All changes should be tested locally before pushing
 
-## For /user:docs Command
+## For /docs Command
 
-When responding to /user:docs commands:
+When responding to /docs commands:
 1. Follow the instructions in the docs.md command file
 2. Report update times from docs_manifest.json and .last_pull
 3. Read documentation files from the docs/ directory only
