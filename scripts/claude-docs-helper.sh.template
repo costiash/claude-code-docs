@@ -141,8 +141,6 @@ show_freshness() {
     
     echo "📍 Branch: ${BRANCH}"
     echo "📦 Version: ${installer_version}"
-    echo ""
-    echo "📚 Community mirror - Official docs: https://docs.anthropic.com/en/docs/claude-code"
 }
 
 # Function to read documentation
@@ -157,7 +155,7 @@ read_doc() {
         print_doc_header
         cat "$doc_path"
         echo ""
-        echo "📚 Community mirror of https://docs.anthropic.com/en/docs/claude-code/$topic"
+        echo "📖 Official page: https://docs.anthropic.com/en/docs/claude-code/$topic"
     else
         print_color "$RED" "❌ Documentation not found: $topic"
         echo ""
@@ -179,8 +177,6 @@ list_docs() {
     ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
     echo ""
     echo "Usage: /docs <topic> or /docs -t to check freshness"
-    echo ""
-    echo "📚 Community mirror - Official docs: https://docs.anthropic.com/en/docs/claude-code"
 }
 
 # Function for hook check (auto-update)
@@ -306,36 +302,39 @@ whats_new() {
     echo ""
     echo "💡 For detailed explanations of any changes, read the specific documentation"
     echo "   using: /docs <topic> (e.g., /docs hooks, /docs setup)"
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "📚 COMMUNITY MIRROR - NOT AFFILIATED WITH ANTHROPIC"
+    echo "Official docs: https://docs.anthropic.com/en/docs/claude-code"
+    echo "Mirror repo: https://github.com/ericbuess/claude-code-docs"
+    echo ""
     
-    # Summary for easy reference
-    echo ""
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "📊 Quick Reference Summary"
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo ""
-    echo "📄 All documentation pages that changed:"
-    # Remove duplicates and sort (handle empty array case)
+    # Put all links at the very bottom so they don't get collapsed
+    echo "📎 QUICK LINKS TO ALL CHANGES:"
+    
+    # First, list all changed docs with links
     local unique_docs=()
     if [[ ${#all_docs_mentioned[@]} -gt 0 ]]; then
         mapfile -t unique_docs < <(printf '%s\n' "${all_docs_mentioned[@]}" | sort -u)
     fi
-    for doc in "${unique_docs[@]}"; do
-        echo "• $doc → https://docs.anthropic.com/en/docs/claude-code/$doc"
-    done
     
+    if [[ ${#unique_docs[@]} -gt 0 ]]; then
+        echo ""
+        echo "Documentation pages:"
+        for doc in "${unique_docs[@]}"; do
+            echo "• $doc: https://docs.anthropic.com/en/docs/claude-code/$doc"
+        done
+    fi
+    
+    # Then list all commits with links
     echo ""
-    echo "🔗 All commits in chronological order:"
+    echo "Git commits:"
     while IFS= read -r commit; do
         local hash=$(echo "$commit" | cut -d' ' -f1)
         local date=$(git show -s --format=%cr "$hash")
-        local msg=$(echo "$commit" | cut -d' ' -f2-)
-        echo ""
-        echo "• $msg ($date)"
-        echo "  View: https://github.com/ericbuess/claude-code-docs/commit/$hash"
-        echo "  Diff: https://github.com/ericbuess/claude-code-docs/commit/$hash.diff"
+        echo "• $date: https://github.com/ericbuess/claude-code-docs/commit/$hash"
     done <<< "$doc_commits"
-    echo ""
-    echo "📚 Community mirror - Official docs: https://docs.anthropic.com/en/docs/claude-code"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
 # Function for uninstall
@@ -378,7 +377,10 @@ uninstall() {
 }
 
 # Combine all arguments into one string for easier parsing
+# Also clean up any escaped quotes that might come from Claude Code
 FULL_ARGS="$*"
+FULL_ARGS="${FULL_ARGS//\\\'/\'}"  # Replace \' with '
+FULL_ARGS="${FULL_ARGS//\\\"/\"}"  # Replace \" with "
 
 # Main command handling
 case "${1:-}" in
@@ -401,7 +403,7 @@ case "${1:-}" in
     uninstall)
         uninstall
         ;;
-    "whats-new"|"what's-new"|"whatsnew"|"what's new"|"whats"|"what")
+    "whats-new"|"what's-new"|"whatsnew"|"what's new"|"whats"|"what"|"whats-new?"|"what's-new?")
         # Handle various forms of "what's new"
         if [[ "${2:-}" == "new" ]] || [[ "$FULL_ARGS" =~ new ]]; then
             whats_new
@@ -415,7 +417,8 @@ case "${1:-}" in
         ;;
     *)
         # Check if the full arguments match "what's new" pattern
-        if [[ "$FULL_ARGS" =~ ^what.?s?\ ?new.*$ ]]; then
+        # Be very flexible to handle various quote escaping issues
+        if [[ "$FULL_ARGS" =~ what.*new ]] || [[ "$1 ${2:-}" =~ what.*new ]]; then
             whats_new
         else
             # Check migration notice before reading docs
