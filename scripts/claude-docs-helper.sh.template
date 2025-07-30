@@ -201,6 +201,13 @@ whats_new() {
     echo "📚 Recent documentation updates (last 7 days):"
     echo ""
     
+    # Quick links at the top for visibility
+    echo "📎 Quick links:"
+    echo "• Full changelog: https://github.com/ericbuess/claude-code-docs/commits/main/docs" 
+    echo "• All docs: https://docs.anthropic.com/en/docs/claude-code"
+    echo "• Mirror repo: https://github.com/ericbuess/claude-code-docs"
+    echo ""
+    
     # Get recent commits that actually updated documentation
     # Look for commits from the last 7 days only
     local doc_commits=$(git log --oneline --since="7 days ago" --grep="Update Claude Code docs" -- 'docs/*.md' 2>/dev/null | head -5)
@@ -280,22 +287,15 @@ whats_new() {
                     local additions=$(git diff --numstat "${hash}^..${hash}" -- "$doc_file" | awk '{print $1}')
                     local deletions=$(git diff --numstat "${hash}^..${hash}" -- "$doc_file" | awk '{print $2}')
                     
-                    if [[ $additions -gt 20 ]]; then
-                        echo "  📝 Significant expansion (new content added)"
-                    elif [[ $deletions -gt 20 ]]; then
-                        echo "  🔄 Major restructuring (content reorganized)"
-                    elif [[ $additions -gt 0 || $deletions -gt 0 ]]; then
-                        echo "  ✏️  Minor updates and improvements"
+                    if [[ $additions -gt 0 || $deletions -gt 0 ]]; then
+                        echo "  📝 Changes: +${additions}/-${deletions} lines"
                     fi
                 fi
             done
             
-            # Add links section at the end of each commit
+            # Add compact link at the end of each commit
             echo ""
-            echo "  📎 Links for this update:"
-            echo "     🔗 View commit: https://github.com/ericbuess/claude-code-docs/commit/$hash"
-            echo "     📝 View diff: https://github.com/ericbuess/claude-code-docs/commit/$hash.diff"
-            echo "     📁 Browse files: https://github.com/ericbuess/claude-code-docs/tree/$hash/docs"
+            echo "  🔗 Links: Commit https://github.com/ericbuess/claude-code-docs/commit/$hash | Diff .../commit/$hash.diff"
         fi
     done <<< "$doc_commits"
     
