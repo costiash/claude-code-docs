@@ -388,7 +388,7 @@ case "${1:-}" in
         show_freshness
         # Check if remaining args form "what's new"
         shift
-        local remaining_args="$*"
+        remaining_args="$*"
         if [[ "$remaining_args" =~ ^what.?s?\ ?new.*$ ]]; then
             echo ""
             whats_new
