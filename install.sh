@@ -56,8 +56,6 @@ detect_user_modifications() {
         "scripts/fetch_claude_docs.py"
         "scripts/requirements.txt"
         "scripts/claude-docs-helper.sh.template"
-        ".last_pull"
-        ".last_check"
     )
     
     # Build find command to exclude expected files
@@ -139,12 +137,6 @@ migrate_installation() {
         git clone https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
     fi
     
-    # Copy over any state files
-    for state_file in .last_pull .last_check; do
-        if [[ -f "$old_dir/$state_file" ]]; then
-            cp "$old_dir/$state_file" "$INSTALL_DIR/" 2>/dev/null || true
-        fi
-    done
     
     # Create migration info
     local migration_info="{
