@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Claude Code Documentation Mirror - Uninstall Script
-# This script cleanly removes the Claude Code documentation mirror installation
+# Claude Code Documentation Mirror - Complete Uninstall Script
+# This script completely removes the Claude Code documentation mirror installation
 
 set -euo pipefail
 
@@ -22,7 +22,7 @@ print_color() {
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 print_color "$GREEN" "Claude Code Documentation Mirror - Uninstaller"
-print_color "$GREEN" "============================================"
+print_color "$GREEN" "=============================================="
 echo
 
 # Check if running from the installation directory
@@ -31,16 +31,10 @@ if [[ ! -f "$SCRIPT_DIR/CLAUDE.md" ]] || [[ ! -d "$SCRIPT_DIR/docs" ]]; then
     exit 1
 fi
 
-print_color "$YELLOW" "This will remove the Claude Code documentation mirror from:"
-print_color "$YELLOW" "  $SCRIPT_DIR"
-echo
-
-# Show what will be removed
-print_color "$YELLOW" "The following will be removed:"
-echo "  - The entire claude-code-docs directory"
-echo "  - Python virtual environment (.venv)"
-echo "  - Local git repository"
-echo "  - All documentation files"
+print_color "$YELLOW" "This will remove:"
+echo "  1. The claude-code-docs directory: $SCRIPT_DIR"
+echo "  2. The /docs command file: ~/.claude/commands/docs.md"
+echo "  3. The auto-update hook from: ~/.claude/settings.json"
 echo
 
 # Ask for confirmation
@@ -51,26 +45,74 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 0
 fi
 
+# Remove the command file
+if [[ -f ~/.claude/commands/docs.md ]]; then
+    print_color "$YELLOW" "Removing /docs command..."
+    rm -f ~/.claude/commands/docs.md
+    print_color "$GREEN" "✓ Removed command file"
+else
+    print_color "$YELLOW" "Command file not found (already removed?)"
+fi
+
+# Remove the hook from settings.json
+if [[ -f ~/.claude/settings.json ]]; then
+    print_color "$YELLOW" "Removing auto-update hook from settings..."
+    
+    # Create backup first
+    cp ~/.claude/settings.json ~/.claude/settings.json.backup
+    
+    # Remove any PreToolUse hooks that contain this installation path
+    if jq --arg path "$SCRIPT_DIR" '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.hooks[0].command | contains($path) | not)]' ~/.claude/settings.json > ~/.claude/settings.json.tmp; then
+        
+        # Clean up empty arrays/objects
+        jq 'if .hooks.PreToolUse == [] then .hooks |= if . == {PreToolUse: []} then {} else del(.PreToolUse) end else . end | if .hooks == {} then del(.hooks) else . end' ~/.claude/settings.json.tmp > ~/.claude/settings.json.tmp2
+        
+        mv ~/.claude/settings.json.tmp2 ~/.claude/settings.json
+        rm -f ~/.claude/settings.json.tmp
+        print_color "$GREEN" "✓ Removed hook from settings"
+        print_color "$YELLOW" "  (Backup saved to ~/.claude/settings.json.backup)"
+    else
+        print_color "$RED" "Failed to update settings.json"
+        print_color "$YELLOW" "Please manually remove the hook from ~/.claude/settings.json"
+        rm -f ~/.claude/settings.json.tmp
+    fi
+else
+    print_color "$YELLOW" "Settings file not found (no hooks to remove)"
+fi
+
+# Remove tracking files
+rm -f "$SCRIPT_DIR/.last_pull" "$SCRIPT_DIR/.last_check" 2>/dev/null || true
+
+# Check if we're currently in the directory we're about to delete
+CURRENT_DIR=$(pwd)
+if [[ "$CURRENT_DIR" == "$SCRIPT_DIR"* ]]; then
+    # We're inside the directory to be deleted, need to move out
+    PARENT_DIR=$(dirname "$SCRIPT_DIR")
+    print_color "$YELLOW" "Changing to parent directory before removal..."
+    cd "$PARENT_DIR"
+fi
+
 # Remove the directory
 print_color "$YELLOW" "Removing installation directory..."
-cd ..
 rm -rf "$SCRIPT_DIR"
+print_color "$GREEN" "✓ Removed installation directory"
 
-print_color "$GREEN" "✓ Claude Code documentation mirror has been uninstalled successfully."
+echo
+print_color "$GREEN" "✅ Claude Code documentation mirror has been completely uninstalled!"
 echo
 
 # Check for other installations
 print_color "$YELLOW" "Checking for other installations..."
-OTHER_INSTALL=""
-if [[ -d "$HOME/claude-code-docs" ]] && [[ "$HOME/claude-code-docs" != "$SCRIPT_DIR" ]]; then
-    OTHER_INSTALL="$HOME/claude-code-docs"
-elif [[ -d "$HOME/Projects/claude-code-docs" ]] && [[ "$HOME/Projects/claude-code-docs" != "$SCRIPT_DIR" ]]; then
-    OTHER_INSTALL="$HOME/Projects/claude-code-docs"
-fi
+OTHER_INSTALLS=()
+[[ -d "$HOME/claude-code-docs" && "$HOME/claude-code-docs" != "$SCRIPT_DIR" ]] && OTHER_INSTALLS+=("$HOME/claude-code-docs")
+[[ -d "$HOME/Projects/claude-code-docs" && "$HOME/Projects/claude-code-docs" != "$SCRIPT_DIR" ]] && OTHER_INSTALLS+=("$HOME/Projects/claude-code-docs")
 
-if [[ -n "$OTHER_INSTALL" ]]; then
-    print_color "$YELLOW" "Note: Another installation was found at: $OTHER_INSTALL"
-    echo "To remove it, run: rm -rf \"$OTHER_INSTALL\""
+if [[ ${#OTHER_INSTALLS[@]} -gt 0 ]]; then
+    print_color "$YELLOW" "Note: Other installations were found at:"
+    for install in "${OTHER_INSTALLS[@]}"; do
+        echo "  - $install"
+    done
+    echo "To remove them, run the uninstaller from each directory."
 fi
 
 echo

@@ -30,16 +30,36 @@ for cmd in git jq curl; do
     fi
 done
 
+# Check if we need to clean up old installation
+if [ -f ~/.claude/commands/docs.md ]; then
+    echo "✓ Found existing Claude Code Docs installation"
+    echo "  Cleaning up old configuration for fresh install..."
+    
+    # Remove old command file
+    rm -f ~/.claude/commands/docs.md
+    echo "  ✓ Removed old command file"
+    
+    # Clean up old hooks from settings.json if it exists
+    if [ -f ~/.claude/settings.json ]; then
+        # Remove any hooks that contain 'claude-code-docs' in their command
+        jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.hooks[]?.command // "" | contains("claude-code-docs") | not)]' ~/.claude/settings.json > ~/.claude/settings.json.tmp && \
+        mv ~/.claude/settings.json.tmp ~/.claude/settings.json
+        echo "  ✓ Cleaned up old hooks"
+    fi
+    
+    echo "  ✓ Cleanup complete"
+fi
+
 # Get the docs path
 if [ -f "docs/docs_manifest.json" ]; then
     # We're already in the claude-code-docs directory
     DOCS_PATH=$(pwd)
-    echo "✓ Found existing installation at: $DOCS_PATH"
+    echo "✓ Found repository at: $DOCS_PATH"
 elif [ -d "claude-code-docs" ]; then
     # The directory already exists
     cd claude-code-docs || exit 1
     DOCS_PATH=$(pwd)
-    echo "✓ Found existing installation at: $DOCS_PATH"
+    echo "✓ Found repository at: $DOCS_PATH"
 else
     # Clone it
     echo "Cloning documentation repository..."
@@ -52,11 +72,18 @@ else
     echo "✓ Documentation cloned to: $DOCS_PATH"
 fi
 
+# Set git merge strategy to avoid conflicts
+git config pull.rebase false
+
+# Always pull latest changes
+echo "Updating to latest version..."
+git pull --quiet origin main || echo "  (Could not pull latest changes, continuing with current version)"
+
 # Escape the docs path for safe use in commands
 DOCS_PATH_ESCAPED=$(printf '%q' "$DOCS_PATH")
 
 # Create command directory
-echo "Setting up /user:docs command..."
+echo "Setting up /docs command..."
 if ! mkdir -p ~/.claude/commands; then
     echo "❌ Error: Failed to create ~/.claude/commands directory"
     exit 1
@@ -64,22 +91,49 @@ fi
 
 # Create the docs command file with quoted heredoc to prevent variable expansion
 cat > ~/.claude/commands/docs.md << 'DOCS_COMMAND_EOF'
-PLACEHOLDER_DOCS_PATH/docs/ contains a local updated copy of all Claude Code documentation.
+LOCAL DOCS AT: PLACEHOLDER_DOCS_PATH/docs/
+ALWAYS use absolute paths when reading files, never relative paths.
+This directory contains a local updated copy of all Claude Code documentation.
+
+When showing documentation freshness with -t flag:
+Show the times first, then check if warning is needed.
+
+WARNING LOGIC - CRITICAL:
+ONLY show warning if GitHub last updated MORE than 3 hours ago.
+If GitHub updated recently (< 3 hours), NEVER show any warning.
+
+If GitHub > 3 hours old AND (local sync missing OR local older than GitHub), show:
+"⚠️ Your docs appear to be out of sync!
+
+Your docs haven't been updated in over 3 hours. To fix this and enable auto-sync:
+
+curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
+
+Would you like me to run this command for you?"
 
 Usage:
-- /user:docs <topic> - Read documentation instantly (no checks)
-- /user:docs -t - Check documentation freshness and sync status
-- /user:docs -t <topic> - Check freshness, then read documentation
+- /docs <topic> - Read documentation instantly (no checks)
+- /docs -t - Check documentation freshness and sync status
+- /docs -t <topic> - Check freshness, then read documentation
 
 Default behavior (no -t flag):
 1. Skip ALL checks for maximum speed
-2. Go straight to reading the requested documentation
-3. Add note: "📚 Reading from local docs (run /user:docs -t to check freshness)"
+2. Read docs using: cat "PLACEHOLDER_DOCS_PATH/docs/[topic].md"
+3. Show note: "📚 Reading from local docs (run /docs -t to check freshness)"
 
-With -t flag:
-1. Read PLACEHOLDER_DOCS_PATH/docs/docs_manifest.json (if it fails, suggest re-running install.sh)
-2. Calculate and show when GitHub last updated and when local docs last synced
-3. Then read the requested topic (if provided)
+With -t flag - EXECUTE THESE STEPS:
+Step 1: Read manifest using: cat "PLACEHOLDER_DOCS_PATH/docs/docs_manifest.json"
+Step 2: Check last sync using: cat "PLACEHOLDER_DOCS_PATH/.last_pull" 2>/dev/null || echo "No sync timestamp"
+Step 3: Calculate and display times:
+   - Extract last_updated and installer_version from manifest
+   - ALWAYS use UTC for calculations: date -u +%s for current time
+   - Convert GitHub timestamp (already UTC) to unix time
+   - Calculate hours_ago = (current_UTC - github_UTC) / 3600
+   - Display: "📅 Documentation last updated on GitHub: X hours/minutes ago"
+   - Display: "📅 Your local docs last synced: X minutes ago" (or "No sync timestamp")
+   - Display: "📅 Installer version: X.X"
+   - WARNING CHECK: Only if hours_ago > 3, then check local sync and maybe show warning
+Step 4: If topic provided, read using: cat "PLACEHOLDER_DOCS_PATH/docs/${topic}.md"
 
 Note: The hook automatically keeps docs up-to-date by checking if GitHub has newer content before each read. You'll see "🔄 Updating docs to latest version..." when it syncs.
 
@@ -90,7 +144,7 @@ GitHub Actions updates the docs every 3 hours. Your local copy automatically syn
 
 IMPORTANT: Show relative times only (no timezone conversions needed):
 - GitHub last updated: Extract timestamp from manifest (it's in UTC!), convert to Unix timestamp, then calculate (current_time - github_time) / 3600 for hours or / 60 for minutes
-- Local docs last synced: Read .last_pull timestamp, then calculate (current_time - last_pull) / 60 for minutes
+- Local docs last synced: Read timestamp from PLACEHOLDER_DOCS_PATH/.last_pull, then calculate (current_time - last_pull) / 60 for minutes
 - If GitHub hasn't updated in >3 hours, add note "(normally updates every 3 hours)"
 - Be clear about wording: "local docs last synced" not "last checked"
 - For calculations: Use proper parentheses like $(((NOW - GITHUB) / 3600)) for hours
@@ -103,26 +157,40 @@ First, check if user passed -t flag:
 Examples:
 
 Default usage (no -t):
-> /user:docs hooks
-📚 Reading from local docs (run /user:docs -t to check freshness)
-[Immediately shows hooks documentation]
+> /docs hooks
+📚 Reading from local docs (run /docs -t to check freshness)
+[Executes: cat "PLACEHOLDER_DOCS_PATH/docs/hooks.md"]
 
 With -t flag:
-> /user:docs -t
+> /docs -t
 📅 Documentation last updated on GitHub: 2 hours ago
 📅 Your local docs last synced: 25 minutes ago
+📅 Installer version: 0.2
 
-> /user:docs -t hooks  
+> /docs -t hooks  
 📅 Documentation last updated on GitHub: 5 hours ago (normally updates every 3 hours)
 📅 Your local docs last synced: 3 hours 15 minutes ago
+📅 Installer version: 0.2
 🔄 Syncing latest documentation...
 [Then shows hooks documentation]
 
-Then answer the user's question by reading from the docs/ subdirectory (e.g. PLACEHOLDER_DOCS_PATH/docs/hooks.md).
+Special handling for "what's new" or "recent changes" queries:
+- If user asks about recent updates, changes, or what's new:
+  1. Run: cd PLACEHOLDER_DOCS_PATH && git log --oneline -10
+  2. For each commit that mentions "Update Claude Code docs":
+     - Show commit date and hash
+     - Run: git diff --name-only COMMIT_HASH^..COMMIT_HASH -- docs/*.md
+     - List which docs changed
+  3. For the most recent docs update commit:
+     - Run: git diff --stat COMMIT_HASH^..COMMIT_HASH -- docs/*.md
+     - Show summary of changes (files changed, insertions, deletions)
+  4. If user wants specific changes, use: git diff COMMIT_HASH^..COMMIT_HASH -- docs/SPECIFIC_FILE.md
+
+Then answer the user's question by reading docs with: cat "PLACEHOLDER_DOCS_PATH/docs/[topic].md"
 
 Available docs: overview, quickstart, setup, memory, common-workflows, ide-integrations, mcp, github-actions, sdk, troubleshooting, security, settings, monitoring-usage, costs, hooks
 
-IMPORTANT: This freshness check only happens when using /user:docs command. If continuing a conversation from a previous session, use /user:docs again to ensure docs are current.
+IMPORTANT: This freshness check only happens when using /docs command. If continuing a conversation from a previous session, use /docs again to ensure docs are current.
 
 User query: $ARGUMENTS
 DOCS_COMMAND_EOF
@@ -135,7 +203,7 @@ else
     sed -i "s|PLACEHOLDER_DOCS_PATH|$DOCS_PATH|g" ~/.claude/commands/docs.md
 fi
 
-echo "✓ Created /user:docs command"
+echo "✓ Created /docs command"
 
 # Setup hook for auto-updates (checks if GitHub has newer content)
 echo "Setting up automatic updates..."
@@ -143,7 +211,8 @@ echo "Setting up automatic updates..."
 # Create the hook command with proper escaping
 # Using printf to safely construct the command with escaped variables
 # This hook uses git fetch to check for remote updates, with rate limiting
-HOOK_COMMAND=$(printf 'if [[ $(jq -r .tool_input.file_path 2>/dev/null) == *%s/* ]]; then LAST_CHECK="%s/.last_check" && LAST_PULL="%s/.last_pull" && NOW=$(date +%%s) && CHECK_INTERVAL=10800 && SHOULD_CHECK=0 && if [[ -f "$LAST_CHECK" ]]; then LAST_CHECK_TIME=$(cat "$LAST_CHECK"); if [[ $((NOW - LAST_CHECK_TIME)) -gt $CHECK_INTERVAL ]]; then SHOULD_CHECK=1; fi; else SHOULD_CHECK=1; fi && if [[ $SHOULD_CHECK -eq 1 ]]; then echo $NOW > "$LAST_CHECK" && (cd %s && git fetch --quiet origin main 2>/dev/null && LOCAL=$(git rev-parse HEAD 2>/dev/null) && REMOTE=$(git rev-parse origin/main 2>/dev/null) && if [[ "$LOCAL" != "$REMOTE" ]]; then echo "🔄 Updating docs to latest version..." >&2 && git pull --quiet origin main && echo $NOW > "$LAST_PULL"; fi) || true; fi; fi' "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED")
+# It also checks for installer updates and runs the installer if needed
+HOOK_COMMAND=$(printf 'if [[ $(jq -r .tool_input.file_path 2>/dev/null) == *%s/* ]]; then LAST_CHECK="%s/.last_check" && LAST_PULL="%s/.last_pull" && NOW=$(date +%%s) && CHECK_INTERVAL=10800 && SHOULD_CHECK=0 && if [[ -f "$LAST_CHECK" ]]; then LAST_CHECK_TIME=$(cat "$LAST_CHECK"); if [[ $((NOW - LAST_CHECK_TIME)) -gt $CHECK_INTERVAL ]]; then SHOULD_CHECK=1; fi; else SHOULD_CHECK=1; fi && if [[ $SHOULD_CHECK -eq 1 ]]; then echo $NOW > "$LAST_CHECK" && (cd %s && git fetch --quiet origin main 2>/dev/null && LOCAL=$(git rev-parse HEAD 2>/dev/null) && REMOTE=$(git rev-parse origin/main 2>/dev/null) && if [[ "$LOCAL" != "$REMOTE" ]]; then echo "🔄 Updating docs to latest version..." >&2 && git pull --quiet origin main && echo $NOW > "$LAST_PULL" && INSTALLER_VERSION=$(jq -r .installer_version "%s/docs/docs_manifest.json" 2>/dev/null || echo 0.1) && if (( $(echo "$INSTALLER_VERSION > 0.2" | bc -l) )); then echo "🔧 Updating Claude Code Docs installer..." >&2 && (cd %s && ./install.sh >/dev/null 2>&1 || true); fi; fi) || true; fi; fi' "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED")
 
 if [ -f ~/.claude/settings.json ]; then
     # Update existing settings.json
@@ -181,16 +250,18 @@ else
     fi
 fi
 
+# No version marker needed - it's in the manifest
+
 echo ""
 echo "✅ Claude Code docs installed successfully!"
 echo ""
-echo "📚 Command: /user:docs (not /docs)"
+echo "📚 Command: /docs (user)"
 echo "📂 Location: $DOCS_PATH"
 echo ""
 echo "Usage examples:"
-echo "  /user:docs hooks         # Read hooks documentation"
-echo "  /user:docs -t           # Check when docs were last updated"
-echo "  /user:docs -t memory    # Check updates, then read memory docs"
+echo "  /docs hooks         # Read hooks documentation"
+echo "  /docs -t           # Check when docs were last updated"
+echo "  /docs -t memory    # Check updates, then read memory docs"
 echo ""
 echo "🔄 Auto-updates: Enabled - syncs automatically when GitHub has newer content"
 echo ""
