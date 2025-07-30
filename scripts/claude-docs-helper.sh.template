@@ -176,9 +176,9 @@ whats_new() {
     echo "💡 Tip: Use ctrl+r in Claude Code to expand collapsed output"
     echo ""
     
-    # Get commits that actually updated documentation
-    # Look for commits with "Update Claude Code docs" that changed docs/ directory
-    local doc_commits=$(git log --oneline -50 --grep="Update Claude Code docs" -- docs/*.md 2>/dev/null | head -10)
+    # Get commits that actually updated documentation (excluding manifest.json)
+    # Look for commits with "Update Claude Code docs" that changed actual doc files
+    local doc_commits=$(git log --oneline -50 --grep="Update Claude Code docs" -- 'docs/*.md' ':!docs/docs_manifest.json' 2>/dev/null | head -10)
     
     if [[ -z "$doc_commits" ]]; then
         # Fallback: look for any commits that changed docs
@@ -223,7 +223,7 @@ whats_new() {
                 
                 while IFS= read -r line; do
                     # Skip file headers
-                    if [[ "$line" =~ ^diff\ --git || "$line" =~ ^index\ || "$line" =~ ^--- || "$line" =~ ^\+\+\+ ]]; then
+                    if [[ "$line" =~ ^diff || "$line" =~ ^index || "$line" =~ ^--- || "$line" =~ ^\+\+\+ ]]; then
                         continue
                     fi
                     
@@ -242,7 +242,7 @@ whats_new() {
                         elif [[ "$line" =~ ^- ]]; then
                             print_color "$RED" "    $line"
                             ((lines_shown++))
-                        elif [[ "$line" =~ ^\ ]]; then
+                        elif [[ "$line" =~ ^[[:space:]] ]]; then
                             # Context line - show if it helps understand the change
                             if [[ $lines_shown -gt 0 && $lines_shown -lt $((max_lines - 1)) ]]; then
                                 echo "    $line"

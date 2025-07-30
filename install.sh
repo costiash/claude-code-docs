@@ -242,7 +242,7 @@ Usage:
 - /docs <topic> - Read specific documentation  
 - /docs -t - Check documentation freshness
 - /docs -t <topic> - Check freshness then read documentation
-- /docs whats-new - Show recent documentation changes
+- /docs what's new - Show recent documentation changes
 
 The helper script handles all functionality including auto-updates.
 
@@ -297,7 +297,7 @@ echo ""
 echo "Usage examples:"
 echo "  /docs hooks         # Read hooks documentation"
 echo "  /docs -t           # Check when docs were last updated"
-echo "  /docs whats-new    # See recent documentation changes"
+echo "  /docs what's new  # See recent documentation changes"
 echo ""
 echo "🔄 Auto-updates: Enabled - syncs automatically when GitHub has newer content"
 echo ""

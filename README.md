@@ -11,7 +11,7 @@ Major improvements:
 - **Automatic migration** from old installations
 - **Script-based architecture** - faster and more reliable
 - **Auto-updates on every request** - always stay in sync
-- **Improved `/docs whats-new`** - shows actual diffs with colors
+- **Improved `/docs what's new`** - shows actual diffs with colors
 - **Simplified sync status** - no confusing timestamps
 - **Better performance** - all operations < 1 second
 
@@ -71,7 +71,7 @@ You'll see: `📚 Reading from local docs (run /docs -t to check freshness)`
 
 ### See what's new
 ```bash
-/docs whats-new    # Show recent documentation changes with diffs
+/docs what's new   # Show recent documentation changes with diffs
 ```
 
 ### Uninstall
@@ -167,7 +167,7 @@ See [UNINSTALL.md](UNINSTALL.md) for manual uninstall instructions.
 - **Automatic migration**: Seamlessly moves from old locations
 - **Script-based architecture**: All logic in a single maintainable script
 - **Performance improvements**: Operations complete in < 1 second
-- **New `/docs whats-new` command**: See actual documentation changes
+- **New `/docs what's new` command**: See actual documentation changes
 - **Simplified codebase**: Easier to understand and contribute
 
 ## License
