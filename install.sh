@@ -242,7 +242,7 @@ Usage:
 - /docs <topic> - Read specific documentation  
 - /docs -t - Check documentation freshness
 - /docs -t <topic> - Check freshness then read documentation
-- /docs what's new - Show recent documentation changes
+- /docs whats new - Show recent documentation changes (or "what's new")
 
 The helper script handles all functionality including auto-updates.
 

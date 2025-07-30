@@ -294,9 +294,12 @@ whats_new() {
                 fi
             done
             
-            # Add GitHub diff link at the end
+            # Add links section at the end of each commit
             echo ""
-            echo "  🔗 View full commit: https://github.com/ericbuess/claude-code-docs/commit/$hash"
+            echo "  📎 Links for this update:"
+            echo "     🔗 View commit: https://github.com/ericbuess/claude-code-docs/commit/$hash"
+            echo "     📝 View diff: https://github.com/ericbuess/claude-code-docs/commit/$hash.diff"
+            echo "     📁 Browse files: https://github.com/ericbuess/claude-code-docs/tree/$hash/docs"
         fi
     done <<< "$doc_commits"
     
@@ -306,21 +309,30 @@ whats_new() {
     
     # Summary for easy reference
     echo ""
-    echo "📊 Summary of changes:"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "📊 Quick Reference Summary"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo ""
-    echo "📄 Documentation pages updated:"
-    # Remove duplicates and sort
-    local unique_docs=($(printf '%s\n' "${all_docs_mentioned[@]}" | sort -u))
+    echo "📄 All documentation pages that changed:"
+    # Remove duplicates and sort (handle empty array case)
+    local unique_docs=()
+    if [[ ${#all_docs_mentioned[@]} -gt 0 ]]; then
+        mapfile -t unique_docs < <(printf '%s\n' "${all_docs_mentioned[@]}" | sort -u)
+    fi
     for doc in "${unique_docs[@]}"; do
-        echo "• $doc: https://docs.anthropic.com/en/docs/claude-code/$doc"
+        echo "• $doc → https://docs.anthropic.com/en/docs/claude-code/$doc"
     done
     
     echo ""
-    echo "🔗 Git commits:"
+    echo "🔗 All commits in chronological order:"
     while IFS= read -r commit; do
         local hash=$(echo "$commit" | cut -d' ' -f1)
         local date=$(git show -s --format=%cr "$hash")
-        echo "• $date: https://github.com/ericbuess/claude-code-docs/commit/$hash"
+        local msg=$(echo "$commit" | cut -d' ' -f2-)
+        echo ""
+        echo "• $msg ($date)"
+        echo "  View: https://github.com/ericbuess/claude-code-docs/commit/$hash"
+        echo "  Diff: https://github.com/ericbuess/claude-code-docs/commit/$hash.diff"
     done <<< "$doc_commits"
     echo ""
     echo "📚 Community mirror - Official docs: https://docs.anthropic.com/en/docs/claude-code"
@@ -389,8 +401,14 @@ case "${1:-}" in
     uninstall)
         uninstall
         ;;
-    "whats-new"|"what's-new"|"whatsnew"|"what's new")
-        whats_new
+    "whats-new"|"what's-new"|"whatsnew"|"what's new"|"whats"|"what")
+        # Handle various forms of "what's new"
+        if [[ "${2:-}" == "new" ]] || [[ "$FULL_ARGS" =~ new ]]; then
+            whats_new
+        else
+            # Just "what" without "new" - treat as doc lookup
+            read_doc "$1"
+        fi
         ;;
     "")
         list_docs
