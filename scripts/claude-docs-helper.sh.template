@@ -158,7 +158,7 @@ read_doc() {
         echo "📖 Official page: https://docs.anthropic.com/en/docs/claude-code/$topic"
     else
         # Check if this looks like a natural language query
-        if [[ "$topic" =~ ^(tell\ me\ about|explain|what\ is|what\ are|how\ do|how\ to|show\ me|find|search) ]] || [[ "$topic" =~ \ .*\ ]]; then
+        if [[ "$topic" =~ ^(tell[[:space:]]me[[:space:]]about|explain|what[[:space:]]is|what[[:space:]]are|how[[:space:]]do|how[[:space:]]to|show[[:space:]]me|find|search) ]] || [[ "$topic" =~ [[:space:]].*[[:space:]] ]]; then
             print_color "$YELLOW" "🔍 That looks like a search query. Let me help you find the right documentation."
             echo ""
             
