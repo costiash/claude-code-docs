@@ -212,37 +212,76 @@ whats_new() {
         print_color "$BLUE" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         print_color "$BLUE" "• $message ($date)"
         
-        # Add GitHub diff link
-        echo "  🔗 View changes: https://github.com/ericbuess/claude-code-docs/commit/$hash"
-        
-        # Show which docs changed and sample of changes
+        # Show which docs changed
         local changed_docs=$(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md | sed 's|docs/||' | sed 's|\.md$||')
         if [[ -n "$changed_docs" ]]; then
-            echo "  Changed: $(echo $changed_docs | tr '\n' ', ' | sed 's/, $//')"
-            echo ""
+            echo "  Docs updated: $(echo $changed_docs | tr '\n' ', ' | sed 's/, $//')"
             
             # Show actual changes for each file
             for doc_file in $(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md); do
                 local filename=$(basename "$doc_file" .md)
+                echo ""
                 echo "  📄 $filename:"
                 echo "  📖 View docs: https://docs.anthropic.com/en/docs/claude-code/$filename"
                 
-                # Count changes
-                local additions=$(git diff --numstat "${hash}^..${hash}" -- "$doc_file" | awk '{print $1}')
-                local deletions=$(git diff --numstat "${hash}^..${hash}" -- "$doc_file" | awk '{print $2}')
+                # Extract meaningful changes from the diff
+                local diff_output=$(git diff "${hash}^..${hash}" -- "$doc_file" 2>/dev/null || echo "")
                 
-                # Show summary of changes
-                if [[ $additions -gt 0 && $deletions -gt 0 ]]; then
-                    echo "  ✏️  Modified: +${additions} lines, -${deletions} lines"
-                elif [[ $additions -gt 0 ]]; then
-                    echo "  ➕ Added: ${additions} new lines"
-                elif [[ $deletions -gt 0 ]]; then
-                    echo "  ➖ Removed: ${deletions} lines"
+                # Look for added sections (lines starting with +#)
+                local added_sections=$(echo "$diff_output" | grep '^+#' | sed 's/^+//' | sed 's/^#* *//' | head -3)
+                
+                # Look for removed sections
+                local removed_sections=$(echo "$diff_output" | grep '^-#' | sed 's/^-//' | sed 's/^#* *//' | head -3)
+                
+                # Look for key additions (new features, commands, etc)
+                local key_additions=$(echo "$diff_output" | grep -E '^\+.*\b(new|added|feature|command|option|support|enable|integration)\b' -i | sed 's/^+//' | sed 's/^[[:space:]]*//' | head -3)
+                
+                # Summarize changes
+                if [[ -n "$added_sections" ]]; then
+                    echo "  ➕ New sections:"
+                    echo "$added_sections" | while read -r section; do
+                        [[ -n "$section" ]] && echo "     - $section"
+                    done
                 fi
-                echo ""
+                
+                if [[ -n "$removed_sections" ]]; then
+                    echo "  ➖ Removed sections:"
+                    echo "$removed_sections" | while read -r section; do
+                        [[ -n "$section" ]] && echo "     - $section"
+                    done
+                fi
+                
+                if [[ -n "$key_additions" && -z "$added_sections" ]]; then
+                    echo "  ✨ Key changes:"
+                    echo "$key_additions" | while read -r change; do
+                        [[ -n "$change" ]] && echo "     - ${change:0:80}..."
+                    done
+                fi
+                
+                # If we couldn't extract meaningful info, show basic stats
+                if [[ -z "$added_sections" && -z "$removed_sections" && -z "$key_additions" ]]; then
+                    local additions=$(git diff --numstat "${hash}^..${hash}" -- "$doc_file" | awk '{print $1}')
+                    local deletions=$(git diff --numstat "${hash}^..${hash}" -- "$doc_file" | awk '{print $2}')
+                    
+                    if [[ $additions -gt 20 ]]; then
+                        echo "  📝 Significant expansion (new content added)"
+                    elif [[ $deletions -gt 20 ]]; then
+                        echo "  🔄 Major restructuring (content reorganized)"
+                    elif [[ $additions -gt 0 || $deletions -gt 0 ]]; then
+                        echo "  ✏️  Minor updates and improvements"
+                    fi
+                fi
             done
+            
+            # Add GitHub diff link at the end
+            echo ""
+            echo "  🔗 View full commit: https://github.com/ericbuess/claude-code-docs/commit/$hash"
         fi
     done <<< "$doc_commits"
+    
+    echo ""
+    echo "💡 For detailed explanations of any changes, read the specific documentation"
+    echo "   using: /docs <topic> (e.g., /docs hooks, /docs setup)"
 }
 
 # Function for uninstall
@@ -309,10 +348,10 @@ case "${1:-}" in
         ;;
     *)
         # Check various forms of "what's new" command
-        if [[ "$1" == "what's" && "$2" == "new" ]] || \
-           [[ "$1" == "whats" && "$2" == "new" ]] || \
-           [[ "$1 $2" == "what's new" ]] || \
-           [[ "$1" == "what" && "$2" == "is" && "$3" == "new" ]]; then
+        if [[ "$1" == "what's" && "${2:-}" == "new" ]] || \
+           [[ "$1" == "whats" && "${2:-}" == "new" ]] || \
+           [[ "$1 ${2:-}" == "what's new" ]] || \
+           [[ "$1" == "what" && "${2:-}" == "is" && "${3:-}" == "new" ]]; then
             whats_new
         else
             # Check migration notice before reading docs
