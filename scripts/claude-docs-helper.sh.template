@@ -250,8 +250,8 @@ hook_check() {
 whats_new() {
     print_doc_header
     
-    # Auto-update first
-    auto_update >/dev/null 2>&1
+    # Auto-update first (synchronous - we need latest git history)
+    auto_update
     
     cd "$DOCS_PATH" 2>/dev/null || {
         print_color "$RED" "❌ Error: Could not access documentation directory"
