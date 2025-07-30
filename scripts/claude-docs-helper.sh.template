@@ -109,6 +109,29 @@ auto_update() {
     return 0  # Success (either updated or already up-to-date)
 }
 
+# Function to start background update (for parallel operations)
+background_update() {
+    # Create a lock file to prevent multiple simultaneous updates
+    local LOCK_FILE="$DOCS_PATH/.update.lock"
+    
+    # Check if update is already running
+    if [[ -f "$LOCK_FILE" ]]; then
+        # Check if lock is stale (older than 60 seconds)
+        if [[ $(find "$LOCK_FILE" -mmin +1 2>/dev/null) ]]; then
+            rm -f "$LOCK_FILE"
+        else
+            return 0  # Update already in progress
+        fi
+    fi
+    
+    # Start update in background
+    (
+        touch "$LOCK_FILE"
+        auto_update >/dev/null 2>&1
+        rm -f "$LOCK_FILE"
+    ) &
+}
+
 # Function to show documentation sync status
 show_freshness() {
     print_doc_header
@@ -145,14 +168,20 @@ show_freshness() {
 
 # Function to read documentation
 read_doc() {
-    # Auto-update before reading
-    auto_update
+    # Start update in background for next time
+    background_update
     
     local topic=$(sanitize_input "$1")
     local doc_path="$DOCS_PATH/docs/${topic}.md"
     
     if [[ -f "$doc_path" ]]; then
         print_doc_header
+        # Show sync status inline (fast, no fetch)
+        local BRANCH=$(cd "$DOCS_PATH" && git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+        local VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
+        echo "✅ Local docs (v$VERSION, $BRANCH branch)"
+        echo ""
+        
         cat "$doc_path"
         echo ""
         echo "📖 Official page: https://docs.anthropic.com/en/docs/claude-code/$topic"
@@ -201,8 +230,8 @@ list_docs() {
     print_doc_header
     check_migration_notice
     
-    # Auto-update before listing
-    auto_update
+    # Start update in background for next time
+    background_update
     
     echo "Available documentation topics:"
     echo ""
