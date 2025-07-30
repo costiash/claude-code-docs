@@ -130,8 +130,8 @@ echo "Setting up automatic updates..."
 
 # Create the hook command with proper escaping
 # Using printf to safely construct the command with escaped variables
-# Note: Using pushd/popd to avoid cd restrictions in Claude Code
-HOOK_COMMAND=$(printf 'if [[ $(jq -r .tool_input.file_path 2>/dev/null) == *%s/* ]]; then LAST_PULL="%s/.last_pull" && NOW=$(date +%%s) && GITHUB_TS=$(jq -r .last_updated "%s/docs/docs_manifest.json" 2>/dev/null | cut -d. -f1) && GITHUB_UNIX=$(date -j -u -f "%%Y-%%m-%%dT%%H:%%M:%%S" "$GITHUB_TS" "+%%s" 2>/dev/null || echo 0) && if [[ -f "$LAST_PULL" ]]; then LAST=$(cat "$LAST_PULL"); if [[ $GITHUB_UNIX -gt $LAST ]]; then echo "🔄 Updating docs to latest version..." >&2 && (cd %s && git pull --quiet) && echo $NOW > "$LAST_PULL"; fi; else echo "🔄 Syncing docs for the first time..." >&2 && (cd %s && git pull --quiet) && echo $NOW > "$LAST_PULL"; fi; fi' "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED")
+# This hook uses git fetch to check for remote updates, with rate limiting
+HOOK_COMMAND=$(printf 'if [[ $(jq -r .tool_input.file_path 2>/dev/null) == *%s/* ]]; then LAST_CHECK="%s/.last_check" && LAST_PULL="%s/.last_pull" && NOW=$(date +%%s) && CHECK_INTERVAL=10800 && SHOULD_CHECK=0 && if [[ -f "$LAST_CHECK" ]]; then LAST_CHECK_TIME=$(cat "$LAST_CHECK"); if [[ $((NOW - LAST_CHECK_TIME)) -gt $CHECK_INTERVAL ]]; then SHOULD_CHECK=1; fi; else SHOULD_CHECK=1; fi && if [[ $SHOULD_CHECK -eq 1 ]]; then echo $NOW > "$LAST_CHECK" && (cd %s && git fetch --quiet origin main 2>/dev/null && LOCAL=$(git rev-parse HEAD 2>/dev/null) && REMOTE=$(git rev-parse origin/main 2>/dev/null) && if [[ "$LOCAL" != "$REMOTE" ]]; then echo "🔄 Updating docs to latest version..." >&2 && git pull --quiet origin main && echo $NOW > "$LAST_PULL"; fi) || true; fi; fi' "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED")
 
 if [ -f ~/.claude/settings.json ]; then
     # Update existing settings.json
