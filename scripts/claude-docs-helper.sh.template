@@ -157,10 +157,42 @@ read_doc() {
         echo ""
         echo "📖 Official page: https://docs.anthropic.com/en/docs/claude-code/$topic"
     else
-        print_color "$RED" "❌ Documentation not found: $topic"
-        echo ""
-        echo "Available topics:"
-        ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
+        # Check if this looks like a natural language query
+        if [[ "$topic" =~ ^(tell\ me\ about|explain|what\ is|what\ are|how\ do|how\ to|show\ me|find|search) ]] || [[ "$topic" =~ \ .*\ ]]; then
+            print_color "$YELLOW" "🔍 That looks like a search query. Let me help you find the right documentation."
+            echo ""
+            
+            # Try to extract keywords from the query
+            local keywords=$(echo "$topic" | grep -o '[a-zA-Z0-9_-]\+' | grep -v -E '^(tell|me|about|explain|what|is|are|how|do|to|show|find|search|the|for|in)$' | tr '\n' ' ')
+            
+            if [[ -n "$keywords" ]]; then
+                echo "Searching for topics related to: $keywords"
+                echo ""
+                
+                # Search for matching topics
+                local matches=$(ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | grep -i -E "$(echo $keywords | tr ' ' '|')" | sort)
+                
+                if [[ -n "$matches" ]]; then
+                    echo "Found these related topics:"
+                    echo "$matches" | sed 's/^/  • /' 
+                    echo ""
+                    echo "Try: /docs <topic> to read a specific document"
+                else
+                    echo "No exact matches found. Here are all available topics:"
+                    ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
+                fi
+            else
+                echo "Available topics:"
+                ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
+            fi
+            echo ""
+            echo "💡 Tip: Use grep to search across all docs: cd ~/.claude-code-docs && grep -r 'search term' docs/"
+        else
+            print_color "$RED" "❌ Documentation not found: $topic"
+            echo ""
+            echo "Available topics:"
+            ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
+        fi
     fi
 }
 
