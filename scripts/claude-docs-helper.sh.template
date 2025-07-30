@@ -94,7 +94,7 @@ auto_update() {
         local INSTALLER_VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
         local VERSION_INT=$(echo "$INSTALLER_VERSION" | sed 's/^0\.//')
         
-        if [[ $VERSION_INT -gt 3 ]]; then
+        if [[ $VERSION_INT -ge 3 ]]; then
             echo "🔧 Updating Claude Code Docs installer..." >&2
             ./install.sh >/dev/null 2>&1
         fi
