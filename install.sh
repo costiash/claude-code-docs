@@ -240,7 +240,7 @@ Execute the Claude Code Docs helper script at ~/.claude-code-docs/claude-docs-he
 Usage:
 - /docs - List all available documentation topics
 - /docs <topic> - Read specific documentation with link to official docs
-- /docs -t - Check documentation freshness
+- /docs -t - Check sync status without reading a doc
 - /docs -t <topic> - Check freshness then read documentation
 - /docs whats new - Show recent documentation changes (or "what's new")
 
