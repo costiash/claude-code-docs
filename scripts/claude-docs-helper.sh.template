@@ -120,47 +120,32 @@ show_freshness() {
     
     # Calculate time since GitHub update
     local github_minutes=$(calculate_time_diff "$github_time")
+    local github_hours=$((github_minutes / 60))
     
-    # Format time display
-    local github_display
-    if [[ $github_minutes -lt 60 ]]; then
-        github_display="${github_minutes} minutes ago"
-    else
-        local hours=$((github_minutes / 60))
-        local mins=$((github_minutes % 60))
-        if [[ $mins -eq 0 ]]; then
-            github_display="${hours} hours ago"
+    # Only show details if there might be an issue (>4 hours old)
+    if [[ $github_hours -gt 4 ]]; then
+        # Format time display
+        local github_display
+        if [[ $github_minutes -lt 60 ]]; then
+            github_display="${github_minutes} minutes ago"
         else
-            github_display="${hours} hours ${mins} minutes ago"
-        fi
-    fi
-    
-    # Get local sync time
-    local local_sync="No sync timestamp"
-    if [[ -f "$LAST_PULL" ]]; then
-        local pull_time=$(cat "$LAST_PULL")
-        local local_minutes=$(( ($(date +%s) - pull_time) / 60 ))
-        
-        if [[ $local_minutes -lt 60 ]]; then
-            local_sync="${local_minutes} minutes ago"
-        else
-            local hours=$((local_minutes / 60))
-            local mins=$((local_minutes % 60))
+            local mins=$((github_minutes % 60))
             if [[ $mins -eq 0 ]]; then
-                local_sync="${hours} hours ago"
+                github_display="${github_hours} hours ago"
             else
-                local_sync="${hours} hours ${mins} minutes ago"
+                github_display="${github_hours} hours ${mins} minutes ago"
             fi
         fi
+        
+        echo "📅 Documentation last updated on GitHub: ${github_display}"
+        echo "⚠️  GitHub hasn't updated docs in over 4 hours (normally updates every 3 hours)"
+        echo "This might indicate an issue with GitHub Actions."
+    else
+        # Everything is fine - simple message
+        print_color "$GREEN" "✅ Documentation is up to date"
     fi
     
-    # Display info
-    echo "📅 Documentation last updated on GitHub: ${github_display}"
-    echo "📅 Your local docs last synced: ${local_sync}"
     echo "📅 Installer version: ${installer_version}"
-    
-    # No warning needed - hook auto-updates!
-    # Only show reinstall message if there's an actual error
 }
 
 # Function to read documentation
