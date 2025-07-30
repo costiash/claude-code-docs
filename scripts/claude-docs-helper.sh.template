@@ -185,156 +185,68 @@ hook_check() {
     exit 0
 }
 
-# Function to show what's new
+# Function to show what's new (concise version for Claude Code)
 whats_new() {
     print_doc_header
-    check_migration_notice
     
     # Auto-update first
-    auto_update
+    auto_update >/dev/null 2>&1
     
     cd "$DOCS_PATH" 2>/dev/null || {
         print_color "$RED" "❌ Error: Could not access documentation directory"
         exit 1
     }
     
-    echo "📚 Recent documentation updates (last 7 days):"
-    echo ""
-    
-    # Quick links at the top for visibility
-    echo "📎 Quick links:"
-    echo "• Full changelog: https://github.com/ericbuess/claude-code-docs/commits/main/docs" 
-    echo "• All docs: https://docs.anthropic.com/en/docs/claude-code"
-    echo "• Mirror repo: https://github.com/ericbuess/claude-code-docs"
+    echo "📚 Recent documentation updates:"
     echo ""
     
     # Get recent commits that actually updated documentation
-    # Look for commits from the last 7 days only
-    local doc_commits=$(git log --oneline --since="7 days ago" --grep="Update Claude Code docs" -- 'docs/*.md' 2>/dev/null | head -5)
+    local doc_commits=$(git log --oneline --since="7 days ago" --grep="Update Claude Code docs" -- 'docs/*.md' 2>/dev/null | head -3)
     
     if [[ -z "$doc_commits" ]]; then
         # Fallback: look for any commits that changed docs
-        doc_commits=$(git log --oneline -50 -- docs/*.md 2>/dev/null | grep -v "feat:" | grep -v "fix:" | grep -v "refactor:" | grep -v "Add TODO" | grep -v "Merge" | head -10)
+        doc_commits=$(git log --oneline -20 -- docs/*.md 2>/dev/null | grep -v "feat:" | grep -v "fix:" | grep -v "refactor:" | grep -v "Add TODO" | grep -v "Merge" | head -3)
     fi
     
     if [[ -z "$doc_commits" ]]; then
         echo "No recent documentation updates found."
+        echo ""
+        echo "• Full changelog: https://github.com/ericbuess/claude-code-docs/commits/main/docs"
         return
     fi
     
-    # Track all docs mentioned for summary
-    local all_docs_mentioned=()
-    
-    # Show each commit with actual changes
+    # Show each commit concisely
     while IFS= read -r commit; do
         local hash=$(echo "$commit" | cut -d' ' -f1)
-        local message=$(echo "$commit" | cut -d' ' -f2-)
         local date=$(git show -s --format=%cr "$hash")
         
-        print_color "$BLUE" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        print_color "$BLUE" "• $message ($date)"
+        print_color "$BLUE" "• $date:"
+        echo "  📎 https://github.com/ericbuess/claude-code-docs/commit/$hash"
         
-        # Show which docs changed
-        local changed_docs=$(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md | sed 's|docs/||' | sed 's|\.md$||')
+        # Show which docs changed with inline links
+        local changed_docs=$(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md | sed 's|docs/||' | sed 's|\.md$||' | head -5)
         if [[ -n "$changed_docs" ]]; then
-            echo "  Docs updated: $(echo $changed_docs | tr '\n' ', ' | sed 's/, $//')"
-            
-            # Show actual changes for each file
-            for doc_file in $(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md); do
-                local filename=$(basename "$doc_file" .md)
-                # Track this doc for summary
-                all_docs_mentioned+=("$filename")
-                echo ""
-                echo "  📄 $filename:"
-                echo "  📖 View docs: https://docs.anthropic.com/en/docs/claude-code/$filename"
+            echo "$changed_docs" | while read -r doc; do
+                [[ -n "$doc" ]] && echo "  📄 $doc: https://docs.anthropic.com/en/docs/claude-code/$doc"
                 
-                # Extract meaningful changes from the diff
-                local diff_output=$(git diff "${hash}^..${hash}" -- "$doc_file" 2>/dev/null || echo "")
-                
-                # Look for added sections (lines starting with +#)
-                local added_sections=$(echo "$diff_output" | grep '^+#' | sed 's/^+//' | sed 's/^#* *//' | head -3)
-                
-                # Look for removed sections
-                local removed_sections=$(echo "$diff_output" | grep '^-#' | sed 's/^-//' | sed 's/^#* *//' | head -3)
-                
-                # Look for key additions (new features, commands, etc)
-                local key_additions=$(echo "$diff_output" | grep -E '^\+.*\b(new|added|feature|command|option|support|enable|integration)\b' -i | sed 's/^+//' | sed 's/^[[:space:]]*//' | head -3)
-                
-                # Summarize changes
-                if [[ -n "$added_sections" ]]; then
-                    echo "  ➕ New sections:"
-                    echo "$added_sections" | while read -r section; do
-                        [[ -n "$section" ]] && echo "     - $section"
-                    done
-                fi
-                
-                if [[ -n "$removed_sections" ]]; then
-                    echo "  ➖ Removed sections:"
-                    echo "$removed_sections" | while read -r section; do
-                        [[ -n "$section" ]] && echo "     - $section"
-                    done
-                fi
-                
-                if [[ -n "$key_additions" && -z "$added_sections" ]]; then
-                    echo "  ✨ Key changes:"
-                    echo "$key_additions" | while read -r change; do
-                        [[ -n "$change" ]] && echo "     - ${change:0:80}..."
-                    done
-                fi
-                
-                # If we couldn't extract meaningful info, show basic stats
-                if [[ -z "$added_sections" && -z "$removed_sections" && -z "$key_additions" ]]; then
-                    local additions=$(git diff --numstat "${hash}^..${hash}" -- "$doc_file" | awk '{print $1}')
-                    local deletions=$(git diff --numstat "${hash}^..${hash}" -- "$doc_file" | awk '{print $2}')
-                    
-                    if [[ $additions -gt 0 || $deletions -gt 0 ]]; then
-                        echo "  📝 Changes: +${additions}/-${deletions} lines"
+                # Show one key change per doc
+                local diff_output=$(git diff "${hash}^..${hash}" -- "docs/${doc}.md" 2>/dev/null || echo "")
+                local added_section=$(echo "$diff_output" | grep '^+#' | sed 's/^+//' | sed 's/^#* *//' | head -1)
+                if [[ -n "$added_section" ]]; then
+                    echo "     ➕ Added: $added_section"
+                else
+                    local key_change=$(echo "$diff_output" | grep -E '^\+.*\b(new|added|feature|command|option|support|enable|integration)\b' -i | sed 's/^+//' | sed 's/^[[:space:]]*//' | head -1)
+                    if [[ -n "$key_change" ]]; then
+                        echo "     ✨ ${key_change:0:60}..."
                     fi
                 fi
             done
-            
-            # Add compact link at the end of each commit
-            echo ""
-            echo "  🔗 Links: Commit https://github.com/ericbuess/claude-code-docs/commit/$hash | Diff .../commit/$hash.diff"
         fi
-    done <<< "$doc_commits"
-    
-    echo ""
-    echo "💡 For detailed explanations of any changes, read the specific documentation"
-    echo "   using: /docs <topic> (e.g., /docs hooks, /docs setup)"
-    echo ""
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "📚 COMMUNITY MIRROR - NOT AFFILIATED WITH ANTHROPIC"
-    echo "Official docs: https://docs.anthropic.com/en/docs/claude-code"
-    echo "Mirror repo: https://github.com/ericbuess/claude-code-docs"
-    echo ""
-    
-    # Put all links at the very bottom so they don't get collapsed
-    echo "📎 QUICK LINKS TO ALL CHANGES:"
-    
-    # First, list all changed docs with links
-    local unique_docs=()
-    if [[ ${#all_docs_mentioned[@]} -gt 0 ]]; then
-        mapfile -t unique_docs < <(printf '%s\n' "${all_docs_mentioned[@]}" | sort -u)
-    fi
-    
-    if [[ ${#unique_docs[@]} -gt 0 ]]; then
         echo ""
-        echo "Documentation pages:"
-        for doc in "${unique_docs[@]}"; do
-            echo "• $doc: https://docs.anthropic.com/en/docs/claude-code/$doc"
-        done
-    fi
-    
-    # Then list all commits with links
-    echo ""
-    echo "Git commits:"
-    while IFS= read -r commit; do
-        local hash=$(echo "$commit" | cut -d' ' -f1)
-        local date=$(git show -s --format=%cr "$hash")
-        echo "• $date: https://github.com/ericbuess/claude-code-docs/commit/$hash"
     done <<< "$doc_commits"
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    
+    echo "📎 Full changelog: https://github.com/ericbuess/claude-code-docs/commits/main/docs"
+    echo "📚 COMMUNITY MIRROR - NOT AFFILIATED WITH ANTHROPIC"
 }
 
 # Function for uninstall
