@@ -119,7 +119,7 @@ Default behavior (no -t flag):
 3. Add note: "📚 Reading from local docs (run /docs -t to check freshness)"
 
 With -t flag:
-1. Read PLACEHOLDER_DOCS_PATH/docs/docs_manifest.json (if it fails, suggest re-running install.sh)
+1. Use Read tool with file_path="PLACEHOLDER_DOCS_PATH/docs/docs_manifest.json" (if it fails, suggest re-running install.sh)
 2. Calculate and show when GitHub last updated and when local docs last synced
 3. Show installer version from manifest (e.g., "Installer version: 0.2")
 4. Then read the requested topic (if provided)
@@ -133,7 +133,7 @@ GitHub Actions updates the docs every 3 hours. Your local copy automatically syn
 
 IMPORTANT: Show relative times only (no timezone conversions needed):
 - GitHub last updated: Extract timestamp from manifest (it's in UTC!), convert to Unix timestamp, then calculate (current_time - github_time) / 3600 for hours or / 60 for minutes
-- Local docs last synced: Read PLACEHOLDER_DOCS_PATH/.last_pull timestamp, then calculate (current_time - last_pull) / 60 for minutes
+- Local docs last synced: Use Read tool with file_path="PLACEHOLDER_DOCS_PATH/.last_pull" for timestamp, then calculate (current_time - last_pull) / 60 for minutes
 - If GitHub hasn't updated in >3 hours, add note "(normally updates every 3 hours)"
 - Be clear about wording: "local docs last synced" not "last checked"
 - For calculations: Use proper parentheses like $(((NOW - GITHUB) / 3600)) for hours
@@ -175,7 +175,7 @@ Special handling for "what's new" or "recent changes" queries:
      - Show summary of changes (files changed, insertions, deletions)
   4. If user wants specific changes, use: git diff COMMIT_HASH^..COMMIT_HASH -- docs/SPECIFIC_FILE.md
 
-Then answer the user's question by reading from the docs/ subdirectory (e.g. PLACEHOLDER_DOCS_PATH/docs/hooks.md).
+Then answer the user's question using Read tool with file_path from the docs/ subdirectory (e.g. file_path="PLACEHOLDER_DOCS_PATH/docs/hooks.md").
 
 Available docs: overview, quickstart, setup, memory, common-workflows, ide-integrations, mcp, github-actions, sdk, troubleshooting, security, settings, monitoring-usage, costs, hooks
 
