@@ -100,16 +100,19 @@ check_migration_notice() {
 auto_update() {
     cd "$DOCS_PATH" 2>/dev/null || return 1
     
+    # Get current branch
+    local BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+    
     # Quick fetch to check for updates (fast)
-    git fetch --quiet origin main 2>/dev/null || return 1
+    git fetch --quiet origin "$BRANCH" 2>/dev/null || return 1
     
     local LOCAL=$(git rev-parse HEAD 2>/dev/null)
-    local REMOTE=$(git rev-parse origin/main 2>/dev/null)
+    local REMOTE=$(git rev-parse origin/"$BRANCH" 2>/dev/null)
     
     if [[ "$LOCAL" != "$REMOTE" ]]; then
         # Updates available - do the pull
         echo "🔄 Updating documentation..." >&2
-        git pull --quiet origin main 2>&1 | grep -v "Merge made by" || true
+        git pull --quiet origin "$BRANCH" 2>&1 | grep -v "Merge made by" || true
         echo $(date +%s) > "$LAST_PULL"
         
         # Check if installer needs updating
@@ -140,12 +143,14 @@ show_freshness() {
         exit 1
     fi
     
-    # Auto-update and check status
-    cd "$DOCS_PATH" 2>/dev/null || exit 1
-    git fetch --quiet origin main 2>/dev/null || true
+    # Auto-update first
+    auto_update
     
+    # Then check status
+    cd "$DOCS_PATH" 2>/dev/null || exit 1
     local LOCAL=$(git rev-parse HEAD 2>/dev/null)
-    local REMOTE=$(git rev-parse origin/main 2>/dev/null)
+    local BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    local REMOTE=$(git rev-parse origin/$BRANCH 2>/dev/null)
     
     if [[ "$LOCAL" != "$REMOTE" ]]; then
         print_color "$YELLOW" "📥 Updates available (run any /docs command to update)"
