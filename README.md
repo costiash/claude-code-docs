@@ -18,7 +18,7 @@ This tool requires the following to be installed:
 - **curl** - For downloading the installation script
 - **Claude Code** - Obviously :)
 
-**Platform Support**: Currently macOS only. Linux support contributions welcome!
+**Platform Support**: macOS and Linux. Windows support contributions welcome!
 
 ## Installation
 

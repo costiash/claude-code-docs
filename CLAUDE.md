@@ -6,8 +6,8 @@ The docs are automatically updated every 3 hours via GitHub Actions.
 
 ## Development Notes
 
-- The install.sh script is macOS-only (tested on macOS)
-- For other platforms, please test thoroughly before submitting PRs
+- The install.sh script supports macOS and Linux
+- For Windows support, please test thoroughly before submitting PRs
 - All changes should be tested locally before pushing
 
 ## For /user:docs Command

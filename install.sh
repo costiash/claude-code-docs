@@ -1,16 +1,22 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs Installer - macOS only
+# Claude Code Docs Installer - Cross-platform
 # This script sets up local Claude Code documentation with automatic updates
 
-echo "Claude Code Docs Installer (macOS only)"
-echo "======================================"
+echo "Claude Code Docs Installer"
+echo "========================="
 
-# Check for macOS
-if [[ "$OSTYPE" != "darwin"* ]]; then
-    echo "❌ Error: This installer is only tested on macOS"
-    echo "For other platforms, please install manually or submit a tested version"
+# Detect OS type
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    OS_TYPE="macos"
+    echo "✓ Detected macOS"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    OS_TYPE="linux"
+    echo "✓ Detected Linux"
+else
+    echo "❌ Error: Unsupported OS type: $OSTYPE"
+    echo "This installer supports macOS and Linux only"
     exit 1
 fi
 
@@ -83,11 +89,12 @@ Error handling:
 GitHub Actions updates the docs every 3 hours. Your local copy automatically syncs at most once every 3 hours when you use this command.
 
 IMPORTANT: Show relative times only (no timezone conversions needed):
-- GitHub last updated: Extract timestamp from manifest (it's in UTC!), convert with: date -j -u -f "%Y-%m-%dT%H:%M:%S" "TIMESTAMP" "+%s", then calculate (current_time - github_time) / 3600 for hours or / 60 for minutes
+- GitHub last updated: Extract timestamp from manifest (it's in UTC!), convert to Unix timestamp, then calculate (current_time - github_time) / 3600 for hours or / 60 for minutes
 - Local docs last synced: Read .last_pull timestamp, then calculate (current_time - last_pull) / 60 for minutes
 - If GitHub hasn't updated in >3 hours, add note "(normally updates every 3 hours)"
 - Be clear about wording: "local docs last synced" not "last checked"
 - For calculations: Use proper parentheses like $(((NOW - GITHUB) / 3600)) for hours
+- Date command compatibility: The installer uses OS-appropriate date syntax
 
 First, check if user passed -t flag:
 - If "$ARGUMENTS" starts with "-t", extract it and treat the rest as the topic
@@ -121,7 +128,12 @@ User query: $ARGUMENTS
 DOCS_COMMAND_EOF
 
 # Replace the placeholder with the actual escaped path
-sed -i '' "s|PLACEHOLDER_DOCS_PATH|$DOCS_PATH|g" ~/.claude/commands/docs.md
+# Use OS-appropriate sed syntax
+if [[ "$OS_TYPE" == "macos" ]]; then
+    sed -i '' "s|PLACEHOLDER_DOCS_PATH|$DOCS_PATH|g" ~/.claude/commands/docs.md
+else
+    sed -i "s|PLACEHOLDER_DOCS_PATH|$DOCS_PATH|g" ~/.claude/commands/docs.md
+fi
 
 echo "✓ Created /user:docs command"
 
@@ -129,9 +141,15 @@ echo "✓ Created /user:docs command"
 echo "Setting up automatic updates..."
 
 # Create the hook command with proper escaping
-# Using printf to safely construct the command with escaped variables
-# Note: Using pushd/popd to avoid cd restrictions in Claude Code
-HOOK_COMMAND=$(printf 'if [[ $(jq -r .tool_input.file_path 2>/dev/null) == *%s/* ]]; then LAST_PULL="%s/.last_pull" && NOW=$(date +%%s) && GITHUB_TS=$(jq -r .last_updated "%s/docs/docs_manifest.json" 2>/dev/null | cut -d. -f1) && GITHUB_UNIX=$(date -j -u -f "%%Y-%%m-%%dT%%H:%%M:%%S" "$GITHUB_TS" "+%%s" 2>/dev/null || echo 0) && if [[ -f "$LAST_PULL" ]]; then LAST=$(cat "$LAST_PULL"); if [[ $GITHUB_UNIX -gt $LAST ]]; then echo "🔄 Updating docs to latest version..." >&2 && (cd %s && git pull --quiet) && echo $NOW > "$LAST_PULL"; fi; else echo "🔄 Syncing docs for the first time..." >&2 && (cd %s && git pull --quiet) && echo $NOW > "$LAST_PULL"; fi; fi' "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED")
+# Using printf to safely construct the command with escaped variables  
+# Note: Using cd to change directory as required
+if [[ "$OS_TYPE" == "macos" ]]; then
+    # macOS version with BSD date
+    HOOK_COMMAND=$(printf 'if [[ $(jq -r .tool_input.file_path 2>/dev/null) == *%s/* ]]; then LAST_PULL="%s/.last_pull" && NOW=$(date +%%s) && GITHUB_TS=$(jq -r .last_updated "%s/docs/docs_manifest.json" 2>/dev/null | cut -d. -f1) && GITHUB_UNIX=$(date -j -u -f "%%Y-%%m-%%dT%%H:%%M:%%S" "$GITHUB_TS" "+%%s" 2>/dev/null || echo 0) && if [[ -f "$LAST_PULL" ]]; then LAST=$(cat "$LAST_PULL"); if [[ $GITHUB_UNIX -gt $LAST ]]; then echo "🔄 Updating docs to latest version..." >&2 && (cd %s && git pull --quiet) && echo $NOW > "$LAST_PULL"; fi; else echo "🔄 Syncing docs for the first time..." >&2 && (cd %s && git pull --quiet) && echo $NOW > "$LAST_PULL"; fi; fi' "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED")
+else
+    # Linux version with GNU date
+    HOOK_COMMAND=$(printf 'if [[ $(jq -r .tool_input.file_path 2>/dev/null) == *%s/* ]]; then LAST_PULL="%s/.last_pull" && NOW=$(date +%%s) && GITHUB_TS=$(jq -r .last_updated "%s/docs/docs_manifest.json" 2>/dev/null | cut -d. -f1) && GITHUB_UNIX=$(date -u -d "$GITHUB_TS" "+%%s" 2>/dev/null || echo 0) && if [[ -f "$LAST_PULL" ]]; then LAST=$(cat "$LAST_PULL"); if [[ $GITHUB_UNIX -gt $LAST ]]; then echo "🔄 Updating docs to latest version..." >&2 && (cd %s && git pull --quiet) && echo $NOW > "$LAST_PULL"; fi; else echo "🔄 Syncing docs for the first time..." >&2 && (cd %s && git pull --quiet) && echo $NOW > "$LAST_PULL"; fi; fi' "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED")
+fi
 
 if [ -f ~/.claude/settings.json ]; then
     # Update existing settings.json
@@ -185,5 +203,3 @@ echo ""
 echo "Available topics: overview, quickstart, memory, hooks, mcp, settings, etc."
 echo ""
 echo "⚠️  Note: Restart Claude Code for auto-updates to take effect"
-echo ""
-echo "Note: This installer is macOS-only. For other platforms, please contribute a tested version."
