@@ -10,7 +10,9 @@ Major improvements:
 - **Fixed installation location** at `~/.claude-code-docs` 
 - **Automatic migration** from old installations
 - **Script-based architecture** - faster and more reliable
-- **New features**: `/docs whats-new` and `/docs uninstall`
+- **Auto-updates on every request** - always stay in sync
+- **Improved `/docs whats-new`** - shows actual diffs with colors
+- **Simplified sync status** - no confusing timestamps
 - **Better performance** - all operations < 1 second
 
 If you have v0.2 installed, it will auto-update when we push v0.3 to main!
@@ -60,11 +62,11 @@ The `/docs` command provides instant access to documentation with optional fresh
 
 You'll see: `📚 Reading from local docs (run /docs -t to check freshness)`
 
-### Check documentation freshness with -t flag
+### Check documentation sync status with -t flag
 ```bash
-/docs -t           # Show when docs were last updated
-/docs -t hooks     # Check freshness, then read hooks docs
-/docs -t mcp       # Check freshness, then read MCP docs
+/docs -t           # Show sync status with GitHub
+/docs -t hooks     # Check sync status, then read hooks docs
+/docs -t mcp       # Check sync status, then read MCP docs
 ```
 
 ### See what's new

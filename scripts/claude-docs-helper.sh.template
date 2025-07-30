@@ -74,15 +74,15 @@ auto_update() {
     if [[ "$LOCAL" != "$REMOTE" ]]; then
         # Updates available - do the pull
         echo "🔄 Updating documentation..." >&2
-        if git pull --quiet origin "$BRANCH" 2>&1 | grep -v "Merge made by"; then
-            # Check if installer needs updating
-            local INSTALLER_VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
-            local VERSION_INT=$(echo "$INSTALLER_VERSION" | sed 's/^0\.//')
-            
-            if [[ $VERSION_INT -gt 3 ]]; then
-                echo "🔧 Updating Claude Code Docs installer..." >&2
-                ./install.sh >/dev/null 2>&1
-            fi
+        git pull --quiet origin "$BRANCH" 2>&1 | grep -v "Merge made by" || true
+        
+        # Check if installer needs updating
+        local INSTALLER_VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
+        local VERSION_INT=$(echo "$INSTALLER_VERSION" | sed 's/^0\.//')
+        
+        if [[ $VERSION_INT -gt 3 ]]; then
+            echo "🔧 Updating Claude Code Docs installer..." >&2
+            ./install.sh >/dev/null 2>&1
         fi
     fi
     
@@ -173,6 +173,7 @@ whats_new() {
     }
     
     echo "📚 Recent documentation updates:"
+    echo "💡 Tip: Use ctrl+r in Claude Code to expand collapsed output"
     echo ""
     
     # Get commits that actually updated documentation
@@ -198,8 +199,8 @@ whats_new() {
         print_color "$BLUE" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         print_color "$BLUE" "• $message ($date)"
         
-        # Add GitHub diff link
-        echo "  🔗 View changes: https://github.com/ericbuess/claude-code-docs/commit/$hash"
+        # Add GitHub diff link (filtered to show only docs changes)
+        echo "  🔗 View changes: https://github.com/ericbuess/claude-code-docs/commit/$hash/docs"
         
         # Show which docs changed and sample of changes
         local changed_docs=$(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md | sed 's|docs/||' | sed 's|\.md$||')
@@ -212,19 +213,43 @@ whats_new() {
                 local filename=$(basename "$doc_file" .md)
                 echo "  📄 $filename:"
                 
-                # Get a summary of what changed (show first 5 additions/deletions)
-                local changes_shown=0
-                git diff "${hash}^..${hash}" -- "$doc_file" | grep -E "^[+-]" | grep -v "^[+-]{3}" | while read -r line; do
-                    if [[ $changes_shown -lt 5 ]]; then
+                # Get unified diff with context
+                local diff_output=$(git diff --unified=2 "${hash}^..${hash}" -- "$doc_file" 2>/dev/null)
+                
+                # Parse and display meaningful changes
+                local in_hunk=false
+                local lines_shown=0
+                local max_lines=8
+                
+                while IFS= read -r line; do
+                    # Skip file headers
+                    if [[ "$line" =~ ^diff\ --git || "$line" =~ ^index\ || "$line" =~ ^--- || "$line" =~ ^\+\+\+ ]]; then
+                        continue
+                    fi
+                    
+                    # Process hunks
+                    if [[ "$line" =~ ^@@ ]]; then
+                        if [[ $lines_shown -lt $max_lines ]]; then
+                            echo "    ..."
+                            in_hunk=true
+                        else
+                            break
+                        fi
+                    elif [[ "$in_hunk" == true && $lines_shown -lt $max_lines ]]; then
                         if [[ "$line" =~ ^\+ ]]; then
-                            echo "    ${line}"
-                            ((changes_shown++))
+                            print_color "$GREEN" "    $line"
+                            ((lines_shown++))
                         elif [[ "$line" =~ ^- ]]; then
-                            echo "    ${line}"
-                            ((changes_shown++))
+                            print_color "$RED" "    $line"
+                            ((lines_shown++))
+                        elif [[ "$line" =~ ^\ ]]; then
+                            # Context line - show if it helps understand the change
+                            if [[ $lines_shown -gt 0 && $lines_shown -lt $((max_lines - 1)) ]]; then
+                                echo "    $line"
+                            fi
                         fi
                     fi
-                done
+                done <<< "$diff_output"
                 
                 # Count changes
                 local additions=$(git diff --numstat "${hash}^..${hash}" -- "$doc_file" | awk '{print $1}')
