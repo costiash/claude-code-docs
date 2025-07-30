@@ -115,14 +115,17 @@ Usage:
 
 Default behavior (no -t flag):
 1. Skip ALL checks for maximum speed
-2. Go straight to reading the requested documentation
-3. Add note: "📚 Reading from local docs (run /docs -t to check freshness)"
+2. Directly read the documentation file
+3. Show note: "📚 Reading from local docs (run /docs -t to check freshness)"
 
-With -t flag:
-1. Use Read tool with file_path="PLACEHOLDER_DOCS_PATH/docs/docs_manifest.json" (if it fails, suggest re-running install.sh)
-2. Calculate and show when GitHub last updated and when local docs last synced
-3. Show installer version from manifest (e.g., "Installer version: 0.2")
-4. Then read the requested topic (if provided)
+With -t flag - EXECUTE THESE STEPS:
+Step 1: Read manifest using: cat "PLACEHOLDER_DOCS_PATH/docs/docs_manifest.json"
+Step 2: Check last sync using: cat "PLACEHOLDER_DOCS_PATH/.last_pull" 2>/dev/null || echo "No sync timestamp"
+Step 3: Extract and display:
+   - last_updated from manifest (GitHub update time)
+   - installer_version from manifest
+   - Calculate hours/minutes since updates
+Step 4: If topic provided, read using: cat "PLACEHOLDER_DOCS_PATH/docs/${topic}.md"
 
 Note: The hook automatically keeps docs up-to-date by checking if GitHub has newer content before each read. You'll see "🔄 Updating docs to latest version..." when it syncs.
 
@@ -133,7 +136,7 @@ GitHub Actions updates the docs every 3 hours. Your local copy automatically syn
 
 IMPORTANT: Show relative times only (no timezone conversions needed):
 - GitHub last updated: Extract timestamp from manifest (it's in UTC!), convert to Unix timestamp, then calculate (current_time - github_time) / 3600 for hours or / 60 for minutes
-- Local docs last synced: Use Read tool with file_path="PLACEHOLDER_DOCS_PATH/.last_pull" for timestamp, then calculate (current_time - last_pull) / 60 for minutes
+- Local docs last synced: Read timestamp from PLACEHOLDER_DOCS_PATH/.last_pull, then calculate (current_time - last_pull) / 60 for minutes
 - If GitHub hasn't updated in >3 hours, add note "(normally updates every 3 hours)"
 - Be clear about wording: "local docs last synced" not "last checked"
 - For calculations: Use proper parentheses like $(((NOW - GITHUB) / 3600)) for hours
@@ -148,7 +151,7 @@ Examples:
 Default usage (no -t):
 > /docs hooks
 📚 Reading from local docs (run /docs -t to check freshness)
-[Immediately shows hooks documentation]
+[Executes: cat "PLACEHOLDER_DOCS_PATH/docs/hooks.md"]
 
 With -t flag:
 > /docs -t
@@ -175,7 +178,7 @@ Special handling for "what's new" or "recent changes" queries:
      - Show summary of changes (files changed, insertions, deletions)
   4. If user wants specific changes, use: git diff COMMIT_HASH^..COMMIT_HASH -- docs/SPECIFIC_FILE.md
 
-Then answer the user's question using Read tool with file_path from the docs/ subdirectory (e.g. file_path="PLACEHOLDER_DOCS_PATH/docs/hooks.md").
+Then answer the user's question by reading docs with: cat "PLACEHOLDER_DOCS_PATH/docs/[topic].md"
 
 Available docs: overview, quickstart, setup, memory, common-workflows, ide-integrations, mcp, github-actions, sdk, troubleshooting, security, settings, monitoring-usage, costs, hooks
 
