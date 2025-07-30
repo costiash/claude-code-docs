@@ -294,6 +294,23 @@ FULL_ARGS="$*"
 FULL_ARGS="${FULL_ARGS//\\\'/\'}"  # Replace \' with '
 FULL_ARGS="${FULL_ARGS//\\\"/\"}"  # Replace \" with "
 
+# Check if arguments start with -t flag (Claude Code passes all args as one string)
+if [[ "$FULL_ARGS" =~ ^-t\ +(.*)$ ]] || [[ "$FULL_ARGS" =~ ^--check\ +(.*)$ ]]; then
+    show_freshness
+    remaining_args="${BASH_REMATCH[1]}"
+    if [[ "$remaining_args" =~ ^what.?s?\ ?new.*$ ]]; then
+        echo ""
+        whats_new
+    elif [[ -n "$remaining_args" ]]; then
+        echo ""
+        read_doc "$(sanitize_input "$remaining_args")"
+    fi
+    exit 0
+elif [[ "$FULL_ARGS" == "-t" ]] || [[ "$FULL_ARGS" == "--check" ]]; then
+    show_freshness
+    exit 0
+fi
+
 # Main command handling
 case "${1:-}" in
     -t|--check)
@@ -333,9 +350,6 @@ case "${1:-}" in
         if [[ "$FULL_ARGS" =~ what.*new ]] || [[ "$1 ${2:-}" =~ what.*new ]]; then
             whats_new
         else
-            # Check migration notice before reading docs
-            check_migration_notice
-            
             # Default: read documentation (header printed in read_doc)
             read_doc "$1"
         fi
