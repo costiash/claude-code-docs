@@ -56,14 +56,19 @@ calculate_time_diff() {
         # macOS date command
         then=$(date -j -f "%Y-%m-%dT%H:%M:%S" "${timestamp%%.*}" +%s 2>/dev/null || echo 0)
     else
-        # Linux date command
-        then=$(date -d "${timestamp%%.*}" +%s 2>/dev/null || echo 0)
+        # Linux date command - handle ISO format properly
+        # Remove microseconds and Z if present
+        local clean_timestamp="${timestamp%%.*}"
+        clean_timestamp="${clean_timestamp%Z}"
+        then=$(date -d "$clean_timestamp" +%s 2>/dev/null || echo 0)
     fi
     
     if [[ $then -eq 0 ]]; then
         echo 0
     else
-        echo $(( (now - then) / 60 ))  # minutes
+        # Return absolute value of difference (handles future dates)
+        local diff=$(( (now - then) / 60 ))  # minutes
+        echo ${diff#-}  # Remove negative sign if present
     fi
 }
 
@@ -157,7 +162,12 @@ show_freshness() {
     # Check if warning needed (only if GitHub > 3 hours old)
     local github_hours=$((github_minutes / 60))
     if [[ $github_hours -gt 3 ]]; then
-        if [[ ! -f "$LAST_PULL" ]] || [[ $(cat "$LAST_PULL" 2>/dev/null || echo 0) -lt $(date -d "$github_time" +%s 2>/dev/null || echo 0) ]]; then
+        # Parse the actual date to check if it needs sync
+        local github_timestamp="${github_time%%.*}"
+        github_timestamp="${github_timestamp%Z}"
+        local github_epoch=$(date -d "$github_timestamp" +%s 2>/dev/null || echo 0)
+        
+        if [[ ! -f "$LAST_PULL" ]] || [[ $(cat "$LAST_PULL" 2>/dev/null || echo 0) -lt $github_epoch ]]; then
             echo ""
             print_color "$YELLOW" "⚠️  Your docs appear to be out of sync!"
             echo ""
@@ -247,10 +257,16 @@ whats_new() {
     echo "📚 Recent documentation updates:"
     echo ""
     
-    # Get the last 10 commits that updated docs
-    local commits=$(git log --oneline -20 | grep -E "(Update Claude Code docs|docs/)" | head -10)
+    # Get commits that actually updated documentation
+    # Look for commits with "Update Claude Code docs" or changes to docs/ directory
+    local doc_commits=$(git log --oneline -50 --grep="Update Claude Code docs" -- docs/*.md | head -10)
     
-    if [[ -z "$commits" ]]; then
+    if [[ -z "$doc_commits" ]]; then
+        # Fallback: look for any commits that changed docs
+        doc_commits=$(git log --oneline -50 -- docs/*.md | grep -v "feat:" | grep -v "fix:" | grep -v "refactor:" | head -10)
+    fi
+    
+    if [[ -z "$doc_commits" ]]; then
         echo "No recent documentation updates found."
         return
     fi
@@ -269,10 +285,10 @@ whats_new() {
             echo "  Changed: $(echo $changed_docs | tr '\n' ', ' | sed 's/, $//')"
         fi
         echo ""
-    done <<< "$commits"
+    done <<< "$doc_commits"
     
     # Show summary of latest changes
-    local latest_hash=$(echo "$commits" | head -1 | cut -d' ' -f1)
+    local latest_hash=$(echo "$doc_commits" | head -1 | cut -d' ' -f1)
     if [[ -n "$latest_hash" ]]; then
         echo "Summary of latest changes:"
         git diff --stat "${latest_hash}^..${latest_hash}" -- docs/*.md 2>/dev/null || true
