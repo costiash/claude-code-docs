@@ -46,13 +46,8 @@ sanitize_input() {
 
 # Function to print documentation header
 print_doc_header() {
-    print_color "$BLUE" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    print_color "$BLUE" "📚 Claude Code Documentation Mirror"
-    echo "   Source: https://docs.anthropic.com/en/docs/claude-code"
-    echo "   Mirror: https://github.com/ericbuess/claude-code-docs"
-    echo "   Note: This is a community mirror, not maintained by Anthropic"
-    echo "   For the latest official docs, visit the source link above"
-    print_color "$BLUE" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "📚 COMMUNITY MIRROR: https://github.com/ericbuess/claude-code-docs"
+    echo "📖 OFFICIAL DOCS: https://docs.anthropic.com/en/docs/claude-code"
     echo ""
 }
 
@@ -146,6 +141,8 @@ show_freshness() {
     
     echo "📍 Branch: ${BRANCH}"
     echo "📦 Version: ${installer_version}"
+    echo ""
+    echo "📚 Community mirror - Official docs: https://docs.anthropic.com/en/docs/claude-code"
 }
 
 # Function to read documentation
@@ -159,6 +156,8 @@ read_doc() {
     if [[ -f "$doc_path" ]]; then
         print_doc_header
         cat "$doc_path"
+        echo ""
+        echo "📚 Community mirror of https://docs.anthropic.com/en/docs/claude-code/$topic"
     else
         print_color "$RED" "❌ Documentation not found: $topic"
         echo ""
@@ -180,6 +179,8 @@ list_docs() {
     ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
     echo ""
     echo "Usage: /docs <topic> or /docs -t to check freshness"
+    echo ""
+    echo "📚 Community mirror - Official docs: https://docs.anthropic.com/en/docs/claude-code"
 }
 
 # Function for hook check (auto-update)
@@ -321,6 +322,8 @@ whats_new() {
         local date=$(git show -s --format=%cr "$hash")
         echo "• $date: https://github.com/ericbuess/claude-code-docs/commit/$hash"
     done <<< "$doc_commits"
+    echo ""
+    echo "📚 Community mirror - Official docs: https://docs.anthropic.com/en/docs/claude-code"
 }
 
 # Function for uninstall
