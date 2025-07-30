@@ -478,18 +478,24 @@ def main():
                 
                 # Check if content has changed
                 old_hash = manifest.get("files", {}).get(filename, {}).get("hash", "")
+                old_entry = manifest.get("files", {}).get(filename, {})
+                
                 if content_has_changed(content, old_hash):
                     content_hash = save_markdown_file(docs_dir, filename, content)
                     logger.info(f"Updated: {filename}")
+                    # Only update timestamp when content actually changes
+                    last_updated = datetime.now().isoformat()
                 else:
                     content_hash = old_hash
                     logger.info(f"Unchanged: {filename}")
+                    # Keep existing timestamp for unchanged files
+                    last_updated = old_entry.get("last_updated", datetime.now().isoformat())
                 
                 new_manifest["files"][filename] = {
                     "original_url": f"{base_url}{page_path}",
                     "original_md_url": f"{base_url}{page_path}.md",
                     "hash": content_hash,
-                    "last_updated": datetime.now().isoformat()
+                    "last_updated": last_updated
                 }
                 
                 fetched_files.add(filename)
