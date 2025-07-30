@@ -1,11 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs Installer - Cross-platform
-# This script sets up local Claude Code documentation with automatic updates
+# Claude Code Docs Installer v0.3 - Fixed location with migration support
+# This script installs/migrates claude-code-docs to ~/.claude-code-docs
 
-echo "Claude Code Docs Installer"
-echo "========================="
+echo "Claude Code Docs Installer v0.3"
+echo "==============================="
+
+# Fixed installation location
+INSTALL_DIR="$HOME/.claude-code-docs"
 
 # Detect OS type
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -29,206 +32,252 @@ for cmd in git jq curl; do
         exit 1
     fi
 done
+echo "✓ All dependencies satisfied"
 
-# Check if we need to clean up old installation
-if [ -f ~/.claude/commands/docs.md ]; then
-    echo "✓ Found existing Claude Code Docs installation"
-    echo "  Cleaning up old configuration for fresh install..."
+# Function to detect user modifications in a directory
+detect_user_modifications() {
+    local dir="$1"
+    local custom_files=()
     
-    # Remove old command file
-    rm -f ~/.claude/commands/docs.md
-    echo "  ✓ Removed old command file"
+    # Expected files that come with the repo
+    local expected_patterns=(
+        "install.sh"
+        "uninstall.sh"
+        "README.md"
+        "LICENSE"
+        "CLAUDE.md"
+        "UNINSTALL.md"
+        "TODO-v0.3.md"
+        ".gitignore"
+        ".git/*"
+        ".github/*"
+        "docs/*.md"
+        "docs/docs_manifest.json"
+        "scripts/fetch_claude_docs.py"
+        "scripts/requirements.txt"
+        "scripts/claude-docs-helper.sh.template"
+        ".last_pull"
+        ".last_check"
+    )
     
-    # Clean up old hooks from settings.json if it exists
-    if [ -f ~/.claude/settings.json ]; then
-        # Remove any hooks that contain 'claude-code-docs' in their command
-        jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.hooks[]?.command // "" | contains("claude-code-docs") | not)]' ~/.claude/settings.json > ~/.claude/settings.json.tmp && \
-        mv ~/.claude/settings.json.tmp ~/.claude/settings.json
-        echo "  ✓ Cleaned up old hooks"
+    # Build find command to exclude expected files
+    local find_cmd="find \"$dir\" -type f"
+    for pattern in "${expected_patterns[@]}"; do
+        find_cmd+=" ! -path \"$dir/$pattern\""
+    done
+    
+    # Execute find and collect custom files
+    while IFS= read -r file; do
+        # Skip .git internals
+        if [[ "$file" =~ \.git/ ]]; then
+            continue
+        fi
+        # Remove directory prefix for cleaner output
+        custom_files+=("${file#$dir/}")
+    done < <(eval "$find_cmd" 2>/dev/null || true)
+    
+    printf '%s\n' "${custom_files[@]}"
+}
+
+# Function to find existing installations
+find_existing_installations() {
+    local installations=()
+    
+    # Current directory (if it has the manifest)
+    if [[ -f "./docs/docs_manifest.json" && "$(pwd)" != "$INSTALL_DIR" ]]; then
+        installations+=("$(pwd)")
     fi
     
-    echo "  ✓ Cleanup complete"
-fi
+    # Common installation locations
+    local common_paths=(
+        "$HOME/claude-code-docs"
+        "$HOME/Projects/claude-code-docs"
+        "$HOME/Documents/claude-code-docs"
+        "$HOME/workspace/claude-code-docs"
+        "$HOME/repos/claude-code-docs"
+        "$HOME/src/claude-code-docs"
+        "$HOME/code/claude-code-docs"
+    )
+    
+    for path in "${common_paths[@]}"; do
+        if [[ -d "$path" && -f "$path/docs/docs_manifest.json" && "$path" != "$INSTALL_DIR" ]]; then
+            installations+=("$path")
+        fi
+    done
+    
+    # Remove duplicates
+    printf '%s\n' "${installations[@]}" | sort -u
+}
 
-# Get the docs path
-if [ -f "docs/docs_manifest.json" ]; then
-    # We're already in the claude-code-docs directory
-    DOCS_PATH=$(pwd)
-    echo "✓ Found repository at: $DOCS_PATH"
-elif [ -d "claude-code-docs" ]; then
-    # The directory already exists
-    cd claude-code-docs || exit 1
-    DOCS_PATH=$(pwd)
-    echo "✓ Found repository at: $DOCS_PATH"
+# Function to migrate from old location
+migrate_installation() {
+    local old_dir="$1"
+    local user_files="$2"
+    
+    echo "Migrating from: $old_dir"
+    echo "To: $INSTALL_DIR"
+    
+    # Create install directory
+    mkdir -p "$INSTALL_DIR"
+    
+    # If old installation has .git, preserve it
+    if [[ -d "$old_dir/.git" ]]; then
+        echo "Preserving git history..."
+        cp -R "$old_dir/.git" "$INSTALL_DIR/"
+        
+        # Reset to clean state in new location
+        cd "$INSTALL_DIR"
+        git reset --hard HEAD 2>/dev/null || true
+        git clean -fd 2>/dev/null || true
+        
+        # Pull latest
+        echo "Updating to latest version..."
+        git pull --quiet origin main || echo "  (Could not pull latest changes)"
+    else
+        # No git history, clone fresh
+        echo "Cloning fresh repository..."
+        git clone https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
+    fi
+    
+    # Copy over any state files
+    for state_file in .last_pull .last_check; do
+        if [[ -f "$old_dir/$state_file" ]]; then
+            cp "$old_dir/$state_file" "$INSTALL_DIR/" 2>/dev/null || true
+        fi
+    done
+    
+    # Create migration info
+    local migration_info="{
+  \"migrated_from\": \"$old_dir\",
+  \"migration_date\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",
+  \"old_dir_safe_to_delete\": $([ -z "$user_files" ] && echo "true" || echo "false"),
+  \"user_files_detected\": ["
+    
+    if [[ -n "$user_files" ]]; then
+        # Add user files to JSON array
+        local first=true
+        while IFS= read -r file; do
+            [[ -z "$file" ]] && continue
+            [[ "$first" == "true" ]] && first=false || migration_info+=","
+            migration_info+="
+    \"$file\""
+        done <<< "$user_files"
+    fi
+    
+    migration_info+="
+  ]
+}"
+    
+    echo "$migration_info" > "$INSTALL_DIR/.migration_info"
+    
+    # Auto-remove old directory if safe
+    if [[ -z "$user_files" ]]; then
+        echo "No user modifications detected in old location"
+        echo "Removing old installation..."
+        rm -rf "$old_dir"
+        echo "✓ Old installation removed"
+    else
+        echo ""
+        echo "⚠️  User modifications detected - old directory preserved"
+        echo "Custom files found:"
+        echo "$user_files" | sed 's/^/  - /'
+    fi
+}
+
+# Main installation logic
+echo ""
+
+# Check if already installed at new location
+if [[ -d "$INSTALL_DIR" && -f "$INSTALL_DIR/docs/docs_manifest.json" ]]; then
+    echo "✓ Found existing installation at ~/.claude-code-docs"
+    
+    # Just update it
+    cd "$INSTALL_DIR"
+    echo "Updating to latest version..."
+    git pull --quiet origin main || echo "  (Could not pull latest changes)"
 else
-    # Clone it
-    echo "Cloning documentation repository..."
-    if ! git clone https://github.com/ericbuess/claude-code-docs.git; then
-        echo "❌ Error: Failed to clone repository"
-        exit 1
+    # Look for existing installations to migrate
+    echo "Checking for existing installations..."
+    mapfile -t existing_installs < <(find_existing_installations)
+    
+    if [[ ${#existing_installs[@]} -gt 0 ]]; then
+        # Found existing installation(s)
+        echo "Found ${#existing_installs[@]} existing installation(s):"
+        for install in "${existing_installs[@]}"; do
+            echo "  - $install"
+        done
+        echo ""
+        
+        # Use the first one found (prioritize current directory)
+        old_install="${existing_installs[0]}"
+        echo "Checking for user modifications in: $old_install"
+        
+        # Check for user modifications
+        user_modifications=$(detect_user_modifications "$old_install")
+        
+        # Migrate
+        migrate_installation "$old_install" "$user_modifications"
+    else
+        # Fresh installation
+        echo "No existing installation found"
+        echo "Installing fresh to ~/.claude-code-docs..."
+        
+        git clone https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
+        cd "$INSTALL_DIR"
     fi
-    cd claude-code-docs || exit 1
-    DOCS_PATH=$(pwd)
-    echo "✓ Documentation cloned to: $DOCS_PATH"
 fi
 
-# Set git merge strategy to avoid conflicts
-git config pull.rebase false
+# Now we're in $INSTALL_DIR, set up the new script-based system
+echo ""
+echo "Setting up Claude Code Docs v0.3..."
 
-# Always pull latest changes
-echo "Updating to latest version..."
-git pull --quiet origin main || echo "  (Could not pull latest changes, continuing with current version)"
-
-# Escape the docs path for safe use in commands
-DOCS_PATH_ESCAPED=$(printf '%q' "$DOCS_PATH")
+# Copy helper script from template
+echo "Installing helper script..."
+cp "$INSTALL_DIR/scripts/claude-docs-helper.sh.template" "$INSTALL_DIR/claude-docs-helper.sh"
+chmod +x "$INSTALL_DIR/claude-docs-helper.sh"
+echo "✓ Helper script installed"
 
 # Create command directory
 echo "Setting up /docs command..."
-if ! mkdir -p ~/.claude/commands; then
-    echo "❌ Error: Failed to create ~/.claude/commands directory"
-    exit 1
-fi
+mkdir -p ~/.claude/commands
 
-# Create the docs command file with quoted heredoc to prevent variable expansion
-cat > ~/.claude/commands/docs.md << 'DOCS_COMMAND_EOF'
-LOCAL DOCS AT: PLACEHOLDER_DOCS_PATH/docs/
-ALWAYS use absolute paths when reading files, never relative paths.
-This directory contains a local updated copy of all Claude Code documentation.
-
-When showing documentation freshness with -t flag:
-Show the times first, then check if warning is needed.
-
-WARNING LOGIC - CRITICAL:
-ONLY show warning if GitHub last updated MORE than 3 hours ago.
-If GitHub updated recently (< 3 hours), NEVER show any warning.
-
-If GitHub > 3 hours old AND (local sync missing OR local older than GitHub), show:
-"⚠️ Your docs appear to be out of sync!
-
-Your docs haven't been updated in over 3 hours. To fix this and enable auto-sync:
-
-curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
-
-Would you like me to run this command for you?"
+# Create simplified docs command
+cat > ~/.claude/commands/docs.md << 'EOF'
+Execute the Claude Code Docs helper script at ~/.claude-code-docs/claude-docs-helper.sh
 
 Usage:
-- /docs <topic> - Read documentation instantly (no checks)
-- /docs -t - Check documentation freshness and sync status
-- /docs -t <topic> - Check freshness, then read documentation
+- /docs - List all available documentation topics
+- /docs <topic> - Read specific documentation  
+- /docs -t - Check documentation freshness
+- /docs -t <topic> - Check freshness then read documentation
+- /docs whats-new - Show recent documentation changes
 
-Default behavior (no -t flag):
-1. Skip ALL checks for maximum speed
-2. Read docs using: cat "PLACEHOLDER_DOCS_PATH/docs/[topic].md"
-3. Show note: "📚 Reading from local docs (run /docs -t to check freshness)"
+The helper script handles all functionality including auto-updates.
 
-With -t flag - EXECUTE THESE STEPS:
-Step 1: Read manifest using: cat "PLACEHOLDER_DOCS_PATH/docs/docs_manifest.json"
-Step 2: Check last sync using: cat "PLACEHOLDER_DOCS_PATH/.last_pull" 2>/dev/null || echo "No sync timestamp"
-Step 3: Calculate and display times:
-   - Extract last_updated and installer_version from manifest
-   - ALWAYS use UTC for calculations: date -u +%s for current time
-   - Convert GitHub timestamp (already UTC) to unix time
-   - Calculate hours_ago = (current_UTC - github_UTC) / 3600
-   - Display: "📅 Documentation last updated on GitHub: X hours/minutes ago"
-   - Display: "📅 Your local docs last synced: X minutes ago" (or "No sync timestamp")
-   - Display: "📅 Installer version: X.X"
-   - WARNING CHECK: Only if hours_ago > 3, then check local sync and maybe show warning
-Step 4: If topic provided, read using: cat "PLACEHOLDER_DOCS_PATH/docs/${topic}.md"
-
-Note: The hook automatically keeps docs up-to-date by checking if GitHub has newer content before each read. You'll see "🔄 Updating docs to latest version..." when it syncs.
-
-Error handling:
-- If any files are missing or commands fail, show: "❌ Error accessing docs. Try re-running: curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash"
-
-GitHub Actions updates the docs every 3 hours. Your local copy automatically syncs at most once every 3 hours when you use this command.
-
-IMPORTANT: Show relative times only (no timezone conversions needed):
-- GitHub last updated: Extract timestamp from manifest (it's in UTC!), convert to Unix timestamp, then calculate (current_time - github_time) / 3600 for hours or / 60 for minutes
-- Local docs last synced: Read timestamp from PLACEHOLDER_DOCS_PATH/.last_pull, then calculate (current_time - last_pull) / 60 for minutes
-- If GitHub hasn't updated in >3 hours, add note "(normally updates every 3 hours)"
-- Be clear about wording: "local docs last synced" not "last checked"
-- For calculations: Use proper parentheses like $(((NOW - GITHUB) / 3600)) for hours
-- Date command compatibility: The installer uses OS-appropriate date syntax
-
-First, check if user passed -t flag:
-- If "$ARGUMENTS" starts with "-t", extract it and treat the rest as the topic
-- Parse carefully: "-t hooks" → flag=true, topic=hooks; "hooks" → flag=false, topic=hooks
-
-Examples:
-
-Default usage (no -t):
-> /docs hooks
-📚 Reading from local docs (run /docs -t to check freshness)
-[Executes: cat "PLACEHOLDER_DOCS_PATH/docs/hooks.md"]
-
-With -t flag:
-> /docs -t
-📅 Documentation last updated on GitHub: 2 hours ago
-📅 Your local docs last synced: 25 minutes ago
-📅 Installer version: 0.2
-
-> /docs -t hooks  
-📅 Documentation last updated on GitHub: 5 hours ago (normally updates every 3 hours)
-📅 Your local docs last synced: 3 hours 15 minutes ago
-📅 Installer version: 0.2
-🔄 Syncing latest documentation...
-[Then shows hooks documentation]
-
-Special handling for "what's new" or "recent changes" queries:
-- If user asks about recent updates, changes, or what's new:
-  1. Run: cd PLACEHOLDER_DOCS_PATH && git log --oneline -10
-  2. For each commit that mentions "Update Claude Code docs":
-     - Show commit date and hash
-     - Run: git diff --name-only COMMIT_HASH^..COMMIT_HASH -- docs/*.md
-     - List which docs changed
-  3. For the most recent docs update commit:
-     - Run: git diff --stat COMMIT_HASH^..COMMIT_HASH -- docs/*.md
-     - Show summary of changes (files changed, insertions, deletions)
-  4. If user wants specific changes, use: git diff COMMIT_HASH^..COMMIT_HASH -- docs/SPECIFIC_FILE.md
-
-Then answer the user's question by reading docs with: cat "PLACEHOLDER_DOCS_PATH/docs/[topic].md"
-
-Available docs: overview, quickstart, setup, memory, common-workflows, ide-integrations, mcp, github-actions, sdk, troubleshooting, security, settings, monitoring-usage, costs, hooks
-
-IMPORTANT: This freshness check only happens when using /docs command. If continuing a conversation from a previous session, use /docs again to ensure docs are current.
-
-User query: $ARGUMENTS
-DOCS_COMMAND_EOF
-
-# Replace the placeholder with the actual escaped path
-# Use OS-appropriate sed syntax
-if [[ "$OS_TYPE" == "macos" ]]; then
-    sed -i '' "s|PLACEHOLDER_DOCS_PATH|$DOCS_PATH|g" ~/.claude/commands/docs.md
-else
-    sed -i "s|PLACEHOLDER_DOCS_PATH|$DOCS_PATH|g" ~/.claude/commands/docs.md
-fi
+Execute: ~/.claude-code-docs/claude-docs-helper.sh $ARGUMENTS
+EOF
 
 echo "✓ Created /docs command"
 
-# Setup hook for auto-updates (checks if GitHub has newer content)
+# Setup hook for auto-updates
 echo "Setting up automatic updates..."
 
-# Create the hook command with proper escaping
-# Using printf to safely construct the command with escaped variables
-# This hook uses git fetch to check for remote updates, with rate limiting
-# It also checks for installer updates and runs the installer if needed
-HOOK_COMMAND=$(printf 'if [[ $(jq -r .tool_input.file_path 2>/dev/null) == *%s/* ]]; then LAST_CHECK="%s/.last_check" && LAST_PULL="%s/.last_pull" && NOW=$(date +%%s) && CHECK_INTERVAL=10800 && SHOULD_CHECK=0 && if [[ -f "$LAST_CHECK" ]]; then LAST_CHECK_TIME=$(cat "$LAST_CHECK"); if [[ $((NOW - LAST_CHECK_TIME)) -gt $CHECK_INTERVAL ]]; then SHOULD_CHECK=1; fi; else SHOULD_CHECK=1; fi && if [[ $SHOULD_CHECK -eq 1 ]]; then echo $NOW > "$LAST_CHECK" && (cd %s && git fetch --quiet origin main 2>/dev/null && LOCAL=$(git rev-parse HEAD 2>/dev/null) && REMOTE=$(git rev-parse origin/main 2>/dev/null) && if [[ "$LOCAL" != "$REMOTE" ]]; then echo "🔄 Updating docs to latest version..." >&2 && git pull --quiet origin main && echo $NOW > "$LAST_PULL" && INSTALLER_VERSION=$(jq -r .installer_version "%s/docs/docs_manifest.json" 2>/dev/null || echo 0.1) && if (( $(echo "$INSTALLER_VERSION > 0.2" | bc -l) )); then echo "🔧 Updating Claude Code Docs installer..." >&2 && (cd %s && ./install.sh >/dev/null 2>&1 || true); fi; fi) || true; fi; fi' "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED" "$DOCS_PATH_ESCAPED")
+# Simple hook that just calls the helper script
+HOOK_COMMAND="~/.claude-code-docs/claude-docs-helper.sh hook-check"
 
 if [ -f ~/.claude/settings.json ]; then
     # Update existing settings.json
     echo "Updating existing Claude settings..."
-    if jq --arg cmd "$HOOK_COMMAND" '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.matcher != "Read")] + [{"matcher": "Read", "hooks": [{"type": "command", "command": $cmd}]}]' ~/.claude/settings.json > ~/.claude/settings.json.tmp; then
-        mv ~/.claude/settings.json.tmp ~/.claude/settings.json
-        echo "✓ Updated Claude settings"
-    else
-        echo "❌ Error: Failed to update settings.json"
-        echo "Please check ~/.claude/settings.json manually"
-        exit 1
-    fi
+    # Remove old hooks first
+    jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.matcher != "Read")]' ~/.claude/settings.json > ~/.claude/settings.json.tmp
+    # Add new hook
+    jq --arg cmd "$HOOK_COMMAND" '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[]] + [{"matcher": "Read", "hooks": [{"type": "command", "command": $cmd}]}]' ~/.claude/settings.json.tmp > ~/.claude/settings.json
+    rm -f ~/.claude/settings.json.tmp
+    echo "✓ Updated Claude settings"
 else
     # Create new settings.json
     echo "Creating Claude settings..."
-    if jq -n --arg cmd "$HOOK_COMMAND" '{
+    jq -n --arg cmd "$HOOK_COMMAND" '{
         "hooks": {
             "PreToolUse": [
                 {
@@ -242,29 +291,25 @@ else
                 }
             ]
         }
-    }' > ~/.claude/settings.json; then
-        echo "✓ Created Claude settings"
-    else
-        echo "❌ Error: Failed to create settings.json"
-        exit 1
-    fi
+    }' > ~/.claude/settings.json
+    echo "✓ Created Claude settings"
 fi
 
-# No version marker needed - it's in the manifest
-
+# Success message
 echo ""
-echo "✅ Claude Code docs installed successfully!"
+echo "✅ Claude Code Docs v0.3 installed successfully!"
 echo ""
 echo "📚 Command: /docs (user)"
-echo "📂 Location: $DOCS_PATH"
+echo "📂 Location: ~/.claude-code-docs"
 echo ""
 echo "Usage examples:"
 echo "  /docs hooks         # Read hooks documentation"
 echo "  /docs -t           # Check when docs were last updated"
-echo "  /docs -t memory    # Check updates, then read memory docs"
+echo "  /docs whats-new    # See recent documentation changes"
 echo ""
 echo "🔄 Auto-updates: Enabled - syncs automatically when GitHub has newer content"
 echo ""
-echo "Available topics: overview, quickstart, memory, hooks, mcp, settings, etc."
+echo "Available topics:"
+ls "$INSTALL_DIR/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 60
 echo ""
 echo "⚠️  Note: Restart Claude Code for auto-updates to take effect"

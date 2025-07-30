@@ -4,6 +4,17 @@
 
 Local mirror of Claude Code documentation files from https://docs.anthropic.com/en/docs/claude-code/, updated every 3 hours.
 
+## 🆕 Version 0.3 Released!
+
+Major improvements:
+- **Fixed installation location** at `~/.claude-code-docs` 
+- **Automatic migration** from old installations
+- **Script-based architecture** - faster and more reliable
+- **New features**: `/docs whats-new` and `/docs uninstall`
+- **Better performance** - all operations < 1 second
+
+If you have v0.2 installed, it will auto-update when we push v0.3 to main!
+
 ## Why This Exists
 
 - **Faster than web fetching** - Read from local files
@@ -23,16 +34,14 @@ This tool requires the following to be installed:
 
 ## Installation
 
-Run this single command from wherever you want to store the docs:
+Run this single command:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
 ```
 
-**Having sync issues?** If `/docs -t` shows your docs are >3 hours out of date, you may have an older version with a sync bug. Just re-run the installer above to fix it - it's safe to run multiple times.
-
 This will:
-1. Clone the repository (or use existing if found)
+1. Install to `~/.claude-code-docs` (or migrate existing installation)
 2. Create the `/docs` slash command
 3. Set up automatic git pull when reading docs
 
@@ -51,17 +60,22 @@ The `/docs` command provides instant access to documentation with optional fresh
 
 You'll see: `📚 Reading from local docs (run /docs -t to check freshness)`
 
-### Optional: Check documentation freshness with -t flag
+### Check documentation freshness with -t flag
 ```bash
 /docs -t           # Show when docs were last updated
 /docs -t hooks     # Check freshness, then read hooks docs
 /docs -t mcp       # Check freshness, then read MCP docs
 ```
 
-The `-t` flag shows:
-- When GitHub last updated the docs
-- When your local copy last synced
-- Triggers a sync if it's been 3+ hours
+### See what's new
+```bash
+/docs whats-new    # Show recent documentation changes with diffs
+```
+
+### Uninstall
+```bash
+/docs uninstall    # Remove claude-code-docs completely
+```
 
 ### Creative usage examples
 ```bash
@@ -77,11 +91,6 @@ The `-t` flag shows:
 /docs how do I customize Claude Code's behavior?
 ```
 
-### Performance notes
-- **Default mode**: Zero overhead - reads docs instantly
-- **With -t flag**: Checks timestamps and syncs if needed (only every 3 hours)
-- **Error handling**: If docs are missing, you'll see instructions to reinstall
-
 ## How Updates Work
 
 The docs automatically stay up-to-date:
@@ -92,8 +101,18 @@ The docs automatically stay up-to-date:
 - No manual updates needed!
 
 **Performance**:
-- `/docs` reads instantly and the hook ensures content is always current
+- `/docs` reads instantly with a simple helper script
 - `/docs -t` shows you exact timestamps of GitHub updates vs local sync
+
+## Migration from v0.2
+
+If you have an older installation, v0.3 will automatically:
+1. Find your existing installation
+2. Check for any custom files you added
+3. Migrate to `~/.claude-code-docs`
+4. Clean up the old location (if safe)
+
+You'll see a brief notice on first use after migration.
 
 ## Troubleshooting
 
@@ -106,7 +125,7 @@ If `/docs` returns "command not found":
 ### Documentation not updating
 If documentation seems outdated:
 1. Run `/docs -t` to check sync status and force an update
-2. Manually update: `cd /path/to/claude-code-docs && git pull`
+2. Manually update: `cd ~/.claude-code-docs && git pull`
 3. Check if GitHub Actions are running: [View Actions](https://github.com/ericbuess/claude-code-docs/actions)
 
 ### Installation errors
@@ -114,30 +133,20 @@ If documentation seems outdated:
 - **"Failed to clone repository"**: Check your internet connection
 - **"Failed to update settings.json"**: Check file permissions on `~/.claude/settings.json`
 
-### Hook not working
-If docs aren't auto-updating:
-1. Check your Claude settings: `cat ~/.claude/settings.json | jq .hooks`
-2. Look for error messages when using `/user:docs`
-3. Re-run the installer to reset the hook
-
 ## Uninstalling
 
 To completely remove the docs integration:
 
-1. **Remove the command file:**
-   ```bash
-   rm ~/.claude/commands/docs.md
-   ```
+```bash
+/docs uninstall
+```
 
-2. **Remove the auto-update hook:**
-   - Run `/hooks` in Claude Code
-   - Find "PreToolUse - Matcher: Read"
-   - Select the hook and remove it
+Or run:
+```bash
+~/.claude-code-docs/uninstall.sh
+```
 
-3. **Delete the repository:**
-   ```bash
-   rm -rf /path/to/claude-code-docs
-   ```
+See [UNINSTALL.md](UNINSTALL.md) for manual uninstall instructions.
 
 ## Security Notes
 
@@ -149,6 +158,15 @@ To completely remove the docs integration:
   - Fork the repository and install from your own fork
   - Clone manually and run the installer from the local directory
   - Review all code before installation
+
+## What's New in v0.3
+
+- **Fixed installation location**: Always installs to `~/.claude-code-docs`
+- **Automatic migration**: Seamlessly moves from old locations
+- **Script-based architecture**: All logic in a single maintainable script
+- **Performance improvements**: Operations complete in < 1 second
+- **New `/docs whats-new` command**: See actual documentation changes
+- **Simplified codebase**: Easier to understand and contribute
 
 ## License
 

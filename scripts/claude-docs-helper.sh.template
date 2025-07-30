@@ -1,0 +1,353 @@
+#!/bin/bash
+set -euo pipefail
+
+# Claude Code Documentation Helper Script v0.3
+# This script handles all /docs command functionality
+# Installation path: ~/.claude-code-docs/claude-docs-helper.sh
+
+# Fixed installation path (no need for placeholder replacement)
+DOCS_PATH="$HOME/.claude-code-docs"
+MANIFEST="$DOCS_PATH/docs/docs_manifest.json"
+LAST_PULL="$DOCS_PATH/.last_pull"
+LAST_CHECK="$DOCS_PATH/.last_check"
+MIGRATION_INFO="$DOCS_PATH/.migration_info"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Function to print colored output
+print_color() {
+    local color=$1
+    shift
+    echo -e "${color}$*${NC}"
+}
+
+# Function to sanitize input arguments
+sanitize_input() {
+    # Remove any potentially dangerous characters
+    echo "$1" | sed 's/[;&|`$()]//g'
+}
+
+# Function to get OS-specific date command
+get_date_cmd() {
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        echo "gdate"  # macOS with GNU coreutils
+        # Fallback to regular date if gdate not available
+        if ! command -v gdate &> /dev/null; then
+            echo "date"
+        fi
+    else
+        echo "date"  # Linux
+    fi
+}
+
+# Function to calculate time differences
+calculate_time_diff() {
+    local timestamp="$1"
+    local now=$(date +%s)
+    local then
+    
+    # Try different date parsing methods
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS date command
+        then=$(date -j -f "%Y-%m-%dT%H:%M:%S" "${timestamp%%.*}" +%s 2>/dev/null || echo 0)
+    else
+        # Linux date command
+        then=$(date -d "${timestamp%%.*}" +%s 2>/dev/null || echo 0)
+    fi
+    
+    if [[ $then -eq 0 ]]; then
+        echo 0
+    else
+        echo $(( (now - then) / 60 ))  # minutes
+    fi
+}
+
+# Function to check and display migration notice
+check_migration_notice() {
+    if [[ -f "$MIGRATION_INFO" ]]; then
+        local migrated_from=$(jq -r '.migrated_from // ""' "$MIGRATION_INFO" 2>/dev/null)
+        local user_files=$(jq -r '.user_files_detected[]? // empty' "$MIGRATION_INFO" 2>/dev/null)
+        
+        if [[ -n "$migrated_from" ]]; then
+            print_color "$BLUE" "📦 Documentation has been migrated to ~/.claude-code-docs"
+            
+            if [[ -n "$user_files" ]]; then
+                print_color "$YELLOW" ""
+                print_color "$YELLOW" "⚠️  Custom files preserved at: $migrated_from"
+                echo "$user_files" | while read -r file; do
+                    echo "  - $file"
+                done
+            fi
+            echo ""
+        fi
+        
+        # Remove migration info after displaying
+        rm -f "$MIGRATION_INFO"
+    fi
+}
+
+# Function to show documentation freshness
+show_freshness() {
+    # Check migration notice first
+    check_migration_notice
+    
+    # Read manifest
+    if [[ ! -f "$MANIFEST" ]]; then
+        print_color "$RED" "❌ Error: Documentation not found at ~/.claude-code-docs"
+        echo "Please reinstall with:"
+        echo "curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash"
+        exit 1
+    fi
+    
+    # Get GitHub update time and installer version
+    local github_time=$(jq -r '.last_updated' "$MANIFEST" 2>/dev/null | cut -d. -f1)
+    local installer_version=$(jq -r '.installer_version' "$MANIFEST" 2>/dev/null)
+    
+    if [[ -z "$github_time" ]]; then
+        print_color "$RED" "❌ Error: Could not read manifest file"
+        exit 1
+    fi
+    
+    # Calculate time since GitHub update
+    local github_minutes=$(calculate_time_diff "$github_time")
+    
+    # Format time display
+    local github_display
+    if [[ $github_minutes -lt 60 ]]; then
+        github_display="${github_minutes} minutes ago"
+    else
+        local hours=$((github_minutes / 60))
+        local mins=$((github_minutes % 60))
+        if [[ $mins -eq 0 ]]; then
+            github_display="${hours} hours ago"
+        else
+            github_display="${hours} hours ${mins} minutes ago"
+        fi
+    fi
+    
+    # Get local sync time
+    local local_sync="No sync timestamp"
+    if [[ -f "$LAST_PULL" ]]; then
+        local pull_time=$(cat "$LAST_PULL")
+        local local_minutes=$(( ($(date +%s) - pull_time) / 60 ))
+        
+        if [[ $local_minutes -lt 60 ]]; then
+            local_sync="${local_minutes} minutes ago"
+        else
+            local hours=$((local_minutes / 60))
+            local mins=$((local_minutes % 60))
+            if [[ $mins -eq 0 ]]; then
+                local_sync="${hours} hours ago"
+            else
+                local_sync="${hours} hours ${mins} minutes ago"
+            fi
+        fi
+    fi
+    
+    # Display info
+    echo "📅 Documentation last updated on GitHub: ${github_display}"
+    echo "📅 Your local docs last synced: ${local_sync}"
+    echo "📅 Installer version: ${installer_version}"
+    
+    # Check if warning needed (only if GitHub > 3 hours old)
+    local github_hours=$((github_minutes / 60))
+    if [[ $github_hours -gt 3 ]]; then
+        if [[ ! -f "$LAST_PULL" ]] || [[ $(cat "$LAST_PULL" 2>/dev/null || echo 0) -lt $(date -d "$github_time" +%s 2>/dev/null || echo 0) ]]; then
+            echo ""
+            print_color "$YELLOW" "⚠️  Your docs appear to be out of sync!"
+            echo ""
+            echo "Your docs haven't been updated in over 3 hours. To fix this and enable auto-sync:"
+            echo ""
+            echo "curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash"
+            echo ""
+            echo "Would you like me to run this command for you?"
+        fi
+    fi
+}
+
+# Function to read documentation
+read_doc() {
+    local topic=$(sanitize_input "$1")
+    local doc_path="$DOCS_PATH/docs/${topic}.md"
+    
+    if [[ -f "$doc_path" ]]; then
+        cat "$doc_path"
+    else
+        print_color "$RED" "❌ Documentation not found: $topic"
+        echo ""
+        echo "Available topics:"
+        ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
+    fi
+}
+
+# Function to list available documentation
+list_docs() {
+    check_migration_notice
+    
+    echo "Available documentation topics:"
+    echo ""
+    ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
+    echo ""
+    echo "Usage: /docs <topic> or /docs -t to check freshness"
+}
+
+# Function for hook check (auto-update)
+hook_check() {
+    local NOW=$(date +%s)
+    local CHECK_INTERVAL=10800  # 3 hours
+    
+    # Check if we should check for updates
+    if [[ -f "$LAST_CHECK" ]]; then
+        local LAST_CHECK_TIME=$(cat "$LAST_CHECK")
+        if [[ $((NOW - LAST_CHECK_TIME)) -lt $CHECK_INTERVAL ]]; then
+            exit 0  # Too soon to check
+        fi
+    fi
+    
+    echo $NOW > "$LAST_CHECK"
+    
+    # Check for updates
+    cd "$DOCS_PATH" 2>/dev/null || exit 0
+    git fetch --quiet origin main 2>/dev/null || exit 0
+    
+    local LOCAL=$(git rev-parse HEAD 2>/dev/null)
+    local REMOTE=$(git rev-parse origin/main 2>/dev/null)
+    
+    if [[ "$LOCAL" != "$REMOTE" ]]; then
+        echo "🔄 Updating docs to latest version..." >&2
+        git pull --quiet origin main
+        echo $NOW > "$LAST_PULL"
+        
+        # Check if installer needs updating
+        local INSTALLER_VERSION=$(jq -r '.installer_version' "$MANIFEST" 2>/dev/null || echo 0.2)
+        # Convert to integer for comparison (0.3 -> 3, 0.2 -> 2)
+        local VERSION_INT=$(echo "$INSTALLER_VERSION" | sed 's/^0\.//')
+        
+        if [[ $VERSION_INT -gt 3 ]]; then
+            echo "🔧 Updating Claude Code Docs installer..." >&2
+            cd "$DOCS_PATH" && ./install.sh >/dev/null 2>&1
+        fi
+    fi
+}
+
+# Function to show what's new
+whats_new() {
+    check_migration_notice
+    
+    cd "$DOCS_PATH" 2>/dev/null || {
+        print_color "$RED" "❌ Error: Could not access documentation directory"
+        exit 1
+    }
+    
+    echo "📚 Recent documentation updates:"
+    echo ""
+    
+    # Get the last 10 commits that updated docs
+    local commits=$(git log --oneline -20 | grep -E "(Update Claude Code docs|docs/)" | head -10)
+    
+    if [[ -z "$commits" ]]; then
+        echo "No recent documentation updates found."
+        return
+    fi
+    
+    # Show each commit with changed files
+    while IFS= read -r commit; do
+        local hash=$(echo "$commit" | cut -d' ' -f1)
+        local message=$(echo "$commit" | cut -d' ' -f2-)
+        local date=$(git show -s --format=%cr "$hash")
+        
+        print_color "$BLUE" "• $message ($date)"
+        
+        # Show which docs changed
+        local changed_docs=$(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md | sed 's|docs/||' | sed 's|\.md$||')
+        if [[ -n "$changed_docs" ]]; then
+            echo "  Changed: $(echo $changed_docs | tr '\n' ', ' | sed 's/, $//')"
+        fi
+        echo ""
+    done <<< "$commits"
+    
+    # Show summary of latest changes
+    local latest_hash=$(echo "$commits" | head -1 | cut -d' ' -f1)
+    if [[ -n "$latest_hash" ]]; then
+        echo "Summary of latest changes:"
+        git diff --stat "${latest_hash}^..${latest_hash}" -- docs/*.md 2>/dev/null || true
+    fi
+}
+
+# Function for uninstall
+uninstall() {
+    print_color "$GREEN" "Claude Code Documentation Mirror - Uninstaller"
+    print_color "$GREEN" "============================================="
+    echo ""
+    echo "This will remove:"
+    echo "  1. The docs command: ~/.claude/commands/docs.md"
+    echo "  2. The auto-update hook from: ~/.claude/settings.json"
+    echo "  3. The installation directory: ~/.claude-code-docs"
+    echo ""
+    
+    read -p "Are you sure? (y/N): " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "Cancelled."
+        exit 0
+    fi
+    
+    # Remove command
+    rm -f ~/.claude/commands/docs.md
+    print_color "$GREEN" "✓ Removed command file"
+    
+    # Remove hook
+    if [[ -f ~/.claude/settings.json ]]; then
+        cp ~/.claude/settings.json ~/.claude/settings.json.backup
+        jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.hooks[0].command | contains("claude-code-docs") | not)]' ~/.claude/settings.json > ~/.claude/settings.json.tmp
+        
+        # Clean up empty arrays/objects
+        jq 'if .hooks.PreToolUse == [] then .hooks |= if . == {PreToolUse: []} then {} else del(.PreToolUse) end else . end | if .hooks == {} then del(.hooks) else . end' ~/.claude/settings.json.tmp > ~/.claude/settings.json
+        rm -f ~/.claude/settings.json.tmp
+        print_color "$GREEN" "✓ Removed hook from settings"
+    fi
+    
+    # Remove directory
+    cd "$HOME"  # Move out of the directory
+    rm -rf "$DOCS_PATH"
+    print_color "$GREEN" "✓ Removed installation directory"
+    echo ""
+    print_color "$GREEN" "✅ Uninstall complete!"
+}
+
+# Main command handling
+case "${1:-}" in
+    -t|--check)
+        show_freshness
+        if [[ -n "${2:-}" ]]; then
+            echo ""
+            read_doc "$(sanitize_input "$2")"
+        fi
+        ;;
+    hook-check)
+        hook_check
+        ;;
+    uninstall)
+        uninstall
+        ;;
+    "whats-new"|"what's-new"|"whatsnew")
+        whats_new
+        ;;
+    "")
+        list_docs
+        ;;
+    *)
+        # Check migration notice before reading docs
+        check_migration_notice
+        
+        # Default: read documentation
+        print_color "$BLUE" "📚 Reading from local docs (run /docs -t to check freshness)"
+        echo ""
+        read_doc "$1"
+        ;;
+esac
