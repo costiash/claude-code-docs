@@ -387,9 +387,15 @@ FULL_ARGS="$*"
 case "${1:-}" in
     -t|--check)
         show_freshness
-        if [[ -n "${2:-}" ]]; then
+        # Check if remaining args form "what's new"
+        shift
+        local remaining_args="$*"
+        if [[ "$remaining_args" =~ ^what.?s?\ ?new.*$ ]]; then
             echo ""
-            read_doc "$(sanitize_input "$2")"
+            whats_new
+        elif [[ -n "$remaining_args" ]]; then
+            echo ""
+            read_doc "$(sanitize_input "$remaining_args")"
         fi
         ;;
     hook-check)
