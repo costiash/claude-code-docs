@@ -58,10 +58,10 @@ detect_user_modifications() {
         "scripts/claude-docs-helper.sh.template"
     )
     
-    # Build find command to exclude expected files
-    local find_cmd="find \"$dir\" -type f"
+    # Build find command arguments in an array
+    local find_args=("$dir" "-type" "f")
     for pattern in "${expected_patterns[@]}"; do
-        find_cmd+=" ! -path \"$dir/$pattern\""
+        find_args+=("!" "-path" "$dir/$pattern")
     done
     
     # Execute find and collect custom files
@@ -72,7 +72,7 @@ detect_user_modifications() {
         fi
         # Remove directory prefix for cleaner output
         custom_files+=("${file#$dir/}")
-    done < <(eval "$find_cmd" 2>/dev/null || true)
+    done < <(find "${find_args[@]}" 2>/dev/null || true)
     
     printf '%s\n' "${custom_files[@]}"
 }
