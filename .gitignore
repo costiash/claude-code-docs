@@ -24,3 +24,4 @@ Thumbs.db
 *.log
 .claude/settings.local.json
 .last_pull
+.last_check
