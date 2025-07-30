@@ -92,6 +92,24 @@ The docs automatically stay up-to-date:
 - `/user:docs` reads instantly and the hook ensures content is always current
 - `/user:docs -t` shows you exact timestamps of GitHub updates vs local sync
 
+## Updating from Previous Versions
+
+If you installed claude-code-docs before July 30, 2025, you have an older version with a bug that prevents proper auto-updates. 
+
+**To update to the latest version:**
+```bash
+cd /path/to/claude-code-docs
+git pull
+./install.sh
+```
+
+This will:
+- Update your repository files
+- Fix the circular logic bug in the auto-update hook
+- Update the `/user:docs` command with improvements
+
+**Important:** The auto-update mechanism cannot update itself. You must re-run the installer after major updates.
+
 ## Troubleshooting
 
 ### Command not found
