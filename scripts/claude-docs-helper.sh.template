@@ -44,6 +44,17 @@ sanitize_input() {
     echo "$1" | sed 's/[;&|`$()]//g'
 }
 
+# Function to print documentation header
+print_doc_header() {
+    print_color "$BLUE" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    print_color "$BLUE" "📚 Claude Code Documentation Mirror"
+    echo "   Source: https://docs.anthropic.com/en/docs/claude-code"
+    echo "   Mirror: https://github.com/ericbuess/claude-code-docs"
+    echo "   Note: This is a community mirror, not maintained by Anthropic"
+    echo "   For the latest official docs, visit the source link above"
+    print_color "$BLUE" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+}
 
 # Function to check and display migration notice
 check_migration_notice() {
@@ -105,6 +116,7 @@ auto_update() {
 
 # Function to show documentation sync status
 show_freshness() {
+    print_doc_header
     # Check migration notice first
     check_migration_notice
     
@@ -145,6 +157,7 @@ read_doc() {
     local doc_path="$DOCS_PATH/docs/${topic}.md"
     
     if [[ -f "$doc_path" ]]; then
+        print_doc_header
         cat "$doc_path"
     else
         print_color "$RED" "❌ Documentation not found: $topic"
@@ -156,6 +169,7 @@ read_doc() {
 
 # Function to list available documentation
 list_docs() {
+    print_doc_header
     check_migration_notice
     
     # Auto-update before listing
@@ -176,6 +190,7 @@ hook_check() {
 
 # Function to show what's new
 whats_new() {
+    print_doc_header
     check_migration_notice
     
     # Auto-update first
@@ -203,6 +218,9 @@ whats_new() {
         return
     fi
     
+    # Track all docs mentioned for summary
+    local all_docs_mentioned=()
+    
     # Show each commit with actual changes
     while IFS= read -r commit; do
         local hash=$(echo "$commit" | cut -d' ' -f1)
@@ -220,6 +238,8 @@ whats_new() {
             # Show actual changes for each file
             for doc_file in $(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md); do
                 local filename=$(basename "$doc_file" .md)
+                # Track this doc for summary
+                all_docs_mentioned+=("$filename")
                 echo ""
                 echo "  📄 $filename:"
                 echo "  📖 View docs: https://docs.anthropic.com/en/docs/claude-code/$filename"
@@ -286,6 +306,16 @@ whats_new() {
     # Summary for easy reference
     echo ""
     echo "📊 Summary of changes:"
+    echo ""
+    echo "📄 Documentation pages updated:"
+    # Remove duplicates and sort
+    local unique_docs=($(printf '%s\n' "${all_docs_mentioned[@]}" | sort -u))
+    for doc in "${unique_docs[@]}"; do
+        echo "• $doc: https://docs.anthropic.com/en/docs/claude-code/$doc"
+    done
+    
+    echo ""
+    echo "🔗 Git commits:"
     while IFS= read -r commit; do
         local hash=$(echo "$commit" | cut -d' ' -f1)
         local date=$(git show -s --format=%cr "$hash")
@@ -295,6 +325,7 @@ whats_new() {
 
 # Function for uninstall
 uninstall() {
+    print_doc_header
     print_color "$GREEN" "Claude Code Documentation Mirror - Uninstaller"
     print_color "$GREEN" "============================================="
     echo ""
@@ -303,6 +334,18 @@ uninstall() {
     echo "  2. The auto-update hook from: ~/.claude/settings.json"
     echo "  3. The installation directory: ~/.claude-code-docs"
     echo ""
+    
+    # Check if running interactively
+    if [[ ! -t 0 ]]; then
+        echo "To uninstall Claude Code Documentation Mirror, run this command directly in your terminal:"
+        echo ""
+        print_color "$YELLOW" "~/.claude-code-docs/uninstall.sh"
+        echo ""
+        echo "Or use the helper script directly:"
+        echo ""
+        print_color "$YELLOW" "~/.claude-code-docs/claude-docs-helper.sh uninstall"
+        exit 0
+    fi
     
     read -p "Are you sure? (y/N): " -n 1 -r
     echo
@@ -366,9 +409,7 @@ case "${1:-}" in
             # Check migration notice before reading docs
             check_migration_notice
             
-            # Default: read documentation
-            print_color "$BLUE" "📚 Reading from local docs (run /docs -t to check freshness)"
-            echo ""
+            # Default: read documentation (header printed in read_doc)
             read_doc "$1"
         fi
         ;;
