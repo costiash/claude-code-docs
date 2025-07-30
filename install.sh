@@ -94,19 +94,22 @@ cat > ~/.claude/commands/docs.md << 'DOCS_COMMAND_EOF'
 PLACEHOLDER_DOCS_PATH/docs/ contains a local updated copy of all Claude Code documentation.
 
 When showing documentation freshness with -t flag:
-- If GitHub last updated > 3 hours ago AND your local sync is older than GitHub's update, show this notice:
+Show the times first, then check if warning is needed.
 
-⚠️ Your docs appear to be out of sync!
-   
-   If your local docs haven't updated in over 3 hours, you likely have an older
-   version of the installer with a bug that prevents automatic updates.
-   
-   To fix this and enable auto-sync, run:
-   
-   curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
-   
-   This one-time fix will ensure your docs stay automatically synchronized.
-   Not sure? Just run the command anyway - it's safe to re-run.
+Out-of-sync warning (ONLY show if BOTH conditions are true):
+  1. GitHub hasn't updated in more than 3 hours (stale)
+  2. Your local sync is missing or older than GitHub's update
+
+If both conditions above are true, show this warning:
+"⚠️ Your docs appear to be out of sync!
+
+If your local docs haven't updated in over 3 hours, you likely have an older
+version of the installer with a bug that prevents automatic updates.
+
+To fix this and enable auto-sync, run:
+curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
+
+This one-time fix will ensure your docs stay automatically synchronized."
 
 Usage:
 - /docs <topic> - Read documentation instantly (no checks)
@@ -121,10 +124,14 @@ Default behavior (no -t flag):
 With -t flag - EXECUTE THESE STEPS:
 Step 1: Read manifest using: cat "PLACEHOLDER_DOCS_PATH/docs/docs_manifest.json"
 Step 2: Check last sync using: cat "PLACEHOLDER_DOCS_PATH/.last_pull" 2>/dev/null || echo "No sync timestamp"
-Step 3: Extract and display:
-   - last_updated from manifest (GitHub update time)
-   - installer_version from manifest
-   - Calculate hours/minutes since updates
+Step 3: Calculate and display times:
+   - Extract last_updated and installer_version from manifest
+   - Convert GitHub timestamp to UTC unix time
+   - Calculate: (current_UTC_time - github_UTC_time) for time difference
+   - Display: "📅 Documentation last updated on GitHub: X hours/minutes ago"
+   - Display: "📅 Your local docs last synced: X minutes ago" (or "No sync timestamp")
+   - Display: "📅 Installer version: X.X"
+   - Check warning conditions: If GitHub > 3 hours old AND local is missing/old, show warning
 Step 4: If topic provided, read using: cat "PLACEHOLDER_DOCS_PATH/docs/${topic}.md"
 
 Note: The hook automatically keeps docs up-to-date by checking if GitHub has newer content before each read. You'll see "🔄 Updating docs to latest version..." when it syncs.
