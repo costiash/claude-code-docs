@@ -10,18 +10,32 @@ DOCS_PATH="$HOME/.claude-code-docs"
 MANIFEST="$DOCS_PATH/docs/docs_manifest.json"
 MIGRATION_INFO="$DOCS_PATH/.migration_info"
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+# Check if we should use colors (disabled in pipes or non-TTY)
+if [[ -t 1 ]] && [[ "${TERM:-}" != "dumb" ]]; then
+    # Colors for output
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    YELLOW='\033[1;33m'
+    BLUE='\033[0;34m'
+    NC='\033[0m' # No Color
+else
+    # No colors
+    RED=''
+    GREEN=''
+    YELLOW=''
+    BLUE=''
+    NC=''
+fi
 
 # Function to print colored output
 print_color() {
     local color=$1
     shift
-    echo -e "${color}$*${NC}"
+    if [[ -n "$color" ]]; then
+        echo -e "${color}$*${NC}"
+    else
+        echo "$*"
+    fi
 }
 
 # Function to sanitize input arguments
@@ -212,49 +226,20 @@ whats_new() {
             for doc_file in $(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md); do
                 local filename=$(basename "$doc_file" .md)
                 echo "  📄 $filename:"
-                
-                # Get unified diff with context
-                local diff_output=$(git diff --unified=2 "${hash}^..${hash}" -- "$doc_file" 2>/dev/null)
-                
-                # Parse and display meaningful changes
-                local in_hunk=false
-                local lines_shown=0
-                local max_lines=8
-                
-                while IFS= read -r line; do
-                    # Skip file headers
-                    if [[ "$line" =~ ^diff || "$line" =~ ^index || "$line" =~ ^--- || "$line" =~ ^\+\+\+ ]]; then
-                        continue
-                    fi
-                    
-                    # Process hunks
-                    if [[ "$line" =~ ^@@ ]]; then
-                        if [[ $lines_shown -lt $max_lines ]]; then
-                            echo "    ..."
-                            in_hunk=true
-                        else
-                            break
-                        fi
-                    elif [[ "$in_hunk" == true && $lines_shown -lt $max_lines ]]; then
-                        if [[ "$line" =~ ^\+ ]]; then
-                            print_color "$GREEN" "    $line"
-                            ((lines_shown++))
-                        elif [[ "$line" =~ ^- ]]; then
-                            print_color "$RED" "    $line"
-                            ((lines_shown++))
-                        elif [[ "$line" =~ ^[[:space:]] ]]; then
-                            # Context line - show if it helps understand the change
-                            if [[ $lines_shown -gt 0 && $lines_shown -lt $((max_lines - 1)) ]]; then
-                                echo "    $line"
-                            fi
-                        fi
-                    fi
-                done <<< "$diff_output"
+                echo "  📖 View docs: https://docs.anthropic.com/en/docs/claude-code/$filename"
                 
                 # Count changes
                 local additions=$(git diff --numstat "${hash}^..${hash}" -- "$doc_file" | awk '{print $1}')
                 local deletions=$(git diff --numstat "${hash}^..${hash}" -- "$doc_file" | awk '{print $2}')
-                echo "    (${additions} additions, ${deletions} deletions)"
+                
+                # Show summary of changes
+                if [[ $additions -gt 0 && $deletions -gt 0 ]]; then
+                    echo "  ✏️  Modified: +${additions} lines, -${deletions} lines"
+                elif [[ $additions -gt 0 ]]; then
+                    echo "  ➕ Added: ${additions} new lines"
+                elif [[ $deletions -gt 0 ]]; then
+                    echo "  ➖ Removed: ${deletions} lines"
+                fi
                 echo ""
             done
         fi
@@ -324,8 +309,11 @@ case "${1:-}" in
         list_docs
         ;;
     *)
-        # Check if it might be "what's new" with space
-        if [[ "$1" == "what's" && "$2" == "new" ]]; then
+        # Check various forms of "what's new" command
+        if [[ "$1" == "what's" && "$2" == "new" ]] || \
+           [[ "$1" == "whats" && "$2" == "new" ]] || \
+           [[ "$1 $2" == "what's new" ]] || \
+           [[ "$1" == "what" && "$2" == "is" && "$3" == "new" ]]; then
             whats_new
         else
             # Check migration notice before reading docs

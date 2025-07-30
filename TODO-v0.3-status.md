@@ -5,12 +5,16 @@
 - **Dev Location**: ~/Projects/tmp/claude-code-docs-dev
 - **Date**: 2025-01-30
 
-## Major Simplification Complete! 🎉
+## Major Improvements Complete! 🎉
 1. ✅ **Auto-update on every request** - No manual syncing needed
 2. ✅ **Removed all timestamp logic** - No more confusing time calculations
 3. ✅ **Simple sync status** - Either synced or offline, that's it
 4. ✅ **Branch-aware** - Works with any branch, not just main
 5. ✅ **Clean output** - Shows branch and version, no unnecessary details
+6. ✅ **Better command handling** - "whats new" works without quotes
+7. ✅ **Smart color detection** - Disables colors when piped/non-TTY
+8. ✅ **Simplified diffs** - Shows line counts instead of raw diffs
+9. ✅ **Direct doc links** - Links to Anthropic docs for each changed file
 
 ## Implementation Complete (40/40 tasks) ✅
 - Fixed installation location at ~/.claude-code-docs
