@@ -8,8 +8,6 @@ set -euo pipefail
 # Fixed installation path (no need for placeholder replacement)
 DOCS_PATH="$HOME/.claude-code-docs"
 MANIFEST="$DOCS_PATH/docs/docs_manifest.json"
-LAST_PULL="$DOCS_PATH/.last_pull"
-LAST_CHECK="$DOCS_PATH/.last_check"
 MIGRATION_INFO="$DOCS_PATH/.migration_info"
 
 # Colors for output
@@ -32,45 +30,6 @@ sanitize_input() {
     echo "$1" | sed 's/[;&|`$()]//g'
 }
 
-# Function to get OS-specific date command
-get_date_cmd() {
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        echo "gdate"  # macOS with GNU coreutils
-        # Fallback to regular date if gdate not available
-        if ! command -v gdate &> /dev/null; then
-            echo "date"
-        fi
-    else
-        echo "date"  # Linux
-    fi
-}
-
-# Function to calculate time differences
-calculate_time_diff() {
-    local timestamp="$1"
-    local now=$(date +%s)
-    local then
-    
-    # Try different date parsing methods
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        # macOS date command
-        then=$(date -j -f "%Y-%m-%dT%H:%M:%S" "${timestamp%%.*}" +%s 2>/dev/null || echo 0)
-    else
-        # Linux date command - handle ISO format properly
-        # Remove microseconds and Z if present
-        local clean_timestamp="${timestamp%%.*}"
-        clean_timestamp="${clean_timestamp%Z}"
-        then=$(date -d "$clean_timestamp" +%s 2>/dev/null || echo 0)
-    fi
-    
-    if [[ $then -eq 0 ]]; then
-        echo 0
-    else
-        # Return absolute value of difference (handles future dates)
-        local diff=$(( (now - then) / 60 ))  # minutes
-        echo ${diff#-}  # Remove negative sign if present
-    fi
-}
 
 # Function to check and display migration notice
 check_migration_notice() {
@@ -104,7 +63,10 @@ auto_update() {
     local BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
     
     # Quick fetch to check for updates (fast)
-    git fetch --quiet origin "$BRANCH" 2>/dev/null || return 1
+    if ! git fetch --quiet origin "$BRANCH" 2>/dev/null; then
+        # Fetch failed - can't sync
+        return 2
+    fi
     
     local LOCAL=$(git rev-parse HEAD 2>/dev/null)
     local REMOTE=$(git rev-parse origin/"$BRANCH" 2>/dev/null)
@@ -112,25 +74,22 @@ auto_update() {
     if [[ "$LOCAL" != "$REMOTE" ]]; then
         # Updates available - do the pull
         echo "🔄 Updating documentation..." >&2
-        git pull --quiet origin "$BRANCH" 2>&1 | grep -v "Merge made by" || true
-        echo $(date +%s) > "$LAST_PULL"
-        
-        # Check if installer needs updating
-        local INSTALLER_VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
-        local VERSION_INT=$(echo "$INSTALLER_VERSION" | sed 's/^0\.//')
-        
-        if [[ $VERSION_INT -gt 3 ]]; then
-            echo "🔧 Updating Claude Code Docs installer..." >&2
-            ./install.sh >/dev/null 2>&1
+        if git pull --quiet origin "$BRANCH" 2>&1 | grep -v "Merge made by"; then
+            # Check if installer needs updating
+            local INSTALLER_VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
+            local VERSION_INT=$(echo "$INSTALLER_VERSION" | sed 's/^0\.//')
+            
+            if [[ $VERSION_INT -gt 3 ]]; then
+                echo "🔧 Updating Claude Code Docs installer..." >&2
+                ./install.sh >/dev/null 2>&1
+            fi
         fi
-        
-        return 0  # Updated
     fi
     
-    return 1  # No updates
+    return 0  # Success (either updated or already up-to-date)
 }
 
-# Function to show documentation freshness
+# Function to show documentation sync status
 show_freshness() {
     # Check migration notice first
     check_migration_notice
@@ -143,23 +102,24 @@ show_freshness() {
         exit 1
     fi
     
-    # Auto-update first
+    # Try to sync with GitHub
     auto_update
+    local sync_status=$?
     
-    # Then check status
-    cd "$DOCS_PATH" 2>/dev/null || exit 1
-    local LOCAL=$(git rev-parse HEAD 2>/dev/null)
-    local BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-    local REMOTE=$(git rev-parse origin/$BRANCH 2>/dev/null)
-    
-    if [[ "$LOCAL" != "$REMOTE" ]]; then
-        print_color "$YELLOW" "📥 Updates available (run any /docs command to update)"
+    if [[ $sync_status -eq 2 ]]; then
+        print_color "$YELLOW" "⚠️  Could not sync with GitHub (using local cache)"
+        echo "Check your internet connection or GitHub access"
     else
-        print_color "$GREEN" "✅ Documentation is up to date"
+        print_color "$GREEN" "✅ Documentation is synced with GitHub"
     fi
     
+    # Show current branch and version
+    cd "$DOCS_PATH" 2>/dev/null || exit 1
+    local BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
     local installer_version=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
-    echo "📅 Installer version: ${installer_version}"
+    
+    echo "📍 Branch: ${BRANCH}"
+    echo "📦 Version: ${installer_version}"
 }
 
 # Function to read documentation

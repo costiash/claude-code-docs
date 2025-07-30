@@ -85,8 +85,6 @@ if [[ ! -d "$HOME/.claude-code-docs" ]] || [[ ! -f "$HOME/.claude-code-docs/clau
         print_color "$YELLOW" "Settings file not found (no hooks to remove)"
     fi
     
-    # Remove tracking files
-    rm -f "$SCRIPT_DIR/.last_pull" "$SCRIPT_DIR/.last_check" 2>/dev/null || true
     
     # Check if we're currently in the directory we're about to delete
     CURRENT_DIR=$(pwd)
