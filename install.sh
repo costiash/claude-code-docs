@@ -267,6 +267,7 @@ When showing what's new:
 📎 Full changelog: https://github.com/ericbuess/claude-code-docs/commits/main/docs
 📚 COMMUNITY MIRROR - NOT AFFILIATED WITH ANTHROPIC
 
+Every request checks for the latest documentation from GitHub (takes ~0.4s).
 The helper script handles all functionality including auto-updates.
 
 Execute: ~/.claude-code-docs/claude-docs-helper.sh "$ARGUMENTS"
