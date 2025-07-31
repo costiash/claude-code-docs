@@ -34,86 +34,65 @@ for cmd in git jq curl; do
 done
 echo "✓ All dependencies satisfied"
 
-# Function to detect user modifications in a directory
-detect_user_modifications() {
-    local dir="$1"
-    local custom_files=()
-    
-    # Expected files that come with the repo
-    local expected_patterns=(
-        "install.sh"
-        "uninstall.sh"
-        "README.md"
-        "LICENSE"
-        "CLAUDE.md"
-        "UNINSTALL.md"
-        "TODO-v0.3.md"
-        ".gitignore"
-        ".git/*"
-        ".github/*"
-        "docs/*.md"
-        "docs/docs_manifest.json"
-        "scripts/fetch_claude_docs.py"
-        "scripts/requirements.txt"
-        "scripts/claude-docs-helper.sh.template"
-    )
-    
-    # Build find command arguments in an array
-    local find_args=("$dir" "-type" "f")
-    for pattern in "${expected_patterns[@]}"; do
-        find_args+=("!" "-path" "$dir/$pattern")
-    done
-    
-    # Execute find and collect custom files
-    while IFS= read -r file; do
-        # Skip .git internals
-        if [[ "$file" =~ \.git/ ]]; then
-            continue
-        fi
-        # Remove directory prefix for cleaner output
-        custom_files+=("${file#$dir/}")
-    done < <(find "${find_args[@]}" 2>/dev/null || true)
-    
-    printf '%s\n' "${custom_files[@]}"
-}
 
-# Function to find existing installations
+# Function to find existing installations from configs
 find_existing_installations() {
-    local installations=()
+    local paths=()
     
-    # Current directory (if it has the manifest)
-    if [[ -f "./docs/docs_manifest.json" && "$(pwd)" != "$INSTALL_DIR" ]]; then
-        installations+=("$(pwd)")
+    # Check command file for paths
+    if [[ -f ~/.claude/commands/docs.md ]]; then
+        while IFS= read -r line; do
+            if [[ "$line" =~ Execute:.*claude-code-docs ]]; then
+                # Extract path from various formats
+                local path=$(echo "$line" | grep -o '[^ "]*claude-code-docs[^ "]*' | head -1)
+                path="${path/#\~/$HOME}"
+                
+                # Get directory part
+                if [[ -d "$path" ]]; then
+                    paths+=("$path")
+                elif [[ -d "$(dirname "$path")" ]] && [[ "$(basename "$(dirname "$path")")" == "claude-code-docs" ]]; then
+                    paths+=("$(dirname "$path")")
+                fi
+            fi
+        done < ~/.claude/commands/docs.md
     fi
     
-    # Common installation locations
-    local common_paths=(
-        "$HOME/claude-code-docs"
-        "$HOME/Projects/claude-code-docs"
-        "$HOME/Documents/claude-code-docs"
-        "$HOME/workspace/claude-code-docs"
-        "$HOME/repos/claude-code-docs"
-        "$HOME/src/claude-code-docs"
-        "$HOME/code/claude-code-docs"
-    )
+    # Check settings.json hooks for paths
+    if [[ -f ~/.claude/settings.json ]]; then
+        local hooks=$(jq -r '.hooks.PreToolUse[]?.hooks[]?.command // empty' ~/.claude/settings.json 2>/dev/null)
+        while IFS= read -r cmd; do
+            if [[ "$cmd" =~ claude-code-docs ]]; then
+                # Extract all paths containing claude-code-docs
+                local found=$(echo "$cmd" | grep -o '[^ "]*claude-code-docs[^ "]*' || true)
+                while IFS= read -r path; do
+                    [[ -z "$path" ]] && continue
+                    path="${path/#\~/$HOME}"
+                    # Clean up path to get the claude-code-docs directory
+                    if [[ "$path" =~ (.*/claude-code-docs)(/.*)?$ ]]; then
+                        path="${BASH_REMATCH[1]}"
+                    fi
+                    [[ -d "$path" ]] && paths+=("$path")
+                done <<< "$found"
+            fi
+        done <<< "$hooks"
+    fi
     
-    for path in "${common_paths[@]}"; do
-        if [[ -d "$path" && -f "$path/docs/docs_manifest.json" && "$path" != "$INSTALL_DIR" ]]; then
-            installations+=("$path")
-        fi
-    done
+    # Also check current directory if running from an installation
+    if [[ -f "./docs/docs_manifest.json" && "$(pwd)" != "$INSTALL_DIR" ]]; then
+        paths+=("$(pwd)")
+    fi
     
-    # Remove duplicates
-    printf '%s\n' "${installations[@]}" | sort -u
+    # Deduplicate and exclude new location
+    printf '%s\n' "${paths[@]}" | grep -v "^$INSTALL_DIR$" | sort -u
 }
 
 # Function to migrate from old location
 migrate_installation() {
     local old_dir="$1"
-    local user_files="$2"
     
-    echo "Migrating from: $old_dir"
-    echo "To: $INSTALL_DIR"
+    echo "📦 Migrating from: $old_dir"
+    echo "   To: $INSTALL_DIR"
+    echo ""
     
     # Create install directory
     mkdir -p "$INSTALL_DIR"
@@ -137,43 +116,14 @@ migrate_installation() {
         git clone https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
     fi
     
-    
-    # Create migration info
-    local migration_info="{
-  \"migrated_from\": \"$old_dir\",
-  \"migration_date\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",
-  \"old_dir_safe_to_delete\": $([ -z "$user_files" ] && echo "true" || echo "false"),
-  \"user_files_detected\": ["
-    
-    if [[ -n "$user_files" ]]; then
-        # Add user files to JSON array
-        local first=true
-        while IFS= read -r file; do
-            [[ -z "$file" ]] && continue
-            [[ "$first" == "true" ]] && first=false || migration_info+=","
-            migration_info+="
-    \"$file\""
-        done <<< "$user_files"
-    fi
-    
-    migration_info+="
-  ]
-}"
-    
-    echo "$migration_info" > "$INSTALL_DIR/.migration_info"
-    
-    # Auto-remove old directory if safe
-    if [[ -z "$user_files" ]]; then
-        echo "No user modifications detected in old location"
-        echo "Removing old installation..."
-        rm -rf "$old_dir"
-        echo "✓ Old installation removed"
-    else
-        echo ""
-        echo "⚠️  User modifications detected - old directory preserved"
-        echo "Custom files found:"
-        echo "$user_files" | sed 's/^/  - /'
-    fi
+    echo ""
+    echo "✅ Migration complete!"
+    echo ""
+    echo "ℹ️  Your old installation is preserved at:"
+    echo "   $old_dir"
+    echo ""
+    echo "   To remove it, run:"
+    echo "   rm -rf \"$old_dir\""
 }
 
 # Main installation logic
@@ -202,13 +152,9 @@ else
         
         # Use the first one found (prioritize current directory)
         old_install="${existing_installs[0]}"
-        echo "Checking for user modifications in: $old_install"
-        
-        # Check for user modifications
-        user_modifications=$(detect_user_modifications "$old_install")
         
         # Migrate
-        migrate_installation "$old_install" "$user_modifications"
+        migrate_installation "$old_install"
     else
         # Fresh installation
         echo "No existing installation found"

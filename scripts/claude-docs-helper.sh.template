@@ -8,7 +8,6 @@ set -euo pipefail
 # Fixed installation path (no need for placeholder replacement)
 DOCS_PATH="$HOME/.claude-code-docs"
 MANIFEST="$DOCS_PATH/docs/docs_manifest.json"
-MIGRATION_INFO="$DOCS_PATH/.migration_info"
 
 # Check if we should use colors (disabled in pipes or non-TTY)
 if [[ -t 1 ]] && [[ "${TERM:-}" != "dumb" ]]; then
@@ -51,29 +50,6 @@ print_doc_header() {
     echo ""
 }
 
-# Function to check and display migration notice
-check_migration_notice() {
-    if [[ -f "$MIGRATION_INFO" ]]; then
-        local migrated_from=$(jq -r '.migrated_from // ""' "$MIGRATION_INFO" 2>/dev/null)
-        local user_files=$(jq -r '.user_files_detected[]? // empty' "$MIGRATION_INFO" 2>/dev/null)
-        
-        if [[ -n "$migrated_from" ]]; then
-            print_color "$BLUE" "📦 Documentation has been migrated to ~/.claude-code-docs"
-            
-            if [[ -n "$user_files" ]]; then
-                print_color "$YELLOW" ""
-                print_color "$YELLOW" "⚠️  Custom files preserved at: $migrated_from"
-                echo "$user_files" | while read -r file; do
-                    echo "  - $file"
-                done
-            fi
-            echo ""
-        fi
-        
-        # Remove migration info after displaying
-        rm -f "$MIGRATION_INFO"
-    fi
-}
 
 # Function to auto-update docs if needed
 auto_update() {
@@ -112,8 +88,6 @@ auto_update() {
 # Function to show documentation sync status
 show_freshness() {
     print_doc_header
-    # Check migration notice first
-    check_migration_notice
     
     # Read manifest
     if [[ ! -f "$MANIFEST" ]]; then
@@ -228,7 +202,6 @@ read_doc() {
 # Function to list available documentation
 list_docs() {
     print_doc_header
-    check_migration_notice
     
     # Auto-update to ensure fresh list
     auto_update
