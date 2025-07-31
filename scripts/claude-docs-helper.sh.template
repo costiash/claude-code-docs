@@ -178,7 +178,7 @@ read_doc() {
                 echo "✅ You have the latest docs (v$VERSION, $BRANCH)"
             fi
         else
-            echo "⚠️  Offline - using cached docs (v$VERSION, $BRANCH)"
+            echo "⚠️  Could not check GitHub for updates - using cached docs (v$VERSION, $BRANCH)"
         fi
         echo ""
         
@@ -243,6 +243,8 @@ list_docs() {
 # Function for hook check (auto-update)
 hook_check() {
     # This is now just a passthrough since auto_update handles everything
+    # Note: We could potentially start a background fetch here for parallelization,
+    # but since git fetch only takes ~0.37s, the complexity isn't worth it
     exit 0
 }
 
