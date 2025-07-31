@@ -236,39 +236,13 @@ whats_new() {
     echo "📚 Recent documentation updates:"
     echo ""
     
-    # Get recent commits that actually changed documentation content (not just timestamps)
-    local count=0
-    local doc_commits=""
+    # Get recent commits that actually updated documentation
+    local doc_commits=$(git log --oneline --since="7 days ago" --grep="Update Claude Code docs" -- 'docs/*.md' 2>/dev/null | head -3)
     
-    # Look through recent commits to find ones with real changes
-    while IFS= read -r commit_line && [[ $count -lt 5 ]]; do
-        local hash=$(echo "$commit_line" | cut -d' ' -f1)
-        
-        # Check if this commit has non-timestamp changes
-        local has_real_changes=false
-        local changed_files=$(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md 2>/dev/null)
-        
-        if [[ -n "$changed_files" ]]; then
-            # Look at the actual diff to see if it's more than just timestamps
-            while IFS= read -r file; do
-                if [[ -n "$file" ]]; then
-                    local diff=$(git diff "${hash}^..${hash}" -- "$file" 2>/dev/null || echo "")
-                    # Filter out lines that are just timestamp changes
-                    local real_changes=$(echo "$diff" | grep -E '^[+-]' | grep -v '^[+-]\s*"last_updated":' | grep -v '^[+-]\s*"last_fetch_completed":' | grep -v '^+++' | grep -v '^---' | head -5)
-                    
-                    if [[ -n "$real_changes" ]]; then
-                        has_real_changes=true
-                        break
-                    fi
-                fi
-            done <<< "$changed_files"
-        fi
-        
-        if [[ "$has_real_changes" == "true" ]]; then
-            doc_commits+="$commit_line"$'\n'
-            ((count++))
-        fi
-    done < <(git log --oneline -50 -- docs/*.md 2>/dev/null | grep -v "Merge")
+    if [[ -z "$doc_commits" ]]; then
+        # Fallback: look for any commits that changed docs
+        doc_commits=$(git log --oneline -20 -- docs/*.md 2>/dev/null | grep -v "feat:" | grep -v "fix:" | grep -v "refactor:" | grep -v "Add TODO" | grep -v "Merge" | head -3)
+    fi
     
     if [[ -z "$doc_commits" ]]; then
         echo "No recent documentation updates found."
@@ -320,7 +294,6 @@ uninstall() {
     
     print_color "$YELLOW" "This will remove:"
     echo "  • The /docs command from ~/.claude/commands/docs.md"
-    echo "  • The claude-code-docs-researcher subagent from ~/.claude/agents/claude-code-docs-researcher.md"
     echo "  • The auto-update hook from ~/.claude/settings.json"
     echo "  • The installation directory ~/.claude-code-docs"
     echo ""
@@ -331,10 +304,6 @@ uninstall() {
     echo ""
     echo "Or to skip confirmation:"
     echo "  echo 'y' | ~/.claude-code-docs/uninstall.sh"
-    echo ""
-    echo "You can also uninstall from within Claude Code by running:"
-    echo "  /agents"
-    echo "Then select and delete the claude-code-docs-researcher subagent"
     echo ""
 }
 
