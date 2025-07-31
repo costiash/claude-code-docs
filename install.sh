@@ -240,30 +240,32 @@ cleanup_old_installations() {
 # Main installation logic
 echo ""
 
+# Always find old installations first (before any config changes)
+echo "Checking for existing installations..."
+mapfile -t existing_installs < <(find_existing_installations)
+OLD_INSTALLATIONS=("${existing_installs[@]}")  # Save for later cleanup
+
+if [[ ${#existing_installs[@]} -gt 0 ]]; then
+    echo "Found ${#existing_installs[@]} existing installation(s):"
+    for install in "${existing_installs[@]}"; do
+        echo "  - $install"
+    done
+    echo ""
+fi
+
 # Check if already installed at new location
 if [[ -d "$INSTALL_DIR" && -f "$INSTALL_DIR/docs/docs_manifest.json" ]]; then
-    echo "✓ Found existing installation at ~/.claude-code-docs"
+    echo "✓ Found installation at ~/.claude-code-docs"
+    echo "  Updating to latest version..."
     
     # Update it safely
     safe_git_update "$INSTALL_DIR"
     cd "$INSTALL_DIR"
 else
-    # Look for existing installations to migrate
-    echo "Checking for existing installations..."
-    mapfile -t existing_installs < <(find_existing_installations)
-    
+    # Need to install at new location
     if [[ ${#existing_installs[@]} -gt 0 ]]; then
-        # Found existing installation(s)
-        echo "Found ${#existing_installs[@]} existing installation(s):"
-        for install in "${existing_installs[@]}"; do
-            echo "  - $install"
-        done
-        echo ""
-        
-        # Use the first one found (prioritize current directory)
+        # Migrate from old location
         old_install="${existing_installs[0]}"
-        
-        # Migrate
         migrate_installation "$old_install"
     else
         # Fresh installation
@@ -274,10 +276,6 @@ else
         cd "$INSTALL_DIR"
     fi
 fi
-
-# Find old installations BEFORE we update configs (silent)
-OLD_INSTALLATIONS=()
-mapfile -t OLD_INSTALLATIONS < <(find_existing_installations)
 
 # Now we're in $INSTALL_DIR, set up the new script-based system
 echo ""
@@ -302,9 +300,14 @@ else
     fi
 fi
 
-# Create command directory
+# Always update command (in case it points to old location)
 echo "Setting up /docs command..."
 mkdir -p ~/.claude/commands
+
+# Remove old command if it exists
+if [[ -f ~/.claude/commands/docs.md ]]; then
+    echo "  Updating existing command..."
+fi
 
 # Create simplified docs command
 cat > ~/.claude/commands/docs.md << 'EOF'
@@ -348,7 +351,7 @@ EOF
 
 echo "✓ Created /docs command"
 
-# Setup hook for auto-updates
+# Always update hook (remove old ones pointing to wrong location)
 echo "Setting up automatic updates..."
 
 # Simple hook that just calls the helper script
@@ -356,16 +359,19 @@ HOOK_COMMAND="~/.claude-code-docs/claude-docs-helper.sh hook-check"
 
 if [ -f ~/.claude/settings.json ]; then
     # Update existing settings.json
-    echo "Updating existing Claude settings..."
-    # Remove old hooks first (remove all Read hooks)
-    jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.matcher == "Read" | not)]' ~/.claude/settings.json > ~/.claude/settings.json.tmp
-    # Add new hook
+    echo "  Updating Claude settings..."
+    
+    # First remove ALL hooks that contain "claude-code-docs" anywhere in the command
+    # This catches old installations at any path
+    jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.hooks[0].command | contains("claude-code-docs") | not)]' ~/.claude/settings.json > ~/.claude/settings.json.tmp
+    
+    # Then add our new hook
     jq --arg cmd "$HOOK_COMMAND" '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[]] + [{"matcher": "Read", "hooks": [{"type": "command", "command": $cmd}]}]' ~/.claude/settings.json.tmp > ~/.claude/settings.json
     rm -f ~/.claude/settings.json.tmp
     echo "✓ Updated Claude settings"
 else
     # Create new settings.json
-    echo "Creating Claude settings..."
+    echo "  Creating Claude settings..."
     jq -n --arg cmd "$HOOK_COMMAND" '{
         "hooks": {
             "PreToolUse": [
