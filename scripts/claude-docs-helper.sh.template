@@ -1,46 +1,21 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Documentation Helper Script v0.3
-# This script handles all /docs command functionality
+# Claude Code Documentation Helper Script v0.3.1
+# This script handles all /docs command functionality  
 # Installation path: ~/.claude-code-docs/claude-docs-helper.sh
 
 # Fixed installation path (no need for placeholder replacement)
 DOCS_PATH="$HOME/.claude-code-docs"
 MANIFEST="$DOCS_PATH/docs/docs_manifest.json"
 
-# Check if we should use colors (disabled in pipes or non-TTY)
-if [[ -t 1 ]] && [[ "${TERM:-}" != "dumb" ]]; then
-    # Colors for output
-    RED='\033[0;31m'
-    GREEN='\033[0;32m'
-    YELLOW='\033[1;33m'
-    BLUE='\033[0;34m'
-    NC='\033[0m' # No Color
-else
-    # No colors
-    RED=''
-    GREEN=''
-    YELLOW=''
-    BLUE=''
-    NC=''
-fi
+# No colors since they don't work in terminal anyway
 
-# Function to print colored output
-print_color() {
-    local color=$1
-    shift
-    if [[ -n "$color" ]]; then
-        echo -e "${color}$*${NC}"
-    else
-        echo "$*"
-    fi
-}
-
-# Function to sanitize input arguments
+# Enhanced sanitize function to prevent command injection
 sanitize_input() {
-    # Remove any potentially dangerous characters
-    echo "$1" | sed 's/[;&|`$()]//g'
+    # Remove ALL shell metacharacters and control characters
+    # Only allow alphanumeric, spaces, hyphens, underscores, periods, commas, apostrophes, and question marks
+    echo "$1" | sed 's/[^a-zA-Z0-9 \-_.,'\''?]//g' | sed 's/  */ /g' | sed 's/^ *//;s/ *$//'
 }
 
 # Function to print documentation header
@@ -60,15 +35,23 @@ auto_update() {
     
     # Quick fetch to check for updates (fast)
     if ! git fetch --quiet origin "$BRANCH" 2>/dev/null; then
-        # Fetch failed - can't sync
-        return 2
+        # Current branch doesn't exist on origin, try main
+        if ! git fetch --quiet origin main 2>/dev/null; then
+            # Fetch failed - can't sync
+            return 2
+        fi
+        # Use main branch for comparison
+        BRANCH="main"
     fi
     
     local LOCAL=$(git rev-parse HEAD 2>/dev/null)
     local REMOTE=$(git rev-parse origin/"$BRANCH" 2>/dev/null)
     
-    if [[ "$LOCAL" != "$REMOTE" ]]; then
-        # Updates available - do the pull
+    # Check if we're behind remote (important: not ahead)
+    local BEHIND=$(git rev-list HEAD..origin/"$BRANCH" --count 2>/dev/null || echo "0")
+    
+    if [[ "$LOCAL" != "$REMOTE" ]] && [[ "$BEHIND" -gt 0 ]]; then
+        # We're behind - safe to pull
         echo "🔄 Updating documentation..." >&2
         git pull --quiet origin "$BRANCH" 2>&1 | grep -v "Merge made by" || true
         
@@ -91,7 +74,7 @@ show_freshness() {
     
     # Read manifest
     if [[ ! -f "$MANIFEST" ]]; then
-        print_color "$RED" "❌ Error: Documentation not found at ~/.claude-code-docs"
+        echo "❌ Error: Documentation not found at ~/.claude-code-docs"
         echo "Please reinstall with:"
         echo "curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash"
         exit 1
@@ -102,10 +85,27 @@ show_freshness() {
     local sync_status=$?
     
     if [[ $sync_status -eq 2 ]]; then
-        print_color "$YELLOW" "⚠️  Could not sync with GitHub (using local cache)"
+        echo "⚠️  Could not sync with GitHub (using local cache)"
         echo "Check your internet connection or GitHub access"
     else
-        print_color "$GREEN" "✅ You have the latest documentation"
+        # Check if we're ahead or behind
+        cd "$DOCS_PATH" 2>/dev/null || exit 1
+        local BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+        # If current branch doesn't exist on origin, compare to main
+        local COMPARE_BRANCH="$BRANCH"
+        if ! git rev-parse --verify origin/"$BRANCH" >/dev/null 2>&1; then
+            COMPARE_BRANCH="main"
+        fi
+        local AHEAD=$(git rev-list origin/"$COMPARE_BRANCH"..HEAD --count 2>/dev/null || echo "0")
+        local BEHIND=$(git rev-list HEAD..origin/"$COMPARE_BRANCH" --count 2>/dev/null || echo "0")
+        
+        if [[ "$AHEAD" -gt 0 ]]; then
+            echo "⚠️  Local version is ahead of GitHub by $AHEAD commit(s)"
+        elif [[ "$BEHIND" -gt 0 ]]; then
+            echo "⚠️  Local version is behind GitHub by $BEHIND commit(s)"
+        else
+            echo "✅ You have the latest documentation"
+        fi
     fi
     
     # Show current branch and version
@@ -131,28 +131,45 @@ read_doc() {
         local VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
         
         # Do the fetch to check status
-        if git fetch --quiet origin "$BRANCH" 2>/dev/null; then
-            local LOCAL=$(git rev-parse HEAD 2>/dev/null)
-            local REMOTE=$(git rev-parse origin/"$BRANCH" 2>/dev/null)
+        local COMPARE_BRANCH="$BRANCH"
+        if ! git fetch --quiet origin "$BRANCH" 2>/dev/null; then
+            # Try main if current branch doesn't exist on origin
+            if git fetch --quiet origin main 2>/dev/null; then
+                COMPARE_BRANCH="main"
+            else
+                echo "⚠️  Could not check GitHub for updates - using cached docs (v$VERSION, $BRANCH)"
+                echo ""
+                cat "$doc_path"
+                echo ""
+                echo "📖 Official page: https://docs.anthropic.com/en/docs/claude-code/$topic"
+                return
+            fi
+        fi
+        
+        local LOCAL=$(git rev-parse HEAD 2>/dev/null)
+        local REMOTE=$(git rev-parse origin/"$COMPARE_BRANCH" 2>/dev/null)
+        local BEHIND=$(git rev-list HEAD..origin/"$COMPARE_BRANCH" --count 2>/dev/null || echo "0")
+        
+        if [[ "$LOCAL" != "$REMOTE" ]] && [[ "$BEHIND" -gt 0 ]]; then
+            # We're behind - safe to update
+            echo "🔄 Updating to latest documentation..."
+            git pull --quiet origin "$COMPARE_BRANCH" 2>&1 | grep -v "Merge made by" || true
             
-            if [[ "$LOCAL" != "$REMOTE" ]]; then
-                # Need to update
-                echo "🔄 Updating to latest documentation..."
-                git pull --quiet origin "$BRANCH" 2>&1 | grep -v "Merge made by" || true
-                
-                # Check if installer needs updating
-                local INSTALLER_VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
-                local VERSION_INT=$(echo "$INSTALLER_VERSION" | sed 's/^0\.//')
-                
-                if [[ $VERSION_INT -ge 3 ]]; then
-                    ./install.sh >/dev/null 2>&1
-                fi
-                echo "✅ Updated to latest (v$VERSION, $BRANCH)"
+            # Check if installer needs updating
+            local INSTALLER_VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
+            local VERSION_INT=$(echo "$INSTALLER_VERSION" | sed 's/^0\.//')
+            
+            if [[ $VERSION_INT -ge 3 ]]; then
+                ./install.sh >/dev/null 2>&1
+            fi
+            echo "✅ Updated to latest (v$VERSION, $BRANCH)"
+        else
+            local AHEAD=$(git rev-list origin/"$COMPARE_BRANCH"..HEAD --count 2>/dev/null || echo "0")
+            if [[ "$AHEAD" -gt 0 ]]; then
+                echo "⚠️  Using local development version (v$VERSION, $BRANCH, +$AHEAD commits)"
             else
                 echo "✅ You have the latest docs (v$VERSION, $BRANCH)"
             fi
-        else
-            echo "⚠️  Could not check GitHub for updates - using cached docs (v$VERSION, $BRANCH)"
         fi
         echo ""
         
@@ -162,7 +179,7 @@ read_doc() {
     else
         # Check if this looks like a natural language query
         if [[ "$topic" =~ ^(tell[[:space:]]me[[:space:]]about|explain|what[[:space:]]is|what[[:space:]]are|how[[:space:]]do|how[[:space:]]to|show[[:space:]]me|find|search) ]] || [[ "$topic" =~ [[:space:]].*[[:space:]] ]]; then
-            print_color "$YELLOW" "🔍 That looks like a search query. Let me help you find the right documentation."
+            echo "🔍 That looks like a search query. Let me help you find the right documentation."
             echo ""
             
             # Try to extract keywords from the query
@@ -172,8 +189,9 @@ read_doc() {
                 echo "Searching for topics related to: $keywords"
                 echo ""
                 
-                # Search for matching topics
-                local matches=$(ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | grep -i -E "$(echo $keywords | tr ' ' '|')" | sort)
+                # Search for matching topics - escape the pattern
+                local escaped_keywords=$(echo "$keywords" | sed 's/[[\.*^$()+?{|]/\\&/g')
+                local matches=$(ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | grep -i -E "$(echo "$escaped_keywords" | tr ' ' '|')" | sort)
                 
                 if [[ -n "$matches" ]]; then
                     echo "Found these related topics:"
@@ -191,7 +209,7 @@ read_doc() {
             echo ""
             echo "💡 Tip: Use grep to search across all docs: cd ~/.claude-code-docs && grep -r 'search term' docs/"
         else
-            print_color "$RED" "❌ Documentation not found: $topic"
+            echo "❌ Documentation not found: $topic"
             echo ""
             echo "Available topics:"
             ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
@@ -221,7 +239,7 @@ hook_check() {
     exit 0
 }
 
-# Function to show what's new (concise version for Claude Code)
+# Function to show what's new (simplified version)
 whats_new() {
     print_doc_header
     
@@ -229,57 +247,39 @@ whats_new() {
     auto_update
     
     cd "$DOCS_PATH" 2>/dev/null || {
-        print_color "$RED" "❌ Error: Could not access documentation directory"
+        echo "❌ Error: Could not access documentation directory"
         exit 1
     }
     
     echo "📚 Recent documentation updates:"
     echo ""
     
-    # Get recent commits that actually updated documentation
-    local doc_commits=$(git log --oneline --since="7 days ago" --grep="Update Claude Code docs" -- 'docs/*.md' 2>/dev/null | head -3)
+    # Get recent commits (simplified - just show all doc commits)
+    local count=0
     
-    if [[ -z "$doc_commits" ]]; then
-        # Fallback: look for any commits that changed docs
-        doc_commits=$(git log --oneline -20 -- docs/*.md 2>/dev/null | grep -v "feat:" | grep -v "fix:" | grep -v "refactor:" | grep -v "Add TODO" | grep -v "Merge" | head -3)
-    fi
-    
-    if [[ -z "$doc_commits" ]]; then
-        echo "No recent documentation updates found."
-        echo ""
-        echo "• Full changelog: https://github.com/ericbuess/claude-code-docs/commits/main/docs"
-        return
-    fi
-    
-    # Show each commit concisely
-    while IFS= read -r commit; do
-        local hash=$(echo "$commit" | cut -d' ' -f1)
-        local date=$(git show -s --format=%cr "$hash")
+    # Show recent commits
+    while IFS= read -r commit_line && [[ $count -lt 5 ]]; do
+        local hash=$(echo "$commit_line" | cut -d' ' -f1)
+        local date=$(git show -s --format=%cr "$hash" 2>/dev/null || echo "unknown")
         
-        print_color "$BLUE" "• $date:"
+        echo "• $date:"
         echo "  📎 https://github.com/ericbuess/claude-code-docs/commit/$hash"
         
-        # Show which docs changed with inline links
+        # Show which docs changed
         local changed_docs=$(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md | sed 's|docs/||' | sed 's|\.md$||' | head -5)
         if [[ -n "$changed_docs" ]]; then
             echo "$changed_docs" | while read -r doc; do
                 [[ -n "$doc" ]] && echo "  📄 $doc: https://docs.anthropic.com/en/docs/claude-code/$doc"
-                
-                # Show one key change per doc
-                local diff_output=$(git diff "${hash}^..${hash}" -- "docs/${doc}.md" 2>/dev/null || echo "")
-                local added_section=$(echo "$diff_output" | grep '^+#' | sed 's/^+//' | sed 's/^#* *//' | head -1)
-                if [[ -n "$added_section" ]]; then
-                    echo "     ➕ Added: $added_section"
-                else
-                    local key_change=$(echo "$diff_output" | grep -E '^\+.*\b(new|added|feature|command|option|support|enable|integration)\b' -i | sed 's/^+//' | sed 's/^[[:space:]]*//' | head -1)
-                    if [[ -n "$key_change" ]]; then
-                        echo "     ✨ ${key_change:0:60}..."
-                    fi
-                fi
             done
         fi
         echo ""
-    done <<< "$doc_commits"
+        ((count++))
+    done < <(git log --oneline -10 -- docs/*.md 2>/dev/null | grep -v "Merge")
+    
+    if [[ $count -eq 0 ]]; then
+        echo "No recent documentation updates found."
+        echo ""
+    fi
     
     echo "📎 Full changelog: https://github.com/ericbuess/claude-code-docs/commits/main/docs"
     echo "📚 COMMUNITY MIRROR - NOT AFFILIATED WITH ANTHROPIC"
@@ -288,17 +288,17 @@ whats_new() {
 # Function for uninstall
 uninstall() {
     print_doc_header
-    print_color "$GREEN" "To uninstall Claude Code Documentation Mirror"
-    print_color "$GREEN" "==========================================="
+    echo "To uninstall Claude Code Documentation Mirror"
+    echo "==========================================="
     echo ""
     
-    print_color "$YELLOW" "This will remove:"
+    echo "This will remove:"
     echo "  • The /docs command from ~/.claude/commands/docs.md"
     echo "  • The auto-update hook from ~/.claude/settings.json"
     echo "  • The installation directory ~/.claude-code-docs"
     echo ""
     
-    print_color "$GREEN" "Run this command in your terminal:"
+    echo "Run this command in your terminal:"
     echo ""
     echo "  ~/.claude-code-docs/uninstall.sh"
     echo ""
@@ -307,17 +307,14 @@ uninstall() {
     echo ""
 }
 
-# Combine all arguments into one string for easier parsing
-# Also clean up any escaped quotes that might come from Claude Code
+# Store original arguments for flag checking
 FULL_ARGS="$*"
-FULL_ARGS="${FULL_ARGS//\\\'/\'}"  # Replace \' with '
-FULL_ARGS="${FULL_ARGS//\\\"/\"}"  # Replace \" with "
 
-# Check if arguments start with -t flag (Claude Code passes all args as one string)
-if [[ "$FULL_ARGS" =~ ^-t\ +(.*)$ ]] || [[ "$FULL_ARGS" =~ ^--check\ +(.*)$ ]]; then
+# Check if arguments start with -t flag (before sanitization)
+if [[ "$FULL_ARGS" =~ ^-t([[:space:]]+(.*))?$ ]]; then
     show_freshness
-    remaining_args="${BASH_REMATCH[1]}"
-    if [[ "$remaining_args" =~ ^what.?s?\ ?new.*$ ]]; then
+    remaining_args="${BASH_REMATCH[2]}"
+    if [[ "$remaining_args" =~ ^what.?s?[[:space:]]?new.*$ ]]; then
         echo ""
         whats_new
     elif [[ -n "$remaining_args" ]]; then
@@ -325,8 +322,16 @@ if [[ "$FULL_ARGS" =~ ^-t\ +(.*)$ ]] || [[ "$FULL_ARGS" =~ ^--check\ +(.*)$ ]]; 
         read_doc "$(sanitize_input "$remaining_args")"
     fi
     exit 0
-elif [[ "$FULL_ARGS" == "-t" ]] || [[ "$FULL_ARGS" == "--check" ]]; then
+elif [[ "$FULL_ARGS" =~ ^--check([[:space:]]+(.*))?$ ]]; then
     show_freshness
+    remaining_args="${BASH_REMATCH[2]}"
+    if [[ "$remaining_args" =~ ^what.?s?[[:space:]]?new.*$ ]]; then
+        echo ""
+        whats_new
+    elif [[ -n "$remaining_args" ]]; then
+        echo ""
+        read_doc "$(sanitize_input "$remaining_args")"
+    fi
     exit 0
 fi
 
@@ -337,7 +342,7 @@ case "${1:-}" in
         # Check if remaining args form "what's new"
         shift
         remaining_args="$*"
-        if [[ "$remaining_args" =~ ^what.?s?\ ?new.*$ ]]; then
+        if [[ "$remaining_args" =~ ^what.?s?[[:space:]]?new.*$ ]]; then
             echo ""
             whats_new
         elif [[ -n "$remaining_args" ]]; then
@@ -351,13 +356,15 @@ case "${1:-}" in
     uninstall)
         uninstall
         ;;
-    "whats-new"|"what's-new"|"whatsnew"|"what's new"|"whats"|"what"|"whats-new?"|"what's-new?")
+    whats-new|whats|what)
         # Handle various forms of "what's new"
-        if [[ "${2:-}" == "new" ]] || [[ "$FULL_ARGS" =~ new ]]; then
+        shift
+        remaining="$*"
+        if [[ "$remaining" =~ new ]] || [[ "$FULL_ARGS" =~ what.*new ]]; then
             whats_new
         else
             # Just "what" without "new" - treat as doc lookup
-            read_doc "$1"
+            read_doc "$(sanitize_input "$1")"
         fi
         ;;
     "")
@@ -365,12 +372,11 @@ case "${1:-}" in
         ;;
     *)
         # Check if the full arguments match "what's new" pattern
-        # Be very flexible to handle various quote escaping issues
-        if [[ "$FULL_ARGS" =~ what.*new ]] || [[ "$1 ${2:-}" =~ what.*new ]]; then
+        if [[ "$FULL_ARGS" =~ what.*new ]]; then
             whats_new
         else
-            # Default: read documentation (header printed in read_doc)
-            read_doc "$1"
+            # Default: read documentation
+            read_doc "$(sanitize_input "$1")"
         fi
         ;;
 esac
