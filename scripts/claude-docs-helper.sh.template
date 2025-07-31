@@ -120,6 +120,10 @@ show_freshness() {
 # Function to read documentation
 read_doc() {
     local topic=$(sanitize_input "$1")
+    
+    # Strip .md extension if user included it (they're being helpful!)
+    topic="${topic%.md}"
+    
     local doc_path="$DOCS_PATH/docs/${topic}.md"
     
     if [[ -f "$doc_path" ]]; then
