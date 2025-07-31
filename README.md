@@ -7,19 +7,19 @@ Local mirror of Claude Code documentation files from https://docs.anthropic.com/
 ## 🆕 Version 0.3 Released!
 
 Major improvements:
-- **Fixed installation location** at `~/.claude-code-docs` 
+- **Fixed installation location** at `~/.claude-code-docs`
 - **Automatic migration** from old installations
 - **Script-based architecture** - faster and more reliable
 - **Auto-updates on every request** - always stay in sync
-- **Improved `/docs what's new`** - shows actual diffs with colors
+- **Improved `/docs what's new`** - shows changes with links
 - **Simplified sync status** - no confusing timestamps
-- **Better performance** - all operations < 1 second
+- **Better performance** - all operations faster
 
 **Upgrading**: v0.2 users will auto-update. If you installed before July 29, 2025 or don't see a version in `/docs -t`, run the install command below.
 
 ## Why This Exists
 
-- **Faster than web fetching** - Read from local files
+- **Faster than web fetching** - Reads from local files; checks a manifest to know where to look
 - **Always up-to-date** - Auto-updates every 3 hours via GitHub Actions
 - **Track documentation evolution** - See exactly what changed in docs over time with git diffs
 - **Empower Claude Code** - Gives Claude the ability to deeply explore many doc files easily by referencing the manifest
@@ -44,8 +44,8 @@ curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/ins
 
 This will:
 1. Install to `~/.claude-code-docs` (or migrate existing installation)
-2. Create the `/docs` slash command
-3. Set up automatic git pull when reading docs
+2. Create the `/docs` slash command to pass arguments to the tool and tell it where to find the docs
+3. Set up a 'PreToolUse' 'Read' hook to enable automatic git pull when reading docs from the ~/.claude-code-docs`
 
 **Note**: The command is `/docs (user)` - it will show in your command list with "(user)" after it to indicate it's a user-created command.
 
@@ -56,7 +56,7 @@ The `/docs` command provides instant access to documentation with optional fresh
 ### Default: Lightning-fast access (no checks)
 ```bash
 /docs hooks        # Instantly read hooks documentation
-/docs mcp          # Instantly read MCP documentation  
+/docs mcp          # Instantly read MCP documentation
 /docs memory       # Instantly read memory documentation
 ```
 
@@ -76,7 +76,7 @@ You'll see: `📚 Reading from local docs (run /docs -t to check freshness)`
 
 ### Uninstall
 ```bash
-/docs uninstall    # Remove claude-code-docs completely
+/docs uninstall    # Get commnd to remove claude-code-docs completely
 ```
 
 ### Creative usage examples
@@ -97,13 +97,13 @@ You'll see: `📚 Reading from local docs (run /docs -t to check freshness)`
 
 The docs automatically stay up-to-date:
 - GitHub Actions updates the repository every 3 hours
-- The hook compares GitHub's timestamp with your local sync time
+- The Claude Code PreToolUse hook runs only when a Read is made in the ~/.claude-code-docs directory and checks the GitHub repo for updates
 - If GitHub has newer content, it automatically syncs before reading
 - You'll see "🔄 Updating docs to latest version..." when this happens
 - No manual updates needed!
 
 **Performance**:
-- Every `/docs` request automatically checks for updates (~0.4s)
+- Every `/docs` request automatically checks for updates
 - Updates are pulled automatically when available
 - `/docs -t` shows sync status without reading a doc
 

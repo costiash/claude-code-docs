@@ -41,7 +41,7 @@ rm -f ~/.claude/commands/docs.md
 ```
 
 ### 2. Remove the hook from Claude settings:
-Edit `~/.claude/settings.json` and remove the PreToolUse hook that references claude-code-docs.
+Use /hooks in Claude Code CLI or Edit `~/.claude/settings.json` direction to remove the PreToolUse hook that references claude-code-docs.
 
 ### 3. Remove the installation directory:
 
@@ -66,13 +66,13 @@ find ~ -name "claude-code-docs" -type d 2>/dev/null | grep -v ".claude-code-docs
 
 ## Backup Created
 
-The uninstaller creates a backup of your Claude settings at `~/.claude/settings.json.backup` before removing hooks, just in case.
+The uninstaller may create a backup of your Claude settings at `~/.claude/settings.json.backup` before removing hooks, just in case.
 
 ## Complete Removal
 
 After uninstalling, there should be no traces left except:
 - The backup file `~/.claude/settings.json.backup` (if hooks were removed)
-- Any custom files you added to the installation directory (v0.2 only)
+- Any custom files you added to the installation directory
 
 ## Reinstalling
 
