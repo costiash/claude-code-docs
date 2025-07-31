@@ -5,9 +5,9 @@
 curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
 ```
 
-## Install last commit before v0.3 refactor
+## Install v0.1 (before version tracking)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/57fc41a/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/9afe719/install.sh | bash
 ```
 
 ## Then test v0.3 migration

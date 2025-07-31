@@ -41,7 +41,17 @@ find_existing_installations() {
     
     # Check command file for paths
     if [[ -f ~/.claude/commands/docs.md ]]; then
+        # Look for paths in the command file
+        # v0.1 format: LOCAL DOCS AT: /path/to/claude-code-docs/docs/
+        # v0.2+ format: Execute: /path/to/claude-code-docs/helper.sh
         while IFS= read -r line; do
+            # v0.1 format
+            if [[ "$line" =~ LOCAL\ DOCS\ AT:\ ([^[:space:]]+)/docs/ ]]; then
+                local path="${BASH_REMATCH[1]}"
+                path="${path/#\~/$HOME}"
+                [[ -d "$path" ]] && paths+=("$path")
+            fi
+            # v0.2+ format
             if [[ "$line" =~ Execute:.*claude-code-docs ]]; then
                 # Extract path from various formats
                 local path=$(echo "$line" | grep -o '[^ "]*claude-code-docs[^ "]*' | head -1)
@@ -62,7 +72,20 @@ find_existing_installations() {
         local hooks=$(jq -r '.hooks.PreToolUse[]?.hooks[]?.command // empty' ~/.claude/settings.json 2>/dev/null)
         while IFS= read -r cmd; do
             if [[ "$cmd" =~ claude-code-docs ]]; then
-                # Extract all paths containing claude-code-docs
+                # Extract paths from v0.1 complex hook format
+                # Look for patterns like: "/path/to/claude-code-docs/.last_check"
+                local v01_paths=$(echo "$cmd" | grep -o '"[^"]*claude-code-docs[^"]*"' | sed 's/"//g' || true)
+                while IFS= read -r path; do
+                    [[ -z "$path" ]] && continue
+                    # Extract just the directory part
+                    if [[ "$path" =~ (.*/claude-code-docs)(/.*)?$ ]]; then
+                        path="${BASH_REMATCH[1]}"
+                        path="${path/#\~/$HOME}"
+                        [[ -d "$path" ]] && paths+=("$path")
+                    fi
+                done <<< "$v01_paths"
+                
+                # Also try v0.2+ simpler format
                 local found=$(echo "$cmd" | grep -o '[^ "]*claude-code-docs[^ "]*' || true)
                 while IFS= read -r path; do
                     [[ -z "$path" ]] && continue
@@ -125,6 +148,90 @@ migrate_installation() {
     echo "✅ Migration complete!"
 }
 
+# Function to safely update git repository
+safe_git_update() {
+    local repo_dir="$1"
+    cd "$repo_dir"
+    
+    # Ensure we're on the main branch
+    local current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
+    if [[ "$current_branch" != "main" ]]; then
+        echo "  Switching to main branch..."
+        git checkout main >/dev/null 2>&1 || {
+            # If checkout fails, force it
+            git checkout -f main >/dev/null 2>&1
+        }
+    fi
+    
+    # Set git config for pull strategy if not set
+    if ! git config pull.rebase >/dev/null 2>&1; then
+        git config pull.rebase false
+    fi
+    
+    echo "Updating to latest version..."
+    
+    # Try regular pull first
+    if git pull --quiet origin main 2>/dev/null; then
+        return 0
+    fi
+    
+    # If pull failed, try more aggressive approach
+    echo "  Standard update failed, trying harder..."
+    
+    # Fetch latest
+    if ! git fetch origin main 2>/dev/null; then
+        echo "  ⚠️  Could not fetch from GitHub (offline?)"
+        return 1
+    fi
+    
+    # Check if we have local changes
+    if [[ -n "$(git status --porcelain 2>/dev/null)" ]]; then
+        echo "  ⚠️  Local changes detected, preserving them..."
+        # Stash changes
+        git stash push -m "Installer auto-stash $(date)" >/dev/null 2>&1
+        # Reset to origin
+        git reset --hard origin/main >/dev/null 2>&1
+        echo "  ✓ Updated (local changes stashed)"
+    else
+        # No local changes, just reset
+        git reset --hard origin/main >/dev/null 2>&1
+        echo "  ✓ Updated successfully"
+    fi
+    
+    return 0
+}
+
+# Function to cleanup old installations
+cleanup_old_installations() {
+    echo ""
+    echo "Checking for old installations to clean up..."
+    mapfile -t old_installs < <(find_existing_installations)
+    
+    if [[ ${#old_installs[@]} -eq 0 ]]; then
+        return
+    fi
+    
+    echo "Found ${#old_installs[@]} old installation(s) to remove:"
+    for old_dir in "${old_installs[@]}"; do
+        echo "  - $old_dir"
+        
+        # Check if it has uncommitted changes
+        if [[ -d "$old_dir/.git" ]]; then
+            cd "$old_dir"
+            if [[ -z "$(git status --porcelain 2>/dev/null)" ]]; then
+                cd - >/dev/null
+                rm -rf "$old_dir"
+                echo "    ✓ Removed (clean)"
+            else
+                cd - >/dev/null
+                echo "    ⚠️  Preserved (has uncommitted changes)"
+            fi
+        else
+            echo "    ⚠️  Preserved (not a git repo)"
+        fi
+    done
+}
+
 # Main installation logic
 echo ""
 
@@ -132,10 +239,9 @@ echo ""
 if [[ -d "$INSTALL_DIR" && -f "$INSTALL_DIR/docs/docs_manifest.json" ]]; then
     echo "✓ Found existing installation at ~/.claude-code-docs"
     
-    # Just update it
+    # Update it safely
+    safe_git_update "$INSTALL_DIR"
     cd "$INSTALL_DIR"
-    echo "Updating to latest version..."
-    git pull --quiet origin main || echo "  (Could not pull latest changes)"
 else
     # Look for existing installations to migrate
     echo "Checking for existing installations..."
@@ -170,9 +276,22 @@ echo "Setting up Claude Code Docs v0.3..."
 
 # Copy helper script from template
 echo "Installing helper script..."
-cp "$INSTALL_DIR/scripts/claude-docs-helper.sh.template" "$INSTALL_DIR/claude-docs-helper.sh"
-chmod +x "$INSTALL_DIR/claude-docs-helper.sh"
-echo "✓ Helper script installed"
+if [[ -f "$INSTALL_DIR/scripts/claude-docs-helper.sh.template" ]]; then
+    cp "$INSTALL_DIR/scripts/claude-docs-helper.sh.template" "$INSTALL_DIR/claude-docs-helper.sh"
+    chmod +x "$INSTALL_DIR/claude-docs-helper.sh"
+    echo "✓ Helper script installed"
+else
+    echo "  ⚠️  Template file missing, attempting recovery..."
+    # Try to fetch just the template file
+    if curl -fsSL "https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/scripts/claude-docs-helper.sh.template" -o "$INSTALL_DIR/claude-docs-helper.sh" 2>/dev/null; then
+        chmod +x "$INSTALL_DIR/claude-docs-helper.sh"
+        echo "  ✓ Helper script downloaded directly"
+    else
+        echo "  ❌ Failed to install helper script"
+        echo "  Please check your installation and try again"
+        exit 1
+    fi
+fi
 
 # Create command directory
 echo "Setting up /docs command..."
@@ -255,6 +374,9 @@ else
     }' > ~/.claude/settings.json
     echo "✓ Created Claude settings"
 fi
+
+# Clean up old installations now that v0.3 is set up
+cleanup_old_installations
 
 # Success message
 echo ""

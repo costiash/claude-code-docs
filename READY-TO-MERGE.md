@@ -17,6 +17,13 @@ curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/dev-v0.3
 - Safe uninstaller
 - All commands work with spaces
 
+## Migration Fixes (Latest)
+- **Always checks for old installations** - Even when ~/.claude-code-docs exists
+- **Safe git updates** - Handles divergent branches, stashes local changes
+- **v0.1 path extraction** - Now correctly parses complex hook format
+- **Cleanup after setup** - Removes old installations after successful v0.3 install
+- **Template fallback** - Downloads directly if missing
+
 ## After Testing
 1. Merge to main: `git checkout main && git merge dev-v0.3-refactor`
 2. Push: `git push origin main`
@@ -24,4 +31,4 @@ curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/dev-v0.3
 4. Users auto-update via manifest version 0.3
 
 ## Summary
-50 commits ready. Major simplification. Works as expected.
+53+ commits ready. Major simplification. Migration issues fixed.
