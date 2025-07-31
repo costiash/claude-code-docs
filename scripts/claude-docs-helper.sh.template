@@ -181,43 +181,34 @@ read_doc() {
         echo ""
         echo "📖 Official page: https://docs.anthropic.com/en/docs/claude-code/$topic"
     else
-        # Check if this looks like a natural language query
-        if [[ "$topic" =~ ^(tell[[:space:]]me[[:space:]]about|explain|what[[:space:]]is|what[[:space:]]are|how[[:space:]]do|how[[:space:]]to|show[[:space:]]me|find|search) ]] || [[ "$topic" =~ [[:space:]].*[[:space:]] ]]; then
-            echo "🔍 That looks like a search query. Let me help you find the right documentation."
-            echo ""
+        # Always show search interface - never error messages
+        print_doc_header
+        echo "🔍 Searching for: $topic"
+        echo ""
+        
+        # Try to extract keywords from the topic
+        local keywords=$(echo "$topic" | grep -o '[a-zA-Z0-9_-]\+' | grep -v -E '^(tell|me|about|explain|what|is|are|how|do|to|show|find|search|the|for|in)$' | tr '\n' ' ')
+        
+        if [[ -n "$keywords" ]]; then
+            # Search for matching topics - escape the pattern
+            local escaped_keywords=$(echo "$keywords" | sed 's/[[\.*^$()+?{|]/\\&/g')
+            local matches=$(ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | grep -i -E "$(echo "$escaped_keywords" | tr ' ' '|')" | sort)
             
-            # Try to extract keywords from the query
-            local keywords=$(echo "$topic" | grep -o '[a-zA-Z0-9_-]\+' | grep -v -E '^(tell|me|about|explain|what|is|are|how|do|to|show|find|search|the|for|in)$' | tr '\n' ' ')
-            
-            if [[ -n "$keywords" ]]; then
-                echo "Searching for topics related to: $keywords"
+            if [[ -n "$matches" ]]; then
+                echo "Found these related topics:"
+                echo "$matches" | sed 's/^/  • /' 
                 echo ""
-                
-                # Search for matching topics - escape the pattern
-                local escaped_keywords=$(echo "$keywords" | sed 's/[[\.*^$()+?{|]/\\&/g')
-                local matches=$(ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | grep -i -E "$(echo "$escaped_keywords" | tr ' ' '|')" | sort)
-                
-                if [[ -n "$matches" ]]; then
-                    echo "Found these related topics:"
-                    echo "$matches" | sed 's/^/  • /' 
-                    echo ""
-                    echo "Try: /docs <topic> to read a specific document"
-                else
-                    echo "No exact matches found. Here are all available topics:"
-                    ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
-                fi
+                echo "Try: /docs <topic> to read a specific document"
             else
-                echo "Available topics:"
+                echo "No exact matches found. Here are all available topics:"
                 ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
             fi
-            echo ""
-            echo "💡 Tip: Use grep to search across all docs: cd ~/.claude-code-docs && grep -r 'search term' docs/"
         else
-            echo "❌ Documentation not found: $topic"
-            echo ""
             echo "Available topics:"
             ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
         fi
+        echo ""
+        echo "💡 Tip: Use grep to search across all docs: cd ~/.claude-code-docs && grep -r 'search term' docs/"
     fi
 }
 
@@ -245,14 +236,17 @@ hook_check() {
 
 # Function to show what's new (simplified version)
 whats_new() {
+    # Temporarily disable strict error handling for this function
+    set +e
+    
     print_doc_header
     
     # Auto-update first (synchronous - we need latest git history)
-    auto_update
+    auto_update || true  # Don't fail if auto-update fails
     
     cd "$DOCS_PATH" 2>/dev/null || {
         echo "❌ Error: Could not access documentation directory"
-        exit 1
+        return 1
     }
     
     echo "📚 Recent documentation updates:"
@@ -270,7 +264,7 @@ whats_new() {
         echo "  📎 https://github.com/ericbuess/claude-code-docs/commit/$hash"
         
         # Show which docs changed
-        local changed_docs=$(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md | sed 's|docs/||' | sed 's|\.md$||' | head -5)
+        local changed_docs=$(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md 2>/dev/null | sed 's|docs/||' | sed 's|\.md$||' | head -5)
         if [[ -n "$changed_docs" ]]; then
             echo "$changed_docs" | while read -r doc; do
                 [[ -n "$doc" ]] && echo "  📄 $doc: https://docs.anthropic.com/en/docs/claude-code/$doc"
@@ -278,7 +272,7 @@ whats_new() {
         fi
         echo ""
         ((count++))
-    done < <(git log --oneline -10 -- docs/*.md 2>/dev/null | grep -v "Merge")
+    done < <(git log --oneline -10 -- docs/*.md 2>/dev/null | grep -v "Merge" || true)
     
     if [[ $count -eq 0 ]]; then
         echo "No recent documentation updates found."
@@ -287,6 +281,12 @@ whats_new() {
     
     echo "📎 Full changelog: https://github.com/ericbuess/claude-code-docs/commits/main/docs"
     echo "📚 COMMUNITY MIRROR - NOT AFFILIATED WITH ANTHROPIC"
+    
+    # Re-enable strict error handling
+    set -e
+    
+    # Ensure we always exit successfully
+    return 0
 }
 
 # Function for uninstall
@@ -384,3 +384,6 @@ case "${1:-}" in
         fi
         ;;
 esac
+
+# Ensure script always exits successfully
+exit 0
