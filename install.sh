@@ -153,15 +153,8 @@ safe_git_update() {
     local repo_dir="$1"
     cd "$repo_dir"
     
-    # Ensure we're on the main branch
-    local current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
-    if [[ "$current_branch" != "main" ]]; then
-        echo "  Switching to main branch..."
-        git checkout main >/dev/null 2>&1 || {
-            # If checkout fails, force it
-            git checkout -f main >/dev/null 2>&1
-        }
-    fi
+    # Stay on current branch (for development)
+    local current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
     
     # Set git config for pull strategy if not set
     if ! git config pull.rebase >/dev/null 2>&1; then
