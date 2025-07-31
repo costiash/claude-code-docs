@@ -15,7 +15,7 @@ MANIFEST="$DOCS_PATH/docs/docs_manifest.json"
 sanitize_input() {
     # Remove ALL shell metacharacters and control characters
     # Only allow alphanumeric, spaces, hyphens, underscores, periods, commas, apostrophes, and question marks
-    echo "$1" | sed 's/[^a-zA-Z0-9 \-_.,'\''?]//g' | sed 's/  */ /g' | sed 's/^ *//;s/ *$//'
+    echo "$1" | sed 's/[^a-zA-Z0-9 _.,'\''?-]//g' | sed 's/  */ /g' | sed 's/^ *//;s/ *$//'
 }
 
 # Function to print documentation header
