@@ -130,7 +130,7 @@ migrate_installation() {
     
     # Fresh install at new location
     echo "Installing fresh at ~/.claude-code-docs..."
-    git clone https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
+    git clone -b dev-v0.3-refactor https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
     cd "$INSTALL_DIR"
     
     # Remove old directory if safe
@@ -153,13 +153,13 @@ safe_git_update() {
     local repo_dir="$1"
     cd "$repo_dir"
     
-    # Ensure we're on the main branch
+    # Ensure we're on the dev-v0.3-refactor branch
     local current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
-    if [[ "$current_branch" != "main" ]]; then
-        echo "  Switching to main branch..."
-        git checkout main >/dev/null 2>&1 || {
+    if [[ "$current_branch" != "dev-v0.3-refactor" ]]; then
+        echo "  Switching to dev-v0.3-refactor branch..."
+        git checkout dev-v0.3-refactor >/dev/null 2>&1 || {
             # If checkout fails, force it
-            git checkout -f main >/dev/null 2>&1
+            git checkout -f dev-v0.3-refactor >/dev/null 2>&1
         }
     fi
     
@@ -171,7 +171,7 @@ safe_git_update() {
     echo "Updating to latest version..."
     
     # Try regular pull first
-    if git pull --quiet origin main 2>/dev/null; then
+    if git pull --quiet origin dev-v0.3-refactor 2>/dev/null; then
         return 0
     fi
     
@@ -179,7 +179,7 @@ safe_git_update() {
     echo "  Standard update failed, trying harder..."
     
     # Fetch latest
-    if ! git fetch origin main 2>/dev/null; then
+    if ! git fetch origin dev-v0.3-refactor 2>/dev/null; then
         echo "  ⚠️  Could not fetch from GitHub (offline?)"
         return 1
     fi
@@ -190,11 +190,11 @@ safe_git_update() {
         # Stash changes
         git stash push -m "Installer auto-stash $(date)" >/dev/null 2>&1
         # Reset to origin
-        git reset --hard origin/main >/dev/null 2>&1
+        git reset --hard origin/dev-v0.3-refactor >/dev/null 2>&1
         echo "  ✓ Updated (local changes stashed)"
     else
         # No local changes, just reset
-        git reset --hard origin/main >/dev/null 2>&1
+        git reset --hard origin/dev-v0.3-refactor >/dev/null 2>&1
         echo "  ✓ Updated successfully"
     fi
     
@@ -265,7 +265,7 @@ else
         echo "No existing installation found"
         echo "Installing fresh to ~/.claude-code-docs..."
         
-        git clone https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
+        git clone -b dev-v0.3-refactor https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
         cd "$INSTALL_DIR"
     fi
 fi
@@ -283,7 +283,7 @@ if [[ -f "$INSTALL_DIR/scripts/claude-docs-helper.sh.template" ]]; then
 else
     echo "  ⚠️  Template file missing, attempting recovery..."
     # Try to fetch just the template file
-    if curl -fsSL "https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/scripts/claude-docs-helper.sh.template" -o "$INSTALL_DIR/claude-docs-helper.sh" 2>/dev/null; then
+    if curl -fsSL "https://raw.githubusercontent.com/ericbuess/claude-code-docs/dev-v0.3-refactor/scripts/claude-docs-helper.sh.template" -o "$INSTALL_DIR/claude-docs-helper.sh" 2>/dev/null; then
         chmod +x "$INSTALL_DIR/claude-docs-helper.sh"
         echo "  ✓ Helper script downloaded directly"
     else
