@@ -203,16 +203,21 @@ safe_git_update() {
 
 # Function to cleanup old installations
 cleanup_old_installations() {
-    echo ""
-    echo "Checking for old installations to clean up..."
-    mapfile -t old_installs < <(find_existing_installations)
-    
-    if [[ ${#old_installs[@]} -eq 0 ]]; then
+    # Use the global OLD_INSTALLATIONS array that was populated before config updates
+    if [[ ${#OLD_INSTALLATIONS[@]} -eq 0 ]]; then
         return
     fi
     
-    echo "Found ${#old_installs[@]} old installation(s) to remove:"
-    for old_dir in "${old_installs[@]}"; do
+    echo ""
+    echo "Cleaning up old installations..."
+    echo "Found ${#OLD_INSTALLATIONS[@]} old installation(s) to remove:"
+    
+    for old_dir in "${OLD_INSTALLATIONS[@]}"; do
+        # Skip empty paths
+        if [[ -z "$old_dir" ]]; then
+            continue
+        fi
+        
         echo "  - $old_dir"
         
         # Check if it has uncommitted changes
@@ -269,6 +274,10 @@ else
         cd "$INSTALL_DIR"
     fi
 fi
+
+# Find old installations BEFORE we update configs (silent)
+OLD_INSTALLATIONS=()
+mapfile -t OLD_INSTALLATIONS < <(find_existing_installations)
 
 # Now we're in $INSTALL_DIR, set up the new script-based system
 echo ""
