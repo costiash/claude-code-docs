@@ -15,7 +15,7 @@ Major improvements:
 - **Simplified sync status** - no confusing timestamps
 - **Better performance** - all operations < 1 second
 
-**Upgrading**: v0.2 users will auto-update. v0.1 users (or if unsure) should run the install command below.
+**Upgrading**: v0.2 users will auto-update. If you installed before December 2024 or don't see a version in `/docs -t`, run the install command below.
 
 ## Why This Exists
 
@@ -115,7 +115,10 @@ If you have v0.1 or v0.2 installed, v0.3 will automatically:
 3. Remove old installation (unless it has uncommitted changes)
 4. Update your command and hook configurations
 
-**Note**: v0.1 users must manually run the install command (no auto-update in v0.1):
+**How to check your version**: Run `/docs -t` and look for "📦 Version: X.X"
+- If you see "Version: 0.2" → You'll auto-update to v0.3
+- If you see no version number → You have v0.1, run the install command:
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
 ```
