@@ -21,8 +21,9 @@ curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/dev-v0.3
 - **Always checks for old installations** - Even when ~/.claude-code-docs exists
 - **Safe git updates** - Handles divergent branches, stashes local changes
 - **v0.1 path extraction** - Now correctly parses complex hook format
-- **Cleanup after setup** - Removes old installations after successful v0.3 install
+- **Cleanup after setup** - Captures old paths BEFORE updating configs
 - **Template fallback** - Downloads directly if missing
+- **Branch-specific testing** - Uses dev-v0.3-refactor until merge
 
 ## After Testing
 
