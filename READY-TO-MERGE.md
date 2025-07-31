@@ -41,4 +41,6 @@ curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/dev-v0.3
 4. Users auto-update via manifest version 0.3
 
 ## Summary
-61 commits ready. Major simplification. All migration issues fixed.
+62 commits ready. Major simplification. All migration issues fixed and tested.
+
+✅ **Migration tests complete** - Both v0.1→v0.3 and v0.2→v0.3 work perfectly!
