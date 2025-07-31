@@ -25,6 +25,15 @@ curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/dev-v0.3
 - **Template fallback** - Downloads directly if missing
 
 ## After Testing
+
+### IMPORTANT: Before Merging to Main
+**Revert the branch-specific changes in install.sh:**
+```bash
+# Change all instances of "dev-v0.3-refactor" back to "main"
+# Remove the "-b dev-v0.3-refactor" from clone commands
+```
+
+### Then Merge
 1. Merge to main: `git checkout main && git merge dev-v0.3-refactor`
 2. Push: `git push origin main`
 3. Delete dev branch: `git branch -d dev-v0.3-refactor && git push origin --delete dev-v0.3-refactor`
