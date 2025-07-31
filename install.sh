@@ -90,40 +90,39 @@ find_existing_installations() {
 migrate_installation() {
     local old_dir="$1"
     
-    echo "📦 Migrating from: $old_dir"
-    echo "   To: $INSTALL_DIR"
+    echo "📦 Found existing installation at: $old_dir"
+    echo "   Migrating to: $INSTALL_DIR"
     echo ""
     
-    # Create install directory
-    mkdir -p "$INSTALL_DIR"
-    
-    # If old installation has .git, preserve it
+    # Check if old dir has uncommitted changes
+    local should_preserve=false
     if [[ -d "$old_dir/.git" ]]; then
-        echo "Preserving git history..."
-        cp -R "$old_dir/.git" "$INSTALL_DIR/"
-        
-        # Reset to clean state in new location
-        cd "$INSTALL_DIR"
-        git reset --hard HEAD 2>/dev/null || true
-        git clean -fd 2>/dev/null || true
-        
-        # Pull latest
-        echo "Updating to latest version..."
-        git pull --quiet origin main || echo "  (Could not pull latest changes)"
+        cd "$old_dir"
+        if [[ -n "$(git status --porcelain 2>/dev/null)" ]]; then
+            should_preserve=true
+            echo "⚠️  Uncommitted changes detected in old installation"
+        fi
+        cd - >/dev/null
+    fi
+    
+    # Fresh install at new location
+    echo "Installing fresh at ~/.claude-code-docs..."
+    git clone https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
+    cd "$INSTALL_DIR"
+    
+    # Remove old directory if safe
+    if [[ "$should_preserve" == "false" ]]; then
+        echo "Removing old installation..."
+        rm -rf "$old_dir"
+        echo "✓ Old installation removed"
     else
-        # No git history, clone fresh
-        echo "Cloning fresh repository..."
-        git clone https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
+        echo ""
+        echo "ℹ️  Old installation preserved at: $old_dir"
+        echo "   (has uncommitted changes)"
     fi
     
     echo ""
     echo "✅ Migration complete!"
-    echo ""
-    echo "ℹ️  Your old installation is preserved at:"
-    echo "   $old_dir"
-    echo ""
-    echo "   To remove it, run:"
-    echo "   rm -rf \"$old_dir\""
 }
 
 # Main installation logic
