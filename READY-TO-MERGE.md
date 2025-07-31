@@ -1,9 +1,8 @@
-# v0.3 Ready to Merge - Next Steps
+# v0.3 Ready to Merge
 
-## Test Command
-```bash
-curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/dev-v0.3-refactor/install.sh | bash
-```
+## Status: READY FOR MERGE ✅
+
+All testing complete on Linux and macOS. Branch references reverted to main.
 
 ## What to Test
 1. **Migration** - Should remove old installation (unless it has changes)
@@ -17,30 +16,24 @@ curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/dev-v0.3
 - Safe uninstaller
 - All commands work with spaces
 
-## Migration Fixes (Latest)
+## Migration Fixes Included
 - **Always checks for old installations** - Even when ~/.claude-code-docs exists
 - **Safe git updates** - Handles divergent branches, stashes local changes
 - **v0.1 path extraction** - Now correctly parses complex hook format
 - **Cleanup after setup** - Captures old paths BEFORE updating configs
 - **Template fallback** - Downloads directly if missing
-- **Branch-specific testing** - Uses dev-v0.3-refactor until merge
+- **Mac bug fixed** - Configs always update regardless of existing installation
 
-## After Testing
-
-### IMPORTANT: Before Merging to Main
-**Revert the branch-specific changes in install.sh:**
-```bash
-# Change all instances of "dev-v0.3-refactor" back to "main"
-# Remove the "-b dev-v0.3-refactor" from clone commands
-```
-
-### Then Merge
+## Ready to Merge
 1. Merge to main: `git checkout main && git merge dev-v0.3-refactor`
 2. Push: `git push origin main`
 3. Delete dev branch: `git branch -d dev-v0.3-refactor && git push origin --delete dev-v0.3-refactor`
 4. Users auto-update via manifest version 0.3
 
 ## Summary
-62 commits ready. Major simplification. All migration issues fixed and tested.
+69 commits ready for merge. Major simplification. All migration issues fixed and tested.
 
-✅ **Migration tests complete** - Both v0.1→v0.3 and v0.2→v0.3 work perfectly!
+✅ **All tests passed** on both Linux and macOS
+✅ **Mac bug fixed** - Configs update even with existing ~/.claude-code-docs  
+✅ **Branch references reverted** - Ready for main branch
+✅ **Test files removed** - Clean commit history
