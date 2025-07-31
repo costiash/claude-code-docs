@@ -103,18 +103,19 @@ The docs automatically stay up-to-date:
 - No manual updates needed!
 
 **Performance**:
-- `/docs` reads instantly with a simple helper script
-- `/docs -t` shows you exact timestamps of GitHub updates vs local sync
+- Every `/docs` request automatically checks for updates (~0.4s)
+- Updates are pulled automatically when available
+- `/docs -t` shows sync status without reading a doc
 
 ## Migration from v0.2
 
 If you have an older installation, v0.3 will automatically:
-1. Find your existing installation
-2. Check for any custom files you added
-3. Migrate to `~/.claude-code-docs`
-4. Clean up the old location (if safe)
+1. Find your existing installation from your current configuration
+2. Migrate to `~/.claude-code-docs`
+3. Preserve your old installation directory
+4. Show you where the old installation is located
 
-You'll see a brief notice on first use after migration.
+You can manually remove the old directory after verifying the migration worked.
 
 ## Troubleshooting
 
@@ -164,11 +165,12 @@ See [UNINSTALL.md](UNINSTALL.md) for manual uninstall instructions.
 ## What's New in v0.3
 
 - **Fixed installation location**: Always installs to `~/.claude-code-docs`
-- **Automatic migration**: Seamlessly moves from old locations
+- **Smart migration**: Finds your actual installation from configs (no guessing)
 - **Script-based architecture**: All logic in a single maintainable script
-- **Performance improvements**: Operations complete in < 1 second
-- **New `/docs what's new` command**: See actual documentation changes
-- **Simplified codebase**: Easier to understand and contribute
+- **Auto-updates**: Every request checks and updates if needed
+- **Safe uninstall**: Preserves directories with uncommitted changes
+- **Natural commands**: `/docs what's new` works with spaces
+- **No version dependencies**: Simpler, more reliable code
 
 ## License
 
