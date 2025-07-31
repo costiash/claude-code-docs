@@ -4,7 +4,7 @@
 
 Local mirror of Claude Code documentation files from https://docs.anthropic.com/en/docs/claude-code/, updated every 3 hours.
 
-## 🆕 Version 0.3 Released!
+## 🆕 Version 0.3.1 Released!
 
 Major improvements:
 - **Fixed installation location** at `~/.claude-code-docs`
@@ -116,7 +116,7 @@ If you have v0.1 or v0.2 installed, v0.3 will automatically:
 4. Update your command and hook configurations
 
 **How to check your version**: Run `/docs -t` and look for "📦 Version: X.X"
-- If you see "Version: 0.2" → You'll auto-update to v0.3
+- If you see "Version: 0.2" or "Version: 0.3" → You'll auto-update to v0.3.1
 - If you see no version number → You have v0.1, run the install command:
 
 ```bash
@@ -168,8 +168,9 @@ See [UNINSTALL.md](UNINSTALL.md) for manual uninstall instructions.
   - Clone manually and run the installer from the local directory
   - Review all code before installation
 
-## What's New in v0.3
+## What's New in v0.3.1
 
+- **Security Fix**: Enhanced command injection prevention
 - **Fixed installation location**: Always installs to `~/.claude-code-docs`
 - **Smart migration**: Finds your actual installation from configs (no guessing)
 - **Script-based architecture**: All logic in a single maintainable script
