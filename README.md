@@ -15,7 +15,7 @@ Major improvements:
 - **Simplified sync status** - no confusing timestamps
 - **Better performance** - all operations < 1 second
 
-If you have v0.2 installed, it will auto-update when we push v0.3 to main!
+**Upgrading**: v0.2 users will auto-update. v0.1 users (or if unsure) should run the install command below.
 
 ## Why This Exists
 
@@ -107,15 +107,18 @@ The docs automatically stay up-to-date:
 - Updates are pulled automatically when available
 - `/docs -t` shows sync status without reading a doc
 
-## Migration from v0.2
+## Migration from Older Versions
 
-If you have an older installation, v0.3 will automatically:
+If you have v0.1 or v0.2 installed, v0.3 will automatically:
 1. Find your existing installation from your current configuration
 2. Migrate to `~/.claude-code-docs`
-3. Preserve your old installation directory
-4. Show you where the old installation is located
+3. Remove old installation (unless it has uncommitted changes)
+4. Update your command and hook configurations
 
-You can manually remove the old directory after verifying the migration worked.
+**Note**: v0.1 users must manually run the install command (no auto-update in v0.1):
+```bash
+curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
+```
 
 ## Troubleshooting
 
