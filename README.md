@@ -15,7 +15,7 @@ Major improvements:
 - **Simplified sync status** - no confusing timestamps
 - **Better performance** - all operations < 1 second
 
-**Upgrading**: v0.2 users will auto-update. If you installed before December 2024 or don't see a version in `/docs -t`, run the install command below.
+**Upgrading**: v0.2 users will auto-update. If you installed before July 29, 2025 or don't see a version in `/docs -t`, run the install command below.
 
 ## Why This Exists
 
