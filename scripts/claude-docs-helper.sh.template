@@ -288,8 +288,8 @@ whats_new() {
 # Function for uninstall
 uninstall() {
     print_doc_header
-    print_color "$GREEN" "Claude Code Documentation Mirror - Uninstaller"
-    print_color "$GREEN" "=============================================="
+    print_color "$GREEN" "To uninstall Claude Code Documentation Mirror"
+    print_color "$GREEN" "==========================================="
     echo ""
     
     print_color "$YELLOW" "This will remove:"
@@ -298,49 +298,13 @@ uninstall() {
     echo "  • The installation directory ~/.claude-code-docs"
     echo ""
     
-    # Ask for confirmation
-    read -p "Are you sure you want to uninstall? (y/N): " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        print_color "$YELLOW" "Uninstall cancelled."
-        exit 0
-    fi
-    
-    # Remove command file
-    if [[ -f ~/.claude/commands/docs.md ]]; then
-        rm -f ~/.claude/commands/docs.md
-        print_color "$GREEN" "✓ Removed /docs command"
-    fi
-    
-    # Remove hook from settings.json
-    if [[ -f ~/.claude/settings.json ]]; then
-        # Backup first
-        cp ~/.claude/settings.json ~/.claude/settings.json.backup
-        
-        # Remove any hooks that contain our path (check both expanded and ~ versions)
-        if jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.hooks[0].command | contains("/.claude-code-docs/") | not)]' ~/.claude/settings.json > ~/.claude/settings.json.tmp; then
-            # Clean up empty arrays/objects
-            jq 'if .hooks.PreToolUse == [] then .hooks |= if . == {PreToolUse: []} then {} else del(.PreToolUse) end else . end | if .hooks == {} then del(.hooks) else . end' ~/.claude/settings.json.tmp > ~/.claude/settings.json.tmp2
-            mv ~/.claude/settings.json.tmp2 ~/.claude/settings.json
-            rm -f ~/.claude/settings.json.tmp
-            print_color "$GREEN" "✓ Removed hooks from settings"
-        else
-            print_color "$RED" "Failed to update settings.json"
-            rm -f ~/.claude/settings.json.tmp
-        fi
-    fi
-    
-    # Remove installation directory
-    print_color "$YELLOW" "Removing installation directory..."
-    cd ~
-    rm -rf "$DOCS_PATH"
-    print_color "$GREEN" "✓ Removed installation directory"
-    
+    print_color "$GREEN" "Run this command in your terminal:"
     echo ""
-    print_color "$GREEN" "✅ Claude Code Documentation Mirror has been uninstalled!"
+    echo "  ~/.claude-code-docs/uninstall.sh"
     echo ""
-    echo "To reinstall:"
-    echo "curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash"
+    echo "Or to skip confirmation:"
+    echo "  echo 'y' | ~/.claude-code-docs/uninstall.sh"
+    echo ""
 }
 
 # Combine all arguments into one string for easier parsing

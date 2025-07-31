@@ -48,13 +48,17 @@ find_all_installations() {
         done <<< "$hooks"
     fi
     
-    # Deduplicate
-    printf '%s\n' "${paths[@]}" | sort -u
+    # Deduplicate - handle empty array case
+    if [[ ${#paths[@]} -gt 0 ]]; then
+        printf '%s\n' "${paths[@]}" | sort -u
+    fi
 }
 
 # Main uninstall logic
 installations=()
-mapfile -t installations < <(find_all_installations)
+while IFS= read -r line; do
+    installations+=("$line")
+done < <(find_all_installations)
 
 if [[ ${#installations[@]} -gt 0 ]]; then
     echo "Found installations at:"
