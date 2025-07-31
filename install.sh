@@ -284,8 +284,8 @@ HOOK_COMMAND="~/.claude-code-docs/claude-docs-helper.sh hook-check"
 if [ -f ~/.claude/settings.json ]; then
     # Update existing settings.json
     echo "Updating existing Claude settings..."
-    # Remove old hooks first
-    jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.matcher != "Read")]' ~/.claude/settings.json > ~/.claude/settings.json.tmp
+    # Remove old hooks first (remove all Read hooks)
+    jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.matcher == "Read" | not)]' ~/.claude/settings.json > ~/.claude/settings.json.tmp
     # Add new hook
     jq --arg cmd "$HOOK_COMMAND" '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[]] + [{"matcher": "Read", "hooks": [{"type": "command", "command": $cmd}]}]' ~/.claude/settings.json.tmp > ~/.claude/settings.json
     rm -f ~/.claude/settings.json.tmp
