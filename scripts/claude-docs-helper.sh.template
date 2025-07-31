@@ -344,8 +344,8 @@ uninstall() {
         # Backup first
         cp ~/.claude/settings.json ~/.claude/settings.json.backup
         
-        # Remove any hooks that contain our path
-        if jq --arg path "$DOCS_PATH" '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.hooks[0].command | contains($path) | not)]' ~/.claude/settings.json > ~/.claude/settings.json.tmp; then
+        # Remove any hooks that contain our path (check both expanded and ~ versions)
+        if jq '.hooks.PreToolUse = [(.hooks.PreToolUse // [])[] | select(.hooks[0].command | contains("/.claude-code-docs/") | not)]' ~/.claude/settings.json > ~/.claude/settings.json.tmp; then
             # Clean up empty arrays/objects
             jq 'if .hooks.PreToolUse == [] then .hooks |= if . == {PreToolUse: []} then {} else del(.PreToolUse) end else . end | if .hooks == {} then del(.hooks) else . end' ~/.claude/settings.json.tmp > ~/.claude/settings.json.tmp2
             mv ~/.claude/settings.json.tmp2 ~/.claude/settings.json
