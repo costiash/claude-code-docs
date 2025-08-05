@@ -26,3 +26,9 @@ Thumbs.db
 .last_pull
 .last_check
 claude-docs-helper.sh
+
+# Test files
+test_*.txt
+test_*.md
+*.test
+*.tmp

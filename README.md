@@ -168,6 +168,24 @@ See [UNINSTALL.md](UNINSTALL.md) for manual uninstall instructions.
   - Clone manually and run the installer from the local directory
   - Review all code before installation
 
+## Known Issues
+
+### v0.3.1 Auto-Update Issue
+**Status**: Fix available in PR #9, manual update required
+
+**Problem**: The v0.3.1 installer modifies `docs_manifest.json` which blocks auto-updates with the error:
+```
+error: Your local changes to the following files would be overwritten by merge:
+        docs/docs_manifest.json
+```
+
+**Solution**: Run the installer again to get the fix:
+```bash
+curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
+```
+
+This will update your installation with a fix that handles dirty working directories gracefully.
+
 ## What's New in v0.3.1
 
 - **Security Fix**: Enhanced command injection prevention
