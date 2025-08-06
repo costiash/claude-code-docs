@@ -10,8 +10,8 @@ echo "==============================="
 # Fixed installation location
 INSTALL_DIR="$HOME/.claude-code-docs"
 
-# Branch to use for installation (change to 'main' when merging to production)
-INSTALL_BRANCH="v0.3.2-release"
+# Branch to use for installation
+INSTALL_BRANCH="main"
 
 # Detect OS type
 if [[ "$OSTYPE" == "darwin"* ]]; then
