@@ -4,25 +4,22 @@
 
 Local mirror of Claude Code documentation files from https://docs.anthropic.com/en/docs/claude-code/, updated every 3 hours.
 
-## 🆕 Version 0.3.1 Released!
+## 🆕 Version 0.3.2 - Important Update
 
-Major improvements:
-- **Fixed installation location** at `~/.claude-code-docs`
-- **Automatic migration** from old installations
-- **Script-based architecture** - faster and more reliable
-- **Auto-updates on every request** - always stay in sync
-- **Improved `/docs what's new`** - shows changes with links
-- **Simplified sync status** - no confusing timestamps
-- **Better performance** - all operations faster
+**If you have any previous version installed**, please run the installer to update:
 
-**Upgrading**: v0.2 users will auto-update. If you installed before July 29, 2025 or don't see a version in `/docs -t`, run the install command below.
+```bash
+curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
+```
+
+This update fixes an issue that prevented automatic updates from working properly.
 
 ## Why This Exists
 
-- **Faster than web fetching** - Reads from local files; checks a manifest to know where to look
-- **Always up-to-date** - Auto-updates every 3 hours via GitHub Actions
-- **Track documentation evolution** - See exactly what changed in docs over time with git diffs
-- **Empower Claude Code** - Gives Claude the ability to deeply explore many doc files easily by referencing the manifest
+- **Faster access** - Reads from local files instead of fetching from web
+- **Automatic updates** - Attempts to stay current with the latest documentation
+- **Track changes** - See what changed in docs over time
+- **Better Claude Code integration** - Allows Claude to explore documentation more effectively
 
 ## Prerequisites
 
@@ -95,33 +92,23 @@ You'll see: `📚 Reading from local docs (run /docs -t to check freshness)`
 
 ## How Updates Work
 
-The docs automatically stay up-to-date:
-- GitHub Actions updates the repository every 3 hours
-- The Claude Code PreToolUse hook runs only when a Read is made in the ~/.claude-code-docs directory and checks the GitHub repo for updates
-- If GitHub has newer content, it automatically syncs before reading
-- You'll see "🔄 Updating docs to latest version..." when this happens
-- No manual updates needed!
+The documentation attempts to stay current:
+- GitHub Actions runs periodically to fetch new documentation
+- When you use `/docs`, it checks for updates
+- Updates are pulled when available
+- You may see "🔄 Updating documentation..." when this happens
 
-**Performance**:
-- Every `/docs` request automatically checks for updates
-- Updates are pulled automatically when available
-- `/docs -t` shows sync status without reading a doc
+Note: If automatic updates fail, you can always run the installer again to get the latest version.
 
-## Migration from Older Versions
+## Updating from Previous Versions
 
-If you have v0.1 or v0.2 installed, v0.3 will automatically:
-1. Find your existing installation from your current configuration
-2. Migrate to `~/.claude-code-docs`
-3. Remove old installation (unless it has uncommitted changes)
-4. Update your command and hook configurations
-
-**How to check your version**: Run `/docs -t` and look for "📦 Version: X.X"
-- If you see "Version: 0.2" or "Version: 0.3" → You'll auto-update to v0.3.1
-- If you see no version number → You have v0.1, run the install command:
+Regardless of which version you have installed, simply run:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
 ```
+
+The installer will handle migration and updates automatically.
 
 ## Troubleshooting
 
@@ -168,34 +155,11 @@ See [UNINSTALL.md](UNINSTALL.md) for manual uninstall instructions.
   - Clone manually and run the installer from the local directory
   - Review all code before installation
 
-## Known Issues
+## What's New in v0.3.2
 
-### v0.3.1 Auto-Update Issue
-**Status**: Fix available in PR #9, manual update required
-
-**Problem**: The v0.3.1 installer modifies `docs_manifest.json` which blocks auto-updates with the error:
-```
-error: Your local changes to the following files would be overwritten by merge:
-        docs/docs_manifest.json
-```
-
-**Solution**: Run the installer again to get the fix:
-```bash
-curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
-```
-
-This will update your installation with a fix that handles dirty working directories gracefully.
-
-## What's New in v0.3.1
-
-- **Security Fix**: Enhanced command injection prevention
-- **Fixed installation location**: Always installs to `~/.claude-code-docs`
-- **Smart migration**: Finds your actual installation from configs (no guessing)
-- **Script-based architecture**: All logic in a single maintainable script
-- **Auto-updates**: Every request checks and updates if needed
-- **Safe uninstall**: Preserves directories with uncommitted changes
-- **Natural commands**: `/docs what's new` works with spaces
-- **No version dependencies**: Simpler, more reliable code
+- Fixed automatic update functionality  
+- Improved handling of local repository changes
+- Better error recovery during updates
 
 ## License
 
