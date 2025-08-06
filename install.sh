@@ -10,6 +10,9 @@ echo "==============================="
 # Fixed installation location
 INSTALL_DIR="$HOME/.claude-code-docs"
 
+# Branch to use for installation (change to 'main' when merging to production)
+INSTALL_BRANCH="v0.3.2-release"
+
 # Detect OS type
 if [[ "$OSTYPE" == "darwin"* ]]; then
     OS_TYPE="macos"
@@ -130,7 +133,7 @@ migrate_installation() {
     
     # Fresh install at new location
     echo "Installing fresh at ~/.claude-code-docs..."
-    git clone https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
+    git clone -b "$INSTALL_BRANCH" https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
     cd "$INSTALL_DIR"
     
     # Remove old directory if safe
@@ -153,8 +156,27 @@ safe_git_update() {
     local repo_dir="$1"
     cd "$repo_dir"
     
-    # Stay on current branch (for development)
-    local current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+    # Check if this is a v0.3.1 installation with dirty manifest (need to upgrade to v0.3.2)
+    local needs_v032_upgrade=false
+    if [[ -n "$(git status --porcelain docs/docs_manifest.json 2>/dev/null)" ]]; then
+        # Check if manifest has installer_version (v0.3.1 bug)
+        if grep -q '"installer_version"' docs/docs_manifest.json 2>/dev/null; then
+            needs_v032_upgrade=true
+            echo "  Detected v0.3.1 with manifest bug, upgrading to v0.3.2..."
+        fi
+    fi
+    
+    # Determine which branch to use
+    local target_branch
+    if [[ "$needs_v032_upgrade" == "true" ]]; then
+        # Force upgrade to v0.3.2-release for bugfix
+        target_branch="$INSTALL_BRANCH"
+        # Fetch the v0.3.2-release branch
+        git fetch origin "$target_branch" 2>/dev/null || true
+    else
+        # Stay on current branch (for normal updates)
+        target_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+    fi
     
     # Set git config for pull strategy if not set
     if ! git config pull.rebase >/dev/null 2>&1; then
@@ -163,8 +185,20 @@ safe_git_update() {
     
     echo "Updating to latest version..."
     
-    # Try regular pull first
-    if git pull --quiet origin main 2>/dev/null; then
+    # For v0.3.1 upgrade, we need to handle dirty files
+    if [[ "$needs_v032_upgrade" == "true" ]]; then
+        # Restore manifest to clean state
+        git checkout -- docs/docs_manifest.json 2>/dev/null || true
+        # Switch to v0.3.2-release branch
+        git checkout "$target_branch" 2>/dev/null || git checkout -b "$target_branch" origin/"$target_branch" 2>/dev/null
+        # Pull latest
+        git pull origin "$target_branch" 2>/dev/null || true
+        echo "  ✓ Upgraded to v0.3.2 (fixed manifest bug)"
+        return 0
+    fi
+    
+    # Try regular pull first (use target branch)
+    if git pull --quiet origin "$target_branch" 2>/dev/null; then
         return 0
     fi
     
@@ -172,7 +206,7 @@ safe_git_update() {
     echo "  Standard update failed, trying harder..."
     
     # Fetch latest
-    if ! git fetch origin main 2>/dev/null; then
+    if ! git fetch origin "$target_branch" 2>/dev/null; then
         echo "  ⚠️  Could not fetch from GitHub (offline?)"
         return 1
     fi
@@ -183,11 +217,11 @@ safe_git_update() {
         # Stash changes
         git stash push -m "Installer auto-stash $(date)" >/dev/null 2>&1
         # Reset to origin
-        git reset --hard origin/main >/dev/null 2>&1
+        git reset --hard origin/"$target_branch" >/dev/null 2>&1
         echo "  ✓ Updated (local changes stashed)"
     else
         # No local changes, just reset
-        git reset --hard origin/main >/dev/null 2>&1
+        git reset --hard origin/"$target_branch" >/dev/null 2>&1
         echo "  ✓ Updated successfully"
     fi
     
@@ -265,7 +299,7 @@ else
         echo "No existing installation found"
         echo "Installing fresh to ~/.claude-code-docs..."
         
-        git clone https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
+        git clone -b "$INSTALL_BRANCH" https://github.com/ericbuess/claude-code-docs.git "$INSTALL_DIR"
         cd "$INSTALL_DIR"
     fi
 fi
@@ -283,7 +317,7 @@ if [[ -f "$INSTALL_DIR/scripts/claude-docs-helper.sh.template" ]]; then
 else
     echo "  ⚠️  Template file missing, attempting recovery..."
     # Try to fetch just the template file
-    if curl -fsSL "https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/scripts/claude-docs-helper.sh.template" -o "$INSTALL_DIR/claude-docs-helper.sh" 2>/dev/null; then
+    if curl -fsSL "https://raw.githubusercontent.com/ericbuess/claude-code-docs/$INSTALL_BRANCH/scripts/claude-docs-helper.sh.template" -o "$INSTALL_DIR/claude-docs-helper.sh" 2>/dev/null; then
         chmod +x "$INSTALL_DIR/claude-docs-helper.sh"
         echo "  ✓ Helper script downloaded directly"
     else
