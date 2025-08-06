@@ -5,6 +5,9 @@ set -euo pipefail
 # This script handles all /docs command functionality  
 # Installation path: ~/.claude-code-docs/claude-docs-helper.sh
 
+# Script version
+SCRIPT_VERSION="0.3.2"
+
 # Fixed installation path (no need for placeholder replacement)
 DOCS_PATH="$HOME/.claude-code-docs"
 MANIFEST="$DOCS_PATH/docs/docs_manifest.json"
@@ -56,7 +59,7 @@ auto_update() {
         git pull --quiet origin "$BRANCH" 2>&1 | grep -v "Merge made by" || true
         
         # Check if installer needs updating
-        local INSTALLER_VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
+        local INSTALLER_VERSION=$SCRIPT_VERSION
         local VERSION_INT=$(echo "$INSTALLER_VERSION" | sed 's/^0\.//')
         
         if [[ $VERSION_INT -ge 3 ]]; then
@@ -111,10 +114,8 @@ show_freshness() {
     # Show current branch and version
     cd "$DOCS_PATH" 2>/dev/null || exit 1
     local BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
-    local installer_version=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
-    
     echo "📍 Branch: ${BRANCH}"
-    echo "📦 Version: ${installer_version}"
+    echo "📦 Version: ${SCRIPT_VERSION}"
 }
 
 # Function to read documentation
@@ -132,7 +133,7 @@ read_doc() {
         # Quick check if we're up to date (0.37s)
         cd "$DOCS_PATH" 2>/dev/null || exit 1
         local BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
-        local VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
+        local VERSION=$SCRIPT_VERSION
         
         # Do the fetch to check status
         local COMPARE_BRANCH="$BRANCH"
@@ -160,7 +161,7 @@ read_doc() {
             git pull --quiet origin "$COMPARE_BRANCH" 2>&1 | grep -v "Merge made by" || true
             
             # Check if installer needs updating
-            local INSTALLER_VERSION=$(jq -r '.installer_version // "0.2"' "$MANIFEST" 2>/dev/null)
+            local INSTALLER_VERSION=$SCRIPT_VERSION
             local VERSION_INT=$(echo "$INSTALLER_VERSION" | sed 's/^0\.//')
             
             if [[ $VERSION_INT -ge 3 ]]; then
