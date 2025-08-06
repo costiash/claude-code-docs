@@ -1,10 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs Installer v0.3.1 - Fixed location with migration support
+# Claude Code Docs Installer v0.3.2 - Fixed auto-update issues
 # This script installs/migrates claude-code-docs to ~/.claude-code-docs
 
-echo "Claude Code Docs Installer v0.3.1"
+echo "Claude Code Docs Installer v0.3.2"
 echo "==============================="
 
 # Fixed installation location
@@ -272,7 +272,7 @@ fi
 
 # Now we're in $INSTALL_DIR, set up the new script-based system
 echo ""
-echo "Setting up Claude Code Docs v0.3.1..."
+echo "Setting up Claude Code Docs v0.3.2..."
 
 # Copy helper script from template
 echo "Installing helper script..."
@@ -383,20 +383,14 @@ else
     echo "✓ Created Claude settings"
 fi
 
-# Add installer version to manifest
-if [[ -f "$INSTALL_DIR/docs/docs_manifest.json" ]]; then
-    # Update manifest with installer version
-    jq '. + {"installer_version": "0.3.1"}' "$INSTALL_DIR/docs/docs_manifest.json" > "$INSTALL_DIR/docs/docs_manifest.json.tmp"
-    mv "$INSTALL_DIR/docs/docs_manifest.json.tmp" "$INSTALL_DIR/docs/docs_manifest.json"
-    echo "✓ Updated manifest with installer version"
-fi
+# Note: Do NOT modify docs_manifest.json - it's tracked by git and would break updates
 
 # Clean up old installations now that v0.3 is set up
 cleanup_old_installations
 
 # Success message
 echo ""
-echo "✅ Claude Code Docs v0.3.1 installed successfully!"
+echo "✅ Claude Code Docs v0.3.2 installed successfully!"
 echo ""
 echo "📚 Command: /docs (user)"
 echo "📂 Location: ~/.claude-code-docs"
