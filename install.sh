@@ -162,6 +162,9 @@ safe_git_update() {
     # Determine which branch to use - always use installer's target branch
     local target_branch="$INSTALL_BRANCH"
     
+    # For compatibility with existing logic
+    local needs_v032_upgrade=false
+    
     # If we're on a different branch or have conflicts, we need to switch
     if [[ "$current_branch" != "$target_branch" ]]; then
         echo "  Switching from $current_branch to $target_branch branch..."
