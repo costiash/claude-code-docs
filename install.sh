@@ -218,8 +218,9 @@ safe_git_update() {
     local has_untracked=false
     local needs_user_confirmation=false
     
-    # Check for merge conflicts
-    if git status --porcelain | grep -q "^UU\|^AA\|^DD" 2>/dev/null; then
+    # Check for merge conflicts (but ignore conflicts on docs_manifest.json - that's expected)
+    local non_manifest_conflicts=$(git status --porcelain | grep "^UU\|^AA\|^DD" | grep -v "docs/docs_manifest.json" 2>/dev/null)
+    if [[ -n "$non_manifest_conflicts" ]]; then
         has_conflicts=true
         needs_user_confirmation=true
     fi
@@ -265,10 +266,15 @@ safe_git_update() {
         fi
         echo "  Proceeding with clean installation..."
     else
-        # If only manifest changes (or no changes), proceed silently
-        local manifest_only_change=$(git status --porcelain | grep "docs/docs_manifest.json" 2>/dev/null)
-        if [[ -n "$manifest_only_change" ]]; then
-            echo "  Handling manifest file updates automatically..."
+        # If only manifest changes/conflicts (or no changes), proceed silently
+        local manifest_only_changes=$(git status --porcelain | grep "docs/docs_manifest.json" 2>/dev/null)
+        if [[ -n "$manifest_only_changes" ]]; then
+            local conflict_type=$(echo "$manifest_only_changes" | grep "^UU")
+            if [[ -n "$conflict_type" ]]; then
+                echo "  Resolving manifest file conflicts automatically..."
+            else
+                echo "  Handling manifest file updates automatically..."
+            fi
         fi
     fi
     
