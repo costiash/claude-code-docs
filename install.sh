@@ -1,10 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs Installer v0.3.2 - Fixed auto-update issues
+# Claude Code Docs Installer v0.3.3 - Changelog integration and compatibility improvements
 # This script installs/migrates claude-code-docs to ~/.claude-code-docs
 
-echo "Claude Code Docs Installer v0.3.2"
+echo "Claude Code Docs Installer v0.3.3"
 echo "==============================="
 
 # Fixed installation location
@@ -375,7 +375,7 @@ fi
 
 # Now we're in $INSTALL_DIR, set up the new script-based system
 echo ""
-echo "Setting up Claude Code Docs v0.3.2..."
+echo "Setting up Claude Code Docs v0.3.3..."
 
 # Copy helper script from template
 echo "Installing helper script..."
@@ -493,7 +493,7 @@ cleanup_old_installations
 
 # Success message
 echo ""
-echo "✅ Claude Code Docs v0.3.2 installed successfully!"
+echo "✅ Claude Code Docs v0.3.3 installed successfully!"
 echo ""
 echo "📚 Command: /docs (user)"
 echo "📂 Location: ~/.claude-code-docs"

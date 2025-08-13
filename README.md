@@ -1,35 +1,49 @@
 # Claude Code Documentation Mirror
 
 [![Last Update](https://img.shields.io/github/last-commit/ericbuess/claude-code-docs/main.svg?label=docs%20updated)](https://github.com/ericbuess/claude-code-docs/commits/main)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue)]()
+[![Beta](https://img.shields.io/badge/status-early%20beta-orange)](https://github.com/ericbuess/claude-code-docs/issues)
 
 Local mirror of Claude Code documentation files from https://docs.anthropic.com/en/docs/claude-code/, updated every 3 hours.
 
-## 🆕 Version 0.3.2 - Important Update
+## ⚠️ Early Beta Notice
 
-**If you have any previous version installed**, please run the installer to update:
+**This is an early beta release**. There may be errors or unexpected behavior. If you encounter any issues, please [open an issue](https://github.com/ericbuess/claude-code-docs/issues) - your feedback helps improve the tool!
 
+## 🆕 Version 0.3.3 - Changelog Integration
+
+**New in this version:**
+- 📋 **Claude Code Changelog**: Access the official Claude Code release notes with `/docs changelog`
+- 🍎 **Full macOS compatibility**: Fixed shell compatibility issues for Mac users
+- 🐧 **Linux support**: Tested on Ubuntu, Debian, and other distributions
+- 🔧 **Improved installer**: Better handling of updates and edge cases
+
+To update:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
 ```
-
-This update fixes an issue that prevented automatic updates from working properly.
 
 ## Why This Exists
 
 - **Faster access** - Reads from local files instead of fetching from web
 - **Automatic updates** - Attempts to stay current with the latest documentation
 - **Track changes** - See what changed in docs over time
+- **Claude Code changelog** - Quick access to official release notes and version history
 - **Better Claude Code integration** - Allows Claude to explore documentation more effectively
 
-## Prerequisites
+## Platform Compatibility
+
+- ✅ **macOS**: Fully supported (tested on macOS 12+)
+- ✅ **Linux**: Fully supported (Ubuntu, Debian, Fedora, etc.)
+- ⏳ **Windows**: Not yet supported - [contributions welcome](#contributing)!
+
+### Prerequisites
 
 This tool requires the following to be installed:
 - **git** - For cloning and updating the repository (usually pre-installed)
 - **jq** - For JSON processing in the auto-update hook (pre-installed on macOS; Linux users may need `apt install jq` or `yum install jq`)
 - **curl** - For downloading the installation script (usually pre-installed)
 - **Claude Code** - Obviously :)
-
-**Platform Support**: macOS and Linux are fully supported. Windows support contributions welcome!
 
 ## Installation
 
@@ -73,8 +87,10 @@ You'll see: `📚 Reading from local docs (run /docs -t to check freshness)`
 
 ### Read Claude Code changelog
 ```bash
-/docs changelog    # Read official Claude Code release notes and changelog
+/docs changelog    # Read official Claude Code release notes and version history
 ```
+
+The changelog feature fetches the latest release notes directly from the official Claude Code repository, showing you what's new in each version.
 
 ### Uninstall
 ```bash
@@ -161,12 +177,39 @@ See [UNINSTALL.md](UNINSTALL.md) for manual uninstall instructions.
   - Clone manually and run the installer from the local directory
   - Review all code before installation
 
-## What's New in v0.3.2
+## What's New
 
+### v0.3.3 (Latest)
+- Added Claude Code changelog integration (`/docs changelog`)
+- Fixed shell compatibility for macOS users (zsh/bash)
+- Improved documentation and error messages
+- Added platform compatibility badges
+
+### v0.3.2
 - Fixed automatic update functionality  
 - Improved handling of local repository changes
 - Better error recovery during updates
 
+## Contributing
+
+**Contributions are welcome!** This is a community project and we'd love your help:
+
+- 🪟 **Windows Support**: Want to help add Windows compatibility? [Fork the repository](https://github.com/ericbuess/claude-code-docs/fork) and submit a PR!
+- 🐛 **Bug Reports**: Found something not working? [Open an issue](https://github.com/ericbuess/claude-code-docs/issues)
+- 💡 **Feature Requests**: Have an idea? [Start a discussion](https://github.com/ericbuess/claude-code-docs/issues)
+- 📝 **Documentation**: Help improve docs or add examples
+
+You can also use Claude Code itself to help build features - just fork the repo and let Claude assist you!
+
+## Known Issues
+
+As this is an early beta, you might encounter some issues:
+- Auto-updates may occasionally fail on some network configurations
+- Some documentation links might not resolve correctly
+
+If you find any issues not listed here, please [report them](https://github.com/ericbuess/claude-code-docs/issues)!
+
 ## License
 
 Documentation content belongs to Anthropic.
+This mirror tool is open source - contributions welcome!
