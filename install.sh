@@ -11,7 +11,7 @@ echo "==============================="
 INSTALL_DIR="$HOME/.claude-code-docs"
 
 # Branch to use for installation
-INSTALL_BRANCH="main"
+INSTALL_BRANCH="dev"
 
 # Detect OS type
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -156,26 +156,19 @@ safe_git_update() {
     local repo_dir="$1"
     cd "$repo_dir"
     
-    # Check if this is a v0.3.1 installation with dirty manifest (need to upgrade to v0.3.2)
-    local needs_v032_upgrade=false
-    if [[ -n "$(git status --porcelain docs/docs_manifest.json 2>/dev/null)" ]]; then
-        # Check if manifest has installer_version (v0.3.1 bug)
-        if grep -q '"installer_version"' docs/docs_manifest.json 2>/dev/null; then
-            needs_v032_upgrade=true
-            echo "  Detected v0.3.1 with manifest bug, upgrading to v0.3.2..."
-        fi
-    fi
+    # Get current branch
+    local current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
     
-    # Determine which branch to use
-    local target_branch
-    if [[ "$needs_v032_upgrade" == "true" ]]; then
-        # Force upgrade to v0.3.2-release for bugfix
-        target_branch="$INSTALL_BRANCH"
-        # Fetch the v0.3.2-release branch
-        git fetch origin "$target_branch" 2>/dev/null || true
+    # Determine which branch to use - always use installer's target branch
+    local target_branch="$INSTALL_BRANCH"
+    
+    # Note: Simplified branch switching - no longer need v0.3.1 upgrade detection
+    
+    # If we're on a different branch or have conflicts, we need to switch
+    if [[ "$current_branch" != "$target_branch" ]]; then
+        echo "  Switching from $current_branch to $target_branch branch..."
     else
-        # Stay on current branch (for normal updates)
-        target_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+        echo "  Updating $target_branch branch..."
     fi
     
     # Set git config for pull strategy if not set
@@ -185,17 +178,7 @@ safe_git_update() {
     
     echo "Updating to latest version..."
     
-    # For v0.3.1 upgrade, we need to handle dirty files
-    if [[ "$needs_v032_upgrade" == "true" ]]; then
-        # Restore manifest to clean state
-        git checkout -- docs/docs_manifest.json 2>/dev/null || true
-        # Switch to v0.3.2-release branch
-        git checkout "$target_branch" 2>/dev/null || git checkout -b "$target_branch" origin/"$target_branch" 2>/dev/null
-        # Pull latest
-        git pull origin "$target_branch" 2>/dev/null || true
-        echo "  ✓ Upgraded to v0.3.2 (fixed manifest bug)"
-        return 0
-    fi
+    # Note: Old v0.3.1 upgrade logic removed - new branch switching logic handles all cases
     
     # Try regular pull first (use target branch)
     if git pull --quiet origin "$target_branch" 2>/dev/null; then
@@ -211,19 +194,102 @@ safe_git_update() {
         return 1
     fi
     
-    # Check if we have local changes
-    if [[ -n "$(git status --porcelain 2>/dev/null)" ]]; then
-        echo "  ⚠️  Local changes detected, preserving them..."
-        # Stash changes
-        git stash push -m "Installer auto-stash $(date)" >/dev/null 2>&1
-        # Reset to origin
-        git reset --hard origin/"$target_branch" >/dev/null 2>&1
-        echo "  ✓ Updated (local changes stashed)"
+    # If we're switching branches, skip the change detection - just force clean
+    if [[ "$current_branch" != "$target_branch" ]]; then
+        echo "  Branch switch detected, forcing clean state..."
+        local needs_user_confirmation=false
     else
-        # No local changes, just reset
-        git reset --hard origin/"$target_branch" >/dev/null 2>&1
-        echo "  ✓ Updated successfully"
+        # Check what kind of changes we have (only when staying on same branch)
+        local has_conflicts=false
+        local has_local_changes=false
+        local has_untracked=false
+        local needs_user_confirmation=false
+        
+        # Check for merge conflicts (but ignore conflicts on docs_manifest.json - that's expected)
+        local non_manifest_conflicts=$(git status --porcelain | grep "^UU\|^AA\|^DD" | grep -v "docs/docs_manifest.json" 2>/dev/null)
+        if [[ -n "$non_manifest_conflicts" ]]; then
+            has_conflicts=true
+            needs_user_confirmation=true
+        fi
+        
+        # Check for uncommitted changes (but ignore docs_manifest.json - that's expected)
+        local non_manifest_changes=$(git status --porcelain | grep -v "docs/docs_manifest.json" 2>/dev/null)
+        if [[ -n "$non_manifest_changes" ]]; then
+            has_local_changes=true
+            needs_user_confirmation=true
+        fi
+        
+        # Check for untracked files (but ignore common temp files)
+        if git status --porcelain | grep "^??" | grep -v -E "\.(tmp|log|swp)$" | grep -q . 2>/dev/null; then
+            has_untracked=true
+            needs_user_confirmation=true
+        fi
     fi
+    
+    # If we have significant changes, ask user for confirmation
+    if [[ "$needs_user_confirmation" == "true" ]]; then
+        echo ""
+        echo "⚠️  WARNING: Local changes detected in your installation:"
+        if [[ "$has_conflicts" == "true" ]]; then
+            echo "  • Merge conflicts need resolution"
+        fi
+        if [[ "$has_local_changes" == "true" ]]; then
+            echo "  • Modified files (other than docs_manifest.json)"
+        fi
+        if [[ "$has_untracked" == "true" ]]; then
+            echo "  • Untracked files"
+        fi
+        echo ""
+        echo "The installer will reset to a clean state, discarding these changes."
+        echo "Note: Changes to docs_manifest.json are handled automatically."
+        echo ""
+        read -p "Continue and discard local changes? [y/N]: " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo "Installation cancelled. Your local changes are preserved."
+            echo "To proceed later, either:"
+            echo "  1. Manually resolve the issues, or"
+            echo "  2. Run the installer again and choose 'y' to discard changes"
+            return 1
+        fi
+        echo "  Proceeding with clean installation..."
+    else
+        # If only manifest changes/conflicts (or no changes), proceed silently
+        local manifest_only_changes=$(git status --porcelain | grep "docs/docs_manifest.json" 2>/dev/null)
+        if [[ -n "$manifest_only_changes" ]]; then
+            local conflict_type=$(echo "$manifest_only_changes" | grep "^UU")
+            if [[ -n "$conflict_type" ]]; then
+                echo "  Resolving manifest file conflicts automatically..."
+            else
+                echo "  Handling manifest file updates automatically..."
+            fi
+        fi
+    fi
+    
+    # Force clean state - handle any conflicts, merges, or messy states
+    if [[ "$needs_user_confirmation" == "true" ]]; then
+        echo "  Forcing clean update (discarding local changes)..."
+    else
+        echo "  Updating to clean state..."
+    fi
+    
+    # Abort any in-progress merge/rebase
+    git merge --abort >/dev/null 2>&1 || true
+    git rebase --abort >/dev/null 2>&1 || true
+    
+    # Clear any stale index
+    git reset >/dev/null 2>&1 || true
+    
+    # Force checkout target branch (handles detached HEAD, wrong branch, etc.)
+    git checkout -B "$target_branch" "origin/$target_branch" >/dev/null 2>&1
+    
+    # Reset to clean state (discards all local changes - user confirmed if needed)
+    git reset --hard "origin/$target_branch" >/dev/null 2>&1
+    
+    # Clean any untracked files that might interfere
+    git clean -fd >/dev/null 2>&1 || true
+    
+    echo "  ✓ Updated successfully to clean state"
     
     return 0
 }
@@ -269,7 +335,10 @@ echo ""
 
 # Always find old installations first (before any config changes)
 echo "Checking for existing installations..."
-mapfile -t existing_installs < <(find_existing_installations)
+existing_installs=()
+while IFS= read -r line; do
+    [[ -n "$line" ]] && existing_installs+=("$line")
+done < <(find_existing_installations)
 OLD_INSTALLATIONS=("${existing_installs[@]}")  # Save for later cleanup
 
 if [[ ${#existing_installs[@]} -gt 0 ]]; then
