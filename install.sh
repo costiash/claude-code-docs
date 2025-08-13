@@ -212,19 +212,26 @@ safe_git_update() {
         return 1
     fi
     
-    # Check if we have local changes
-    if [[ -n "$(git status --porcelain 2>/dev/null)" ]]; then
-        echo "  ⚠️  Local changes detected, preserving them..."
-        # Stash changes
-        git stash push -m "Installer auto-stash $(date)" >/dev/null 2>&1
-        # Reset to origin
-        git reset --hard origin/"$target_branch" >/dev/null 2>&1
-        echo "  ✓ Updated (local changes stashed)"
-    else
-        # No local changes, just reset
-        git reset --hard origin/"$target_branch" >/dev/null 2>&1
-        echo "  ✓ Updated successfully"
-    fi
+    # Force clean state - handle any conflicts, merges, or messy states
+    echo "  Forcing clean update..."
+    
+    # Abort any in-progress merge/rebase
+    git merge --abort >/dev/null 2>&1 || true
+    git rebase --abort >/dev/null 2>&1 || true
+    
+    # Clear any stale index
+    git reset >/dev/null 2>&1 || true
+    
+    # Force checkout target branch (handles detached HEAD, wrong branch, etc.)
+    git checkout -B "$target_branch" "origin/$target_branch" >/dev/null 2>&1
+    
+    # Reset to clean state (discards all local changes - this is what users expect)
+    git reset --hard "origin/$target_branch" >/dev/null 2>&1
+    
+    # Clean any untracked files that might interfere
+    git clean -fd >/dev/null 2>&1 || true
+    
+    echo "  ✓ Updated successfully (forced clean state)"
     
     return 0
 }
