@@ -180,7 +180,11 @@ read_doc() {
         
         cat "$doc_path"
         echo ""
-        echo "📖 Official page: https://docs.anthropic.com/en/docs/claude-code/$topic"
+        if [[ "$topic" == "changelog" ]]; then
+            echo "📖 Official source: https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md"
+        else
+            echo "📖 Official page: https://docs.anthropic.com/en/docs/claude-code/$topic"
+        fi
     else
         # Always show search interface - never error messages
         print_doc_header

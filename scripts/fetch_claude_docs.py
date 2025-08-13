@@ -374,6 +374,64 @@ def content_has_changed(content: str, old_hash: str) -> bool:
     return new_hash != old_hash
 
 
+def fetch_changelog(session: requests.Session) -> Tuple[str, str]:
+    """
+    Fetch Claude Code changelog from GitHub repository.
+    Returns tuple of (filename, content).
+    """
+    changelog_url = "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md"
+    filename = "changelog.md"
+    
+    logger.info(f"Fetching Claude Code changelog: {changelog_url}")
+    
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = session.get(changelog_url, headers=HEADERS, timeout=30, allow_redirects=True)
+            
+            if response.status_code == 429:  # Rate limited
+                wait_time = int(response.headers.get('Retry-After', 60))
+                logger.warning(f"Rate limited. Waiting {wait_time} seconds...")
+                time.sleep(wait_time)
+                continue
+            
+            response.raise_for_status()
+            
+            content = response.text
+            
+            # Add header to indicate this is from Claude Code repo, not docs site
+            header = """# Claude Code Changelog
+
+> **Source**: https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
+> 
+> This is the official Claude Code release changelog, automatically fetched from the Claude Code repository. For documentation, see other topics via `/docs`.
+
+---
+
+"""
+            content = header + content
+            
+            # Basic validation
+            if len(content.strip()) < 100:
+                raise ValueError(f"Changelog content too short ({len(content)} bytes)")
+            
+            logger.info(f"Successfully fetched changelog ({len(content)} bytes)")
+            return filename, content
+            
+        except requests.exceptions.RequestException as e:
+            logger.warning(f"Attempt {attempt + 1}/{MAX_RETRIES} failed for changelog: {e}")
+            if attempt < MAX_RETRIES - 1:
+                delay = min(RETRY_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
+                jittered_delay = delay * random.uniform(0.5, 1.0)
+                logger.info(f"Retrying in {jittered_delay:.1f} seconds...")
+                time.sleep(jittered_delay)
+            else:
+                raise Exception(f"Failed to fetch changelog after {MAX_RETRIES} attempts: {e}")
+        
+        except ValueError as e:
+            logger.error(f"Changelog validation failed: {e}")
+            raise
+
+
 def save_markdown_file(docs_dir: Path, filename: str, content: str) -> str:
     """Save markdown content and return its hash."""
     file_path = docs_dir / filename
@@ -509,6 +567,40 @@ def main():
                 logger.error(f"Failed to process {page_path}: {e}")
                 failed += 1
                 failed_pages.append(page_path)
+    
+    # Fetch Claude Code changelog
+    logger.info("Fetching Claude Code changelog...")
+    try:
+        filename, content = fetch_changelog(session)
+        
+        # Check if content has changed
+        old_hash = manifest.get("files", {}).get(filename, {}).get("hash", "")
+        old_entry = manifest.get("files", {}).get(filename, {})
+        
+        if content_has_changed(content, old_hash):
+            content_hash = save_markdown_file(docs_dir, filename, content)
+            logger.info(f"Updated: {filename}")
+            last_updated = datetime.now().isoformat()
+        else:
+            content_hash = old_hash
+            logger.info(f"Unchanged: {filename}")
+            last_updated = old_entry.get("last_updated", datetime.now().isoformat())
+        
+        new_manifest["files"][filename] = {
+            "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+            "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
+            "hash": content_hash,
+            "last_updated": last_updated,
+            "source": "claude-code-repository"
+        }
+        
+        fetched_files.add(filename)
+        successful += 1
+        
+    except Exception as e:
+        logger.error(f"Failed to fetch changelog: {e}")
+        failed += 1
+        failed_pages.append("changelog")
     
     # Clean up old files (only those we previously fetched)
     cleanup_old_files(docs_dir, fetched_files, manifest)

@@ -269,7 +269,10 @@ echo ""
 
 # Always find old installations first (before any config changes)
 echo "Checking for existing installations..."
-mapfile -t existing_installs < <(find_existing_installations)
+existing_installs=()
+while IFS= read -r line; do
+    [[ -n "$line" ]] && existing_installs+=("$line")
+done < <(find_existing_installations)
 OLD_INSTALLATIONS=("${existing_installs[@]}")  # Save for later cleanup
 
 if [[ ${#existing_installs[@]} -gt 0 ]]; then
