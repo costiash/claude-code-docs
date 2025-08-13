@@ -156,27 +156,17 @@ safe_git_update() {
     local repo_dir="$1"
     cd "$repo_dir"
     
-    # Check if this is a v0.3.1 installation with dirty manifest (need to upgrade to v0.3.2)
-    local needs_v032_upgrade=false
-    if [[ -n "$(git status --porcelain docs/docs_manifest.json 2>/dev/null)" ]]; then
-        # Check if manifest has installer_version (v0.3.1 bug)
-        if grep -q '"installer_version"' docs/docs_manifest.json 2>/dev/null; then
-            needs_v032_upgrade=true
-            echo "  Detected v0.3.1 with manifest bug, upgrading to v0.3.2..."
-        fi
-    fi
+    # Get current branch
+    local current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
     
-    # Determine which branch to use
-    local target_branch
-    if [[ "$needs_v032_upgrade" == "true" ]]; then
-        # Force upgrade to v0.3.2-release for bugfix
-        target_branch="$INSTALL_BRANCH"
-        # Fetch the v0.3.2-release branch
-        git fetch origin "$target_branch" 2>/dev/null || true
+    # Determine which branch to use - always use installer's target branch
+    local target_branch="$INSTALL_BRANCH"
+    
+    # If we're on a different branch or have conflicts, we need to switch
+    if [[ "$current_branch" != "$target_branch" ]]; then
+        echo "  Switching from $current_branch to $target_branch branch..."
     else
-        # Use the installer's target branch (allows switching branches)
-        target_branch="$INSTALL_BRANCH"
-        echo "  Switching to $target_branch branch..."
+        echo "  Updating $target_branch branch..."
     fi
     
     # Set git config for pull strategy if not set
@@ -212,30 +202,36 @@ safe_git_update() {
         return 1
     fi
     
-    # Check what kind of changes we have
-    local has_conflicts=false
-    local has_local_changes=false
-    local has_untracked=false
-    local needs_user_confirmation=false
-    
-    # Check for merge conflicts (but ignore conflicts on docs_manifest.json - that's expected)
-    local non_manifest_conflicts=$(git status --porcelain | grep "^UU\|^AA\|^DD" | grep -v "docs/docs_manifest.json" 2>/dev/null)
-    if [[ -n "$non_manifest_conflicts" ]]; then
-        has_conflicts=true
-        needs_user_confirmation=true
-    fi
-    
-    # Check for uncommitted changes (but ignore docs_manifest.json - that's expected)
-    local non_manifest_changes=$(git status --porcelain | grep -v "docs/docs_manifest.json" 2>/dev/null)
-    if [[ -n "$non_manifest_changes" ]]; then
-        has_local_changes=true
-        needs_user_confirmation=true
-    fi
-    
-    # Check for untracked files (but ignore common temp files)
-    if git status --porcelain | grep "^??" | grep -v -E "\.(tmp|log|swp)$" | grep -q . 2>/dev/null; then
-        has_untracked=true
-        needs_user_confirmation=true
+    # If we're switching branches, skip the change detection - just force clean
+    if [[ "$current_branch" != "$target_branch" ]]; then
+        echo "  Branch switch detected, forcing clean state..."
+        local needs_user_confirmation=false
+    else
+        # Check what kind of changes we have (only when staying on same branch)
+        local has_conflicts=false
+        local has_local_changes=false
+        local has_untracked=false
+        local needs_user_confirmation=false
+        
+        # Check for merge conflicts (but ignore conflicts on docs_manifest.json - that's expected)
+        local non_manifest_conflicts=$(git status --porcelain | grep "^UU\|^AA\|^DD" | grep -v "docs/docs_manifest.json" 2>/dev/null)
+        if [[ -n "$non_manifest_conflicts" ]]; then
+            has_conflicts=true
+            needs_user_confirmation=true
+        fi
+        
+        # Check for uncommitted changes (but ignore docs_manifest.json - that's expected)
+        local non_manifest_changes=$(git status --porcelain | grep -v "docs/docs_manifest.json" 2>/dev/null)
+        if [[ -n "$non_manifest_changes" ]]; then
+            has_local_changes=true
+            needs_user_confirmation=true
+        fi
+        
+        # Check for untracked files (but ignore common temp files)
+        if git status --porcelain | grep "^??" | grep -v -E "\.(tmp|log|swp)$" | grep -q . 2>/dev/null; then
+            has_untracked=true
+            needs_user_confirmation=true
+        fi
     fi
     
     # If we have significant changes, ask user for confirmation
