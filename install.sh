@@ -174,8 +174,9 @@ safe_git_update() {
         # Fetch the v0.3.2-release branch
         git fetch origin "$target_branch" 2>/dev/null || true
     else
-        # Stay on current branch (for normal updates)
-        target_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+        # Use the installer's target branch (allows switching branches)
+        target_branch="$INSTALL_BRANCH"
+        echo "  Switching to $target_branch branch..."
     fi
     
     # Set git config for pull strategy if not set
