@@ -11,7 +11,7 @@ echo "==============================="
 INSTALL_DIR="$HOME/.claude-code-docs"
 
 # Branch to use for installation
-INSTALL_BRANCH="dev"
+INSTALL_BRANCH="main"
 
 # Detect OS type
 if [[ "$OSTYPE" == "darwin"* ]]; then
