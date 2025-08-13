@@ -162,8 +162,7 @@ safe_git_update() {
     # Determine which branch to use - always use installer's target branch
     local target_branch="$INSTALL_BRANCH"
     
-    # For compatibility with existing logic
-    local needs_v032_upgrade=false
+    # Note: Simplified branch switching - no longer need v0.3.1 upgrade detection
     
     # If we're on a different branch or have conflicts, we need to switch
     if [[ "$current_branch" != "$target_branch" ]]; then
@@ -179,17 +178,7 @@ safe_git_update() {
     
     echo "Updating to latest version..."
     
-    # For v0.3.1 upgrade, we need to handle dirty files
-    if [[ "$needs_v032_upgrade" == "true" ]]; then
-        # Restore manifest to clean state
-        git checkout -- docs/docs_manifest.json 2>/dev/null || true
-        # Switch to v0.3.2-release branch
-        git checkout "$target_branch" 2>/dev/null || git checkout -b "$target_branch" origin/"$target_branch" 2>/dev/null
-        # Pull latest
-        git pull origin "$target_branch" 2>/dev/null || true
-        echo "  ✓ Upgraded to v0.3.2 (fixed manifest bug)"
-        return 0
-    fi
+    # Note: Old v0.3.1 upgrade logic removed - new branch switching logic handles all cases
     
     # Try regular pull first (use target branch)
     if git pull --quiet origin "$target_branch" 2>/dev/null; then
