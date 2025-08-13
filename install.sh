@@ -225,7 +225,8 @@ safe_git_update() {
     fi
     
     # Check for uncommitted changes (but ignore docs_manifest.json - that's expected)
-    if git status --porcelain | grep -v "docs/docs_manifest.json" | grep -q . 2>/dev/null; then
+    local non_manifest_changes=$(git status --porcelain | grep -v "docs/docs_manifest.json" 2>/dev/null)
+    if [[ -n "$non_manifest_changes" ]]; then
         has_local_changes=true
         needs_user_confirmation=true
     fi
@@ -244,13 +245,14 @@ safe_git_update() {
             echo "  • Merge conflicts need resolution"
         fi
         if [[ "$has_local_changes" == "true" ]]; then
-            echo "  • Modified files (excluding docs_manifest.json)"
+            echo "  • Modified files (other than docs_manifest.json)"
         fi
         if [[ "$has_untracked" == "true" ]]; then
             echo "  • Untracked files"
         fi
         echo ""
         echo "The installer will reset to a clean state, discarding these changes."
+        echo "Note: Changes to docs_manifest.json are handled automatically."
         echo ""
         read -p "Continue and discard local changes? [y/N]: " -n 1 -r
         echo
@@ -262,6 +264,12 @@ safe_git_update() {
             return 1
         fi
         echo "  Proceeding with clean installation..."
+    else
+        # If only manifest changes (or no changes), proceed silently
+        local manifest_only_change=$(git status --porcelain | grep "docs/docs_manifest.json" 2>/dev/null)
+        if [[ -n "$manifest_only_change" ]]; then
+            echo "  Handling manifest file updates automatically..."
+        fi
     fi
     
     # Force clean state - handle any conflicts, merges, or messy states
