@@ -212,8 +212,64 @@ safe_git_update() {
         return 1
     fi
     
+    # Check what kind of changes we have
+    local has_conflicts=false
+    local has_local_changes=false
+    local has_untracked=false
+    local needs_user_confirmation=false
+    
+    # Check for merge conflicts
+    if git status --porcelain | grep -q "^UU\|^AA\|^DD" 2>/dev/null; then
+        has_conflicts=true
+        needs_user_confirmation=true
+    fi
+    
+    # Check for uncommitted changes (but ignore docs_manifest.json - that's expected)
+    if git status --porcelain | grep -v "docs/docs_manifest.json" | grep -q . 2>/dev/null; then
+        has_local_changes=true
+        needs_user_confirmation=true
+    fi
+    
+    # Check for untracked files (but ignore common temp files)
+    if git status --porcelain | grep "^??" | grep -v -E "\.(tmp|log|swp)$" | grep -q . 2>/dev/null; then
+        has_untracked=true
+        needs_user_confirmation=true
+    fi
+    
+    # If we have significant changes, ask user for confirmation
+    if [[ "$needs_user_confirmation" == "true" ]]; then
+        echo ""
+        echo "⚠️  WARNING: Local changes detected in your installation:"
+        if [[ "$has_conflicts" == "true" ]]; then
+            echo "  • Merge conflicts need resolution"
+        fi
+        if [[ "$has_local_changes" == "true" ]]; then
+            echo "  • Modified files (excluding docs_manifest.json)"
+        fi
+        if [[ "$has_untracked" == "true" ]]; then
+            echo "  • Untracked files"
+        fi
+        echo ""
+        echo "The installer will reset to a clean state, discarding these changes."
+        echo ""
+        read -p "Continue and discard local changes? [y/N]: " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo "Installation cancelled. Your local changes are preserved."
+            echo "To proceed later, either:"
+            echo "  1. Manually resolve the issues, or"
+            echo "  2. Run the installer again and choose 'y' to discard changes"
+            return 1
+        fi
+        echo "  Proceeding with clean installation..."
+    fi
+    
     # Force clean state - handle any conflicts, merges, or messy states
-    echo "  Forcing clean update..."
+    if [[ "$needs_user_confirmation" == "true" ]]; then
+        echo "  Forcing clean update (discarding local changes)..."
+    else
+        echo "  Updating to clean state..."
+    fi
     
     # Abort any in-progress merge/rebase
     git merge --abort >/dev/null 2>&1 || true
@@ -225,13 +281,13 @@ safe_git_update() {
     # Force checkout target branch (handles detached HEAD, wrong branch, etc.)
     git checkout -B "$target_branch" "origin/$target_branch" >/dev/null 2>&1
     
-    # Reset to clean state (discards all local changes - this is what users expect)
+    # Reset to clean state (discards all local changes - user confirmed if needed)
     git reset --hard "origin/$target_branch" >/dev/null 2>&1
     
     # Clean any untracked files that might interfere
     git clean -fd >/dev/null 2>&1 || true
     
-    echo "  ✓ Updated successfully (forced clean state)"
+    echo "  ✓ Updated successfully to clean state"
     
     return 0
 }
