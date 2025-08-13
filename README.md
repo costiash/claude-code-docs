@@ -71,6 +71,11 @@ You'll see: `📚 Reading from local docs (run /docs -t to check freshness)`
 /docs what's new   # Show recent documentation changes with diffs
 ```
 
+### Read Claude Code changelog
+```bash
+/docs changelog    # Read official Claude Code release notes and changelog
+```
+
 ### Uninstall
 ```bash
 /docs uninstall    # Get commnd to remove claude-code-docs completely
@@ -84,6 +89,7 @@ You'll see: `📚 Reading from local docs (run /docs -t to check freshness)`
 
 # Check for recent changes
 /docs -t what's new in the latest documentation?
+/docs changelog    # Check Claude Code release notes
 
 # Search across all docs
 /docs find all mentions of authentication
