@@ -43,12 +43,16 @@ The magic is in combining a simple local file system with Claude's language unde
 ## What's Included
 
 **Documentation Paths** (573 tracked in manifest across 6 categories):
-- API Reference (377 paths, 65.8%) - Complete API docs, Admin API, Agent SDK, multi-language SDK docs
+- API Reference (377 paths, 65.8%) - Complete API docs, Admin API, Agent SDK
+  - 🐍 **Python** (45 docs) | 📘 **TypeScript** (45 docs) | 🔷 **Go** (45 docs)
+  - ☕ **Java** (45 docs) | 🟣 **Kotlin** (45 docs) | 💎 **Ruby** (45 docs)
 - Core Documentation (82 paths, 14.3%) - Guides, tutorials, best practices
 - Prompt Library (65 paths, 11.3%) - Ready-to-use prompt templates
 - Claude Code (46 paths, 8.0%) - CLI-specific docs, hooks, skills, MCP
 - Release Notes (2 paths) - Version history
 - Resources (1 path) - Additional resources
+
+> 💡 **Multi-language support**: Whether you're building with Python, TypeScript, Go, Java, Kotlin, or Ruby - the API documentation for your language is included and searchable!
 
 **Files Downloaded** (571 actual .md files)
 
