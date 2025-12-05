@@ -1,7 +1,7 @@
 # Claude Code Changelog
 
 > **Source**: https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
-> 
+>
 > This is the official Claude Code release changelog, automatically fetched from the Claude Code repository. For documentation, see other topics via `/docs`.
 
 ---
