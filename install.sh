@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs Installer v0.4.2 - Enhanced edition with accurate path tracking
+# Claude Code Docs Installer v0.5.0 - Enhanced edition with breaking changes
 # This script installs claude-code-docs to ~/.claude-code-docs
 # Installation Strategy: Always perform a fresh installation at the fixed location
 #   1. Remove any existing installation at ~/.claude-code-docs (with user confirmation)
@@ -9,8 +9,12 @@ set -euo pipefail
 #   3. Set up commands and hooks
 #   4. Clean up any old installations in other locations
 
-echo "Claude Code Docs Installer v0.4.2"
+echo "Claude Code Docs Installer v0.5.0"
 echo "==============================="
+
+# Target version for upgrade messaging
+TARGET_VERSION="0.5.0"
+TARGET_DOCS="571"
 
 # Fixed installation location
 INSTALL_DIR="$HOME/.claude-code-docs"
@@ -42,6 +46,64 @@ for cmd in git jq curl; do
 done
 echo "✓ All dependencies satisfied"
 
+
+# Function to detect current installation version
+detect_current_version() {
+    if [[ ! -d "$INSTALL_DIR" ]]; then
+        echo "none|0|false"
+        return
+    fi
+
+    local version="unknown"
+    local doc_count=0
+    local has_packages="false"
+
+    # Get version from helper script (try multiple locations)
+    if [[ -f "$INSTALL_DIR/scripts/claude-docs-helper.sh" ]]; then
+        version=$(grep -m1 'ENHANCED_VERSION=' "$INSTALL_DIR/scripts/claude-docs-helper.sh" 2>/dev/null | cut -d'"' -f2 || echo "unknown")
+    elif [[ -f "$INSTALL_DIR/claude-docs-helper.sh" ]]; then
+        version=$(grep -m1 'ENHANCED_VERSION=' "$INSTALL_DIR/claude-docs-helper.sh" 2>/dev/null | cut -d'"' -f2 || echo "unknown")
+    fi
+
+    # Count docs
+    doc_count=$(find "$INSTALL_DIR/docs" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+
+    # Check for modular packages (new in v0.5.0)
+    [[ -d "$INSTALL_DIR/scripts/fetcher" && -d "$INSTALL_DIR/scripts/lookup" ]] && has_packages="true"
+
+    echo "$version|$doc_count|$has_packages"
+}
+
+# Function to show upgrade information
+show_upgrade_info() {
+    local current_info="$1"
+
+    IFS='|' read -r cur_version cur_docs cur_packages <<< "$current_info"
+
+    # Skip if no existing installation
+    [[ "$cur_version" == "none" ]] && return
+
+    # Skip if already on target version
+    [[ "$cur_version" == "$TARGET_VERSION" ]] && return
+
+    echo ""
+    echo "════════════════════════════════════════════════════════════════"
+    echo "                       UPGRADE DETECTED                         "
+    echo "════════════════════════════════════════════════════════════════"
+    echo ""
+    echo "  Current: v$cur_version ($cur_docs documentation files)"
+    echo "  Target:  v$TARGET_VERSION ($TARGET_DOCS documentation files)"
+    echo ""
+    echo "  What's New in v$TARGET_VERSION:"
+    echo "  • 2x documentation coverage ($TARGET_DOCS files)"
+    echo "  • Domain-based filename convention (claude-code__*.md)"
+    echo "  • Modular Python packages (fetcher/, lookup/)"
+    echo "  • Safety thresholds for sync protection"
+    echo "  • 573 paths tracked across 6 categories"
+    echo ""
+    echo "════════════════════════════════════════════════════════════════"
+    echo ""
+}
 
 # Function to check and remove existing installation at ~/.claude-code-docs
 check_and_remove_existing_install() {
@@ -276,6 +338,10 @@ cleanup_old_installations() {
 # Main installation logic
 echo ""
 
+# STAGE 0: Detect current version before any changes (for upgrade messaging)
+CURRENT_VERSION_INFO=$(detect_current_version)
+show_upgrade_info "$CURRENT_VERSION_INFO"
+
 # STAGE 1: Check and remove existing installation at fixed location
 check_and_remove_existing_install
 
@@ -351,7 +417,7 @@ echo "✓ Repository cloned successfully"
 
 # Now we're in $INSTALL_DIR, set up the new script-based system
 echo ""
-echo "Setting up Claude Code Docs v0.4.2..."
+echo "Setting up Claude Code Docs v$TARGET_VERSION..."
 
 # Copy enhanced helper script (not the template!)
 echo "Installing helper script..."
@@ -590,7 +656,7 @@ if [[ ! -d "$INSTALL_DIR/docs" ]]; then
 else
     DOC_COUNT=$(find "$INSTALL_DIR/docs" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
     if [[ "$DOC_COUNT" -lt 100 ]]; then
-        echo "  ⚠️  Only $DOC_COUNT documentation files found (expected ~267)"
+        echo "  ⚠️  Only $DOC_COUNT documentation files found (expected ~571)"
     else
         echo "  ✓ Documentation files installed ($DOC_COUNT files)"
     fi
@@ -621,8 +687,27 @@ fi
 
 # Success message
 echo ""
-echo "✅ Claude Code Docs v0.4.2 installed successfully!"
+echo "✅ Claude Code Docs v$TARGET_VERSION installed successfully!"
 echo ""
+
+# Show upgrade summary if this was an upgrade
+IFS='|' read -r prev_version prev_docs prev_packages <<< "$CURRENT_VERSION_INFO"
+if [[ "$prev_version" != "none" && "$prev_version" != "$TARGET_VERSION" ]]; then
+    echo "┌─────────────────────────────────────────────────────────────────┐"
+    echo "│  UPGRADE COMPLETE                                               │"
+    echo "├─────────────────────────────────────────────────────────────────┤"
+    printf "│  %-63s │\n" "Before: v$prev_version ($prev_docs documentation files)"
+    printf "│  %-63s │\n" "After:  v$TARGET_VERSION ($TARGET_DOCS documentation files)"
+    echo "│                                                                 │"
+    echo "│  New Features:                                                  │"
+    echo "│  ✓ 2x documentation coverage                                   │"
+    echo "│  ✓ Domain-based file naming (claude-code__*.md)                │"
+    echo "│  ✓ Modular Python packages                                     │"
+    echo "│  ✓ Safety thresholds for sync                                  │"
+    echo "└─────────────────────────────────────────────────────────────────┘"
+    echo ""
+fi
+
 echo "📚 Command: /docs (user)"
 echo "📂 Location: ~/.claude-code-docs"
 echo ""
@@ -634,9 +719,9 @@ echo ""
 echo "🔄 Updates: Run '/docs -t' to check for and pull latest documentation"
 echo ""
 
-# Show what's installed (273 paths tracked in manifest)
+# Show what's installed (573 paths tracked in manifest across 6 categories)
 echo "📦 Installed Components:"
-echo "  • 273 documentation paths tracked"
+echo "  • 573 documentation paths tracked (6 categories)"
 echo "  • AI-powered /docs command"
 echo ""
 
@@ -652,7 +737,7 @@ data = json.load(open('$INSTALL_DIR/paths_manifest.json'))
 total = data['metadata']['total_paths']
 cats = data['categories']
 
-print(f'📚 Documentation Coverage: {total} paths across 7 categories')
+print(f'📚 Documentation Coverage: {total} paths across {len(cats)} categories')
 print('')
 print('Categories:')
 for i, (cat, paths) in enumerate(cats.items(), 1):
@@ -681,7 +766,7 @@ else
     echo "  • Enhanced AI routing capabilities"
     echo ""
     echo "Without Python, you can:"
-    echo "  • Read all 273 documentation paths via /docs command"
+    echo "  • Read all 573 documentation paths via /docs command"
     echo "  • Use AI-powered semantic queries"
     echo "  • Check documentation freshness"
     echo "  • View recent changes"
