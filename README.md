@@ -54,12 +54,14 @@ The magic is in combining a simple local file system with Claude's language unde
 
 > 💡 **Multi-language support**: Whether you're building with Python, TypeScript, Go, Java, Kotlin, or Ruby - the API documentation for your language is included and searchable!
 
+> 🚀 **No Python required!** Core features including AI-powered semantic search work with just bash. Python 3.9+ enables advanced full-text search and path validation.
+
 **Files Downloaded** (571 actual .md files)
 
-**Python Features** (optional, requires Python 3.9+):
-- Full-text search across all content
-- Fuzzy path matching
-- HTTP validation
+**Optional Python Features** (requires Python 3.9+):
+- Full-text content search (`--search-content`)
+- Fuzzy path matching (`--search`)
+- HTTP validation (`--validate`)
 - Auto-regeneration of manifests
 
 ## Installation
