@@ -255,7 +255,7 @@ The tool runner provides an out-of-the-box solution for executing tools with Cla
 We recommend that you use the tool runner for most tool use implementations.
 
 <Note>
-The tool runner is currently in beta and only available in the [Python](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md) and [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers) SDKs.
+The tool runner is currently in beta and available in the [Python](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), and [Ruby](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta) SDKs.
 </Note>
 
 <Tip>
@@ -670,6 +670,145 @@ for await (const messageStream of runner) {
 }
 
 console.log(await runner);
+```
+
+</Tab>
+<Tab title="Ruby">
+
+### Basic usage
+
+Define tools using `Anthropic::BaseTool` with an input schema, then use `client.beta.messages.tool_runner` to execute them.
+
+```ruby
+require "anthropic"
+
+# Initialize client
+client = Anthropic::Client.new
+
+# Define input schema
+class GetWeatherInput < Anthropic::BaseModel
+  required :location, String, doc: "The city and state, e.g. San Francisco, CA"
+  optional :unit, Anthropic::InputSchema::EnumOf["celsius", "fahrenheit"],
+           doc: "Temperature unit"
+end
+
+# Define tool
+class GetWeather < Anthropic::BaseTool
+  doc "Get the current weather in a given location"
+  input_schema GetWeatherInput
+
+  def call(input)
+    # In a full implementation, you'd call a weather API here
+    JSON.generate({temperature: "20°C", condition: "Sunny"})
+  end
+end
+
+class CalculateSumInput < Anthropic::BaseModel
+  required :a, Integer, doc: "First number"
+  required :b, Integer, doc: "Second number"
+end
+
+class CalculateSum < Anthropic::BaseTool
+  doc "Add two numbers together"
+  input_schema CalculateSumInput
+
+  def call(input)
+    (input.a + input.b).to_s
+  end
+end
+
+# Use the tool runner
+runner = client.beta.messages.tool_runner(
+  model: "claude-sonnet-4-5",
+  max_tokens: 1024,
+  tools: [GetWeather.new, CalculateSum.new],
+  messages: [
+    {role: "user", content: "What's the weather like in Paris? Also, what's 15 + 27?"}
+  ]
+)
+
+runner.each_message do |message|
+  message.content.each do |block|
+    puts block.text if block.respond_to?(:text)
+  end
+end
+```
+
+The `call` method must return a string or a content block array. If you want to return a structured JSON object to Claude, encode it to a JSON string before returning it.
+
+The `Anthropic::BaseTool` class uses the `doc` method for the tool description and `input_schema` to define the expected parameters. The SDK will automatically convert this to the appropriate JSON schema format.
+
+### Iterating over the tool runner
+
+The tool runner provides an `each_message` method that yields each message as the conversation progresses. This is often referred to as a "tool call loop".
+
+After your code has a chance to process the current message, the tool runner will check if Claude requested a tool use. If so, it will call the tool and send the tool result back to Claude automatically, then yield the next message.
+
+If you don't care about intermediate messages, you can use the `run_until_finished` method to get all messages at once:
+
+```ruby
+runner = client.beta.messages.tool_runner(
+  model: "claude-sonnet-4-5",
+  max_tokens: 1024,
+  tools: [GetWeather.new, CalculateSum.new],
+  messages: [
+    {role: "user", content: "What's the weather like in Paris? Also, what's 15 + 27?"}
+  ]
+)
+
+all_messages = runner.run_until_finished
+all_messages.each { |msg| puts msg.content }
+```
+
+### Advanced usage
+
+The tool runner provides several methods for customizing behavior:
+
+- `#next_message` - Manually step through the conversation one message at a time
+- `#feed_messages` - Inject additional messages mid-conversation
+- `#params` - Access or modify the current request parameters
+
+```ruby
+runner = client.beta.messages.tool_runner(
+  model: "claude-sonnet-4-5",
+  max_tokens: 1024,
+  tools: [GetWeather.new],
+  messages: [{role: "user", content: "What's the weather in San Francisco?"}]
+)
+
+# Manual step-by-step control
+message = runner.next_message
+puts message.content
+
+# Inject follow-up messages
+runner.feed_messages([
+  {role: "user", content: "Also check Boston"}
+])
+
+# Access current parameters
+puts runner.params
+```
+
+### Streaming
+
+When using streaming, iterate with `each_streaming` to receive real-time events:
+
+```ruby
+runner = client.beta.messages.tool_runner(
+  model: "claude-sonnet-4-5",
+  max_tokens: 1024,
+  tools: [CalculateSum.new],
+  messages: [{role: "user", content: "What is 15 + 27?"}]
+)
+
+runner.each_streaming do |event|
+  case event
+  when Anthropic::Streaming::TextEvent
+    print event.text
+  when Anthropic::Streaming::ToolUseEvent
+    puts "\nTool called: #{event.tool_name}"
+  end
+end
 ```
 
 </Tab>
