@@ -213,12 +213,15 @@ The installer will:
 → Combines recent changes with explanation
 ```
 
-**Behind the scenes:** When Python 3.9+ is available, the AI routes to:
-- `--search-content` for semantic information searches
-- `--search` for path discovery
-- Direct lookups for specific topics
+**Behind the scenes:** Claude itself is the search engine. It can:
+- Read documentation files directly
+- Search content using grep
+- Match filenames to topics
+- Synthesize answers from multiple sources
 
-**Without Python 3.9+:** The AI gracefully explains limitations and suggests available alternatives.
+**With Python 3.9+:** Optimized helper commands (`--search-content`, `--search`) provide faster, more accurate results.
+
+**Without Python 3.9+:** Claude uses its native capabilities (file reading, grep, pattern matching) to find and present documentation. The AI-powered experience works either way - Python just makes it faster.
 
 ### Advanced Commands (Direct Access)
 
