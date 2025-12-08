@@ -1280,15 +1280,6 @@ As you build applications with the text editor tool, we're excited to see how yo
     Learn how to implement tool workflows for use with Claude.
   </Card>
 
-{" "}
-<Card
-  title="Token-efficient tool use"
-  icon="lightning"
-  href="/docs/en/agents-and-tools/tool-use/token-efficient-tool-use"
->
-  Reduce latency and costs when using tools with Claude Sonnet 3.7.
-</Card>
-
   <Card
     title="Bash tool"
     icon="terminal"

@@ -825,7 +825,4 @@ We recommend using Anthropic's managed solution if you're using the Claude API.
   <Card title="Implement Tool Use" icon="hammer" href="/docs/en/agents-and-tools/tool-use/implement-tool-use">
     Step-by-step guide for implementing tools.
   </Card>
-  <Card title="Token-Efficient Tool Use" icon="bolt" href="/docs/en/agents-and-tools/tool-use/token-efficient-tool-use">
-    Optimize your tool implementations for better performance.
-  </Card>
 </CardGroup>

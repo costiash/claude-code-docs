@@ -1,6 +1,6 @@
 # Vision
 
-The Claude 3 and 4 families of models comes with new vision capabilities that allow Claude to understand and analyze images, opening up exciting possibilities for multimodal interaction.
+Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.
 
 ---
 
@@ -13,7 +13,7 @@ This guide describes how to work with images in Claude, including best practices
 Use Claude’s vision capabilities via:
 
 - [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
-- The [Console Workbench](/workbench/). If you select a model that accepts images (Claude 3 and 4 models only), a button to add images appears at the top right of every User message block.
+- The [Console Workbench](/workbench/). A button to add images appears at the top right of every User message block.
 - **API request**. See the examples in this guide.
 
 ---
@@ -42,15 +42,15 @@ If your input image is too large and needs to be resized, it will increase laten
   both dimensions).
 </Tip>
 
-Here is a table of maximum image sizes accepted by our API that will not be resized for common aspect ratios. With the Claude Sonnet 3.7 model, these images use approximately 1,600 tokens and around $4.80/1K images.
+Here is a table of maximum image sizes accepted by our API that will not be resized for common aspect ratios. With Claude Sonnet 4.5, these images use approximately 1,600 tokens and around $4.80/1K images.
 
 | Aspect ratio | Image size   |
 | ------------ | ------------ |
-| 1:1          | 1092x1092 px |
-| 3:4          | 951x1268 px  |
-| 2:3          | 896x1344 px  |
-| 9:16         | 819x1456 px  |
-| 1:2          | 784x1568 px  |
+| 1&#58;1      | 1092x1092 px |
+| 3&#58;4      | 951x1268 px  |
+| 2&#58;3      | 896x1344 px  |
+| 9&#58;16     | 819x1456 px  |
+| 1&#58;2      | 784x1568 px  |
 
 ### Calculate image costs
 
@@ -58,7 +58,7 @@ Each image you include in a request to Claude counts towards your token usage. T
 
 If your image does not need to be resized, you can estimate the number of tokens used through this algorithm: `tokens = (width px * height px)/750`
 
-Here are examples of approximate tokenization and costs for different image sizes within our API’s size constraints based on Claude Sonnet 3.7 per-token price of $3 per million input tokens:
+Here are examples of approximate tokenization and costs for different image sizes within our API's size constraints based on Claude Sonnet 4.5 per-token price of $3 per million input tokens:
 
 | Image size                    | \# of Tokens | Cost / image | Cost / 1K images |
 | ----------------------------- | ------------ | ------------ | ---------------- |
@@ -303,7 +303,7 @@ Below are examples of how to include images in a Messages API request using base
             );
             Message message = client.messages().create(
                     MessageCreateParams.builder()
-                            .model(Model.CLAUDE_3_7_SONNET_LATEST)
+                            .model(Model.CLAUDE_SONNET_4_5_LATEST)
                             .maxTokens(1024)
                             .addUserMessageOfBlockParams(contentBlockParams)
                             .build()
@@ -437,7 +437,7 @@ Below are examples of how to include images in a Messages API request using base
             );
             Message message = client.messages().create(
                     MessageCreateParams.builder()
-                            .model(Model.CLAUDE_3_7_SONNET_LATEST)
+                            .model(Model.CLAUDE_SONNET_4_5_LATEST)
                             .maxTokens(1024)
                             .addUserMessageOfBlockParams(contentBlockParams)
                             .build()
@@ -600,7 +600,7 @@ public class ImageFilesExample {
                 .build();
 
         MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_3_7_SONNET_LATEST)
+                .model(Model.CLAUDE_SONNET_4_5_LATEST)
                 .maxTokens(1024)
                 .addUserMessageOfBlockParams(
                         List.of(
@@ -632,8 +632,6 @@ Ask Claude to describe one image.
 | Role | Content                        |
 | ---- | ------------------------------ |
 | User | \[Image\] Describe this image. |
-
-Here is the corresponding API call using the Claude Sonnet 3.7 model.
 
 <Tabs>
   <Tab title="Using Base64">
@@ -700,8 +698,6 @@ Ask Claude to describe the differences between multiple images.
 | Role | Content |
 | ---- | ------------------------------------------------------------------------- |
 | User | Image 1: \[Image 1\] Image 2: \[Image 2\] How are these images different? |
-
-Here is the corresponding API call using the Claude Sonnet 3.7 model.
 
 <Tabs>
   <Tab title="Using Base64">
@@ -799,8 +795,6 @@ Ask Claude to describe the differences between multiple images, while giving it 
 | ------- | ------------------------------------------------------------------------- |
 | System  | Respond only in Spanish.                                                  |
 | User    | Image 1: \[Image 1\] Image 2: \[Image 2\] How are these images different? |
-
-Here is the corresponding API call using the Claude Sonnet 3.7 model.
 
 <Tabs>
   <Tab title="Using Base64">

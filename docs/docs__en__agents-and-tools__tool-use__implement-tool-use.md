@@ -1429,9 +1429,9 @@ You can also encourage parallel tool use within specific user messages:
 <Warning>
 **Parallel tool use with Claude Sonnet 3.7**
 
-Claude Sonnet 3.7 may be less likely to make make parallel tool calls in a response, even when you have not set `disable_parallel_tool_use`. To work around this, we recommend enabling [token-efficient tool use](/docs/en/agents-and-tools/tool-use/token-efficient-tool-use), which helps encourage Claude to use parallel tools. This beta feature also reduces latency and saves an average of 14% in output tokens.
+Claude Sonnet 3.7 may be less likely to make make parallel tool calls in a response, even when you have not set `disable_parallel_tool_use`. We recommend [upgrading to Claude 4 models](/docs/en/about-claude/models/migrating-to-claude-4), which have built-in token-efficient tool use and improved parallel tool calling.
 
-If you prefer not to opt into the token-efficient tool use beta, you can also introduce a "batch tool" that can act as a meta-tool to wrap invocations to other tools simultaneously. We find that if this tool is present, the model will use it to simultaneously call multiple tools in parallel for you.
+If you're still using Claude Sonnet 3.7, you can enable the `token-efficient-tools-2025-02-19` [beta header](/docs/en/api/beta-headers), which helps encourage Claude to use parallel tools. You can also introduce a "batch tool" that can act as a meta-tool to wrap invocations to other tools simultaneously.
 
 See [this example](https://github.com/anthropics/anthropic-cookbook/blob/main/tool_use/parallel_tools_claude_3_7_sonnet.ipynb) in our cookbook for how to use this workaround.
 
@@ -1893,7 +1893,7 @@ print(f"Average tools per message: {avg_tools_per_message}")
 **4. Model-specific behavior**
 
 - Claude Opus 4.5, Opus 4.1, and Sonnet 4: Excel at parallel tool use with minimal prompting
-- Claude Sonnet 3.7: May need stronger prompting or [token-efficient tool use](/docs/en/agents-and-tools/tool-use/token-efficient-tool-use)
+- Claude Sonnet 3.7: May need stronger prompting or the `token-efficient-tools-2025-02-19` [beta header](/docs/en/api/beta-headers). Consider [upgrading to Claude 4](/docs/en/about-claude/models/migrating-to-claude-4).
 - Claude Haiku: Less likely to use parallel tools without explicit prompting
 
 </section>

@@ -87,7 +87,7 @@ Claude Sonnet 4.5 is our most intelligent model, offering best-in-class performa
 
 6. **Remove token-efficient tool use beta header**
 
-   [Token-efficient tool use](/docs/en/agents-and-tools/tool-use/token-efficient-tool-use) is a beta feature that only works with Claude 3.7 Sonnet. All Claude 4 models have built-in token-efficient tool use, so you should no longer include the beta header.
+   Token-efficient tool use is a beta feature that only works with Claude 3.7 Sonnet. All Claude 4 models have built-in token-efficient tool use, so you should no longer include the beta header.
 
    Remove the `token-efficient-tools-2025-02-19` [beta header](/docs/en/api/beta-headers) from your requests:
 
