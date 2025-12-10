@@ -177,8 +177,14 @@
     "docs__en__agent-sdk__typescript.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/typescript.md",
-      "hash": "58b6c92a3a30e338a4ce1886b684edd78ba2780ef9a1c1569160e002b918d6bf",
-      "last_updated": "2025-12-05T22:25:20.624240"
+      "hash": "d5af7ac88b9b1c15614f0c67cb822321b9aeb1ca40a1afc659613d0b18261bcb",
+      "last_updated": "2025-12-10T21:06:40.774803"
+    },
+    "docs__en__agent-sdk__typescript-v2-preview.md": {
+      "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview",
+      "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview.md",
+      "hash": "743e19150b15d9195be44db84270dedbc37a6b8207d4623fca8d9a8321512ad1",
+      "last_updated": "2025-12-10T21:06:41.355343"
     },
     "docs__en__agents-and-tools__agent-skills__best-practices.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices",
@@ -231,8 +237,8 @@
     "docs__en__agents-and-tools__tool-use__computer-use-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool.md",
-      "hash": "cf2135fd74006d0f2fb5b6c6ff99ce1c1420eeb2fe091cf71c51cbfa3ad9a291",
-      "last_updated": "2025-12-05T22:25:27.119486"
+      "hash": "6b3cfa128d480e68cf74ceefec1ec65955f022c209dbaba2d1717c77d26a52be",
+      "last_updated": "2025-12-10T21:06:46.628396"
     },
     "docs__en__agents-and-tools__tool-use__fine-grained-tool-streaming.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming",
@@ -3429,10 +3435,10 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-10T18:15:42.764212",
-    "fetch_duration_seconds": 394.40426,
-    "total_pages_discovered": 574,
-    "pages_fetched_successfully": 571,
+    "last_fetch_completed": "2025-12-10T21:12:47.006618",
+    "fetch_duration_seconds": 388.594401,
+    "total_pages_discovered": 575,
+    "pages_fetched_successfully": 572,
     "pages_failed": 4,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
@@ -3442,10 +3448,10 @@
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 571,
+    "total_files": 572,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2025-12-10T18:15:42.764228",
+  "last_updated": "2025-12-10T21:12:47.006643",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

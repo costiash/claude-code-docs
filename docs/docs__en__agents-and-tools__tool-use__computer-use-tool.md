@@ -410,10 +410,6 @@ Available in Claude Opus 4.5:
 | `display_number` | No | Display number for X11 environments |
 | `enable_zoom` | No | Enable zoom action (`computer_20251124` only). Set to `true` to allow Claude to zoom into specific screen regions. Default: `false` |
 
-<Warning>
-Keep display resolution at or below 1280x800 (WXGA) for best performance. Higher resolutions may cause accuracy issues due to [image resizing](/docs/en/build-with-claude/vision#evaluate-image-size).
-</Warning>
-
 <Note>
 **Important**: The computer use tool must be explicitly executed by your application - Claude cannot execute it directly. You are responsible for implementing the screenshot capture, mouse movements, keyboard inputs, and other actions based on Claude's requests.
 </Note>
@@ -820,6 +816,74 @@ If an action fails to execute:
 
 </section>
 
+#### Handle coordinate scaling for higher resolutions
+
+The API constrains images to a maximum of 1568 pixels on the longest edge and approximately 1.15 megapixels total (see [image resizing](/docs/en/build-with-claude/vision#evaluate-image-size) for details). For example, a 1512x982 screen gets downsampled to approximately 1330x864. Claude analyzes this smaller image and returns coordinates in that space, but your tool executes clicks in the original screen space.
+
+This can cause Claude's click coordinates to miss their targets unless you handle the coordinate transformation.
+
+To fix this, resize screenshots yourself and scale Claude's coordinates back up:
+
+<CodeGroup>
+```python Python
+import math
+
+def get_scale_factor(width, height):
+    """Calculate scale factor to meet API constraints."""
+    long_edge = max(width, height)
+    total_pixels = width * height
+
+    long_edge_scale = 1568 / long_edge
+    total_pixels_scale = math.sqrt(1_150_000 / total_pixels)
+
+    return min(1.0, long_edge_scale, total_pixels_scale)
+
+# When capturing screenshot
+scale = get_scale_factor(screen_width, screen_height)
+scaled_width = int(screen_width * scale)
+scaled_height = int(screen_height * scale)
+
+# Resize image to scaled dimensions before sending to Claude
+screenshot = capture_and_resize(scaled_width, scaled_height)
+
+# When handling Claude's coordinates, scale them back up
+def execute_click(x, y):
+    screen_x = x / scale
+    screen_y = y / scale
+    perform_click(screen_x, screen_y)
+```
+
+```typescript TypeScript
+const MAX_LONG_EDGE = 1568;
+const MAX_PIXELS = 1_150_000;
+
+function getScaleFactor(width: number, height: number): number {
+  const longEdge = Math.max(width, height);
+  const totalPixels = width * height;
+
+  const longEdgeScale = MAX_LONG_EDGE / longEdge;
+  const totalPixelsScale = Math.sqrt(MAX_PIXELS / totalPixels);
+
+  return Math.min(1.0, longEdgeScale, totalPixelsScale);
+}
+
+// When capturing screenshot
+const scale = getScaleFactor(screenWidth, screenHeight);
+const scaledWidth = Math.floor(screenWidth * scale);
+const scaledHeight = Math.floor(screenHeight * scale);
+
+// Resize image to scaled dimensions before sending to Claude
+const screenshot = captureAndResize(scaledWidth, scaledHeight);
+
+// When handling Claude's coordinates, scale them back up
+function executeClick(x: number, y: number): void {
+  const screenX = x / scale;
+  const screenY = y / scale;
+  performClick(screenX, screenY);
+}
+```
+</CodeGroup>
+
 #### Follow implementation best practices
 
 <section title="Use appropriate display resolution">
@@ -837,6 +901,7 @@ When returning screenshots to Claude:
 - Encode screenshots as base64 PNG or JPEG
 - Consider compressing large screenshots to improve performance
 - Include relevant metadata like timestamp or display state
+- If using higher resolutions, ensure coordinates are accurately scaled
 
 </section>
 

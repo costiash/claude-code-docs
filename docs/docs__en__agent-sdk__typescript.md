@@ -6,6 +6,10 @@ Complete API reference for the TypeScript Agent SDK, including all functions, ty
 
 <script src="/components/typescript-sdk-type-links.js" defer />
 
+<Note>
+**Try the new V2 interface (preview):** A simplified interface with `send()` and `receive()` patterns is now available, making multi-turn conversations easier. [Learn more](/docs/en/agent-sdk/typescript-v2-preview)
+</Note>
+
 ## Installation
 
 ```bash
