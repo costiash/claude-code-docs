@@ -76,6 +76,7 @@ await using session = unstable_v2_createSession({
 
 await session.send('Hello!')
 for await (const msg of session.receive()) {
+  // Filter for assistant messages to get human-readable output
   if (msg.type === 'assistant') {
     const text = msg.message.content
       .filter(block => block.type === 'text')
@@ -128,13 +129,26 @@ await using session = unstable_v2_createSession({
 // Turn 1
 await session.send('What is 5 + 3?')
 for await (const msg of session.receive()) {
-  console.log(msg)
+  // Filter for assistant messages to get human-readable output
+  if (msg.type === 'assistant') {
+    const text = msg.message.content
+      .filter(block => block.type === 'text')
+      .map(block => block.text)
+      .join('')
+    console.log(text)
+  }
 }
 
 // Turn 2
 await session.send('Multiply that by 2')
 for await (const msg of session.receive()) {
-  console.log(msg)
+  if (msg.type === 'assistant') {
+    const text = msg.message.content
+      .filter(block => block.type === 'text')
+      .map(block => block.text)
+      .join('')
+    console.log(text)
+  }
 }
 ```
 
@@ -167,7 +181,13 @@ const q = query({
 })
 
 for await (const msg of q) {
-  console.log(msg)
+  if (msg.type === 'assistant') {
+    const text = msg.message.content
+      .filter(block => block.type === 'text')
+      .map(block => block.text)
+      .join('')
+    console.log(text)
+  }
 }
 ```
 
@@ -177,18 +197,51 @@ for await (const msg of q) {
 
 If you have a session ID from a previous interaction, you can resume it later. This is useful for long-running workflows or when you need to persist conversations across application restarts.
 
-This example reconnects to an existing session and continues the conversation:
+This example creates a session, stores its ID, closes it, then resumes the conversation:
 
 ```typescript
-import { unstable_v2_resumeSession } from '@anthropic-ai/claude-agent-sdk'
+import {
+  unstable_v2_createSession,
+  unstable_v2_resumeSession,
+  type SDKMessage
+} from '@anthropic-ai/claude-agent-sdk'
 
-await using session = unstable_v2_resumeSession(sessionId, {
+// Helper to extract text from assistant messages
+function getAssistantText(msg: SDKMessage): string | null {
+  if (msg.type !== 'assistant') return null
+  return msg.message.content
+    .filter(block => block.type === 'text')
+    .map(block => block.text)
+    .join('')
+}
+
+// Create initial session and have a conversation
+const session = unstable_v2_createSession({
   model: 'claude-sonnet-4-5-20250929'
 })
 
-await session.send('Continue from where we left off')
+await session.send('Remember this number: 42')
+
+// Get the session ID from any received message
+let sessionId: string | undefined
 for await (const msg of session.receive()) {
-  // Process response
+  sessionId = msg.session_id
+  const text = getAssistantText(msg)
+  if (text) console.log('Initial response:', text)
+}
+
+console.log('Session ID:', sessionId)
+session.close()
+
+// Later: resume the session using the stored ID
+await using resumedSession = unstable_v2_resumeSession(sessionId!, {
+  model: 'claude-sonnet-4-5-20250929'
+})
+
+await resumedSession.send('What number did I ask you to remember?')
+for await (const msg of resumedSession.receive()) {
+  const text = getAssistantText(msg)
+  if (text) console.log('Resumed response:', text)
 }
 ```
 
@@ -198,16 +251,44 @@ for await (const msg of session.receive()) {
 ```typescript
 import { query } from '@anthropic-ai/claude-agent-sdk'
 
-const q = query({
-  prompt: 'Continue from where we left off',
+// Create initial session
+const initialQuery = query({
+  prompt: 'Remember this number: 42',
+  options: { model: 'claude-sonnet-4-5-20250929' }
+})
+
+// Get session ID from any message
+let sessionId: string | undefined
+for await (const msg of initialQuery) {
+  sessionId = msg.session_id
+  if (msg.type === 'assistant') {
+    const text = msg.message.content
+      .filter(block => block.type === 'text')
+      .map(block => block.text)
+      .join('')
+    console.log('Initial response:', text)
+  }
+}
+
+console.log('Session ID:', sessionId)
+
+// Later: resume the session
+const resumedQuery = query({
+  prompt: 'What number did I ask you to remember?',
   options: {
     model: 'claude-sonnet-4-5-20250929',
     resume: sessionId
   }
 })
 
-for await (const msg of q) {
-  // Process response
+for await (const msg of resumedQuery) {
+  if (msg.type === 'assistant') {
+    const text = msg.message.content
+      .filter(block => block.type === 'text')
+      .map(block => block.text)
+      .join('')
+    console.log('Resumed response:', text)
+  }
 }
 ```
 
@@ -217,18 +298,26 @@ for await (const msg of q) {
 
 Sessions can be closed manually or automatically using [`await using`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html#using-declarations-and-explicit-resource-management), a TypeScript 5.2+ feature for automatic resource cleanup. If you're using an older TypeScript version or encounter compatibility issues, use manual cleanup instead.
 
+**Automatic cleanup (TypeScript 5.2+):**
+
 ```typescript
-// Automatic cleanup with await using (TypeScript 5.2+)
+import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'
+
 await using session = unstable_v2_createSession({
   model: 'claude-sonnet-4-5-20250929'
 })
 // Session closes automatically when the block exits
+```
 
-// Manual cleanup (works with any TypeScript version)
+**Manual cleanup:**
+
+```typescript
+import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'
+
 const session = unstable_v2_createSession({
   model: 'claude-sonnet-4-5-20250929'
 })
-// ...
+// ... use the session ...
 session.close()
 ```
 
