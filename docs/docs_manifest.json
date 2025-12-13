@@ -2835,8 +2835,8 @@
     "claude-code__memory.md": {
       "original_url": "https://platform.claude.com/docs/en/memory",
       "original_md_url": "https://platform.claude.com/docs/en/memory.md",
-      "hash": "7824df90065bd8ec0ee17b916232eefa3849d9be383beaa3aa3cf00c0cf5bd6d",
-      "last_updated": "2025-12-09T18:13:04.309248"
+      "hash": "bfb0737ddfd8af370ca9574d85d10c84cf4091092b343af03cc3e218d09baa22",
+      "last_updated": "2025-12-13T06:13:14.618429"
     },
     "claude-code__microsoft-foundry.md": {
       "original_url": "https://platform.claude.com/docs/en/microsoft-foundry",
@@ -3441,8 +3441,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-13T03:34:31.502545",
-    "fetch_duration_seconds": 393.444043,
+    "last_fetch_completed": "2025-12-13T06:14:15.739241",
+    "fetch_duration_seconds": 363.811432,
     "total_pages_discovered": 576,
     "pages_fetched_successfully": 573,
     "pages_failed": 4,
@@ -3457,7 +3457,7 @@
     "total_files": 573,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2025-12-13T03:34:31.502564",
+  "last_updated": "2025-12-13T06:14:15.739263",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
