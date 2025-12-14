@@ -386,6 +386,16 @@ The SDK also supports Claude Code's filesystem-based configuration. To use these
     export ANTHROPIC_API_KEY=your-api-key
     ```
     Get your key from the [Console](https://console.anthropic.com/).
+
+    The SDK also supports authentication via third-party API providers:
+
+    - **Amazon Bedrock**: Set `CLAUDE_CODE_USE_BEDROCK=1` environment variable and configure AWS credentials
+    - **Google Vertex AI**: Set `CLAUDE_CODE_USE_VERTEX=1` environment variable and configure Google Cloud credentials
+    - **Microsoft Foundry**: Set `CLAUDE_CODE_USE_FOUNDRY=1` environment variable and configure Azure credentials
+
+    <Note>
+    Unless previously approved, we do not allow third party developers to offer Claude.ai login or rate limits for their products, including agents built on the Claude Agent SDK. Please use the API key authentication methods described in this document instead.
+    </Note>
   </Step>
   <Step title="Run your first agent">
     This example creates an agent that lists files in your current directory using built-in tools.
