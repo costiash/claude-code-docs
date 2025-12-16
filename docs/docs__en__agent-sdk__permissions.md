@@ -16,7 +16,7 @@ The Claude Agent SDK provides four complementary ways to control tool usage:
 
 1. **[Permission Modes](#permission-modes)** - Global permission behavior settings that affect all tools
 2. **[canUseTool callback](/docs/en/agent-sdk/typescript#canusetool)** - Runtime permission handler for cases not covered by other rules
-3. **[Hooks](/docs/en/agent-sdk/typescript#hook-types)** - Fine-grained control over every tool execution with custom logic
+3. **[Hooks](/docs/en/agent-sdk/hooks)** - Fine-grained control over every tool execution with custom logic
 4. **[Permission rules (settings.json)](https://code.claude.com/docs/en/settings#permission-settings)** - Declarative allow/deny rules with integrated bash command parsing
 
 Use cases for each approach:
@@ -361,7 +361,62 @@ result = await query(
 
 </CodeGroup>
 
+## Handling the AskUserQuestion Tool
+
+The `AskUserQuestion` tool allows Claude to ask the user clarifying questions during a conversation. When this tool is called, your `canUseTool` callback receives the questions and must return the user's answers.
+
+### Input Structure
+
+When `canUseTool` is called with `toolName: "AskUserQuestion"`, the input contains:
+
+```typescript
+{
+  questions: [
+    {
+      question: "Which database should we use?",
+      header: "Database",
+      options: [
+        { label: "PostgreSQL", description: "Relational, ACID compliant" },
+        { label: "MongoDB", description: "Document-based, flexible schema" }
+      ],
+      multiSelect: false
+    },
+    {
+      question: "Which features should we enable?",
+      header: "Features",
+      options: [
+        { label: "Authentication", description: "User login and sessions" },
+        { label: "Logging", description: "Request and error logging" },
+        { label: "Caching", description: "Redis-based response caching" }
+      ],
+      multiSelect: true
+    }
+  ]
+}
+```
+
+### Returning Answers
+
+Return the answers in `updatedInput.answers` as a record mapping question text to the selected option label(s):
+
+```typescript
+return {
+  behavior: "allow",
+  updatedInput: {
+    questions: input.questions,  // Pass through original questions
+    answers: {
+      "Which database should we use?": "PostgreSQL",
+      "Which features should we enable?": "Authentication, Caching"
+    }
+  }
+}
+```
+
+<Note>
+Multi-select answers are comma-separated strings (e.g., `"Authentication, Caching"`).
+</Note>
+
 ## Related Resources
 
-- [Hooks Guide](https://code.claude.com/docs/en/hooks-guide) - Learn how to implement hooks for fine-grained control over tool execution
+- [Hooks Guide](/docs/en/agent-sdk/hooks) - Learn how to implement hooks for fine-grained control over tool execution
 - [Settings: Permission Rules](https://code.claude.com/docs/en/settings#permission-settings) - Configure declarative allow/deny rules with bash command parsing

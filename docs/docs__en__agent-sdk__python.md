@@ -936,6 +936,8 @@ class CLIJSONDecodeError(ClaudeSDKError):
 
 ## Hook Types
 
+For a comprehensive guide on using hooks with examples and common patterns, see the [Hooks guide](/en/docs/agent-sdk/hooks).
+
 ### `HookEvent`
 
 Supported hook event types. Note that due to setup limitations, the Python SDK does not support SessionStart, SessionEnd, and Notification hooks.
@@ -964,7 +966,7 @@ HookCallback = Callable[
 
 Parameters:
 
-- `input_data`: Hook-specific input data (see [hook documentation](https://docs.claude.comhttps://code.claude.com/docs/en/hooks#hook-input))
+- `input_data`: Hook-specific input data (see [Hooks guide](/docs/en/agent-sdk/hooks#input-data))
 - `tool_use_id`: Optional tool use identifier (for tool-related hooks)
 - `context`: Hook context with additional information
 
@@ -997,6 +999,8 @@ class HookMatcher:
 ```
 
 ### Hook Usage Example
+
+This example registers two hooks: one that blocks dangerous bash commands like `rm -rf /`, and another that logs all tool usage for auditing. The security hook only runs on Bash commands (via the `matcher`), while the logging hook runs on all tools.
 
 ```python
 from claude_agent_sdk import query, ClaudeAgentOptions, HookMatcher, HookContext

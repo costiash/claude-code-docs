@@ -47,7 +47,7 @@ Anthropic has best-in-class developer tools to build scalable applications with 
 
 <CardGroup cols={3}>
   <Card title="Developer Console" icon="computer" href="/">
-    Enjoy easier, more powerful prompting in your browser with the Workbench and prompt generator tool. 
+    Enjoy easier, more powerful prompting in your browser with the Workbench and the prompt generator tool. 
   </Card>
   <Card title="API Reference" icon="code" href="/docs/en/api/overview">
     Explore, implement, and scale with the Claude API and SDKs. 
@@ -75,7 +75,7 @@ Claude can assist with many tasks that involve text, code, and images.
 ---
 
 ## Support
- 
+
 <CardGroup cols={2}>
   <Card title="Help Center" icon="help" href="https://support.claude.com/en/">
     Find answers to frequently asked account and billing questions.

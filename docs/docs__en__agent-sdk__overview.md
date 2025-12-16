@@ -96,7 +96,6 @@ Everything that makes Claude Code powerful is available in the SDK:
     ```
     </CodeGroup>
 
-    [View full tool reference →](https://docs.anthropic.com/en/docs/claude-code/cli-reference#tools-available-to-claude)
   </Tab>
   <Tab title="Hooks">
     Run custom code at key points in the agent lifecycle. Hooks can execute shell commands or custom scripts to validate, log, block, or transform agent behavior.
@@ -148,7 +147,7 @@ Everything that makes Claude Code powerful is available in the SDK:
     ```
     </CodeGroup>
 
-    [Learn more about hooks →](https://docs.anthropic.com/en/docs/claude-code/hooks)
+    [Learn more about hooks →](/docs/en/agent-sdk/hooks)
   </Tab>
   <Tab title="Subagents">
     Spawn specialized agents to handle focused subtasks. Your main agent delegates work, and subagents report back with results.
