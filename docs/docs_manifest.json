@@ -2715,14 +2715,14 @@
     "claude-code__cli-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/cli-reference",
       "original_md_url": "https://platform.claude.com/docs/en/cli-reference.md",
-      "hash": "1f74e23fa86b4371fc33681751e303252a7b222d2da28beaf28c3e09b5bee882",
-      "last_updated": "2025-12-15T18:14:07.008018"
+      "hash": "e084a5b4ea6ffc18f1ef1be036c0a2c40ef371879dd66270417985dcd8537784",
+      "last_updated": "2025-12-17T15:12:21.607161"
     },
     "claude-code__common-workflows.md": {
       "original_url": "https://platform.claude.com/docs/en/common-workflows",
       "original_md_url": "https://platform.claude.com/docs/en/common-workflows.md",
-      "hash": "cdd4557bc66afb224609140f1fa6b92cb90bdb72a1dec0064dbda535396e03f4",
-      "last_updated": "2025-12-12T18:14:10.736883"
+      "hash": "5a3b795e8c5b95d08648e95e62c8df60830659dbdacae0ae4afb43a55f6967b2",
+      "last_updated": "2025-12-17T15:12:22.230205"
     },
     "claude-code__costs.md": {
       "original_url": "https://platform.claude.com/docs/en/costs",
@@ -3333,8 +3333,8 @@
     "claude-code__slash-commands.md": {
       "original_url": "https://platform.claude.com/docs/en/slash-commands",
       "original_md_url": "https://platform.claude.com/docs/en/slash-commands.md",
-      "hash": "beb94bd0553b3233e53a4ee2b9bdb6c5cb4ccd231c7fe090015672c834a21278",
-      "last_updated": "2025-12-10T09:15:02.259678"
+      "hash": "dcc87b3143579d8f9a66df570057340cb6cc5b085c931abf040477a1db904832",
+      "last_updated": "2025-12-17T15:13:32.751671"
     },
     "claude-code__statusline.md": {
       "original_url": "https://platform.claude.com/docs/en/statusline",
@@ -3429,8 +3429,8 @@
     "claude-code__vs-code.md": {
       "original_url": "https://platform.claude.com/docs/en/vs-code",
       "original_md_url": "https://platform.claude.com/docs/en/vs-code.md",
-      "hash": "33be62ea974331d47956e67dea3234a965f01e62c15f2f5bf30ea81428870931",
-      "last_updated": "2025-12-16T21:13:11.352173"
+      "hash": "f1b9d660d74940cfb80830e6a176d0b6dc52c6b6b042c1815ba527e913e3486d",
+      "last_updated": "2025-12-17T15:13:43.643041"
     },
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
@@ -3441,8 +3441,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-17T12:17:58.886157",
-    "fetch_duration_seconds": 444.605238,
+    "last_fetch_completed": "2025-12-17T15:13:43.695654",
+    "fetch_duration_seconds": 402.831793,
     "total_pages_discovered": 576,
     "pages_fetched_successfully": 573,
     "pages_failed": 4,
@@ -3457,7 +3457,7 @@
     "total_files": 573,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2025-12-17T12:17:58.886182",
+  "last_updated": "2025-12-17T15:13:43.695672",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
