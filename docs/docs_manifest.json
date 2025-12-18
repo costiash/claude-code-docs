@@ -2715,8 +2715,8 @@
     "claude-code__cli-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/cli-reference",
       "original_md_url": "https://platform.claude.com/docs/en/cli-reference.md",
-      "hash": "e084a5b4ea6ffc18f1ef1be036c0a2c40ef371879dd66270417985dcd8537784",
-      "last_updated": "2025-12-17T15:12:21.607161"
+      "hash": "f785e1ab67f1aa8303c9d991ff1adce00db55555d45bff1df5ce7457cce2fafe",
+      "last_updated": "2025-12-18T18:14:31.415067"
     },
     "claude-code__common-workflows.md": {
       "original_url": "https://platform.claude.com/docs/en/common-workflows",
@@ -3429,8 +3429,8 @@
     "claude-code__vs-code.md": {
       "original_url": "https://platform.claude.com/docs/en/vs-code",
       "original_md_url": "https://platform.claude.com/docs/en/vs-code.md",
-      "hash": "f1b9d660d74940cfb80830e6a176d0b6dc52c6b6b042c1815ba527e913e3486d",
-      "last_updated": "2025-12-17T15:13:43.643041"
+      "hash": "d936c92de540dc33ce188f78e75d4221908aa95af83d71d64bffe292d2225e4e",
+      "last_updated": "2025-12-18T18:16:09.410839"
     },
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
@@ -3441,13 +3441,14 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-18T15:13:33.686204",
-    "fetch_duration_seconds": 404.393812,
-    "total_pages_discovered": 576,
+    "last_fetch_completed": "2025-12-18T18:16:09.435758",
+    "fetch_duration_seconds": 419.065566,
+    "total_pages_discovered": 577,
     "pages_fetched_successfully": 573,
-    "pages_failed": 4,
+    "pages_failed": 5,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
+      "/docs/en/chrome",
       "/docs/en/resources/overview",
       "/docs/en/resources/prompt-library/library",
       "/docs/en/slack"
@@ -3457,7 +3458,7 @@
     "total_files": 573,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2025-12-18T15:13:33.686224",
+  "last_updated": "2025-12-18T18:16:09.435781",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
