@@ -35,9 +35,9 @@ This approach has two major advantages:
 
 | Level    | Description                                                                                                                      | Typical use case                                                                      |
 | -------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `high`   | Maximum capability—Claude uses as many tokens as needed for the best possible outcome. Equivalent to not setting the parameter.  | Complex reasoning, difficult coding problems, agentic tasks                           |
+| `high`   | Maximum capability. Claude uses as many tokens as needed for the best possible outcome. Equivalent to not setting the parameter.  | Complex reasoning, difficult coding problems, agentic tasks                           |
 | `medium` | Balanced approach with moderate token savings. | Agentic tasks that require a balance of speed, cost, and performance                                                         |
-| `low`    | Most efficient—significant token savings with some capability reduction. | Simpler tasks that need the best speed and lowest costs, such as subagents                     |
+| `low`    | Most efficient. Significant token savings with some capability reduction. | Simpler tasks that need the best speed and lowest costs, such as subagents                     |
 
 ## Basic usage
 

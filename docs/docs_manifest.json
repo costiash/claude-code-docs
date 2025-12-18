@@ -2523,8 +2523,8 @@
     "docs__en__build-with-claude__effort.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/effort",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/effort.md",
-      "hash": "372d290460839acb18ade4343971e0bb90f7d824badcd07ef4015dc7d521b6ab",
-      "last_updated": "2025-12-16T00:31:19.948854"
+      "hash": "1a0b2d81e663e60dbe890fc8e1107c982d3b084b0f5b45fe70379d6c5515bd63",
+      "last_updated": "2025-12-18T03:36:52.164524"
     },
     "docs__en__build-with-claude__embeddings.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/embeddings",
@@ -3441,8 +3441,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-18T00:28:20.926305",
-    "fetch_duration_seconds": 369.309597,
+    "last_fetch_completed": "2025-12-18T03:38:28.043317",
+    "fetch_duration_seconds": 381.195518,
     "total_pages_discovered": 576,
     "pages_fetched_successfully": 573,
     "pages_failed": 4,
@@ -3457,7 +3457,7 @@
     "total_files": 573,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2025-12-18T00:28:20.926325",
+  "last_updated": "2025-12-18T03:38:28.043336",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
