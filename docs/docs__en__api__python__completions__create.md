@@ -398,10 +398,11 @@ Future models and features will not be compatible with Text Completions. See our
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 completion = client.completions.create(
     max_tokens_to_sample=256,

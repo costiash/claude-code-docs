@@ -121,7 +121,7 @@ Create Skill
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const skill = await client.beta.skills.create();
@@ -259,7 +259,7 @@ List Skills
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
@@ -383,7 +383,7 @@ Get Skill
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const skill = await client.beta.skills.retrieve('skill_id');
@@ -477,7 +477,7 @@ Delete Skill
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const skill = await client.beta.skills.delete('skill_id');
@@ -611,7 +611,7 @@ Create Skill Version
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const version = await client.beta.skills.versions.create('skill_id');
@@ -747,7 +747,7 @@ List Skill Versions
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
@@ -880,7 +880,7 @@ Get Skill Version
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const version = await client.beta.skills.versions.retrieve('version', { skill_id: 'skill_id' });
@@ -980,7 +980,7 @@ Delete Skill Version
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const version = await client.beta.skills.versions.delete('version', { skill_id: 'skill_id' });

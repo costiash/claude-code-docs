@@ -95,6 +95,8 @@ Upload File
 ```http
 curl https://api.anthropic.com/v1/files \
     -H 'Content-Type: multipart/form-data' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -F file=undefined
+    -F 'file=@/path/to/file'
 ```

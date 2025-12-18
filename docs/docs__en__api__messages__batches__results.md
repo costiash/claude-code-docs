@@ -566,5 +566,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ```http
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```

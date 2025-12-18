@@ -2557,6 +2557,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 ```http
 curl https://api.anthropic.com/v1/messages \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "max_tokens": 1024,
@@ -4643,6 +4644,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 ```http
 curl https://api.anthropic.com/v1/messages/count_tokens \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "messages": [
@@ -15949,6 +15951,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ```http
 curl https://api.anthropic.com/v1/messages/batches \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "requests": [
@@ -16077,6 +16080,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ```http
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -16210,6 +16214,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ```http
 curl https://api.anthropic.com/v1/messages/batches \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -16324,6 +16329,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ```http
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
     -X POST \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -16364,6 +16370,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ```http
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -16935,6 +16942,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ```http
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 

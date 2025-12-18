@@ -399,10 +399,11 @@ The Models API response can be used to determine which models are available for 
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 page = client.beta.models.list()
 page = page.data[0]
@@ -498,10 +499,11 @@ The Models API response can be used to determine information about a specific mo
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_model_info = client.beta.models.retrieve(
     model_id="model_id",
@@ -5718,10 +5720,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message = client.beta.messages.create(
     max_tokens=1024,
@@ -9802,10 +9805,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message_tokens_count = client.beta.messages.count_tokens(
     messages=[{
@@ -33224,10 +33228,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message_batch = client.beta.messages.batches.create(
     requests=[{
@@ -33400,10 +33405,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message_batch = client.beta.messages.batches.retrieve(
     message_batch_id="message_batch_id",
@@ -33576,10 +33582,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 page = client.beta.messages.batches.list()
 page = page.data[0]
@@ -33743,10 +33750,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message_batch = client.beta.messages.batches.cancel(
     message_batch_id="message_batch_id",
@@ -33837,10 +33845,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_deleted_message_batch = client.beta.messages.batches.delete(
     message_batch_id="message_batch_id",
@@ -35064,10 +35073,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message_batch_individual_response = client.beta.messages.batches.results(
     message_batch_id="message_batch_id",
@@ -38745,10 +38755,11 @@ Upload File
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 file_metadata = client.beta.files.upload(
     file=b"raw file contents",
@@ -38867,10 +38878,11 @@ List Files
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 page = client.beta.files.list()
 page = page.data[0]
@@ -38944,10 +38956,11 @@ Download File
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 response = client.beta.files.download(
     file_id="file_id",
@@ -39058,10 +39071,11 @@ Get File Metadata
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 file_metadata = client.beta.files.retrieve_metadata(
     file_id="file_id",
@@ -39148,10 +39162,11 @@ Delete File
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 deleted_file = client.beta.files.delete(
     file_id="file_id",
@@ -39333,10 +39348,11 @@ Create Skill
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 skill = client.beta.skills.create()
 print(skill.id)
@@ -39467,10 +39483,11 @@ List Skills
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 page = client.beta.skills.list()
 page = page.data[0]
@@ -39587,10 +39604,11 @@ Get Skill
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 skill = client.beta.skills.retrieve(
     skill_id="skill_id",
@@ -39679,10 +39697,11 @@ Delete Skill
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 skill = client.beta.skills.delete(
     skill_id="skill_id",
@@ -39811,10 +39830,11 @@ Create Skill Version
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 version = client.beta.skills.versions.create(
     skill_id="skill_id",
@@ -39945,10 +39965,11 @@ List Skill Versions
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 page = client.beta.skills.versions.list(
     skill_id="skill_id",
@@ -40076,10 +40097,11 @@ Get Skill Version
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 version = client.beta.skills.versions.retrieve(
     version="version",
@@ -40175,10 +40197,11 @@ Delete Skill Version
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 version = client.beta.skills.versions.delete(
     version="version",

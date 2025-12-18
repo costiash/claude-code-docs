@@ -4047,6 +4047,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 ```http
 curl https://api.anthropic.com/v1/messages/count_tokens \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "messages": [

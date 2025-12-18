@@ -239,6 +239,7 @@ class ClaudeSDKClient:
     async def receive_messages(self) -> AsyncIterator[Message]
     async def receive_response(self) -> AsyncIterator[Message]
     async def interrupt(self) -> None
+    async def rewind_files(self, user_message_uuid: str) -> None
     async def disconnect(self) -> None
 ```
 
@@ -252,6 +253,7 @@ class ClaudeSDKClient:
 | `receive_messages()`        | Receive all messages from Claude as an async iterator               |
 | `receive_response()`        | Receive messages until and including a ResultMessage                |
 | `interrupt()`               | Send interrupt signal (only works in streaming mode)                |
+| `rewind_files(user_message_uuid)` | Restore files to their state at the specified user message. Requires `enable_file_checkpointing=True`. See [File checkpointing](/docs/en/agent-sdk/file-checkpointing) |
 | `disconnect()`              | Disconnect from Claude                                              |
 
 #### Context Manager Support
@@ -493,6 +495,7 @@ class ClaudeAgentOptions:
 | `resume`                      | `str \| None`                                | `None`               | Session ID to resume                                                                                                                                                                    |
 | `max_turns`                   | `int \| None`                                | `None`               | Maximum conversation turns                                                                                                                                                              |
 | `disallowed_tools`            | `list[str]`                                  | `[]`                 | List of disallowed tool names                                                                                                                                                           |
+| `enable_file_checkpointing`   | `bool`                                       | `False`              | Enable file change tracking for rewinding. See [File checkpointing](/docs/en/agent-sdk/file-checkpointing)                                                                              |
 | `model`                       | `str \| None`                                | `None`               | Claude model to use                                                                                                                                                                     |
 | `output_format`               | [`OutputFormat`](#outputformat) ` \| None`   | `None`               | Define output format for agent results. See [Structured outputs](/docs/en/agent-sdk/structured-outputs) for details                                                                    |
 | `permission_prompt_tool_name` | `str \| None`                                | `None`               | MCP tool name for permission prompts                                                                                                                                                    |

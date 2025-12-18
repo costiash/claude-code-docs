@@ -5159,7 +5159,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const betaMessage = await client.beta.messages.create({
@@ -9220,7 +9220,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const betaMessageTokensCount = await client.beta.messages.countTokens({
@@ -32543,7 +32543,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const betaMessageBatch = await client.beta.messages.batches.create({
@@ -32722,7 +32722,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const betaMessageBatch = await client.beta.messages.batches.retrieve('message_batch_id');
@@ -32900,7 +32900,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
@@ -33071,7 +33071,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const betaMessageBatch = await client.beta.messages.batches.cancel('message_batch_id');
@@ -33167,7 +33167,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const betaDeletedMessageBatch = await client.beta.messages.batches.delete('message_batch_id');
@@ -34371,7 +34371,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const betaMessageBatchIndividualResponse = await client.beta.messages.batches.results('message_batch_id');

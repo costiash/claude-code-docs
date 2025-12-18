@@ -106,7 +106,7 @@ Upload File
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const fileMetadata = await client.beta.files.upload({ file: fs.createReadStream('path/to/file') });
@@ -230,7 +230,7 @@ List Files
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
@@ -311,7 +311,7 @@ Download File
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const response = await client.beta.files.download('file_id');
@@ -428,7 +428,7 @@ Get File Metadata
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const fileMetadata = await client.beta.files.retrieveMetadata('file_id');
@@ -520,7 +520,7 @@ Delete File
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const deletedFile = await client.beta.files.delete('file_id');

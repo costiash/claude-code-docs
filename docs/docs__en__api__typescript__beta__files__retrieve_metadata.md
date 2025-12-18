@@ -104,7 +104,7 @@ Get File Metadata
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const fileMetadata = await client.beta.files.retrieveMetadata('file_id');

@@ -412,6 +412,7 @@ The Models API response can be used to determine which models are available for 
 
 ```http
 curl https://api.anthropic.com/v1/models \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -505,6 +506,7 @@ The Models API response can be used to determine information about a specific mo
 
 ```http
 curl https://api.anthropic.com/v1/models/$MODEL_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -5675,6 +5677,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 ```http
 curl https://api.anthropic.com/v1/messages \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "max_tokens": 1024,
@@ -9737,6 +9740,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 ```http
 curl https://api.anthropic.com/v1/messages/count_tokens \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "messages": [
@@ -33074,6 +33078,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ```http
 curl https://api.anthropic.com/v1/messages/batches \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "requests": [
@@ -33250,6 +33256,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ```http
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -33431,6 +33439,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ```http
 curl https://api.anthropic.com/v1/messages/batches \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -33593,6 +33603,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ```http
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
     -X POST \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -33681,6 +33693,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ```http
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -34880,6 +34894,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ```http
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -38486,8 +38502,10 @@ Upload File
 ```http
 curl https://api.anthropic.com/v1/files \
     -H 'Content-Type: multipart/form-data' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -F file=undefined
+    -F 'file=@/path/to/file'
 ```
 
 ## List
@@ -38616,6 +38634,8 @@ List Files
 
 ```http
 curl https://api.anthropic.com/v1/files \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -38683,6 +38703,8 @@ Download File
 
 ```http
 curl https://api.anthropic.com/v1/files/$FILE_ID/content \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -38788,6 +38810,8 @@ Get File Metadata
 
 ```http
 curl https://api.anthropic.com/v1/files/$FILE_ID \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -38872,6 +38896,8 @@ Delete File
 ```http
 curl https://api.anthropic.com/v1/files/$FILE_ID \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -39035,6 +39061,8 @@ Create Skill
 ```http
 curl https://api.anthropic.com/v1/skills \
     -X POST \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -39178,6 +39206,8 @@ List Skills
 
 ```http
 curl https://api.anthropic.com/v1/skills \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -39290,6 +39320,8 @@ Get Skill
 
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -39374,6 +39406,8 @@ Delete Skill
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -39492,6 +39526,8 @@ Create Skill Version
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
     -X POST \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -39631,6 +39667,8 @@ List Skill Versions
 
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -39752,6 +39790,8 @@ Get Skill Version
 
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -39842,5 +39882,7 @@ Delete Skill Version
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```

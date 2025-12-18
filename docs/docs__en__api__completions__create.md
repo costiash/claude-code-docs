@@ -356,6 +356,7 @@ Future models and features will not be compatible with Text Completions. See our
 ```http
 curl https://api.anthropic.com/v1/complete \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "max_tokens_to_sample": 256,

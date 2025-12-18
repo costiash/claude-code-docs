@@ -122,7 +122,7 @@ Get Skill Version
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const version = await client.beta.skills.versions.retrieve('version', { skill_id: 'skill_id' });

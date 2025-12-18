@@ -79,5 +79,7 @@ Delete Skill
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```

@@ -2555,6 +2555,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 ```http
 curl https://api.anthropic.com/v1/messages \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "max_tokens": 1024,

@@ -588,10 +588,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 message_batch_individual_response = client.messages.batches.results(
     "message_batch_id",

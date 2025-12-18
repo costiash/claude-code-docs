@@ -130,6 +130,10 @@ async for message in query(
 
 The SDK automatically handles loading the conversation history and context when you resume a session, allowing Claude to continue exactly where it left off.
 
+<Tip>
+To track and revert file changes across sessions, see [File Checkpointing](/docs/en/agent-sdk/file-checkpointing).
+</Tip>
+
 ## Forking Sessions
 
 When resuming a session, you can choose to either continue the original session or fork it into a new branch. By default, resuming continues the original session. Use the `forkSession` option (TypeScript) or `fork_session` option (Python) to create a new session ID that starts from the resumed state.

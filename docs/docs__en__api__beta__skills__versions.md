@@ -113,6 +113,8 @@ Create Skill Version
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
     -X POST \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -252,6 +254,8 @@ List Skill Versions
 
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -373,6 +377,8 @@ Get Skill Version
 
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -463,5 +469,7 @@ Delete Skill Version
 ```http
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
     -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```

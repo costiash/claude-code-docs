@@ -110,7 +110,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const messageBatch = await client.messages.batches.retrieve('message_batch_id');

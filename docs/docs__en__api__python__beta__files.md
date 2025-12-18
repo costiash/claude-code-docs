@@ -101,10 +101,11 @@ Upload File
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 file_metadata = client.beta.files.upload(
     file=b"raw file contents",
@@ -223,10 +224,11 @@ List Files
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 page = client.beta.files.list()
 page = page.data[0]
@@ -300,10 +302,11 @@ Download File
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 response = client.beta.files.download(
     file_id="file_id",
@@ -414,10 +417,11 @@ Get File Metadata
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 file_metadata = client.beta.files.retrieve_metadata(
     file_id="file_id",
@@ -504,10 +508,11 @@ Delete File
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 deleted_file = client.beta.files.delete(
     file_id="file_id",

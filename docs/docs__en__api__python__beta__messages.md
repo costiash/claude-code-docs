@@ -5181,10 +5181,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message = client.beta.messages.create(
     max_tokens=1024,
@@ -9265,10 +9266,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message_tokens_count = client.beta.messages.count_tokens(
     messages=[{
@@ -32687,10 +32689,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message_batch = client.beta.messages.batches.create(
     requests=[{
@@ -32863,10 +32866,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message_batch = client.beta.messages.batches.retrieve(
     message_batch_id="message_batch_id",
@@ -33039,10 +33043,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 page = client.beta.messages.batches.list()
 page = page.data[0]
@@ -33206,10 +33211,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message_batch = client.beta.messages.batches.cancel(
     message_batch_id="message_batch_id",
@@ -33300,10 +33306,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_deleted_message_batch = client.beta.messages.batches.delete(
     message_batch_id="message_batch_id",
@@ -34527,10 +34534,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```python
+import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="my-anthropic-api-key",
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 beta_message_batch_individual_response = client.beta.messages.batches.results(
     message_batch_id="message_batch_id",

@@ -377,7 +377,7 @@ Future models and features will not be compatible with Text Completions. See our
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: 'my-anthropic-api-key',
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
 const completion = await client.completions.create({

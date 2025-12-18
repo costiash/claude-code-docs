@@ -124,5 +124,7 @@ List Files
 
 ```http
 curl https://api.anthropic.com/v1/files \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
