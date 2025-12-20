@@ -178,7 +178,7 @@ See [tool use pricing](#tool-use-pricing) for complete pricing details.
 Code execution tool usage is tracked separately from token usage. Execution time has a minimum of 5 minutes.
 If files are included in the request, execution time is billed even if the tool is not used due to files being preloaded onto the container.
 
-Each organization receives 50 free hours of usage with the code execution tool per day. Additional usage beyond the first 50 hours is billed at $0.05 per hour, per container.
+Each organization receives 1,550 free hours of usage with the code execution tool per month. Additional usage beyond the first 1,550 hours is billed at $0.05 per hour, per container.
 
 #### Text editor tool
 

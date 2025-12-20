@@ -79,7 +79,8 @@ Everything that makes Claude Code powerful is available in the SDK:
             prompt="Find all TODO comments and create a summary",
             options=ClaudeAgentOptions(allowed_tools=["Read", "Glob", "Grep"])
         ):
-            print(message)
+            if hasattr(message, "result"):
+                print(message.result)
 
     asyncio.run(main())
     ```
@@ -91,14 +92,14 @@ Everything that makes Claude Code powerful is available in the SDK:
       prompt: "Find all TODO comments and create a summary",
       options: { allowedTools: ["Read", "Glob", "Grep"] }
     })) {
-      console.log(message);
+      if ("result" in message) console.log(message.result);
     }
     ```
     </CodeGroup>
 
   </Tab>
   <Tab title="Hooks">
-    Run custom code at key points in the agent lifecycle. Hooks can execute shell commands or custom scripts to validate, log, block, or transform agent behavior.
+    Run custom code at key points in the agent lifecycle. SDK hooks use callback functions to validate, log, block, or transform agent behavior.
 
     **Available hooks:** `PreToolUse`, `PostToolUse`, `Stop`, `SessionStart`, `SessionEnd`, `UserPromptSubmit`, and more.
 
@@ -107,42 +108,51 @@ Everything that makes Claude Code powerful is available in the SDK:
     <CodeGroup>
     ```python Python
     import asyncio
-    from claude_agent_sdk import query, ClaudeAgentOptions
+    from datetime import datetime
+    from claude_agent_sdk import query, ClaudeAgentOptions, HookMatcher
+
+    async def log_file_change(input_data, tool_use_id, context):
+        file_path = input_data.get('tool_input', {}).get('file_path', 'unknown')
+        with open('./audit.log', 'a') as f:
+            f.write(f"{datetime.now()}: modified {file_path}\n")
+        return {}
 
     async def main():
         async for message in query(
-            prompt="Suggest improvements to utils.py",
+            prompt="Refactor utils.py to improve readability",
             options=ClaudeAgentOptions(
                 permission_mode="acceptEdits",
                 hooks={
-                    "PostToolUse": [{
-                        "matcher": "Edit|Write",
-                        "hooks": [{"type": "command", "command": "echo \"$(date): file modified\" >> ./audit.log"}]
-                    }]
+                    "PostToolUse": [HookMatcher(matcher="Edit|Write", hooks=[log_file_change])]
                 }
             )
         ):
-            print(message)
+            if hasattr(message, "result"):
+                print(message.result)
 
     asyncio.run(main())
     ```
 
     ```typescript TypeScript
-    import { query } from "@anthropic-ai/claude-agent-sdk";
+    import { query, HookCallback } from "@anthropic-ai/claude-agent-sdk";
+    import { appendFileSync } from "fs";
+
+    const logFileChange: HookCallback = async (input) => {
+      const filePath = (input as any).tool_input?.file_path ?? "unknown";
+      appendFileSync("./audit.log", `${new Date().toISOString()}: modified ${filePath}\n`);
+      return {};
+    };
 
     for await (const message of query({
-      prompt: "Suggest improvements to utils.py",
+      prompt: "Refactor utils.py to improve readability",
       options: {
         permissionMode: "acceptEdits",
         hooks: {
-          PostToolUse: [{
-            matcher: "Edit|Write",
-            hooks: [{ type: "command", command: "echo \"$(date): file modified\" >> ./audit.log" }]
-          }]
+          PostToolUse: [{ matcher: "Edit|Write", hooks: [logFileChange] }]
         }
       }
     })) {
-      console.log(message);
+      if ("result" in message) console.log(message.result);
     }
     ```
     </CodeGroup>
@@ -152,19 +162,29 @@ Everything that makes Claude Code powerful is available in the SDK:
   <Tab title="Subagents">
     Spawn specialized agents to handle focused subtasks. Your main agent delegates work, and subagents report back with results.
 
-    Enable the `Task` tool to let Claude spawn subagents when it decides a task is complex enough to benefit from delegation. Claude automatically determines when to use subagents based on task complexity.
+    Define custom agents with specialized instructions. Include `Task` in `allowedTools` since subagents are invoked via the Task tool:
 
     <CodeGroup>
     ```python Python
     import asyncio
-    from claude_agent_sdk import query, ClaudeAgentOptions
+    from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition
 
     async def main():
         async for message in query(
-            prompt="Analyze this codebase for security vulnerabilities",
-            options=ClaudeAgentOptions(allowed_tools=["Read", "Glob", "Grep", "Task"])
+            prompt="Use the code-reviewer agent to review this codebase",
+            options=ClaudeAgentOptions(
+                allowed_tools=["Read", "Glob", "Grep", "Task"],
+                agents={
+                    "code-reviewer": AgentDefinition(
+                        description="Expert code reviewer for quality and security reviews.",
+                        prompt="Analyze code quality and suggest improvements.",
+                        tools=["Read", "Glob", "Grep"]
+                    )
+                }
+            )
         ):
-            print(message)
+            if hasattr(message, "result"):
+                print(message.result)
 
     asyncio.run(main())
     ```
@@ -173,17 +193,24 @@ Everything that makes Claude Code powerful is available in the SDK:
     import { query } from "@anthropic-ai/claude-agent-sdk";
 
     for await (const message of query({
-      prompt: "Analyze this codebase for security vulnerabilities",
+      prompt: "Use the code-reviewer agent to review this codebase",
       options: {
-        allowedTools: ["Read", "Glob", "Grep", "Task"]
+        allowedTools: ["Read", "Glob", "Grep", "Task"],
+        agents: {
+          "code-reviewer": {
+            description: "Expert code reviewer for quality and security reviews.",
+            prompt: "Analyze code quality and suggest improvements.",
+            tools: ["Read", "Glob", "Grep"]
+          }
+        }
       }
     })) {
-      console.log(message);
+      if ("result" in message) console.log(message.result);
     }
     ```
     </CodeGroup>
 
-    You can also define custom agent types with the `agents` option for more specialized delegation patterns.
+    Messages from within a subagent's context include a `parent_tool_use_id` field, letting you track which messages belong to which subagent execution.
 
     [Learn more about subagents →](/docs/en/agent-sdk/subagents)
   </Tab>
@@ -206,7 +233,8 @@ Everything that makes Claude Code powerful is available in the SDK:
                 }
             )
         ):
-            print(message)
+            if hasattr(message, "result"):
+                print(message.result)
 
     asyncio.run(main())
     ```
@@ -222,7 +250,7 @@ Everything that makes Claude Code powerful is available in the SDK:
         }
       }
     })) {
-      console.log(message);
+      if ("result" in message) console.log(message.result);
     }
     ```
     </CodeGroup>
@@ -247,7 +275,8 @@ Everything that makes Claude Code powerful is available in the SDK:
                 permission_mode="bypassPermissions"
             )
         ):
-            print(message)
+            if hasattr(message, "result"):
+                print(message.result)
 
     asyncio.run(main())
     ```
@@ -262,7 +291,7 @@ Everything that makes Claude Code powerful is available in the SDK:
         permissionMode: "bypassPermissions"
       }
     })) {
-      console.log(message);
+      if ("result" in message) console.log(message.result);
     }
     ```
     </CodeGroup>
@@ -288,14 +317,15 @@ Everything that makes Claude Code powerful is available in the SDK:
             options=ClaudeAgentOptions(allowed_tools=["Read", "Glob"])
         ):
             if hasattr(message, 'subtype') and message.subtype == 'init':
-                session_id = message.data.get('session_id')
+                session_id = message.session_id
 
         # Resume with full context from the first query
         async for message in query(
             prompt="Now find all places that call it",  # "it" = auth module
             options=ClaudeAgentOptions(resume=session_id)
         ):
-            pass
+            if hasattr(message, "result"):
+                print(message.result)
 
     asyncio.run(main())
     ```
@@ -320,7 +350,7 @@ Everything that makes Claude Code powerful is available in the SDK:
       prompt: "Now find all places that call it",  // "it" = auth module
       options: { resume: sessionId }
     })) {
-      // Process messages...
+      if ("result" in message) console.log(message.result);
     }
     ```
     </CodeGroup>
@@ -388,9 +418,9 @@ The SDK also supports Claude Code's filesystem-based configuration. To use these
 
     The SDK also supports authentication via third-party API providers:
 
-    - **Amazon Bedrock**: Set `CLAUDE_CODE_USE_BEDROCK=1` environment variable and configure AWS credentials
-    - **Google Vertex AI**: Set `CLAUDE_CODE_USE_VERTEX=1` environment variable and configure Google Cloud credentials
-    - **Microsoft Foundry**: Set `CLAUDE_CODE_USE_FOUNDRY=1` environment variable and configure Azure credentials
+    - **Amazon Bedrock**: set `CLAUDE_CODE_USE_BEDROCK=1` environment variable and configure AWS credentials
+    - **Google Vertex AI**: set `CLAUDE_CODE_USE_VERTEX=1` environment variable and configure Google Cloud credentials
+    - **Microsoft Foundry**: set `CLAUDE_CODE_USE_FOUNDRY=1` environment variable and configure Azure credentials
 
     <Note>
     Unless previously approved, we do not allow third party developers to offer Claude.ai login or rate limits for their products, including agents built on the Claude Agent SDK. Please use the API key authentication methods described in this document instead.
@@ -409,7 +439,8 @@ The SDK also supports Claude Code's filesystem-based configuration. To use these
             prompt="What files are in this directory?",
             options=ClaudeAgentOptions(allowed_tools=["Bash", "Glob"])
         ):
-            print(message)
+            if hasattr(message, "result"):
+                print(message.result)
 
     asyncio.run(main())
     ```
@@ -421,7 +452,7 @@ The SDK also supports Claude Code's filesystem-based configuration. To use these
       prompt: "What files are in this directory?",
       options: { allowedTools: ["Bash", "Glob"] },
     })) {
-      console.log(message);
+      if ("result" in message) console.log(message.result);
     }
     ```
     </CodeGroup>
@@ -487,15 +518,15 @@ The Claude platform offers multiple ways to build with Claude. Here's how the Ag
 
 View the full changelog for SDK updates, bug fixes, and new features:
 
-- **TypeScript SDK**: [View CHANGELOG.md](https://github.com/anthropics/claude-agent-sdk-typescript/blob/main/CHANGELOG.md)
-- **Python SDK**: [View CHANGELOG.md](https://github.com/anthropics/claude-agent-sdk-python/blob/main/CHANGELOG.md)
+- **TypeScript SDK**: [view CHANGELOG.md](https://github.com/anthropics/claude-agent-sdk-typescript/blob/main/CHANGELOG.md)
+- **Python SDK**: [view CHANGELOG.md](https://github.com/anthropics/claude-agent-sdk-python/blob/main/CHANGELOG.md)
 
 ## Reporting bugs
 
 If you encounter bugs or issues with the Agent SDK:
 
-- **TypeScript SDK**: [Report issues on GitHub](https://github.com/anthropics/claude-agent-sdk-typescript/issues)
-- **Python SDK**: [Report issues on GitHub](https://github.com/anthropics/claude-agent-sdk-python/issues)
+- **TypeScript SDK**: [report issues on GitHub](https://github.com/anthropics/claude-agent-sdk-typescript/issues)
+- **Python SDK**: [report issues on GitHub](https://github.com/anthropics/claude-agent-sdk-python/issues)
 
 ## Branding guidelines
 
