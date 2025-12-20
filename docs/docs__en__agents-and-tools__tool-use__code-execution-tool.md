@@ -10,6 +10,8 @@ The code execution tool allows Claude to run Bash commands and manipulate files,
 The code execution tool is currently in public beta.
 
 To use this feature, add the `"code-execution-2025-08-25"` [beta header](/docs/en/api/beta-headers) to your API requests.
+
+Please reach out through our [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to share your feedback on this feature.
 </Note>
 
 ## Model compatibility

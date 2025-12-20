@@ -243,14 +243,14 @@
     "docs__en__agents-and-tools__tool-use__code-execution-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool.md",
-      "hash": "6ab67a2ed520ab67693047a0bfc880a53dbf3eed32e2da45fb2c515e37f85e40",
-      "last_updated": "2025-12-20T00:24:42.823297"
+      "hash": "7057516f007fb118e8857c3fe8e47323a8a3ac00d708ad94d274acfcd92c9788",
+      "last_updated": "2025-12-20T03:28:17.267378"
     },
     "docs__en__agents-and-tools__tool-use__computer-use-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool.md",
-      "hash": "6b3cfa128d480e68cf74ceefec1ec65955f022c209dbaba2d1717c77d26a52be",
-      "last_updated": "2025-12-10T21:06:46.628396"
+      "hash": "6355b90db23c2ca2a5b2dab78fe3a87a6bdc6030e32cee054075c106f534170b",
+      "last_updated": "2025-12-20T03:28:17.962336"
     },
     "docs__en__agents-and-tools__tool-use__fine-grained-tool-streaming.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming",
@@ -279,8 +279,8 @@
     "docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling.md",
-      "hash": "3b90a7d549a1ff55426cb1c3bec0305f52223f8f6e702b42c999008277e66298",
-      "last_updated": "2025-12-08T21:06:06.253863"
+      "hash": "60c986eea6845468d20eefbe8c5353fe54a554395c8cb1e35110b7159bea8d58",
+      "last_updated": "2025-12-20T03:28:21.259025"
     },
     "docs__en__agents-and-tools__tool-use__text-editor-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool",
@@ -291,8 +291,8 @@
     "docs__en__agents-and-tools__tool-use__tool-search-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool.md",
-      "hash": "19323f70c17c0e231f94a0c2388df54182951c5aa3ca8c181b220db67934a65f",
-      "last_updated": "2025-12-09T00:25:48.451325"
+      "hash": "705a8ea20fb23ce2dcedce3a7ba164224771dcb41e183170eec88cf1ec7f87f5",
+      "last_updated": "2025-12-20T03:28:22.618451"
     },
     "docs__en__agents-and-tools__tool-use__web-fetch-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool",
@@ -3441,8 +3441,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-20T00:30:56.780792",
-    "fetch_duration_seconds": 400.047256,
+    "last_fetch_completed": "2025-12-20T03:34:28.432048",
+    "fetch_duration_seconds": 401.533965,
     "total_pages_discovered": 578,
     "pages_fetched_successfully": 573,
     "pages_failed": 6,
@@ -3459,7 +3459,7 @@
     "total_files": 573,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2025-12-20T00:30:56.780812",
+  "last_updated": "2025-12-20T03:34:28.432068",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

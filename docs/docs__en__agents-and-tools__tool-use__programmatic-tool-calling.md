@@ -10,6 +10,8 @@ Programmatic tool calling is currently in public beta.
 To use this feature, add the `"advanced-tool-use-2025-11-20"` [beta header](/docs/en/api/beta-headers) to your API requests.
 
 This feature requires the code execution tool to be enabled.
+
+Please reach out through our [feedback form](https://forms.gle/MVGTnrHe73HpMiho8) to share your feedback on this feature.
 </Note>
 
 ## Model compatibility
