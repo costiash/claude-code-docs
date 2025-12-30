@@ -394,7 +394,7 @@ The SDK also supports Claude Code's filesystem-based configuration. To use these
       </Tab>
     </Tabs>
 
-    See [Claude Code setup](https://docs.anthropic.com/en/docs/claude-code/setup) for Windows and other options.
+    See [Claude Code setup](https://code.claude.com/docs/en/setup) for Windows and other options.
   </Step>
   <Step title="Install the SDK">
     <Tabs>

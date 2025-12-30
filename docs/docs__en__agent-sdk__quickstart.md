@@ -43,7 +43,7 @@ Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fix
     After installing Claude Code onto your machine, run `claude` in your terminal and follow the prompts to authenticate. The SDK will use this authentication automatically.
 
     <Tip>
-    For more information on Claude Code installation, see [Claude Code setup](https://docs.anthropic.com/en/docs/claude-code/setup).
+    For more information on Claude Code installation, see [Claude Code setup](https://code.claude.com/docs/en/setup).
     </Tip>
   </Step>
 
@@ -220,7 +220,7 @@ After running, check `utils.py`. You'll see defensive code handling empty lists 
 This is what makes the Agent SDK different: Claude executes tools directly instead of asking you to implement them.
 
 <Note>
-If you see "Claude Code not found", [install Claude Code](#install-claude-code) and restart your terminal. For "API key not found", [set your API key](#set-your-api-key). See the [full troubleshooting guide](https://docs.anthropic.com/en/docs/claude-code/troubleshooting) for more help.
+If you see "Claude Code not found", [install Claude Code](#install-claude-code) and restart your terminal. For "API key not found", [set your API key](#set-your-api-key). See the [full troubleshooting guide](https://code.claude.com/docs/en/troubleshooting) for more help.
 </Note>
 
 ### Try other prompts

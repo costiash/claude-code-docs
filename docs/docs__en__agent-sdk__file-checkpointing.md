@@ -715,19 +715,20 @@ Set the environment variable and run the script from the same directory as your 
 Open your utility file (`utils.py` or `utils.ts`) in your IDE or editor before running the script. You'll see the file update in real-time as the agent adds doc comments, then revert back to the original when you choose to rewind.
 </Tip>
 
-<CodeGroup>
-
-```bash Python
-export CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING=1
-python try_checkpointing.py
-```
-
-```bash TypeScript
-export CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING=1
-npx tsx try_checkpointing.ts
-```
-
-</CodeGroup>
+<Tabs>
+  <Tab title="Python">
+    ```bash
+    export CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING=1
+    python try_checkpointing.py
+    ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```bash
+    export CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING=1
+    npx tsx try_checkpointing.ts
+    ```
+  </Tab>
+</Tabs>
 
 You'll see the agent add doc comments, then a prompt asking if you want to rewind. If you choose yes, the file is restored to its original state.
 
