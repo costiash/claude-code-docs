@@ -52,7 +52,6 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 | Claude Opus 4.5 | anthropic.claude-opus-4-5-20251101-v1:0 | Yes | Yes | Yes | No | No |
 | Claude Opus 4.1 | anthropic.claude-opus-4-1-20250805-v1:0 | No | Yes | No | No | No |
 | Claude Opus 4 | anthropic.claude-opus-4-20250514-v1:0 | No | Yes | No | No | No |
-| Claude Opus 3 <Tooltip tooltipContent="Deprecated as of June 30, 2025.">⚠️</Tooltip> | anthropic.claude-3-opus-20240229-v1:0 | No | Yes | No | No | No |
 | Claude Haiku 4.5 | anthropic.claude-haiku-4-5-20251001-v1:0 | Yes | Yes | Yes | No | No |
 | Claude Haiku 3.5 <Tooltip tooltipContent="Deprecated as of December 19, 2025.">⚠️</Tooltip> | anthropic.claude-3-5-haiku-20241022-v1:0 | No | Yes | No | No | No |
 | Claude Haiku 3 | anthropic.claude-3-haiku-20240307-v1:0 | No | Yes | Yes | No | Yes |

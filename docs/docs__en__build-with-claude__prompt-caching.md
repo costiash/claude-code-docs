@@ -216,7 +216,6 @@ Prompt caching is currently supported on:
 - Claude Haiku 4.5
 - Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations))
 - Claude Haiku 3
-- Claude Opus 3 ([deprecated](/docs/en/about-claude/model-deprecations))
 
 ### Structuring your prompt
 
@@ -263,7 +262,7 @@ You can define up to 4 cache breakpoints if you want to:
 ### Cache limitations
 The minimum cacheable prompt length is:
 - 4096 tokens for Claude Opus 4.5
-- 1024 tokens for Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4.5, Claude Sonnet 4, Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)), and Claude Opus 3 ([deprecated](/docs/en/about-claude/model-deprecations))
+- 1024 tokens for Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4.5, Claude Sonnet 4, and Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
 - 4096 tokens for Claude Haiku 4.5
 - 2048 tokens for Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations)) and Claude Haiku 3
 
@@ -1637,7 +1636,7 @@ This pattern is especially powerful for:
 
   <section title="Is prompt caching available for all models?">
 
-    No, prompt caching is currently only available for Claude Opus 4.5, Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4.5, Claude Sonnet 4, Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)), Claude Haiku 4.5, Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations)), Claude Haiku 3, and Claude Opus 3 ([deprecated](/docs/en/about-claude/model-deprecations)).
+    No, prompt caching is currently only available for Claude Opus 4.5, Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4.5, Claude Sonnet 4, Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)), Claude Haiku 4.5, Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations)), and Claude Haiku 3.
   
 </section>
 

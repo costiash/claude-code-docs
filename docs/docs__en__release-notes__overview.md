@@ -10,6 +10,9 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### January 5, 2026
+- We've retired the Claude Opus 3 model (`claude-3-opus-20240229`). All requests to this model will now return an error. We recommend upgrading to [Claude Opus 4.5](/docs/en/about-claude/models/overview#latest-models-comparison), which offers significantly improved intelligence at a third of the cost. Researchers can request ongoing access to Claude Opus 3 on the API through the [External Researcher Access Program](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program).
+
 ### December 19, 2025
 - We announced the deprecation of the Claude Haiku 3.5 model. Read more in [our documentation](/docs/en/about-claude/model-deprecations).
 

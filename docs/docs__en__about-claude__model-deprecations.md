@@ -62,7 +62,6 @@ All publicly released models are listed below with their status:
 
 | API Model Name              | Current State       | Deprecated        | Tentative Retirement Date |
 |:----------------------------|:--------------------|:------------------|:-------------------------|
-| `claude-3-opus-20240229`    | Deprecated          | June 30, 2025     | January 5, 2026          |
 | `claude-3-haiku-20240307`   | Active              | N/A               | Not sooner than March 7, 2025 |
 | `claude-3-5-haiku-20241022` | Deprecated          | December 19, 2025 | February 19, 2026          |
 | `claude-3-7-sonnet-20250219`| Deprecated          | October 28, 2025  | February 19, 2026          |
@@ -108,11 +107,15 @@ On August 13, 2025, we notified developers using Claude Sonnet 3.5 models of the
 
 ### 2025-06-30: Claude Opus 3 model
 
+<Note>
+This model was retired January 5, 2026.
+</Note>
+
 On June 30, 2025, we notified developers using Claude Opus 3 model of its upcoming retirement.
 
 | Retirement Date             | Deprecated Model            | Recommended Replacement         |
 |:----------------------------|:----------------------------|:--------------------------------|
-| January 5, 2026             | `claude-3-opus-20240229`    | `claude-opus-4-1-20250805`      |
+| January 5, 2026             | `claude-3-opus-20240229`    | `claude-opus-4-5-20251101`      |
 
 ### 2025-01-21: Claude 2, Claude 2.1, and Claude Sonnet 3 models
 

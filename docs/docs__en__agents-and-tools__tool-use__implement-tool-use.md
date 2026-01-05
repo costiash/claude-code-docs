@@ -4,7 +4,7 @@
 
 ## Choosing a model
 
-We recommend using the latest Claude Sonnet (4.5) or Claude Opus (4.1) model for complex tools and ambiguous queries; they handle multiple tools better and seek clarification when needed.
+We recommend using the latest Claude Sonnet (4.5) or Claude Opus (4.5) model for complex tools and ambiguous queries; they handle multiple tools better and seek clarification when needed.
 
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 

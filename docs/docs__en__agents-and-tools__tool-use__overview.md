@@ -1119,7 +1119,7 @@ When you use `tools`, we also automatically include a special system prompt for 
 
 These token counts are added to your normal input and output tokens to calculate the total cost of a request.
 
-Refer to our [models overview table](/docs/en/about-claude/models/overview#model-comparison-table) for current per-model prices.
+Refer to our [models overview table](/docs/en/about-claude/models/overview#latest-models-comparison) for current per-model prices.
 
 When you send a tool use prompt, just like any other API request, the response will output both input and output token counts as part of the reported `usage` metrics.
 
