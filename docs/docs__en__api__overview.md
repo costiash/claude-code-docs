@@ -12,7 +12,7 @@ The Claude API is a RESTful API at `https://api.anthropic.com` that provides pro
 
 To use the Claude API, you'll need:
 
-- An [Anthropic Console account](https://console.anthropic.com)
+- An [Anthropic Console account](https://platform.claude.com)
 - An [API key](/settings/keys)
 
 For step-by-step setup instructions, see [Get started](/docs/en/get-started).
@@ -47,7 +47,7 @@ If you are using the [Client SDKs](#client-sdks), the SDK will send these header
 
 ### Getting API Keys
 
-The API is made available via the web [Console](https://console.anthropic.com/). You can use the [Workbench](https://console.anthropic.com/workbench) to try out the API in the browser and then generate API keys in [Account Settings](https://console.anthropic.com/settings/keys). Use [workspaces](https://console.anthropic.com/settings/workspaces) to segment your API keys and [control spend](/docs/en/api/rate-limits) by use case.
+The API is made available via the web [Console](https://platform.claude.com/). You can use the [Workbench](https://platform.claude.com/workbench) to try out the API in the browser and then generate API keys in [Account Settings](https://platform.claude.com/settings/keys). Use [workspaces](https://platform.claude.com/settings/workspaces) to segment your API keys and [control spend](/docs/en/api/rate-limits) by use case.
 
 ## Client SDKs
 

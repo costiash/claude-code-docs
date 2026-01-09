@@ -419,7 +419,7 @@ The SDK also supports Claude Code's filesystem-based configuration. To use these
     ```bash
     export ANTHROPIC_API_KEY=your-api-key
     ```
-    Get your key from the [Console](https://console.anthropic.com/).
+    Get your key from the [Console](https://platform.claude.com/).
 
     The SDK also supports authentication via third-party API providers:
 

@@ -14,7 +14,7 @@ Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fix
 ## Prerequisites
 
 - **Node.js 18+** or **Python 3.10+**
-- An **Anthropic account** ([sign up here](https://console.anthropic.com/))
+- An **Anthropic account** ([sign up here](https://platform.claude.com/))
 
 ## Setup
 
@@ -85,7 +85,7 @@ Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fix
   <Step title="Set your API key">
     If you've already authenticated Claude Code (by running `claude` in your terminal), the SDK uses that authentication automatically.
 
-    Otherwise, you need an API key, which you can get from the [Claude Console](https://console.anthropic.com/).
+    Otherwise, you need an API key, which you can get from the [Claude Console](https://platform.claude.com/).
 
     Create a `.env` file in your project directory and store the API key there:
 
