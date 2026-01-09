@@ -93,8 +93,8 @@
     "docs__en__agent-sdk__hosting.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/hosting",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/hosting.md",
-      "hash": "92c5a2b14ab8d39acf80a7f42d56fd8d9c35674e6e63d1de8fc1810a2fb431f5",
-      "last_updated": "2025-12-06T03:24:36.530410"
+      "hash": "e94915e46e17e9f9f8cc3fb06b0868513a4caf52e58adce19a551a981998e89d",
+      "last_updated": "2026-01-09T21:06:20.172398"
     },
     "docs__en__agent-sdk__mcp.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/mcp",
@@ -3429,8 +3429,8 @@
     "claude-code__third-party-integrations.md": {
       "original_url": "https://platform.claude.com/docs/en/third-party-integrations",
       "original_md_url": "https://platform.claude.com/docs/en/third-party-integrations.md",
-      "hash": "0e85206bb618f60d61463ecc3d78c77e9198a91cd1af583f4176a58487915a83",
-      "last_updated": "2026-01-09T06:16:41.381365"
+      "hash": "1d17dd35fe770a0b698a66e15a3026bbbaa0277c64eedccfbd9dc10b833e3779",
+      "last_updated": "2026-01-09T21:13:52.553799"
     },
     "claude-code__troubleshooting.md": {
       "original_url": "https://platform.claude.com/docs/en/troubleshooting",
@@ -3453,8 +3453,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-01-09T18:16:02.650429",
-    "fetch_duration_seconds": 397.547916,
+    "last_fetch_completed": "2026-01-09T21:13:53.734444",
+    "fetch_duration_seconds": 465.193341,
     "total_pages_discovered": 580,
     "pages_fetched_successfully": 575,
     "pages_failed": 6,
@@ -3471,7 +3471,7 @@
     "total_files": 575,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-01-09T18:16:02.650457",
+  "last_updated": "2026-01-09T21:13:53.734464",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

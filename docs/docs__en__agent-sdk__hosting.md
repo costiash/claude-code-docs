@@ -45,8 +45,8 @@ Unlike stateless API calls, the Claude Agent SDK operates as a **long-running pr
 
 Several providers specialize in secure container environments for AI code execution:
 
+- **[Modal Sandbox](https://modal.com/docs/guide/sandbox)** - [demo implementation](https://modal.com/docs/examples/claude-slack-gif-creator)
 - **[Cloudflare Sandboxes](https://github.com/cloudflare/sandbox-sdk)**
-- **[Modal Sandboxes](https://modal.com/docs/guide/sandbox)**
 - **[Daytona](https://www.daytona.io/)**
 - **[E2B](https://e2b.dev/)**
 - **[Fly Machines](https://fly.io/docs/machines/)**
