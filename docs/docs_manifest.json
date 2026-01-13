@@ -3327,14 +3327,14 @@
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
       "original_md_url": "https://platform.claude.com/docs/en/settings.md",
-      "hash": "3df1110cb4b1e739c663de6ef069c1813dcb5b7696ad9d04b2e97f6b5f24e13c",
-      "last_updated": "2026-01-12T00:33:30.793162"
+      "hash": "06d4fa8c616c6567f40a6e64a8b7f9bc6ba964ba27ed354003a95c584a394a3a",
+      "last_updated": "2026-01-13T21:13:43.806429"
     },
     "claude-code__setup.md": {
       "original_url": "https://platform.claude.com/docs/en/setup",
       "original_md_url": "https://platform.claude.com/docs/en/setup.md",
-      "hash": "528525ae902a267566156c43802f434dc9a434864f13091c975578a8f33be97e",
-      "last_updated": "2026-01-12T18:21:08.324164"
+      "hash": "a15faa702e3d76bb04647ab9a40e45c994bb7498bd02e5172d75e93f96e79a2d",
+      "last_updated": "2026-01-13T21:13:44.421850"
     },
     "claude-code__skills.md": {
       "original_url": "https://platform.claude.com/docs/en/skills",
@@ -3453,8 +3453,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-01-13T18:35:15.712910",
-    "fetch_duration_seconds": 1515.363104,
+    "last_fetch_completed": "2026-01-13T21:13:58.684593",
+    "fetch_duration_seconds": 452.806203,
     "total_pages_discovered": 580,
     "pages_fetched_successfully": 575,
     "pages_failed": 6,
@@ -3471,7 +3471,7 @@
     "total_files": 575,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-01-13T18:35:15.712931",
+  "last_updated": "2026-01-13T21:13:58.684612",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
