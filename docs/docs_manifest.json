@@ -255,8 +255,8 @@
     "docs__en__agents-and-tools__tool-use__computer-use-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool.md",
-      "hash": "f05e78d615664c2973514f9bfd3590d4cff9371102d7a09838a3e774484fa15c",
-      "last_updated": "2026-01-07T00:26:08.589462"
+      "hash": "d2f22b214d36b1de557025f97ec7a284ba73713cb8a6f0b39bb722dc561087b1",
+      "last_updated": "2026-01-14T03:37:17.857756"
     },
     "docs__en__agents-and-tools__tool-use__fine-grained-tool-streaming.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming",
@@ -3453,8 +3453,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-01-14T00:33:27.403868",
-    "fetch_duration_seconds": 388.496576,
+    "last_fetch_completed": "2026-01-14T03:44:45.731214",
+    "fetch_duration_seconds": 480.979593,
     "total_pages_discovered": 580,
     "pages_fetched_successfully": 575,
     "pages_failed": 6,
@@ -3471,7 +3471,7 @@
     "total_files": 575,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-01-14T00:33:27.403888",
+  "last_updated": "2026-01-14T03:44:45.731236",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

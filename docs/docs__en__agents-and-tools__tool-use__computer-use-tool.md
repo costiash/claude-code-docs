@@ -357,7 +357,7 @@ Available in Claude 4 models and Claude Sonnet 3.7:
 - **right_click**, **middle_click** - Additional mouse buttons
 - **double_click**, **triple_click** - Multiple clicks
 - **left_mouse_down**, **left_mouse_up** - Fine-grained click control
-- **hold_key** - Hold a key while performing other actions
+- **hold_key** - Hold down a key for a specified duration (in seconds)
 - **wait** - Pause between actions
 
 **Enhanced actions (`computer_20251124`)**
@@ -399,6 +399,46 @@ Available in Claude Opus 4.5:
   "region": [100, 200, 400, 350]
 }
 ```
+
+</section>
+
+<section title="Modifier keys with click and scroll actions">
+
+To hold modifier keys (like Shift, Ctrl, or Alt) while performing click or scroll actions, use the `text` parameter on those actions. This is different from `hold_key`, which simply holds a key for a duration without performing other actions.
+
+```json
+// Shift+click (e.g., for selecting a range of items)
+{
+  "action": "left_click",
+  "coordinate": [500, 300],
+  "text": "shift"
+}
+
+// Ctrl+click (e.g., for multi-select on Windows/Linux)
+{
+  "action": "left_click",
+  "coordinate": [500, 300],
+  "text": "ctrl"
+}
+
+// Cmd+click (e.g., for multi-select on macOS)
+{
+  "action": "left_click",
+  "coordinate": [500, 300],
+  "text": "super"
+}
+
+// Shift+scroll (e.g., for horizontal scrolling)
+{
+  "action": "scroll",
+  "coordinate": [500, 400],
+  "scroll_direction": "down",
+  "scroll_amount": 3,
+  "text": "shift"
+}
+```
+
+The `text` parameter in click/scroll actions accepts modifier keys like `shift`, `ctrl`, `alt`, and `super` (for the Command/Windows key).
 
 </section>
 
