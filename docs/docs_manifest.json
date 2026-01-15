@@ -105,14 +105,14 @@
     "docs__en__agent-sdk__migration-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/migration-guide",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/migration-guide.md",
-      "hash": "04a58d4175b43def18fab1bc0c7072c2c0b6cf54865e545f76d7925f476e7958",
-      "last_updated": "2025-12-05T22:25:09.232761"
+      "hash": "83a55fafb1c7551306d456410ddcacd082e6188c6b8ffdbee259fffac0a9ed2d",
+      "last_updated": "2026-01-15T21:07:49.058168"
     },
     "docs__en__agent-sdk__modifying-system-prompts.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/modifying-system-prompts",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/modifying-system-prompts.md",
-      "hash": "9c9d87fbfd8e7c6bc7a4be28462d1527fdcaa4267c124b09d4096677c05ff54a",
-      "last_updated": "2025-12-05T22:25:09.950677"
+      "hash": "7004f45a515bf7df8bab61659d9ef52b6d94ccbb555a14f807fae9d51c0c81e7",
+      "last_updated": "2026-01-15T21:07:49.754480"
     },
     "docs__en__agent-sdk__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/overview",
@@ -177,14 +177,14 @@
     "docs__en__agent-sdk__structured-outputs.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/structured-outputs",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/structured-outputs.md",
-      "hash": "0f78341b9b61c01f9188fdaac6f26583b7b65bfc026f8b97ec6088c5b50be758",
-      "last_updated": "2025-12-05T22:25:17.435874"
+      "hash": "3e2d025138c438d6bd93cd60d93f0be237346146bfa764dc10609714d2375ac6",
+      "last_updated": "2026-01-15T21:08:08.585228"
     },
     "docs__en__agent-sdk__subagents.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/subagents",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/subagents.md",
-      "hash": "eaf4b5ca792985684b6bcad0ba9807bbb42aa87409b707bf1116f35e7d3e201a",
-      "last_updated": "2025-12-20T00:24:36.707268"
+      "hash": "6cd7128094818caefc0c74cfdff2cb2219decd51cbabbfaaabc6be9a6a6b5740",
+      "last_updated": "2026-01-15T21:08:12.364118"
     },
     "docs__en__agent-sdk__todo-tracking.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/todo-tracking",
@@ -195,8 +195,8 @@
     "docs__en__agent-sdk__typescript.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/typescript.md",
-      "hash": "57c4a48f382725017a8d721b07c46d1af294542ff26804f0eabb7e79b4919711",
-      "last_updated": "2026-01-08T00:26:57.762754"
+      "hash": "5625cdf6fcd809d7a321cfc34c99dba01dd8cd091c733683a04cd3335daf7722",
+      "last_updated": "2026-01-15T21:08:14.521368"
     },
     "docs__en__agent-sdk__typescript-v2-preview.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview",
@@ -3156,6 +3156,12 @@
       "hash": "0d25fa39d685c1e5bb23ad3f441508d50f9375be05a1b4ace5d4e155ce481309",
       "last_updated": "2025-12-05T22:32:27.226419"
     },
+    "docs__en__resources__prompt-library__motivational-muse.md": {
+      "original_url": "https://platform.claude.com/docs/en/resources/prompt-library/motivational-muse",
+      "original_md_url": "https://platform.claude.com/docs/en/resources/prompt-library/motivational-muse.md",
+      "hash": "57f44075b1f043025d4468867482776b61c363979a0634c6cd3f5572656e85b9",
+      "last_updated": "2026-01-15T21:18:49.574035"
+    },
     "docs__en__resources__prompt-library__neologism-creator.md": {
       "original_url": "https://platform.claude.com/docs/en/resources/prompt-library/neologism-creator",
       "original_md_url": "https://platform.claude.com/docs/en/resources/prompt-library/neologism-creator.md",
@@ -3447,26 +3453,25 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-01-15T18:26:51.891418",
-    "fetch_duration_seconds": 885.882429,
+    "last_fetch_completed": "2026-01-15T21:19:34.308731",
+    "fetch_duration_seconds": 780.590786,
     "total_pages_discovered": 580,
-    "pages_fetched_successfully": 574,
-    "pages_failed": 7,
+    "pages_fetched_successfully": 575,
+    "pages_failed": 6,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/chrome",
       "/docs/en/discover-plugins",
       "/docs/en/resources/overview",
       "/docs/en/resources/prompt-library/library",
-      "/docs/en/resources/prompt-library/motivational-muse",
       "/docs/en/slack"
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 574,
+    "total_files": 575,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-01-15T18:26:51.891439",
+  "last_updated": "2026-01-15T21:19:34.308757",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

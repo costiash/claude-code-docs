@@ -168,7 +168,7 @@ options = ClaudeAgentOptions(
 // BEFORE (v0.0.x) - Used Claude Code's system prompt by default
 const result = query({ prompt: "Hello" });
 
-// AFTER (v0.1.0) - Uses empty system prompt by default
+// AFTER (v0.1.0) - Uses minimal system prompt by default
 // To get the old behavior, explicitly request Claude Code's preset:
 const result = query({
   prompt: "Hello",
@@ -191,7 +191,7 @@ const result = query({
 async for message in query(prompt="Hello"):
     print(message)
 
-# AFTER (v0.1.0) - Uses empty system prompt by default
+# AFTER (v0.1.0) - Uses minimal system prompt by default
 # To get the old behavior, explicitly request Claude Code's preset:
 from claude_agent_sdk import query, ClaudeAgentOptions
 

@@ -14,7 +14,7 @@ This guide explains how to define and use subagents in the SDK using the `agents
 You can create subagents in three ways:
 
 - **Programmatically**: use the `agents` parameter in your `query()` options ([TypeScript](/docs/en/agent-sdk/typescript#agentdefinition), [Python](/docs/en/agent-sdk/python#agentdefinition))
-- **Filesystem-based**: define agents as markdown files in `.claude/agents/` directories (see the [Claude Code documentation](https://code.claude.com/docs/en/sub-agents))
+- **Filesystem-based**: define agents as markdown files in `.claude/agents/` directories (see [defining subagents as files](https://code.claude.com/docs/en/sub-agents))
 - **Built-in general-purpose**: Claude can invoke the built-in `general-purpose` subagent at any time via the Task tool without you defining anything
 
 This guide focuses on the programmatic approach, which is recommended for SDK applications.
@@ -266,7 +266,7 @@ Subagents are invoked via the Task tool. To detect when a subagent is invoked, c
 This example iterates through streamed messages, logging when a subagent is invoked and when subsequent messages originate from within that subagent's execution context.
 
 <Note>
-The message structure differs between SDKs. In Python, content blocks are accessed directly via `message.content`. In TypeScript, `SDKAssistantMessage` wraps the Anthropic API message, so content is accessed via `message.message.content`.
+The message structure differs between SDKs. In Python, content blocks are accessed directly via `message.content`. In TypeScript, `SDKAssistantMessage` wraps the Claude API message, so content is accessed via `message.message.content`.
 </Note>
 
 <CodeGroup>
@@ -340,6 +340,122 @@ for await (const message of query({
 }
 ```
 </CodeGroup>
+
+## Resuming subagents
+
+Subagents can be resumed to continue where they left off. Resumed subagents retain their full conversation history, including all previous tool calls, results, and reasoning. The subagent picks up exactly where it stopped rather than starting fresh.
+
+When a subagent completes, Claude receives its agent ID in the Task tool result. To resume a subagent programmatically:
+
+1. **Capture the session ID**: Extract `session_id` from messages during the first query
+2. **Extract the agent ID**: Parse `agentId` from the message content
+3. **Resume the session**: Pass `resume: sessionId` in the second query's options, and include the agent ID in your prompt
+
+<Note>
+You must resume the same session to access the subagent's transcript. Each `query()` call starts a new session by default, so pass `resume: sessionId` to continue in the same session.
+
+If you're using a custom agent (not a built-in one), you also need to pass the same agent definition in the `agents` parameter for both queries.
+</Note>
+
+The example below demonstrates this flow: the first query runs a subagent and captures the session ID and agent ID, then the second query resumes the session to ask a follow-up question that requires context from the first analysis.
+
+<CodeGroup>
+```typescript TypeScript
+import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+
+// Helper to extract agentId from message content
+// Stringify to avoid traversing different block types (TextBlock, ToolResultBlock, etc.)
+function extractAgentId(message: SDKMessage): string | undefined {
+  if (!('message' in message)) return undefined;
+  // Stringify the content so we can search it without traversing nested blocks
+  const content = JSON.stringify(message.message.content);
+  const match = content.match(/agentId:\s*([a-f0-9-]+)/);
+  return match?.[1];
+}
+
+let agentId: string | undefined;
+let sessionId: string | undefined;
+
+// First invocation - use the Explore agent to find API endpoints
+for await (const message of query({
+  prompt: "Use the Explore agent to find all API endpoints in this codebase",
+  options: { allowedTools: ['Read', 'Grep', 'Glob', 'Task'] }
+})) {
+  // Capture session_id from ResultMessage (needed to resume this session)
+  if ('session_id' in message) sessionId = message.session_id;
+  // Search message content for the agentId (appears in Task tool results)
+  const extractedId = extractAgentId(message);
+  if (extractedId) agentId = extractedId;
+  // Print the final result
+  if ('result' in message) console.log(message.result);
+}
+
+// Second invocation - resume and ask follow-up
+if (agentId && sessionId) {
+  for await (const message of query({
+    prompt: `Resume agent ${agentId} and list the top 3 most complex endpoints`,
+    options: { allowedTools: ['Read', 'Grep', 'Glob', 'Task'], resume: sessionId }
+  })) {
+    if ('result' in message) console.log(message.result);
+  }
+}
+```
+
+```python Python
+import asyncio
+import json
+import re
+from claude_agent_sdk import query, ClaudeAgentOptions
+
+def extract_agent_id(text: str) -> str | None:
+    """Extract agentId from Task tool result text."""
+    match = re.search(r"agentId:\s*([a-f0-9-]+)", text)
+    return match.group(1) if match else None
+
+async def main():
+    agent_id = None
+    session_id = None
+
+    # First invocation - use the Explore agent to find API endpoints
+    async for message in query(
+        prompt="Use the Explore agent to find all API endpoints in this codebase",
+        options=ClaudeAgentOptions(allowed_tools=["Read", "Grep", "Glob", "Task"])
+    ):
+        # Capture session_id from ResultMessage (needed to resume this session)
+        if hasattr(message, "session_id"):
+            session_id = message.session_id
+        # Search message content for the agentId (appears in Task tool results)
+        if hasattr(message, "content"):
+            # Stringify the content so we can search it without traversing nested blocks
+            content_str = json.dumps(message.content, default=str)
+            extracted = extract_agent_id(content_str)
+            if extracted:
+                agent_id = extracted
+        # Print the final result
+        if hasattr(message, "result"):
+            print(message.result)
+
+    # Second invocation - resume and ask follow-up
+    if agent_id and session_id:
+        async for message in query(
+            prompt=f"Resume agent {agent_id} and list the top 3 most complex endpoints",
+            options=ClaudeAgentOptions(
+                allowed_tools=["Read", "Grep", "Glob", "Task"],
+                resume=session_id
+            )
+        ):
+            if hasattr(message, "result"):
+                print(message.result)
+
+asyncio.run(main())
+```
+</CodeGroup>
+
+Subagent transcripts persist independently of the main conversation:
+
+- **Main conversation compaction**: When the main conversation compacts, subagent transcripts are unaffected. They're stored in separate files.
+- **Session persistence**: Subagent transcripts persist within their session. You can resume a subagent after restarting Claude Code by resuming the same session.
+- **Automatic cleanup**: Transcripts are cleaned up based on the `cleanupPeriodDays` setting (default: 30 days).
 
 ## Tool restrictions
 
