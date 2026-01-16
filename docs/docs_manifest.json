@@ -138,6 +138,12 @@
       "hash": "cadba2eab4f8d3054c4c69d1259a8d5956fa9663cf2479406c1444e4c7c0d813",
       "last_updated": "2026-01-08T00:26:49.581232"
     },
+    "docs__en__agent-sdk__quickstart.md": {
+      "original_url": "https://platform.claude.com/docs/en/agent-sdk/quickstart",
+      "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/quickstart.md",
+      "hash": "29ad0ebe2e501040f08764a0860b2be2feefd505247bafdc508cadeabb11235f",
+      "last_updated": "2026-01-16T03:35:08.066730"
+    },
     "docs__en__agent-sdk__secure-deployment.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/secure-deployment",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/secure-deployment.md",
@@ -1806,6 +1812,12 @@
       "hash": "89d617e1be943fa8f5d1cf9b899e75b88a6c0b0db3164f852143f56ae32819a3",
       "last_updated": "2025-12-18T21:09:35.342057"
     },
+    "docs__en__api__python__beta__skills__versions__list.md": {
+      "original_url": "https://platform.claude.com/docs/en/api/python/beta/skills/versions/list",
+      "original_md_url": "https://platform.claude.com/docs/en/api/python/beta/skills/versions/list.md",
+      "hash": "f41584f07b2f5c1d351fc2d24f40f0c7424b56355f8e98f594dc5e8747e6c053",
+      "last_updated": "2026-01-16T03:38:22.876873"
+    },
     "docs__en__api__python__beta__skills__versions__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/skills/versions/retrieve",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/beta/skills/versions/retrieve.md",
@@ -2543,6 +2555,12 @@
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/files.md",
       "hash": "fb56b60ab2f43610792be90b919b501a773008559d50097f2997a7cd2e4d06e7",
       "last_updated": "2025-12-19T18:14:02.644318"
+    },
+    "docs__en__build-with-claude__multilingual-support.md": {
+      "original_url": "https://platform.claude.com/docs/en/build-with-claude/multilingual-support",
+      "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/multilingual-support.md",
+      "hash": "f60b9e15b27c915ae5ccc0b93cc6b4d274390043ebb784a1bd0463c508ba3c7d",
+      "last_updated": "2026-01-16T03:39:48.301416"
     },
     "docs__en__build-with-claude__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/overview",
@@ -3429,22 +3447,19 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "76eeaa4d36459f9ad85821e614f05595024994945f0c9158039ce7dcb594aed2",
-      "last_updated": "2026-01-16T00:34:18.195701",
+      "hash": "3b4ef4ea16e51b961832297de07700232c2815de567aca33c58fafa770c1956a",
+      "last_updated": "2026-01-16T03:41:51.641919",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-01-16T00:34:18.196241",
-    "fetch_duration_seconds": 450.060814,
+    "last_fetch_completed": "2026-01-16T03:41:51.642027",
+    "fetch_duration_seconds": 420.077629,
     "total_pages_discovered": 580,
-    "pages_fetched_successfully": 572,
-    "pages_failed": 9,
+    "pages_fetched_successfully": 575,
+    "pages_failed": 6,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
-      "/docs/en/agent-sdk/quickstart",
-      "/docs/en/api/python/beta/skills/versions/list",
-      "/docs/en/build-with-claude/multilingual-support",
       "/docs/en/chrome",
       "/docs/en/discover-plugins",
       "/docs/en/resources/overview",
@@ -3453,10 +3468,10 @@
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 572,
+    "total_files": 575,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-01-16T00:34:18.196261",
+  "last_updated": "2026-01-16T03:41:51.642046",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
