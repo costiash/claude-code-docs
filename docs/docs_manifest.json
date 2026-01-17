@@ -123,8 +123,8 @@
     "docs__en__agent-sdk__permissions.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/permissions",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/permissions.md",
-      "hash": "315d4bce6385b762e97793f474d92b77fad8254fac1b0831309a111d54fd3246",
-      "last_updated": "2026-01-16T18:09:33.011655"
+      "hash": "6adf1b328ce59b6829fa5b68567979d84b3a11b2c78e0e524717eea5bbe853ec",
+      "last_updated": "2026-01-17T21:05:19.280123"
     },
     "docs__en__agent-sdk__plugins.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/plugins",
@@ -207,8 +207,8 @@
     "docs__en__agent-sdk__user-input.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/user-input",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/user-input.md",
-      "hash": "ef53f611dc727b2bca5498a7ae35d2ed4c613d3549ae1b9d3df49064f94c1ec3",
-      "last_updated": "2026-01-08T00:26:59.604664"
+      "hash": "acb3bc16d2fa2683fe2f7bda4ba1e074ad8e185caaf0d39c8ed0450dbee64554",
+      "last_updated": "2026-01-17T21:05:27.857552"
     },
     "docs__en__agents-and-tools__agent-skills__best-practices.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices",
@@ -3453,8 +3453,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-01-17T18:14:14.053284",
-    "fetch_duration_seconds": 372.94875,
+    "last_fetch_completed": "2026-01-17T21:11:35.983386",
+    "fetch_duration_seconds": 390.897933,
     "total_pages_discovered": 580,
     "pages_fetched_successfully": 575,
     "pages_failed": 6,
@@ -3471,7 +3471,7 @@
     "total_files": 575,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-01-17T18:14:14.053302",
+  "last_updated": "2026-01-17T21:11:35.983409",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

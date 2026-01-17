@@ -361,6 +361,10 @@ Beyond allowing or denying, you can modify the tool's input or provide context t
 
 When Claude needs more direction on a task with multiple valid approaches, it calls the `AskUserQuestion` tool. This triggers your `canUseTool` callback with `toolName` set to `AskUserQuestion`. The input contains Claude's questions as multiple-choice options, which you display to the user and return their selections.
 
+<Tip>
+Clarifying questions are especially common in [`plan` mode](/docs/en/agent-sdk/permissions#plan-mode-plan), where Claude explores the codebase and asks questions before proposing a plan. This makes plan mode ideal for interactive workflows where you want Claude to gather requirements before making changes.
+</Tip>
+
 The following steps show how to handle clarifying questions:
 
 <Steps>

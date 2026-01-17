@@ -49,16 +49,12 @@ The SDK supports these permission modes:
 | :--- | :---------- | :------------ |
 | `default` | Standard permission behavior | No auto-approvals; unmatched tools trigger your `canUseTool` callback |
 | `acceptEdits` | Auto-accept file edits | File edits and [filesystem operations](#accept-edits-mode-acceptedits) (`mkdir`, `rm`, `mv`, etc.) are automatically approved |
-| `dontAsk` | Skip approval prompts | Auto-deny tools unless explicitly allowed by an [allow rule](https://code.claude.com/docs/en/settings#permission-settings) |
 | `bypassPermissions` | Bypass all permission checks | All tools run without permission prompts (use with caution) |
+| `plan` | Planning mode | No tool execution; Claude plans without making changes |
 
 <Warning>
 **Subagent inheritance**: When using `bypassPermissions`, all subagents inherit this mode and it cannot be overridden. Subagents may have different system prompts and less constrained behavior than your main agent. Enabling `bypassPermissions` grants them full, autonomous system access without any approval prompts.
 </Warning>
-
-<Note>
-`plan` mode is not currently supported in the SDK.
-</Note>
 
 ### Set permission mode
 
@@ -177,12 +173,6 @@ Auto-approves file operations so Claude can edit code without prompting. Other t
 
 **Use when:** you trust Claude's edits and want faster iteration, such as during prototyping or when working in an isolated directory.
 
-#### Don't ask mode (`dontAsk`)
-
-Auto-denies all tools unless explicitly permitted by an [allow rule](https://code.claude.com/docs/en/settings#permission-settings) in `settings.json`. No prompts are shown.
-
-**Use when:** running in non-interactive environments (CI/CD, batch processing) where you can't prompt users. Configure allow rules for the specific tools you need.
-
 #### Bypass permissions mode (`bypassPermissions`)
 
 Auto-approves all tool uses without prompts. Hooks still execute and can block operations if needed.
@@ -190,6 +180,12 @@ Auto-approves all tool uses without prompts. Hooks still execute and can block o
 <Warning>
 Use with extreme caution. Claude has full system access in this mode. Only use in controlled environments where you trust all possible operations.
 </Warning>
+
+#### Plan mode (`plan`)
+
+Prevents tool execution entirely. Claude can analyze code and create plans but cannot make changes. Claude may use `AskUserQuestion` to clarify requirements before finalizing the plan. See [Handle approvals and user input](/docs/en/agent-sdk/user-input#handle-clarifying-questions) for handling these prompts.
+
+**Use when:** you want Claude to propose changes without executing them, such as during code review or when you need to approve changes before they're made.
 
 ## Related resources
 
