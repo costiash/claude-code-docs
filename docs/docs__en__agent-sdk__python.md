@@ -453,6 +453,7 @@ Configuration dataclass for Claude Code queries.
 ```python
 @dataclass
 class ClaudeAgentOptions:
+    tools: list[str] | ToolsPreset | None = None
     allowed_tools: list[str] = field(default_factory=list)
     system_prompt: str | SystemPromptPreset | None = None
     mcp_servers: dict[str, McpServerConfig] | str | Path = field(default_factory=dict)
@@ -460,11 +461,15 @@ class ClaudeAgentOptions:
     continue_conversation: bool = False
     resume: str | None = None
     max_turns: int | None = None
+    max_budget_usd: float | None = None
     disallowed_tools: list[str] = field(default_factory=list)
     model: str | None = None
+    fallback_model: str | None = None
+    betas: list[SdkBeta] = field(default_factory=list)
     output_format: OutputFormat | None = None
     permission_prompt_tool_name: str | None = None
     cwd: str | Path | None = None
+    cli_path: str | Path | None = None
     settings: str | None = None
     add_dirs: list[str | Path] = field(default_factory=list)
     env: dict[str, str] = field(default_factory=dict)
@@ -479,10 +484,12 @@ class ClaudeAgentOptions:
     fork_session: bool = False
     agents: dict[str, AgentDefinition] | None = None
     setting_sources: list[SettingSource] | None = None
+    max_thinking_tokens: int | None = None
 ```
 
 | Property                      | Type                                         | Default              | Description                                                                                                                                                                             |
 | :---------------------------- | :------------------------------------------- | :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tools`                       | `list[str] \| ToolsPreset \| None`           | `None`               | Tools configuration. Use `{"type": "preset", "preset": "claude_code"}` for Claude Code's default tools                                                                                  |
 | `allowed_tools`               | `list[str]`                                  | `[]`                 | List of allowed tool names                                                                                                                                                              |
 | `system_prompt`               | `str \| SystemPromptPreset \| None`          | `None`               | System prompt configuration. Pass a string for custom prompt, or use `{"type": "preset", "preset": "claude_code"}` for Claude Code's system prompt. Add `"append"` to extend the preset |
 | `mcp_servers`                 | `dict[str, McpServerConfig] \| str \| Path`  | `{}`                 | MCP server configurations or path to config file                                                                                                                                        |
@@ -490,12 +497,16 @@ class ClaudeAgentOptions:
 | `continue_conversation`       | `bool`                                       | `False`              | Continue the most recent conversation                                                                                                                                                   |
 | `resume`                      | `str \| None`                                | `None`               | Session ID to resume                                                                                                                                                                    |
 | `max_turns`                   | `int \| None`                                | `None`               | Maximum conversation turns                                                                                                                                                              |
+| `max_budget_usd`              | `float \| None`                              | `None`               | Maximum budget in USD for the session                                                                                                                                                   |
 | `disallowed_tools`            | `list[str]`                                  | `[]`                 | List of disallowed tool names                                                                                                                                                           |
 | `enable_file_checkpointing`   | `bool`                                       | `False`              | Enable file change tracking for rewinding. See [File checkpointing](/docs/en/agent-sdk/file-checkpointing)                                                                              |
 | `model`                       | `str \| None`                                | `None`               | Claude model to use                                                                                                                                                                     |
+| `fallback_model`              | `str \| None`                                | `None`               | Fallback model to use if the primary model fails                                                                                                                                        |
+| `betas`                       | `list[SdkBeta]`                              | `[]`                 | Beta features to enable. See [`SdkBeta`](#sdkbeta) for available options                                                                                                                |
 | `output_format`               | [`OutputFormat`](#outputformat) ` \| None`   | `None`               | Define output format for agent results. See [Structured outputs](/docs/en/agent-sdk/structured-outputs) for details                                                                    |
 | `permission_prompt_tool_name` | `str \| None`                                | `None`               | MCP tool name for permission prompts                                                                                                                                                    |
 | `cwd`                         | `str \| Path \| None`                        | `None`               | Current working directory                                                                                                                                                               |
+| `cli_path`                    | `str \| Path \| None`                        | `None`               | Custom path to the Claude Code CLI executable                                                                                                                                           |
 | `settings`                    | `str \| None`                                | `None`               | Path to settings file                                                                                                                                                                   |
 | `add_dirs`                    | `list[str \| Path]`                          | `[]`                 | Additional directories Claude can access                                                                                                                                                |
 | `env`                         | `dict[str, str]`                             | `{}`                 | Environment variables                                                                                                                                                                   |
@@ -503,15 +514,16 @@ class ClaudeAgentOptions:
 | `max_buffer_size`             | `int \| None`                                | `None`               | Maximum bytes when buffering CLI stdout                                                                                                                                                 |
 | `debug_stderr`                | `Any`                                        | `sys.stderr`         | _Deprecated_ - File-like object for debug output. Use `stderr` callback instead                                                                                                         |
 | `stderr`                      | `Callable[[str], None] \| None`              | `None`               | Callback function for stderr output from CLI                                                                                                                                            |
-| `can_use_tool`                | `CanUseTool \| None`                         | `None`               | Tool permission callback function                                                                                                                                                       |
+| `can_use_tool`                | [`CanUseTool`](#canusertool) ` \| None`      | `None`               | Tool permission callback function. See [Permission types](#canusertool) for details                                                                                                     |
 | `hooks`                       | `dict[HookEvent, list[HookMatcher]] \| None` | `None`               | Hook configurations for intercepting events                                                                                                                                             |
 | `user`                        | `str \| None`                                | `None`               | User identifier                                                                                                                                                                         |
-| `include_partial_messages`    | `bool`                                       | `False`              | Include partial message streaming events                                                                                                                                                |
+| `include_partial_messages`    | `bool`                                       | `False`              | Include partial message streaming events. When enabled, [`StreamEvent`](#streamevent) messages are yielded                                                                              |
 | `fork_session`                | `bool`                                       | `False`              | When resuming with `resume`, fork to a new session ID instead of continuing the original session                                                                                        |
 | `agents`                      | `dict[str, AgentDefinition] \| None`         | `None`               | Programmatically defined subagents                                                                                                                                                      |
 | `plugins`                     | `list[SdkPluginConfig]`                      | `[]`                 | Load custom plugins from local paths. See [Plugins](/docs/en/agent-sdk/plugins) for details                                                                                             |
 | `sandbox`                     | [`SandboxSettings`](#sandboxsettings) ` \| None` | `None`              | Configure sandbox behavior programmatically. See [Sandbox settings](#sandboxsettings) for details                                        |
 | `setting_sources`             | `list[SettingSource] \| None`                | `None` (no settings) | Control which filesystem settings to load. When omitted, no settings are loaded. **Note:** Must include `"project"` to load CLAUDE.md files                                             |
+| `max_thinking_tokens`         | `int \| None`                                | `None`               | Maximum tokens for thinking blocks                                                                                                                                                      |
 
 ### `OutputFormat`
 
@@ -685,6 +697,125 @@ PermissionMode = Literal[
 ]
 ```
 
+### `CanUseTool`
+
+Type alias for tool permission callback functions.
+
+```python
+CanUseTool = Callable[
+    [str, dict[str, Any], ToolPermissionContext],
+    Awaitable[PermissionResult]
+]
+```
+
+The callback receives:
+- `tool_name`: Name of the tool being called
+- `input_data`: The tool's input parameters
+- `context`: A `ToolPermissionContext` with additional information
+
+Returns a `PermissionResult` (either `PermissionResultAllow` or `PermissionResultDeny`).
+
+### `ToolPermissionContext`
+
+Context information passed to tool permission callbacks.
+
+```python
+@dataclass
+class ToolPermissionContext:
+    signal: Any | None = None  # Future: abort signal support
+    suggestions: list[PermissionUpdate] = field(default_factory=list)
+```
+
+| Field | Type | Description |
+|:------|:-----|:------------|
+| `signal` | `Any \| None` | Reserved for future abort signal support |
+| `suggestions` | `list[PermissionUpdate]` | Permission update suggestions from the CLI |
+
+### `PermissionResult`
+
+Union type for permission callback results.
+
+```python
+PermissionResult = PermissionResultAllow | PermissionResultDeny
+```
+
+### `PermissionResultAllow`
+
+Result indicating the tool call should be allowed.
+
+```python
+@dataclass
+class PermissionResultAllow:
+    behavior: Literal["allow"] = "allow"
+    updated_input: dict[str, Any] | None = None
+    updated_permissions: list[PermissionUpdate] | None = None
+```
+
+| Field | Type | Default | Description |
+|:------|:-----|:--------|:------------|
+| `behavior` | `Literal["allow"]` | `"allow"` | Must be "allow" |
+| `updated_input` | `dict[str, Any] \| None` | `None` | Modified input to use instead of original |
+| `updated_permissions` | `list[PermissionUpdate] \| None` | `None` | Permission updates to apply |
+
+### `PermissionResultDeny`
+
+Result indicating the tool call should be denied.
+
+```python
+@dataclass
+class PermissionResultDeny:
+    behavior: Literal["deny"] = "deny"
+    message: str = ""
+    interrupt: bool = False
+```
+
+| Field | Type | Default | Description |
+|:------|:-----|:--------|:------------|
+| `behavior` | `Literal["deny"]` | `"deny"` | Must be "deny" |
+| `message` | `str` | `""` | Message explaining why the tool was denied |
+| `interrupt` | `bool` | `False` | Whether to interrupt the current execution |
+
+### `PermissionUpdate`
+
+Configuration for updating permissions programmatically.
+
+```python
+@dataclass
+class PermissionUpdate:
+    type: Literal[
+        "addRules",
+        "replaceRules",
+        "removeRules",
+        "setMode",
+        "addDirectories",
+        "removeDirectories",
+    ]
+    rules: list[PermissionRuleValue] | None = None
+    behavior: Literal["allow", "deny", "ask"] | None = None
+    mode: PermissionMode | None = None
+    directories: list[str] | None = None
+    destination: Literal["userSettings", "projectSettings", "localSettings", "session"] | None = None
+```
+
+| Field | Type | Description |
+|:------|:-----|:------------|
+| `type` | `Literal[...]` | The type of permission update operation |
+| `rules` | `list[PermissionRuleValue] \| None` | Rules for add/replace/remove operations |
+| `behavior` | `Literal["allow", "deny", "ask"] \| None` | Behavior for rule-based operations |
+| `mode` | `PermissionMode \| None` | Mode for setMode operation |
+| `directories` | `list[str] \| None` | Directories for add/remove directory operations |
+| `destination` | `Literal[...] \| None` | Where to apply the permission update |
+
+### `SdkBeta`
+
+Literal type for SDK beta features.
+
+```python
+SdkBeta = Literal["context-1m-2025-08-07"]
+```
+
+Use with the `betas` field in `ClaudeAgentOptions` to enable beta features.
+
 ### `McpSdkServerConfig`
 
 Configuration for SDK MCP servers created with `create_sdk_mcp_server()`.
@@ -764,7 +895,7 @@ For complete information on creating and using plugins, see [Plugins](/docs/en/a
 Union type of all possible messages.
 
 ```python
-Message = UserMessage | AssistantMessage | SystemMessage | ResultMessage
+Message = UserMessage | AssistantMessage | SystemMessage | ResultMessage | StreamEvent
 ```
 
 ### `UserMessage`
@@ -815,7 +946,28 @@ class ResultMessage:
     total_cost_usd: float | None = None
     usage: dict[str, Any] | None = None
     result: str | None = None
+    structured_output: Any = None
 ```
+
+### `StreamEvent`
+
+Stream event for partial message updates during streaming. Only received when `include_partial_messages=True` in `ClaudeAgentOptions`.
+
+```python
+@dataclass
+class StreamEvent:
+    uuid: str
+    session_id: str
+    event: dict[str, Any]  # The raw Anthropic API stream event
+    parent_tool_use_id: str | None = None
+```
+
+| Field | Type | Description |
+|:------|:-----|:------------|
+| `uuid` | `str` | Unique identifier for this event |
+| `session_id` | `str` | Session identifier |
+| `event` | `dict[str, Any]` | The raw Anthropic API stream event data |
+| `parent_tool_use_id` | `str \| None` | Parent tool use ID if this event is from a subagent |
 
 ## Content Block Types
 
@@ -935,7 +1087,7 @@ class CLIJSONDecodeError(ClaudeSDKError):
 
 ## Hook Types
 
-For a comprehensive guide on using hooks with examples and common patterns, see the [Hooks guide](/en/docs/agent-sdk/hooks).
+For a comprehensive guide on using hooks with examples and common patterns, see the [Hooks guide](/docs/en/agent-sdk/hooks).
 
 ### `HookEvent`
 
@@ -996,6 +1148,184 @@ class HookMatcher:
     hooks: list[HookCallback] = field(default_factory=list)  # List of callbacks to execute
     timeout: float | None = None        # Timeout in seconds for all hooks in this matcher (default: 60)
 ```
+
+### `HookInput`
+
+Union type of all hook input types. The actual type depends on the `hook_event_name` field.
+
+```python
+HookInput = (
+    PreToolUseHookInput
+    | PostToolUseHookInput
+    | UserPromptSubmitHookInput
+    | StopHookInput
+    | SubagentStopHookInput
+    | PreCompactHookInput
+)
+```
+
+### `BaseHookInput`
+
+Base fields present in all hook input types.
+
+```python
+class BaseHookInput(TypedDict):
+    session_id: str
+    transcript_path: str
+    cwd: str
+    permission_mode: NotRequired[str]
+```
+
+| Field | Type | Description |
+|:------|:-----|:------------|
+| `session_id` | `str` | Current session identifier |
+| `transcript_path` | `str` | Path to the session transcript file |
+| `cwd` | `str` | Current working directory |
+| `permission_mode` | `str` (optional) | Current permission mode |
+
+### `PreToolUseHookInput`
+
+Input data for `PreToolUse` hook events.
+
+```python
+class PreToolUseHookInput(BaseHookInput):
+    hook_event_name: Literal["PreToolUse"]
+    tool_name: str
+    tool_input: dict[str, Any]
+```
+
+| Field | Type | Description |
+|:------|:-----|:------------|
+| `hook_event_name` | `Literal["PreToolUse"]` | Always "PreToolUse" |
+| `tool_name` | `str` | Name of the tool about to be executed |
+| `tool_input` | `dict[str, Any]` | Input parameters for the tool |
+
+### `PostToolUseHookInput`
+
+Input data for `PostToolUse` hook events.
+
+```python
+class PostToolUseHookInput(BaseHookInput):
+    hook_event_name: Literal["PostToolUse"]
+    tool_name: str
+    tool_input: dict[str, Any]
+    tool_response: Any
+```
+
+| Field | Type | Description |
+|:------|:-----|:------------|
+| `hook_event_name` | `Literal["PostToolUse"]` | Always "PostToolUse" |
+| `tool_name` | `str` | Name of the tool that was executed |
+| `tool_input` | `dict[str, Any]` | Input parameters that were used |
+| `tool_response` | `Any` | Response from the tool execution |
+
+### `UserPromptSubmitHookInput`
+
+Input data for `UserPromptSubmit` hook events.
+
+```python
+class UserPromptSubmitHookInput(BaseHookInput):
+    hook_event_name: Literal["UserPromptSubmit"]
+    prompt: str
+```
+
+| Field | Type | Description |
+|:------|:-----|:------------|
+| `hook_event_name` | `Literal["UserPromptSubmit"]` | Always "UserPromptSubmit" |
+| `prompt` | `str` | The user's submitted prompt |
+
+### `StopHookInput`
+
+Input data for `Stop` hook events.
+
+```python
+class StopHookInput(BaseHookInput):
+    hook_event_name: Literal["Stop"]
+    stop_hook_active: bool
+```
+
+| Field | Type | Description |
+|:------|:-----|:------------|
+| `hook_event_name` | `Literal["Stop"]` | Always "Stop" |
+| `stop_hook_active` | `bool` | Whether the stop hook is active |
+
+### `SubagentStopHookInput`
+
+Input data for `SubagentStop` hook events.
+
+```python
+class SubagentStopHookInput(BaseHookInput):
+    hook_event_name: Literal["SubagentStop"]
+    stop_hook_active: bool
+```
+
+| Field | Type | Description |
+|:------|:-----|:------------|
+| `hook_event_name` | `Literal["SubagentStop"]` | Always "SubagentStop" |
+| `stop_hook_active` | `bool` | Whether the stop hook is active |
+
+### `PreCompactHookInput`
+
+Input data for `PreCompact` hook events.
+
+```python
+class PreCompactHookInput(BaseHookInput):
+    hook_event_name: Literal["PreCompact"]
+    trigger: Literal["manual", "auto"]
+    custom_instructions: str | None
+```
+
+| Field | Type | Description |
+|:------|:-----|:------------|
+| `hook_event_name` | `Literal["PreCompact"]` | Always "PreCompact" |
+| `trigger` | `Literal["manual", "auto"]` | What triggered the compaction |
+| `custom_instructions` | `str \| None` | Custom instructions for compaction |
+
+### `HookJSONOutput`
+
+Union type for hook callback return values.
+
+```python
+HookJSONOutput = AsyncHookJSONOutput | SyncHookJSONOutput
+```
+
+#### `SyncHookJSONOutput`
+
+Synchronous hook output with control and decision fields.
+
+```python
+class SyncHookJSONOutput(TypedDict):
+    # Control fields
+    continue_: NotRequired[bool]      # Whether to proceed (default: True)
+    suppressOutput: NotRequired[bool] # Hide stdout from transcript
+    stopReason: NotRequired[str]      # Message when continue is False
+
+    # Decision fields
+    decision: NotRequired[Literal["block"]]
+    systemMessage: NotRequired[str]   # Warning message for user
+    reason: NotRequired[str]          # Feedback for Claude
+
+    # Hook-specific output
+    hookSpecificOutput: NotRequired[dict[str, Any]]
+```
+
+<Note>
+Use `continue_` (with underscore) in Python code. It is automatically converted to `continue` when sent to the CLI.
+</Note>
+
+#### `AsyncHookJSONOutput`
+
+Async hook output that defers hook execution.
+
+```python
+class AsyncHookJSONOutput(TypedDict):
+    async_: Literal[True]             # Set to True to defer execution
+    asyncTimeout: NotRequired[int]    # Timeout in milliseconds
+```
+
+<Note>
+Use `async_` (with underscore) in Python code. It is automatically converted to `async` when sent to the CLI.
+</Note>
 
 ### Hook Usage Example
 

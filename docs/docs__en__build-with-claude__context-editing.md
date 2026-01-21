@@ -35,25 +35,19 @@ The `clear_thinking_20251015` strategy manages `thinking` blocks in conversation
 To maximize cache hits, preserve all thinking blocks by setting `keep: "all"`.
 </Tip>
 
-<Note>
 An assistant conversation turn may include multiple content blocks (e.g. when using tools) and multiple thinking blocks (e.g. with [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking)).
-</Note>
 
-<Tip>
-**Context editing happens server-side**
+### Context editing happens server-side
 
-Context editing is applied **server-side** before the prompt reaches Claude. Your client application maintains the full, unmodified conversation history—you do not need to sync your client state with the edited version. Continue managing your full conversation history locally as you normally would.
-</Tip>
+Context editing is applied server-side before the prompt reaches Claude. Your client application maintains the full, unmodified conversation history—you do not need to sync your client state with the edited version. Continue managing your full conversation history locally as you normally would.
 
-<Tip>
-**Context editing and prompt caching**
+### Context editing and prompt caching
 
 Context editing's interaction with [prompt caching](/docs/en/build-with-claude/prompt-caching) varies by strategy:
 
 - **Tool result clearing**: Invalidates cached prompt prefixes when content is cleared. To account for this, we recommend clearing enough tokens to make the cache invalidation worthwhile. Use the `clear_at_least` parameter to ensure a minimum number of tokens is cleared each time. You'll incur cache write costs each time content is cleared, but subsequent requests can reuse the newly cached prefix.
 
 - **Thinking block clearing**: When thinking blocks are **kept** in context (not cleared), the prompt cache is preserved, enabling cache hits and reducing input token costs. When thinking blocks are **cleared**, the cache is invalidated at the point where clearing occurs. Configure the `keep` parameter based on whether you want to prioritize cache performance or context window availability.
-</Tip>
 
 ## Supported models
 
