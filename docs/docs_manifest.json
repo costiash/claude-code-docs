@@ -2277,8 +2277,8 @@
     "docs__en__build-with-claude__extended-thinking.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking.md",
-      "hash": "1dbcba74b03d741610e8ea327ed0b340d8434e6112831710700669d7ff9044d2",
-      "last_updated": "2026-01-06T18:14:08.798814"
+      "hash": "21a1179998d06a919ecf757aba3f53f4b8804990253c860e3f36e41c9cea03db",
+      "last_updated": "2026-01-22T18:25:03.230330"
     },
     "docs__en__build-with-claude__files.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/files",
@@ -3177,8 +3177,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-01-22T15:43:28.868425",
-    "fetch_duration_seconds": 1976.164315,
+    "last_fetch_completed": "2026-01-22T18:27:45.759975",
+    "fetch_duration_seconds": 1134.843461,
     "total_pages_discovered": 582,
     "pages_fetched_successfully": 529,
     "pages_failed": 54,
@@ -3243,7 +3243,7 @@
     "total_files": 529,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-01-22T15:43:28.868448",
+  "last_updated": "2026-01-22T18:27:45.760002",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

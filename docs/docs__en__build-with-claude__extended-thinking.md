@@ -421,10 +421,10 @@ When using extended thinking with tool use, be aware of the following limitation
 
 ### Toggling thinking modes in conversations
 
-You cannot toggle thinking in the middle of an assistant turn, including during tool use loops. The entire assistant turn must operate in a single thinking mode: 
+You cannot toggle thinking in the middle of an assistant turn, including during tool use loops. The entire assistant turn should operate in a single thinking mode:
 
-- **If thinking is enabled**, the final assistant turn must start with a thinking block.
-- **If thinking is disabled**, the final assistant turn must not contain any thinking blocks
+- **If thinking is enabled**, the final assistant turn should start with a thinking block.
+- **If thinking is disabled**, the final assistant turn should not contain any thinking blocks
 
 From the model's perspective, **tool use loops are part of the assistant turn**. An assistant turn doesn't complete until Claude finishes its full response, which may include multiple tool calls and results.
 
@@ -438,42 +438,30 @@ Assistant: [text: "The weather in Paris is 20°C and sunny"]
 
 Even though there are multiple API messages, the tool use loop is conceptually part of one continuous assistant response.
 
-#### Common error scenarios
+#### Graceful thinking degradation
 
-You might encounter this error:
-```
-Expected `thinking` or `redacted_thinking`, but found `tool_use`.
-When `thinking` is enabled, a final `assistant` message must start
-with a thinking block (preceding the lastmost set of `tool_use` and
-`tool_result` blocks).
-```
+When a mid-turn thinking conflict occurs (such as toggling thinking on or off during a tool use loop), the API automatically disables thinking for that request. To preserve model quality and remain on-distribution, the API may:
 
-This typically occurs when:
-1. You had thinking **disabled** during a tool use sequence
-2. You want to enable thinking again
-3. Your last assistant message contains tool use blocks but no thinking block
+- Strip thinking blocks from the conversation when they would create an invalid turn structure
+- Disable thinking for the current request when the conversation history is incompatible with thinking being enabled
+
+This means that attempting to toggle thinking mid-turn won't cause an error, but thinking will be silently disabled for that request. To confirm whether thinking was active, check for the presence of `thinking` blocks in the response.
 
 #### Practical guidance
 
-**✗ Invalid: Toggling thinking immediately after tool use**
-```
-User: "What's the weather?"
-Assistant: [tool_use] (thinking disabled)
-User: [tool_result]
-// Cannot enable thinking here - still in the same assistant turn
-```
+**Best practice**: Plan your thinking strategy at the start of each turn rather than trying to toggle mid-turn.
 
-**✓ Valid: Complete the assistant turn first**
+**Example: Toggling thinking after completing a turn**
 ```
 User: "What's the weather?"
 Assistant: [tool_use] (thinking disabled)
 User: [tool_result]
-Assistant: [text: "It's sunny"] 
-User: "What about tomorrow?" (thinking disabled)
+Assistant: [text: "It's sunny"]
+User: "What about tomorrow?"
 Assistant: [thinking] + [text: "..."] (thinking enabled - new turn)
 ```
 
-**Best practice**: Plan your thinking strategy at the start of each turn rather than trying to toggle mid-turn.
+By completing the assistant turn before toggling thinking, you ensure that thinking is actually enabled for the new request.
 
 <Note>
 Toggling thinking modes also invalidates prompt caching for message history. For more details, see the [Extended thinking with prompt caching](#extended-thinking-with-prompt-caching) section.
@@ -895,7 +883,7 @@ Extended thinking tasks often take longer than 5 minutes to complete. Consider u
 - Thinking blocks from previous turns are removed from context, which can affect cache breakpoints
 - When continuing conversations with tool use, thinking blocks are cached and count as input tokens when read from cache
 - This creates a tradeoff: while thinking blocks don't consume context window space visually, they still count toward your input token usage when cached
-- If thinking becomes disabled, requests will fail if you pass thinking content in the current tool use turn. In other contexts, thinking content passed to the API is simply ignored
+- If thinking becomes disabled and you pass thinking content in the current tool use turn, the thinking content will be stripped and thinking will remain disabled for that request
 
 **Cache invalidation patterns**
 - Changes to thinking parameters (enabled/disabled or budget allocation) invalidate message cache breakpoints
