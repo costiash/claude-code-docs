@@ -2469,8 +2469,8 @@
     "claude-code__common-workflows.md": {
       "original_url": "https://platform.claude.com/docs/en/common-workflows",
       "original_md_url": "https://platform.claude.com/docs/en/common-workflows.md",
-      "hash": "446b4f3e9c595756853be3fa979bb02b55bdc52095f134bd00f001a864877cca",
-      "last_updated": "2026-01-21T21:20:59.387708"
+      "hash": "c4e3580f9e40783eaf89ffef6bd645987a8235c655b89e631a160d178f9cbc18",
+      "last_updated": "2026-01-22T15:36:03.675710"
     },
     "claude-code__costs.md": {
       "original_url": "https://platform.claude.com/docs/en/costs",
@@ -3177,8 +3177,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-01-22T12:27:32.642318",
-    "fetch_duration_seconds": 961.16264,
+    "last_fetch_completed": "2026-01-22T15:43:28.868425",
+    "fetch_duration_seconds": 1976.164315,
     "total_pages_discovered": 582,
     "pages_fetched_successfully": 529,
     "pages_failed": 54,
@@ -3243,7 +3243,7 @@
     "total_files": 529,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-01-22T12:27:32.642341",
+  "last_updated": "2026-01-22T15:43:28.868448",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
