@@ -216,6 +216,12 @@
       "hash": "ebcc593fba18290ddce3ff3c856457929580538c4929047dff2a7a71b972e9dd",
       "last_updated": "2025-12-05T22:25:21.342185"
     },
+    "docs__en__agents-and-tools__agent-skills__enterprise.md": {
+      "original_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/enterprise",
+      "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/enterprise.md",
+      "hash": "99ba22e3083e4431ab1bc5c29197cb67cd89687d8e9f6045361a66a1a2034db6",
+      "last_updated": "2026-01-27T21:08:21.406620"
+    },
     "docs__en__agents-and-tools__agent-skills__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview.md",
@@ -2487,8 +2493,8 @@
     "claude-code__desktop.md": {
       "original_url": "https://platform.claude.com/docs/en/desktop",
       "original_md_url": "https://platform.claude.com/docs/en/desktop.md",
-      "hash": "390db8427834af5271090d743ff408b70377f0c541a8f74081b9efc51069fc3a",
-      "last_updated": "2026-01-24T03:38:52.582957"
+      "hash": "0dfa6d7f6072d7680bc343215443419895ea4416e9208da25ea021e78ac37caa",
+      "last_updated": "2026-01-27T21:31:02.351149"
     },
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
@@ -3177,10 +3183,10 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-01-27T18:35:34.902394",
-    "fetch_duration_seconds": 1443.205345,
-    "total_pages_discovered": 582,
-    "pages_fetched_successfully": 529,
+    "last_fetch_completed": "2026-01-27T21:35:41.638564",
+    "fetch_duration_seconds": 1811.100012,
+    "total_pages_discovered": 583,
+    "pages_fetched_successfully": 530,
     "pages_failed": 54,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
@@ -3240,10 +3246,10 @@
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 529,
+    "total_files": 530,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-01-27T18:35:34.902417",
+  "last_updated": "2026-01-27T21:35:41.638589",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
