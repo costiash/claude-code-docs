@@ -2625,8 +2625,8 @@
     "claude-code__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/overview",
       "original_md_url": "https://platform.claude.com/docs/en/overview.md",
-      "hash": "f11efdc63008e3940909005e6e390d3d53df74be74f1e25824d9eb2463656dc2",
-      "last_updated": "2026-01-26T21:16:53.565095"
+      "hash": "bca0bf1bab9528e5c7a3b5b71ce42e0aa8047529c751e36c3cabe51d9f9d6ff2",
+      "last_updated": "2026-01-28T15:16:05.875179"
     },
     "claude-code__plugin-marketplaces.md": {
       "original_url": "https://platform.claude.com/docs/en/plugin-marketplaces",
@@ -2649,8 +2649,8 @@
     "claude-code__quickstart.md": {
       "original_url": "https://platform.claude.com/docs/en/quickstart",
       "original_md_url": "https://platform.claude.com/docs/en/quickstart.md",
-      "hash": "0213c2b1ae76aee145cdfcb9bb4db39cd66862c939a16797796c620234076ba5",
-      "last_updated": "2026-01-26T21:16:55.980667"
+      "hash": "eb1a114b9bbc0a1c974b786061d4349a0b06eebba227476a4c0454673433bf53",
+      "last_updated": "2026-01-28T15:16:08.519487"
     },
     "docs__en__release-notes__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/release-notes/overview",
@@ -3183,11 +3183,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-01-28T12:18:14.835423",
-    "fetch_duration_seconds": 372.598108,
-    "total_pages_discovered": 583,
+    "last_fetch_completed": "2026-01-28T15:17:03.488657",
+    "fetch_duration_seconds": 349.539591,
+    "total_pages_discovered": 584,
     "pages_fetched_successfully": 530,
-    "pages_failed": 54,
+    "pages_failed": 55,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/api/kotlin/beta",
@@ -3240,6 +3240,7 @@
       "/docs/en/discover-plugins",
       "/docs/en/features-overview",
       "/docs/en/how-claude-code-works",
+      "/docs/en/keybindings",
       "/docs/en/resources/overview",
       "/docs/en/resources/prompt-library/library",
       "/docs/en/slack"
@@ -3249,7 +3250,7 @@
     "total_files": 530,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-01-28T12:18:14.835446",
+  "last_updated": "2026-01-28T15:17:03.488679",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
