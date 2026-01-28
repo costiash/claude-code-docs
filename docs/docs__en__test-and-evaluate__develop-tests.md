@@ -4,7 +4,7 @@
 
 After defining your success criteria, the next step is designing evaluations to measure LLM performance against those criteria. This is a vital part of the prompt engineering cycle.
 
-![](/docs/images/how-to-prompt-eng.png)
+![Flowchart of prompt engineering: test cases, preliminary prompt, iterative testing and refinement, final validation, ship](/docs/images/how-to-prompt-eng.png)
 
 This guide focuses on how to develop your test cases.
 
@@ -182,7 +182,7 @@ This guide focuses on how to develop your test cases.
         5: Perfectly {target_tone}
         Output only the number."""
 
-        # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output 
+        # Best practice: Use a different model for evaluation than for generating the output
         response = client.messages.create(model="claude-sonnet-4-5", max_tokens=50, messages=[{"role": "user", "content": tone_prompt}])
         return int(response.content[0].text.strip())
 
@@ -236,7 +236,7 @@ This guide focuses on how to develop your test cases.
         <response>{model_output}</response>
         Output only 'yes' or 'no'."""
 
-        # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        # Best practice: Use a different model for evaluation than for generating the output
         response = client.messages.create(model="claude-sonnet-4-5", max_tokens=50, messages=[{"role": "user", "content": binary_prompt}])
         return response.content[0].text.strip().lower() == "no"
 
@@ -296,7 +296,7 @@ This guide focuses on how to develop your test cases.
         5: Perfectly utilizes context
         Output only the number and nothing else."""
 
-        # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        # Best practice: Use a different model for evaluation than for generating the output
         response = client.messages.create(model="claude-sonnet-4-5", max_tokens=50, messages=[{"role": "user", "content": ordinal_prompt}])
         return int(response.content[0].text.strip())
 
