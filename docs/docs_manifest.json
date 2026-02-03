@@ -2460,6 +2460,12 @@
       "hash": "7196ce596dea74eac1c5f58c9f9a14ef6184c777b4ea97657c131dda34e9f15a",
       "last_updated": "2026-01-23T00:32:17.057967"
     },
+    "docs__en__build-with-claude__zero-data-retention.md": {
+      "original_url": "https://platform.claude.com/docs/en/build-with-claude/zero-data-retention",
+      "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/zero-data-retention.md",
+      "hash": "e3bef4a7cad0316969d50e17c3a6519180a257413c086305c4dcb3edddf0cd19",
+      "last_updated": "2026-02-03T18:27:28.077871"
+    },
     "claude-code__checkpointing.md": {
       "original_url": "https://platform.claude.com/docs/en/checkpointing",
       "original_md_url": "https://platform.claude.com/docs/en/checkpointing.md",
@@ -2469,8 +2475,8 @@
     "claude-code__claude-code-on-the-web.md": {
       "original_url": "https://platform.claude.com/docs/en/claude-code-on-the-web",
       "original_md_url": "https://platform.claude.com/docs/en/claude-code-on-the-web.md",
-      "hash": "9cff79e84c0a9c2c2a91adc8c0488dbdad02e3d01ca54695e435ff24421cb5cf",
-      "last_updated": "2026-01-28T03:40:23.255188"
+      "hash": "af7352160ff69abbefaa9306686a0e26aa536662e41fdb16bea4e758b822dd1d",
+      "last_updated": "2026-02-03T18:27:29.866308"
     },
     "claude-code__cli-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/cli-reference",
@@ -3177,16 +3183,16 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "7ddc4dac33e19f8ac8eaaaa58d4ce8a966143fb1852f2f2926bd40ac765bf82c",
-      "last_updated": "2026-02-01T00:42:27.252142",
+      "hash": "fc9d3f269d1fbe6c6c9eca36a137546956529d2a68761003470ef00f202dd551",
+      "last_updated": "2026-02-03T18:28:49.123559",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-02-03T15:25:18.586460",
-    "fetch_duration_seconds": 367.409416,
-    "total_pages_discovered": 586,
-    "pages_fetched_successfully": 530,
+    "last_fetch_completed": "2026-02-03T18:28:49.123661",
+    "fetch_duration_seconds": 375.80978,
+    "total_pages_discovered": 587,
+    "pages_fetched_successfully": 531,
     "pages_failed": 57,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
@@ -3249,10 +3255,10 @@
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 530,
+    "total_files": 531,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-02-03T15:25:18.586484",
+  "last_updated": "2026-02-03T18:28:49.123679",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
