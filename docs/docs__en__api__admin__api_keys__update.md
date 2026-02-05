@@ -2,7 +2,7 @@
 
 **post** `/v1/organizations/api_keys/{api_key_id}`
 
-Update Api Key
+Update API Key
 
 ### Path Parameters
 
@@ -78,13 +78,14 @@ Update Api Key
 
   - `workspace_id: string`
 
-    ID of the Workspace associated with the API key, or null if the API key belongs to the default Workspace.
+    ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
 
 ### Example
 
 ```http
 curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
     -d '{}'
 ```

@@ -1435,6 +1435,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `Optional<String> inferenceGeo`
+
+    Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
   - `Optional<Metadata> metadata`
 
     An object describing metadata about the request.
@@ -1442,18 +1446,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
   - `Optional<OutputConfig> outputConfig`
 
     Configuration options for the model's output, such as the output format.
-
-    - `Optional<Format> format`
-
-      A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
-
-      - `Schema schema`
-
-        The JSON schema of the format
-
-      - `JsonValue; type "json_schema"constant`
-
-        - `JSON_SCHEMA("json_schema")`
 
   - `Optional<ServiceTier> serviceTier`
 
@@ -1728,6 +1720,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         Description of what this tool does.
 
         Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+      - `Optional<Boolean> eagerInputStreaming`
+
+        Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
       - `Optional<Boolean> strict`
 
@@ -2231,6 +2227,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Most intelligent model for building agents and coding
+
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
       Premium model combining maximum intelligence with practical performance
@@ -2392,6 +2392,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of input tokens read from the cache.
 
+    - `Optional<String> inferenceGeo`
+
+      The geographic region where inference was performed for this request.
+
     - `long inputTokens`
 
       The number of input tokens which were used.
@@ -2438,7 +2442,7 @@ public final class Main {
         MessageCreateParams params = MessageCreateParams.builder()
             .maxTokens(1024L)
             .addUserMessage("Hello, world")
-            .model(Model.CLAUDE_SONNET_4_5_20250929)
+            .model(Model.CLAUDE_OPUS_4_6)
             .build();
         Message message = client.messages().create(params);
     }
@@ -3876,18 +3880,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     Configuration options for the model's output, such as the output format.
 
-    - `Optional<Format> format`
-
-      A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
-
-      - `Schema schema`
-
-        The JSON schema of the format
-
-      - `JsonValue; type "json_schema"constant`
-
-        - `JSON_SCHEMA("json_schema")`
-
   - `Optional<System> system`
 
     System prompt.
@@ -4135,6 +4127,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         Description of what this tool does.
 
         Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+      - `Optional<Boolean> eagerInputStreaming`
+
+        Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
       - `Optional<Boolean> strict`
 
@@ -4416,7 +4412,7 @@ public final class Main {
 
         MessageCountTokensParams params = MessageCountTokensParams.builder()
             .addUserMessage("Hello, world")
-            .model(Model.CLAUDE_SONNET_4_5_20250929)
+            .model(Model.CLAUDE_OPUS_4_6)
             .build();
         MessageTokensCount messageTokensCount = client.messages().countTokens(params);
     }
@@ -7004,6 +7000,18 @@ public final class Main {
 
     - `INPUT_JSON_DELTA("input_json_delta")`
 
+### JSON Output Format
+
+- `class JsonOutputFormat:`
+
+  - `Schema schema`
+
+    The JSON schema of the format
+
+  - `JsonValue; type "json_schema"constant`
+
+    - `JSON_SCHEMA("json_schema")`
+
 ### Message
 
 - `class Message:`
@@ -7237,6 +7245,10 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Most intelligent model for building agents and coding
+
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
       Premium model combining maximum intelligence with practical performance
@@ -7398,6 +7410,10 @@ public final class Main {
 
       The number of input tokens read from the cache.
 
+    - `Optional<String> inferenceGeo`
+
+      The geographic region where inference was performed for this request.
+
     - `long inputTokens`
 
       The number of input tokens which were used.
@@ -7478,6 +7494,10 @@ public final class Main {
       Description of what this tool does.
 
       Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+    - `Optional<Boolean> eagerInputStreaming`
+
+      Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
     - `Optional<Boolean> strict`
 
@@ -9136,6 +9156,34 @@ public final class Main {
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
+### Output Config
+
+- `class OutputConfig:`
+
+  - `Optional<Effort> effort`
+
+    All possible effort levels.
+
+    - `LOW("low")`
+
+    - `MEDIUM("medium")`
+
+    - `HIGH("high")`
+
+    - `MAX("max")`
+
+  - `Optional<JsonOutputFormat> format`
+
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+
+    - `Schema schema`
+
+      The JSON schema of the format
+
+    - `JsonValue; type "json_schema"constant`
+
+      - `JSON_SCHEMA("json_schema")`
+
 ### Plain Text Source
 
 - `class PlainTextSource:`
@@ -9925,6 +9973,10 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
         Premium model combining maximum intelligence with practical performance
@@ -10085,6 +10137,10 @@ public final class Main {
       - `Optional<Long> cacheReadInputTokens`
 
         The number of input tokens read from the cache.
+
+      - `Optional<String> inferenceGeo`
+
+        The geographic region where inference was performed for this request.
 
       - `long inputTokens`
 
@@ -10361,6 +10417,10 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
           Premium model combining maximum intelligence with practical performance
@@ -10521,6 +10581,10 @@ public final class Main {
         - `Optional<Long> cacheReadInputTokens`
 
           The number of input tokens read from the cache.
+
+        - `Optional<String> inferenceGeo`
+
+          The geographic region where inference was performed for this request.
 
         - `long inputTokens`
 
@@ -11646,6 +11710,14 @@ public final class Main {
 
     - `THINKING("thinking")`
 
+### Thinking Config Adaptive
+
+- `class ThinkingConfigAdaptive:`
+
+  - `JsonValue; type "adaptive"constant`
+
+    - `ADAPTIVE("adaptive")`
+
 ### Thinking Config Disabled
 
 - `class ThinkingConfigDisabled:`
@@ -11699,6 +11771,12 @@ public final class Main {
     - `JsonValue; type "disabled"constant`
 
       - `DISABLED("disabled")`
+
+  - `class ThinkingConfigAdaptive:`
+
+    - `JsonValue; type "adaptive"constant`
+
+      - `ADAPTIVE("adaptive")`
 
 ### Thinking Delta
 
@@ -11762,6 +11840,10 @@ public final class Main {
     Description of what this tool does.
 
     Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+  - `Optional<Boolean> eagerInputStreaming`
+
+    Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
   - `Optional<Boolean> strict`
 
@@ -12738,6 +12820,10 @@ public final class Main {
 
       Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+    - `Optional<Boolean> eagerInputStreaming`
+
+      Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
     - `Optional<Boolean> strict`
 
       When true, guarantees schema validation on tool names and inputs
@@ -13085,6 +13171,10 @@ public final class Main {
   - `Optional<Long> cacheReadInputTokens`
 
     The number of input tokens read from the cache.
+
+  - `Optional<String> inferenceGeo`
+
+    The geographic region where inference was performed for this request.
 
   - `long inputTokens`
 
@@ -14911,6 +15001,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
           Premium model combining maximum intelligence with practical performance
@@ -14991,6 +15085,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Our previous most fast and cost-effective
 
+      - `Optional<String> inferenceGeo`
+
+        Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
       - `Optional<Metadata> metadata`
 
         An object describing metadata about the request.
@@ -15005,7 +15103,19 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Configuration options for the model's output, such as the output format.
 
-        - `Optional<Format> format`
+        - `Optional<Effort> effort`
+
+          All possible effort levels.
+
+          - `LOW("low")`
+
+          - `MEDIUM("medium")`
+
+          - `HIGH("high")`
+
+          - `MAX("max")`
+
+        - `Optional<JsonOutputFormat> format`
 
           A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
@@ -15198,6 +15308,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `DISABLED("disabled")`
 
+        - `class ThinkingConfigAdaptive:`
+
+          - `JsonValue; type "adaptive"constant`
+
+            - `ADAPTIVE("adaptive")`
+
       - `Optional<ToolChoice> toolChoice`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -15370,6 +15486,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             Description of what this tool does.
 
             Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+          - `Optional<Boolean> eagerInputStreaming`
+
+            Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
           - `Optional<Boolean> strict`
 
@@ -15753,7 +15873,7 @@ public final class Main {
                 .params(BatchCreateParams.Request.Params.builder()
                     .maxTokens(1024L)
                     .addUserMessage("Hello, world")
-                    .model(Model.CLAUDE_SONNET_4_5_20250929)
+                    .model(Model.CLAUDE_OPUS_4_6)
                     .build())
                 .build())
             .build();
@@ -16489,6 +16609,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+            Most intelligent model for building agents and coding
+
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
             Premium model combining maximum intelligence with practical performance
@@ -16649,6 +16773,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `Optional<Long> cacheReadInputTokens`
 
             The number of input tokens read from the cache.
+
+          - `Optional<String> inferenceGeo`
+
+            The geographic region where inference was performed for this request.
 
           - `long inputTokens`
 
@@ -17267,6 +17395,10 @@ public final class Main {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+            Most intelligent model for building agents and coding
+
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
             Premium model combining maximum intelligence with practical performance
@@ -17427,6 +17559,10 @@ public final class Main {
           - `Optional<Long> cacheReadInputTokens`
 
             The number of input tokens read from the cache.
+
+          - `Optional<String> inferenceGeo`
+
+            The geographic region where inference was performed for this request.
 
           - `long inputTokens`
 
@@ -17831,6 +17967,10 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
           Premium model combining maximum intelligence with practical performance
@@ -17991,6 +18131,10 @@ public final class Main {
         - `Optional<Long> cacheReadInputTokens`
 
           The number of input tokens read from the cache.
+
+        - `Optional<String> inferenceGeo`
+
+          The geographic region where inference was performed for this request.
 
         - `long inputTokens`
 
@@ -18357,6 +18501,10 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
         Premium model combining maximum intelligence with practical performance
@@ -18517,6 +18665,10 @@ public final class Main {
       - `Optional<Long> cacheReadInputTokens`
 
         The number of input tokens read from the cache.
+
+      - `Optional<String> inferenceGeo`
+
+        The geographic region where inference was performed for this request.
 
       - `long inputTokens`
 

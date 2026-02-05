@@ -1453,6 +1453,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
+
           - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
             Premium model combining maximum intelligence with practical performance
@@ -1535,6 +1539,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `string`
 
+      - `InferenceGeo string`
+
+        Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
       - `Metadata Metadata`
 
         An object describing metadata about the request.
@@ -1545,11 +1553,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-      - `OutputConfig MessageBatchNewParamsRequestParamsOutputConfig`
+      - `OutputConfig OutputConfig`
 
         Configuration options for the model's output, such as the output format.
 
-        - `Format MessageBatchNewParamsRequestParamsOutputConfigFormat`
+        - `Effort OutputConfigEffort`
+
+          All possible effort levels.
+
+          - `const OutputConfigEffortLow OutputConfigEffort = "low"`
+
+          - `const OutputConfigEffortMedium OutputConfigEffort = "medium"`
+
+          - `const OutputConfigEffortHigh OutputConfigEffort = "high"`
+
+          - `const OutputConfigEffortMax OutputConfigEffort = "max"`
+
+        - `Format JSONOutputFormat`
 
           A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
@@ -1740,6 +1760,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const DisabledDisabled Disabled = "disabled"`
 
+        - `type ThinkingConfigAdaptive struct{…}`
+
+          - `Type Adaptive`
+
+            - `const AdaptiveAdaptive Adaptive = "adaptive"`
+
       - `ToolChoice ToolChoiceUnion`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -1912,6 +1938,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             Description of what this tool does.
 
             Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+          - `EagerInputStreaming bool`
+
+            Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
           - `Strict bool`
 
@@ -2302,7 +2332,7 @@ func main() {
           }},
           Role: anthropic.MessageParamRoleUser,
         }},
-        Model: anthropic.ModelClaudeSonnet4_5_20250929,
+        Model: anthropic.ModelClaudeOpus4_6,
       },
     }},
   })
@@ -3056,6 +3086,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
+
             - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
               Premium model combining maximum intelligence with practical performance
@@ -3218,6 +3252,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `CacheReadInputTokens int64`
 
             The number of input tokens read from the cache.
+
+          - `InferenceGeo string`
+
+            The geographic region where inference was performed for this request.
 
           - `InputTokens int64`
 
@@ -3845,6 +3883,10 @@ func main() {
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
+
             - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
               Premium model combining maximum intelligence with practical performance
@@ -4007,6 +4049,10 @@ func main() {
           - `CacheReadInputTokens int64`
 
             The number of input tokens read from the cache.
+
+          - `InferenceGeo string`
+
+            The geographic region where inference was performed for this request.
 
           - `InputTokens int64`
 
@@ -4417,6 +4463,10 @@ func main() {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
+
           - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
             Premium model combining maximum intelligence with practical performance
@@ -4579,6 +4629,10 @@ func main() {
         - `CacheReadInputTokens int64`
 
           The number of input tokens read from the cache.
+
+        - `InferenceGeo string`
+
+          The geographic region where inference was performed for this request.
 
         - `InputTokens int64`
 
@@ -4951,6 +5005,10 @@ func main() {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+          Most intelligent model for building agents and coding
+
         - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
           Premium model combining maximum intelligence with practical performance
@@ -5113,6 +5171,10 @@ func main() {
       - `CacheReadInputTokens int64`
 
         The number of input tokens read from the cache.
+
+      - `InferenceGeo string`
+
+        The geographic region where inference was performed for this request.
 
       - `InputTokens int64`
 

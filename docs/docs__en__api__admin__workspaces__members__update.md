@@ -65,6 +65,7 @@ Update Workspace Member
 ```http
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
     -d '{
           "workspace_role": "workspace_user"

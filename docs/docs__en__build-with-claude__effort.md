@@ -4,17 +4,19 @@ Control how many tokens Claude uses when responding with the effort parameter, t
 
 ---
 
-The effort parameter allows you to control how eager Claude is about spending tokens when responding to requests. This gives you the ability to trade off between response thoroughness and token efficiency, all with a single model.
+The effort parameter allows you to control how eager Claude is about spending tokens when responding to requests. This gives you the ability to trade off between response thoroughness and token efficiency, all with a single model. The effort parameter is generally available on all supported models with no beta header required.
 
 <Note>
-  The effort parameter is currently in beta and only supported by Claude Opus 4.5.
-
-  You must include the [beta header](/docs/en/api/beta-headers) `effort-2025-11-24` when using this feature.
+  The effort parameter is supported by Claude Opus 4.6 and Claude Opus 4.5.
 </Note>
+
+<Tip>
+For Claude Opus 4.6, effort replaces `budget_tokens` as the recommended way to control thinking depth. Combine effort with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`) for the best experience. While `budget_tokens` is still accepted on Opus 4.6, it is deprecated and will be removed in a future model release. At `high` (default) and `max` effort, Claude will almost always think. At lower effort levels, it may skip thinking for simpler problems.
+</Tip>
 
 ## How effort works
 
-By default, Claude uses maximum effort—spending as many tokens as needed for the best possible outcome. By lowering the effort level, you can instruct Claude to be more conservative with token usage, optimizing for speed and cost while accepting some reduction in capability.
+By default, Claude uses high effort—spending as many tokens as needed for excellent results. You can raise the effort level to `max` for the absolute highest capability, or lower it to be more conservative with token usage, optimizing for speed and cost while accepting some reduction in capability.
 
 <Tip>
 Setting `effort` to `"high"` produces exactly the same behavior as omitting the `effort` parameter entirely.
@@ -35,9 +37,14 @@ This approach has two major advantages:
 
 | Level    | Description                                                                                                                      | Typical use case                                                                      |
 | -------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `high`   | Maximum capability. Claude uses as many tokens as needed for the best possible outcome. Equivalent to not setting the parameter.  | Complex reasoning, difficult coding problems, agentic tasks                           |
+| `max`    | Absolute maximum capability with no constraints on token spending. Opus 4.6 only — requests using `max` on other models will return an error. | Tasks requiring the deepest possible reasoning and most thorough analysis |
+| `high`   | High capability. Equivalent to not setting the parameter. | Complex reasoning, difficult coding problems, agentic tasks                           |
 | `medium` | Balanced approach with moderate token savings. | Agentic tasks that require a balance of speed, cost, and performance                                                         |
 | `low`    | Most efficient. Significant token savings with some capability reduction. | Simpler tasks that need the best speed and lowest costs, such as subagents                     |
+
+<Note>
+Effort is a behavioral signal, not a strict token budget. At lower effort levels, Claude will still think on sufficiently difficult problems — it will just think less than it would at higher effort levels for the same problem.
+</Note>
 
 ## Basic usage
 
@@ -47,9 +54,8 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-response = client.beta.messages.create(
-    model="claude-opus-4-5-20251101",
-    betas=["effort-2025-11-24"],
+response = client.messages.create(
+    model="claude-opus-4-6",
     max_tokens=4096,
     messages=[{
         "role": "user",
@@ -68,9 +74,8 @@ import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic();
 
-const response = await client.beta.messages.create({
-  model: "claude-opus-4-5-20251101",
-  betas: ["effort-2025-11-24"],
+const response = await client.messages.create({
+  model: "claude-opus-4-6",
   max_tokens: 4096,
   messages: [{
     role: "user",
@@ -88,10 +93,9 @@ console.log(response.content[0].text);
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: effort-2025-11-24" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-opus-4-5-20251101",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -107,6 +111,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ## When should I adjust the effort parameter?
 
+- Use **max effort** when you need the absolute highest capability with no constraints—the most thorough reasoning and deepest analysis. Only available on Opus 4.6; requests using `max` on other models will return an error.
 - Use **high effort** (the default) when you need Claude's best work—complex reasoning, nuanced analysis, difficult coding problems, or any task where quality is the top priority.
 - Use **medium effort** as a balanced option when you want solid performance without the full token expenditure of high effort.
 - Use **low effort** when you're optimizing for speed (because Claude answers with fewer tokens) or cost—for example, simple classification tasks, quick lookups, or high-volume use cases where marginal quality improvements don't justify additional latency or spend.
@@ -129,17 +134,12 @@ Higher effort levels may:
 
 ## Effort with extended thinking
 
-The effort parameter works alongside the thinking token budget when extended thinking is enabled. These two controls serve different purposes:
+The effort parameter works alongside extended thinking. Its behavior depends on the model:
 
-- **Effort parameter**: Controls how Claude spends all tokens—including thinking tokens, text responses, and tool calls
-- **Thinking token budget**: Sets a maximum limit on thinking tokens specifically
+- **Claude Opus 4.6** uses [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`), where effort is the recommended control for thinking depth. While `budget_tokens` is still accepted on Opus 4.6, it is deprecated and will be removed in a future release. At `high` and `max` effort, Claude almost always thinks deeply. At lower levels, it may skip thinking for simpler problems.
+- **Claude Opus 4.5** uses manual thinking (`thinking: {type: "enabled", budget_tokens: N}`), where effort works alongside the thinking token budget. Set the effort level for your task, then set the thinking token budget based on task complexity.
 
-The effort parameter can be used with or without extended thinking enabled. When both are configured:
-
-1. First determine the effort level appropriate for your task
-2. Then set the thinking token budget based on task complexity
-
-For best performance on complex reasoning tasks, use high effort (the default) with a high thinking token budget. This allows Claude to think thoroughly and provide comprehensive responses.
+The effort parameter can be used with or without extended thinking enabled. When used without thinking, it still controls overall token spend for text responses and tool calls.
 
 ## Best practices
 

@@ -16,7 +16,7 @@ If you decide to implement leak-resistant techniques, be sure to test your promp
 ## Strategies to reduce prompt leak
 
 - **Separate context from queries:**
-You can try using system prompts to isolate key information and context from user queries. You can emphasize key instructions in the `User` turn, then reemphasize those instructions by prefilling the `Assistant` turn.
+You can try using system prompts to isolate key information and context from user queries. You can emphasize key instructions in the `User` turn, then reemphasize those instructions by prefilling the `Assistant` turn. (Note: prefilling is deprecated and not supported on Claude Opus 4.6 and Sonnet 4.5.)
 
 <section title="Example: Safeguarding proprietary analytics">
 

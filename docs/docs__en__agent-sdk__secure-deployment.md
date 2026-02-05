@@ -14,7 +14,7 @@ Not every deployment needs maximum security. A developer running Claude Code on 
 
 ## What are we protecting against?
 
-Agents can take unintended actions due to prompt injection (instructions embedded in content they process) or model error. Claude models are designed to resist this, and as we analyzed in our [model card](https://assets.anthropic.com/m/64823ba7485345a7/Claude-Opus-4-5-System-Card.pdf), we believe Claude Opus 4.5 is the most robust frontier model available.
+Agents can take unintended actions due to prompt injection (instructions embedded in content they process) or model error. Claude models are designed to resist this, and as we analyzed in our [model card](https://assets.anthropic.com/m/64823ba7485345a7/Claude-Opus-4-5-System-Card.pdf), we believe Claude Opus 4.6 is the most robust frontier model available.
 
 Defense in depth is still good practice though. For example, if an agent processes a malicious file that instructs it to send customer data to an external server, network controls can block that request entirely.
 

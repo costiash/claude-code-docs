@@ -38,7 +38,7 @@ Discuss with the user various science fiction scenarios and associated challenge
         api_key="my_api_key",
     )
     message = client.messages.create(
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-6",
         max_tokens=2000,
         temperature=1,
         system="Your task is to explore a science fiction scenario and discuss the potential challenges and considerations that may arise. Briefly describe the scenario, identify the key technological, social, or ethical issues involved, and encourage the user to share their thoughts on how these challenges might be addressed.",
@@ -67,7 +67,7 @@ Discuss with the user various science fiction scenarios and associated challenge
     });
     
     const msg = await anthropic.messages.create({
-      model: "claude-sonnet-4-5",
+      model: "claude-opus-4-6",
       max_tokens: 2000,
       temperature: 1,
       system: "Your task is to explore a science fiction scenario and discuss the potential challenges and considerations that may arise. Briefly describe the scenario, identify the key technological, social, or ethical issues involved, and encourage the user to share their thoughts on how these challenges might be addressed.",
@@ -96,7 +96,7 @@ Discuss with the user various science fiction scenarios and associated challenge
     client = AnthropicBedrock()
     
     message = client.messages.create(
-        model="anthropic.claude-sonnet-4-5-20250929-v1:0",
+        model="anthropic.claude-opus-4-6-v1:0",
         max_tokens=2000,
         temperature=1,
         system="Your task is to explore a science fiction scenario and discuss the potential challenges and considerations that may arise. Briefly describe the scenario, identify the key technological, social, or ethical issues involved, and encourage the user to share their thoughts on how these challenges might be addressed.",
@@ -125,7 +125,7 @@ Discuss with the user various science fiction scenarios and associated challenge
     const client = new AnthropicBedrock();
     
     const msg = await client.messages.create({
-      model: "anthropic.claude-sonnet-4-5-20250929-v1:0",
+      model: "anthropic.claude-opus-4-6-v1:0",
       max_tokens: 2000,
       temperature: 1,
       system: "Your task is to explore a science fiction scenario and discuss the potential challenges and considerations that may arise. Briefly describe the scenario, identify the key technological, social, or ethical issues involved, and encourage the user to share their thoughts on how these challenges might be addressed.",

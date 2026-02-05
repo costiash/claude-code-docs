@@ -33,6 +33,8 @@ The Claude API includes the following APIs:
 
 For the complete API reference with all endpoints, parameters, and response schemas, explore the API reference pages listed in the navigation. To access beta features, see [Beta headers](/docs/en/api/beta-headers).
 
+The Messages API supports an optional `inference_geo` parameter for [data residency controls](/docs/en/build-with-claude/data-residency), allowing you to specify where model inference runs.
+
 ## Authentication
 
 All requests to the Claude API must include these headers:
@@ -66,7 +68,7 @@ from anthropic import Anthropic
 
 client = Anthropic()  # Reads ANTHROPIC_API_KEY from environment
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}]
 )
@@ -149,7 +151,7 @@ curl https://api.anthropic.com/v1/messages \
   --header "anthropic-version: 2023-06-01" \
   --header "content-type: application/json" \
   --data '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": "Hello, Claude"}
@@ -169,7 +171,7 @@ curl https://api.anthropic.com/v1/messages \
       "text": "Hello! How can I assist you today?"
     }
   ],
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "stop_reason": "end_turn",
   "usage": {
     "input_tokens": 12,

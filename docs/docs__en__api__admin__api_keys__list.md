@@ -2,7 +2,7 @@
 
 **get** `/v1/organizations/api_keys`
 
-List Api Keys
+List API Keys
 
 ### Query Parameters
 
@@ -90,7 +90,7 @@ List Api Keys
 
   - `workspace_id: string`
 
-    ID of the Workspace associated with the API key, or null if the API key belongs to the default Workspace.
+    ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
 
 - `first_id: string`
 
@@ -108,5 +108,6 @@ List Api Keys
 
 ```http
 curl https://api.anthropic.com/v1/organizations/api_keys \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```

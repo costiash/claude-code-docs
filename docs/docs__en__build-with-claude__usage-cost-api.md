@@ -76,7 +76,7 @@ Track token consumption across your organization with detailed breakdowns by mod
 
 - **Time buckets**: Aggregate usage data in fixed intervals (`1m`, `1h`, or `1d`)
 - **Token tracking**: Measure uncached input, cached input, cache creation, and output tokens
-- **Filtering & grouping**: Filter by API key, workspace, model, service tier, or context window, and group results by these dimensions
+- **Filtering & grouping**: Filter by API key, workspace, model, service tier, context window, or [data residency](/docs/en/build-with-claude/data-residency), and group results by these dimensions
 - **Server tool usage**: Track usage of server-side tools like web search
 
 For complete parameter details and response schemas, see the [Usage API reference](/docs/en/api/admin-api/usage-cost/get-messages-usage-report).
@@ -101,7 +101,7 @@ bucket_width=1d" \
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2025-01-15T00:00:00Z&\
 ending_at=2025-01-15T23:59:59Z&\
-models[]=claude-sonnet-4-5-20250929&\
+models[]=claude-opus-4-6&\
 service_tiers[]=batch&\
 context_window[]=0-200k&\
 bucket_width=1h" \
@@ -130,6 +130,38 @@ To retrieve your organization's API key IDs, use the [List API Keys](/docs/en/ap
 To retrieve your organization's workspace IDs, use the [List Workspaces](/docs/en/api/admin-api/workspaces/list-workspaces) endpoint, or find your organization's workspace IDs in the Anthropic Console.
 </Tip>
 
+#### Data residency
+
+Track your [data residency controls](/docs/en/build-with-claude/data-residency) by grouping and filtering usage with the `inference_geo` dimension. This is useful for verifying geographic routing across your organization.
+
+```bash
+curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
+starting_at=2026-02-01T00:00:00Z&\
+ending_at=2026-02-08T00:00:00Z&\
+group_by[]=inference_geo&\
+group_by[]=model&\
+bucket_width=1d" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ADMIN_API_KEY"
+```
+
+You can also filter to a specific geo. Valid values are `global`, `us`, and `not_available`:
+
+```bash
+curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
+starting_at=2026-02-01T00:00:00Z&\
+ending_at=2026-02-08T00:00:00Z&\
+inference_geos[]=us&\
+group_by[]=model&\
+bucket_width=1d" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ADMIN_API_KEY"
+```
+
+<Note>
+Models released before February 2026 (prior to Claude Opus 4.6) don't support the `inference_geo` request parameter, so their usage reports return `"not_available"` for this dimension. You can use `not_available` as a filter value in `inference_geos[]` to target those models.
+</Note>
+
 ### Time granularity limits
 
 | Granularity | Default Limit | Maximum Limit | Use Case |
@@ -146,7 +178,7 @@ Retrieve service-level cost breakdowns in USD with the `/v1/organizations/cost_r
 
 - **Currency**: All costs in USD, reported as decimal strings in lowest units (cents)
 - **Cost types**: Track token usage, web search, and code execution costs
-- **Grouping**: Group costs by workspace or description for detailed breakdowns
+- **Grouping**: Group costs by workspace or description for detailed breakdowns. When grouping by `description`, responses include parsed fields like `model` and `inference_geo`
 - **Time buckets**: Daily granularity only (`1d`)
 
 For complete parameter details and response schemas, see the [Cost API reference](/docs/en/api/admin-api/usage-cost/get-cost-report).
@@ -239,3 +271,4 @@ The Usage and Cost APIs can be used to help you deliver a better experience for 
 - [Prompt caching](/docs/en/build-with-claude/prompt-caching) - Optimize costs with caching
 - [Batch processing](/docs/en/build-with-claude/batch-processing) - 50% discount on batch requests
 - [Rate limits](/docs/en/api/rate-limits) - Understand usage tiers
+- [Data residency](/docs/en/build-with-claude/data-residency) - Control inference geography

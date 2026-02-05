@@ -24,7 +24,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Must be unique for each request within the Message Batch.
 
-  - `params: { max_tokens, messages, model, 12 more}`
+  - `params: { max_tokens, messages, model, 13 more}`
 
     Messages API creation parameters for the individual request.
 
@@ -1449,11 +1449,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more`
+      - `:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-opus-4-6"`
+
+          Most intelligent model for building agents and coding
 
         - `:"claude-opus-4-5-20251101"`
 
@@ -1537,6 +1541,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `String`
 
+    - `inference_geo: String`
+
+      Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
     - `metadata: Metadata`
 
       An object describing metadata about the request.
@@ -1547,11 +1555,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-    - `output_config: { format_}`
+    - `output_config: OutputConfig`
 
       Configuration options for the model's output, such as the output format.
 
-      - `format_: { schema, type}`
+      - `effort: :low | :medium | :high | :max`
+
+        All possible effort levels.
+
+        - `:low`
+
+        - `:medium`
+
+        - `:high`
+
+        - `:max`
+
+      - `format_: JSONOutputFormat`
 
         A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
@@ -1744,6 +1764,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:disabled`
 
+      - `class ThinkingConfigAdaptive`
+
+        - `type: :adaptive`
+
+          - `:adaptive`
+
     - `tool_choice: ToolChoice`
 
       How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -1916,6 +1942,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           Description of what this tool does.
 
           Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+        - `eager_input_streaming: bool`
+
+          Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
         - `strict: bool`
 
@@ -2287,7 +2317,7 @@ message_batch = anthropic.messages.batches.create(
   requests: [
     {
       custom_id: "my-custom-id-1",
-      params: {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}], model: :"claude-sonnet-4-5-20250929"}
+      params: {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}], model: :"claude-opus-4-6"}
     }
   ]
 )
@@ -2976,11 +3006,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more`
+          - `:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
 
             - `:"claude-opus-4-5-20251101"`
 
@@ -3144,6 +3178,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `cache_read_input_tokens: Integer`
 
             The number of input tokens read from the cache.
+
+          - `inference_geo: String`
+
+            The geographic region where inference was performed for this request.
 
           - `input_tokens: Integer`
 
@@ -3752,11 +3790,15 @@ puts(message_batch_individual_response)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more`
+          - `:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
 
             - `:"claude-opus-4-5-20251101"`
 
@@ -3920,6 +3962,10 @@ puts(message_batch_individual_response)
           - `cache_read_input_tokens: Integer`
 
             The number of input tokens read from the cache.
+
+          - `inference_geo: String`
+
+            The geographic region where inference was performed for this request.
 
           - `input_tokens: Integer`
 
@@ -4324,11 +4370,15 @@ puts(message_batch_individual_response)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more`
+        - `:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
 
           - `:"claude-opus-4-5-20251101"`
 
@@ -4492,6 +4542,10 @@ puts(message_batch_individual_response)
         - `cache_read_input_tokens: Integer`
 
           The number of input tokens read from the cache.
+
+        - `inference_geo: String`
+
+          The geographic region where inference was performed for this request.
 
         - `input_tokens: Integer`
 
@@ -4858,11 +4912,15 @@ puts(message_batch_individual_response)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more`
+      - `:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-opus-4-6"`
+
+          Most intelligent model for building agents and coding
 
         - `:"claude-opus-4-5-20251101"`
 
@@ -5026,6 +5084,10 @@ puts(message_batch_individual_response)
       - `cache_read_input_tokens: Integer`
 
         The number of input tokens read from the cache.
+
+      - `inference_geo: String`
+
+        The geographic region where inference was performed for this request.
 
       - `input_tokens: Integer`
 

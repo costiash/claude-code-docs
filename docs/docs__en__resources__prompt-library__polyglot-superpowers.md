@@ -28,7 +28,7 @@ Translate text from any language into any language.
         api_key="my_api_key",
     )
     message = client.messages.create(
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-6",
         max_tokens=2000,
         temperature=0.2,
         system="You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version.",
@@ -57,7 +57,7 @@ Translate text from any language into any language.
     });
     
     const msg = await anthropic.messages.create({
-      model: "claude-sonnet-4-5",
+      model: "claude-opus-4-6",
       max_tokens: 2000,
       temperature: 0.2,
       system: "You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version.",
@@ -86,7 +86,7 @@ Translate text from any language into any language.
     client = AnthropicBedrock()
     
     message = client.messages.create(
-        model="anthropic.claude-sonnet-4-5-20250929-v1:0",
+        model="anthropic.claude-opus-4-6-v1:0",
         max_tokens=2000,
         temperature=0.2,
         system="You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version.",
@@ -115,7 +115,7 @@ Translate text from any language into any language.
     const client = new AnthropicBedrock();
     
     const msg = await client.messages.create({
-      model: "anthropic.claude-sonnet-4-5-20250929-v1:0",
+      model: "anthropic.claude-opus-4-6-v1:0",
       max_tokens: 2000,
       temperature: 0.2,
       system: "You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version.",

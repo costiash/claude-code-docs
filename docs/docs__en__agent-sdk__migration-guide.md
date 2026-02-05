@@ -109,14 +109,14 @@ Change `ClaudeCodeOptions` to `ClaudeAgentOptions`:
 from claude_agent_sdk import query, ClaudeCodeOptions
 
 options = ClaudeCodeOptions(
-    model="claude-sonnet-4-5"
+    model="claude-opus-4-6"
 )
 
 # After
 from claude_agent_sdk import query, ClaudeAgentOptions
 
 options = ClaudeAgentOptions(
-    model="claude-sonnet-4-5"
+    model="claude-opus-4-6"
 )
 ```
 
@@ -141,7 +141,7 @@ To improve isolation and explicit configuration, Claude Agent SDK v0.1.0 introdu
 from claude_agent_sdk import query, ClaudeCodeOptions
 
 options = ClaudeCodeOptions(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     permission_mode="acceptEdits"
 )
 
@@ -149,7 +149,7 @@ options = ClaudeCodeOptions(
 from claude_agent_sdk import query, ClaudeAgentOptions
 
 options = ClaudeAgentOptions(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     permission_mode="acceptEdits"
 )
 ```

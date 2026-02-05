@@ -4,6 +4,8 @@
 
 This guide provides actionable tips to keep Claude in character, even during long, complex interactions.
 
+<Note>Prefilling is deprecated and not supported on Claude Opus 4.6 and Claude Sonnet 4.5. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) or system prompt instructions instead.</Note>
+
 - **Use system prompts to set the role:** Use [system prompts](/docs/en/build-with-claude/prompt-engineering/system-prompts) to define Claude's role and personality. This sets a strong foundation for consistent responses.
     <Tip>When setting up the character, provide detailed information about the personality, background, and any specific traits or quirks. This will help the model better emulate and generalize the character's traits.</Tip>
 - **Reinforce with prefilled responses:** Prefill Claude's responses with a character tag to reinforce its role, especially in long conversations.

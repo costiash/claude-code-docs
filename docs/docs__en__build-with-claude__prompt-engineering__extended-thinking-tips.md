@@ -4,11 +4,11 @@
 
 This guide provides advanced strategies and techniques for getting the most out of Claude's extended thinking features. Extended thinking allows Claude to work through complex problems step-by-step, improving performance on difficult tasks. 
 
-See [Extended thinking models](/docs/en/about-claude/models/extended-thinking-models) for guidance on deciding when to use extended thinking.
+See [Extended thinking](/docs/en/build-with-claude/extended-thinking) for guidance on deciding when to use extended thinking.
 
 ## Before diving in
 
-This guide presumes that you have already decided to use extended thinking mode and have reviewed our basic steps on [how to get started with extended thinking](/docs/en/about-claude/models/extended-thinking-models#getting-started-with-extended-thinking-models) as well as our [extended thinking implementation guide](/docs/en/build-with-claude/extended-thinking).
+This guide presumes that you have already decided to use extended thinking mode and have reviewed our [extended thinking implementation guide](/docs/en/build-with-claude/extended-thinking).
 
 ### Technical considerations for extended thinking
 
@@ -128,7 +128,7 @@ To make the best use of this methodology, we recommend the following tips:
 - We don't recommend passing Claude's extended thinking back in the user text block, as this doesn't improve performance and may actually degrade results.
 - Prefilling extended thinking is explicitly not allowed, and manually changing the model's output text that follows its thinking block is likely going to degrade results due to model confusion.
 
-When extended thinking is turned off, standard `assistant` response text [prefill](/docs/en/build-with-claude/prompt-engineering/prefill-claudes-response) is still allowed.
+When extended thinking is turned off, standard `assistant` response text prefill is still allowed.
 
 <Note>
 Sometimes Claude may repeat its extended thinking in the assistant output text. If you want a clean response, instruct Claude not to repeat its extended thinking and to only output the answer.

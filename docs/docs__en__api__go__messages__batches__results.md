@@ -273,6 +273,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
+
             - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
               Premium model combining maximum intelligence with practical performance
@@ -435,6 +439,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `CacheReadInputTokens int64`
 
             The number of input tokens read from the cache.
+
+          - `InferenceGeo string`
+
+            The geographic region where inference was performed for this request.
 
           - `InputTokens int64`
 

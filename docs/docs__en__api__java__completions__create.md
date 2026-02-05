@@ -144,6 +144,10 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Most intelligent model for building agents and coding
+
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
       Premium model combining maximum intelligence with practical performance
@@ -260,7 +264,7 @@ public final class Main {
 
         CompletionCreateParams params = CompletionCreateParams.builder()
             .maxTokensToSample(256L)
-            .model(Model.CLAUDE_OPUS_4_5_20251101)
+            .model(Model.CLAUDE_OPUS_4_6)
             .prompt("\n\nHuman: Hello, world!\n\nAssistant:")
             .build();
         Completion completion = client.completions().create(params);

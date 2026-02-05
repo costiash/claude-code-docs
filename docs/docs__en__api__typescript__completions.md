@@ -30,7 +30,11 @@ Future models and features will not be compatible with Text Completions. See our
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more`
+      - `"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more`
+
+        - `"claude-opus-4-6"`
+
+          Most intelligent model for building agents and coding
 
         - `"claude-opus-4-5-20251101"`
 
@@ -270,7 +274,11 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more`
+    - `"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more`
+
+      - `"claude-opus-4-6"`
+
+        Most intelligent model for building agents and coding
 
       - `"claude-opus-4-5-20251101"`
 
@@ -382,7 +390,7 @@ const client = new Anthropic({
 
 const completion = await client.completions.create({
   max_tokens_to_sample: 256,
-  model: 'claude-opus-4-5-20251101',
+  model: 'claude-opus-4-6',
   prompt: '\n\nHuman: Hello, world!\n\nAssistant:',
 });
 
@@ -411,7 +419,11 @@ console.log(completion.id);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more`
+    - `"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more`
+
+      - `"claude-opus-4-6"`
+
+        Most intelligent model for building agents and coding
 
       - `"claude-opus-4-5-20251101"`
 

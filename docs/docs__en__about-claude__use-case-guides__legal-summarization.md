@@ -75,7 +75,7 @@ See our guide on [establishing success criteria](/docs/en/test-and-evaluate/defi
 
 ### Select the right Claude model
 
-Model accuracy is extremely important when summarizing legal documents. Claude Sonnet 4.5 is an excellent choice for use cases such as this where high accuracy is required. If the size and quantity of your documents is large such that costs start to become a concern, you can also try using a smaller model like Claude Haiku 4.5. 
+Model accuracy is extremely important when summarizing legal documents. Claude Opus 4.6 is an excellent choice for use cases such as this where high accuracy is required. If the size and quantity of your documents is large such that costs start to become a concern, you can also try using a smaller model like Claude Haiku 4.5. 
 
 To help estimate these costs, below is a comparison of the cost to summarize 1,000 sublease agreements using both Sonnet and Haiku:
 
@@ -89,10 +89,10 @@ To help estimate these costs, below is a comparison of the cost to summarize 1,0
     * Output tokens per summary: 350
     * Total output tokens: 350,000
  
-* **Claude Sonnet 4.5 estimated cost**
-    * Input token cost: 86 MTok * \$3.00/MTok = \$258
-    * Output token cost: 0.35 MTok * \$15.00/MTok = \$5.25
-    * Total cost: \$258.00 + \$5.25 = \$263.25
+* **Claude Opus 4.6 estimated cost**
+    * Input token cost: 86 MTok * \$5.00/MTok = \$430
+    * Output token cost: 0.35 MTok * \$25.00/MTok = \$8.75
+    * Total cost: \$430.00 + \$8.75 = \$438.75
 
 * **Claude Haiku 3 estimated cost**
     * Input token cost: 86 MTok * \$0.25/MTok = \$21.50
@@ -157,7 +157,7 @@ import anthropic
 # Initialize the Anthropic client
 client = anthropic.Anthropic()
 
-def summarize_document(text, details_to_extract, model="claude-sonnet-4-5", max_tokens=1000):
+def summarize_document(text, details_to_extract, model="claude-opus-4-6", max_tokens=1000):
 
     # Format the details to extract to be placed within the prompt's context
     details_to_extract_str = '\n'.join(details_to_extract)
@@ -254,7 +254,7 @@ client = anthropic.Anthropic()
 def chunk_text(text, chunk_size=20000):
     return [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
 
-def summarize_long_document(text, details_to_extract, model="claude-sonnet-4-5", max_tokens=1000):
+def summarize_long_document(text, details_to_extract, model="claude-opus-4-6", max_tokens=1000):
 
     # Format the details to extract to be placed within the prompt's context
     details_to_extract_str = '\n'.join(details_to_extract)

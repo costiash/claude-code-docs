@@ -10,6 +10,14 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### February 5, 2026
+- We've launched [Claude Opus 4.6](https://www.anthropic.com/news/claude-opus-4-6), our most intelligent model for complex agentic tasks and long-horizon work. Opus 4.6 recommends [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`); manual thinking (`type: "enabled"` with `budget_tokens`) is deprecated. Opus 4.6 does not support prefilling assistant messages. Learn more in [What's new in Claude 4.6](/docs/en/about-claude/models/whats-new-claude-4-6).
+- The [effort parameter](/docs/en/build-with-claude/effort) is now generally available (no beta header required) and supports Claude Opus 4.6. Effort replaces `budget_tokens` for controlling thinking depth on new models.
+- We've launched the [compaction API](/docs/en/build-with-claude/compaction) in beta, providing server-side context summarization for effectively infinite conversations. Available on Opus 4.6.
+- We've introduced [data residency controls](/docs/en/build-with-claude/data-residency), allowing you to specify where model inference runs with the `inference_geo` parameter. US-only inference is available at 1.1x pricing for models released after February 1, 2026.
+- The [1M token context window](/docs/en/build-with-claude/context-windows#1m-token-context-window) is now available in beta for Claude Opus 4.6, in addition to Sonnet 4.5 and Sonnet 4. [Long context pricing](/docs/en/about-claude/pricing#long-context-pricing) applies to requests exceeding 200K input tokens.
+- [Fine-grained tool streaming](/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming) is now generally available on all models and platforms (no beta header required). The `output_format` parameter for [structured outputs](/docs/en/build-with-claude/structured-outputs) has been moved to `output_config.format`.
+
 ### January 29, 2026
 - [Structured outputs](/docs/en/build-with-claude/structured-outputs) are now generally available on the Claude API for Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. GA includes expanded schema support, improved grammar compilation latency, and a simplified integration path with no beta header required. The `output_format` parameter has moved to `output_config.format`. Existing beta users can continue using the beta header during the transition period. Structured outputs remain in public beta on Amazon Bedrock and Microsoft Foundry.
 
@@ -60,7 +68,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 - We've launched [Claude Haiku 4.5](https://www.anthropic.com/news/claude-haiku-4-5), our fastest and most intelligent Haiku model with near-frontier performance. Ideal for real-time applications, high-volume processing, and cost-sensitive deployments requiring strong reasoning. Learn more in our [Models & Pricing documentation](/docs/en/about-claude/models).
 
 ### September 29, 2025
-- We've launched [Claude Sonnet 4.5](https://www.anthropic.com/news/claude-sonnet-4-5), our best model for complex agents and coding, with the highest intelligence across most tasks. Learn more in [What's new in Claude 4.5](/docs/en/about-claude/models/whats-new-claude-4-5).
+- We've launched [Claude Sonnet 4.5](https://www.anthropic.com/news/claude-sonnet-4-5), our best model for complex agents and coding, with the highest intelligence across most tasks. Learn more in the [models overview](/docs/en/about-claude/models/overview).
 - We've introduced [global endpoint pricing](/docs/en/about-claude/pricing#third-party-platform-pricing) for AWS Bedrock and Google Vertex AI. The Claude API (1P) pricing is unaffected.
 - We've introduced a new stop reason `model_context_window_exceeded` that allows you to request the maximum possible tokens without calculating input size. Learn more in our [handling stop reasons documentation](/docs/en/build-with-claude/handling-stop-reasons).
 - We've launched the memory tool in beta, enabling Claude to store and consult information across conversations. Learn more in our [memory tool documentation](/docs/en/agents-and-tools/tool-use/memory-tool).

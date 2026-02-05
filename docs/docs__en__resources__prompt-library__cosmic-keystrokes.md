@@ -289,7 +289,7 @@ client = anthropic.Anthropic(
     api_key="my_api_key",
 )
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=2000,
     temperature=0,
     messages=[
@@ -315,7 +315,7 @@ const anthropic = new Anthropic({
 });
 
 const msg = await anthropic.messages.create({
-  model: 'claude-sonnet-4-5',
+  model: 'claude-opus-4-6',
   max_tokens: 2000,
   temperature: 0,
   messages: [
@@ -341,7 +341,7 @@ from anthropic import AnthropicBedrock
 client = AnthropicBedrock()
 
 message = client.messages.create(
-    model="anthropic.claude-sonnet-4-5-20250929-v1:0",
+    model="anthropic.claude-opus-4-6-v1:0",
     max_tokens=2000,
     temperature=0,
     messages=[
@@ -367,7 +367,7 @@ import AnthropicBedrock from '@anthropic-ai/bedrock-sdk';
 const client = new AnthropicBedrock();
 
 const msg = await client.messages.create({
-  model: 'anthropic.claude-sonnet-4-5-20250929-v1:0',
+  model: 'anthropic.claude-opus-4-6-v1:0',
   max_tokens: 2000,
   temperature: 0,
   messages: [

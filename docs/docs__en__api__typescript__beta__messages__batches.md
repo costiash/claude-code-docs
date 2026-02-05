@@ -2464,6 +2464,47 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"1h"`
 
+            - `BetaCompactionBlockParam`
+
+              A compaction block containing summary of previous context.
+
+              Users should round-trip these blocks from responses to subsequent requests
+              to maintain context across compaction boundaries.
+
+              When content is None, the block represents a failed compaction. The server
+              treats these as no-ops. Empty string content is not allowed.
+
+              - `content: string | null`
+
+                Summary of previously compacted content, or null if compaction failed
+
+              - `type: "compaction"`
+
+                - `"compaction"`
+
+              - `cache_control?: BetaCacheControlEphemeral | null`
+
+                Create a cache control breakpoint at this content block.
+
+                - `type: "ephemeral"`
+
+                  - `"ephemeral"`
+
+                - `ttl?: "5m" | "1h"`
+
+                  The time-to-live for the cache control breakpoint.
+
+                  This may be one the following values:
+
+                  - `5m`: 5 minutes
+                  - `1h`: 1 hour
+
+                  Defaults to `5m`.
+
+                  - `"5m"`
+
+                  - `"1h"`
+
         - `role: "user" | "assistant"`
 
           - `"user"`
@@ -2476,7 +2517,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more`
+        - `"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more`
+
+          - `"claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
 
           - `"claude-opus-4-5-20251101"`
 
@@ -2600,7 +2645,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-        - `edits?: Array<BetaClearToolUses20250919Edit | BetaClearThinking20251015Edit>`
+        - `edits?: Array<BetaClearToolUses20250919Edit | BetaClearThinking20251015Edit | BetaCompact20260112Edit>`
 
           List of context management edits to apply
 
@@ -2690,6 +2735,36 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `"all"`
 
+          - `BetaCompact20260112Edit`
+
+            Automatically compact older context when reaching the configured trigger threshold.
+
+            - `type: "compact_20260112"`
+
+              - `"compact_20260112"`
+
+            - `instructions?: string | null`
+
+              Additional instructions for summarization.
+
+            - `pause_after_compaction?: boolean`
+
+              Whether to pause after compaction and return the compaction block to the user.
+
+            - `trigger?: BetaInputTokensTrigger | null`
+
+              When to trigger compaction. Defaults to 150000 input tokens.
+
+              - `type: "input_tokens"`
+
+                - `"input_tokens"`
+
+              - `value: number`
+
+      - `inference_geo?: string | null`
+
+        Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
       - `mcp_servers?: Array<BetaRequestMCPServerURLDefinition>`
 
         MCP servers to be utilized in this request
@@ -2724,17 +2799,17 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Configuration options for the model's output, such as the output format.
 
-        - `effort?: "low" | "medium" | "high" | null`
+        - `effort?: "low" | "medium" | "high" | "max" | null`
 
-          How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
-
-          Valid values are `low`, `medium`, or `high`.
+          All possible effort levels.
 
           - `"low"`
 
           - `"medium"`
 
           - `"high"`
+
+          - `"max"`
 
         - `format?: BetaJSONOutputFormat | null`
 
@@ -2943,6 +3018,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"disabled"`
 
+        - `BetaThinkingConfigAdaptive`
+
+          - `type: "adaptive"`
+
+            - `"adaptive"`
+
       - `tool_choice?: BetaToolChoice`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -3125,6 +3206,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             Description of what this tool does.
 
             Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+          - `eager_input_streaming?: boolean | null`
+
+            Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
           - `input_examples?: Array<Record<string, unknown>>`
 
@@ -4300,7 +4385,7 @@ const betaMessageBatch = await client.beta.messages.batches.create({
       params: {
         max_tokens: 1024,
         messages: [{ content: 'Hello, world', role: 'user' }],
-        model: 'claude-sonnet-4-5-20250929',
+        model: 'claude-opus-4-6',
       },
     },
   ],
@@ -5765,6 +5850,22 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"container_upload"`
 
+          - `BetaCompactionBlock`
+
+            A compaction block returned when autocompact is triggered.
+
+            When content is None, it indicates the compaction failed to produce a valid
+            summary (e.g., malformed output from the model). Clients may round-trip
+            compaction blocks with null content; the server treats them as no-ops.
+
+            - `content: string | null`
+
+              Summary of compacted content, or null if compaction failed
+
+            - `type: "compaction"`
+
+              - `"compaction"`
+
         - `context_management: BetaContextManagementResponse | null`
 
           Context management response.
@@ -5813,7 +5914,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more`
+          - `"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more`
+
+            - `"claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
@@ -5930,6 +6035,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"pause_turn"`
 
+          - `"compaction"`
+
           - `"refusal"`
 
           - `"model_context_window_exceeded"`
@@ -5980,9 +6087,99 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of input tokens read from the cache.
 
+          - `inference_geo: string | null`
+
+            The geographic region where inference was performed for this request.
+
           - `input_tokens: number`
 
             The number of input tokens which were used.
+
+          - `iterations: Array<BetaMessageIterationUsage | BetaCompactionIterationUsage> | null`
+
+            Per-iteration token usage breakdown.
+
+            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+            - Determine which iterations exceeded long context thresholds (>=200k tokens)
+            - Calculate the true context window size from the last iteration
+            - Understand token accumulation across server-side tool use loops
+
+            - `BetaMessageIterationUsage`
+
+              Token usage for a sampling iteration.
+
+              - `cache_creation: BetaCacheCreation | null`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: number`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: number`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: number`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: number`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: number`
+
+                The number of input tokens which were used.
+
+              - `output_tokens: number`
+
+                The number of output tokens which were used.
+
+              - `type: "message"`
+
+                Usage for a sampling iteration
+
+                - `"message"`
+
+            - `BetaCompactionIterationUsage`
+
+              Token usage for a compaction iteration.
+
+              - `cache_creation: BetaCacheCreation | null`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: number`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: number`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: number`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: number`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: number`
+
+                The number of input tokens which were used.
+
+              - `output_tokens: number`
+
+                The number of output tokens which were used.
+
+              - `type: "compaction"`
+
+                Usage for a compaction iteration
+
+                - `"compaction"`
 
           - `output_tokens: number`
 
@@ -7121,6 +7318,22 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
               - `"container_upload"`
 
+          - `BetaCompactionBlock`
+
+            A compaction block returned when autocompact is triggered.
+
+            When content is None, it indicates the compaction failed to produce a valid
+            summary (e.g., malformed output from the model). Clients may round-trip
+            compaction blocks with null content; the server treats them as no-ops.
+
+            - `content: string | null`
+
+              Summary of compacted content, or null if compaction failed
+
+            - `type: "compaction"`
+
+              - `"compaction"`
+
         - `context_management: BetaContextManagementResponse | null`
 
           Context management response.
@@ -7169,7 +7382,11 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more`
+          - `"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more`
+
+            - `"claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
@@ -7286,6 +7503,8 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
           - `"pause_turn"`
 
+          - `"compaction"`
+
           - `"refusal"`
 
           - `"model_context_window_exceeded"`
@@ -7336,9 +7555,99 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
             The number of input tokens read from the cache.
 
+          - `inference_geo: string | null`
+
+            The geographic region where inference was performed for this request.
+
           - `input_tokens: number`
 
             The number of input tokens which were used.
+
+          - `iterations: Array<BetaMessageIterationUsage | BetaCompactionIterationUsage> | null`
+
+            Per-iteration token usage breakdown.
+
+            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+            - Determine which iterations exceeded long context thresholds (>=200k tokens)
+            - Calculate the true context window size from the last iteration
+            - Understand token accumulation across server-side tool use loops
+
+            - `BetaMessageIterationUsage`
+
+              Token usage for a sampling iteration.
+
+              - `cache_creation: BetaCacheCreation | null`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: number`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: number`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: number`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: number`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: number`
+
+                The number of input tokens which were used.
+
+              - `output_tokens: number`
+
+                The number of output tokens which were used.
+
+              - `type: "message"`
+
+                Usage for a sampling iteration
+
+                - `"message"`
+
+            - `BetaCompactionIterationUsage`
+
+              Token usage for a compaction iteration.
+
+              - `cache_creation: BetaCacheCreation | null`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: number`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: number`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: number`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: number`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: number`
+
+                The number of input tokens which were used.
+
+              - `output_tokens: number`
+
+                The number of output tokens which were used.
+
+              - `type: "compaction"`
+
+                Usage for a compaction iteration
+
+                - `"compaction"`
 
           - `output_tokens: number`
 
@@ -8269,6 +8578,22 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
             - `"container_upload"`
 
+        - `BetaCompactionBlock`
+
+          A compaction block returned when autocompact is triggered.
+
+          When content is None, it indicates the compaction failed to produce a valid
+          summary (e.g., malformed output from the model). Clients may round-trip
+          compaction blocks with null content; the server treats them as no-ops.
+
+          - `content: string | null`
+
+            Summary of compacted content, or null if compaction failed
+
+          - `type: "compaction"`
+
+            - `"compaction"`
+
       - `context_management: BetaContextManagementResponse | null`
 
         Context management response.
@@ -8317,7 +8642,11 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more`
+        - `"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more`
+
+          - `"claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
 
           - `"claude-opus-4-5-20251101"`
 
@@ -8434,6 +8763,8 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
         - `"pause_turn"`
 
+        - `"compaction"`
+
         - `"refusal"`
 
         - `"model_context_window_exceeded"`
@@ -8484,9 +8815,99 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
           The number of input tokens read from the cache.
 
+        - `inference_geo: string | null`
+
+          The geographic region where inference was performed for this request.
+
         - `input_tokens: number`
 
           The number of input tokens which were used.
+
+        - `iterations: Array<BetaMessageIterationUsage | BetaCompactionIterationUsage> | null`
+
+          Per-iteration token usage breakdown.
+
+          Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+          - Determine which iterations exceeded long context thresholds (>=200k tokens)
+          - Calculate the true context window size from the last iteration
+          - Understand token accumulation across server-side tool use loops
+
+          - `BetaMessageIterationUsage`
+
+            Token usage for a sampling iteration.
+
+            - `cache_creation: BetaCacheCreation | null`
+
+              Breakdown of cached tokens by TTL
+
+              - `ephemeral_1h_input_tokens: number`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `ephemeral_5m_input_tokens: number`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `cache_creation_input_tokens: number`
+
+              The number of input tokens used to create the cache entry.
+
+            - `cache_read_input_tokens: number`
+
+              The number of input tokens read from the cache.
+
+            - `input_tokens: number`
+
+              The number of input tokens which were used.
+
+            - `output_tokens: number`
+
+              The number of output tokens which were used.
+
+            - `type: "message"`
+
+              Usage for a sampling iteration
+
+              - `"message"`
+
+          - `BetaCompactionIterationUsage`
+
+            Token usage for a compaction iteration.
+
+            - `cache_creation: BetaCacheCreation | null`
+
+              Breakdown of cached tokens by TTL
+
+              - `ephemeral_1h_input_tokens: number`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `ephemeral_5m_input_tokens: number`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `cache_creation_input_tokens: number`
+
+              The number of input tokens used to create the cache entry.
+
+            - `cache_read_input_tokens: number`
+
+              The number of input tokens read from the cache.
+
+            - `input_tokens: number`
+
+              The number of input tokens which were used.
+
+            - `output_tokens: number`
+
+              The number of output tokens which were used.
+
+            - `type: "compaction"`
+
+              Usage for a compaction iteration
+
+              - `"compaction"`
 
         - `output_tokens: number`
 
@@ -9379,6 +9800,22 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
           - `"container_upload"`
 
+      - `BetaCompactionBlock`
+
+        A compaction block returned when autocompact is triggered.
+
+        When content is None, it indicates the compaction failed to produce a valid
+        summary (e.g., malformed output from the model). Clients may round-trip
+        compaction blocks with null content; the server treats them as no-ops.
+
+        - `content: string | null`
+
+          Summary of compacted content, or null if compaction failed
+
+        - `type: "compaction"`
+
+          - `"compaction"`
+
     - `context_management: BetaContextManagementResponse | null`
 
       Context management response.
@@ -9427,7 +9864,11 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more`
+      - `"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more`
+
+        - `"claude-opus-4-6"`
+
+          Most intelligent model for building agents and coding
 
         - `"claude-opus-4-5-20251101"`
 
@@ -9544,6 +9985,8 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
       - `"pause_turn"`
 
+      - `"compaction"`
+
       - `"refusal"`
 
       - `"model_context_window_exceeded"`
@@ -9594,9 +10037,99 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
         The number of input tokens read from the cache.
 
+      - `inference_geo: string | null`
+
+        The geographic region where inference was performed for this request.
+
       - `input_tokens: number`
 
         The number of input tokens which were used.
+
+      - `iterations: Array<BetaMessageIterationUsage | BetaCompactionIterationUsage> | null`
+
+        Per-iteration token usage breakdown.
+
+        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+        - Determine which iterations exceeded long context thresholds (>=200k tokens)
+        - Calculate the true context window size from the last iteration
+        - Understand token accumulation across server-side tool use loops
+
+        - `BetaMessageIterationUsage`
+
+          Token usage for a sampling iteration.
+
+          - `cache_creation: BetaCacheCreation | null`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: number`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `ephemeral_5m_input_tokens: number`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `cache_creation_input_tokens: number`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: number`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: number`
+
+            The number of input tokens which were used.
+
+          - `output_tokens: number`
+
+            The number of output tokens which were used.
+
+          - `type: "message"`
+
+            Usage for a sampling iteration
+
+            - `"message"`
+
+        - `BetaCompactionIterationUsage`
+
+          Token usage for a compaction iteration.
+
+          - `cache_creation: BetaCacheCreation | null`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: number`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `ephemeral_5m_input_tokens: number`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `cache_creation_input_tokens: number`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: number`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: number`
+
+            The number of input tokens which were used.
+
+          - `output_tokens: number`
+
+            The number of output tokens which were used.
+
+          - `type: "compaction"`
+
+            Usage for a compaction iteration
+
+            - `"compaction"`
 
       - `output_tokens: number`
 

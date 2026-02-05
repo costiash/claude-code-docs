@@ -83,7 +83,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -112,7 +112,7 @@ import Anthropic from '@anthropic-ai/sdk';
 const client = new Anthropic();
 
 const response = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -142,7 +142,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -185,7 +185,7 @@ client = anthropic.Anthropic()
 
 # Step 1: Use a Skill to create a file
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -235,7 +235,7 @@ const client = new Anthropic();
 
 // Step 1: Use a Skill to create a file
 const response = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -292,7 +292,7 @@ RESPONSE=$(curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -406,7 +406,7 @@ Reuse the same container across multiple messages by specifying the container ID
 ```python Python
 # First request creates container
 response1 = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -426,7 +426,7 @@ messages = [
 ]
 
 response2 = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -443,7 +443,7 @@ response2 = client.beta.messages.create(
 ```typescript TypeScript
 // First request creates container
 const response1 = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -463,7 +463,7 @@ const messages = [
 ];
 
 const response2 = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -488,7 +488,7 @@ messages = [{"role": "user", "content": "Process this large dataset"}]
 max_retries = 10
 
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -507,7 +507,7 @@ for i in range(max_retries):
 
     messages.append({"role": "assistant", "content": response.content})
     response = client.beta.messages.create(
-        model="claude-sonnet-4-5-20250929",
+        model="claude-opus-4-6",
         max_tokens=4096,
         betas=["code-execution-2025-08-25", "skills-2025-10-02"],
         container={
@@ -526,7 +526,7 @@ let messages = [{role: 'user' as const, content: 'Process this large dataset'}];
 const maxRetries = 10;
 
 let response = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -546,7 +546,7 @@ for (let i = 0; i < maxRetries; i++) {
 
   messages.push({role: 'assistant', content: response.content});
   response = await client.beta.messages.create({
-    model: 'claude-sonnet-4-5-20250929',
+    model: 'claude-opus-4-6',
     max_tokens: 4096,
     betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
     container: {
@@ -569,7 +569,7 @@ RESPONSE=$(curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -602,7 +602,7 @@ while [ "$STOP_REASON" = "pause_turn" ]; do
     -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
     -H "content-type: application/json" \
     -d "{
-      \"model\": \"claude-sonnet-4-5-20250929\",
+      \"model\": \"claude-opus-4-6\",
       \"max_tokens\": 4096,
       \"container\": {
         \"id\": \"$CONTAINER_ID\",
@@ -635,7 +635,7 @@ Combine multiple Skills in a single request to handle complex workflows:
 <CodeGroup>
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -670,7 +670,7 @@ response = client.beta.messages.create(
 
 ```typescript TypeScript
 const response = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -710,7 +710,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -1024,7 +1024,7 @@ new_version = client.beta.skills.versions.create(
 
 # Use specific version
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -1040,7 +1040,7 @@ response = client.beta.messages.create(
 
 # Use latest version
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -1071,7 +1071,7 @@ const newVersion = await client.beta.skills.versions.create(
 
 // Use specific version
 const response = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -1087,7 +1087,7 @@ const response = await client.beta.messages.create({
 
 // Use latest version
 const response = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -1119,7 +1119,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
   -H "content-type: application/json" \
   -d "{
-    \"model\": \"claude-sonnet-4-5-20250929\",
+    \"model\": \"claude-opus-4-6\",
     \"max_tokens\": 4096,
     \"container\": {
       \"skills\": [{
@@ -1139,7 +1139,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 4096,
     "container": {
       "skills": [{
@@ -1224,7 +1224,7 @@ dcf_skill = client.beta.skills.create(
 
 # Use with Excel to create financial model
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -1256,7 +1256,7 @@ const dcfSkill = await client.beta.skills.create({
 
 // Use with Excel to create financial model
 const response = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -1291,7 +1291,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
   -H "content-type: application/json" \
   -d "{
-    \"model\": \"claude-sonnet-4-5-20250929\",
+    \"model\": \"claude-opus-4-6\",
     \"max_tokens\": 4096,
     \"container\": {
       \"skills\": [
@@ -1388,7 +1388,7 @@ When using prompt caching, note that changing the Skills list in your container 
 ```python Python
 # First request creates cache
 response1 = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02", "prompt-caching-2024-07-31"],
     container={
@@ -1402,7 +1402,7 @@ response1 = client.beta.messages.create(
 
 # Adding/removing Skills breaks cache
 response2 = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02", "prompt-caching-2024-07-31"],
     container={
@@ -1419,7 +1419,7 @@ response2 = client.beta.messages.create(
 ```typescript TypeScript
 // First request creates cache
 const response1 = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02', 'prompt-caching-2024-07-31'],
   container: {
@@ -1433,7 +1433,7 @@ const response1 = await client.beta.messages.create({
 
 // Adding/removing Skills breaks cache
 const response2 = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02', 'prompt-caching-2024-07-31'],
   container: {
@@ -1455,7 +1455,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02,prompt-caching-2024-07-31" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -1473,7 +1473,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02,prompt-caching-2024-07-31" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -1497,7 +1497,7 @@ Handle Skill-related errors gracefully:
 ```python Python
 try:
     response = client.beta.messages.create(
-        model="claude-sonnet-4-5-20250929",
+        model="claude-opus-4-6",
         max_tokens=4096,
         betas=["code-execution-2025-08-25", "skills-2025-10-02"],
         container={
@@ -1519,7 +1519,7 @@ except anthropic.BadRequestError as e:
 ```typescript TypeScript
 try {
   const response = await client.beta.messages.create({
-    model: 'claude-sonnet-4-5-20250929',
+    model: 'claude-opus-4-6',
     max_tokens: 4096,
     betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
     container: {

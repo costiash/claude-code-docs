@@ -153,7 +153,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
     - `subscription_type: optional "enterprise" or "team"`
 
-      Subscription tier for subscription customers. Null for API customers.
+      Subscription tier for subscription customers. `null` for API customers.
 
       - `"enterprise"`
 
@@ -171,5 +171,6 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
 ```http
 curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```

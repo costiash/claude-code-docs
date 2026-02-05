@@ -2444,6 +2444,47 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"1h"`
 
+      - `class BetaCompactionBlockParam: …`
+
+        A compaction block containing summary of previous context.
+
+        Users should round-trip these blocks from responses to subsequent requests
+        to maintain context across compaction boundaries.
+
+        When content is None, the block represents a failed compaction. The server
+        treats these as no-ops. Empty string content is not allowed.
+
+        - `content: Optional[str]`
+
+          Summary of previously compacted content, or null if compaction failed
+
+        - `type: Literal["compaction"]`
+
+          - `"compaction"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+          - `type: Literal["ephemeral"]`
+
+            - `"ephemeral"`
+
+          - `ttl: Optional[Literal["5m", "1h"]]`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"`
+
+            - `"1h"`
+
   - `role: Literal["user", "assistant"]`
 
     - `"user"`
@@ -2456,12 +2497,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `UnionMember0 = Literal["claude-opus-4-5-20251101", "claude-opus-4-5", "claude-3-7-sonnet-latest", 17 more]`
+  - `UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `claude-opus-4-6` - Most intelligent model for building agents and coding
     - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
     - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
     - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
@@ -2482,6 +2524,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
     - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
     - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+
+    - `"claude-opus-4-6"`
+
+      Most intelligent model for building agents and coding
 
     - `"claude-opus-4-5-20251101"`
 
@@ -2695,6 +2741,36 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"all"`
 
+    - `class BetaCompact20260112Edit: …`
+
+      Automatically compact older context when reaching the configured trigger threshold.
+
+      - `type: Literal["compact_20260112"]`
+
+        - `"compact_20260112"`
+
+      - `instructions: Optional[str]`
+
+        Additional instructions for summarization.
+
+      - `pause_after_compaction: Optional[bool]`
+
+        Whether to pause after compaction and return the compaction block to the user.
+
+      - `trigger: Optional[BetaInputTokensTrigger]`
+
+        When to trigger compaction. Defaults to 150000 input tokens.
+
+        - `type: Literal["input_tokens"]`
+
+          - `"input_tokens"`
+
+        - `value: int`
+
+- `inference_geo: Optional[str]`
+
+  Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
 - `mcp_servers: Optional[Iterable[BetaRequestMCPServerURLDefinitionParam]]`
 
   MCP servers to be utilized in this request
@@ -2729,17 +2805,17 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Configuration options for the model's output, such as the output format.
 
-  - `effort: Optional[Literal["low", "medium", "high"]]`
+  - `effort: Optional[Literal["low", "medium", "high", "max"]]`
 
-    How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
-
-    Valid values are `low`, `medium`, or `high`.
+    All possible effort levels.
 
     - `"low"`
 
     - `"medium"`
 
     - `"high"`
+
+    - `"max"`
 
   - `format: Optional[BetaJSONOutputFormat]`
 
@@ -2950,6 +3026,12 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"disabled"`
 
+  - `class BetaThinkingConfigAdaptive: …`
+
+    - `type: Literal["adaptive"]`
+
+      - `"adaptive"`
+
 - `tool_choice: Optional[BetaToolChoiceParam]`
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -3132,6 +3214,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       Description of what this tool does.
 
       Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+    - `eager_input_streaming: Optional[bool]`
+
+      Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
     - `input_examples: Optional[List[Dict[str, object]]]`
 
@@ -4960,6 +5046,22 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"container_upload"`
 
+    - `class BetaCompactionBlock: …`
+
+      A compaction block returned when autocompact is triggered.
+
+      When content is None, it indicates the compaction failed to produce a valid
+      summary (e.g., malformed output from the model). Clients may round-trip
+      compaction blocks with null content; the server treats them as no-ops.
+
+      - `content: Optional[str]`
+
+        Summary of compacted content, or null if compaction failed
+
+      - `type: Literal["compaction"]`
+
+        - `"compaction"`
+
   - `context_management: Optional[BetaContextManagementResponse]`
 
     Context management response.
@@ -5008,12 +5110,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `UnionMember0 = Literal["claude-opus-4-5-20251101", "claude-opus-4-5", "claude-3-7-sonnet-latest", 17 more]`
+    - `UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `claude-opus-4-6` - Most intelligent model for building agents and coding
       - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
       - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
       - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
@@ -5034,6 +5137,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+
+      - `"claude-opus-4-6"`
+
+        Most intelligent model for building agents and coding
 
       - `"claude-opus-4-5-20251101"`
 
@@ -5150,6 +5257,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `"pause_turn"`
 
+    - `"compaction"`
+
     - `"refusal"`
 
     - `"model_context_window_exceeded"`
@@ -5200,9 +5309,99 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of input tokens read from the cache.
 
+    - `inference_geo: Optional[str]`
+
+      The geographic region where inference was performed for this request.
+
     - `input_tokens: int`
 
       The number of input tokens which were used.
+
+    - `iterations: Optional[List[Iteration]]`
+
+      Per-iteration token usage breakdown.
+
+      Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+      - Determine which iterations exceeded long context thresholds (>=200k tokens)
+      - Calculate the true context window size from the last iteration
+      - Understand token accumulation across server-side tool use loops
+
+      - `class BetaMessageIterationUsage: …`
+
+        Token usage for a sampling iteration.
+
+        - `cache_creation: Optional[BetaCacheCreation]`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: int`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: int`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: int`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: int`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: int`
+
+          The number of input tokens which were used.
+
+        - `output_tokens: int`
+
+          The number of output tokens which were used.
+
+        - `type: Literal["message"]`
+
+          Usage for a sampling iteration
+
+          - `"message"`
+
+      - `class BetaCompactionIterationUsage: …`
+
+        Token usage for a compaction iteration.
+
+        - `cache_creation: Optional[BetaCacheCreation]`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: int`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: int`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: int`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: int`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: int`
+
+          The number of input tokens which were used.
+
+        - `output_tokens: int`
+
+          The number of output tokens which were used.
+
+        - `type: Literal["compaction"]`
+
+          Usage for a compaction iteration
+
+          - `"compaction"`
 
     - `output_tokens: int`
 
@@ -5245,7 +5444,7 @@ beta_message = client.beta.messages.create(
         "content": "Hello, world",
         "role": "user",
     }],
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
 )
 print(beta_message.id)
 ```

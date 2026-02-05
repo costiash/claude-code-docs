@@ -6,31 +6,41 @@ Automatically manage conversation context as it grows with context editing.
 
 ## Overview
 
-Context editing allows you to automatically manage conversation context as it grows, helping you optimize costs and stay within context window limits. You can use server-side API strategies, client-side SDK features, or both together.
+<Note>
+For most use cases, [server-side compaction](/docs/en/build-with-claude/compaction) is the primary strategy for managing context in long-running conversations. The strategies on this page are useful for specific scenarios where you need more fine-grained control over what content is cleared.
+</Note>
+
+Context editing allows you to selectively clear specific content from conversation history as it grows. This helps you optimize costs and stay within context window limits. This page covers:
+
+- **Tool result clearing** - Best for agentic workflows with heavy tool use where old tool results are no longer needed
+- **Thinking block clearing** - For managing thinking blocks when using extended thinking, with options to preserve recent thinking for context continuity
+- **Client-side SDK compaction** - An SDK-based alternative for summary-based context management (server-side compaction is generally preferred)
 
 | Approach | Where it runs | Strategies | How it works |
 |----------|---------------|------------|--------------|
 | **Server-side** | API | Tool result clearing (`clear_tool_uses_20250919`)<br/>Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently. |
-| **Client-side** | SDK | Compaction | Available in [Python and TypeScript SDKs](/docs/en/api/client-sdks) when using [`tool_runner`](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta). Generates a summary and replaces full conversation history. See [Compaction](#client-side-compaction-sdk) below. |
+| **Client-side** | SDK | Compaction | Available in [Python and TypeScript SDKs](/docs/en/api/client-sdks) when using [`tool_runner`](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk) below. |
 
 ## Server-side strategies
 
 <Note>
 Context editing is currently in beta with support for tool result clearing and thinking block clearing. To enable it, use the beta header `context-management-2025-06-27` in your API requests.
 
-Please reach out through our [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
+Share feedback on this feature through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88).
 </Note>
 
 ### Tool result clearing
 
-The `clear_tool_uses_20250919` strategy clears tool results when conversation context grows beyond your configured threshold. When activated, the API automatically clears the oldest tool results in chronological order, replacing them with placeholder text to let Claude know the tool result was removed. By default, only tool results are cleared. You can optionally clear both tool results and tool calls (the tool use parameters) by setting `clear_tool_inputs` to true.
+The `clear_tool_uses_20250919` strategy clears tool results when conversation context grows beyond your configured threshold. This is particularly useful for agentic workflows with heavy tool use. Older tool results (like file contents or search results) are no longer needed once Claude has processed them.
+
+When activated, the API automatically clears the oldest tool results in chronological order. Each cleared result is replaced with placeholder text so Claude knows it was removed. By default, only tool results are cleared. You can optionally clear both tool results and tool calls (the tool use parameters) by setting `clear_tool_inputs` to true.
 
 ### Thinking block clearing
 
-The `clear_thinking_20251015` strategy manages `thinking` blocks in conversations when extended thinking is enabled. This strategy automatically clears older thinking blocks from previous turns.
+The `clear_thinking_20251015` strategy manages `thinking` blocks in conversations when extended thinking is enabled. This strategy gives you control over thinking preservation: you can choose to keep more thinking blocks to maintain reasoning continuity, or clear them more aggressively to save context space.
 
 <Tip>
-**Default behavior**: When extended thinking is enabled without configuring the `clear_thinking_20251015` strategy, the API automatically keeps only the thinking blocks from the last assistant turn (equivalent to `keep: {type: "thinking_turns", value: 1}`).
+**Default behavior:** When extended thinking is enabled without configuring the `clear_thinking_20251015` strategy, the API automatically keeps only the thinking blocks from the last assistant turn (equivalent to `keep: {type: "thinking_turns", value: 1}`).
 
 To maximize cache hits, preserve all thinking blocks by setting `keep: "all"`.
 </Tip>
@@ -39,13 +49,13 @@ An assistant conversation turn may include multiple content blocks (e.g. when us
 
 ### Context editing happens server-side
 
-Context editing is applied server-side before the prompt reaches Claude. Your client application maintains the full, unmodified conversation history—you do not need to sync your client state with the edited version. Continue managing your full conversation history locally as you normally would.
+Context editing is applied server-side before the prompt reaches Claude. Your client application maintains the full, unmodified conversation history. You do not need to sync your client state with the edited version. Continue managing your full conversation history locally as you normally would.
 
 ### Context editing and prompt caching
 
 Context editing's interaction with [prompt caching](/docs/en/build-with-claude/prompt-caching) varies by strategy:
 
-- **Tool result clearing**: Invalidates cached prompt prefixes when content is cleared. To account for this, we recommend clearing enough tokens to make the cache invalidation worthwhile. Use the `clear_at_least` parameter to ensure a minimum number of tokens is cleared each time. You'll incur cache write costs each time content is cleared, but subsequent requests can reuse the newly cached prefix.
+- **Tool result clearing**: Invalidates cached prompt prefixes when content is cleared. To account for this, clear enough tokens to make the cache invalidation worthwhile. Use the `clear_at_least` parameter to ensure a minimum number of tokens is cleared each time. You'll incur cache write costs each time content is cleared, but subsequent requests can reuse the newly cached prefix.
 
 - **Thinking block clearing**: When thinking blocks are **kept** in context (not cleared), the prompt cache is preserved, enabling cache hits and reducing input token costs. When thinking blocks are **cleared**, the cache is invalidated at the point where clearing occurs. Configure the `keep` parameter based on whether you want to prioritize cache performance or context window availability.
 
@@ -53,6 +63,7 @@ Context editing's interaction with [prompt caching](/docs/en/build-with-claude/p
 
 Context editing is available on:
 
+- Claude Opus 4.6 (`claude-opus-4-6`)
 - Claude Opus 4.5 (`claude-opus-4-5-20251101`)
 - Claude Opus 4.1 (`claude-opus-4-1-20250805`)
 - Claude Opus 4 (`claude-opus-4-20250514`)
@@ -62,7 +73,7 @@ Context editing is available on:
 
 ## Tool result clearing usage
 
-The simplest way to enable tool result clearing is to specify only the strategy type, as all other [configuration options](#configuration-options-for-tool-result-clearing) will use their default values:
+The simplest way to enable tool result clearing is to specify only the strategy type. All other [configuration options](#configuration-options-for-tool-result-clearing) use their default values:
 
 <CodeGroup>
 
@@ -73,7 +84,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [
             {
@@ -97,7 +108,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=4096,
     messages=[
         {
@@ -128,7 +139,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 4096,
   messages: [
     {
@@ -166,7 +177,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [
             {
@@ -211,7 +222,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=4096,
     messages=[
         {
@@ -267,7 +278,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 4096,
   messages: [
     {
@@ -330,7 +341,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-sonnet-4-5-20250929",
+        "model": "claude-opus-4-6",
         "max_tokens": 1024,
         "messages": [...],
         "thinking": {
@@ -353,7 +364,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[...],
     thinking={
@@ -383,7 +394,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-5-20250929",
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [...],
   thinking: {
@@ -446,7 +457,7 @@ When using multiple strategies, the `clear_thinking_20251015` strategy must be l
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[...],
     thinking={
@@ -482,7 +493,7 @@ response = client.beta.messages.create(
 
 ```typescript TypeScript
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-5-20250929",
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [...],
   thinking: {
@@ -589,7 +600,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "messages": [
             {
                 "role": "user",
@@ -617,7 +628,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ```python Python
 response = client.beta.messages.count_tokens(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     messages=[
         {
             "role": "user",
@@ -656,7 +667,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.countTokens({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   messages: [
     {
       role: "user",
@@ -717,7 +728,7 @@ To use both features together, enable them in your API request:
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=4096,
     messages=[...],
     tools=[
@@ -744,7 +755,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 4096,
   messages: [...],
   tools: [
@@ -767,6 +778,10 @@ const response = await anthropic.beta.messages.create({
 
 ## Client-side compaction (SDK)
 
+<Warning>
+**Server-side compaction is recommended over SDK compaction.** [Server-side compaction](/docs/en/build-with-claude/compaction) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
+</Warning>
+
 <Note>
 Compaction is available in the [Python and TypeScript SDKs](/docs/en/api/client-sdks) when using the [`tool_runner` method](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta).
 </Note>
@@ -777,10 +792,10 @@ Compaction is an SDK feature that automatically manages conversation context by 
 
 When compaction is enabled, the SDK monitors token usage after each model response:
 
-1. **Threshold check**: The SDK calculates total tokens as `input_tokens + cache_creation_input_tokens + cache_read_input_tokens + output_tokens`
-2. **Summary generation**: When the threshold is exceeded, a summary prompt is injected as a user turn, and Claude generates a structured summary wrapped in `<summary></summary>` tags
-3. **Context replacement**: The SDK extracts the summary and replaces the entire message history with it
-4. **Continuation**: The conversation resumes from the summary, with Claude picking up where it left off
+1. **Threshold check:** The SDK calculates total tokens as `input_tokens + cache_creation_input_tokens + cache_read_input_tokens + output_tokens`.
+2. **Summary generation:** When the threshold is exceeded, a summary prompt is injected as a user turn, and Claude generates a structured summary wrapped in `<summary></summary>` tags.
+3. **Context replacement:** The SDK extracts the summary and replaces the entire message history with it.
+4. **Continuation:** The conversation resumes from the summary, with Claude picking up where it left off.
 
 ### Using compaction
 
@@ -794,7 +809,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 runner = client.beta.messages.tool_runner(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=4096,
     tools=[...],
     messages=[
@@ -821,7 +836,7 @@ import Anthropic from '@anthropic-ai/sdk';
 const client = new Anthropic();
 
 const runner = client.beta.messages.toolRunner({
-    model: 'claude-sonnet-4-5',
+    model: 'claude-opus-4-6',
     max_tokens: 4096,
     tools: [...],
     messages: [
@@ -983,11 +998,11 @@ Wrap your summary in <summary></summary> tags.`
 
 The built-in summary prompt instructs Claude to create a structured continuation summary including:
 
-1. **Task Overview**: The user's core request, success criteria, and constraints
-2. **Current State**: What has been completed, files modified, and artifacts produced
-3. **Important Discoveries**: Technical constraints, decisions made, errors resolved, and failed approaches
-4. **Next Steps**: Specific actions needed, blockers, and priority order
-5. **Context to Preserve**: User preferences, domain-specific details, and commitments made
+1. **Task Overview:** The user's core request, success criteria, and constraints.
+2. **Current State:** What has been completed, files modified, and artifacts produced.
+3. **Important Discoveries:** Technical constraints, decisions made, errors resolved, and failed approaches.
+4. **Next Steps:** Specific actions needed, blockers, and priority order.
+5. **Context to Preserve:** User preferences, domain-specific details, and commitments made.
 
 This structure enables Claude to resume work efficiently without losing important context or repeating mistakes.
 

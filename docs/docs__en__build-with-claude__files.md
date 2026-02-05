@@ -91,7 +91,7 @@ curl -X POST https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: files-api-2025-04-14" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {
@@ -120,7 +120,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {
@@ -151,7 +151,7 @@ import { Anthropic } from '@anthropic-ai/sdk';
 const anthropic = new Anthropic();
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
     {
@@ -205,7 +205,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -d @- <<EOF
 {
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "max_tokens": 1024,
   "messages": [
     {
@@ -234,7 +234,7 @@ csv_content = df.to_string()
 
 # Send as plain text in the message
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {
@@ -264,7 +264,7 @@ async function analyzeDocument() {
 
   // Send as plain text in the message
   const response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-5',
+    model: 'claude-opus-4-6',
     max_tokens: 1024,
     messages: [
       {

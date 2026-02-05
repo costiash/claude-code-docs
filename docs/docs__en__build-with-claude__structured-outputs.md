@@ -9,10 +9,14 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 - **JSON outputs** (`output_config.format`): Get Claude's response in a specific JSON format
 - **Strict tool use** (`strict: true`): Guarantee schema validation on tool names and inputs
 
+<Warning>
+The `output_format` parameter has been moved to `output_config.format`. The old `output_format` parameter still works temporarily but is deprecated and will be removed in a future API version. Update your code to use `output_config: {format: {...}}` instead.
+</Warning>
+
 These features can be used independently or together in the same request.
 
 <Note>
-Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs remain in public beta on Microsoft Foundry.
+Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Opus 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs remain in public beta on Microsoft Foundry.
 </Note>
 
 <Tip>
@@ -51,7 +55,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {
@@ -84,7 +88,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {
@@ -120,7 +124,7 @@ const client = new Anthropic({
 });
 
 const response = await client.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
     {
@@ -179,6 +183,10 @@ console.log(response.content[0].text);
 
 The Python and TypeScript SDKs provide helpers that make it easier to work with JSON outputs, including schema transformation, automatic validation, and integration with popular schema libraries.
 
+<Note>
+SDK helper methods (like `.parse()` and Pydantic/Zod integration) still accept `output_format` as a convenience parameter. The SDK handles the translation to `output_config.format` internally. The examples below show the SDK helper syntax.
+</Note>
+
 #### Using Pydantic and Zod
 
 For Python and TypeScript developers, you can use familiar schema definition tools like Pydantic and Zod instead of writing raw JSON schemas.
@@ -199,7 +207,7 @@ client = Anthropic()
 
 # With .create() - requires transform_schema()
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {
@@ -219,7 +227,7 @@ print(response.content[0].text)
 
 # With .parse() - can pass Pydantic model directly
 response = client.messages.parse(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {
@@ -248,7 +256,7 @@ const ContactInfoSchema = z.object({
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
     {
@@ -285,7 +293,7 @@ class ContactInfo(BaseModel):
 client = anthropic.Anthropic()
 
 response = client.messages.parse(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[{"role": "user", "content": "..."}],
     output_format=ContactInfo,
@@ -315,7 +323,7 @@ schema = transform_schema(schema)
 schema["properties"]["custom_field"] = {"type": "string"}
 
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[{"role": "user", "content": "..."}],
     output_config={
@@ -360,7 +368,7 @@ class Invoice(BaseModel):
     customer_name: str
 
 response = client.messages.parse(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     output_format=Invoice,
     messages=[{"role": "user", "content": f"Extract invoice data from: {invoice_text}"}]
 )
@@ -379,7 +387,7 @@ const InvoiceSchema = z.object({
 });
 
 const response = await client.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   output_config: { format: zodOutputFormat(InvoiceSchema) },
   messages: [{"role": "user", "content": `Extract invoice data from: ${invoiceText}`}]
 });
@@ -406,7 +414,7 @@ class Classification(BaseModel):
     sentiment: str
 
 response = client.messages.parse(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     output_format=Classification,
     messages=[{"role": "user", "content": f"Classify this feedback: {feedback_text}"}]
 )
@@ -424,7 +432,7 @@ const ClassificationSchema = z.object({
 });
 
 const response = await client.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   output_config: { format: zodOutputFormat(ClassificationSchema) },
   messages: [{"role": "user", "content": `Classify this feedback: ${feedbackText}`}]
 });
@@ -451,7 +459,7 @@ class APIResponse(BaseModel):
     metadata: dict
 
 response = client.messages.parse(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     output_format=APIResponse,
     messages=[{"role": "user", "content": "Process this request: ..."}]
 )
@@ -469,7 +477,7 @@ const APIResponseSchema = z.object({
 });
 
 const response = await client.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   output_config: { format: zodOutputFormat(APIResponseSchema) },
   messages: [{"role": "user", "content": "Process this request: ..."}]
 });
@@ -509,7 +517,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": "What is the weather in San Francisco?"}
@@ -543,7 +551,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {"role": "user", "content": "What's the weather like in San Francisco?"}
@@ -583,7 +591,7 @@ const client = new Anthropic({
 });
 
 const response = await client.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
     {
@@ -657,7 +665,7 @@ Ensure tool parameters exactly match your schema:
 
 ```python Python
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     messages=[{"role": "user", "content": "Search for flights to Tokyo"}],
     tools=[{
         "name": "search_flights",
@@ -678,7 +686,7 @@ response = client.messages.create(
 
 ```typescript TypeScript
 const response = await client.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   messages: [{"role": "user", "content": "Search for flights to Tokyo"}],
   tools: [{
     name: "search_flights",
@@ -709,7 +717,7 @@ Build reliable multi-step agents with guaranteed tool parameters:
 
 ```python Python
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     messages=[{"role": "user", "content": "Help me plan a trip to Paris for 2 people"}],
     tools=[
         {
@@ -747,7 +755,7 @@ response = client.messages.create(
 
 ```typescript TypeScript
 const response = await client.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   messages: [{"role": "user", "content": "Help me plan a trip to Paris for 2 people"}],
   tools: [
     {
@@ -800,7 +808,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
 
 ```python Python
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Help me plan a trip to Paris for next month"}],
     # JSON outputs: structured response format
@@ -837,7 +845,7 @@ response = client.messages.create(
 
 ```typescript TypeScript
 const response = await client.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Help me plan a trip to Paris for next month" }],
   // JSON outputs: structured response format
@@ -994,7 +1002,7 @@ For persistent issues with valid schemas, [contact support](https://support.clau
 
 **Incompatible with:**
 - **[Citations](/docs/en/build-with-claude/citations)**: Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_config.format`.
-- **[Message Prefilling](/docs/en/build-with-claude/prompt-engineering/prefill-claudes-response)**: Incompatible with JSON outputs
+- **Message Prefilling**: Incompatible with JSON outputs
 
 <Tip>
 **Grammar scope**: Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [Extended Thinking](/docs/en/build-with-claude/extended-thinking)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.

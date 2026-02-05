@@ -37,6 +37,14 @@ Get Cost Report
 
   Optionally set to the `next_page` token from the previous response.
 
+### Header Parameters
+
+- `"anthropic-beta": optional array of string`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+
 ### Returns
 
 - `CostReport = object { data, has_more, next_page }`
@@ -47,7 +55,7 @@ Get Cost Report
 
       End of the time bucket (exclusive) in RFC 3339 format.
 
-    - `results: array of object { amount, context_window, cost_type, 6 more }`
+    - `results: array of object { amount, context_window, cost_type, 7 more }`
 
       List of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -57,7 +65,7 @@ Get Cost Report
 
       - `context_window: "0-200k" or "200k-1M"`
 
-        Input context window used. Null if not grouping by description or for non-token costs.
+        Input context window used. `null` if not grouping by description or for non-token costs.
 
         - `"0-200k"`
 
@@ -65,7 +73,7 @@ Get Cost Report
 
       - `cost_type: "tokens" or "web_search" or "code_execution"`
 
-        Type of cost. Null if not grouping by description.
+        Type of cost. `null` if not grouping by description.
 
         - `"tokens"`
 
@@ -79,15 +87,20 @@ Get Cost Report
 
       - `description: string`
 
-        Description of the cost item. Null if not grouping by description.
+        Description of the cost item. `null` if not grouping by description.
+
+      - `inference_geo: string`
+
+        Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
+        For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
 
       - `model: string`
 
-        Model name used. Null if not grouping by description or for non-token costs.
+        Model name used. `null` if not grouping by description or for non-token costs.
 
       - `service_tier: "standard" or "batch"`
 
-        Service tier used. Null if not grouping by description or for non-token costs.
+        Service tier used. `null` if not grouping by description or for non-token costs.
 
         - `"standard"`
 
@@ -95,7 +108,7 @@ Get Cost Report
 
       - `token_type: "uncached_input_tokens" or "output_tokens" or "cache_read_input_tokens" or 2 more`
 
-        Type of token. Null if not grouping by description or for non-token costs.
+        Type of token. `null` if not grouping by description or for non-token costs.
 
         - `"uncached_input_tokens"`
 
@@ -109,7 +122,7 @@ Get Cost Report
 
       - `workspace_id: string`
 
-        ID of the Workspace this cost is associated with. Null if not grouping by workspace or for the default workspace.
+        ID of the Workspace this cost is associated with. `null` if not grouping by workspace or for the default workspace.
 
     - `starting_at: string`
 
@@ -127,5 +140,6 @@ Get Cost Report
 
 ```http
 curl https://api.anthropic.com/v1/organizations/cost_report \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```

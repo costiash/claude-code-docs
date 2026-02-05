@@ -59,7 +59,7 @@ Craft a design brief for a holistic brand identity.
         api_key="my_api_key",
     )
     message = client.messages.create(
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-6",
         max_tokens=2000,
         temperature=1,
         system="Your task is to create a comprehensive design brief for a holistic brand identity based on the given specifications. The brand identity should encompass various elements such as suggestions for the brand name, logo, color palette, typography, visual style, tone of voice, and overall brand personality. Ensure that all elements work together harmoniously to create a cohesive and memorable brand experience that effectively communicates the brand's values, mission, and unique selling proposition to its target audience. Be detailed and comprehensive and provide enough specific details for someone to create a truly unique brand identity.",
@@ -88,7 +88,7 @@ Craft a design brief for a holistic brand identity.
     });
     
     const msg = await anthropic.messages.create({
-      model: "claude-sonnet-4-5",
+      model: "claude-opus-4-6",
       max_tokens: 2000,
       temperature: 1,
       system: "Your task is to create a comprehensive design brief for a holistic brand identity based on the given specifications. The brand identity should encompass various elements such as suggestions for the brand name, logo, color palette, typography, visual style, tone of voice, and overall brand personality. Ensure that all elements work together harmoniously to create a cohesive and memorable brand experience that effectively communicates the brand's values, mission, and unique selling proposition to its target audience. Be detailed and comprehensive and provide enough specific details for someone to create a truly unique brand identity.",
@@ -117,7 +117,7 @@ Craft a design brief for a holistic brand identity.
     client = AnthropicBedrock()
     
     message = client.messages.create(
-        model="anthropic.claude-sonnet-4-5-20250929-v1:0",
+        model="anthropic.claude-opus-4-6-v1:0",
         max_tokens=2000,
         temperature=1,
         system="Your task is to create a comprehensive design brief for a holistic brand identity based on the given specifications. The brand identity should encompass various elements such as suggestions for the brand name, logo, color palette, typography, visual style, tone of voice, and overall brand personality. Ensure that all elements work together harmoniously to create a cohesive and memorable brand experience that effectively communicates the brand's values, mission, and unique selling proposition to its target audience. Be detailed and comprehensive and provide enough specific details for someone to create a truly unique brand identity.",
@@ -146,7 +146,7 @@ Craft a design brief for a holistic brand identity.
     const client = new AnthropicBedrock();
     
     const msg = await client.messages.create({
-      model: "anthropic.claude-sonnet-4-5-20250929-v1:0",
+      model: "anthropic.claude-opus-4-6-v1:0",
       max_tokens: 2000,
       temperature: 1,
       system: "Your task is to create a comprehensive design brief for a holistic brand identity based on the given specifications. The brand identity should encompass various elements such as suggestions for the brand name, logo, color palette, typography, visual style, tone of voice, and overall brand personality. Ensure that all elements work together harmoniously to create a cohesive and memorable brand experience that effectively communicates the brand's values, mission, and unique selling proposition to its target audience. Be detailed and comprehensive and provide enough specific details for someone to create a truly unique brand identity.",

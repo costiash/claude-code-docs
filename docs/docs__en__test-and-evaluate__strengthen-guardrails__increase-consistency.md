@@ -25,6 +25,9 @@ Precisely define your desired output format using JSON, XML, or custom templates
 </section>
 
 ## Prefill Claude's response
+
+<Note>Prefilling is deprecated and not supported on Claude Opus 4.6 and Claude Sonnet 4.5. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) or system prompt instructions instead.</Note>
+
 Prefill the `Assistant` turn with your desired format. This trick bypasses Claude's friendly preamble and enforces your structure.
 
 <section title="Example: Daily sales report">

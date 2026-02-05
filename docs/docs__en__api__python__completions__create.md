@@ -24,12 +24,13 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `UnionMember0 = Literal["claude-opus-4-5-20251101", "claude-opus-4-5", "claude-3-7-sonnet-latest", 17 more]`
+  - `UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `claude-opus-4-6` - Most intelligent model for building agents and coding
     - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
     - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
     - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
@@ -50,6 +51,10 @@ Future models and features will not be compatible with Text Completions. See our
     - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
     - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
     - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+
+    - `"claude-opus-4-6"`
+
+      Most intelligent model for building agents and coding
 
     - `"claude-opus-4-5-20251101"`
 
@@ -269,12 +274,13 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `UnionMember0 = Literal["claude-opus-4-5-20251101", "claude-opus-4-5", "claude-3-7-sonnet-latest", 17 more]`
+    - `UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `claude-opus-4-6` - Most intelligent model for building agents and coding
       - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
       - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
       - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
@@ -295,6 +301,10 @@ Future models and features will not be compatible with Text Completions. See our
       - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
       - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+
+      - `"claude-opus-4-6"`
+
+        Most intelligent model for building agents and coding
 
       - `"claude-opus-4-5-20251101"`
 
@@ -406,7 +416,7 @@ client = Anthropic(
 )
 completion = client.completions.create(
     max_tokens_to_sample=256,
-    model="claude-opus-4-5-20251101",
+    model="claude-opus-4-6",
     prompt="\n\nHuman: Hello, world!\n\nAssistant:",
 )
 print(completion.id)

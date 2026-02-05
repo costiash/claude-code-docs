@@ -92,12 +92,13 @@ Claude calls the memory tool:
 
 The memory tool is available on:
 
-- Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
-- Claude Sonnet 4 (`claude-sonnet-4-20250514`)
-- Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
+- Claude Opus 4.6 (`claude-opus-4-6`)
 - Claude Opus 4.5 (`claude-opus-4-5-20251101`)
 - Claude Opus 4.1 (`claude-opus-4-1-20250805`)
 - Claude Opus 4 (`claude-opus-4-20250514`)
+- Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
+- Claude Sonnet 4 (`claude-sonnet-4-20250514`)
+- Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
 
 ## Getting started
 
@@ -126,7 +127,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 2048,
         "messages": [
             {
@@ -147,7 +148,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 message = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=2048,
     messages=[
         {
@@ -171,7 +172,7 @@ const anthropic = new Anthropic({
 });
 
 const message = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 2048,
   messages: [
     {
@@ -444,7 +445,7 @@ To use both features together:
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=4096,
     messages=[...],
     tools=[
@@ -481,7 +482,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 4096,
   messages: [...],
   tools: [
@@ -539,3 +540,9 @@ context_management: {
 ```
 
 </CodeGroup>
+
+## Using with Compaction
+
+The memory tool can also be paired with [compaction](/docs/en/build-with-claude/compaction), which provides server-side summarization of older conversation context. While context editing clears specific tool results on the client side, compaction automatically summarizes the entire conversation on the server side when it approaches the context window limit.
+
+For long-running agentic workflows, consider using both: compaction keeps the active context manageable without client-side bookkeeping, and memory persists important information across compaction boundaries so that nothing critical is lost in the summary.

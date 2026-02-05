@@ -67,7 +67,7 @@ client = anthropic.Anthropic(  # defaults to os.environ.get("ANTHROPIC_API_KEY")
     api_key="my_api_key",
 )
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=2000,
     temperature=0,
     system="You are an AI assistant with expertise in LaTeX, a document preparation system widely used for academic and technical writing. Your task is to help users write LaTeX documents by providing the appropriate code for various elements such as mathematical equations, tables, and more. Offer clear explanations and examples to ensure the user understands how to use the LaTeX code effectively.",
@@ -97,7 +97,7 @@ const anthropic = new Anthropic({
 });
 
 const msg = await anthropic.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 2000,
   temperature: 0,
   system: "You are an AI assistant with expertise in LaTeX, a document preparation system widely used for academic and technical writing. Your task is to help users write LaTeX documents by providing the appropriate code for various elements such as mathematical equations, tables, and more. Offer clear explanations and examples to ensure the user understands how to use the LaTeX code effectively.",
@@ -129,7 +129,7 @@ from anthropic import AnthropicBedrock
 client = AnthropicBedrock()
 
 message = client.messages.create(
-model="anthropic.claude-sonnet-4-5-20250929-v1:0",
+model="anthropic.claude-opus-4-6-v1:0",
 max_tokens=2000,
 temperature=0,
 system="You are an AI assistant with expertise in LaTeX, a document preparation system widely used for academic and technical writing. Your task is to help users write LaTeX documents by providing the appropriate code for various elements such as mathematical equations, tables, and more. Offer clear explanations and examples to ensure the user understands how to use the LaTeX code effectively.",
@@ -158,7 +158,7 @@ import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 const client = new AnthropicBedrock();
 
 const msg = await client.messages.create({
-  model: "anthropic.claude-sonnet-4-5-20250929-v1:0",
+  model: "anthropic.claude-opus-4-6-v1:0",
   max_tokens: 2000,
   temperature: 0,
   system: "You are an AI assistant with expertise in LaTeX, a document preparation system widely used for academic and technical writing. Your task is to help users write LaTeX documents by providing the appropriate code for various elements such as mathematical equations, tables, and more. Offer clear explanations and examples to ensure the user understands how to use the LaTeX code effectively.",

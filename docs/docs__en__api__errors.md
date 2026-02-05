@@ -66,7 +66,7 @@ Our official SDKs provide this value as a property on top-level response objects
   client = anthropic.Anthropic()
 
   message = client.messages.create(
-      model="claude-sonnet-4-5",
+      model="claude-opus-4-6",
       max_tokens=1024,
       messages=[
           {"role": "user", "content": "Hello, Claude"}
@@ -81,7 +81,7 @@ Our official SDKs provide this value as a property on top-level response objects
   const client = new Anthropic();
 
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-5',
+    model: 'claude-opus-4-6',
     max_tokens: 1024,
     messages: [
       {"role": "user", "content": "Hello, Claude"}
@@ -109,3 +109,45 @@ If you are building a direct API integration, you should be aware that setting a
 
 Our [SDKs](/docs/en/api/client-sdks) will validate that your non-streaming Messages API requests are not expected to exceed a 10 minute timeout and
 also will set a socket option for TCP keep-alive.
+
+If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) to get the complete `Message` object without writing event-handling code:
+
+<CodeGroup>
+    ```python Python
+    with client.messages.stream(
+        max_tokens=128000,
+        messages=[{"role": "user", "content": "Write a detailed analysis..."}],
+        model="claude-opus-4-6",
+    ) as stream:
+        message = stream.get_final_message()
+    ```
+
+    ```typescript TypeScript
+    const stream = client.messages.stream({
+        max_tokens: 128000,
+        messages: [{role: 'user', content: 'Write a detailed analysis...'}],
+        model: 'claude-opus-4-6',
+    });
+    const message = await stream.finalMessage();
+    ```
+</CodeGroup>
+
+See [Streaming Messages](/docs/en/build-with-claude/streaming#get-the-final-message-without-handling-events) for more details.
+
+## Common validation errors
+
+### Prefill not supported
+
+Claude Opus 4.6 does not support prefilling assistant messages. Sending a request with a prefilled last assistant message to this model returns a 400 `invalid_request_error`:
+
+```json
+{
+  "type": "error",
+  "error": {
+    "type": "invalid_request_error",
+    "message": "Prefilling assistant messages is not supported for this model."
+  }
+}
+```
+
+Use [structured outputs](/docs/en/build-with-claude/structured-outputs), system prompt instructions, or [`output_config.format`](/docs/en/build-with-claude/structured-outputs#json-outputs) instead.

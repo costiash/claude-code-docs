@@ -16,9 +16,9 @@ The tool search tool is currently in public beta. Include the appropriate [beta 
 
 | Provider                 | Beta header                    | Supported models                       |
 | ------------------------ | ------------------------------ | -------------------------------------- |
-| Claude API<br/>Microsoft Foundry  | `advanced-tool-use-2025-11-20` | Claude Opus 4.5<br />Claude Sonnet 4.5 |
-| Google Cloud's Vertex AI | `tool-search-tool-2025-10-19`  | Claude Opus 4.5<br />Claude Sonnet 4.5 |
-| Amazon Bedrock           | `tool-search-tool-2025-10-19`  | Claude Opus 4.5<br />Claude Sonnet 4.5 |
+| Claude API<br/>Microsoft Foundry  | `advanced-tool-use-2025-11-20` | Claude Opus 4.6<br />Claude Opus 4.5<br />Claude Sonnet 4.5 |
+| Google Cloud's Vertex AI | `tool-search-tool-2025-10-19`  | Claude Opus 4.6<br />Claude Opus 4.5<br />Claude Sonnet 4.5 |
+| Amazon Bedrock           | `tool-search-tool-2025-10-19`  | Claude Opus 4.6<br />Claude Opus 4.5<br />Claude Sonnet 4.5 |
 
 Please reach out through our [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA) to share your feedback on this feature.
 </Note>
@@ -62,7 +62,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: advanced-tool-use-2025-11-20" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5-20250929",
+        "model": "claude-opus-4-6",
         "max_tokens": 2048,
         "messages": [
             {
@@ -117,7 +117,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     betas=["advanced-tool-use-2025-11-20"],
     max_tokens=2048,
     messages=[
@@ -176,7 +176,7 @@ const client = new Anthropic();
 
 async function main() {
   const response = await client.beta.messages.create({
-    model: "claude-sonnet-4-5-20250929",
+    model: "claude-opus-4-6",
     betas: ["advanced-tool-use-2025-11-20"],
     max_tokens: 2048,
     messages: [
@@ -365,7 +365,7 @@ curl https://api.anthropic.com/v1/messages \
   --header "anthropic-beta: advanced-tool-use-2025-11-20,mcp-client-2025-11-20" \
   --header "content-type: application/json" \
   --data '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 2048,
     "mcp_servers": [
       {
@@ -407,7 +407,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     betas=["advanced-tool-use-2025-11-20", "mcp-client-2025-11-20"],
     max_tokens=2048,
     mcp_servers=[
@@ -453,7 +453,7 @@ const client = new Anthropic();
 
 async function main() {
   const response = await client.beta.messages.create({
-    model: "claude-sonnet-4-5-20250929",
+    model: "claude-opus-4-6",
     betas: ["advanced-tool-use-2025-11-20", "mcp-client-2025-11-20"],
     max_tokens: 2048,
     mcp_servers: [
@@ -654,7 +654,7 @@ messages = [
 ]
 
 response1 = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     betas=["advanced-tool-use-2025-11-20"],
     max_tokens=2048,
     messages=messages,
@@ -692,7 +692,7 @@ messages.append({
 })
 
 response2 = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     betas=["advanced-tool-use-2025-11-20"],
     max_tokens=2048,
     messages=messages,

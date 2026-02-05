@@ -158,6 +158,10 @@ Future models and features will not be compatible with Text Completions. See our
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+        Most intelligent model for building agents and coding
+
       - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
         Premium model combining maximum intelligence with practical performance
@@ -276,7 +280,7 @@ func main() {
   )
   completion, err := client.Completions.New(context.TODO(), anthropic.CompletionNewParams{
     MaxTokensToSample: 256,
-    Model: anthropic.ModelClaudeOpus4_5_20251101,
+    Model: anthropic.ModelClaudeOpus4_6,
     Prompt: "\n\nHuman: Hello, world!\n\nAssistant:",
   })
   if err != nil {
@@ -313,6 +317,10 @@ func main() {
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+        Most intelligent model for building agents and coding
 
       - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 

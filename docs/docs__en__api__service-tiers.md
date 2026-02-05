@@ -32,13 +32,19 @@ Anthropic counts usage against Priority Tier capacity as follows:
 - Cache writes as 1.25 tokens per token written to the cache with a 5 minute TTL
 - Cache writes as 2.00 tokens per token written to the cache with a 1 hour TTL
 - For [long-context](/docs/en/build-with-claude/context-windows) (>200k input tokens) requests, input tokens are 2 tokens per token
+- For [US-only inference](/docs/en/build-with-claude/data-residency) (`inference_geo: "us"`) requests, input tokens are 1.1 tokens per token
 - All other input tokens are 1 token per token
 
 **Output Tokens**
 - For [long-context](/docs/en/build-with-claude/context-windows) (>200k input tokens) requests, output tokens are 1.5 tokens per token
+- For [US-only inference](/docs/en/build-with-claude/data-residency) (`inference_geo: "us"`) requests, output tokens are 1.1 tokens per token
 - All other output tokens are 1 token per token
 
 Otherwise, requests proceed at standard tier.
+
+<Note>
+These burndown rates reflect the relative pricing of each token type. For example, US-only inference is priced at 1.1x, so each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your Priority Tier capacity. Multipliers stack — a long-context request with US-only inference draws down input tokens at 2.2 tokens per token (2 × 1.1).
+</Note>
 
 <Note>
 Requests assigned Priority Tier pull from both the Priority Tier capacity and the regular rate limits.
@@ -51,7 +57,7 @@ You can control which service tiers can be used for a request by setting the `se
 
 ```python
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude!"}],
     service_tier="auto"  # Automatically use Priority Tier when available, fallback to standard
@@ -110,13 +116,14 @@ The ratio of input to output tokens you purchase matters. Sizing your Priority T
 
 Priority Tier is supported by:
 
+- Claude Opus 4.6
 - Claude Opus 4.5
-- Claude Sonnet 4.5
-- Claude Haiku 4.5
 - Claude Opus 4.1
 - Claude Opus 4
+- Claude Sonnet 4.5
 - Claude Sonnet 4
 - Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
+- Claude Haiku 4.5
 - Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations))
 
 Check the [model overview page](/docs/en/about-claude/models/overview) for more details on our models.

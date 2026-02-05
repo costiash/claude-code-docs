@@ -33,12 +33,12 @@ from anthropic import Anthropic
 client = Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {"role": "user", "content": "Hello, Claude"}
     ],
-    betas=["beta-feature-name"]
+    betas=["code-execution-2025-08-25"]
 )
 ```
 
@@ -48,12 +48,12 @@ import Anthropic from '@anthropic-ai/sdk';
 const anthropic = new Anthropic();
 
 const msg = await anthropic.beta.messages.create({
-  model: 'claude-sonnet-4-5',
+  model: 'claude-opus-4-6',
   max_tokens: 1024,
   messages: [
     { role: 'user', content: 'Hello, Claude' }
   ],
-  betas: ['beta-feature-name']
+  betas: ['code-execution-2025-08-25']
 });
 ```
 
@@ -61,10 +61,10 @@ const msg = await anthropic.beta.messages.create({
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: beta-feature-name" \
+  -H "anthropic-beta: code-execution-2025-08-25" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": "Hello, Claude"}

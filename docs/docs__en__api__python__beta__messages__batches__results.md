@@ -839,6 +839,22 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"container_upload"`
 
+          - `class BetaCompactionBlock: …`
+
+            A compaction block returned when autocompact is triggered.
+
+            When content is None, it indicates the compaction failed to produce a valid
+            summary (e.g., malformed output from the model). Clients may round-trip
+            compaction blocks with null content; the server treats them as no-ops.
+
+            - `content: Optional[str]`
+
+              Summary of compacted content, or null if compaction failed
+
+            - `type: Literal["compaction"]`
+
+              - `"compaction"`
+
         - `context_management: Optional[BetaContextManagementResponse]`
 
           Context management response.
@@ -887,12 +903,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `UnionMember0 = Literal["claude-opus-4-5-20251101", "claude-opus-4-5", "claude-3-7-sonnet-latest", 17 more]`
+          - `UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `claude-opus-4-6` - Most intelligent model for building agents and coding
             - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
             - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
             - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
@@ -913,6 +930,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
             - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
             - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+
+            - `"claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
@@ -1029,6 +1050,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"pause_turn"`
 
+          - `"compaction"`
+
           - `"refusal"`
 
           - `"model_context_window_exceeded"`
@@ -1079,9 +1102,99 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of input tokens read from the cache.
 
+          - `inference_geo: Optional[str]`
+
+            The geographic region where inference was performed for this request.
+
           - `input_tokens: int`
 
             The number of input tokens which were used.
+
+          - `iterations: Optional[List[Iteration]]`
+
+            Per-iteration token usage breakdown.
+
+            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+            - Determine which iterations exceeded long context thresholds (>=200k tokens)
+            - Calculate the true context window size from the last iteration
+            - Understand token accumulation across server-side tool use loops
+
+            - `class BetaMessageIterationUsage: …`
+
+              Token usage for a sampling iteration.
+
+              - `cache_creation: Optional[BetaCacheCreation]`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: int`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: int`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: int`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: int`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: int`
+
+                The number of input tokens which were used.
+
+              - `output_tokens: int`
+
+                The number of output tokens which were used.
+
+              - `type: Literal["message"]`
+
+                Usage for a sampling iteration
+
+                - `"message"`
+
+            - `class BetaCompactionIterationUsage: …`
+
+              Token usage for a compaction iteration.
+
+              - `cache_creation: Optional[BetaCacheCreation]`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: int`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: int`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: int`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: int`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: int`
+
+                The number of input tokens which were used.
+
+              - `output_tokens: int`
+
+                The number of output tokens which were used.
+
+              - `type: Literal["compaction"]`
+
+                Usage for a compaction iteration
+
+                - `"compaction"`
 
           - `output_tokens: int`
 

@@ -2460,6 +2460,47 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
+            - `type BetaCompactionBlockParamResp struct{…}`
+
+              A compaction block containing summary of previous context.
+
+              Users should round-trip these blocks from responses to subsequent requests
+              to maintain context across compaction boundaries.
+
+              When content is None, the block represents a failed compaction. The server
+              treats these as no-ops. Empty string content is not allowed.
+
+              - `Content string`
+
+                Summary of previously compacted content, or null if compaction failed
+
+              - `Type Compaction`
+
+                - `const CompactionCompaction Compaction = "compaction"`
+
+              - `CacheControl BetaCacheControlEphemeral`
+
+                Create a cache control breakpoint at this content block.
+
+                - `Type Ephemeral`
+
+                  - `const EphemeralEphemeral Ephemeral = "ephemeral"`
+
+                - `TTL BetaCacheControlEphemeralTTL`
+
+                  The time-to-live for the cache control breakpoint.
+
+                  This may be one the following values:
+
+                  - `5m`: 5 minutes
+                  - `1h`: 1 hour
+
+                  Defaults to `5m`.
+
+                  - `const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"`
+
+                  - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
+
         - `Role BetaMessageParamRole`
 
           - `const BetaMessageParamRoleUser BetaMessageParamRole = "user"`
@@ -2477,6 +2518,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
 
           - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
@@ -2690,6 +2735,36 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `const AllAll All = "all"`
 
+          - `type BetaCompact20260112Edit struct{…}`
+
+            Automatically compact older context when reaching the configured trigger threshold.
+
+            - `Type Compact20260112`
+
+              - `const Compact20260112Compact20260112 Compact20260112 = "compact_20260112"`
+
+            - `Instructions string`
+
+              Additional instructions for summarization.
+
+            - `PauseAfterCompaction bool`
+
+              Whether to pause after compaction and return the compaction block to the user.
+
+            - `Trigger BetaInputTokensTrigger`
+
+              When to trigger compaction. Defaults to 150000 input tokens.
+
+              - `Type InputTokens`
+
+                - `const InputTokensInputTokens InputTokens = "input_tokens"`
+
+              - `Value int64`
+
+      - `InferenceGeo string`
+
+        Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
       - `MCPServers []BetaRequestMCPServerURLDefinition`
 
         MCP servers to be utilized in this request
@@ -2726,15 +2801,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `Effort BetaOutputConfigEffort`
 
-          How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
-
-          Valid values are `low`, `medium`, or `high`.
+          All possible effort levels.
 
           - `const BetaOutputConfigEffortLow BetaOutputConfigEffort = "low"`
 
           - `const BetaOutputConfigEffortMedium BetaOutputConfigEffort = "medium"`
 
           - `const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"`
+
+          - `const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"`
 
         - `Format BetaJSONOutputFormat`
 
@@ -2941,6 +3016,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const DisabledDisabled Disabled = "disabled"`
 
+        - `type BetaThinkingConfigAdaptive struct{…}`
+
+          - `Type Adaptive`
+
+            - `const AdaptiveAdaptive Adaptive = "adaptive"`
+
       - `ToolChoice BetaToolChoiceUnion`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -3123,6 +3204,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             Description of what this tool does.
 
             Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+          - `EagerInputStreaming bool`
+
+            Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
           - `InputExamples []map[string, any]`
 
@@ -4312,7 +4397,7 @@ func main() {
           }},
           Role: anthropic.BetaMessageParamRoleUser,
         }},
-        Model: anthropic.ModelClaudeSonnet4_5_20250929,
+        Model: anthropic.ModelClaudeOpus4_6,
       },
     }},
   })
@@ -5842,6 +5927,22 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `const ContainerUploadContainerUpload ContainerUpload = "container_upload"`
 
+          - `type BetaCompactionBlock struct{…}`
+
+            A compaction block returned when autocompact is triggered.
+
+            When content is None, it indicates the compaction failed to produce a valid
+            summary (e.g., malformed output from the model). Clients may round-trip
+            compaction blocks with null content; the server treats them as no-ops.
+
+            - `Content string`
+
+              Summary of compacted content, or null if compaction failed
+
+            - `Type Compaction`
+
+              - `const CompactionCompaction Compaction = "compaction"`
+
         - `ContextManagement BetaContextManagementResponse`
 
           Context management response.
@@ -5895,6 +5996,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
 
             - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
@@ -6011,6 +6116,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `const BetaStopReasonPauseTurn BetaStopReason = "pause_turn"`
 
+          - `const BetaStopReasonCompaction BetaStopReason = "compaction"`
+
           - `const BetaStopReasonRefusal BetaStopReason = "refusal"`
 
           - `const BetaStopReasonModelContextWindowExceeded BetaStopReason = "model_context_window_exceeded"`
@@ -6061,9 +6168,99 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of input tokens read from the cache.
 
+          - `InferenceGeo string`
+
+            The geographic region where inference was performed for this request.
+
           - `InputTokens int64`
 
             The number of input tokens which were used.
+
+          - `Iterations []BetaUsageIterationUnion`
+
+            Per-iteration token usage breakdown.
+
+            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+            - Determine which iterations exceeded long context thresholds (>=200k tokens)
+            - Calculate the true context window size from the last iteration
+            - Understand token accumulation across server-side tool use loops
+
+            - `type BetaMessageIterationUsage struct{…}`
+
+              Token usage for a sampling iteration.
+
+              - `CacheCreation BetaCacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+                - `Ephemeral1hInputTokens int64`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `Ephemeral5mInputTokens int64`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `CacheCreationInputTokens int64`
+
+                The number of input tokens used to create the cache entry.
+
+              - `CacheReadInputTokens int64`
+
+                The number of input tokens read from the cache.
+
+              - `InputTokens int64`
+
+                The number of input tokens which were used.
+
+              - `OutputTokens int64`
+
+                The number of output tokens which were used.
+
+              - `Type Message`
+
+                Usage for a sampling iteration
+
+                - `const MessageMessage Message = "message"`
+
+            - `type BetaCompactionIterationUsage struct{…}`
+
+              Token usage for a compaction iteration.
+
+              - `CacheCreation BetaCacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+                - `Ephemeral1hInputTokens int64`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `Ephemeral5mInputTokens int64`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `CacheCreationInputTokens int64`
+
+                The number of input tokens used to create the cache entry.
+
+              - `CacheReadInputTokens int64`
+
+                The number of input tokens read from the cache.
+
+              - `InputTokens int64`
+
+                The number of input tokens which were used.
+
+              - `OutputTokens int64`
+
+                The number of output tokens which were used.
+
+              - `Type Compaction`
+
+                Usage for a compaction iteration
+
+                - `const CompactionCompaction Compaction = "compaction"`
 
           - `OutputTokens int64`
 
@@ -7217,6 +7414,22 @@ func main() {
 
               - `const ContainerUploadContainerUpload ContainerUpload = "container_upload"`
 
+          - `type BetaCompactionBlock struct{…}`
+
+            A compaction block returned when autocompact is triggered.
+
+            When content is None, it indicates the compaction failed to produce a valid
+            summary (e.g., malformed output from the model). Clients may round-trip
+            compaction blocks with null content; the server treats them as no-ops.
+
+            - `Content string`
+
+              Summary of compacted content, or null if compaction failed
+
+            - `Type Compaction`
+
+              - `const CompactionCompaction Compaction = "compaction"`
+
         - `ContextManagement BetaContextManagementResponse`
 
           Context management response.
@@ -7270,6 +7483,10 @@ func main() {
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
 
             - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
@@ -7386,6 +7603,8 @@ func main() {
 
           - `const BetaStopReasonPauseTurn BetaStopReason = "pause_turn"`
 
+          - `const BetaStopReasonCompaction BetaStopReason = "compaction"`
+
           - `const BetaStopReasonRefusal BetaStopReason = "refusal"`
 
           - `const BetaStopReasonModelContextWindowExceeded BetaStopReason = "model_context_window_exceeded"`
@@ -7436,9 +7655,99 @@ func main() {
 
             The number of input tokens read from the cache.
 
+          - `InferenceGeo string`
+
+            The geographic region where inference was performed for this request.
+
           - `InputTokens int64`
 
             The number of input tokens which were used.
+
+          - `Iterations []BetaUsageIterationUnion`
+
+            Per-iteration token usage breakdown.
+
+            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+            - Determine which iterations exceeded long context thresholds (>=200k tokens)
+            - Calculate the true context window size from the last iteration
+            - Understand token accumulation across server-side tool use loops
+
+            - `type BetaMessageIterationUsage struct{…}`
+
+              Token usage for a sampling iteration.
+
+              - `CacheCreation BetaCacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+                - `Ephemeral1hInputTokens int64`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `Ephemeral5mInputTokens int64`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `CacheCreationInputTokens int64`
+
+                The number of input tokens used to create the cache entry.
+
+              - `CacheReadInputTokens int64`
+
+                The number of input tokens read from the cache.
+
+              - `InputTokens int64`
+
+                The number of input tokens which were used.
+
+              - `OutputTokens int64`
+
+                The number of output tokens which were used.
+
+              - `Type Message`
+
+                Usage for a sampling iteration
+
+                - `const MessageMessage Message = "message"`
+
+            - `type BetaCompactionIterationUsage struct{…}`
+
+              Token usage for a compaction iteration.
+
+              - `CacheCreation BetaCacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+                - `Ephemeral1hInputTokens int64`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `Ephemeral5mInputTokens int64`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `CacheCreationInputTokens int64`
+
+                The number of input tokens used to create the cache entry.
+
+              - `CacheReadInputTokens int64`
+
+                The number of input tokens read from the cache.
+
+              - `InputTokens int64`
+
+                The number of input tokens which were used.
+
+              - `OutputTokens int64`
+
+                The number of output tokens which were used.
+
+              - `Type Compaction`
+
+                Usage for a compaction iteration
+
+                - `const CompactionCompaction Compaction = "compaction"`
 
           - `OutputTokens int64`
 
@@ -8369,6 +8678,22 @@ func main() {
 
             - `const ContainerUploadContainerUpload ContainerUpload = "container_upload"`
 
+        - `type BetaCompactionBlock struct{…}`
+
+          A compaction block returned when autocompact is triggered.
+
+          When content is None, it indicates the compaction failed to produce a valid
+          summary (e.g., malformed output from the model). Clients may round-trip
+          compaction blocks with null content; the server treats them as no-ops.
+
+          - `Content string`
+
+            Summary of compacted content, or null if compaction failed
+
+          - `Type Compaction`
+
+            - `const CompactionCompaction Compaction = "compaction"`
+
       - `ContextManagement BetaContextManagementResponse`
 
         Context management response.
@@ -8422,6 +8747,10 @@ func main() {
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
 
           - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
@@ -8538,6 +8867,8 @@ func main() {
 
         - `const BetaStopReasonPauseTurn BetaStopReason = "pause_turn"`
 
+        - `const BetaStopReasonCompaction BetaStopReason = "compaction"`
+
         - `const BetaStopReasonRefusal BetaStopReason = "refusal"`
 
         - `const BetaStopReasonModelContextWindowExceeded BetaStopReason = "model_context_window_exceeded"`
@@ -8588,9 +8919,99 @@ func main() {
 
           The number of input tokens read from the cache.
 
+        - `InferenceGeo string`
+
+          The geographic region where inference was performed for this request.
+
         - `InputTokens int64`
 
           The number of input tokens which were used.
+
+        - `Iterations []BetaUsageIterationUnion`
+
+          Per-iteration token usage breakdown.
+
+          Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+          - Determine which iterations exceeded long context thresholds (>=200k tokens)
+          - Calculate the true context window size from the last iteration
+          - Understand token accumulation across server-side tool use loops
+
+          - `type BetaMessageIterationUsage struct{…}`
+
+            Token usage for a sampling iteration.
+
+            - `CacheCreation BetaCacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+              - `Ephemeral1hInputTokens int64`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `Ephemeral5mInputTokens int64`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `CacheCreationInputTokens int64`
+
+              The number of input tokens used to create the cache entry.
+
+            - `CacheReadInputTokens int64`
+
+              The number of input tokens read from the cache.
+
+            - `InputTokens int64`
+
+              The number of input tokens which were used.
+
+            - `OutputTokens int64`
+
+              The number of output tokens which were used.
+
+            - `Type Message`
+
+              Usage for a sampling iteration
+
+              - `const MessageMessage Message = "message"`
+
+          - `type BetaCompactionIterationUsage struct{…}`
+
+            Token usage for a compaction iteration.
+
+            - `CacheCreation BetaCacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+              - `Ephemeral1hInputTokens int64`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `Ephemeral5mInputTokens int64`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `CacheCreationInputTokens int64`
+
+              The number of input tokens used to create the cache entry.
+
+            - `CacheReadInputTokens int64`
+
+              The number of input tokens read from the cache.
+
+            - `InputTokens int64`
+
+              The number of input tokens which were used.
+
+            - `OutputTokens int64`
+
+              The number of output tokens which were used.
+
+            - `Type Compaction`
+
+              Usage for a compaction iteration
+
+              - `const CompactionCompaction Compaction = "compaction"`
 
         - `OutputTokens int64`
 
@@ -9483,6 +9904,22 @@ func main() {
 
           - `const ContainerUploadContainerUpload ContainerUpload = "container_upload"`
 
+      - `type BetaCompactionBlock struct{…}`
+
+        A compaction block returned when autocompact is triggered.
+
+        When content is None, it indicates the compaction failed to produce a valid
+        summary (e.g., malformed output from the model). Clients may round-trip
+        compaction blocks with null content; the server treats them as no-ops.
+
+        - `Content string`
+
+          Summary of compacted content, or null if compaction failed
+
+        - `Type Compaction`
+
+          - `const CompactionCompaction Compaction = "compaction"`
+
     - `ContextManagement BetaContextManagementResponse`
 
       Context management response.
@@ -9536,6 +9973,10 @@ func main() {
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
+
+          Most intelligent model for building agents and coding
 
         - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
@@ -9652,6 +10093,8 @@ func main() {
 
       - `const BetaStopReasonPauseTurn BetaStopReason = "pause_turn"`
 
+      - `const BetaStopReasonCompaction BetaStopReason = "compaction"`
+
       - `const BetaStopReasonRefusal BetaStopReason = "refusal"`
 
       - `const BetaStopReasonModelContextWindowExceeded BetaStopReason = "model_context_window_exceeded"`
@@ -9702,9 +10145,99 @@ func main() {
 
         The number of input tokens read from the cache.
 
+      - `InferenceGeo string`
+
+        The geographic region where inference was performed for this request.
+
       - `InputTokens int64`
 
         The number of input tokens which were used.
+
+      - `Iterations []BetaUsageIterationUnion`
+
+        Per-iteration token usage breakdown.
+
+        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+        - Determine which iterations exceeded long context thresholds (>=200k tokens)
+        - Calculate the true context window size from the last iteration
+        - Understand token accumulation across server-side tool use loops
+
+        - `type BetaMessageIterationUsage struct{…}`
+
+          Token usage for a sampling iteration.
+
+          - `CacheCreation BetaCacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+            - `Ephemeral1hInputTokens int64`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `Ephemeral5mInputTokens int64`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `CacheCreationInputTokens int64`
+
+            The number of input tokens used to create the cache entry.
+
+          - `CacheReadInputTokens int64`
+
+            The number of input tokens read from the cache.
+
+          - `InputTokens int64`
+
+            The number of input tokens which were used.
+
+          - `OutputTokens int64`
+
+            The number of output tokens which were used.
+
+          - `Type Message`
+
+            Usage for a sampling iteration
+
+            - `const MessageMessage Message = "message"`
+
+        - `type BetaCompactionIterationUsage struct{…}`
+
+          Token usage for a compaction iteration.
+
+          - `CacheCreation BetaCacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+            - `Ephemeral1hInputTokens int64`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `Ephemeral5mInputTokens int64`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `CacheCreationInputTokens int64`
+
+            The number of input tokens used to create the cache entry.
+
+          - `CacheReadInputTokens int64`
+
+            The number of input tokens read from the cache.
+
+          - `InputTokens int64`
+
+            The number of input tokens which were used.
+
+          - `OutputTokens int64`
+
+            The number of output tokens which were used.
+
+          - `Type Compaction`
+
+            Usage for a compaction iteration
+
+            - `const CompactionCompaction Compaction = "compaction"`
 
       - `OutputTokens int64`
 

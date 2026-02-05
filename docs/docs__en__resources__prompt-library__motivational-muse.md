@@ -40,7 +40,7 @@ Provide personalized motivational messages and affirmations based on user input.
         api_key="my_api_key",
     )
     message = client.messages.create(
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-6",
         max_tokens=2000,
         temperature=1,
         system="Your task is to generate a personalized motivational message or affirmation based on the user's input. Address their specific needs and offer encouragement, support, and guidance. Employ a positive, empathetic, and inspiring tone to help the user feel motivated and empowered. Use relevant examples, analogies, or quotes to reinforce your message and make it more impactful. Ensure that the message is concise, authentic, and easy to understand.",
@@ -69,7 +69,7 @@ Provide personalized motivational messages and affirmations based on user input.
     });
     
     const msg = await anthropic.messages.create({
-      model: "claude-sonnet-4-5",
+      model: "claude-opus-4-6",
       max_tokens: 2000,
       temperature: 1,
       system: "Your task is to generate a personalized motivational message or affirmation based on the user's input. Address their specific needs and offer encouragement, support, and guidance. Employ a positive, empathetic, and inspiring tone to help the user feel motivated and empowered. Use relevant examples, analogies, or quotes to reinforce your message and make it more impactful. Ensure that the message is concise, authentic, and easy to understand.",
@@ -98,7 +98,7 @@ Provide personalized motivational messages and affirmations based on user input.
     client = AnthropicBedrock()
     
     message = client.messages.create(
-        model="anthropic.claude-sonnet-4-5-20250929-v1:0",
+        model="anthropic.claude-opus-4-6-v1:0",
         max_tokens=2000,
         temperature=1,
         system="Your task is to generate a personalized motivational message or affirmation based on the user's input. Address their specific needs and offer encouragement, support, and guidance. Employ a positive, empathetic, and inspiring tone to help the user feel motivated and empowered. Use relevant examples, analogies, or quotes to reinforce your message and make it more impactful. Ensure that the message is concise, authentic, and easy to understand.",
@@ -127,7 +127,7 @@ Provide personalized motivational messages and affirmations based on user input.
     const client = new AnthropicBedrock();
     
     const msg = await client.messages.create({
-      model: "anthropic.claude-sonnet-4-5-20250929-v1:0",
+      model: "anthropic.claude-opus-4-6-v1:0",
       max_tokens: 2000,
       temperature: 1,
       system: "Your task is to generate a personalized motivational message or affirmation based on the user's input. Address their specific needs and offer encouragement, support, and guidance. Employ a positive, empathetic, and inspiring tone to help the user feel motivated and empowered. Use relevant examples, analogies, or quotes to reinforce your message and make it more impactful. Ensure that the message is concise, authentic, and easy to understand.",

@@ -1431,11 +1431,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+  - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-6"`
+
+      Most intelligent model for building agents and coding
 
     - `"claude-opus-4-5-20251101"`
 
@@ -1519,6 +1523,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `UnionMember1 = string`
 
+- `inference_geo: optional string`
+
+  Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
 - `metadata: optional Metadata`
 
   An object describing metadata about the request.
@@ -1529,11 +1537,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-- `output_config: optional object { format }`
+- `output_config: optional OutputConfig`
 
   Configuration options for the model's output, such as the output format.
 
-  - `format: optional object { schema, type }`
+  - `effort: optional "low" or "medium" or "high" or "max"`
+
+    All possible effort levels.
+
+    - `"low"`
+
+    - `"medium"`
+
+    - `"high"`
+
+    - `"max"`
+
+  - `format: optional JSONOutputFormat`
 
     A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
@@ -1726,6 +1746,12 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"disabled"`
 
+  - `ThinkingConfigAdaptive = object { type }`
+
+    - `type: "adaptive"`
+
+      - `"adaptive"`
+
 - `tool_choice: optional ToolChoice`
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -1848,7 +1874,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-  - `Tool = object { input_schema, name, cache_control, 3 more }`
+  - `Tool = object { input_schema, name, cache_control, 4 more }`
 
     - `input_schema: object { type, properties, required }`
 
@@ -1898,6 +1924,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       Description of what this tool does.
 
       Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+    - `eager_input_streaming: optional boolean`
+
+      Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
     - `strict: optional boolean`
 
@@ -2401,11 +2431,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+    - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-6"`
+
+        Most intelligent model for building agents and coding
 
       - `"claude-opus-4-5-20251101"`
 
@@ -2570,6 +2604,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of input tokens read from the cache.
 
+    - `inference_geo: string`
+
+      The geographic region where inference was performed for this request.
+
     - `input_tokens: number`
 
       The number of input tokens which were used.
@@ -2612,7 +2650,7 @@ curl https://api.anthropic.com/v1/messages \
               "role": "user"
             }
           ],
-          "model": "claude-sonnet-4-5-20250929"
+          "model": "claude-opus-4-6"
         }'
 ```
 
@@ -4039,11 +4077,15 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+  - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-6"`
+
+      Most intelligent model for building agents and coding
 
     - `"claude-opus-4-5-20251101"`
 
@@ -4127,11 +4169,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `UnionMember1 = string`
 
-- `output_config: optional object { format }`
+- `output_config: optional OutputConfig`
 
   Configuration options for the model's output, such as the output format.
 
-  - `format: optional object { schema, type }`
+  - `effort: optional "low" or "medium" or "high" or "max"`
+
+    All possible effort levels.
+
+    - `"low"`
+
+    - `"medium"`
+
+    - `"high"`
+
+    - `"max"`
+
+  - `format: optional JSONOutputFormat`
 
     A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
@@ -4292,6 +4346,12 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"disabled"`
 
+  - `ThinkingConfigAdaptive = object { type }`
+
+    - `type: "adaptive"`
+
+      - `"adaptive"`
+
 - `tool_choice: optional ToolChoice`
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -4414,7 +4474,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-  - `Tool = object { input_schema, name, cache_control, 3 more }`
+  - `Tool = object { input_schema, name, cache_control, 4 more }`
 
     - `input_schema: object { type, properties, required }`
 
@@ -4464,6 +4524,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       Description of what this tool does.
 
       Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+    - `eager_input_streaming: optional boolean`
+
+      Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
     - `strict: optional boolean`
 
@@ -4740,7 +4804,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               "role": "user"
             }
           ],
-          "model": "claude-opus-4-5-20251101"
+          "model": "claude-opus-4-6"
         }'
 ```
 
@@ -7325,6 +7389,18 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"input_json_delta"`
 
+### JSON Output Format
+
+- `JSONOutputFormat = object { schema, type }`
+
+  - `schema: map[unknown]`
+
+    The JSON schema of the format
+
+  - `type: "json_schema"`
+
+    - `"json_schema"`
+
 ### Message
 
 - `Message = object { id, content, model, 5 more }`
@@ -7558,11 +7634,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+    - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-6"`
+
+        Most intelligent model for building agents and coding
 
       - `"claude-opus-4-5-20251101"`
 
@@ -7727,6 +7807,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The number of input tokens read from the cache.
 
+    - `inference_geo: string`
+
+      The geographic region where inference was performed for this request.
+
     - `input_tokens: number`
 
       The number of input tokens which were used.
@@ -7757,7 +7841,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `MessageCountTokensTool = Tool or ToolBash20250124 or ToolTextEditor20250124 or 3 more`
 
-  - `Tool = object { input_schema, name, cache_control, 3 more }`
+  - `Tool = object { input_schema, name, cache_control, 4 more }`
 
     - `input_schema: object { type, properties, required }`
 
@@ -7807,6 +7891,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Description of what this tool does.
 
       Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+    - `eager_input_streaming: optional boolean`
+
+      Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
     - `strict: optional boolean`
 
@@ -9467,17 +9555,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Model
 
-- `Model = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more or string`
+- `Model = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more or string`
 
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+  - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-6"`
+
+      Most intelligent model for building agents and coding
 
     - `"claude-opus-4-5-20251101"`
 
@@ -9560,6 +9652,34 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Our previous most fast and cost-effective
 
   - `UnionMember1 = string`
+
+### Output Config
+
+- `OutputConfig = object { effort, format }`
+
+  - `effort: optional "low" or "medium" or "high" or "max"`
+
+    All possible effort levels.
+
+    - `"low"`
+
+    - `"medium"`
+
+    - `"high"`
+
+    - `"max"`
+
+  - `format: optional JSONOutputFormat`
+
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+
+    - `schema: map[unknown]`
+
+      The JSON schema of the format
+
+    - `type: "json_schema"`
+
+      - `"json_schema"`
 
 ### Plain Text Source
 
@@ -10350,11 +10470,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+      - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-6"`
+
+          Most intelligent model for building agents and coding
 
         - `"claude-opus-4-5-20251101"`
 
@@ -10518,6 +10642,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `cache_read_input_tokens: number`
 
         The number of input tokens read from the cache.
+
+      - `inference_geo: string`
+
+        The geographic region where inference was performed for this request.
 
       - `input_tokens: number`
 
@@ -10794,11 +10922,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+        - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
 
           - `"claude-opus-4-5-20251101"`
 
@@ -10962,6 +11094,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `cache_read_input_tokens: number`
 
           The number of input tokens read from the cache.
+
+        - `inference_geo: string`
+
+          The geographic region where inference was performed for this request.
 
         - `input_tokens: number`
 
@@ -12087,6 +12223,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"thinking"`
 
+### Thinking Config Adaptive
+
+- `ThinkingConfigAdaptive = object { type }`
+
+  - `type: "adaptive"`
+
+    - `"adaptive"`
+
 ### Thinking Config Disabled
 
 - `ThinkingConfigDisabled = object { type }`
@@ -12113,7 +12257,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Thinking Config Param
 
-- `ThinkingConfigParam = ThinkingConfigEnabled or ThinkingConfigDisabled`
+- `ThinkingConfigParam = ThinkingConfigEnabled or ThinkingConfigDisabled or ThinkingConfigAdaptive`
 
   Configuration for enabling Claude's extended thinking.
 
@@ -12141,6 +12285,12 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"disabled"`
 
+  - `ThinkingConfigAdaptive = object { type }`
+
+    - `type: "adaptive"`
+
+      - `"adaptive"`
+
 ### Thinking Delta
 
 - `ThinkingDelta = object { thinking, type }`
@@ -12153,7 +12303,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Tool
 
-- `Tool = object { input_schema, name, cache_control, 3 more }`
+- `Tool = object { input_schema, name, cache_control, 4 more }`
 
   - `input_schema: object { type, properties, required }`
 
@@ -12203,6 +12353,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     Description of what this tool does.
 
     Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+  - `eager_input_streaming: optional boolean`
+
+    Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
   - `strict: optional boolean`
 
@@ -13128,7 +13282,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `ToolUnion = Tool or ToolBash20250124 or ToolTextEditor20250124 or 3 more`
 
-  - `Tool = object { input_schema, name, cache_control, 3 more }`
+  - `Tool = object { input_schema, name, cache_control, 4 more }`
 
     - `input_schema: object { type, properties, required }`
 
@@ -13178,6 +13332,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Description of what this tool does.
 
       Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+    - `eager_input_streaming: optional boolean`
+
+      Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
     - `strict: optional boolean`
 
@@ -13505,7 +13663,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Usage
 
-- `Usage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+- `Usage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 5 more }`
 
   - `cache_creation: CacheCreation`
 
@@ -13526,6 +13684,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `cache_read_input_tokens: number`
 
     The number of input tokens read from the cache.
+
+  - `inference_geo: string`
+
+    The geographic region where inference was performed for this request.
 
   - `input_tokens: number`
 
@@ -13923,7 +14085,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Must be unique for each request within the Message Batch.
 
-  - `params: object { max_tokens, messages, model, 12 more }`
+  - `params: object { max_tokens, messages, model, 13 more }`
 
     Messages API creation parameters for the individual request.
 
@@ -15348,11 +15510,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+      - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-6"`
+
+          Most intelligent model for building agents and coding
 
         - `"claude-opus-4-5-20251101"`
 
@@ -15436,6 +15602,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `UnionMember1 = string`
 
+    - `inference_geo: optional string`
+
+      Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
     - `metadata: optional Metadata`
 
       An object describing metadata about the request.
@@ -15446,11 +15616,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-    - `output_config: optional object { format }`
+    - `output_config: optional OutputConfig`
 
       Configuration options for the model's output, such as the output format.
 
-      - `format: optional object { schema, type }`
+      - `effort: optional "low" or "medium" or "high" or "max"`
+
+        All possible effort levels.
+
+        - `"low"`
+
+        - `"medium"`
+
+        - `"high"`
+
+        - `"max"`
+
+      - `format: optional JSONOutputFormat`
 
         A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
@@ -15643,6 +15825,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"disabled"`
 
+      - `ThinkingConfigAdaptive = object { type }`
+
+        - `type: "adaptive"`
+
+          - `"adaptive"`
+
     - `tool_choice: optional ToolChoice`
 
       How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -15765,7 +15953,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-      - `Tool = object { input_schema, name, cache_control, 3 more }`
+      - `Tool = object { input_schema, name, cache_control, 4 more }`
 
         - `input_schema: object { type, properties, required }`
 
@@ -15815,6 +16003,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           Description of what this tool does.
 
           Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+        - `eager_input_streaming: optional boolean`
+
+          Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
         - `strict: optional boolean`
 
@@ -16194,7 +16386,7 @@ curl https://api.anthropic.com/v1/messages/batches \
                     "role": "user"
                   }
                 ],
-                "model": "claude-sonnet-4-5-20250929"
+                "model": "claude-opus-4-6"
               }
             }
           ]
@@ -16870,11 +17062,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+          - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
@@ -17038,6 +17234,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `cache_read_input_tokens: number`
 
             The number of input tokens read from the cache.
+
+          - `inference_geo: string`
+
+            The geographic region where inference was performed for this request.
 
           - `input_tokens: number`
 
@@ -17642,11 +17842,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+          - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
@@ -17810,6 +18014,10 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
           - `cache_read_input_tokens: number`
 
             The number of input tokens read from the cache.
+
+          - `inference_geo: string`
+
+            The geographic region where inference was performed for this request.
 
           - `input_tokens: number`
 
@@ -18214,11 +18422,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+        - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
 
           - `"claude-opus-4-5-20251101"`
 
@@ -18382,6 +18594,10 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
         - `cache_read_input_tokens: number`
 
           The number of input tokens read from the cache.
+
+        - `inference_geo: string`
+
+          The geographic region where inference was performed for this request.
 
         - `input_tokens: number`
 
@@ -18748,11 +18964,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more`
+      - `UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-6"`
+
+          Most intelligent model for building agents and coding
 
         - `"claude-opus-4-5-20251101"`
 
@@ -18916,6 +19136,10 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
       - `cache_read_input_tokens: number`
 
         The number of input tokens read from the cache.
+
+      - `inference_geo: string`
+
+        The geographic region where inference was performed for this request.
 
       - `input_tokens: number`
 

@@ -28,7 +28,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "tools": [
       {
@@ -61,7 +61,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=[
         {
@@ -93,7 +93,7 @@ const anthropic = new Anthropic({
 
 async function main() {
   const response = await anthropic.messages.create({
-    model: "claude-sonnet-4-5",
+    model: "claude-opus-4-6",
     max_tokens: 1024,
     tools: [{
       name: "get_weather",
@@ -285,7 +285,7 @@ client = anthropic.Anthropic()
 claude_tools = await get_claude_tools(mcp_session)
 
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=claude_tools,
     messages=[{"role": "user", "content": "What tools do you have available?"}]
@@ -299,7 +299,7 @@ const anthropic = new Anthropic();
 const claudeTools = await getClaudeTools(mcpClient);
 
 const response = await anthropic.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   tools: claudeTools,
   messages: [{ role: "user", content: "What tools do you have available?" }],
@@ -327,7 +327,7 @@ Here are a few code examples demonstrating various tool use patterns and techniq
          --header "content-type: application/json" \
          --data \
     '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 1024,
         "tools": [{
             "name": "get_weather",
@@ -357,7 +357,7 @@ Here are a few code examples demonstrating various tool use patterns and techniq
     client = anthropic.Anthropic()
 
     response = client.messages.create(
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-6",
         max_tokens=1024,
         tools=[
             {
@@ -443,7 +443,7 @@ Claude will return a response similar to:
 ```json JSON
 {
   "id": "msg_01Aq9w938a90dw8q",
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -471,7 +471,7 @@ You would then need to execute the `get_weather` function with the provided inpu
          --header "content-type: application/json" \
          --data \
     '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 1024,
         "tools": [
             {
@@ -533,7 +533,7 @@ You would then need to execute the `get_weather` function with the provided inpu
 
     ```python Python
     response = client.messages.create(
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-6",
         max_tokens=1024,
         tools=[
             {
@@ -672,7 +672,7 @@ This will print Claude's final response, incorporating the weather data:
 ```json JSON
 {
   "id": "msg_01Aq9w938a90dw8q",
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "stop_reason": "stop_sequence",
   "role": "assistant",
   "content": [
@@ -708,7 +708,7 @@ You can provide Claude with multiple tools to choose from in a single request. H
          --header "content-type: application/json" \
          --data \
     '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 1024,
         "tools": [{
             "name": "get_weather",
@@ -755,7 +755,7 @@ You can provide Claude with multiple tools to choose from in a single request. H
     client = anthropic.Anthropic()
 
     response = client.messages.create(
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-6",
         max_tokens=1024,
         tools=[
             {
@@ -910,7 +910,7 @@ Here's an example of using a `get_location` tool to get the user's location, the
          --header "content-type: application/json" \
          --data \
     '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 1024,
         "tools": [
             {
@@ -950,7 +950,7 @@ Here's an example of using a `get_location` tool to get the user's location, the
 
     ```python Python
     response = client.messages.create(
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-6",
         max_tokens=1024,
         tools=[
             {
@@ -1105,6 +1105,7 @@ When you use `tools`, we also automatically include a special system prompt for 
 
 | Model                    | Tool choice                                          | Tool use system prompt token count          |
 |--------------------------|------------------------------------------------------|---------------------------------------------|
+| Claude Opus 4.6              | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Opus 4.5            | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Opus 4.1            | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Opus 4            | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |

@@ -85,7 +85,7 @@ client = anthropic.Anthropic()
 
 # Create a message with the PowerPoint Skill
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -117,7 +117,7 @@ const client = new Anthropic();
 
 // Create a message with the PowerPoint Skill
 const response = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -149,7 +149,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -270,7 +270,7 @@ Now that you've created your first document with Skills, try these variations:
 <CodeGroup>
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -295,7 +295,7 @@ response = client.beta.messages.create(
 
 ```typescript TypeScript
 const response = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -325,7 +325,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -353,7 +353,7 @@ curl https://api.anthropic.com/v1/messages \
 <CodeGroup>
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -378,7 +378,7 @@ response = client.beta.messages.create(
 
 ```typescript TypeScript
 const response = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -408,7 +408,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -436,7 +436,7 @@ curl https://api.anthropic.com/v1/messages \
 <CodeGroup>
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -461,7 +461,7 @@ response = client.beta.messages.create(
 
 ```typescript TypeScript
 const response = await client.beta.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
   max_tokens: 4096,
   betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
   container: {
@@ -491,7 +491,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-opus-4-6",
     "max_tokens": 4096,
     "container": {
       "skills": [

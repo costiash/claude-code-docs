@@ -17,7 +17,7 @@ Our [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
     with client.messages.stream(
         max_tokens=1024,
         messages=[{"role": "user", "content": "Hello"}],
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-6",
     ) as stream:
       for text in stream.text_stream:
           print(text, end="", flush=True)
@@ -30,13 +30,51 @@ Our [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
 
     await client.messages.stream({
         messages: [{role: 'user', content: "Hello"}],
-        model: 'claude-sonnet-4-5',
+        model: 'claude-opus-4-6',
         max_tokens: 1024,
     }).on('text', (text) => {
         console.log(text);
     });
     ```
 </CodeGroup>
+
+## Get the final message without handling events
+
+If you don't need to process text as it arrives, the SDKs provide a way to use streaming under the hood while returning the complete `Message` object — identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
+
+<CodeGroup>
+    ```python Python
+    import anthropic
+
+    client = anthropic.Anthropic()
+
+    with client.messages.stream(
+        max_tokens=128000,
+        messages=[{"role": "user", "content": "Write a detailed analysis..."}],
+        model="claude-opus-4-6",
+    ) as stream:
+        message = stream.get_final_message()
+
+    print(message.content[0].text)
+    ```
+
+    ```typescript TypeScript
+    import Anthropic from '@anthropic-ai/sdk';
+
+    const client = new Anthropic();
+
+    const stream = client.messages.stream({
+        max_tokens: 128000,
+        messages: [{role: 'user', content: 'Write a detailed analysis...'}],
+        model: 'claude-opus-4-6',
+    });
+
+    const message = await stream.finalMessage();
+    console.log(message.content[0].text);
+    ```
+</CodeGroup>
+
+The `.stream()` call keeps the HTTP connection alive with server-sent events, then `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) accumulates all events and returns the complete `Message` object. No event handling code is needed.
 
 ## Event types
 
@@ -104,7 +142,7 @@ For thinking content, a special `signature_delta` event is sent just before the 
 A typical thinking delta looks like:
 ```json Thinking delta
 event: content_block_delta
-data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "Let me solve this step by step:\n\n1. First break down 27 * 453"}}
+data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "I need to find the GCD of 1071 and 462 using the Euclidean algorithm.\n\n1071 = 2 × 462 + 147"}}
 ```
 
 The signature delta looks like:
@@ -138,7 +176,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --data \
 '{
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "messages": [{"role": "user", "content": "Hello"}],
   "max_tokens": 256,
   "stream": true
@@ -151,7 +189,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 with client.messages.stream(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     messages=[{"role": "user", "content": "Hello"}],
     max_tokens=256,
 ) as stream:
@@ -162,7 +200,7 @@ with client.messages.stream(
 
 ```json Response
 event: message_start
-data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-sonnet-4-5-20250929", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
+data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-6", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
 
 event: content_block_start
 data: {"type": "content_block_start", "index": 0, "content_block": {"type": "text", "text": ""}}
@@ -190,7 +228,7 @@ data: {"type": "message_stop"}
 ### Streaming request with tool use
 
 <Tip>
-Tool use now supports fine-grained streaming for parameter values as a beta feature. For more details, see [Fine-grained tool streaming](/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming).
+Tool use supports [fine-grained streaming](/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming) for parameter values. Enable it per tool with `eager_input_streaming`.
 </Tip>
 
 In this request, we ask Claude to use a tool to tell us the weather.
@@ -202,7 +240,7 @@ In this request, we ask Claude to use a tool to tell us the weather.
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-sonnet-4-5",
+      "model": "claude-opus-4-6",
       "max_tokens": 1024,
       "tools": [
         {
@@ -254,7 +292,7 @@ tools = [
 ]
 
 with client.messages.stream(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "any"},
@@ -272,7 +310,7 @@ with client.messages.stream(
 
 ```json Response
 event: message_start
-data: {"type":"message_start","message":{"id":"msg_014p7gG3wDgGV9EUtLvnow3U","type":"message","role":"assistant","model":"claude-sonnet-4-5-20250929","stop_sequence":null,"usage":{"input_tokens":472,"output_tokens":2},"content":[],"stop_reason":null}}
+data: {"type":"message_start","message":{"id":"msg_014p7gG3wDgGV9EUtLvnow3U","type":"message","role":"assistant","model":"claude-opus-4-6","stop_sequence":null,"usage":{"input_tokens":472,"output_tokens":2},"content":[],"stop_reason":null}}
 
 event: content_block_start
 data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}
@@ -374,7 +412,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 20000,
     "stream": true,
     "thinking": {
@@ -384,7 +422,7 @@ curl https://api.anthropic.com/v1/messages \
     "messages": [
         {
             "role": "user",
-            "content": "What is 27 * 453?"
+            "content": "What is the greatest common divisor of 1071 and 462?"
         }
     ]
 }'
@@ -396,7 +434,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 with client.messages.stream(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=20000,
     thinking={
         "type": "enabled",
@@ -405,7 +443,7 @@ with client.messages.stream(
     messages=[
         {
             "role": "user",
-            "content": "What is 27 * 453?"
+            "content": "What is the greatest common divisor of 1071 and 462?"
         }
     ],
 ) as stream:
@@ -420,28 +458,22 @@ with client.messages.stream(
 
 ```json Response
 event: message_start
-data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-sonnet-4-5-20250929", "stop_reason": null, "stop_sequence": null}}
+data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-6", "stop_reason": null, "stop_sequence": null}}
 
 event: content_block_start
 data: {"type": "content_block_start", "index": 0, "content_block": {"type": "thinking", "thinking": ""}}
 
 event: content_block_delta
-data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "Let me solve this step by step:\n\n1. First break down 27 * 453"}}
+data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "I need to find the GCD of 1071 and 462 using the Euclidean algorithm.\n\n1071 = 2 × 462 + 147"}}
 
 event: content_block_delta
-data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "\n2. 453 = 400 + 50 + 3"}}
+data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "\n462 = 3 × 147 + 21"}}
 
 event: content_block_delta
-data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "\n3. 27 * 400 = 10,800"}}
+data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "\n147 = 7 × 21 + 0"}}
 
 event: content_block_delta
-data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "\n4. 27 * 50 = 1,350"}}
-
-event: content_block_delta
-data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "\n5. 27 * 3 = 81"}}
-
-event: content_block_delta
-data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "\n6. 10,800 + 1,350 + 81 = 12,231"}}
+data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "\nThe remainder is 0, so GCD(1071, 462) = 21."}}
 
 event: content_block_delta
 data: {"type": "content_block_delta", "index": 0, "delta": {"type": "signature_delta", "signature": "EqQBCgIYAhIM1gbcDa9GJwZA2b3hGgxBdjrkzLoky3dl1pkiMOYds..."}}
@@ -453,7 +485,7 @@ event: content_block_start
 data: {"type": "content_block_start", "index": 1, "content_block": {"type": "text", "text": ""}}
 
 event: content_block_delta
-data: {"type": "content_block_delta", "index": 1, "delta": {"type": "text_delta", "text": "27 * 453 = 12,231"}}
+data: {"type": "content_block_delta", "index": 1, "delta": {"type": "text_delta", "text": "The greatest common divisor of 1071 and 462 is **21**."}}
 
 event: content_block_stop
 data: {"type": "content_block_stop", "index": 1}
@@ -477,7 +509,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "stream": true,
     "tools": [
@@ -502,7 +534,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 with client.messages.stream(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=[
         {
@@ -525,7 +557,7 @@ with client.messages.stream(
 
 ```json Response
 event: message_start
-data: {"type":"message_start","message":{"id":"msg_01G...","type":"message","role":"assistant","model":"claude-sonnet-4-5-20250929","content":[],"stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":2679,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":3}}}
+data: {"type":"message_start","message":{"id":"msg_01G...","type":"message","role":"assistant","model":"claude-opus-4-6","content":[],"stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":2679,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":3}}}
 
 event: content_block_start
 data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}

@@ -63,6 +63,7 @@ Create Workspace Member
 ```http
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
     -d '{
           "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",

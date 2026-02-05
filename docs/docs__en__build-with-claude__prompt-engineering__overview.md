@@ -53,9 +53,8 @@ The prompt engineering pages in this section have been organized from most broad
 4. [Let Claude think (chain of thought)](/docs/en/build-with-claude/prompt-engineering/chain-of-thought)
 5. [Use XML tags](/docs/en/build-with-claude/prompt-engineering/use-xml-tags)
 6. [Give Claude a role (system prompts)](/docs/en/build-with-claude/prompt-engineering/system-prompts)
-7. [Prefill Claude's response](/docs/en/build-with-claude/prompt-engineering/prefill-claudes-response)
-8. [Chain complex prompts](/docs/en/build-with-claude/prompt-engineering/chain-prompts)
-9. [Long context tips](/docs/en/build-with-claude/prompt-engineering/long-context-tips)
+7. [Chain complex prompts](/docs/en/build-with-claude/prompt-engineering/chain-prompts)
+8. [Long context tips](/docs/en/build-with-claude/prompt-engineering/long-context-tips)
 
 ***
 

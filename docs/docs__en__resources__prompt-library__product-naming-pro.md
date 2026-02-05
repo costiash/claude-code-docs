@@ -35,7 +35,7 @@ Create catchy product names from descriptions and keywords.
         api_key="my_api_key",
     )
     message = client.messages.create(
-        model="claude-sonnet-4-5",
+        model="claude-opus-4-6",
         max_tokens=1000,
         temperature=1,
         system="Your task is to generate creative, memorable, and marketable product names based on the provided description and keywords. The product names should be concise (2-4 words), evocative, and easily understood by the target audience. Avoid generic or overly literal names. Instead, aim to create a name that stands out, captures the essence of the product, and leaves a lasting impression.",
@@ -64,7 +64,7 @@ Create catchy product names from descriptions and keywords.
     });
     
     const msg = await anthropic.messages.create({
-      model: "claude-sonnet-4-5",
+      model: "claude-opus-4-6",
       max_tokens: 1000,
       temperature: 1,
       system: "Your task is to generate creative, memorable, and marketable product names based on the provided description and keywords. The product names should be concise (2-4 words), evocative, and easily understood by the target audience. Avoid generic or overly literal names. Instead, aim to create a name that stands out, captures the essence of the product, and leaves a lasting impression.",
@@ -93,7 +93,7 @@ Create catchy product names from descriptions and keywords.
     client = AnthropicBedrock()
     
     message = client.messages.create(
-        model="anthropic.claude-sonnet-4-5-20250929-v1:0",
+        model="anthropic.claude-opus-4-6-v1:0",
         max_tokens=1000,
         temperature=1,
         system="Your task is to generate creative, memorable, and marketable product names based on the provided description and keywords. The product names should be concise (2-4 words), evocative, and easily understood by the target audience. Avoid generic or overly literal names. Instead, aim to create a name that stands out, captures the essence of the product, and leaves a lasting impression.",
@@ -122,7 +122,7 @@ Create catchy product names from descriptions and keywords.
     const client = new AnthropicBedrock();
     
     const msg = await client.messages.create({
-      model: "anthropic.claude-sonnet-4-5-20250929-v1:0",
+      model: "anthropic.claude-opus-4-6-v1:0",
       max_tokens: 1000,
       temperature: 1,
       system: "Your task is to generate creative, memorable, and marketable product names based on the provided description and keywords. The product names should be concise (2-4 words), evocative, and easily understood by the target audience. Avoid generic or overly literal names. Instead, aim to create a name that stands out, captures the essence of the product, and leaves a lasting impression.",

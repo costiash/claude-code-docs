@@ -45,7 +45,7 @@ client = anthropic.Anthropic(
   api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-sonnet-4-5",
+  model="claude-opus-4-6",
   max_tokens=2000,
   temperature=1,
   system="Help the user navigate a complex ethical dilemma by identifying core ethical principles, exploring different ethical frameworks, considering potential consequences, acknowledging complexity, encouraging personal reflection, and offering additional resources. Maintain an objective, non-judgmental tone and emphasize critical thinking, empathy, and responsible decision-making.",
@@ -76,7 +76,7 @@ const anthropic = new Anthropic({
 });
 
 const msg = await anthropic.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   max_tokens: 2000,
   temperature: 1,
   system: "Help the user navigate a complex ethical dilemma by identifying core ethical principles, exploring different ethical frameworks, considering potential consequences, acknowledging complexity, encouraging personal reflection, and offering additional resources. Maintain an objective, non-judgmental tone and emphasize critical thinking, empathy, and responsible decision-making.",
@@ -107,7 +107,7 @@ from anthropic import AnthropicBedrock
 client = AnthropicBedrock()
 
 message = client.messages.create(
-    model="anthropic.claude-sonnet-4-5-20250929-v1:0",
+    model="anthropic.claude-opus-4-6-v1:0",
     max_tokens=2000,
     temperature=1,
     system="Help the user navigate a complex ethical dilemma by identifying core ethical principles, exploring different ethical frameworks, considering potential consequences, acknowledging complexity, encouraging personal reflection, and offering additional resources. Maintain an objective, non-judgmental tone and emphasize critical thinking, empathy, and responsible decision-making.",
@@ -138,7 +138,7 @@ import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 const client = new AnthropicBedrock();
 
 const msg = await client.messages.create({
-  model: "anthropic.claude-sonnet-4-5-20250929-v1:0",
+  model: "anthropic.claude-opus-4-6-v1:0",
   max_tokens: 2000,
   temperature: 1,
   system: "Help the user navigate a complex ethical dilemma by identifying core ethical principles, exploring different ethical frameworks, considering potential consequences, acknowledging complexity, encouraging personal reflection, and offering additional resources. Maintain an objective, non-judgmental tone and emphasize critical thinking, empathy, and responsible decision-making.",

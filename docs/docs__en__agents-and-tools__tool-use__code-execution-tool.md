@@ -20,10 +20,11 @@ The code execution tool is available on the following models:
 
 | Model | Tool Version |
 |-------|--------------|
+| Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20250825` |
+| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |
 | Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |
 | Claude Opus 4.1 (`claude-opus-4-1-20250805`) | `code_execution_20250825` |
 | Claude Opus 4 (`claude-opus-4-20250514`) | `code_execution_20250825` |
-| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |
 | Claude Sonnet 4 (`claude-sonnet-4-20250514`) | `code_execution_20250825` |
 | Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
 | Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) | `code_execution_20250825` |
@@ -49,7 +50,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: code-execution-2025-08-25" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [
             {
@@ -70,7 +71,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["code-execution-2025-08-25"],
     max_tokens=4096,
     messages=[{
@@ -93,7 +94,7 @@ const anthropic = new Anthropic();
 
 async function main() {
   const response = await anthropic.beta.messages.create({
-    model: "claude-sonnet-4-5",
+    model: "claude-opus-4-6",
     betas: ["code-execution-2025-08-25"],
     max_tokens: 4096,
     messages: [
@@ -141,7 +142,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: code-execution-2025-08-25" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -156,7 +157,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["code-execution-2025-08-25"],
     max_tokens=4096,
     messages=[{
@@ -172,7 +173,7 @@ response = client.beta.messages.create(
 
 ```typescript TypeScript
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   betas: ["code-execution-2025-08-25"],
   max_tokens: 4096,
   messages: [{
@@ -199,7 +200,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: code-execution-2025-08-25" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -214,7 +215,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["code-execution-2025-08-25"],
     max_tokens=4096,
     messages=[{
@@ -230,7 +231,7 @@ response = client.beta.messages.create(
 
 ```typescript TypeScript
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   betas: ["code-execution-2025-08-25"],
   max_tokens: 4096,
   messages: [{
@@ -284,7 +285,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: code-execution-2025-08-25,files-api-2025-04-14" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -312,7 +313,7 @@ file_object = client.beta.files.upload(
 
 # Use the file_id with code execution
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["code-execution-2025-08-25", "files-api-2025-04-14"],
     max_tokens=4096,
     messages=[{
@@ -343,7 +344,7 @@ async function main() {
 
   // Use the file_id with code execution
   const response = await anthropic.beta.messages.create({
-    model: "claude-sonnet-4-5",
+    model: "claude-opus-4-6",
     betas: ["code-execution-2025-08-25", "files-api-2025-04-14"],
     max_tokens: 4096,
     messages: [{
@@ -379,7 +380,7 @@ client = Anthropic()
 
 # Request code execution that creates files
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["code-execution-2025-08-25", "files-api-2025-04-14"],
     max_tokens=4096,
     messages=[{
@@ -422,7 +423,7 @@ const anthropic = new Anthropic();
 async function main() {
   // Request code execution that creates files
   const response = await anthropic.beta.messages.create({
-    model: "claude-sonnet-4-5",
+    model: "claude-opus-4-6",
     betas: ["code-execution-2025-08-25", "files-api-2025-04-14"],
     max_tokens: 4096,
     messages: [{
@@ -496,7 +497,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: code-execution-2025-08-25,files-api-2025-04-14" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -526,7 +527,7 @@ file_object = client.beta.files.upload(
 
 # Use it with code execution
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["code-execution-2025-08-25", "files-api-2025-04-14"],
     max_tokens=4096,
     messages=[{
@@ -558,7 +559,7 @@ const fileObject = await anthropic.beta.files.create({
 
 // Use it with code execution
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-5",
+  model: "claude-opus-4-6",
   betas: ["code-execution-2025-08-25", "files-api-2025-04-14"],
   max_tokens: 4096,
   messages: [{
@@ -796,7 +797,7 @@ client = Anthropic(
 
 # First request: Create a file with a random number
 response1 = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["code-execution-2025-08-25"],
     max_tokens=4096,
     messages=[{
@@ -815,7 +816,7 @@ container_id = response1.container.id
 # Second request: Reuse the container to read the file
 response2 = client.beta.messages.create(
     container=container_id,  # Reuse the same container
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["code-execution-2025-08-25"],
     max_tokens=4096,
     messages=[{
@@ -837,7 +838,7 @@ const anthropic = new Anthropic();
 async function main() {
   // First request: Create a file with a random number
   const response1 = await anthropic.beta.messages.create({
-    model: "claude-sonnet-4-5",
+    model: "claude-opus-4-6",
     betas: ["code-execution-2025-08-25"],
     max_tokens: 4096,
     messages: [{
@@ -856,7 +857,7 @@ async function main() {
   // Second request: Reuse the container to read the file
   const response2 = await anthropic.beta.messages.create({
     container: containerId,  // Reuse the same container
-    model: "claude-sonnet-4-5",
+    model: "claude-opus-4-6",
     betas: ["code-execution-2025-08-25"],
     max_tokens: 4096,
     messages: [{
@@ -883,7 +884,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: code-execution-2025-08-25" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -906,7 +907,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --data '{
         "container": "'$CONTAINER_ID'",
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -996,7 +997,7 @@ The code execution tool powers [programmatic tool calling](/docs/en/agents-and-t
 ```python Python
 # Enable programmatic calling for your tools
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["advanced-tool-use-2025-11-20"],
     max_tokens=4096,
     messages=[{

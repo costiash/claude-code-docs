@@ -14,6 +14,7 @@ The following table shows pricing for all Claude models across different usage t
 
 | Model             | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
 |-------------------|-------------------|-----------------|-----------------|----------------------|---------------|
+| Claude Opus 4.6     | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.5   | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.1   | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok | $75 / MTok    |
 | Claude Opus 4     | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok | $75 / MTok    |
@@ -59,12 +60,21 @@ For implementation details and code examples:
 
 ## Feature-specific pricing
 
+### Data residency pricing
+
+For Claude Opus 4.6 and newer models, specifying US-only inference via the `inference_geo` parameter incurs a 1.1x multiplier on all token pricing categories, including input tokens, output tokens, cache writes, and cache reads. Global routing (the default) uses standard pricing.
+
+This applies to the Claude API (1P) only. Third-party platforms have their own regional pricing — see [AWS Bedrock](https://aws.amazon.com/bedrock/pricing/), [Google Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/pricing), and [Microsoft Foundry](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/#pricing) for details. Earlier models retain their existing pricing regardless of `inference_geo` settings.
+
+For more information, see our [data residency documentation](/docs/en/build-with-claude/data-residency).
+
 ### Batch processing
 
 The Batch API allows asynchronous processing of large volumes of requests with a 50% discount on both input and output tokens.
 
 | Model             | Batch input      | Batch output    |
 |-------------------|------------------|-----------------|
+| Claude Opus 4.6       | $2.50 / MTok     | $12.50 / MTok   |
 | Claude Opus 4.5     | $2.50 / MTok     | $12.50 / MTok   |
 | Claude Opus 4.1     | $7.50 / MTok     | $37.50 / MTok   |
 | Claude Opus 4     | $7.50 / MTok     | $37.50 / MTok   |
@@ -80,20 +90,23 @@ For more information about batch processing, see our [batch processing documenta
 
 ### Long context pricing
 
-When using Claude Sonnet 4 or Sonnet 4.5 with the [1M token context window enabled](/docs/en/build-with-claude/context-windows#1m-token-context-window), requests that exceed 200K input tokens are automatically charged at premium long context rates:
+When using Claude Opus 4.6, Sonnet 4.5, or Sonnet 4 with the [1M token context window enabled](/docs/en/build-with-claude/context-windows#1m-token-context-window), requests that exceed 200K input tokens are automatically charged at premium long context rates:
 
 <Note>
-The 1M token context window is currently in beta for organizations in [usage tier](/docs/en/api/rate-limits) 4 and organizations with custom rate limits. The 1M token context window is only available for Claude Sonnet 4 and Sonnet 4.5.
+The 1M token context window is currently in beta for organizations in [usage tier](/docs/en/api/rate-limits) 4 and organizations with custom rate limits. The 1M token context window is only available for Claude Opus 4.6, Sonnet 4.5, and Sonnet 4.
 </Note>
 
-| ≤ 200K input tokens | > 200K input tokens |
-|-----------------------------------|-------------------------------------|
-| Input: $3 / MTok | Input: $6 / MTok |
-| Output: $15 / MTok | Output: $22.50 / MTok |
+| Model | ≤ 200K input tokens | > 200K input tokens |
+|-------|-----------------------------------|-------------------------------------|
+| Claude Opus 4.6 | Input: $5 / MTok | Input: $10 / MTok |
+|  | Output: $25 / MTok | Output: $37.50 / MTok |
+| Claude Sonnet 4.5 / 4 | Input: $3 / MTok | Input: $6 / MTok |
+|  | Output: $15 / MTok | Output: $22.50 / MTok |
 
 Long context pricing stacks with other pricing modifiers:
 - The [Batch API 50% discount](#batch-processing) applies to long context pricing
 - [Prompt caching multipliers](#model-pricing) apply on top of long context pricing
+- The [data residency 1.1x multiplier](#data-residency-pricing) applies on top of long context pricing
 
 <Note>
 Even with the beta flag enabled, requests with fewer than 200K input tokens are charged at standard rates. If your request exceeds 200K input tokens, all tokens incur premium pricing.
@@ -142,6 +155,7 @@ When you use `tools`, we also automatically include a special system prompt for 
 
 | Model                    | Tool choice                                          | Tool use system prompt token count          |
 |--------------------------|------------------------------------------------------|---------------------------------------------|
+| Claude Opus 4.6              | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Opus 4.5            | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Opus 4.1            | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Opus 4            | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
@@ -269,8 +283,8 @@ When building a customer support agent, here's how costs might break down:
 <Note>
   Example calculation for processing 10,000 support tickets:
   - Average ~3,700 tokens per conversation
-  - Using Claude Sonnet 4.5 at $3/MTok input, $15/MTok output
-  - Total cost: ~$22.20 per 10,000 tickets
+  - Using Claude Opus 4.6 at $5/MTok input, $25/MTok output
+  - Total cost: ~$37.00 per 10,000 tickets
 </Note>
 
 For a detailed walkthrough of this calculation, see our [customer support agent guide](/docs/en/about-claude/use-case-guides/customer-support-chat).

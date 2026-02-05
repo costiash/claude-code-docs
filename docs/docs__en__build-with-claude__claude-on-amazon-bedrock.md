@@ -46,6 +46,7 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 
 | Model | Base Bedrock model ID | `global` | `us` | `eu` | `jp` | `apac` |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| Claude Opus 4.6 | anthropic.claude-opus-4-6-v1:0 | Yes | Yes | Yes | Yes | Yes |
 | Claude Sonnet 4.5 | anthropic.claude-sonnet-4-5-20250929-v1:0 | Yes | Yes | Yes | Yes | No |
 | Claude Sonnet 4 | anthropic.claude-sonnet-4-20250514-v1:0 | Yes | Yes | Yes | No | Yes |
 | Claude Sonnet 3.7 <Tooltip tooltipContent="Deprecated as of October 28, 2025.">⚠️</Tooltip> | anthropic.claude-3-7-sonnet-20250219-v1:0 | No | Yes | Yes | No | Yes |
@@ -100,7 +101,7 @@ The following examples show how to generate text from Claude on Bedrock:
   )
 
   message = client.messages.create(
-      model="global.anthropic.claude-sonnet-4-5-20250929-v1:0",
+      model="global.anthropic.claude-opus-4-6-v1:0",
       max_tokens=256,
       messages=[{"role": "user", "content": "Hello, world"}]
   )
@@ -127,7 +128,7 @@ The following examples show how to generate text from Claude on Bedrock:
 
   async function main() {
     const message = await client.messages.create({
-      model: 'global.anthropic.claude-sonnet-4-5-20250929-v1:0',
+      model: 'global.anthropic.claude-opus-4-6-v1:0',
       max_tokens: 256,
       messages: [{"role": "user", "content": "Hello, world"}]
     });
@@ -147,7 +148,7 @@ The following examples show how to generate text from Claude on Bedrock:
     "anthropic_version": "bedrock-2023-05-31"
   })
 
-  response = bedrock.invoke_model(body=body, modelId="global.anthropic.claude-sonnet-4-5-20250929-v1:0")
+  response = bedrock.invoke_model(body=body, modelId="global.anthropic.claude-opus-4-6-v1:0")
 
   response_body = json.loads(response.get("body").read())
   print(response_body.get("content"))
@@ -182,7 +183,7 @@ For more details on the two document processing modes and their limitations, ref
 
 ### 1M token context window
 
-Claude Sonnet 4 and 4.5 support the [1M token context window](/docs/en/build-with-claude/context-windows#1m-token-context-window) on Amazon Bedrock.
+Claude Opus 4.6, Sonnet 4.5, and Sonnet 4 support the [1M token context window](/docs/en/build-with-claude/context-windows#1m-token-context-window) on Amazon Bedrock.
 
 <Note>
 The 1M token context window is currently in beta. To use the extended context window, include the `context-1m-2025-08-07` beta header in your [Bedrock API requests](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-anthropic-claude-messages-request-response.html).
@@ -217,7 +218,7 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 ### Implementation
 
-**Using global endpoints (default for Sonnet 4.5 and 4):**
+**Using global endpoints (default for Opus 4.6, Sonnet 4.5, and Sonnet 4):**
 
 The model IDs for Claude Sonnet 4.5 and 4 already include the `global.` prefix:
 
@@ -228,7 +229,7 @@ from anthropic import AnthropicBedrock
 client = AnthropicBedrock(aws_region="us-west-2")
 
 message = client.messages.create(
-    model="global.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    model="global.anthropic.claude-opus-4-6-v1:0",
     max_tokens=256,
     messages=[{"role": "user", "content": "Hello, world"}]
 )
@@ -242,7 +243,7 @@ const client = new AnthropicBedrock({
 });
 
 const message = await client.messages.create({
-  model: 'global.anthropic.claude-sonnet-4-5-20250929-v1:0',
+  model: 'global.anthropic.claude-opus-4-6-v1:0',
   max_tokens: 256,
   messages: [{role: "user", content: "Hello, world"}]
 });
@@ -261,7 +262,7 @@ client = AnthropicBedrock(aws_region="us-west-2")
 
 # Using US regional endpoint (CRIS)
 message = client.messages.create(
-    model="anthropic.claude-sonnet-4-5-20250929-v1:0",  # No global. prefix
+    model="anthropic.claude-opus-4-6-v1:0",  # No global. prefix
     max_tokens=256,
     messages=[{"role": "user", "content": "Hello, world"}]
 )
@@ -276,7 +277,7 @@ const client = new AnthropicBedrock({
 
 // Using US regional endpoint (CRIS)
 const message = await client.messages.create({
-  model: 'anthropic.claude-sonnet-4-5-20250929-v1:0',  // No global. prefix
+  model: 'anthropic.claude-opus-4-6-v1:0',  // No global. prefix
   max_tokens: 256,
   messages: [{role: "user", content: "Hello, world"}]
 });

@@ -102,10 +102,10 @@ When selecting a model, it’s important to consider the size of your data. If c
     * Output token cost: 1,500 MTok * \$1.25/MTok = \$1,875
     * Monthly cost: \$715 + \$1,875 = \$2,590
 
-* **Claude Sonnet 4.5 estimated cost**
-    * Input token cost: 2,860 MTok * \$3.00/MTok = \$8,580
-    * Output token cost: 1,500 MTok * \$15.00/MTok = \$22,500
-    * Monthly cost: \$8,580 + \$22,500 = \$31,080
+* **Claude Opus 4.6 estimated cost**
+    * Input token cost: 2,860 MTok * \$5.00/MTok = \$14,300
+    * Output token cost: 1,500 MTok * \$25.00/MTok = \$37,500
+    * Monthly cost: \$14,300 + \$37,500 = \$51,800
 
 <Tip>Actual costs may differ from these estimates. These estimates are based on the prompt highlighted in the section on [batch processing](#consider-batch-processing). Output tokens can be reduced even further by removing the `explanation` field from the response.</Tip>  
 
