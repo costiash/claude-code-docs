@@ -18,12 +18,8 @@ Claude works with any standard PDF. However, you should ensure your request size
 | Requirement | Limit |
 |------------|--------|
 | Maximum request size | 32MB |
-| Maximum pages per request | 600 (models with 1M context) / 100 (all other models) |
+| Maximum pages per request | 100 |
 | Format | Standard PDF (no passwords/encryption) |
-
-<Note>
-The 600-page limit is available for models that support the [1M context window](/docs/en/build-with-claude/context-windows#1m-token-context-window): Claude Opus 4.6, Sonnet 4.5, and Sonnet 4. All other models support up to 100 pages per request.
-</Note>
 
 Please note that both limits are on the entire request payload, including any other content sent alongside PDFs.
 
