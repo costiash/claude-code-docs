@@ -12,21 +12,21 @@ Claude Opus 4.6 is a near drop-in replacement for Claude 4.5, with a few breakin
 
 ```python
 # Opus migration
-model="claude-opus-4-5"     # Before
-model="claude-opus-4-6"       # After
+model="claude-opus-4-5"   # Before
+model="claude-opus-4-6"   # After
 ```
 
 ### Breaking changes
 
-1. **Prefill removal**: Prefilling assistant messages returns a 400 error on Claude 4.6 models. Use [structured outputs](/docs/en/build-with-claude/structured-outputs), system prompt instructions, or `output_config.format` instead.
+1. **Prefill removal:** Prefilling assistant messages returns a 400 error on Claude 4.6 models. Use [structured outputs](/docs/en/build-with-claude/structured-outputs), system prompt instructions, or `output_config.format` instead.
 
-2. **Tool parameter quoting**: Claude 4.6 models may produce slightly different JSON string escaping in tool call arguments (e.g., different handling of Unicode escapes or forward slash escaping). If you parse tool call `input` as a raw string rather than using a JSON parser, verify your parsing logic. Standard JSON parsers (like `json.loads()` or `JSON.parse()`) handle these differences automatically.
+2. **Tool parameter quoting:** Claude 4.6 models may produce slightly different JSON string escaping in tool call arguments (e.g., different handling of Unicode escapes or forward slash escaping). If you parse tool call `input` as a raw string rather than using a JSON parser, verify your parsing logic. Standard JSON parsers (like `json.loads()` or `JSON.parse()`) handle these differences automatically.
 
 ### Recommended changes
 
 These are not required but will improve your experience:
 
-1. **Migrate to adaptive thinking**: `thinking: {type: "enabled", budget_tokens: N}` is deprecated on Claude 4.6 models and will be removed in a future model release. Switch to `thinking: {type: "adaptive"}` and use the [effort parameter](/docs/en/build-with-claude/effort) to control thinking depth. See [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking).
+1. **Migrate to adaptive thinking:** `thinking: {type: "enabled", budget_tokens: N}` is deprecated on Claude 4.6 models and will be removed in a future model release. Switch to `thinking: {type: "adaptive"}` and use the [effort parameter](/docs/en/build-with-claude/effort) to control thinking depth. See [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking).
 
    <CodeGroup>
    ```python Before
@@ -57,15 +57,15 @@ These are not required but will improve your experience:
    ```
    </CodeGroup>
 
-   Note that the migration also moves from `client.beta.messages.create` to `client.messages.create` — adaptive thinking and effort are GA features and do not require the beta SDK namespace or any beta headers.
+   Note that the migration also moves from `client.beta.messages.create` to `client.messages.create`. Adaptive thinking and effort are GA features and do not require the beta SDK namespace or any beta headers.
 
-2. **Remove effort beta header**: The effort parameter is now GA. Remove `betas=["effort-2025-11-24"]` from your requests.
+2. **Remove effort beta header:** The effort parameter is now GA. Remove `betas=["effort-2025-11-24"]` from your requests.
 
-3. **Remove fine-grained tool streaming beta header**: Fine-grained tool streaming is now GA. Remove `betas=["fine-grained-tool-streaming-2025-05-14"]` from your requests.
+3. **Remove fine-grained tool streaming beta header:** Fine-grained tool streaming is now GA. Remove `betas=["fine-grained-tool-streaming-2025-05-14"]` from your requests.
 
-4. **Remove interleaved thinking beta header**: Adaptive thinking automatically enables interleaved thinking. Remove `betas=["interleaved-thinking-2025-05-14"]` from your requests.
+4. **Remove interleaved thinking beta header:** Adaptive thinking automatically enables interleaved thinking. Remove `betas=["interleaved-thinking-2025-05-14"]` from your requests.
 
-5. **Migrate to output_config.format**: If using structured outputs, update `output_format={...}` to `output_config={"format": {...}}`. The old parameter remains functional but is deprecated and will be removed in a future model release.
+5. **Migrate to output_config.format:** If using structured outputs, update `output_format={...}` to `output_config={"format": {...}}`. The old parameter remains functional but is deprecated and will be removed in a future model release.
 
 ### Migrating from Claude 4.1 or earlier to Claude 4.6
 
@@ -73,24 +73,24 @@ If you're migrating from Opus 4.1, Sonnet 4, or earlier models directly to Claud
 
 ```python
 # From Opus 4.1
-model="claude-opus-4-1-20250805"    # Before
-model="claude-opus-4-6"               # After
+model="claude-opus-4-1-20250805"   # Before
+model="claude-opus-4-6"            # After
 
 # From Sonnet 4
-model="claude-sonnet-4-20250514"    # Before
-model="claude-opus-4-6"              # After
+model="claude-sonnet-4-20250514"   # Before
+model="claude-opus-4-6"            # After
 
 # From Sonnet 3.7
-model="claude-3-7-sonnet-20250219"  # Before
+model="claude-3-7-sonnet-20250219"   # Before
 model="claude-opus-4-6"              # After
 ```
 
 #### Additional breaking changes
 
-1. **Sampling parameters**
+1. **Update sampling parameters**
 
    <Warning>
-   This is a breaking change from Claude 3.x models.
+   This is a breaking change when migrating from Claude 3.x models.
    </Warning>
 
    Use only `temperature` OR `top_p`, not both:
@@ -112,10 +112,10 @@ model="claude-opus-4-6"              # After
    )
    ```
 
-2. **Tool versions**
+2. **Update tool versions**
 
    <Warning>
-   This is a breaking change from Claude 3.x models.
+   This is a breaking change when migrating from Claude 3.x models.
    </Warning>
 
    Update to the latest tool versions. Remove any code using the `undo_edit` command.
@@ -128,8 +128,8 @@ model="claude-opus-4-6"              # After
    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}]
    ```
 
-   - **Text editor**: Use `text_editor_20250728` and `str_replace_based_edit_tool`. See [Text editor tool documentation](/docs/en/agents-and-tools/tool-use/text-editor-tool) for details.
-   - **Code execution**: Upgrade to `code_execution_20250825`. See [Code execution tool documentation](/docs/en/agents-and-tools/tool-use/code-execution-tool#upgrade-to-latest-tool-version) for migration instructions.
+   - **Text editor:** Use `text_editor_20250728` and `str_replace_based_edit_tool`. See [Text editor tool documentation](/docs/en/agents-and-tools/tool-use/text-editor-tool) for details.
+   - **Code execution:** Upgrade to `code_execution_20250825`. See [Code execution tool documentation](/docs/en/agents-and-tools/tool-use/code-execution-tool#upgrade-to-latest-tool-version) for migration instructions.
 
 3. **Handle the `refusal` stop reason**
 
@@ -155,7 +155,7 @@ model="claude-opus-4-6"              # After
        pass
    ```
 
-5. **Tool parameter handling (trailing newlines)**
+5. **Verify tool parameter handling (trailing newlines)**
 
    Claude 4.5+ models preserve trailing newlines in tool call string parameters that were previously stripped. If your tools rely on exact string matching against tool call parameters, verify your logic handles trailing newlines correctly.
 
@@ -165,13 +165,13 @@ model="claude-opus-4-6"              # After
 
 #### Additional recommended changes
 
-- **Remove legacy beta headers**: Remove `token-efficient-tools-2025-02-19` and `output-128k-2025-02-19` — all Claude 4+ models have built-in token-efficient tool use and these headers have no effect.
+- **Remove legacy beta headers:** Remove `token-efficient-tools-2025-02-19` and `output-128k-2025-02-19`. All Claude 4+ models have built-in token-efficient tool use and these headers have no effect.
 
 ### Claude 4.6 migration checklist
 
 - [ ] Update model ID to `claude-opus-4-6`
-- [ ] **BREAKING**: Remove assistant message prefills (returns 400 error); use structured outputs or `output_config.format` instead
-- [ ] **Recommended**: Migrate from `thinking: {type: "enabled", budget_tokens: N}` to `thinking: {type: "adaptive"}` with the [effort parameter](/docs/en/build-with-claude/effort) (`budget_tokens` is deprecated and will be removed in a future release)
+- [ ] **BREAKING:** Remove assistant message prefills (returns 400 error); use structured outputs or `output_config.format` instead
+- [ ] **Recommended:** Migrate from `thinking: {type: "enabled", budget_tokens: N}` to `thinking: {type: "adaptive"}` with the [effort parameter](/docs/en/build-with-claude/effort) (`budget_tokens` is deprecated and will be removed in a future release)
 - [ ] Verify tool call JSON parsing uses a standard JSON parser
 - [ ] Remove `effort-2025-11-24` beta header (effort is now GA)
 - [ ] Remove `fine-grained-tool-streaming-2025-05-14` beta header
@@ -202,41 +202,30 @@ Sonnet 4.5 pricing is $3 per million input tokens, $15 per million output tokens
 
 ```python
 # From Sonnet 4
-model="claude-sonnet-4-20250514"        # Before
-model="claude-sonnet-4-5-20250929"      # After
+model="claude-sonnet-4-20250514"     # Before
+model="claude-sonnet-4-5-20250929"   # After
 
 # From Sonnet 3.7
-model="claude-3-7-sonnet-20250219"      # Before
-model="claude-sonnet-4-5-20250929"      # After
-```
-
-**Consider enabling extended thinking** for significant performance improvements on coding and reasoning tasks (disabled by default):
-
-```python
-response = client.messages.create(
-    model="claude-sonnet-4-5-20250929",
-    max_tokens=16000,
-    thinking={"type": "enabled", "budget_tokens": 10000},
-    messages=[...]
-)
+model="claude-3-7-sonnet-20250219"   # Before
+model="claude-sonnet-4-5-20250929"   # After
 ```
 
 ### Breaking changes
 
 These breaking changes apply when migrating from Claude 3.x Sonnet models.
 
-1. **Sampling parameters**
+1. **Update sampling parameters**
 
    <Warning>
-   This is a breaking change from Claude 3.x models.
+   This is a breaking change when migrating from Claude 3.x models.
    </Warning>
 
    Use only `temperature` OR `top_p`, not both.
 
-2. **Tool versions**
+2. **Update tool versions**
 
    <Warning>
-   This is a breaking change from Claude 3.x models.
+   This is a breaking change when migrating from Claude 3.x models.
    </Warning>
 
    Update to the latest tool versions (`text_editor_20250728`, `code_execution_20250825`). Remove any code using the `undo_edit` command.
@@ -252,9 +241,9 @@ These breaking changes apply when migrating from Claude 3.x Sonnet models.
 ### Sonnet 4.5 migration checklist
 
 - [ ] Update model ID to `claude-sonnet-4-5-20250929`
-- [ ] **BREAKING**: Update tool versions to latest (`text_editor_20250728`, `code_execution_20250825`) — legacy versions not supported (if migrating from 3.x)
-- [ ] **BREAKING**: Remove any code using the `undo_edit` command (if applicable)
-- [ ] **BREAKING**: Update sampling parameters to use only `temperature` OR `top_p`, not both (if migrating from 3.x)
+- [ ] **BREAKING:** Update tool versions to latest (`text_editor_20250728`, `code_execution_20250825`); legacy versions are not supported (if migrating from 3.x)
+- [ ] **BREAKING:** Remove any code using the `undo_edit` command (if applicable)
+- [ ] **BREAKING:** Update sampling parameters to use only `temperature` OR `top_p`, not both (if migrating from 3.x)
 - [ ] Handle new `refusal` stop reason in your application
 - [ ] Review and update prompts following [prompting best practices](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
 - [ ] Consider enabling extended thinking for complex reasoning tasks
@@ -264,7 +253,7 @@ These breaking changes apply when migrating from Claude 3.x Sonnet models.
 
 ## Migrating to Claude Haiku 4.5
 
-Claude Haiku 4.5 is our fastest and most intelligent Haiku model with near-frontier performance, delivering premium model quality for interactive applications and high-volume processing.
+Claude Haiku 4.5 is the fastest and most intelligent Haiku model with near-frontier performance, delivering premium model quality for interactive applications and high-volume processing.
 
 For a complete overview of capabilities, see the [models overview](/docs/en/about-claude/models/overview).
 
@@ -276,25 +265,20 @@ Haiku 4.5 pricing is $1 per million input tokens, $5 per million output tokens. 
 
 ```python
 # From Haiku 3.5
-model="claude-3-5-haiku-20241022"      # Before
-model="claude-haiku-4-5-20251001"      # After
+model="claude-3-5-haiku-20241022"   # Before
+model="claude-haiku-4-5-20251001"   # After
 ```
 
 **Review new rate limits:** Haiku 4.5 has separate rate limits from Haiku 3.5. See [Rate limits documentation](/docs/en/api/rate-limits) for details.
 
-**Consider enabling extended thinking** for significant performance improvements on coding and reasoning tasks (disabled by default):
-
-```python
-response = client.messages.create(
-    model="claude-haiku-4-5-20251001",
-    max_tokens=16000,
-    thinking={"type": "enabled", "budget_tokens": 5000},
-    messages=[...]
-)
-```
+<Tip>
+For significant performance improvements on coding and reasoning tasks, consider enabling extended thinking with `thinking: {type: "enabled", budget_tokens: N}`.
+</Tip>
 
 <Note>
 Extended thinking impacts [prompt caching](/docs/en/build-with-claude/prompt-caching#caching-with-thinking-blocks) efficiency.
+
+Extended thinking is deprecated in Claude 4.6 or newer models. If using newer models, use [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) instead.
 </Note>
 
 **Explore new capabilities:** See the [models overview](/docs/en/about-claude/models/overview) for details on context awareness, increased output capacity (64K tokens), higher intelligence, and improved speed.
@@ -303,18 +287,18 @@ Extended thinking impacts [prompt caching](/docs/en/build-with-claude/prompt-cac
 
 These breaking changes apply when migrating from Claude 3.x Haiku models.
 
-1. **Sampling parameters**
+1. **Update sampling parameters**
 
    <Warning>
-   This is a breaking change from Claude 3.x models.
+   This is a breaking change when migrating from Claude 3.x models.
    </Warning>
 
    Use only `temperature` OR `top_p`, not both.
 
-2. **Tool versions**
+2. **Update tool versions**
 
    <Warning>
-   This is a breaking change from Claude 3.x models.
+   This is a breaking change when migrating from Claude 3.x models.
    </Warning>
 
    Update to the latest tool versions (`text_editor_20250728`, `code_execution_20250825`). Remove any code using the `undo_edit` command.
@@ -330,9 +314,9 @@ These breaking changes apply when migrating from Claude 3.x Haiku models.
 ### Haiku 4.5 migration checklist
 
 - [ ] Update model ID to `claude-haiku-4-5-20251001`
-- [ ] **BREAKING**: Update tool versions to latest (`text_editor_20250728`, `code_execution_20250825`) — legacy versions not supported
-- [ ] **BREAKING**: Remove any code using the `undo_edit` command (if applicable)
-- [ ] **BREAKING**: Update sampling parameters to use only `temperature` OR `top_p`, not both
+- [ ] **BREAKING:** Update tool versions to latest (`text_editor_20250728`, `code_execution_20250825`); legacy versions are not supported
+- [ ] **BREAKING:** Remove any code using the `undo_edit` command (if applicable)
+- [ ] **BREAKING:** Update sampling parameters to use only `temperature` OR `top_p`, not both
 - [ ] Handle new `refusal` stop reason in your application
 - [ ] Review and adjust for new rate limits (separate from Haiku 3.5)
 - [ ] Review and update prompts following [prompting best practices](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
@@ -343,7 +327,7 @@ These breaking changes apply when migrating from Claude 3.x Haiku models.
 
 ## Need help?
 
-- Check our [API documentation](/docs/en/api/overview) for detailed specifications
+- Check the [API documentation](/docs/en/api/overview) for detailed specifications
 - Review [model capabilities](/docs/en/about-claude/models/overview) for performance comparisons
 - Review [API release notes](/docs/en/release-notes/api) for API updates
 - Contact support if you encounter any issues during migration

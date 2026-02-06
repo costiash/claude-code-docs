@@ -103,7 +103,7 @@ Generate CSV spreadsheets with various types of data.
     client = AnthropicBedrock()
     
     message = client.messages.create(
-        model="anthropic.claude-opus-4-6-v1:0",
+        model="anthropic.claude-opus-4-6-v1",
         max_tokens=1000,
         temperature=0,
         system="Your task is to generate a CSV spreadsheet containing the specified type of data. The spreadsheet should be well-organized, with clear column headers and appropriate data types for each column. Ensure that the data is realistic, diverse, and formatted consistently. Include a minimum of 10 rows of data, not counting the header row.",
@@ -132,7 +132,7 @@ Generate CSV spreadsheets with various types of data.
     const client = new AnthropicBedrock();
     
     const msg = await client.messages.create({
-      model: "anthropic.claude-opus-4-6-v1:0",
+      model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 1000,
       temperature: 0,
       system: "Your task is to generate a CSV spreadsheet containing the specified type of data. The spreadsheet should be well-organized, with clear column headers and appropriate data types for each column. Ensure that the data is realistic, diverse, and formatted consistently. Include a minimum of 10 rows of data, not counting the header row.",

@@ -104,7 +104,7 @@ from anthropic import AnthropicBedrock
 client = AnthropicBedrock()
 
 message = client.messages.create(
-    model="anthropic.claude-opus-4-6-v1:0",
+    model="anthropic.claude-opus-4-6-v1",
     max_tokens=2000,
     temperature=0,
     messages=[
@@ -134,7 +134,7 @@ import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 const client = new AnthropicBedrock();
 
 const msg = await client.messages.create({
-  model: "anthropic.claude-opus-4-6-v1:0",
+  model: "anthropic.claude-opus-4-6-v1",
   max_tokens: 2000,
   temperature: 0,
   messages: [

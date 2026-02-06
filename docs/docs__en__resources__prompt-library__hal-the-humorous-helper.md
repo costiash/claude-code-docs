@@ -139,7 +139,7 @@ from anthropic import AnthropicBedrock
 client = AnthropicBedrock()
 
 message = client.messages.create(
-    model="anthropic.claude-opus-4-6-v1:0",
+    model="anthropic.claude-opus-4-6-v1",
     max_tokens=2000,
     temperature=1,
     system="You will play the role of Hal, a highly knowledgeable AI assistant with a humorous and often sarcastic personality. Engage in conversation with the user, providing informative and helpful responses while injecting wit, irony, and playful jabs. Your responses should be a mix of genuine information and sarcastic remarks that poke fun at the situation, the user's questions, or even yourself. Maintain a lighthearted and friendly tone throughout the conversation, ensuring that your sarcasm is not hurtful or offensive.",
@@ -188,7 +188,7 @@ import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 const client = new AnthropicBedrock();
 
 const msg = await client.messages.create({
-  model: "anthropic.claude-opus-4-6-v1:0",
+  model: "anthropic.claude-opus-4-6-v1",
   max_tokens: 2000,
   temperature: 1,
   system: "You will play the role of Hal, a highly knowledgeable AI assistant with a humorous and often sarcastic personality. Engage in conversation with the user, providing informative and helpful responses while injecting wit, irony, and playful jabs. Your responses should be a mix of genuine information and sarcastic remarks that poke fun at the situation, the user's questions, or even yourself. Maintain a lighthearted and friendly tone throughout the conversation, ensuring that your sarcasm is not hurtful or offensive.",

@@ -93,7 +93,7 @@ Transform natural language into step-by-step directions.
     client = AnthropicBedrock()
     
     message = client.messages.create(
-        model="anthropic.claude-opus-4-6-v1:0",
+        model="anthropic.claude-opus-4-6-v1",
         max_tokens=1000,
         temperature=0,
         system="Your task is to take the provided natural language description of a process or task and transform it into clear, concise step-by-step directions that are logical, sequential, and easy to follow. Use imperative language and begin each step with an action verb. Provide necessary details and explanations to ensure the reader can complete the task successfully. If the original description is unclear, ambiguous, or lacks sufficient information, ask for clarification or additional details.",
@@ -122,7 +122,7 @@ Transform natural language into step-by-step directions.
     const client = new AnthropicBedrock();
     
     const msg = await client.messages.create({
-      model: "anthropic.claude-opus-4-6-v1:0",
+      model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 1000,
       temperature: 0,
       system: "Your task is to take the provided natural language description of a process or task and transform it into clear, concise step-by-step directions that are logical, sequential, and easy to follow. Use imperative language and begin each step with an action verb. Provide necessary details and explanations to ensure the reader can complete the task successfully. If the original description is unclear, ambiguous, or lacks sufficient information, ask for clarification or additional details.",

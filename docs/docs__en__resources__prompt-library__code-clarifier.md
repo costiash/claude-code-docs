@@ -103,7 +103,7 @@ Simplify and explain complex code in plain language.
     client = AnthropicBedrock()
     
     message = client.messages.create(
-        model="anthropic.claude-opus-4-6-v1:0",
+        model="anthropic.claude-opus-4-6-v1",
         max_tokens=1000,
         temperature=0,
         system="Your task is to take the code snippet provided and explain it in simple, easy-to-understand language. Break down the code's functionality, purpose, and key components. Use analogies, examples, and plain terms to make the explanation accessible to someone with minimal coding knowledge. Avoid using technical jargon unless absolutely necessary, and provide clear explanations for any jargon used. The goal is to help the reader understand what the code does and how it works at a high level.",
@@ -132,7 +132,7 @@ Simplify and explain complex code in plain language.
     const client = new AnthropicBedrock();
     
     const msg = await client.messages.create({
-      model: "anthropic.claude-opus-4-6-v1:0",
+      model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 1000,
       temperature: 0,
       system: "Your task is to take the code snippet provided and explain it in simple, easy-to-understand language. Break down the code's functionality, purpose, and key components. Use analogies, examples, and plain terms to make the explanation accessible to someone with minimal coding knowledge. Avoid using technical jargon unless absolutely necessary, and provide clear explanations for any jargon used. The goal is to help the reader understand what the code does and how it works at a high level.",

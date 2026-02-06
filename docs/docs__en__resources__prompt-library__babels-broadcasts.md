@@ -114,7 +114,7 @@ Create compelling product announcement tweets in the world's 10 most spoken lang
     client = AnthropicBedrock()
     
     message = client.messages.create(
-        model="anthropic.claude-opus-4-6-v1:0",
+        model="anthropic.claude-opus-4-6-v1",
         max_tokens=2000,
         temperature=0,
         messages=[
@@ -142,7 +142,7 @@ Create compelling product announcement tweets in the world's 10 most spoken lang
     const client = new AnthropicBedrock();
     
     const msg = await client.messages.create({
-      model: "anthropic.claude-opus-4-6-v1:0",
+      model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 2000,
       temperature: 0,
       messages: [

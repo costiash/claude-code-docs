@@ -46,7 +46,7 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 
 | Model | Base Bedrock model ID | `global` | `us` | `eu` | `jp` | `apac` |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
-| Claude Opus 4.6 | anthropic.claude-opus-4-6-v1:0 | Yes | Yes | Yes | Yes | Yes |
+| Claude Opus 4.6 | anthropic.claude-opus-4-6-v1 | Yes | Yes | Yes | Yes | Yes |
 | Claude Sonnet 4.5 | anthropic.claude-sonnet-4-5-20250929-v1:0 | Yes | Yes | Yes | Yes | No |
 | Claude Sonnet 4 | anthropic.claude-sonnet-4-20250514-v1:0 | Yes | Yes | Yes | No | Yes |
 | Claude Sonnet 3.7 <Tooltip tooltipContent="Deprecated as of October 28, 2025.">⚠️</Tooltip> | anthropic.claude-3-7-sonnet-20250219-v1:0 | No | Yes | Yes | No | Yes |
@@ -101,7 +101,7 @@ The following examples show how to generate text from Claude on Bedrock:
   )
 
   message = client.messages.create(
-      model="global.anthropic.claude-opus-4-6-v1:0",
+      model="global.anthropic.claude-opus-4-6-v1",
       max_tokens=256,
       messages=[{"role": "user", "content": "Hello, world"}]
   )
@@ -128,7 +128,7 @@ The following examples show how to generate text from Claude on Bedrock:
 
   async function main() {
     const message = await client.messages.create({
-      model: 'global.anthropic.claude-opus-4-6-v1:0',
+      model: 'global.anthropic.claude-opus-4-6-v1',
       max_tokens: 256,
       messages: [{"role": "user", "content": "Hello, world"}]
     });
@@ -148,7 +148,7 @@ The following examples show how to generate text from Claude on Bedrock:
     "anthropic_version": "bedrock-2023-05-31"
   })
 
-  response = bedrock.invoke_model(body=body, modelId="global.anthropic.claude-opus-4-6-v1:0")
+  response = bedrock.invoke_model(body=body, modelId="global.anthropic.claude-opus-4-6-v1")
 
   response_body = json.loads(response.get("body").read())
   print(response_body.get("content"))
@@ -229,7 +229,7 @@ from anthropic import AnthropicBedrock
 client = AnthropicBedrock(aws_region="us-west-2")
 
 message = client.messages.create(
-    model="global.anthropic.claude-opus-4-6-v1:0",
+    model="global.anthropic.claude-opus-4-6-v1",
     max_tokens=256,
     messages=[{"role": "user", "content": "Hello, world"}]
 )
@@ -243,7 +243,7 @@ const client = new AnthropicBedrock({
 });
 
 const message = await client.messages.create({
-  model: 'global.anthropic.claude-opus-4-6-v1:0',
+  model: 'global.anthropic.claude-opus-4-6-v1',
   max_tokens: 256,
   messages: [{role: "user", content: "Hello, world"}]
 });
@@ -262,7 +262,7 @@ client = AnthropicBedrock(aws_region="us-west-2")
 
 # Using US regional endpoint (CRIS)
 message = client.messages.create(
-    model="anthropic.claude-opus-4-6-v1:0",  # No global. prefix
+    model="anthropic.claude-opus-4-6-v1",  # No global. prefix
     max_tokens=256,
     messages=[{"role": "user", "content": "Hello, world"}]
 )
@@ -277,7 +277,7 @@ const client = new AnthropicBedrock({
 
 // Using US regional endpoint (CRIS)
 const message = await client.messages.create({
-  model: 'anthropic.claude-opus-4-6-v1:0',  // No global. prefix
+  model: 'anthropic.claude-opus-4-6-v1',  // No global. prefix
   max_tokens: 256,
   messages: [{role: "user", content: "Hello, world"}]
 });

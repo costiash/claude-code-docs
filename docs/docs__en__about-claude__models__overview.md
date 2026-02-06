@@ -19,7 +19,7 @@ Once you've picked a model, [learn how to make your first API call](/docs/en/get
 | **Description** | Our most intelligent model for building agents and coding | Our best combination of speed and intelligence | Our fastest model with near-frontier intelligence |
 | **Claude API ID** | claude-opus-4-6 | claude-sonnet-4-5-20250929 | claude-haiku-4-5-20251001 |
 | **Claude API alias** | claude-opus-4-6 | claude-sonnet-4-5 | claude-haiku-4-5 |
-| **AWS Bedrock ID** | anthropic.claude-opus-4-6-v1:0 | anthropic.claude-sonnet-4-5-20250929-v1:0 | anthropic.claude-haiku-4-5-20251001-v1:0 |
+| **AWS Bedrock ID** | anthropic.claude-opus-4-6-v1 | anthropic.claude-sonnet-4-5-20250929-v1:0 | anthropic.claude-haiku-4-5-20251001-v1:0 |
 | **GCP Vertex AI ID** | claude-opus-4-6 | claude-sonnet-4-5@20250929 | claude-haiku-4-5@20251001 |
 | **Pricing**<sup>1</sup> | \$5 / input MTok<br/>\$25 / output MTok | \$3 / input MTok<br/>\$15 / output MTok | \$1 / input MTok<br/>\$5 / output MTok |
 | **[Extended thinking](/docs/en/build-with-claude/extended-thinking)** | Yes | Yes | Yes |

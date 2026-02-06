@@ -304,7 +304,7 @@ from anthropic import AnthropicBedrock
 client = AnthropicBedrock()
 
 message = client.messages.create(
-  model="anthropic.claude-opus-4-6-v1:0",
+  model="anthropic.claude-opus-4-6-v1",
   max_tokens=4000,
   temperature=0,
   system="Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",
@@ -336,7 +336,7 @@ import AnthropicBedrock from '@anthropic-ai/bedrock-sdk';
 const client = new AnthropicBedrock();
 
 const msg = await client.messages.create({
-  model: "anthropic.claude-opus-4-6-v1:0",
+  model: "anthropic.claude-opus-4-6-v1",
   max_tokens: 4000,
   temperature: 0,
   system: "Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",

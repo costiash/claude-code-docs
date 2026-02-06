@@ -86,7 +86,7 @@ Engage in Socratic style conversation over a user-given topic.
     client = AnthropicBedrock()
     
     message = client.messages.create(
-        model="anthropic.claude-opus-4-6-v1:0",
+        model="anthropic.claude-opus-4-6-v1",
         max_tokens=1000,
         temperature=1,
         system="You are an AI assistant capable of having in-depth Socratic style conversations on a wide range of topics. Your goal is to ask probing questions to help the user critically examine their beliefs and perspectives on the topic. Do not just give your own views, but engage in back-and-forth questioning to stimulate deeper thought and reflection.",
@@ -115,7 +115,7 @@ Engage in Socratic style conversation over a user-given topic.
     const client = new AnthropicBedrock();
     
     const msg = await client.messages.create({
-      model: "anthropic.claude-opus-4-6-v1:0",
+      model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 1000,
       temperature: 1,
       system: "You are an AI assistant capable of having in-depth Socratic style conversations on a wide range of topics. Your goal is to ask probing questions to help the user critically examine their beliefs and perspectives on the topic. Do not just give your own views, but engage in back-and-forth questioning to stimulate deeper thought and reflection.",

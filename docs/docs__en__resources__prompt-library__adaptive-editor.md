@@ -83,7 +83,7 @@ Rewrite text following user-given instructions, such as with a different tone, a
     client = AnthropicBedrock()
     
     message = client.messages.create(
-        model="anthropic.claude-opus-4-6-v1:0",
+        model="anthropic.claude-opus-4-6-v1",
         max_tokens=2000,
         temperature=1,
         messages=[
@@ -111,7 +111,7 @@ Rewrite text following user-given instructions, such as with a different tone, a
     const client = new AnthropicBedrock();
     
     const msg = await client.messages.create({
-      model: "anthropic.claude-opus-4-6-v1:0",
+      model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 2000,
       temperature: 1,
       messages: [
