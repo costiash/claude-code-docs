@@ -227,6 +227,165 @@ public class BatchExample {
 }
 ```
 
+```go Go
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+    client := anthropic.NewClient()
+
+    batch, _ := client.Messages.Batches.New(context.Background(),
+        anthropic.BatchCreateParams{
+            Requests: []anthropic.BatchCreateParamsRequest{
+                {
+                    CustomID: "my-first-request",
+                    Params: anthropic.BatchCreateParamsRequestParams{
+                        Model:     anthropic.ModelClaudeOpus4_6,
+                        MaxTokens: 1024,
+                        Messages: []anthropic.MessageParam{
+                            anthropic.NewUserMessage(
+                                anthropic.NewTextBlock("Hello, world"),
+                            ),
+                        },
+                    },
+                },
+                {
+                    CustomID: "my-second-request",
+                    Params: anthropic.BatchCreateParamsRequestParams{
+                        Model:     anthropic.ModelClaudeOpus4_6,
+                        MaxTokens: 1024,
+                        Messages: []anthropic.MessageParam{
+                            anthropic.NewUserMessage(
+                                anthropic.NewTextBlock("Hi again, friend"),
+                            ),
+                        },
+                    },
+                },
+            },
+        })
+
+    fmt.Println(batch.ID)
+}
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+batch = client.messages.batches.create(
+  requests: [
+    {
+      custom_id: "my-first-request",
+      params: {
+        model: "claude-opus-4-6",
+        max_tokens: 1024,
+        messages: [
+          { role: "user", content: "Hello, world" }
+        ]
+      }
+    },
+    {
+      custom_id: "my-second-request",
+      params: {
+        model: "claude-opus-4-6",
+        max_tokens: 1024,
+        messages: [
+          { role: "user", content: "Hi again, friend" }
+        ]
+      }
+    }
+  ]
+)
+
+puts batch
+```
+
+```csharp C#
+using Anthropic;
+
+var client = new AnthropicClient();
+
+var batch = await client.Messages.Batches.CreateAsync(
+    new BatchCreateParams
+    {
+        Requests = new[]
+        {
+            new BatchCreateParams.Request
+            {
+                CustomId = "my-first-request",
+                Params = new BatchCreateParams.Request.Params
+                {
+                    Model = "claude-opus-4-6",
+                    MaxTokens = 1024,
+                    Messages = new[]
+                    {
+                        new MessageParam { Role = "user", Content = "Hello, world" }
+                    }
+                }
+            },
+            new BatchCreateParams.Request
+            {
+                CustomId = "my-second-request",
+                Params = new BatchCreateParams.Request.Params
+                {
+                    Model = "claude-opus-4-6",
+                    MaxTokens = 1024,
+                    Messages = new[]
+                    {
+                        new MessageParam { Role = "user", Content = "Hi again, friend" }
+                    }
+                }
+            }
+        }
+    });
+
+Console.WriteLine(batch);
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(
+    apiKey: getenv("ANTHROPIC_API_KEY")
+);
+
+$batch = $client->messages->batches->create([
+    'requests' => [
+        [
+            'custom_id' => 'my-first-request',
+            'params' => [
+                'model' => 'claude-opus-4-6',
+                'max_tokens' => 1024,
+                'messages' => [
+                    ['role' => 'user', 'content' => 'Hello, world']
+                ]
+            ]
+        ],
+        [
+            'custom_id' => 'my-second-request',
+            'params' => [
+                'model' => 'claude-opus-4-6',
+                'max_tokens' => 1024,
+                'messages' => [
+                    ['role' => 'user', 'content' => 'Hi again, friend']
+                ]
+            ]
+        ]
+    ]
+]);
+
+print_r($batch);
+```
+
 </CodeGroup>
 
 In this example, two separate requests are batched together for asynchronous processing. Each request has a unique `custom_id` and contains the standard parameters you'd use for a Messages API call.

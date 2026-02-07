@@ -63,6 +63,88 @@ await anthropic.beta.files.upload({
   betas: ['files-api-2025-04-14']
 });
 ```
+
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import java.nio.file.Path;
+
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+var file = client.beta().files().upload(
+    Path.of("/path/to/document.pdf")
+);
+
+System.out.println(file.id());
+```
+
+```go Go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+
+    "github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+    client := anthropic.NewClient()
+
+    file, _ := os.Open("/path/to/document.pdf")
+    defer file.Close()
+
+    response, _ := client.Beta.Files.Upload(context.Background(),
+        anthropic.BetaFileUploadParams{
+            File: file,
+        })
+
+    fmt.Println(response.ID)
+}
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+file = client.beta.files.upload(
+  file: File.open("/path/to/document.pdf", "rb")
+)
+
+puts file.id
+```
+
+```csharp C#
+using Anthropic;
+
+var client = new AnthropicClient();
+
+var file = await client.Beta.Files.UploadAsync(
+    new FileUploadParams
+    {
+        File = File.OpenRead("/path/to/document.pdf")
+    });
+
+Console.WriteLine(file.Id);
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(
+    apiKey: getenv("ANTHROPIC_API_KEY")
+);
+
+$file = $client->beta->files->upload([
+    'file' => fopen('/path/to/document.pdf', 'r')
+]);
+
+echo $file->id;
+```
 </CodeGroup>
 
 The response from uploading a file will include:
@@ -175,6 +257,169 @@ const response = await anthropic.beta.messages.create({
 });
 
 console.log(response);
+```
+
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.*;
+
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+MessageCreateParams params = MessageCreateParams.builder()
+    .model(Model.CLAUDE_OPUS_4_6)
+    .maxTokens(1024)
+    .addMessage(MessageParam.builder()
+        .role(Role.USER)
+        .content(ContentBlockParam.ofText("Please summarize this document for me."))
+        .content(ContentBlockParam.ofDocument(DocumentBlockParam.builder()
+            .source(DocumentBlockParam.Source.ofFile(
+                DocumentBlockParam.Source.File.builder()
+                    .fileId("file_011CNha8iCJcU1wXNR6q4V8w")
+                    .build()))
+            .build()))
+        .build())
+    .build();
+
+Message message = client.beta().messages().create(params);
+System.out.println(message);
+```
+
+```go Go
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+    client := anthropic.NewClient()
+
+    response, _ := client.Beta.Messages.New(context.Background(),
+        anthropic.BetaMessageNewParams{
+            Model:     anthropic.ModelClaudeOpus4_6,
+            MaxTokens: 1024,
+            Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+            Messages: []anthropic.BetaMessageParam{
+                {
+                    Role: "user",
+                    Content: []anthropic.BetaContentBlockParam{
+                        anthropic.NewBetaTextBlock("Please summarize this document for me."),
+                        {
+                            Type: "document",
+                            Source: &anthropic.BetaDocumentSourceParam{
+                                Type:   "file",
+                                FileID: "file_011CNha8iCJcU1wXNR6q4V8w",
+                            },
+                        },
+                    },
+                },
+            },
+        })
+
+    fmt.Println(response)
+}
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  betas: ["files-api-2025-04-14"],
+  messages: [
+    {
+      role: "user",
+      content: [
+        { type: "text", text: "Please summarize this document for me." },
+        {
+          type: "document",
+          source: {
+            type: "file",
+            file_id: "file_011CNha8iCJcU1wXNR6q4V8w"
+          }
+        }
+      ]
+    }
+  ]
+)
+
+puts response
+```
+
+```csharp C#
+using Anthropic;
+
+var client = new AnthropicClient();
+
+var response = await client.Beta.Messages.CreateAsync(
+    new BetaMessageCreateParams
+    {
+        Model = "claude-opus-4-6",
+        MaxTokens = 1024,
+        Betas = new[] { "files-api-2025-04-14" },
+        Messages = new[]
+        {
+            new BetaMessageParam
+            {
+                Role = "user",
+                Content = new object[]
+                {
+                    new { type = "text", text = "Please summarize this document for me." },
+                    new
+                    {
+                        type = "document",
+                        source = new
+                        {
+                            type = "file",
+                            file_id = "file_011CNha8iCJcU1wXNR6q4V8w"
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+Console.WriteLine(response);
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(
+    apiKey: getenv("ANTHROPIC_API_KEY")
+);
+
+$response = $client->beta->messages->create([
+    'model' => 'claude-opus-4-6',
+    'max_tokens' => 1024,
+    'betas' => ['files-api-2025-04-14'],
+    'messages' => [
+        [
+            'role' => 'user',
+            'content' => [
+                ['type' => 'text', 'text' => 'Please summarize this document for me.'],
+                [
+                    'type' => 'document',
+                    'source' => [
+                        'type' => 'file',
+                        'file_id' => 'file_011CNha8iCJcU1wXNR6q4V8w'
+                    ]
+                ]
+            ]
+        ]
+    ]
+]);
+
+print_r($response);
 ```
 </CodeGroup>
 

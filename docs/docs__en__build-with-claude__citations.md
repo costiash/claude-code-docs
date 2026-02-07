@@ -116,7 +116,7 @@ public class DocumentExample {
                 .build();
 
         MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_SONNET_4_20250514)
+                .model(Model.CLAUDE_OPUS_4_6)
                 .maxTokens(1024)
                 .addUserMessageOfBlockParams(List.of(ContentBlockParam.ofDocument(documentParam), ContentBlockParam.ofText(textBlockParam)))
                 .build();

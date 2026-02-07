@@ -152,6 +152,181 @@ const response = await client.messages.create({
 console.log(response.content[0].text);
 ```
 
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.*;
+
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+// Java SDK uses class-based structured outputs
+// See the Java SDK page for annotation-based approach
+MessageCreateParams params = MessageCreateParams.builder()
+    .model(Model.CLAUDE_OPUS_4_6)
+    .maxTokens(1024)
+    .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.")
+    .build();
+
+Message message = client.beta().messages().create(params);
+System.out.println(message.content());
+```
+
+```go Go
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+    client := anthropic.NewClient()
+
+    response, _ := client.Beta.Messages.New(context.Background(),
+        anthropic.BetaMessageNewParams{
+            Model:     anthropic.ModelClaudeOpus4_6,
+            MaxTokens: 1024,
+            Betas:     []anthropic.AnthropicBeta{"structured-outputs-2025-11-13"},
+            Messages: []anthropic.BetaMessageParam{
+                anthropic.NewBetaUserMessage(
+                    anthropic.NewBetaTextBlock("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan."),
+                ),
+            },
+            OutputFormat: anthropic.BetaOutputFormatParam{
+                Type: "json_schema",
+                Schema: map[string]interface{}{
+                    "type": "object",
+                    "properties": map[string]interface{}{
+                        "name":           map[string]string{"type": "string"},
+                        "email":          map[string]string{"type": "string"},
+                        "plan_interest":  map[string]string{"type": "string"},
+                        "demo_requested": map[string]string{"type": "boolean"},
+                    },
+                    "required":             []string{"name", "email", "plan_interest", "demo_requested"},
+                    "additionalProperties": false,
+                },
+            },
+        })
+
+    fmt.Println(response.Content[0].Text)
+}
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  betas: ["structured-outputs-2025-11-13"],
+  messages: [
+    {
+      role: "user",
+      content: "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan."
+    }
+  ],
+  output_format: {
+    type: "json_schema",
+    schema: {
+      type: "object",
+      properties: {
+        name: { type: "string" },
+        email: { type: "string" },
+        plan_interest: { type: "string" },
+        demo_requested: { type: "boolean" }
+      },
+      required: ["name", "email", "plan_interest", "demo_requested"],
+      additionalProperties: false
+    }
+  }
+)
+
+puts response.content[0].text
+```
+
+```csharp C#
+using Anthropic;
+
+var client = new AnthropicClient();
+
+var response = await client.Beta.Messages.CreateAsync(
+    new BetaMessageCreateParams
+    {
+        Model = "claude-opus-4-6",
+        MaxTokens = 1024,
+        Betas = new[] { "structured-outputs-2025-11-13" },
+        Messages = new[]
+        {
+            new BetaMessageParam
+            {
+                Role = "user",
+                Content = "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan."
+            }
+        },
+        OutputFormat = new OutputFormat
+        {
+            Type = "json_schema",
+            Schema = new
+            {
+                type = "object",
+                properties = new
+                {
+                    name = new { type = "string" },
+                    email = new { type = "string" },
+                    plan_interest = new { type = "string" },
+                    demo_requested = new { type = "boolean" }
+                },
+                required = new[] { "name", "email", "plan_interest", "demo_requested" },
+                additionalProperties = false
+            }
+        }
+    });
+
+Console.WriteLine(response.Content[0].Text);
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(
+    apiKey: getenv("ANTHROPIC_API_KEY")
+);
+
+$response = $client->beta->messages->create([
+    'model' => 'claude-opus-4-6',
+    'max_tokens' => 1024,
+    'betas' => ['structured-outputs-2025-11-13'],
+    'messages' => [
+        [
+            'role' => 'user',
+            'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.'
+        ]
+    ],
+    'output_format' => [
+        'type' => 'json_schema',
+        'schema' => [
+            'type' => 'object',
+            'properties' => [
+                'name' => ['type' => 'string'],
+                'email' => ['type' => 'string'],
+                'plan_interest' => ['type' => 'string'],
+                'demo_requested' => ['type' => 'boolean']
+            ],
+            'required' => ['name', 'email', 'plan_interest', 'demo_requested'],
+            'additionalProperties' => false
+        ]
+    ]
+]);
+
+echo $response->content[0]->text;
+```
+
 </CodeGroup>
 
 **Response format:** Valid JSON matching your schema in `response.content[0].text`
@@ -181,15 +356,20 @@ console.log(response.content[0].text);
 
 ### Working with JSON outputs in SDKs
 
-The Python and TypeScript SDKs provide helpers that make it easier to work with JSON outputs, including schema transformation, automatic validation, and integration with popular schema libraries.
+The SDKs provide helpers that make it easier to work with JSON outputs, including schema transformation, automatic validation, and integration with popular schema libraries.
 
 <Note>
 SDK helper methods (like `.parse()` and Pydantic/Zod integration) still accept `output_format` as a convenience parameter. The SDK handles the translation to `output_config.format` internally. The examples below show the SDK helper syntax.
 </Note>
 
-#### Using Pydantic and Zod
+#### Using native schema definitions
 
-For Python and TypeScript developers, you can use familiar schema definition tools like Pydantic and Zod instead of writing raw JSON schemas.
+Instead of writing raw JSON schemas, you can use familiar schema definition tools in your language. Each SDK provides class-based or library-based schema support:
+
+- **Python**: [Pydantic](https://docs.pydantic.dev/) models
+- **TypeScript**: [Zod](https://zod.dev/) schemas
+- **Java**: Plain Java classes with annotation support (see [Java SDK structured outputs](/docs/en/api/sdks/java#using-structured-outputs))
+- **Ruby**: `Anthropic::BaseModel` classes (see [Ruby SDK](/docs/en/api/sdks/ruby#input-schema-and-tool-calling))
 
 <CodeGroup>
 
@@ -275,7 +455,12 @@ console.log(response.content[0].text);
 
 #### SDK-specific methods
 
-**Python: `client.messages.parse()` (Recommended)**
+Each SDK provides helpers that make working with structured outputs easier. See individual SDK pages for full details.
+
+<Tabs>
+<Tab title="Python">
+
+**`client.messages.parse()` (Recommended)**
 
 The `parse()` method automatically transforms your Pydantic model, validates the response, and returns a `parsed_output` attribute.
 
@@ -306,7 +491,7 @@ print(contact.name, contact.email)
 
 </section>
 
-**Python: `transform_schema()` helper**
+**`transform_schema()` helper**
 
 For when you need to manually transform schemas before sending, or when you want to modify a Pydantic-generated schema. Unlike `client.messages.parse()`, which transforms provided schemas automatically, this gives you the transformed schema so you can further customize it.
 
@@ -334,9 +519,48 @@ response = client.messages.create(
 
 </section>
 
+</Tab>
+<Tab title="Java">
+
+**`outputConfig(Class<T>)` method**
+
+Pass a Java class to `outputConfig()` and the SDK automatically generates a JSON schema from it. Access the parsed result from the response content.
+
+<section title="Example usage">
+
+```java
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.StructuredMessageCreateParams;
+import com.anthropic.models.messages.Model;
+
+class ContactInfo {
+    public String name;
+    public String email;
+    public String planInterest;
+}
+
+StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(1024)
+        .outputConfig(ContactInfo.class)
+        .addUserMessage("...")
+        .build();
+
+client.beta().messages().create(createParams).content().stream()
+        .flatMap(contentBlock -> contentBlock.text().stream())
+        .forEach(textBlock -> System.out.println(textBlock.text().name));
+```
+
+</section>
+
+See [Java SDK structured outputs](/docs/en/api/sdks/java#using-structured-outputs) for annotation support, optional fields, and local schema validation.
+
+</Tab>
+</Tabs>
+
 #### How SDK transformation works
 
-Both Python and TypeScript SDKs automatically transform schemas with unsupported features:
+The Python and TypeScript SDKs automatically transform schemas with unsupported features:
 
 1. **Remove unsupported constraints** (e.g., `minimum`, `maximum`, `minLength`, `maxLength`)
 2. **Update descriptions** with constraint info (e.g., "Must be at least 100"), when the constraint is not directly supported with structured outputs
