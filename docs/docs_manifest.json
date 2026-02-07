@@ -3249,17 +3249,17 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "f5311c335c47e90548a5bf88ce3db66502511b1146ff9787cc37ebc4ea4c59be",
-      "last_updated": "2026-02-06T15:23:22.653836",
+      "hash": "74a1b351e1c3f2758dd24f8be42d9e9fc8580752120253edff0661d6b59fb7d1",
+      "last_updated": "2026-02-07T18:15:34.993951",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-02-07T15:14:07.611367",
-    "fetch_duration_seconds": 353.586746,
-    "total_pages_discovered": 599,
+    "last_fetch_completed": "2026-02-07T18:15:34.994058",
+    "fetch_duration_seconds": 350.355605,
+    "total_pages_discovered": 600,
     "pages_fetched_successfully": 542,
-    "pages_failed": 58,
+    "pages_failed": 59,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/agent-teams",
@@ -3312,6 +3312,7 @@
       "/docs/en/best-practices",
       "/docs/en/chrome",
       "/docs/en/discover-plugins",
+      "/docs/en/fast-mode",
       "/docs/en/features-overview",
       "/docs/en/how-claude-code-works",
       "/docs/en/keybindings",
@@ -3325,7 +3326,7 @@
     "total_files": 542,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-02-07T15:14:07.611388",
+  "last_updated": "2026-02-07T18:15:34.994077",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
