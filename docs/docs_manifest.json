@@ -2679,8 +2679,8 @@
     "claude-code__model-config.md": {
       "original_url": "https://platform.claude.com/docs/en/model-config",
       "original_md_url": "https://platform.claude.com/docs/en/model-config.md",
-      "hash": "b5ffd771018641949809c3bb6649c67ba131fac86105c6d6f5e13c2837e809b7",
-      "last_updated": "2026-02-05T21:15:30.417049"
+      "hash": "50ed1fd79756dea4b8a007a5723944f127afd9e28732ee60a718c51dbc145a49",
+      "last_updated": "2026-02-09T00:38:30.837260"
     },
     "claude-code__monitoring-usage.md": {
       "original_url": "https://platform.claude.com/docs/en/monitoring-usage",
@@ -3261,8 +3261,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-02-08T21:15:49.681714",
-    "fetch_duration_seconds": 386.987787,
+    "last_fetch_completed": "2026-02-09T00:39:29.254950",
+    "fetch_duration_seconds": 356.066254,
     "total_pages_discovered": 601,
     "pages_fetched_successfully": 543,
     "pages_failed": 59,
@@ -3332,7 +3332,7 @@
     "total_files": 543,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-02-08T21:15:49.681736",
+  "last_updated": "2026-02-09T00:39:29.254968",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
