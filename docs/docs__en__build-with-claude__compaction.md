@@ -34,7 +34,7 @@ When compaction is enabled, Claude automatically summarizes your conversation wh
 
 On subsequent requests, append the response to your messages. The API automatically drops all message blocks prior to the `compaction` block, continuing the conversation from the summary. 
 
-![Compaction flow diagram](/docs/images/compaction-flow.svg)
+![Flow diagram showing the compaction process: when input tokens exceed the trigger threshold, Claude generates a summary in a compaction block and continues the response with the compacted context](/docs/images/compaction-flow.svg)
 
 ## Basic usage
 
@@ -177,7 +177,7 @@ const response = await client.beta.messages.create({
 
 By default, compaction uses the following summarization prompt:
 
-```text
+```
 You have written a partial transcript for the initial task above. Please write a summary of the transcript. The purpose of this summary is to provide continuity so you can continue to make progress towards solving the task in a future context, where the raw history above may not be accessible and will be replaced with this summary. Write down anything that would be helpful, including the state, next steps, learnings etc. You must wrap your summary in a <summary></summary> block.
 ```
 
@@ -475,7 +475,7 @@ messages.push({ role: "assistant", content: message.content });
 
 ### Prompt caching
 
-You may add a `cache_control` breakpoint on compaction blocks, which caches the full system prompt along with the summarized content. The original compacted content is ignored.
+Compaction works well with [prompt caching](/docs/en/build-with-claude/prompt-caching). You can add a `cache_control` breakpoint on compaction blocks to cache the summarized content. The original compacted content is ignored.
 
 ```json
 {
@@ -493,6 +493,57 @@ You may add a `cache_control` breakpoint on compaction blocks, which caches the 
     ]
 }
 ```
+
+#### Maximizing cache hits with system prompts
+
+When compaction occurs, the summary becomes new content that needs to be written to the cache. Without additional cache breakpoints, this would also invalidate any cached system prompt, requiring it to be re-cached along with the compaction summary.
+
+To maximize cache hit rates, add a `cache_control` breakpoint at the end of your system prompt. This keeps the system prompt cached separately from the conversation, so when compaction occurs:
+
+- The system prompt cache remains valid and is read from cache
+- Only the compaction summary needs to be written as a new cache entry
+
+<CodeGroup>
+```python Python
+response = client.beta.messages.create(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    system=[
+        {
+            "type": "text",
+            "text": "You are a helpful coding assistant...",
+            "cache_control": {"type": "ephemeral"}  # Cache the system prompt separately
+        }
+    ],
+    messages=messages,
+    context_management={
+        "edits": [{"type": "compact_20260112"}]
+    }
+)
+```
+
+```typescript TypeScript
+const response = await client.beta.messages.create({
+  betas: ["compact-2026-01-12"],
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  system: [
+    {
+      type: "text",
+      text: "You are a helpful coding assistant...",
+      cache_control: { type: "ephemeral" }  // Cache the system prompt separately
+    }
+  ],
+  messages,
+  context_management: {
+    edits: [{ type: "compact_20260112" }]
+  }
+});
+```
+</CodeGroup>
+
+This approach is particularly beneficial for long system prompts, as they remain cached even across multiple compaction events throughout a conversation.
 
 ## Understanding usage
 

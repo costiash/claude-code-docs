@@ -209,7 +209,7 @@ Note: Steps 3 and 4 are optional. For some workflows, Claude's tool use request 
 
 ### Server tools
 
-Server tools follow a different workflow:
+Server tools follow a different workflow where Anthropic's servers handle tool execution in a loop:
 
 <Steps>
   <Step title="Provide Claude with tools and a user prompt">
@@ -219,12 +219,21 @@ Server tools follow a different workflow:
   <Step title="Claude executes the server tool">
     - Claude assesses if a server tool can help with the user's query.
     - If yes, Claude executes the tool, and the results are automatically incorporated into Claude's response.
+    - The server runs a sampling loop that may execute multiple tool calls before returning a response.
   </Step>
   <Step title="Claude uses the server tool result to formulate a response">
     - Claude analyzes the server tool results to craft its final response to the original user prompt.
-    - No additional user interaction is needed for server tool execution.
+    - In most cases, no additional user interaction is needed for server tool execution.
   </Step>
 </Steps>
+
+<Note>
+**Handling `pause_turn` with server tools**
+
+The server-side sampling loop has a default limit of 10 iterations. If Claude reaches this limit while executing server tools, the API returns a response with `stop_reason="pause_turn"`. This may include a `server_tool_use` block without a corresponding `server_tool_result`.
+
+When you receive `pause_turn`, continue the conversation by sending the response back to let Claude finish processing. See [handling stop reasons](/docs/en/build-with-claude/handling-stop-reasons#3-implement-retry-logic-for-pause-turn) for implementation details.
+</Note>
 
 ---
 

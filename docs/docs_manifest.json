@@ -297,8 +297,8 @@
     "docs__en__agents-and-tools__tool-use__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview.md",
-      "hash": "0fc52903e3aa79a497248113d7a69ca24b7a58ed2331b14be05b35b9c91341b0",
-      "last_updated": "2026-02-05T18:22:21.096352"
+      "hash": "d4e0bee6e1001fed262ef2739aa570717125313c5d5b65858c7df56e20787ed0",
+      "last_updated": "2026-02-10T21:19:24.859294"
     },
     "docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling",
@@ -2319,8 +2319,8 @@
     "docs__en__build-with-claude__compaction.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/compaction",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/compaction.md",
-      "hash": "3135e1363f3a772c4a1c01db53b2ebdb7c86e47d4f22bf8604dd0950761d4ee4",
-      "last_updated": "2026-02-05T18:26:12.919100"
+      "hash": "d1f745682143f2d4346d5d5dfe82addfe4b612452231b54c2eb950a249445c8e",
+      "last_updated": "2026-02-10T21:23:18.695119"
     },
     "docs__en__build-with-claude__context-editing.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/context-editing",
@@ -2373,8 +2373,8 @@
     "docs__en__build-with-claude__handling-stop-reasons.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons.md",
-      "hash": "998432382d9c86772ad6478c31c6470c53f305ca14c3f2680c2f52f9b39e77a9",
-      "last_updated": "2026-02-05T18:26:18.041002"
+      "hash": "6671ae21b548f32ca778776439bbc56c96d8b4b58dc66454b5af87fe15c8e7cf",
+      "last_updated": "2026-02-10T21:23:24.527724"
     },
     "docs__en__build-with-claude__multilingual-support.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/multilingual-support",
@@ -3261,8 +3261,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-02-10T18:33:43.406805",
-    "fetch_duration_seconds": 389.868286,
+    "last_fetch_completed": "2026-02-10T21:25:12.736616",
+    "fetch_duration_seconds": 379.705409,
     "total_pages_discovered": 601,
     "pages_fetched_successfully": 543,
     "pages_failed": 59,
@@ -3332,7 +3332,7 @@
     "total_files": 543,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-02-10T18:33:43.406829",
+  "last_updated": "2026-02-10T21:25:12.736637",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

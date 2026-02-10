@@ -184,7 +184,9 @@ if response.stop_reason == "tool_use":
 ```
 
 ### pause_turn
-Used with server tools like web search when Claude needs to pause a long-running operation.
+Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](/docs/en/agents-and-tools/tool-use/overview#server-tools) like web search or web fetch. The default limit is 10 iterations per request.
+
+When this happens, the response may contain a `server_tool_use` block without a corresponding `server_tool_result`. To let Claude finish processing, continue the conversation by sending the response back as-is.
 
 ```python
 response = client.messages.create(
@@ -195,7 +197,7 @@ response = client.messages.create(
 )
 
 if response.stop_reason == "pause_turn":
-    # Continue the conversation
+    # Continue the conversation by sending the response back
     messages = [
         {"role": "user", "content": original_query},
         {"role": "assistant", "content": response.content}
@@ -206,6 +208,10 @@ if response.stop_reason == "pause_turn":
         tools=[{"type": "web_search_20250305", "name": "web_search"}]
     )
 ```
+
+<Note>
+Your application should handle `pause_turn` in any agent loop that uses server tools. Simply add the assistant's response to your messages array and make another API request to let Claude continue.
+</Note>
 
 ### refusal
 Claude refused to generate a response due to safety concerns.
@@ -304,24 +310,38 @@ def handle_truncated_response(response):
 
 ### 3. Implement retry logic for pause_turn
 
-For server tools that may pause:
+When using [server tools](/docs/en/agents-and-tools/tool-use/overview#server-tools), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
 ```python
-def handle_paused_conversation(initial_response, max_retries=3):
-    response = initial_response
-    messages = [{"role": "user", "content": original_query}]
-    
-    for attempt in range(max_retries):
-        if response.stop_reason != "pause_turn":
-            break
-            
-        messages.append({"role": "assistant", "content": response.content})
+def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
+    """
+    Handle server tool conversations that may require multiple continuations.
+
+    The server runs a sampling loop when executing server tools. If the loop
+    reaches its iteration limit, the API returns pause_turn. Continue the
+    conversation by sending the response back to let Claude finish.
+    """
+    messages = [{"role": "user", "content": user_query}]
+
+    for _ in range(max_continuations):
         response = client.messages.create(
             model="claude-opus-4-6",
             messages=messages,
-            tools=original_tools
+            tools=tools
         )
-    
+
+        if response.stop_reason != "pause_turn":
+            # Claude finished processing - return the final response
+            return response
+
+        # pause_turn: add the assistant's response and continue
+        # pause_turn: replace the full message list to maintain alternating roles
+        messages = [
+            {"role": "user", "content": user_query},
+            {"role": "assistant", "content": response.content}
+        ]
+
+    # Reached max continuations - return the last response
     return response
 ```
 
