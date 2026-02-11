@@ -26,27 +26,26 @@ Generate similes from basic descriptions.
 import anthropic
 
 client = anthropic.Anthropic(
-  # defaults to os.environ.get("ANTHROPIC_API_KEY")
-  api_key="my_api_key",
+    # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=1000,
-  temperature=1,
-  messages=[
-    {
-      "role": "user",
-      "content": [
+    model="claude-opus-4-6",
+    max_tokens=1000,
+    temperature=1,
+    messages=[
         {
-          "type": "text",
-          "text": "Help me create some similes to describe a person's laughter that is joyful and contagious?"
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Help me create some similes to describe a person's laughter that is joyful and contagious?",
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -56,7 +55,7 @@ print(message.content)
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+  apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
 });
 
 const msg = await anthropic.messages.create({
@@ -65,11 +64,11 @@ const msg = await anthropic.messages.create({
   temperature: 1,
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Help me create some similes to describe a person's laughter that is joyful and contagious?"
+          type: "text",
+          text: "Help me create some similes to describe a person's laughter that is joyful and contagious?"
         }
       ]
     }
@@ -99,14 +98,13 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Help me create some similes to describe a person's laughter that is joyful and contagious?"
+                    "text": "Help me create some similes to describe a person's laughter that is joyful and contagious?",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -125,11 +123,11 @@ const msg = await client.messages.create({
   temperature: 1,
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Help me create some similes to describe a person's laughter that is joyful and contagious?"
+          type: "text",
+          text: "Help me create some similes to describe a person's laughter that is joyful and contagious?"
         }
       ]
     }
@@ -157,21 +155,20 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Help me create some similes to describe a person's laughter that is joyful and contagious?"
+                    "text": "Help me create some similes to describe a person's laughter that is joyful and contagious?",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
 <Tab title="Vertex AI TypeScript">
 
 ```typescript
-import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
+import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
 // Additionally goes through the standard `google-auth-library` flow.
@@ -183,11 +180,11 @@ const msg = await client.messages.create({
   temperature: 1,
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Help me create some similes to describe a person's laughter that is joyful and contagious?"
+          type: "text",
+          text: "Help me create some similes to describe a person's laughter that is joyful and contagious?"
         }
       ]
     }

@@ -41,7 +41,7 @@ Generate alliterative phrases and sentences for any given subject.
 <CodeGroup>
     ```python Python
     import anthropic
-    
+
     client = anthropic.Anthropic(
         # defaults to os.environ.get("ANTHROPIC_API_KEY")
         api_key="my_api_key",
@@ -51,30 +51,18 @@ Generate alliterative phrases and sentences for any given subject.
         max_tokens=1000,
         temperature=1,
         system="Your task is to create alliterative phrases and sentences for the given subject. Ensure that the alliterations not only sound pleasing but also convey relevant information or evoke appropriate emotions related to the subject.",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": "Ocean"
-                    }
-                ]
-            }
-        ]
+        messages=[{"role": "user", "content": [{"type": "text", "text": "Ocean"}]}],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript TypeScript
     import Anthropic from "@anthropic-ai/sdk";
-    
+
     const anthropic = new Anthropic({
-      apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+      apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
     });
-    
+
     const msg = await anthropic.messages.create({
       model: "claude-opus-4-6",
       max_tokens: 1000,
@@ -82,57 +70,44 @@ Generate alliterative phrases and sentences for any given subject.
       system: "Your task is to create alliterative phrases and sentences for the given subject. Ensure that the alliterations not only sound pleasing but also convey relevant information or evoke appropriate emotions related to the subject.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "Ocean"
+              type: "text",
+              text: "Ocean"
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
-    
-    
+
     ```python AWS Bedrock Python
     from anthropic import AnthropicBedrock
-    
+
     # See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
     # for authentication options
     client = AnthropicBedrock()
-    
+
     message = client.messages.create(
         model="anthropic.claude-opus-4-6-v1",
         max_tokens=1000,
         temperature=1,
         system="Your task is to create alliterative phrases and sentences for the given subject. Ensure that the alliterations not only sound pleasing but also convey relevant information or evoke appropriate emotions related to the subject.",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": "Ocean"
-                    }
-                ]
-            }
-        ]
+        messages=[{"role": "user", "content": [{"type": "text", "text": "Ocean"}]}],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript AWS Bedrock TypeScript
     import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
-    
+
     // See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
     // for authentication options
     const client = new AnthropicBedrock();
-    
+
     const msg = await client.messages.create({
       model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 1000,
@@ -140,55 +115,42 @@ Generate alliterative phrases and sentences for any given subject.
       system: "Your task is to create alliterative phrases and sentences for the given subject. Ensure that the alliterations not only sound pleasing but also convey relevant information or evoke appropriate emotions related to the subject.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "Ocean"
+              type: "text",
+              text: "Ocean"
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
-    
-    
+
     ```python Vertex AI Python
     from anthropic import AnthropicVertex
-    
+
     client = AnthropicVertex()
-    
+
     message = client.messages.create(
         model="claude-sonnet-4@20250514",
         max_tokens=1000,
         temperature=1,
         system="Your task is to create alliterative phrases and sentences for the given subject. Ensure that the alliterations not only sound pleasing but also convey relevant information or evoke appropriate emotions related to the subject.",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": "Ocean"
-                    }
-                ]
-            }
-        ]
+        messages=[{"role": "user", "content": [{"type": "text", "text": "Ocean"}]}],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript Vertex AI TypeScript
-    import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
-    
+    import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
+
     // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
     // Additionally goes through the standard `google-auth-library` flow.
     const client = new AnthropicVertex();
-    
+
     const msg = await client.messages.create({
       model: "claude-sonnet-4@20250514",
       max_tokens: 1000,
@@ -196,17 +158,17 @@ Generate alliterative phrases and sentences for any given subject.
       system: "Your task is to create alliterative phrases and sentences for the given subject. Ensure that the alliterations not only sound pleasing but also convey relevant information or evoke appropriate emotions related to the subject.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "Ocean"
+              type: "text",
+              text: "Ocean"
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
 </CodeGroup>

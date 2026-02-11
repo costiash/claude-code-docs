@@ -28,7 +28,7 @@ Text 2:
 3.  Emotional impact and engagement: The text conveys a positive emotion by stating "It made me happy," but it does not provide a strong emotional connection or engagement due to the lack of descriptive language and imagery.
 4.  Grammar and punctuation: The text appears to be grammatically correct and well-punctuated, with no obvious errors or issues.
 
-Comparative Analysis:  
+Comparative Analysis:
  Based on the evaluation, Text 1 performs significantly better than Text 2 in terms of descriptive language, imagery, sentence structure, variety, and emotional impact. Text 1 creates a vivid and immersive experience for the reader and demonstrates a higher quality of writing based on the given criteria, with its strong descriptive language, varied sentence structures, and effective emotional engagement. Text 2, while grammatically correct, lacks the descriptive richness and emotional impact present in Text 1.
 
 ---
@@ -60,8 +60,6 @@ message = client.messages.create(
     ],
 )
 print(message.content)
-
-
 ````
 </Tab>
 <Tab title="TypeScript">
@@ -70,7 +68,7 @@ print(message.content)
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+  apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
 });
 
 const msg = await anthropic.messages.create({
@@ -79,11 +77,11 @@ const msg = await anthropic.messages.create({
   temperature: 0,
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Evaluate the following two texts based on the given criteria:  \n  \nText 1:  \nThe sun was setting behind the mountains, casting a warm golden glow across the valley. The birds chirped their evening songs as the gentle breeze rustled through the leaves. It was a peaceful and serene moment, one that filled the heart with joy and contentment.  \n  \nText 2:  \nThe sunset was pretty. The birds were singing and the wind was blowing. It made me happy.  \n  \nCriteria:  \n1. Descriptive language and imagery  \n2. Sentence structure and variety  \n3. Emotional impact and engagement  \n4. Grammar and punctuation"
+          type: "text",
+          text: "Evaluate the following two texts based on the given criteria:  \n  \nText 1:  \nThe sun was setting behind the mountains, casting a warm golden glow across the valley. The birds chirped their evening songs as the gentle breeze rustled through the leaves. It was a peaceful and serene moment, one that filled the heart with joy and contentment.  \n  \nText 2:  \nThe sunset was pretty. The birds were singing and the wind was blowing. It made me happy.  \n  \nCriteria:  \n1. Descriptive language and imagery  \n2. Sentence structure and variety  \n3. Emotional impact and engagement  \n4. Grammar and punctuation"
         }
       ]
     }
@@ -113,14 +111,13 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Evaluate the following two texts based on the given criteria:  \n  \nText 1:  \nThe sun was setting behind the mountains, casting a warm golden glow across the valley. The birds chirped their evening songs as the gentle breeze rustled through the leaves. It was a peaceful and serene moment, one that filled the heart with joy and contentment.  \n  \nText 2:  \nThe sunset was pretty. The birds were singing and the wind was blowing. It made me happy.  \n  \nCriteria:  \n1. Descriptive language and imagery  \n2. Sentence structure and variety  \n3. Emotional impact and engagement  \n4. Grammar and punctuation"
+                    "text": "Evaluate the following two texts based on the given criteria:  \n  \nText 1:  \nThe sun was setting behind the mountains, casting a warm golden glow across the valley. The birds chirped their evening songs as the gentle breeze rustled through the leaves. It was a peaceful and serene moment, one that filled the heart with joy and contentment.  \n  \nText 2:  \nThe sunset was pretty. The birds were singing and the wind was blowing. It made me happy.  \n  \nCriteria:  \n1. Descriptive language and imagery  \n2. Sentence structure and variety  \n3. Emotional impact and engagement  \n4. Grammar and punctuation",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -139,11 +136,11 @@ const msg = await client.messages.create({
   temperature: 0,
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Evaluate the following two texts based on the given criteria:  \n  \nText 1:  \nThe sun was setting behind the mountains, casting a warm golden glow across the valley. The birds chirped their evening songs as the gentle breeze rustled through the leaves. It was a peaceful and serene moment, one that filled the heart with joy and contentment.  \n  \nText 2:  \nThe sunset was pretty. The birds were singing and the wind was blowing. It made me happy.  \n  \nCriteria:  \n1. Descriptive language and imagery  \n2. Sentence structure and variety  \n3. Emotional impact and engagement  \n4. Grammar and punctuation"
+          type: "text",
+          text: "Evaluate the following two texts based on the given criteria:  \n  \nText 1:  \nThe sun was setting behind the mountains, casting a warm golden glow across the valley. The birds chirped their evening songs as the gentle breeze rustled through the leaves. It was a peaceful and serene moment, one that filled the heart with joy and contentment.  \n  \nText 2:  \nThe sunset was pretty. The birds were singing and the wind was blowing. It made me happy.  \n  \nCriteria:  \n1. Descriptive language and imagery  \n2. Sentence structure and variety  \n3. Emotional impact and engagement  \n4. Grammar and punctuation"
         }
       ]
     }
@@ -171,21 +168,20 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Evaluate the following two texts based on the given criteria:  \n  \nText 1:  \nThe sun was setting behind the mountains, casting a warm golden glow across the valley. The birds chirped their evening songs as the gentle breeze rustled through the leaves. It was a peaceful and serene moment, one that filled the heart with joy and contentment.  \n  \nText 2:  \nThe sunset was pretty. The birds were singing and the wind was blowing. It made me happy.  \n  \nCriteria:  \n1. Descriptive language and imagery  \n2. Sentence structure and variety  \n3. Emotional impact and engagement  \n4. Grammar and punctuation"
+                    "text": "Evaluate the following two texts based on the given criteria:  \n  \nText 1:  \nThe sun was setting behind the mountains, casting a warm golden glow across the valley. The birds chirped their evening songs as the gentle breeze rustled through the leaves. It was a peaceful and serene moment, one that filled the heart with joy and contentment.  \n  \nText 2:  \nThe sunset was pretty. The birds were singing and the wind was blowing. It made me happy.  \n  \nCriteria:  \n1. Descriptive language and imagery  \n2. Sentence structure and variety  \n3. Emotional impact and engagement  \n4. Grammar and punctuation",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
 <Tab title="Vertex AI TypeScript">
 
 ```typescript
-import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
+import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
 // Additionally goes through the standard `google-auth-library` flow.
@@ -197,11 +193,11 @@ const msg = await client.messages.create({
   temperature: 0,
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Evaluate the following two texts based on the given criteria:  \n  \nText 1:  \nThe sun was setting behind the mountains, casting a warm golden glow across the valley. The birds chirped their evening songs as the gentle breeze rustled through the leaves. It was a peaceful and serene moment, one that filled the heart with joy and contentment.  \n  \nText 2:  \nThe sunset was pretty. The birds were singing and the wind was blowing. It made me happy.  \n  \nCriteria:  \n1. Descriptive language and imagery  \n2. Sentence structure and variety  \n3. Emotional impact and engagement  \n4. Grammar and punctuation"
+          type: "text",
+          text: "Evaluate the following two texts based on the given criteria:  \n  \nText 1:  \nThe sun was setting behind the mountains, casting a warm golden glow across the valley. The birds chirped their evening songs as the gentle breeze rustled through the leaves. It was a peaceful and serene moment, one that filled the heart with joy and contentment.  \n  \nText 2:  \nThe sunset was pretty. The birds were singing and the wind was blowing. It made me happy.  \n  \nCriteria:  \n1. Descriptive language and imagery  \n2. Sentence structure and variety  \n3. Emotional impact and engagement  \n4. Grammar and punctuation"
         }
       ]
     }

@@ -63,7 +63,7 @@ Craft in depth lesson plans on any subject.
 <CodeGroup>
     ```python Python
     import anthropic
-    
+
     client = anthropic.Anthropic(
         # defaults to os.environ.get("ANTHROPIC_API_KEY")
         api_key="my_api_key",
@@ -79,24 +79,22 @@ Craft in depth lesson plans on any subject.
                 "content": [
                     {
                         "type": "text",
-                        "text": "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)"
+                        "text": "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript TypeScript
     import Anthropic from "@anthropic-ai/sdk";
-    
+
     const anthropic = new Anthropic({
-      apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+      apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
     });
-    
+
     const msg = await anthropic.messages.create({
       model: "claude-opus-4-6",
       max_tokens: 4000,
@@ -104,28 +102,27 @@ Craft in depth lesson plans on any subject.
       system: "Your task is to create a comprehensive, engaging, and well-structured lesson plan on the given subject. The lesson plan should be designed for a 60-minute class session and should cater to a specific grade level or age group. Begin by stating the lesson objectives, which should be clear, measurable, and aligned with relevant educational standards. Next, provide a detailed outline of the lesson, breaking it down into an introduction, main activities, and a conclusion. For each section, describe the teaching methods, learning activities, and resources you will use to effectively convey the content and engage the students. Finally, describe the assessment methods you will employ to evaluate students' understanding and mastery of the lesson objectives. The lesson plan should be well-organized, easy to follow, and promote active learning and critical thinking.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)"
+              type: "text",
+              text: "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)"
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
-    
-    
+
     ```python AWS Bedrock Python
     from anthropic import AnthropicBedrock
-    
+
     # See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
     # for authentication options
     client = AnthropicBedrock()
-    
+
     message = client.messages.create(
         model="anthropic.claude-opus-4-6-v1",
         max_tokens=4000,
@@ -137,24 +134,22 @@ Craft in depth lesson plans on any subject.
                 "content": [
                     {
                         "type": "text",
-                        "text": "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)"
+                        "text": "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript AWS Bedrock TypeScript
     import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
-    
+
     // See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
     // for authentication options
     const client = new AnthropicBedrock();
-    
+
     const msg = await client.messages.create({
       model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 4000,
@@ -162,26 +157,25 @@ Craft in depth lesson plans on any subject.
       system: "Your task is to create a comprehensive, engaging, and well-structured lesson plan on the given subject. The lesson plan should be designed for a 60-minute class session and should cater to a specific grade level or age group. Begin by stating the lesson objectives, which should be clear, measurable, and aligned with relevant educational standards. Next, provide a detailed outline of the lesson, breaking it down into an introduction, main activities, and a conclusion. For each section, describe the teaching methods, learning activities, and resources you will use to effectively convey the content and engage the students. Finally, describe the assessment methods you will employ to evaluate students' understanding and mastery of the lesson objectives. The lesson plan should be well-organized, easy to follow, and promote active learning and critical thinking.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)"
+              type: "text",
+              text: "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)"
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
-    
-    
+
     ```python Vertex AI Python
     from anthropic import AnthropicVertex
-    
+
     client = AnthropicVertex()
-    
+
     message = client.messages.create(
         model="claude-sonnet-4@20250514",
         max_tokens=4000,
@@ -193,24 +187,22 @@ Craft in depth lesson plans on any subject.
                 "content": [
                     {
                         "type": "text",
-                        "text": "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)"
+                        "text": "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript Vertex AI TypeScript
-    import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
-    
+    import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
+
     // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
     // Additionally goes through the standard `google-auth-library` flow.
     const client = new AnthropicVertex();
-    
+
     const msg = await client.messages.create({
       model: "claude-sonnet-4@20250514",
       max_tokens: 4000,
@@ -218,17 +210,17 @@ Craft in depth lesson plans on any subject.
       system: "Your task is to create a comprehensive, engaging, and well-structured lesson plan on the given subject. The lesson plan should be designed for a 60-minute class session and should cater to a specific grade level or age group. Begin by stating the lesson objectives, which should be clear, measurable, and aligned with relevant educational standards. Next, provide a detailed outline of the lesson, breaking it down into an introduction, main activities, and a conclusion. For each section, describe the teaching methods, learning activities, and resources you will use to effectively convey the content and engage the students. Finally, describe the assessment methods you will employ to evaluate students' understanding and mastery of the lesson objectives. The lesson plan should be well-organized, easy to follow, and promote active learning and critical thinking.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)"
+              type: "text",
+              text: "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)"
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
 </CodeGroup>

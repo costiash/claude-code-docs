@@ -46,10 +46,9 @@ response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     inference_geo="us",
-    messages=[{
-        "role": "user",
-        "content": "Summarize the key points of this document."
-    }]
+    messages=[
+        {"role": "user", "content": "Summarize the key points of this document."}
+    ],
 )
 
 print(response.content[0].text)
@@ -58,7 +57,7 @@ print(f"Inference geo: {response.usage.inference_geo}")
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 

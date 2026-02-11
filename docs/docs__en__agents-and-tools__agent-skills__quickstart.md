@@ -36,24 +36,21 @@ import anthropic
 client = anthropic.Anthropic()
 
 # List Anthropic-managed Skills
-skills = client.beta.skills.list(
-    source="anthropic",
-    betas=["skills-2025-10-02"]
-)
+skills = client.beta.skills.list(source="anthropic", betas=["skills-2025-10-02"])
 
 for skill in skills.data:
     print(f"{skill.id}: {skill.display_title}")
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
 // List Anthropic-managed Skills
 const skills = await client.beta.skills.list({
-  source: 'anthropic',
-  betas: ['skills-2025-10-02']
+  source: "anthropic",
+  betas: ["skills-2025-10-02"]
 });
 
 for (const skill of skills.data) {
@@ -89,53 +86,46 @@ response = client.beta.messages.create(
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "pptx",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Create a presentation about renewable energy with 5 slides"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a presentation about renewable energy with 5 slides",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
 print(response.content)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
 // Create a message with the PowerPoint Skill
 const response = await client.beta.messages.create({
-  model: 'claude-opus-4-6',
+  model: "claude-opus-4-6",
   max_tokens: 4096,
-  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
   container: {
     skills: [
       {
-        type: 'anthropic',
-        skill_id: 'pptx',
-        version: 'latest'
+        type: "anthropic",
+        skill_id: "pptx",
+        version: "latest"
       }
     ]
   },
   messages: [{
-    role: 'user',
-    content: 'Create a presentation about renewable energy with 5 slides'
+    role: "user",
+    content: "Create a presentation about renewable energy with 5 slides"
   }],
   tools: [{
-    type: 'code_execution_20250825',
-    name: 'code_execution'
+    type: "code_execution_20250825",
+    name: "code_execution"
   }]
 });
 
@@ -192,18 +182,17 @@ The presentation was created in the code execution container and saved as a file
 # Extract file ID from response
 file_id = None
 for block in response.content:
-    if block.type == 'tool_use' and block.name == 'code_execution':
+    if block.type == "tool_use" and block.name == "code_execution":
         # File ID is in the tool result
         for result_block in block.content:
-            if hasattr(result_block, 'file_id'):
+            if hasattr(result_block, "file_id"):
                 file_id = result_block.file_id
                 break
 
 if file_id:
     # Download the file
     file_content = client.beta.files.download(
-        file_id=file_id,
-        betas=["files-api-2025-04-14"]
+        file_id=file_id, betas=["files-api-2025-04-14"]
     )
 
     # Save to disk
@@ -217,10 +206,10 @@ if file_id:
 // Extract file ID from response
 let fileId: string | null = null;
 for (const block of response.content) {
-  if (block.type === 'tool_use' && block.name === 'code_execution') {
+  if (block.type === "tool_use" && block.name === "code_execution") {
     // File ID is in the tool result
     for (const resultBlock of block.content) {
-      if ('file_id' in resultBlock) {
+      if ("file_id" in resultBlock) {
         fileId = resultBlock.file_id;
         break;
       }
@@ -231,14 +220,14 @@ for (const block of response.content) {
 if (fileId) {
   // Download the file
   const fileContent = await client.beta.files.download(fileId, {
-    betas: ['files-api-2025-04-14']
+    betas: ["files-api-2025-04-14"]
   });
 
   // Save to disk
-  const fs = require('fs');
-  fs.writeFileSync('renewable_energy.pptx', Buffer.from(await fileContent.arrayBuffer()));
+  const fs = require("fs/promises");
+  await fs.writeFile("renewable_energy.pptx", Buffer.from(await fileContent.arrayBuffer()));
 
-  console.log('Presentation saved to renewable_energy.pptx');
+  console.log("Presentation saved to renewable_energy.pptx");
 }
 ```
 
@@ -274,46 +263,39 @@ response = client.beta.messages.create(
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "xlsx",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Create a quarterly sales tracking spreadsheet with sample data"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a quarterly sales tracking spreadsheet with sample data",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 ```
 
 ```typescript TypeScript
 const response = await client.beta.messages.create({
-  model: 'claude-opus-4-6',
+  model: "claude-opus-4-6",
   max_tokens: 4096,
-  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
   container: {
     skills: [
       {
-        type: 'anthropic',
-        skill_id: 'xlsx',
-        version: 'latest'
+        type: "anthropic",
+        skill_id: "xlsx",
+        version: "latest"
       }
     ]
   },
   messages: [{
-    role: 'user',
-    content: 'Create a quarterly sales tracking spreadsheet with sample data'
+    role: "user",
+    content: "Create a quarterly sales tracking spreadsheet with sample data"
   }],
   tools: [{
-    type: 'code_execution_20250825',
-    name: 'code_execution'
+    type: "code_execution_20250825",
+    name: "code_execution"
   }]
 });
 ```
@@ -357,46 +339,39 @@ response = client.beta.messages.create(
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "docx",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Write a 2-page report on the benefits of renewable energy"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Write a 2-page report on the benefits of renewable energy",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 ```
 
 ```typescript TypeScript
 const response = await client.beta.messages.create({
-  model: 'claude-opus-4-6',
+  model: "claude-opus-4-6",
   max_tokens: 4096,
-  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
   container: {
     skills: [
       {
-        type: 'anthropic',
-        skill_id: 'docx',
-        version: 'latest'
+        type: "anthropic",
+        skill_id: "docx",
+        version: "latest"
       }
     ]
   },
   messages: [{
-    role: 'user',
-    content: 'Write a 2-page report on the benefits of renewable energy'
+    role: "user",
+    content: "Write a 2-page report on the benefits of renewable energy"
   }],
   tools: [{
-    type: 'code_execution_20250825',
-    name: 'code_execution'
+    type: "code_execution_20250825",
+    name: "code_execution"
   }]
 });
 ```
@@ -440,46 +415,34 @@ response = client.beta.messages.create(
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "pdf",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Generate a PDF invoice template"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[{"role": "user", "content": "Generate a PDF invoice template"}],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 ```
 
 ```typescript TypeScript
 const response = await client.beta.messages.create({
-  model: 'claude-opus-4-6',
+  model: "claude-opus-4-6",
   max_tokens: 4096,
-  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
   container: {
     skills: [
       {
-        type: 'anthropic',
-        skill_id: 'pdf',
-        version: 'latest'
+        type: "anthropic",
+        skill_id: "pdf",
+        version: "latest"
       }
     ]
   },
   messages: [{
-    role: 'user',
-    content: 'Generate a PDF invoice template'
+    role: "user",
+    content: "Generate a PDF invoice template"
   }],
   tools: [{
-    type: 'code_execution_20250825',
-    name: 'code_execution'
+    type: "code_execution_20250825",
+    name: "code_execution"
   }]
 });
 ```

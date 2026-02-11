@@ -57,8 +57,6 @@ message = client.messages.create(
     ],
 )
 print(message.content)
-
-
 ````
 </Tab>
 
@@ -68,7 +66,7 @@ print(message.content)
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+  apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
 });
 
 const msg = await anthropic.messages.create({
@@ -78,11 +76,11 @@ const msg = await anthropic.messages.create({
   system: "You are an AI assistant with a deep understanding of dream interpretation and symbolism. Your task is to provide users with insightful and meaningful analyses of the symbols, emotions, and narratives present in their dreams. Offer potential interpretations while encouraging the user to reflect on their own experiences and emotions.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "I had a dream last night that I was walking through a dense forest. The trees were tall and dark, and I could hear strange whispers coming from the shadows. Suddenly, I stumbled upon a clearing where I found a majestic white stag standing in the center. As I approached the stag, it transformed into a wise old man who handed me a golden key. Then I woke up. What could this dream mean?"
+          type: "text",
+          text: "I had a dream last night that I was walking through a dense forest. The trees were tall and dark, and I could hear strange whispers coming from the shadows. Suddenly, I stumbled upon a clearing where I found a majestic white stag standing in the center. As I approached the stag, it transformed into a wise old man who handed me a golden key. Then I woke up. What could this dream mean?"
         }
       ]
     }
@@ -114,14 +112,13 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "I had a dream last night that I was walking through a dense forest. The trees were tall and dark, and I could hear strange whispers coming from the shadows. Suddenly, I stumbled upon a clearing where I found a majestic white stag standing in the center. As I approached the stag, it transformed into a wise old man who handed me a golden key. Then I woke up. What could this dream mean?"
+                    "text": "I had a dream last night that I was walking through a dense forest. The trees were tall and dark, and I could hear strange whispers coming from the shadows. Suddenly, I stumbled upon a clearing where I found a majestic white stag standing in the center. As I approached the stag, it transformed into a wise old man who handed me a golden key. Then I woke up. What could this dream mean?",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -142,11 +139,11 @@ const msg = await client.messages.create({
   system: "You are an AI assistant with a deep understanding of dream interpretation and symbolism. Your task is to provide users with insightful and meaningful analyses of the symbols, emotions, and narratives present in their dreams. Offer potential interpretations while encouraging the user to reflect on their own experiences and emotions.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "I had a dream last night that I was walking through a dense forest. The trees were tall and dark, and I could hear strange whispers coming from the shadows. Suddenly, I stumbled upon a clearing where I found a majestic white stag standing in the center. As I approached the stag, it transformed into a wise old man who handed me a golden key. Then I woke up. What could this dream mean?"
+          type: "text",
+          text: "I had a dream last night that I was walking through a dense forest. The trees were tall and dark, and I could hear strange whispers coming from the shadows. Suddenly, I stumbled upon a clearing where I found a majestic white stag standing in the center. As I approached the stag, it transformed into a wise old man who handed me a golden key. Then I woke up. What could this dream mean?"
         }
       ]
     }
@@ -176,14 +173,13 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "I had a dream last night that I was walking through a dense forest. The trees were tall and dark, and I could hear strange whispers coming from the shadows. Suddenly, I stumbled upon a clearing where I found a majestic white stag standing in the center. As I approached the stag, it transformed into a wise old man who handed me a golden key. Then I woke up. What could this dream mean?"
+                    "text": "I had a dream last night that I was walking through a dense forest. The trees were tall and dark, and I could hear strange whispers coming from the shadows. Suddenly, I stumbled upon a clearing where I found a majestic white stag standing in the center. As I approached the stag, it transformed into a wise old man who handed me a golden key. Then I woke up. What could this dream mean?",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -191,7 +187,7 @@ print(message.content)
 <Tab title="Vertex AI TypeScript">
 
 ```typescript
-import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
+import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
 // Additionally goes through the standard `google-auth-library` flow.
@@ -204,11 +200,11 @@ const msg = await client.messages.create({
   system: "You are an AI assistant with a deep understanding of dream interpretation and symbolism. Your task is to provide users with insightful and meaningful analyses of the symbols, emotions, and narratives present in their dreams. Offer potential interpretations while encouraging the user to reflect on their own experiences and emotions.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "I had a dream last night that I was walking through a dense forest. The trees were tall and dark, and I could hear strange whispers coming from the shadows. Suddenly, I stumbled upon a clearing where I found a majestic white stag standing in the center. As I approached the stag, it transformed into a wise old man who handed me a golden key. Then I woke up. What could this dream mean?"
+          type: "text",
+          text: "I had a dream last night that I was walking through a dense forest. The trees were tall and dark, and I could hear strange whispers coming from the shadows. Suddenly, I stumbled upon a clearing where I found a majestic white stag standing in the center. As I approached the stag, it transformed into a wise old man who handed me a golden key. Then I woke up. What could this dream mean?"
         }
       ]
     }

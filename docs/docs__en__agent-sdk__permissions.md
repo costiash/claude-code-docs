@@ -70,6 +70,7 @@ You can set the permission mode once when starting a query, or change it dynamic
     import asyncio
     from claude_agent_sdk import query, ClaudeAgentOptions
 
+
     async def main():
         async for message in query(
             prompt="Help me refactor this code",
@@ -79,6 +80,7 @@ You can set the permission mode once when starting a query, or change it dynamic
         ):
             if hasattr(message, "result"):
                 print(message.result)
+
 
     asyncio.run(main())
     ```
@@ -90,8 +92,8 @@ You can set the permission mode once when starting a query, or change it dynamic
       for await (const message of query({
         prompt: "Help me refactor this code",
         options: {
-          permissionMode: "default",  // Set the mode here
-        },
+          permissionMode: "default" // Set the mode here
+        }
       })) {
         if ("result" in message) {
           console.log(message.result);
@@ -113,6 +115,7 @@ You can set the permission mode once when starting a query, or change it dynamic
     import asyncio
     from claude_agent_sdk import query, ClaudeAgentOptions
 
+
     async def main():
         q = query(
             prompt="Help me refactor this code",
@@ -129,6 +132,7 @@ You can set the permission mode once when starting a query, or change it dynamic
             if hasattr(message, "result"):
                 print(message.result)
 
+
     asyncio.run(main())
     ```
 
@@ -139,8 +143,8 @@ You can set the permission mode once when starting a query, or change it dynamic
       const q = query({
         prompt: "Help me refactor this code",
         options: {
-          permissionMode: "default",  // Start in default mode
-        },
+          permissionMode: "default" // Start in default mode
+        }
       });
 
       // Change mode dynamically mid-session

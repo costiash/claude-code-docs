@@ -97,7 +97,7 @@ Here's what counts towards ITPM:
 <Note>
 The `input_tokens` field only represents tokens that appear **after your last cache breakpoint**, not all input tokens in your request. To calculate total input tokens:
 
-```
+```text
 total_input_tokens = cache_read_input_tokens + cache_creation_input_tokens + input_tokens
 ```
 
@@ -123,7 +123,7 @@ To get the most out of your rate limits, use [prompt caching](/docs/en/build-wit
 - Tool definitions
 - Conversation history
 
-With effective caching, you can dramatically increase your actual throughput without increasing your rate limits. Monitor your cache hit rate on the [Usage page](/settings/usage) to optimize your caching strategy.
+With effective caching, you can dramatically increase your actual throughput without increasing your rate limits. Monitor your cache hit rate on the [Usage page](/usage) to optimize your caching strategy.
 </Tip>
 
 OTPM rate limits are estimated based on `max_tokens` at the beginning of each request, and the estimate is adjusted at the end of the request to reflect the actual number of output tokens used.
@@ -257,7 +257,7 @@ To get the most out of the 1M token context window with rate limits, use [prompt
 
 ### Monitoring your rate limits in the Console
 
-You can monitor your rate limit usage on the [Usage](/settings/usage) page of the [Claude Console](/). 
+You can monitor your rate limit usage on the [Usage](/usage) page of the [Claude Console](/).
 
 In addition to providing token and request charts, the Usage page provides two separate rate limit charts. Use these charts to see what headroom you have to grow, when you may be hitting peak use, better undersand what rate limits to request, or how you can improve your caching rates. The charts visualize a number of metrics for a given rate limit (e.g. per model):
 

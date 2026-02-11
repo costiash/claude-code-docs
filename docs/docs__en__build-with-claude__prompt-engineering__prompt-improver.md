@@ -74,7 +74,7 @@ Here's how the prompt improver enhances a basic classification prompt:
 
 <section title="Original prompt">
 
-```
+```text
 From the following list of Wikipedia article titles, identify which article this sentence came from.
 Respond with just the article title and nothing else.
 
@@ -89,7 +89,7 @@ Sentence to classify:
 
 <section title="Improved prompt">
 
-```
+```text
 You are an intelligent text classification system specialized in matching sentences to Wikipedia article titles. Your task is to identify which Wikipedia article a given sentence most likely belongs to, based on a provided list of article titles.
 
 First, review the following list of Wikipedia article titles:

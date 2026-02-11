@@ -54,17 +54,16 @@ response = client.beta.messages.create(
     max_tokens=4096,
     speed="fast",
     betas=["fast-mode-2026-02-01"],
-    messages=[{
-        "role": "user",
-        "content": "Refactor this module to use dependency injection"
-    }]
+    messages=[
+        {"role": "user", "content": "Refactor this module to use dependency injection"}
+    ],
 )
 
 print(response.content[0].text)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
@@ -86,7 +85,7 @@ console.log(response.content[0].text);
 
 ## Pricing
 
-Fast mode is priced at 6x standard Opus rates for prompts <= 200K tokens, and 12x standard Opus rates for prompts > 200K tokens. The following table shows pricing for Claude Opus 4.6 with fast mode:
+Fast mode is priced at 6x standard Opus rates for prompts ≤200K tokens, and 12x standard Opus rates for prompts > 200K tokens. The following table shows pricing for Claude Opus 4.6 with fast mode:
 
 | Context window | Input | Output |
 |:---------------|:------|:-------|
@@ -154,7 +153,7 @@ response = client.beta.messages.create(
     max_tokens=1024,
     speed="fast",
     betas=["fast-mode-2026-02-01"],
-    messages=[{"role": "user", "content": "Hello"}]
+    messages=[{"role": "user", "content": "Hello"}],
 )
 
 print(response.usage.speed)  # "fast" or "standard"
@@ -169,7 +168,7 @@ const response = await client.beta.messages.create({
   messages: [{ role: "user", content: "Hello" }]
 });
 
-console.log(response.usage.speed);  // "fast" or "standard"
+console.log(response.usage.speed); // "fast" or "standard"
 ```
 
 ```ruby Ruby
@@ -209,6 +208,7 @@ import anthropic
 
 client = anthropic.Anthropic()
 
+
 def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params):
     try:
         return client.beta.messages.create(**params, max_retries=max_retries)
@@ -217,10 +217,17 @@ def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params
             del params["speed"]
             return create_message_with_fast_fallback(**params)
         raise
-    except (anthropic.InternalServerError, anthropic.OverloadedError, anthropic.APIConnectionError):
+    except (
+        anthropic.InternalServerError,
+        anthropic.OverloadedError,
+        anthropic.APIConnectionError,
+    ):
         if max_attempts > 1:
-            return create_message_with_fast_fallback(max_attempts=max_attempts - 1, **params)
+            return create_message_with_fast_fallback(
+                max_attempts=max_attempts - 1, **params
+            )
         raise
+
 
 message = create_message_with_fast_fallback(
     model="claude-opus-4-6",
@@ -233,14 +240,14 @@ message = create_message_with_fast_fallback(
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
 async function createMessageWithFastFallback(
   params: Anthropic.Beta.MessageCreateParams,
   requestOptions?: Anthropic.RequestOptions,
-  maxAttempts: number = 3,
+  maxAttempts: number = 3
 ): Promise<Anthropic.Beta.Message> {
   try {
     return await client.beta.messages.create(params, requestOptions);
@@ -267,9 +274,9 @@ const message = await createMessageWithFastFallback(
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello" }],
     betas: ["fast-mode-2026-02-01"],
-    speed: "fast",
+    speed: "fast"
   },
-  { maxRetries: 0 },
+  { maxRetries: 0 }
 );
 ```
 

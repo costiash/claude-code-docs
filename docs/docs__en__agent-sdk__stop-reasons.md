@@ -20,12 +20,14 @@ The `stop_reason` field is present on both success and error result messages. Ch
 from claude_agent_sdk import query, ResultMessage
 import asyncio
 
+
 async def check_stop_reason():
     async for message in query(prompt="Write a poem about the ocean"):
         if isinstance(message, ResultMessage):
             print(f"Stop reason: {message.stop_reason}")
             if message.stop_reason == "refusal":
                 print("The model declined this request.")
+
 
 asyncio.run(check_stop_reason())
 ```
@@ -34,7 +36,7 @@ asyncio.run(check_stop_reason())
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 for await (const message of query({
-  prompt: "Write a poem about the ocean",
+  prompt: "Write a poem about the ocean"
 })) {
   if (message.type === "result") {
     console.log("Stop reason:", message.stop_reason);
@@ -76,6 +78,7 @@ Error results (such as `error_max_turns` or `error_during_execution`) also carry
 from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
 import asyncio
 
+
 async def handle_max_turns():
     options = ClaudeAgentOptions(max_turns=3)
 
@@ -86,6 +89,7 @@ async def handle_max_turns():
                 # stop_reason might be "end_turn" or "tool_use"
                 # depending on what the model was doing when the limit hit
 
+
 asyncio.run(handle_max_turns())
 ```
 
@@ -94,7 +98,7 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
 
 for await (const message of query({
   prompt: "Refactor this module",
-  options: { maxTurns: 3 },
+  options: { maxTurns: 3 }
 })) {
   if (message.type === "result" && message.subtype === "error_max_turns") {
     console.log("Hit turn limit. Last stop reason:", message.stop_reason);
@@ -116,6 +120,7 @@ for await (const message of query({
 from claude_agent_sdk import query, ResultMessage
 import asyncio
 
+
 async def safe_query(prompt: str):
     async for message in query(prompt=prompt):
         if isinstance(message, ResultMessage):
@@ -124,6 +129,7 @@ async def safe_query(prompt: str):
                 return None
             return message.result
     return None
+
 
 asyncio.run(safe_query("Summarize this article"))
 ```

@@ -53,7 +53,7 @@ Craft a design brief for a holistic brand identity.
 <CodeGroup>
     ```python Python
     import anthropic
-    
+
     client = anthropic.Anthropic(
         # defaults to os.environ.get("ANTHROPIC_API_KEY")
         api_key="my_api_key",
@@ -69,24 +69,22 @@ Craft a design brief for a holistic brand identity.
                 "content": [
                     {
                         "type": "text",
-                        "text": "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices."
+                        "text": "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices.",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript TypeScript
     import Anthropic from "@anthropic-ai/sdk";
-    
+
     const anthropic = new Anthropic({
-      apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+      apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
     });
-    
+
     const msg = await anthropic.messages.create({
       model: "claude-opus-4-6",
       max_tokens: 2000,
@@ -94,28 +92,27 @@ Craft a design brief for a holistic brand identity.
       system: "Your task is to create a comprehensive design brief for a holistic brand identity based on the given specifications. The brand identity should encompass various elements such as suggestions for the brand name, logo, color palette, typography, visual style, tone of voice, and overall brand personality. Ensure that all elements work together harmoniously to create a cohesive and memorable brand experience that effectively communicates the brand's values, mission, and unique selling proposition to its target audience. Be detailed and comprehensive and provide enough specific details for someone to create a truly unique brand identity.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices."
+              type: "text",
+              text: "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices."
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
-    
-    
+
     ```python AWS Bedrock Python
     from anthropic import AnthropicBedrock
-    
+
     # See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
     # for authentication options
     client = AnthropicBedrock()
-    
+
     message = client.messages.create(
         model="anthropic.claude-opus-4-6-v1",
         max_tokens=2000,
@@ -127,24 +124,22 @@ Craft a design brief for a holistic brand identity.
                 "content": [
                     {
                         "type": "text",
-                        "text": "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices."
+                        "text": "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices.",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript AWS Bedrock TypeScript
     import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
-    
+
     // See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
     // for authentication options
     const client = new AnthropicBedrock();
-    
+
     const msg = await client.messages.create({
       model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 2000,
@@ -152,25 +147,25 @@ Craft a design brief for a holistic brand identity.
       system: "Your task is to create a comprehensive design brief for a holistic brand identity based on the given specifications. The brand identity should encompass various elements such as suggestions for the brand name, logo, color palette, typography, visual style, tone of voice, and overall brand personality. Ensure that all elements work together harmoniously to create a cohesive and memorable brand experience that effectively communicates the brand's values, mission, and unique selling proposition to its target audience. Be detailed and comprehensive and provide enough specific details for someone to create a truly unique brand identity.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices."
+              type: "text",
+              text: "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices."
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
-  
+
     ```python Vertex AI Python
     from anthropic import AnthropicVertex
-    
+
     client = AnthropicVertex()
-    
+
     message = client.messages.create(
         model="claude-sonnet-4@20250514",
         max_tokens=2000,
@@ -182,23 +177,22 @@ Craft a design brief for a holistic brand identity.
                 "content": [
                     {
                         "type": "text",
-                        "text": "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices."
+                        "text": "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices.",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
     ```
-    
-    
+
     ```typescript Vertex AI TypeScript
-    import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
-    
+    import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
+
     // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
     // Additionally goes through the standard `google-auth-library` flow.
     const client = new AnthropicVertex();
-    
+
     const msg = await client.messages.create({
       model: "claude-sonnet-4@20250514",
       max_tokens: 2000,
@@ -206,17 +200,17 @@ Craft a design brief for a holistic brand identity.
       system: "Your task is to create a comprehensive design brief for a holistic brand identity based on the given specifications. The brand identity should encompass various elements such as suggestions for the brand name, logo, color palette, typography, visual style, tone of voice, and overall brand personality. Ensure that all elements work together harmoniously to create a cohesive and memorable brand experience that effectively communicates the brand's values, mission, and unique selling proposition to its target audience. Be detailed and comprehensive and provide enough specific details for someone to create a truly unique brand identity.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices."
+              type: "text",
+              text: "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices."
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
 </CodeGroup>

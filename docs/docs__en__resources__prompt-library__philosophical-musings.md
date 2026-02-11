@@ -34,7 +34,7 @@ Engage in deep philosophical discussions and thought experiments.
 <CodeGroup>
     ```python Python
     import anthropic
-    
+
     client = anthropic.Anthropic(
         # defaults to os.environ.get("ANTHROPIC_API_KEY")
         api_key="my_api_key",
@@ -50,24 +50,22 @@ Engage in deep philosophical discussions and thought experiments.
                 "content": [
                     {
                         "type": "text",
-                        "text": "The trolley problem and the ethics of utilitarianism"
+                        "text": "The trolley problem and the ethics of utilitarianism",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript TypeScript
     import Anthropic from "@anthropic-ai/sdk";
-    
+
     const anthropic = new Anthropic({
-      apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+      apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
     });
-    
+
     const msg = await anthropic.messages.create({
       model: "claude-opus-4-6",
       max_tokens: 2000,
@@ -75,28 +73,27 @@ Engage in deep philosophical discussions and thought experiments.
       system: "Your task is to discuss a philosophical concept or thought experiment on the given topic. Briefly explain the concept, present the main arguments and implications, and encourage critical thinking by posing open-ended questions. Maintain a balanced, objective tone that fosters intellectual curiosity.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "The trolley problem and the ethics of utilitarianism"
+              type: "text",
+              text: "The trolley problem and the ethics of utilitarianism"
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
-    
-    
+
     ```python AWS Bedrock Python
     from anthropic import AnthropicBedrock
-    
+
     # See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
     # for authentication options
     client = AnthropicBedrock()
-    
+
     message = client.messages.create(
         model="anthropic.claude-opus-4-6-v1",
         max_tokens=2000,
@@ -108,24 +105,22 @@ Engage in deep philosophical discussions and thought experiments.
                 "content": [
                     {
                         "type": "text",
-                        "text": "The trolley problem and the ethics of utilitarianism"
+                        "text": "The trolley problem and the ethics of utilitarianism",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript AWS Bedrock TypeScript
     import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
-    
+
     // See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
     // for authentication options
     const client = new AnthropicBedrock();
-    
+
     const msg = await client.messages.create({
       model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 2000,
@@ -133,26 +128,25 @@ Engage in deep philosophical discussions and thought experiments.
       system: "Your task is to discuss a philosophical concept or thought experiment on the given topic. Briefly explain the concept, present the main arguments and implications, and encourage critical thinking by posing open-ended questions. Maintain a balanced, objective tone that fosters intellectual curiosity.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "The trolley problem and the ethics of utilitarianism"
+              type: "text",
+              text: "The trolley problem and the ethics of utilitarianism"
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
-    
-    
+
     ```python Vertex AI Python
     from anthropic import AnthropicVertex
-    
+
     client = AnthropicVertex()
-    
+
     message = client.messages.create(
         model="claude-sonnet-4@20250514",
         max_tokens=2000,
@@ -164,24 +158,22 @@ Engage in deep philosophical discussions and thought experiments.
                 "content": [
                     {
                         "type": "text",
-                        "text": "The trolley problem and the ethics of utilitarianism"
+                        "text": "The trolley problem and the ethics of utilitarianism",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript Vertex AI TypeScript
-    import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
-    
+    import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
+
     // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
     // Additionally goes through the standard `google-auth-library` flow.
     const client = new AnthropicVertex();
-    
+
     const msg = await client.messages.create({
       model: "claude-sonnet-4@20250514",
       max_tokens: 2000,
@@ -189,17 +181,17 @@ Engage in deep philosophical discussions and thought experiments.
       system: "Your task is to discuss a philosophical concept or thought experiment on the given topic. Briefly explain the concept, present the main arguments and implications, and encourage critical thinking by posing open-ended questions. Maintain a balanced, objective tone that fosters intellectual curiosity.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "The trolley problem and the ethics of utilitarianism"
+              type: "text",
+              text: "The trolley problem and the ethics of utilitarianism"
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
 </CodeGroup>

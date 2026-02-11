@@ -34,7 +34,7 @@ Provide personalized motivational messages and affirmations based on user input.
 <CodeGroup>
     ```python Python
     import anthropic
-    
+
     client = anthropic.Anthropic(
         # defaults to os.environ.get("ANTHROPIC_API_KEY")
         api_key="my_api_key",
@@ -50,24 +50,22 @@ Provide personalized motivational messages and affirmations based on user input.
                 "content": [
                     {
                         "type": "text",
-                        "text": "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it."
+                        "text": "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it.",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript TypeScript
     import Anthropic from "@anthropic-ai/sdk";
-    
+
     const anthropic = new Anthropic({
-      apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+      apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
     });
-    
+
     const msg = await anthropic.messages.create({
       model: "claude-opus-4-6",
       max_tokens: 2000,
@@ -75,28 +73,27 @@ Provide personalized motivational messages and affirmations based on user input.
       system: "Your task is to generate a personalized motivational message or affirmation based on the user's input. Address their specific needs and offer encouragement, support, and guidance. Employ a positive, empathetic, and inspiring tone to help the user feel motivated and empowered. Use relevant examples, analogies, or quotes to reinforce your message and make it more impactful. Ensure that the message is concise, authentic, and easy to understand.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it."
+              type: "text",
+              text: "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it."
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
-    
-    
+
     ```python AWS Bedrock Python
     from anthropic import AnthropicBedrock
-    
+
     # See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
     # for authentication options
     client = AnthropicBedrock()
-    
+
     message = client.messages.create(
         model="anthropic.claude-opus-4-6-v1",
         max_tokens=2000,
@@ -108,24 +105,22 @@ Provide personalized motivational messages and affirmations based on user input.
                 "content": [
                     {
                         "type": "text",
-                        "text": "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it."
+                        "text": "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it.",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript AWS Bedrock TypeScript
     import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
-    
+
     // See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
     // for authentication options
     const client = new AnthropicBedrock();
-    
+
     const msg = await client.messages.create({
       model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 2000,
@@ -133,26 +128,25 @@ Provide personalized motivational messages and affirmations based on user input.
       system: "Your task is to generate a personalized motivational message or affirmation based on the user's input. Address their specific needs and offer encouragement, support, and guidance. Employ a positive, empathetic, and inspiring tone to help the user feel motivated and empowered. Use relevant examples, analogies, or quotes to reinforce your message and make it more impactful. Ensure that the message is concise, authentic, and easy to understand.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it."
+              type: "text",
+              text: "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it."
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
-    
-    
+
     ```python Vertex AI Python
     from anthropic import AnthropicVertex
-    
+
     client = AnthropicVertex()
-    
+
     message = client.messages.create(
         model="claude-sonnet-4@20250514",
         max_tokens=2000,
@@ -164,24 +158,22 @@ Provide personalized motivational messages and affirmations based on user input.
                 "content": [
                     {
                         "type": "text",
-                        "text": "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it."
+                        "text": "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it.",
                     }
-                ]
+                ],
             }
-        ]
+        ],
     )
     print(message.content)
-    
     ```
-    
-    
+
     ```typescript Vertex AI TypeScript
-    import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
-    
+    import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
+
     // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
     // Additionally goes through the standard `google-auth-library` flow.
     const client = new AnthropicVertex();
-    
+
     const msg = await client.messages.create({
       model: "claude-sonnet-4@20250514",
       max_tokens: 2000,
@@ -189,18 +181,18 @@ Provide personalized motivational messages and affirmations based on user input.
       system: "Your task is to generate a personalized motivational message or affirmation based on the user's input. Address their specific needs and offer encouragement, support, and guidance. Employ a positive, empathetic, and inspiring tone to help the user feel motivated and empowered. Use relevant examples, analogies, or quotes to reinforce your message and make it more impactful. Ensure that the message is concise, authentic, and easy to understand.",
       messages: [
         {
-          "role": "user",
-          "content": [
+          role: "user",
+          content: [
             {
-              "type": "text",
-              "text": "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it."
+              type: "text",
+              text: "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it."
             }
           ]
         }
       ]
     });
     console.log(msg);
-    
+
     ```
-    
+
 </CodeGroup>

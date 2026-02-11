@@ -88,14 +88,13 @@ client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-sonnet-4-5",
     max_tokens=16000,
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 10000
-    },
-    messages=[{
-        "role": "user",
-        "content": "Are there an infinite number of prime numbers such that n mod 4 == 3?"
-    }]
+    thinking={"type": "enabled", "budget_tokens": 10000},
+    messages=[
+        {
+            "role": "user",
+            "content": "Are there an infinite number of prime numbers such that n mod 4 == 3?",
+        }
+    ],
 )
 
 # The response will contain summarized thinking blocks and text blocks
@@ -107,7 +106,7 @@ for block in response.content:
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
@@ -148,7 +147,7 @@ The `budget_tokens` parameter determines the maximum number of tokens Claude is 
 Claude Opus 4.6 supports up to 128K output tokens. Earlier models support up to 64K output tokens.
 </Note>
 
-`budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window (200k tokens). 
+`budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window (200k tokens).
 
 ### Summarized thinking
 
@@ -212,7 +211,12 @@ with client.messages.stream(
     model="claude-sonnet-4-5",
     max_tokens=16000,
     thinking={"type": "enabled", "budget_tokens": 10000},
-    messages=[{"role": "user", "content": "What is the greatest common divisor of 1071 and 462?"}],
+    messages=[
+        {
+            "role": "user",
+            "content": "What is the greatest common divisor of 1071 and 462?",
+        }
+    ],
 ) as stream:
     thinking_started = False
     response_started = False
@@ -239,7 +243,7 @@ with client.messages.stream(
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
@@ -260,27 +264,27 @@ let thinkingStarted = false;
 let responseStarted = false;
 
 for await (const event of stream) {
-  if (event.type === 'content_block_start') {
+  if (event.type === "content_block_start") {
     console.log(`\nStarting ${event.content_block.type} block...`);
     // Reset flags for each new block
     thinkingStarted = false;
     responseStarted = false;
-  } else if (event.type === 'content_block_delta') {
-    if (event.delta.type === 'thinking_delta') {
+  } else if (event.type === "content_block_delta") {
+    if (event.delta.type === "thinking_delta") {
       if (!thinkingStarted) {
-        process.stdout.write('Thinking: ');
+        process.stdout.write("Thinking: ");
         thinkingStarted = true;
       }
       process.stdout.write(event.delta.thinking);
-    } else if (event.delta.type === 'text_delta') {
+    } else if (event.delta.type === "text_delta") {
       if (!responseStarted) {
-        process.stdout.write('Response: ');
+        process.stdout.write("Response: ");
         responseStarted = true;
       }
       process.stdout.write(event.delta.text);
     }
-  } else if (event.type === 'content_block_stop') {
-    console.log('\nBlock complete.');
+  } else if (event.type === "content_block_stop") {
+    console.log("\nBlock complete.");
   }
 }
 ```
@@ -290,7 +294,6 @@ for await (const event of stream) {
 <TryInConsoleButton userPrompt="What is the greatest common divisor of 1071 and 462?" thinkingBudgetTokens={16000}>
   Try in Console
 </TryInConsoleButton>
-  
 
 Example streaming output:
 ```json
@@ -407,25 +410,18 @@ weather_tool = {
     "description": "Get current weather for a location",
     "input_schema": {
         "type": "object",
-        "properties": {
-            "location": {"type": "string"}
-        },
-        "required": ["location"]
-    }
+        "properties": {"location": {"type": "string"}},
+        "required": ["location"],
+    },
 }
 
 # First request - Claude responds with thinking and tool request
 response = client.messages.create(
     model="claude-sonnet-4-5",
     max_tokens=16000,
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 10000
-    },
+    thinking={"type": "enabled", "budget_tokens": 10000},
     tools=[weather_tool],
-    messages=[
-        {"role": "user", "content": "What's the weather in Paris?"}
-    ]
+    messages=[{"role": "user", "content": "What's the weather in Paris?"}],
 )
 ```
 
@@ -490,10 +486,12 @@ Now let's continue the conversation and use the tool
 <CodeGroup>
 ```python Python
 # Extract thinking block and tool use block
-thinking_block = next((block for block in response.content
-                      if block.type == 'thinking'), None)
-tool_use_block = next((block for block in response.content
-                      if block.type == 'tool_use'), None)
+thinking_block = next(
+    (block for block in response.content if block.type == "thinking"), None
+)
+tool_use_block = next(
+    (block for block in response.content if block.type == "tool_use"), None
+)
 
 # Call your actual weather API, here is where your actual API call would go
 # let's pretend this is what we get back
@@ -504,31 +502,33 @@ weather_data = {"temperature": 88}
 continuation = client.messages.create(
     model="claude-sonnet-4-5",
     max_tokens=16000,
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 10000
-    },
+    thinking={"type": "enabled", "budget_tokens": 10000},
     tools=[weather_tool],
     messages=[
         {"role": "user", "content": "What's the weather in Paris?"},
         # notice that the thinking_block is passed in as well as the tool_use_block
         # if this is not passed in, an error is raised
         {"role": "assistant", "content": [thinking_block, tool_use_block]},
-        {"role": "user", "content": [{
-            "type": "tool_result",
-            "tool_use_id": tool_use_block.id,
-            "content": f"Current temperature: {weather_data['temperature']}°F"
-        }]}
-    ]
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "tool_result",
+                    "tool_use_id": tool_use_block.id,
+                    "content": f"Current temperature: {weather_data['temperature']}°F",
+                }
+            ],
+        },
+    ],
 )
 ```
 
 ```typescript TypeScript
 // Extract thinking block and tool use block
 const thinkingBlock = response.content.find(block =>
-  block.type === 'thinking');
+  block.type === "thinking");
 const toolUseBlock = response.content.find(block =>
-  block.type === 'tool_use');
+  block.type === "tool_use");
 
 // Call your actual weather API, here is where your actual API call would go
 // let's pretend this is what we get back
@@ -553,7 +553,7 @@ const continuation = await client.messages.create({
       type: "tool_result",
       tool_use_id: toolUseBlock.id,
       content: `Current temperature: ${weatherData.temperature}°F`
-    }]}
+    }] }
   ]
 });
 ```
@@ -622,7 +622,7 @@ Here are some important considerations for interleaved thinking:
 
 Without interleaved thinking, Claude thinks once at the start of the assistant turn. Subsequent responses after tool results continue without new thinking blocks.
 
-```
+```text
 User: "What's the total revenue if we sold 150 units at $50 each,
        and how does this compare to our average monthly revenue?"
 
@@ -645,7 +645,7 @@ Turn 3: [text] "The total revenue is $7,500, which is 44% above your
 
 With interleaved thinking enabled, Claude can think after receiving each tool result, allowing it to reason about intermediate results before continuing.
 
-```
+```text
 User: "What's the total revenue if we sold 150 units at $50 each,
        and how does this compare to our average monthly revenue?"
 
@@ -713,8 +713,8 @@ User: "What's the weather in Paris?"
 
 **Request 2:**
 ```
-User: ["What's the weather in Paris?"], 
-Assistant: [thinking_block_1] + [tool_use block 1], 
+User: ["What's the weather in Paris?"],
+Assistant: [thinking_block_1] + [tool_use block 1],
 User: [tool_result_1, cache=True]
 ```
 **Response 2:**
@@ -754,9 +754,10 @@ from bs4 import BeautifulSoup
 
 client = Anthropic()
 
+
 def fetch_article_content(url):
     response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
+    soup = BeautifulSoup(response.content, "html.parser")
 
     # Remove script and style elements
     for script in soup(["script", "style"]):
@@ -770,9 +771,10 @@ def fetch_article_content(url):
     # Break multi-headlines into a line each
     chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
     # Drop blank lines
-    text = '\n'.join(chunk for chunk in chunks if chunk)
+    text = "\n".join(chunk for chunk in chunks if chunk)
 
     return text
+
 
 # Fetch the content of the article
 book_url = "https://www.gutenberg.org/cache/epub/1342/pg1342.txt"
@@ -780,59 +782,38 @@ book_content = fetch_article_content(book_url)
 # Use just enough text for caching (first few chapters)
 LARGE_TEXT = book_content[:5000]
 
-SYSTEM_PROMPT=[
+SYSTEM_PROMPT = [
     {
         "type": "text",
         "text": "You are an AI assistant that is tasked with literary analysis. Analyze the following text carefully.",
     },
-    {
-        "type": "text",
-        "text": LARGE_TEXT,
-        "cache_control": {"type": "ephemeral"}
-    }
+    {"type": "text", "text": LARGE_TEXT, "cache_control": {"type": "ephemeral"}},
 ]
 
-MESSAGES = [
-    {
-        "role": "user",
-        "content": "Analyze the tone of this passage."
-    }
-]
+MESSAGES = [{"role": "user", "content": "Analyze the tone of this passage."}]
 
 # First request - establish cache
 print("First request - establishing cache")
 response1 = client.messages.create(
     model="claude-sonnet-4-5",
     max_tokens=20000,
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 4000
-    },
+    thinking={"type": "enabled", "budget_tokens": 4000},
     system=SYSTEM_PROMPT,
-    messages=MESSAGES
+    messages=MESSAGES,
 )
 
 print(f"First response usage: {response1.usage}")
 
-MESSAGES.append({
-    "role": "assistant",
-    "content": response1.content
-})
-MESSAGES.append({
-    "role": "user",
-    "content": "Analyze the characters in this passage."
-})
+MESSAGES.append({"role": "assistant", "content": response1.content})
+MESSAGES.append({"role": "user", "content": "Analyze the characters in this passage."})
 # Second request - same thinking parameters (cache hit expected)
 print("\nSecond request - same thinking parameters (cache hit expected)")
 response2 = client.messages.create(
     model="claude-sonnet-4-5",
     max_tokens=20000,
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 4000
-    },
+    thinking={"type": "enabled", "budget_tokens": 4000},
     system=SYSTEM_PROMPT,
-    messages=MESSAGES
+    messages=MESSAGES,
 )
 
 print(f"Second response usage: {response2.usage}")
@@ -844,37 +825,37 @@ response3 = client.messages.create(
     max_tokens=20000,
     thinking={
         "type": "enabled",
-        "budget_tokens": 8000  # Changed thinking budget
+        "budget_tokens": 8000,  # Changed thinking budget
     },
     system=SYSTEM_PROMPT,  # System prompt remains cached
-    messages=MESSAGES  # Messages cache is invalidated
+    messages=MESSAGES,  # Messages cache is invalidated
 )
 
 print(f"Third response usage: {response3.usage}")
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
-import axios from 'axios';
-import * as cheerio from 'cheerio';
+import Anthropic from "@anthropic-ai/sdk";
+import axios from "axios";
+import * as cheerio from "cheerio";
 
 const client = new Anthropic();
 
 async function fetchArticleContent(url: string): Promise<string> {
   const response = await axios.get(url);
   const $ = cheerio.load(response.data);
-  
+
   // Remove script and style elements
-  $('script, style').remove();
-  
+  $("script, style").remove();
+
   // Get text
   let text = $.text();
-  
+
   // Break into lines and remove leading and trailing space on each
-  const lines = text.split('\n').map(line => line.trim());
+  const lines = text.split("\n").map(line => line.trim());
   // Drop blank lines
-  text = lines.filter(line => line.length > 0).join('\n');
-  
+  text = lines.filter(line => line.length > 0).join("\n");
+
   return text;
 }
 
@@ -887,7 +868,7 @@ const LARGE_TEXT = bookContent.slice(0, 5000);
 const SYSTEM_PROMPT = [
   {
     type: "text",
-    text: "You are an AI assistant that is tasked with literary analysis. Analyze the following text carefully.",
+    text: "You are an AI assistant that is tasked with literary analysis. Analyze the following text carefully."
   },
   {
     type: "text",
@@ -949,10 +930,10 @@ const response3 = await client.messages.create({
   max_tokens: 20000,
   thinking: {
     type: "enabled",
-    budget_tokens: 8000  // Changed thinking budget
+    budget_tokens: 8000 // Changed thinking budget
   },
-  system: SYSTEM_PROMPT,  // System prompt remains cached
-  messages: MESSAGES  // Messages cache is invalidated
+  system: SYSTEM_PROMPT, // System prompt remains cached
+  messages: MESSAGES // Messages cache is invalidated
 });
 
 console.log(`Third response usage: ${response3.usage}`);
@@ -970,9 +951,10 @@ from bs4 import BeautifulSoup
 
 client = Anthropic()
 
+
 def fetch_article_content(url):
     response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
+    soup = BeautifulSoup(response.content, "html.parser")
 
     # Remove script and style elements
     for script in soup(["script", "style"]):
@@ -986,9 +968,10 @@ def fetch_article_content(url):
     # Break multi-headlines into a line each
     chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
     # Drop blank lines
-    text = '\n'.join(chunk for chunk in chunks if chunk)
+    text = "\n".join(chunk for chunk in chunks if chunk)
 
     return text
+
 
 # Fetch the content of the article
 book_url = "https://www.gutenberg.org/cache/epub/1342/pg1342.txt"
@@ -1006,11 +989,8 @@ MESSAGES = [
                 "text": LARGE_TEXT,
                 "cache_control": {"type": "ephemeral"},
             },
-            {
-                "type": "text",
-                "text": "Analyze the tone of this passage."
-            }
-        ]
+            {"type": "text", "text": "Analyze the tone of this passage."},
+        ],
     }
 ]
 
@@ -1019,23 +999,14 @@ print("First request - establishing cache")
 response1 = client.messages.create(
     model="claude-sonnet-4-5",
     max_tokens=20000,
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 4000
-    },
-    messages=MESSAGES
+    thinking={"type": "enabled", "budget_tokens": 4000},
+    messages=MESSAGES,
 )
 
 print(f"First response usage: {response1.usage}")
 
-MESSAGES.append({
-    "role": "assistant",
-    "content": response1.content
-})
-MESSAGES.append({
-    "role": "user",
-    "content": "Analyze the characters in this passage."
-})
+MESSAGES.append({"role": "assistant", "content": response1.content})
+MESSAGES.append({"role": "user", "content": "Analyze the characters in this passage."})
 # Second request - same thinking parameters (cache hit expected)
 print("\nSecond request - same thinking parameters (cache hit expected)")
 response2 = client.messages.create(
@@ -1043,21 +1014,15 @@ response2 = client.messages.create(
     max_tokens=20000,
     thinking={
         "type": "enabled",
-        "budget_tokens": 4000  # Same thinking budget
+        "budget_tokens": 4000,  # Same thinking budget
     },
-    messages=MESSAGES
+    messages=MESSAGES,
 )
 
 print(f"Second response usage: {response2.usage}")
 
-MESSAGES.append({
-    "role": "assistant",
-    "content": response2.content
-})
-MESSAGES.append({
-    "role": "user",
-    "content": "Analyze the setting in this passage."
-})
+MESSAGES.append({"role": "assistant", "content": response2.content})
+MESSAGES.append({"role": "user", "content": "Analyze the setting in this passage."})
 
 # Third request - different thinking budget (cache miss expected)
 print("\nThird request - different thinking budget (cache miss expected)")
@@ -1066,18 +1031,18 @@ response3 = client.messages.create(
     max_tokens=20000,
     thinking={
         "type": "enabled",
-        "budget_tokens": 8000  # Different thinking budget breaks cache
+        "budget_tokens": 8000,  # Different thinking budget breaks cache
     },
-    messages=MESSAGES
+    messages=MESSAGES,
 )
 
 print(f"Third response usage: {response3.usage}")
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
-import axios from 'axios';
-import * as cheerio from 'cheerio';
+import Anthropic from "@anthropic-ai/sdk";
+import axios from "axios";
+import * as cheerio from "cheerio";
 
 const client = new Anthropic();
 
@@ -1086,15 +1051,15 @@ async function fetchArticleContent(url: string): Promise<string> {
   const $ = cheerio.load(response.data);
 
   // Remove script and style elements
-  $('script, style').remove();
+  $("script, style").remove();
 
   // Get text
   let text = $.text();
 
   // Clean up text (break into lines, remove whitespace)
-  const lines = text.split('\n').map(line => line.trim());
-  const chunks = lines.flatMap(line => line.split('  ').map(phrase => phrase.trim()));
-  text = chunks.filter(chunk => chunk).join('\n');
+  const lines = text.split("\n").map(line => line.trim());
+  const chunks = lines.flatMap(line => line.split("  ").map(phrase => phrase.trim()));
+  text = chunks.filter(chunk => chunk).join("\n");
 
   return text;
 }
@@ -1114,7 +1079,7 @@ async function main() {
         {
           type: "text",
           text: LARGE_TEXT,
-          cache_control: {type: "ephemeral"},
+          cache_control: { type: "ephemeral" }
         },
         {
           type: "text",
@@ -1136,7 +1101,7 @@ async function main() {
     messages: MESSAGES
   });
 
-  console.log(`First response usage: `, response1.usage);
+  console.log("First response usage: ", response1.usage);
 
   MESSAGES = [
     ...MESSAGES,
@@ -1157,12 +1122,12 @@ async function main() {
     max_tokens: 20000,
     thinking: {
       type: "enabled",
-      budget_tokens: 4000  // Same thinking budget
+      budget_tokens: 4000 // Same thinking budget
     },
     messages: MESSAGES
   });
 
-  console.log(`Second response usage: `, response2.usage);
+  console.log("Second response usage: ", response2.usage);
 
   MESSAGES = [
     ...MESSAGES,
@@ -1183,12 +1148,12 @@ async function main() {
     max_tokens: 20000,
     thinking: {
       type: "enabled",
-      budget_tokens: 8000  // Different thinking budget breaks cache
+      budget_tokens: 8000 // Different thinking budget breaks cache
     },
     messages: MESSAGES
   });
 
-  console.log(`Third response usage: `, response3.usage);
+  console.log("Third response usage: ", response3.usage);
 }
 
 main().catch(console.error);
@@ -1198,7 +1163,7 @@ main().catch(console.error);
 
 Here is the output of the script (you may see slightly different numbers)
 
-```
+```text
 First request - establishing cache
 First response usage: { cache_creation_input_tokens: 1370, cache_read_input_tokens: 0, input_tokens: 17, output_tokens: 700 }
 
@@ -1249,7 +1214,7 @@ We recommend using the [token counting API](/docs/en/build-with-claude/token-cou
 
 When using extended thinking with tool use, thinking blocks must be explicitly preserved and returned with the tool results.
 
-The effective context window calculation for extended thinking with tool use becomes: 
+The effective context window calculation for extended thinking with tool use becomes:
 
 ```
 context window =
@@ -1344,14 +1309,13 @@ client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-sonnet-4-5",
     max_tokens=16000,
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 10000
-    },
-    messages=[{
-        "role": "user",
-        "content": "ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB"
-    }]
+    thinking={"type": "enabled", "budget_tokens": 10000},
+    messages=[
+        {
+            "role": "user",
+            "content": "ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB",
+        }
+    ],
 )
 
 # Identify redacted thinking blocks
@@ -1365,7 +1329,8 @@ if has_redacted_thinking:
 
     # Extract all blocks (both redacted and non-redacted)
     all_thinking_blocks = [
-        block for block in response.content
+        block
+        for block in response.content
         if block.type in ["thinking", "redacted_thinking"]
     ]
 
@@ -1377,7 +1342,7 @@ if has_redacted_thinking:
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
@@ -1413,7 +1378,7 @@ if (hasRedactedThinking) {
   // This preserves the integrity of Claude's reasoning
 
   console.log(`Found ${allThinkingBlocks.length} thinking blocks total`);
-  console.log(`These blocks are still billable as output tokens`);
+  console.log("These blocks are still billable as output tokens");
 }
 ```
 

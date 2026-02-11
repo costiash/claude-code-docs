@@ -91,10 +91,10 @@ for await (const message of query({
   options: {
     systemPrompt: {
       type: "preset",
-      preset: "claude_code", // Use Claude Code's system prompt
+      preset: "claude_code" // Use Claude Code's system prompt
     },
-    settingSources: ["project"], // Required to load CLAUDE.md from project
-  },
+    settingSources: ["project"] // Required to load CLAUDE.md from project
+  }
 })) {
   messages.push(message);
 }
@@ -114,10 +114,10 @@ async for message in query(
     options=ClaudeAgentOptions(
         system_prompt={
             "type": "preset",
-            "preset": "claude_code"  # Use Claude Code's system prompt
+            "preset": "claude_code",  # Use Claude Code's system prompt
         },
-        setting_sources=["project"]  # Required to load CLAUDE.md from project
-    )
+        setting_sources=["project"],  # Required to load CLAUDE.md from project
+    ),
 ):
     messages.append(message)
 
@@ -198,10 +198,11 @@ For every code submission:
 ```python Python
 from pathlib import Path
 
+
 async def create_output_style(name: str, description: str, prompt: str):
     # User-level: ~/.claude/output-styles
     # Project-level: .claude/output-styles
-    output_styles_dir = Path.home() / '.claude' / 'output-styles'
+    output_styles_dir = Path.home() / ".claude" / "output-styles"
 
     output_styles_dir.mkdir(parents=True, exist_ok=True)
 
@@ -212,21 +213,22 @@ description: {description}
 
 {prompt}"""
 
-    file_name = name.lower().replace(' ', '-') + '.md'
+    file_name = name.lower().replace(" ", "-") + ".md"
     file_path = output_styles_dir / file_name
-    file_path.write_text(content, encoding='utf-8')
+    file_path.write_text(content, encoding="utf-8")
+
 
 # Example: Create a code review specialist
 await create_output_style(
-    'Code Reviewer',
-    'Thorough code review assistant',
+    "Code Reviewer",
+    "Thorough code review assistant",
     """You are an expert code reviewer.
 
 For every code submission:
 1. Check for bugs and security issues
 2. Evaluate performance
 3. Suggest improvements
-4. Rate code quality (1-10)"""
+4. Rate code quality (1-10)""",
 )
 ```
 
@@ -260,9 +262,9 @@ for await (const message of query({
       type: "preset",
       preset: "claude_code",
       append:
-        "Always include detailed docstrings and type hints in Python code.",
-    },
-  },
+        "Always include detailed docstrings and type hints in Python code."
+    }
+  }
 })) {
   messages.push(message);
   if (message.type === "assistant") {
@@ -282,12 +284,12 @@ async for message in query(
         system_prompt={
             "type": "preset",
             "preset": "claude_code",
-            "append": "Always include detailed docstrings and type hints in Python code."
+            "append": "Always include detailed docstrings and type hints in Python code.",
         }
-    )
+    ),
 ):
     messages.append(message)
-    if message.type == 'assistant':
+    if message.type == "assistant":
         print(message.message.content)
 ```
 
@@ -315,8 +317,8 @@ const messages = [];
 for await (const message of query({
   prompt: "Create a data processing pipeline",
   options: {
-    systemPrompt: customPrompt,
-  },
+    systemPrompt: customPrompt
+  }
 })) {
   messages.push(message);
   if (message.type === "assistant") {
@@ -340,12 +342,10 @@ messages = []
 
 async for message in query(
     prompt="Create a data processing pipeline",
-    options=ClaudeAgentOptions(
-        system_prompt=custom_prompt
-    )
+    options=ClaudeAgentOptions(system_prompt=custom_prompt),
 ):
     messages.append(message)
-    if message.type == 'assistant':
+    if message.type == "assistant":
         print(message.message.content)
 ```
 
@@ -448,9 +448,9 @@ for await (const message of query({
         - OAuth 2.0 compliance
         - Token storage security
         - Session management
-      `,
-    },
-  },
+      `
+    }
+  }
 })) {
   messages.push(message);
 }
@@ -474,9 +474,9 @@ async for message in query(
             - OAuth 2.0 compliance
             - Token storage security
             - Session management
-            """
+            """,
         }
-    )
+    ),
 ):
     messages.append(message)
 ```

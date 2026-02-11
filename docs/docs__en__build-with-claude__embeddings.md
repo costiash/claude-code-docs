@@ -86,7 +86,7 @@ print(result.embeddings[1])
 [-0.0069352793507277966, 0.020878976210951805, ...]  # embedding for "Sample text 2"
 ```
 
-When creating the embeddings, you can specify a few other arguments to the `embed()` function. 
+When creating the embeddings, you can specify a few other arguments to the `embed()` function.
 
 For more information on the Voyage python package, see [the Voyage documentation](https://docs.voyageai.com/docs/embeddings#python-api).
 
@@ -146,9 +146,8 @@ documents = [
     "20th-century innovations, from radios to smartphones, centered on electronic advancements.",
     "Rivers provide water, irrigation, and habitat for aquatic species, vital for ecosystems.",
     "Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET.",
-    "Shakespeare's works, like 'Hamlet' and 'A Midsummer Night's Dream,' endure in literature."
+    "Shakespeare's works, like 'Hamlet' and 'A Midsummer Night's Dream,' endure in literature.",
 ]
-
 ```
 
 We will first use Voyage to convert each of them into an embedding vector
@@ -159,9 +158,7 @@ import voyageai
 vo = voyageai.Client()
 
 # Embed the documents
-doc_embds = vo.embed(
-    documents, model="voyage-3.5", input_type="document"
-).embeddings
+doc_embds = vo.embed(documents, model="voyage-3.5", input_type="document").embeddings
 ```
 
 The embeddings will allow us to do semantic search / retrieval in the vector space. Given an example query,
@@ -176,9 +173,7 @@ we convert it into an embedding, and conduct a nearest neighbor search to find t
 import numpy as np
 
 # Embed the query
-query_embd = vo.embed(
-    [query], model="voyage-3.5", input_type="query"
-).embeddings[0]
+query_embd = vo.embed([query], model="voyage-3.5", input_type="query").embeddings[0]
 
 # Compute the similarity
 # Voyage embeddings are normalized to length 1, therefore dot-product
@@ -204,7 +199,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
   <section title="Why do Voyage embeddings have superior quality?">
 
     Embedding models rely on powerful neural networks to capture and compress semantic context, similar to generative models. Voyage's team of experienced AI researchers optimizes every component of the embedding process, including:
-    - Model architecture 
+    - Model architecture
     - Data collection
     - Loss functions
     - Optimizer selection
@@ -218,8 +213,8 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     For general-purpose embedding, we recommend:
     - `voyage-3-large`: Best quality
     - `voyage-3.5-lite`: Lowest latency and cost
-    - `voyage-3.5`: Balanced performance with superior retrieval quality at a competitive price point 
-    
+    - `voyage-3.5`: Balanced performance with superior retrieval quality at a competitive price point
+
     For retrieval, use the `input_type` parameter to specify whether the text is a query or document type.
 
     Domain-specific models:
@@ -254,7 +249,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     When using the `input_type` parameter, special prompts are prepended to the input text prior to embedding. Specifically:
 
     > 📘 **Prompts associated with `input_type`**
-    > 
+    >
     > - For a query, the prompt is “Represent the query for retrieving supporting documents: “.
     > - For a document, the prompt is “Represent the document for retrieval: “.
     > - Example
@@ -274,7 +269,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     - `binary` and `ubinary`: Each returned embedding is a list of 8-bit integers that represent bit-packed, quantized single-bit embedding values: `int8` for `binary` and `uint8` for `ubinary`. The length of the returned list of integers is 1/8 of the actual dimension of the embedding. The binary type uses the offset binary method, which you can learn more about in the FAQ below.
 
     > **Binary quantization example**
-    > 
+    >
     > Consider the following eight embedding values: -0.03955078, 0.006214142, -0.07446289, -0.039001465, 0.0046463013, 0.00030612946, -0.08496094, and 0.03994751. With binary quantization, values less than or equal to zero will be quantized to a binary zero, and positive values to a binary one, resulting in the following binary sequence: 0, 1, 0, 0, 1, 1, 0, 1. These eight bits are then packed into a single 8-bit integer, 01001101 (with the leftmost bit as the most significant bit).
     >   - `ubinary`: The binary sequence is directly converted and represented as the unsigned integer (`uint8`) 77.
     >   - `binary`: The binary sequence is represented as the signed integer (`int8`) -51, calculated using the offset binary method (77 - 128 = -51).
@@ -288,6 +283,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     ```python
     import voyageai
     import numpy as np
+
 
     def embd_normalize(v: np.ndarray) -> np.ndarray:
         """
@@ -303,7 +299,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     vo = voyageai.Client()
 
     # Generate voyage-code-3 vectors, which by default are 1024-dimensional floating-point numbers
-    embd = vo.embed(['Sample text 1', 'Sample text 2'], model='voyage-code-3').embeddings
+    embd = vo.embed(["Sample text 1", "Sample text 2"], model="voyage-code-3").embeddings
 
     # Set shorter dimension
     short_dim = 256

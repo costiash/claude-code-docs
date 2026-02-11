@@ -55,59 +55,60 @@ Sometimes Claude returns an empty response (exactly 2-3 tokens with no content) 
 # INCORRECT: Adding text immediately after tool_result
 messages = [
     {"role": "user", "content": "Calculate the sum of 1234 and 5678"},
-    {"role": "assistant", "content": [
-        {
-            "type": "tool_use",
-            "id": "toolu_123",
-            "name": "calculator",
-            "input": {"operation": "add", "a": 1234, "b": 5678}
-        }
-    ]},
-    {"role": "user", "content": [
-        {
-            "type": "tool_result",
-            "tool_use_id": "toolu_123",
-            "content": "6912"
-        },
-        {
-            "type": "text",
-            "text": "Here's the result"  # Don't add text after tool_result
-        }
-    ]}
+    {
+        "role": "assistant",
+        "content": [
+            {
+                "type": "tool_use",
+                "id": "toolu_123",
+                "name": "calculator",
+                "input": {"operation": "add", "a": 1234, "b": 5678},
+            }
+        ],
+    },
+    {
+        "role": "user",
+        "content": [
+            {"type": "tool_result", "tool_use_id": "toolu_123", "content": "6912"},
+            {
+                "type": "text",
+                "text": "Here's the result",  # Don't add text after tool_result
+            },
+        ],
+    },
 ]
 
 # CORRECT: Send tool results directly without additional text
 messages = [
     {"role": "user", "content": "Calculate the sum of 1234 and 5678"},
-    {"role": "assistant", "content": [
-        {
-            "type": "tool_use",
-            "id": "toolu_123",
-            "name": "calculator",
-            "input": {"operation": "add", "a": 1234, "b": 5678}
-        }
-    ]},
-    {"role": "user", "content": [
-        {
-            "type": "tool_result",
-            "tool_use_id": "toolu_123",
-            "content": "6912"
-        }
-    ]}  # Just the tool_result, no additional text
+    {
+        "role": "assistant",
+        "content": [
+            {
+                "type": "tool_use",
+                "id": "toolu_123",
+                "name": "calculator",
+                "input": {"operation": "add", "a": 1234, "b": 5678},
+            }
+        ],
+    },
+    {
+        "role": "user",
+        "content": [
+            {"type": "tool_result", "tool_use_id": "toolu_123", "content": "6912"}
+        ],
+    },  # Just the tool_result, no additional text
 ]
+
 
 # If you still get empty responses after fixing the above:
 def handle_empty_response(client, messages):
     response = client.messages.create(
-        model="claude-opus-4-6",
-        max_tokens=1024,
-        messages=messages
+        model="claude-opus-4-6", max_tokens=1024, messages=messages
     )
 
     # Check if response is empty
-    if (response.stop_reason == "end_turn" and
-        not response.content:
-
+    if response.stop_reason == "end_turn" and not response.content:
         # INCORRECT: Don't just retry with the empty response
         # This won't work because Claude already decided it's done
 
@@ -115,9 +116,7 @@ def handle_empty_response(client, messages):
         messages.append({"role": "user", "content": "Please continue"})
 
         response = client.messages.create(
-            model="claude-opus-4-6",
-            max_tokens=1024,
-            messages=messages
+            model="claude-opus-4-6", max_tokens=1024, messages=messages
         )
 
     return response
@@ -136,7 +135,7 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=10,
-    messages=[{"role": "user", "content": "Explain quantum physics"}]
+    messages=[{"role": "user", "content": "Explain quantum physics"}],
 )
 
 if response.stop_reason == "max_tokens":
@@ -153,7 +152,7 @@ response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     stop_sequences=["END", "STOP"],
-    messages=[{"role": "user", "content": "Generate text until you say END"}]
+    messages=[{"role": "user", "content": "Generate text until you say END"}],
 )
 
 if response.stop_reason == "stop_sequence":
@@ -172,7 +171,7 @@ response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     tools=[weather_tool],
-    messages=[{"role": "user", "content": "What's the weather?"}]
+    messages=[{"role": "user", "content": "What's the weather?"}],
 )
 
 if response.stop_reason == "tool_use":
@@ -193,19 +192,19 @@ response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
-    messages=[{"role": "user", "content": "Search for latest AI news"}]
+    messages=[{"role": "user", "content": "Search for latest AI news"}],
 )
 
 if response.stop_reason == "pause_turn":
     # Continue the conversation by sending the response back
     messages = [
         {"role": "user", "content": original_query},
-        {"role": "assistant", "content": response.content}
+        {"role": "assistant", "content": response.content},
     ]
     continuation = client.messages.create(
         model="claude-opus-4-6",
         messages=messages,
-        tools=[{"type": "web_search_20250305", "name": "web_search"}]
+        tools=[{"type": "web_search_20250305", "name": "web_search"}],
     )
 ```
 
@@ -220,7 +219,7 @@ Claude refused to generate a response due to safety concerns.
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[{"role": "user", "content": "[Unsafe request]"}]
+    messages=[{"role": "user", "content": "[Unsafe request]"}],
 )
 
 if response.stop_reason == "refusal":
@@ -245,7 +244,9 @@ Claude stopped because it reached the model's context window limit. This allows 
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=64000,  # Model's maximum output tokens
-    messages=[{"role": "user", "content": "Large input that uses most of context window..."}]
+    messages=[
+        {"role": "user", "content": "Large input that uses most of context window..."}
+    ],
 )
 
 if response.stop_reason == "model_context_window_exceeded":
@@ -298,12 +299,12 @@ def handle_truncated_response(response):
         # Option 2: Continue generation
         messages = [
             {"role": "user", "content": original_prompt},
-            {"role": "assistant", "content": response.content[0].text}
+            {"role": "assistant", "content": response.content[0].text},
         ]
         continuation = client.messages.create(
             model="claude-opus-4-6",
             max_tokens=1024,
-            messages=messages + [{"role": "user", "content": "Please continue"}]
+            messages=messages + [{"role": "user", "content": "Please continue"}],
         )
         return response.content[0].text + continuation.content[0].text
 ```
@@ -325,20 +326,17 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 
     for _ in range(max_continuations):
         response = client.messages.create(
-            model="claude-opus-4-6",
-            messages=messages,
-            tools=tools
+            model="claude-opus-4-6", messages=messages, tools=tools
         )
 
         if response.stop_reason != "pause_turn":
             # Claude finished processing - return the final response
             return response
 
-        # pause_turn: add the assistant's response and continue
         # pause_turn: replace the full message list to maintain alternating roles
         messages = [
             {"role": "user", "content": user_query},
-            {"role": "assistant", "content": response.content}
+            {"role": "assistant", "content": response.content},
         ]
 
     # Reached max continuations - return the last response
@@ -362,11 +360,11 @@ It's important to distinguish between `stop_reason` values and actual errors:
 ```python
 try:
     response = client.messages.create(...)
-    
+
     # Handle successful response with stop_reason
     if response.stop_reason == "max_tokens":
         print("Response was truncated")
-    
+
 except anthropic.APIError as e:
     # Handle actual errors
     if e.status_code == 429:
@@ -405,9 +403,7 @@ def complete_tool_workflow(client, user_query, tools):
 
     while True:
         response = client.messages.create(
-            model="claude-opus-4-6",
-            messages=messages,
-            tools=tools
+            model="claude-opus-4-6", messages=messages, tools=tools
         )
 
         if response.stop_reason == "tool_use":
@@ -429,9 +425,7 @@ def get_complete_response(client, prompt, max_attempts=3):
 
     for _ in range(max_attempts):
         response = client.messages.create(
-            model="claude-opus-4-6",
-            messages=messages,
-            max_tokens=4096
+            model="claude-opus-4-6", messages=messages, max_tokens=4096
         )
 
         full_response += response.content[0].text
@@ -443,7 +437,7 @@ def get_complete_response(client, prompt, max_attempts=3):
         messages = [
             {"role": "user", "content": prompt},
             {"role": "assistant", "content": full_response},
-            {"role": "user", "content": "Please continue from where you left off."}
+            {"role": "user", "content": "Please continue from where you left off."},
         ]
 
     return full_response
@@ -462,12 +456,14 @@ def get_max_possible_tokens(client, prompt):
     response = client.messages.create(
         model="claude-opus-4-6",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=64000  # Set to model's maximum output tokens
+        max_tokens=64000,  # Set to model's maximum output tokens
     )
 
     if response.stop_reason == "model_context_window_exceeded":
         # Got the maximum possible tokens given input size
-        print(f"Generated {response.usage.output_tokens} tokens (context limit reached)")
+        print(
+            f"Generated {response.usage.output_tokens} tokens (context limit reached)"
+        )
     elif response.stop_reason == "max_tokens":
         # Got exactly the requested tokens
         print(f"Generated {response.usage.output_tokens} tokens (max_tokens reached)")

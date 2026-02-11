@@ -43,18 +43,20 @@ for await (const message of query({
 import asyncio
 from claude_agent_sdk import query
 
+
 async def main():
     async for message in query(
         prompt="Hello",
         options={
             "plugins": [
                 {"type": "local", "path": "./my-plugin"},
-                {"type": "local", "path": "/absolute/path/to/another-plugin"}
+                {"type": "local", "path": "/absolute/path/to/another-plugin"},
             ]
-        }
+        },
     ):
         # Plugin commands, agents, and other features are now available
         pass
+
 
 asyncio.run(main())
 ```
@@ -102,10 +104,10 @@ for await (const message of query({
 import asyncio
 from claude_agent_sdk import query
 
+
 async def main():
     async for message in query(
-        prompt="Hello",
-        options={"plugins": [{"type": "local", "path": "./my-plugin"}]}
+        prompt="Hello", options={"plugins": [{"type": "local", "path": "./my-plugin"}]}
     ):
         if message.type == "system" and message.subtype == "init":
             # Check loaded plugins
@@ -115,6 +117,7 @@ async def main():
             # Check available commands from plugins
             print("Commands:", message.data.get("slash_commands"))
             # Example: ["/help", "/compact", "my-plugin:custom-command"]
+
 
 asyncio.run(main())
 ```
@@ -132,7 +135,7 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // Load a plugin with a custom /greet command
 for await (const message of query({
-  prompt: "/my-plugin:greet",  // Use plugin command with namespace
+  prompt: "/my-plugin:greet", // Use plugin command with namespace
   options: {
     plugins: [{ type: "local", path: "./my-plugin" }]
   }
@@ -148,17 +151,19 @@ for await (const message of query({
 import asyncio
 from claude_agent_sdk import query, AssistantMessage, TextBlock
 
+
 async def main():
     # Load a plugin with a custom /greet command
     async for message in query(
         prompt="/demo-plugin:greet",  # Use plugin command with namespace
-        options={"plugins": [{"type": "local", "path": "./plugins/demo-plugin"}]}
+        options={"plugins": [{"type": "local", "path": "./plugins/demo-plugin"}]},
     ):
         # Claude executes the custom greeting command from the plugin
         if isinstance(message, AssistantMessage):
             for block in message.content:
                 if isinstance(block, TextBlock):
                     print(f"Claude: {block.text}")
+
 
 asyncio.run(main())
 ```
@@ -228,15 +233,12 @@ async def run_with_plugin():
     print(f"Loading plugin from: {plugin_path}")
 
     options = ClaudeAgentOptions(
-        plugins=[
-            {"type": "local", "path": str(plugin_path)}
-        ],
+        plugins=[{"type": "local", "path": str(plugin_path)}],
         max_turns=3,
     )
 
     async for message in query(
-        prompt="What custom commands do you have available?",
-        options=options
+        prompt="What custom commands do you have available?", options=options
     ):
         if message.type == "system" and message.subtype == "init":
             print(f"Loaded plugins: {message.data.get('plugins')}")
@@ -287,7 +289,7 @@ Load plugins during development without installing them globally:
 ```typescript
 plugins: [
   { type: "local", path: "./dev-plugins/my-plugin" }
-]
+];
 ```
 
 ### Project-specific extensions
@@ -297,7 +299,7 @@ Include plugins in your project repository for team-wide consistency:
 ```typescript
 plugins: [
   { type: "local", path: "./project-plugins/team-workflows" }
-]
+];
 ```
 
 ### Multiple plugin sources
@@ -308,7 +310,7 @@ Combine plugins from different locations:
 plugins: [
   { type: "local", path: "./local-plugin" },
   { type: "local", path: "~/.claude/custom-plugins/shared-plugin" }
-]
+];
 ```
 
 ## Troubleshooting

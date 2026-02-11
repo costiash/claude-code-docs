@@ -44,31 +44,37 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    system=[
-      {
-        "type": "text",
-        "text": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n",
-      },
-      {
-        "type": "text",
-        "text": "<the entire contents of 'Pride and Prejudice'>",
-        "cache_control": {"type": "ephemeral"}
-      }
+params = {
+    "model": "claude-opus-4-6",
+    "max_tokens": 1024,
+    "system": [
+        {
+            "type": "text",
+            "text": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n",
+        },
+        {
+            "type": "text",
+            "text": "<the entire contents of 'Pride and Prejudice'>",
+            "cache_control": {"type": "ephemeral"},
+        },
     ],
-    messages=[{"role": "user", "content": "Analyze the major themes in 'Pride and Prejudice'."}],
-)
+    "messages": [
+        {
+            "role": "user",
+            "content": "Analyze the major themes in 'Pride and Prejudice'.",
+        }
+    ],
+}
+response = client.messages.create(**params)
 print(response.usage.model_dump_json())
 
 # Call the model again with the same inputs up to the cache checkpoint
-response = client.messages.create(.....)
+response = client.messages.create(**params)
 print(response.usage.model_dump_json())
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
@@ -78,7 +84,7 @@ const response = await client.messages.create({
   system: [
     {
       type: "text",
-      text: "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n",
+      text: "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
     },
     {
       type: "text",
@@ -96,13 +102,11 @@ const response = await client.messages.create({
 console.log(response.usage);
 
 // Call the model again with the same inputs up to the cache checkpoint
-const new_response = await client.messages.create(...)
+const new_response = await client.messages.create(/* ... */);
 console.log(new_response.usage);
 ```
 
 ```java Java
-import java.util.List;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -110,30 +114,35 @@ import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.TextBlockParam;
+import java.util.List;
 
 public class PromptCachingExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_6)
-                .maxTokens(1024)
-                .systemOfTextBlockParams(List.of(
-                        TextBlockParam.builder()
-                                .text("You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n")
-                                .build(),
-                        TextBlockParam.builder()
-                                .text("<the entire contents of 'Pride and Prejudice'>")
-                                .cacheControl(CacheControlEphemeral.builder().build())
-                                .build()
-                ))
-                .addUserMessage("Analyze the major themes in 'Pride and Prejudice'.")
-                .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_6)
+      .maxTokens(1024)
+      .systemOfTextBlockParams(
+        List.of(
+          TextBlockParam.builder()
+            .text(
+              "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+            )
+            .build(),
+          TextBlockParam.builder()
+            .text("<the entire contents of 'Pride and Prejudice'>")
+            .cacheControl(CacheControlEphemeral.builder().build())
+            .build()
+        )
+      )
+      .addUserMessage("Analyze the major themes in 'Pride and Prejudice'.")
+      .build();
 
-        Message message = client.messages().create(params);
-        System.out.println(message.usage());
-    }
+    Message message = client.messages().create(params);
+    System.out.println(message.usage());
+  }
 }
 ```
 </CodeGroup>
@@ -338,7 +347,7 @@ Monitor cache performance using these API response fields, within `usage` in the
 The `input_tokens` field represents only the tokens that come **after the last cache breakpoint** in your request - not all the input tokens you sent.
 
 To calculate total input tokens:
-```
+```text
 total_input_tokens = cache_read_input_tokens + cache_creation_input_tokens + input_tokens
 ```
 
@@ -554,6 +563,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```python Python
 import anthropic
+
 client = anthropic.Anthropic()
 
 response = client.messages.create(
@@ -562,26 +572,26 @@ response = client.messages.create(
     system=[
         {
             "type": "text",
-            "text": "You are an AI assistant tasked with analyzing legal documents."
+            "text": "You are an AI assistant tasked with analyzing legal documents.",
         },
         {
             "type": "text",
             "text": "Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]",
-            "cache_control": {"type": "ephemeral"}
-        }
+            "cache_control": {"type": "ephemeral"},
+        },
     ],
     messages=[
         {
             "role": "user",
-            "content": "What are the key terms and conditions in this agreement?"
+            "content": "What are the key terms and conditions in this agreement?",
         }
-    ]
+    ],
 )
 print(response.model_dump_json())
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
@@ -590,19 +600,19 @@ const response = await client.messages.create({
   max_tokens: 1024,
   system: [
     {
-        "type": "text",
-        "text": "You are an AI assistant tasked with analyzing legal documents."
+      type: "text",
+      text: "You are an AI assistant tasked with analyzing legal documents."
     },
     {
-        "type": "text",
-        "text": "Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]",
-        "cache_control": {"type": "ephemeral"}
+      type: "text",
+      text: "Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]",
+      cache_control: { type: "ephemeral" }
     }
   ],
   messages: [
     {
-        "role": "user",
-        "content": "What are the key terms and conditions in this agreement?"
+      role: "user",
+      content: "What are the key terms and conditions in this agreement?"
     }
   ]
 });
@@ -610,8 +620,6 @@ console.log(response);
 ```
 
 ```java Java
-import java.util.List;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -619,30 +627,35 @@ import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.TextBlockParam;
+import java.util.List;
 
 public class LegalDocumentAnalysisExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_6)
-                .maxTokens(1024)
-                .systemOfTextBlockParams(List.of(
-                        TextBlockParam.builder()
-                                .text("You are an AI assistant tasked with analyzing legal documents.")
-                                .build(),
-                        TextBlockParam.builder()
-                                .text("Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]")
-                                .cacheControl(CacheControlEphemeral.builder().build())
-                                .build()
-                ))
-                .addUserMessage("What are the key terms and conditions in this agreement?")
-                .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_6)
+      .maxTokens(1024)
+      .systemOfTextBlockParams(
+        List.of(
+          TextBlockParam.builder()
+            .text("You are an AI assistant tasked with analyzing legal documents.")
+            .build(),
+          TextBlockParam.builder()
+            .text(
+              "Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]"
+            )
+            .cacheControl(CacheControlEphemeral.builder().build())
+            .build()
+        )
+      )
+      .addUserMessage("What are the key terms and conditions in this agreement?")
+      .build();
 
-        Message message = client.messages().create(params);
-        System.out.println(message);
-    }
+    Message message = client.messages().create(params);
+    System.out.println(message);
+  }
 }
 ```
 </CodeGroup>
@@ -720,6 +733,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```python Python
 import anthropic
+
 client = anthropic.Anthropic()
 
 response = client.messages.create(
@@ -734,15 +748,15 @@ response = client.messages.create(
                 "properties": {
                     "location": {
                         "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA"
+                        "description": "The city and state, e.g. San Francisco, CA",
                     },
                     "unit": {
                         "type": "string",
                         "enum": ["celsius", "fahrenheit"],
-                        "description": "The unit of temperature, either 'celsius' or 'fahrenheit'"
-                    }
+                        "description": "The unit of temperature, either 'celsius' or 'fahrenheit'",
+                    },
                 },
-                "required": ["location"]
+                "required": ["location"],
             },
         },
         # many more tools
@@ -754,83 +768,75 @@ response = client.messages.create(
                 "properties": {
                     "timezone": {
                         "type": "string",
-                        "description": "The IANA time zone name, e.g. America/Los_Angeles"
+                        "description": "The IANA time zone name, e.g. America/Los_Angeles",
                     }
                 },
-                "required": ["timezone"]
+                "required": ["timezone"],
             },
-            "cache_control": {"type": "ephemeral"}
-        }
+            "cache_control": {"type": "ephemeral"},
+        },
     ],
-    messages=[
-        {
-            "role": "user",
-            "content": "What's the weather and time in New York?"
-        }
-    ]
+    messages=[{"role": "user", "content": "What's the weather and time in New York?"}],
 )
 print(response.model_dump_json())
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
 const response = await client.messages.create({
-    model: "claude-opus-4-6",
-    max_tokens: 1024,
-    tools=[
-        {
-            "name": "get_weather",
-            "description": "Get the current weather in a given location",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "location": {
-                        "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA"
-                    },
-                    "unit": {
-                        "type": "string",
-                        "enum": ["celsius", "fahrenheit"],
-                        "description": "The unit of temperature, either 'celsius' or 'fahrenheit'"
-                    }
-                },
-                "required": ["location"]
-            },
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  tools = [
+    {
+      name: "get_weather",
+      description: "Get the current weather in a given location",
+      input_schema: {
+        type: "object",
+        properties: {
+          location: {
+            type: "string",
+            description: "The city and state, e.g. San Francisco, CA"
+          },
+          unit: {
+            type: "string",
+            enum: ["celsius", "fahrenheit"],
+            description: "The unit of temperature, either 'celsius' or 'fahrenheit'"
+          }
         },
-        // many more tools
-        {
-            "name": "get_time",
-            "description": "Get the current time in a given time zone",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "timezone": {
-                        "type": "string",
-                        "description": "The IANA time zone name, e.g. America/Los_Angeles"
-                    }
-                },
-                "required": ["timezone"]
-            },
-            "cache_control": {"type": "ephemeral"}
-        }
-    ],
-    messages: [
-        {
-            "role": "user",
-            "content": "What's the weather and time in New York?"
-        }
-    ]
+        required: ["location"]
+      }
+    },
+    // many more tools
+    {
+      name: "get_time",
+      description: "Get the current time in a given time zone",
+      input_schema: {
+        type: "object",
+        properties: {
+          timezone: {
+            type: "string",
+            description: "The IANA time zone name, e.g. America/Los_Angeles"
+          }
+        },
+        required: ["timezone"]
+      },
+      cache_control: { type: "ephemeral" }
+    }
+  ],
+  messages: [
+    {
+      role: "user",
+      content: "What's the weather and time in New York?"
+    }
+  ]
 });
 console.log(response);
 ```
 
 ```java Java
-import java.util.List;
-import java.util.Map;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -840,59 +846,83 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.Tool;
 import com.anthropic.models.messages.Tool.InputSchema;
+import java.util.List;
+import java.util.Map;
 
 public class ToolsWithCacheControlExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        // Weather tool schema
-        InputSchema weatherSchema = InputSchema.builder()
-                .properties(JsonValue.from(Map.of(
-                        "location", Map.of(
-                                "type", "string",
-                                "description", "The city and state, e.g. San Francisco, CA"
-                        ),
-                        "unit", Map.of(
-                                "type", "string",
-                                "enum", List.of("celsius", "fahrenheit"),
-                                "description", "The unit of temperature, either celsius or fahrenheit"
-                        )
-                )))
-                .putAdditionalProperty("required", JsonValue.from(List.of("location")))
-                .build();
+    // Weather tool schema
+    InputSchema weatherSchema = InputSchema.builder()
+      .properties(
+        JsonValue.from(
+          Map.of(
+            "location",
+            Map.of(
+              "type",
+              "string",
+              "description",
+              "The city and state, e.g. San Francisco, CA"
+            ),
+            "unit",
+            Map.of(
+              "type",
+              "string",
+              "enum",
+              List.of("celsius", "fahrenheit"),
+              "description",
+              "The unit of temperature, either celsius or fahrenheit"
+            )
+          )
+        )
+      )
+      .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+      .build();
 
-        // Time tool schema
-        InputSchema timeSchema = InputSchema.builder()
-                .properties(JsonValue.from(Map.of(
-                        "timezone", Map.of(
-                                "type", "string",
-                                "description", "The IANA time zone name, e.g. America/Los_Angeles"
-                        )
-                )))
-                .putAdditionalProperty("required", JsonValue.from(List.of("timezone")))
-                .build();
+    // Time tool schema
+    InputSchema timeSchema = InputSchema.builder()
+      .properties(
+        JsonValue.from(
+          Map.of(
+            "timezone",
+            Map.of(
+              "type",
+              "string",
+              "description",
+              "The IANA time zone name, e.g. America/Los_Angeles"
+            )
+          )
+        )
+      )
+      .putAdditionalProperty("required", JsonValue.from(List.of("timezone")))
+      .build();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_6)
-                .maxTokens(1024)
-                .addTool(Tool.builder()
-                        .name("get_weather")
-                        .description("Get the current weather in a given location")
-                        .inputSchema(weatherSchema)
-                        .build())
-                .addTool(Tool.builder()
-                        .name("get_time")
-                        .description("Get the current time in a given time zone")
-                        .inputSchema(timeSchema)
-                        .cacheControl(CacheControlEphemeral.builder().build())
-                        .build())
-                .addUserMessage("What is the weather and time in New York?")
-                .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_6)
+      .maxTokens(1024)
+      .addTool(
+        Tool.builder()
+          .name("get_weather")
+          .description("Get the current weather in a given location")
+          .inputSchema(weatherSchema)
+          .build()
+      )
+      .addTool(
+        Tool.builder()
+          .name("get_time")
+          .description("Get the current time in a given time zone")
+          .inputSchema(timeSchema)
+          .cacheControl(CacheControlEphemeral.builder().build())
+          .build()
+      )
+      .addUserMessage("What is the weather and time in New York?")
+      .build();
 
-        Message message = client.messages().create(params);
-        System.out.println(message);
-    }
+    Message message = client.messages().create(params);
+    System.out.println(message);
+  }
 }
 ```
 </CodeGroup>
@@ -971,6 +1001,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```python Python
 import anthropic
+
 client = anthropic.Anthropic()
 
 response = client.messages.create(
@@ -980,7 +1011,7 @@ response = client.messages.create(
         {
             "type": "text",
             "text": "...long system prompt",
-            "cache_control": {"type": "ephemeral"}
+            "cache_control": {"type": "ephemeral"},
         }
     ],
     messages=[
@@ -992,83 +1023,78 @@ response = client.messages.create(
                     "type": "text",
                     "text": "Hello, can you tell me more about the solar system?",
                 }
-            ]
+            ],
         },
         {
             "role": "assistant",
-            "content": "Certainly! The solar system is the collection of celestial bodies that orbit our Sun. It consists of eight planets, numerous moons, asteroids, comets, and other objects. The planets, in order from closest to farthest from the Sun, are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Each planet has its own unique characteristics and features. Is there a specific aspect of the solar system you'd like to know more about?"
+            "content": "Certainly! The solar system is the collection of celestial bodies that orbit our Sun. It consists of eight planets, numerous moons, asteroids, comets, and other objects. The planets, in order from closest to farthest from the Sun, are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Each planet has its own unique characteristics and features. Is there a specific aspect of the solar system you'd like to know more about?",
         },
         {
             "role": "user",
             "content": [
-                {
-                    "type": "text",
-                    "text": "Good to know."
-                },
+                {"type": "text", "text": "Good to know."},
                 {
                     "type": "text",
                     "text": "Tell me more about Mars.",
-                    "cache_control": {"type": "ephemeral"}
-                }
-            ]
-        }
-    ]
+                    "cache_control": {"type": "ephemeral"},
+                },
+            ],
+        },
+    ],
 )
 print(response.model_dump_json())
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
 const response = await client.messages.create({
-    model: "claude-opus-4-6",
-    max_tokens: 1024,
-    system=[
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  system = [
+    {
+      type: "text",
+      text: "...long system prompt",
+      cache_control: { type: "ephemeral" }
+    }
+  ],
+  messages = [
+    // ...long conversation so far
+    {
+      role: "user",
+      content: [
         {
-            "type": "text",
-            "text": "...long system prompt",
-            "cache_control": {"type": "ephemeral"}
+          type: "text",
+          text: "Hello, can you tell me more about the solar system?"
         }
-    ],
-    messages=[
-        // ...long conversation so far
+      ]
+    },
+    {
+      role: "assistant",
+      content: "Certainly! The solar system is the collection of celestial bodies that orbit our Sun. It consists of eight planets, numerous moons, asteroids, comets, and other objects. The planets, in order from closest to farthest from the Sun, are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Each planet has its own unique characteristics and features. Is there a specific aspect of the solar system you'd like to know more about?"
+    },
+    {
+      role: "user",
+      content: [
         {
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Hello, can you tell me more about the solar system?",
-                }
-            ]
+          type: "text",
+          text: "Good to know."
         },
         {
-            "role": "assistant",
-            "content": "Certainly! The solar system is the collection of celestial bodies that orbit our Sun. It consists of eight planets, numerous moons, asteroids, comets, and other objects. The planets, in order from closest to farthest from the Sun, are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Each planet has its own unique characteristics and features. Is there a specific aspect of the solar system you'd like to know more about?"
-        },
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Good to know."
-                },
-                {
-                    "type": "text",
-                    "text": "Tell me more about Mars.",
-                    "cache_control": {"type": "ephemeral"}
-                }
-            ]
+          type: "text",
+          text: "Tell me more about Mars.",
+          cache_control: { type: "ephemeral" }
         }
-    ]
+      ]
+    }
+  ]
 });
 console.log(response);
 ```
 
 ```java Java
-import java.util.List;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -1077,42 +1103,47 @@ import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.TextBlockParam;
+import java.util.List;
 
 public class ConversationWithCacheControlExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        // Create ephemeral system prompt
-        TextBlockParam systemPrompt = TextBlockParam.builder()
-                .text("...long system prompt")
-                .cacheControl(CacheControlEphemeral.builder().build())
-                .build();
+    // Create ephemeral system prompt
+    TextBlockParam systemPrompt = TextBlockParam.builder()
+      .text("...long system prompt")
+      .cacheControl(CacheControlEphemeral.builder().build())
+      .build();
 
-        // Create message params
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_6)
-                .maxTokens(1024)
-                .systemOfTextBlockParams(List.of(systemPrompt))
-                // First user message (without cache control)
-                .addUserMessage("Hello, can you tell me more about the solar system?")
-                // Assistant response
-                .addAssistantMessage("Certainly! The solar system is the collection of celestial bodies that orbit our Sun. It consists of eight planets, numerous moons, asteroids, comets, and other objects. The planets, in order from closest to farthest from the Sun, are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Each planet has its own unique characteristics and features. Is there a specific aspect of the solar system you would like to know more about?")
-                // Second user message (with cache control)
-                .addUserMessageOfBlockParams(List.of(
-                        ContentBlockParam.ofText(TextBlockParam.builder()
-                                .text("Good to know.")
-                                .build()),
-                        ContentBlockParam.ofText(TextBlockParam.builder()
-                                .text("Tell me more about Mars.")
-                                .cacheControl(CacheControlEphemeral.builder().build())
-                                .build())
-                ))
-                .build();
+    // Create message params
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_6)
+      .maxTokens(1024)
+      .systemOfTextBlockParams(List.of(systemPrompt))
+      // First user message (without cache control)
+      .addUserMessage("Hello, can you tell me more about the solar system?")
+      // Assistant response
+      .addAssistantMessage(
+        "Certainly! The solar system is the collection of celestial bodies that orbit our Sun. It consists of eight planets, numerous moons, asteroids, comets, and other objects. The planets, in order from closest to farthest from the Sun, are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Each planet has its own unique characteristics and features. Is there a specific aspect of the solar system you would like to know more about?"
+      )
+      // Second user message (with cache control)
+      .addUserMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofText(TextBlockParam.builder().text("Good to know.").build()),
+          ContentBlockParam.ofText(
+            TextBlockParam.builder()
+              .text("Tell me more about Mars.")
+              .cacheControl(CacheControlEphemeral.builder().build())
+              .build()
+          )
+        )
+      )
+      .build();
 
-        Message message = client.messages().create(params);
-        System.out.println(message);
-    }
+    Message message = client.messages().create(params);
+    System.out.println(message);
+  }
 }
 ```
 </CodeGroup>
@@ -1239,6 +1270,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```python Python
 import anthropic
+
 client = anthropic.Anthropic()
 
 response = client.messages.create(
@@ -1251,13 +1283,10 @@ response = client.messages.create(
             "input_schema": {
                 "type": "object",
                 "properties": {
-                    "query": {
-                        "type": "string",
-                        "description": "Search query"
-                    }
+                    "query": {"type": "string", "description": "Search query"}
                 },
-                "required": ["query"]
-            }
+                "required": ["query"],
+            },
         },
         {
             "name": "get_document",
@@ -1265,32 +1294,29 @@ response = client.messages.create(
             "input_schema": {
                 "type": "object",
                 "properties": {
-                    "doc_id": {
-                        "type": "string",
-                        "description": "Document ID"
-                    }
+                    "doc_id": {"type": "string", "description": "Document ID"}
                 },
-                "required": ["doc_id"]
+                "required": ["doc_id"],
             },
-            "cache_control": {"type": "ephemeral"}
-        }
+            "cache_control": {"type": "ephemeral"},
+        },
     ],
     system=[
         {
             "type": "text",
             "text": "You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base",
-            "cache_control": {"type": "ephemeral"}
+            "cache_control": {"type": "ephemeral"},
         },
         {
             "type": "text",
             "text": "# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]",
-            "cache_control": {"type": "ephemeral"}
-        }
+            "cache_control": {"type": "ephemeral"},
+        },
     ],
     messages=[
         {
             "role": "user",
-            "content": "Can you search for information about Mars rovers?"
+            "content": "Can you search for information about Mars rovers?",
         },
         {
             "role": "assistant",
@@ -1299,9 +1325,9 @@ response = client.messages.create(
                     "type": "tool_use",
                     "id": "tool_1",
                     "name": "search_documents",
-                    "input": {"query": "Mars rovers"}
+                    "input": {"query": "Mars rovers"},
                 }
-            ]
+            ],
         },
         {
             "role": "user",
@@ -1309,18 +1335,18 @@ response = client.messages.create(
                 {
                     "type": "tool_result",
                     "tool_use_id": "tool_1",
-                    "content": "Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)"
+                    "content": "Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)",
                 }
-            ]
+            ],
         },
         {
             "role": "assistant",
             "content": [
                 {
                     "type": "text",
-                    "text": "I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document."
+                    "text": "I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document.",
                 }
-            ]
+            ],
         },
         {
             "role": "user",
@@ -1328,120 +1354,117 @@ response = client.messages.create(
                 {
                     "type": "text",
                     "text": "Yes, please tell me about the Perseverance rover specifically.",
-                    "cache_control": {"type": "ephemeral"}
+                    "cache_control": {"type": "ephemeral"},
                 }
-            ]
-        }
-    ]
+            ],
+        },
+    ],
 )
 print(response.model_dump_json())
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
 const response = await client.messages.create({
-    model: "claude-opus-4-6",
-    max_tokens: 1024,
-    tools: [
-        {
-            name: "search_documents",
-            description: "Search through the knowledge base",
-            input_schema: {
-                type: "object",
-                properties: {
-                    query: {
-                        type: "string",
-                        description: "Search query"
-                    }
-                },
-                required: ["query"]
-            }
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  tools: [
+    {
+      name: "search_documents",
+      description: "Search through the knowledge base",
+      input_schema: {
+        type: "object",
+        properties: {
+          query: {
+            type: "string",
+            description: "Search query"
+          }
         },
+        required: ["query"]
+      }
+    },
+    {
+      name: "get_document",
+      description: "Retrieve a specific document by ID",
+      input_schema: {
+        type: "object",
+        properties: {
+          doc_id: {
+            type: "string",
+            description: "Document ID"
+          }
+        },
+        required: ["doc_id"]
+      },
+      cache_control: { type: "ephemeral" }
+    }
+  ],
+  system: [
+    {
+      type: "text",
+      text: "You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base",
+      cache_control: { type: "ephemeral" }
+    },
+    {
+      type: "text",
+      text: "# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]",
+      cache_control: { type: "ephemeral" }
+    }
+  ],
+  messages: [
+    {
+      role: "user",
+      content: "Can you search for information about Mars rovers?"
+    },
+    {
+      role: "assistant",
+      content: [
         {
-            name: "get_document",
-            description: "Retrieve a specific document by ID",
-            input_schema: {
-                type: "object",
-                properties: {
-                    doc_id: {
-                        type: "string",
-                        description: "Document ID"
-                    }
-                },
-                required: ["doc_id"]
-            },
-            cache_control: { type: "ephemeral" }
+          type: "tool_use",
+          id: "tool_1",
+          name: "search_documents",
+          input: { query: "Mars rovers" }
         }
-    ],
-    system: [
+      ]
+    },
+    {
+      role: "user",
+      content: [
         {
-            type: "text",
-            text: "You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base",
-            cache_control: { type: "ephemeral" }
-        },
-        {
-            type: "text",
-            text: "# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]",
-            cache_control: { type: "ephemeral" }
+          type: "tool_result",
+          tool_use_id: "tool_1",
+          content: "Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)"
         }
-    ],
-    messages: [
+      ]
+    },
+    {
+      role: "assistant",
+      content: [
         {
-            role: "user",
-            content: "Can you search for information about Mars rovers?"
-        },
-        {
-            role: "assistant",
-            content: [
-                {
-                    type: "tool_use",
-                    id: "tool_1",
-                    name: "search_documents",
-                    input: { query: "Mars rovers" }
-                }
-            ]
-        },
-        {
-            role: "user",
-            content: [
-                {
-                    type: "tool_result",
-                    tool_use_id: "tool_1",
-                    content: "Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)"
-                }
-            ]
-        },
-        {
-            role: "assistant",
-            content: [
-                {
-                    type: "text",
-                    text: "I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document."
-                }
-            ]
-        },
-        {
-            role: "user",
-            content: [
-                {
-                    type: "text",
-                    text: "Yes, please tell me about the Perseverance rover specifically.",
-                    cache_control: { type: "ephemeral" }
-                }
-            ]
+          type: "text",
+          text: "I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document."
         }
-    ]
+      ]
+    },
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "Yes, please tell me about the Perseverance rover specifically.",
+          cache_control: { type: "ephemeral" }
+        }
+      ]
+    }
+  ]
 });
 console.log(response);
 ```
 
 ```java Java
-import java.util.List;
-import java.util.Map;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -1455,91 +1478,121 @@ import com.anthropic.models.messages.Tool;
 import com.anthropic.models.messages.Tool.InputSchema;
 import com.anthropic.models.messages.ToolResultBlockParam;
 import com.anthropic.models.messages.ToolUseBlockParam;
+import java.util.List;
+import java.util.Map;
 
 public class MultipleCacheBreakpointsExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        // Search tool schema
-        InputSchema searchSchema = InputSchema.builder()
-                .properties(JsonValue.from(Map.of(
-                        "query", Map.of(
-                                "type", "string",
-                                "description", "Search query"
-                        )
-                )))
-                .putAdditionalProperty("required", JsonValue.from(List.of("query")))
-                .build();
+    // Search tool schema
+    InputSchema searchSchema = InputSchema.builder()
+      .properties(
+        JsonValue.from(
+          Map.of("query", Map.of("type", "string", "description", "Search query"))
+        )
+      )
+      .putAdditionalProperty("required", JsonValue.from(List.of("query")))
+      .build();
 
-        // Get document tool schema
-        InputSchema getDocSchema = InputSchema.builder()
-                .properties(JsonValue.from(Map.of(
-                        "doc_id", Map.of(
-                                "type", "string",
-                                "description", "Document ID"
-                        )
-                )))
-                .putAdditionalProperty("required", JsonValue.from(List.of("doc_id")))
-                .build();
+    // Get document tool schema
+    InputSchema getDocSchema = InputSchema.builder()
+      .properties(
+        JsonValue.from(
+          Map.of("doc_id", Map.of("type", "string", "description", "Document ID"))
+        )
+      )
+      .putAdditionalProperty("required", JsonValue.from(List.of("doc_id")))
+      .build();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_6)
-                .maxTokens(1024)
-                // Tools with cache control on the last one
-                .addTool(Tool.builder()
-                        .name("search_documents")
-                        .description("Search through the knowledge base")
-                        .inputSchema(searchSchema)
-                        .build())
-                .addTool(Tool.builder()
-                        .name("get_document")
-                        .description("Retrieve a specific document by ID")
-                        .inputSchema(getDocSchema)
-                        .cacheControl(CacheControlEphemeral.builder().build())
-                        .build())
-                // System prompts with cache control on instructions and context separately
-                .systemOfTextBlockParams(List.of(
-                        TextBlockParam.builder()
-                                .text("You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base")
-                                .cacheControl(CacheControlEphemeral.builder().build())
-                                .build(),
-                        TextBlockParam.builder()
-                                .text("# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]")
-                                .cacheControl(CacheControlEphemeral.builder().build())
-                                .build()
-                ))
-                // Conversation history
-                .addUserMessage("Can you search for information about Mars rovers?")
-                .addAssistantMessageOfBlockParams(List.of(
-                        ContentBlockParam.ofToolUse(ToolUseBlockParam.builder()
-                                .id("tool_1")
-                                .name("search_documents")
-                                .input(JsonValue.from(Map.of("query", "Mars rovers")))
-                                .build())
-                ))
-                .addUserMessageOfBlockParams(List.of(
-                        ContentBlockParam.ofToolResult(ToolResultBlockParam.builder()
-                                .toolUseId("tool_1")
-                                .content("Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)")
-                                .build())
-                ))
-                .addAssistantMessageOfBlockParams(List.of(
-                        ContentBlockParam.ofText(TextBlockParam.builder()
-                                .text("I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document.")
-                                .build())
-                ))
-                .addUserMessageOfBlockParams(List.of(
-                        ContentBlockParam.ofText(TextBlockParam.builder()
-                                .text("Yes, please tell me about the Perseverance rover specifically.")
-                                .cacheControl(CacheControlEphemeral.builder().build())
-                                .build())
-                ))
-                .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_6)
+      .maxTokens(1024)
+      // Tools with cache control on the last one
+      .addTool(
+        Tool.builder()
+          .name("search_documents")
+          .description("Search through the knowledge base")
+          .inputSchema(searchSchema)
+          .build()
+      )
+      .addTool(
+        Tool.builder()
+          .name("get_document")
+          .description("Retrieve a specific document by ID")
+          .inputSchema(getDocSchema)
+          .cacheControl(CacheControlEphemeral.builder().build())
+          .build()
+      )
+      // System prompts with cache control on instructions and context separately
+      .systemOfTextBlockParams(
+        List.of(
+          TextBlockParam.builder()
+            .text(
+              "You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base"
+            )
+            .cacheControl(CacheControlEphemeral.builder().build())
+            .build(),
+          TextBlockParam.builder()
+            .text(
+              "# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]"
+            )
+            .cacheControl(CacheControlEphemeral.builder().build())
+            .build()
+        )
+      )
+      // Conversation history
+      .addUserMessage("Can you search for information about Mars rovers?")
+      .addAssistantMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofToolUse(
+            ToolUseBlockParam.builder()
+              .id("tool_1")
+              .name("search_documents")
+              .input(JsonValue.from(Map.of("query", "Mars rovers")))
+              .build()
+          )
+        )
+      )
+      .addUserMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofToolResult(
+            ToolResultBlockParam.builder()
+              .toolUseId("tool_1")
+              .content(
+                "Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)"
+              )
+              .build()
+          )
+        )
+      )
+      .addAssistantMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofText(
+            TextBlockParam.builder()
+              .text(
+                "I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document."
+              )
+              .build()
+          )
+        )
+      )
+      .addUserMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofText(
+            TextBlockParam.builder()
+              .text("Yes, please tell me about the Perseverance rover specifically.")
+              .cacheControl(CacheControlEphemeral.builder().build())
+              .build()
+          )
+        )
+      )
+      .build();
 
-        Message message = client.messages().create(params);
-        System.out.println(message);
-    }
+    Message message = client.messages().create(params);
+    System.out.println(message);
+  }
 }
 ```
 </CodeGroup>
@@ -1609,7 +1662,7 @@ This pattern is especially powerful for:
 
     The usage response includes three separate input token fields that together represent your total input:
 
-    ```
+    ```text
     total_input_tokens = cache_read_input_tokens + cache_creation_input_tokens + input_tokens
     ```
 
@@ -1731,14 +1784,14 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
 
   This error typically appears when you have upgraded your SDK or you are using outdated code examples. Prompt caching is now generally available, so you no longer need the beta prefix. Instead of:
     <CodeGroup>
-      ```python Python
-      python client.beta.prompt_caching.messages.create(...)
+      ```python
+      client.beta.prompt_caching.messages.create(**params)
       ```
     </CodeGroup>
     Simply use:
     <CodeGroup>
-      ```python Python
-      python client.messages.create(...)
+      ```python
+      client.messages.create(**params)
       ```
     </CodeGroup>
   
@@ -1748,13 +1801,13 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
   This error typically appears when you have upgraded your SDK or you are using outdated code examples. Prompt caching is now generally available, so you no longer need the beta prefix. Instead of:
 
       ```typescript TypeScript
-      client.beta.promptCaching.messages.create(...)
+      client.beta.promptCaching.messages.create(/* ... */);
       ```
 
       Simply use:
 
       ```typescript
-      client.messages.create(...)
+      client.messages.create(/* ... */);
       ```
   
 </section>

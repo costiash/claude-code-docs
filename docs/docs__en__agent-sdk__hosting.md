@@ -52,13 +52,13 @@ Several providers specialize in secure container environments for AI code execut
 - **[Fly Machines](https://fly.io/docs/machines/)**
 - **[Vercel Sandbox](https://vercel.com/docs/functions/sandbox)**
 
-For self-hosted options (Docker, gVisor, Firecracker) and detailed isolation configuration, see [Isolation Technologies](/docs/en/agent-sdk/secure-deployment#isolation-technologies). 
+For self-hosted options (Docker, gVisor, Firecracker) and detailed isolation configuration, see [Isolation Technologies](/docs/en/agent-sdk/secure-deployment#isolation-technologies).
 
 ## Production Deployment Patterns
 
 ### Pattern 1: Ephemeral Sessions
 
-Create a new container for each user task, then destroy it when complete. 
+Create a new container for each user task, then destroy it when complete.
 
 Best for one-off tasks, the user may still interact with the AI while the task is completing, but once completed the container is destroyed.
 
@@ -109,7 +109,7 @@ We have found that the dominant cost of serving agents is the tokens, containers
 
 ### When should I shut down idle containers vs. keeping them warm?
 This is likely provider dependent, different sandbox providers will let you set different criteria for idle timeouts after which a sandbox might spin down.
-You will want to tune this timeout based on how frequent you think user response might be. 
+You will want to tune this timeout based on how frequent you think user response might be.
 
 ### How often should I update the Claude Code CLI?
 The Claude Code CLI is versioned with semver, so any breaking changes will be versioned.

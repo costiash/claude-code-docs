@@ -32,10 +32,13 @@ client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=2048,
-    system="You are a seasoned data scientist at a Fortune 500 company.", # <-- role prompt
+    system="You are a seasoned data scientist at a Fortune 500 company.",  # <-- role prompt
     messages=[
-        {"role": "user", "content": "Analyze this dataset for anomalies: <dataset>{{DATASET}}</dataset>"}
-    ]
+        {
+            "role": "user",
+            "content": "Analyze this dataset for anomalies: <dataset>{{DATASET}}</dataset>",
+        }
+    ],
 )
 
 print(response.content)

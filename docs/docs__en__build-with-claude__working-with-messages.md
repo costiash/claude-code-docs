@@ -31,23 +31,21 @@ This guide covers common patterns for working with the Messages API, including b
   message = anthropic.Anthropic().messages.create(
       model="claude-opus-4-6",
       max_tokens=1024,
-      messages=[
-          {"role": "user", "content": "Hello, Claude"}
-      ]
+      messages=[{"role": "user", "content": "Hello, Claude"}],
   )
   print(message)
   ```
 
   ```typescript TypeScript
-  import Anthropic from '@anthropic-ai/sdk';
+  import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();
 
   const message = await anthropic.messages.create({
-    model: 'claude-opus-4-6',
+    model: "claude-opus-4-6",
     max_tokens: 1024,
     messages: [
-      {"role": "user", "content": "Hello, Claude"}
+      { role: "user", content: "Hello, Claude" }
     ]
   });
   console.log(message);
@@ -108,25 +106,24 @@ message = anthropic.Anthropic().messages.create(
     messages=[
         {"role": "user", "content": "Hello, Claude"},
         {"role": "assistant", "content": "Hello!"},
-        {"role": "user", "content": "Can you describe LLMs to me?"}
+        {"role": "user", "content": "Can you describe LLMs to me?"},
     ],
 )
 print(message)
-
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
 await anthropic.messages.create({
-  model: 'claude-opus-4-6',
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
-    {"role": "user", "content": "Hello, Claude"},
-    {"role": "assistant", "content": "Hello!"},
-    {"role": "user", "content": "Can you describe LLMs to me?"}
+    { role: "user", content: "Hello, Claude" },
+    { role: "assistant", content: "Hello!" },
+    { role: "user", content: "Can you describe LLMs to me?" }
   ]
 });
 ```
@@ -181,24 +178,27 @@ You can pre-fill part of Claude's response in the last position of the input mes
       model="claude-opus-4-6",
       max_tokens=1,
       messages=[
-          {"role": "user", "content": "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"},
-          {"role": "assistant", "content": "The answer is ("}
-      ]
+          {
+              "role": "user",
+              "content": "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae",
+          },
+          {"role": "assistant", "content": "The answer is ("},
+      ],
   )
   print(message)
   ```
 
   ```typescript TypeScript
-  import Anthropic from '@anthropic-ai/sdk';
+  import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();
 
   const message = await anthropic.messages.create({
-    model: 'claude-opus-4-6',
+    model: "claude-opus-4-6",
     max_tokens: 1,
     messages: [
-      {"role": "user", "content": "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"},
-      {"role": "assistant", "content": "The answer is ("}
+      { role: "user", content: "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae" },
+      { role: "assistant", content: "The answer is (" }
     ]
   });
   console.log(message);
@@ -309,10 +309,7 @@ Claude can read both text and images in requests. We support both `base64` and `
                           "data": image_data,
                       },
                   },
-                  {
-                      "type": "text",
-                      "text": "What is in the above image?"
-                  }
+                  {"type": "text", "text": "What is in the above image?"},
               ],
           }
       ],
@@ -334,10 +331,7 @@ Claude can read both text and images in requests. We support both `base64` and `
                           "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
                       },
                   },
-                  {
-                      "type": "text",
-                      "text": "What is in the above image?"
-                  }
+                  {"type": "text", "text": "What is in the above image?"},
               ],
           }
       ],
@@ -346,63 +340,63 @@ Claude can read both text and images in requests. We support both `base64` and `
   ```
 
   ```typescript TypeScript
-  import Anthropic from '@anthropic-ai/sdk';
+  import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();
 
   // Option 1: Base64-encoded image
-  const image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-  const image_media_type = "image/jpeg"
+  const image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+  const image_media_type = "image/jpeg";
   const image_array_buffer = await ((await fetch(image_url)).arrayBuffer());
-  const image_data = Buffer.from(image_array_buffer).toString('base64');
+  const image_data = Buffer.from(image_array_buffer).toString("base64");
 
   const message = await anthropic.messages.create({
-    model: 'claude-opus-4-6',
+    model: "claude-opus-4-6",
     max_tokens: 1024,
     messages: [
+      {
+        role: "user",
+        content: [
           {
-              "role": "user",
-              "content": [
-                  {
-                      "type": "image",
-                      "source": {
-                          "type": "base64",
-                          "media_type": image_media_type,
-                          "data": image_data,
-                      },
-                  },
-                  {
-                      "type": "text",
-                      "text": "What is in the above image?"
-                  }
-              ],
+            type: "image",
+            source: {
+              type: "base64",
+              media_type: image_media_type,
+              data: image_data
+            }
+          },
+          {
+            type: "text",
+            text: "What is in the above image?"
           }
         ]
+      }
+    ]
   });
   console.log(message);
 
   // Option 2: URL-referenced image
   const messageFromUrl = await anthropic.messages.create({
-    model: 'claude-opus-4-6',
+    model: "claude-opus-4-6",
     max_tokens: 1024,
     messages: [
+      {
+        role: "user",
+        content: [
           {
-              "role": "user",
-              "content": [
-                  {
-                      "type": "image",
-                      "source": {
-                          "type": "url",
-                          "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
-                      },
-                  },
-                  {
-                      "type": "text",
-                      "text": "What is in the above image?"
-                  }
-              ],
+            type: "image",
+            source: {
+              type: "url",
+              url: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+            }
+          },
+          {
+            type: "text",
+            text: "What is in the above image?"
           }
         ]
+      }
+    ]
   });
   console.log(messageFromUrl);
   ```

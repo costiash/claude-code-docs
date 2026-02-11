@@ -69,23 +69,14 @@ client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[
-        {
-            "role": "user",
-            "content": "What's the weather in NYC?"
-        }
-    ],
-    tools=[{
-        "type": "web_search_20250305",
-        "name": "web_search",
-        "max_uses": 5
-    }]
+    messages=[{"role": "user", "content": "What's the weather in NYC?"}],
+    tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
 )
 print(response)
 ```
 
 ```typescript TypeScript
-import { Anthropic } from '@anthropic-ai/sdk';
+import { Anthropic } from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
@@ -263,7 +254,7 @@ Citations are always enabled for web search, and each `web_search_result_locatio
 - `encrypted_index`: A reference that must be passed back for multi-turn conversations.
 - `cited_text`: Up to 150 characters of the cited content
 
-The web search citation fields `cited_text`, `title`, and `url` do not count towards input or output token usage. 
+The web search citation fields `cited_text`, `title`, and `url` do not count towards input or output token usage.
 
 <Note>
   When displaying API outputs directly to end users, citations must be included to the original source. If you are making modifications to API outputs, including by reprocessing and/or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
@@ -312,57 +303,57 @@ client = anthropic.Anthropic()
 
 # First request with web search and cache breakpoint
 messages = [
-    {
-        "role": "user",
-        "content": "What's the current weather in San Francisco today?"
-    }
+    {"role": "user", "content": "What's the current weather in San Francisco today?"}
 ]
 
 response1 = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     messages=messages,
-    tools=[{
-        "type": "web_search_20250305",
-        "name": "web_search",
-        "user_location": {
-            "type": "approximate",
-            "city": "San Francisco",
-            "region": "California",
-            "country": "US",
-            "timezone": "America/Los_Angeles"
+    tools=[
+        {
+            "type": "web_search_20250305",
+            "name": "web_search",
+            "user_location": {
+                "type": "approximate",
+                "city": "San Francisco",
+                "region": "California",
+                "country": "US",
+                "timezone": "America/Los_Angeles",
+            },
         }
-    }]
+    ],
 )
 
 # Add Claude's response to the conversation
-messages.append({
-    "role": "assistant",
-    "content": response1.content
-})
+messages.append({"role": "assistant", "content": response1.content})
 
 # Second request with cache breakpoint after the search results
-messages.append({
-    "role": "user",
-    "content": "Should I expect rain later this week?",
-    "cache_control": {"type": "ephemeral"}  # Cache up to this point
-})
+messages.append(
+    {
+        "role": "user",
+        "content": "Should I expect rain later this week?",
+        "cache_control": {"type": "ephemeral"},  # Cache up to this point
+    }
+)
 
 response2 = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     messages=messages,
-    tools=[{
-        "type": "web_search_20250305",
-        "name": "web_search",
-        "user_location": {
-            "type": "approximate",
-            "city": "San Francisco",
-            "region": "California",
-            "country": "US",
-            "timezone": "America/Los_Angeles"
+    tools=[
+        {
+            "type": "web_search_20250305",
+            "name": "web_search",
+            "user_location": {
+                "type": "approximate",
+                "city": "San Francisco",
+                "region": "California",
+                "country": "US",
+                "timezone": "America/Los_Angeles",
+            },
         }
-    }]
+    ],
 )
 # The second response will benefit from cached search results
 # while still being able to perform new searches if needed
@@ -375,7 +366,7 @@ print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
 
 With streaming enabled, you'll receive search events as part of the stream. There will be a pause while the search executes:
 
-```javascript
+```json
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_abc123", "type": "message"}}
 

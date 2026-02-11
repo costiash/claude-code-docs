@@ -68,7 +68,7 @@ The diagram below illustrates the context window token management when combining
   <Step title="Third Step">
     - **Input components:** All inputs and the output from the previous turn is carried forward with the exception of the thinking block, which can be dropped now that Claude has completed the entire tool use cycle. The API will automatically strip the thinking block for you if you pass it back, or you can feel free to strip it yourself at this stage. This is also where you would add the next `User` turn.
     - **Output components:** Since there is a new `User` turn outside of the tool use cycle, Claude will generate a new extended thinking block and continue from there.
-    - **Token calculation:** Previous thinking tokens are automatically stripped from context window calculations. All other previous blocks still count as part of the token window, and the thinking block in the current `Assistant` turn counts as part of the context window. 
+    - **Token calculation:** Previous thinking tokens are automatically stripped from context window calculations. All other previous blocks still count as part of the token window, and the thinking block in the current `Assistant` turn counts as part of the context window.
   </Step>
 </Steps>
 
@@ -120,25 +120,23 @@ client = Anthropic()
 response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "Process this large document..."}
-    ],
-    betas=["context-1m-2025-08-07"]
+    messages=[{"role": "user", "content": "Process this large document..."}],
+    betas=["context-1m-2025-08-07"],
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
 const msg = await anthropic.beta.messages.create({
-  model: 'claude-opus-4-6',
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
-    { role: 'user', content: 'Process this large document...' }
+    { role: "user", content: "Process this large document..." }
   ],
-  betas: ['context-1m-2025-08-07']
+  betas: ["context-1m-2025-08-07"]
 });
 ```
 
@@ -147,14 +145,14 @@ const msg = await anthropic.beta.messages.create({
 **Important considerations:**
 - **Beta status:** This is a beta feature subject to change. Features and pricing may be modified or removed in future releases.
 - **Usage tier requirement:** The 1M token context window is available to organizations in [usage tier](/docs/en/api/rate-limits) 4 and organizations with custom rate limits. Lower tier organizations must advance to usage tier 4 to access this feature.
-- **Availability:** The 1M token context window is currently available on the Claude API, [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry), [Amazon Bedrock](/docs/en/build-with-claude/claude-on-amazon-bedrock), and [Google Cloud's Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai). 
+- **Availability:** The 1M token context window is currently available on the Claude API, [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry), [Amazon Bedrock](/docs/en/build-with-claude/claude-on-amazon-bedrock), and [Google Cloud's Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai).
 - **Pricing:** Requests exceeding 200K tokens are automatically charged at premium rates (2x input, 1.5x output pricing). See the [pricing documentation](/docs/en/about-claude/pricing#long-context-pricing) for details.
 - **Rate limits:** Long context requests have dedicated rate limits. See the [rate limits documentation](/docs/en/api/rate-limits#long-context-rate-limits) for details.
 - **Multimodal considerations:** When processing large numbers of images or pdfs, be aware that the files can vary in token usage. When pairing a large prompt with a large number of images, you may hit [request size limits](/docs/en/api/overview#request-size-limits).
 
 ## Context awareness in Claude Sonnet 4.5 and Haiku 4.5
 
-Claude Sonnet 4.5 and Claude Haiku 4.5 feature **context awareness**. This capability lets these models track their remaining context window (i.e. "token budget") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work. Claude is trained to use this context precisely, persisting in the task until the very end rather than guessing how many tokens remain. For a model, lacking context awareness is like competing in a cooking show without a clock. Claude 4.5 models change this by explicitly informing the model about its remaining context, so it can take maximum advantage of the available tokens. 
+Claude Sonnet 4.5 and Claude Haiku 4.5 feature **context awareness**. This capability lets these models track their remaining context window (i.e. "token budget") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work. Claude is trained to use this context precisely, persisting in the task until the very end rather than guessing how many tokens remain. For a model, lacking context awareness is like competing in a cooking show without a clock. Claude 4.5 models change this by explicitly informing the model about its remaining context, so it can take maximum advantage of the available tokens.
 
 **How it works:**
 

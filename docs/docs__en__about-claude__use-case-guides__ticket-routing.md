@@ -49,19 +49,19 @@ Here are some key indicators that you should use an LLM like Claude  instead of 
 ##  Build and deploy your LLM support workflow
 
 ### Understand your current support approach
-Before diving into automation, it's crucial to understand your existing ticketing system. Start by investigating how your support team currently handles ticket routing. 
+Before diving into automation, it's crucial to understand your existing ticketing system. Start by investigating how your support team currently handles ticket routing.
 
 Consider questions like:
 * What criteria are used to determine what SLA/service offering is applied?
 * Is ticket routing used to determine which tier of support or product specialist a ticket goes to?
-* Are there any automated rules or workflows already in place? In what cases do they fail? 
+* Are there any automated rules or workflows already in place? In what cases do they fail?
 * How are edge cases or ambiguous tickets handled?
-* How does the team prioritize tickets? 
+* How does the team prioritize tickets?
 
 The more you know about how humans handle certain cases, the better you will be able to work with Claude to do the task.
 
 ### Define user intent categories
-A well-defined list of user intent categories is crucial for accurate support ticket classification with Claude. Claude’s ability to route tickets effectively within your system is directly proportional to how well-defined your system’s categories are.  
+A well-defined list of user intent categories is crucial for accurate support ticket classification with Claude. Claude’s ability to route tickets effectively within your system is directly proportional to how well-defined your system’s categories are.
 
 Here are some example user intent categories and subcategories.
 
@@ -161,7 +161,7 @@ In addition to intent, ticket routing and prioritization may also be influenced 
 
 ### Establish success criteria
 
-Work with your support team to [define clear success criteria](/docs/en/test-and-evaluate/define-success) with measurable benchmarks, thresholds, and goals. 
+Work with your support team to [define clear success criteria](/docs/en/test-and-evaluate/define-success) with measurable benchmarks, thresholds, and goals.
 
 Here are some standard criteria and benchmarks when using LLMs for support ticket routing:
 
@@ -210,7 +210,7 @@ Here are some common success criteria that may be useful regardless of whether a
 </section>
     <section title="Time-to-assignment">
 
-        This metric tracks how quickly tickets are assigned after being submitted. Faster assignment times generally lead to quicker resolutions and improved customer satisfaction. Best-in-class systems often achieve average assignment times of under 5 minutes, with many aiming for near-instantaneous routing (which is possible with LLM implementations). 
+        This metric tracks how quickly tickets are assigned after being submitted. Faster assignment times generally lead to quicker resolutions and improved customer satisfaction. Best-in-class systems often achieve average assignment times of under 5 minutes, with many aiming for near-instantaneous routing (which is possible with LLM implementations).
     
 </section>
     <section title="Rerouting rate">
@@ -258,11 +258,11 @@ Here are some common success criteria that may be useful regardless of whether a
 
 The choice of model depends on the trade-offs between cost, accuracy, and response time.
 
-Many customers have found `claude-haiku-4-5-20251001` an ideal model for ticket routing, as it is the fastest and most cost-effective model in the Claude 4 family while still delivering excellent results. If your classification problem requires deep subject matter expertise or a large volume of intent categories complex reasoning, you may opt for the [larger Sonnet model](/docs/en/about-claude/models). 
+Many customers have found `claude-haiku-4-5-20251001` an ideal model for ticket routing, as it is the fastest and most cost-effective model in the Claude 4 family while still delivering excellent results. If your classification problem requires deep subject matter expertise or a large volume of intent categories complex reasoning, you may opt for the [larger Sonnet model](/docs/en/about-claude/models).
 
 ### Build a strong prompt
 
-Ticket routing is a type of classification task. Claude analyzes the content of a support ticket and classifies it into predefined categories based on the issue type, urgency, required expertise, or other relevant factors. 
+Ticket routing is a type of classification task. Claude analyzes the content of a support ticket and classifies it into predefined categories based on the issue type, urgency, required expertise, or other relevant factors.
 
 Let’s write a ticket classification prompt. Our initial prompt should contain the contents of the user request and return both the reasoning and the intent.
 
@@ -274,7 +274,7 @@ Here's an example ticket routing classification prompt:
 ```python
 def classify_support_request(ticket_contents):
     # Define the prompt for the classification task
-    classification_prompt = f"""You will be acting as a customer support ticket classification system. Your task is to analyze customer support requests and output the appropriate classification intent for each request, along with your reasoning. 
+    classification_prompt = f"""You will be acting as a customer support ticket classification system. Your task is to analyze customer support requests and output the appropriate classification intent for each request, along with your reasoning.
 
         Here is the customer support request you need to classify:
 
@@ -351,11 +351,12 @@ import re
 client = anthropic.Anthropic()
 
 # Set the default model
-DEFAULT_MODEL="claude-haiku-4-5-20251001"
+DEFAULT_MODEL = "claude-haiku-4-5-20251001"
+
 
 def classify_support_request(ticket_contents):
     # Define the prompt for the classification task
-    classification_prompt = f"""You will be acting as a customer support ticket classification system. 
+    classification_prompt = f"""You will be acting as a customer support ticket classification system.
         ...
         ... The reasoning should be enclosed in <reasoning> tags and the intent in <intent> tags. Return only the reasoning and the intent.
         """
@@ -385,7 +386,7 @@ def classify_support_request(ticket_contents):
 This code:
 * Imports the Anthropic library and creates a client instance using your API key.
 * Defines a `classify_support_request` function that takes a `ticket_contents` string.
-* Sends the `ticket_contents` to Claude for classification using the `classification_prompt` 
+* Sends the `ticket_contents` to Claude for classification using the `classification_prompt`
 * Returns the model's `reasoning` and `intent` extracted from the response.
 
 Since we need to wait for the entire reasoning and intent text to be generated before parsing, we set `stream=False` (the default).
@@ -416,11 +417,12 @@ import re
 client = anthropic.Anthropic()
 
 # Set the default model
-DEFAULT_MODEL="claude-haiku-4-5-20251001"
+DEFAULT_MODEL = "claude-haiku-4-5-20251001"
+
 
 def classify_support_request(request, actual_intent):
     # Define the prompt for the classification task
-    classification_prompt = f"""You will be acting as a customer support ticket classification system. 
+    classification_prompt = f"""You will be acting as a customer support ticket classification system.
         ...
         ...The reasoning should be enclosed in <reasoning> tags and the intent in <intent> tags. Return only the reasoning and the intent.
         """
@@ -444,7 +446,7 @@ def classify_support_request(request, actual_intent):
     intent_match = re.search(r"<intent>(.*?)</intent>", reasoning_and_intent, re.DOTALL)
     intent = intent_match.group(1).strip() if intent_match else ""
 
-      # Check if the model's prediction is correct.
+    # Check if the model's prediction is correct.
     correct = actual_intent.strip() == intent.strip()
 
     # Return the reasoning, intent, correct, and usage.
@@ -455,7 +457,7 @@ Let’s break down the edits we’ve made:
 * We added the `actual_intent` from our test cases into the `classify_support_request` method and set up a comparison to assess whether Claude’s intent classification matches our golden intent classification.
 * We extracted usage statistics for the API call to calculate cost based on input and output tokens used
 
-### Run your evaluation 
+### Run your evaluation
 
 A proper evaluation requires clear thresholds and benchmarks to determine what is a good result. The script above will give us the runtime values for accuracy, response time, and cost per classification, but we still would need clearly established thresholds. For example:
 * **Accuracy:** 95% (out of 100 tests)
@@ -485,9 +487,9 @@ For example, you might have a top-level classifier that broadly categorizes tick
 
 ### Use vector databases and similarity search retrieval to handle highly variable tickets
 
-Despite providing examples being the most effective way to improve performance, if support requests are highly variable, it can be hard to include enough examples in a single prompt. 
+Despite providing examples being the most effective way to improve performance, if support requests are highly variable, it can be hard to include enough examples in a single prompt.
 
-In this scenario, you could employ a vector database to do similarity searches from a dataset of examples and retrieve the most relevant examples for a given query. 
+In this scenario, you could employ a vector database to do similarity searches from a dataset of examples and retrieve the most relevant examples for a given query.
 
 This approach, outlined in detail in our [classification recipe](https://platform.claude.com/cookbook/capabilities-classification-guide), has been shown to improve performance from 71% accuracy to 93% accuracy.
 
@@ -510,7 +512,7 @@ Here are some scenarios where Claude may misclassify tickets (there may be other
     <section title="Multiple issues cause issue prioritization confusion">
 
         When customers present multiple issues in a single interaction, Claude may have difficulty identifying the primary concern.
-        * **Solution:** Clarify the prioritization of intents so thatClaude can better rank the extracted intents and identify the primary concern. 
+        * **Solution:** Clarify the prioritization of intents so thatClaude can better rank the extracted intents and identify the primary concern.
     
 </section>
 
@@ -524,7 +526,7 @@ Proper integration requires that you make some decisions regarding how your Clau
 * **Pull-Based:** Your code pulls for the latest tickets based on a given schedule and routes them at pull time.
     * This approach is easier to implement but might make unnecessary calls to the support ticket system when the pull frequency is too high or might be overly slow when the pull frequency is too low.
 
-For either of these approaches, you will need to wrap your script in a service. The choice of approach depends on what APIs your support ticketing system provides. 
+For either of these approaches, you will need to wrap your script in a service. The choice of approach depends on what APIs your support ticketing system provides.
 
 ***
 

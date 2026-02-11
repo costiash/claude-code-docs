@@ -79,7 +79,7 @@ For non-PDF files like .csv, .xlsx, .docx, .md, or .txt files, see [Working with
 Let's start with a simple example using the Messages API. You can provide PDFs to Claude in three ways:
 
 1. As a URL reference to a PDF hosted online
-2. As a base64-encoded PDF in `document` content blocks  
+2. As a base64-encoded PDF in `document` content blocks
 3. By a `file_id` from the [Files API](/docs/en/build-with-claude/files)
 
 #### Option 1: URL-based PDF document
@@ -126,14 +126,11 @@ The simplest approach is to reference a PDF directly from a URL:
                         "type": "document",
                         "source": {
                             "type": "url",
-                            "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-                        }
+                            "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf",
+                        },
                     },
-                    {
-                        "type": "text",
-                        "text": "What are the key findings in this document?"
-                    }
-                ]
+                    {"type": "text", "text": "What are the key findings in this document?"},
+                ],
             }
         ],
     )
@@ -141,75 +138,77 @@ The simplest approach is to reference a PDF directly from a URL:
     print(message.content)
     ```
     ```typescript TypeScript
-    import Anthropic from '@anthropic-ai/sdk';
+    import Anthropic from "@anthropic-ai/sdk";
 
     const anthropic = new Anthropic();
-    
+
     async function main() {
       const response = await anthropic.messages.create({
-        model: 'claude-opus-4-6',
+        model: "claude-opus-4-6",
         max_tokens: 1024,
         messages: [
           {
-            role: 'user',
+            role: "user",
             content: [
               {
-                type: 'document',
+                type: "document",
                 source: {
-                  type: 'url',
-                  url: 'https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf',
-                },
+                  type: "url",
+                  url: "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+                }
               },
               {
-                type: 'text',
-                text: 'What are the key findings in this document?',
-              },
-            ],
-          },
-        ],
+                type: "text",
+                text: "What are the key findings in this document?"
+              }
+            ]
+          }
+        ]
       });
-      
+
       console.log(response);
     }
-    
+
     main();
     ```
     ```java Java
-    import java.util.List;
-
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-    import com.anthropic.models.messages.MessageCreateParams;
     import com.anthropic.models.messages.*;
+    import com.anthropic.models.messages.MessageCreateParams;
+    import java.util.List;
 
     public class PdfExample {
-        public static void main(String[] args) {
-            AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-            // Create document block with URL
-            DocumentBlockParam documentParam = DocumentBlockParam.builder()
-                    .urlPdfSource("https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf")
-                    .build();
+      public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-            // Create a message with document and text content blocks
-            MessageCreateParams params = MessageCreateParams.builder()
-                    .model(Model.CLAUDE_OPUS_4_6)
-                    .maxTokens(1024)
-                    .addUserMessageOfBlockParams(
-                            List.of(
-                                    ContentBlockParam.ofDocument(documentParam),
-                                    ContentBlockParam.ofText(
-                                            TextBlockParam.builder()
-                                                    .text("What are the key findings in this document?")
-                                                    .build()
-                                    )
-                            )
-                    )
-                    .build();
+        // Create document block with URL
+        DocumentBlockParam documentParam = DocumentBlockParam.builder()
+          .urlPdfSource(
+            "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+          )
+          .build();
 
-            Message message = client.messages().create(params);
-            System.out.println(message.content());
-        }
+        // Create a message with document and text content blocks
+        MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_6)
+          .maxTokens(1024)
+          .addUserMessageOfBlockParams(
+            List.of(
+              ContentBlockParam.ofDocument(documentParam),
+              ContentBlockParam.ofText(
+                TextBlockParam.builder()
+                  .text("What are the key findings in this document?")
+                  .build()
+              )
+            )
+          )
+          .build();
+
+        Message message = client.messages().create(params);
+        System.out.println(message.content());
+      }
     }
     ```
 </CodeGroup>
@@ -259,7 +258,7 @@ If you need to send PDFs from your local system or when a URL isn't available:
     import base64
     import httpx
 
-    # First, load and encode the PDF 
+    # First, load and encode the PDF
     pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
     pdf_data = base64.standard_b64encode(httpx.get(pdf_url).content).decode("utf-8")
 
@@ -281,14 +280,11 @@ If you need to send PDFs from your local system or when a URL isn't available:
                         "source": {
                             "type": "base64",
                             "media_type": "application/pdf",
-                            "data": pdf_data
-                        }
+                            "data": pdf_data,
+                        },
                     },
-                    {
-                        "type": "text",
-                        "text": "What are the key findings in this document?"
-                    }
-                ]
+                    {"type": "text", "text": "What are the key findings in this document?"},
+                ],
             }
         ],
     )
@@ -296,61 +292,53 @@ If you need to send PDFs from your local system or when a URL isn't available:
     print(message.content)
     ```
     ```typescript TypeScript
-    import Anthropic from '@anthropic-ai/sdk';
-    import fetch from 'node-fetch';
-    import fs from 'fs';
+    import Anthropic from "@anthropic-ai/sdk";
+    import fetch from "node-fetch";
+    import fs from "fs";
 
     async function main() {
       // Method 1: Fetch and encode a remote PDF
       const pdfURL = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf";
       const pdfResponse = await fetch(pdfURL);
       const arrayBuffer = await pdfResponse.arrayBuffer();
-      const pdfBase64 = Buffer.from(arrayBuffer).toString('base64');
-      
+      const pdfBase64 = Buffer.from(arrayBuffer).toString("base64");
+
       // Method 2: Load from a local file
-      // const pdfBase64 = fs.readFileSync('document.pdf').toString('base64');
-      
+      // const pdfBase64 = (await fs.readFile('document.pdf')).toString('base64');
+
       // Send the API request with base64-encoded PDF
       const anthropic = new Anthropic();
       const response = await anthropic.messages.create({
-        model: 'claude-opus-4-6',
+        model: "claude-opus-4-6",
         max_tokens: 1024,
         messages: [
           {
-            role: 'user',
+            role: "user",
             content: [
               {
-                type: 'document',
+                type: "document",
                 source: {
-                  type: 'base64',
-                  media_type: 'application/pdf',
-                  data: pdfBase64,
-                },
+                  type: "base64",
+                  media_type: "application/pdf",
+                  data: pdfBase64
+                }
               },
               {
-                type: 'text',
-                text: 'What are the key findings in this document?',
-              },
-            ],
-          },
-        ],
+                type: "text",
+                text: "What are the key findings in this document?"
+              }
+            ]
+          }
+        ]
       });
-      
+
       console.log(response);
     }
-    
+
     main();
     ```
 
     ```java Java
-    import java.io.IOException;
-    import java.net.URI;
-    import java.net.http.HttpClient;
-    import java.net.http.HttpRequest;
-    import java.net.http.HttpResponse;
-    import java.util.Base64;
-    import java.util.List;
-
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.models.messages.ContentBlockParam;
@@ -359,48 +347,63 @@ If you need to send PDFs from your local system or when a URL isn't available:
     import com.anthropic.models.messages.MessageCreateParams;
     import com.anthropic.models.messages.Model;
     import com.anthropic.models.messages.TextBlockParam;
+    import java.io.IOException;
+    import java.net.URI;
+    import java.net.http.HttpClient;
+    import java.net.http.HttpRequest;
+    import java.net.http.HttpResponse;
+    import java.util.Base64;
+    import java.util.List;
 
     public class PdfExample {
-        public static void main(String[] args) throws IOException, InterruptedException {
-            AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-            // Method 1: Download and encode a remote PDF
-            String pdfUrl = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf";
-            HttpClient httpClient = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(pdfUrl))
-                    .GET()
-                    .build();
+      public static void main(String[] args) throws IOException, InterruptedException {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-            HttpResponse<byte[]> response = httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
-            String pdfBase64 = Base64.getEncoder().encodeToString(response.body());
+        // Method 1: Download and encode a remote PDF
+        String pdfUrl =
+          "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf";
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(pdfUrl)).GET().build();
 
-            // Method 2: Load from a local file
-            // byte[] fileBytes = Files.readAllBytes(Path.of("document.pdf"));
-            // String pdfBase64 = Base64.getEncoder().encodeToString(fileBytes);
+        HttpResponse<byte[]> response = httpClient.send(
+          request,
+          HttpResponse.BodyHandlers.ofByteArray()
+        );
+        String pdfBase64 = Base64.getEncoder().encodeToString(response.body());
 
-            // Create document block with base64 data
-            DocumentBlockParam documentParam = DocumentBlockParam.builder()
-                    .base64PdfSource(pdfBase64)
-                    .build();
+        // Method 2: Load from a local file
+        // byte[] fileBytes = Files.readAllBytes(Path.of("document.pdf"));
+        // String pdfBase64 = Base64.getEncoder().encodeToString(fileBytes);
 
-            // Create a message with document and text content blocks
-            MessageCreateParams params = MessageCreateParams.builder()
-                    .model(Model.CLAUDE_OPUS_4_6)
-                    .maxTokens(1024)
-                    .addUserMessageOfBlockParams(
-                            List.of(
-                                    ContentBlockParam.ofDocument(documentParam),
-                                    ContentBlockParam.ofText(TextBlockParam.builder().text("What are the key findings in this document?").build())
-                            )
-                    )
-                    .build();
+        // Create document block with base64 data
+        DocumentBlockParam documentParam = DocumentBlockParam.builder()
+          .base64PdfSource(pdfBase64)
+          .build();
 
-            Message message = client.messages().create(params);
-            message.content().stream()
-                    .flatMap(contentBlock -> contentBlock.text().stream())
-                    .forEach(textBlock -> System.out.println(textBlock.text()));
-        }
+        // Create a message with document and text content blocks
+        MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_6)
+          .maxTokens(1024)
+          .addUserMessageOfBlockParams(
+            List.of(
+              ContentBlockParam.ofDocument(documentParam),
+              ContentBlockParam.ofText(
+                TextBlockParam.builder()
+                  .text("What are the key findings in this document?")
+                  .build()
+              )
+            )
+          )
+          .build();
+
+        Message message = client.messages().create(params);
+        message
+          .content()
+          .stream()
+          .flatMap(contentBlock -> contentBlock.text().stream())
+          .forEach(textBlock -> System.out.println(textBlock.text()));
+      }
     }
     ```
 
@@ -408,7 +411,7 @@ If you need to send PDFs from your local system or when a URL isn't available:
 
 #### Option 3: Files API
 
-For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](/docs/en/build-with-claude/files): 
+For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](/docs/en/build-with-claude/files):
 
 <CodeGroup>
 ```bash Shell
@@ -426,7 +429,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
   -d '{
-    "model": "claude-opus-4-6", 
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [{
       "role": "user",
@@ -465,16 +468,10 @@ message = client.beta.messages.create(
             "content": [
                 {
                     "type": "document",
-                    "source": {
-                        "type": "file",
-                        "file_id": file_upload.id
-                    }
+                    "source": {"type": "file", "file_id": file_upload.id},
                 },
-                {
-                    "type": "text",
-                    "text": "What are the key findings in this document?"
-                }
-            ]
+                {"type": "text", "text": "What are the key findings in this document?"},
+            ],
         }
     ],
 )
@@ -483,38 +480,38 @@ print(message.content)
 ```
 
 ```typescript TypeScript
-import { Anthropic, toFile } from '@anthropic-ai/sdk';
-import fs from 'fs';
+import { Anthropic, toFile } from "@anthropic-ai/sdk";
+import fs from "fs";
 
 const anthropic = new Anthropic();
 
 async function main() {
   // Upload the PDF file
   const fileUpload = await anthropic.beta.files.upload({
-    file: toFile(fs.createReadStream('document.pdf'), undefined, { type: 'application/pdf' })
+    file: toFile(fs.createReadStream("document.pdf"), undefined, { type: "application/pdf" })
   }, {
-    betas: ['files-api-2025-04-14']
+    betas: ["files-api-2025-04-14"]
   });
 
   // Use the uploaded file in a message
   const response = await anthropic.beta.messages.create({
-    model: 'claude-opus-4-6',
+    model: "claude-opus-4-6",
     max_tokens: 1024,
-    betas: ['files-api-2025-04-14'],
+    betas: ["files-api-2025-04-14"],
     messages: [
       {
-        role: 'user',
+        role: "user",
         content: [
           {
-            type: 'document',
+            type: "document",
             source: {
-              type: 'file',
+              type: "file",
               file_id: fileUpload.id
             }
           },
           {
-            type: 'text',
-            text: 'What are the key findings in this document?'
+            type: "text",
+            text: "What are the key findings in this document?"
           }
         ]
       }
@@ -528,49 +525,52 @@ main();
 ```
 
 ```java Java
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.File;
 import com.anthropic.models.files.FileUploadParams;
 import com.anthropic.models.messages.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 
 public class PdfFilesExample {
-    public static void main(String[] args) throws IOException {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        // Upload the PDF file
-        File file = client.beta().files().upload(FileUploadParams.builder()
-                .file(Files.newInputStream(Path.of("document.pdf")))
-                .build());
+  public static void main(String[] args) throws IOException {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        // Use the uploaded file in a message
-        DocumentBlockParam documentParam = DocumentBlockParam.builder()
-                .fileSource(file.id())
-                .build();
+    // Upload the PDF file
+    File file = client
+      .beta()
+      .files()
+      .upload(
+        FileUploadParams.builder().file(Files.newInputStream(Path.of("document.pdf"))).build()
+      );
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_6)
-                .maxTokens(1024)
-                .addUserMessageOfBlockParams(
-                        List.of(
-                                ContentBlockParam.ofDocument(documentParam),
-                                ContentBlockParam.ofText(
-                                        TextBlockParam.builder()
-                                                .text("What are the key findings in this document?")
-                                                .build()
-                                )
-                        )
-                )
-                .build();
+    // Use the uploaded file in a message
+    DocumentBlockParam documentParam = DocumentBlockParam.builder()
+      .fileSource(file.id())
+      .build();
 
-        Message message = client.messages().create(params);
-        System.out.println(message.content());
-    }
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_6)
+      .maxTokens(1024)
+      .addUserMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofDocument(documentParam),
+          ContentBlockParam.ofText(
+            TextBlockParam.builder()
+              .text("What are the key findings in this document?")
+              .build()
+          )
+        )
+      )
+      .build();
+
+    Message message = client.messages().create(params);
+    System.out.println(message.content());
+  }
 }
 ```
 </CodeGroup>
@@ -666,15 +666,12 @@ message = client.messages.create(
                     "source": {
                         "type": "base64",
                         "media_type": "application/pdf",
-                        "data": pdf_data
+                        "data": pdf_data,
                     },
-                    "cache_control": {"type": "ephemeral"}
+                    "cache_control": {"type": "ephemeral"},
                 },
-                {
-                    "type": "text",
-                    "text": "Analyze this document."
-                }
-            ]
+                {"type": "text", "text": "Analyze this document."},
+            ],
         }
     ],
 )
@@ -682,38 +679,33 @@ message = client.messages.create(
 
 ```typescript TypeScript
 const response = await anthropic.messages.create({
-  model: 'claude-opus-4-6',
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
     {
       content: [
         {
-          type: 'document',
+          type: "document",
           source: {
-            media_type: 'application/pdf',
-            type: 'base64',
-            data: pdfBase64,
+            media_type: "application/pdf",
+            type: "base64",
+            data: pdfBase64
           },
-          cache_control: { type: 'ephemeral' },
+          cache_control: { type: "ephemeral" }
         },
         {
-          type: 'text',
-          text: 'Which model has the highest human preference win rates across each use-case?',
-        },
+          type: "text",
+          text: "Which model has the highest human preference win rates across each use-case?"
+        }
       ],
-      role: 'user',
-    },
-  ],
+      role: "user"
+    }
+  ]
 });
 console.log(response);
 ```
 
 ```java Java
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Base64PdfSource;
@@ -724,38 +716,45 @@ import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.TextBlockParam;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class MessagesDocumentExample {
 
-    public static void main(String[] args) throws IOException {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) throws IOException {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        // Read PDF file as base64
-        byte[] pdfBytes = Files.readAllBytes(Paths.get("pdf_base64.txt"));
-        String pdfBase64 = new String(pdfBytes);
+    // Read PDF file as base64
+    byte[] pdfBytes = Files.readAllBytes(Paths.get("pdf_base64.txt"));
+    String pdfBase64 = new String(pdfBytes);
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_6)
-                .maxTokens(1024)
-                .addUserMessageOfBlockParams(List.of(
-                        ContentBlockParam.ofDocument(
-                                DocumentBlockParam.builder()
-                                        .source(Base64PdfSource.builder()
-                                                .data(pdfBase64)
-                                                .build())
-                                        .cacheControl(CacheControlEphemeral.builder().build())
-                                        .build()),
-                        ContentBlockParam.ofText(
-                                TextBlockParam.builder()
-                                        .text("Which model has the highest human preference win rates across each use-case?")
-                                        .build())
-                ))
-                .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_6)
+      .maxTokens(1024)
+      .addUserMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofDocument(
+            DocumentBlockParam.builder()
+              .source(Base64PdfSource.builder().data(pdfBase64).build())
+              .cacheControl(CacheControlEphemeral.builder().build())
+              .build()
+          ),
+          ContentBlockParam.ofText(
+            TextBlockParam.builder()
+              .text(
+                "Which model has the highest human preference win rates across each use-case?"
+              )
+              .build()
+          )
+        )
+      )
+      .build();
 
-
-        Message message = client.messages().create(params);
-        System.out.println(message);
-    }
+    Message message = client.messages().create(params);
+    System.out.println(message);
+  }
 }
 ```
 </CodeGroup>
@@ -848,17 +847,14 @@ message_batch = client.messages.batches.create(
                                 "source": {
                                     "type": "base64",
                                     "media_type": "application/pdf",
-                                    "data": pdf_data
-                                }
+                                    "data": pdf_data,
+                                },
                             },
-                            {
-                                "type": "text",
-                                "text": "Summarize this document."
-                            }
-                        ]
+                            {"type": "text", "text": "Summarize this document."},
+                        ],
                     }
-                ]
-            }
+                ],
+            },
         }
     ]
 )
@@ -868,130 +864,139 @@ message_batch = client.messages.batches.create(
 const response = await anthropic.messages.batches.create({
   requests: [
     {
-      custom_id: 'my-first-request',
+      custom_id: "my-first-request",
       params: {
         max_tokens: 1024,
         messages: [
           {
             content: [
               {
-                type: 'document',
+                type: "document",
                 source: {
-                  media_type: 'application/pdf',
-                  type: 'base64',
-                  data: pdfBase64,
-                },
+                  media_type: "application/pdf",
+                  type: "base64",
+                  data: pdfBase64
+                }
               },
               {
-                type: 'text',
-                text: 'Which model has the highest human preference win rates across each use-case?',
-              },
+                type: "text",
+                text: "Which model has the highest human preference win rates across each use-case?"
+              }
             ],
-            role: 'user',
-          },
+            role: "user"
+          }
         ],
-        model: 'claude-opus-4-6',
-      },
+        model: "claude-opus-4-6"
+      }
     },
     {
-      custom_id: 'my-second-request',
+      custom_id: "my-second-request",
       params: {
         max_tokens: 1024,
         messages: [
           {
             content: [
               {
-                type: 'document',
+                type: "document",
                 source: {
-                  media_type: 'application/pdf',
-                  type: 'base64',
-                  data: pdfBase64,
-                },
+                  media_type: "application/pdf",
+                  type: "base64",
+                  data: pdfBase64
+                }
               },
               {
-                type: 'text',
-                text: 'Extract 5 key insights from this document.',
-              },
+                type: "text",
+                text: "Extract 5 key insights from this document."
+              }
             ],
-            role: 'user',
-          },
+            role: "user"
+          }
         ],
-        model: 'claude-opus-4-6',
-      },
+        model: "claude-opus-4-6"
+      }
     }
-  ],
+  ]
 });
 console.log(response);
 ```
 
 ```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.*;
+import com.anthropic.models.messages.batches.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.*;
-import com.anthropic.models.messages.batches.*;
-
 public class MessagesBatchDocumentExample {
 
-    public static void main(String[] args) throws IOException {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) throws IOException {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        // Read PDF file as base64
-        byte[] pdfBytes = Files.readAllBytes(Paths.get("pdf_base64.txt"));
-        String pdfBase64 = new String(pdfBytes);
+    // Read PDF file as base64
+    byte[] pdfBytes = Files.readAllBytes(Paths.get("pdf_base64.txt"));
+    String pdfBase64 = new String(pdfBytes);
 
-        BatchCreateParams params = BatchCreateParams.builder()
-                .addRequest(BatchCreateParams.Request.builder()
-                        .customId("my-first-request")
-                        .params(BatchCreateParams.Request.Params.builder()
-                                .model(Model.CLAUDE_OPUS_4_6)
-                                .maxTokens(1024)
-                                .addUserMessageOfBlockParams(List.of(
-                                        ContentBlockParam.ofDocument(
-                                                DocumentBlockParam.builder()
-                                                        .source(Base64PdfSource.builder()
-                                                                .data(pdfBase64)
-                                                                .build())
-                                                        .build()
-                                        ),
-                                        ContentBlockParam.ofText(
-                                                TextBlockParam.builder()
-                                                        .text("Which model has the highest human preference win rates across each use-case?")
-                                                        .build()
-                                        )
-                                ))
-                                .build())
-                        .build())
-                .addRequest(BatchCreateParams.Request.builder()
-                        .customId("my-second-request")
-                        .params(BatchCreateParams.Request.Params.builder()
-                                .model(Model.CLAUDE_OPUS_4_6)
-                                .maxTokens(1024)
-                                .addUserMessageOfBlockParams(List.of(
-                                        ContentBlockParam.ofDocument(
-                                        DocumentBlockParam.builder()
-                                                .source(Base64PdfSource.builder()
-                                                        .data(pdfBase64)
-                                                        .build())
-                                                .build()
-                                        ),
-                                        ContentBlockParam.ofText(
-                                                TextBlockParam.builder()
-                                                        .text("Extract 5 key insights from this document.")
-                                                        .build()
-                                        )
-                                ))
-                                .build())
-                        .build())
-                .build();
+    BatchCreateParams params = BatchCreateParams.builder()
+      .addRequest(
+        BatchCreateParams.Request.builder()
+          .customId("my-first-request")
+          .params(
+            BatchCreateParams.Request.Params.builder()
+              .model(Model.CLAUDE_OPUS_4_6)
+              .maxTokens(1024)
+              .addUserMessageOfBlockParams(
+                List.of(
+                  ContentBlockParam.ofDocument(
+                    DocumentBlockParam.builder()
+                      .source(Base64PdfSource.builder().data(pdfBase64).build())
+                      .build()
+                  ),
+                  ContentBlockParam.ofText(
+                    TextBlockParam.builder()
+                      .text(
+                        "Which model has the highest human preference win rates across each use-case?"
+                      )
+                      .build()
+                  )
+                )
+              )
+              .build()
+          )
+          .build()
+      )
+      .addRequest(
+        BatchCreateParams.Request.builder()
+          .customId("my-second-request")
+          .params(
+            BatchCreateParams.Request.Params.builder()
+              .model(Model.CLAUDE_OPUS_4_6)
+              .maxTokens(1024)
+              .addUserMessageOfBlockParams(
+                List.of(
+                  ContentBlockParam.ofDocument(
+                    DocumentBlockParam.builder()
+                      .source(Base64PdfSource.builder().data(pdfBase64).build())
+                      .build()
+                  ),
+                  ContentBlockParam.ofText(
+                    TextBlockParam.builder()
+                      .text("Extract 5 key insights from this document.")
+                      .build()
+                  )
+                )
+              )
+              .build()
+          )
+          .build()
+      )
+      .build();
 
-        MessageBatch batch = client.messages().batches().create(params);
-        System.out.println(batch);
-    }
+    MessageBatch batch = client.messages().batches().create(params);
+    System.out.println(batch);
+  }
 }
 ```
 </CodeGroup>

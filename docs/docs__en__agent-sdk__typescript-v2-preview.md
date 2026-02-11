@@ -29,28 +29,28 @@ npm install @anthropic-ai/claude-agent-sdk
 For simple single-turn queries where you don't need to maintain a session, use `unstable_v2_prompt()`. This example sends a math question and logs the answer:
 
 ```typescript
-import { unstable_v2_prompt } from '@anthropic-ai/claude-agent-sdk'
+import { unstable_v2_prompt } from "@anthropic-ai/claude-agent-sdk";
 
-const result = await unstable_v2_prompt('What is 2 + 2?', {
-  model: 'claude-opus-4-6'
-})
-console.log(result.result)
+const result = await unstable_v2_prompt("What is 2 + 2?", {
+  model: "claude-opus-4-6"
+});
+console.log(result.result);
 ```
 
 <details>
 <summary>See the same operation in V1</summary>
 
 ```typescript
-import { query } from '@anthropic-ai/claude-agent-sdk'
+import { query } from "@anthropic-ai/claude-agent-sdk";
 
 const q = query({
-  prompt: 'What is 2 + 2?',
-  options: { model: 'claude-opus-4-6' }
-})
+  prompt: "What is 2 + 2?",
+  options: { model: "claude-opus-4-6" }
+});
 
 for await (const msg of q) {
-  if (msg.type === 'result') {
-    console.log(msg.result)
+  if (msg.type === "result") {
+    console.log(msg.result);
   }
 }
 ```
@@ -68,21 +68,21 @@ This explicit separation makes it easier to add logic between turns (like proces
 The example below creates a session, sends "Hello!" to Claude, and prints the text response. It uses [`await using`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html#using-declarations-and-explicit-resource-management) (TypeScript 5.2+) to automatically close the session when the block exits. You can also call `session.close()` manually.
 
 ```typescript
-import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'
+import { unstable_v2_createSession } from "@anthropic-ai/claude-agent-sdk";
 
 await using session = unstable_v2_createSession({
-  model: 'claude-opus-4-6'
-})
+  model: "claude-opus-4-6"
+});
 
-await session.send('Hello!')
+await session.send("Hello!");
 for await (const msg of session.stream()) {
   // Filter for assistant messages to get human-readable output
-  if (msg.type === 'assistant') {
+  if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === 'text')
+      .filter(block => block.type === "text")
       .map(block => block.text)
-      .join('')
-    console.log(text)
+      .join("");
+    console.log(text);
   }
 }
 ```
@@ -93,20 +93,20 @@ for await (const msg of session.stream()) {
 In V1, both input and output flow through a single async generator. For a basic prompt this looks similar, but adding multi-turn logic requires restructuring to use an input generator.
 
 ```typescript
-import { query } from '@anthropic-ai/claude-agent-sdk'
+import { query } from "@anthropic-ai/claude-agent-sdk";
 
 const q = query({
-  prompt: 'Hello!',
-  options: { model: 'claude-opus-4-6' }
-})
+  prompt: "Hello!",
+  options: { model: "claude-opus-4-6" }
+});
 
 for await (const msg of q) {
-  if (msg.type === 'assistant') {
+  if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === 'text')
+      .filter(block => block.type === "text")
       .map(block => block.text)
-      .join('')
-    console.log(text)
+      .join("");
+    console.log(text);
   }
 }
 ```
@@ -120,34 +120,34 @@ Sessions persist context across multiple exchanges. To continue a conversation, 
 This example asks a math question, then asks a follow-up that references the previous answer:
 
 ```typescript
-import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'
+import { unstable_v2_createSession } from "@anthropic-ai/claude-agent-sdk";
 
 await using session = unstable_v2_createSession({
-  model: 'claude-opus-4-6'
-})
+  model: "claude-opus-4-6"
+});
 
 // Turn 1
-await session.send('What is 5 + 3?')
+await session.send("What is 5 + 3?");
 for await (const msg of session.stream()) {
   // Filter for assistant messages to get human-readable output
-  if (msg.type === 'assistant') {
+  if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === 'text')
+      .filter(block => block.type === "text")
       .map(block => block.text)
-      .join('')
-    console.log(text)
+      .join("");
+    console.log(text);
   }
 }
 
 // Turn 2
-await session.send('Multiply that by 2')
+await session.send("Multiply that by 2");
 for await (const msg of session.stream()) {
-  if (msg.type === 'assistant') {
+  if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === 'text')
+      .filter(block => block.type === "text")
       .map(block => block.text)
-      .join('')
-    console.log(text)
+      .join("");
+    console.log(text);
   }
 }
 ```
@@ -156,37 +156,37 @@ for await (const msg of session.stream()) {
 <summary>See the same operation in V1</summary>
 
 ```typescript
-import { query } from '@anthropic-ai/claude-agent-sdk'
+import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // Must create an async iterable to feed messages
 async function* createInputStream() {
   yield {
-    type: 'user',
-    session_id: '',
-    message: { role: 'user', content: [{ type: 'text', text: 'What is 5 + 3?' }] },
+    type: "user",
+    session_id: "",
+    message: { role: "user", content: [{ type: "text", text: "What is 5 + 3?" }] },
     parent_tool_use_id: null
-  }
+  };
   // Must coordinate when to yield next message
   yield {
-    type: 'user',
-    session_id: '',
-    message: { role: 'user', content: [{ type: 'text', text: 'Multiply by 2' }] },
+    type: "user",
+    session_id: "",
+    message: { role: "user", content: [{ type: "text", text: "Multiply by 2" }] },
     parent_tool_use_id: null
-  }
+  };
 }
 
 const q = query({
   prompt: createInputStream(),
-  options: { model: 'claude-opus-4-6' }
-})
+  options: { model: "claude-opus-4-6" }
+});
 
 for await (const msg of q) {
-  if (msg.type === 'assistant') {
+  if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === 'text')
+      .filter(block => block.type === "text")
       .map(block => block.text)
-      .join('')
-    console.log(text)
+      .join("");
+    console.log(text);
   }
 }
 ```
@@ -204,44 +204,44 @@ import {
   unstable_v2_createSession,
   unstable_v2_resumeSession,
   type SDKMessage
-} from '@anthropic-ai/claude-agent-sdk'
+} from "@anthropic-ai/claude-agent-sdk";
 
 // Helper to extract text from assistant messages
 function getAssistantText(msg: SDKMessage): string | null {
-  if (msg.type !== 'assistant') return null
+  if (msg.type !== "assistant") return null;
   return msg.message.content
-    .filter(block => block.type === 'text')
+    .filter(block => block.type === "text")
     .map(block => block.text)
-    .join('')
+    .join("");
 }
 
 // Create initial session and have a conversation
 const session = unstable_v2_createSession({
-  model: 'claude-opus-4-6'
-})
+  model: "claude-opus-4-6"
+});
 
-await session.send('Remember this number: 42')
+await session.send("Remember this number: 42");
 
 // Get the session ID from any received message
-let sessionId: string | undefined
+let sessionId: string | undefined;
 for await (const msg of session.stream()) {
-  sessionId = msg.session_id
-  const text = getAssistantText(msg)
-  if (text) console.log('Initial response:', text)
+  sessionId = msg.session_id;
+  const text = getAssistantText(msg);
+  if (text) console.log("Initial response:", text);
 }
 
-console.log('Session ID:', sessionId)
-session.close()
+console.log("Session ID:", sessionId);
+session.close();
 
 // Later: resume the session using the stored ID
 await using resumedSession = unstable_v2_resumeSession(sessionId!, {
-  model: 'claude-opus-4-6'
-})
+  model: "claude-opus-4-6"
+});
 
-await resumedSession.send('What number did I ask you to remember?')
+await resumedSession.send("What number did I ask you to remember?");
 for await (const msg of resumedSession.stream()) {
-  const text = getAssistantText(msg)
-  if (text) console.log('Resumed response:', text)
+  const text = getAssistantText(msg);
+  if (text) console.log("Resumed response:", text);
 }
 ```
 
@@ -249,45 +249,45 @@ for await (const msg of resumedSession.stream()) {
 <summary>See the same operation in V1</summary>
 
 ```typescript
-import { query } from '@anthropic-ai/claude-agent-sdk'
+import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // Create initial session
 const initialQuery = query({
-  prompt: 'Remember this number: 42',
-  options: { model: 'claude-opus-4-6' }
-})
+  prompt: "Remember this number: 42",
+  options: { model: "claude-opus-4-6" }
+});
 
 // Get session ID from any message
-let sessionId: string | undefined
+let sessionId: string | undefined;
 for await (const msg of initialQuery) {
-  sessionId = msg.session_id
-  if (msg.type === 'assistant') {
+  sessionId = msg.session_id;
+  if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === 'text')
+      .filter(block => block.type === "text")
       .map(block => block.text)
-      .join('')
-    console.log('Initial response:', text)
+      .join("");
+    console.log("Initial response:", text);
   }
 }
 
-console.log('Session ID:', sessionId)
+console.log("Session ID:", sessionId);
 
 // Later: resume the session
 const resumedQuery = query({
-  prompt: 'What number did I ask you to remember?',
+  prompt: "What number did I ask you to remember?",
   options: {
-    model: 'claude-opus-4-6',
+    model: "claude-opus-4-6",
     resume: sessionId
   }
-})
+});
 
 for await (const msg of resumedQuery) {
-  if (msg.type === 'assistant') {
+  if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === 'text')
+      .filter(block => block.type === "text")
       .map(block => block.text)
-      .join('')
-    console.log('Resumed response:', text)
+      .join("");
+    console.log("Resumed response:", text);
   }
 }
 ```
@@ -301,24 +301,24 @@ Sessions can be closed manually or automatically using [`await using`](https://w
 **Automatic cleanup (TypeScript 5.2+):**
 
 ```typescript
-import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'
+import { unstable_v2_createSession } from "@anthropic-ai/claude-agent-sdk";
 
 await using session = unstable_v2_createSession({
-  model: 'claude-opus-4-6'
-})
+  model: "claude-opus-4-6"
+});
 // Session closes automatically when the block exits
 ```
 
 **Manual cleanup:**
 
 ```typescript
-import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'
+import { unstable_v2_createSession } from "@anthropic-ai/claude-agent-sdk";
 
 const session = unstable_v2_createSession({
-  model: 'claude-opus-4-6'
-})
+  model: "claude-opus-4-6"
+});
 // ... use the session ...
-session.close()
+session.close();
 ```
 
 ## API reference

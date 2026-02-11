@@ -19,21 +19,21 @@ Our [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
         messages=[{"role": "user", "content": "Hello"}],
         model="claude-opus-4-6",
     ) as stream:
-      for text in stream.text_stream:
-          print(text, end="", flush=True)
+        for text in stream.text_stream:
+            print(text, end="", flush=True)
     ```
 
     ```typescript TypeScript
-    import Anthropic from '@anthropic-ai/sdk';
+    import Anthropic from "@anthropic-ai/sdk";
 
     const client = new Anthropic();
 
     await client.messages.stream({
-        messages: [{role: 'user', content: "Hello"}],
-        model: 'claude-opus-4-6',
-        max_tokens: 1024,
-    }).on('text', (text) => {
-        console.log(text);
+      messages: [{ role: "user", content: "Hello" }],
+      model: "claude-opus-4-6",
+      max_tokens: 1024
+    }).on("text", (text) => {
+      console.log(text);
     });
     ```
 </CodeGroup>
@@ -59,14 +59,14 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
     ```
 
     ```typescript TypeScript
-    import Anthropic from '@anthropic-ai/sdk';
+    import Anthropic from "@anthropic-ai/sdk";
 
     const client = new Anthropic();
 
     const stream = client.messages.stream({
-        max_tokens: 128000,
-        messages: [{role: 'user', content: 'Write a detailed analysis...'}],
-        model: 'claude-opus-4-6',
+      max_tokens: 128000,
+      messages: [{ role: "user", content: "Write a detailed analysis..." }],
+      model: "claude-opus-4-6"
     });
 
     const message = await stream.finalMessage();
@@ -283,11 +283,11 @@ tools = [
             "properties": {
                 "location": {
                     "type": "string",
-                    "description": "The city and state, e.g. San Francisco, CA"
+                    "description": "The city and state, e.g. San Francisco, CA",
                 }
             },
-            "required": ["location"]
-        }
+            "required": ["location"],
+        },
     }
 ]
 
@@ -297,10 +297,7 @@ with client.messages.stream(
     tools=tools,
     tool_choice={"type": "any"},
     messages=[
-        {
-            "role": "user",
-            "content": "What is the weather like in San Francisco?"
-        }
+        {"role": "user", "content": "What is the weather like in San Francisco?"}
     ],
 ) as stream:
     for text in stream.text_stream:
@@ -436,14 +433,11 @@ client = anthropic.Anthropic()
 with client.messages.stream(
     model="claude-opus-4-6",
     max_tokens=20000,
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 16000
-    },
+    thinking={"type": "enabled", "budget_tokens": 16000},
     messages=[
         {
             "role": "user",
-            "content": "What is the greatest common divisor of 1071 and 462?"
+            "content": "What is the greatest common divisor of 1071 and 462?",
         }
     ],
 ) as stream:
@@ -536,18 +530,9 @@ client = anthropic.Anthropic()
 with client.messages.stream(
     model="claude-opus-4-6",
     max_tokens=1024,
-    tools=[
-        {
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "max_uses": 5
-        }
-    ],
+    tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
     messages=[
-        {
-            "role": "user",
-            "content": "What is the weather like in New York City today?"
-        }
+        {"role": "user", "content": "What is the weather like in New York City today?"}
     ],
 ) as stream:
     for text in stream.text_stream:

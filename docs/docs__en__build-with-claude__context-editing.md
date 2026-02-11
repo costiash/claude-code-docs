@@ -110,32 +110,18 @@ curl https://api.anthropic.com/v1/messages \
 response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
-    messages=[
-        {
-            "role": "user",
-            "content": "Search for recent developments in AI"
-        }
-    ],
-    tools=[
-        {
-            "type": "web_search_20250305",
-            "name": "web_search"
-        }
-    ],
+    messages=[{"role": "user", "content": "Search for recent developments in AI"}],
+    tools=[{"type": "web_search_20250305", "name": "web_search"}],
     betas=["context-management-2025-06-27"],
-    context_management={
-        "edits": [
-            {"type": "clear_tool_uses_20250919"}
-        ]
-    }
+    context_management={"edits": [{"type": "clear_tool_uses_20250919"}]},
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY
 });
 
 const response = await anthropic.beta.messages.create({
@@ -227,20 +213,16 @@ response = client.beta.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Create a simple command line calculator app using Python"
+            "content": "Create a simple command line calculator app using Python",
         }
     ],
     tools=[
         {
             "type": "text_editor_20250728",
             "name": "str_replace_based_edit_tool",
-            "max_characters": 10000
+            "max_characters": 10000,
         },
-        {
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "max_uses": 3
-        }
+        {"type": "web_search_20250305", "name": "web_search", "max_uses": 3},
     ],
     betas=["context-management-2025-06-27"],
     context_management={
@@ -248,33 +230,24 @@ response = client.beta.messages.create(
             {
                 "type": "clear_tool_uses_20250919",
                 # Trigger clearing when threshold is exceeded
-                "trigger": {
-                    "type": "input_tokens",
-                    "value": 30000
-                },
+                "trigger": {"type": "input_tokens", "value": 30000},
                 # Number of tool uses to keep after clearing
-                "keep": {
-                    "type": "tool_uses",
-                    "value": 3
-                },
+                "keep": {"type": "tool_uses", "value": 3},
                 # Optional: Clear at least this many tokens
-                "clear_at_least": {
-                    "type": "input_tokens",
-                    "value": 5000
-                },
+                "clear_at_least": {"type": "input_tokens", "value": 5000},
                 # Exclude these tools from being cleared
-                "exclude_tools": ["web_search"]
+                "exclude_tools": ["web_search"],
             }
         ]
-    }
+    },
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY
 });
 
 const response = await anthropic.beta.messages.create({
@@ -367,36 +340,30 @@ response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     messages=[...],
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 10000
-    },
+    thinking={"type": "enabled", "budget_tokens": 10000},
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
             {
                 "type": "clear_thinking_20251015",
-                "keep": {
-                    "type": "thinking_turns",
-                    "value": 2
-                }
+                "keep": {"type": "thinking_turns", "value": 2},
             }
         ]
-    }
+    },
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY
 });
 
 const response = await anthropic.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  messages: [...],
+  messages: [/* ... */],
   thinking: {
     type: "enabled",
     budget_tokens: 10000
@@ -460,34 +427,22 @@ response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     messages=[...],
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 10000
-    },
+    thinking={"type": "enabled", "budget_tokens": 10000},
     tools=[...],
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
             {
                 "type": "clear_thinking_20251015",
-                "keep": {
-                    "type": "thinking_turns",
-                    "value": 2
-                }
+                "keep": {"type": "thinking_turns", "value": 2},
             },
             {
                 "type": "clear_tool_uses_20250919",
-                "trigger": {
-                    "type": "input_tokens",
-                    "value": 50000
-                },
-                "keep": {
-                    "type": "tool_uses",
-                    "value": 5
-                }
-            }
+                "trigger": {"type": "input_tokens", "value": 50000},
+                "keep": {"type": "tool_uses", "value": 5},
+            },
         ]
-    }
+    },
 )
 ```
 
@@ -495,12 +450,12 @@ response = client.beta.messages.create(
 const response = await anthropic.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  messages: [...],
+  messages: [/* ... */],
   thinking: {
     type: "enabled",
     budget_tokens: 10000
   },
-  tools: [...],
+  tools: [/* ... */],
   betas: ["context-management-2025-06-27"],
   context_management: {
     edits: [
@@ -629,41 +584,32 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ```python Python
 response = client.beta.messages.count_tokens(
     model="claude-opus-4-6",
-    messages=[
-        {
-            "role": "user",
-            "content": "Continue our conversation..."
-        }
-    ],
+    messages=[{"role": "user", "content": "Continue our conversation..."}],
     tools=[...],  # Your tool definitions
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
             {
                 "type": "clear_tool_uses_20250919",
-                "trigger": {
-                    "type": "input_tokens",
-                    "value": 30000
-                },
-                "keep": {
-                    "type": "tool_uses",
-                    "value": 5
-                }
+                "trigger": {"type": "input_tokens", "value": 30000},
+                "keep": {"type": "tool_uses", "value": 5},
             }
         ]
-    }
+    },
 )
 
 print(f"Original tokens: {response.context_management['original_input_tokens']}")
 print(f"After clearing: {response.input_tokens}")
-print(f"Savings: {response.context_management['original_input_tokens'] - response.input_tokens} tokens")
+print(
+    f"Savings: {response.context_management['original_input_tokens'] - response.input_tokens} tokens"
+)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY
 });
 
 const response = await anthropic.beta.messages.countTokens({
@@ -674,7 +620,7 @@ const response = await anthropic.beta.messages.countTokens({
       content: "Continue our conversation..."
     }
   ],
-  tools: [...],  // Your tool definitions
+  tools: [/* ... */], // Your tool definitions
   betas: ["context-management-2025-06-27"],
   context_management: {
     edits: [
@@ -732,37 +678,30 @@ response = client.beta.messages.create(
     max_tokens=4096,
     messages=[...],
     tools=[
-        {
-            "type": "memory_20250818",
-            "name": "memory"
-        },
+        {"type": "memory_20250818", "name": "memory"},
         # Your other tools
     ],
     betas=["context-management-2025-06-27"],
-    context_management={
-        "edits": [
-            {"type": "clear_tool_uses_20250919"}
-        ]
-    }
+    context_management={"edits": [{"type": "clear_tool_uses_20250919"}]},
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY
 });
 
 const response = await anthropic.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
-  messages: [...],
+  messages: [/* ... */],
   tools: [
     {
       type: "memory_20250818",
       name: "memory"
-    },
+    }
     // Your other tools
   ],
   betas: ["context-management-2025-06-27"],
@@ -815,13 +754,10 @@ runner = client.beta.messages.tool_runner(
     messages=[
         {
             "role": "user",
-            "content": "Analyze all the files in this directory and write a summary report."
+            "content": "Analyze all the files in this directory and write a summary report.",
         }
     ],
-    compaction_control={
-        "enabled": True,
-        "context_token_threshold": 100000
-    }
+    compaction_control={"enabled": True, "context_token_threshold": 100000},
 )
 
 for message in runner:
@@ -831,28 +767,28 @@ final = runner.until_done()
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
 const runner = client.beta.messages.toolRunner({
-    model: 'claude-opus-4-6',
-    max_tokens: 4096,
-    tools: [...],
-    messages: [
-        {
-            role: 'user',
-            content: 'Analyze all the files in this directory and write a summary report.'
-        }
-    ],
-    compactionControl: {
-        enabled: true,
-        contextTokenThreshold: 100000
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  tools: [/* ... */],
+  messages: [
+    {
+      role: "user",
+      content: "Analyze all the files in this directory and write a summary report."
     }
+  ],
+  compactionControl: {
+    enabled: true,
+    contextTokenThreshold: 100000
+  }
 });
 
 for await (const message of runner) {
-    console.log('Tokens used:', message.usage.input_tokens);
+  console.log("Tokens used:", message.usage.input_tokens);
 }
 
 const finalMessage = await runner.runUntilDone();
@@ -908,16 +844,10 @@ The threshold determines when compaction occurs. A lower threshold means more fr
 
 ```python Python
 # More frequent compaction for memory-constrained scenarios
-compaction_control={
-    "enabled": True,
-    "context_token_threshold": 50000
-}
+compaction_control = {"enabled": True, "context_token_threshold": 50000}
 
 # Less frequent compaction when you need more context
-compaction_control={
-    "enabled": True,
-    "context_token_threshold": 150000
-}
+compaction_control = {"enabled": True, "context_token_threshold": 150000}
 ```
 
 ```typescript TypeScript
@@ -943,10 +873,10 @@ You can use a faster or cheaper model for generating summaries:
 <CodeGroup>
 
 ```python Python
-compaction_control={
+compaction_control = {
     "enabled": True,
     "context_token_threshold": 100000,
-    "model": "claude-haiku-4-5"
+    "model": "claude-haiku-4-5",
 }
 ```
 
@@ -967,7 +897,7 @@ You can provide a custom prompt for domain-specific needs. Your prompt should in
 <CodeGroup>
 
 ```python Python
-compaction_control={
+compaction_control = {
     "enabled": True,
     "context_token_threshold": 100000,
     "summary_prompt": """Summarize the research conducted so far, including:
@@ -975,7 +905,7 @@ compaction_control={
 - Questions answered and remaining unknowns
 - Recommended next steps
 
-Wrap your summary in <summary></summary> tags."""
+Wrap your summary in <summary></summary> tags.""",
 }
 ```
 
@@ -1008,7 +938,7 @@ This structure enables Claude to resume work efficiently without losing importan
 
 <section title="View full default prompt">
 
-```
+```text
 You have been working on the task described above but have not yet completed it. Write a continuation summary that will allow you (or another instance of yourself) to resume work efficiently in a future context window where the conversation history will be replaced with this summary. Your summary should be structured, concise, and actionable. Include:
 
 1. Task Overview

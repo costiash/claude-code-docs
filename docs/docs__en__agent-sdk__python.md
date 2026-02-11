@@ -75,21 +75,18 @@ Returns an `AsyncIterator[Message]` that yields messages from the conversation.
 #### Example - With options
 
 ```python
-
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions
+
 
 async def main():
     options = ClaudeAgentOptions(
         system_prompt="You are an expert Python developer",
-        permission_mode='acceptEdits',
-        cwd="/home/user/project"
+        permission_mode="acceptEdits",
+        cwd="/home/user/project",
     )
 
-    async for message in query(
-        prompt="Create a Python web server",
-        options=options
-    ):
+    async for message in query(prompt="Create a Python web server", options=options):
         print(message)
 
 
@@ -130,9 +127,9 @@ def tool(
        "type": "object",
        "properties": {
            "text": {"type": "string"},
-           "count": {"type": "integer", "minimum": 0}
+           "count": {"type": "integer", "minimum": 0},
        },
-       "required": ["text"]
+       "required": ["text"],
    }
    ```
 
@@ -146,14 +143,10 @@ A decorator function that wraps the tool implementation and returns an `SdkMcpTo
 from claude_agent_sdk import tool
 from typing import Any
 
+
 @tool("greet", "Greet a user", {"name": str})
 async def greet(args: dict[str, Any]) -> dict[str, Any]:
-    return {
-        "content": [{
-            "type": "text",
-            "text": f"Hello, {args['name']}!"
-        }]
-    }
+    return {"content": [{"type": "text", "text": f"Hello, {args['name']}!"}]}
 ```
 
 ### `create_sdk_mcp_server()`
@@ -185,34 +178,27 @@ Returns an `McpSdkServerConfig` object that can be passed to `ClaudeAgentOptions
 ```python
 from claude_agent_sdk import tool, create_sdk_mcp_server
 
+
 @tool("add", "Add two numbers", {"a": float, "b": float})
 async def add(args):
-    return {
-        "content": [{
-            "type": "text",
-            "text": f"Sum: {args['a'] + args['b']}"
-        }]
-    }
+    return {"content": [{"type": "text", "text": f"Sum: {args['a'] + args['b']}"}]}
+
 
 @tool("multiply", "Multiply two numbers", {"a": float, "b": float})
 async def multiply(args):
-    return {
-        "content": [{
-            "type": "text",
-            "text": f"Product: {args['a'] * args['b']}"
-        }]
-    }
+    return {"content": [{"type": "text", "text": f"Product: {args['a'] * args['b']}"}]}
+
 
 calculator = create_sdk_mcp_server(
     name="calculator",
     version="2.0.0",
-    tools=[add, multiply]  # Pass decorated functions
+    tools=[add, multiply],  # Pass decorated functions
 )
 
 # Use with Claude
 options = ClaudeAgentOptions(
     mcp_servers={"calc": calculator},
-    allowed_tools=["mcp__calc__add", "mcp__calc__multiply"]
+    allowed_tools=["mcp__calc__add", "mcp__calc__multiply"],
 )
 ```
 
@@ -275,6 +261,7 @@ async with ClaudeSDKClient() as client:
 import asyncio
 from claude_agent_sdk import ClaudeSDKClient, AssistantMessage, TextBlock, ResultMessage
 
+
 async def main():
     async with ClaudeSDKClient() as client:
         # First question
@@ -305,6 +292,7 @@ async def main():
                     if isinstance(block, TextBlock):
                         print(f"Claude: {block.text}")
 
+
 asyncio.run(main())
 ```
 
@@ -313,6 +301,7 @@ asyncio.run(main())
 ```python
 import asyncio
 from claude_agent_sdk import ClaudeSDKClient
+
 
 async def message_stream():
     """Generate messages dynamically."""
@@ -323,6 +312,7 @@ async def message_stream():
     yield {"type": "text", "text": "Humidity: 60%"}
     await asyncio.sleep(0.5)
     yield {"type": "text", "text": "What patterns do you see?"}
+
 
 async def main():
     async with ClaudeSDKClient() as client:
@@ -339,6 +329,7 @@ async def main():
         async for message in client.receive_response():
             print(message)
 
+
 asyncio.run(main())
 ```
 
@@ -348,11 +339,9 @@ asyncio.run(main())
 import asyncio
 from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions
 
+
 async def interruptible_task():
-    options = ClaudeAgentOptions(
-        allowed_tools=["Bash"],
-        permission_mode="acceptEdits"
-    )
+    options = ClaudeAgentOptions(allowed_tools=["Bash"], permission_mode="acceptEdits")
 
     async with ClaudeSDKClient(options=options) as client:
         # Start a long-running task
@@ -372,30 +361,26 @@ async def interruptible_task():
             # Process the new response
             pass
 
+
 asyncio.run(interruptible_task())
 ```
 
 #### Example - Advanced permission control
 
 ```python
-from claude_agent_sdk import (
-    ClaudeSDKClient,
-    ClaudeAgentOptions
-)
+from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions
 from claude_agent_sdk.types import PermissionResultAllow, PermissionResultDeny
 
+
 async def custom_permission_handler(
-    tool_name: str,
-    input_data: dict,
-    context: dict
+    tool_name: str, input_data: dict, context: dict
 ) -> PermissionResultAllow | PermissionResultDeny:
     """Custom logic for tool permissions."""
 
     # Block writes to system directories
     if tool_name == "Write" and input_data.get("file_path", "").startswith("/system/"):
         return PermissionResultDeny(
-            message="System directory write not allowed",
-            interrupt=True
+            message="System directory write not allowed", interrupt=True
         )
 
     # Redirect sensitive file operations
@@ -408,10 +393,10 @@ async def custom_permission_handler(
     # Allow everything else
     return PermissionResultAllow(updated_input=input_data)
 
+
 async def main():
     options = ClaudeAgentOptions(
-        can_use_tool=custom_permission_handler,
-        allowed_tools=["Read", "Write", "Edit"]
+        can_use_tool=custom_permission_handler, allowed_tools=["Read", "Write", "Edit"]
     )
 
     async with ClaudeSDKClient(options=options) as client:
@@ -420,6 +405,7 @@ async def main():
         async for message in client.receive_response():
             # Will use sandbox path instead
             print(message)
+
 
 asyncio.run(main())
 ```
@@ -587,7 +573,7 @@ async for message in query(
     prompt="Analyze this code",
     options=ClaudeAgentOptions(
         setting_sources=["user", "project", "local"]  # Load all settings
-    )
+    ),
 ):
     print(message)
 ```
@@ -600,7 +586,7 @@ async for message in query(
     prompt="Run CI checks",
     options=ClaudeAgentOptions(
         setting_sources=["project"]  # Only .claude/settings.json
-    )
+    ),
 ):
     print(message)
 ```
@@ -613,8 +599,8 @@ async for message in query(
     prompt="Run tests",
     options=ClaudeAgentOptions(
         setting_sources=["project"],  # Only team-shared settings
-        permission_mode="bypassPermissions"
-    )
+        permission_mode="bypassPermissions",
+    ),
 ):
     print(message)
 ```
@@ -628,10 +614,10 @@ async for message in query(
     prompt="Review this PR",
     options=ClaudeAgentOptions(
         # setting_sources=None is the default, no need to specify
-        agents={ /* ... */ },
-        mcp_servers={ /* ... */ },
-        allowed_tools=["Read", "Grep", "Glob"]
-    )
+        agents={...},
+        mcp_servers={...},
+        allowed_tools=["Read", "Grep", "Glob"],
+    ),
 ):
     print(message)
 ```
@@ -645,11 +631,11 @@ async for message in query(
     options=ClaudeAgentOptions(
         system_prompt={
             "type": "preset",
-            "preset": "claude_code"  # Use Claude Code's system prompt
+            "preset": "claude_code",  # Use Claude Code's system prompt
         },
         setting_sources=["project"],  # Required to load CLAUDE.md from project
-        allowed_tools=["Read", "Write", "Edit"]
-    )
+        allowed_tools=["Read", "Write", "Edit"],
+    ),
 ):
     print(message)
 ```
@@ -690,10 +676,10 @@ Permission modes for controlling tool execution.
 
 ```python
 PermissionMode = Literal[
-    "default",           # Standard permission behavior
-    "acceptEdits",       # Auto-accept file edits
-    "plan",              # Planning mode - no execution
-    "bypassPermissions"  # Bypass all permission checks (use with caution)
+    "default",  # Standard permission behavior
+    "acceptEdits",  # Auto-accept file edits
+    "plan",  # Planning mode - no execution
+    "bypassPermissions",  # Bypass all permission checks (use with caution)
 ]
 ```
 
@@ -703,8 +689,7 @@ Type alias for tool permission callback functions.
 
 ```python
 CanUseTool = Callable[
-    [str, dict[str, Any], ToolPermissionContext],
-    Awaitable[PermissionResult]
+    [str, dict[str, Any], ToolPermissionContext], Awaitable[PermissionResult]
 ]
 ```
 
@@ -794,7 +779,9 @@ class PermissionUpdate:
     behavior: Literal["allow", "deny", "ask"] | None = None
     mode: PermissionMode | None = None
     directories: list[str] | None = None
-    destination: Literal["userSettings", "projectSettings", "localSettings", "session"] | None = None
+    destination: (
+        Literal["userSettings", "projectSettings", "localSettings", "session"] | None
+    ) = None
 ```
 
 | Field | Type | Description |
@@ -832,7 +819,9 @@ class McpSdkServerConfig(TypedDict):
 Union type for MCP server configurations.
 
 ```python
-McpServerConfig = McpStdioServerConfig | McpSSEServerConfig | McpHttpServerConfig | McpSdkServerConfig
+McpServerConfig = (
+    McpStdioServerConfig | McpSSEServerConfig | McpHttpServerConfig | McpSdkServerConfig
+)
 ```
 
 #### `McpStdioServerConfig`
@@ -880,9 +869,9 @@ class SdkPluginConfig(TypedDict):
 
 **Example:**
 ```python
-plugins=[
+plugins = [
     {"type": "local", "path": "./my-plugin"},
-    {"type": "local", "path": "/absolute/path/to/plugin"}
+    {"type": "local", "path": "/absolute/path/to/plugin"},
 ]
 ```
 
@@ -1041,7 +1030,9 @@ Raised when Claude Code CLI is not installed or not found.
 
 ```python
 class CLINotFoundError(CLIConnectionError):
-    def __init__(self, message: str = "Claude Code not found", cli_path: str | None = None):
+    def __init__(
+        self, message: str = "Claude Code not found", cli_path: str | None = None
+    ):
         """
         Args:
             message: Error message (default: "Claude Code not found")
@@ -1064,7 +1055,9 @@ Raised when the Claude Code process fails.
 
 ```python
 class ProcessError(ClaudeSDKError):
-    def __init__(self, message: str, exit_code: int | None = None, stderr: str | None = None):
+    def __init__(
+        self, message: str, exit_code: int | None = None, stderr: str | None = None
+    ):
         self.exit_code = exit_code
         self.stderr = stderr
 ```
@@ -1095,12 +1088,12 @@ Supported hook event types. Note that due to setup limitations, the Python SDK d
 
 ```python
 HookEvent = Literal[
-    "PreToolUse",      # Called before tool execution
-    "PostToolUse",     # Called after tool execution
-    "UserPromptSubmit", # Called when user submits a prompt
-    "Stop",            # Called when stopping execution
-    "SubagentStop",    # Called when a subagent stops
-    "PreCompact"       # Called before message compaction
+    "PreToolUse",  # Called before tool execution
+    "PostToolUse",  # Called after tool execution
+    "UserPromptSubmit",  # Called when user submits a prompt
+    "Stop",  # Called when stopping execution
+    "SubagentStop",  # Called when a subagent stops
+    "PreCompact",  # Called before message compaction
 ]
 ```
 
@@ -1110,8 +1103,7 @@ Type definition for hook callback functions.
 
 ```python
 HookCallback = Callable[
-    [dict[str, Any], str | None, HookContext],
-    Awaitable[dict[str, Any]]
+    [dict[str, Any], str | None, HookContext], Awaitable[dict[str, Any]]
 ]
 ```
 
@@ -1144,9 +1136,15 @@ Configuration for matching hooks to specific events or tools.
 ```python
 @dataclass
 class HookMatcher:
-    matcher: str | None = None        # Tool name or pattern to match (e.g., "Bash", "Write|Edit")
-    hooks: list[HookCallback] = field(default_factory=list)  # List of callbacks to execute
-    timeout: float | None = None        # Timeout in seconds for all hooks in this matcher (default: 60)
+    matcher: str | None = (
+        None  # Tool name or pattern to match (e.g., "Bash", "Write|Edit")
+    )
+    hooks: list[HookCallback] = field(
+        default_factory=list
+    )  # List of callbacks to execute
+    timeout: float | None = (
+        None  # Timeout in seconds for all hooks in this matcher (default: 60)
+    )
 ```
 
 ### `HookInput`
@@ -1296,14 +1294,14 @@ Synchronous hook output with control and decision fields.
 ```python
 class SyncHookJSONOutput(TypedDict):
     # Control fields
-    continue_: NotRequired[bool]      # Whether to proceed (default: True)
-    suppressOutput: NotRequired[bool] # Hide stdout from transcript
-    stopReason: NotRequired[str]      # Message when continue is False
+    continue_: NotRequired[bool]  # Whether to proceed (default: True)
+    suppressOutput: NotRequired[bool]  # Hide stdout from transcript
+    stopReason: NotRequired[str]  # Message when continue is False
 
     # Decision fields
     decision: NotRequired[Literal["block"]]
-    systemMessage: NotRequired[str]   # Warning message for user
-    reason: NotRequired[str]          # Feedback for Claude
+    systemMessage: NotRequired[str]  # Warning message for user
+    reason: NotRequired[str]  # Feedback for Claude
 
     # Hook-specific output
     hookSpecificOutput: NotRequired[dict[str, Any]]
@@ -1319,8 +1317,8 @@ Async hook output that defers hook execution.
 
 ```python
 class AsyncHookJSONOutput(TypedDict):
-    async_: Literal[True]             # Set to True to defer execution
-    asyncTimeout: NotRequired[int]    # Timeout in milliseconds
+    async_: Literal[True]  # Set to True to defer execution
+    asyncTimeout: NotRequired[int]  # Timeout in milliseconds
 ```
 
 <Note>
@@ -1335,49 +1333,47 @@ This example registers two hooks: one that blocks dangerous bash commands like `
 from claude_agent_sdk import query, ClaudeAgentOptions, HookMatcher, HookContext
 from typing import Any
 
+
 async def validate_bash_command(
-    input_data: dict[str, Any],
-    tool_use_id: str | None,
-    context: HookContext
+    input_data: dict[str, Any], tool_use_id: str | None, context: HookContext
 ) -> dict[str, Any]:
     """Validate and potentially block dangerous bash commands."""
-    if input_data['tool_name'] == 'Bash':
-        command = input_data['tool_input'].get('command', '')
-        if 'rm -rf /' in command:
+    if input_data["tool_name"] == "Bash":
+        command = input_data["tool_input"].get("command", "")
+        if "rm -rf /" in command:
             return {
-                'hookSpecificOutput': {
-                    'hookEventName': 'PreToolUse',
-                    'permissionDecision': 'deny',
-                    'permissionDecisionReason': 'Dangerous command blocked'
+                "hookSpecificOutput": {
+                    "hookEventName": "PreToolUse",
+                    "permissionDecision": "deny",
+                    "permissionDecisionReason": "Dangerous command blocked",
                 }
             }
     return {}
 
+
 async def log_tool_use(
-    input_data: dict[str, Any],
-    tool_use_id: str | None,
-    context: HookContext
+    input_data: dict[str, Any], tool_use_id: str | None, context: HookContext
 ) -> dict[str, Any]:
     """Log all tool usage for auditing."""
     print(f"Tool used: {input_data.get('tool_name')}")
     return {}
 
+
 options = ClaudeAgentOptions(
     hooks={
-        'PreToolUse': [
-            HookMatcher(matcher='Bash', hooks=[validate_bash_command], timeout=120),  # 2 min for validation
-            HookMatcher(hooks=[log_tool_use])  # Applies to all tools (default 60s timeout)
+        "PreToolUse": [
+            HookMatcher(
+                matcher="Bash", hooks=[validate_bash_command], timeout=120
+            ),  # 2 min for validation
+            HookMatcher(
+                hooks=[log_tool_use]
+            ),  # Applies to all tools (default 60s timeout)
         ],
-        'PostToolUse': [
-            HookMatcher(hooks=[log_tool_use])
-        ]
+        "PostToolUse": [HookMatcher(hooks=[log_tool_use])],
     }
 )
 
-async for message in query(
-    prompt="Analyze this codebase",
-    options=options
-):
+async for message in query(prompt="Analyze this codebase", options=options):
     print(message)
 ```
 
@@ -1393,9 +1389,9 @@ Documentation of input/output schemas for all built-in Claude Code tools. While 
 
 ```python
 {
-    "description": str,      # A short (3-5 word) description of the task
-    "prompt": str,           # The task for the agent to perform
-    "subagent_type": str     # The type of specialized agent to use
+    "description": str,  # A short (3-5 word) description of the task
+    "prompt": str,  # The task for the agent to perform
+    "subagent_type": str,  # The type of specialized agent to use
 }
 ```
 
@@ -1403,10 +1399,10 @@ Documentation of input/output schemas for all built-in Claude Code tools. While 
 
 ```python
 {
-    "result": str,                    # Final result from the subagent
-    "usage": dict | None,             # Token usage statistics
+    "result": str,  # Final result from the subagent
+    "usage": dict | None,  # Token usage statistics
     "total_cost_usd": float | None,  # Total cost in USD
-    "duration_ms": int | None         # Execution duration in milliseconds
+    "duration_ms": int | None,  # Execution duration in milliseconds
 }
 ```
 
@@ -1420,20 +1416,20 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "questions": [                    # Questions to ask the user (1-4 questions)
+    "questions": [  # Questions to ask the user (1-4 questions)
         {
-            "question": str,          # The complete question to ask the user
-            "header": str,            # Very short label displayed as a chip/tag (max 12 chars)
-            "options": [              # The available choices (2-4 options)
+            "question": str,  # The complete question to ask the user
+            "header": str,  # Very short label displayed as a chip/tag (max 12 chars)
+            "options": [  # The available choices (2-4 options)
                 {
-                    "label": str,         # Display text for this option (1-5 words)
-                    "description": str    # Explanation of what this option means
+                    "label": str,  # Display text for this option (1-5 words)
+                    "description": str,  # Explanation of what this option means
                 }
             ],
-            "multiSelect": bool       # Set to true to allow multiple selections
+            "multiSelect": bool,  # Set to true to allow multiple selections
         }
     ],
-    "answers": dict | None            # User answers populated by the permission system
+    "answers": dict | None,  # User answers populated by the permission system
 }
 ```
 
@@ -1441,16 +1437,16 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "questions": [                    # The questions that were asked
+    "questions": [  # The questions that were asked
         {
             "question": str,
             "header": str,
             "options": [{"label": str, "description": str}],
-            "multiSelect": bool
+            "multiSelect": bool,
         }
     ],
-    "answers": dict[str, str]         # Maps question text to answer string
-                                      # Multi-select answers are comma-separated
+    "answers": dict[str, str],  # Maps question text to answer string
+    # Multi-select answers are comma-separated
 }
 ```
 
@@ -1462,10 +1458,10 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "command": str,                  # The command to execute
-    "timeout": int | None,           # Optional timeout in milliseconds (max 600000)
-    "description": str | None,       # Clear, concise description (5-10 words)
-    "run_in_background": bool | None # Set to true to run in background
+    "command": str,  # The command to execute
+    "timeout": int | None,  # Optional timeout in milliseconds (max 600000)
+    "description": str | None,  # Clear, concise description (5-10 words)
+    "run_in_background": bool | None,  # Set to true to run in background
 }
 ```
 
@@ -1473,10 +1469,10 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "output": str,              # Combined stdout and stderr output
-    "exitCode": int,            # Exit code of the command
-    "killed": bool | None,      # Whether command was killed due to timeout
-    "shellId": str | None       # Shell ID for background processes
+    "output": str,  # Combined stdout and stderr output
+    "exitCode": int,  # Exit code of the command
+    "killed": bool | None,  # Whether command was killed due to timeout
+    "shellId": str | None,  # Shell ID for background processes
 }
 ```
 
@@ -1488,10 +1484,10 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "file_path": str,           # The absolute path to the file to modify
-    "old_string": str,          # The text to replace
-    "new_string": str,          # The text to replace it with
-    "replace_all": bool | None  # Replace all occurrences (default False)
+    "file_path": str,  # The absolute path to the file to modify
+    "old_string": str,  # The text to replace
+    "new_string": str,  # The text to replace it with
+    "replace_all": bool | None,  # Replace all occurrences (default False)
 }
 ```
 
@@ -1499,9 +1495,9 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "message": str,      # Confirmation message
-    "replacements": int, # Number of replacements made
-    "file_path": str     # File path that was edited
+    "message": str,  # Confirmation message
+    "replacements": int,  # Number of replacements made
+    "file_path": str,  # File path that was edited
 }
 ```
 
@@ -1513,9 +1509,9 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "file_path": str,       # The absolute path to the file to read
-    "offset": int | None,   # The line number to start reading from
-    "limit": int | None     # The number of lines to read
+    "file_path": str,  # The absolute path to the file to read
+    "offset": int | None,  # The line number to start reading from
+    "limit": int | None,  # The number of lines to read
 }
 ```
 
@@ -1523,9 +1519,9 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "content": str,         # File contents with line numbers
-    "total_lines": int,     # Total number of lines in file
-    "lines_returned": int   # Lines actually returned
+    "content": str,  # File contents with line numbers
+    "total_lines": int,  # Total number of lines in file
+    "lines_returned": int,  # Lines actually returned
 }
 ```
 
@@ -1533,9 +1529,9 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "image": str,       # Base64 encoded image data
-    "mime_type": str,   # Image MIME type
-    "file_size": int    # File size in bytes
+    "image": str,  # Base64 encoded image data
+    "mime_type": str,  # Image MIME type
+    "file_size": int,  # File size in bytes
 }
 ```
 
@@ -1548,7 +1544,7 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 ```python
 {
     "file_path": str,  # The absolute path to the file to write
-    "content": str     # The content to write to the file
+    "content": str,  # The content to write to the file
 }
 ```
 
@@ -1556,9 +1552,9 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "message": str,        # Success message
+    "message": str,  # Success message
     "bytes_written": int,  # Number of bytes written
-    "file_path": str       # File path that was written
+    "file_path": str,  # File path that was written
 }
 ```
 
@@ -1570,8 +1566,8 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "pattern": str,       # The glob pattern to match files against
-    "path": str | None    # The directory to search in (defaults to cwd)
+    "pattern": str,  # The glob pattern to match files against
+    "path": str | None,  # The directory to search in (defaults to cwd)
 }
 ```
 
@@ -1580,8 +1576,8 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 ```python
 {
     "matches": list[str],  # Array of matching file paths
-    "count": int,          # Number of matches found
-    "search_path": str     # Search directory used
+    "count": int,  # Number of matches found
+    "search_path": str,  # Search directory used
 }
 ```
 
@@ -1593,18 +1589,18 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "pattern": str,                    # The regular expression pattern
-    "path": str | None,                # File or directory to search in
-    "glob": str | None,                # Glob pattern to filter files
-    "type": str | None,                # File type to search
-    "output_mode": str | None,         # "content", "files_with_matches", or "count"
-    "-i": bool | None,                 # Case insensitive search
-    "-n": bool | None,                 # Show line numbers
-    "-B": int | None,                  # Lines to show before each match
-    "-A": int | None,                  # Lines to show after each match
-    "-C": int | None,                  # Lines to show before and after
-    "head_limit": int | None,          # Limit output to first N lines/entries
-    "multiline": bool | None           # Enable multiline mode
+    "pattern": str,  # The regular expression pattern
+    "path": str | None,  # File or directory to search in
+    "glob": str | None,  # Glob pattern to filter files
+    "type": str | None,  # File type to search
+    "output_mode": str | None,  # "content", "files_with_matches", or "count"
+    "-i": bool | None,  # Case insensitive search
+    "-n": bool | None,  # Show line numbers
+    "-B": int | None,  # Lines to show before each match
+    "-A": int | None,  # Lines to show after each match
+    "-C": int | None,  # Lines to show before and after
+    "head_limit": int | None,  # Limit output to first N lines/entries
+    "multiline": bool | None,  # Enable multiline mode
 }
 ```
 
@@ -1618,10 +1614,10 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
             "line_number": int | None,
             "line": str,
             "before_context": list[str] | None,
-            "after_context": list[str] | None
+            "after_context": list[str] | None,
         }
     ],
-    "total_matches": int
+    "total_matches": int,
 }
 ```
 
@@ -1630,7 +1626,7 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 ```python
 {
     "files": list[str],  # Files containing matches
-    "count": int         # Number of files with matches
+    "count": int,  # Number of files with matches
 }
 ```
 
@@ -1642,11 +1638,11 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "notebook_path": str,                     # Absolute path to the Jupyter notebook
-    "cell_id": str | None,                    # The ID of the cell to edit
-    "new_source": str,                        # The new source for the cell
+    "notebook_path": str,  # Absolute path to the Jupyter notebook
+    "cell_id": str | None,  # The ID of the cell to edit
+    "new_source": str,  # The new source for the cell
     "cell_type": "code" | "markdown" | None,  # The type of the cell
-    "edit_mode": "replace" | "insert" | "delete" | None  # Edit operation type
+    "edit_mode": "replace" | "insert" | "delete" | None,  # Edit operation type
 }
 ```
 
@@ -1654,10 +1650,10 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "message": str,                              # Success message
+    "message": str,  # Success message
     "edit_type": "replaced" | "inserted" | "deleted",  # Type of edit performed
-    "cell_id": str | None,                       # Cell ID that was affected
-    "total_cells": int                           # Total cells in notebook after edit
+    "cell_id": str | None,  # Cell ID that was affected
+    "total_cells": int,  # Total cells in notebook after edit
 }
 ```
 
@@ -1669,8 +1665,8 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "url": str,     # The URL to fetch content from
-    "prompt": str   # The prompt to run on the fetched content
+    "url": str,  # The URL to fetch content from
+    "prompt": str,  # The prompt to run on the fetched content
 }
 ```
 
@@ -1678,10 +1674,10 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "response": str,           # AI model's response to the prompt
-    "url": str,                # URL that was fetched
-    "final_url": str | None,   # Final URL after redirects
-    "status_code": int | None  # HTTP status code
+    "response": str,  # AI model's response to the prompt
+    "url": str,  # URL that was fetched
+    "final_url": str | None,  # Final URL after redirects
+    "status_code": int | None,  # HTTP status code
 }
 ```
 
@@ -1693,9 +1689,9 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "query": str,                        # The search query to use
-    "allowed_domains": list[str] | None, # Only include results from these domains
-    "blocked_domains": list[str] | None  # Never include results from these domains
+    "query": str,  # The search query to use
+    "allowed_domains": list[str] | None,  # Only include results from these domains
+    "blocked_domains": list[str] | None,  # Never include results from these domains
 }
 ```
 
@@ -1703,16 +1699,9 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "results": [
-        {
-            "title": str,
-            "url": str,
-            "snippet": str,
-            "metadata": dict | None
-        }
-    ],
+    "results": [{"title": str, "url": str, "snippet": str, "metadata": dict | None}],
     "total_results": int,
-    "query": str
+    "query": str,
 }
 ```
 
@@ -1726,9 +1715,9 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 {
     "todos": [
         {
-            "content": str,                              # The task description
+            "content": str,  # The task description
             "status": "pending" | "in_progress" | "completed",  # Task status
-            "activeForm": str                            # Active form of the description
+            "activeForm": str,  # Active form of the description
         }
     ]
 }
@@ -1739,12 +1728,7 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 ```python
 {
     "message": str,  # Success message
-    "stats": {
-        "total": int,
-        "pending": int,
-        "in_progress": int,
-        "completed": int
-    }
+    "stats": {"total": int, "pending": int, "in_progress": int, "completed": int},
 }
 ```
 
@@ -1756,8 +1740,8 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "bash_id": str,       # The ID of the background shell
-    "filter": str | None  # Optional regex to filter output lines
+    "bash_id": str,  # The ID of the background shell
+    "filter": str | None,  # Optional regex to filter output lines
 }
 ```
 
@@ -1765,9 +1749,9 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "output": str,                                      # New output since last check
-    "status": "running" | "completed" | "failed",       # Current shell status
-    "exitCode": int | None                              # Exit code when completed
+    "output": str,  # New output since last check
+    "status": "running" | "completed" | "failed",  # Current shell status
+    "exitCode": int | None,  # Exit code when completed
 }
 ```
 
@@ -1788,7 +1772,7 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 ```python
 {
     "message": str,  # Success message
-    "shell_id": str  # ID of the killed shell
+    "shell_id": str,  # ID of the killed shell
 }
 ```
 
@@ -1808,8 +1792,8 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 
 ```python
 {
-    "message": str,          # Confirmation message
-    "approved": bool | None  # Whether user approved the plan
+    "message": str,  # Confirmation message
+    "approved": bool | None,  # Whether user approved the plan
 }
 ```
 
@@ -1835,10 +1819,10 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
             "name": str,
             "description": str | None,
             "mimeType": str | None,
-            "server": str
+            "server": str,
         }
     ],
-    "total": int
+    "total": int,
 }
 ```
 
@@ -1851,7 +1835,7 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 ```python
 {
     "server": str,  # The MCP server name
-    "uri": str      # The resource URI to read
+    "uri": str,  # The resource URI to read
 }
 ```
 
@@ -1860,14 +1844,9 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 ```python
 {
     "contents": [
-        {
-            "uri": str,
-            "mimeType": str | None,
-            "text": str | None,
-            "blob": str | None
-        }
+        {"uri": str, "mimeType": str | None, "text": str | None, "blob": str | None}
     ],
-    "server": str
+    "server": str,
 }
 ```
 
@@ -1876,8 +1855,14 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 ### Building a Continuous Conversation Interface
 
 ```python
-from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, AssistantMessage, TextBlock
+from claude_agent_sdk import (
+    ClaudeSDKClient,
+    ClaudeAgentOptions,
+    AssistantMessage,
+    TextBlock,
+)
 import asyncio
+
 
 class ConversationSession:
     """Maintains a single conversation session with Claude."""
@@ -1889,18 +1874,20 @@ class ConversationSession:
     async def start(self):
         await self.client.connect()
         print("Starting conversation session. Claude will remember context.")
-        print("Commands: 'exit' to quit, 'interrupt' to stop current task, 'new' for new session")
+        print(
+            "Commands: 'exit' to quit, 'interrupt' to stop current task, 'new' for new session"
+        )
 
         while True:
             user_input = input(f"\n[Turn {self.turn_count + 1}] You: ")
 
-            if user_input.lower() == 'exit':
+            if user_input.lower() == "exit":
                 break
-            elif user_input.lower() == 'interrupt':
+            elif user_input.lower() == "interrupt":
                 await self.client.interrupt()
                 print("Task interrupted!")
                 continue
-            elif user_input.lower() == 'new':
+            elif user_input.lower() == "new":
                 # Disconnect and reconnect for a fresh session
                 await self.client.disconnect()
                 await self.client.connect()
@@ -1924,13 +1911,14 @@ class ConversationSession:
         await self.client.disconnect()
         print(f"Conversation ended after {self.turn_count} turns.")
 
+
 async def main():
     options = ClaudeAgentOptions(
-        allowed_tools=["Read", "Write", "Bash"],
-        permission_mode="acceptEdits"
+        allowed_tools=["Read", "Write", "Bash"], permission_mode="acceptEdits"
     )
     session = ConversationSession(options)
     await session.start()
+
 
 # Example conversation:
 # Turn 1 - You: "Create a file called hello.py"
@@ -1950,75 +1938,70 @@ from claude_agent_sdk import (
     ClaudeSDKClient,
     ClaudeAgentOptions,
     HookMatcher,
-    HookContext
+    HookContext,
 )
 import asyncio
 from typing import Any
 
+
 async def pre_tool_logger(
-    input_data: dict[str, Any],
-    tool_use_id: str | None,
-    context: HookContext
+    input_data: dict[str, Any], tool_use_id: str | None, context: HookContext
 ) -> dict[str, Any]:
     """Log all tool usage before execution."""
-    tool_name = input_data.get('tool_name', 'unknown')
+    tool_name = input_data.get("tool_name", "unknown")
     print(f"[PRE-TOOL] About to use: {tool_name}")
 
     # You can modify or block the tool execution here
-    if tool_name == "Bash" and "rm -rf" in str(input_data.get('tool_input', {})):
+    if tool_name == "Bash" and "rm -rf" in str(input_data.get("tool_input", {})):
         return {
-            'hookSpecificOutput': {
-                'hookEventName': 'PreToolUse',
-                'permissionDecision': 'deny',
-                'permissionDecisionReason': 'Dangerous command blocked'
+            "hookSpecificOutput": {
+                "hookEventName": "PreToolUse",
+                "permissionDecision": "deny",
+                "permissionDecisionReason": "Dangerous command blocked",
             }
         }
     return {}
 
+
 async def post_tool_logger(
-    input_data: dict[str, Any],
-    tool_use_id: str | None,
-    context: HookContext
+    input_data: dict[str, Any], tool_use_id: str | None, context: HookContext
 ) -> dict[str, Any]:
     """Log results after tool execution."""
-    tool_name = input_data.get('tool_name', 'unknown')
+    tool_name = input_data.get("tool_name", "unknown")
     print(f"[POST-TOOL] Completed: {tool_name}")
     return {}
 
+
 async def user_prompt_modifier(
-    input_data: dict[str, Any],
-    tool_use_id: str | None,
-    context: HookContext
+    input_data: dict[str, Any], tool_use_id: str | None, context: HookContext
 ) -> dict[str, Any]:
     """Add context to user prompts."""
-    original_prompt = input_data.get('prompt', '')
+    original_prompt = input_data.get("prompt", "")
 
     # Add timestamp to all prompts
     from datetime import datetime
+
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     return {
-        'hookSpecificOutput': {
-            'hookEventName': 'UserPromptSubmit',
-            'updatedPrompt': f"[{timestamp}] {original_prompt}"
+        "hookSpecificOutput": {
+            "hookEventName": "UserPromptSubmit",
+            "updatedPrompt": f"[{timestamp}] {original_prompt}",
         }
     }
+
 
 async def main():
     options = ClaudeAgentOptions(
         hooks={
-            'PreToolUse': [
+            "PreToolUse": [
                 HookMatcher(hooks=[pre_tool_logger]),
-                HookMatcher(matcher='Bash', hooks=[pre_tool_logger])
+                HookMatcher(matcher="Bash", hooks=[pre_tool_logger]),
             ],
-            'PostToolUse': [
-                HookMatcher(hooks=[post_tool_logger])
-            ],
-            'UserPromptSubmit': [
-                HookMatcher(hooks=[user_prompt_modifier])
-            ]
+            "PostToolUse": [HookMatcher(hooks=[post_tool_logger])],
+            "UserPromptSubmit": [HookMatcher(hooks=[user_prompt_modifier])],
         },
-        allowed_tools=["Read", "Write", "Bash"]
+        allowed_tools=["Read", "Write", "Bash"],
     )
 
     async with ClaudeSDKClient(options=options) as client:
@@ -2027,6 +2010,7 @@ async def main():
         async for message in client.receive_response():
             # Hooks will automatically log tool usage
             pass
+
 
 asyncio.run(main())
 ```
@@ -2040,20 +2024,18 @@ from claude_agent_sdk import (
     AssistantMessage,
     ToolUseBlock,
     ToolResultBlock,
-    TextBlock
+    TextBlock,
 )
 import asyncio
 
+
 async def monitor_progress():
     options = ClaudeAgentOptions(
-        allowed_tools=["Write", "Bash"],
-        permission_mode="acceptEdits"
+        allowed_tools=["Write", "Bash"], permission_mode="acceptEdits"
     )
 
     async with ClaudeSDKClient(options=options) as client:
-        await client.query(
-            "Create 5 Python files with different sorting algorithms"
-        )
+        await client.query("Create 5 Python files with different sorting algorithms")
 
         # Monitor progress in real-time
         files_created = []
@@ -2070,9 +2052,10 @@ async def monitor_progress():
                         print(f"💭 Claude says: {block.text[:100]}...")
 
             # Check if we've received the final result
-            if hasattr(message, 'subtype') and message.subtype in ['success', 'error']:
+            if hasattr(message, "subtype") and message.subtype in ["success", "error"]:
                 print(f"\n🎯 Task completed!")
                 break
+
 
 asyncio.run(monitor_progress())
 ```
@@ -2085,21 +2068,22 @@ asyncio.run(monitor_progress())
 from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ToolUseBlock
 import asyncio
 
+
 async def create_project():
     options = ClaudeAgentOptions(
         allowed_tools=["Read", "Write", "Bash"],
-        permission_mode='acceptEdits',
-        cwd="/home/user/project"
+        permission_mode="acceptEdits",
+        cwd="/home/user/project",
     )
 
     async for message in query(
-        prompt="Create a Python project structure with setup.py",
-        options=options
+        prompt="Create a Python project structure with setup.py", options=options
     ):
         if isinstance(message, AssistantMessage):
             for block in message.content:
                 if isinstance(block, ToolUseBlock):
                     print(f"Using tool: {block.name}")
+
 
 asyncio.run(create_project())
 ```
@@ -2107,12 +2091,7 @@ asyncio.run(create_project())
 ### Error handling
 
 ```python
-from claude_agent_sdk import (
-    query,
-    CLINotFoundError,
-    ProcessError,
-    CLIJSONDecodeError
-)
+from claude_agent_sdk import query, CLINotFoundError, ProcessError, CLIJSONDecodeError
 
 try:
     async for message in query(prompt="Hello"):
@@ -2131,6 +2110,7 @@ except CLIJSONDecodeError as e:
 from claude_agent_sdk import ClaudeSDKClient
 import asyncio
 
+
 async def interactive_session():
     async with ClaudeSDKClient() as client:
         # Send initial message
@@ -2147,6 +2127,7 @@ async def interactive_session():
         async for msg in client.receive_response():
             print(msg)
 
+
 asyncio.run(interactive_session())
 ```
 
@@ -2159,57 +2140,43 @@ from claude_agent_sdk import (
     tool,
     create_sdk_mcp_server,
     AssistantMessage,
-    TextBlock
+    TextBlock,
 )
 import asyncio
 from typing import Any
+
 
 # Define custom tools with @tool decorator
 @tool("calculate", "Perform mathematical calculations", {"expression": str})
 async def calculate(args: dict[str, Any]) -> dict[str, Any]:
     try:
         result = eval(args["expression"], {"__builtins__": {}})
-        return {
-            "content": [{
-                "type": "text",
-                "text": f"Result: {result}"
-            }]
-        }
+        return {"content": [{"type": "text", "text": f"Result: {result}"}]}
     except Exception as e:
         return {
-            "content": [{
-                "type": "text",
-                "text": f"Error: {str(e)}"
-            }],
-            "is_error": True
+            "content": [{"type": "text", "text": f"Error: {str(e)}"}],
+            "is_error": True,
         }
+
 
 @tool("get_time", "Get current time", {})
 async def get_time(args: dict[str, Any]) -> dict[str, Any]:
     from datetime import datetime
+
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    return {
-        "content": [{
-            "type": "text",
-            "text": f"Current time: {current_time}"
-        }]
-    }
+    return {"content": [{"type": "text", "text": f"Current time: {current_time}"}]}
+
 
 async def main():
     # Create SDK MCP server with custom tools
     my_server = create_sdk_mcp_server(
-        name="utilities",
-        version="1.0.0",
-        tools=[calculate, get_time]
+        name="utilities", version="1.0.0", tools=[calculate, get_time]
     )
 
     # Configure options with the server
     options = ClaudeAgentOptions(
         mcp_servers={"utils": my_server},
-        allowed_tools=[
-            "mcp__utils__calculate",
-            "mcp__utils__get_time"
-        ]
+        allowed_tools=["mcp__utils__calculate", "mcp__utils__get_time"],
     )
 
     # Use ClaudeSDKClient for interactive tool usage
@@ -2231,6 +2198,7 @@ async def main():
                 for block in message.content:
                     if isinstance(block, TextBlock):
                         print(f"Time: {block.text}")
+
 
 asyncio.run(main())
 ```
@@ -2280,14 +2248,12 @@ from claude_agent_sdk import query, ClaudeAgentOptions, SandboxSettings
 sandbox_settings: SandboxSettings = {
     "enabled": True,
     "autoAllowBashIfSandboxed": True,
-    "network": {
-        "allowLocalBinding": True
-    }
+    "network": {"allowLocalBinding": True},
 }
 
 async for message in query(
     prompt="Build and test my project",
-    options=ClaudeAgentOptions(sandbox=sandbox_settings)
+    options=ClaudeAgentOptions(sandbox=sandbox_settings),
 ):
     print(message)
 ```
@@ -2345,6 +2311,7 @@ When `allowUnsandboxedCommands` is enabled, the model can request to run command
 ```python
 from claude_agent_sdk import query, ClaudeAgentOptions
 
+
 async def can_use_tool(tool: str, input: dict) -> bool:
     # Check if the model is requesting to bypass the sandbox
     if tool == "Bash" and input.get("dangerouslyDisableSandbox"):
@@ -2355,17 +2322,18 @@ async def can_use_tool(tool: str, input: dict) -> bool:
         return is_command_authorized(input.get("command"))
     return True
 
+
 async def main():
     async for message in query(
         prompt="Deploy my application",
         options=ClaudeAgentOptions(
             sandbox={
                 "enabled": True,
-                "allowUnsandboxedCommands": True  # Model can request unsandboxed execution
+                "allowUnsandboxedCommands": True,  # Model can request unsandboxed execution
             },
             permission_mode="default",
-            can_use_tool=can_use_tool
-        )
+            can_use_tool=can_use_tool,
+        ),
     ):
         print(message)
 ```

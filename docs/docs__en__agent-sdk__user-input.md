@@ -22,6 +22,7 @@ async def handle_tool_request(tool_name, input_data, context):
     # Prompt user and return allow or deny
     ...
 
+
 options = ClaudeAgentOptions(can_use_tool=handle_tool_request)
 ```
 
@@ -30,7 +31,7 @@ async function handleToolRequest(toolName, input) {
   // Prompt user and return allow or deny
 }
 
-const options = { canUseTool: handleToolRequest }
+const options = { canUseTool: handleToolRequest };
 ```
 </CodeGroup>
 
@@ -143,7 +144,7 @@ import * as readline from "readline";
 function prompt(question: string): Promise<string> {
   const rl = readline.createInterface({
     input: process.stdin,
-    output: process.stdout,
+    output: process.stdout
   });
   return new Promise((resolve) =>
     rl.question(question, (answer) => {
@@ -177,8 +178,8 @@ for await (const message of query({
         // Deny: tool doesn't execute, Claude sees the message
         return { behavior: "deny", message: "User denied this action" };
       }
-    },
-  },
+    }
+  }
 })) {
   if ("result" in message) console.log(message.result);
 }
@@ -257,7 +258,7 @@ Beyond allowing or denying, you can modify the tool's input or provide context t
         return { behavior: "allow", updatedInput: input };
       }
       return { behavior: "deny", message: "User declined" };
-    }
+    };
     ```
     </CodeGroup>
   </Tab>
@@ -271,7 +272,9 @@ Beyond allowing or denying, you can modify the tool's input or provide context t
         if tool_name == "Bash":
             # User approved, but scope all commands to sandbox
             sandboxed_input = {**input_data}
-            sandboxed_input["command"] = input_data["command"].replace("/tmp", "/tmp/sandbox")
+            sandboxed_input["command"] = input_data["command"].replace(
+                "/tmp", "/tmp/sandbox"
+            )
             return PermissionResultAllow(updated_input=sandboxed_input)
         return PermissionResultAllow(updated_input=input_data)
     ```
@@ -287,7 +290,7 @@ Beyond allowing or denying, you can modify the tool's input or provide context t
         return { behavior: "allow", updatedInput: sandboxedInput };
       }
       return { behavior: "allow", updatedInput: input };
-    }
+    };
     ```
     </CodeGroup>
   </Tab>
@@ -316,7 +319,7 @@ Beyond allowing or denying, you can modify the tool's input or provide context t
         };
       }
       return { behavior: "allow", updatedInput: input };
-    }
+    };
     ```
     </CodeGroup>
   </Tab>
@@ -345,7 +348,7 @@ Beyond allowing or denying, you can modify the tool's input or provide context t
         };
       }
       return { behavior: "allow", updatedInput: input };
-    }
+    };
     ```
     </CodeGroup>
   </Tab>
@@ -379,7 +382,7 @@ The following steps show how to handle clarifying questions:
             can_use_tool=can_use_tool,
         ),
     ):
-        # ...
+        print(message)
     ```
 
     ```typescript TypeScript
@@ -390,10 +393,10 @@ The following steps show how to handle clarifying questions:
         tools: ["Read", "Glob", "Grep", "AskUserQuestion"],
         canUseTool: async (toolName, input) => {
           // Handle clarifying questions here
-        },
-      },
+        }
+      }
     })) {
-      // ...
+      console.log(message);
     }
     ```
     </CodeGroup>
@@ -421,7 +424,7 @@ The following steps show how to handle clarifying questions:
       }
       // Handle other tools normally
       return promptForApproval(toolName, input);
-    }
+    };
     ```
 
     </CodeGroup>
@@ -480,8 +483,8 @@ The following steps show how to handle clarifying questions:
             "questions": input_data.get("questions", []),
             "answers": {
                 "How should I format the output?": "Summary",
-                "Which sections should I include?": "Introduction, Conclusion"
-            }
+                "Which sections should I include?": "Introduction, Conclusion",
+            },
         }
     )
     ```
@@ -496,7 +499,7 @@ The following steps show how to handle clarifying questions:
           "Which sections should I include?": "Introduction, Conclusion"
         }
       }
-    }
+    };
     ```
 
     </CodeGroup>
@@ -619,7 +622,9 @@ async def handle_ask_user_question(input_data: dict) -> PermissionResultAllow:
     )
 
 
-async def can_use_tool(tool_name: str, input_data: dict, context) -> PermissionResultAllow:
+async def can_use_tool(
+    tool_name: str, input_data: dict, context
+) -> PermissionResultAllow:
     # Route AskUserQuestion to our question handler
     if tool_name == "AskUserQuestion":
         return await handle_ask_user_question(input_data)
@@ -630,7 +635,10 @@ async def can_use_tool(tool_name: str, input_data: dict, context) -> PermissionR
 async def prompt_stream():
     yield {
         "type": "user",
-        "message": {"role": "user", "content": "Help me decide on the tech stack for a new mobile app"},
+        "message": {
+            "role": "user",
+            "content": "Help me decide on the tech stack for a new mobile app",
+        },
     }
 
 
@@ -656,12 +664,14 @@ asyncio.run(main())
 
 ```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
-import * as readline from "readline";
+import * as readline from "readline/promises";
 
 // Helper to prompt user for input in the terminal
-function prompt(question: string): Promise<string> {
+async function prompt(question: string): Promise<string> {
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-  return new Promise((resolve) => rl.question(question, (answer) => { rl.close(); resolve(answer); }));
+  const answer = await rl.question(question);
+  rl.close();
+  return answer;
 }
 
 // Parse user input as option number(s) or free text
@@ -697,7 +707,7 @@ async function handleAskUserQuestion(input: any) {
   // Return the answers to Claude (must include original questions)
   return {
     behavior: "allow",
-    updatedInput: { questions: input.questions, answers },
+    updatedInput: { questions: input.questions, answers }
   };
 }
 
@@ -712,8 +722,8 @@ async function main() {
         }
         // Auto-approve other tools for this example
         return { behavior: "allow", updatedInput: input };
-      },
-    },
+      }
+    }
   })) {
     if ("result" in message) console.log(message.result);
   }

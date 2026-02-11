@@ -60,31 +60,31 @@ The example below asks the agent to research Anthropic and return the company na
 <CodeGroup>
 
 ```typescript TypeScript
-import { query } from '@anthropic-ai/claude-agent-sdk'
+import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // Define the shape of data you want back
 const schema = {
-  type: 'object',
+  type: "object",
   properties: {
-    company_name: { type: 'string' },
-    founded_year: { type: 'number' },
-    headquarters: { type: 'string' }
+    company_name: { type: "string" },
+    founded_year: { type: "number" },
+    headquarters: { type: "string" }
   },
-  required: ['company_name']
-}
+  required: ["company_name"]
+};
 
 for await (const message of query({
-  prompt: 'Research Anthropic and provide key company information',
+  prompt: "Research Anthropic and provide key company information",
   options: {
     outputFormat: {
-      type: 'json_schema',
+      type: "json_schema",
       schema: schema
     }
   }
 })) {
   // The result message contains structured_output with validated data
-  if (message.type === 'result' && message.structured_output) {
-    console.log(message.structured_output)
+  if (message.type === "result" && message.structured_output) {
+    console.log(message.structured_output);
     // { company_name: "Anthropic", founded_year: 2021, headquarters: "San Francisco, CA" }
   }
 }
@@ -100,25 +100,24 @@ schema = {
     "properties": {
         "company_name": {"type": "string"},
         "founded_year": {"type": "number"},
-        "headquarters": {"type": "string"}
+        "headquarters": {"type": "string"},
     },
-    "required": ["company_name"]
+    "required": ["company_name"],
 }
+
 
 async def main():
     async for message in query(
         prompt="Research Anthropic and provide key company information",
         options=ClaudeAgentOptions(
-            output_format={
-                "type": "json_schema",
-                "schema": schema
-            }
-        )
+            output_format={"type": "json_schema", "schema": schema}
+        ),
     ):
         # The result message contains structured_output with validated data
         if isinstance(message, ResultMessage) and message.structured_output:
             print(message.structured_output)
             # {'company_name': 'Anthropic', 'founded_year': 2021, 'headquarters': 'San Francisco, CA'}
+
 
 asyncio.run(main())
 ```
@@ -134,8 +133,8 @@ The example below defines a schema for a feature implementation plan with a summ
 <CodeGroup>
 
 ```typescript TypeScript
-import { z } from 'zod'
-import { query } from '@anthropic-ai/claude-agent-sdk'
+import { z } from "zod";
+import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // Define schema with Zod
 const FeaturePlan = z.object({
@@ -144,36 +143,36 @@ const FeaturePlan = z.object({
   steps: z.array(z.object({
     step_number: z.number(),
     description: z.string(),
-    estimated_complexity: z.enum(['low', 'medium', 'high'])
+    estimated_complexity: z.enum(["low", "medium", "high"])
   })),
   risks: z.array(z.string())
-})
+});
 
 type FeaturePlan = z.infer<typeof FeaturePlan>
 
 // Convert to JSON Schema
-const schema = z.toJSONSchema(FeaturePlan)
+const schema = z.toJSONSchema(FeaturePlan);
 
 // Use in query
 for await (const message of query({
-  prompt: 'Plan how to add dark mode support to a React app. Break it into implementation steps.',
+  prompt: "Plan how to add dark mode support to a React app. Break it into implementation steps.",
   options: {
     outputFormat: {
-      type: 'json_schema',
+      type: "json_schema",
       schema: schema
     }
   }
 })) {
-  if (message.type === 'result' && message.structured_output) {
+  if (message.type === "result" && message.structured_output) {
     // Validate and get fully typed result
-    const parsed = FeaturePlan.safeParse(message.structured_output)
+    const parsed = FeaturePlan.safeParse(message.structured_output);
     if (parsed.success) {
-      const plan: FeaturePlan = parsed.data
-      console.log(`Feature: ${plan.feature_name}`)
-      console.log(`Summary: ${plan.summary}`)
+      const plan: FeaturePlan = parsed.data;
+      console.log(`Feature: ${plan.feature_name}`);
+      console.log(`Summary: ${plan.summary}`);
       plan.steps.forEach(step => {
-        console.log(`${step.step_number}. [${step.estimated_complexity}] ${step.description}`)
-      })
+        console.log(`${step.step_number}. [${step.estimated_complexity}] ${step.description}`);
+      });
     }
   }
 }
@@ -184,10 +183,12 @@ import asyncio
 from pydantic import BaseModel
 from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
 
+
 class Step(BaseModel):
     step_number: int
     description: str
     estimated_complexity: str  # 'low', 'medium', 'high'
+
 
 class FeaturePlan(BaseModel):
     feature_name: str
@@ -195,15 +196,16 @@ class FeaturePlan(BaseModel):
     steps: list[Step]
     risks: list[str]
 
+
 async def main():
     async for message in query(
         prompt="Plan how to add dark mode support to a React app. Break it into implementation steps.",
         options=ClaudeAgentOptions(
             output_format={
                 "type": "json_schema",
-                "schema": FeaturePlan.model_json_schema()
+                "schema": FeaturePlan.model_json_schema(),
             }
-        )
+        ),
     ):
         if isinstance(message, ResultMessage) and message.structured_output:
             # Validate and get fully typed result
@@ -211,7 +213,10 @@ async def main():
             print(f"Feature: {plan.feature_name}")
             print(f"Summary: {plan.summary}")
             for step in plan.steps:
-                print(f"{step.step_number}. [{step.estimated_complexity}] {step.description}")
+                print(
+                    f"{step.step_number}. [{step.estimated_complexity}] {step.description}"
+                )
+
 
 asyncio.run(main())
 ```
@@ -242,50 +247,50 @@ The schema includes optional fields (`author` and `date`) since git blame inform
 <CodeGroup>
 
 ```typescript TypeScript
-import { query } from '@anthropic-ai/claude-agent-sdk'
+import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // Define structure for TODO extraction
 const todoSchema = {
-  type: 'object',
+  type: "object",
   properties: {
     todos: {
-      type: 'array',
+      type: "array",
       items: {
-        type: 'object',
+        type: "object",
         properties: {
-          text: { type: 'string' },
-          file: { type: 'string' },
-          line: { type: 'number' },
-          author: { type: 'string' },
-          date: { type: 'string' }
+          text: { type: "string" },
+          file: { type: "string" },
+          line: { type: "number" },
+          author: { type: "string" },
+          date: { type: "string" }
         },
-        required: ['text', 'file', 'line']
+        required: ["text", "file", "line"]
       }
     },
-    total_count: { type: 'number' }
+    total_count: { type: "number" }
   },
-  required: ['todos', 'total_count']
-}
+  required: ["todos", "total_count"]
+};
 
 // Agent uses Grep to find TODOs, Bash to get git blame info
 for await (const message of query({
-  prompt: 'Find all TODO comments in this codebase and identify who added them',
+  prompt: "Find all TODO comments in this codebase and identify who added them",
   options: {
     outputFormat: {
-      type: 'json_schema',
+      type: "json_schema",
       schema: todoSchema
     }
   }
 })) {
-  if (message.type === 'result' && message.structured_output) {
-    const data = message.structured_output
-    console.log(`Found ${data.total_count} TODOs`)
+  if (message.type === "result" && message.structured_output) {
+    const data = message.structured_output;
+    console.log(`Found ${data.total_count} TODOs`);
     data.todos.forEach(todo => {
-      console.log(`${todo.file}:${todo.line} - ${todo.text}`)
+      console.log(`${todo.file}:${todo.line} - ${todo.text}`);
       if (todo.author) {
-        console.log(`  Added by ${todo.author} on ${todo.date}`)
+        console.log(`  Added by ${todo.author} on ${todo.date}`);
       }
-    })
+    });
   }
 }
 ```
@@ -307,34 +312,33 @@ todo_schema = {
                     "file": {"type": "string"},
                     "line": {"type": "number"},
                     "author": {"type": "string"},
-                    "date": {"type": "string"}
+                    "date": {"type": "string"},
                 },
-                "required": ["text", "file", "line"]
-            }
+                "required": ["text", "file", "line"],
+            },
         },
-        "total_count": {"type": "number"}
+        "total_count": {"type": "number"},
     },
-    "required": ["todos", "total_count"]
+    "required": ["todos", "total_count"],
 }
+
 
 async def main():
     # Agent uses Grep to find TODOs, Bash to get git blame info
     async for message in query(
         prompt="Find all TODO comments in this codebase and identify who added them",
         options=ClaudeAgentOptions(
-            output_format={
-                "type": "json_schema",
-                "schema": todo_schema
-            }
-        )
+            output_format={"type": "json_schema", "schema": todo_schema}
+        ),
     ):
         if isinstance(message, ResultMessage) and message.structured_output:
             data = message.structured_output
             print(f"Found {data['total_count']} TODOs")
-            for todo in data['todos']:
+            for todo in data["todos"]:
                 print(f"{todo['file']}:{todo['line']} - {todo['text']}")
-                if 'author' in todo:
+                if "author" in todo:
                     print(f"  Added by {todo['author']} on {todo['date']}")
+
 
 asyncio.run(main())
 ```
@@ -358,21 +362,21 @@ The example below checks the `subtype` field to determine whether the output was
 
 ```typescript TypeScript
 for await (const msg of query({
-  prompt: 'Extract contact info from the document',
+  prompt: "Extract contact info from the document",
   options: {
     outputFormat: {
-      type: 'json_schema',
+      type: "json_schema",
       schema: contactSchema
     }
   }
 })) {
-  if (msg.type === 'result') {
-    if (msg.subtype === 'success' && msg.structured_output) {
+  if (msg.type === "result") {
+    if (msg.subtype === "success" && msg.structured_output) {
       // Use the validated output
-      console.log(msg.structured_output)
-    } else if (msg.subtype === 'error_max_structured_output_retries') {
+      console.log(msg.structured_output);
+    } else if (msg.subtype === "error_max_structured_output_retries") {
       // Handle the failure - retry with simpler prompt, fall back to unstructured, etc.
-      console.error('Could not produce valid output')
+      console.error("Could not produce valid output");
     }
   }
 }
@@ -382,11 +386,8 @@ for await (const msg of query({
 async for message in query(
     prompt="Extract contact info from the document",
     options=ClaudeAgentOptions(
-        output_format={
-            "type": "json_schema",
-            "schema": contact_schema
-        }
-    )
+        output_format={"type": "json_schema", "schema": contact_schema}
+    ),
 ):
     if isinstance(message, ResultMessage):
         if message.subtype == "success" and message.structured_output:

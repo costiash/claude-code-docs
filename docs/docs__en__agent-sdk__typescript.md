@@ -172,7 +172,7 @@ type AgentDefinition = {
   description: string;
   tools?: string[];
   prompt: string;
-  model?: 'sonnet' | 'opus' | 'haiku' | 'inherit';
+  model?: "sonnet" | "opus" | "haiku" | "inherit";
 }
 ```
 
@@ -188,7 +188,7 @@ type AgentDefinition = {
 Controls which filesystem-based configuration sources the SDK loads settings from.
 
 ```typescript
-type SettingSource = 'user' | 'project' | 'local';
+type SettingSource = "user" | "project" | "local";
 ```
 
 | Value | Description | Location |
@@ -209,7 +209,7 @@ When `settingSources` is **omitted** or **undefined**, the SDK does **not** load
 const result = query({
   prompt: "Analyze this code",
   options: {
-    settingSources: ['user', 'project', 'local']  // Load all settings
+    settingSources: ["user", "project", "local"] // Load all settings
   }
 });
 ```
@@ -220,7 +220,7 @@ const result = query({
 const result = query({
   prompt: "Run CI checks",
   options: {
-    settingSources: ['project']  // Only .claude/settings.json
+    settingSources: ["project"] // Only .claude/settings.json
   }
 });
 ```
@@ -231,8 +231,8 @@ const result = query({
 const result = query({
   prompt: "Run tests",
   options: {
-    settingSources: ['project'],  // Only team-shared settings
-    permissionMode: 'bypassPermissions'
+    settingSources: ["project"], // Only team-shared settings
+    permissionMode: "bypassPermissions"
   }
 });
 ```
@@ -247,7 +247,7 @@ const result = query({
     // settingSources: [] is the default, no need to specify
     agents: { /* ... */ },
     mcpServers: { /* ... */ },
-    allowedTools: ['Read', 'Grep', 'Glob']
+    allowedTools: ["Read", "Grep", "Glob"]
   }
 });
 ```
@@ -259,11 +259,11 @@ const result = query({
   prompt: "Add a new feature following project conventions",
   options: {
     systemPrompt: {
-      type: 'preset',
-      preset: 'claude_code'  // Required to use CLAUDE.md
+      type: "preset",
+      preset: "claude_code" // Required to use CLAUDE.md
     },
-    settingSources: ['project'],  // Loads CLAUDE.md from project directory
-    allowedTools: ['Read', 'Write', 'Edit']
+    settingSources: ["project"], // Loads CLAUDE.md from project directory
+    allowedTools: ["Read", "Write", "Edit"]
   }
 });
 ```
@@ -281,10 +281,10 @@ Programmatic options (like `agents`, `allowedTools`) always override filesystem 
 
 ```typescript
 type PermissionMode =
-  | 'default'           // Standard permission behavior
-  | 'acceptEdits'       // Auto-accept file edits
-  | 'bypassPermissions' // Bypass all permission checks
-  | 'plan'              // Planning mode - no execution
+  | "default" // Standard permission behavior
+  | "acceptEdits" // Auto-accept file edits
+  | "bypassPermissions" // Bypass all permission checks
+  | "plan" // Planning mode - no execution
 ```
 
 ### `CanUseTool`
@@ -307,14 +307,14 @@ type CanUseTool = (
 Result of a permission check.
 
 ```typescript
-type PermissionResult = 
+type PermissionResult =
   | {
-      behavior: 'allow';
+      behavior: "allow";
       updatedInput: ToolInput;
       updatedPermissions?: PermissionUpdate[];
     }
   | {
-      behavior: 'deny';
+      behavior: "deny";
       message: string;
       interrupt?: boolean;
     }
@@ -325,7 +325,7 @@ type PermissionResult =
 Configuration for MCP servers.
 
 ```typescript
-type McpServerConfig = 
+type McpServerConfig =
   | McpStdioServerConfig
   | McpSSEServerConfig
   | McpHttpServerConfig
@@ -336,7 +336,7 @@ type McpServerConfig =
 
 ```typescript
 type McpStdioServerConfig = {
-  type?: 'stdio';
+  type?: "stdio";
   command: string;
   args?: string[];
   env?: Record<string, string>;
@@ -347,7 +347,7 @@ type McpStdioServerConfig = {
 
 ```typescript
 type McpSSEServerConfig = {
-  type: 'sse';
+  type: "sse";
   url: string;
   headers?: Record<string, string>;
 }
@@ -357,7 +357,7 @@ type McpSSEServerConfig = {
 
 ```typescript
 type McpHttpServerConfig = {
-  type: 'http';
+  type: "http";
   url: string;
   headers?: Record<string, string>;
 }
@@ -367,7 +367,7 @@ type McpHttpServerConfig = {
 
 ```typescript
 type McpSdkServerConfigWithInstance = {
-  type: 'sdk';
+  type: "sdk";
   name: string;
   instance: McpServer;
 }
@@ -379,7 +379,7 @@ Configuration for loading plugins in the SDK.
 
 ```typescript
 type SdkPluginConfig = {
-  type: 'local';
+  type: "local";
   path: string;
 }
 ```
@@ -392,9 +392,9 @@ type SdkPluginConfig = {
 **Example:**
 ```typescript
 plugins: [
-  { type: 'local', path: './my-plugin' },
-  { type: 'local', path: '/absolute/path/to/plugin' }
-]
+  { type: "local", path: "./my-plugin" },
+  { type: "local", path: "/absolute/path/to/plugin" }
+];
 ```
 
 For complete information on creating and using plugins, see [Plugins](/docs/en/agent-sdk/plugins).
@@ -406,7 +406,7 @@ For complete information on creating and using plugins, see [Plugins](/docs/en/a
 Union type of all possible messages returned by the query.
 
 ```typescript
-type SDKMessage = 
+type SDKMessage =
   | SDKAssistantMessage
   | SDKUserMessage
   | SDKUserMessageReplay
@@ -422,7 +422,7 @@ Assistant response message.
 
 ```typescript
 type SDKAssistantMessage = {
-  type: 'assistant';
+  type: "assistant";
   uuid: UUID;
   session_id: string;
   message: APIAssistantMessage; // From Anthropic SDK
@@ -436,7 +436,7 @@ User input message.
 
 ```typescript
 type SDKUserMessage = {
-  type: 'user';
+  type: "user";
   uuid?: UUID;
   session_id: string;
   message: APIUserMessage; // From Anthropic SDK
@@ -450,7 +450,7 @@ Replayed user message with required UUID.
 
 ```typescript
 type SDKUserMessageReplay = {
-  type: 'user';
+  type: "user";
   uuid: UUID;
   session_id: string;
   message: APIUserMessage;
@@ -465,8 +465,8 @@ Final result message.
 ```typescript
 type SDKResultMessage =
   | {
-      type: 'result';
-      subtype: 'success';
+      type: "result";
+      subtype: "success";
       uuid: UUID;
       session_id: string;
       duration_ms: number;
@@ -481,12 +481,12 @@ type SDKResultMessage =
       structured_output?: unknown;
     }
   | {
-      type: 'result';
+      type: "result";
       subtype:
-        | 'error_max_turns'
-        | 'error_during_execution'
-        | 'error_max_budget_usd'
-        | 'error_max_structured_output_retries';
+        | "error_max_turns"
+        | "error_during_execution"
+        | "error_max_budget_usd"
+        | "error_max_structured_output_retries";
       uuid: UUID;
       session_id: string;
       duration_ms: number;
@@ -507,8 +507,8 @@ System initialization message.
 
 ```typescript
 type SDKSystemMessage = {
-  type: 'system';
-  subtype: 'init';
+  type: "system";
+  subtype: "init";
   uuid: UUID;
   session_id: string;
   apiKeySource: ApiKeySource;
@@ -531,7 +531,7 @@ Streaming partial message (only when `includePartialMessages` is true).
 
 ```typescript
 type SDKPartialAssistantMessage = {
-  type: 'stream_event';
+  type: "stream_event";
   event: RawMessageStreamEvent; // From Anthropic SDK
   parent_tool_use_id: string | null;
   uuid: UUID;
@@ -545,12 +545,12 @@ Message indicating a conversation compaction boundary.
 
 ```typescript
 type SDKCompactBoundaryMessage = {
-  type: 'system';
-  subtype: 'compact_boundary';
+  type: "system";
+  subtype: "compact_boundary";
   uuid: UUID;
   session_id: string;
   compact_metadata: {
-    trigger: 'manual' | 'auto';
+    trigger: "manual" | "auto";
     pre_tokens: number;
   };
 }
@@ -578,18 +578,18 @@ Available hook events.
 
 ```typescript
 type HookEvent =
-  | 'PreToolUse'
-  | 'PostToolUse'
-  | 'PostToolUseFailure'
-  | 'Notification'
-  | 'UserPromptSubmit'
-  | 'SessionStart'
-  | 'SessionEnd'
-  | 'Stop'
-  | 'SubagentStart'
-  | 'SubagentStop'
-  | 'PreCompact'
-  | 'PermissionRequest';
+  | "PreToolUse"
+  | "PostToolUse"
+  | "PostToolUseFailure"
+  | "Notification"
+  | "UserPromptSubmit"
+  | "SessionStart"
+  | "SessionEnd"
+  | "Stop"
+  | "SubagentStart"
+  | "SubagentStop"
+  | "PreCompact"
+  | "PermissionRequest";
 ```
 
 ### `HookCallback`
@@ -652,7 +652,7 @@ type BaseHookInput = {
 
 ```typescript
 type PreToolUseHookInput = BaseHookInput & {
-  hook_event_name: 'PreToolUse';
+  hook_event_name: "PreToolUse";
   tool_name: string;
   tool_input: unknown;
 }
@@ -662,7 +662,7 @@ type PreToolUseHookInput = BaseHookInput & {
 
 ```typescript
 type PostToolUseHookInput = BaseHookInput & {
-  hook_event_name: 'PostToolUse';
+  hook_event_name: "PostToolUse";
   tool_name: string;
   tool_input: unknown;
   tool_response: unknown;
@@ -673,7 +673,7 @@ type PostToolUseHookInput = BaseHookInput & {
 
 ```typescript
 type PostToolUseFailureHookInput = BaseHookInput & {
-  hook_event_name: 'PostToolUseFailure';
+  hook_event_name: "PostToolUseFailure";
   tool_name: string;
   tool_input: unknown;
   error: string;
@@ -685,7 +685,7 @@ type PostToolUseFailureHookInput = BaseHookInput & {
 
 ```typescript
 type NotificationHookInput = BaseHookInput & {
-  hook_event_name: 'Notification';
+  hook_event_name: "Notification";
   message: string;
   title?: string;
 }
@@ -695,7 +695,7 @@ type NotificationHookInput = BaseHookInput & {
 
 ```typescript
 type UserPromptSubmitHookInput = BaseHookInput & {
-  hook_event_name: 'UserPromptSubmit';
+  hook_event_name: "UserPromptSubmit";
   prompt: string;
 }
 ```
@@ -704,8 +704,8 @@ type UserPromptSubmitHookInput = BaseHookInput & {
 
 ```typescript
 type SessionStartHookInput = BaseHookInput & {
-  hook_event_name: 'SessionStart';
-  source: 'startup' | 'resume' | 'clear' | 'compact';
+  hook_event_name: "SessionStart";
+  source: "startup" | "resume" | "clear" | "compact";
 }
 ```
 
@@ -713,8 +713,8 @@ type SessionStartHookInput = BaseHookInput & {
 
 ```typescript
 type SessionEndHookInput = BaseHookInput & {
-  hook_event_name: 'SessionEnd';
-  reason: ExitReason;  // String from EXIT_REASONS array
+  hook_event_name: "SessionEnd";
+  reason: ExitReason; // String from EXIT_REASONS array
 }
 ```
 
@@ -722,7 +722,7 @@ type SessionEndHookInput = BaseHookInput & {
 
 ```typescript
 type StopHookInput = BaseHookInput & {
-  hook_event_name: 'Stop';
+  hook_event_name: "Stop";
   stop_hook_active: boolean;
 }
 ```
@@ -731,7 +731,7 @@ type StopHookInput = BaseHookInput & {
 
 ```typescript
 type SubagentStartHookInput = BaseHookInput & {
-  hook_event_name: 'SubagentStart';
+  hook_event_name: "SubagentStart";
   agent_id: string;
   agent_type: string;
 }
@@ -741,7 +741,7 @@ type SubagentStartHookInput = BaseHookInput & {
 
 ```typescript
 type SubagentStopHookInput = BaseHookInput & {
-  hook_event_name: 'SubagentStop';
+  hook_event_name: "SubagentStop";
   stop_hook_active: boolean;
 }
 ```
@@ -750,8 +750,8 @@ type SubagentStopHookInput = BaseHookInput & {
 
 ```typescript
 type PreCompactHookInput = BaseHookInput & {
-  hook_event_name: 'PreCompact';
-  trigger: 'manual' | 'auto';
+  hook_event_name: "PreCompact";
+  trigger: "manual" | "auto";
   custom_instructions: string | null;
 }
 ```
@@ -760,7 +760,7 @@ type PreCompactHookInput = BaseHookInput & {
 
 ```typescript
 type PermissionRequestHookInput = BaseHookInput & {
-  hook_event_name: 'PermissionRequest';
+  hook_event_name: "PermissionRequest";
   tool_name: string;
   tool_input: unknown;
   permission_suggestions?: PermissionUpdate[];
@@ -791,26 +791,26 @@ type SyncHookJSONOutput = {
   continue?: boolean;
   suppressOutput?: boolean;
   stopReason?: string;
-  decision?: 'approve' | 'block';
+  decision?: "approve" | "block";
   systemMessage?: string;
   reason?: string;
   hookSpecificOutput?:
     | {
-        hookEventName: 'PreToolUse';
-        permissionDecision?: 'allow' | 'deny' | 'ask';
+        hookEventName: "PreToolUse";
+        permissionDecision?: "allow" | "deny" | "ask";
         permissionDecisionReason?: string;
         updatedInput?: Record<string, unknown>;
       }
     | {
-        hookEventName: 'UserPromptSubmit';
+        hookEventName: "UserPromptSubmit";
         additionalContext?: string;
       }
     | {
-        hookEventName: 'SessionStart';
+        hookEventName: "SessionStart";
         additionalContext?: string;
       }
     | {
-        hookEventName: 'PostToolUse';
+        hookEventName: "PostToolUse";
         additionalContext?: string;
       };
 }
@@ -1077,27 +1077,27 @@ interface GrepInput {
   /**
    * Output mode: "content", "files_with_matches", or "count"
    */
-  output_mode?: 'content' | 'files_with_matches' | 'count';
+  output_mode?: "content" | "files_with_matches" | "count";
   /**
    * Case insensitive search
    */
-  '-i'?: boolean;
+  "-i"?: boolean;
   /**
    * Show line numbers (for content mode)
    */
-  '-n'?: boolean;
+  "-n"?: boolean;
   /**
    * Lines to show before each match
    */
-  '-B'?: number;
+  "-B"?: number;
   /**
    * Lines to show after each match
    */
-  '-A'?: number;
+  "-A"?: number;
   /**
    * Lines to show before and after each match
    */
-  '-C'?: number;
+  "-C"?: number;
   /**
    * Limit output to first N lines/entries
    */
@@ -1147,11 +1147,11 @@ interface NotebookEditInput {
   /**
    * The type of the cell (code or markdown)
    */
-  cell_type?: 'code' | 'markdown';
+  cell_type?: "code" | "markdown";
   /**
    * The type of edit (replace, insert, delete)
    */
-  edit_mode?: 'replace' | 'insert' | 'delete';
+  edit_mode?: "replace" | "insert" | "delete";
 }
 ```
 
@@ -1216,7 +1216,7 @@ interface TodoWriteInput {
     /**
      * The task status
      */
-    status: 'pending' | 'in_progress' | 'completed';
+    status: "pending" | "in_progress" | "completed";
     /**
      * Active form of the task description
      */
@@ -1406,7 +1406,7 @@ interface BashOutputToolOutput {
   /**
    * Current shell status
    */
-  status: 'running' | 'completed' | 'failed';
+  status: "running" | "completed" | "failed";
   /**
    * Exit code (when completed)
    */
@@ -1444,7 +1444,7 @@ Returns confirmation of successful edits with replacement count.
 **Tool name:** `Read`
 
 ```typescript
-type ReadOutput = 
+type ReadOutput =
   | TextFileOutput
   | ImageFileOutput
   | PDFFileOutput
@@ -1503,7 +1503,7 @@ interface NotebookFileOutput {
    * Jupyter notebook cells
    */
   cells: Array<{
-    cell_type: 'code' | 'markdown';
+    cell_type: "code" | "markdown";
     source: string;
     outputs?: any[];
     execution_count?: number;
@@ -1568,7 +1568,7 @@ Returns file paths matching the glob pattern, sorted by modification time.
 **Tool name:** `Grep`
 
 ```typescript
-type GrepOutput = 
+type GrepOutput =
   | GrepContentOutput
   | GrepFilesOutput
   | GrepCountOutput;
@@ -1650,7 +1650,7 @@ interface NotebookEditOutput {
   /**
    * Type of edit performed
    */
-  edit_type: 'replaced' | 'inserted' | 'deleted';
+  edit_type: "replaced" | "inserted" | "deleted";
   /**
    * Cell ID that was affected
    */
@@ -1821,37 +1821,37 @@ Returns the contents of the requested MCP resource.
 Operations for updating permissions.
 
 ```typescript
-type PermissionUpdate = 
+type PermissionUpdate =
   | {
-      type: 'addRules';
+      type: "addRules";
       rules: PermissionRuleValue[];
       behavior: PermissionBehavior;
       destination: PermissionUpdateDestination;
     }
   | {
-      type: 'replaceRules';
+      type: "replaceRules";
       rules: PermissionRuleValue[];
       behavior: PermissionBehavior;
       destination: PermissionUpdateDestination;
     }
   | {
-      type: 'removeRules';
+      type: "removeRules";
       rules: PermissionRuleValue[];
       behavior: PermissionBehavior;
       destination: PermissionUpdateDestination;
     }
   | {
-      type: 'setMode';
+      type: "setMode";
       mode: PermissionMode;
       destination: PermissionUpdateDestination;
     }
   | {
-      type: 'addDirectories';
+      type: "addDirectories";
       directories: string[];
       destination: PermissionUpdateDestination;
     }
   | {
-      type: 'removeDirectories';
+      type: "removeDirectories";
       directories: string[];
       destination: PermissionUpdateDestination;
     }
@@ -1860,17 +1860,17 @@ type PermissionUpdate =
 ### `PermissionBehavior`
 
 ```typescript
-type PermissionBehavior = 'allow' | 'deny' | 'ask';
+type PermissionBehavior = "allow" | "deny" | "ask";
 ```
 
 ### `PermissionUpdateDestination`
 
 ```typescript
-type PermissionUpdateDestination = 
-  | 'userSettings'     // Global user settings
-  | 'projectSettings'  // Per-directory project settings
-  | 'localSettings'    // Gitignored local settings
-  | 'session'          // Current session only
+type PermissionUpdateDestination =
+  | "userSettings" // Global user settings
+  | "projectSettings" // Per-directory project settings
+  | "localSettings" // Gitignored local settings
+  | "session" // Current session only
 ```
 
 ### `PermissionRuleValue`
@@ -1887,7 +1887,7 @@ type PermissionRuleValue = {
 ### `ApiKeySource`
 
 ```typescript
-type ApiKeySource = 'user' | 'project' | 'org' | 'temporary';
+type ApiKeySource = "user" | "project" | "org" | "temporary";
 ```
 
 ### `SdkBeta`
@@ -1895,7 +1895,7 @@ type ApiKeySource = 'user' | 'project' | 'org' | 'temporary';
 Available beta features that can be enabled via the `betas` option. See [Beta headers](/docs/en/api/beta-headers) for more information.
 
 ```typescript
-type SdkBeta = 'context-1m-2025-08-07';
+type SdkBeta = "context-1m-2025-08-07";
 ```
 
 | Value | Description | Compatible Models |
@@ -1933,7 +1933,7 @@ Status of a connected MCP server.
 ```typescript
 type McpServerStatus = {
   name: string;
-  status: 'connected' | 'failed' | 'needs-auth' | 'pending';
+  status: "connected" | "failed" | "needs-auth" | "pending";
   serverInfo?: {
     name: string;
     version: string;
@@ -1974,7 +1974,7 @@ type ModelUsage = {
 ### `ConfigScope`
 
 ```typescript
-type ConfigScope = 'local' | 'user' | 'project';
+type ConfigScope = "local" | "user" | "project";
 ```
 
 ### `NonNullableUsage`
@@ -2007,7 +2007,7 @@ MCP tool result type (from `@modelcontextprotocol/sdk/types.js`).
 ```typescript
 type CallToolResult = {
   content: Array<{
-    type: 'text' | 'image' | 'resource';
+    type: "text" | "image" | "resource";
     // Additional fields vary by type
   }>;
   isError?: boolean;
@@ -2139,7 +2139,7 @@ const result = await query({
   options: {
     sandbox: {
       enabled: true,
-      allowUnsandboxedCommands: true  // Model can request unsandboxed execution
+      allowUnsandboxedCommands: true // Model can request unsandboxed execution
     },
     permissionMode: "default",
     canUseTool: async (tool, input) => {

@@ -25,24 +25,26 @@ The following example blocks the agent from modifying `.env` files. First, defin
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions, HookMatcher
 
+
 # Define a hook callback that receives tool call details
 async def protect_env_files(input_data, tool_use_id, context):
     # Extract the file path from the tool's input arguments
-    file_path = input_data['tool_input'].get('file_path', '')
-    file_name = file_path.split('/')[-1]
+    file_path = input_data["tool_input"].get("file_path", "")
+    file_name = file_path.split("/")[-1]
 
     # Block the operation if targeting a .env file
-    if file_name == '.env':
+    if file_name == ".env":
         return {
-            'hookSpecificOutput': {
-                'hookEventName': input_data['hook_event_name'],
-                'permissionDecision': 'deny',
-                'permissionDecisionReason': 'Cannot modify .env files'
+            "hookSpecificOutput": {
+                "hookEventName": input_data["hook_event_name"],
+                "permissionDecision": "deny",
+                "permissionDecisionReason": "Cannot modify .env files",
             }
         }
 
     # Return empty object to allow the operation
     return {}
+
 
 async def main():
     async for message in query(
@@ -51,11 +53,14 @@ async def main():
             hooks={
                 # Register the hook for PreToolUse events
                 # The matcher filters to only Write and Edit tool calls
-                'PreToolUse': [HookMatcher(matcher='Write|Edit', hooks=[protect_env_files])]
+                "PreToolUse": [
+                    HookMatcher(matcher="Write|Edit", hooks=[protect_env_files])
+                ]
             }
-        )
+        ),
     ):
         print(message)
+
 
 asyncio.run(main())
 ```
@@ -70,15 +75,15 @@ const protectEnvFiles: HookCallback = async (input, toolUseID, { signal }) => {
 
   // Extract the file path from the tool's input arguments
   const filePath = preInput.tool_input?.file_path as string;
-  const fileName = filePath?.split('/').pop();
+  const fileName = filePath?.split("/").pop();
 
   // Block the operation if targeting a .env file
-  if (fileName === '.env') {
+  if (fileName === ".env") {
     return {
       hookSpecificOutput: {
         hookEventName: input.hook_event_name,
-        permissionDecision: 'deny',
-        permissionDecisionReason: 'Cannot modify .env files'
+        permissionDecision: "deny",
+        permissionDecisionReason: "Cannot modify .env files"
       }
     };
   }
@@ -93,7 +98,7 @@ for await (const message of query({
     hooks: {
       // Register the hook for PreToolUse events
       // The matcher filters to only Write and Edit tool calls
-      PreToolUse: [{ matcher: 'Write|Edit', hooks: [protectEnvFiles] }]
+      PreToolUse: [{ matcher: "Write|Edit", hooks: [protectEnvFiles] }]
     }
   }
 })) {
@@ -161,10 +166,8 @@ To configure a hook for your agent, pass the hook in the `options.hooks` paramet
 async for message in query(
     prompt="Your prompt",
     options=ClaudeAgentOptions(
-        hooks={
-            'PreToolUse': [HookMatcher(matcher='Bash', hooks=[my_callback])]
-        }
-    )
+        hooks={"PreToolUse": [HookMatcher(matcher="Bash", hooks=[my_callback])]}
+    ),
 ):
     print(message)
 ```
@@ -174,7 +177,7 @@ for await (const message of query({
   prompt: "Your prompt",
   options: {
     hooks: {
-      PreToolUse: [{ matcher: 'Bash', hooks: [myCallback] }]
+      PreToolUse: [{ matcher: "Bash", hooks: [myCallback] }]
     }
   }
 })) {
@@ -217,9 +220,7 @@ This example uses a matcher to run a hook only for file-modifying tools when the
 ```python Python
 options = ClaudeAgentOptions(
     hooks={
-        'PreToolUse': [
-            HookMatcher(matcher='Write|Edit', hooks=[validate_file_path])
-        ]
+        "PreToolUse": [HookMatcher(matcher="Write|Edit", hooks=[validate_file_path])]
     }
 )
 ```
@@ -228,7 +229,7 @@ options = ClaudeAgentOptions(
 const options = {
   hooks: {
     PreToolUse: [
-      { matcher: 'Write|Edit', hooks: [validateFilePath] }
+      { matcher: "Write|Edit", hooks: [validateFilePath] }
     ]
   }
 };
@@ -286,7 +287,7 @@ The code below defines a hook callback that uses `tool_name` and `tool_input` to
 
 ```python Python
 async def log_tool_calls(input_data, tool_use_id, context):
-    if input_data['hook_event_name'] == 'PreToolUse':
+    if input_data["hook_event_name"] == "PreToolUse":
         print(f"Tool: {input_data['tool_name']}")
         print(f"Input: {input_data['tool_input']}")
     return {}
@@ -294,10 +295,10 @@ async def log_tool_calls(input_data, tool_use_id, context):
 
 ```typescript TypeScript
 const logToolCalls: HookCallback = async (input, toolUseID, { signal }) => {
-  if (input.hook_event_name === 'PreToolUse') {
+  if (input.hook_event_name === "PreToolUse") {
     const preInput = input as PreToolUseHookInput;
     console.log(`Tool: ${preInput.tool_name}`);
-    console.log(`Input:`, preInput.tool_input);
+    console.log("Input:", preInput.tool_input);
   }
   return {};
 };
@@ -334,18 +335,18 @@ This example blocks write operations to the `/etc` directory while injecting a s
 
 ```python Python
 async def block_etc_writes(input_data, tool_use_id, context):
-    file_path = input_data['tool_input'].get('file_path', '')
+    file_path = input_data["tool_input"].get("file_path", "")
 
-    if file_path.startswith('/etc'):
+    if file_path.startswith("/etc"):
         return {
             # Top-level field: inject guidance into the conversation
-            'systemMessage': 'Remember: system directories like /etc are protected.',
+            "systemMessage": "Remember: system directories like /etc are protected.",
             # hookSpecificOutput: block the operation
-            'hookSpecificOutput': {
-                'hookEventName': input_data['hook_event_name'],
-                'permissionDecision': 'deny',
-                'permissionDecisionReason': 'Writing to /etc is not allowed'
-            }
+            "hookSpecificOutput": {
+                "hookEventName": input_data["hook_event_name"],
+                "permissionDecision": "deny",
+                "permissionDecisionReason": "Writing to /etc is not allowed",
+            },
         }
     return {}
 ```
@@ -354,15 +355,15 @@ async def block_etc_writes(input_data, tool_use_id, context):
 const blockEtcWrites: HookCallback = async (input, toolUseID, { signal }) => {
   const filePath = (input as PreToolUseHookInput).tool_input?.file_path as string;
 
-  if (filePath?.startsWith('/etc')) {
+  if (filePath?.startsWith("/etc")) {
     return {
       // Top-level field: inject guidance into the conversation
-      systemMessage: 'Remember: system directories like /etc are protected.',
+      systemMessage: "Remember: system directories like /etc are protected.",
       // hookSpecificOutput: block the operation
       hookSpecificOutput: {
         hookEventName: input.hook_event_name,
-        permissionDecision: 'deny',
-        permissionDecisionReason: 'Writing to /etc is not allowed'
+        permissionDecision: "deny",
+        permissionDecisionReason: "Writing to /etc is not allowed"
       }
     };
   }
@@ -391,17 +392,17 @@ Return a deny decision to prevent tool execution:
 
 ```python Python
 async def block_dangerous_commands(input_data, tool_use_id, context):
-    if input_data['hook_event_name'] != 'PreToolUse':
+    if input_data["hook_event_name"] != "PreToolUse":
         return {}
 
-    command = input_data['tool_input'].get('command', '')
+    command = input_data["tool_input"].get("command", "")
 
-    if 'rm -rf /' in command:
+    if "rm -rf /" in command:
         return {
-            'hookSpecificOutput': {
-                'hookEventName': input_data['hook_event_name'],
-                'permissionDecision': 'deny',
-                'permissionDecisionReason': 'Dangerous command blocked: rm -rf /'
+            "hookSpecificOutput": {
+                "hookEventName": input_data["hook_event_name"],
+                "permissionDecision": "deny",
+                "permissionDecisionReason": "Dangerous command blocked: rm -rf /",
             }
         }
     return {}
@@ -409,16 +410,16 @@ async def block_dangerous_commands(input_data, tool_use_id, context):
 
 ```typescript TypeScript
 const blockDangerousCommands: HookCallback = async (input, toolUseID, { signal }) => {
-  if (input.hook_event_name !== 'PreToolUse') return {};
+  if (input.hook_event_name !== "PreToolUse") return {};
 
   const command = (input as PreToolUseHookInput).tool_input.command as string;
 
-  if (command?.includes('rm -rf /')) {
+  if (command?.includes("rm -rf /")) {
     return {
       hookSpecificOutput: {
         hookEventName: input.hook_event_name,
-        permissionDecision: 'deny',
-        permissionDecisionReason: 'Dangerous command blocked: rm -rf /'
+        permissionDecision: "deny",
+        permissionDecisionReason: "Dangerous command blocked: rm -rf /"
       }
     };
   }
@@ -436,19 +437,19 @@ Return updated input to change what the tool receives:
 
 ```python Python
 async def redirect_to_sandbox(input_data, tool_use_id, context):
-    if input_data['hook_event_name'] != 'PreToolUse':
+    if input_data["hook_event_name"] != "PreToolUse":
         return {}
 
-    if input_data['tool_name'] == 'Write':
-        original_path = input_data['tool_input'].get('file_path', '')
+    if input_data["tool_name"] == "Write":
+        original_path = input_data["tool_input"].get("file_path", "")
         return {
-            'hookSpecificOutput': {
-                'hookEventName': input_data['hook_event_name'],
-                'permissionDecision': 'allow',
-                'updatedInput': {
-                    **input_data['tool_input'],
-                    'file_path': f'/sandbox{original_path}'
-                }
+            "hookSpecificOutput": {
+                "hookEventName": input_data["hook_event_name"],
+                "permissionDecision": "allow",
+                "updatedInput": {
+                    **input_data["tool_input"],
+                    "file_path": f"/sandbox{original_path}",
+                },
             }
         }
     return {}
@@ -456,15 +457,15 @@ async def redirect_to_sandbox(input_data, tool_use_id, context):
 
 ```typescript TypeScript
 const redirectToSandbox: HookCallback = async (input, toolUseID, { signal }) => {
-  if (input.hook_event_name !== 'PreToolUse') return {};
+  if (input.hook_event_name !== "PreToolUse") return {};
 
   const preInput = input as PreToolUseHookInput;
-  if (preInput.tool_name === 'Write') {
+  if (preInput.tool_name === "Write") {
     const originalPath = preInput.tool_input.file_path as string;
     return {
       hookSpecificOutput: {
         hookEventName: input.hook_event_name,
-        permissionDecision: 'allow',
+        permissionDecision: "allow",
         updatedInput: {
           ...preInput.tool_input,
           file_path: `/sandbox${originalPath}`
@@ -490,15 +491,13 @@ Inject context into the conversation:
 
 ```python Python
 async def add_security_reminder(input_data, tool_use_id, context):
-    return {
-        'systemMessage': 'Remember to follow security best practices.'
-    }
+    return {"systemMessage": "Remember to follow security best practices."}
 ```
 
 ```typescript TypeScript
 const addSecurityReminder: HookCallback = async (input, toolUseID, { signal }) => {
   return {
-    systemMessage: 'Remember to follow security best practices.'
+    systemMessage: "Remember to follow security best practices."
   };
 };
 ```
@@ -513,16 +512,16 @@ Bypass permission prompts for trusted tools. This is useful when you want certai
 
 ```python Python
 async def auto_approve_read_only(input_data, tool_use_id, context):
-    if input_data['hook_event_name'] != 'PreToolUse':
+    if input_data["hook_event_name"] != "PreToolUse":
         return {}
 
-    read_only_tools = ['Read', 'Glob', 'Grep', 'LS']
-    if input_data['tool_name'] in read_only_tools:
+    read_only_tools = ["Read", "Glob", "Grep", "LS"]
+    if input_data["tool_name"] in read_only_tools:
         return {
-            'hookSpecificOutput': {
-                'hookEventName': input_data['hook_event_name'],
-                'permissionDecision': 'allow',
-                'permissionDecisionReason': 'Read-only tool auto-approved'
+            "hookSpecificOutput": {
+                "hookEventName": input_data["hook_event_name"],
+                "permissionDecision": "allow",
+                "permissionDecisionReason": "Read-only tool auto-approved",
             }
         }
     return {}
@@ -530,16 +529,16 @@ async def auto_approve_read_only(input_data, tool_use_id, context):
 
 ```typescript TypeScript
 const autoApproveReadOnly: HookCallback = async (input, toolUseID, { signal }) => {
-  if (input.hook_event_name !== 'PreToolUse') return {};
+  if (input.hook_event_name !== "PreToolUse") return {};
 
   const preInput = input as PreToolUseHookInput;
-  const readOnlyTools = ['Read', 'Glob', 'Grep', 'LS'];
+  const readOnlyTools = ["Read", "Glob", "Grep", "LS"];
   if (readOnlyTools.includes(preInput.tool_name)) {
     return {
       hookSpecificOutput: {
         hookEventName: input.hook_event_name,
-        permissionDecision: 'allow',
-        permissionDecisionReason: 'Read-only tool auto-approved'
+        permissionDecision: "allow",
+        permissionDecisionReason: "Read-only tool auto-approved"
       }
     };
   }
@@ -566,11 +565,11 @@ Hooks execute in the order they appear in the array. Keep each hook focused on a
 ```python Python
 options = ClaudeAgentOptions(
     hooks={
-        'PreToolUse': [
-            HookMatcher(hooks=[rate_limiter]),        # First: check rate limits
-            HookMatcher(hooks=[authorization_check]), # Second: verify permissions
-            HookMatcher(hooks=[input_sanitizer]),     # Third: sanitize inputs
-            HookMatcher(hooks=[audit_logger])         # Last: log the action
+        "PreToolUse": [
+            HookMatcher(hooks=[rate_limiter]),  # First: check rate limits
+            HookMatcher(hooks=[authorization_check]),  # Second: verify permissions
+            HookMatcher(hooks=[input_sanitizer]),  # Third: sanitize inputs
+            HookMatcher(hooks=[audit_logger]),  # Last: log the action
         ]
     }
 )
@@ -579,11 +578,11 @@ options = ClaudeAgentOptions(
 ```typescript TypeScript
 const options = {
   hooks: {
-    'PreToolUse': [
-      { hooks: [rateLimiter] },        // First: check rate limits
+    PreToolUse: [
+      { hooks: [rateLimiter] }, // First: check rate limits
       { hooks: [authorizationCheck] }, // Second: verify permissions
-      { hooks: [inputSanitizer] },     // Third: sanitize inputs
-      { hooks: [auditLogger] }         // Last: log the action
+      { hooks: [inputSanitizer] }, // Third: sanitize inputs
+      { hooks: [auditLogger] } // Last: log the action
     ]
   }
 };
@@ -600,15 +599,13 @@ Use regex patterns to match multiple tools:
 ```python Python
 options = ClaudeAgentOptions(
     hooks={
-        'PreToolUse': [
+        "PreToolUse": [
             # Match file modification tools
-            HookMatcher(matcher='Write|Edit|Delete', hooks=[file_security_hook]),
-
+            HookMatcher(matcher="Write|Edit|Delete", hooks=[file_security_hook]),
             # Match all MCP tools
-            HookMatcher(matcher='^mcp__', hooks=[mcp_audit_hook]),
-
+            HookMatcher(matcher="^mcp__", hooks=[mcp_audit_hook]),
             # Match everything (no matcher)
-            HookMatcher(hooks=[global_logger])
+            HookMatcher(hooks=[global_logger]),
         ]
     }
 )
@@ -617,12 +614,12 @@ options = ClaudeAgentOptions(
 ```typescript TypeScript
 const options = {
   hooks: {
-    'PreToolUse': [
+    PreToolUse: [
       // Match file modification tools
-      { matcher: 'Write|Edit|Delete', hooks: [fileSecurityHook] },
+      { matcher: "Write|Edit|Delete", hooks: [fileSecurityHook] },
 
       // Match all MCP tools
-      { matcher: '^mcp__', hooks: [mcpAuditHook] },
+      { matcher: "^mcp__", hooks: [mcpAuditHook] },
 
       // Match everything (no matcher)
       { hooks: [globalLogger] }
@@ -645,23 +642,22 @@ Use `SubagentStop` hooks to monitor subagent completion. The `tool_use_id` helps
 
 ```python Python
 async def subagent_tracker(input_data, tool_use_id, context):
-    if input_data['hook_event_name'] == 'SubagentStop':
+    if input_data["hook_event_name"] == "SubagentStop":
         print(f"[SUBAGENT] Completed")
         print(f"  Tool use ID: {tool_use_id}")
         print(f"  Stop hook active: {input_data.get('stop_hook_active')}")
     return {}
 
+
 options = ClaudeAgentOptions(
-    hooks={
-        'SubagentStop': [HookMatcher(hooks=[subagent_tracker])]
-    }
+    hooks={"SubagentStop": [HookMatcher(hooks=[subagent_tracker])]}
 )
 ```
 
 ```typescript TypeScript
 const subagentTracker: HookCallback = async (input, toolUseID, { signal }) => {
-  if (input.hook_event_name === 'SubagentStop') {
-    console.log(`[SUBAGENT] Completed`);
+  if (input.hook_event_name === "SubagentStop") {
+    console.log("[SUBAGENT] Completed");
     console.log(`  Tool use ID: ${toolUseID}`);
     console.log(`  Stop hook active: ${input.stop_hook_active}`);
   }
@@ -687,33 +683,34 @@ Hooks can perform async operations like HTTP requests. Handle errors gracefully 
 import aiohttp
 from datetime import datetime
 
+
 async def webhook_notifier(input_data, tool_use_id, context):
-    if input_data['hook_event_name'] != 'PostToolUse':
+    if input_data["hook_event_name"] != "PostToolUse":
         return {}
 
     try:
         async with aiohttp.ClientSession() as session:
             await session.post(
-                'https://api.example.com/webhook',
+                "https://api.example.com/webhook",
                 json={
-                    'tool': input_data['tool_name'],
-                    'timestamp': datetime.now().isoformat()
-                }
+                    "tool": input_data["tool_name"],
+                    "timestamp": datetime.now().isoformat(),
+                },
             )
     except Exception as e:
-        print(f'Webhook request failed: {e}')
+        print(f"Webhook request failed: {e}")
 
     return {}
 ```
 
 ```typescript TypeScript
 const webhookNotifier: HookCallback = async (input, toolUseID, { signal }) => {
-  if (input.hook_event_name !== 'PostToolUse') return {};
+  if (input.hook_event_name !== "PostToolUse") return {};
 
   try {
     // Pass signal for proper cancellation
-    await fetch('https://api.example.com/webhook', {
-      method: 'POST',
+    await fetch("https://api.example.com/webhook", {
+      method: "POST",
       body: JSON.stringify({
         tool: (input as PostToolUseHookInput).tool_name,
         timestamp: new Date().toISOString()
@@ -721,8 +718,8 @@ const webhookNotifier: HookCallback = async (input, toolUseID, { signal }) => {
       signal
     });
   } catch (error) {
-    if (error instanceof Error && error.name === 'AbortError') {
-      console.log('Webhook request cancelled');
+    if (error instanceof Error && error.name === "AbortError") {
+      console.log("Webhook request cancelled");
     }
   }
 
@@ -742,8 +739,8 @@ import { query, HookCallback, NotificationHookInput } from "@anthropic-ai/claude
 const notificationHandler: HookCallback = async (input, toolUseID, { signal }) => {
   const notification = input as NotificationHookInput;
 
-  await fetch('https://hooks.slack.com/services/YOUR/WEBHOOK/URL', {
-    method: 'POST',
+  await fetch("https://hooks.slack.com/services/YOUR/WEBHOOK/URL", {
+    method: "POST",
     body: JSON.stringify({
       text: `Agent status: ${notification.message}`
     }),
@@ -785,7 +782,7 @@ Matchers only match **tool names**, not file paths or other arguments. To filter
 const myHook: HookCallback = async (input, toolUseID, { signal }) => {
   const preInput = input as PreToolUseHookInput;
   const filePath = preInput.tool_input?.file_path as string;
-  if (!filePath?.endsWith('.md')) return {};  // Skip non-markdown files
+  if (!filePath?.endsWith(".md")) return {}; // Skip non-markdown files
   // Process markdown files...
 };
 ```
@@ -809,8 +806,8 @@ const myHook: HookCallback = async (input, toolUseID, { signal }) => {
   return {
     hookSpecificOutput: {
       hookEventName: input.hook_event_name,
-      permissionDecision: 'allow',
-      updatedInput: { command: 'new command' }
+      permissionDecision: "allow",
+      updatedInput: { command: "new command" }
     }
   };
   ```

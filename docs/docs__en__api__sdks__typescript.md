@@ -38,16 +38,16 @@ If you are interested in other runtime environments, please open or upvote an is
 ## Usage
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 const message = await client.messages.create({
   max_tokens: 1024,
-  messages: [{ role: 'user', content: 'Hello, Claude' }],
-  model: 'claude-opus-4-6',
+  messages: [{ role: "user", content: "Hello, Claude" }],
+  model: "claude-opus-4-6"
 });
 
 console.log(message.content);
@@ -58,16 +58,16 @@ console.log(message.content);
 This library includes TypeScript definitions for all request params and response fields. You may import and use them like so:
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 const params: Anthropic.MessageCreateParams = {
   max_tokens: 1024,
-  messages: [{ role: 'user', content: 'Hello, Claude' }],
-  model: 'claude-opus-4-6',
+  messages: [{ role: "user", content: "Hello, Claude" }],
+  model: "claude-opus-4-6"
 };
 const message: Anthropic.Message = await client.messages.create(params);
 ```
@@ -79,8 +79,8 @@ Documentation for each method, request param, and response field are available i
 You can see the exact usage for a given request through the `usage` response property, e.g.
 
 ```typescript
-const message = await client.messages.create(...)
-console.log(message.usage)
+const message = await client.messages.create(/* ... */);
+console.log(message.usage);
 // { input_tokens: 25, output_tokens: 13 }
 ```
 
@@ -89,15 +89,15 @@ console.log(message.usage)
 We provide support for streaming responses using Server Sent Events (SSE).
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
 const stream = await client.messages.create({
   max_tokens: 1024,
-  messages: [{ role: 'user', content: 'Hello, Claude' }],
-  model: 'claude-opus-4-6',
-  stream: true,
+  messages: [{ role: "user", content: "Hello, Claude" }],
+  model: "claude-opus-4-6",
+  stream: true
 });
 for await (const messageStreamEvent of stream) {
   console.log(messageStreamEvent.type);
@@ -111,23 +111,23 @@ Or `break` inside the iteration loop to cancel.
 This library provides several conveniences for streaming messages, for example:
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
 async function main() {
   const stream = anthropic.messages
     .stream({
-      model: 'claude-opus-4-6',
+      model: "claude-opus-4-6",
       max_tokens: 1024,
       messages: [
         {
-          role: 'user',
-          content: 'Say hello there!',
-        },
-      ],
+          role: "user",
+          content: "Say hello there!"
+        }
+      ]
     })
-    .on('text', (text) => {
+    .on("text", (text) => {
       console.log(text);
     });
 
@@ -149,29 +149,29 @@ This SDK provides helpers for making it easy to create and run tools in the Mess
 For more details on tool use, see the [tool use overview](/docs/en/agents-and-tools/tool-use/overview).
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
-import { betaZodTool } from '@anthropic-ai/sdk/helpers/beta/zod';
-import { z } from 'zod';
+import { betaZodTool } from "@anthropic-ai/sdk/helpers/beta/zod";
+import { z } from "zod";
 
 const anthropic = new Anthropic();
 
 const weatherTool = betaZodTool({
-  name: 'get_weather',
+  name: "get_weather",
   inputSchema: z.object({
-    location: z.string(),
+    location: z.string()
   }),
-  description: 'Get the current weather in a given location',
+  description: "Get the current weather in a given location",
   run: (input) => {
     return `The weather in ${input.location} is foggy and 60°F`;
-  },
+  }
 });
 
 const finalMessage = await anthropic.beta.messages.toolRunner({
-  model: 'claude-opus-4-6',
+  model: "claude-opus-4-6",
   max_tokens: 1000,
-  messages: [{ role: 'user', content: 'What is the weather in San Francisco?' }],
-  tools: [weatherTool],
+  messages: [{ role: "user", content: "What is the weather in San Francisco?" }],
+  tools: [weatherTool]
 });
 ```
 
@@ -191,22 +191,22 @@ Message Batches takes an array of requests, where each object has a `custom_id` 
 await anthropic.messages.batches.create({
   requests: [
     {
-      custom_id: 'my-first-request',
+      custom_id: "my-first-request",
       params: {
-        model: 'claude-opus-4-6',
+        model: "claude-opus-4-6",
         max_tokens: 1024,
-        messages: [{ role: 'user', content: 'Hello, world' }],
-      },
+        messages: [{ role: "user", content: "Hello, world" }]
+      }
     },
     {
-      custom_id: 'my-second-request',
+      custom_id: "my-second-request",
       params: {
-        model: 'claude-opus-4-6',
+        model: "claude-opus-4-6",
         max_tokens: 1024,
-        messages: [{ role: 'user', content: 'Hi again, friend' }],
-      },
-    },
-  ],
+        messages: [{ role: "user", content: "Hi again, friend" }]
+      }
+    }
+  ]
 });
 ```
 
@@ -217,7 +217,7 @@ Once a Message Batch has been processed, indicated by `.processing_status === 'e
 ```typescript
 const results = await anthropic.messages.batches.results(batch_id);
 for await (const entry of results) {
-  if (entry.result.type === 'succeeded') {
+  if (entry.result.type === "succeeded") {
     console.log(entry.result.message.content);
   }
 }
@@ -235,36 +235,36 @@ Request parameters that correspond to file uploads can be passed in many differe
 Note that we recommend you set the content-type explicitly as the files API will not infer it for you:
 
 ```typescript
-import fs from 'fs';
-import Anthropic, { toFile } from '@anthropic-ai/sdk';
+import fs from "fs";
+import Anthropic, { toFile } from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
 await client.beta.files.upload({
-  file: await toFile(fs.createReadStream('/path/to/file'), undefined, { type: 'application/json' }),
-  betas: ['files-api-2025-04-14'],
+  file: await toFile(fs.createReadStream("/path/to/file"), undefined, { type: "application/json" }),
+  betas: ["files-api-2025-04-14"]
 });
 
 // Or if you have the web `File` API you can pass a `File` instance:
 await client.beta.files.upload({
-  file: new File(['my bytes'], 'file.txt', { type: 'text/plain' }),
-  betas: ['files-api-2025-04-14'],
+  file: new File(["my bytes"], "file.txt", { type: "text/plain" }),
+  betas: ["files-api-2025-04-14"]
 });
 // You can also pass a `fetch` `Response`:
 await client.beta.files.upload({
-  file: await fetch('https://somesite/file'),
-  betas: ['files-api-2025-04-14'],
+  file: await fetch("https://somesite/file"),
+  betas: ["files-api-2025-04-14"]
 });
 
 // Or a `Buffer` / `Uint8Array`
 await client.beta.files.upload({
-  file: await toFile(Buffer.from('my bytes'), 'file', { type: 'text/plain' }),
-  betas: ['files-api-2025-04-14'],
+  file: await toFile(Buffer.from("my bytes"), "file", { type: "text/plain" }),
+  betas: ["files-api-2025-04-14"]
 });
 await client.beta.files.upload({
-  file: await toFile(new Uint8Array([0, 1, 2]), 'file', { type: 'text/plain' }),
-  betas: ['files-api-2025-04-14'],
+  file: await toFile(new Uint8Array([0, 1, 2]), "file", { type: "text/plain" }),
+  betas: ["files-api-2025-04-14"]
 });
 ```
 
@@ -275,15 +275,15 @@ or if the API returns a non-success status code (i.e., 4xx or 5xx response),
 a subclass of `APIError` will be thrown:
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
 const message = await client.messages
   .create({
     max_tokens: 1024,
-    messages: [{ role: 'user', content: 'Hello, Claude' }],
-    model: 'claude-opus-4-6',
+    messages: [{ role: "user", content: "Hello, Claude" }],
+    model: "claude-opus-4-6"
   })
   .catch(async (err) => {
     if (err instanceof Anthropic.APIError) {
@@ -318,8 +318,8 @@ All object responses in the SDK provide a `_request_id` property which is added 
 ```typescript
 const message = await client.messages.create({
   max_tokens: 1024,
-  messages: [{ role: 'user', content: 'Hello, Claude' }],
-  model: 'claude-opus-4-6',
+  messages: [{ role: "user", content: "Hello, Claude" }],
+  model: "claude-opus-4-6"
 });
 console.log(message._request_id); // req_018EeWyXxfu5pfWkrYcMdjWG
 ```
@@ -335,12 +335,12 @@ You can use the `maxRetries` option to configure or disable this:
 ```typescript
 // Configure the default for all requests:
 const client = new Anthropic({
-  maxRetries: 0, // default is 2
+  maxRetries: 0 // default is 2
 });
 
 // Or, configure per-request:
-await client.messages.create({ max_tokens: 1024, messages: [{ role: 'user', content: 'Hello, Claude' }], model: 'claude-opus-4-6' }, {
-  maxRetries: 5,
+await client.messages.create({ max_tokens: 1024, messages: [{ role: "user", content: "Hello, Claude" }], model: "claude-opus-4-6" }, {
+  maxRetries: 5
 });
 ```
 
@@ -362,12 +362,12 @@ You can configure this with a `timeout` option:
 ```typescript
 // Configure the default for all requests:
 const client = new Anthropic({
-  timeout: 20 * 1000, // 20 seconds (default is 10 minutes)
+  timeout: 20 * 1000 // 20 seconds (default is 10 minutes)
 });
 
 // Override per-request:
-await client.messages.create({ max_tokens: 1024, messages: [{ role: 'user', content: 'Hello, Claude' }], model: 'claude-opus-4-6' }, {
-  timeout: 5 * 1000,
+await client.messages.create({ max_tokens: 1024, messages: [{ role: "user", content: "Hello, Claude" }], model: "claude-opus-4-6" }, {
+  timeout: 5 * 1000
 });
 ```
 
@@ -435,17 +435,17 @@ If you need to, you can override it by setting default headers on a per-request 
 Be aware that doing so may result in incorrect types and other unexpected or undefined behavior in the SDK.
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
 const message = await client.messages.create(
   {
     max_tokens: 1024,
-    messages: [{ role: 'user', content: 'Hello, Claude' }],
-    model: 'claude-opus-4-6',
+    messages: [{ role: "user", content: "Hello, Claude" }],
+    model: "claude-opus-4-6"
   },
-  { headers: { 'anthropic-version': 'My-Custom-Value' } },
+  { headers: { "anthropic-version": "My-Custom-Value" } }
 );
 ```
 
@@ -465,21 +465,21 @@ const client = new Anthropic();
 const response = await client.messages
   .create({
     max_tokens: 1024,
-    messages: [{ role: 'user', content: 'Hello, Claude' }],
-    model: 'claude-opus-4-6',
+    messages: [{ role: "user", content: "Hello, Claude" }],
+    model: "claude-opus-4-6"
   })
   .asResponse();
-console.log(response.headers.get('X-My-Header'));
+console.log(response.headers.get("X-My-Header"));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: message, response: raw } = await client.messages
   .create({
     max_tokens: 1024,
-    messages: [{ role: 'user', content: 'Hello, Claude' }],
-    model: 'claude-opus-4-6',
+    messages: [{ role: "user", content: "Hello, Claude" }],
+    model: "claude-opus-4-6"
   })
   .withResponse();
-console.log(raw.headers.get('X-My-Header'));
+console.log(raw.headers.get("X-My-Header"));
 console.log(message.content);
 ```
 
@@ -498,10 +498,10 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  logLevel: 'debug', // Show all log messages
+  logLevel: "debug" // Show all log messages
 });
 ```
 
@@ -526,14 +526,14 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
-import pino from 'pino';
+import Anthropic from "@anthropic-ai/sdk";
+import pino from "pino";
 
 const logger = pino();
 
 const client = new Anthropic({
-  logger: logger.child({ name: 'Anthropic' }),
-  logLevel: 'debug', // Send all messages to pino, allowing it to filter
+  logger: logger.child({ name: "Anthropic" }),
+  logLevel: "debug" // Send all messages to pino, allowing it to filter
 });
 ```
 
@@ -548,9 +548,9 @@ To make requests to undocumented endpoints, you can use `client.get`, `client.po
 Options on the client, such as retries, will be respected when making these requests.
 
 ```typescript
-await client.post('/some/path', {
-  body: { some_prop: 'foo' },
-  query: { some_query_arg: 'bar' },
+await client.post("/some/path", {
+  body: { some_prop: "foo" },
+  query: { some_query_arg: "bar" }
 });
 ```
 
@@ -564,7 +564,7 @@ send will be sent as-is.
 client.messages.create({
   // ...
   // @ts-expect-error baz is not yet public
-  baz: 'undocumented option',
+  baz: "undocumented option"
 });
 ```
 
@@ -587,7 +587,7 @@ By default, this library expects a global `fetch` function is defined.
 If you want to use a different `fetch` function, you can either polyfill the global:
 
 ```typescript
-import fetch from 'my-fetch';
+import fetch from "my-fetch";
 
 globalThis.fetch = fetch;
 ```
@@ -595,8 +595,8 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
-import fetch from 'my-fetch';
+import Anthropic from "@anthropic-ai/sdk";
+import fetch from "my-fetch";
 
 const client = new Anthropic({ fetch });
 ```
@@ -606,12 +606,12 @@ const client = new Anthropic({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
   fetchOptions: {
     // `RequestInit` options
-  },
+  }
 });
 ```
 
@@ -623,37 +623,37 @@ options to requests:
 <Tabs>
 <Tab title="Node.js">
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
-import * as undici from 'undici';
+import Anthropic from "@anthropic-ai/sdk";
+import * as undici from "undici";
 
-const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
+const proxyAgent = new undici.ProxyAgent("http://localhost:8888");
 const client = new Anthropic({
   fetchOptions: {
-    dispatcher: proxyAgent,
-  },
+    dispatcher: proxyAgent
+  }
 });
 ```
 </Tab>
 <Tab title="Bun">
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
   fetchOptions: {
-    proxy: 'http://localhost:8888',
-  },
+    proxy: "http://localhost:8888"
+  }
 });
 ```
 </Tab>
 <Tab title="Deno">
 ```typescript
-import Anthropic from 'npm:@anthropic-ai/sdk';
+import Anthropic from "npm:@anthropic-ai/sdk";
 
-const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
+const httpClient = Deno.createHttpClient({ proxy: { url: "http://localhost:8888" } });
 const client = new Anthropic({
   fetchOptions: {
-    client: httpClient,
-  },
+    client: httpClient
+  }
 });
 ```
 </Tab>
@@ -668,30 +668,30 @@ You can access most beta API features through the beta property of the client. T
 For example, to use code execution:
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 const response = await client.beta.messages.create({
   max_tokens: 1024,
-  model: 'claude-opus-4-6',
+  model: "claude-opus-4-6",
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: "What's 4242424242 * 4242424242?.",
-        },
-      ],
-    },
+          type: "text",
+          text: "What's 4242424242 * 4242424242?."
+        }
+      ]
+    }
   ],
   tools: [
     {
-      name: 'code_execution',
-      type: 'code_execution_20250522',
-    },
+      name: "code_execution",
+      type: "code_execution_20250522"
+    }
   ],
-  betas: ['code-execution-2025-05-22'],
+  betas: ["code-execution-2025-05-22"]
 });
 ```
 
@@ -728,14 +728,14 @@ npm install @anthropic-ai/bedrock-sdk
 ```
 
 ```typescript
-import { AnthropicBedrock } from '@anthropic-ai/bedrock-sdk';
+import { AnthropicBedrock } from "@anthropic-ai/bedrock-sdk";
 
 const client = new AnthropicBedrock();
 
 const message = await client.messages.create({
-  model: 'anthropic.claude-opus-4-6-v1',
+  model: "anthropic.claude-opus-4-6-v1",
   max_tokens: 1024,
-  messages: [{ role: 'user', content: 'Hello, Claude' }],
+  messages: [{ role: "user", content: "Hello, Claude" }]
 });
 ```
 
@@ -748,14 +748,14 @@ npm install @anthropic-ai/vertex-sdk
 ```
 
 ```typescript
-import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
+import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 const client = new AnthropicVertex();
 
 const message = await client.messages.create({
-  model: 'claude-opus-4-6',
+  model: "claude-opus-4-6",
   max_tokens: 1024,
-  messages: [{ role: 'user', content: 'Hello, Claude' }],
+  messages: [{ role: "user", content: "Hello, Claude" }]
 });
 ```
 

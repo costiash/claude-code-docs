@@ -55,7 +55,7 @@ The chain of thought techniques below are **ordered from least to most complex**
         | User | Draft personalized emails to donors asking for contributions to this year's Care for Kids program.<br/><br/>Program information:<br/>\\{\{PROGRAM_DETAILS}}<br/>\</program><br/><br/>Donor information:<br/>\<donor>\{\{DONOR_DETAILS}}<br/>\</donor><br/><br/>Think before you write the email in \<thinking> tags. First, think through what messaging might appeal to this donor given their donation history and which campaigns they've supported in the past. Then, think through what aspects of the Care for Kids program would appeal to them, given their history. Finally, write the personalized donor email in \<email> tags, using your analysis. |
     
 </section>
-    
+
 ### Examples
 
   <section title="Example: Financial analysis without thinking">

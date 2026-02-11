@@ -34,7 +34,7 @@ Anthropic notifies customers with active deployments for models with upcoming re
 
 To help identify usage of deprecated models, customers can access an audit of their API usage. Follow these steps:
 
-1. Go to the [Usage](/settings/usage) page in Console
+1. Go to the [Usage](/usage) page in Console
 2. Click the "Export" button
 3. Review the downloaded CSV to see usage broken down by API key and model
 
@@ -124,7 +124,7 @@ On June 30, 2025, we notified developers using Claude Opus 3 model of its upcomi
 These models were retired July 21, 2025.
 </Note>
 
-On January 21, 2025, we notified developers using Claude 2, Claude 2.1, and Claude Sonnet 3 models of their upcoming retirements. 
+On January 21, 2025, we notified developers using Claude 2, Claude 2.1, and Claude Sonnet 3 models of their upcoming retirements.
 
 | Retirement Date             | Deprecated Model            | Recommended Replacement         |
 |:----------------------------|:----------------------------|:--------------------------------|

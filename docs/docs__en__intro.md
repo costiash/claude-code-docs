@@ -44,10 +44,10 @@ Anthropic has best-in-class developer tools to build scalable applications with 
 
 <CardGroup cols={3}>
   <Card title="Developer Console" icon="computer" href="/">
-    Enjoy easier, more powerful prompting in your browser with the Workbench and the prompt generator tool. 
+    Enjoy easier, more powerful prompting in your browser with the Workbench and the prompt generator tool.
   </Card>
   <Card title="API Reference" icon="code" href="/docs/en/api/overview">
-    Explore, implement, and scale with the Claude API and SDKs. 
+    Explore, implement, and scale with the Claude API and SDKs.
   </Card>
   <Card title="Claude Cookbook" icon="chef-hat" href="https://platform.claude.com/cookbooks">
     Learn with interactive Jupyter notebooks that demonstrate uploading PDFs, embeddings, and more.
@@ -62,10 +62,10 @@ Claude can assist with many tasks that involve text, code, and images.
 
 <CardGroup cols={2}>
   <Card title="Text and code generation" icon="text-aa" href="/docs/en/build-with-claude/text-generation">
-    Summarize text, answer questions, extract data, translate text, and explain and generate code. 
+    Summarize text, answer questions, extract data, translate text, and explain and generate code.
   </Card>
   <Card title="Vision" icon="image" href="/docs/en/build-with-claude/vision">
-    Process and analyze visual input and generate text and code from images. 
+    Process and analyze visual input and generate text and code from images.
   </Card>
 </CardGroup>
 

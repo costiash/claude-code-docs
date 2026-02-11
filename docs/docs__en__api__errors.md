@@ -16,8 +16,8 @@ Our API follows a predictable HTTP error code format:
 * 529 - `overloaded_error`: The API is temporarily overloaded.
 
   <Warning>
-  529 errors can occur when APIs experience high traffic across all users.  
-  
+  529 errors can occur when APIs experience high traffic across all users.
+
   In rare cases, if your organization has a sharp increase in usage, you might see 429 errors due to acceleration limits on the API. To avoid hitting acceleration limits, ramp up your traffic gradually and maintain consistent usage patterns.
   </Warning>
 
@@ -68,26 +68,24 @@ Our official SDKs provide this value as a property on top-level response objects
   message = client.messages.create(
       model="claude-opus-4-6",
       max_tokens=1024,
-      messages=[
-          {"role": "user", "content": "Hello, Claude"}
-      ]
+      messages=[{"role": "user", "content": "Hello, Claude"}],
   )
   print(f"Request ID: {message._request_id}")
   ```
 
   ```typescript TypeScript
-  import Anthropic from '@anthropic-ai/sdk';
+  import Anthropic from "@anthropic-ai/sdk";
 
   const client = new Anthropic();
 
   const message = await client.messages.create({
-    model: 'claude-opus-4-6',
+    model: "claude-opus-4-6",
     max_tokens: 1024,
     messages: [
-      {"role": "user", "content": "Hello, Claude"}
+      { role: "user", content: "Hello, Claude" }
     ]
   });
-  console.log('Request ID:', message._request_id);
+  console.log("Request ID:", message._request_id);
   ```
 </CodeGroup>
 
@@ -124,9 +122,9 @@ If you don't need to process events incrementally, use `.stream()` with `.get_fi
 
     ```typescript TypeScript
     const stream = client.messages.stream({
-        max_tokens: 128000,
-        messages: [{role: 'user', content: 'Write a detailed analysis...'}],
-        model: 'claude-opus-4-6',
+      max_tokens: 128000,
+      messages: [{ role: "user", content: "Write a detailed analysis..." }],
+      model: "claude-opus-4-6"
     });
     const message = await stream.finalMessage();
     ```

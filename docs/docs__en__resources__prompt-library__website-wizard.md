@@ -211,21 +211,21 @@ Create one-page websites based on user specifications.
 ```
 
 > This code creates a one-page website for "EduQuest" with the following features and sections:
-> 
+>
 > A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar.
-> 
+>
 > A hero section with a placeholder video background, a dynamic tagline that rotates between "Learn at your own pace," "Discover new passions," and "Expand your horizons" every 3 seconds, and a "Get Started" button.
-> 
+>
 > A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions.
-> 
+>
 > A "Success Stories" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names.
-> 
+>
 > A footer with links to the platform's blog, FAQ, privacy policy, and a "Contact Us" button.
-> 
+>
 > The CSS styles are embedded within the `<style>` tag in the `<head>` section, and the JavaScript code is placed within the `<script>` tag at the end of the `<body>` section.
-> 
+>
 > The JavaScript code handles the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds using the setInterval function.
-> 
+>
 > Please note that the video background, course images, and testimonials are placeholders and should be replaced with actual content.
 
 ## API request
@@ -236,28 +236,27 @@ Create one-page websites based on user specifications.
 ```python
 import anthropic
 
-client = anthropic.Anthropic( # defaults to os.environ.get("ANTHROPIC_API_KEY")
-api_key="my_api_key",
+client = anthropic.Anthropic(  # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=4000,
-  temperature=0,
-  system="Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",
-  messages=[
-    {
-      "role": "user",
-      "content": [
+    model="claude-opus-4-6",
+    max_tokens=4000,
+    temperature=0,
+    system="Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",
+    messages=[
         {
-          "type": "text",
-          "text": "Create a one-page website for an online learning platform called \"EduQuest\" with the following features and sections: \n \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar. \n \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between \"Learn at your own pace,\" \"Discover new passions,\" and \"Expand your horizons\" every 3 seconds, and a \"Get Started\" button leading to a course catalog. \n \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions. \n \n4. An interactive \"Learning Paths\" section with a short quiz to determine learning styles and interests, and a button to start the quiz. \n \n5. A \"Success Stories\" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names. \n \n6. A footer with links to the platform's blog, FAQ, privacy policy, and a \"Contact Us\" button that opens a modal window with a contact form and customer support information. \n \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section. \n \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": 'Create a one-page website for an online learning platform called "EduQuest" with the following features and sections: \n \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar. \n \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between "Learn at your own pace," "Discover new passions," and "Expand your horizons" every 3 seconds, and a "Get Started" button leading to a course catalog. \n \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions. \n \n4. An interactive "Learning Paths" section with a short quiz to determine learning styles and interests, and a button to start the quiz. \n \n5. A "Success Stories" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names. \n \n6. A footer with links to the platform\'s blog, FAQ, privacy policy, and a "Contact Us" button that opens a modal window with a contact form and customer support information. \n \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section. \n \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds.',
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -267,7 +266,7 @@ print(message.content)
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+  apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
 });
 
 const msg = await anthropic.messages.create({
@@ -277,11 +276,11 @@ const msg = await anthropic.messages.create({
   system: "Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Create a one-page website for an online learning platform called \"EduQuest\" with the following features and sections:  \n  \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar.  \n  \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between \"Learn at your own pace,\" \"Discover new passions,\" and \"Expand your horizons\" every 3 seconds, and a \"Get Started\" button leading to a course catalog.  \n  \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions.  \n  \n4. An interactive \"Learning Paths\" section with a short quiz to determine learning styles and interests, and a button to start the quiz.  \n  \n5. A \"Success Stories\" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names.  \n  \n6. A footer with links to the platform's blog, FAQ, privacy policy, and a \"Contact Us\" button that opens a modal window with a contact form and customer support information.  \n  \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section.  \n  \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds."
+          type: "text",
+          text: "Create a one-page website for an online learning platform called \"EduQuest\" with the following features and sections:  \n  \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar.  \n  \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between \"Learn at your own pace,\" \"Discover new passions,\" and \"Expand your horizons\" every 3 seconds, and a \"Get Started\" button leading to a course catalog.  \n  \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions.  \n  \n4. An interactive \"Learning Paths\" section with a short quiz to determine learning styles and interests, and a button to start the quiz.  \n  \n5. A \"Success Stories\" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names.  \n  \n6. A footer with links to the platform's blog, FAQ, privacy policy, and a \"Contact Us\" button that opens a modal window with a contact form and customer support information.  \n  \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section.  \n  \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds."
         }
       ]
     }
@@ -304,24 +303,23 @@ from anthropic import AnthropicBedrock
 client = AnthropicBedrock()
 
 message = client.messages.create(
-  model="anthropic.claude-opus-4-6-v1",
-  max_tokens=4000,
-  temperature=0,
-  system="Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",
-  messages=[
-    {
-      "role": "user",
-      "content": [
+    model="anthropic.claude-opus-4-6-v1",
+    max_tokens=4000,
+    temperature=0,
+    system="Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",
+    messages=[
         {
-          "type": "text",
-          "text": "Create a one-page website for an online learning platform called \"EduQuest\" with the following features and sections: \n \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar. \n \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between \"Learn at your own pace,\" \"Discover new passions,\" and \"Expand your horizons\" every 3 seconds, and a \"Get Started\" button leading to a course catalog. \n \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions. \n \n4. An interactive \"Learning Paths\" section with a short quiz to determine learning styles and interests, and a button to start the quiz. \n \n5. A \"Success Stories\" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names. \n \n6. A footer with links to the platform's blog, FAQ, privacy policy, and a \"Contact Us\" button that opens a modal window with a contact form and customer support information. \n \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section. \n \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": 'Create a one-page website for an online learning platform called "EduQuest" with the following features and sections: \n \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar. \n \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between "Learn at your own pace," "Discover new passions," and "Expand your horizons" every 3 seconds, and a "Get Started" button leading to a course catalog. \n \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions. \n \n4. An interactive "Learning Paths" section with a short quiz to determine learning styles and interests, and a button to start the quiz. \n \n5. A "Success Stories" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names. \n \n6. A footer with links to the platform\'s blog, FAQ, privacy policy, and a "Contact Us" button that opens a modal window with a contact form and customer support information. \n \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section. \n \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds.',
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -329,7 +327,7 @@ print(message.content)
 
 ```typescript
 
-import AnthropicBedrock from '@anthropic-ai/bedrock-sdk';
+import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 
 // See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
 // for authentication options
@@ -342,11 +340,11 @@ const msg = await client.messages.create({
   system: "Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Create a one-page website for an online learning platform called \"EduQuest\" with the following features and sections: \n \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar. \n \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between \"Learn at your own pace,\" \"Discover new passions,\" and \"Expand your horizons\" every 3 seconds, and a \"Get Started\" button leading to a course catalog. \n \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions. \n \n4. An interactive \"Learning Paths\" section with a short quiz to determine learning styles and interests, and a button to start the quiz. \n \n5. A \"Success Stories\" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names. \n \n6. A footer with links to the platform's blog, FAQ, privacy policy, and a \"Contact Us\" button that opens a modal window with a contact form and customer support information. \n \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section. \n \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds."
+          type: "text",
+          text: "Create a one-page website for an online learning platform called \"EduQuest\" with the following features and sections: \n \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar. \n \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between \"Learn at your own pace,\" \"Discover new passions,\" and \"Expand your horizons\" every 3 seconds, and a \"Get Started\" button leading to a course catalog. \n \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions. \n \n4. An interactive \"Learning Paths\" section with a short quiz to determine learning styles and interests, and a button to start the quiz. \n \n5. A \"Success Stories\" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names. \n \n6. A footer with links to the platform's blog, FAQ, privacy policy, and a \"Contact Us\" button that opens a modal window with a contact form and customer support information. \n \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section. \n \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds."
         }
       ]
     }
@@ -365,51 +363,50 @@ from anthropic import AnthropicVertex
 client = AnthropicVertex()
 
 message = client.messages.create(
-  model="claude-sonnet-4@20250514",
-  max_tokens=4000,
-  temperature=0,
-  system="Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",
-  messages=[
-    {
-      "role": "user",
-      "content": [
+    model="claude-sonnet-4@20250514",
+    max_tokens=4000,
+    temperature=0,
+    system="Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",
+    messages=[
         {
-          "type": "text",
-          "text": "Create a one-page website for an online learning platform called \"EduQuest\" with the following features and sections: \n \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar. \n \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between \"Learn at your own pace,\" \"Discover new passions,\" and \"Expand your horizons\" every 3 seconds, and a \"Get Started\" button leading to a course catalog. \n \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions. \n \n4. An interactive \"Learning Paths\" section with a short quiz to determine learning styles and interests, and a button to start the quiz. \n \n5. A \"Success Stories\" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names. \n \n6. A footer with links to the platform's blog, FAQ, privacy policy, and a \"Contact Us\" button that opens a modal window with a contact form and customer support information. \n \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section. \n \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": 'Create a one-page website for an online learning platform called "EduQuest" with the following features and sections: \n \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar. \n \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between "Learn at your own pace," "Discover new passions," and "Expand your horizons" every 3 seconds, and a "Get Started" button leading to a course catalog. \n \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions. \n \n4. An interactive "Learning Paths" section with a short quiz to determine learning styles and interests, and a button to start the quiz. \n \n5. A "Success Stories" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names. \n \n6. A footer with links to the platform\'s blog, FAQ, privacy policy, and a "Contact Us" button that opens a modal window with a contact form and customer support information. \n \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section. \n \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds.',
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
-
 ```
 </Tab>
 <Tab title="Vertex AI TypeScript">
 
-```typescript 
-import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
+```typescript
+import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
 // Additionally goes through the standard `google-auth-library` flow.
 const client = new AnthropicVertex();
 
 const msg = await client.messages.create({
-model: "claude-sonnet-4@20250514",
-max_tokens: 4000,
-temperature: 0,
-system: "Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",
-messages: [
-{
-"role": "user",
-"content": [
-{
-"type": "text",
-"text": "Create a one-page website for an online learning platform called \"EduQuest\" with the following features and sections: \n \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar. \n \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between \"Learn at your own pace,\" \"Discover new passions,\" and \"Expand your horizons\" every 3 seconds, and a \"Get Started\" button leading to a course catalog. \n \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions. \n \n4. An interactive \"Learning Paths\" section with a short quiz to determine learning styles and interests, and a button to start the quiz. \n \n5. A \"Success Stories\" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names. \n \n6. A footer with links to the platform's blog, FAQ, privacy policy, and a \"Contact Us\" button that opens a modal window with a contact form and customer support information. \n \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section. \n \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds."
-}
-]
-}
-]
+  model: "claude-sonnet-4@20250514",
+  max_tokens: 4000,
+  temperature: 0,
+  system: "Your task is to create a one-page website based on the given specifications, delivered as an HTML file with embedded JavaScript and CSS. The website should incorporate a variety of engaging and interactive design features, such as drop-down menus, dynamic text and content, clickable buttons, and more. Ensure that the design is visually appealing, responsive, and user-friendly. The HTML, CSS, and JavaScript code should be well-structured, efficiently organized, and properly commented for readability and maintainability.",
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "Create a one-page website for an online learning platform called \"EduQuest\" with the following features and sections: \n \n1. A fixed navigation bar with links to course categories (Math, Science, Languages, Arts) and a search bar. \n \n2. A hero section with a video background showcasing students learning online, a dynamic tagline that rotates between \"Learn at your own pace,\" \"Discover new passions,\" and \"Expand your horizons\" every 3 seconds, and a \"Get Started\" button leading to a course catalog. \n \n3. A featured courses section displaying course cards with placeholders for course images, titles, instructors, and descriptions. \n \n4. An interactive \"Learning Paths\" section with a short quiz to determine learning styles and interests, and a button to start the quiz. \n \n5. A \"Success Stories\" section featuring testimonials from satisfied students, with placeholders for the testimonial text and student names. \n \n6. A footer with links to the platform's blog, FAQ, privacy policy, and a \"Contact Us\" button that opens a modal window with a contact form and customer support information. \n \nInclude filler placeholder content for the video background, course cards, and testimonials. Embed the CSS styles within the `<style>` tag in the `<head>` section and place the JavaScript code within the `<script>` tag at the end of the `<body>` section. \n \nThe JavaScript code should handle the dynamic tagline in the hero section, rotating through the different taglines every 3 seconds."
+        }
+      ]
+    }
+  ]
 });
 console.log(msg);
 

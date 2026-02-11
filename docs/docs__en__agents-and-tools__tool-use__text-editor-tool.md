@@ -33,7 +33,7 @@ Some examples of when to use the text editor tool are:
 <Tab title="Claude 4">
 Provide the text editor tool (named `str_replace_based_edit_tool`) to Claude using the Messages API.
 
-You can optionally specify a `max_characters` parameter to control truncation when viewing large files. 
+You can optionally specify a `max_characters` parameter to control truncation when viewing large files.
 
 <Note>
 `max_characters` is only compatible with `text_editor_20250728` and later versions of the text editor tool.
@@ -77,20 +77,20 @@ response = client.messages.create(
         {
             "type": "text_editor_20250728",
             "name": "str_replace_based_edit_tool",
-            "max_characters": 10000
+            "max_characters": 10000,
         }
     ],
     messages=[
         {
-            "role": "user", 
-            "content": "There's a syntax error in my primes.py file. Can you help me fix it?"
+            "role": "user",
+            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
         }
-    ]
+    ],
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
@@ -123,21 +123,21 @@ import com.anthropic.models.messages.ToolStrReplaceBasedEditTool20250728;
 
 public class TextEditorToolExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        ToolStrReplaceBasedEditTool20250728 editorTool = ToolStrReplaceBasedEditTool20250728.builder()
-                .build();
+    ToolStrReplaceBasedEditTool20250728 editorTool =
+      ToolStrReplaceBasedEditTool20250728.builder().build();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_SONNET_4_0)
-                .maxTokens(1024)
-                .addTool(editorTool)
-                .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
-                .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_SONNET_4_0)
+      .maxTokens(1024)
+      .addTool(editorTool)
+      .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+      .build();
 
-        Message message = client.messages().create(params);
-    }
+    Message message = client.messages().create(params);
+  }
 }
 ```
 </CodeGroup>
@@ -177,23 +177,18 @@ client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-3-7-sonnet-20250219",
     max_tokens=1024,
-    tools=[
-        {
-            "type": "text_editor_20250124",
-            "name": "str_replace_editor"
-        }
-    ],
+    tools=[{"type": "text_editor_20250124", "name": "str_replace_editor"}],
     messages=[
         {
-            "role": "user", 
-            "content": "There's a syntax error in my primes.py file. Can you help me fix it?"
+            "role": "user",
+            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
         }
-    ]
+    ],
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
@@ -225,21 +220,20 @@ import com.anthropic.models.messages.ToolTextEditor20250124;
 
 public class TextEditorToolExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        ToolTextEditor20250124 editorTool = ToolTextEditor20250124.builder()
-                .build();
+    ToolTextEditor20250124 editorTool = ToolTextEditor20250124.builder().build();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_3_7_SONNET_LATEST)
-                .maxTokens(1024)
-                .addTool(editorTool)
-                .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
-                .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_3_7_SONNET_LATEST)
+      .maxTokens(1024)
+      .addTool(editorTool)
+      .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+      .build();
 
-        Message message = client.messages().create(params);
-    }
+    Message message = client.messages().create(params);
+  }
 }
 ```
 </CodeGroup>
@@ -469,23 +463,18 @@ client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    tools=[
-        {
-            "type": "text_editor_20250728",
-            "name": "str_replace_based_edit_tool"
-        }
-    ],
+    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
         {
-            "role": "user", 
-            "content": "There's a syntax error in my primes.py file. Can you help me fix it?"
+            "role": "user",
+            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
         }
-    ]
+    ],
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
@@ -517,21 +506,21 @@ import com.anthropic.models.messages.ToolStrReplaceBasedEditTool20250728;
 
 public class TextEditorToolExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        ToolStrReplaceBasedEditTool20250728 editorTool = ToolStrReplaceBasedEditTool20250728.builder()
-                .build();
+    ToolStrReplaceBasedEditTool20250728 editorTool =
+      ToolStrReplaceBasedEditTool20250728.builder().build();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_SONNET_4_0)
-                .maxTokens(1024)
-                .addTool(editorTool)
-                .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
-                .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_SONNET_4_0)
+      .maxTokens(1024)
+      .addTool(editorTool)
+      .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+      .build();
 
-        Message message = client.messages().create(params);
-    }
+    Message message = client.messages().create(params);
+  }
 }
 ```
 </CodeGroup>
@@ -620,34 +609,26 @@ curl https://api.anthropic.com/v1/messages \
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    tools=[
-        {
-            "type": "text_editor_20250728",
-            "name": "str_replace_based_edit_tool"
-        }
-    ],
+    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
         {
-            "role": "user", 
-            "content": "There's a syntax error in my primes.py file. Can you help me fix it?"
+            "role": "user",
+            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
         },
         {
             "role": "assistant",
             "content": [
                 {
                     "type": "text",
-                    "text": "I'll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue."
+                    "text": "I'll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue.",
                 },
                 {
                     "type": "tool_use",
                     "id": "toolu_01AbCdEfGhIjKlMnOpQrStU",
                     "name": "str_replace_based_edit_tool",
-                    "input": {
-                        "command": "view",
-                        "path": "primes.py"
-                    }
-                }
-            ]
+                    "input": {"command": "view", "path": "primes.py"},
+                },
+            ],
         },
         {
             "role": "user",
@@ -655,16 +636,16 @@ response = client.messages.create(
                 {
                     "type": "tool_result",
                     "tool_use_id": "toolu_01AbCdEfGhIjKlMnOpQrStU",
-                    "content": "1: def is_prime(n):\n2:     \"\"\"Check if a number is prime.\"\"\"\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     \"\"\"Generate a list of prime numbers up to the given limit.\"\"\"\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     \"\"\"Main function to demonstrate prime number generation.\"\"\"\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f\"Prime numbers up to {limit}:\")\n29:     print(prime_list)\n30:     print(f\"Found {len(prime_list)} prime numbers.\")\n31: \n32: if __name__ == \"__main__\":\n33:     main()"
+                    "content": '1: def is_prime(n):\n2:     """Check if a number is prime."""\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     """Generate a list of prime numbers up to the given limit."""\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     """Main function to demonstrate prime number generation."""\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f"Prime numbers up to {limit}:")\n29:     print(prime_list)\n30:     print(f"Found {len(prime_list)} prime numbers.")\n31: \n32: if __name__ == "__main__":\n33:     main()',
                 }
-            ]
-        }
-    ]
+            ],
+        },
+    ],
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
@@ -685,29 +666,29 @@ const response = await anthropic.messages.create({
     {
       role: "assistant",
       content: [
-          {
-              type: "text",
-              text: "I'll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue."
-          },
-          {
-              type: "tool_use",
-              id: "toolu_01AbCdEfGhIjKlMnOpQrStU",
-              name: "str_replace_based_edit_tool",
-              input: {
-                  command: "view",
-                  path: "primes.py"
-              }
+        {
+          type: "text",
+          text: "I'll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue."
+        },
+        {
+          type: "tool_use",
+          id: "toolu_01AbCdEfGhIjKlMnOpQrStU",
+          name: "str_replace_based_edit_tool",
+          input: {
+            command: "view",
+            path: "primes.py"
           }
+        }
       ]
     },
     {
       role: "user",
       content: [
-          {
-              type: "tool_result",
-              tool_use_id: "toolu_01AbCdEfGhIjKlMnOpQrStU",
-              content: "1: def is_prime(n):\n2:     \"\"\"Check if a number is prime.\"\"\"\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     \"\"\"Generate a list of prime numbers up to the given limit.\"\"\"\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     \"\"\"Main function to demonstrate prime number generation.\"\"\"\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f\"Prime numbers up to {limit}:\")\n29:     print(prime_list)\n30:     print(f\"Found {len(prime_list)} prime numbers.\")\n31: \n32: if __name__ == \"__main__\":\n33:     main()"
-          }
+        {
+          type: "tool_result",
+          tool_use_id: "toolu_01AbCdEfGhIjKlMnOpQrStU",
+          content: "1: def is_prime(n):\n2:     \"\"\"Check if a number is prime.\"\"\"\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     \"\"\"Generate a list of prime numbers up to the given limit.\"\"\"\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     \"\"\"Main function to demonstrate prime number generation.\"\"\"\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f\"Prime numbers up to {limit}:\")\n29:     print(prime_list)\n30:     print(f\"Found {len(prime_list)} prime numbers.\")\n31: \n32: if __name__ == \"__main__\":\n33:     main()"
+        }
       ]
     }
   ]
@@ -724,22 +705,22 @@ import com.anthropic.models.messages.ToolStrReplaceBasedEditTool20250728;
 
 public class TextEditorToolExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        ToolStrReplaceBasedEditTool20250728 editorTool = ToolStrReplaceBasedEditTool20250728.builder()
-            .build();
+    ToolStrReplaceBasedEditTool20250728 editorTool =
+      ToolStrReplaceBasedEditTool20250728.builder().build();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_SONNET_4_0)
-            .maxTokens(1024)
-            .addTool(editorTool)
-            .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_SONNET_4_0)
+      .maxTokens(1024)
+      .addTool(editorTool)
+      .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+      .build();
 
-        Message message = client.messages().create(params);
-        System.out.println(message);
-    }
+    Message message = client.messages().create(params);
+    System.out.println(message);
+  }
 }
 ```
 </CodeGroup>
@@ -785,12 +766,7 @@ Your application should then make the edit and return the result:
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    tools=[
-        {
-            "type": "text_editor_20250728",
-            "name": "str_replace_based_edit_tool"
-        }
-    ],
+    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
         # Previous messages...
         {
@@ -798,7 +774,7 @@ response = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you."
+                    "text": "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you.",
                 },
                 {
                     "type": "tool_use",
@@ -808,10 +784,10 @@ response = client.messages.create(
                         "command": "str_replace",
                         "path": "primes.py",
                         "old_str": "    for num in range(2, limit + 1)",
-                        "new_str": "    for num in range(2, limit + 1):"
-                    }
-                }
-            ]
+                        "new_str": "    for num in range(2, limit + 1):",
+                    },
+                },
+            ],
         },
         {
             "role": "user",
@@ -819,11 +795,11 @@ response = client.messages.create(
                 {
                     "type": "tool_result",
                     "tool_use_id": "toolu_01PqRsTuVwXyZAbCdEfGh",
-                    "content": "Successfully replaced text at exactly one location."
+                    "content": "Successfully replaced text at exactly one location.",
                 }
-            ]
-        }
-    ]
+            ],
+        },
+    ],
 )
 ```
 
@@ -874,9 +850,6 @@ const response = await anthropic.messages.create({
 ```
 
 ```java Java
-import java.util.List;
-import java.util.Map;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -889,48 +862,65 @@ import com.anthropic.models.messages.TextBlockParam;
 import com.anthropic.models.messages.ToolResultBlockParam;
 import com.anthropic.models.messages.ToolStrReplaceBasedEditTool20250728;
 import com.anthropic.models.messages.ToolUseBlockParam;
+import java.util.List;
+import java.util.Map;
 
 public class TextEditorConversationExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_SONNET_4_0)
-                .maxTokens(1024)
-                .addTool(ToolStrReplaceBasedEditTool20250728.builder()
-                        .build())
-                // Previous messages would go here
-                .addAssistantMessageOfBlockParams(
-                        List.of(
-                                ContentBlockParam.ofText(TextBlockParam.builder()
-                                        .text("I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you.")
-                                        .build()),
-                                ContentBlockParam.ofToolUse(ToolUseBlockParam.builder()
-                                        .id("toolu_01PqRsTuVwXyZAbCdEfGh")
-                                        .name("str_replace_based_edit_tool")
-                                        .input(JsonValue.from(Map.of(
-                                                "command", "str_replace",
-                                                "path", "primes.py",
-                                                "old_str", "    for num in range(2, limit + 1)",
-                                                "new_str", "    for num in range(2, limit + 1):"
-                                        )))
-                                        .build()
-                                )
-                        )
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_SONNET_4_0)
+      .maxTokens(1024)
+      .addTool(ToolStrReplaceBasedEditTool20250728.builder().build())
+      // Previous messages would go here
+      .addAssistantMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofText(
+            TextBlockParam.builder()
+              .text(
+                "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you."
+              )
+              .build()
+          ),
+          ContentBlockParam.ofToolUse(
+            ToolUseBlockParam.builder()
+              .id("toolu_01PqRsTuVwXyZAbCdEfGh")
+              .name("str_replace_based_edit_tool")
+              .input(
+                JsonValue.from(
+                  Map.of(
+                    "command",
+                    "str_replace",
+                    "path",
+                    "primes.py",
+                    "old_str",
+                    "    for num in range(2, limit + 1)",
+                    "new_str",
+                    "    for num in range(2, limit + 1):"
+                  )
                 )
-                .addUserMessageOfBlockParams(List.of(
-                        ContentBlockParam.ofToolResult(ToolResultBlockParam.builder()
-                                .toolUseId("toolu_01PqRsTuVwXyZAbCdEfGh")
-                                .content("Successfully replaced text at exactly one location.")
-                                .build()
-                        )
-                ))
-                .build();
+              )
+              .build()
+          )
+        )
+      )
+      .addUserMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofToolResult(
+            ToolResultBlockParam.builder()
+              .toolUseId("toolu_01PqRsTuVwXyZAbCdEfGh")
+              .content("Successfully replaced text at exactly one location.")
+              .build()
+          )
+        )
+      )
+      .build();
 
-        Message message = client.messages().create(params);
-        System.out.println(message);
-    }
+    Message message = client.messages().create(params);
+    System.out.println(message);
+  }
 }
 ```
 </CodeGroup>
@@ -966,18 +956,13 @@ client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-3-7-sonnet-20250219",
     max_tokens=1024,
-    tools=[
-        {
-            "type": "text_editor_20250124",
-            "name": "str_replace_editor"
-        }
-    ],
+    tools=[{"type": "text_editor_20250124", "name": "str_replace_editor"}],
     messages=[
         {
-            "role": "user", 
-            "content": "There's a syntax error in my primes.py file. Can you help me fix it?"
+            "role": "user",
+            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
         }
-    ]
+    ],
 )
 
 print(response)
@@ -1008,24 +993,24 @@ The tool type depends on the model version:
     ```python
     def handle_editor_tool(tool_call, model_version):
         input_params = tool_call.input
-        command = input_params.get('command', '')
-        file_path = input_params.get('path', '')
-        
-        if command == 'view':
+        command = input_params.get("command", "")
+        file_path = input_params.get("path", "")
+
+        if command == "view":
             # Read and return file contents
             pass
-        elif command == 'str_replace':
+        elif command == "str_replace":
             # Replace text in file
             pass
-        elif command == 'create':
+        elif command == "create":
             # Create new file
             pass
-        elif command == 'insert':
+        elif command == "insert":
             # Insert text at location
             pass
-        elif command == 'undo_edit':
+        elif command == "undo_edit":
             # Check if it's a Claude 4 model
-            if 'str_replace_based_edit_tool' in model_version:
+            if "str_replace_based_edit_tool" in model_version:
                 return {"error": "undo_edit command is not supported in Claude 4"}
             # Restore from backup for Claude 3.7
             pass
@@ -1046,12 +1031,12 @@ The tool type depends on the model version:
         if content.type == "tool_use":
             # Execute the tool based on command
             result = handle_editor_tool(content)
-            
+
             # Return result to Claude
             tool_result = {
                 "type": "tool_result",
                 "tool_use_id": content.id,
-                "content": result
+                "content": result,
             }
     ```
   </Step>
@@ -1181,7 +1166,7 @@ def backup_file(file_path):
     """Create a backup of a file before editing."""
     backup_path = f"{file_path}.backup"
     if os.path.exists(file_path):
-        with open(file_path, 'r') as src, open(backup_path, 'w') as dst:
+        with open(file_path, "r") as src, open(backup_path, "w") as dst:
             dst.write(src.read())
 ```
 
@@ -1193,9 +1178,9 @@ The `str_replace` command requires an exact match for the text to be replaced. Y
 ```python
 def safe_replace(file_path, old_text, new_text):
     """Replace text only if there's exactly one match."""
-    with open(file_path, 'r') as f:
+    with open(file_path, "r") as f:
         content = f.read()
-    
+
     count = content.count(old_text)
     if count == 0:
         return "Error: No match found"
@@ -1203,7 +1188,7 @@ def safe_replace(file_path, old_text, new_text):
         return f"Error: Found {count} matches"
     else:
         new_content = content.replace(old_text, new_text)
-        with open(file_path, 'w') as f:
+        with open(file_path, "w") as f:
             f.write(new_content)
         return "Successfully replaced text"
 ```
@@ -1218,9 +1203,10 @@ def verify_changes(file_path):
     """Run tests or checks after making changes."""
     try:
         # For Python files, check for syntax errors
-        if file_path.endswith('.py'):
+        if file_path.endswith(".py"):
             import ast
-            with open(file_path, 'r') as f:
+
+            with open(file_path, "r") as f:
                 ast.parse(f.read())
             return "Syntax check passed"
     except Exception as e:

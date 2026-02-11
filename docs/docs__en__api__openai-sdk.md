@@ -5,7 +5,7 @@ Anthropic provides a compatibility layer that enables you to use the OpenAI SDK 
 ---
 
 <Note>
-This compatibility layer is primarily intended to test and compare model capabilities, and is not considered a long-term or production-ready solution for most use cases. While we do intend to keep it fully functional and not make breaking changes, our priority is the reliability and effectiveness of the [Claude API](/docs/en/api/overview). 
+This compatibility layer is primarily intended to test and compare model capabilities, and is not considered a long-term or production-ready solution for most use cases. While we do intend to keep it fully functional and not make breaking changes, our priority is the reliability and effectiveness of the [Claude API](/docs/en/api/overview).
 
 For more information on known compatibility limitations, see [Important OpenAI compatibility limitations](#important-openai-compatibility-limitations).
 
@@ -20,11 +20,11 @@ For the best experience and access to Claude API full feature set ([PDF processi
 
 To use the OpenAI SDK compatibility feature, you'll need to:
 
-1. Use an official OpenAI SDK  
-2. Change the following  
-   * Update your base URL to point to the Claude API  
-   * Replace your API key with an [Claude API key](/settings/keys)  
-   * Update your model name to use a [Claude model](/docs/en/about-claude/models/overview)  
+1. Use an official OpenAI SDK
+2. Change the following
+   * Update your base URL to point to the Claude API
+   * Replace your API key with an [Claude API key](/settings/keys)
+   * Update your model name to use a [Claude model](/docs/en/about-claude/models/overview)
 3. Review the documentation below for what features are supported
 
 ### Quick start example
@@ -35,33 +35,33 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 
     client = OpenAI(
         api_key="ANTHROPIC_API_KEY",  # Your Claude API key
-        base_url="https://api.anthropic.com/v1/"  # the Claude API endpoint
+        base_url="https://api.anthropic.com/v1/",  # the Claude API endpoint
     )
 
     response = client.chat.completions.create(
-        model="claude-opus-4-6", # Anthropic model name
+        model="claude-opus-4-6",  # Anthropic model name
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": "Who are you?"}
+            {"role": "user", "content": "Who are you?"},
         ],
     )
 
     print(response.choices[0].message.content)
     ```
-    
+
     ```typescript TypeScript
-    import OpenAI from 'openai';
+    import OpenAI from "openai";
 
     const openai = new OpenAI({
-        apiKey: "ANTHROPIC_API_KEY",   // Your Claude API key
-        baseURL: "https://api.anthropic.com/v1/",  // Claude API endpoint
+      apiKey: "ANTHROPIC_API_KEY", // Your Claude API key
+      baseURL: "https://api.anthropic.com/v1/" // Claude API endpoint
     });
 
     const response = await openai.chat.completions.create({
-        messages: [
-            { role: "user", content: "Who are you?" }
-        ],
-        model: "claude-opus-4-6", // Claude model name
+      messages: [
+        { role: "user", content: "Who are you?" }
+      ],
+      model: "claude-opus-4-6" // Claude model name
     });
 
     console.log(response.choices[0].message.content);
@@ -75,8 +75,8 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 Here are the most substantial differences from using OpenAI:
 
 * The `strict` parameter for function calling is ignored, which means the tool use JSON is not guaranteed to follow the supplied schema. For guaranteed schema conformance, use the native [Claude API with Structured Outputs](/docs/en/build-with-claude/structured-outputs).
-* Audio input is not supported; it will simply be ignored and stripped from input  
-* Prompt caching is not supported, but it is supported in [the Anthropic SDK](/docs/en/api/client-sdks)  
+* Audio input is not supported; it will simply be ignored and stripped from input
+* Prompt caching is not supported, but it is supported in [the Anthropic SDK](/docs/en/api/client-sdks)
 * System/developer messages are hoisted and concatenated to the beginning of the conversation, as Anthropic only supports a single initial system message.
 
 Most unsupported fields are silently ignored rather than producing errors. These are all documented below.
@@ -98,20 +98,18 @@ You can enable [extended thinking](/docs/en/build-with-claude/extended-thinking)
     response = client.chat.completions.create(
         model="claude-sonnet-4-5",
         messages=...,
-        extra_body={
-            "thinking": { "type": "enabled", "budget_tokens": 2000 }
-        }
+        extra_body={"thinking": {"type": "enabled", "budget_tokens": 2000}},
     )
     ```
-    
+
     ```typescript TypeScript
     const response = await openai.chat.completions.create({
-        messages: [
-            { role: "user", content: "Who are you?" }
-        ],
-        model: "claude-sonnet-4-5",
-        // @ts-expect-error
-        thinking: { type: "enabled", budget_tokens: 2000 }
+      messages: [
+        { role: "user", content: "Who are you?" }
+      ],
+      model: "claude-sonnet-4-5",
+      // @ts-expect-error
+      thinking: { type: "enabled", budget_tokens: 2000 }
     });
 
     ```

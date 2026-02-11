@@ -91,9 +91,7 @@ client = anthropic.Anthropic()
 message = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "Hello, Claude"}
-    ]
+    messages=[{"role": "user", "content": "Hello, Claude"}],
 )
 print(message.content)
 ```
@@ -108,7 +106,7 @@ const message = await client.messages.create({
   max_tokens: 1024,
   messages: [
     { role: "user", content: "Hello, Claude" }
-  ],
+  ]
 });
 console.log(message.content);
 ```
@@ -130,11 +128,11 @@ System.out.println(message.content());
 client := anthropic.NewClient()
 
 message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-    Model:     anthropic.ModelClaudeOpus4_6,
-    MaxTokens: 1024,
-    Messages: []anthropic.MessageParam{
-        anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
-    },
+	Model:     anthropic.ModelClaudeOpus4_6,
+	MaxTokens: 1024,
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
+	},
 })
 fmt.Println(message.Content)
 ```
@@ -205,7 +203,7 @@ message = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello"}],
-    betas=["feature-name"]
+    betas=["feature-name"],
 )
 ```
 
@@ -214,7 +212,7 @@ const message = await client.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello" }],
-  betas: ["feature-name"],
+  betas: ["feature-name"]
 });
 ```
 
@@ -234,12 +232,12 @@ client.beta().messages().create(params);
 
 ```go Go
 message, _ := client.Beta.Messages.New(context.Background(), anthropic.BetaMessageNewParams{
-    Model:     anthropic.ModelClaudeOpus4_6,
-    MaxTokens: 1024,
-    Messages: []anthropic.BetaMessageParam{
-        anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
-    },
-    Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBeta("feature-name")},
+	Model:     anthropic.ModelClaudeOpus4_6,
+	MaxTokens: 1024,
+	Messages: []anthropic.BetaMessageParam{
+		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
+	},
+	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBeta("feature-name")},
 })
 ```
 

@@ -41,18 +41,19 @@ Once configured, Claude automatically discovers Skills from the specified direct
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions
 
+
 async def main():
     options = ClaudeAgentOptions(
         cwd="/path/to/project",  # Project with .claude/skills/
         setting_sources=["user", "project"],  # Load Skills from filesystem
-        allowed_tools=["Skill", "Read", "Write", "Bash"]  # Enable Skill tool
+        allowed_tools=["Skill", "Read", "Write", "Bash"],  # Enable Skill tool
     )
 
     async for message in query(
-        prompt="Help me process this PDF document",
-        options=options
+        prompt="Help me process this PDF document", options=options
     ):
         print(message)
+
 
 asyncio.run(main())
 ```
@@ -63,9 +64,9 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
 for await (const message of query({
   prompt: "Help me process this PDF document",
   options: {
-    cwd: "/path/to/project",  // Project with .claude/skills/
-    settingSources: ["user", "project"],  // Load Skills from filesystem
-    allowedTools: ["Skill", "Read", "Write", "Bash"]  // Enable Skill tool
+    cwd: "/path/to/project", // Project with .claude/skills/
+    settingSources: ["user", "project"], // Load Skills from filesystem
+    allowedTools: ["Skill", "Read", "Write", "Bash"] // Enable Skill tool
   }
 })) {
   console.log(message);
@@ -115,13 +116,10 @@ Import statements from the first example are assumed in the following code snipp
 ```python Python
 options = ClaudeAgentOptions(
     setting_sources=["user", "project"],  # Load Skills from filesystem
-    allowed_tools=["Skill", "Read", "Grep", "Glob"]  # Restricted toolset
+    allowed_tools=["Skill", "Read", "Grep", "Glob"],  # Restricted toolset
 )
 
-async for message in query(
-    prompt="Analyze the codebase structure",
-    options=options
-):
+async for message in query(prompt="Analyze the codebase structure", options=options):
     print(message)
 ```
 
@@ -130,8 +128,8 @@ async for message in query(
 for await (const message of query({
   prompt: "Analyze the codebase structure",
   options: {
-    settingSources: ["user", "project"],  // Load Skills from filesystem
-    allowedTools: ["Skill", "Read", "Grep", "Glob"]  // Restricted toolset
+    settingSources: ["user", "project"], // Load Skills from filesystem
+    allowedTools: ["Skill", "Read", "Grep", "Glob"] // Restricted toolset
   }
 })) {
   console.log(message);
@@ -149,13 +147,10 @@ To see which Skills are available in your SDK application, simply ask Claude:
 ```python Python
 options = ClaudeAgentOptions(
     setting_sources=["user", "project"],  # Load Skills from filesystem
-    allowed_tools=["Skill"]
+    allowed_tools=["Skill"],
 )
 
-async for message in query(
-    prompt="What Skills are available?",
-    options=options
-):
+async for message in query(prompt="What Skills are available?", options=options):
     print(message)
 ```
 
@@ -163,7 +158,7 @@ async for message in query(
 for await (const message of query({
   prompt: "What Skills are available?",
   options: {
-    settingSources: ["user", "project"],  // Load Skills from filesystem
+    settingSources: ["user", "project"], // Load Skills from filesystem
     allowedTools: ["Skill"]
   }
 })) {
@@ -185,13 +180,10 @@ Test Skills by asking questions that match their descriptions:
 options = ClaudeAgentOptions(
     cwd="/path/to/project",
     setting_sources=["user", "project"],  # Load Skills from filesystem
-    allowed_tools=["Skill", "Read", "Bash"]
+    allowed_tools=["Skill", "Read", "Bash"],
 )
 
-async for message in query(
-    prompt="Extract text from invoice.pdf",
-    options=options
-):
+async for message in query(prompt="Extract text from invoice.pdf", options=options):
     print(message)
 ```
 
@@ -200,7 +192,7 @@ for await (const message of query({
   prompt: "Extract text from invoice.pdf",
   options: {
     cwd: "/path/to/project",
-    settingSources: ["user", "project"],  // Load Skills from filesystem
+    settingSources: ["user", "project"], // Load Skills from filesystem
     allowedTools: ["Skill", "Read", "Bash"]
   }
 })) {
@@ -222,14 +214,12 @@ Claude automatically invokes the relevant Skill if the description matches your 
 
 ```python Python
 # Wrong - Skills won't be loaded
-options = ClaudeAgentOptions(
-    allowed_tools=["Skill"]
-)
+options = ClaudeAgentOptions(allowed_tools=["Skill"])
 
 # Correct - Skills will be loaded
 options = ClaudeAgentOptions(
     setting_sources=["user", "project"],  # Required to load Skills
-    allowed_tools=["Skill"]
+    allowed_tools=["Skill"],
 )
 ```
 
@@ -241,7 +231,7 @@ const options = {
 
 // Correct - Skills will be loaded
 const options = {
-  settingSources: ["user", "project"],  // Required to load Skills
+  settingSources: ["user", "project"], // Required to load Skills
   allowedTools: ["Skill"]
 };
 ```
@@ -259,15 +249,15 @@ For more details on `settingSources`/`setting_sources`, see the [TypeScript SDK 
 options = ClaudeAgentOptions(
     cwd="/path/to/project",  # Must contain .claude/skills/
     setting_sources=["user", "project"],  # Required to load Skills
-    allowed_tools=["Skill"]
+    allowed_tools=["Skill"],
 )
 ```
 
 ```typescript TypeScript
 // Ensure your cwd points to the directory containing .claude/skills/
 const options = {
-  cwd: "/path/to/project",  // Must contain .claude/skills/
-  settingSources: ["user", "project"],  // Required to load Skills
+  cwd: "/path/to/project", // Must contain .claude/skills/
+  settingSources: ["user", "project"], // Required to load Skills
   allowedTools: ["Skill"]
 };
 ```

@@ -30,7 +30,7 @@ function translateSlidesToKorean() {
         var shape = pageElement.asShape();
         if (shape.getText() !== null) {
           var text = shape.getText().asString();
-          var translatedText = LanguageApp.translate(text, '', 'ko');
+          var translatedText = LanguageApp.translate(text, "", "ko");
           shape.getText().setText(translatedText);
         }
       } else if (pageElement.getPageElementType() === SlidesApp.PageElementType.TABLE) {
@@ -42,7 +42,7 @@ function translateSlidesToKorean() {
           for (var col = 0; col < numColumns; col++) {
             var tableCell = table.getCell(row, col);
             var text = tableCell.getText().asString();
-            var translatedText = LanguageApp.translate(text, '', 'ko');
+            var translatedText = LanguageApp.translate(text, "", "ko");
             tableCell.getText().setText(translatedText);
           }
         }
@@ -87,27 +87,26 @@ the text and the capabilities of the translation service.
 import anthropic
 
 client = anthropic.Anthropic(
-  # defaults to os.environ.get("ANTHROPIC_API_KEY")
-  api_key="my_api_key",
+    # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=2000,
-  temperature=0,
-  messages=[
-    {
-      "role": "user",
-      "content": [
+    model="claude-opus-4-6",
+    max_tokens=2000,
+    temperature=0,
+    messages=[
         {
-          "type": "text",
-          "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean.",
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -118,7 +117,7 @@ print(message.content)
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+  apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
 });
 
 const msg = await anthropic.messages.create({
@@ -127,11 +126,11 @@ const msg = await anthropic.messages.create({
   temperature: 0,
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."
+          type: "text",
+          text: "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."
         }
       ]
     }
@@ -145,7 +144,7 @@ console.log(msg);
 
 <Tab title="AWS Bedrock AI TypeScript">
 
-```
+```python
 from anthropic import AnthropicBedrock
 
 # See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
@@ -162,21 +161,20 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."
+                    "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean.",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
 
 <Tab title="AWS Bedrock AI Python">
 
-```
+```typescript
 import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 
 // See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
@@ -189,11 +187,11 @@ const msg = await client.messages.create({
   temperature: 0,
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."
+          type: "text",
+          text: "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."
         }
       ]
     }
@@ -207,7 +205,7 @@ console.log(msg);
 
 <Tab title="Vertex AI Python">
 
-```
+```python
 from anthropic import AnthropicVertex
 
 client = AnthropicVertex()
@@ -222,14 +220,13 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."
+                    "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean.",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -237,27 +234,27 @@ print(message.content)
 <Tab title="Vertex AI TypeScript">
 
 ```typescript
-import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
+import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
 // Additionally goes through the standard `google-auth-library` flow.
 const client = new AnthropicVertex();
 
 const msg = await client.messages.create({
-model: "claude-sonnet-4@20250514",
-max_tokens: 2000,
-temperature: 0,
-messages: [
-{
-"role": "user",
-"content": [
-{
-"type": "text",
-"text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."
-}
-]
-}
-]
+  model: "claude-sonnet-4@20250514",
+  max_tokens: 2000,
+  temperature: 0,
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."
+        }
+      ]
+    }
+  ]
 });
 console.log(msg);
 

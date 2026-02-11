@@ -4,7 +4,7 @@ Documentation for using beta headers with the Claude API
 
 ---
 
-Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API. 
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
 
 These features are subject to change and may be modified or removed in future releases.
 
@@ -35,25 +35,23 @@ client = Anthropic()
 response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "Hello, Claude"}
-    ],
-    betas=["code-execution-2025-08-25"]
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+    betas=["code-execution-2025-08-25"],
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
 const msg = await anthropic.beta.messages.create({
-  model: 'claude-opus-4-6',
+  model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
-    { role: 'user', content: 'Hello, Claude' }
+    { role: "user", content: "Hello, Claude" }
   ],
-  betas: ['code-execution-2025-08-25']
+  betas: ["code-execution-2025-08-25"]
 });
 ```
 

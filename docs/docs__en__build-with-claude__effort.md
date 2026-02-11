@@ -57,20 +57,20 @@ client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
-    messages=[{
-        "role": "user",
-        "content": "Analyze the trade-offs between microservices and monolithic architectures"
-    }],
-    output_config={
-        "effort": "medium"
-    }
+    messages=[
+        {
+            "role": "user",
+            "content": "Analyze the trade-offs between microservices and monolithic architectures",
+        }
+    ],
+    output_config={"effort": "medium"},
 )
 
 print(response.content[0].text)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 

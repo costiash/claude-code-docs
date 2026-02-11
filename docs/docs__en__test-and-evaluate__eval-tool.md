@@ -53,7 +53,7 @@ To use the 'Generate Test Case' feature:
   </Step>
   <Step title="Edit generation logic (optional)">
     You can also edit the test case generation logic by clicking on the arrow dropdown to the right of the 'Generate Test Case' button, then on 'Show generation logic' at the top of the Variables window that pops up. You may have to click `Generate' on the top right of this window to populate initial generation logic.
-    
+
     Editing this allows you to customize and fine tune the test cases that Claude generates to greater precision and specificity.
   </Step>
 </Steps>
@@ -72,7 +72,7 @@ If you update your original prompt text, you can re-run the entire eval suite ag
 
 To make the most of the Evaluation tool, structure your prompts with clear input and output formats. For example:
 
-```
+```text
 In this task, you will generate a cute one sentence story that incorporates two elements: a color and a sound.
 The color to include in the story is:
 <color>

@@ -29,18 +29,18 @@ Claude can assist in legal research by quickly analyzing large volumes of case l
 </section>
 
 ### Determine the details you want the summarization to extract
-There is no single correct summary for any given document. Without clear direction, it can be difficult for Claude to determine which details to include. To achieve optimal results, identify the specific information you want to include in the summary. 
+There is no single correct summary for any given document. Without clear direction, it can be difficult for Claude to determine which details to include. To achieve optimal results, identify the specific information you want to include in the summary.
 
 For instance, when summarizing a sublease agreement, you might wish to extract the following key points:
 
 ```python
 details_to_extract = [
-    'Parties involved (sublessor, sublessee, and original lessor)',
-    'Property details (address, description, and permitted use)', 
-    'Term and rent (start date, end date, monthly rent, and security deposit)',
-    'Responsibilities (utilities, maintenance, and repairs)',
-    'Consent and notices (landlord\'s consent, and notice requirements)',
-    'Special provisions (furniture, parking, and subletting restrictions)'
+    "Parties involved (sublessor, sublessee, and original lessor)",
+    "Property details (address, description, and permitted use)",
+    "Term and rent (start date, end date, monthly rent, and security deposit)",
+    "Responsibilities (utilities, maintenance, and repairs)",
+    "Consent and notices (landlord's consent, and notice requirements)",
+    "Special provisions (furniture, parking, and subletting restrictions)",
 ]
 ```
 
@@ -75,7 +75,7 @@ See our guide on [establishing success criteria](/docs/en/test-and-evaluate/defi
 
 ### Select the right Claude model
 
-Model accuracy is extremely important when summarizing legal documents. Claude Opus 4.6 is an excellent choice for use cases such as this where high accuracy is required. If the size and quantity of your documents is large such that costs start to become a concern, you can also try using a smaller model like Claude Haiku 4.5. 
+Model accuracy is extremely important when summarizing legal documents. Claude Opus 4.6 is an excellent choice for use cases such as this where high accuracy is required. If the size and quantity of your documents is large such that costs start to become a concern, you can also try using a smaller model like Claude Haiku 4.5.
 
 To help estimate these costs, below is a comparison of the cost to summarize 1,000 sublease agreements using both Sonnet and Haiku:
 
@@ -88,7 +88,7 @@ To help estimate these costs, below is a comparison of the cost to summarize 1,0
     * Input tokens: 86M (assuming 1 token per 3.5 characters)
     * Output tokens per summary: 350
     * Total output tokens: 350,000
- 
+
 * **Claude Opus 4.6 estimated cost**
     * Input token cost: 86 MTok * \$5.00/MTok = \$430
     * Output token cost: 0.35 MTok * \$25.00/MTok = \$8.75
@@ -103,7 +103,7 @@ To help estimate these costs, below is a comparison of the cost to summarize 1,0
 
 ### Transform documents into a format that Claude can process
 
-Before you begin summarizing documents, you need to prepare your data. This involves extracting text from PDFs, cleaning the text, and ensuring it's ready to be processed by Claude. 
+Before you begin summarizing documents, you need to prepare your data. This involves extracting text from PDFs, cleaning the text, and ensuring it's ready to be processed by Claude.
 
 Here is a demonstration of this process on a sample pdf:
 
@@ -114,15 +114,16 @@ import re
 import pypdf
 import requests
 
+
 def get_llm_text(pdf_file):
     reader = pypdf.PdfReader(pdf_file)
     text = "\n".join([page.extract_text() for page in reader.pages])
 
     # Remove extra whitespace
-    text = re.sub(r'\s+', ' ', text) 
+    text = re.sub(r"\s+", " ", text)
 
     # Remove page numbers
-    text = re.sub(r'\n\s*\d+\s*\n', '\n', text) 
+    text = re.sub(r"\n\s*\d+\s*\n", "\n", text)
 
     return text
 
@@ -137,8 +138,8 @@ response = requests.get(url)
 # Load the PDF from memory
 pdf_file = BytesIO(response.content)
 
-document_text = get_llm_text(pdf_file) 
-print(document_text[:50000]) 
+document_text = get_llm_text(pdf_file)
+print(document_text[:50000])
 ```
 
 In this example, we first download a pdf of a sample sublease agreement used in the [summarization cookbook](https://platform.claude.com/cookbook/capabilities-summarization-guide). This agreement was sourced from a publicly available sublease agreement from the [sec.gov website](https://www.sec.gov/Archives/edgar/data/1045425/000119312507044370/dex1032.htm).
@@ -147,7 +148,7 @@ We use the pypdf library to extract the contents of the pdf and convert it to te
 
 ### Build a strong prompt
 
-Claude can adapt to various summarization styles. You can change the details of the prompt to guide Claude to be more or less verbose, include more or less technical terminology, or provide a higher or lower level summary of the context at hand. 
+Claude can adapt to various summarization styles. You can change the details of the prompt to guide Claude to be more or less verbose, include more or less technical terminology, or provide a higher or lower level summary of the context at hand.
 
 Here’s an example of how to create a prompt that ensures the generated summaries follow a consistent structure when analyzing sublease agreements:
 
@@ -157,11 +158,13 @@ import anthropic
 # Initialize the Anthropic client
 client = anthropic.Anthropic()
 
-def summarize_document(text, details_to_extract, model="claude-opus-4-6", max_tokens=1000):
 
+def summarize_document(
+    text, details_to_extract, model="claude-opus-4-6", max_tokens=1000
+):
     # Format the details to extract to be placed within the prompt's context
-    details_to_extract_str = '\n'.join(details_to_extract)
-    
+    details_to_extract_str = "\n".join(details_to_extract)
+
     # Prompt the model to summarize the sublease agreement
     prompt = f"""Summarize the following sublease agreement. Focus on these key aspects:
 
@@ -173,7 +176,7 @@ def summarize_document(text, details_to_extract, model="claude-opus-4-6", max_to
     - Sublessor: [Name]
     // Add more details as needed
     </parties involved>
-    
+
     If any information is not explicitly stated in the document, note it as "Not specified". Do not preamble.
 
     Sublease agreement text:
@@ -186,12 +189,16 @@ def summarize_document(text, details_to_extract, model="claude-opus-4-6", max_to
         system="You are a legal analyst specializing in real estate law, known for highly accurate and detailed summaries of sublease agreements.",
         messages=[
             {"role": "user", "content": prompt},
-            {"role": "assistant", "content": "Here is the summary of the sublease agreement: <summary>"}
+            {
+                "role": "assistant",
+                "content": "Here is the summary of the sublease agreement: <summary>",
+            },
         ],
-        stop_sequences=["</summary>"]
+        stop_sequences=["</summary>"],
     )
 
     return response.content[0].text
+
 
 sublease_summary = summarize_document(document_text, details_to_extract)
 print(sublease_summary)
@@ -201,7 +208,7 @@ This code implements a `summarize_document` function that uses Claude to summari
 
 Within the function, a prompt is generated for Claude, including the document to be summarized, the details to extract, and specific instructions for summarizing the document. The prompt instructs Claude to respond with a summary of each detail to extract nested within XML headers.
 
-Because we decided to output each section of the summary within tags, each section can easily be parsed out as a post-processing step. This approach enables structured summaries that can be adapted for your use case, so that each summary follows the same pattern. 
+Because we decided to output each section of the summary within tags, each section can easily be parsed out as a post-processing step. This approach enables structured summaries that can be adapted for your use case, so that each summary follows the same pattern.
 
 ### Evaluate your prompt
 
@@ -251,20 +258,28 @@ import anthropic
 # Initialize the Anthropic client
 client = anthropic.Anthropic()
 
+
 def chunk_text(text, chunk_size=20000):
-    return [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+    return [text[i : i + chunk_size] for i in range(0, len(text), chunk_size)]
 
-def summarize_long_document(text, details_to_extract, model="claude-opus-4-6", max_tokens=1000):
 
+def summarize_long_document(
+    text, details_to_extract, model="claude-opus-4-6", max_tokens=1000
+):
     # Format the details to extract to be placed within the prompt's context
-    details_to_extract_str = '\n'.join(details_to_extract)
+    details_to_extract_str = "\n".join(details_to_extract)
 
     # Iterate over chunks and summarize each one
-    chunk_summaries = [summarize_document(chunk, details_to_extract, model=model, max_tokens=max_tokens) for chunk in chunk_text(text)]
-    
+    chunk_summaries = [
+        summarize_document(
+            chunk, details_to_extract, model=model, max_tokens=max_tokens
+        )
+        for chunk in chunk_text(text)
+    ]
+
     final_summary_prompt = f"""
-    
-    You are looking at the chunked summaries of multiple documents that are all related. 
+
+    You are looking at the chunked summaries of multiple documents that are all related.
     Combine the following summaries of the document from different truthful sources into a coherent overall summary:
 
     <chunked_summaries>
@@ -280,7 +295,7 @@ def summarize_long_document(text, details_to_extract, model="claude-opus-4-6", m
     - Sublessor: [Name]
     // Add more details as needed
     </parties involved>
-    
+
     If any information is not explicitly stated in the document, note it as "Not specified". Do not preamble.
     """
 
@@ -289,14 +304,17 @@ def summarize_long_document(text, details_to_extract, model="claude-opus-4-6", m
         max_tokens=max_tokens,
         system="You are a legal expert that summarizes notes on one document.",
         messages=[
-            {"role": "user",  "content": final_summary_prompt},
-            {"role": "assistant", "content": "Here is the summary of the sublease agreement: <summary>"}
-
+            {"role": "user", "content": final_summary_prompt},
+            {
+                "role": "assistant",
+                "content": "Here is the summary of the sublease agreement: <summary>",
+            },
         ],
-        stop_sequences=["</summary>"]
+        stop_sequences=["</summary>"],
     )
-    
+
     return response.content[0].text
+
 
 long_summary = summarize_long_document(document_text, details_to_extract)
 print(long_summary)

@@ -153,22 +153,19 @@ message = client.beta.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
+            "content": "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.",
         }
     ],
-    tools=[{
-        "type": "memory_20250818",
-        "name": "memory"
-    }],
-    betas=["context-management-2025-06-27"]
+    tools=[{"type": "memory_20250818", "name": "memory"}],
+    betas=["context-management-2025-06-27"],
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY
 });
 
 const message = await anthropic.beta.messages.create({
@@ -449,10 +446,7 @@ response = client.beta.messages.create(
     max_tokens=4096,
     messages=[...],
     tools=[
-        {
-            "type": "memory_20250818",
-            "name": "memory"
-        },
+        {"type": "memory_20250818", "name": "memory"},
         # Your other tools
     ],
     betas=["context-management-2025-06-27"],
@@ -460,36 +454,30 @@ response = client.beta.messages.create(
         "edits": [
             {
                 "type": "clear_tool_uses_20250919",
-                "trigger": {
-                    "type": "input_tokens",
-                    "value": 100000
-                },
-                "keep": {
-                    "type": "tool_uses",
-                    "value": 3
-                }
+                "trigger": {"type": "input_tokens", "value": 100000},
+                "keep": {"type": "tool_uses", "value": 3},
             }
         ]
-    }
+    },
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY
 });
 
 const response = await anthropic.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
-  messages: [...],
+  messages: [/* ... */],
   tools: [
     {
       type: "memory_20250818",
       name: "memory"
-    },
+    }
     // Your other tools
   ],
   betas: ["context-management-2025-06-27"],
@@ -518,13 +506,8 @@ You can also exclude memory tool calls from being cleared to ensure Claude alway
 <CodeGroup>
 
 ```python Python
-context_management={
-    "edits": [
-        {
-            "type": "clear_tool_uses_20250919",
-            "exclude_tools": ["memory"]
-        }
-    ]
+context_management = {
+    "edits": [{"type": "clear_tool_uses_20250919", "exclude_tools": ["memory"]}]
 }
 ```
 
@@ -535,7 +518,7 @@ context_management: {
       type: "clear_tool_uses_20250919",
       exclude_tools: ["memory"]
     }
-  ]
+  ];
 }
 ```
 

@@ -11,7 +11,7 @@ Please use [this form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback 
 </Note>
 
 <Warning>
-Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. We recommend only using this tool in trusted environments or when handling non-sensitive data. 
+Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. We recommend only using this tool in trusted environments or when handling non-sensitive data.
 
 To minimize exfiltration risks, Claude is not allowed to dynamically construct URLs. Claude can only fetch URLs that have been explicitly provided by the user or that come from previous web search or web fetch results. However, there is still residual risk that should be carefully considered when using this tool.
 
@@ -81,36 +81,31 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-response = client.messages.create(
+response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
+    betas=["web-fetch-2025-09-10"],
     messages=[
         {
             "role": "user",
-            "content": "Please analyze the content at https://example.com/article"
+            "content": "Please analyze the content at https://example.com/article",
         }
     ],
-    tools=[{
-        "type": "web_fetch_20250910",
-        "name": "web_fetch",
-        "max_uses": 5
-    }],
-    extra_headers={
-        "anthropic-beta": "web-fetch-2025-09-10"
-    }
+    tools=[{"type": "web_fetch_20250910", "name": "web_fetch", "max_uses": 5}],
 )
 print(response)
 ```
 
 ```typescript TypeScript
-import { Anthropic } from '@anthropic-ai/sdk';
+import { Anthropic } from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
 async function main() {
-  const response = await anthropic.messages.create({
+  const response = await anthropic.beta.messages.create({
     model: "claude-opus-4-6",
     max_tokens: 1024,
+    betas: ["web-fetch-2025-09-10"],
     messages: [
       {
         role: "user",
@@ -121,10 +116,7 @@ async function main() {
       type: "web_fetch_20250910",
       name: "web_fetch",
       max_uses: 5
-    }],
-    headers: {
-      "anthropic-beta": "web-fetch-2025-09-10"
-    }
+    }]
   });
 
   console.log(response);
@@ -176,7 +168,7 @@ When using domain filters:
 - You can use either `allowed_domains` or `blocked_domains`, but not both in the same request.
 
 <Warning>
-Be aware that Unicode characters in domain names can create security vulnerabilities through homograph attacks, where visually similar characters from different scripts can bypass domain filters. For example, `аmazon.com` (using Cyrillic 'а') may appear identical to `amazon.com` but represents a different domain. 
+Be aware that Unicode characters in domain names can create security vulnerabilities through homograph attacks, where visually similar characters from different scripts can bypass domain filters. For example, `аmazon.com` (using Cyrillic 'а') may appear identical to `amazon.com` but represents a different domain.
 
 When configuring domain allow/block lists:
 - Use ASCII-only domain names when possible
@@ -355,31 +347,25 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-response = client.messages.create(
+response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
+    betas=["web-fetch-2025-09-10"],
     messages=[
         {
             "role": "user",
-            "content": "Find recent articles about quantum computing and analyze the most relevant one in detail"
+            "content": "Find recent articles about quantum computing and analyze the most relevant one in detail",
         }
     ],
     tools=[
-        {
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "max_uses": 3
-        },
+        {"type": "web_search_20250305", "name": "web_search", "max_uses": 3},
         {
             "type": "web_fetch_20250910",
             "name": "web_fetch",
             "max_uses": 5,
-            "citations": {"enabled": True}
-        }
+            "citations": {"enabled": True},
+        },
     ],
-    extra_headers={
-        "anthropic-beta": "web-fetch-2025-09-10"
-    }
 )
 ```
 
@@ -402,47 +388,36 @@ client = anthropic.Anthropic()
 messages = [
     {
         "role": "user",
-        "content": "Analyze this research paper: https://arxiv.org/abs/2024.12345"
+        "content": "Analyze this research paper: https://arxiv.org/abs/2024.12345",
     }
 ]
 
-response1 = client.messages.create(
+response1 = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
+    betas=["web-fetch-2025-09-10"],
     messages=messages,
-    tools=[{
-        "type": "web_fetch_20250910",
-        "name": "web_fetch"
-    }],
-    extra_headers={
-        "anthropic-beta": "web-fetch-2025-09-10"
-    }
+    tools=[{"type": "web_fetch_20250910", "name": "web_fetch"}],
 )
 
 # Add Claude's response to conversation
-messages.append({
-    "role": "assistant",
-    "content": response1.content
-})
+messages.append({"role": "assistant", "content": response1.content})
 
 # Second request with cache breakpoint
-messages.append({
-    "role": "user",
-    "content": "What methodology does the paper use?",
-    "cache_control": {"type": "ephemeral"}
-})
+messages.append(
+    {
+        "role": "user",
+        "content": "What methodology does the paper use?",
+        "cache_control": {"type": "ephemeral"},
+    }
+)
 
-response2 = client.messages.create(
+response2 = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
+    betas=["web-fetch-2025-09-10"],
     messages=messages,
-    tools=[{
-        "type": "web_fetch_20250910",
-        "name": "web_fetch"
-    }],
-    extra_headers={
-        "anthropic-beta": "web-fetch-2025-09-10"
-    }
+    tools=[{"type": "web_fetch_20250910", "name": "web_fetch"}],
 )
 
 # The second response benefits from cached fetch results
@@ -453,7 +428,7 @@ print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
 
 With streaming enabled, fetch events are part of the stream with a pause during content retrieval:
 
-```javascript
+```json
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_abc123", "type": "message"}}
 

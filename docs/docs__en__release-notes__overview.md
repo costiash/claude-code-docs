@@ -165,8 +165,8 @@ _<sup>* - Opus 4.1 does not allow both `temperature` and `top_p` parameters to b
 - We've launched [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking) in public beta, a feature that enables Claude to think in between tool calls. To enable interleaved thinking, use the [beta header](/docs/en/api/beta-headers) `interleaved-thinking-2025-05-14`.
 - We've launched the [Files API](/docs/en/build-with-claude/files) in public beta, enabling you to upload files and reference them in the Messages API and code execution tool.
 - We've launched the [Code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) in public beta, a tool that enables Claude to execute Python code in a secure, sandboxed environment.
-- We've launched the [MCP connector](/docs/en/agents-and-tools/mcp-connector) in public beta, a feature that allows you to connect to remote MCP servers directly from the Messages API. 
-- To increase answer quality and decrease tool errors, we've changed the default value for the `top_p` [nucleus sampling](https://en.wikipedia.org/wiki/Top-p_sampling) parameter in the Messages API from 0.999 to 0.99 for all models. To revert this change, set `top_p` to 0.999. 
+- We've launched the [MCP connector](/docs/en/agents-and-tools/mcp-connector) in public beta, a feature that allows you to connect to remote MCP servers directly from the Messages API.
+- To increase answer quality and decrease tool errors, we've changed the default value for the `top_p` [nucleus sampling](https://en.wikipedia.org/wiki/Top-p_sampling) parameter in the Messages API from 0.999 to 0.99 for all models. To revert this change, set `top_p` to 0.999.
     Additionally, when extended thinking is enabled, you can now set `top_p` to values between 0.95 and 1.
 - We've moved our [Go SDK](https://github.com/anthropics/anthropic-sdk-go) from beta to GA.
 - We've included minute and hour level granularity to the [Usage](https://console.anthropic.com/settings/usage) page of Console alongside 429 error rates on the Usage page.

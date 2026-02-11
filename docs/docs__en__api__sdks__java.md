@@ -46,10 +46,11 @@ import com.anthropic.models.messages.Model;
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .maxTokens(1024L)
-    .addUserMessage("Hello, Claude")
-    .model(Model.CLAUDE_OPUS_4_6)
-    .build();
+  .maxTokens(1024L)
+  .addUserMessage("Hello, Claude")
+  .model(Model.CLAUDE_OPUS_4_6)
+  .build();
+
 Message message = client.messages().create(params);
 ```
 
@@ -75,8 +76,8 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-    .apiKey("my-anthropic-api-key")
-    .build();
+  .apiKey("my-anthropic-api-key")
+  .build();
 ```
 
 Or use a combination of both approaches:
@@ -86,10 +87,10 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-    // Configures using system properties or environment variables
-    .fromEnv()
-    .apiKey("my-anthropic-api-key")
-    .build();
+  // Configures using system properties or environment variables
+  .fromEnv()
+  .apiKey("my-anthropic-api-key")
+  .build();
 ```
 
 ### Configuration options
@@ -114,8 +115,8 @@ To temporarily use a modified client configuration while reusing the same connec
 import com.anthropic.client.AnthropicClient;
 
 AnthropicClient clientWithOptions = client.withOptions(optionsBuilder -> {
-    optionsBuilder.baseUrl("https://example.com");
-    optionsBuilder.maxRetries(42);
+  optionsBuilder.baseUrl("https://example.com");
+  optionsBuilder.maxRetries(42);
 });
 ```
 
@@ -136,10 +137,11 @@ import java.util.concurrent.CompletableFuture;
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .maxTokens(1024L)
-    .addUserMessage("Hello, Claude")
-    .model(Model.CLAUDE_OPUS_4_6)
-    .build();
+  .maxTokens(1024L)
+  .addUserMessage("Hello, Claude")
+  .model(Model.CLAUDE_OPUS_4_6)
+  .build();
+
 CompletableFuture<Message> message = client.async().messages().create(params);
 ```
 
@@ -156,10 +158,11 @@ import java.util.concurrent.CompletableFuture;
 AnthropicClientAsync client = AnthropicOkHttpClientAsync.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .maxTokens(1024L)
-    .addUserMessage("Hello, Claude")
-    .model(Model.CLAUDE_OPUS_4_6)
-    .build();
+  .maxTokens(1024L)
+  .addUserMessage("Hello, Claude")
+  .model(Model.CLAUDE_OPUS_4_6)
+  .build();
+
 CompletableFuture<Message> message = client.messages().create(params);
 ```
 
@@ -252,9 +255,9 @@ import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import java.util.concurrent.Executors;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-    .fromEnv()
-    .streamHandlerExecutor(Executors.newFixedThreadPool(4))
-    .build();
+  .fromEnv()
+  .streamHandlerExecutor(Executors.newFixedThreadPool(4))
+  .build();
 ```
 
 ### Streaming with message accumulator
@@ -316,18 +319,21 @@ Java classes can contain fields declared to be instances of other classes and ca
 
 ```java
 class Person {
-    public String name;
-    public int birthYear;
+
+  public String name;
+  public int birthYear;
 }
 
 class Book {
-    public String title;
-    public Person author;
-    public int publicationYear;
+
+  public String title;
+  public Person author;
+  public int publicationYear;
 }
 
 class BookList {
-    public List<Book> books;
+
+  public List<Book> books;
 }
 ```
 
@@ -361,10 +367,11 @@ If a field is optional and does not require a defined value, you can represent t
 import java.util.Optional;
 
 class Book {
-    public String title;
-    public Person author;
-    public int publicationYear;
-    public Optional<String> isbn;
+
+  public String title;
+  public Person author;
+  public int publicationYear;
+  public Optional<String> isbn;
 }
 ```
 
@@ -392,11 +399,11 @@ import com.anthropic.models.beta.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 
 StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_6)
-        .maxTokens(2048)
-        .outputConfig(BookList.class, JsonSchemaLocalValidation.NO)
-        .addUserMessage("List some famous late twentieth century novels.")
-        .build();
+  .model(Model.CLAUDE_OPUS_4_6)
+  .maxTokens(2048)
+  .outputConfig(BookList.class, JsonSchemaLocalValidation.NO)
+  .addUserMessage("List some famous late twentieth century novels.")
+  .build();
 ```
 
 ### Structured outputs with streaming
@@ -425,24 +432,32 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 class Person {
-    @JsonPropertyDescription("The first name and surname of the person")
-    public String name;
-    public int birthYear;
-    @JsonPropertyDescription("The year the person died, or 'present' if the person is living.")
-    public String deathYear;
+
+  @JsonPropertyDescription("The first name and surname of the person")
+  public String name;
+
+  public int birthYear;
+
+  @JsonPropertyDescription("The year the person died, or 'present' if the person is living.")
+  public String deathYear;
 }
 
 @JsonClassDescription("The details of one published book")
 class Book {
-    public String title;
-    public Person author;
-    @JsonPropertyDescription("The year in which the book was first published.")
-    public int publicationYear;
-    @JsonIgnore public String genre;
+
+  public String title;
+  public Person author;
+
+  @JsonPropertyDescription("The year in which the book was first published.")
+  public int publicationYear;
+
+  @JsonIgnore
+  public String genre;
 }
 
 class BookList {
-    public List<Book> books;
+
+  public List<Book> books;
 }
 ```
 
@@ -458,20 +473,21 @@ If you use `@JsonProperty(required = false)`, the `false` value will be ignored.
 You can also use OpenAPI Swagger 2 `@Schema` and `@ArraySchema` annotations for type-specific constraints:
 
 ```java
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 class Article {
-    @ArraySchema(minItems = 1)
-    public List<String> authors;
 
-    public String title;
+  @ArraySchema(minItems = 1)
+  public List<String> authors;
 
-    @Schema(format = "date")
-    public String publicationDate;
+  public String title;
 
-    @Schema(minimum = "1")
-    public int pageCount;
+  @Schema(format = "date")
+  public String publicationDate;
+
+  @Schema(minimum = "1")
+  public int pageCount;
 }
 ```
 
@@ -490,25 +506,33 @@ import com.fasterxml.jackson.annotation.JsonClassDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 enum Unit {
-  CELSIUS, FAHRENHEIT;
+  CELSIUS,
+  FAHRENHEIT;
 
   public String toString() {
     switch (this) {
-      case CELSIUS: return "C";
-      case FAHRENHEIT: default: return "F";
+      case CELSIUS:
+        return "C";
+      case FAHRENHEIT:
+      default:
+        return "F";
     }
   }
 
   public double fromKelvin(double temperatureK) {
     switch (this) {
-      case CELSIUS: return temperatureK - 273.15;
-      case FAHRENHEIT: default: return (temperatureK - 273.15) * 1.8 + 32.0;
+      case CELSIUS:
+        return temperatureK - 273.15;
+      case FAHRENHEIT:
+      default:
+        return (temperatureK - 273.15) * 1.8 + 32.0;
     }
   }
 }
 
 @JsonClassDescription("Get the weather in a given location")
 static class GetWeather {
+
   @JsonPropertyDescription("The city and state, e.g. San Francisco, CA")
   public String location;
 
@@ -518,16 +542,25 @@ static class GetWeather {
   public Weather execute() {
     double temperatureK;
     switch (location) {
-      case "San Francisco, CA": temperatureK = 300.0; break;
-      case "New York, NY": temperatureK = 310.0; break;
-      case "Dallas, TX": temperatureK = 305.0; break;
-      default: temperatureK = 295; break;
+      case "San Francisco, CA":
+        temperatureK = 300.0;
+        break;
+      case "New York, NY":
+        temperatureK = 310.0;
+        break;
+      case "Dallas, TX":
+        temperatureK = 305.0;
+        break;
+      default:
+        temperatureK = 295;
+        break;
     }
     return new Weather(String.format("%.0f%s", unit.fromKelvin(temperatureK), unit));
   }
 }
 
 static class Weather {
+
   public String temperature;
 
   public Weather(String temperature) {
@@ -598,10 +631,10 @@ Like for structured outputs, you can perform local validation to check that the 
 
 ```java
 MessageCreateParams.Builder createParamsBuilder = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_6)
-        .maxTokens(2048)
-        .addTool(GetWeather.class, JsonSchemaLocalValidation.NO)
-        .addUserMessage("What's the temperature in New York?");
+  .model(Model.CLAUDE_OPUS_4_6)
+  .maxTokens(2048)
+  .addTool(GetWeather.class, JsonSchemaLocalValidation.NO)
+  .addUserMessage("What's the temperature in New York?");
 ```
 
 ### Annotating tool classes
@@ -624,19 +657,22 @@ The SDK defines methods that accept files through the `MultipartField` interface
 
 ```java
 import com.anthropic.core.MultipartField;
+import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.beta.files.FileMetadata;
 import com.anthropic.models.beta.files.FileUploadParams;
-import com.anthropic.models.beta.AnthropicBeta;
 import java.io.InputStream;
 import java.nio.file.Paths;
 
 FileUploadParams params = FileUploadParams.builder()
-    .file(MultipartField.<InputStream>builder()
-        .value(Files.newInputStream(Paths.get("/path/to/file.pdf")))
-        .contentType("application/pdf")
-        .build())
-    .addBeta(AnthropicBeta.FILES_API_2025_04_14)
-    .build();
+  .file(
+    MultipartField.<InputStream>builder()
+      .value(Files.newInputStream(Paths.get("/path/to/file.pdf")))
+      .contentType("application/pdf")
+      .build()
+  )
+  .addBeta(AnthropicBeta.FILES_API_2025_04_14)
+  .build();
+
 FileMetadata fileMetadata = client.beta().files().upload(params);
 ```
 
@@ -644,20 +680,23 @@ Or from an `InputStream`:
 
 ```java
 import com.anthropic.core.MultipartField;
+import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.beta.files.FileMetadata;
 import com.anthropic.models.beta.files.FileUploadParams;
-import com.anthropic.models.beta.AnthropicBeta;
 import java.io.InputStream;
 import java.net.URL;
 
 FileUploadParams params = FileUploadParams.builder()
-    .file(MultipartField.<InputStream>builder()
-        .value(new URL("https://example.com/path/to/file").openStream())
-        .filename("document.pdf")
-        .contentType("application/pdf")
-        .build())
-    .addBeta(AnthropicBeta.FILES_API_2025_04_14)
-    .build();
+  .file(
+    MultipartField.<InputStream>builder()
+      .value(new URL("https://example.com/path/to/file").openStream())
+      .filename("document.pdf")
+      .contentType("application/pdf")
+      .build()
+  )
+  .addBeta(AnthropicBeta.FILES_API_2025_04_14)
+  .build();
+
 FileMetadata fileMetadata = client.beta().files().upload(params);
 ```
 
@@ -665,18 +704,21 @@ Or a `byte[]` array:
 
 ```java
 import com.anthropic.core.MultipartField;
+import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.beta.files.FileMetadata;
 import com.anthropic.models.beta.files.FileUploadParams;
-import com.anthropic.models.beta.AnthropicBeta;
 
 FileUploadParams params = FileUploadParams.builder()
-    .file(MultipartField.<byte[]>builder()
-        .value("content".getBytes())
-        .filename("document.txt")
-        .contentType("text/plain")
-        .build())
-    .addBeta(AnthropicBeta.FILES_API_2025_04_14)
-    .build();
+  .file(
+    MultipartField.<byte[]>builder()
+      .value("content".getBytes())
+      .filename("document.txt")
+      .contentType("text/plain")
+      .build()
+  )
+  .addBeta(AnthropicBeta.FILES_API_2025_04_14)
+  .build();
+
 FileMetadata fileMetadata = client.beta().files().upload(params);
 ```
 
@@ -777,6 +819,7 @@ import com.anthropic.models.messages.Message;
 import java.util.Optional;
 
 HttpResponseFor<Message> message = client.messages().withRawResponse().create(params);
+
 Optional<String> requestId = message.requestId();
 ```
 
@@ -802,10 +845,7 @@ To set a custom number of retries, configure the client using the `maxRetries` m
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 
-AnthropicClient client = AnthropicOkHttpClient.builder()
-    .fromEnv()
-    .maxRetries(4)
-    .build();
+AnthropicClient client = AnthropicOkHttpClient.builder().fromEnv().maxRetries(4).build();
 ```
 
 ## Timeouts
@@ -833,9 +873,9 @@ To set a custom timeout per-request:
 ```java
 import com.anthropic.models.messages.Message;
 
-Message message = client.messages().create(
-  params, RequestOptions.builder().timeout(Duration.ofSeconds(30)).build()
-);
+Message message = client
+  .messages()
+  .create(params, RequestOptions.builder().timeout(Duration.ofSeconds(30)).build());
 ```
 
 Or configure the default for all method calls at the client level:
@@ -846,9 +886,9 @@ import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import java.time.Duration;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-    .fromEnv()
-    .timeout(Duration.ofSeconds(30))
-    .build();
+  .fromEnv()
+  .timeout(Duration.ofSeconds(30))
+  .build();
 ```
 
 ## Long requests
@@ -933,15 +973,13 @@ Each class in the SDK has an associated builder for constructing it. Each class 
 
 ```java
 MessageCreateParams params = MessageCreateParams.builder()
-    .maxTokens(1024L)
-    .addUserMessage("Hello, Claude")
-    .model(Model.CLAUDE_OPUS_4_6)
-    .build();
+  .maxTokens(1024L)
+  .addUserMessage("Hello, Claude")
+  .model(Model.CLAUDE_OPUS_4_6)
+  .build();
 
 // Create a modified copy using toBuilder()
-MessageCreateParams modified = params.toBuilder()
-    .maxTokens(2048L)
-    .build();
+MessageCreateParams modified = params.toBuilder().maxTokens(2048L).build();
 ```
 
 Because each class is immutable, builder modification will never affect already built class instances.
@@ -961,10 +999,10 @@ import com.anthropic.core.JsonValue;
 import com.anthropic.models.messages.MessageCreateParams;
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .putAdditionalHeader("Secret-Header", "42")
-    .putAdditionalQueryParam("secret_query_param", "42")
-    .putAdditionalBodyProperty("secretProperty", JsonValue.from("42"))
-    .build();
+  .putAdditionalHeader("Secret-Header", "42")
+  .putAdditionalQueryParam("secret_query_param", "42")
+  .putAdditionalBodyProperty("secretProperty", JsonValue.from("42"))
+  .build();
 ```
 
 <Warning>
@@ -979,10 +1017,10 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Metadata;
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .metadata(Metadata.builder()
-        .putAdditionalProperty("secretProperty", JsonValue.from("42"))
-        .build())
-    .build();
+  .metadata(
+    Metadata.builder().putAdditionalProperty("secretProperty", JsonValue.from("42")).build()
+  )
+  .build();
 ```
 
 To set a documented parameter or property to an undocumented or not yet supported value, pass a `JsonValue` object to its setter:
@@ -993,10 +1031,10 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .maxTokens(JsonValue.from(3.14))
-    .addUserMessage("Hello, Claude")
-    .model(Model.CLAUDE_OPUS_4_6)
-    .build();
+  .maxTokens(JsonValue.from(3.14))
+  .addUserMessage("Hello, Claude")
+  .model(Model.CLAUDE_OPUS_4_6)
+  .build();
 ```
 
 ### JsonValue creation
@@ -1010,27 +1048,22 @@ import java.util.Map;
 
 // Create primitive JSON values
 JsonValue nullValue = JsonValue.from(null);
+
 JsonValue booleanValue = JsonValue.from(true);
+
 JsonValue numberValue = JsonValue.from(42);
+
 JsonValue stringValue = JsonValue.from("Hello World!");
 
 // Create a JSON array value equivalent to `["Hello", "World"]`
-JsonValue arrayValue = JsonValue.from(List.of(
-  "Hello", "World"
-));
+JsonValue arrayValue = JsonValue.from(List.of("Hello", "World"));
 
 // Create a JSON object value equivalent to `{ "a": 1, "b": 2 }`
-JsonValue objectValue = JsonValue.from(Map.of(
-  "a", 1,
-  "b", 2
-));
+JsonValue objectValue = JsonValue.from(Map.of("a", 1, "b", 2));
 
 // Create an arbitrarily nested JSON equivalent to:
 // { "a": [1, 2], "b": [3, 4] }
-JsonValue complexValue = JsonValue.from(Map.of(
-  "a", List.of(1, 2),
-  "b", List.of(3, 4)
-));
+JsonValue complexValue = JsonValue.from(Map.of("a", List.of(1, 2), "b", List.of(3, 4)));
 ```
 
 ### Forcibly omitting required parameters
@@ -1043,10 +1076,10 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .addUserMessage("Hello, world")
-    .model(Model.CLAUDE_OPUS_4_6)
-    .maxTokens(JsonMissing.of())
-    .build();
+  .addUserMessage("Hello, world")
+  .model(Model.CLAUDE_OPUS_4_6)
+  .maxTokens(JsonMissing.of())
+  .build();
 ```
 
 ### Response properties
@@ -1057,7 +1090,11 @@ To access undocumented response properties, call the `_additionalProperties()` m
 import com.anthropic.core.JsonValue;
 import java.util.Map;
 
-Map<String, JsonValue> additionalProperties = client.messages().create(params)._additionalProperties();
+Map<String, JsonValue> additionalProperties = client
+  .messages()
+  .create(params)
+  ._additionalProperties();
+
 JsonValue secretPropertyValue = additionalProperties.get("secretProperty");
 ```
 
@@ -1099,9 +1136,9 @@ Or configure per-request:
 ```java
 import com.anthropic.models.messages.Message;
 
-Message message = client.messages().create(
-  params, RequestOptions.builder().responseValidation(true).build()
-);
+Message message = client
+  .messages()
+  .create(params, RequestOptions.builder().responseValidation(true).build());
 ```
 
 Or configure the default for all method calls at the client level:
@@ -1111,9 +1148,9 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-    .fromEnv()
-    .responseValidation(true)
-    .build();
+  .fromEnv()
+  .responseValidation(true)
+  .build();
 ```
 
 ## HTTP client customization
@@ -1127,13 +1164,9 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-    .fromEnv()
-    .proxy(new Proxy(
-      Proxy.Type.HTTP, new InetSocketAddress(
-        "https://example.com", 8080
-      )
-    ))
-    .build();
+  .fromEnv()
+  .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("https://example.com", 8080)))
+  .build();
 ```
 
 ### HTTPS / SSL configuration
@@ -1147,11 +1180,11 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-    .fromEnv()
-    .sslSocketFactory(yourSSLSocketFactory)
-    .trustManager(yourTrustManager)
-    .hostnameVerifier(yourHostnameVerifier)
-    .build();
+  .fromEnv()
+  .sslSocketFactory(yourSSLSocketFactory)
+  .trustManager(yourTrustManager)
+  .hostnameVerifier(yourHostnameVerifier)
+  .build();
 ```
 
 ### Custom HTTP client
@@ -1221,8 +1254,8 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-        .backend(BedrockBackend.fromEnv())
-        .build();
+  .backend(BedrockBackend.fromEnv())
+  .build();
 ```
 
 `BedrockBackend.fromEnv()` automatically resolves the AWS credentials using the AWS default credentials provider chain and resolves the AWS region using the AWS default region provider chain.
@@ -1238,15 +1271,15 @@ import software.amazon.awssdk.auth.credentials.AwsCredentials;
 import software.amazon.awssdk.regions.Region;
 
 AwsCredentials awsCredentials = AwsBasicCredentials.create(
-        System.getenv("AWS_ACCESS_KEY_ID"),
-        System.getenv("AWS_SECRET_ACCESS_KEY"));
+  System.getenv("AWS_ACCESS_KEY_ID"),
+  System.getenv("AWS_SECRET_ACCESS_KEY")
+);
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-        .backend(BedrockBackend.builder()
-                .awsCredentials(awsCredentials)
-                .region(Region.US_EAST_1)
-                .build())
-        .build();
+  .backend(
+    BedrockBackend.builder().awsCredentials(awsCredentials).region(Region.US_EAST_1).build()
+  )
+  .build();
 ```
 
 You can also create and configure your own AWS credentials provider:
@@ -1258,16 +1291,13 @@ import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 
-AwsCredentialsProvider awsCredentialsProvider =
-        DefaultCredentialsProvider.builder()
-                .asyncCredentialUpdateEnabled(true)
-                .build();
+AwsCredentialsProvider awsCredentialsProvider = DefaultCredentialsProvider.builder()
+  .asyncCredentialUpdateEnabled(true)
+  .build();
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-        .backend(BedrockBackend.builder()
-                .fromEnv(awsCredentialsProvider)
-                .build())
-        .build();
+  .backend(BedrockBackend.builder().fromEnv(awsCredentialsProvider).build())
+  .build();
 ```
 
 The AWS classes used above are included automatically as transitive dependencies of the `anthropic-java-bedrock` library dependency.
@@ -1285,11 +1315,8 @@ The API key can also be passed directly to the backend:
 
 ```java
 AnthropicClient client = AnthropicOkHttpClient.builder()
-        .backend(BedrockBackend.builder()
-                .apiKey(myApiKey)
-                .region(Region.US_EAST_1)
-                .build())
-        .build();
+  .backend(BedrockBackend.builder().apiKey(myApiKey).region(Region.US_EAST_1).build())
+  .build();
 ```
 
 An error will occur if you set both an API key and an AWS credentials provider.
@@ -1323,8 +1350,8 @@ import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.vertex.backends.VertexBackend;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-        .backend(VertexBackend.fromEnv())
-        .build();
+  .backend(VertexBackend.fromEnv())
+  .build();
 ```
 
 `VertexBackend.fromEnv()` automatically resolves the Google OAuth2 credentials from your configured Google Cloud Application Default Credentials (ADC), the Google Cloud region from the `CLOUD_ML_REGION` environment variable, and the Google Cloud project ID from `ANTHROPIC_VERTEX_PROJECT_ID` environment variable.
@@ -1339,18 +1366,22 @@ import com.google.auth.oauth2.AccessToken;
 import com.google.auth.oauth2.GoogleCredentials;
 
 String accessToken = System.getenv("GOOGLE_APPLICATION_CREDENTIALS");
+
 String project = System.getenv("ANTHROPIC_VERTEX_PROJECT_ID");
 
 GoogleCredentials googleCredentials = GoogleCredentials.create(
-        AccessToken.newBuilder().setTokenValue(accessToken).build());
+  AccessToken.newBuilder().setTokenValue(accessToken).build()
+);
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
-        .backend(VertexBackend.builder()
-                .googleCredentials(googleCredentials)
-                .region("us-central1")
-                .project(project)
-                .build())
-        .build();
+  .backend(
+    VertexBackend.builder()
+      .googleCredentials(googleCredentials)
+      .region("us-central1")
+      .project(project)
+      .build()
+  )
+  .build();
 ```
 
 The Google Cloud classes used above are included automatically as transitive dependencies of the `anthropic-java-vertex` library dependency.
@@ -1373,13 +1404,15 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .maxTokens(1024L)
-    .addUserMessage("Hello, Claude")
-    .model(Model.CLAUDE_OPUS_4_6)
-    .build();
+  .maxTokens(1024L)
+  .addUserMessage("Hello, Claude")
+  .model(Model.CLAUDE_OPUS_4_6)
+  .build();
+
 HttpResponseFor<Message> message = client.messages().withRawResponse().create(params);
 
 int statusCode = message.statusCode();
+
 Headers headers = message.headers();
 ```
 

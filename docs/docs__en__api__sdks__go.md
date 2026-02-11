@@ -63,29 +63,29 @@ func main() {
 
 ```go
 messages := []anthropic.MessageParam{
-    anthropic.NewUserMessage(anthropic.NewTextBlock("What is my first name?")),
+	anthropic.NewUserMessage(anthropic.NewTextBlock("What is my first name?")),
 }
 
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-    Model:     anthropic.ModelClaudeOpus4_6,
-    Messages:  messages,
-    MaxTokens: 1024,
+	Model:     anthropic.ModelClaudeOpus4_6,
+	Messages:  messages,
+	MaxTokens: 1024,
 })
 if err != nil {
-    panic(err)
+	panic(err)
 }
 
 fmt.Printf("%+v\n", message.Content)
 
 messages = append(messages, message.ToParam())
 messages = append(messages, anthropic.NewUserMessage(
-    anthropic.NewTextBlock("My full name is John Doe"),
+	anthropic.NewTextBlock("My full name is John Doe"),
 ))
 
 message, err = client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-    Model:     anthropic.ModelClaudeOpus4_6,
-    Messages:  messages,
-    MaxTokens: 1024,
+	Model:     anthropic.ModelClaudeOpus4_6,
+	Messages:  messages,
+	MaxTokens: 1024,
 })
 
 fmt.Printf("%+v\n", message.Content)
@@ -96,12 +96,12 @@ fmt.Printf("%+v\n", message.Content)
 
 ```go
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-    Model:     anthropic.ModelClaudeOpus4_6,
-    MaxTokens: 1024,
-    System: []anthropic.TextBlockParam{
-        {Text: "Be very serious at all times."},
-    },
-    Messages: messages,
+	Model:     anthropic.ModelClaudeOpus4_6,
+	MaxTokens: 1024,
+	System: []anthropic.TextBlockParam{
+		{Text: "Be very serious at all times."},
+	},
+	Messages: messages,
 })
 ```
 
@@ -112,33 +112,33 @@ message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 content := "What is a quaternion?"
 
 stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-    Model:     anthropic.ModelClaudeOpus4_6,
-    MaxTokens: 1024,
-    Messages: []anthropic.MessageParam{
-        anthropic.NewUserMessage(anthropic.NewTextBlock(content)),
-    },
+	Model:     anthropic.ModelClaudeOpus4_6,
+	MaxTokens: 1024,
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock(content)),
+	},
 })
 
 message := anthropic.Message{}
 for stream.Next() {
-    event := stream.Current()
-    err := message.Accumulate(event)
-    if err != nil {
-        panic(err)
-    }
+	event := stream.Current()
+	err := message.Accumulate(event)
+	if err != nil {
+		panic(err)
+	}
 
-    switch eventVariant := event.AsAny().(type) {
-        case anthropic.ContentBlockDeltaEvent:
-        switch deltaVariant := eventVariant.Delta.AsAny().(type) {
-        case anthropic.TextDelta:
-            print(deltaVariant.Text)
-        }
+	switch eventVariant := event.AsAny().(type) {
+	case anthropic.ContentBlockDeltaEvent:
+		switch deltaVariant := eventVariant.Delta.AsAny().(type) {
+		case anthropic.TextDelta:
+			print(deltaVariant.Text)
+		}
 
-    }
+	}
 }
 
 if stream.Err() != nil {
-    panic(stream.Err())
+	panic(stream.Err())
 }
 ```
 
@@ -483,33 +483,33 @@ Use the streaming API for real-time responses:
 
 ```go
 stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-    Model:     anthropic.ModelClaudeOpus4_6,
-    MaxTokens: 1024,
-    Messages: []anthropic.MessageParam{
-        anthropic.NewUserMessage(anthropic.NewTextBlock("What is a quaternion?")),
-    },
+	Model:     anthropic.ModelClaudeOpus4_6,
+	MaxTokens: 1024,
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock("What is a quaternion?")),
+	},
 })
 
 message := anthropic.Message{}
 for stream.Next() {
-    event := stream.Current()
-    err := message.Accumulate(event)
-    if err != nil {
-        panic(err)
-    }
+	event := stream.Current()
+	err := message.Accumulate(event)
+	if err != nil {
+		panic(err)
+	}
 
-    switch eventVariant := event.AsAny().(type) {
-        case anthropic.ContentBlockDeltaEvent:
-        switch deltaVariant := eventVariant.Delta.AsAny().(type) {
-        case anthropic.TextDelta:
-            print(deltaVariant.Text)
-        }
+	switch eventVariant := event.AsAny().(type) {
+	case anthropic.ContentBlockDeltaEvent:
+		switch deltaVariant := eventVariant.Delta.AsAny().(type) {
+		case anthropic.TextDelta:
+			print(deltaVariant.Text)
+		}
 
-    }
+	}
 }
 
 if stream.Err() != nil {
-    panic(stream.Err())
+	panic(stream.Err())
 }
 ```
 
@@ -633,13 +633,13 @@ helper we provide to easily wrap any `io.Reader` with the appropriate file name 
 // A file from the file system
 file, err := os.Open("/path/to/file.json")
 anthropic.BetaFileUploadParams{
-	File: anthropic.File(file, "custom-name.json", "application/json"),
+	File:  anthropic.File(file, "custom-name.json", "application/json"),
 	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
 }
 
 // A file from a string
 anthropic.BetaFileUploadParams{
-	File: anthropic.File(strings.NewReader("my file contents"), "custom-name.json", "application/json"),
+	File:  anthropic.File(strings.NewReader("my file contents"), "custom-name.json", "application/json"),
 	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
 }
 ```
@@ -699,7 +699,7 @@ client := anthropic.NewClient(
 	option.WithHeader("X-Some-Header", "custom_header_info"),
 )
 
-client.Messages.New(context.TODO(), ...,
+client.Messages.New(context.TODO(), // ...,
 	// Override the header
 	option.WithHeader("X-Some-Header", "some_other_custom_header_info"),
 	// Add an undocumented field to the request body, using sjson syntax
@@ -719,22 +719,20 @@ We provide `option.WithMiddleware` which applies the given
 middleware to requests.
 
 ```go
-func Logger(req *http.Request, next option.MiddlewareNext) (res *http.Response, err error) {
-	// Before the request
-	start := time.Now()
-	LogReq(req)
-
-	// Forward the request to the next handler
-	res, err = next(req)
-
-	// Handle stuff after the request
-	LogRes(res, err, time.Since(start))
-
-    return res, err
-}
-
 client := anthropic.NewClient(
-	option.WithMiddleware(Logger),
+	option.WithMiddleware(func(req *http.Request, next option.MiddlewareNext) (res *http.Response, err error) {
+		// Before the request
+		start := time.Now()
+		LogReq(req)
+
+		// Forward the request to the next handler
+		res, err = next(req)
+
+		// Handle stuff after the request
+		LogRes(res, err, time.Since(start))
+
+		return res, err
+	}),
 )
 ```
 
@@ -860,17 +858,17 @@ To make requests to undocumented endpoints, you can use `client.Get`, `client.Po
 
 ```go
 var (
-    // params can be an io.Reader, a []byte, an encoding/json serializable object,
-    // or a "...Params" struct defined in this library.
-    params map[string]any
+	// params can be an io.Reader, a []byte, an encoding/json serializable object,
+	// or a "...Params" struct defined in this library.
+	params map[string]any
 
-    // result can be an []byte, *http.Response, a encoding/json deserializable object,
-    // or a model defined in this library.
-    result *http.Response
+	// result can be an []byte, *http.Response, a encoding/json deserializable object,
+	// or a model defined in this library.
+	result *http.Response
 )
 err := client.Post(context.Background(), "/unspecified", params, &result)
 if err != nil {
-    ...
+	// ...
 }
 ```
 
@@ -881,10 +879,10 @@ or the `option.WithJSONSet()` methods.
 
 ```go
 params := FooNewParams{
-    ID:   "id_xxxx",
-    Data: FooNewParamsData{
-        FirstName: anthropic.String("John"),
-    },
+	ID: "id_xxxx",
+	Data: FooNewParamsData{
+		FirstName: anthropic.String("John"),
+	},
 }
 client.Foo.New(context.Background(), params, option.WithJSONSet("data.last_name", "Doe"))
 ```

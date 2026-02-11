@@ -120,17 +120,9 @@ response = client.beta.messages.create(
     model="claude-opus-4-6",
     betas=["advanced-tool-use-2025-11-20"],
     max_tokens=2048,
-    messages=[
-        {
-            "role": "user",
-            "content": "What is the weather in San Francisco?"
-        }
-    ],
+    messages=[{"role": "user", "content": "What is the weather in San Francisco?"}],
     tools=[
-        {
-            "type": "tool_search_tool_regex_20251119",
-            "name": "tool_search_tool_regex"
-        },
+        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
         {
             "name": "get_weather",
             "description": "Get the weather at a specific location",
@@ -138,14 +130,11 @@ response = client.beta.messages.create(
                 "type": "object",
                 "properties": {
                     "location": {"type": "string"},
-                    "unit": {
-                        "type": "string",
-                        "enum": ["celsius", "fahrenheit"]
-                    }
+                    "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
                 },
-                "required": ["location"]
+                "required": ["location"],
             },
-            "defer_loading": True
+            "defer_loading": True,
         },
         {
             "name": "search_files",
@@ -154,16 +143,13 @@ response = client.beta.messages.create(
                 "type": "object",
                 "properties": {
                     "query": {"type": "string"},
-                    "file_types": {
-                        "type": "array",
-                        "items": {"type": "string"}
-                    }
+                    "file_types": {"type": "array", "items": {"type": "string"}},
                 },
-                "required": ["query"]
+                "required": ["query"],
             },
-            "defer_loading": True
-        }
-    ]
+            "defer_loading": True,
+        },
+    ],
 )
 
 print(response)
@@ -182,13 +168,13 @@ async function main() {
     messages: [
       {
         role: "user",
-        content: "What is the weather in San Francisco?",
-      },
+        content: "What is the weather in San Francisco?"
+      }
     ],
     tools: [
       {
         type: "tool_search_tool_regex_20251119",
-        name: "tool_search_tool_regex",
+        name: "tool_search_tool_regex"
       },
       {
         name: "get_weather",
@@ -199,12 +185,12 @@ async function main() {
             location: { type: "string" },
             unit: {
               type: "string",
-              enum: ["celsius", "fahrenheit"],
-            },
+              enum: ["celsius", "fahrenheit"]
+            }
           },
-          required: ["location"],
+          required: ["location"]
         },
-        defer_loading: true,
+        defer_loading: true
       },
       {
         name: "search_files",
@@ -215,14 +201,14 @@ async function main() {
             query: { type: "string" },
             file_types: {
               type: "array",
-              items: { type: "string" },
-            },
+              items: { type: "string" }
+            }
           },
-          required: ["query"],
+          required: ["query"]
         },
-        defer_loading: true,
-      },
-    ],
+        defer_loading: true
+      }
+    ]
   });
 
   console.log(JSON.stringify(response, null, 2));
@@ -411,36 +397,18 @@ response = client.beta.messages.create(
     betas=["advanced-tool-use-2025-11-20", "mcp-client-2025-11-20"],
     max_tokens=2048,
     mcp_servers=[
-        {
-            "type": "url",
-            "name": "database-server",
-            "url": "https://mcp-db.example.com"
-        }
+        {"type": "url", "name": "database-server", "url": "https://mcp-db.example.com"}
     ],
     tools=[
-        {
-            "type": "tool_search_tool_regex_20251119",
-            "name": "tool_search_tool_regex"
-        },
+        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
         {
             "type": "mcp_toolset",
             "mcp_server_name": "database-server",
-            "default_config": {
-                "defer_loading": True
-            },
-            "configs": {
-                "search_events": {
-                    "defer_loading": False
-                }
-            }
-        }
+            "default_config": {"defer_loading": True},
+            "configs": {"search_events": {"defer_loading": False}},
+        },
     ],
-    messages=[
-        {
-            "role": "user",
-            "content": "What events are in my database?"
-        }
-    ]
+    messages=[{"role": "user", "content": "What events are in my database?"}],
 )
 
 print(response)
@@ -460,33 +428,33 @@ async function main() {
       {
         type: "url",
         name: "database-server",
-        url: "https://mcp-db.example.com",
-      },
+        url: "https://mcp-db.example.com"
+      }
     ],
     tools: [
       {
         type: "tool_search_tool_regex_20251119",
-        name: "tool_search_tool_regex",
+        name: "tool_search_tool_regex"
       },
       {
         type: "mcp_toolset",
         mcp_server_name: "database-server",
         default_config: {
-          defer_loading: true,
+          defer_loading: true
         },
         configs: {
           search_events: {
-            defer_loading: false,
-          },
-        },
-      },
+            defer_loading: false
+          }
+        }
+      }
     ],
     messages: [
       {
         role: "user",
-        content: "What events are in my database?",
-      },
-    ],
+        content: "What events are in my database?"
+      }
+    ]
   });
 
   console.log(JSON.stringify(response, null, 2));
@@ -646,12 +614,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 # First request with tool search
-messages = [
-    {
-        "role": "user",
-        "content": "What's the weather in Seattle?"
-    }
-]
+messages = [{"role": "user", "content": "What's the weather in Seattle?"}]
 
 response1 = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -659,37 +622,31 @@ response1 = client.beta.messages.create(
     max_tokens=2048,
     messages=messages,
     tools=[
-        {
-            "type": "tool_search_tool_regex_20251119",
-            "name": "tool_search_tool_regex"
-        },
+        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
         {
             "name": "get_weather",
             "description": "Get weather for a location",
             "input_schema": {
                 "type": "object",
-                "properties": {
-                    "location": {"type": "string"}
-                },
-                "required": ["location"]
+                "properties": {"location": {"type": "string"}},
+                "required": ["location"],
             },
-            "defer_loading": True
-        }
-    ]
+            "defer_loading": True,
+        },
+    ],
 )
 
 # Add Claude's response to conversation
-messages.append({
-    "role": "assistant",
-    "content": response1.content
-})
+messages.append({"role": "assistant", "content": response1.content})
 
 # Second request with cache breakpoint
-messages.append({
-    "role": "user",
-    "content": "What about New York?",
-    "cache_control": {"type": "ephemeral"}
-})
+messages.append(
+    {
+        "role": "user",
+        "content": "What about New York?",
+        "cache_control": {"type": "ephemeral"},
+    }
+)
 
 response2 = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -697,23 +654,18 @@ response2 = client.beta.messages.create(
     max_tokens=2048,
     messages=messages,
     tools=[
-        {
-            "type": "tool_search_tool_regex_20251119",
-            "name": "tool_search_tool_regex"
-        },
+        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
         {
             "name": "get_weather",
             "description": "Get weather for a location",
             "input_schema": {
                 "type": "object",
-                "properties": {
-                    "location": {"type": "string"}
-                },
-                "required": ["location"]
+                "properties": {"location": {"type": "string"}},
+                "required": ["location"],
             },
-            "defer_loading": True
-        }
-    ]
+            "defer_loading": True,
+        },
+    ],
 )
 
 print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
@@ -726,7 +678,7 @@ The system automatically expands tool_reference blocks throughout the entire con
 
 With streaming enabled, you'll receive tool search events as part of the stream:
 
-```javascript
+```json
 event: content_block_start
 data: {"type": "content_block_start", "index": 1, "content_block": {"type": "server_tool_use", "id": "srvtoolu_xyz789", "name": "tool_search_tool_regex"}}
 

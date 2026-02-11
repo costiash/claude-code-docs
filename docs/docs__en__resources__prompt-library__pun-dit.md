@@ -46,8 +46,6 @@ message = client.messages.create(
     messages=[{"role": "user", "content": [{"type": "text", "text": "Fishing"}]}],
 )
 print(message.content)
-
-
 ````
 </Tab>
 
@@ -57,7 +55,7 @@ print(message.content)
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+  apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
 });
 
 const msg = await anthropic.messages.create({
@@ -67,11 +65,11 @@ const msg = await anthropic.messages.create({
   system: "You are an AI assistant with a witty sense of humor and a knack for crafting clever puns and wordplay. When a user provides a topic, your task is to generate a list of puns, play on words, or humorous phrases related to that topic. The wordplay should be original, creative, and aim to elicit a laugh or a groan from the reader.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Fishing"
+          type: "text",
+          text: "Fishing"
         }
       ]
     }
@@ -97,20 +95,9 @@ message = client.messages.create(
     max_tokens=1000,
     temperature=1,
     system="You are an AI assistant with a witty sense of humor and a knack for crafting clever puns and wordplay. When a user provides a topic, your task is to generate a list of puns, play on words, or humorous phrases related to that topic. The wordplay should be original, creative, and aim to elicit a laugh or a groan from the reader.",
-    messages=[
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Fishing"
-                }
-            ]
-        }
-    ]
+    messages=[{"role": "user", "content": [{"type": "text", "text": "Fishing"}]}],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -131,11 +118,11 @@ const msg = await client.messages.create({
   system: "You are an AI assistant with a witty sense of humor and a knack for crafting clever puns and wordplay. When a user provides a topic, your task is to generate a list of puns, play on words, or humorous phrases related to that topic. The wordplay should be original, creative, and aim to elicit a laugh or a groan from the reader.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Fishing"
+          type: "text",
+          text: "Fishing"
         }
       ]
     }
@@ -159,20 +146,9 @@ message = client.messages.create(
     max_tokens=1000,
     temperature=1,
     system="You are an AI assistant with a witty sense of humor and a knack for crafting clever puns and wordplay. When a user provides a topic, your task is to generate a list of puns, play on words, or humorous phrases related to that topic. The wordplay should be original, creative, and aim to elicit a laugh or a groan from the reader.",
-    messages=[
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Fishing"
-                }
-            ]
-        }
-    ]
+    messages=[{"role": "user", "content": [{"type": "text", "text": "Fishing"}]}],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -180,7 +156,7 @@ print(message.content)
 <Tab title="Vertex AI TypeScript">
 
 ```typescript
-import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
+import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
 // Additionally goes through the standard `google-auth-library` flow.
@@ -193,11 +169,11 @@ const msg = await client.messages.create({
   system: "You are an AI assistant with a witty sense of humor and a knack for crafting clever puns and wordplay. When a user provides a topic, your task is to generate a list of puns, play on words, or humorous phrases related to that topic. The wordplay should be original, creative, and aim to elicit a laugh or a groan from the reader.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Fishing"
+          type: "text",
+          text: "Fishing"
         }
       ]
     }

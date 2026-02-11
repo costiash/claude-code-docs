@@ -17,7 +17,7 @@ Suggested recipes:
 
 Honey Garlic Chicken Stir-Fry
 
-Description: A quick and flavorful stir-fry featuring tender chicken breast, crisp vegetables, and a sweet and savory honey garlic sauce.  
+Description: A quick and flavorful stir-fry featuring tender chicken breast, crisp vegetables, and a sweet and savory honey garlic sauce.
  Ingredients:
 
 - 2 chicken breasts, cut into bite-sized pieces
@@ -77,28 +77,27 @@ Instructions:
 import anthropic
 
 client = anthropic.Anthropic(
-  # defaults to os.environ.get("ANTHROPIC_API_KEY")
-  api_key="my_api_key",
+    # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=2000,
-  temperature=0.5,
-  system="Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment.",
-  messages=[
-    {
-    "role": "user",
-    "content": [
+    model="claude-opus-4-6",
+    max_tokens=2000,
+    temperature=0.5,
+    system="Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment.",
+    messages=[
         {
-          "type": "text",
-          "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey \nDietary preferences: gluten free"
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey \nDietary preferences: gluten free",
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -108,7 +107,7 @@ print(message.content)
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+  apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
 });
 
 const msg = await anthropic.messages.create({
@@ -118,11 +117,11 @@ const msg = await anthropic.messages.create({
   system: "Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"
+          type: "text",
+          text: "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"
         }
       ]
     }
@@ -135,7 +134,7 @@ console.log(msg);
 </Tab>
 <Tab title="AWS Bedrock Python">
 
-```
+```python
 from anthropic import AnthropicBedrock
 
 # See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
@@ -153,20 +152,19 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"
+                    "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
 <Tab title="AWS Bedrock TypeScript">
 
-```
+```typescript
 import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 
 // See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock
@@ -180,11 +178,11 @@ const msg = await client.messages.create({
   system: "Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"
+          type: "text",
+          text: "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"
         }
       ]
     }
@@ -197,7 +195,7 @@ console.log(msg);
 </Tab>
 <Tab title="Vertex AI Python">
 
-```
+```python
 from anthropic import AnthropicVertex
 
 client = AnthropicVertex()
@@ -213,21 +211,20 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"
+                    "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
 <Tab title="Vertex AI TypeScript">
 
-```
-import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
+```typescript
+import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
 // Additionally goes through the standard `google-auth-library` flow.
@@ -240,11 +237,11 @@ const msg = await client.messages.create({
   system: "Your task is to generate personalized recipe ideas based on the user's input of available ingredients and dietary preferences. Use this information to suggest a variety of creative and delicious recipes that can be made using the given ingredients while accommodating the user's dietary needs, if any are mentioned. For each recipe, provide a brief description, a list of required ingredients, and a simple set of instructions. Ensure that the recipes are easy to follow, nutritious, and can be prepared with minimal additional ingredients or equipment.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"
+          type: "text",
+          text: "Available ingredients: chicken breast, broccoli, carrots, onion, garlic, olive oil, rice, gluten free soy sauce, honey  \nDietary preferences: gluten free"
         }
       ]
     }

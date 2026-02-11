@@ -93,7 +93,7 @@ response = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
+            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
     ],
     output_config={
@@ -105,19 +105,19 @@ response = client.messages.create(
                     "name": {"type": "string"},
                     "email": {"type": "string"},
                     "plan_interest": {"type": "string"},
-                    "demo_requested": {"type": "boolean"}
+                    "demo_requested": {"type": "boolean"},
                 },
                 "required": ["name", "email", "plan_interest", "demo_requested"],
-                "additionalProperties": False
-            }
+                "additionalProperties": False,
+            },
         }
-    }
+    },
 )
 print(response.content[0].text)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY
@@ -175,42 +175,42 @@ System.out.println(message.content());
 package main
 
 import (
-    "context"
-    "fmt"
+	"context"
+	"fmt"
 
-    "github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go"
 )
 
 func main() {
-    client := anthropic.NewClient()
+	client := anthropic.NewClient()
 
-    response, _ := client.Beta.Messages.New(context.Background(),
-        anthropic.BetaMessageNewParams{
-            Model:     anthropic.ModelClaudeOpus4_6,
-            MaxTokens: 1024,
-            Betas:     []anthropic.AnthropicBeta{"structured-outputs-2025-11-13"},
-            Messages: []anthropic.BetaMessageParam{
-                anthropic.NewBetaUserMessage(
-                    anthropic.NewBetaTextBlock("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan."),
-                ),
-            },
-            OutputFormat: anthropic.BetaOutputFormatParam{
-                Type: "json_schema",
-                Schema: map[string]interface{}{
-                    "type": "object",
-                    "properties": map[string]interface{}{
-                        "name":           map[string]string{"type": "string"},
-                        "email":          map[string]string{"type": "string"},
-                        "plan_interest":  map[string]string{"type": "string"},
-                        "demo_requested": map[string]string{"type": "boolean"},
-                    },
-                    "required":             []string{"name", "email", "plan_interest", "demo_requested"},
-                    "additionalProperties": false,
-                },
-            },
-        })
+	response, _ := client.Beta.Messages.New(context.Background(),
+		anthropic.BetaMessageNewParams{
+			Model:     anthropic.ModelClaudeOpus4_6,
+			MaxTokens: 1024,
+			Betas:     []anthropic.AnthropicBeta{"structured-outputs-2025-11-13"},
+			Messages: []anthropic.BetaMessageParam{
+				anthropic.NewBetaUserMessage(
+					anthropic.NewBetaTextBlock("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan."),
+				),
+			},
+			OutputFormat: anthropic.BetaOutputFormatParam{
+				Type: "json_schema",
+				Schema: map[string]interface{}{
+					"type": "object",
+					"properties": map[string]interface{}{
+						"name":           map[string]string{"type": "string"},
+						"email":          map[string]string{"type": "string"},
+						"plan_interest":  map[string]string{"type": "string"},
+						"demo_requested": map[string]string{"type": "boolean"},
+					},
+					"required":             []string{"name", "email", "plan_interest", "demo_requested"},
+					"additionalProperties": false,
+				},
+			},
+		})
 
-    fmt.Println(response.Content[0].Text)
+	fmt.Println(response.Content[0].Text)
 }
 ```
 
@@ -377,11 +377,13 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
 from pydantic import BaseModel
 from anthropic import Anthropic, transform_schema
 
+
 class ContactInfo(BaseModel):
     name: str
     email: str
     plan_interest: str
     demo_requested: bool
+
 
 client = Anthropic()
 
@@ -392,7 +394,7 @@ response = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
+            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
     ],
     output_config={
@@ -400,7 +402,7 @@ response = client.messages.create(
             "type": "json_schema",
             "schema": transform_schema(ContactInfo),
         }
-    }
+    },
 )
 
 print(response.content[0].text)
@@ -412,7 +414,7 @@ response = client.messages.parse(
     messages=[
         {
             "role": "user",
-            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
+            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
     ],
     output_format=ContactInfo,
@@ -422,15 +424,15 @@ print(response.parsed_output)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
-import { z } from 'zod';
-import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
+import Anthropic from "@anthropic-ai/sdk";
+import { z } from "zod";
+import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 
 const ContactInfoSchema = z.object({
   name: z.string(),
   email: z.string(),
   plan_interest: z.string(),
-  demo_requested: z.boolean(),
+  demo_requested: z.boolean()
 });
 
 const client = new Anthropic();
@@ -444,7 +446,7 @@ const response = await client.messages.create({
       content: "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
     }
   ],
-  output_config: { format: zodOutputFormat(ContactInfoSchema) },
+  output_config: { format: zodOutputFormat(ContactInfoSchema) }
 });
 
 // Automatically parsed and validated
@@ -470,10 +472,12 @@ The `parse()` method automatically transforms your Pydantic model, validates the
 from pydantic import BaseModel
 import anthropic
 
+
 class ContactInfo(BaseModel):
     name: str
     email: str
     plan_interest: str
+
 
 client = anthropic.Anthropic()
 
@@ -584,6 +588,7 @@ Extract structured data from unstructured text:
 from pydantic import BaseModel
 from typing import List
 
+
 class Invoice(BaseModel):
     invoice_number: str
     date: str
@@ -591,29 +596,32 @@ class Invoice(BaseModel):
     line_items: List[dict]
     customer_name: str
 
+
 response = client.messages.parse(
     model="claude-opus-4-6",
     output_format=Invoice,
-    messages=[{"role": "user", "content": f"Extract invoice data from: {invoice_text}"}]
+    messages=[
+        {"role": "user", "content": f"Extract invoice data from: {invoice_text}"}
+    ],
 )
 ```
 
 ```typescript TypeScript
-import { z } from 'zod';
-import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
+import { z } from "zod";
+import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 
 const InvoiceSchema = z.object({
   invoice_number: z.string(),
   date: z.string(),
   total_amount: z.number(),
   line_items: z.array(z.record(z.string(), z.any())),
-  customer_name: z.string(),
+  customer_name: z.string()
 });
 
 const response = await client.messages.create({
   model: "claude-opus-4-6",
   output_config: { format: zodOutputFormat(InvoiceSchema) },
-  messages: [{"role": "user", "content": `Extract invoice data from: ${invoiceText}`}]
+  messages: [{ role: "user", content: `Extract invoice data from: ${invoiceText}` }]
 });
 ```
 
@@ -631,34 +639,36 @@ Classify content with structured categories:
 from pydantic import BaseModel
 from typing import List
 
+
 class Classification(BaseModel):
     category: str
     confidence: float
     tags: List[str]
     sentiment: str
 
+
 response = client.messages.parse(
     model="claude-opus-4-6",
     output_format=Classification,
-    messages=[{"role": "user", "content": f"Classify this feedback: {feedback_text}"}]
+    messages=[{"role": "user", "content": f"Classify this feedback: {feedback_text}"}],
 )
 ```
 
 ```typescript TypeScript
-import { z } from 'zod';
-import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
+import { z } from "zod";
+import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 
 const ClassificationSchema = z.object({
   category: z.string(),
   confidence: z.number(),
   tags: z.array(z.string()),
-  sentiment: z.string(),
+  sentiment: z.string()
 });
 
 const response = await client.messages.create({
   model: "claude-opus-4-6",
   output_config: { format: zodOutputFormat(ClassificationSchema) },
-  messages: [{"role": "user", "content": `Classify this feedback: ${feedbackText}`}]
+  messages: [{ role: "user", content: `Classify this feedback: ${feedbackText}` }]
 });
 ```
 
@@ -676,34 +686,36 @@ Generate API-ready responses:
 from pydantic import BaseModel
 from typing import List, Optional
 
+
 class APIResponse(BaseModel):
     status: str
     data: dict
     errors: Optional[List[dict]]
     metadata: dict
 
+
 response = client.messages.parse(
     model="claude-opus-4-6",
     output_format=APIResponse,
-    messages=[{"role": "user", "content": "Process this request: ..."}]
+    messages=[{"role": "user", "content": "Process this request: ..."}],
 )
 ```
 
 ```typescript TypeScript
-import { z } from 'zod';
-import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
+import { z } from "zod";
+import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 
 const APIResponseSchema = z.object({
   status: z.string(),
   data: z.record(z.string(), z.any()),
   errors: z.array(z.record(z.string(), z.any())).optional(),
-  metadata: z.record(z.string(), z.any()),
+  metadata: z.record(z.string(), z.any())
 });
 
 const response = await client.messages.create({
   model: "claude-opus-4-6",
   output_config: { format: zodOutputFormat(APIResponseSchema) },
-  messages: [{"role": "user", "content": "Process this request: ..."}]
+  messages: [{ role: "user", content: "Process this request: ..." }]
 });
 ```
 
@@ -777,9 +789,7 @@ client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "What's the weather like in San Francisco?"}
-    ],
+    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
     tools=[
         {
             "name": "get_weather",
@@ -790,25 +800,25 @@ response = client.messages.create(
                 "properties": {
                     "location": {
                         "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA"
+                        "description": "The city and state, e.g. San Francisco, CA",
                     },
                     "unit": {
                         "type": "string",
                         "enum": ["celsius", "fahrenheit"],
-                        "description": "The unit of temperature, either 'celsius' or 'fahrenheit'"
-                    }
+                        "description": "The unit of temperature, either 'celsius' or 'fahrenheit'",
+                    },
                 },
                 "required": ["location"],
-                "additionalProperties": False
-            }
+                "additionalProperties": False,
+            },
         }
-    ]
+    ],
 )
 print(response.content)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY
@@ -826,7 +836,7 @@ const response = await client.messages.create({
   tools: [{
     name: "get_weather",
     description: "Get the current weather in a given location",
-    strict: true,  // Enable strict mode
+    strict: true, // Enable strict mode
     input_schema: {
       type: "object",
       properties: {
@@ -891,36 +901,41 @@ Ensure tool parameters exactly match your schema:
 response = client.messages.create(
     model="claude-opus-4-6",
     messages=[{"role": "user", "content": "Search for flights to Tokyo"}],
-    tools=[{
-        "name": "search_flights",
-        "strict": True,
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "destination": {"type": "string"},
-                "departure_date": {"type": "string", "format": "date"},
-                "passengers": {"type": "integer", "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+    tools=[
+        {
+            "name": "search_flights",
+            "strict": True,
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination": {"type": "string"},
+                    "departure_date": {"type": "string", "format": "date"},
+                    "passengers": {
+                        "type": "integer",
+                        "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    },
+                },
+                "required": ["destination", "departure_date"],
+                "additionalProperties": False,
             },
-            "required": ["destination", "departure_date"],
-            "additionalProperties": False
         }
-    }]
+    ],
 )
 ```
 
 ```typescript TypeScript
 const response = await client.messages.create({
   model: "claude-opus-4-6",
-  messages: [{"role": "user", "content": "Search for flights to Tokyo"}],
+  messages: [{ role: "user", content: "Search for flights to Tokyo" }],
   tools: [{
     name: "search_flights",
     strict: true,
     input_schema: {
       type: "object",
       properties: {
-        destination: {type: "string"},
-        departure_date: {type: "string", format: "date"},
-        passengers: {type: "integer", enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+        destination: { type: "string" },
+        departure_date: { type: "string", format: "date" },
+        passengers: { type: "integer", enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
       },
       required: ["destination", "departure_date"],
       additionalProperties: false
@@ -953,11 +968,11 @@ response = client.messages.create(
                     "origin": {"type": "string"},
                     "destination": {"type": "string"},
                     "departure_date": {"type": "string", "format": "date"},
-                    "travelers": {"type": "integer", "enum": [1, 2, 3, 4, 5, 6]}
+                    "travelers": {"type": "integer", "enum": [1, 2, 3, 4, 5, 6]},
                 },
                 "required": ["origin", "destination", "departure_date"],
-                "additionalProperties": False
-            }
+                "additionalProperties": False,
+            },
         },
         {
             "name": "search_hotels",
@@ -967,20 +982,20 @@ response = client.messages.create(
                 "properties": {
                     "city": {"type": "string"},
                     "check_in": {"type": "string", "format": "date"},
-                    "guests": {"type": "integer", "enum": [1, 2, 3, 4]}
+                    "guests": {"type": "integer", "enum": [1, 2, 3, 4]},
                 },
                 "required": ["city", "check_in"],
-                "additionalProperties": False
-            }
-        }
-    ]
+                "additionalProperties": False,
+            },
+        },
+    ],
 )
 ```
 
 ```typescript TypeScript
 const response = await client.messages.create({
   model: "claude-opus-4-6",
-  messages: [{"role": "user", "content": "Help me plan a trip to Paris for 2 people"}],
+  messages: [{ role: "user", content: "Help me plan a trip to Paris for 2 people" }],
   tools: [
     {
       name: "search_flights",
@@ -988,10 +1003,10 @@ const response = await client.messages.create({
       input_schema: {
         type: "object",
         properties: {
-          origin: {type: "string"},
-          destination: {type: "string"},
-          departure_date: {type: "string", format: "date"},
-          travelers: {type: "integer", enum: [1, 2, 3, 4, 5, 6]}
+          origin: { type: "string" },
+          destination: { type: "string" },
+          departure_date: { type: "string", format: "date" },
+          travelers: { type: "integer", enum: [1, 2, 3, 4, 5, 6] }
         },
         required: ["origin", "destination", "departure_date"],
         additionalProperties: false
@@ -1003,9 +1018,9 @@ const response = await client.messages.create({
       input_schema: {
         type: "object",
         properties: {
-          city: {type: "string"},
-          check_in: {type: "string", format: "date"},
-          guests: {type: "integer", enum: [1, 2, 3, 4]}
+          city: { type: "string" },
+          check_in: { type: "string", format: "date" },
+          guests: { type: "integer", enum: [1, 2, 3, 4] }
         },
         required: ["city", "check_in"],
         additionalProperties: false
@@ -1034,7 +1049,9 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[{"role": "user", "content": "Help me plan a trip to Paris for next month"}],
+    messages=[
+        {"role": "user", "content": "Help me plan a trip to Paris for next month"}
+    ],
     # JSON outputs: structured response format
     output_config={
         "format": {
@@ -1043,27 +1060,29 @@ response = client.messages.create(
                 "type": "object",
                 "properties": {
                     "summary": {"type": "string"},
-                    "next_steps": {"type": "array", "items": {"type": "string"}}
+                    "next_steps": {"type": "array", "items": {"type": "string"}},
                 },
                 "required": ["summary", "next_steps"],
-                "additionalProperties": False
-            }
+                "additionalProperties": False,
+            },
         }
     },
     # Strict tool use: guaranteed tool parameters
-    tools=[{
-        "name": "search_flights",
-        "strict": True,
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "destination": {"type": "string"},
-                "date": {"type": "string", "format": "date"}
+    tools=[
+        {
+            "name": "search_flights",
+            "strict": True,
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination": {"type": "string"},
+                    "date": {"type": "string", "format": "date"},
+                },
+                "required": ["destination", "date"],
+                "additionalProperties": False,
             },
-            "required": ["destination", "date"],
-            "additionalProperties": False
         }
-    }]
+    ],
 )
 ```
 

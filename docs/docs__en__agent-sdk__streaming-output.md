@@ -28,6 +28,7 @@ from claude_agent_sdk import query, ClaudeAgentOptions
 from claude_agent_sdk.types import StreamEvent
 import asyncio
 
+
 async def stream_response():
     options = ClaudeAgentOptions(
         include_partial_messages=True,
@@ -42,6 +43,7 @@ async def stream_response():
                 if delta.get("type") == "text_delta":
                     print(delta.get("text", ""), end="", flush=True)
 
+
 asyncio.run(stream_response())
 ```
 
@@ -52,7 +54,7 @@ for await (const message of query({
   prompt: "List the files in my project",
   options: {
     includePartialMessages: true,
-    allowedTools: ["Bash", "Read"],
+    allowedTools: ["Bash", "Read"]
   }
 })) {
   if (message.type === "stream_event") {
@@ -82,16 +84,16 @@ Both contain raw Claude API events, not accumulated text. You need to extract an
 ```python Python
 @dataclass
 class StreamEvent:
-    uuid: str                      # Unique identifier for this event
-    session_id: str                # Session identifier
-    event: dict[str, Any]          # The raw Claude API stream event
-    parent_tool_use_id: str | None # Parent tool ID if from a subagent
+    uuid: str  # Unique identifier for this event
+    session_id: str  # Session identifier
+    event: dict[str, Any]  # The raw Claude API stream event
+    parent_tool_use_id: str | None  # Parent tool ID if from a subagent
 ```
 
 ```typescript TypeScript
 type SDKPartialAssistantMessage = {
-  type: 'stream_event';
-  event: RawMessageStreamEvent;    // From Anthropic SDK
+  type: "stream_event";
+  event: RawMessageStreamEvent; // From Anthropic SDK
   parent_tool_use_id: string | null;
   uuid: UUID;
   session_id: string;
@@ -144,6 +146,7 @@ from claude_agent_sdk import query, ClaudeAgentOptions
 from claude_agent_sdk.types import StreamEvent
 import asyncio
 
+
 async def stream_text():
     options = ClaudeAgentOptions(include_partial_messages=True)
 
@@ -157,6 +160,7 @@ async def stream_text():
                     print(delta.get("text", ""), end="", flush=True)
 
     print()  # Final newline
+
 
 asyncio.run(stream_text())
 ```
@@ -196,6 +200,7 @@ from claude_agent_sdk import query, ClaudeAgentOptions
 from claude_agent_sdk.types import StreamEvent
 import asyncio
 
+
 async def stream_tool_calls():
     options = ClaudeAgentOptions(
         include_partial_messages=True,
@@ -233,6 +238,7 @@ async def stream_tool_calls():
                     print(f"Tool {current_tool} called with: {tool_input}")
                     current_tool = None
 
+
 asyncio.run(stream_tool_calls())
 ```
 
@@ -247,7 +253,7 @@ for await (const message of query({
   prompt: "Read the README.md file",
   options: {
     includePartialMessages: true,
-    allowedTools: ["Read", "Bash"],
+    allowedTools: ["Read", "Bash"]
   }
 })) {
   if (message.type === "stream_event") {
@@ -292,6 +298,7 @@ from claude_agent_sdk.types import StreamEvent
 import asyncio
 import sys
 
+
 async def streaming_ui():
     options = ClaudeAgentOptions(
         include_partial_messages=True,
@@ -302,8 +309,7 @@ async def streaming_ui():
     in_tool = False
 
     async for message in query(
-        prompt="Find all TODO comments in the codebase",
-        options=options
+        prompt="Find all TODO comments in the codebase", options=options
     ):
         if isinstance(message, StreamEvent):
             event = message.event
@@ -334,6 +340,7 @@ async def streaming_ui():
             # Agent finished all work
             print(f"\n\n--- Complete ---")
 
+
 asyncio.run(streaming_ui())
 ```
 
@@ -347,7 +354,7 @@ for await (const message of query({
   prompt: "Find all TODO comments in the codebase",
   options: {
     includePartialMessages: true,
-    allowedTools: ["Read", "Bash", "Grep"],
+    allowedTools: ["Read", "Bash", "Grep"]
   }
 })) {
   if (message.type === "stream_event") {

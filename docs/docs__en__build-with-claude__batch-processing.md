@@ -138,23 +138,27 @@ message_batch = client.messages.batches.create(
             params=MessageCreateParamsNonStreaming(
                 model="claude-opus-4-6",
                 max_tokens=1024,
-                messages=[{
-                    "role": "user",
-                    "content": "Hello, world",
-                }]
-            )
+                messages=[
+                    {
+                        "role": "user",
+                        "content": "Hello, world",
+                    }
+                ],
+            ),
         ),
         Request(
             custom_id="my-second-request",
             params=MessageCreateParamsNonStreaming(
                 model="claude-opus-4-6",
                 max_tokens=1024,
-                messages=[{
-                    "role": "user",
-                    "content": "Hi again, friend",
-                }]
-            )
-        )
+                messages=[
+                    {
+                        "role": "user",
+                        "content": "Hi again, friend",
+                    }
+                ],
+            ),
+        ),
     ]
 )
 
@@ -162,7 +166,7 @@ print(message_batch)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
@@ -173,7 +177,7 @@ const messageBatch = await anthropic.messages.batches.create({
       model: "claude-opus-4-6",
       max_tokens: 1024,
       messages: [
-        {"role": "user", "content": "Hello, world"}
+        { role: "user", content: "Hello, world" }
       ]
     }
   }, {
@@ -182,13 +186,13 @@ const messageBatch = await anthropic.messages.batches.create({
       model: "claude-opus-4-6",
       max_tokens: 1024,
       messages: [
-        {"role": "user", "content": "Hi again, friend"}
+        { role: "user", content: "Hi again, friend" }
       ]
     }
   }]
 });
 
-console.log(messageBatch)
+console.log(messageBatch);
 ```
 
 ```java Java
@@ -198,32 +202,41 @@ import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.batches.*;
 
 public class BatchExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        BatchCreateParams params = BatchCreateParams.builder()
-            .addRequest(BatchCreateParams.Request.builder()
-                .customId("my-first-request")
-                .params(BatchCreateParams.Request.Params.builder()
-                    .model(Model.CLAUDE_OPUS_4_6)
-                    .maxTokens(1024)
-                    .addUserMessage("Hello, world")
-                    .build())
-                .build())
-            .addRequest(BatchCreateParams.Request.builder()
-                .customId("my-second-request")
-                .params(BatchCreateParams.Request.Params.builder()
-                    .model(Model.CLAUDE_OPUS_4_6)
-                    .maxTokens(1024)
-                    .addUserMessage("Hi again, friend")
-                    .build())
-                .build())
-            .build();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageBatch messageBatch = client.messages().batches().create(params);
+    BatchCreateParams params = BatchCreateParams.builder()
+      .addRequest(
+        BatchCreateParams.Request.builder()
+          .customId("my-first-request")
+          .params(
+            BatchCreateParams.Request.Params.builder()
+              .model(Model.CLAUDE_OPUS_4_6)
+              .maxTokens(1024)
+              .addUserMessage("Hello, world")
+              .build()
+          )
+          .build()
+      )
+      .addRequest(
+        BatchCreateParams.Request.builder()
+          .customId("my-second-request")
+          .params(
+            BatchCreateParams.Request.Params.builder()
+              .model(Model.CLAUDE_OPUS_4_6)
+              .maxTokens(1024)
+              .addUserMessage("Hi again, friend")
+              .build()
+          )
+          .build()
+      )
+      .build();
 
-        System.out.println(messageBatch);
-    }
+    MessageBatch messageBatch = client.messages().batches().create(params);
+
+    System.out.println(messageBatch);
+  }
 }
 ```
 
@@ -231,46 +244,46 @@ public class BatchExample {
 package main
 
 import (
-    "context"
-    "fmt"
+	"context"
+	"fmt"
 
-    "github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go"
 )
 
 func main() {
-    client := anthropic.NewClient()
+	client := anthropic.NewClient()
 
-    batch, _ := client.Messages.Batches.New(context.Background(),
-        anthropic.BatchCreateParams{
-            Requests: []anthropic.BatchCreateParamsRequest{
-                {
-                    CustomID: "my-first-request",
-                    Params: anthropic.BatchCreateParamsRequestParams{
-                        Model:     anthropic.ModelClaudeOpus4_6,
-                        MaxTokens: 1024,
-                        Messages: []anthropic.MessageParam{
-                            anthropic.NewUserMessage(
-                                anthropic.NewTextBlock("Hello, world"),
-                            ),
-                        },
-                    },
-                },
-                {
-                    CustomID: "my-second-request",
-                    Params: anthropic.BatchCreateParamsRequestParams{
-                        Model:     anthropic.ModelClaudeOpus4_6,
-                        MaxTokens: 1024,
-                        Messages: []anthropic.MessageParam{
-                            anthropic.NewUserMessage(
-                                anthropic.NewTextBlock("Hi again, friend"),
-                            ),
-                        },
-                    },
-                },
-            },
-        })
+	batch, _ := client.Messages.Batches.New(context.Background(),
+		anthropic.BatchCreateParams{
+			Requests: []anthropic.BatchCreateParamsRequest{
+				{
+					CustomID: "my-first-request",
+					Params: anthropic.BatchCreateParamsRequestParams{
+						Model:     anthropic.ModelClaudeOpus4_6,
+						MaxTokens: 1024,
+						Messages: []anthropic.MessageParam{
+							anthropic.NewUserMessage(
+								anthropic.NewTextBlock("Hello, world"),
+							),
+						},
+					},
+				},
+				{
+					CustomID: "my-second-request",
+					Params: anthropic.BatchCreateParamsRequestParams{
+						Model:     anthropic.ModelClaudeOpus4_6,
+						MaxTokens: 1024,
+						Messages: []anthropic.MessageParam{
+							anthropic.NewUserMessage(
+								anthropic.NewTextBlock("Hi again, friend"),
+							),
+						},
+					},
+				},
+			},
+		})
 
-    fmt.Println(batch.ID)
+	fmt.Println(batch.ID)
 }
 ```
 
@@ -435,9 +448,7 @@ client = anthropic.Anthropic()
 
 message_batch = None
 while True:
-    message_batch = client.messages.batches.retrieve(
-        MESSAGE_BATCH_ID
-    )
+    message_batch = client.messages.batches.retrieve(MESSAGE_BATCH_ID)
     if message_batch.processing_status == "ended":
         break
 
@@ -447,7 +458,7 @@ print(message_batch)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
@@ -456,7 +467,7 @@ while (true) {
   messageBatch = await anthropic.messages.batches.retrieve(
     MESSAGE_BATCH_ID
   );
-  if (messageBatch.processing_status === 'ended') {
+  if (messageBatch.processing_status === "ended") {
     break;
   }
 
@@ -493,14 +504,12 @@ import anthropic
 client = anthropic.Anthropic()
 
 # Automatically fetches more pages as needed.
-for message_batch in client.messages.batches.list(
-    limit=20
-):
+for message_batch in client.messages.batches.list(limit=20):
     print(message_batch)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
@@ -554,18 +563,18 @@ import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.batches.*;
 
 public class BatchListExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        // Automatically fetches more pages as needed
-        for (MessageBatch messageBatch : client.messages().batches().list(
-                BatchListParams.builder()
-                        .limit(20)
-                        .build()
-        )) {
-            System.out.println(messageBatch);
-        }
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    // Automatically fetches more pages as needed
+    for (MessageBatch messageBatch : client
+      .messages()
+      .batches()
+      .list(BatchListParams.builder().limit(20).build())) {
+      System.out.println(messageBatch);
     }
+  }
 }
 ```
 </CodeGroup>
@@ -650,19 +659,19 @@ for result in client.messages.batches.results(
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
 // Stream results file in memory-efficient chunks, processing one at a time
 for await (const result of await anthropic.messages.batches.results(
-    "msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d"
+  "msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d"
 )) {
   switch (result.result.type) {
-    case 'succeeded':
+    case "succeeded":
       console.log(`Success! ${result.custom_id}`);
       break;
-    case 'errored':
+    case "errored":
       if (result.result.error.type == "invalid_request") {
         // Request body must be fixed before re-sending request
         console.log(`Validation error: ${result.custom_id}`);
@@ -671,7 +680,7 @@ for await (const result of await anthropic.messages.batches.results(
         console.log(`Server error: ${result.custom_id}`);
       }
       break;
-    case 'expired':
+    case "expired":
       console.log(`Request expired: ${result.custom_id}`);
       break;
   }
@@ -682,39 +691,44 @@ for await (const result of await anthropic.messages.batches.results(
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.http.StreamResponse;
-import com.anthropic.models.messages.batches.MessageBatchIndividualResponse;
 import com.anthropic.models.messages.batches.BatchResultsParams;
+import com.anthropic.models.messages.batches.MessageBatchIndividualResponse;
 
 public class BatchResultsExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        // Stream results file in memory-efficient chunks, processing one at a time
-        try (StreamResponse<MessageBatchIndividualResponse> streamResponse = client.messages()
-                .batches()
-                .resultsStreaming(
-                        BatchResultsParams.builder()
-                                .messageBatchId("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d")
-                                .build())) {
-
-            streamResponse.stream().forEach(result -> {
-                if (result.result().isSucceeded()) {
-                    System.out.println("Success! " + result.customId());
-                } else if (result.result().isErrored()) {
-                    if (result.result().asErrored().error().error().isInvalidRequestError()) {
-                        // Request body must be fixed before re-sending request
-                        System.out.println("Validation error: " + result.customId());
-                    } else {
-                        // Request can be retried directly
-                        System.out.println("Server error: " + result.customId());
-                    }
-                } else if (result.result().isExpired()) {
-                    System.out.println("Request expired: " + result.customId());
-                }
-            });
-        }
+    // Stream results file in memory-efficient chunks, processing one at a time
+    try (
+      StreamResponse<MessageBatchIndividualResponse> streamResponse = client
+        .messages()
+        .batches()
+        .resultsStreaming(
+          BatchResultsParams.builder()
+            .messageBatchId("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d")
+            .build()
+        )
+    ) {
+      streamResponse
+        .stream()
+        .forEach(result -> {
+          if (result.result().isSucceeded()) {
+            System.out.println("Success! " + result.customId());
+          } else if (result.result().isErrored()) {
+            if (result.result().asErrored().error().error().isInvalidRequestError()) {
+              // Request body must be fixed before re-sending request
+              System.out.println("Validation error: " + result.customId());
+            } else {
+              // Request can be retried directly
+              System.out.println("Server error: " + result.customId());
+            }
+          } else if (result.result().isExpired()) {
+            System.out.println("Request expired: " + result.customId());
+          }
+        });
     }
+  }
 }
 ```
 
@@ -752,12 +766,12 @@ print(message_batch)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
 const messageBatch = await anthropic.messages.batches.cancel(
-    MESSAGE_BATCH_ID
+  MESSAGE_BATCH_ID
 );
 console.log(messageBatch);
 ```
@@ -775,16 +789,16 @@ import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.batches.*;
 
 public class BatchCancelExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageBatch messageBatch = client.messages().batches().cancel(
-                BatchCancelParams.builder()
-                        .messageBatchId(MESSAGE_BATCH_ID)
-                        .build()
-        );
-        System.out.println(messageBatch);
-    }
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    MessageBatch messageBatch = client
+      .messages()
+      .batches()
+      .cancel(BatchCancelParams.builder().messageBatchId(MESSAGE_BATCH_ID).build());
+    System.out.println(messageBatch);
+  }
 }
 ```
 </CodeGroup>
@@ -896,19 +910,21 @@ message_batch = client.messages.batches.create(
                 system=[
                     {
                         "type": "text",
-                        "text": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+                        "text": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n",
                     },
                     {
                         "type": "text",
                         "text": "<the entire contents of Pride and Prejudice>",
-                        "cache_control": {"type": "ephemeral"}
+                        "cache_control": {"type": "ephemeral"},
+                    },
+                ],
+                messages=[
+                    {
+                        "role": "user",
+                        "content": "Analyze the major themes in Pride and Prejudice.",
                     }
                 ],
-                messages=[{
-                    "role": "user",
-                    "content": "Analyze the major themes in Pride and Prejudice."
-                }]
-            )
+            ),
         ),
         Request(
             custom_id="my-second-request",
@@ -918,26 +934,28 @@ message_batch = client.messages.batches.create(
                 system=[
                     {
                         "type": "text",
-                        "text": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+                        "text": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n",
                     },
                     {
                         "type": "text",
                         "text": "<the entire contents of Pride and Prejudice>",
-                        "cache_control": {"type": "ephemeral"}
+                        "cache_control": {"type": "ephemeral"},
+                    },
+                ],
+                messages=[
+                    {
+                        "role": "user",
+                        "content": "Write a summary of Pride and Prejudice.",
                     }
                 ],
-                messages=[{
-                    "role": "user",
-                    "content": "Write a summary of Pride and Prejudice."
-                }]
-            )
-        )
+            ),
+        ),
     ]
 )
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
@@ -955,11 +973,11 @@ const messageBatch = await anthropic.messages.batches.create({
         {
           type: "text",
           text: "<the entire contents of Pride and Prejudice>",
-          cache_control: {type: "ephemeral"}
+          cache_control: { type: "ephemeral" }
         }
       ],
       messages: [
-        {"role": "user", "content": "Analyze the major themes in Pride and Prejudice."}
+        { role: "user", content: "Analyze the major themes in Pride and Prejudice." }
       ]
     }
   }, {
@@ -975,11 +993,11 @@ const messageBatch = await anthropic.messages.batches.create({
         {
           type: "text",
           text: "<the entire contents of Pride and Prejudice>",
-          cache_control: {type: "ephemeral"}
+          cache_control: { type: "ephemeral" }
         }
       ],
       messages: [
-        {"role": "user", "content": "Write a summary of Pride and Prejudice."}
+        { role: "user", content: "Write a summary of Pride and Prejudice." }
       ]
     }
   }]
@@ -987,59 +1005,74 @@ const messageBatch = await anthropic.messages.batches.create({
 ```
 
 ```java Java
-import java.util.List;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.TextBlockParam;
 import com.anthropic.models.messages.batches.*;
+import java.util.List;
 
 public class BatchExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        BatchCreateParams createParams = BatchCreateParams.builder()
-                .addRequest(BatchCreateParams.Request.builder()
-                        .customId("my-first-request")
-                        .params(BatchCreateParams.Request.Params.builder()
-                                .model(Model.CLAUDE_OPUS_4_6)
-                                .maxTokens(1024)
-                                .systemOfTextBlockParams(List.of(
-                                        TextBlockParam.builder()
-                                                .text("You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n")
-                                                .build(),
-                                        TextBlockParam.builder()
-                                                .text("<the entire contents of Pride and Prejudice>")
-                                                .cacheControl(CacheControlEphemeral.builder().build())
-                                                .build()
-                                ))
-                                .addUserMessage("Analyze the major themes in Pride and Prejudice.")
-                                .build())
-                        .build())
-                .addRequest(BatchCreateParams.Request.builder()
-                        .customId("my-second-request")
-                        .params(BatchCreateParams.Request.Params.builder()
-                                .model(Model.CLAUDE_OPUS_4_6)
-                                .maxTokens(1024)
-                                .systemOfTextBlockParams(List.of(
-                                        TextBlockParam.builder()
-                                                .text("You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n")
-                                                .build(),
-                                        TextBlockParam.builder()
-                                                .text("<the entire contents of Pride and Prejudice>")
-                                                .cacheControl(CacheControlEphemeral.builder().build())
-                                                .build()
-                                ))
-                                .addUserMessage("Write a summary of Pride and Prejudice.")
-                                .build())
-                        .build())
-                .build();
+    BatchCreateParams createParams = BatchCreateParams.builder()
+      .addRequest(
+        BatchCreateParams.Request.builder()
+          .customId("my-first-request")
+          .params(
+            BatchCreateParams.Request.Params.builder()
+              .model(Model.CLAUDE_OPUS_4_6)
+              .maxTokens(1024)
+              .systemOfTextBlockParams(
+                List.of(
+                  TextBlockParam.builder()
+                    .text(
+                      "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+                    )
+                    .build(),
+                  TextBlockParam.builder()
+                    .text("<the entire contents of Pride and Prejudice>")
+                    .cacheControl(CacheControlEphemeral.builder().build())
+                    .build()
+                )
+              )
+              .addUserMessage("Analyze the major themes in Pride and Prejudice.")
+              .build()
+          )
+          .build()
+      )
+      .addRequest(
+        BatchCreateParams.Request.builder()
+          .customId("my-second-request")
+          .params(
+            BatchCreateParams.Request.Params.builder()
+              .model(Model.CLAUDE_OPUS_4_6)
+              .maxTokens(1024)
+              .systemOfTextBlockParams(
+                List.of(
+                  TextBlockParam.builder()
+                    .text(
+                      "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+                    )
+                    .build(),
+                  TextBlockParam.builder()
+                    .text("<the entire contents of Pride and Prejudice>")
+                    .cacheControl(CacheControlEphemeral.builder().build())
+                    .build()
+                )
+              )
+              .addUserMessage("Write a summary of Pride and Prejudice.")
+              .build()
+          )
+          .build()
+      )
+      .build();
 
-        MessageBatch messageBatch = client.messages().batches().create(createParams);
-    }
+    MessageBatch messageBatch = client.messages().batches().create(createParams);
+  }
 }
 ```
 

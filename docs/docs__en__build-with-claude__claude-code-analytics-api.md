@@ -20,7 +20,7 @@ This API enables you to better monitor, analyze, and optimize your Claude Code a
 
 <Check>
   **Admin API key required**
-  
+
   This API is part of the [Admin API](/docs/en/build-with-claude/administration-api). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
 </Check>
 
@@ -38,9 +38,9 @@ limit=20" \
 
 <Tip>
   **Set a User-Agent header for integrations**
-  
+
   If you're building an integration, set your User-Agent header to help us understand usage patterns:
-  ```
+  ```text
   User-Agent: YourApp/1.0.0 (https://yourapp.com)
   ```
 </Tip>

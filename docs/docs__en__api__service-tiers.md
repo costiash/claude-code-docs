@@ -60,7 +60,7 @@ message = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude!"}],
-    service_tier="auto"  # Automatically use Priority Tier when available, fallback to standard
+    service_tier="auto",  # Automatically use Priority Tier when available, fallback to standard
 )
 ```
 

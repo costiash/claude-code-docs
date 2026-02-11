@@ -17,27 +17,27 @@ When you start a new query, the SDK automatically creates a session and returns 
 <CodeGroup>
 
 ```typescript TypeScript
-import { query } from "@anthropic-ai/claude-agent-sdk"
+import { query } from "@anthropic-ai/claude-agent-sdk";
 
-let sessionId: string | undefined
+let sessionId: string | undefined;
 
 const response = query({
   prompt: "Help me build a web application",
   options: {
     model: "claude-opus-4-6"
   }
-})
+});
 
 for await (const message of response) {
   // The first message is a system init message with the session ID
-  if (message.type === 'system' && message.subtype === 'init') {
-    sessionId = message.session_id
-    console.log(`Session started with ID: ${sessionId}`)
+  if (message.type === "system" && message.subtype === "init") {
+    sessionId = message.session_id;
+    console.log(`Session started with ID: ${sessionId}`);
     // You can save this ID for later resumption
   }
 
   // Process other messages...
-  console.log(message)
+  console.log(message);
 }
 
 // Later, you can use the saved sessionId to resume
@@ -47,7 +47,7 @@ if (sessionId) {
     options: {
       resume: sessionId
     }
-  })
+  });
 }
 ```
 
@@ -58,13 +58,11 @@ session_id = None
 
 async for message in query(
     prompt="Help me build a web application",
-    options=ClaudeAgentOptions(
-        model="claude-opus-4-6"
-    )
+    options=ClaudeAgentOptions(model="claude-opus-4-6"),
 ):
     # The first message is a system init message with the session ID
-    if hasattr(message, 'subtype') and message.subtype == 'init':
-        session_id = message.data.get('session_id')
+    if hasattr(message, "subtype") and message.subtype == "init":
+        session_id = message.data.get("session_id")
         print(f"Session started with ID: {session_id}")
         # You can save this ID for later resumption
 
@@ -75,9 +73,7 @@ async for message in query(
 if session_id:
     async for message in query(
         prompt="Continue where we left off",
-        options=ClaudeAgentOptions(
-            resume=session_id
-        )
+        options=ClaudeAgentOptions(resume=session_id),
     ):
         print(message)
 ```
@@ -91,7 +87,7 @@ The SDK supports resuming sessions from previous conversation states, enabling c
 <CodeGroup>
 
 ```typescript TypeScript
-import { query } from "@anthropic-ai/claude-agent-sdk"
+import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // Resume a previous session using its ID
 const response = query({
@@ -101,11 +97,11 @@ const response = query({
     model: "claude-opus-4-6",
     allowedTools: ["Read", "Edit", "Write", "Glob", "Grep", "Bash"]
   }
-})
+});
 
 // The conversation continues with full context from the previous session
 for await (const message of response) {
-  console.log(message)
+  console.log(message);
 }
 ```
 
@@ -118,8 +114,8 @@ async for message in query(
     options=ClaudeAgentOptions(
         resume="session-xyz",  # Session ID from previous conversation
         model="claude-opus-4-6",
-        allowed_tools=["Read", "Edit", "Write", "Glob", "Grep", "Bash"]
-    )
+        allowed_tools=["Read", "Edit", "Write", "Glob", "Grep", "Bash"],
+    ),
 ):
     print(message)
 
@@ -160,20 +156,20 @@ Forking is useful when you want to:
 <CodeGroup>
 
 ```typescript TypeScript
-import { query } from "@anthropic-ai/claude-agent-sdk"
+import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // First, capture the session ID
-let sessionId: string | undefined
+let sessionId: string | undefined;
 
 const response = query({
   prompt: "Help me design a REST API",
   options: { model: "claude-opus-4-6" }
-})
+});
 
 for await (const message of response) {
-  if (message.type === 'system' && message.subtype === 'init') {
-    sessionId = message.session_id
-    console.log(`Original session: ${sessionId}`)
+  if (message.type === "system" && message.subtype === "init") {
+    sessionId = message.session_id;
+    console.log(`Original session: ${sessionId}`);
   }
 }
 
@@ -182,14 +178,14 @@ const forkedResponse = query({
   prompt: "Now let's redesign this as a GraphQL API instead",
   options: {
     resume: sessionId,
-    forkSession: true,  // Creates a new session ID
+    forkSession: true, // Creates a new session ID
     model: "claude-opus-4-6"
   }
-})
+});
 
 for await (const message of forkedResponse) {
-  if (message.type === 'system' && message.subtype === 'init') {
-    console.log(`Forked session: ${message.session_id}`)
+  if (message.type === "system" && message.subtype === "init") {
+    console.log(`Forked session: ${message.session_id}`);
     // This will be a different session ID
   }
 }
@@ -199,10 +195,10 @@ const originalContinued = query({
   prompt: "Add authentication to the REST API",
   options: {
     resume: sessionId,
-    forkSession: false,  // Continue original session (default)
+    forkSession: false, // Continue original session (default)
     model: "claude-opus-4-6"
   }
-})
+});
 ```
 
 ```python Python
@@ -213,10 +209,10 @@ session_id = None
 
 async for message in query(
     prompt="Help me design a REST API",
-    options=ClaudeAgentOptions(model="claude-opus-4-6")
+    options=ClaudeAgentOptions(model="claude-opus-4-6"),
 ):
-    if hasattr(message, 'subtype') and message.subtype == 'init':
-        session_id = message.data.get('session_id')
+    if hasattr(message, "subtype") and message.subtype == "init":
+        session_id = message.data.get("session_id")
         print(f"Original session: {session_id}")
 
 # Fork the session to try a different approach
@@ -225,11 +221,11 @@ async for message in query(
     options=ClaudeAgentOptions(
         resume=session_id,
         fork_session=True,  # Creates a new session ID
-        model="claude-opus-4-6"
-    )
+        model="claude-opus-4-6",
+    ),
 ):
-    if hasattr(message, 'subtype') and message.subtype == 'init':
-        forked_id = message.data.get('session_id')
+    if hasattr(message, "subtype") and message.subtype == "init":
+        forked_id = message.data.get("session_id")
         print(f"Forked session: {forked_id}")
         # This will be a different session ID
 
@@ -239,8 +235,8 @@ async for message in query(
     options=ClaudeAgentOptions(
         resume=session_id,
         fork_session=False,  # Continue original session (default)
-        model="claude-opus-4-6"
-    )
+        model="claude-opus-4-6",
+    ),
 ):
     print(message)
 ```

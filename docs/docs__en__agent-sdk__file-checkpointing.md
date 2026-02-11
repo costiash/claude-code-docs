@@ -18,7 +18,7 @@ Only changes made through the Write, Edit, and NotebookEdit tools are tracked. C
 
 ## How checkpointing works
 
-When you enable file checkpointing, the SDK creates backups of files before modifying them through the Write, Edit, or NotebookEdit tools. User messages in the response stream include a checkpoint UUID that you can use as a restore point. 
+When you enable file checkpointing, the SDK creates backups of files before modifying them through the Write, Edit, or NotebookEdit tools. User messages in the response stream include a checkpoint UUID that you can use as a restore point.
 
 Checkpoint works with these built-in tools that the agent uses to modify files:
 
@@ -51,15 +51,23 @@ The following example shows the complete flow: enable checkpointing, capture the
 ```python Python
 import asyncio
 import os
-from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, UserMessage, ResultMessage
+from claude_agent_sdk import (
+    ClaudeSDKClient,
+    ClaudeAgentOptions,
+    UserMessage,
+    ResultMessage,
+)
+
 
 async def main():
     # Step 1: Enable checkpointing
     options = ClaudeAgentOptions(
         enable_file_checkpointing=True,
         permission_mode="acceptEdits",  # Auto-accept file edits without prompting
-        extra_args={"replay-user-messages": None},  # Required to receive checkpoint UUIDs in the response stream
-        env={**os.environ, "CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING": "1"}
+        extra_args={
+            "replay-user-messages": None
+        },  # Required to receive checkpoint UUIDs in the response stream
+        env={**os.environ, "CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING": "1"},
     )
 
     checkpoint_id = None
@@ -78,15 +86,15 @@ async def main():
 
     # Step 3: Later, rewind by resuming the session with an empty prompt
     if checkpoint_id and session_id:
-        async with ClaudeSDKClient(ClaudeAgentOptions(
-            enable_file_checkpointing=True,
-            resume=session_id
-        )) as client:
+        async with ClaudeSDKClient(
+            ClaudeAgentOptions(enable_file_checkpointing=True, resume=session_id)
+        ) as client:
             await client.query("")  # Empty prompt to open the connection
             async for message in client.receive_response():
                 await client.rewind_files(checkpoint_id)
                 break
         print(f"Rewound to checkpoint: {checkpoint_id}")
+
 
 asyncio.run(main())
 ```
@@ -98,9 +106,9 @@ async function main() {
   // Step 1: Enable checkpointing
   const opts = {
     enableFileCheckpointing: true,
-    permissionMode: "acceptEdits" as const,  // Auto-accept file edits without prompting
-    extraArgs: { 'replay-user-messages': null },  // Required to receive checkpoint UUIDs in the response stream
-    env: { ...process.env, CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING: '1' }
+    permissionMode: "acceptEdits" as const, // Auto-accept file edits without prompting
+    extraArgs: { "replay-user-messages": null }, // Required to receive checkpoint UUIDs in the response stream
+    env: { ...process.env, CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING: "1" }
   };
 
   const response = query({
@@ -113,10 +121,10 @@ async function main() {
 
   // Step 2: Capture checkpoint UUID from the first user message
   for await (const message of response) {
-    if (message.type === 'user' && message.uuid && !checkpointId) {
+    if (message.type === "user" && message.uuid && !checkpointId) {
       checkpointId = message.uuid;
     }
-    if ('session_id' in message && !sessionId) {
+    if ("session_id" in message && !sessionId) {
       sessionId = message.session_id;
     }
   }
@@ -124,7 +132,7 @@ async function main() {
   // Step 3: Later, rewind by resuming the session with an empty prompt
   if (checkpointId && sessionId) {
     const rewindQuery = query({
-      prompt: "",  // Empty prompt to open the connection
+      prompt: "", // Empty prompt to open the connection
       options: { ...opts, resume: sessionId }
     });
 
@@ -164,14 +172,14 @@ import os
 
 options = ClaudeAgentOptions(
     enable_file_checkpointing=True,
-    env={**os.environ, "CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING": "1"}
+    env={**os.environ, "CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING": "1"},
 )
 ```
 
 ```typescript TypeScript
 const opts = {
   enableFileCheckpointing: true,
-  env: { ...process.env, CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING: '1' }
+  env: { ...process.env, CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING: "1" }
 };
 ```
 
@@ -194,7 +202,7 @@ Configure your SDK options to enable checkpointing and receive checkpoint UUIDs:
 options = ClaudeAgentOptions(
     enable_file_checkpointing=True,
     permission_mode="acceptEdits",
-    extra_args={"replay-user-messages": None}
+    extra_args={"replay-user-messages": None},
 )
 
 async with ClaudeSDKClient(options) as client:
@@ -207,7 +215,7 @@ const response = query({
   options: {
     enableFileCheckpointing: true,
     permissionMode: "acceptEdits" as const,
-    extraArgs: { 'replay-user-messages': null }
+    extraArgs: { "replay-user-messages": null }
   }
 });
 ```
@@ -245,11 +253,11 @@ let sessionId: string | undefined;
 
 for await (const message of response) {
   // Update checkpoint on each user message (keeps the latest)
-  if (message.type === 'user' && message.uuid) {
+  if (message.type === "user" && message.uuid) {
     checkpointId = message.uuid;
   }
   // Capture session ID from any message that has it
-  if ('session_id' in message) {
+  if ("session_id" in message) {
     sessionId = message.session_id;
   }
 }
@@ -266,10 +274,9 @@ To rewind after the stream completes, resume the session with an empty prompt an
 <CodeGroup>
 
 ```python Python
-async with ClaudeSDKClient(ClaudeAgentOptions(
-    enable_file_checkpointing=True,
-    resume=session_id
-)) as client:
+async with ClaudeSDKClient(
+    ClaudeAgentOptions(enable_file_checkpointing=True, resume=session_id)
+) as client:
     await client.query("")  # Empty prompt to open the connection
     async for message in client.receive_response():
         await client.rewind_files(checkpoint_id)
@@ -278,7 +285,7 @@ async with ClaudeSDKClient(ClaudeAgentOptions(
 
 ```typescript TypeScript
 const rewindQuery = query({
-  prompt: "",  // Empty prompt to open the connection
+  prompt: "", // Empty prompt to open the connection
   options: { ...opts, resume: sessionId }
 });
 
@@ -315,12 +322,13 @@ import asyncio
 import os
 from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, UserMessage
 
+
 async def main():
     options = ClaudeAgentOptions(
         enable_file_checkpointing=True,
         permission_mode="acceptEdits",
         extra_args={"replay-user-messages": None},
-        env={**os.environ, "CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING": "1"}
+        env={**os.environ, "CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING": "1"},
     )
 
     safe_checkpoint = None
@@ -341,6 +349,7 @@ async def main():
                 # Exit the loop after rewinding, files are restored
                 break
 
+
 asyncio.run(main())
 ```
 
@@ -353,8 +362,8 @@ async function main() {
     options: {
       enableFileCheckpointing: true,
       permissionMode: "acceptEdits" as const,
-      extraArgs: { 'replay-user-messages': null },
-      env: { ...process.env, CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING: '1' }
+      extraArgs: { "replay-user-messages": null },
+      env: { ...process.env, CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING: "1" }
     }
   });
 
@@ -363,7 +372,7 @@ async function main() {
   for await (const message of response) {
     // Update checkpoint before each agent turn starts
     // This overwrites the previous checkpoint. Only keep the latest
-    if (message.type === 'user' && message.uuid) {
+    if (message.type === "user" && message.uuid) {
       safeCheckpoint = message.uuid;
     }
 
@@ -395,7 +404,13 @@ import asyncio
 import os
 from dataclasses import dataclass
 from datetime import datetime
-from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, UserMessage, ResultMessage
+from claude_agent_sdk import (
+    ClaudeSDKClient,
+    ClaudeAgentOptions,
+    UserMessage,
+    ResultMessage,
+)
+
 
 # Store checkpoint metadata for better tracking
 @dataclass
@@ -404,12 +419,13 @@ class Checkpoint:
     description: str
     timestamp: datetime
 
+
 async def main():
     options = ClaudeAgentOptions(
         enable_file_checkpointing=True,
         permission_mode="acceptEdits",
         extra_args={"replay-user-messages": None},
-        env={**os.environ, "CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING": "1"}
+        env={**os.environ, "CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING": "1"},
     )
 
     checkpoints = []
@@ -420,26 +436,28 @@ async def main():
 
         async for message in client.receive_response():
             if isinstance(message, UserMessage) and message.uuid:
-                checkpoints.append(Checkpoint(
-                    id=message.uuid,
-                    description=f"After turn {len(checkpoints) + 1}",
-                    timestamp=datetime.now()
-                ))
+                checkpoints.append(
+                    Checkpoint(
+                        id=message.uuid,
+                        description=f"After turn {len(checkpoints) + 1}",
+                        timestamp=datetime.now(),
+                    )
+                )
             if isinstance(message, ResultMessage) and not session_id:
                 session_id = message.session_id
 
     # Later: rewind to any checkpoint by resuming the session
     if checkpoints and session_id:
         target = checkpoints[0]  # Pick any checkpoint
-        async with ClaudeSDKClient(ClaudeAgentOptions(
-            enable_file_checkpointing=True,
-            resume=session_id
-        )) as client:
+        async with ClaudeSDKClient(
+            ClaudeAgentOptions(enable_file_checkpointing=True, resume=session_id)
+        ) as client:
             await client.query("")  # Empty prompt to open the connection
             async for message in client.receive_response():
                 await client.rewind_files(target.id)
                 break
         print(f"Rewound to: {target.description}")
+
 
 asyncio.run(main())
 ```
@@ -458,8 +476,8 @@ async function main() {
   const opts = {
     enableFileCheckpointing: true,
     permissionMode: "acceptEdits" as const,
-    extraArgs: { 'replay-user-messages': null },
-    env: { ...process.env, CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING: '1' }
+    extraArgs: { "replay-user-messages": null },
+    env: { ...process.env, CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING: "1" }
   };
 
   const response = query({
@@ -471,23 +489,23 @@ async function main() {
   let sessionId: string | undefined;
 
   for await (const message of response) {
-    if (message.type === 'user' && message.uuid) {
+    if (message.type === "user" && message.uuid) {
       checkpoints.push({
         id: message.uuid,
         description: `After turn ${checkpoints.length + 1}`,
         timestamp: new Date()
       });
     }
-    if ('session_id' in message && !sessionId) {
+    if ("session_id" in message && !sessionId) {
       sessionId = message.session_id;
     }
   }
 
   // Later: rewind to any checkpoint by resuming the session
   if (checkpoints.length > 0 && sessionId) {
-    const target = checkpoints[0];  // Pick any checkpoint
+    const target = checkpoints[0]; // Pick any checkpoint
     const rewindQuery = query({
-      prompt: "",  // Empty prompt to open the connection
+      prompt: "", // Empty prompt to open the connection
       options: { ...opts, resume: sessionId }
     });
 
@@ -522,11 +540,14 @@ Create a new file called `utils.py` (Python) or `utils.ts` (TypeScript) and past
 def add(a, b):
     return a + b
 
+
 def subtract(a, b):
     return a - b
 
+
 def multiply(a, b):
     return a * b
+
 
 def divide(a, b):
     if b == 0:
@@ -569,7 +590,13 @@ This script asks Claude to add doc comments to your utility file, then gives you
 
 ```python try_checkpointing.py
 import asyncio
-from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, UserMessage, ResultMessage
+from claude_agent_sdk import (
+    ClaudeSDKClient,
+    ClaudeAgentOptions,
+    UserMessage,
+    ResultMessage,
+)
+
 
 async def main():
     # Configure the SDK with checkpointing enabled
@@ -579,11 +606,11 @@ async def main():
     options = ClaudeAgentOptions(
         enable_file_checkpointing=True,
         permission_mode="acceptEdits",
-        extra_args={"replay-user-messages": None}
+        extra_args={"replay-user-messages": None},
     )
 
     checkpoint_id = None  # Store the user message UUID for rewinding
-    session_id = None     # Store the session ID for resuming
+    session_id = None  # Store the session ID for resuming
 
     print("Running agent to add doc comments to utils.py...\n")
 
@@ -607,18 +634,20 @@ async def main():
 
         if response.lower() == "y":
             # Resume the session with an empty prompt, then rewind
-            async with ClaudeSDKClient(ClaudeAgentOptions(
-                enable_file_checkpointing=True,
-                resume=session_id
-            )) as client:
+            async with ClaudeSDKClient(
+                ClaudeAgentOptions(enable_file_checkpointing=True, resume=session_id)
+            ) as client:
                 await client.query("")  # Empty prompt opens the connection
                 async for message in client.receive_response():
                     await client.rewind_files(checkpoint_id)  # Restore files
                     break
 
-            print("\n✓ File restored! Open utils.py to verify the doc comments are gone.")
+            print(
+                "\n✓ File restored! Open utils.py to verify the doc comments are gone."
+            )
         else:
             print("\nKept the modified file.")
+
 
 asyncio.run(main())
 ```
@@ -635,10 +664,10 @@ async function main() {
   const opts = {
     enableFileCheckpointing: true,
     permissionMode: "acceptEdits" as const,
-    extraArgs: { 'replay-user-messages': null }
+    extraArgs: { "replay-user-messages": null }
   };
 
-  let sessionId: string | undefined;    // Store the session ID for resuming
+  let sessionId: string | undefined; // Store the session ID for resuming
   let checkpointId: string | undefined; // Store the user message UUID for rewinding
 
   console.log("Running agent to add doc comments to utils.ts...\n");
@@ -677,12 +706,12 @@ async function main() {
     if (answer.toLowerCase() === "y") {
       // Resume the session with an empty prompt, then rewind
       const rewindQuery = query({
-        prompt: "",  // Empty prompt opens the connection
+        prompt: "", // Empty prompt opens the connection
         options: { ...opts, resume: sessionId }
       });
 
       for await (const msg of rewindQuery) {
-        await rewindQuery.rewindFiles(checkpointId);  // Restore files
+        await rewindQuery.rewindFiles(checkpointId); // Restore files
         break;
       }
 
@@ -785,10 +814,9 @@ This error occurs when you call `rewindFiles()` or `rewind_files()` after you've
 
 ```python Python
 # Resume session with empty prompt, then rewind
-async with ClaudeSDKClient(ClaudeAgentOptions(
-    enable_file_checkpointing=True,
-    resume=session_id
-)) as client:
+async with ClaudeSDKClient(
+    ClaudeAgentOptions(enable_file_checkpointing=True, resume=session_id)
+) as client:
     await client.query("")
     async for message in client.receive_response():
         await client.rewind_files(checkpoint_id)

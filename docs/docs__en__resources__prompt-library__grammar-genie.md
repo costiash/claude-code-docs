@@ -40,7 +40,6 @@ message = client.messages.create(
     ],
 )
 print(message.content)
-
 ````
 </Tab>
 <Tab title="TypeScript">
@@ -49,7 +48,7 @@ print(message.content)
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+  apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
 });
 
 const msg = await anthropic.messages.create({
@@ -59,11 +58,11 @@ const msg = await anthropic.messages.create({
   system: "Your task is to take the text provided and rewrite it into a clear, grammatically correct version while preserving the original meaning as closely as possible. Correct any spelling mistakes, punctuation errors, verb tense issues, word choice problems, and other grammatical mistakes.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "I can haz cheeseburger?"
+          type: "text",
+          text: "I can haz cheeseburger?"
         }
       ]
     }
@@ -91,17 +90,11 @@ message = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "I can haz cheeseburger?"
-                }
-            ]
+            "content": [{"type": "text", "text": "I can haz cheeseburger?"}],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -114,21 +107,21 @@ import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 const client = new AnthropicBedrock();
 
 const msg = await client.messages.create({
-model: "anthropic.claude-opus-4-6-v1",
-max_tokens: 1000,
-temperature: 0,
-system: "Your task is to take the text provided and rewrite it into a clear, grammatically correct version while preserving the original meaning as closely as possible. Correct any spelling mistakes, punctuation errors, verb tense issues, word choice problems, and other grammatical mistakes.",
-messages: [
-{
-"role": "user",
-"content": [
-{
-"type": "text",
-"text": "I can haz cheeseburger?"
-}
-]
-}
-]
+  model: "anthropic.claude-opus-4-6-v1",
+  max_tokens: 1000,
+  temperature: 0,
+  system: "Your task is to take the text provided and rewrite it into a clear, grammatically correct version while preserving the original meaning as closely as possible. Correct any spelling mistakes, punctuation errors, verb tense issues, word choice problems, and other grammatical mistakes.",
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "I can haz cheeseburger?"
+        }
+      ]
+    }
+  ]
 });
 console.log(msg);
 
@@ -149,24 +142,18 @@ message = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "I can haz cheeseburger?"
-                }
-            ]
+            "content": [{"type": "text", "text": "I can haz cheeseburger?"}],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ````
 
 </Tab>
 <Tab title="Vertex AI TypeScript">
 
 ```typescript
-import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
+import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
 // Additionally goes through the standard `google-auth-library` flow.
@@ -179,11 +166,11 @@ const msg = await client.messages.create({
   system: "Your task is to take the text provided and rewrite it into a clear, grammatically correct version while preserving the original meaning as closely as possible. Correct any spelling mistakes, punctuation errors, verb tense issues, word choice problems, and other grammatical mistakes.",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "I can haz cheeseburger?"
+          type: "text",
+          text: "I can haz cheeseburger?"
         }
       ]
     }

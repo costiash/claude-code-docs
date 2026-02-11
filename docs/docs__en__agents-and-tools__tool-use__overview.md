@@ -2,7 +2,7 @@
 
 ---
 
-Claude is capable of interacting with tools and functions, allowing you to extend Claude's capabilities to perform a wider variety of tasks. 
+Claude is capable of interacting with tools and functions, allowing you to extend Claude's capabilities to perform a wider variety of tasks.
 
 <Tip>
   Learn everything you need to master tool use with Claude as part of our new [courses](https://anthropic.skilljar.com/)! Please
@@ -85,7 +85,7 @@ print(response)
 ```
 
 ```typescript TypeScript
-import { Anthropic } from '@anthropic-ai/sdk';
+import { Anthropic } from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY
@@ -109,9 +109,9 @@ async function main() {
         required: ["location"]
       }
     }],
-    messages: [{ 
-      role: "user", 
-      content: "Tell me the weather in San Francisco." 
+    messages: [{
+      role: "user",
+      content: "Tell me the weather in San Francisco."
     }]
   });
 
@@ -122,9 +122,6 @@ main().catch(console.error);
 ```
 
 ```java Java
-import java.util.List;
-import java.util.Map;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -133,35 +130,47 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.Tool;
 import com.anthropic.models.messages.Tool.InputSchema;
+import java.util.List;
+import java.util.Map;
 
 public class GetWeatherExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        InputSchema schema = InputSchema.builder()
-                .properties(JsonValue.from(Map.of(
-                        "location",
-                        Map.of(
-                                "type", "string",
-                                "description", "The city and state, e.g. San Francisco, CA"))))
-                .putAdditionalProperty("required", JsonValue.from(List.of("location")))
-                .build();
+    InputSchema schema = InputSchema.builder()
+      .properties(
+        JsonValue.from(
+          Map.of(
+            "location",
+            Map.of(
+              "type",
+              "string",
+              "description",
+              "The city and state, e.g. San Francisco, CA"
+            )
+          )
+        )
+      )
+      .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+      .build();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_0)
-                .maxTokens(1024)
-                .addTool(Tool.builder()
-                        .name("get_weather")
-                        .description("Get the current weather in a given location")
-                        .inputSchema(schema)
-                        .build())
-                .addUserMessage("What's the weather like in San Francisco?")
-                .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_0)
+      .maxTokens(1024)
+      .addTool(
+        Tool.builder()
+          .name("get_weather")
+          .description("Get the current weather in a given location")
+          .inputSchema(schema)
+          .build()
+      )
+      .addUserMessage("What's the weather like in San Francisco?")
+      .build();
 
-        Message message = client.messages().create(params);
-        System.out.println(message);
-    }
+    Message message = client.messages().create(params);
+    System.out.println(message);
+  }
 }
 ```
 
@@ -253,17 +262,20 @@ When you build an MCP client and call `list_tools()` on an MCP server, you'll re
 ```python Python
 from mcp import ClientSession
 
+
 async def get_claude_tools(mcp_session: ClientSession):
     """Convert MCP tools to Claude's tool format."""
     mcp_tools = await mcp_session.list_tools()
 
     claude_tools = []
     for tool in mcp_tools.tools:
-        claude_tools.append({
-            "name": tool.name,
-            "description": tool.description or "",
-            "input_schema": tool.inputSchema  # Rename inputSchema to input_schema
-        })
+        claude_tools.append(
+            {
+                "name": tool.name,
+                "description": tool.description or "",
+                "input_schema": tool.inputSchema,  # Rename inputSchema to input_schema
+            }
+        )
 
     return claude_tools
 ```
@@ -278,7 +290,7 @@ async function getClaudeTools(mcpClient: Client) {
   return mcpTools.tools.map((tool) => ({
     name: tool.name,
     description: tool.description ?? "",
-    input_schema: tool.inputSchema, // Rename inputSchema to input_schema
+    input_schema: tool.inputSchema // Rename inputSchema to input_schema
   }));
 }
 ```
@@ -297,7 +309,7 @@ response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     tools=claude_tools,
-    messages=[{"role": "user", "content": "What tools do you have available?"}]
+    messages=[{"role": "user", "content": "What tools do you have available?"}],
 )
 ```
 
@@ -311,7 +323,7 @@ const response = await anthropic.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
   tools: claudeTools,
-  messages: [{ role: "user", content: "What tools do you have available?" }],
+  messages: [{ role: "user", content: "What tools do you have available?" }]
 });
 ```
 </CodeGroup>
@@ -363,6 +375,7 @@ Here are a few code examples demonstrating various tool use patterns and techniq
 
     ```python Python
     import anthropic
+
     client = anthropic.Anthropic()
 
     response = client.messages.create(
@@ -377,28 +390,27 @@ Here are a few code examples demonstrating various tool use patterns and techniq
                     "properties": {
                         "location": {
                             "type": "string",
-                            "description": "The city and state, e.g. San Francisco, CA"
+                            "description": "The city and state, e.g. San Francisco, CA",
                         },
                         "unit": {
                             "type": "string",
                             "enum": ["celsius", "fahrenheit"],
-                            "description": "The unit of temperature, either \"celsius\" or \"fahrenheit\""
-                        }
+                            "description": 'The unit of temperature, either "celsius" or "fahrenheit"',
+                        },
                     },
-                    "required": ["location"]
-                }
+                    "required": ["location"],
+                },
             }
         ],
-        messages=[{"role": "user", "content": "What is the weather like in San Francisco?"}]
+        messages=[
+            {"role": "user", "content": "What is the weather like in San Francisco?"}
+        ],
     )
 
     print(response)
     ```
-    
-    ```java Java
-    import java.util.List;
-    import java.util.Map;
 
+    ```java Java
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.core.JsonValue;
@@ -407,41 +419,56 @@ Here are a few code examples demonstrating various tool use patterns and techniq
     import com.anthropic.models.messages.Model;
     import com.anthropic.models.messages.Tool;
     import com.anthropic.models.messages.Tool.InputSchema;
+    import java.util.List;
+    import java.util.Map;
 
     public class WeatherToolExample {
 
-        public static void main(String[] args) {
-            AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+      public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-            InputSchema schema = InputSchema.builder()
-                    .properties(JsonValue.from(Map.of(
-                            "location", Map.of(
-                                    "type", "string",
-                                    "description", "The city and state, e.g. San Francisco, CA"
-                            ),
-                            "unit", Map.of(
-                                    "type", "string",
-                                    "enum", List.of("celsius", "fahrenheit"),
-                                    "description", "The unit of temperature, either \"celsius\" or \"fahrenheit\""
-                            )
-                    )))
-                    .putAdditionalProperty("required", JsonValue.from(List.of("location")))
-                    .build();
+        InputSchema schema = InputSchema.builder()
+          .properties(
+            JsonValue.from(
+              Map.of(
+                "location",
+                Map.of(
+                  "type",
+                  "string",
+                  "description",
+                  "The city and state, e.g. San Francisco, CA"
+                ),
+                "unit",
+                Map.of(
+                  "type",
+                  "string",
+                  "enum",
+                  List.of("celsius", "fahrenheit"),
+                  "description",
+                  "The unit of temperature, either \"celsius\" or \"fahrenheit\""
+                )
+              )
+            )
+          )
+          .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+          .build();
 
-            MessageCreateParams params = MessageCreateParams.builder()
-                    .model(Model.CLAUDE_OPUS_4_0)
-                    .maxTokens(1024)
-                    .addTool(Tool.builder()
-                            .name("get_weather")
-                            .description("Get the current weather in a given location")
-                            .inputSchema(schema)
-                            .build())
-                    .addUserMessage("What is the weather like in San Francisco?")
-                    .build();
+        MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_0)
+          .maxTokens(1024)
+          .addTool(
+            Tool.builder()
+              .name("get_weather")
+              .description("Get the current weather in a given location")
+              .inputSchema(schema)
+              .build()
+          )
+          .addUserMessage("What is the weather like in San Francisco?")
+          .build();
 
-            Message message = client.messages().create(params);
-            System.out.println(message);
-        }
+        Message message = client.messages().create(params);
+        System.out.println(message);
+      }
     }
     ```
 
@@ -553,126 +580,136 @@ You would then need to execute the `get_weather` function with the provided inpu
                     "properties": {
                         "location": {
                             "type": "string",
-                            "description": "The city and state, e.g. San Francisco, CA"
+                            "description": "The city and state, e.g. San Francisco, CA",
                         },
                         "unit": {
                             "type": "string",
                             "enum": ["celsius", "fahrenheit"],
-                            "description": "The unit of temperature, either 'celsius' or 'fahrenheit'"
-                        }
+                            "description": "The unit of temperature, either 'celsius' or 'fahrenheit'",
+                        },
                     },
-                    "required": ["location"]
-                }
+                    "required": ["location"],
+                },
             }
         ],
         messages=[
-            {
-                "role": "user",
-                "content": "What's the weather like in San Francisco?"
-            },
+            {"role": "user", "content": "What's the weather like in San Francisco?"},
             {
                 "role": "assistant",
                 "content": [
                     {
                         "type": "text",
-                        "text": "I'll check the current weather in San Francisco for you."
+                        "text": "I'll check the current weather in San Francisco for you.",
                     },
                     {
                         "type": "tool_use",
                         "id": "toolu_01A09q90qw90lq917835lq9",
                         "name": "get_weather",
-                        "input": {"location": "San Francisco, CA", "unit": "celsius"}
-                    }
-                ]
+                        "input": {"location": "San Francisco, CA", "unit": "celsius"},
+                    },
+                ],
             },
             {
                 "role": "user",
                 "content": [
                     {
                         "type": "tool_result",
-                        "tool_use_id": "toolu_01A09q90qw90lq917835lq9", # from the API response
-                        "content": "65 degrees" # from running your tool
+                        "tool_use_id": "toolu_01A09q90qw90lq917835lq9",  # from the API response
+                        "content": "65 degrees",  # from running your tool
                     }
-                ]
-            }
-        ]
+                ],
+            },
+        ],
     )
 
     print(response)
     ```
-    
+
    ```java Java
-    import java.util.List;
-    import java.util.Map;
+   import com.anthropic.client.AnthropicClient;
+   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+   import com.anthropic.core.JsonValue;
+   import com.anthropic.models.messages.*;
+   import com.anthropic.models.messages.Tool.InputSchema;
+   import java.util.List;
+   import java.util.Map;
 
-    import com.anthropic.client.AnthropicClient;
-    import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-    import com.anthropic.core.JsonValue;
-    import com.anthropic.models.messages.*;
-    import com.anthropic.models.messages.Tool.InputSchema;
+   public class ToolConversationExample {
 
-    public class ToolConversationExample {
+     public static void main(String[] args) {
+       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        public static void main(String[] args) {
-            AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+       InputSchema schema = InputSchema.builder()
+         .properties(
+           JsonValue.from(
+             Map.of(
+               "location",
+               Map.of(
+                 "type",
+                 "string",
+                 "description",
+                 "The city and state, e.g. San Francisco, CA"
+               ),
+               "unit",
+               Map.of(
+                 "type",
+                 "string",
+                 "enum",
+                 List.of("celsius", "fahrenheit"),
+                 "description",
+                 "The unit of temperature, either \"celsius\" or \"fahrenheit\""
+               )
+             )
+           )
+         )
+         .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+         .build();
 
-            InputSchema schema = InputSchema.builder()
-                    .properties(JsonValue.from(Map.of(
-                            "location", Map.of(
-                                    "type", "string",
-                                    "description", "The city and state, e.g. San Francisco, CA"
-                            ),
-                            "unit", Map.of(
-                                    "type", "string",
-                                    "enum", List.of("celsius", "fahrenheit"),
-                                    "description", "The unit of temperature, either \"celsius\" or \"fahrenheit\""
-                            )
-                    )))
-                    .putAdditionalProperty("required", JsonValue.from(List.of("location")))
-                    .build();
+       MessageCreateParams params = MessageCreateParams.builder()
+         .model(Model.CLAUDE_OPUS_4_0)
+         .maxTokens(1024)
+         .addTool(
+           Tool.builder()
+             .name("get_weather")
+             .description("Get the current weather in a given location")
+             .inputSchema(schema)
+             .build()
+         )
+         .addUserMessage("What is the weather like in San Francisco?")
+         .addAssistantMessageOfBlockParams(
+           List.of(
+             ContentBlockParam.ofText(
+               TextBlockParam.builder()
+                 .text("I'll check the current weather in San Francisco for you.")
+                 .build()
+             ),
+             ContentBlockParam.ofToolUse(
+               ToolUseBlockParam.builder()
+                 .id("toolu_01A09q90qw90lq917835lq9")
+                 .name("get_weather")
+                 .input(
+                   JsonValue.from(Map.of("location", "San Francisco, CA", "unit", "celsius"))
+                 )
+                 .build()
+             )
+           )
+         )
+         .addUserMessageOfBlockParams(
+           List.of(
+             ContentBlockParam.ofToolResult(
+               ToolResultBlockParam.builder()
+                 .toolUseId("toolu_01A09q90qw90lq917835lq9")
+                 .content("15 degrees")
+                 .build()
+             )
+           )
+         )
+         .build();
 
-            MessageCreateParams params = MessageCreateParams.builder()
-                    .model(Model.CLAUDE_OPUS_4_0)
-                    .maxTokens(1024)
-                    .addTool(Tool.builder()
-                            .name("get_weather")
-                            .description("Get the current weather in a given location")
-                            .inputSchema(schema)
-                            .build())
-                    .addUserMessage("What is the weather like in San Francisco?")
-                    .addAssistantMessageOfBlockParams(
-                            List.of(
-                                    ContentBlockParam.ofText(
-                                            TextBlockParam.builder()
-                                                    .text("I'll check the current weather in San Francisco for you.")
-                                                    .build()
-                                    ),
-                                    ContentBlockParam.ofToolUse(
-                                            ToolUseBlockParam.builder()
-                                                    .id("toolu_01A09q90qw90lq917835lq9")
-                                                    .name("get_weather")
-                                                    .input(JsonValue.from(Map.of(
-                                                            "location", "San Francisco, CA",
-                                                            "unit", "celsius"
-                                                    )))
-                                                    .build()
-                                    )
-                            )
-                    )
-                    .addUserMessageOfBlockParams(List.of(
-                            ContentBlockParam.ofToolResult(
-                                    ToolResultBlockParam.builder()
-                                            .toolUseId("toolu_01A09q90qw90lq917835lq9")
-                                            .content("15 degrees")
-                                            .build()
-                            )
-                    ))
-                    .build();
-
-            Message message = client.messages().create(params);
-            System.out.println(message);
-        }
-    }
+       Message message = client.messages().create(params);
+       System.out.println(message);
+     }
+   }
    ```
 
 </CodeGroup>
@@ -761,6 +798,7 @@ You can provide Claude with multiple tools to choose from in a single request. H
 
     ```python Python
     import anthropic
+
     client = anthropic.Anthropic()
 
     response = client.messages.create(
@@ -775,16 +813,16 @@ You can provide Claude with multiple tools to choose from in a single request. H
                     "properties": {
                         "location": {
                             "type": "string",
-                            "description": "The city and state, e.g. San Francisco, CA"
+                            "description": "The city and state, e.g. San Francisco, CA",
                         },
                         "unit": {
                             "type": "string",
                             "enum": ["celsius", "fahrenheit"],
-                            "description": "The unit of temperature, either 'celsius' or 'fahrenheit'"
-                        }
+                            "description": "The unit of temperature, either 'celsius' or 'fahrenheit'",
+                        },
                     },
-                    "required": ["location"]
-                }
+                    "required": ["location"],
+                },
             },
             {
                 "name": "get_time",
@@ -794,27 +832,24 @@ You can provide Claude with multiple tools to choose from in a single request. H
                     "properties": {
                         "timezone": {
                             "type": "string",
-                            "description": "The IANA time zone name, e.g. America/Los_Angeles"
+                            "description": "The IANA time zone name, e.g. America/Los_Angeles",
                         }
                     },
-                    "required": ["timezone"]
-                }
-            }
+                    "required": ["timezone"],
+                },
+            },
         ],
         messages=[
             {
                 "role": "user",
-                "content": "What is the weather like right now in New York? Also what time is it there?"
+                "content": "What is the weather like right now in New York? Also what time is it there?",
             }
-        ]
+        ],
     )
     print(response)
     ```
-    
-    ```java Java
-    import java.util.List;
-    import java.util.Map;
 
+    ```java Java
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.core.JsonValue;
@@ -823,58 +858,84 @@ You can provide Claude with multiple tools to choose from in a single request. H
     import com.anthropic.models.messages.Model;
     import com.anthropic.models.messages.Tool;
     import com.anthropic.models.messages.Tool.InputSchema;
+    import java.util.List;
+    import java.util.Map;
 
     public class MultipleToolsExample {
 
-        public static void main(String[] args) {
-            AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+      public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-            // Weather tool schema
-            InputSchema weatherSchema = InputSchema.builder()
-                    .properties(JsonValue.from(Map.of(
-                            "location", Map.of(
-                                    "type", "string",
-                                    "description", "The city and state, e.g. San Francisco, CA"
-                            ),
-                            "unit", Map.of(
-                                    "type", "string",
-                                    "enum", List.of("celsius", "fahrenheit"),
-                                    "description", "The unit of temperature, either \"celsius\" or \"fahrenheit\""
-                            )
-                    )))
-                    .putAdditionalProperty("required", JsonValue.from(List.of("location")))
-                    .build();
+        // Weather tool schema
+        InputSchema weatherSchema = InputSchema.builder()
+          .properties(
+            JsonValue.from(
+              Map.of(
+                "location",
+                Map.of(
+                  "type",
+                  "string",
+                  "description",
+                  "The city and state, e.g. San Francisco, CA"
+                ),
+                "unit",
+                Map.of(
+                  "type",
+                  "string",
+                  "enum",
+                  List.of("celsius", "fahrenheit"),
+                  "description",
+                  "The unit of temperature, either \"celsius\" or \"fahrenheit\""
+                )
+              )
+            )
+          )
+          .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+          .build();
 
-            // Time tool schema
-            InputSchema timeSchema = InputSchema.builder()
-                    .properties(JsonValue.from(Map.of(
-                            "timezone", Map.of(
-                                    "type", "string",
-                                    "description", "The IANA time zone name, e.g. America/Los_Angeles"
-                            )
-                    )))
-                    .putAdditionalProperty("required", JsonValue.from(List.of("timezone")))
-                    .build();
+        // Time tool schema
+        InputSchema timeSchema = InputSchema.builder()
+          .properties(
+            JsonValue.from(
+              Map.of(
+                "timezone",
+                Map.of(
+                  "type",
+                  "string",
+                  "description",
+                  "The IANA time zone name, e.g. America/Los_Angeles"
+                )
+              )
+            )
+          )
+          .putAdditionalProperty("required", JsonValue.from(List.of("timezone")))
+          .build();
 
-            MessageCreateParams params = MessageCreateParams.builder()
-                    .model(Model.CLAUDE_OPUS_4_0)
-                    .maxTokens(1024)
-                    .addTool(Tool.builder()
-                            .name("get_weather")
-                            .description("Get the current weather in a given location")
-                            .inputSchema(weatherSchema)
-                            .build())
-                    .addTool(Tool.builder()
-                            .name("get_time")
-                            .description("Get the current time in a given time zone")
-                            .inputSchema(timeSchema)
-                            .build())
-                    .addUserMessage("What is the weather like right now in New York? Also what time is it there?")
-                    .build();
+        MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_0)
+          .maxTokens(1024)
+          .addTool(
+            Tool.builder()
+              .name("get_weather")
+              .description("Get the current weather in a given location")
+              .inputSchema(weatherSchema)
+              .build()
+          )
+          .addTool(
+            Tool.builder()
+              .name("get_time")
+              .description("Get the current time in a given time zone")
+              .inputSchema(timeSchema)
+              .build()
+          )
+          .addUserMessage(
+            "What is the weather like right now in New York? Also what time is it there?"
+          )
+          .build();
 
-            Message message = client.messages().create(params);
-            System.out.println(message);
-        }
+        Message message = client.messages().create(params);
+        System.out.println(message);
+      }
     }
     ```
 
@@ -965,10 +1026,7 @@ Here's an example of using a `get_location` tool to get the user's location, the
             {
                 "name": "get_location",
                 "description": "Get the current user location based on their IP address. This tool has no parameters or arguments.",
-                "input_schema": {
-                    "type": "object",
-                    "properties": {}
-                }
+                "input_schema": {"type": "object", "properties": {}},
             },
             {
                 "name": "get_weather",
@@ -978,29 +1036,23 @@ Here's an example of using a `get_location` tool to get the user's location, the
                     "properties": {
                         "location": {
                             "type": "string",
-                            "description": "The city and state, e.g. San Francisco, CA"
+                            "description": "The city and state, e.g. San Francisco, CA",
                         },
                         "unit": {
                             "type": "string",
                             "enum": ["celsius", "fahrenheit"],
-                            "description": "The unit of temperature, either 'celsius' or 'fahrenheit'"
-                        }
+                            "description": "The unit of temperature, either 'celsius' or 'fahrenheit'",
+                        },
                     },
-                    "required": ["location"]
-                }
-            }
+                    "required": ["location"],
+                },
+            },
         ],
-        messages=[{
-       		  "role": "user",
-        	  "content": "What's the weather like where I am?"
-        }]
+        messages=[{"role": "user", "content": "What's the weather like where I am?"}],
     )
     ```
-    
-    ```java Java
-    import java.util.List;
-    import java.util.Map;
 
+    ```java Java
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.core.JsonValue;
@@ -1009,52 +1061,71 @@ Here's an example of using a `get_location` tool to get the user's location, the
     import com.anthropic.models.messages.Model;
     import com.anthropic.models.messages.Tool;
     import com.anthropic.models.messages.Tool.InputSchema;
+    import java.util.List;
+    import java.util.Map;
 
     public class EmptySchemaToolExample {
 
-        public static void main(String[] args) {
-            AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+      public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-            // Empty schema for location tool
-            InputSchema locationSchema = InputSchema.builder()
-                    .properties(JsonValue.from(Map.of()))
-                    .build();
+        // Empty schema for location tool
+        InputSchema locationSchema = InputSchema.builder()
+          .properties(JsonValue.from(Map.of()))
+          .build();
 
-            // Weather tool schema
-            InputSchema weatherSchema = InputSchema.builder()
-                    .properties(JsonValue.from(Map.of(
-                            "location", Map.of(
-                                    "type", "string",
-                                    "description", "The city and state, e.g. San Francisco, CA"
-                            ),
-                            "unit", Map.of(
-                                    "type", "string",
-                                    "enum", List.of("celsius", "fahrenheit"),
-                                    "description", "The unit of temperature, either \"celsius\" or \"fahrenheit\""
-                            )
-                    )))
-                    .putAdditionalProperty("required", JsonValue.from(List.of("location")))
-                    .build();
+        // Weather tool schema
+        InputSchema weatherSchema = InputSchema.builder()
+          .properties(
+            JsonValue.from(
+              Map.of(
+                "location",
+                Map.of(
+                  "type",
+                  "string",
+                  "description",
+                  "The city and state, e.g. San Francisco, CA"
+                ),
+                "unit",
+                Map.of(
+                  "type",
+                  "string",
+                  "enum",
+                  List.of("celsius", "fahrenheit"),
+                  "description",
+                  "The unit of temperature, either \"celsius\" or \"fahrenheit\""
+                )
+              )
+            )
+          )
+          .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+          .build();
 
-            MessageCreateParams params = MessageCreateParams.builder()
-                    .model(Model.CLAUDE_OPUS_4_0)
-                    .maxTokens(1024)
-                    .addTool(Tool.builder()
-                            .name("get_location")
-                            .description("Get the current user location based on their IP address. This tool has no parameters or arguments.")
-                            .inputSchema(locationSchema)
-                            .build())
-                    .addTool(Tool.builder()
-                            .name("get_weather")
-                            .description("Get the current weather in a given location")
-                            .inputSchema(weatherSchema)
-                            .build())
-                    .addUserMessage("What is the weather like where I am?")
-                    .build();
+        MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_4_0)
+          .maxTokens(1024)
+          .addTool(
+            Tool.builder()
+              .name("get_location")
+              .description(
+                "Get the current user location based on their IP address. This tool has no parameters or arguments."
+              )
+              .inputSchema(locationSchema)
+              .build()
+          )
+          .addTool(
+            Tool.builder()
+              .name("get_weather")
+              .description("Get the current weather in a given location")
+              .inputSchema(weatherSchema)
+              .build()
+          )
+          .addUserMessage("What is the weather like where I am?")
+          .build();
 
-            Message message = client.messages().create(params);
-            System.out.println(message);
-        }
+        Message message = client.messages().create(params);
+        System.out.println(message);
+      }
     }
     ```
 

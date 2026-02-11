@@ -94,23 +94,17 @@ response = client.beta.messages.create(
     max_tokens=1024,
     tools=[
         {
-          "type": "computer_20251124",
-          "name": "computer",
-          "display_width_px": 1024,
-          "display_height_px": 768,
-          "display_number": 1,
+            "type": "computer_20251124",
+            "name": "computer",
+            "display_width_px": 1024,
+            "display_height_px": 768,
+            "display_number": 1,
         },
-        {
-          "type": "text_editor_20250728",
-          "name": "str_replace_based_edit_tool"
-        },
-        {
-          "type": "bash_20250124",
-          "name": "bash"
-        }
+        {"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"},
+        {"type": "bash_20250124", "name": "bash"},
     ],
     messages=[{"role": "user", "content": "Save a picture of a cat to my desktop."}],
-    betas=["computer-use-2025-11-24"]
+    betas=["computer-use-2025-11-24"],
 )
 print(response)
 ```
@@ -256,13 +250,22 @@ async def sampling_loop(
     """
     # Set up tools and API parameters
     client = Anthropic(api_key=api_key)
-    beta_flag = "computer-use-2025-01-24" if "20250124" in tool_version else "computer-use-2024-10-22"
+    beta_flag = (
+        "computer-use-2025-01-24"
+        if "20250124" in tool_version
+        else "computer-use-2024-10-22"
+    )
 
     # Configure tools - you should already have these initialized elsewhere
     tools = [
-        {"type": f"computer_{tool_version}", "name": "computer", "display_width_px": 1024, "display_height_px": 768},
+        {
+            "type": f"computer_{tool_version}",
+            "name": "computer",
+            "display_width_px": 1024,
+            "display_height_px": 768,
+        },
         {"type": f"text_editor_{tool_version}", "name": "str_replace_editor"},
-        {"type": f"bash_{tool_version}", "name": "bash"}
+        {"type": f"bash_{tool_version}", "name": "bash"},
     ]
 
     # Main agent loop (with iteration limit to prevent runaway API costs)
@@ -281,7 +284,7 @@ async def sampling_loop(
             messages=messages,
             tools=tools,
             betas=[beta_flag],
-            thinking=thinking
+            thinking=thinking,
         )
 
         # Add Claude's response to the conversation history
@@ -297,11 +300,9 @@ async def sampling_loop(
                 result = {"result": "Tool executed successfully"}
 
                 # Format the result for Claude
-                tool_results.append({
-                    "type": "tool_result",
-                    "tool_use_id": block.id,
-                    "content": result
-                })
+                tool_results.append(
+                    {"type": "tool_result", "tool_use_id": block.id, "content": result}
+                )
 
         # If no tools were used, Claude is done - return the final messages
         if not tool_results:
@@ -568,41 +569,40 @@ response = client.beta.messages.create(
     max_tokens=1024,
     tools=[
         {
-          "type": "computer_20250124",
-          "name": "computer",
-          "display_width_px": 1024,
-          "display_height_px": 768,
-          "display_number": 1,
+            "type": "computer_20250124",
+            "name": "computer",
+            "display_width_px": 1024,
+            "display_height_px": 768,
+            "display_number": 1,
         },
+        {"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"},
+        {"type": "bash_20250124", "name": "bash"},
         {
-          "type": "text_editor_20250728",
-          "name": "str_replace_based_edit_tool"
-        },
-        {
-          "type": "bash_20250124",
-          "name": "bash"
-        },
-        {
-          "name": "get_weather",
-          "description": "Get the current weather in a given location",
-          "input_schema": {
-            "type": "object",
-            "properties": {
-              "location": {
-                "type": "string",
-                "description": "The city and state, e.g. San Francisco, CA"
-              },
-              "unit": {
-                "type": "string",
-                "enum": ["celsius", "fahrenheit"],
-                "description": "The unit of temperature, either 'celsius' or 'fahrenheit'"
-              }
+            "name": "get_weather",
+            "description": "Get the current weather in a given location",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The city and state, e.g. San Francisco, CA",
+                    },
+                    "unit": {
+                        "type": "string",
+                        "enum": ["celsius", "fahrenheit"],
+                        "description": "The unit of temperature, either 'celsius' or 'fahrenheit'",
+                    },
+                },
+                "required": ["location"],
             },
-            "required": ["location"]
-          }
         },
     ],
-    messages=[{"role": "user", "content": "Find flights from San Francisco to a place with warmer weather."}],
+    messages=[
+        {
+            "role": "user",
+            "content": "Find flights from San Francisco to a place with warmer weather.",
+        }
+    ],
     betas=["computer-use-2025-01-24"],
     thinking={"type": "enabled", "budget_tokens": 1024},
 )
@@ -610,7 +610,7 @@ print(response)
 ```
 
 ```typescript TypeScript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
@@ -618,113 +618,123 @@ const message = await anthropic.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
   tools: [
-      {
-        type: "computer_20250124",
-        name: "computer",
-        display_width_px: 1024,
-        display_height_px: 768,
-        display_number: 1,
-      },
-      {
-        type: "text_editor_20250728",
-        name: "str_replace_based_edit_tool"
-      },
-      {
-        type: "bash_20250124",
-        name: "bash"
-      },
-      {
-        name: "get_weather",
-        description: "Get the current weather in a given location",
-        input_schema: {
-          type: "object",
-          properties: {
-            location: {
-              type: "string",
-              description: "The city and state, e.g. San Francisco, CA"
-            },
-            unit: {
-              type: "string",
-              enum: ["celsius", "fahrenheit"],
-              description: "The unit of temperature, either 'celsius' or 'fahrenheit'"
-            }
+    {
+      type: "computer_20250124",
+      name: "computer",
+      display_width_px: 1024,
+      display_height_px: 768,
+      display_number: 1
+    },
+    {
+      type: "text_editor_20250728",
+      name: "str_replace_based_edit_tool"
+    },
+    {
+      type: "bash_20250124",
+      name: "bash"
+    },
+    {
+      name: "get_weather",
+      description: "Get the current weather in a given location",
+      input_schema: {
+        type: "object",
+        properties: {
+          location: {
+            type: "string",
+            description: "The city and state, e.g. San Francisco, CA"
           },
-          required: ["location"]
-        }
-      },
+          unit: {
+            type: "string",
+            enum: ["celsius", "fahrenheit"],
+            description: "The unit of temperature, either 'celsius' or 'fahrenheit'"
+          }
+        },
+        required: ["location"]
+      }
+    }
   ],
   messages: [{ role: "user", content: "Find flights from San Francisco to a place with warmer weather." }],
   betas: ["computer-use-2025-01-24"],
-  thinking: { type: "enabled", budget_tokens: 1024 },
+  thinking: { type: "enabled", budget_tokens: 1024 }
 });
 console.log(message);
 ```
 ```java Java
-import java.util.List;
-import java.util.Map;
-
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
 import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.beta.messages.BetaToolBash20250124;
-import com.anthropic.models.beta.messages.BetaToolComputerUse20250124;
-import com.anthropic.models.beta.messages.BetaToolTextEditor20250124;
 import com.anthropic.models.beta.messages.BetaThinkingConfigEnabled;
 import com.anthropic.models.beta.messages.BetaThinkingConfigParam;
 import com.anthropic.models.beta.messages.BetaTool;
+import com.anthropic.models.beta.messages.BetaToolBash20250124;
+import com.anthropic.models.beta.messages.BetaToolComputerUse20250124;
+import com.anthropic.models.beta.messages.BetaToolTextEditor20250124;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import java.util.List;
+import java.util.Map;
 
 public class MultipleToolsExample {
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model("claude-opus-4-6")
-                .maxTokens(1024)
-                .addTool(BetaToolComputerUse20250124.builder()
-                        .displayWidthPx(1024)
-                        .displayHeightPx(768)
-                        .displayNumber(1)
-                        .build())
-                .addTool(BetaToolTextEditor20250124.builder()
-                        .build())
-                .addTool(BetaToolBash20250124.builder()
-                        .build())
-                .addTool(BetaTool.builder()
-                        .name("get_weather")
-                        .description("Get the current weather in a given location")
-                        .inputSchema(BetaTool.InputSchema.builder()
-                                .properties(
-                                        JsonValue.from(
-                                                Map.of(
-                                                        "location", Map.of(
-                                                                "type", "string",
-                                                                "description", "The city and state, e.g. San Francisco, CA"
-                                                        ),
-                                                        "unit", Map.of(
-                                                                "type", "string",
-                                                                "enum", List.of("celsius", "fahrenheit"),
-                                                                "description", "The unit of temperature, either 'celsius' or 'fahrenheit'"
-                                                        )
-                                                )
-                                        ))
-                                .build()
-                        )
-                        .build())
-                .thinking(BetaThinkingConfigParam.ofEnabled(
-                        BetaThinkingConfigEnabled.builder()
-                                .budgetTokens(1024)
-                                .build()
-                ))
-                .addUserMessage("Find flights from San Francisco to a place with warmer weather.")
-                .addBeta("computer-use-2025-01-24")
-                .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model("claude-opus-4-6")
+      .maxTokens(1024)
+      .addTool(
+        BetaToolComputerUse20250124.builder()
+          .displayWidthPx(1024)
+          .displayHeightPx(768)
+          .displayNumber(1)
+          .build()
+      )
+      .addTool(BetaToolTextEditor20250124.builder().build())
+      .addTool(BetaToolBash20250124.builder().build())
+      .addTool(
+        BetaTool.builder()
+          .name("get_weather")
+          .description("Get the current weather in a given location")
+          .inputSchema(
+            BetaTool.InputSchema.builder()
+              .properties(
+                JsonValue.from(
+                  Map.of(
+                    "location",
+                    Map.of(
+                      "type",
+                      "string",
+                      "description",
+                      "The city and state, e.g. San Francisco, CA"
+                    ),
+                    "unit",
+                    Map.of(
+                      "type",
+                      "string",
+                      "enum",
+                      List.of("celsius", "fahrenheit"),
+                      "description",
+                      "The unit of temperature, either 'celsius' or 'fahrenheit'"
+                    )
+                  )
+                )
+              )
+              .build()
+          )
+          .build()
+      )
+      .thinking(
+        BetaThinkingConfigParam.ofEnabled(
+          BetaThinkingConfigEnabled.builder().budgetTokens(1024).build()
+        )
+      )
+      .addUserMessage("Find flights from San Francisco to a place with warmer weather.")
+      .addBeta("computer-use-2025-01-24")
+      .build();
 
-        BetaMessage message = client.beta().messages().create(params);
-        System.out.println(message);
-    }
+    BetaMessage message = client.beta().messages().create(params);
+    System.out.println(message);
+  }
 }
 ```
 </CodeGroup>
@@ -767,12 +777,12 @@ The computer use tool is implemented as a schema-less tool. When using this tool
         if content.type == "tool_use":
             action = content.input["action"]
             result = handle_computer_action(action, content.input)
-            
+
             # Return result to Claude
             tool_result = {
                 "type": "tool_result",
                 "tool_use_id": content.id,
-                "content": result
+                "content": result,
             }
     ```
   </Step>
@@ -781,14 +791,14 @@ The computer use tool is implemented as a schema-less tool. When using this tool
     ```python
     while True:
         response = client.beta.messages.create(...)
-        
+
         # Check if Claude used any tools
         tool_results = process_tool_calls(response)
-        
+
         if not tool_results:
             # No more tool use, task complete
             break
-            
+
         # Continue conversation with tool results
         messages.append({"role": "user", "content": tool_results})
     ```
@@ -871,6 +881,7 @@ To fix this, resize screenshots yourself and scale Claude's coordinates back up:
 ```python Python
 import math
 
+
 def get_scale_factor(width, height):
     """Calculate scale factor to meet API constraints."""
     long_edge = max(width, height)
@@ -881,6 +892,7 @@ def get_scale_factor(width, height):
 
     return min(1.0, long_edge_scale, total_pixels_scale)
 
+
 # When capturing screenshot
 scale = get_scale_factor(screen_width, screen_height)
 scaled_width = int(screen_width * scale)
@@ -888,6 +900,7 @@ scaled_height = int(screen_height * scale)
 
 # Resize image to scaled dimensions before sending to Claude
 screenshot = capture_and_resize(scaled_width, scaled_height)
+
 
 # When handling Claude's coordinates, scale them back up
 def execute_click(x, y):
@@ -978,6 +991,7 @@ def validate_action(action_type, params):
 Keep a log of all actions for troubleshooting:
 ```python
 import logging
+
 
 def log_action(action_type, params, result):
     logging.info(f"Action: {action_type}, Params: {params}, Result: {result}")

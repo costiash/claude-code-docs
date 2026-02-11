@@ -28,28 +28,27 @@ This HEX color code represents a vivid, bold shade of red. Red is commonly assoc
 import anthropic
 
 client = anthropic.Anthropic(
-  # defaults to os.environ.get("ANTHROPIC_API_KEY")
-  api_key="my_api_key",
+    # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=500,
-  temperature=0.5,
-  system="Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\"",
-  messages=[
-    {
-    "role": "user",
-    "content": [
+    model="claude-opus-4-6",
+    max_tokens=500,
+    temperature=0.5,
+    system='Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with "Unable to determine a HEX color code for the given mood."',
+    messages=[
         {
-          "type": "text",
-          "text": "A passionate, intense, and fiery emotion, full of love and desire."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "A passionate, intense, and fiery emotion, full of love and desire.",
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -59,7 +58,7 @@ print(message.content)
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
+  apiKey: "my_api_key" // defaults to process.env["ANTHROPIC_API_KEY"]
 });
 
 const msg = await anthropic.messages.create({
@@ -69,11 +68,11 @@ const msg = await anthropic.messages.create({
   system: "Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\"",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "A passionate, intense, and fiery emotion, full of love and desire."
+          type: "text",
+          text: "A passionate, intense, and fiery emotion, full of love and desire."
         }
       ]
     }
@@ -97,21 +96,20 @@ message = client.messages.create(
     model="anthropic.claude-opus-4-6-v1",
     max_tokens=500,
     temperature=0.5,
-    system="Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\"",
+    system='Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with "Unable to determine a HEX color code for the given mood."',
     messages=[
         {
             "role": "user",
             "content": [
                 {
                     "type": "text",
-                    "text": "A passionate, intense, and fiery emotion, full of love and desire."
+                    "text": "A passionate, intense, and fiery emotion, full of love and desire.",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
@@ -131,11 +129,11 @@ const msg = await client.messages.create({
   system: "Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\"",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "A passionate, intense, and fiery emotion, full of love and desire."
+          type: "text",
+          text: "A passionate, intense, and fiery emotion, full of love and desire."
         }
       ]
     }
@@ -157,28 +155,27 @@ message = client.messages.create(
     model="claude-sonnet-4@20250514",
     max_tokens=500,
     temperature=0.5,
-    system="Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\"",
+    system='Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with "Unable to determine a HEX color code for the given mood."',
     messages=[
         {
             "role": "user",
             "content": [
                 {
                     "type": "text",
-                    "text": "A passionate, intense, and fiery emotion, full of love and desire."
+                    "text": "A passionate, intense, and fiery emotion, full of love and desire.",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
-
 ```
 
 </Tab>
 <Tab title="Vertex AI TypeScript">
 
 ```typescript
-import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
+import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 // Reads from the `CLOUD_ML_REGION` & `ANTHROPIC_VERTEX_PROJECT_ID` environment variables.
 // Additionally goes through the standard `google-auth-library` flow.
@@ -191,11 +188,11 @@ const msg = await client.messages.create({
   system: "Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\"",
   messages: [
     {
-      "role": "user",
-      "content": [
+      role: "user",
+      content: [
         {
-          "type": "text",
-          "text": "A passionate, intense, and fiery emotion, full of love and desire."
+          type: "text",
+          text: "A passionate, intense, and fiery emotion, full of love and desire."
         }
       ]
     }
