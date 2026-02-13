@@ -11,7 +11,7 @@ Write LaTeX documents, generating code for mathematical equations, tables, and m
 | System | You are an AI assistant with expertise in LaTeX, a document preparation system widely used for academic and technical writing. Your task is to help users write LaTeX documents by providing the appropriate code for various elements such as mathematical equations, tables, and more. Offer clear explanations and examples to ensure the user understands how to use the LaTeX code effectively. |
 | User   | I need to create a simple table with three columns and two rows. The header row should contain the titles "Name," "Age," and "City." The data row should have the values "John," "25," and "New York."                                                                                                                                                                                               |
 
-## Example Output
+## Example output
 
 Here's the LaTeX code to create a simple table with three columns and two rows, including a header row with the titles "Name," "Age," and "City," and a data row with the values "John," "25," and "New York":
 
@@ -45,7 +45,7 @@ Explanation:
 
 When you compile your LaTeX document, this code will generate a table that looks like this:
 
-```
+```text
 +------+-----+----------+
 | Name | Age |   City   |
 +------+-----+----------+
@@ -56,7 +56,7 @@ When you compile your LaTeX document, this code will generate a table that looks
 
 ---
 
-## API Request
+## API request
 
 <Tabs>
 <Tab title="Python">

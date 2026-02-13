@@ -68,7 +68,7 @@ asyncio.run(track_usage())
 
 Here's how messages and usage are reported in a typical multi-step conversation:
 
-```
+```text
 <!-- Step 1: Initial request with parallel tool uses -->
 assistant (text)      { id: "msg_1", usage: { output_tokens: 100, ... } }
 assistant (tool_use)  { id: "msg_1", usage: { output_tokens: 100, ... } }
@@ -86,7 +86,7 @@ assistant (text)      { id: "msg_2", usage: { output_tokens: 98, ... } }
 
 ### 1. Same ID = Same Usage
 
-**All messages with the same `id` field report identical usage**. When Claude sends multiple messages in the same turn (e.g., text + tool uses), they share the same message ID and usage data.
+**All messages with the same `id` field report identical usage**. When Claude sends multiple messages in the same turn (for example, text + tool uses), they share the same message ID and usage data.
 
 ```typescript
 // All these messages have the same ID and usage
@@ -121,7 +121,7 @@ console.log("Total cost:", result.usage.total_cost_usd);
 
 ### 4. Per-Model Usage Breakdown
 
-The result message also includes `modelUsage`, which provides authoritative per-model usage data. Like `total_cost_usd`, this field is accurate and suitable for billing purposes. This is especially useful when using multiple models (e.g., Haiku for subagents, Opus for the main agent).
+The result message also includes `modelUsage`, which provides authoritative per-model usage data. Like `total_cost_usd`, this field is accurate and suitable for billing purposes. This is especially useful when using multiple models (for example, Haiku for subagents, Opus for the main agent).
 
 ```typescript
 // modelUsage provides per-model breakdown
@@ -333,7 +333,7 @@ Each usage object contains:
 - `output_tokens`: Tokens generated in the response
 - `cache_creation_input_tokens`: Tokens used to create cache entries
 - `cache_read_input_tokens`: Tokens read from cache
-- `service_tier`: The service tier used (e.g., "standard")
+- `service_tier`: The service tier used (for example, "standard")
 - `total_cost_usd`: Total cost in USD (only in result message)
 
 ## Example: Building a Billing Dashboard

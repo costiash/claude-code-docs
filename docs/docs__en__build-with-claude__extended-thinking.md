@@ -361,7 +361,7 @@ You cannot toggle thinking in the middle of an assistant turn, including during 
 From the model's perspective, **tool use loops are part of the assistant turn**. An assistant turn doesn't complete until Claude finishes its full response, which may include multiple tool calls and results.
 
 For example, this sequence is all part of a **single assistant turn**:
-```
+```text
 User: "What's the weather in Paris?"
 Assistant: [thinking] + [tool_use: get_weather]
 User: [tool_result: "20°C, sunny"]
@@ -384,7 +384,7 @@ This means that attempting to toggle thinking mid-turn won't cause an error, but
 **Best practice**: Plan your thinking strategy at the start of each turn rather than trying to toggle mid-turn.
 
 **Example: Toggling thinking after completing a turn**
-```
+```text
 User: "What's the weather?"
 Assistant: [tool_use] (thinking disabled)
 User: [tool_result]
@@ -616,7 +616,7 @@ Here are some important considerations for interleaved thinking:
 - Interleaved thinking is only supported for [tools used via the Messages API](/docs/en/agents-and-tools/tool-use/overview).
 - For Claude 4 models, interleaved thinking requires the beta header `interleaved-thinking-2025-05-14`.
 - Direct calls to the Claude API allow you to pass `interleaved-thinking-2025-05-14` in requests to any model, with no effect.
-- On 3rd-party platforms (e.g., [Amazon Bedrock](/docs/en/build-with-claude/claude-on-amazon-bedrock) and [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4, or Sonnet 4, your request will fail.
+- On 3rd-party platforms (for example, [Amazon Bedrock](/docs/en/build-with-claude/claude-on-amazon-bedrock) and [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4, or Sonnet 4, your request will fail.
 
 <section title="Tool use without interleaved thinking">
 
@@ -703,28 +703,28 @@ When using extended thinking with tool use, thinking blocks exhibit specific cac
 **Detailed example flow:**
 
 **Request 1:**
-```
+```text
 User: "What's the weather in Paris?"
 ```
 **Response 1:**
-```
+```text
 [thinking_block_1] + [tool_use block 1]
 ```
 
 **Request 2:**
-```
+```text
 User: ["What's the weather in Paris?"],
 Assistant: [thinking_block_1] + [tool_use block 1],
 User: [tool_result_1, cache=True]
 ```
 **Response 2:**
-```
+```text
 [thinking_block_2] + [text block 2]
 ```
 Request 2 writes a cache of the request content (not the response). The cache includes the original user message, the first thinking block, tool use block, and the tool result.
 
 **Request 3:**
-```
+```text
 User: ["What's the weather in Paris?"],
 Assistant: [thinking_block_1] + [tool_use block 1],
 User: [tool_result_1, cache=True],
@@ -732,7 +732,7 @@ Assistant: [thinking_block_2] + [text block 2],
 User: [Text response, cache=True]
 ```
 For Claude Opus 4.5 and later (including Claude Opus 4.6), all previous thinking blocks are kept by default. For older models, because a non-tool-result user block was included, all previous thinking blocks are ignored. This request will be processed the same as:
-```
+```text
 User: ["What's the weather in Paris?"],
 Assistant: [tool_use block 1],
 User: [tool_result_1, cache=True],
@@ -1202,7 +1202,7 @@ The diagram below demonstrates the specialized token management when extended th
 
 The effective context window is calculated as:
 
-```
+```text
 context window =
   (current input tokens - previous thinking tokens) +
   (thinking tokens + encrypted thinking tokens + text output tokens)
@@ -1216,7 +1216,7 @@ When using extended thinking with tool use, thinking blocks must be explicitly p
 
 The effective context window calculation for extended thinking with tool use becomes:
 
-```
+```text
 context window =
   (current input tokens + previous thinking tokens + tool use tokens) +
   (thinking tokens + encrypted thinking tokens + text output tokens)

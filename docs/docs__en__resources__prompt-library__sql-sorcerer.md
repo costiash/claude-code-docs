@@ -23,7 +23,7 @@ GROUP BY c.customer_id, c.first_name, c.last_name;
 
 ```
 
-## API Request
+## API request
 
 ---
 
@@ -213,4 +213,3 @@ console.log(msg);
 ```
 </Tab>
 </Tabs>
-```

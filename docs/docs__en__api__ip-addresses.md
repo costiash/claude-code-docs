@@ -26,7 +26,7 @@ These are the stable IP addresses that Anthropic uses for outbound requests (for
 
 *The following individual IP addresses are still in use, but will be phased out starting January 15, 2026.*
 
-```
+```text
 34.162.46.92/32
 34.162.102.82/32
 34.162.136.91/32

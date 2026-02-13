@@ -213,5 +213,3 @@ console.log(msg);
 ```
 </Tab>
 </Tabs>
-
-```

@@ -66,8 +66,8 @@ asyncio.run(main())
 ### Path specifications
 
 Plugin paths can be:
-- **Relative paths**: Resolved relative to your current working directory (e.g., `"./plugins/my-plugin"`)
-- **Absolute paths**: Full file system paths (e.g., `"/home/user/plugins/my-plugin"`)
+- **Relative paths**: Resolved relative to your current working directory (for example, `"./plugins/my-plugin"`)
+- **Absolute paths**: Full file system paths (for example, `"/home/user/plugins/my-plugin"`)
 
 <Note>
 The path should point to the plugin's root directory (the directory containing `.claude-plugin/plugin.json`).
@@ -171,7 +171,7 @@ asyncio.run(main())
 </CodeGroup>
 
 <Note>
-If you installed a plugin via the CLI (e.g., `/plugin install my-plugin@marketplace`), you can still use it in the SDK by providing its installation path. Check `~/.claude/plugins/` for CLI-installed plugins.
+If you installed a plugin via the CLI (for example, `/plugin install my-plugin@marketplace`), you can still use it in the SDK by providing its installation path. Check `~/.claude/plugins/` for CLI-installed plugins.
 </Note>
 
 ## Complete example
@@ -260,7 +260,7 @@ if __name__ == "__main__":
 
 A plugin directory must contain a `.claude-plugin/plugin.json` manifest file. It can optionally include:
 
-```
+```text
 my-plugin/
 ├── .claude-plugin/
 │   └── plugin.json          # Required: plugin manifest

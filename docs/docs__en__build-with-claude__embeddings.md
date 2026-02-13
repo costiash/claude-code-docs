@@ -18,7 +18,7 @@ Anthropic does not offer its own embedding model. One embeddings provider that h
 
 Voyage AI makes state-of-the-art embedding models and offers customized models for specific industry domains such as finance and healthcare, or bespoke fine-tuned models for individual customers.
 
-The rest of this guide is for Voyage AI, but we encourage you to assess a variety of embeddings vendors to find the best fit for your specific use case.
+The rest of this guide is for Voyage AI, but you should assess a variety of embeddings vendors to find the best fit for your specific use case.
 
 ## Available Models
 
@@ -81,7 +81,7 @@ print(result.embeddings[1])
 
 `result.embeddings` will be a list of two embedding vectors, each containing 1024 floating-point numbers. After running the above code, the two embeddings will be printed on the screen:
 
-```
+```text
 [-0.013131560757756233, 0.019828535616397858, ...]   # embedding for "Sample text 1"
 [-0.0069352793507277966, 0.020878976210951805, ...]  # embedding for "Sample text 2"
 ```
@@ -188,7 +188,7 @@ Note that we use `input_type="document"` and `input_type="query"` for embedding 
 
 The output would be the 5th document, which is indeed the most relevant to the query:
 
-```
+```text
 Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET.
 ```
 
@@ -244,7 +244,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
 
   <section title="When and how should I use the input_type parameter?">
 
-    For all retrieval tasks and use cases (e.g., RAG), we recommend that the `input_type` parameter be used to specify whether the input text is a query or document. Do not omit `input_type` or set `input_type=None`. Specifying whether input text is a query or document can create better dense vector representations for retrieval, which can lead to better retrieval quality.
+    For all retrieval tasks and use cases (for example, RAG), use the `input_type` parameter to specify whether the input text is a query or document. Do not omit `input_type` or set `input_type=None`. Specifying whether input text is a query or document can create better dense vector representations for retrieval, which can lead to better retrieval quality.
 
     When using the `input_type` parameter, special prompts are prepended to the input text prior to embedding. Specifically:
 

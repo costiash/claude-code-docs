@@ -17,21 +17,19 @@ Calculate the time complexity of functions and algorithms.
 >
 > Step 1: Analyzing the first loop
 >
-> ```
+> ```python
 > for i in range(n):
->    print(i)
->
+>     print(i)
 > ```
 
 > This loop iterates `n` times and performs a constant-time operation (`print(i)`) in each iteration. Therefore, the time complexity of this step is O(n).
 >
 > Step 2: Analyzing the nested loops
 >
-> ```
+> ```python
 > for j in range(n):
 >     for k in range(n):
 >         print(j, k)
->
 > ```
 >
 > The outer loop iterates `n` times, and for each iteration, the inner loop also iterates `n` times. In each iteration of the inner loop, a constant-time operation (`print(j, k)`) is performed. Therefore, the time complexity of the nested loops is O(n \* n) = O(n^2).

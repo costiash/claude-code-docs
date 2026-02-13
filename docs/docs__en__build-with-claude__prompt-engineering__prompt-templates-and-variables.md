@@ -36,7 +36,7 @@ The [Claude Console](/) heavily uses prompt templates and variables in order to 
 Let's consider a simple application that translates English text to Spanish. The translated text would be variable since you would expect this text to change between users or calls to Claude. This translated text could be dynamically retrieved from databases or the user's input.
 
 Thus, for your translation app, you might use this simple prompt template:
-```
+```text
 Translate this text from English to Spanish: {{text}}
 ```
 

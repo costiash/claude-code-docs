@@ -1,13 +1,13 @@
 # Adaptive thinking
 
-Let Claude dynamically decide when and how much to think with adaptive thinking mode.
+Let Claude dynamically determine when and how much to use extended thinking with adaptive thinking mode.
 
 ---
 
-Adaptive thinking is the recommended way to use [extended thinking](/docs/en/build-with-claude/extended-thinking) with Claude Opus 4.6. Instead of manually setting a thinking token budget, adaptive thinking lets Claude dynamically decide when and how much to think based on the complexity of each request.
+Adaptive thinking is the recommended way to use [extended thinking](/docs/en/build-with-claude/extended-thinking) with Claude Opus 4.6. Instead of manually setting a thinking token budget, adaptive thinking lets Claude dynamically determine when and how much to use extended thinking based on the complexity of each request.
 
 <Tip>
-Adaptive thinking reliably drives better performance than extended thinking with a fixed `budget_tokens`, and we recommend moving to adaptive thinking to get the most intelligent responses from Opus 4.6. No beta header is required.
+Adaptive thinking reliably drives better performance than extended thinking with a fixed `budget_tokens`. Move to adaptive thinking to get the most intelligent responses from Opus 4.6. No beta header is required.
 </Tip>
 
 ## Supported models
@@ -24,7 +24,7 @@ Older models (Sonnet 4.5, Opus 4.5, etc.) do not support adaptive thinking and r
 
 ## How adaptive thinking works
 
-In adaptive mode, thinking is optional for the model. Claude evaluates the complexity of each request and decides whether and how much to think. At the default effort level (`high`), Claude will almost always think. At lower effort levels, Claude may skip thinking for simpler problems.
+In adaptive mode, thinking is optional for the model. Claude evaluates the complexity of each request and determines whether and how much to use extended thinking. At the default effort level (`high`), Claude will almost always think. At lower effort levels, Claude may skip thinking for simpler problems.
 
 Adaptive thinking also automatically enables [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking). This means Claude can think between tool calls, making it especially effective for agentic workflows.
 
@@ -242,12 +242,12 @@ for await (const event of stream) {
 
 | Mode | Config | Availability | When to use |
 |:-----|:-------|:-------------|:------------|
-| **Adaptive** | `thinking: {type: "adaptive"}` | Opus 4.6 | Claude decides when and how much to think. Use `effort` to guide. |
+| **Adaptive** | `thinking: {type: "adaptive"}` | Opus 4.6 | Claude determines when and how much to use extended thinking. Use `effort` to guide. |
 | **Manual** | `thinking: {type: "enabled", budget_tokens: N}` | All models. Deprecated on Opus 4.6 — use adaptive mode instead. | When you need precise control over thinking token spend. |
 | **Disabled** | Omit `thinking` parameter | All models | When you don't need extended thinking and want the lowest latency. |
 
 <Note>
-Adaptive thinking is currently available on Opus 4.6. Older models only support `type: "enabled"` with `budget_tokens`. On Opus 4.6, `type: "enabled"` with `budget_tokens` is still accepted but deprecated — we recommend using adaptive thinking with the [effort parameter](/docs/en/build-with-claude/effort) instead.
+Adaptive thinking is currently available on Opus 4.6. Older models only support `type: "enabled"` with `budget_tokens`. On Opus 4.6, `type: "enabled"` with `budget_tokens` is still accepted but deprecated. Use adaptive thinking with the [effort parameter](/docs/en/build-with-claude/effort) instead.
 </Note>
 
 ## Important considerations
@@ -264,7 +264,7 @@ Consecutive requests using `adaptive` thinking preserve [prompt cache](/docs/en/
 
 Adaptive thinking's triggering behavior is promptable. If Claude is thinking more or less often than you'd like, you can add guidance to your system prompt:
 
-```
+```text
 Extended thinking adds latency and should only be used when it
 will meaningfully improve answer quality — typically for problems
 that require multi-step reasoning. When in doubt, respond directly.

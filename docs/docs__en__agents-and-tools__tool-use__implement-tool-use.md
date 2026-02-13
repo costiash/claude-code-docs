@@ -9,7 +9,7 @@ We recommend using the latest Claude Opus (4.6) model for complex tools and ambi
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 
 <Tip>
-If using Claude with tool use and extended thinking, refer to our guide [here](/docs/en/build-with-claude/extended-thinking) for more information.
+If using Claude with tool use and extended thinking, refer to the [extended thinking guide](/docs/en/build-with-claude/extended-thinking) for more information.
 </Tip>
 
 ## Specifying client tools
@@ -55,7 +55,7 @@ This tool, named `get_weather`, expects an input object with a required `locatio
 
 When you call the Claude API with the `tools` parameter, we construct a special system prompt from the tool definitions, tool configuration, and any user-specified system prompt. The constructed prompt is designed to instruct the model to use the specified tool(s) and provide the necessary context for the tool to operate properly:
 
-```
+```text
 In this environment you have access to a set of tools you can use to answer the user's question.
 {{ FORMATTING INSTRUCTIONS }}
 String and scalar parameters should be specified as is, while lists and objects should use JSON format. Note that spaces for string values are not stripped. The output is not expected to be valid XML and is parsed with regular expressions.
@@ -976,7 +976,7 @@ The SDK tool runner is in beta. The rest of this document covers manual tool imp
 
 In some cases, you may want Claude to use a specific tool to answer the user's question, even if Claude thinks it can provide an answer without using a tool. You can do this by specifying the tool in the `tool_choice` field like so:
 
-```
+```text
 tool_choice = {"type": "tool", "name": "get_weather"}
 ```
 
@@ -1629,7 +1629,7 @@ When you receive a tool use response for a client tool, you should:
 2. Run the actual tool in your codebase corresponding to that tool name, passing in the tool `input`.
 3. Continue the conversation by sending a new message with the `role` of `user`, and a `content` block containing the `tool_result` type and the following information:
    - `tool_use_id`: The `id` of the tool use request this is a result for.
-   - `content`: The result of the tool, as a string (e.g. `"content": "15 degrees"`), a list of nested content blocks (e.g. `"content": [{"type": "text", "text": "15 degrees"}]`), or a list of document blocks (e.g. `"content": ["type": "document", "source": {"type": "text", "media_type": "text/plain", "data": "15 degrees"}]`). These content blocks can use the `text`, `image`, or `document` types.
+   - `content`: The result of the tool, as a string (for example, `"content": "15 degrees"`), a list of nested content blocks (for example, `"content": [{"type": "text", "text": "15 degrees"}]`), or a list of document blocks (for example, `"content": ["type": "document", "source": {"type": "text", "media_type": "text/plain", "data": "15 degrees"}]`). These content blocks can use the `text`, `image`, or `document` types.
    - `is_error` (optional): Set to `true` if the tool execution resulted in an error.
 
 <Note>
@@ -1908,7 +1908,7 @@ There are a few different types of errors that can occur when using tools with C
 
 <section title="Tool execution error">
 
-If the tool itself throws an error during execution (e.g. a network error when fetching weather data), you can return the error message in the `content` along with `"is_error": true`:
+If the tool itself throws an error during execution (for example, a network error when fetching weather data), you can return the error message in the `content` along with `"is_error": true`:
 
 ```json JSON
 {
@@ -1924,12 +1924,12 @@ If the tool itself throws an error during execution (e.g. a network error when f
 }
 ```
 
-Claude will then incorporate this error into its response to the user, e.g. "I'm sorry, I was unable to retrieve the current weather because the weather service API is not available. Please try again later."
+Claude will then incorporate this error into its response to the user. For example: "I'm sorry, I was unable to retrieve the current weather because the weather service API is not available. Please try again later."
 
 </section>
 <section title="Invalid tool name">
 
-If Claude's attempted use of a tool is invalid (e.g. missing required parameters), it usually means that the there wasn't enough information for Claude to use the tool correctly. Your best bet during development is to try the request again with more-detailed `description` values in your tool definitions.
+If Claude's attempted use of a tool is invalid (for example, missing required parameters), it usually means that there wasn't enough information for Claude to use the tool correctly. Your best bet during development is to try the request again with more-detailed `description` values in your tool definitions.
 
 However, you can also continue the conversation forward with a `tool_result` that indicates the error, and Claude will try to use the tool again with the missing information filled in:
 
@@ -1961,7 +1961,7 @@ To prevent Claude from reflecting on search quality with \<search_quality_reflec
 </section>
 <section title="Server tool errors">
 
-When server tools encounter errors (e.g., network issues with Web Search), Claude will transparently handle these errors and attempt to provide an alternative response or explanation to the user. Unlike client tools, you do not need to handle `is_error` results for server tools.
+When server tools encounter errors (for example, network issues with Web Search), Claude will transparently handle these errors and attempt to provide an alternative response or explanation to the user. Unlike client tools, you do not need to handle `is_error` results for server tools.
 
 For web search specifically, possible error codes include:
 - `too_many_requests`: Rate limit exceeded

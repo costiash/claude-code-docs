@@ -624,13 +624,18 @@ data: {"type":"message_stop"}
 
 ## Error recovery
 
-When a streaming request is interrupted due to network issues, timeouts, or other errors, you can recover by resuming from where the stream was interrupted. This approach saves you from re-processing the entire response.
+For Claude 4.5 models and earlier, you can recover a streaming request that was interrupted due to network issues, timeouts, or other errors by resuming from where the stream was interrupted. This approach saves you from re-processing the entire response.
 
 The basic recovery strategy involves:
 
 1. **Capture the partial response**: Save all content that was successfully received before the error occurred
 2. **Construct a continuation request**: Create a new API request that includes the partial assistant response as the beginning of a new assistant message
 3. **Resume streaming**: Continue receiving the rest of the response from where it was interrupted
+
+For Claude Opus 4.6, you should add a user message that instructs the model to continue from where it left off. For example:
+```
+Your previous response was interrupted and ended with [previous_response]. Continue from where you left off.
+```
 
 ### Error recovery best practices
 

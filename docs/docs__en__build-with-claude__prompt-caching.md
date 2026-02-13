@@ -263,7 +263,7 @@ Consider a conversation with 30 content blocks where you set `cache_control` onl
 #### When to use multiple breakpoints
 
 You can define up to 4 cache breakpoints if you want to:
-- Cache different sections that change at different frequencies (e.g., tools rarely change, but context updates daily)
+- Cache different sections that change at different frequencies (for example, tools rarely change, but context updates daily)
 - Have more control over exactly what gets cached
 - Ensure caching for content more than 20 blocks before your final breakpoint
 - Place breakpoints before editable content to guarantee cache hits even when changes occur beyond the 20-block window
@@ -339,7 +339,7 @@ Monitor cache performance using these API response fields, within `usage` in the
 
 - `cache_creation_input_tokens`: Number of tokens written to the cache when creating a new entry.
 - `cache_read_input_tokens`: Number of tokens retrieved from the cache for this request.
-- `input_tokens`: Number of input tokens which were not read from or used to create a cache (i.e., tokens after the last cache breakpoint).
+- `input_tokens`: Number of input tokens which were not read from or used to create a cache (that is, tokens after the last cache breakpoint).
 
 <Note>
 **Understanding the token breakdown**
@@ -395,7 +395,7 @@ If experiencing unexpected behavior:
 - Verify that `tool_choice` and image usage remain consistent between calls
 - Validate that you are caching at least the minimum number of tokens
 - The system automatically checks for cache hits at previous content block boundaries (up to ~20 blocks before your breakpoint). For prompts with more than 20 content blocks, you may need additional `cache_control` parameters earlier in the prompt to ensure all content can be cached
-- Verify that the keys in your `tool_use` content blocks have stable ordering as some languages (e.g. Swift, Go) randomize key order during JSON conversion, breaking caches
+- Verify that the keys in your `tool_use` content blocks have stable ordering as some languages (for example, Swift, Go) randomize key order during JSON conversion, breaking caches
 
 <Note>
 Changes to `tool_choice` or the presence/absence of images anywhere in the prompt will invalidate the cache, requiring a new cache entry to be created. For more details on cache invalidation, see [What invalidates the cache](#what-invalidates-the-cache).
@@ -417,7 +417,7 @@ When using [extended thinking](/docs/en/build-with-claude/extended-thinking) wit
 For more details on cache invalidation, see [What invalidates the cache](#what-invalidates-the-cache).
 
 **Example with tool use**:
-```
+```text
 Request 1: User: "What's the weather in Paris?"
 Response: [thinking_block_1] + [tool_use block 1]
 
@@ -490,7 +490,7 @@ Note that the current `cache_creation_input_tokens` field equals the sum of the 
 
 ### When to use the 1-hour cache
 
-If you have prompts that are used at a regular cadence (i.e., system prompts that are used more frequently than every 5 minutes), continue to use the 5-minute cache, since this will continue to be refreshed at no additional charge.
+If you have prompts that are used at a regular cadence (that is, system prompts that are used more frequently than every 5 minutes), continue to use the 5-minute cache, since this will continue to be refreshed at no additional charge.
 
 The 1-hour cache is best used in the following scenarios:
 - When you have prompts that are likely used less frequently than 5 minutes, but more frequently than every hour. For example, when an agentic side-agent will take longer than 5 minutes, or when storing a long chat conversation with a user and you generally expect that user may not respond in the next 5 minutes.
@@ -503,7 +503,7 @@ The 5-minute and 1-hour cache behave the same with respect to latency. You will 
 
 ### Mixing different TTLs
 
-You can use both 1-hour and 5-minute cache controls in the same request, but with an important constraint: Cache entries with longer TTL must appear before shorter TTLs (i.e., a 1-hour cache entry must appear before any 5-minute cache entries).
+You can use both 1-hour and 5-minute cache controls in the same request, but with an important constraint: Cache entries with longer TTL must appear before shorter TTLs (that is, a 1-hour cache entry must appear before any 5-minute cache entries).
 
 When mixing TTLs, we determine three billing locations in your prompt:
 1. Position `A`: The token count at the highest cache hit (or 0 if no hits).
@@ -1760,7 +1760,7 @@ Prompt caching is designed with strong privacy and data separation measures:
 
 3. The caching mechanism is designed to maintain the integrity and privacy of each unique conversation or context.
 
-4. It's safe to use `cache_control` anywhere in your prompts. For cost efficiency, it's better to exclude highly variable parts (e.g., user's arbitrary input) from caching.
+4. It's safe to use `cache_control` anywhere in your prompts. For cost efficiency, it's better to exclude highly variable parts (for example, user's arbitrary input) from caching.
 
 These measures ensure that prompt caching maintains data privacy and security while offering performance benefits.
 

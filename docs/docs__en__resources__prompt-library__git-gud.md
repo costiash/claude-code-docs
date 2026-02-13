@@ -10,7 +10,7 @@ Generate appropriate Git commands based on user-described version control action
 | ---- | ----------------------------------------------------------------------------------------------------------------------------- |
 | User | I have made some changes to my local files and I want to save them in my local Git repository. What Git command should I use? |
 
-## Example Output
+## Example output
 
 To save the changes you've made to your local files in your local Git repository, you should use the following Git commands:
 
@@ -24,7 +24,7 @@ To save the changes you've made to your local files in your local Git repository
 
 For example, if you've made changes to a file named `example.txt`, you would run:
 
-```
+```bash
 git add example.txt
 git commit -m "Update example.txt with new content"
 
@@ -36,7 +36,7 @@ Remember to run these commands from within your Git repository directory in your
 
 ---
 
-## API Request
+## API request
 
 <Tabs>
 <Tab title="Python">

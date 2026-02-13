@@ -152,13 +152,13 @@ const msg = await anthropic.beta.messages.create({
 
 ## Context awareness in Claude Sonnet 4.5 and Haiku 4.5
 
-Claude Sonnet 4.5 and Claude Haiku 4.5 feature **context awareness**. This capability lets these models track their remaining context window (i.e. "token budget") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work. Claude is trained to use this context precisely, persisting in the task until the very end rather than guessing how many tokens remain. For a model, lacking context awareness is like competing in a cooking show without a clock. Claude 4.5 models change this by explicitly informing the model about its remaining context, so it can take maximum advantage of the available tokens.
+Claude Sonnet 4.5 and Claude Haiku 4.5 feature **context awareness**. This capability lets these models track their remaining context window (that is, "token budget") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work. Claude is trained to use this context precisely, persisting in the task until the very end rather than guessing how many tokens remain. For a model, lacking context awareness is like competing in a cooking show without a clock. Claude 4.5 models change this by explicitly informing the model about its remaining context, so it can take maximum advantage of the available tokens.
 
 **How it works:**
 
 At the start of a conversation, Claude receives information about its total context window:
 
-```
+```xml
 <budget:token_budget>200000</budget:token_budget>
 ```
 
@@ -166,7 +166,7 @@ The budget is set to 200K tokens (standard), 500K tokens (claude.ai Enterprise),
 
 After each tool call, Claude receives an update on remaining capacity:
 
-```
+```xml
 <system_warning>Token usage: 35000/200000; 165000 remaining</system_warning>
 ```
 

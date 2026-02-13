@@ -168,7 +168,7 @@ const response = await client.beta.messages.create({
 
 By default, compaction uses the following summarization prompt:
 
-```
+```text
 You have written a partial transcript for the initial task above. Please write a summary of the transcript. The purpose of this summary is to provide continuity so you can continue to make progress towards solving the task in a future context, where the raw history above may not be accessible and will be replaced with this summary. Write down anything that would be helpful, including the state, next steps, learnings etc. You must wrap your summary in a <summary></summary> block.
 ```
 
@@ -833,7 +833,7 @@ console.log(await chat("Now add rate limiting and error handling"));
 
 ## Current limitations
 
-- **Same model for summarization:** The model specified in your request is used for summarization. There is no option to use a different (e.g., cheaper) model for the summary.
+- **Same model for summarization:** The model specified in your request is used for summarization. There is no option to use a different (for example, cheaper) model for the summary.
 
 ## Next steps
 
