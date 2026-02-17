@@ -9,10 +9,6 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 - **JSON outputs** (`output_config.format`): Get Claude's response in a specific JSON format
 - **Strict tool use** (`strict: true`): Guarantee schema validation on tool names and inputs
 
-<Warning>
-The `output_format` parameter has been moved to `output_config.format`. The old `output_format` parameter still works temporarily but is deprecated and will be removed in a future API version. Update your code to use `output_config: {format: {...}}` instead.
-</Warning>
-
 These features can be used independently or together in the same request.
 
 <Note>
