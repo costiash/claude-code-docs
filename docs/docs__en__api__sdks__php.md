@@ -161,7 +161,7 @@ $client = new Client(
   apiKey: getenv("ANTHROPIC_API_KEY") ?: "my-anthropic-api-key"
 );
 
-$page = $client->messages->batches->list();
+$page = $client->beta->messages->batches->list(limit: 20);
 
 var_dump($page);
 
@@ -221,6 +221,12 @@ $response = $client->request(
   body: ['hello' => 'world']
 );
 ```
+
+## Semantic versioning
+
+This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. As the library is in initial development and has a major version of `0`, APIs may change at any time.
+
+This package considers improvements to the (non-runtime) PHPDoc type definitions to be non-breaking changes.
 
 ## Additional resources
 

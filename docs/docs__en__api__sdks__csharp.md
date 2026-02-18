@@ -113,7 +113,11 @@ The `WithOptions` method does not affect the original client or service.
 
 ## Streaming
 
-The SDK defines methods that return response "chunk" streams, where each chunk can be individually processed as soon as it arrives instead of waiting on the full response. Streaming methods return [`IAsyncEnumerable`](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.iasyncenumerable-1):
+The SDK defines methods that return response "chunk" streams, where each chunk can be individually processed as soon as it arrives instead of waiting on the full response. Streaming methods generally correspond to [SSE](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) or [JSONL](https://jsonlines.org) responses.
+
+A streaming method always has a `Streaming` suffix in its name, even if it doesn't have a non-streaming variant.
+
+These streaming methods return [`IAsyncEnumerable`](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.iasyncenumerable-1):
 
 ```csharp
 using System;
@@ -231,6 +235,8 @@ Console.WriteLine(message);
 
 ## Pagination
 
+The SDK defines methods that return paginated lists of results. It provides convenient ways to access the results either one page at a time or item-by-item across all pages.
+
 ### Auto-pagination
 
 To iterate through all results across all pages, use the `Paginate` method, which automatically fetches more pages as needed. The method returns an [`IAsyncEnumerable`](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.iasyncenumerable-1):
@@ -302,7 +308,7 @@ Console.WriteLine(message);
 
 ## IChatClient integration
 
-The SDK provides an implementation of the `IChatClient` interface from the `Microsoft.Extensions.AI.Abstractions` library. This enables `AnthropicClient` to be used with other libraries that integrate with these core abstractions. For example, tools in the MCP C# SDK (`ModelContextProtocol`) library can be used directly with an `AnthropicClient` exposed via `IChatClient`.
+The SDK provides an implementation of the `IChatClient` interface from the `Microsoft.Extensions.AI.Abstractions` library. This enables `AnthropicClient` (and `Anthropic.Services.IBetaService`) to be used with other libraries that integrate with these core abstractions. For example, tools in the MCP C# SDK (`ModelContextProtocol`) library can be used directly with an `AnthropicClient` exposed via `IChatClient`.
 
 ```csharp
 using Anthropic;
@@ -324,9 +330,9 @@ ChatOptions options = new() { Tools = [.. await learningServer.ListToolsAsync()]
 Console.WriteLine(await chatClient.GetResponseAsync("Tell me about IChatClient", options));
 ```
 
-## HTTP client customization
+## Requests and responses
 
-To send a request to the Claude API, build an instance of some `Params` class and pass it to the corresponding client method. When the response is received, it will be deserialized into an instance of a C# class.
+To send a request to the Claude API, build an instance of a `Params` class and pass it to the corresponding client method. When the response is received, it's deserialized into an instance of a C# class.
 
 For example, `client.Messages.Create` should be called with an instance of `MessageCreateParams`, and it will return an instance of `Task<Message>`.
 
@@ -349,7 +355,7 @@ var response = await client.Beta.Files.Download(parameters);
 Console.WriteLine(response);
 ```
 
-To save the response content to a file:
+To save the response content to a file, or any [`Stream`](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream), use the [`CopyToAsync`](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.copytoasync) method:
 
 ```csharp
 using System.IO;
@@ -357,7 +363,7 @@ using System.IO;
 using var response = await client.Beta.Files.Download(parameters);
 using var contentStream = await response.ReadAsStream();
 using var fileStream = File.Open(path, FileMode.OpenOrCreate);
-await contentStream.CopyToAsync(fileStream);
+await contentStream.CopyToAsync(fileStream); // Or any other Stream
 ```
 
 ### Raw responses
@@ -397,6 +403,10 @@ await foreach (var item in response.Enumerate())
 
 ### Logging
 
+<Warning>
+All log messages are intended for debugging only. The format and content of log messages may change between releases.
+</Warning>
+
 Enable debug logging via environment variable:
 
 ```bash
@@ -407,11 +417,31 @@ export ANTHROPIC_LOG=debug
 
 The SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.
 
-## Beta features
+## Platform integrations
+
+<Note>
+For detailed platform setup guides with code examples, see:
+- [Amazon Bedrock](/docs/en/build-with-claude/claude-on-amazon-bedrock)
+- [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry)
+</Note>
+
+The C# SDK supports Bedrock and Foundry through separate NuGet packages:
+
+- **Bedrock**: `Anthropic.Bedrock`. Uses `AnthropicBedrockClient` with `AnthropicBedrockCredentialsHelper.FromEnv()` or explicit credentials.
+- **Foundry**: `Anthropic.Foundry`. Uses `AnthropicFoundryClient` with `DefaultAnthropicFoundryCredentials.FromEnv()` or explicit credentials.
+
+## Semantic versioning
 
 <Warning>
-While this package is versioned as 10+, it is currently in beta. During the beta period, breaking changes may occur in minor or patch releases. Once the library reaches stable release, SemVer conventions will be followed more strictly. Share feedback by [filing an issue](https://www.github.com/anthropics/anthropic-sdk-csharp/issues/new).
+While this package is versioned as 10+, it's currently in beta. During the beta period, breaking changes may occur in minor or patch releases. Once the library reaches stable release, SemVer conventions will be followed more strictly. Share feedback by [filing an issue](https://www.github.com/anthropics/anthropic-sdk-csharp/issues/new).
 </Warning>
+
+This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
+
+1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let the maintainers know if you're relying on such internals.)_
+2. Changes that aren't expected to impact the vast majority of users in practice.
+
+Backwards-compatibility is taken seriously to ensure you can rely on a smooth upgrade experience.
 
 ## Additional resources
 

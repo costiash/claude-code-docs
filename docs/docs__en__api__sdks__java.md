@@ -15,7 +15,7 @@ For API feature documentation with code examples, see the [API reference](/docs/
 <Tabs>
 <Tab title="Gradle">
 ```kotlin
-implementation("com.anthropic:anthropic-java:2.11.1")
+implementation("com.anthropic:anthropic-java:2.14.0")
 ```
 </Tab>
 <Tab title="Maven">
@@ -23,7 +23,7 @@ implementation("com.anthropic:anthropic-java:2.11.1")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.11.1</version>
+    <version>2.14.0</version>
 </dependency>
 ```
 </Tab>
@@ -42,7 +42,8 @@ import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 
-// Configures using the `ANTHROPIC_API_KEY` environment variable
+// Configures using the `anthropic.apiKey`, `anthropic.authToken` and `anthropic.baseUrl` system properties
+// Or configures using the `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN` and `ANTHROPIC_BASE_URL` environment variables
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
@@ -309,193 +310,13 @@ A `BetaMessageAccumulator` is also available for the accumulation of a `BetaMess
 
 ## Structured outputs
 
-[Structured Outputs](/docs/en/build-with-claude/structured-outputs) (beta) ensures that the model generates responses that adhere to a supplied JSON schema.
-
-A JSON schema can be derived automatically from the structure of an arbitrary Java class. The JSON content from the response will then be converted automatically to an instance of that class.
-
-### Defining classes
-
-Java classes can contain fields declared to be instances of other classes and can use collections:
-
-```java
-class Person {
-
-  public String name;
-  public int birthYear;
-}
-
-class Book {
-
-  public String title;
-  public Person author;
-  public int publicationYear;
-}
-
-class BookList {
-
-  public List<Book> books;
-}
-```
-
-### Using structured outputs
-
-Pass the top-level class to `outputConfig(Class<T>)` when building the parameters and then access an instance from the generated message content in the response:
-
-```java
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.beta.messages.StructuredMessageCreateParams;
-import com.anthropic.models.messages.Model;
-
-StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_6)
-        .maxTokens(2048)
-        .outputConfig(BookList.class)
-        .addUserMessage("List some famous late twentieth century novels.")
-        .build();
-
-client.beta().messages().create(createParams).content().stream()
-        .flatMap(contentBlock -> contentBlock.text().stream())
-        .flatMap(textBlock -> textBlock.text().books.stream())
-        .forEach(book -> System.out.println(book.title + " by " + book.author.name));
-```
-
-### Optional fields
-
-If a field is optional and does not require a defined value, you can represent this using `java.util.Optional`. It is up to the AI model to decide whether to provide a value for that field or leave it empty.
-
-```java
-import java.util.Optional;
-
-class Book {
-
-  public String title;
-  public Person author;
-  public int publicationYear;
-  public Optional<String> isbn;
-}
-```
-
-<Warning>
-Generic type information for fields is retained in the class's metadata, but generic type erasure applies in other scopes. While a JSON schema can be derived from a `BookList.books` field with type `List<Book>`, a valid JSON schema cannot be derived from a local variable of that same type.
-</Warning>
-
-If an error occurs while converting a JSON response to a Java class instance, the error message will include the JSON response to assist in diagnosis. If your JSON response may contain sensitive information, avoid logging it directly, or ensure that you redact any sensitive details from the error message.
-
-### Local JSON schema validation
-
-Structured Outputs supports a [subset of the JSON Schema language](/docs/en/build-with-claude/structured-outputs#json-schema-limitations). Schemas are generated automatically from classes to align with this subset. The method `outputConfig(Class<T>)` performs a validation check on the schema derived from the specified class.
-
-Key points:
-
-- **Local validation**: The validation process occurs locally, meaning no requests are sent to the remote AI model.
-- **Remote validation**: The remote AI model will conduct its own validation upon receiving the JSON schema in the request.
-- **Version compatibility**: There may be instances where local validation fails while remote validation succeeds if the SDK version is outdated.
-- **Disabling local validation**: If you encounter compatibility issues, you can disable local validation by passing `JsonSchemaLocalValidation.NO`:
-
-```java
-import com.anthropic.core.JsonSchemaLocalValidation;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.beta.messages.StructuredMessageCreateParams;
-import com.anthropic.models.messages.Model;
-
-StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_4_6)
-  .maxTokens(2048)
-  .outputConfig(BookList.class, JsonSchemaLocalValidation.NO)
-  .addUserMessage("List some famous late twentieth century novels.")
-  .build();
-```
-
-### Structured outputs with streaming
-
-Structured outputs can also be used with streaming. As responses are returned in "stream events", the full response must first be accumulated to concatenate the JSON strings that can then be converted into instances of the arbitrary Java class.
-
-Use the `BetaMessageAccumulator` as described in [Streaming with message accumulator](#streaming-with-message-accumulator) to accumulate the JSON strings. Once accumulated, use `BetaMessageAccumulator.message(Class<T>)` to convert the accumulated `BetaMessage` into a `StructuredMessage`, which can then automatically deserialize the JSON strings into instances of your Java class.
-
-### Defining JSON schema properties
-
-When a JSON schema is derived from your Java classes, all properties represented by `public` fields or `public` getter methods are included in the schema by default. Non-`public` fields and getter methods are not included by default.
-
-You can exclude `public`, or include non-`public` fields or getter methods, by using the `@JsonIgnore` or `@JsonProperty` annotations respectively.
-
-If you do not want to define `public` fields, you can define `private` fields and corresponding `public` getter methods. For example, a `private` field `myValue` with a `public` getter method `getMyValue()` will result in a `"myValue"` property being included in the JSON schema.
-
-Each of your classes must define at least one property to be included in the JSON schema. A validation error will occur if any class contains no fields or getter methods from which schema properties can be derived.
-
-### Annotating classes and JSON schemas
-
-You can use annotations to add further information to the JSON schema derived from your Java classes. The SDK supports the use of Jackson Databind annotations:
-
-```java
-import com.fasterxml.jackson.annotation.JsonClassDescription;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-
-class Person {
-
-  @JsonPropertyDescription("The first name and surname of the person")
-  public String name;
-
-  public int birthYear;
-
-  @JsonPropertyDescription("The year the person died, or 'present' if the person is living.")
-  public String deathYear;
-}
-
-@JsonClassDescription("The details of one published book")
-class Book {
-
-  public String title;
-  public Person author;
-
-  @JsonPropertyDescription("The year in which the book was first published.")
-  public int publicationYear;
-
-  @JsonIgnore
-  public String genre;
-}
-
-class BookList {
-
-  public List<Book> books;
-}
-```
-
-Annotation summary:
-
-- `@JsonClassDescription` - Add a detailed description to a class.
-- `@JsonPropertyDescription` - Add a detailed description to a field or getter method.
-- `@JsonIgnore` - Exclude a `public` field or getter method from the generated JSON schema.
-- `@JsonProperty` - Include a non-`public` field or getter method in the generated JSON schema.
-
-If you use `@JsonProperty(required = false)`, the `false` value will be ignored. Anthropic JSON schemas must mark all properties as required.
-
-You can also use OpenAPI Swagger 2 `@Schema` and `@ArraySchema` annotations for type-specific constraints:
-
-```java
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Schema;
-
-class Article {
-
-  @ArraySchema(minItems = 1)
-  public List<String> authors;
-
-  public String title;
-
-  @Schema(format = "date")
-  public String publicationDate;
-
-  @Schema(minimum = "1")
-  public int pageCount;
-}
-```
-
-If you use both Jackson and Swagger annotations to set the same schema field, the Jackson annotation will take precedence.
+For complete structured outputs documentation including Java examples, see [Structured Outputs](/docs/en/build-with-claude/structured-outputs).
 
 ## Tool use
 
-[Tool Use](/docs/en/agents-and-tools/tool-use/overview) lets you integrate external tools and functions directly into the AI model's responses. You define JSON schemas for tools, and the model uses the schemas to decide when and how to use these tools.
+[Tool Use](/docs/en/agents-and-tools/tool-use/overview) lets you integrate external tools and functions directly into the AI model's responses. Instead of producing plain text, the model can output instructions (with parameters) for invoking a tool or calling a function when appropriate. You define JSON schemas for tools, and the model uses the schemas to decide when and how to use these tools.
+
+The tool use feature supports a "strict" mode (beta) that guarantees that the JSON output from the AI model will conform to the JSON schema you provide in the input parameters.
 
 The SDK can derive a tool and its parameters automatically from the structure of an arbitrary Java class: the class's name (converted to snake case) provides the tool name, and the class's fields define the tool's parameters.
 
@@ -894,10 +715,10 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
 ## Long requests
 
 <Warning>
-We highly encourage you to use [streaming](#streaming) for longer running requests.
+Anthropic highly encourages using [streaming](#streaming) for longer running requests.
 </Warning>
 
-We do not recommend setting a large `maxTokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic. The SDK periodically pings the API to keep the connection alive and reduce the impact of these networks.
+Avoid setting a large `maxTokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic. The SDK periodically pings the API to keep the connection alive and reduce the impact of these networks.
 
 The SDK throws an error if a non-streaming request is expected to take longer than 10 minutes. Using a [streaming method](#streaming) or [overriding the timeout](#timeouts) at the client or request level disables the error.
 
@@ -941,6 +762,39 @@ CompletableFuture<BatchListPageAsync> pageFuture = client.async().messages().bat
 pageFuture.thenAccept(page -> page.autoPager().subscribe(batch -> {
     System.out.println(batch);
 }));
+
+// If you need to handle errors or completion of the stream
+pageFuture.thenAccept(page -> page.autoPager().subscribe(new AsyncStreamResponse.Handler<>() {
+    @Override
+    public void onNext(MessageBatch batch) {
+        System.out.println(batch);
+    }
+
+    @Override
+    public void onComplete(Optional<Throwable> error) {
+        if (error.isPresent()) {
+            System.out.println("Something went wrong!");
+            throw new RuntimeException(error.get());
+        } else {
+            System.out.println("No more!");
+        }
+    }
+}));
+
+// Or use futures
+pageFuture.thenAccept(page -> page.autoPager()
+    .subscribe(batch -> {
+        System.out.println(batch);
+    })
+    .onCompleteFuture()
+    .whenComplete((unused, error) -> {
+        if (error != null) {
+            System.out.println("Something went wrong!");
+            throw new RuntimeException(error);
+        } else {
+            System.out.println("No more!");
+        }
+    }));
 ```
 
 ### Manual pagination
@@ -1005,6 +859,8 @@ MessageCreateParams params = MessageCreateParams.builder()
   .build();
 ```
 
+These can be accessed on the built object later using the `_additionalHeaders()`, `_additionalQueryParams()`, and `_additionalBodyProperties()` methods.
+
 <Warning>
 The values passed to these methods overwrite values passed to earlier methods. For security reasons, ensure these methods are only used with trusted input data.
 </Warning>
@@ -1022,6 +878,8 @@ MessageCreateParams params = MessageCreateParams.builder()
   )
   .build();
 ```
+
+These properties can be accessed on the nested built object later using the `_additionalProperties()` method.
 
 To set a documented parameter or property to an undocumented or not yet supported value, pass a `JsonValue` object to its setter:
 
@@ -1096,6 +954,27 @@ Map<String, JsonValue> additionalProperties = client
   ._additionalProperties();
 
 JsonValue secretPropertyValue = additionalProperties.get("secretProperty");
+
+String result = secretPropertyValue.accept(new JsonValue.Visitor<>() {
+    @Override
+    public String visitNull() {
+        return "It's null!";
+    }
+
+    @Override
+    public String visitBoolean(boolean value) {
+        return "It's a boolean!";
+    }
+
+    @Override
+    public String visitNumber(Number value) {
+        return "It's a number!";
+    }
+
+    // Other methods include `visitMissing`, `visitString`, `visitArray`, and `visitObject`
+    // The default implementation of each unimplemented method delegates to `visitDefault`,
+    // which throws by default, but can also be overridden
+});
 ```
 
 To access a property's raw JSON value, call its `_` prefixed method:
@@ -1112,6 +991,7 @@ if (maxTokens.isMissing()) {
   // The property was set to literal null
 } else {
   // Check if value was provided as a string
+  // Other methods include `asNumber()`, `asBoolean()`, etc.
   Optional<String> jsonString = maxTokens.asString();
 
   // Try to deserialize into a custom type
@@ -1220,175 +1100,19 @@ To use a completely custom HTTP client:
 ## Platform integrations
 
 <Note>
-For detailed platform setup guides, see:
+For detailed platform setup guides with code examples, see:
 - [Amazon Bedrock](/docs/en/build-with-claude/claude-on-amazon-bedrock)
 - [Google Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai)
+- [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry)
 </Note>
 
-### Amazon Bedrock
+The Java SDK supports Bedrock, Vertex AI, and Foundry through separate dependencies that provide platform-specific `Backend` implementations:
 
-This SDK provides support for the Anthropic Bedrock API. This support requires the `anthropic-java-bedrock` library dependency.
+- **Bedrock**: `com.anthropic:anthropic-java-bedrock`: Uses `BedrockBackend.fromEnv()` or `BedrockBackend.builder()`
+- **Vertex AI**: `com.anthropic:anthropic-java-vertex`: Uses `VertexBackend.fromEnv()` or `VertexBackend.builder()`
+- **Foundry**: `com.anthropic:anthropic-java-foundry`: Uses `FoundryBackend.fromEnv()` or `FoundryBackend.builder()`
 
-<Tabs>
-<Tab title="Gradle">
-```kotlin
-implementation("com.anthropic:anthropic-java-bedrock:2.11.1")
-```
-</Tab>
-<Tab title="Maven">
-```xml
-<dependency>
-    <groupId>com.anthropic</groupId>
-    <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.11.1</version>
-</dependency>
-```
-</Tab>
-</Tabs>
-
-Create the Anthropic client with the `BedrockBackend`. Usage of the API is otherwise the same.
-
-```java
-import com.anthropic.bedrock.backends.BedrockBackend;
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(BedrockBackend.fromEnv())
-  .build();
-```
-
-`BedrockBackend.fromEnv()` automatically resolves the AWS credentials using the AWS default credentials provider chain and resolves the AWS region using the AWS default region provider chain.
-
-With explicit credentials:
-
-```java
-import com.anthropic.bedrock.backends.BedrockBackend;
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.AwsCredentials;
-import software.amazon.awssdk.regions.Region;
-
-AwsCredentials awsCredentials = AwsBasicCredentials.create(
-  System.getenv("AWS_ACCESS_KEY_ID"),
-  System.getenv("AWS_SECRET_ACCESS_KEY")
-);
-
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(
-    BedrockBackend.builder().awsCredentials(awsCredentials).region(Region.US_EAST_1).build()
-  )
-  .build();
-```
-
-You can also create and configure your own AWS credentials provider:
-
-```java
-import com.anthropic.bedrock.backends.BedrockBackend;
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
-
-AwsCredentialsProvider awsCredentialsProvider = DefaultCredentialsProvider.builder()
-  .asyncCredentialUpdateEnabled(true)
-  .build();
-
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(BedrockBackend.builder().fromEnv(awsCredentialsProvider).build())
-  .build();
-```
-
-The AWS classes used above are included automatically as transitive dependencies of the `anthropic-java-bedrock` library dependency.
-
-Currently, the Bedrock backend does not support the following:
-
-- Anthropic Batch API
-- Anthropic Token Counting API
-
-#### Bedrock usage with an API key
-
-The `BedrockBackend` can also use an API key instead of AWS credentials for request authorization. You can set the `AWS_BEARER_TOKEN_BEDROCK` environment variable to the value of your API key and call `BedrockBackend.fromEnv()` to authorize requests using that API key. An API key will be used in preference to AWS credentials if both are set in the environment.
-
-The API key can also be passed directly to the backend:
-
-```java
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(BedrockBackend.builder().apiKey(myApiKey).region(Region.US_EAST_1).build())
-  .build();
-```
-
-An error will occur if you set both an API key and an AWS credentials provider.
-
-### Google Vertex AI
-
-This SDK provides support for Anthropic models on the Google Cloud Vertex AI platform. This support requires the `anthropic-java-vertex` library dependency.
-
-<Tabs>
-<Tab title="Gradle">
-```kotlin
-implementation("com.anthropic:anthropic-java-vertex:2.11.1")
-```
-</Tab>
-<Tab title="Maven">
-```xml
-<dependency>
-    <groupId>com.anthropic</groupId>
-    <artifactId>anthropic-java-vertex</artifactId>
-    <version>2.11.1</version>
-</dependency>
-```
-</Tab>
-</Tabs>
-
-Create the Anthropic client with the `VertexBackend`. Usage of the API is otherwise the same.
-
-```java
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.vertex.backends.VertexBackend;
-
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(VertexBackend.fromEnv())
-  .build();
-```
-
-`VertexBackend.fromEnv()` automatically resolves the Google OAuth2 credentials from your configured Google Cloud Application Default Credentials (ADC), the Google Cloud region from the `CLOUD_ML_REGION` environment variable, and the Google Cloud project ID from `ANTHROPIC_VERTEX_PROJECT_ID` environment variable.
-
-With explicit credentials:
-
-```java
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.vertex.backends.VertexBackend;
-import com.google.auth.oauth2.AccessToken;
-import com.google.auth.oauth2.GoogleCredentials;
-
-String accessToken = System.getenv("GOOGLE_APPLICATION_CREDENTIALS");
-
-String project = System.getenv("ANTHROPIC_VERTEX_PROJECT_ID");
-
-GoogleCredentials googleCredentials = GoogleCredentials.create(
-  AccessToken.newBuilder().setTokenValue(accessToken).build()
-);
-
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(
-    VertexBackend.builder()
-      .googleCredentials(googleCredentials)
-      .region("us-central1")
-      .project(project)
-      .build()
-  )
-  .build();
-```
-
-The Google Cloud classes used above are included automatically as transitive dependencies of the `anthropic-java-vertex` library dependency.
-
-Currently, the Vertex backend does not support the following:
-
-- Anthropic Batch API
+Each backend is passed to the client via `.backend()` on `AnthropicOkHttpClient.builder()`. AWS, Google Cloud, and Azure classes are included as transitive dependencies of the respective library.
 
 ## Advanced usage
 
@@ -1452,6 +1176,8 @@ If the SDK threw an exception, but you're certain the version is compatible, the
 There is no guarantee that the SDK works correctly when the Jackson version check is disabled.
 </Warning>
 
+There are also bugs in older Jackson versions that can affect the SDK. The SDK doesn't work around all Jackson bugs and expects users to upgrade Jackson for those instead.
+
 </section>
 
 <section title="ProGuard/R8 configuration">
@@ -1478,21 +1204,21 @@ To access undocumented response properties, use the `_additionalProperties()` me
 
 You can access most beta API features through the `beta()` method on the client. To check the availability of all of Claude's capabilities and tools, see the [build with Claude overview](/docs/en/build-with-claude/overview).
 
-For example, to use the [Files API](/docs/en/build-with-claude/files):
+For example, to use structured outputs:
 
 ```java
-import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 
-MessageCreateParams params = MessageCreateParams.builder()
+StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_4_6)
-        .maxTokens(1024L)
-        .addUserMessage("Please summarize this document for me.")
-        .addBeta(AnthropicBeta.FILES_API_2025_04_14)
+        .maxTokens(2048)
+        .outputFormat(BookList.class)
+        .addUserMessage("List some famous late twentieth century novels.")
         .build();
 
-client.beta().messages().create(params);
+client.beta().messages().create(createParams);
 ```
 
 ## Frequently asked questions
@@ -1515,7 +1241,7 @@ Using `JsonField<T>` enables a few features:
 
 <section title="Why doesn't the SDK use data classes?">
 
-It is not backwards compatible to add new fields to a data class, and we don't want to introduce a breaking change every time we add a field to a class.
+It is not backwards compatible to add new fields to a data class, and the SDK avoids introducing a breaking change every time a field is added to a class.
 
 </section>
 
@@ -1531,6 +1257,13 @@ Checked exceptions:
 - Don't play well with lambdas (also due to the function coloring problem)
 
 </section>
+
+## Semantic versioning
+
+This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
+
+1. Changes to library internals which are technically public but not intended or documented for external use.
+2. Changes that aren't expected to impact the vast majority of users in practice.
 
 ## Additional resources
 

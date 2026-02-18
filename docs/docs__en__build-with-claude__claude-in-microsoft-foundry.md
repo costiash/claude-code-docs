@@ -8,6 +8,10 @@ This guide will walk you through the process of setting up and making API calls 
 
 Regional availability: At launch, Claude is available as a Global Standard deployment type in Foundry resources (US DataZone coming soon). Pricing for Claude in the Microsoft Marketplace uses Anthropic's standard API pricing. Visit the [pricing page](https://claude.com/pricing#api) for details.
 
+<Note>
+Foundry is supported by the C#, Java, Python, and TypeScript SDKs. The Go, PHP, and Ruby SDKs do not currently support Microsoft Foundry. For available SDK platform integrations, see [Client SDKs](/docs/en/api/client-sdks).
+</Note>
+
 ## Preview
 
 In this preview platform integration, Claude models run on Anthropic's infrastructure. This is a commercial integration for billing and access through Azure. As an independent processor for Microsoft, customers using Claude through Microsoft Foundry are subject to Anthropic's data use terms. Anthropic continues to provide its industry-leading safety and data commitments, including zero data retention availability.
@@ -37,6 +41,25 @@ npm install @anthropic-ai/foundry-sdk
 ```
 </Tab>
 
+<Tab title="Java">
+<Tabs>
+<Tab title="Gradle">
+```kotlin
+implementation("com.anthropic:anthropic-java-foundry:2.14.0")
+```
+</Tab>
+<Tab title="Maven">
+```xml
+<dependency>
+    <groupId>com.anthropic</groupId>
+    <artifactId>anthropic-java-foundry</artifactId>
+    <version>2.14.0</version>
+</dependency>
+```
+</Tab>
+</Tabs>
+</Tab>
+
 <Tab title="C#">
 ```bash
 dotnet add package Anthropic.Foundry
@@ -58,7 +81,7 @@ To provision your resource:
 2. Create a new Foundry resource or select an existing one
 3. Configure access management using Azure-issued API keys or Entra ID for role-based access control
 4. Optionally configure the resource to be part of a private network (Azure Virtual Network) for enhanced security
-5. Note your resource name—you'll use this as `{resource}` in API endpoints (e.g., `https://{resource}.services.ai.azure.com/anthropic/v1/*`)
+5. Note your resource name. You'll use this as `{resource}` in API endpoints (e.g., `https://{resource}.services.ai.azure.com/anthropic/v1/*`)
 
 ### Creating Foundry deployments
 
@@ -134,6 +157,52 @@ const message = await client.messages.create({
   messages: [{ role: "user", content: "Hello!" }]
 });
 console.log(message.content);
+```
+
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.foundry.backends.FoundryBackend;
+import com.anthropic.models.messages.MessageCreateParams;
+
+// Requires env vars: ANTHROPIC_FOUNDRY_API_KEY, ANTHROPIC_FOUNDRY_RESOURCE
+AnthropicClient client = AnthropicOkHttpClient.builder()
+  .backend(FoundryBackend.fromEnv())
+  .build();
+
+MessageCreateParams params = MessageCreateParams.builder()
+  .model("claude-opus-4-6")
+  .maxTokens(1024)
+  .addUserMessage("Hello!")
+  .build();
+
+client.messages().create(params).content().stream()
+  .flatMap(block -> block.text().stream())
+  .forEach(textBlock -> System.out.println(textBlock.text()));
+```
+
+```csharp C#
+using Anthropic.Foundry;
+using Anthropic.Models.Messages;
+
+var client = new AnthropicFoundryClient(
+    new AnthropicFoundryApiKeyCredentials(
+        Environment.GetEnvironmentVariable("ANTHROPIC_FOUNDRY_API_KEY")!,
+        "example-resource"
+    )
+);
+
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = "claude-opus-4-6",
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "Hello!" }],
+});
+
+Console.WriteLine(
+    string.Join("", response.Content
+        .Where(c => c.Value is TextBlock)
+        .Select(c => (c.Value as TextBlock)!.Text)));
 ```
 
 ```bash Shell
@@ -218,6 +287,63 @@ const message = await client.messages.create({
   messages: [{ role: "user", content: "Hello!" }]
 });
 console.log(message.content);
+```
+
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.foundry.backends.FoundryBackend;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.azure.identity.AuthenticationUtil;
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import java.util.function.Supplier;
+
+Supplier<String> bearerTokenSupplier = AuthenticationUtil.getBearerTokenSupplier(
+    new DefaultAzureCredentialBuilder().build(),
+    "https://cognitiveservices.azure.com/.default"
+);
+
+AnthropicClient client = AnthropicOkHttpClient.builder()
+  .backend(FoundryBackend.builder()
+    .bearerTokenSupplier(bearerTokenSupplier)
+    .resource("example-resource")
+    .build())
+  .build();
+
+MessageCreateParams params = MessageCreateParams.builder()
+  .model("claude-opus-4-6")
+  .maxTokens(1024)
+  .addUserMessage("Hello!")
+  .build();
+
+client.messages().create(params).content().stream()
+  .flatMap(block -> block.text().stream())
+  .forEach(textBlock -> System.out.println(textBlock.text()));
+```
+
+```csharp C#
+using Anthropic.Foundry;
+using Anthropic.Models.Messages;
+using Azure.Identity;
+
+var client = new AnthropicFoundryClient(
+    new AnthropicFoundryIdentityTokenCredentials(
+        new DefaultAzureCredential(),
+        "example-resource"
+    )
+);
+
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = "claude-opus-4-6",
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "Hello!" }],
+});
+
+Console.WriteLine(
+    string.Join("", response.Content
+        .Where(c => c.Value is TextBlock)
+        .Select(c => (c.Value as TextBlock)!.Text)));
 ```
 
 ```bash Shell

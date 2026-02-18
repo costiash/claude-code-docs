@@ -8,6 +8,10 @@ Calling Claude through Bedrock slightly differs from how you would call Claude w
 
 Note that this guide assumes you have already signed up for an [AWS account](https://portal.aws.amazon.com/billing/signup) and configured programmatic access.
 
+<Note>
+The PHP SDK does not currently support Amazon Bedrock. For available SDK platform integrations, see [Client SDKs](/docs/en/api/client-sdks).
+</Note>
+
 ## Install and configure the AWS CLI
 
 1. [Install a version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) at or newer than version `2.13.23`
@@ -54,6 +58,20 @@ implementation("com.anthropic:anthropic-java-bedrock:2.+")
 <Tab title="Go">
 ```bash
 go get github.com/anthropics/anthropic-sdk-go/bedrock
+```
+</Tab>
+
+<Tab title="C#">
+```bash
+dotnet add package Anthropic.Bedrock
+```
+</Tab>
+
+<Tab title="Ruby">
+```bash
+# Gemfile
+gem "anthropic"
+gem "aws-sdk-bedrockruntime"
 ```
 </Tab>
 
@@ -231,6 +249,42 @@ The following examples show how to generate text from Claude on Bedrock:
   }
   ```
 
+  ```csharp C#
+  using Anthropic.Bedrock;
+  using Anthropic.Models.Messages;
+
+  AnthropicBedrockClient client = new(
+      await AnthropicBedrockCredentialsHelper.FromEnv()
+      ?? throw new InvalidOperationException("AWS credentials not configured.")
+  );
+
+  var response = await client.Messages.Create(new MessageCreateParams
+  {
+      Model = "global.anthropic.claude-opus-4-6-v1",
+      MaxTokens = 256,
+      Messages = [new() { Role = Role.User, Content = "Hello, world" }],
+  });
+
+  Console.WriteLine(
+      string.Join("", response.Content
+          .Where(c => c.Value is TextBlock)
+          .Select(c => (c.Value as TextBlock)!.Text)));
+  ```
+
+  ```ruby Ruby
+  require "anthropic"
+
+  client = Anthropic::BedrockClient.new
+
+  message = client.messages.create(
+    model: "global.anthropic.claude-opus-4-6-v1",
+    max_tokens: 256,
+    messages: [{role: "user", content: "Hello, world"}]
+  )
+
+  puts message.content.first.text
+  ```
+
   ```python Boto3 (Python)
   import boto3
   import json
@@ -253,7 +307,107 @@ The following examples show how to generate text from Claude on Bedrock:
   ```
 </CodeGroup>
 
-See our [client SDKs](/docs/en/api/client-sdks) for more details, and the official Bedrock docs [here](https://docs.aws.amazon.com/bedrock/).
+See the [client SDKs](/docs/en/api/client-sdks) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
+
+### Bearer token authentication
+
+You can authenticate with Bedrock using bearer tokens instead of AWS credentials. This is useful in corporate environments where teams need access to Bedrock without managing AWS credentials, IAM roles, or account-level permissions.
+
+<Note>
+Bearer token authentication is supported in the C#, Go, and Java SDKs. The Python, TypeScript, and Ruby SDKs use AWS SigV4 signing only.
+</Note>
+
+The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment variable, which is automatically detected by `fromEnv()` credential resolution.
+
+To provide a token programmatically:
+
+<CodeGroup>
+
+```csharp C#
+using Anthropic.Bedrock;
+using Anthropic.Models.Messages;
+
+var client = new AnthropicBedrockClient(
+    new AnthropicBedrockApiTokenCredentials
+    {
+        BearerToken = "your-bearer-token",
+        Region = "us-east-1",
+    }
+);
+
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "Hello!" }],
+});
+```
+
+```go Go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/bedrock"
+	"github.com/aws/aws-sdk-go-v2/aws"
+)
+
+func main() {
+	cfg := aws.Config{
+		Region:                  "us-west-2",
+		BearerAuthTokenProvider: bedrock.NewStaticBearerTokenProvider("your-bearer-token"),
+	}
+	client := anthropic.NewClient(
+		bedrock.WithConfig(cfg),
+	)
+
+	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello!")),
+		},
+	})
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(message.Content[0].AsResponseTextBlock().Text)
+}
+```
+
+```java Java
+import com.anthropic.bedrock.backends.BedrockBackend;
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+
+// Option 1: Set AWS_BEARER_TOKEN_BEDROCK environment variable and use fromEnv()
+AnthropicClient client = AnthropicOkHttpClient.builder()
+  .backend(BedrockBackend.fromEnv())
+  .build();
+
+// Option 2: Provide the token programmatically
+client = AnthropicOkHttpClient.builder()
+  .backend(BedrockBackend.builder()
+    .apiKey("your-bearer-token")
+    .build())
+  .build();
+
+MessageCreateParams params = MessageCreateParams.builder()
+  .model("us.anthropic.claude-sonnet-4-5-20250929-v1:0")
+  .maxTokens(1024)
+  .addUserMessage("Hello!")
+  .build();
+
+client.messages().create(params).content().stream()
+  .flatMap(block -> block.text().stream())
+  .forEach(textBlock -> System.out.println(textBlock.text()));
+```
+
+</CodeGroup>
 
 ## Activity logging
 
@@ -266,7 +420,7 @@ Turning on this service does not give AWS or Anthropic any access to your conten
 </Note>
 
 ## Feature support
-You can find all the features currently supported on Bedrock [here](/docs/en/api/overview).
+For all currently supported features on Bedrock, see [API features overview](/docs/en/api/overview).
 
 ### PDF Support on Bedrock
 
@@ -395,6 +549,39 @@ func main() {
 	_ = message
 }
 ```
+
+```csharp C#
+using Anthropic.Bedrock;
+using Anthropic.Models.Messages;
+
+// C# Bedrock client uses model IDs with region prefix for global routing
+AnthropicBedrockClient client = new(
+    await AnthropicBedrockCredentialsHelper.FromEnv()
+    ?? throw new InvalidOperationException("AWS credentials not configured.")
+);
+
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    // Use "global." prefix for global cross-region inference
+    Model = "global.anthropic.claude-opus-4-6-v1",
+    MaxTokens = 256,
+    Messages = [new() { Role = Role.User, Content = "Hello, world" }],
+});
+```
+
+```ruby Ruby
+require "anthropic"
+
+# Default credentials resolve region from AWS_REGION env var
+client = Anthropic::BedrockClient.new
+
+message = client.messages.create(
+  # Use "global." prefix for global cross-region inference
+  model: "global.anthropic.claude-opus-4-6-v1",
+  max_tokens: 256,
+  messages: [{role: "user", content: "Hello, world"}]
+)
+```
 </CodeGroup>
 
 **Using regional endpoints (CRIS):**
@@ -479,6 +666,36 @@ func main() {
 	})
 	_ = message
 }
+```
+
+```csharp C#
+using Anthropic.Bedrock;
+using Anthropic.Models.Messages;
+
+AnthropicBedrockClient client = new(
+    new AnthropicBedrockPrivateKeyCredentials { Region = "us-west-2" }
+);
+
+// Using US regional endpoint (CRIS)
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = "anthropic.claude-opus-4-6-v1", // No global. prefix
+    MaxTokens = 256,
+    Messages = [new() { Role = Role.User, Content = "Hello, world" }],
+});
+```
+
+```ruby Ruby
+require "anthropic"
+
+# Using US regional endpoint (CRIS)
+client = Anthropic::BedrockClient.new(aws_region: "us-west-2")
+
+message = client.messages.create(
+  model: "anthropic.claude-opus-4-6-v1", # No global. prefix
+  max_tokens: 256,
+  messages: [{role: "user", content: "Hello, world"}]
+)
 ```
 </CodeGroup>
 

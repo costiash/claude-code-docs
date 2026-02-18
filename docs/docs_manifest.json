@@ -2199,44 +2199,44 @@
     "docs__en__api__sdks__csharp.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/csharp",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/csharp.md",
-      "hash": "29669c1114df3b9aaeceae193bab2ad64f9f81ec0d1fd1ccdf9c81cadf4b3b93",
-      "last_updated": "2026-02-17T18:27:43.316263"
+      "hash": "cae4df9dc55fec3b259a1786d029a92b390be7211f7897dbfad5ac26e8d540d1",
+      "last_updated": "2026-02-18T03:56:57.846070"
     },
     "docs__en__api__sdks__go.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/go",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/go.md",
-      "hash": "6e122a13048c2d1756949d252aab50f355b23c305497356e51ab3418f6911b48",
-      "last_updated": "2026-02-11T18:28:45.269818"
+      "hash": "506daa58f7bc98d46626f4bc0253fb36e8db9872fbd6586b7b2f5e577ca739ac",
+      "last_updated": "2026-02-18T03:56:58.431127"
     },
     "docs__en__api__sdks__java.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/java",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/java.md",
-      "hash": "ffa43c8d18e599f74a278faab44221c8efa64af23975c4daf25c98671ebca37d",
-      "last_updated": "2026-02-17T18:27:44.576167"
+      "hash": "72052fdc2e7009ec0ae3144099ac2de36f06f10178486d7070c6aa768c85d013",
+      "last_updated": "2026-02-18T03:56:59.095541"
     },
     "docs__en__api__sdks__php.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/php",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/php.md",
-      "hash": "5efbb4e3e75e0a3e2772c659375bd2a5515cd320d2d94fd1d2203620148411db",
-      "last_updated": "2026-02-17T18:27:45.187385"
+      "hash": "ec0ec3880dd51f2000a81db9ea310d440cefc075d2a8fd60ea49c11c97a28eb2",
+      "last_updated": "2026-02-18T03:56:59.746095"
     },
     "docs__en__api__sdks__python.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/python",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/python.md",
-      "hash": "437a47f9bf0ca8eb0161eee0a21af03949365770077cbc760e27565d1e3af7a9",
-      "last_updated": "2026-02-17T18:27:45.782028"
+      "hash": "8e8f898436883eb0af1b9f8c56e36775152f44ea38a3037fc66ed70347f490a6",
+      "last_updated": "2026-02-18T03:57:00.324584"
     },
     "docs__en__api__sdks__ruby.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/ruby",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/ruby.md",
-      "hash": "14d0794c0772dc77e2eeff43b89d7f82a54d90fe67e988f8fef6c50d5de45b46",
-      "last_updated": "2026-02-07T00:34:18.228360"
+      "hash": "f55a02d2bc8caebc14475cff8a5f2cacfe441466eebac4b6215ee71cc22d8ea9",
+      "last_updated": "2026-02-18T03:57:01.007011"
     },
     "docs__en__api__sdks__typescript.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/typescript",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/typescript.md",
-      "hash": "7e6450b5856437bb32609a05df373d69c204b968ca5e538c54ef6e4d2ca2d644",
-      "last_updated": "2026-02-17T18:27:47.009777"
+      "hash": "80587db72c82d6dfb08cc6cc4f20d938186c0ee99a2ce9cfb86cb7f2f31c1506",
+      "last_updated": "2026-02-18T03:57:01.590108"
     },
     "docs__en__api__service-tiers.md": {
       "original_url": "https://platform.claude.com/docs/en/api/service-tiers",
@@ -2559,20 +2559,20 @@
     "docs__en__build-with-claude__claude-in-microsoft-foundry.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry.md",
-      "hash": "e579d576029aea0fe8f48ece658159389dac1b79b507c9198e2c1cd1cc25d8a6",
-      "last_updated": "2026-02-17T18:28:41.227001"
+      "hash": "7487059fa31d403a8a25ced4bf48d2dafadb26f8f0e4be9540f02c82f1fe22e5",
+      "last_updated": "2026-02-18T03:58:00.147677"
     },
     "docs__en__build-with-claude__claude-on-amazon-bedrock.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock.md",
-      "hash": "f2a5f1e22b811e824d22044c53af983131a80b99770e84d31e76cd94e6e9bf94",
-      "last_updated": "2026-02-17T18:28:41.844143"
+      "hash": "f355ad7a6e4c5cfa29075d71e58b6db4ab92fe1e0306476edf1b3569f4269e5b",
+      "last_updated": "2026-02-18T03:58:00.847585"
     },
     "docs__en__build-with-claude__claude-on-vertex-ai.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai.md",
-      "hash": "ad7872c3dfee83f5217725ee573e3b9c7b296ad0f4f2b4c2262358074a4ec809",
-      "last_updated": "2026-02-17T18:28:42.482583"
+      "hash": "a82c97dae787dd9713bea27b8bebd14df077b790485fc6ce42945e2c8c1d9be3",
+      "last_updated": "2026-02-18T03:58:01.434917"
     },
     "docs__en__build-with-claude__compaction.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/compaction",
@@ -2757,8 +2757,8 @@
     "docs__en__build-with-claude__structured-outputs.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs.md",
-      "hash": "a32048b22aada1048f3ff9a06510471f21ebb4f3c99a9f7d1d3bfb12f22e4b20",
-      "last_updated": "2026-02-17T21:19:32.378946"
+      "hash": "666ad2c005a28344c39afb23b62bd809dc71916a28e661984e77de701e03c061",
+      "last_updated": "2026-02-18T03:58:21.935582"
     },
     "docs__en__build-with-claude__token-counting.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
@@ -2907,8 +2907,8 @@
     "claude-code__legal-and-compliance.md": {
       "original_url": "https://platform.claude.com/docs/en/legal-and-compliance",
       "original_md_url": "https://platform.claude.com/docs/en/legal-and-compliance.md",
-      "hash": "773c24daa75cf3853f754f36125add8df53b9d00cafd8f188ebaba6161878a7e",
-      "last_updated": "2026-01-24T03:39:00.696525"
+      "hash": "255e31b55475481c4969dadad71392b896bd82937879daa831f1d25a3ebdc655",
+      "last_updated": "2026-02-18T03:58:40.364740"
     },
     "claude-code__llm-gateway.md": {
       "original_url": "https://platform.claude.com/docs/en/llm-gateway",
@@ -3519,8 +3519,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-02-18T00:40:17.364002",
-    "fetch_duration_seconds": 437.932196,
+    "last_fetch_completed": "2026-02-18T03:59:47.966723",
+    "fetch_duration_seconds": 470.088086,
     "total_pages_discovered": 783,
     "pages_fetched_successfully": 586,
     "pages_failed": 198,
@@ -3729,7 +3729,7 @@
     "total_files": 586,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-02-18T00:40:17.364029",
+  "last_updated": "2026-02-18T03:59:47.966747",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

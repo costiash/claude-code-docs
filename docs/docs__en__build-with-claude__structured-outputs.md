@@ -364,18 +364,19 @@ SDK helper methods (like `.parse()` and Pydantic/Zod integration) still accept `
 
 #### Using native schema definitions
 
-Instead of writing raw JSON schemas, you can use familiar schema definition tools in your language. Each SDK provides class-based or library-based schema support:
+Instead of writing raw JSON schemas, you can use familiar schema definition tools in your language:
 
-- **Python**: [Pydantic](https://docs.pydantic.dev/) models
-- **TypeScript**: [Zod](https://zod.dev/) schemas
-- **Java**: Plain Java classes with annotation support (see [Java SDK structured outputs](/docs/en/api/sdks/java#using-structured-outputs))
-- **Ruby**: `Anthropic::BaseModel` classes (see [Ruby SDK](/docs/en/api/sdks/ruby#input-schema-and-tool-calling))
+- **Python**: [Pydantic](https://docs.pydantic.dev/) models with `client.messages.parse()`
+- **TypeScript**: [Zod](https://zod.dev/) schemas with `zodOutputFormat()`
+- **Java**: Plain Java classes with automatic schema derivation via `outputFormat(Class<T>)`
+- **Ruby**: `Anthropic::BaseModel` classes with `output_config: {format: Model}`
+- **C#**, **Go**, **PHP**: Raw JSON schemas passed via `output_config`
 
 <CodeGroup>
 
 ```python Python
 from pydantic import BaseModel
-from anthropic import Anthropic, transform_schema
+from anthropic import Anthropic
 
 
 class ContactInfo(BaseModel):
@@ -387,27 +388,6 @@ class ContactInfo(BaseModel):
 
 client = Anthropic()
 
-# With .create() - requires transform_schema()
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[
-        {
-            "role": "user",
-            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
-        }
-    ],
-    output_config={
-        "format": {
-            "type": "json_schema",
-            "schema": transform_schema(ContactInfo),
-        }
-    },
-)
-
-print(response.content[0].text)
-
-# With .parse() - can pass Pydantic model directly
 response = client.messages.parse(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -437,7 +417,7 @@ const ContactInfoSchema = z.object({
 
 const client = new Anthropic();
 
-const response = await client.messages.create({
+const response = await client.messages.parse({
   model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
@@ -449,8 +429,190 @@ const response = await client.messages.create({
   output_config: { format: zodOutputFormat(ContactInfoSchema) }
 });
 
-// Automatically parsed and validated
-console.log(response.content[0].text);
+// Guaranteed type-safe
+console.log(response.parsed_output.email);
+```
+
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.StructuredMessageCreateParams;
+import com.anthropic.models.messages.Model;
+
+class ContactInfo {
+    public String name;
+    public String email;
+    public String planInterest;
+    public boolean demoRequested;
+}
+
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
+  .model(Model.CLAUDE_OPUS_4_6)
+  .maxTokens(1024)
+  .outputFormat(ContactInfo.class)
+  .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.")
+  .build();
+
+var response = client.messages().create(createParams);
+ContactInfo contact = response.output(ContactInfo.class);
+System.out.println(contact.name + " (" + contact.email + ")");
+```
+
+```go Go
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/invopop/jsonschema"
+)
+
+type ContactInfo struct {
+	Name          string `json:"name" jsonschema:"description=Full name"`
+	Email         string `json:"email" jsonschema:"description=Email address"`
+	PlanInterest  string `json:"plan_interest" jsonschema:"description=Plan type"`
+	DemoRequested bool   `json:"demo_requested" jsonschema:"description=Whether a demo was requested"`
+}
+
+func generateSchema(v any) map[string]any {
+	r := jsonschema.Reflector{AllowAdditionalProperties: false, DoNotReference: true}
+	s := r.Reflect(v)
+	b, _ := json.Marshal(s)
+	var m map[string]any
+	json.Unmarshal(b, &m)
+	return m
+}
+
+func main() {
+	client := anthropic.NewClient()
+	schema := generateSchema(&ContactInfo{})
+
+	message, _ := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock(
+				"Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
+			)),
+		},
+		OutputConfig: anthropic.OutputConfigParam{
+			Format: anthropic.JSONOutputFormatParam{
+				Schema: schema,
+			},
+		},
+	})
+
+	var contact ContactInfo
+	json.Unmarshal([]byte(message.Content[0].AsResponseTextBlock().Text), &contact)
+	fmt.Printf("%s (%s)\n", contact.Name, contact.Email)
+}
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+class ContactInfo < Anthropic::BaseModel
+  required :name, String
+  required :email, String
+  required :plan_interest, String
+  required :demo_requested, Anthropic::Boolean
+end
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [{
+    role: "user",
+    content: "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
+  }],
+  output_config: {format: ContactInfo}
+)
+
+contact = message.parsed_output
+puts "#{contact.name} (#{contact.email})"
+```
+
+```csharp C#
+using System.Text.Json;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+var client = new AnthropicClient();
+
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = "claude-opus-4-6",
+    MaxTokens = 1024,
+    Messages = [new() {
+        Role = Role.User,
+        Content = "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
+    }],
+    OutputConfig = new OutputConfig
+    {
+        Format = new JsonOutputFormat
+        {
+            Schema = new Dictionary<string, JsonElement>
+            {
+                ["type"] = JsonSerializer.SerializeToElement("object"),
+                ["properties"] = JsonSerializer.SerializeToElement(new
+                {
+                    name = new { type = "string" },
+                    email = new { type = "string" },
+                    plan_interest = new { type = "string" },
+                    demo_requested = new { type = "boolean" },
+                }),
+                ["required"] = JsonSerializer.SerializeToElement(
+                    new[] { "name", "email", "plan_interest", "demo_requested" }),
+                ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
+            },
+        },
+    },
+});
+
+var json = (response.Content.First().Value as TextBlock)!.Text;
+// JSON is guaranteed to match the schema
+var contact = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
+Console.WriteLine($"{contact["name"]} ({contact["email"]})");
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+use Anthropic\Messages\OutputConfig;
+use Anthropic\Messages\JSONOutputFormat;
+
+$client = new Client();
+
+$response = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.'],
+    ],
+    model: 'claude-opus-4-6',
+    outputConfig: OutputConfig::with(format: JSONOutputFormat::with(schema: [
+        'type' => 'object',
+        'properties' => [
+            'name' => ['type' => 'string'],
+            'email' => ['type' => 'string'],
+            'plan_interest' => ['type' => 'string'],
+            'demo_requested' => ['type' => 'boolean'],
+        ],
+        'required' => ['name', 'email', 'plan_interest', 'demo_requested'],
+        'additionalProperties' => false,
+    ])),
+);
+
+$data = json_decode($response->content[0]->text, true);
+echo $data['name'] . ' (' . $data['email'] . ')';
 ```
 
 </CodeGroup>
@@ -524,17 +686,52 @@ response = client.messages.create(
 </section>
 
 </Tab>
+<Tab title="TypeScript">
+
+**`client.messages.parse()` with `zodOutputFormat()`**
+
+The `parse()` method accepts a Zod schema, validates the response, and returns a `parsed_output` attribute with the inferred TypeScript type matching the schema.
+
+<section title="Example usage">
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
+import { z } from "zod";
+import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
+
+const ContactInfo = z.object({
+  name: z.string(),
+  email: z.string(),
+  planInterest: z.string()
+});
+
+const client = new Anthropic();
+
+const response = await client.messages.parse({
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [{ role: "user", content: "..." }],
+  output_config: { format: zodOutputFormat(ContactInfo) }
+});
+
+// Guaranteed type-safe
+console.log(response.parsed_output.email);
+```
+
+</section>
+
+</Tab>
 <Tab title="Java">
 
-**`outputConfig(Class<T>)` method**
+**`outputFormat(Class<T>)` method**
 
-Pass a Java class to `outputConfig()` and the SDK automatically generates a JSON schema from it. Access the parsed result from the response content.
+Pass a Java class to `outputFormat()` and the SDK automatically derives a JSON schema, validates it, and returns a `StructuredMessageCreateParams<T>`. Access the parsed result via `response.output(Class<T>)`.
 
 <section title="Example usage">
 
 ```java
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.beta.messages.StructuredMessageCreateParams;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 
 class ContactInfo {
@@ -544,20 +741,379 @@ class ContactInfo {
 }
 
 StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_6)
-        .maxTokens(1024)
-        .outputConfig(ContactInfo.class)
-        .addUserMessage("...")
-        .build();
+  .model(Model.CLAUDE_OPUS_4_6)
+  .maxTokens(1024)
+  .outputFormat(ContactInfo.class)
+  .addUserMessage("...")
+  .build();
 
-client.beta().messages().create(createParams).content().stream()
-        .flatMap(contentBlock -> contentBlock.text().stream())
-        .forEach(textBlock -> System.out.println(textBlock.text().name));
+var response = client.messages().create(createParams);
+ContactInfo contact = response.output(ContactInfo.class);
+System.out.println(contact.name + " (" + contact.email + ")");
 ```
 
 </section>
 
-See [Java SDK structured outputs](/docs/en/api/sdks/java#using-structured-outputs) for annotation support, optional fields, and local schema validation.
+<section title="Generic type erasure">
+
+Generic type information for fields is retained in the class's metadata, but generic type erasure applies in other scopes. While a JSON schema can be derived from a `BookList.books` field with type `List<Book>`, a valid JSON schema cannot be derived from a local variable of that same type.
+
+If an error occurs while converting a JSON response to a Java class instance, the error message will include the JSON response to assist in diagnosis. If your JSON response may contain sensitive information, avoid logging it directly, or ensure that you redact any sensitive details from the error message.
+
+</section>
+
+<section title="Local schema validation">
+
+Structured outputs support a [subset of the JSON Schema language](/docs/en/build-with-claude/structured-outputs#json-schema-limitations). Schemas are generated automatically from classes to align with this subset. The `outputFormat(Class<T>)` method performs a validation check on the schema derived from the specified class.
+
+Key points:
+
+- **Local validation** occurs without sending requests to the remote AI model.
+- **Remote validation** is also performed by the AI model upon receiving the JSON schema.
+- **Version compatibility**: Local validation may fail while remote validation succeeds if the SDK version is outdated.
+- **Disabling local validation**: Pass `JsonSchemaLocalValidation.NO` if you encounter compatibility issues:
+
+```java
+import com.anthropic.core.JsonSchemaLocalValidation;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.StructuredMessageCreateParams;
+import com.anthropic.models.messages.Model;
+
+StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
+  .model(Model.CLAUDE_OPUS_4_6)
+  .maxTokens(2048)
+  .outputFormat(BookList.class, JsonSchemaLocalValidation.NO)
+  .addUserMessage("List some famous late twentieth century novels.")
+  .build();
+```
+
+</section>
+
+<section title="Streaming">
+
+Structured outputs can also be used with streaming. As responses arrive in stream events, you need to accumulate the full response before deserializing the JSON.
+
+Use `BetaMessageAccumulator` to collect the JSON strings from the stream. Once accumulated, call `BetaMessageAccumulator.message(Class<T>)` to convert the accumulated `BetaMessage` into a `StructuredMessage`, which automatically deserializes the JSON into your Java class.
+
+</section>
+
+<section title="JSON schema properties">
+
+When a JSON schema is derived from your Java classes, all properties represented by `public` fields or `public` getter methods are included by default. Non-`public` fields and getter methods are excluded.
+
+You can control visibility with annotations:
+
+- `@JsonIgnore` excludes a `public` field or getter method
+- `@JsonProperty` includes a non-`public` field or getter method
+
+If you define `private` fields with `public` getter methods, the property name is derived from the getter (e.g., `private` field `myValue` with `public` method `getMyValue()` produces a `"myValue"` property). To use a non-conventional getter name, annotate the method with `@JsonProperty`.
+
+Each class must define at least one property for the JSON schema. A validation error occurs if no fields or getter methods can produce schema properties, such as when:
+
+- There are no fields or getter methods in the class
+- All `public` members are annotated with `@JsonIgnore`
+- All non-`public` members lack `@JsonProperty` annotations
+- A field uses a `Map` type, which produces an empty `"properties"` field
+
+</section>
+
+<section title="Annotations (Jackson and Swagger)">
+
+You can use Jackson Databind annotations to enrich the JSON schema derived from your Java classes:
+
+```java
+import com.fasterxml.jackson.annotation.JsonClassDescription;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+
+class Person {
+
+  @JsonPropertyDescription("The first name and surname of the person")
+  public String name;
+
+  public int birthYear;
+
+  @JsonPropertyDescription("The year the person died, or 'present' if the person is living.")
+  public String deathYear;
+}
+
+@JsonClassDescription("The details of one published book")
+class Book {
+
+  public String title;
+  public Person author;
+
+  @JsonPropertyDescription("The year in which the book was first published.")
+  public int publicationYear;
+
+  @JsonIgnore
+  public String genre;
+}
+
+class BookList {
+
+  public List<Book> books;
+}
+```
+
+Annotation summary:
+
+- `@JsonClassDescription` -- Add a description to a class
+- `@JsonPropertyDescription` -- Add a description to a field or getter method
+- `@JsonIgnore` -- Exclude a `public` field or getter from the schema
+- `@JsonProperty` -- Include a non-`public` field or getter in the schema
+
+If you use `@JsonProperty(required = false)`, the `false` value is ignored. Anthropic JSON schemas must mark all properties as required.
+
+You can also use OpenAPI Swagger 2 `@Schema` and `@ArraySchema` annotations for type-specific constraints:
+
+```java
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+class Article {
+
+  @ArraySchema(minItems = 1)
+  public List<String> authors;
+
+  public String title;
+
+  @Schema(format = "date")
+  public String publicationDate;
+
+  @Schema(minimum = "1")
+  public int pageCount;
+}
+```
+
+Local validation checks that you haven't used any unsupported constraint keywords, but constraint values aren't validated locally. For example, an unsupported `"format"` value may pass local validation but cause a remote error.
+
+If you use both Jackson and Swagger annotations to set the same schema field, the Jackson annotation takes precedence.
+
+</section>
+
+</Tab>
+<Tab title="Go">
+
+**Raw JSON schemas via `OutputConfigParam`**
+
+The Go SDK works with raw JSON schemas. Define a Go struct with json tags, generate the JSON schema (for example, using `invopop/jsonschema`), and unmarshal the response text into your struct.
+
+<section title="Example usage">
+
+```go
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/invopop/jsonschema"
+)
+
+type ContactInfo struct {
+	Name         string `json:"name" jsonschema:"description=Full name"`
+	Email        string `json:"email" jsonschema:"description=Email address"`
+	PlanInterest string `json:"plan_interest" jsonschema:"description=Plan type"`
+}
+
+func generateSchema(v any) map[string]any {
+	r := jsonschema.Reflector{AllowAdditionalProperties: false, DoNotReference: true}
+	s := r.Reflect(v)
+	b, _ := json.Marshal(s)
+	var m map[string]any
+	json.Unmarshal(b, &m)
+	return m
+}
+
+func main() {
+	client := anthropic.NewClient()
+	schema := generateSchema(&ContactInfo{})
+
+	message, _ := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock(
+				"Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.",
+			)),
+		},
+		OutputConfig: anthropic.OutputConfigParam{
+			Format: anthropic.JSONOutputFormatParam{
+				Schema: schema,
+			},
+		},
+	})
+
+	var contact ContactInfo
+	json.Unmarshal([]byte(message.Content[0].AsResponseTextBlock().Text), &contact)
+	fmt.Printf("%s (%s)\n", contact.Name, contact.Email)
+}
+```
+
+</section>
+
+</Tab>
+<Tab title="Ruby">
+
+**`output_config: {format: Model}` with `parsed_output`**
+
+Define a model class extending `Anthropic::BaseModel` and pass it as the format to `messages.create()`. The response includes a `parsed_output` attribute with a typed Ruby object.
+
+<section title="Example usage">
+
+```ruby
+require "anthropic"
+
+class ContactInfo < Anthropic::BaseModel
+  required :name, String
+  required :email, String
+  required :plan_interest, String
+end
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [{role: "user", content: "..."}],
+  output_config: {format: ContactInfo}
+)
+
+contact = message.parsed_output
+puts "#{contact.name} (#{contact.email})"
+```
+
+</section>
+
+<section title="Advanced model features">
+
+The Ruby SDK supports additional model definition features for richer schemas:
+
+- **`doc:` keyword** -- Add descriptions to fields for more informative schema output
+- **`Anthropic::ArrayOf[T]`** -- Typed arrays with `min_length` and `max_length` constraints
+- **`Anthropic::EnumOf[:a, :b]`** -- Enum fields with constrained values
+- **`Anthropic::UnionOf[T1, T2]`** -- Union types mapped to `anyOf`
+
+```ruby
+class FamousNumber < Anthropic::BaseModel
+  required :value, Float
+  optional :reason, String, doc: "why is this number mathematically significant?"
+end
+
+class Output < Anthropic::BaseModel
+  required :numbers, Anthropic::ArrayOf[FamousNumber], min_length: 3, max_length: 5
+end
+
+message = anthropic.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [{role: "user", content: "give me some famous numbers"}],
+  output_config: {format: Output}
+)
+
+message.parsed_output
+# => #<Output numbers=[#<FamousNumber value=3.14159... reason="Pi is...">...]>
+```
+
+</section>
+
+</Tab>
+<Tab title="C#">
+
+**Raw JSON schemas via `OutputConfig`**
+
+The C# SDK uses raw JSON schemas built programmatically with `JsonSerializer.SerializeToElement`. Deserialize the response JSON with `JsonSerializer.Deserialize`.
+
+<section title="Example usage">
+
+```csharp
+using System.Text.Json;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+var client = new AnthropicClient();
+
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = "claude-opus-4-6",
+    MaxTokens = 1024,
+    Messages = [new() {
+        Role = Role.User,
+        Content = "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan."
+    }],
+    OutputConfig = new OutputConfig
+    {
+        Format = new JsonOutputFormat
+        {
+            Schema = new Dictionary<string, JsonElement>
+            {
+                ["type"] = JsonSerializer.SerializeToElement("object"),
+                ["properties"] = JsonSerializer.SerializeToElement(new
+                {
+                    name = new { type = "string" },
+                    email = new { type = "string" },
+                    plan_interest = new { type = "string" },
+                }),
+                ["required"] = JsonSerializer.SerializeToElement(
+                    new[] { "name", "email", "plan_interest" }),
+                ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
+            },
+        },
+    },
+});
+
+var json = (response.Content.First().Value as TextBlock)!.Text;
+// JSON is guaranteed to match the schema
+var contact = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
+Console.WriteLine($"{contact["name"]} ({contact["email"]})");
+```
+
+</section>
+
+</Tab>
+<Tab title="PHP">
+
+**Raw JSON schemas via `OutputConfig::with()`**
+
+The PHP SDK passes raw JSON schemas as associative arrays via `OutputConfig::with()`. Decode the response with `json_decode()`.
+
+<section title="Example usage">
+
+```php
+<?php
+
+use Anthropic\Client;
+use Anthropic\Messages\OutputConfig;
+use Anthropic\Messages\JSONOutputFormat;
+
+$client = new Client();
+
+$response = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.'],
+    ],
+    model: 'claude-opus-4-6',
+    outputConfig: OutputConfig::with(format: JSONOutputFormat::with(schema: [
+        'type' => 'object',
+        'properties' => [
+            'name' => ['type' => 'string'],
+            'email' => ['type' => 'string'],
+            'plan_interest' => ['type' => 'string'],
+        ],
+        'required' => ['name', 'email', 'plan_interest'],
+        'additionalProperties' => false,
+    ])),
+);
+
+$data = json_decode($response->content[0]->text, true);
+echo $data['name'] . ' (' . $data['email'] . ')';
+```
+
+</section>
 
 </Tab>
 </Tabs>
