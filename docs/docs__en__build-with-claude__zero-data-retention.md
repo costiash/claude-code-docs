@@ -45,6 +45,7 @@ These API endpoints process data in real-time:
 | Web Fetch | `/v1/messages` (with `web_fetch` tool) | Fetched web content returned in the API response. |
 | Memory Tool | `/v1/messages` (with `memory` tool) | Client-side memory storage where you control data retention. |
 | Tool Search (client-side) | `/v1/messages` | [Custom client-side tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool#custom-tool-search-implementation) uses the standard Messages API. |
+| Context Management (compaction) | `/v1/messages` (with `context_management`) | Server-side compaction summarizes conversation context in real-time. |
 
 ### Not ZDR-eligible
 
@@ -57,7 +58,6 @@ The following is a non-exhaustive list of endpoints and features that store data
 | Programmatic Tool Calling | `/v1/messages` (with `code_execution` tool) | Container data retained up to 30 days. | Built on code execution—uses sandbox containers that retain user data. |
 | Tool Search (server-side) | `/v1/messages` (with `tool_search` tool) | Data retained according to standard policy. | Server-side tool search indexes and stores tool catalog data beyond the immediate API response. |
 | Files API | `/v1/files` | Files retained until explicitly deleted. | Beta features are excluded from ZDR. Files uploaded via the Files API are retained for future API requests. |
-| Context Management | `/v1/messages` (with `context_management`) | Files stored on Anthropic servers. | Beta features are excluded from ZDR. |
 
 ### Special cases
 

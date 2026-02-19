@@ -462,7 +462,7 @@ Note that requests which time out will be [retried twice by default](#retries).
 ## Long requests
 
 <Warning>
-Anthropic highly encourages using the streaming [Messages API](#streaming-responses) for longer running requests.
+Consider using the streaming [Messages API](#streaming-responses) for longer running requests.
 </Warning>
 
 Avoid setting a large `max_tokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic.
@@ -723,7 +723,7 @@ with Anthropic() as client:
 
 ## Beta features
 
-Anthropic introduces beta features before they are generally available to get early feedback and test new functionality. You can check the availability of all of Claude's capabilities and tools in the [build with Claude overview](/docs/en/build-with-claude/overview).
+Beta features are available before general release to get early feedback and test new functionality. You can check the availability of all of Claude's capabilities and tools in the [build with Claude overview](/docs/en/build-with-claude/overview).
 
 You can access most beta API features through the `beta` property of the client. To enable a particular beta feature, you need to add the appropriate [beta header](/docs/en/api/beta-headers) to the `betas` field when creating a message.
 

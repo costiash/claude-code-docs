@@ -184,28 +184,28 @@ import (
 func main() {
 	client := anthropic.NewClient()
 
-	response, _ := client.Beta.Messages.New(context.Background(),
-		anthropic.BetaMessageNewParams{
+	response, _ := client.Messages.New(context.Background(),
+		anthropic.MessageNewParams{
 			Model:     anthropic.ModelClaudeOpus4_6,
 			MaxTokens: 1024,
-			Betas:     []anthropic.AnthropicBeta{"structured-outputs-2025-11-13"},
-			Messages: []anthropic.BetaMessageParam{
-				anthropic.NewBetaUserMessage(
-					anthropic.NewBetaTextBlock("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan."),
+			Messages: []anthropic.MessageParam{
+				anthropic.NewUserMessage(
+					anthropic.NewTextBlock("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan."),
 				),
 			},
-			OutputFormat: anthropic.BetaOutputFormatParam{
-				Type: "json_schema",
-				Schema: map[string]interface{}{
-					"type": "object",
-					"properties": map[string]interface{}{
-						"name":           map[string]string{"type": "string"},
-						"email":          map[string]string{"type": "string"},
-						"plan_interest":  map[string]string{"type": "string"},
-						"demo_requested": map[string]string{"type": "boolean"},
+			OutputConfig: anthropic.OutputConfigParam{
+				Format: anthropic.JSONOutputFormatParam{
+					Schema: map[string]interface{}{
+						"type": "object",
+						"properties": map[string]interface{}{
+							"name":           map[string]string{"type": "string"},
+							"email":          map[string]string{"type": "string"},
+							"plan_interest":  map[string]string{"type": "string"},
+							"demo_requested": map[string]string{"type": "boolean"},
+						},
+						"required":             []string{"name", "email", "plan_interest", "demo_requested"},
+						"additionalProperties": false,
 					},
-					"required":             []string{"name", "email", "plan_interest", "demo_requested"},
-					"additionalProperties": false,
 				},
 			},
 		})
@@ -219,28 +219,29 @@ require "anthropic"
 
 client = Anthropic::Client.new
 
-response = client.beta.messages.create(
+response = client.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  betas: ["structured-outputs-2025-11-13"],
   messages: [
     {
       role: "user",
       content: "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan."
     }
   ],
-  output_format: {
-    type: "json_schema",
-    schema: {
-      type: "object",
-      properties: {
-        name: { type: "string" },
-        email: { type: "string" },
-        plan_interest: { type: "string" },
-        demo_requested: { type: "boolean" }
-      },
-      required: ["name", "email", "plan_interest", "demo_requested"],
-      additionalProperties: false
+  output_config: {
+    format: {
+      type: "json_schema",
+      schema: {
+        type: "object",
+        properties: {
+          name: { type: "string" },
+          email: { type: "string" },
+          plan_interest: { type: "string" },
+          demo_requested: { type: "boolean" }
+        },
+        required: ["name", "email", "plan_interest", "demo_requested"],
+        additionalProperties: false
+      }
     }
   }
 )
@@ -253,35 +254,37 @@ using Anthropic;
 
 var client = new AnthropicClient();
 
-var response = await client.Beta.Messages.CreateAsync(
-    new BetaMessageCreateParams
+var response = await client.Messages.CreateAsync(
+    new MessageCreateParams
     {
         Model = "claude-opus-4-6",
         MaxTokens = 1024,
-        Betas = new[] { "structured-outputs-2025-11-13" },
         Messages = new[]
         {
-            new BetaMessageParam
+            new MessageParam
             {
                 Role = "user",
                 Content = "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan."
             }
         },
-        OutputFormat = new OutputFormat
+        OutputConfig = new OutputConfig
         {
-            Type = "json_schema",
-            Schema = new
+            Format = new JsonOutputFormat
             {
-                type = "object",
-                properties = new
+                Type = "json_schema",
+                Schema = new
                 {
-                    name = new { type = "string" },
-                    email = new { type = "string" },
-                    plan_interest = new { type = "string" },
-                    demo_requested = new { type = "boolean" }
-                },
-                required = new[] { "name", "email", "plan_interest", "demo_requested" },
-                additionalProperties = false
+                    type = "object",
+                    properties = new
+                    {
+                        name = new { type = "string" },
+                        email = new { type = "string" },
+                        plan_interest = new { type = "string" },
+                        demo_requested = new { type = "boolean" }
+                    },
+                    required = new[] { "name", "email", "plan_interest", "demo_requested" },
+                    additionalProperties = false
+                }
             }
         }
     });
@@ -1777,17 +1780,41 @@ If the response is cut off due to reaching the `max_tokens` limit:
 - The output may be incomplete and not match your schema
 - Retry with a higher `max_tokens` value to get the complete structured output
 
-### Schema validation errors
+### Schema complexity limits
 
-If your schema uses unsupported features or is too complex, you'll receive a 400 error:
+Structured outputs work by compiling your JSON schemas into a grammar that constrains Claude's output. More complex schemas produce larger grammars that take longer to compile. To protect against excessive compilation times, the API enforces several complexity limits.
 
-**"Too many recursive definitions in schema"**
-- Cause: Schema has excessive or cyclic recursive definitions
-- Solution: Simplify schema structure, reduce nesting depth
+#### Explicit limits
 
-**"Schema is too complex"**
-- Cause: Schema exceeds complexity limits
-- Solution: Break into smaller schemas, simplify structure, or reduce the number of tools marked as `strict: true`
+The following limits apply to all requests with `output_config.format` or `strict: true`:
+
+| Limit | Value | Description |
+|-------|-------|-------------|
+| Strict tools per request | 20 | Maximum number of tools with `strict: true`. Non-strict tools don't count toward this limit. |
+| Optional parameters | 24 | Total optional parameters across all strict tool schemas and JSON output schemas. Each parameter not listed in `required` counts toward this limit. |
+| Parameters with union types | 16 | Total parameters that use `anyOf` or type arrays (e.g., `"type": ["string", "null"]`) across all strict schemas. These are especially expensive because they create exponential compilation cost. |
+
+<Note>
+These limits apply to the combined total across all strict schemas in a single request. For example, if you have 4 strict tools with 6 optional parameters each, you'll reach the 24-parameter limit even though no single tool seems complex.
+</Note>
+
+#### Additional internal limits
+
+Beyond the explicit limits above, there are additional internal limits on the compiled grammar size. These limits exist because schema complexity doesn't reduce to a single dimension: features like optional parameters, union types, nested objects, and number of tools interact with each other in ways that can make the compiled grammar disproportionately large.
+
+When these limits are exceeded, you'll receive a 400 error with the message "Schema is too complex for compilation." These errors mean the combined complexity of your schemas exceeds what can be efficiently compiled, even if each individual limit above is satisfied. As a final stop-gap, the API also enforces a **compilation timeout of 180 seconds**. Schemas that pass all explicit checks but produce very large compiled grammars may hit this timeout.
+
+#### Tips for reducing schema complexity
+
+If you're hitting complexity limits, try these strategies in order:
+
+1. **Mark only critical tools as strict.** If you have many tools, reserve it for tools where schema violations cause real problems, and rely on Claude's natural adherence for simpler tools.
+
+2. **Reduce optional parameters.** Make parameters `required` where possible. Each optional parameter roughly doubles a portion of the grammar's state space. If a parameter always has a reasonable default, consider making it required and having Claude provide that default explicitly.
+
+3. **Simplify nested structures.** Deeply nested objects with optional fields compound the complexity. Flatten structures where possible.
+
+4. **Split into multiple requests.** If you have many strict tools, consider splitting them across separate requests or sub-agents.
 
 For persistent issues with valid schemas, [contact support](https://support.claude.com/en/articles/9015913-how-to-get-support) with your schema definition.
 

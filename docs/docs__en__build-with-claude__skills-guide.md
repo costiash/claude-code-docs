@@ -38,10 +38,10 @@ This feature is in beta and is **not** covered by [Zero Data Retention (ZDR)](/d
 ## Overview
 
 <Note>
-For a deep dive into the architecture and real-world applications of Agent Skills, read our engineering blog: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
+For a deep dive into the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
 </Note>
 
-Skills integrate with the Messages API through the code execution tool. Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical—both require code execution and use the same `container` structure.
+Skills integrate with the Messages API through the code execution tool. Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
 
 ### Using Skills
 
@@ -57,13 +57,13 @@ Skills integrate identically in the Messages API regardless of source. You speci
 | **Management** | Pre-built and maintained by Anthropic | Upload and manage via [Skills API](/docs/en/api/skills/create-skill) |
 | **Availability** | Available to all users | Private to your workspace |
 
-Both skill sources are returned by the [List Skills endpoint](/docs/en/api/skills/list-skills) (use the `source` parameter to filter). The integration shape and execution environment are identical—the only difference is where the Skills come from and how they're managed.
+Both skill sources are returned by the [List Skills endpoint](/docs/en/api/skills/list-skills) (use the `source` parameter to filter). The integration shape and execution environment are identical. The only difference is where the Skills come from and how they're managed.
 
 ### Prerequisites
 
 To use Skills, you need:
 
-1. **Anthropic API key** from the [Console](/settings/keys)
+1. **Claude API key** from the [Console](/settings/keys)
 2. **Beta headers**:
    - `code-execution-2025-08-25` - Enables code execution (required for Skills)
    - `skills-2025-10-02` - Enables Skills API
@@ -78,7 +78,7 @@ To use Skills, you need:
 
 Skills are specified using the `container` parameter in the Messages API. You can include up to 8 Skills per request.
 
-The structure is identical for both Anthropic and custom Skills—specify the required `type` and `skill_id`, and optionally include `version` to pin to a specific version:
+The structure is identical for both Anthropic and custom Skills. Specify the required `type` and `skill_id`, and optionally include `version` to pin to a specific version:
 
 <CodeGroup>
 ```python Python
@@ -1153,7 +1153,7 @@ When you specify Skills in a container:
 3. **Automatic Use**: Claude automatically loads and uses Skills when relevant to your request
 4. **Composition**: Multiple Skills compose together for complex workflows
 
-The progressive disclosure architecture ensures efficient context usage—Claude only loads full Skill instructions when needed.
+The progressive disclosure architecture ensures efficient context usage: Claude only loads full Skill instructions when needed.
 
 ---
 

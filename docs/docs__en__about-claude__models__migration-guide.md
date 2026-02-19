@@ -263,15 +263,15 @@ model = "claude-sonnet-4-6"  # After
 
 ### Recommended changes
 
-1. **Remove `fine-grained-tool-streaming-2025-05-14` beta header** — Fine-grained tool streaming is now GA on Sonnet 4.6 and no longer requires a beta header.
-2. **Migrate `output_format` to `output_config.format`** — The `output_format` parameter is deprecated. Use `output_config.format` instead.
+1. **Remove `fine-grained-tool-streaming-2025-05-14` beta header:** Fine-grained tool streaming is now GA on Sonnet 4.6 and no longer requires a beta header.
+2. **Migrate `output_format` to `output_config.format`:** The `output_format` parameter is deprecated. Use `output_config.format` instead.
 
 ### Migrating from Sonnet 4.5
 
-We strongly encourage migrating from Sonnet 4.5 to Sonnet 4.6, which delivers more intelligence at the same price point.
+Consider migrating from Sonnet 4.5 to Sonnet 4.6, which delivers more intelligence at the same price point.
 
 <Warning>
-Sonnet 4.6 defaults to an effort level of `high`, in contrast to Sonnet 4.5 which had no effort parameter. We recommend adjusting the effort parameter as you migrate from Sonnet 4.5 to Sonnet 4.6. If not explicitly set, you may experience higher latency with the default effort level.
+Sonnet 4.6 defaults to an effort level of `high`, in contrast to Sonnet 4.5 which had no effort parameter. Consider adjusting the effort parameter as you migrate from Sonnet 4.5 to Sonnet 4.6. If not explicitly set, you may experience higher latency with the default effort level.
 </Warning>
 
 #### If you're not using extended thinking
@@ -321,11 +321,11 @@ curl https://api.anthropic.com/v1/messages \
 
 #### If you're using extended thinking
 
-If you're using extended thinking on Sonnet 4.5, it continues to be supported on Sonnet 4.6 with no changes needed to your thinking configuration. We recommend keeping a thinking budget around 16k tokens. In practice, most tasks don't use that much, but it provides headroom for harder problems without risk of runaway token usage.
+If you're using extended thinking on Sonnet 4.5, it continues to be supported on Sonnet 4.6 with no changes needed to your thinking configuration. Consider keeping a thinking budget around 16k tokens. In practice, most tasks don't use that much, but it provides headroom for harder problems without risk of runaway token usage.
 
 ##### Coding and agentic use cases
 
-For agentic coding, frontend design, tool-heavy workflows, and complex enterprise workflows, we recommend starting with `medium` effort. If you find latency is too high, consider reducing effort to `low`. If you need higher intelligence, consider increasing effort to `high` or migrating to Opus 4.6.
+For agentic coding, frontend design, tool-heavy workflows, and complex enterprise workflows, start with `medium` effort. If you find latency is too high, consider reducing effort to `low`. If you need higher intelligence, consider increasing effort to `high` or migrating to Opus 4.6.
 
 <CodeGroup>
 ```python Python
@@ -379,7 +379,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ##### Chat and non-coding use cases
 
-For chat, content generation, search, classification, and other non-coding tasks, we recommend starting with `low` effort with extended thinking. If you need more depth, increase effort to `medium`.
+For chat, content generation, search, classification, and other non-coding tasks, start with `low` effort with extended thinking. If you need more depth, increase effort to `medium`.
 
 <CodeGroup>
 ```python Python

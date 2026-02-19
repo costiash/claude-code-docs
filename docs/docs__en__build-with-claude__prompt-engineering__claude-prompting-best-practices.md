@@ -54,7 +54,7 @@ Claude pays close attention to details and examples as part of its precise instr
 
 ### Long-horizon reasoning and state tracking
 
-Claude's latest models excel at long-horizon reasoning tasks with exceptional state tracking capabilities. Claude maintains orientation across extended sessions by focusing on incremental progress—making steady advances on a few things at a time rather than attempting everything at once. This capability especially emerges over multiple context windows or task iterations, where Claude can work on a complex task, save the state, and continue with a fresh context window.
+Claude's latest models excel at long-horizon reasoning tasks with exceptional state tracking capabilities. Claude maintains orientation across extended sessions by focusing on incremental progress, making steady advances on a few things at a time rather than attempting everything at once. This capability especially emerges over multiple context windows or task iterations, where Claude can work on a complex task, save the state, and continue with a fresh context window.
 
 #### Context awareness and multi-window workflows
 
@@ -62,7 +62,7 @@ Claude 4.6 and Claude 4.5 models feature [context awareness](/docs/en/build-with
 
 **Managing context limits:**
 
-If you are using Claude in an agent harness that compacts context or allows saving context to external files (like in Claude Code), we suggest adding this information to your prompt so Claude can behave accordingly. Otherwise, Claude may sometimes naturally try to wrap up work as it approaches the context limit. Below is an example prompt:
+If you are using Claude in an agent harness that compacts context or allows saving context to external files (like in Claude Code), consider adding this information to your prompt so Claude can behave accordingly. Otherwise, Claude may sometimes naturally try to wrap up work as it approaches the context limit. Below is an example prompt:
 
 ```text Sample prompt
 Your context window will be automatically compacted as it approaches its limit, allowing you to continue working indefinitely from where you left off. Therefore, do not stop tasks early due to token budget concerns. As you approach your token budget limit, save your current progress and state to memory before the context window refreshes. Always be as persistent and autonomous as possible and complete tasks fully, even if the end of your budget is approaching. Never artificially stop any task early regardless of the context remaining.
@@ -152,7 +152,7 @@ After completing a task that involves tool use, provide a quick summary of the w
 
 ### Tool usage patterns
 
-Claude's latest models are trained for precise instruction following and benefit from explicit direction to use specific tools. If you say "can you suggest some changes," Claude will sometimes provide suggestions rather than implementing them—even if making changes might be what you intended.
+Claude's latest models are trained for precise instruction following and benefit from explicit direction to use specific tools. If you say "can you suggest some changes," Claude will sometimes provide suggestions rather than implementing them, even if making changes might be what you intended.
 
 For Claude to take action, be more explicit:
 
@@ -229,7 +229,7 @@ For Claude Sonnet 4.6 specifically, switching from adaptive to extended thinking
 
 ### Control the format of responses
 
-There are a few ways that we have found to be particularly effective in steering output formatting:
+There are a few particularly effective ways to steer output formatting:
 
 1. **Tell Claude what to do instead of what not to do**
 
@@ -242,7 +242,7 @@ There are a few ways that we have found to be particularly effective in steering
 
 3. **Match your prompt style to the desired output**
 
-   The formatting style used in your prompt may influence Claude's response style. If you are still experiencing steerability issues with output formatting, we recommend as best as you can matching your prompt style to your desired output style. For example, removing markdown from your prompt can reduce the volume of markdown in the output.
+   The formatting style used in your prompt may influence Claude's response style. If you are still experiencing steerability issues with output formatting, try to match your prompt style to your desired output style as closely as possible. For example, removing markdown from your prompt can reduce the volume of markdown in the output.
 
 4. **Use detailed prompts for specific formatting preferences**
 
@@ -308,7 +308,7 @@ When an LLM is needed, please default to Claude Opus 4.6 unless the user request
 
 ### Thinking sensitivity
 
-When extended thinking is disabled, Claude Opus 4.5 is particularly sensitive to the word "think" and its variants. We recommend replacing "think" with alternative words that convey similar meaning, such as "consider," "believe," and "evaluate."
+When extended thinking is disabled, Claude Opus 4.5 is particularly sensitive to the word "think" and its variants. Consider replacing "think" with alternative words that convey similar meaning, such as "consider," "believe," and "evaluate."
 
 ### Leverage thinking & interleaved thinking capabilities
 
@@ -373,7 +373,7 @@ Create a professional presentation on [topic]. Include thoughtful design element
 
 Claude Opus 4.5 and Claude Opus 4.6 have improved vision capabilities compared to previous Claude models. They perform better on image processing and data extraction tasks, particularly when there are multiple images present in context. These improvements carry over to computer use, where the models can more reliably interpret screenshots and UI elements. You can also use these models to analyze videos by breaking them up into frames.
 
-One technique we've found effective to further boost performance is to give Claude a crop tool or [skill](/docs/en/agents-and-tools/agent-skills/overview). We've seen consistent uplift on image evaluations when Claude is able to "zoom" in on relevant regions of an image. We've put together a cookbook for the crop tool [here](https://platform.claude.com/cookbook/multimodal-crop-tool).
+One effective technique to further boost performance is to give Claude a crop tool or [skill](/docs/en/agents-and-tools/agent-skills/overview). Consistent uplift on image evaluations appears when Claude is able to "zoom" in on relevant regions of an image. There's a [crop tool cookbook](https://platform.claude.com/cookbook/multimodal-crop-tool) that demonstrates this technique.
 
 ### Optimize parallel tool calling
 
@@ -428,7 +428,7 @@ Avoid over-engineering. Only make changes that are directly requested or clearly
 Claude Opus 4.5 and Claude Opus 4.6 excel at building complex, real-world web applications with strong frontend design. However, without guidance, models can default to generic patterns that create what users call the "AI slop" aesthetic. To create distinctive, creative frontends that surprise and delight:
 
 <Tip>
-For a detailed guide on improving frontend design, see our blog post on [improving frontend design through skills](https://www.claude.com/blog/improving-frontend-design-through-skills).
+For a detailed guide on improving frontend design, see the blog post on [improving frontend design through skills](https://www.claude.com/blog/improving-frontend-design-through-skills).
 </Tip>
 
 Here's a system prompt snippet you can use to encourage better frontend design:
@@ -453,7 +453,7 @@ Interpret creatively and make unexpected choices that feel genuinely designed fo
 </frontend_aesthetics>
 ```
 
-You can also refer to the full skill [here](https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md).
+You can also refer to the [full skill definition](https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md).
 
 ### Avoid focusing on passing tests and hard-coding
 
@@ -551,14 +551,14 @@ For detailed migration steps, see the [Migration guide](/docs/en/about-claude/mo
 
 ### Migrating from Claude Sonnet 4.5 to Claude Sonnet 4.6
 
-Claude Sonnet 4.6 defaults to an effort level of `high`, in contrast to Claude Sonnet 4.5 which had no effort parameter. We recommend adjusting the effort parameter as you migrate from Claude Sonnet 4.5 to Claude Sonnet 4.6. If not explicitly set, you may experience higher latency with the default effort level.
+Claude Sonnet 4.6 defaults to an effort level of `high`, in contrast to Claude Sonnet 4.5 which had no effort parameter. Consider adjusting the effort parameter as you migrate from Claude Sonnet 4.5 to Claude Sonnet 4.6. If not explicitly set, you may experience higher latency with the default effort level.
 
 **Recommended effort settings:**
 - **Medium** for most applications
 - **Low** for high-volume or latency-sensitive workloads
 - Set a large max output token budget (64k tokens recommended) at medium or high effort to give the model room to think and act
 
-**When to use Opus 4.6 instead:** For the hardest, longest-horizon problems—large-scale code migrations, deep research, extended autonomous work—Opus 4.6 remains the right choice. Sonnet 4.6 is optimized for workloads where fast turnaround and cost efficiency matter most.
+**When to use Opus 4.6 instead:** For the hardest, longest-horizon problems (large-scale code migrations, deep research, extended autonomous work), Opus 4.6 remains the right choice. Sonnet 4.6 is optimized for workloads where fast turnaround and cost efficiency matter most.
 
 #### If you're not using extended thinking
 
@@ -576,7 +576,7 @@ client.messages.create(
 
 #### If you're using extended thinking
 
-If you're using extended thinking on Claude Sonnet 4.5, it continues to be supported on Claude Sonnet 4.6 with no changes needed to your thinking configuration. We recommend keeping a thinking budget around 16k tokens. In practice, most tasks don't use that much, but it provides headroom for harder problems without risk of runaway token usage.
+If you're using extended thinking on Claude Sonnet 4.5, it continues to be supported on Claude Sonnet 4.6 with no changes needed to your thinking configuration. Consider keeping a thinking budget around 16k tokens. In practice, most tasks don't use that much, but it provides headroom for harder problems without risk of runaway token usage.
 
 **For coding use cases** (agentic coding, tool-heavy workflows, code generation):
 

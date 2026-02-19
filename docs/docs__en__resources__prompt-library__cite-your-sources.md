@@ -4,7 +4,7 @@ Get answers to questions about a document's content with relevant citations supp
 
 ---
 
-<Tip>We recommend using the [citation feature](/docs/en/build-with-claude/citations) built into the API instead of a prompt based approach. Using the API citation feature will improve citation quality, ensure that all returned citations are valid, and potentially reduce the number of needed output tokens.</Tip>
+<Tip>Consider using the [citation feature](/docs/en/build-with-claude/citations) built into the API instead of a prompt based approach. Using the API citation feature will improve citation quality, ensure that all returned citations are valid, and potentially reduce the number of needed output tokens.</Tip>
 
 > Copy this prompt into the developer [Console](/dashboard) to try it for yourself!
 

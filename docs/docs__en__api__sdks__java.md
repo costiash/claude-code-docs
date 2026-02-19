@@ -715,7 +715,7 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
 ## Long requests
 
 <Warning>
-Anthropic highly encourages using [streaming](#streaming) for longer running requests.
+Consider using [streaming](#streaming) for longer running requests.
 </Warning>
 
 Avoid setting a large `maxTokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic. The SDK periodically pings the API to keep the connection alive and reduce the impact of these networks.

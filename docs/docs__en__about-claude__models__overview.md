@@ -1,14 +1,14 @@
 # Models overview
 
-Claude is a family of state-of-the-art large language models developed by Anthropic. This guide introduces our models and compares their performance.
+Claude is a family of state-of-the-art large language models developed by Anthropic. This guide introduces the available models and compares their performance.
 
 ---
 
 ## Choosing a model
 
-If you're unsure which model to use, we recommend starting with **Claude Opus 4.6** for the most complex tasks. It is our latest generation model with exceptional performance in coding and reasoning.
+If you're unsure which model to use, consider starting with **Claude Opus 4.6** for the most complex tasks. It is the latest generation model with exceptional performance in coding and reasoning.
 
-All current Claude models support text and image input, text output, multilingual capabilities, and vision. Models are available via the Anthropic API, AWS Bedrock, and Google Vertex AI.
+All current Claude models support text and image input, text output, multilingual capabilities, and vision. Models are available via the Claude API, AWS Bedrock, and Google Vertex AI.
 
 Once you've picked a model, [learn how to make your first API call](/docs/en/get-started).
 
@@ -16,7 +16,7 @@ Once you've picked a model, [learn how to make your first API call](/docs/en/get
 
 | Feature | Claude Opus 4.6 | Claude Sonnet 4.6 | Claude Haiku 4.5 |
 |:--------|:----------------|:------------------|:-----------------|
-| **Description** | Our most intelligent model for building agents and coding | Our best combination of speed and intelligence | Our fastest model with near-frontier intelligence |
+| **Description** | The most intelligent model for building agents and coding | The best combination of speed and intelligence | The fastest model with near-frontier intelligence |
 | **Claude API ID** | claude-opus-4-6 | claude-sonnet-4-6 | claude-haiku-4-5-20251001 |
 | **Claude API alias** | claude-opus-4-6 | claude-sonnet-4-6 | claude-haiku-4-5 |
 | **AWS Bedrock ID** | anthropic.claude-opus-4-6-v1 | anthropic.claude-sonnet-4-6 | anthropic.claude-haiku-4-5-20251001-v1:0 |
@@ -31,7 +31,7 @@ Once you've picked a model, [learn how to make your first API call](/docs/en/get
 | **Reliable knowledge cutoff** | May 2025<sup>2</sup> | Aug 2025<sup>2</sup> | Feb 2025 |
 | **Training data cutoff** | Aug 2025 | Jan 2026 | Jul 2025 |
 
-_<sup>1 - See our [pricing page](/docs/en/about-claude/pricing) for complete pricing information including batch API discounts, prompt caching rates, extended thinking costs, and vision processing fees.</sup>_
+_<sup>1 - See the [pricing page](/docs/en/about-claude/pricing) for complete pricing information including batch API discounts, prompt caching rates, extended thinking costs, and vision processing fees.</sup>_
 
 _<sup>2 - **Reliable knowledge cutoff** indicates the date through which a model's knowledge is most extensive and reliable. **Training data cutoff** is the broader date range of training data used. For more information, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).</sup>_
 
@@ -43,7 +43,7 @@ _<sup>3 - Claude Opus 4.6 and Sonnet 4.6 support a [1M token context window](/do
 
 <section title="Legacy models">
 
-The following models are still available but we recommend migrating to current models for improved performance:
+The following models are still available. Consider migrating to current models for improved performance:
 
 | Feature | Claude Sonnet 4.5 | Claude Opus 4.5 | Claude Opus 4.1 | Claude Sonnet 4 | Claude Sonnet 3.7 | Claude Opus 4 | Claude Haiku 3 |
 |:--------|:------------------|:----------------|:----------------|:----------------|:------------------|:--------------|:---------------|
@@ -66,7 +66,7 @@ _<sup>2 - **Reliable knowledge cutoff** indicates the date through which a model
 
 _<sup>3 - Some Haiku models have a single training data cutoff date.</sup>_
 
-_<sup>4 - Include the beta header `output-128k-2025-02-19` in your API request to increase the maximum output token length to 128K tokens for Claude Sonnet 3.7. We strongly suggest using our [streaming Messages API](/docs/en/build-with-claude/streaming) to avoid timeouts when generating longer outputs. See our guidance on [long requests](/docs/en/api/errors#long-requests) for more details.</sup>_
+_<sup>4 - Include the beta header `output-128k-2025-02-19` in your API request to increase the maximum output token length to 128K tokens for Claude Sonnet 3.7. Use the [streaming Messages API](/docs/en/build-with-claude/streaming) to avoid timeouts when generating longer outputs. See the guidance on [long requests](/docs/en/api/errors#long-requests) for more details.</sup>_
 
 </section>
 
@@ -76,17 +76,17 @@ Claude 4 models excel in:
 - **Performance**: Top-tier results in reasoning, coding, multilingual tasks, long-context handling, honesty, and image processing. See the [Claude 4 blog post](http://www.anthropic.com/news/claude-4) for more information.
 - **Engaging responses**: Claude models are ideal for applications that require rich, human-like interactions.
 
-    - If you prefer more concise responses, you can adjust your prompts to guide the model toward the desired output length. Refer to our [prompt engineering guides](/docs/en/build-with-claude/prompt-engineering) for details.
-    - For prompting best practices, see our [prompting best practices guide](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
+    - If you prefer more concise responses, you can adjust your prompts to guide the model toward the desired output length. Refer to the [prompt engineering guides](/docs/en/build-with-claude/prompt-engineering) for details.
+    - For prompting best practices, see the [prompting best practices guide](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
 - **Output quality**: When migrating from previous model generations to Claude 4, you may notice larger improvements in overall performance.
 
 ## Migrating to Claude 4.6
 
-If you're currently using older Claude models, we recommend migrating to Claude Opus 4.6 to take advantage of improved intelligence and enhanced capabilities. For detailed migration instructions, see [Migrating to Claude 4.6](/docs/en/about-claude/models/migration-guide).
+If you're currently using older Claude models, consider migrating to Claude Opus 4.6 to take advantage of improved intelligence and enhanced capabilities. For detailed migration instructions, see [Migrating to Claude 4.6](/docs/en/about-claude/models/migration-guide).
 
 ## Get started with Claude
 
-If you're ready to start exploring what Claude can do for you, let's dive in! Whether you're a developer looking to integrate Claude into your applications or a user wanting to experience the power of AI firsthand, we've got you covered.
+If you're ready to start exploring what Claude can do for you, dive in! Whether you're a developer looking to integrate Claude into your applications or a user wanting to experience the power of AI firsthand, the following resources can help.
 
 <Note>Looking to chat with Claude? Visit [claude.ai](http://www.claude.ai)!</Note>
 
@@ -102,4 +102,4 @@ If you're ready to start exploring what Claude can do for you, let's dive in! Wh
   </Card>
 </CardGroup>
 
-If you have any questions or need assistance, don't hesitate to reach out to our [support team](https://support.claude.com/) or consult the [Discord community](https://www.anthropic.com/discord).
+If you have any questions or need assistance, don't hesitate to reach out to the [support team](https://support.claude.com/) or consult the [Discord community](https://www.anthropic.com/discord).

@@ -8,7 +8,7 @@ Claude excels at tasks across multiple languages, maintaining strong cross-lingu
 
 Claude demonstrates robust multilingual capabilities, with particularly strong performance in zero-shot tasks across languages. The model maintains consistent relative performance across both widely-spoken and lower-resource languages, making it a reliable choice for multilingual applications.
 
-Note that Claude is capable in many languages beyond those benchmarked below. We encourage testing with any languages relevant to your specific use cases.
+Note that Claude is capable in many languages beyond those benchmarked below. Consider testing with any languages relevant to your specific use cases.
 
 ## Performance data
 
@@ -48,7 +48,7 @@ When working with multilingual content:
 2. **Use native scripts**: Submit text in its native script rather than transliteration for optimal results
 3. **Consider cultural context**: Effective communication often requires cultural and regional awareness beyond pure translation
 
-We also suggest following our general [prompt engineering guidelines](/docs/en/build-with-claude/prompt-engineering/overview) to better improve Claude's performance.
+Also follow the general [prompt engineering guidelines](/docs/en/build-with-claude/prompt-engineering/overview) to better improve Claude's performance.
 
 ***
 

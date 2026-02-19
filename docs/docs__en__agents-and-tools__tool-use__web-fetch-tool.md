@@ -15,7 +15,7 @@ This feature is [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data
 </Note>
 
 <Warning>
-Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. We recommend only using this tool in trusted environments or when handling non-sensitive data.
+Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. Only use this tool in trusted environments or when handling non-sensitive data.
 
 To minimize exfiltration risks, Claude is not allowed to dynamically construct URLs. Claude can only fetch URLs that have been explicitly provided by the user or that come from previous web search or web fetch results. However, there is still residual risk that should be carefully considered when using this tool.
 
@@ -67,14 +67,13 @@ This dynamic filtering is particularly useful for:
 Dynamic filtering requires the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) to be enabled. The web fetch tool (with and without dynamic filtering) is available on the Claude API and Microsoft Azure.
 </Note>
 
-To enable dynamic filtering, use the `web_fetch_20260209` tool version with the `code-execution-web-tools-2026-02-09` beta header:
+To enable dynamic filtering, use the `web_fetch_20260209` tool version:
 
 <CodeGroup>
 ```bash Shell
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-web-tools-2026-02-09" \
     --header "content-type: application/json" \
     --data '{
         "model": "claude-opus-4-6",
@@ -97,10 +96,9 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
-    betas=["code-execution-web-tools-2026-02-09"],
     messages=[
         {
             "role": "user",
@@ -118,10 +116,9 @@ import { Anthropic } from "@anthropic-ai/sdk";
 const anthropic = new Anthropic();
 
 async function main() {
-  const response = await anthropic.beta.messages.create({
+  const response = await anthropic.messages.create({
     model: "claude-opus-4-6",
     max_tokens: 4096,
-    betas: ["code-execution-web-tools-2026-02-09"],
     messages: [
       {
         role: "user",

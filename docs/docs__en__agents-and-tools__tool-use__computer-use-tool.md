@@ -6,10 +6,10 @@ Claude can interact with computer environments through the computer use tool, wh
 
 <Note>
 Computer use is currently in beta and requires a [beta header](/docs/en/api/beta-headers):
-- `"computer-use-2025-11-24"` for Claude Opus 4.6, Claude Opus 4.5
-- `"computer-use-2025-01-24"` for Claude Sonnet 4.6, Sonnet 4.5, Haiku 4.5, Opus 4.1, Sonnet 4, Opus 4, and Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
+- `"computer-use-2025-11-24"` for Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5
+- `"computer-use-2025-01-24"` for Sonnet 4.5, Haiku 4.5, Opus 4.1, Sonnet 4, Opus 4, and Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
 
-Please reach out through our [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
+Please reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
 </Note>
 
 <Note>
@@ -33,11 +33,11 @@ Computer use is available for the following Claude models:
 
 | Model | Tool Version | Beta Flag |
 |-------|--------------|-----------|
-| Claude Opus 4.6, Claude Opus 4.5 | `computer_20251124` | `computer-use-2025-11-24` |
+| Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5 | `computer_20251124` | `computer-use-2025-11-24` |
 | All other supported models | `computer_20250124` | `computer-use-2025-01-24` |
 
 <Note>
-Claude Opus 4.6 and Claude Opus 4.5 introduce the `computer_20251124` tool version with new capabilities including the zoom action for detailed screen region inspection. All other models (Sonnet 4.6, Sonnet 4.5, Haiku 4.5, Sonnet 4, Opus 4, Opus 4.1, and Sonnet 3.7) use the `computer_20250124` tool version.
+Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 introduce the `computer_20251124` tool version with new capabilities including the zoom action for detailed screen region inspection. All other models (Sonnet 4.5, Haiku 4.5, Sonnet 4, Opus 4, Opus 4.1, and Sonnet 3.7) use the `computer_20250124` tool version.
 </Note>
 
 <Warning>
@@ -57,11 +57,11 @@ To minimize risks, consider taking precautions such as:
 4. Asking a human to confirm decisions that may result in meaningful real-world consequences as well as any tasks requiring affirmative consent, such as accepting cookies, executing financial transactions, or agreeing to terms of service.
 </Warning>
 
-In some circumstances, Claude will follow commands found in content even if it conflicts with the user's instructions. For example, Claude instructions on webpages or contained in images may override instructions or cause Claude to make mistakes. We suggest taking precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
+In some circumstances, Claude will follow commands found in content even if it conflicts with the user's instructions. For example, Claude instructions on webpages or contained in images may override instructions or cause Claude to make mistakes. Take precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
 
-We've trained the model to resist these prompt injections and have added an extra layer of defense. If you use our computer use tools, we'll automatically run classifiers on your prompts to flag potential instances of prompt injections. When these classifiers identify potential prompt injections in screenshots, they will automatically steer the model to ask for user confirmation before proceeding with the next action. We recognize that this extra protection won't be ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, please [contact us](https://support.claude.com/en/).
+The model has been trained to resist these prompt injections, and an extra layer of defense has been added. If you use the computer use tools, classifiers will automatically run on your prompts to flag potential instances of prompt injections. When these classifiers identify potential prompt injections in screenshots, they will automatically steer the model to ask for user confirmation before proceeding with the next action. This extra protection won't be ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, please [contact support](https://support.claude.com/en/).
 
-We still suggest taking precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
+These precautions remain important even with the classifier defense layer in place.
 
 Finally, please inform end users of relevant risks and obtain their consent prior to enabling computer use in your own products.
 
@@ -71,7 +71,7 @@ Finally, please inform end users of relevant risks and obtain their consent prio
   href="https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo"
 >
 
-Get started quickly with our computer use reference implementation that includes a web interface, Docker container, example tool implementations, and an agent loop.
+Get started quickly with the computer use reference implementation that includes a web interface, Docker container, example tool implementations, and an agent loop.
 
 **Note:** The implementation has been updated to include new tools for both Claude 4 models and Claude Sonnet 3.7. Be sure to pull the latest version of the repo to access these new features.
 
@@ -80,7 +80,7 @@ Get started quickly with our computer use reference implementation that includes
 <Tip>
   Please use [this form](https://forms.gle/BT1hpBrqDPDUrCqo7) to provide
   feedback on the quality of the model responses, the API itself, or the quality
-  of the documentation - we cannot wait to hear from you!
+  of the documentation.
 </Tip>
 
 ## Quick start
@@ -190,7 +190,7 @@ The example above shows all three tools being used together, which requires the 
   </Step>
 </Steps>
 
-We refer to the repetition of steps 3 and 4 without user input as the "agent loop" (that is, Claude responding with a tool use request and your application responding to Claude with the results of evaluating that request).
+The repetition of steps 3 and 4 without user input is referred to as the "agent loop" (that is, Claude responding with a tool use request and your application responding to Claude with the results of evaluating that request).
 
 ### The computing environment
 
@@ -219,9 +219,9 @@ For security and isolation, the reference implementation runs all of this inside
 
 ## How to implement computer use
 
-### Start with our reference implementation
+### Start with the reference implementation
 
-We have built a [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) that includes everything you need to get started quickly with computer use:
+A [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is available that includes everything you need to get started quickly with computer use:
 
 - A [containerized environment](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/Dockerfile) suitable for computer use with Claude
 - Implementations of [the computer use tools](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo/computer_use_demo/tools)
@@ -255,7 +255,9 @@ async def sampling_loop(
     # Set up tools and API parameters
     client = Anthropic(api_key=api_key)
     beta_flag = (
-        "computer-use-2025-01-24"
+        "computer-use-2025-11-24"
+        if "20251124" in tool_version
+        else "computer-use-2025-01-24"
         if "20250124" in tool_version
         else "computer-use-2024-10-22"
     )
@@ -318,7 +320,7 @@ async def sampling_loop(
 
 The loop continues until either Claude responds without requesting any tools (task completion) or the maximum iteration limit is reached. This safeguard prevents potential infinite loops that could result in unexpected API costs.
 
-We recommend trying the reference implementation out before reading the rest of this documentation.
+Try the reference implementation out before reading the rest of this documentation.
 
 ### Optimize model performance with prompting
 
@@ -328,7 +330,7 @@ Here are some tips on how to get the best quality outputs:
 2. Claude sometimes assumes outcomes of its actions without explicitly checking their results. To prevent this you can prompt Claude with `After each step, take a screenshot and carefully evaluate if you have achieved the right outcome. Explicitly show your thinking: "I have evaluated step X..." If not correct, try again. Only when you confirm a step was executed correctly should you move on to the next one.`
 3. Some UI elements (like dropdowns and scrollbars) might be tricky for Claude to manipulate using mouse movements. If you experience this, try prompting the model to use keyboard shortcuts.
 4. For repeatable tasks or UI interactions, include example screenshots and tool calls of successful outcomes in your prompt.
-5. If you need the model to log in, provide it with the username and password in your prompt inside xml tags like `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Please review our [guide on mitigating prompt injections](/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) before providing the model with login credentials.
+5. If you need the model to log in, provide it with the username and password in your prompt inside xml tags like `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Please review the [guide on mitigating prompt injections](/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) before providing the model with login credentials.
 
 <Tip>
   If you repeatedly encounter a clear set of issues or know in advance the tasks
@@ -510,13 +512,13 @@ The computer use tool can be combined with other tools to create more powerful a
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: computer-use-2025-01-24" \
+    -H "anthropic-beta: computer-use-2025-11-24" \
     -d '{
       "model": "claude-opus-4-6",
       "max_tokens": 2000,
       "tools": [
         {
-          "type": "computer_20250124",
+          "type": "computer_20251124",
           "name": "computer",
           "display_width_px": 1024,
           "display_height_px": 768,
@@ -573,7 +575,7 @@ response = client.beta.messages.create(
     max_tokens=1024,
     tools=[
         {
-            "type": "computer_20250124",
+            "type": "computer_20251124",
             "name": "computer",
             "display_width_px": 1024,
             "display_height_px": 768,
@@ -607,7 +609,7 @@ response = client.beta.messages.create(
             "content": "Find flights from San Francisco to a place with warmer weather.",
         }
     ],
-    betas=["computer-use-2025-01-24"],
+    betas=["computer-use-2025-11-24"],
     thinking={"type": "enabled", "budget_tokens": 1024},
 )
 print(response)
@@ -623,7 +625,7 @@ const message = await anthropic.beta.messages.create({
   max_tokens: 1024,
   tools: [
     {
-      type: "computer_20250124",
+      type: "computer_20251124",
       name: "computer",
       display_width_px: 1024,
       display_height_px: 768,
@@ -658,7 +660,7 @@ const message = await anthropic.beta.messages.create({
     }
   ],
   messages: [{ role: "user", content: "Find flights from San Francisco to a place with warmer weather." }],
-  betas: ["computer-use-2025-01-24"],
+  betas: ["computer-use-2025-11-24"],
   thinking: { type: "enabled", budget_tokens: 1024 }
 });
 console.log(message);
@@ -733,7 +735,7 @@ public class MultipleToolsExample {
         )
       )
       .addUserMessage("Find flights from San Francisco to a place with warmer weather.")
-      .addBeta("computer-use-2025-01-24")
+      .addBeta("computer-use-2025-11-24")
       .build();
 
     BetaMessage message = client.beta().messages().create(params);
@@ -1009,17 +1011,17 @@ def log_action(action_type, params, result):
 
 The computer use functionality is in beta. While Claude's capabilities are cutting edge, developers should be aware of its limitations:
 
-1. **Latency**: the current computer use latency for human-AI interactions may be too slow compared to regular human-directed computer actions. We recommend focusing on use cases where speed isn't critical (for example, background information gathering, automated software testing) in trusted environments.
+1. **Latency**: the current computer use latency for human-AI interactions may be too slow compared to regular human-directed computer actions. Focus on use cases where speed isn't critical (for example, background information gathering, automated software testing) in trusted environments.
 2. **Computer vision accuracy and reliability**: Claude may make mistakes or hallucinate when outputting specific coordinates while generating actions. Claude Sonnet 3.7 introduces the thinking capability that can help you understand the model's reasoning and identify potential issues.
-3. **Tool selection accuracy and reliability**: Claude may make mistakes or hallucinate when selecting tools while generating actions or take unexpected actions to solve problems. Additionally, reliability may be lower when interacting with niche applications or multiple applications at once. We recommend that users prompt the model carefully when requesting complex tasks.
+3. **Tool selection accuracy and reliability**: Claude may make mistakes or hallucinate when selecting tools while generating actions or take unexpected actions to solve problems. Additionally, reliability may be lower when interacting with niche applications or multiple applications at once. Prompt the model carefully when requesting complex tasks.
 4. **Scrolling reliability**: Claude Sonnet 3.7 introduced dedicated scroll actions with direction control that improves reliability. The model can now explicitly scroll in any direction (up/down/left/right) by a specified amount.
 5. **Spreadsheet interaction**: Mouse clicks for spreadsheet interaction have improved in Claude Sonnet 3.7 with the addition of more precise mouse control actions like `left_mouse_down`, `left_mouse_up`, and new modifier key support. Cell selection can be more reliable by using these fine-grained controls and combining modifier keys with clicks.
-6. **Account creation and content generation on social and communications platforms**: While Claude will visit websites, we are limiting its ability to create accounts or generate and share content or otherwise engage in human impersonation across social media websites and platforms. We may update this capability in the future.
-7. **Vulnerabilities**: Vulnerabilities like jailbreaking or prompt injection may persist across frontier AI systems, including the beta computer use API. In some circumstances, Claude will follow commands found in content, sometimes even in conflict with the user's instructions. For example, Claude instructions on webpages or contained in images may override instructions or cause Claude to make mistakes. We recommend:
+6. **Account creation and content generation on social and communications platforms**: While Claude will visit websites, Claude's ability to create accounts or generate and share content or otherwise engage in human impersonation across social media websites and platforms is limited. This capability may be updated in the future.
+7. **Vulnerabilities**: Vulnerabilities like jailbreaking or prompt injection may persist across frontier AI systems, including the beta computer use API. In some circumstances, Claude will follow commands found in content, sometimes even in conflict with the user's instructions. For example, Claude instructions on webpages or contained in images may override instructions or cause Claude to make mistakes. Consider the following:
    a. Limiting computer use to trusted environments such as virtual machines or containers with minimal privileges
    b. Avoiding giving computer use access to sensitive accounts or data without strict oversight
    c. Informing end users of relevant risks and obtaining their consent before enabling or requesting permissions necessary for computer use features in your applications
-8. **Inappropriate or illegal actions**: Per Anthropic's terms of service, you must not employ computer use to violate any laws or our Acceptable Use Policy.
+8. **Inappropriate or illegal actions**: Per Anthropic's terms of service, you must not employ computer use to violate any laws or the Acceptable Use Policy.
 
 Always carefully review and verify Claude's computer use actions and logs. Do not use Claude for tasks requiring perfect precision or sensitive user information without human oversight.
 
@@ -1053,7 +1055,7 @@ If you're also using bash or text editor tools alongside computer use, those too
     icon="github-logo"
     href="https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo"
   >
-    Get started quickly with our complete Docker-based implementation
+    Get started quickly with the complete Docker-based implementation
   </Card>
   <Card
     title="Tool documentation"

@@ -32,7 +32,7 @@ This is useful for:
 
 ## Organization roles and permissions
 
-There are five organization-level roles. See more details [here](https://support.claude.com/en/articles/10186004-api-console-roles-and-permissions).
+There are five organization-level roles. See more details in the [API Console roles and permissions](https://support.claude.com/en/articles/10186004-api-console-roles-and-permissions) article.
 
 | Role | Permissions |
 |------|-------------|

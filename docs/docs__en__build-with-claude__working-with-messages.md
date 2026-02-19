@@ -79,7 +79,7 @@ This feature is [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data
 
 ## Multiple conversational turns
 
-The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don't necessarily need to actually originate from Claude — you can use synthetic `assistant` messages.
+The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don't necessarily need to actually originate from Claude. You can use synthetic `assistant` messages.
 
 <CodeGroup>
 ```bash Shell
@@ -236,7 +236,7 @@ Prefilling is deprecated and not supported on Claude Opus 4.6, Claude Sonnet 4.6
 
 ## Vision
 
-Claude can read both text and images in requests. We support both `base64` and `url` source types for images, and the `image/jpeg`, `image/png`, `image/gif`, and `image/webp` media types. See our [vision guide](/docs/en/build-with-claude/vision) for more details.
+Claude can read both text and images in requests. Both `base64` and `url` source types are supported for images, along with the `image/jpeg`, `image/png`, `image/gif`, and `image/webp` media types. See the [vision guide](/docs/en/build-with-claude/vision) for more details.
 
 <CodeGroup>
   ```bash Shell
@@ -429,6 +429,6 @@ Claude can read both text and images in requests. We support both `base64` and `
 
 ## Tool use and computer use
 
-See our [guide](/docs/en/agents-and-tools/tool-use/overview) for examples of how to use tools with the Messages API.
-See our [computer use guide](/docs/en/agents-and-tools/tool-use/computer-use-tool) for examples of how to control desktop computer environments with the Messages API.
+See the [tool use guide](/docs/en/agents-and-tools/tool-use/overview) for examples of how to use tools with the Messages API.
+See the [computer use guide](/docs/en/agents-and-tools/tool-use/computer-use-tool) for examples of how to control desktop computer environments with the Messages API.
 For guaranteed JSON output, see [Structured Outputs](/docs/en/build-with-claude/structured-outputs).

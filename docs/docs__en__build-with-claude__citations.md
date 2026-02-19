@@ -128,8 +128,8 @@ public class DocumentExample {
 
 In comparison with prompt-based citations solutions, the citations feature has the following advantages:
 - **Cost savings:** If your prompt-based approach asks Claude to output direct quotes, you may see cost savings due to the fact that `cited_text` does not count towards your output tokens.
-- **Better citation reliability:** Because we parse citations into the respective response formats mentioned above and extract `cited_text`, citations are guaranteed to contain valid pointers to the provided documents.
-- **Improved citation quality:** In our evals, we found the citations feature to be significantly more likely to cite the most relevant quotes from documents as compared to purely prompt-based approaches.
+- **Better citation reliability:** Because citations are parsed into the respective response formats mentioned above and `cited_text` is extracted, citations are guaranteed to contain valid pointers to the provided documents.
+- **Improved citation quality:** In evaluations, the citations feature was found to be significantly more likely to cite the most relevant quotes from documents as compared to purely prompt-based approaches.
 </Tip>
 
 ---
@@ -320,7 +320,7 @@ In this example:
 
 ### Choosing a document type
 
-We support three document types for citations. Documents can be provided directly in the message (base64, text, or URL) or uploaded via the [Files API](/docs/en/build-with-claude/files) and referenced by `file_id`:
+Three document types are supported for citations. Documents can be provided directly in the message (base64, text, or URL) or uploaded via the [Files API](/docs/en/build-with-claude/files) and referenced by `file_id`:
 
 | Type | Best for | Chunking | Citation format |
 | :--- | :--- | :--- | :--- |
@@ -544,7 +544,7 @@ When citations are enabled, responses include multiple text blocks with citation
 
 ### Streaming Support
 
-For streaming responses, we've added a `citations_delta` type that contains a single citation to be added to the `citations` list on the current `text` content block.
+For streaming responses, a `citations_delta` type is included that contains a single citation to be added to the `citations` list on the current `text` content block.
 
 <section title="Example streaming events">
 

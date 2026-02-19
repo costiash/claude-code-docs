@@ -191,7 +191,7 @@ The `allowed_callers` field specifies which contexts can invoke a tool:
 - `["direct", "code_execution_20250825"]` - Callable both directly and from code execution
 
 <Tip>
-We recommend choosing either `["direct"]` or `["code_execution_20250825"]` for each tool rather than enabling both, as this provides clearer guidance to Claude for how best to use the tool.
+Choose either `["direct"]` or `["code_execution_20250825"]` for each tool rather than enabling both, as this provides clearer guidance to Claude for how best to use the tool.
 </Tip>
 
 ### The `caller` field in responses
@@ -760,7 +760,7 @@ Claude's training includes extensive exposure to code, making it effective at re
 - **Process large results efficiently**: Filter down large tool outputs, extract only relevant data, or write intermediate results to files before returning summaries to the context window
 - **Reduce latency significantly**: Eliminate the overhead of re-sampling Claude between each tool call in multi-step workflows
 
-This approach enables workflows that would be impractical with traditional tool use—such as processing files over 1M tokens—by allowing Claude to work with data programmatically rather than loading everything into the conversation context.
+This approach enables workflows that would be impractical with traditional tool use (such as processing files over 1M tokens) by allowing Claude to work with data programmatically rather than loading everything into the conversation context.
 
 ## Alternative implementations
 
@@ -803,7 +803,7 @@ Anthropic's programmatic tool calling is a managed version of sandboxed executio
 - Easy to enable with minimal configuration
 - Environment and instructions optimized for Claude
 
-We recommend using Anthropic's managed solution if you're using the Claude API.
+Consider using Anthropic's managed solution if you're using the Claude API.
 
 ## Related features
 

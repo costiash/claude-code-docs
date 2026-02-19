@@ -131,13 +131,13 @@ For more information on the Voyage HTTP API, see [the Voyage documentation](http
 
 ### AWS Marketplace
 
-Voyage embeddings are available on [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=seller-snt4gb6fd7ljg). Instructions for accessing Voyage on AWS are available [here](https://docs.voyageai.com/docs/aws-marketplace-model-package?ref=anthropic).
+Voyage embeddings are available on [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=seller-snt4gb6fd7ljg). Instructions for accessing Voyage on AWS are available in the [Voyage AWS Marketplace documentation](https://docs.voyageai.com/docs/aws-marketplace-model-package?ref=anthropic).
 
 ## Quickstart example
 
-Now that we know how to get embeddings, let's see a brief example.
+The following brief example shows how to use embeddings.
 
-Suppose we have a small corpus of six documents to retrieve from
+Suppose you have a small corpus of six documents to retrieve from
 
 ```python
 documents = [
@@ -150,7 +150,7 @@ documents = [
 ]
 ```
 
-We will first use Voyage to convert each of them into an embedding vector
+First, use Voyage to convert each document into an embedding vector
 
 ```python
 import voyageai
@@ -161,13 +161,13 @@ vo = voyageai.Client()
 doc_embds = vo.embed(documents, model="voyage-3.5", input_type="document").embeddings
 ```
 
-The embeddings will allow us to do semantic search / retrieval in the vector space. Given an example query,
+The embeddings allow you to do semantic search / retrieval in the vector space. Given an example query,
 
 ```python
 query = "When is Apple's conference call scheduled?"
 ```
 
-we convert it into an embedding, and conduct a nearest neighbor search to find the most relevant document based on the distance in the embedding space.
+Next, convert it into an embedding and conduct a nearest neighbor search to find the most relevant document based on the distance in the embedding space.
 
 ```python
 import numpy as np
@@ -184,7 +184,7 @@ retrieved_id = np.argmax(similarities)
 print(documents[retrieved_id])
 ```
 
-Note that we use `input_type="document"` and `input_type="query"` for embedding the document and query, respectively. More specification can be found [here](/docs/en/build-with-claude/embeddings#voyage-python-package).
+Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in the [Voyage Python package section](/docs/en/build-with-claude/embeddings#voyage-python-package).
 
 The output would be the 5th document, which is indeed the most relevant to the query:
 
@@ -192,7 +192,7 @@ The output would be the 5th document, which is indeed the most relevant to the q
 Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET.
 ```
 
-If you are looking for a detailed set of cookbooks on how to do RAG with embeddings, including vector databases, check out our [RAG cookbook](https://platform.claude.com/cookbook/third-party-pinecone-rag-using-pinecone).
+If you are looking for a detailed set of cookbooks on how to do RAG with embeddings, including vector databases, check out the [RAG cookbook](https://platform.claude.com/cookbook/third-party-pinecone-rag-using-pinecone).
 
 ## FAQ
 
@@ -210,7 +210,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
 
   <section title="What embedding models are available and which should I use?">
 
-    For general-purpose embedding, we recommend:
+    For general-purpose embedding, the recommended models are:
     - `voyage-3-large`: Best quality
     - `voyage-3.5-lite`: Lowest latency and cost
     - `voyage-3.5`: Balanced performance with superior retrieval quality at a competitive price point
@@ -227,7 +227,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
 
   <section title="Which similarity function should I use?">
 
-    You can use Voyage embeddings with either dot-product similarity, cosine similarity, or Euclidean distance. An explanation about embedding similarity can be found [here](https://www.pinecone.io/learn/vector-similarity/).
+    You can use Voyage embeddings with either dot-product similarity, cosine similarity, or Euclidean distance. An explanation about embedding similarity can be found in this [vector similarity guide](https://www.pinecone.io/learn/vector-similarity/).
 
     Voyage AI embeddings are normalized to length 1, which means that:
 
@@ -256,7 +256,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     >     - When `input_type="query"`, a query like "When is Apple's conference call scheduled?" will become "**Represent the query for retrieving supporting documents:** When is Apple's conference call scheduled?"
     >     - When `input_type="document"`, a query like "Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET." will become "**Represent the document for retrieval:** Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET."
 
-    `voyage-large-2-instruct`, as the name suggests, is trained to be responsive to additional instructions that are prepended to the input text. For classification, clustering, or other [MTEB](https://huggingface.co/mteb) subtasks, please use the instructions [here](https://github.com/voyage-ai/voyage-large-2-instruct).
+    `voyage-large-2-instruct`, as the name suggests, is trained to be responsive to additional instructions that are prepended to the input text. For classification, clustering, or other [MTEB](https://huggingface.co/mteb) subtasks, please use the [voyage-large-2-instruct instructions](https://github.com/voyage-ai/voyage-large-2-instruct).
   
 </section>
 

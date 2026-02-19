@@ -6,7 +6,7 @@ Selecting the optimal Claude model for your application involves balancing three
 
 ## Establish key criteria
 
-When choosing a Claude model, we recommend first evaluating these factors:
+When choosing a Claude model, consider first evaluating these factors:
 - **Capabilities:** What specific features or capabilities will you need the model to have in order to meet your needs?
 - **Speed:** How quickly does the model need to respond in your application? For Claude Opus 4.6, [fast mode](/docs/en/build-with-claude/fast-mode) (research preview) can provide up to 2.5x higher output speed at premium pricing.
 - **Cost:** What's your budget for both development and production usage?
@@ -52,10 +52,10 @@ This approach is best for:
 
 ## Model selection matrix
 
-| When you need... | We recommend starting with... | Example use cases |
+| When you need... | Consider starting with... | Example use cases |
 |------------------|-------------------|-------------------|
-| Our most intelligent model, and the world’s best model for coding, enterprise agents, and professional work. | Claude Opus 4.6 | Professional software engineering, advanced agents for office tasks, computer and browser use at scale, multi-hour research tasks, step-change vision applications |
-| Frontier intelligence at scale—built for coding, agents, and enterprise workflows | Claude Sonnet 4.6 | Code generation, data analysis, content creation, visual understanding, agentic tool use |
+| The most intelligent model, and the world’s best model for coding, enterprise agents, and professional work. | Claude Opus 4.6 | Professional software engineering, advanced agents for office tasks, computer and browser use at scale, multi-hour research tasks, step-change vision applications |
+| Frontier intelligence at scale, built for coding, agents, and enterprise workflows | Claude Sonnet 4.6 | Code generation, data analysis, content creation, visual understanding, agentic tool use |
 | Near-frontier performance with lightning-fast speed and extended thinking at the most economical price point | Claude Haiku 4.5 | Real-time applications, high-volume intelligent processing, cost-sensitive deployments needing strong reasoning, sub-agent tasks |
 
 ***

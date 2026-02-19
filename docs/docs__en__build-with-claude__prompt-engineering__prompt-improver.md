@@ -1,9 +1,9 @@
-# Use our prompt improver to optimize your prompts
+# Use the prompt improver to optimize your prompts
 
 ---
 
 <Note>
-Our prompt improver is compatible with all Claude models, including those with extended thinking capabilities. For prompting tips specific to extended thinking models, see [here](/docs/en/build-with-claude/extended-thinking).
+The prompt improver is compatible with all Claude models, including those with extended thinking capabilities. For prompting tips specific to extended thinking models, see the [extended thinking documentation](/docs/en/build-with-claude/extended-thinking).
 </Note>
 
 The prompt improver helps you quickly iterate and improve your prompts through automated analysis and enhancement. It excels at making prompts more robust for complex tasks that require high accuracy.
@@ -51,7 +51,7 @@ While examples appear separately in the Workbench UI, they're included at the st
 
 ## Generate test examples
 
-Don't have examples yet? Use our [Test Case Generator](/docs/en/test-and-evaluate/eval-tool#creating-test-cases) to:
+Don't have examples yet? Use the [Test Case Generator](/docs/en/test-and-evaluate/eval-tool#creating-test-cases) to:
 1. Generate sample inputs
 2. Get Claude's responses
 3. Edit the responses to match your ideal outputs
@@ -145,9 +145,9 @@ Common issues and solutions:
     Get inspired by example prompts for various tasks.
   </Card>
   <Card title="GitHub prompting tutorial" icon="link" href="https://github.com/anthropics/prompt-eng-interactive-tutorial">
-    Learn prompting best practices with our interactive tutorial.
+    Learn prompting best practices with the interactive tutorial.
   </Card>
   <Card title="Test your prompts" icon="link" href="/docs/en/test-and-evaluate/eval-tool">
-    Use our evaluation tool to test your improved prompts.
+    Use the evaluation tool to test your improved prompts.
   </Card>
 </CardGroup>

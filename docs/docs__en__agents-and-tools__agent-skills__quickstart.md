@@ -8,7 +8,7 @@ This tutorial shows you how to use Agent Skills to create a PowerPoint presentat
 
 ## Prerequisites
 
-- [Anthropic API key](/settings/keys)
+- [Claude API key](/settings/keys)
 - Python 3.7+ or curl installed
 - Basic familiarity with making API requests
 
@@ -27,7 +27,7 @@ Pre-built Agent Skills extend Claude's capabilities with specialized expertise f
 
 ## Step 1: List available Skills
 
-First, let's see what Skills are available. We'll use the Skills API to list all Anthropic-managed Skills:
+First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills:
 
 <CodeGroup>
 ```python Python
@@ -72,7 +72,7 @@ This API returns each Skill's metadata: its name and description. Claude loads t
 
 ## Step 2: Create a presentation
 
-Now we'll use the PowerPoint Skill to create a presentation about renewable energy. We specify Skills using the `container` parameter in the Messages API:
+Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
 <CodeGroup>
 ```python Python
