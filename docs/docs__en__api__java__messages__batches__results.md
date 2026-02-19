@@ -231,7 +231,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -273,7 +273,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -327,7 +327,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -339,7 +339,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class WebSearchToolResultError:`
 
-                - `ErrorCode errorCode`
+                - `WebSearchToolResultErrorCode errorCode`
 
                   - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -401,7 +401,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -951,14 +951,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `PRIORITY("priority")`
 
             - `BATCH("batch")`
-
-          - `Optional<Speed> speed`
-
-            The inference speed mode used for this request.
-
-            - `STANDARD("standard")`
-
-            - `FAST("fast")`
 
       - `JsonValue; type "succeeded"constant`
 

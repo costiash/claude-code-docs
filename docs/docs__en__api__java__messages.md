@@ -729,7 +729,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -1453,7 +1453,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -1481,7 +1481,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `class WebSearchToolRequestError:`
 
-              - `ErrorCode errorCode`
+              - `WebSearchToolResultErrorCode errorCode`
 
                 - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -1550,7 +1550,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -1904,7 +1904,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -2307,6 +2307,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `Optional<CacheControlEphemeral> cacheControl`
+
+    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
   - `Optional<String> container`
 
     Container identifier for reuse across requests.
@@ -2332,14 +2336,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `AUTO("auto")`
 
     - `STANDARD_ONLY("standard_only")`
-
-  - `Optional<Speed> speed`
-
-    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-    - `STANDARD("standard")`
-
-    - `FAST("fast")`
 
   - `Optional<List<String>> stopSequences`
 
@@ -2582,6 +2578,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -2649,6 +2647,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -2702,6 +2702,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -2753,6 +2755,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -2784,7 +2788,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `CodeExecutionTool20260120`
+    - `class CodeExecutionTool20260120:`
+
+      Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
       - `JsonValue; name "code_execution"constant`
 
@@ -2803,6 +2809,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -2854,6 +2862,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -2908,6 +2918,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -2961,6 +2973,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3013,6 +3027,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -3070,6 +3086,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -3158,6 +3176,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<List<String>> allowedDomains`
 
         List of domains to allow fetching from
@@ -3211,7 +3231,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `WebSearchTool20260209`
+    - `class WebSearchTool20260209:`
 
       - `JsonValue; name "web_search"constant`
 
@@ -3230,6 +3250,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -3298,7 +3320,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-    - `WebFetchTool20260209`
+    - `class WebFetchTool20260209:`
 
       - `JsonValue; name "web_fetch"constant`
 
@@ -3317,6 +3339,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -3393,6 +3417,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3445,6 +3471,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -3688,7 +3716,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -3730,7 +3758,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -3784,7 +3812,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -3796,7 +3824,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `class WebSearchToolResultError:`
 
-          - `ErrorCode errorCode`
+          - `WebSearchToolResultErrorCode errorCode`
 
             - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -3858,7 +3886,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -4408,14 +4436,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `PRIORITY("priority")`
 
       - `BATCH("batch")`
-
-    - `Optional<Speed> speed`
-
-      The inference speed mode used for this request.
-
-      - `STANDARD("standard")`
-
-      - `FAST("fast")`
 
 ### Example
 
@@ -5165,7 +5185,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -5889,7 +5909,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -5917,7 +5937,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `class WebSearchToolRequestError:`
 
-              - `ErrorCode errorCode`
+              - `WebSearchToolResultErrorCode errorCode`
 
                 - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -5986,7 +6006,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -6340,7 +6360,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -6743,17 +6763,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `Optional<CacheControlEphemeral> cacheControl`
+
+    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
   - `Optional<OutputConfig> outputConfig`
 
     Configuration options for the model's output, such as the output format.
-
-  - `Optional<Speed> speed`
-
-    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-    - `STANDARD("standard")`
-
-    - `FAST("fast")`
 
   - `Optional<System> system`
 
@@ -6980,6 +6996,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -7047,6 +7065,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -7100,6 +7120,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -7151,6 +7173,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -7182,7 +7206,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `CodeExecutionTool20260120`
+    - `class CodeExecutionTool20260120:`
+
+      Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
       - `JsonValue; name "code_execution"constant`
 
@@ -7201,6 +7227,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -7252,6 +7280,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -7306,6 +7336,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -7359,6 +7391,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -7411,6 +7445,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -7468,6 +7504,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -7556,6 +7594,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<List<String>> allowedDomains`
 
         List of domains to allow fetching from
@@ -7609,7 +7649,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `WebSearchTool20260209`
+    - `class WebSearchTool20260209:`
 
       - `JsonValue; name "web_search"constant`
 
@@ -7628,6 +7668,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -7696,7 +7738,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-    - `WebFetchTool20260209`
+    - `class WebFetchTool20260209:`
 
       - `JsonValue; name "web_fetch"constant`
 
@@ -7715,6 +7757,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -7791,6 +7835,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -7843,6 +7889,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -8601,6 +8649,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
   - `Optional<CacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -8653,6 +8703,65 @@ public final class Main {
     - `DIRECT("direct")`
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+  - `Optional<CacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+  - `Optional<Boolean> deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Optional<Boolean> strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Code Execution Tool 20260120
+
+- `class CodeExecutionTool20260120:`
+
+  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+  - `JsonValue; name "code_execution"constant`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `CODE_EXECUTION("code_execution")`
+
+  - `JsonValue; type "code_execution_20260120"constant`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+  - `Optional<List<AllowedCaller>> allowedCallers`
+
+    - `DIRECT("direct")`
+
+    - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
   - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -9240,7 +9349,7 @@ public final class Main {
 
           - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-      - `class CodeExecution20260120:`
+      - `class ServerToolCaller20260120:`
 
         - `String toolId`
 
@@ -9282,7 +9391,7 @@ public final class Main {
 
           - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-      - `class CodeExecution20260120:`
+      - `class ServerToolCaller20260120:`
 
         - `String toolId`
 
@@ -9336,7 +9445,7 @@ public final class Main {
 
           - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-      - `class CodeExecution20260120:`
+      - `class ServerToolCaller20260120:`
 
         - `String toolId`
 
@@ -9348,7 +9457,7 @@ public final class Main {
 
       - `class WebSearchToolResultError:`
 
-        - `ErrorCode errorCode`
+        - `WebSearchToolResultErrorCode errorCode`
 
           - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -9410,7 +9519,7 @@ public final class Main {
 
           - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-      - `class CodeExecution20260120:`
+      - `class ServerToolCaller20260120:`
 
         - `String toolId`
 
@@ -10406,7 +10515,7 @@ public final class Main {
 
           - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-      - `class CodeExecution20260120:`
+      - `class ServerToolCaller20260120:`
 
         - `String toolId`
 
@@ -11130,7 +11239,7 @@ public final class Main {
 
           - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-      - `class CodeExecution20260120:`
+      - `class ServerToolCaller20260120:`
 
         - `String toolId`
 
@@ -11158,7 +11267,7 @@ public final class Main {
 
       - `class WebSearchToolRequestError:`
 
-        - `ErrorCode errorCode`
+        - `WebSearchToolResultErrorCode errorCode`
 
           - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -11227,7 +11336,7 @@ public final class Main {
 
           - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-      - `class CodeExecution20260120:`
+      - `class ServerToolCaller20260120:`
 
         - `String toolId`
 
@@ -11581,7 +11690,7 @@ public final class Main {
 
           - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-      - `class CodeExecution20260120:`
+      - `class ServerToolCaller20260120:`
 
         - `String toolId`
 
@@ -12790,6 +12899,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
   - `Optional<CacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -13018,7 +13129,7 @@ public final class Main {
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -13060,7 +13171,7 @@ public final class Main {
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -13114,7 +13225,7 @@ public final class Main {
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -13126,7 +13237,7 @@ public final class Main {
 
         - `class WebSearchToolResultError:`
 
-          - `ErrorCode errorCode`
+          - `WebSearchToolResultErrorCode errorCode`
 
             - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -13188,7 +13299,7 @@ public final class Main {
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -13739,14 +13850,6 @@ public final class Main {
 
       - `BATCH("batch")`
 
-    - `Optional<Speed> speed`
-
-      The inference speed mode used for this request.
-
-      - `STANDARD("standard")`
-
-      - `FAST("fast")`
-
 ### Message Count Tokens Tool
 
 - `class MessageCountTokensTool: A class that can be one of several variants.union`
@@ -13780,6 +13883,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -13848,6 +13953,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -13901,6 +14008,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -13952,6 +14061,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -13983,7 +14094,9 @@ public final class Main {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260120`
+  - `class CodeExecutionTool20260120:`
+
+    Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
     - `JsonValue; name "code_execution"constant`
 
@@ -14002,6 +14115,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -14053,6 +14168,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -14107,6 +14224,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -14160,6 +14279,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -14212,6 +14333,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -14269,6 +14392,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<List<String>> allowedDomains`
 
@@ -14357,6 +14482,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<List<String>> allowedDomains`
 
       List of domains to allow fetching from
@@ -14410,7 +14537,7 @@ public final class Main {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20260209`
+  - `class WebSearchTool20260209:`
 
     - `JsonValue; name "web_search"constant`
 
@@ -14429,6 +14556,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<List<String>> allowedDomains`
 
@@ -14497,7 +14626,7 @@ public final class Main {
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-  - `WebFetchTool20260209`
+  - `class WebFetchTool20260209:`
 
     - `JsonValue; name "web_fetch"constant`
 
@@ -14516,6 +14645,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<List<String>> allowedDomains`
 
@@ -14592,6 +14723,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -14644,6 +14777,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -15366,7 +15501,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -16090,7 +16225,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -16118,7 +16253,7 @@ public final class Main {
 
           - `class WebSearchToolRequestError:`
 
-            - `ErrorCode errorCode`
+            - `WebSearchToolResultErrorCode errorCode`
 
               - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -16187,7 +16322,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -16541,7 +16676,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -17418,7 +17553,7 @@ public final class Main {
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -17460,7 +17595,7 @@ public final class Main {
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -17514,7 +17649,7 @@ public final class Main {
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -17526,7 +17661,7 @@ public final class Main {
 
         - `class WebSearchToolResultError:`
 
-          - `ErrorCode errorCode`
+          - `WebSearchToolResultErrorCode errorCode`
 
             - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -17588,7 +17723,7 @@ public final class Main {
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-        - `class CodeExecution20260120:`
+        - `class ServerToolCaller20260120:`
 
           - `String toolId`
 
@@ -18221,7 +18356,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -18263,7 +18398,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -18317,7 +18452,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -18329,7 +18464,7 @@ public final class Main {
 
           - `class WebSearchToolResultError:`
 
-            - `ErrorCode errorCode`
+            - `WebSearchToolResultErrorCode errorCode`
 
               - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -18391,7 +18526,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -18942,14 +19077,6 @@ public final class Main {
 
         - `BATCH("batch")`
 
-      - `Optional<Speed> speed`
-
-        The inference speed mode used for this request.
-
-        - `STANDARD("standard")`
-
-        - `FAST("fast")`
-
   - `JsonValue; type "message_start"constant`
 
     - `MESSAGE_START("message_start")`
@@ -19161,7 +19288,7 @@ public final class Main {
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -19203,7 +19330,7 @@ public final class Main {
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -19257,7 +19384,7 @@ public final class Main {
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -19269,7 +19396,7 @@ public final class Main {
 
             - `class WebSearchToolResultError:`
 
-              - `ErrorCode errorCode`
+              - `WebSearchToolResultErrorCode errorCode`
 
                 - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -19331,7 +19458,7 @@ public final class Main {
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -19882,14 +20009,6 @@ public final class Main {
 
           - `BATCH("batch")`
 
-        - `Optional<Speed> speed`
-
-          The inference speed mode used for this request.
-
-          - `STANDARD("standard")`
-
-          - `FAST("fast")`
-
     - `JsonValue; type "message_start"constant`
 
       - `MESSAGE_START("message_start")`
@@ -20126,7 +20245,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -20168,7 +20287,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -20222,7 +20341,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -20234,7 +20353,7 @@ public final class Main {
 
           - `class WebSearchToolResultError:`
 
-            - `ErrorCode errorCode`
+            - `WebSearchToolResultErrorCode errorCode`
 
               - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -20296,7 +20415,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -20972,6 +21091,16 @@ public final class Main {
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+### Server Tool Caller 20260120
+
+- `class ServerToolCaller20260120:`
+
+  - `String toolId`
+
+  - `JsonValue; type "code_execution_20260120"constant`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
 ### Server Tool Usage
 
 - `class ServerToolUsage:`
@@ -21012,7 +21141,7 @@ public final class Main {
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-    - `class CodeExecution20260120:`
+    - `class ServerToolCaller20260120:`
 
       - `String toolId`
 
@@ -21115,7 +21244,7 @@ public final class Main {
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-    - `class CodeExecution20260120:`
+    - `class ServerToolCaller20260120:`
 
       - `String toolId`
 
@@ -22023,6 +22152,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
   - `Optional<CacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -22091,6 +22222,8 @@ public final class Main {
     - `DIRECT("direct")`
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
   - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -22963,6 +23096,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
   - `Optional<CacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -23017,6 +23152,8 @@ public final class Main {
     - `DIRECT("direct")`
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
   - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -23308,6 +23445,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
   - `Optional<CacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -23363,6 +23502,8 @@ public final class Main {
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
   - `Optional<CacheControlEphemeral> cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -23417,6 +23558,8 @@ public final class Main {
     - `DIRECT("direct")`
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
   - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -23489,6 +23632,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -23556,6 +23701,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -23609,6 +23756,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -23660,6 +23809,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -23691,7 +23842,9 @@ public final class Main {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260120`
+  - `class CodeExecutionTool20260120:`
+
+    Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
     - `JsonValue; name "code_execution"constant`
 
@@ -23710,6 +23863,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -23761,6 +23916,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -23815,6 +23972,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -23868,6 +24027,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -23920,6 +24081,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -23977,6 +24140,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<List<String>> allowedDomains`
 
@@ -24065,6 +24230,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<List<String>> allowedDomains`
 
       List of domains to allow fetching from
@@ -24118,7 +24285,7 @@ public final class Main {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20260209`
+  - `class WebSearchTool20260209:`
 
     - `JsonValue; name "web_search"constant`
 
@@ -24137,6 +24304,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<List<String>> allowedDomains`
 
@@ -24205,7 +24374,7 @@ public final class Main {
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-  - `WebFetchTool20260209`
+  - `class WebFetchTool20260209:`
 
     - `JsonValue; name "web_fetch"constant`
 
@@ -24224,6 +24393,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<List<String>> allowedDomains`
 
@@ -24300,6 +24471,8 @@ public final class Main {
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
     - `Optional<CacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
@@ -24352,6 +24525,8 @@ public final class Main {
       - `DIRECT("direct")`
 
       - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
     - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -24412,7 +24587,7 @@ public final class Main {
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-    - `class CodeExecution20260120:`
+    - `class ServerToolCaller20260120:`
 
       - `String toolId`
 
@@ -24487,7 +24662,7 @@ public final class Main {
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-    - `class CodeExecution20260120:`
+    - `class ServerToolCaller20260120:`
 
       - `String toolId`
 
@@ -24573,13 +24748,29 @@ public final class Main {
 
     - `BATCH("batch")`
 
-  - `Optional<Speed> speed`
+### User Location
 
-    The inference speed mode used for this request.
+- `class UserLocation:`
 
-    - `STANDARD("standard")`
+  - `JsonValue; type "approximate"constant`
 
-    - `FAST("fast")`
+    - `APPROXIMATE("approximate")`
+
+  - `Optional<String> city`
+
+    The city of the user.
+
+  - `Optional<String> country`
+
+    The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+  - `Optional<String> region`
+
+    The region of the user.
+
+  - `Optional<String> timezone`
+
+    The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 ### Web Fetch Block
 
@@ -24930,6 +25121,85 @@ public final class Main {
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+  - `Optional<List<String>> allowedDomains`
+
+    List of domains to allow fetching from
+
+  - `Optional<List<String>> blockedDomains`
+
+    List of domains to block fetching from
+
+  - `Optional<CacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+  - `Optional<CitationsConfigParam> citations`
+
+    Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `Optional<Boolean> enabled`
+
+  - `Optional<Boolean> deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Optional<Long> maxContentTokens`
+
+    Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+  - `Optional<Long> maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `Optional<Boolean> strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Web Fetch Tool 20260209
+
+- `class WebFetchTool20260209:`
+
+  - `JsonValue; name "web_fetch"constant`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `WEB_FETCH("web_fetch")`
+
+  - `JsonValue; type "web_fetch_20260209"constant`
+
+    - `WEB_FETCH_20260209("web_fetch_20260209")`
+
+  - `Optional<List<AllowedCaller>> allowedCallers`
+
+    - `DIRECT("direct")`
+
+    - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
   - `Optional<List<String>> allowedDomains`
 
     List of domains to allow fetching from
@@ -25009,7 +25279,7 @@ public final class Main {
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-    - `class CodeExecution20260120:`
+    - `class ServerToolCaller20260120:`
 
       - `String toolId`
 
@@ -25453,7 +25723,7 @@ public final class Main {
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-    - `class CodeExecution20260120:`
+    - `class ServerToolCaller20260120:`
 
       - `String toolId`
 
@@ -25587,6 +25857,99 @@ public final class Main {
 
     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+  - `Optional<List<String>> allowedDomains`
+
+    If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+  - `Optional<List<String>> blockedDomains`
+
+    If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+  - `Optional<CacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+  - `Optional<Boolean> deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Optional<Long> maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `Optional<Boolean> strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `Optional<UserLocation> userLocation`
+
+    Parameters for the user's location. Used to provide more relevant search results.
+
+    - `JsonValue; type "approximate"constant`
+
+      - `APPROXIMATE("approximate")`
+
+    - `Optional<String> city`
+
+      The city of the user.
+
+    - `Optional<String> country`
+
+      The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+    - `Optional<String> region`
+
+      The region of the user.
+
+    - `Optional<String> timezone`
+
+      The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+### Web Search Tool 20260209
+
+- `class WebSearchTool20260209:`
+
+  - `JsonValue; name "web_search"constant`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `WEB_SEARCH("web_search")`
+
+  - `JsonValue; type "web_search_20260209"constant`
+
+    - `WEB_SEARCH_20260209("web_search_20260209")`
+
+  - `Optional<List<AllowedCaller>> allowedCallers`
+
+    - `DIRECT("direct")`
+
+    - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
   - `Optional<List<String>> allowedDomains`
 
     If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -25658,7 +26021,7 @@ public final class Main {
 
 - `class WebSearchToolRequestError:`
 
-  - `ErrorCode errorCode`
+  - `WebSearchToolResultErrorCode errorCode`
 
     - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -25702,7 +26065,7 @@ public final class Main {
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-    - `class CodeExecution20260120:`
+    - `class ServerToolCaller20260120:`
 
       - `String toolId`
 
@@ -25714,7 +26077,7 @@ public final class Main {
 
     - `class WebSearchToolResultError:`
 
-      - `ErrorCode errorCode`
+      - `WebSearchToolResultErrorCode errorCode`
 
         - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -25758,7 +26121,7 @@ public final class Main {
 
   - `class WebSearchToolResultError:`
 
-    - `ErrorCode errorCode`
+    - `WebSearchToolResultErrorCode errorCode`
 
       - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -25812,7 +26175,7 @@ public final class Main {
 
     - `class WebSearchToolRequestError:`
 
-      - `ErrorCode errorCode`
+      - `WebSearchToolResultErrorCode errorCode`
 
         - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -25881,7 +26244,7 @@ public final class Main {
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-    - `class CodeExecution20260120:`
+    - `class ServerToolCaller20260120:`
 
       - `String toolId`
 
@@ -25909,7 +26272,7 @@ public final class Main {
 
   - `class WebSearchToolRequestError:`
 
-    - `ErrorCode errorCode`
+    - `WebSearchToolResultErrorCode errorCode`
 
       - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -25931,7 +26294,7 @@ public final class Main {
 
 - `class WebSearchToolResultError:`
 
-  - `ErrorCode errorCode`
+  - `WebSearchToolResultErrorCode errorCode`
 
     - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -25948,6 +26311,22 @@ public final class Main {
   - `JsonValue; type "web_search_tool_result_error"constant`
 
     - `WEB_SEARCH_TOOL_RESULT_ERROR("web_search_tool_result_error")`
+
+### Web Search Tool Result Error Code
+
+- `enum WebSearchToolResultErrorCode:`
+
+  - `INVALID_TOOL_INPUT("invalid_tool_input")`
+
+  - `UNAVAILABLE("unavailable")`
+
+  - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+  - `TOO_MANY_REQUESTS("too_many_requests")`
+
+  - `QUERY_TOO_LONG("query_too_long")`
+
+  - `REQUEST_TOO_LARGE("request_too_large")`
 
 # Batches
 
@@ -26696,7 +27075,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-                - `class CodeExecution20260120:`
+                - `class ServerToolCaller20260120:`
 
                   - `String toolId`
 
@@ -27420,7 +27799,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-                - `class CodeExecution20260120:`
+                - `class ServerToolCaller20260120:`
 
                   - `String toolId`
 
@@ -27448,7 +27827,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `class WebSearchToolRequestError:`
 
-                  - `ErrorCode errorCode`
+                  - `WebSearchToolResultErrorCode errorCode`
 
                     - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -27517,7 +27896,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-                - `class CodeExecution20260120:`
+                - `class ServerToolCaller20260120:`
 
                   - `String toolId`
 
@@ -27871,7 +28250,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-                - `class CodeExecution20260120:`
+                - `class ServerToolCaller20260120:`
 
                   - `String toolId`
 
@@ -28362,6 +28741,29 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Our previous most fast and cost-effective
 
+      - `Optional<CacheControlEphemeral> cacheControl`
+
+        Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+        - `JsonValue; type "ephemeral"constant`
+
+          - `EPHEMERAL("ephemeral")`
+
+        - `Optional<Ttl> ttl`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+          - `TTL_5M("5m")`
+
+          - `TTL_1H("1h")`
+
       - `Optional<String> container`
 
         Container identifier for reuse across requests.
@@ -28417,14 +28819,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `AUTO("auto")`
 
         - `STANDARD_ONLY("standard_only")`
-
-      - `Optional<Speed> speed`
-
-        The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-        - `STANDARD("standard")`
-
-        - `FAST("fast")`
 
       - `Optional<List<String>> stopSequences`
 
@@ -28753,6 +29147,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -28820,6 +29216,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -28873,6 +29271,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -28924,6 +29324,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -28955,7 +29357,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `CodeExecutionTool20260120`
+        - `class CodeExecutionTool20260120:`
+
+          Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
           - `JsonValue; name "code_execution"constant`
 
@@ -28974,6 +29378,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `DIRECT("direct")`
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -29025,6 +29431,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `DIRECT("direct")`
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -29079,6 +29487,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -29132,6 +29542,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -29184,6 +29596,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `DIRECT("direct")`
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -29241,6 +29655,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `DIRECT("direct")`
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
           - `Optional<List<String>> allowedDomains`
 
@@ -29329,6 +29745,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
           - `Optional<List<String>> allowedDomains`
 
             List of domains to allow fetching from
@@ -29382,7 +29800,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `WebSearchTool20260209`
+        - `class WebSearchTool20260209:`
 
           - `JsonValue; name "web_search"constant`
 
@@ -29401,6 +29819,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `DIRECT("direct")`
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
           - `Optional<List<String>> allowedDomains`
 
@@ -29469,7 +29889,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-        - `WebFetchTool20260209`
+        - `class WebFetchTool20260209:`
 
           - `JsonValue; name "web_fetch"constant`
 
@@ -29488,6 +29908,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `DIRECT("direct")`
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
           - `Optional<List<String>> allowedDomains`
 
@@ -29564,6 +29986,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -29616,6 +30040,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `DIRECT("direct")`
 
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -30475,7 +30901,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -30517,7 +30943,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -30571,7 +30997,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -30583,7 +31009,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class WebSearchToolResultError:`
 
-                - `ErrorCode errorCode`
+                - `WebSearchToolResultErrorCode errorCode`
 
                   - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -30645,7 +31071,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -31195,14 +31621,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `PRIORITY("priority")`
 
             - `BATCH("batch")`
-
-          - `Optional<Speed> speed`
-
-            The inference speed mode used for this request.
-
-            - `STANDARD("standard")`
-
-            - `FAST("fast")`
 
       - `JsonValue; type "succeeded"constant`
 
@@ -31757,7 +32175,7 @@ public final class Main {
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -31799,7 +32217,7 @@ public final class Main {
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -31853,7 +32271,7 @@ public final class Main {
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -31865,7 +32283,7 @@ public final class Main {
 
               - `class WebSearchToolResultError:`
 
-                - `ErrorCode errorCode`
+                - `WebSearchToolResultErrorCode errorCode`
 
                   - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -31927,7 +32345,7 @@ public final class Main {
 
                   - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
@@ -32478,14 +32896,6 @@ public final class Main {
 
             - `BATCH("batch")`
 
-          - `Optional<Speed> speed`
-
-            The inference speed mode used for this request.
-
-            - `STANDARD("standard")`
-
-            - `FAST("fast")`
-
       - `JsonValue; type "succeeded"constant`
 
         - `SUCCEEDED("succeeded")`
@@ -32825,7 +33235,7 @@ public final class Main {
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -32867,7 +33277,7 @@ public final class Main {
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -32921,7 +33331,7 @@ public final class Main {
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -32933,7 +33343,7 @@ public final class Main {
 
             - `class WebSearchToolResultError:`
 
-              - `ErrorCode errorCode`
+              - `WebSearchToolResultErrorCode errorCode`
 
                 - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -32995,7 +33405,7 @@ public final class Main {
 
                 - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `String toolId`
 
@@ -33546,14 +33956,6 @@ public final class Main {
 
           - `BATCH("batch")`
 
-        - `Optional<Speed> speed`
-
-          The inference speed mode used for this request.
-
-          - `STANDARD("standard")`
-
-          - `FAST("fast")`
-
     - `JsonValue; type "succeeded"constant`
 
       - `SUCCEEDED("succeeded")`
@@ -33855,7 +34257,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -33897,7 +34299,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -33951,7 +34353,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -33963,7 +34365,7 @@ public final class Main {
 
           - `class WebSearchToolResultError:`
 
-            - `ErrorCode errorCode`
+            - `WebSearchToolResultErrorCode errorCode`
 
               - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
@@ -34025,7 +34427,7 @@ public final class Main {
 
               - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `String toolId`
 
@@ -34575,14 +34977,6 @@ public final class Main {
         - `PRIORITY("priority")`
 
         - `BATCH("batch")`
-
-      - `Optional<Speed> speed`
-
-        The inference speed mode used for this request.
-
-        - `STANDARD("standard")`
-
-        - `FAST("fast")`
 
   - `JsonValue; type "succeeded"constant`
 

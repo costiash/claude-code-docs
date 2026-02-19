@@ -2695,6 +2695,29 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `String`
 
+- `cache_control: BetaCacheControlEphemeral`
+
+  Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+  - `type: :ephemeral`
+
+    - `:ephemeral`
+
+  - `ttl: :"5m" | :"1h"`
+
+    The time-to-live for the cache control breakpoint.
+
+    This may be one the following values:
+
+    - `5m`: 5 minutes
+    - `1h`: 1 hour
+
+    Defaults to `5m`.
+
+    - `:"5m"`
+
+    - `:"1h"`
+
 - `container: BetaContainerParams | String`
 
   Container identifier for reuse across requests.
@@ -3268,11 +3291,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3335,11 +3360,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:bash_20241022`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3388,11 +3415,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:bash_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3441,11 +3470,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:code_execution_20250522`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3492,11 +3523,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:code_execution_20250825`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3545,11 +3578,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:code_execution_20260120`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3604,11 +3639,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:computer_20241022`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3661,11 +3698,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:memory_20250818`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3722,11 +3761,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:computer_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3779,11 +3820,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:text_editor_20241022`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3840,11 +3883,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:computer_20251124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3901,11 +3946,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:text_editor_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3954,11 +4001,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:text_editor_20250429`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -4007,11 +4056,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:text_editor_20250728`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -4064,11 +4115,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:web_search_20250305`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -4151,11 +4204,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:web_fetch_20250910`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -4224,11 +4279,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:web_search_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -4311,11 +4368,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:web_fetch_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -4386,11 +4445,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:tool_search_tool_bm25`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -4439,11 +4500,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:tool_search_tool_regex`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -8529,6 +8592,29 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `String`
 
+- `cache_control: BetaCacheControlEphemeral`
+
+  Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+  - `type: :ephemeral`
+
+    - `:ephemeral`
+
+  - `ttl: :"5m" | :"1h"`
+
+    The time-to-live for the cache control breakpoint.
+
+    This may be one the following values:
+
+    - `5m`: 5 minutes
+    - `1h`: 1 hour
+
+    Defaults to `5m`.
+
+    - `:"5m"`
+
+    - `:"1h"`
+
 - `context_management: BetaContextManagementConfig`
 
   Context management configuration.
@@ -9020,11 +9106,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9087,11 +9175,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:bash_20241022`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9140,11 +9230,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:bash_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9193,11 +9285,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:code_execution_20250522`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9244,11 +9338,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:code_execution_20250825`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9297,11 +9393,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:code_execution_20260120`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9356,11 +9454,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:computer_20241022`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9413,11 +9513,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:memory_20250818`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9474,11 +9576,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:computer_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9531,11 +9635,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:text_editor_20241022`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9592,11 +9698,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:computer_20251124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9653,11 +9761,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:text_editor_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9706,11 +9816,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:text_editor_20250429`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9759,11 +9871,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:text_editor_20250728`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -9816,11 +9930,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:web_search_20250305`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -9903,11 +10019,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:web_fetch_20250910`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -9976,11 +10094,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:web_search_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -10063,11 +10183,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:web_fetch_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -10138,11 +10260,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:tool_search_tool_bm25`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -10191,11 +10315,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:tool_search_tool_regex`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -11167,11 +11293,13 @@ puts(beta_message_tokens_count)
 
     - `:code_execution_20250522`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -11220,11 +11348,13 @@ puts(beta_message_tokens_count)
 
     - `:code_execution_20250825`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -11275,11 +11405,13 @@ puts(beta_message_tokens_count)
 
     - `:code_execution_20260120`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -16360,11 +16492,13 @@ puts(beta_message_tokens_count)
 
     - `:memory_20250818`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -27357,11 +27491,13 @@ puts(beta_message_tokens_count)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -27426,11 +27562,13 @@ puts(beta_message_tokens_count)
 
     - `:bash_20241022`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -27481,11 +27619,13 @@ puts(beta_message_tokens_count)
 
     - `:bash_20250124`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -27666,11 +27806,13 @@ puts(beta_message_tokens_count)
 
     - `:computer_20241022`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -27733,11 +27875,13 @@ puts(beta_message_tokens_count)
 
     - `:computer_20250124`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -27800,11 +27944,13 @@ puts(beta_message_tokens_count)
 
     - `:computer_20251124`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -28581,11 +28727,13 @@ puts(beta_message_tokens_count)
 
     - `:tool_search_tool_bm25`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -28636,11 +28784,13 @@ puts(beta_message_tokens_count)
 
     - `:tool_search_tool_regex`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -28914,11 +29064,13 @@ puts(beta_message_tokens_count)
 
     - `:text_editor_20241022`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -28969,11 +29121,13 @@ puts(beta_message_tokens_count)
 
     - `:text_editor_20250124`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -29024,11 +29178,13 @@ puts(beta_message_tokens_count)
 
     - `:text_editor_20250429`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -29079,11 +29235,13 @@ puts(beta_message_tokens_count)
 
     - `:text_editor_20250728`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: BetaCacheControlEphemeral`
 
@@ -29150,11 +29308,13 @@ puts(beta_message_tokens_count)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29217,11 +29377,13 @@ puts(beta_message_tokens_count)
 
       - `:bash_20241022`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29270,11 +29432,13 @@ puts(beta_message_tokens_count)
 
       - `:bash_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29323,11 +29487,13 @@ puts(beta_message_tokens_count)
 
       - `:code_execution_20250522`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29374,11 +29540,13 @@ puts(beta_message_tokens_count)
 
       - `:code_execution_20250825`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29427,11 +29595,13 @@ puts(beta_message_tokens_count)
 
       - `:code_execution_20260120`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29486,11 +29656,13 @@ puts(beta_message_tokens_count)
 
       - `:computer_20241022`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29543,11 +29715,13 @@ puts(beta_message_tokens_count)
 
       - `:memory_20250818`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29604,11 +29778,13 @@ puts(beta_message_tokens_count)
 
       - `:computer_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29661,11 +29837,13 @@ puts(beta_message_tokens_count)
 
       - `:text_editor_20241022`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29722,11 +29900,13 @@ puts(beta_message_tokens_count)
 
       - `:computer_20251124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29783,11 +29963,13 @@ puts(beta_message_tokens_count)
 
       - `:text_editor_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29836,11 +30018,13 @@ puts(beta_message_tokens_count)
 
       - `:text_editor_20250429`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29889,11 +30073,13 @@ puts(beta_message_tokens_count)
 
       - `:text_editor_20250728`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -29946,11 +30132,13 @@ puts(beta_message_tokens_count)
 
       - `:web_search_20250305`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -30033,11 +30221,13 @@ puts(beta_message_tokens_count)
 
       - `:web_fetch_20250910`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -30106,11 +30296,13 @@ puts(beta_message_tokens_count)
 
       - `:web_search_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -30193,11 +30385,13 @@ puts(beta_message_tokens_count)
 
       - `:web_fetch_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -30268,11 +30462,13 @@ puts(beta_message_tokens_count)
 
       - `:tool_search_tool_bm25`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -30321,11 +30517,13 @@ puts(beta_message_tokens_count)
 
       - `:tool_search_tool_regex`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -31098,11 +31296,13 @@ puts(beta_message_tokens_count)
 
     - `:web_fetch_20250910`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `allowed_domains: Array[String]`
 
@@ -31173,11 +31373,13 @@ puts(beta_message_tokens_count)
 
     - `:web_fetch_20260209`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `allowed_domains: Array[String]`
 
@@ -31846,11 +32048,13 @@ puts(beta_message_tokens_count)
 
     - `:web_search_20250305`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `allowed_domains: Array[String]`
 
@@ -31935,11 +32139,13 @@ puts(beta_message_tokens_count)
 
     - `:web_search_20260209`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `allowed_domains: Array[String]`
 
@@ -32345,7 +32551,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Must be unique for each request within the Message Batch.
 
-  - `params: { max_tokens, messages, model, 18 more}`
+  - `params: { max_tokens, messages, model, 19 more}`
 
     Messages API creation parameters for the individual request.
 
@@ -35032,6 +35238,29 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `String`
 
+    - `cache_control: BetaCacheControlEphemeral`
+
+      Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+      - `type: :ephemeral`
+
+        - `:ephemeral`
+
+      - `ttl: :"5m" | :"1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `:"5m"`
+
+        - `:"1h"`
+
     - `container: BetaContainerParams | String`
 
       Container identifier for reuse across requests.
@@ -35603,11 +35832,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -35670,11 +35901,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:bash_20241022`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -35723,11 +35956,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:bash_20250124`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -35776,11 +36011,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:code_execution_20250522`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -35827,11 +36064,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:code_execution_20250825`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -35880,11 +36119,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:code_execution_20260120`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -35939,11 +36180,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:computer_20241022`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -35996,11 +36239,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:memory_20250818`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -36057,11 +36302,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:computer_20250124`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -36114,11 +36361,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:text_editor_20241022`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -36175,11 +36424,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:computer_20251124`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -36236,11 +36487,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:text_editor_20250124`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -36289,11 +36542,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:text_editor_20250429`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -36342,11 +36597,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:text_editor_20250728`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -36399,11 +36656,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:web_search_20250305`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `allowed_domains: Array[String]`
 
@@ -36486,11 +36745,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:web_fetch_20250910`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `allowed_domains: Array[String]`
 
@@ -36559,11 +36820,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:web_search_20260209`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `allowed_domains: Array[String]`
 
@@ -36646,11 +36909,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:web_fetch_20260209`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `allowed_domains: Array[String]`
 
@@ -36721,11 +36986,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:tool_search_tool_bm25`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -36774,11 +37041,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:tool_search_tool_regex`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: BetaCacheControlEphemeral`
 

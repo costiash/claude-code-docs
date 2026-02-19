@@ -3287,6 +3287,29 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `UnionMember1 = string`
 
+- `cache_control: optional BetaCacheControlEphemeral`
+
+  Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+  - `type: "ephemeral"`
+
+    - `"ephemeral"`
+
+  - `ttl: optional "5m" or "1h"`
+
+    The time-to-live for the cache control breakpoint.
+
+    This may be one the following values:
+
+    - `5m`: 5 minutes
+    - `1h`: 1 hour
+
+    Defaults to `5m`.
+
+    - `"5m"`
+
+    - `"1h"`
+
 - `container: optional BetaContainerParams or string`
 
   Container identifier for reuse across requests.
@@ -3858,11 +3881,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -3925,11 +3950,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"bash_20241022"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -3978,11 +4005,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"bash_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4031,11 +4060,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"code_execution_20250522"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4082,11 +4113,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"code_execution_20250825"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4135,11 +4168,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"code_execution_20260120"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4194,11 +4229,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"computer_20241022"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4251,11 +4288,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"memory_20250818"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4312,11 +4351,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"computer_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4369,11 +4410,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"text_editor_20241022"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4430,11 +4473,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"computer_20251124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4491,11 +4536,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"text_editor_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4544,11 +4591,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"text_editor_20250429"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4597,11 +4646,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"text_editor_20250728"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -4654,11 +4705,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"web_search_20250305"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -4741,11 +4794,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"web_fetch_20250910"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -4814,11 +4869,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"web_search_20260209"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -4901,11 +4958,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"web_fetch_20260209"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -4976,11 +5035,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"tool_search_tool_bm25"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -5029,11 +5090,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"tool_search_tool_regex"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -9123,6 +9186,29 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `UnionMember1 = string`
 
+- `cache_control: optional BetaCacheControlEphemeral`
+
+  Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+  - `type: "ephemeral"`
+
+    - `"ephemeral"`
+
+  - `ttl: optional "5m" or "1h"`
+
+    The time-to-live for the cache control breakpoint.
+
+    This may be one the following values:
+
+    - `5m`: 5 minutes
+    - `1h`: 1 hour
+
+    Defaults to `5m`.
+
+    - `"5m"`
+
+    - `"1h"`
+
 - `context_management: optional BetaContextManagementConfig`
 
   Context management configuration.
@@ -9614,11 +9700,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -9681,11 +9769,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"bash_20241022"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -9734,11 +9824,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"bash_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -9787,11 +9879,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"code_execution_20250522"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -9838,11 +9932,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"code_execution_20250825"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -9891,11 +9987,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"code_execution_20260120"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -9950,11 +10048,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"computer_20241022"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -10007,11 +10107,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"memory_20250818"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -10068,11 +10170,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"computer_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -10125,11 +10229,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"text_editor_20241022"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -10186,11 +10292,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"computer_20251124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -10247,11 +10355,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"text_editor_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -10300,11 +10410,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"text_editor_20250429"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -10353,11 +10465,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"text_editor_20250728"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -10410,11 +10524,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"web_search_20250305"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -10497,11 +10613,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"web_fetch_20250910"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -10570,11 +10688,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"web_search_20260209"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -10657,11 +10777,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"web_fetch_20260209"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -10732,11 +10854,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"tool_search_tool_bm25"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -10785,11 +10909,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"tool_search_tool_regex"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -11716,11 +11842,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"code_execution_20250522"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -11769,11 +11897,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"code_execution_20250825"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -11824,11 +11954,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"code_execution_20260120"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -16909,11 +17041,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"memory_20250818"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -27906,11 +28040,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -27975,11 +28111,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"bash_20241022"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -28030,11 +28168,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"bash_20250124"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -28215,11 +28355,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"computer_20241022"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -28282,11 +28424,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"computer_20250124"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -28349,11 +28493,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"computer_20251124"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29130,11 +29276,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"tool_search_tool_bm25"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29185,11 +29333,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"tool_search_tool_regex"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29463,11 +29613,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"text_editor_20241022"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29518,11 +29670,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"text_editor_20250124"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29573,11 +29727,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"text_editor_20250429"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29628,11 +29784,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"text_editor_20250728"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29699,11 +29857,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29766,11 +29926,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"bash_20241022"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29819,11 +29981,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"bash_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29872,11 +30036,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"code_execution_20250522"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29923,11 +30089,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"code_execution_20250825"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -29976,11 +30144,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"code_execution_20260120"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -30035,11 +30205,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"computer_20241022"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -30092,11 +30264,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"memory_20250818"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -30153,11 +30327,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"computer_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -30210,11 +30386,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"text_editor_20241022"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -30271,11 +30449,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"computer_20251124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -30332,11 +30512,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"text_editor_20250124"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -30385,11 +30567,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"text_editor_20250429"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -30438,11 +30622,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"text_editor_20250728"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -30495,11 +30681,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"web_search_20250305"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -30582,11 +30770,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"web_fetch_20250910"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -30655,11 +30845,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"web_search_20260209"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -30742,11 +30934,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"web_fetch_20260209"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `allowed_domains: optional array of string`
 
@@ -30817,11 +31011,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"tool_search_tool_bm25"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -30870,11 +31066,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
       - `"tool_search_tool_regex"`
 
-    - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
       - `"direct"`
 
       - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
 
     - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -31647,11 +31845,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"web_fetch_20250910"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `allowed_domains: optional array of string`
 
@@ -31722,11 +31922,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"web_fetch_20260209"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `allowed_domains: optional array of string`
 
@@ -32395,11 +32597,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"web_search_20250305"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `allowed_domains: optional array of string`
 
@@ -32484,11 +32688,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
     - `"web_search_20260209"`
 
-  - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
     - `"direct"`
 
     - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
 
   - `allowed_domains: optional array of string`
 
@@ -32942,7 +33148,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Must be unique for each request within the Message Batch.
 
-  - `params: object { max_tokens, messages, model, 18 more }`
+  - `params: object { max_tokens, messages, model, 19 more }`
 
     Messages API creation parameters for the individual request.
 
@@ -35629,6 +35835,29 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `UnionMember1 = string`
 
+    - `cache_control: optional BetaCacheControlEphemeral`
+
+      Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+      - `type: "ephemeral"`
+
+        - `"ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
     - `container: optional BetaContainerParams or string`
 
       Container identifier for reuse across requests.
@@ -36200,11 +36429,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36267,11 +36498,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"bash_20241022"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36320,11 +36553,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"bash_20250124"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36373,11 +36608,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"code_execution_20250522"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36424,11 +36661,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"code_execution_20250825"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36477,11 +36716,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"code_execution_20260120"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36536,11 +36777,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"computer_20241022"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36593,11 +36836,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"memory_20250818"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36654,11 +36899,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"computer_20250124"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36711,11 +36958,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"text_editor_20241022"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36772,11 +37021,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"computer_20251124"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36833,11 +37084,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"text_editor_20250124"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36886,11 +37139,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"text_editor_20250429"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36939,11 +37194,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"text_editor_20250728"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -36996,11 +37253,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_search_20250305"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains: optional array of string`
 
@@ -37083,11 +37342,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_fetch_20250910"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains: optional array of string`
 
@@ -37156,11 +37417,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_search_20260209"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains: optional array of string`
 
@@ -37243,11 +37506,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_fetch_20260209"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains: optional array of string`
 
@@ -37318,11 +37583,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"tool_search_tool_bm25"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 
@@ -37371,11 +37638,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"tool_search_tool_regex"`
 
-        - `allowed_callers: optional array of "direct" or "code_execution_20250825"`
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: optional BetaCacheControlEphemeral`
 

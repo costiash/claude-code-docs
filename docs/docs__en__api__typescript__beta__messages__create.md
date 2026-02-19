@@ -2693,6 +2693,29 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `(string & {})`
 
+    - `cache_control?: BetaCacheControlEphemeral | null`
+
+      Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+      - `type: "ephemeral"`
+
+        - `"ephemeral"`
+
+      - `ttl?: "5m" | "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
     - `container?: BetaContainerParams | string | null`
 
       Body param: Container identifier for reuse across requests.
@@ -3266,11 +3289,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3333,11 +3358,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"bash_20241022"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3386,11 +3413,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"bash_20250124"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3439,11 +3468,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"code_execution_20250522"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3490,11 +3521,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"code_execution_20250825"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3543,11 +3576,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"code_execution_20260120"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3602,11 +3637,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"computer_20241022"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3659,11 +3696,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"memory_20250818"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3720,11 +3759,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"computer_20250124"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3777,11 +3818,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"text_editor_20241022"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3838,11 +3881,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"computer_20251124"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3899,11 +3944,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"text_editor_20250124"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3952,11 +3999,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"text_editor_20250429"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -4005,11 +4054,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"text_editor_20250728"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -4062,11 +4113,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"web_search_20250305"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains?: Array<string> | null`
 
@@ -4149,11 +4202,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"web_fetch_20250910"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains?: Array<string> | null`
 
@@ -4222,11 +4277,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"web_search_20260209"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains?: Array<string> | null`
 
@@ -4309,11 +4366,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"web_fetch_20260209"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains?: Array<string> | null`
 
@@ -4384,11 +4443,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"tool_search_tool_bm25"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -4437,11 +4498,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"tool_search_tool_regex"`
 
-        - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 

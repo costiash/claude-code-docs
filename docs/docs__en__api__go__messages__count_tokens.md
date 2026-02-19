@@ -717,7 +717,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
 
-            - `ToolUseBlockParamCallerCodeExecution20260120Resp`
+            - `type ServerToolCaller20260120 struct{…}`
 
               - `ToolID string`
 
@@ -1439,7 +1439,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
 
-            - `ServerToolUseBlockParamCallerCodeExecution20260120Resp`
+            - `type ServerToolCaller20260120 struct{…}`
 
               - `ToolID string`
 
@@ -1467,19 +1467,19 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `type WebSearchToolRequestError struct{…}`
 
-              - `ErrorCode WebSearchToolRequestErrorErrorCode`
+              - `ErrorCode WebSearchToolResultErrorCode`
 
-                - `const WebSearchToolRequestErrorErrorCodeInvalidToolInput WebSearchToolRequestErrorErrorCode = "invalid_tool_input"`
+                - `const WebSearchToolResultErrorCodeInvalidToolInput WebSearchToolResultErrorCode = "invalid_tool_input"`
 
-                - `const WebSearchToolRequestErrorErrorCodeUnavailable WebSearchToolRequestErrorErrorCode = "unavailable"`
+                - `const WebSearchToolResultErrorCodeUnavailable WebSearchToolResultErrorCode = "unavailable"`
 
-                - `const WebSearchToolRequestErrorErrorCodeMaxUsesExceeded WebSearchToolRequestErrorErrorCode = "max_uses_exceeded"`
+                - `const WebSearchToolResultErrorCodeMaxUsesExceeded WebSearchToolResultErrorCode = "max_uses_exceeded"`
 
-                - `const WebSearchToolRequestErrorErrorCodeTooManyRequests WebSearchToolRequestErrorErrorCode = "too_many_requests"`
+                - `const WebSearchToolResultErrorCodeTooManyRequests WebSearchToolResultErrorCode = "too_many_requests"`
 
-                - `const WebSearchToolRequestErrorErrorCodeQueryTooLong WebSearchToolRequestErrorErrorCode = "query_too_long"`
+                - `const WebSearchToolResultErrorCodeQueryTooLong WebSearchToolResultErrorCode = "query_too_long"`
 
-                - `const WebSearchToolRequestErrorErrorCodeRequestTooLarge WebSearchToolRequestErrorErrorCode = "request_too_large"`
+                - `const WebSearchToolResultErrorCodeRequestTooLarge WebSearchToolResultErrorCode = "request_too_large"`
 
               - `Type WebSearchToolResultError`
 
@@ -1536,7 +1536,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
 
-            - `WebSearchToolResultBlockParamCallerCodeExecution20260120Resp`
+            - `type ServerToolCaller20260120 struct{…}`
 
               - `ToolID string`
 
@@ -1890,7 +1890,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code_execution_20250825"`
 
-            - `WebFetchToolResultBlockParamCallerCodeExecution20260120Resp`
+            - `type ServerToolCaller20260120 struct{…}`
 
               - `ToolID string`
 
@@ -2293,17 +2293,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `CacheControl param.Field[CacheControlEphemeral]`
+
+    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
   - `OutputConfig param.Field[OutputConfig]`
 
     Configuration options for the model's output, such as the output format.
-
-  - `Speed param.Field[MessageCountTokensParamsSpeed]`
-
-    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-    - `const MessageCountTokensParamsSpeedStandard MessageCountTokensParamsSpeed = "standard"`
-
-    - `const MessageCountTokensParamsSpeedFast MessageCountTokensParamsSpeed = "fast"`
 
   - `System param.Field[MessageCountTokensParamsSystemUnion]`
 
@@ -2530,6 +2526,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const ToolAllowedCallerCodeExecution20250825 ToolAllowedCaller = "code_execution_20250825"`
 
+        - `const ToolAllowedCallerCodeExecution20260120 ToolAllowedCaller = "code_execution_20260120"`
+
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -2597,6 +2595,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const ToolBash20250124AllowedCallerCodeExecution20250825 ToolBash20250124AllowedCaller = "code_execution_20250825"`
 
+        - `const ToolBash20250124AllowedCallerCodeExecution20260120 ToolBash20250124AllowedCaller = "code_execution_20260120"`
+
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -2650,6 +2650,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const CodeExecutionTool20250522AllowedCallerCodeExecution20250825 CodeExecutionTool20250522AllowedCaller = "code_execution_20250825"`
 
+        - `const CodeExecutionTool20250522AllowedCallerCodeExecution20260120 CodeExecutionTool20250522AllowedCaller = "code_execution_20260120"`
+
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -2701,6 +2703,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const CodeExecutionTool20250825AllowedCallerCodeExecution20250825 CodeExecutionTool20250825AllowedCaller = "code_execution_20250825"`
 
+        - `const CodeExecutionTool20250825AllowedCallerCodeExecution20260120 CodeExecutionTool20250825AllowedCaller = "code_execution_20260120"`
+
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -2732,7 +2736,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `MessageCountTokensToolCodeExecutionTool20260120`
+    - `type CodeExecutionTool20260120 struct{…}`
+
+      Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
       - `Name CodeExecution`
 
@@ -2748,9 +2754,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `AllowedCallers []string`
 
-        - `const MessageCountTokensToolCodeExecutionTool20260120AllowedCallerDirect MessageCountTokensToolCodeExecutionTool20260120AllowedCaller = "direct"`
+        - `const CodeExecutionTool20260120AllowedCallerDirect CodeExecutionTool20260120AllowedCaller = "direct"`
 
-        - `const MessageCountTokensToolCodeExecutionTool20260120AllowedCallerCodeExecution20250825 MessageCountTokensToolCodeExecutionTool20260120AllowedCaller = "code_execution_20250825"`
+        - `const CodeExecutionTool20260120AllowedCallerCodeExecution20250825 CodeExecutionTool20260120AllowedCaller = "code_execution_20250825"`
+
+        - `const CodeExecutionTool20260120AllowedCallerCodeExecution20260120 CodeExecutionTool20260120AllowedCaller = "code_execution_20260120"`
 
       - `CacheControl CacheControlEphemeral`
 
@@ -2802,6 +2810,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const MemoryTool20250818AllowedCallerDirect MemoryTool20250818AllowedCaller = "direct"`
 
         - `const MemoryTool20250818AllowedCallerCodeExecution20250825 MemoryTool20250818AllowedCaller = "code_execution_20250825"`
+
+        - `const MemoryTool20250818AllowedCallerCodeExecution20260120 MemoryTool20250818AllowedCaller = "code_execution_20260120"`
 
       - `CacheControl CacheControlEphemeral`
 
@@ -2856,6 +2866,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const ToolTextEditor20250124AllowedCallerCodeExecution20250825 ToolTextEditor20250124AllowedCaller = "code_execution_20250825"`
 
+        - `const ToolTextEditor20250124AllowedCallerCodeExecution20260120 ToolTextEditor20250124AllowedCaller = "code_execution_20260120"`
+
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -2909,6 +2921,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const ToolTextEditor20250429AllowedCallerCodeExecution20250825 ToolTextEditor20250429AllowedCaller = "code_execution_20250825"`
 
+        - `const ToolTextEditor20250429AllowedCallerCodeExecution20260120 ToolTextEditor20250429AllowedCaller = "code_execution_20260120"`
+
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -2961,6 +2975,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const ToolTextEditor20250728AllowedCallerDirect ToolTextEditor20250728AllowedCaller = "direct"`
 
         - `const ToolTextEditor20250728AllowedCallerCodeExecution20250825 ToolTextEditor20250728AllowedCaller = "code_execution_20250825"`
+
+        - `const ToolTextEditor20250728AllowedCallerCodeExecution20260120 ToolTextEditor20250728AllowedCaller = "code_execution_20260120"`
 
       - `CacheControl CacheControlEphemeral`
 
@@ -3019,6 +3035,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const WebSearchTool20250305AllowedCallerCodeExecution20250825 WebSearchTool20250305AllowedCaller = "code_execution_20250825"`
 
+        - `const WebSearchTool20250305AllowedCallerCodeExecution20260120 WebSearchTool20250305AllowedCaller = "code_execution_20260120"`
+
       - `AllowedDomains []string`
 
         If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -3062,7 +3080,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         When true, guarantees schema validation on tool names and inputs
 
-      - `UserLocation WebSearchTool20250305UserLocation`
+      - `UserLocation UserLocation`
 
         Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3105,6 +3123,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const WebFetchTool20250910AllowedCallerDirect WebFetchTool20250910AllowedCaller = "direct"`
 
         - `const WebFetchTool20250910AllowedCallerCodeExecution20250825 WebFetchTool20250910AllowedCaller = "code_execution_20250825"`
+
+        - `const WebFetchTool20250910AllowedCallerCodeExecution20260120 WebFetchTool20250910AllowedCaller = "code_execution_20260120"`
 
       - `AllowedDomains []string`
 
@@ -3159,7 +3179,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `MessageCountTokensToolWebSearchTool20260209`
+    - `type WebSearchTool20260209 struct{…}`
 
       - `Name WebSearch`
 
@@ -3175,9 +3195,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `AllowedCallers []string`
 
-        - `const MessageCountTokensToolWebSearchTool20260209AllowedCallerDirect MessageCountTokensToolWebSearchTool20260209AllowedCaller = "direct"`
+        - `const WebSearchTool20260209AllowedCallerDirect WebSearchTool20260209AllowedCaller = "direct"`
 
-        - `const MessageCountTokensToolWebSearchTool20260209AllowedCallerCodeExecution20250825 MessageCountTokensToolWebSearchTool20260209AllowedCaller = "code_execution_20250825"`
+        - `const WebSearchTool20260209AllowedCallerCodeExecution20250825 WebSearchTool20260209AllowedCaller = "code_execution_20250825"`
+
+        - `const WebSearchTool20260209AllowedCallerCodeExecution20260120 WebSearchTool20260209AllowedCaller = "code_execution_20260120"`
 
       - `AllowedDomains []string`
 
@@ -3222,7 +3244,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         When true, guarantees schema validation on tool names and inputs
 
-      - `UserLocation MessageCountTokensToolWebSearchTool20260209UserLocation`
+      - `UserLocation UserLocation`
 
         Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3246,7 +3268,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-    - `MessageCountTokensToolWebFetchTool20260209`
+    - `type WebFetchTool20260209 struct{…}`
 
       - `Name WebFetch`
 
@@ -3262,9 +3284,11 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `AllowedCallers []string`
 
-        - `const MessageCountTokensToolWebFetchTool20260209AllowedCallerDirect MessageCountTokensToolWebFetchTool20260209AllowedCaller = "direct"`
+        - `const WebFetchTool20260209AllowedCallerDirect WebFetchTool20260209AllowedCaller = "direct"`
 
-        - `const MessageCountTokensToolWebFetchTool20260209AllowedCallerCodeExecution20250825 MessageCountTokensToolWebFetchTool20260209AllowedCaller = "code_execution_20250825"`
+        - `const WebFetchTool20260209AllowedCallerCodeExecution20250825 WebFetchTool20260209AllowedCaller = "code_execution_20250825"`
+
+        - `const WebFetchTool20260209AllowedCallerCodeExecution20260120 WebFetchTool20260209AllowedCaller = "code_execution_20260120"`
 
       - `AllowedDomains []string`
 
@@ -3341,6 +3365,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `const ToolSearchToolBm25_20251119AllowedCallerCodeExecution20250825 ToolSearchToolBm25_20251119AllowedCaller = "code_execution_20250825"`
 
+        - `const ToolSearchToolBm25_20251119AllowedCallerCodeExecution20260120 ToolSearchToolBm25_20251119AllowedCaller = "code_execution_20260120"`
+
       - `CacheControl CacheControlEphemeral`
 
         Create a cache control breakpoint at this content block.
@@ -3393,6 +3419,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         - `const ToolSearchToolRegex20251119AllowedCallerDirect ToolSearchToolRegex20251119AllowedCaller = "direct"`
 
         - `const ToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 ToolSearchToolRegex20251119AllowedCaller = "code_execution_20250825"`
+
+        - `const ToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 ToolSearchToolRegex20251119AllowedCaller = "code_execution_20260120"`
 
       - `CacheControl CacheControlEphemeral`
 

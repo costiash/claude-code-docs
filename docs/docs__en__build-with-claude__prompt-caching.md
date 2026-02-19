@@ -2,13 +2,18 @@
 
 ---
 
-Prompt caching is a powerful feature that optimizes your API usage by allowing resuming from specific prefixes in your prompts. This approach significantly reduces processing time and costs for repetitive tasks or prompts with consistent elements.
+Prompt caching optimizes your API usage by allowing resuming from specific prefixes in your prompts. This significantly reduces processing time and costs for repetitive tasks or prompts with consistent elements.
 
 <Note>
 Prompt caching stores KV cache representations and cryptographic hashes of cached content, but does not store the raw text of prompts or responses. This may be suitable for customers who require [ZDR-type data retention](/docs/en/build-with-claude/zero-data-retention) commitments. See [cache lifetime](/docs/en/build-with-claude/prompt-caching#what-is-the-cache-lifetime) for details.
 </Note>
 
-Here's an example of how to implement prompt caching with the Messages API using a `cache_control` block:
+There are two ways to enable prompt caching:
+
+- **[Automatic caching](#automatic-caching)**: Add a single `cache_control` field at the top level of your request. The system automatically applies the cache breakpoint to the last cacheable block and moves it forward as conversations grow. Best for multi-turn conversations where the growing message history should be cached automatically.
+- **[Explicit cache breakpoints](#explicit-cache-breakpoints)**: Place `cache_control` directly on individual content blocks for fine-grained control over exactly what gets cached.
+
+The simplest way to start is with automatic caching:
 
 <CodeGroup>
 
@@ -20,17 +25,8 @@ curl https://api.anthropic.com/v1/messages \
   -d '{
     "model": "claude-opus-4-6",
     "max_tokens": 1024,
-    "system": [
-      {
-        "type": "text",
-        "text": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
-      },
-      {
-        "type": "text",
-        "text": "<the entire contents of Pride and Prejudice>",
-        "cache_control": {"type": "ephemeral"}
-      }
-    ],
+    "cache_control": {"type": "ephemeral"},
+    "system": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.",
     "messages": [
       {
         "role": "user",
@@ -38,9 +34,6 @@ curl https://api.anthropic.com/v1/messages \
       }
     ]
   }'
-
-# Call the model again with the same inputs up to the cache checkpoint
-curl https://api.anthropic.com/v1/messages # rest of input
 ```
 
 ```python Python
@@ -48,32 +41,18 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-params = {
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "system": [
-        {
-            "type": "text",
-            "text": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n",
-        },
-        {
-            "type": "text",
-            "text": "<the entire contents of 'Pride and Prejudice'>",
-            "cache_control": {"type": "ephemeral"},
-        },
-    ],
-    "messages": [
+response = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=1024,
+    cache_control={"type": "ephemeral"},
+    system="You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.",
+    messages=[
         {
             "role": "user",
             "content": "Analyze the major themes in 'Pride and Prejudice'.",
         }
     ],
-}
-response = client.messages.create(**params)
-print(response.usage.model_dump_json())
-
-# Call the model again with the same inputs up to the cache checkpoint
-response = client.messages.create(**params)
+)
 print(response.usage.model_dump_json())
 ```
 
@@ -85,17 +64,8 @@ const client = new Anthropic();
 const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  system: [
-    {
-      type: "text",
-      text: "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
-    },
-    {
-      type: "text",
-      text: "<the entire contents of 'Pride and Prejudice'>",
-      cache_control: { type: "ephemeral" }
-    }
-  ],
+  cache_control: { type: "ephemeral" },
+  system: "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.",
   messages: [
     {
       role: "user",
@@ -104,10 +74,6 @@ const response = await client.messages.create({
   ]
 });
 console.log(response.usage);
-
-// Call the model again with the same inputs up to the cache checkpoint
-const new_response = await client.messages.create(/* ... */);
-console.log(new_response.usage);
 ```
 
 ```java Java
@@ -117,8 +83,6 @@ import com.anthropic.models.messages.CacheControlEphemeral;
 import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.TextBlockParam;
-import java.util.List;
 
 public class PromptCachingExample {
 
@@ -126,23 +90,12 @@ public class PromptCachingExample {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_4_6)
-      .maxTokens(1024)
-      .systemOfTextBlockParams(
-        List.of(
-          TextBlockParam.builder()
-            .text(
-              "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
-            )
-            .build(),
-          TextBlockParam.builder()
-            .text("<the entire contents of 'Pride and Prejudice'>")
-            .cacheControl(CacheControlEphemeral.builder().build())
-            .build()
-        )
-      )
-      .addUserMessage("Analyze the major themes in 'Pride and Prejudice'.")
-      .build();
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(1024)
+        .cacheControl(CacheControlEphemeral.builder().build())
+        .system("You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.")
+        .addUserMessage("Analyze the major themes in 'Pride and Prejudice'.")
+        .build();
 
     Message message = client.messages().create(params);
     System.out.println(message.usage());
@@ -151,12 +104,7 @@ public class PromptCachingExample {
 ```
 </CodeGroup>
 
-```json JSON
-{"cache_creation_input_tokens":188086,"cache_read_input_tokens":0,"input_tokens":21,"output_tokens":393}
-{"cache_creation_input_tokens":0,"cache_read_input_tokens":188086,"input_tokens":21,"output_tokens":393}
-```
-
-In this example, the entire text of "Pride and Prejudice" is cached using the `cache_control` parameter. This enables reuse of this large text across multiple API calls without reprocessing it each time. Changing only the user message allows you to ask various questions about the book while utilizing the cached content, leading to faster responses and improved efficiency.
+With automatic caching, the system caches all content up to and including the last cacheable block. On subsequent requests with the same prefix, cached content is reused automatically.
 
 ---
 
@@ -190,6 +138,7 @@ Prompt caching references the entire prompt - `tools`, `system`, and `messages` 
 </Tip>
 
 ---
+
 ## Pricing
 
 Prompt caching introduces a new pricing structure. The table below shows the price per million tokens for each supported model:
@@ -219,11 +168,10 @@ These multipliers stack with other pricing modifiers such as the Batch API disco
 </Note>
 
 ---
-## How to implement prompt caching
 
-### Supported models
+## Supported models
 
-Prompt caching is currently supported on:
+Prompt caching (both automatic and explicit) is currently supported on:
 - Claude Opus 4.6
 - Claude Opus 4.5
 - Claude Opus 4.1
@@ -235,6 +183,166 @@ Prompt caching is currently supported on:
 - Claude Haiku 4.5
 - Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations))
 - Claude Haiku 3
+
+---
+
+## Automatic caching
+
+Automatic caching is the simplest way to enable prompt caching. Instead of placing `cache_control` on individual content blocks, add a single `cache_control` field at the top level of your request body. The system automatically applies the cache breakpoint to the last cacheable block.
+
+<CodeGroup>
+
+```bash Shell
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 1024,
+    "cache_control": {"type": "ephemeral"},
+    "system": "You are a helpful assistant that remembers our conversation.",
+    "messages": [
+      {"role": "user", "content": "My name is Alex. I work on machine learning."},
+      {"role": "assistant", "content": "Nice to meet you, Alex! How can I help with your ML work today?"},
+      {"role": "user", "content": "What did I say I work on?"}
+    ]
+  }'
+```
+
+```python Python
+import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=1024,
+    cache_control={"type": "ephemeral"},
+    system="You are a helpful assistant that remembers our conversation.",
+    messages=[
+        {"role": "user", "content": "My name is Alex. I work on machine learning."},
+        {
+            "role": "assistant",
+            "content": "Nice to meet you, Alex! How can I help with your ML work today?",
+        },
+        {"role": "user", "content": "What did I say I work on?"},
+    ],
+)
+print(response.usage.model_dump_json())
+```
+
+```typescript TypeScript
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const response = await client.messages.create({
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  cache_control: { type: "ephemeral" },
+  system: "You are a helpful assistant that remembers our conversation.",
+  messages: [
+    { role: "user", content: "My name is Alex. I work on machine learning." },
+    { role: "assistant", content: "Nice to meet you, Alex! How can I help with your ML work today?" },
+    { role: "user", content: "What did I say I work on?" }
+  ]
+});
+console.log(response.usage);
+```
+
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.CacheControlEphemeral;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+
+public class AutomaticCachingExample {
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+                .model(Model.CLAUDE_OPUS_4_6)
+                .maxTokens(1024)
+                .cacheControl(CacheControlEphemeral.builder().build())
+                .system("You are a helpful assistant that remembers our conversation.")
+                .addUserMessage("My name is Alex. I work on machine learning.")
+                .addAssistantMessage("Nice to meet you, Alex! How can I help with your ML work today?")
+                .addUserMessage("What did I say I work on?")
+                .build();
+
+        Message message = client.messages().create(params);
+        System.out.println(message.usage());
+    }
+}
+```
+</CodeGroup>
+
+### How automatic caching works in multi-turn conversations
+
+With automatic caching, the cache point moves forward automatically as conversations grow. Each new request caches everything up to the last cacheable block, and previous content is read from cache.
+
+| Request | Content | Cache behavior |
+|---------|---------|----------------|
+| Request 1 | System + User:A + Asst:B + **User:C** ◀ cache | Everything written to cache |
+| Request 2 | System + User:A + Asst:B + User:C + Asst:D + **User:E** ◀ cache | System through User:C read from cache; Asst:D + User:E written to cache |
+| Request 3 | System + User:A + Asst:B + User:C + Asst:D + User:E + Asst:F + **User:G** ◀ cache | System through User:E read from cache; Asst:F + User:G written to cache |
+
+The cache breakpoint automatically moves to the last cacheable block in each request, so you don't need to update any `cache_control` markers as the conversation grows.
+
+### TTL support
+
+By default, automatic caching uses a 5-minute TTL. You can specify a 1-hour TTL at 2x the base input token price:
+
+```json
+"cache_control": {"type": "ephemeral", "ttl": "1h"}
+```
+
+### Combining with block-level caching
+
+Automatic caching is compatible with [explicit cache breakpoints](#explicit-cache-breakpoints). When used together, the automatic cache breakpoint uses one of the 4 available breakpoint slots.
+
+This lets you combine both approaches. For example, use explicit breakpoints to cache your system prompt and tools independently, while automatic caching handles the conversation:
+
+```json
+{
+  "model": "claude-opus-4-6",
+  "max_tokens": 1024,
+  "cache_control": {"type": "ephemeral"},
+  "system": [
+    {
+      "type": "text",
+      "text": "You are a helpful assistant.",
+      "cache_control": {"type": "ephemeral"}
+    }
+  ],
+  "messages": [...]
+}
+```
+
+### What stays the same
+
+Automatic caching uses the same underlying caching infrastructure. Pricing, minimum token thresholds, context ordering requirements, and the 20-block lookback window all apply the same as with explicit breakpoints.
+
+### Edge cases
+
+- If the last block already has an explicit `cache_control` with the same TTL, automatic caching is a no-op.
+- If the last block has an explicit `cache_control` with a different TTL, the API returns a 400 error.
+- If 4 explicit block-level breakpoints already exist, the API returns a 400 error (no slots left for automatic caching).
+- If the last block is not eligible as an automatic cache breakpoint target, the system silently walks backwards to find the nearest eligible block. If none is found, caching is skipped.
+
+<Note>
+Automatic caching is available on the Claude API and Azure AI Foundry (preview). Support for Amazon Bedrock and Google Vertex AI is coming later.
+</Note>
+
+---
+
+## Explicit cache breakpoints
+
+For more control over caching, you can place `cache_control` directly on individual content blocks. This is useful when you need to cache different sections that change at different frequencies, or need fine-grained control over exactly what gets cached.
 
 ### Structuring your prompt
 
@@ -278,6 +386,19 @@ You can define up to 4 cache breakpoints if you want to:
 **Important limitation**: If your prompt has more than 20 content blocks before your cache breakpoint, and you modify content earlier than those 20 blocks, you won't get a cache hit unless you add additional explicit breakpoints closer to that content.
 </Note>
 
+### Understanding cache breakpoint costs
+
+**Cache breakpoints themselves don't add any cost.** You are only charged for:
+- **Cache writes**: When new content is written to the cache (25% more than base input tokens for 5-minute TTL)
+- **Cache reads**: When cached content is used (10% of base input token price)
+- **Regular input tokens**: For any uncached content
+
+Adding more `cache_control` breakpoints doesn't increase your costs - you still pay the same amount based on what content is actually cached and read. The breakpoints simply give you control over what sections can be cached independently.
+
+---
+
+## Caching strategies and considerations
+
 ### Cache limitations
 The minimum cacheable prompt length is:
 - 4096 tokens for Claude Opus 4.6, Claude Opus 4.5
@@ -291,17 +412,8 @@ For concurrent requests, note that a cache entry only becomes available after th
 
 Currently, "ephemeral" is the only supported cache type, which by default has a 5-minute lifetime.
 
-### Understanding cache breakpoint costs
-
-**Cache breakpoints themselves don't add any cost.** You are only charged for:
-- **Cache writes**: When new content is written to the cache (25% more than base input tokens for 5-minute TTL)
-- **Cache reads**: When cached content is used (10% of base input token price)
-- **Regular input tokens**: For any uncached content
-
-Adding more `cache_control` breakpoints doesn't increase your costs - you still pay the same amount based on what content is actually cached and read. The breakpoints simply give you control over what sections can be cached independently.
-
 ### What can be cached
-Most blocks in the request can be designated for caching with `cache_control`. This includes:
+Most blocks in the request can be cached. This includes:
 
 - Tools: Tool definitions in the `tools` array
 - System messages: Content blocks in the `system` array
@@ -309,7 +421,7 @@ Most blocks in the request can be designated for caching with `cache_control`. T
 - Images & Documents: Content blocks in the `messages.content` array, in user turns
 - Tool use and tool results: Content blocks in the `messages.content` array, in both user and assistant turns
 
-Each of these elements can be marked with `cache_control` to enable caching for that portion of the request.
+Each of these elements can be cached, either automatically or by marking them with `cache_control`.
 
 ### What cannot be cached
 While most request blocks can be cached, there are some exceptions:
@@ -371,42 +483,6 @@ total_input_tokens = cache_read_input_tokens + cache_creation_input_tokens + inp
 This is important for understanding both costs and rate limits, as `input_tokens` will typically be much smaller than your total input when using caching effectively.
 </Note>
 
-### Best practices for effective caching
-
-To optimize prompt caching performance:
-
-- Cache stable, reusable content like system instructions, background information, large contexts, or frequent tool definitions.
-- Place cached content at the prompt's beginning for best performance.
-- Use cache breakpoints strategically to separate different cacheable prefix sections.
-- Set cache breakpoints at the end of conversations and just before editable content to maximize cache hit rates, especially when working with prompts that have more than 20 content blocks.
-- Regularly analyze cache hit rates and adjust your strategy as needed.
-
-### Optimizing for different use cases
-
-Tailor your prompt caching strategy to your scenario:
-
-- Conversational agents: Reduce cost and latency for extended conversations, especially those with long instructions or uploaded documents.
-- Coding assistants: Improve autocomplete and codebase Q&A by keeping relevant sections or a summarized version of the codebase in the prompt.
-- Large document processing: Incorporate complete long-form material including images in your prompt without increasing response latency.
-- Detailed instruction sets: Share extensive lists of instructions, procedures, and examples to fine-tune Claude's responses.  Developers often include an example or two in the prompt, but with prompt caching you can get even better performance by including 20+ diverse examples of high quality answers.
-- Agentic tool use: Enhance performance for scenarios involving multiple tool calls and iterative code changes, where each step typically requires a new API call.
-- Talk to books, papers, documentation, podcast transcripts, and other longform content:  Bring any knowledge base alive by embedding the entire document(s) into the prompt, and letting users ask it questions.
-
-### Troubleshooting common issues
-
-If experiencing unexpected behavior:
-
-- Ensure cached sections are identical and marked with cache_control in the same locations across calls
-- Check that calls are made within the cache lifetime (5 minutes by default)
-- Verify that `tool_choice` and image usage remain consistent between calls
-- Validate that you are caching at least the minimum number of tokens
-- The system automatically checks for cache hits at previous content block boundaries (up to ~20 blocks before your breakpoint). For prompts with more than 20 content blocks, you may need additional `cache_control` parameters earlier in the prompt to ensure all content can be cached
-- Verify that the keys in your `tool_use` content blocks have stable ordering as some languages (for example, Swift, Go) randomize key order during JSON conversion, breaking caches
-
-<Note>
-Changes to `tool_choice` or the presence/absence of images anywhere in the prompt will invalidate the cache, requiring a new cache entry to be created. For more details on cache invalidation, see [What invalidates the cache](#what-invalidates-the-cache).
-</Note>
-
 ### Caching with thinking blocks
 
 When using [extended thinking](/docs/en/build-with-claude/extended-thinking) with prompt caching, thinking blocks have special behavior:
@@ -449,11 +525,10 @@ When a non-tool-result user block is included, it designates a new assistant loo
 
 For more detailed information, see the [extended thinking documentation](/docs/en/build-with-claude/extended-thinking#understanding-thinking-block-caching-behavior).
 
----
-## Cache storage and sharing
+### Cache storage and sharing
 
 <Warning>
-Starting February 5, 2026, prompt caching will use workspace-level isolation instead of organization-level isolation. Caches will be isolated per workspace, ensuring data separation between workspaces within the same organization. This change applies to the Claude API and Azure; Amazon Bedrock and Google Vertex AI will maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this change.
+Starting February 5, 2026, prompt caching will use workspace-level isolation instead of organization-level isolation. Caches will be isolated per workspace, ensuring data separation between workspaces within the same organization. This change applies to the Claude API and Azure AI Foundry (preview); Amazon Bedrock and Google Vertex AI will maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this change.
 </Warning>
 
 - **Organization Isolation**: Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts.
@@ -461,6 +536,44 @@ Starting February 5, 2026, prompt caching will use workspace-level isolation ins
 - **Exact Matching**: Cache hits require 100% identical prompt segments, including all text and images up to and including the block marked with cache control.
 
 - **Output Token Generation**: Prompt caching has no effect on output token generation. The response you receive will be identical to what you would get if prompt caching was not used.
+
+### Best practices for effective caching
+
+To optimize prompt caching performance:
+
+- Start with [automatic caching](#automatic-caching) for multi-turn conversations. It handles breakpoint management automatically.
+- Use [explicit block-level breakpoints](#explicit-cache-breakpoints) when you need to cache different sections with different change frequencies.
+- Cache stable, reusable content like system instructions, background information, large contexts, or frequent tool definitions.
+- Place cached content at the prompt's beginning for best performance.
+- Use cache breakpoints strategically to separate different cacheable prefix sections.
+- Set cache breakpoints at the end of conversations and just before editable content to maximize cache hit rates, especially when working with prompts that have more than 20 content blocks.
+- Regularly analyze cache hit rates and adjust your strategy as needed.
+
+### Optimizing for different use cases
+
+Tailor your prompt caching strategy to your scenario:
+
+- Conversational agents: Reduce cost and latency for extended conversations, especially those with long instructions or uploaded documents.
+- Coding assistants: Improve autocomplete and codebase Q&A by keeping relevant sections or a summarized version of the codebase in the prompt.
+- Large document processing: Incorporate complete long-form material including images in your prompt without increasing response latency.
+- Detailed instruction sets: Share extensive lists of instructions, procedures, and examples to fine-tune Claude's responses.  Developers often include an example or two in the prompt, but with prompt caching you can get even better performance by including 20+ diverse examples of high quality answers.
+- Agentic tool use: Enhance performance for scenarios involving multiple tool calls and iterative code changes, where each step typically requires a new API call.
+- Talk to books, papers, documentation, podcast transcripts, and other longform content:  Bring any knowledge base alive by embedding the entire document(s) into the prompt, and letting users ask it questions.
+
+### Troubleshooting common issues
+
+If experiencing unexpected behavior:
+
+- Ensure cached sections are identical across calls. For explicit breakpoints, verify that `cache_control` markers are in the same locations
+- Check that calls are made within the cache lifetime (5 minutes by default)
+- Verify that `tool_choice` and image usage remain consistent between calls
+- Validate that you are caching at least the minimum number of tokens
+- The system automatically checks for cache hits at previous content block boundaries (up to ~20 blocks before your breakpoint). For prompts with more than 20 content blocks, you may need additional `cache_control` parameters earlier in the prompt to ensure all content can be cached
+- Verify that the keys in your `tool_use` content blocks have stable ordering as some languages (for example, Swift, Go) randomize key order during JSON conversion, breaking caches
+
+<Note>
+Changes to `tool_choice` or the presence/absence of images anywhere in the prompt will invalidate the cache, requiring a new cache entry to be created. For more details on cache invalidation, see [What invalidates the cache](#what-invalidates-the-cache).
+</Note>
 
 ---
 ## 1-hour cache duration
@@ -1720,7 +1833,7 @@ This pattern is especially powerful for:
 
   <section title="How do I enable prompt caching?">
 
-    To enable prompt caching, include at least one `cache_control` breakpoint in your API request.
+    The easiest way is to add `"cache_control": {"type": "ephemeral"}` at the top level of your request body ([automatic caching](#automatic-caching)). Alternatively, include at least one `cache_control` breakpoint on individual content blocks ([explicit cache breakpoints](#explicit-cache-breakpoints)).
   
 </section>
 
@@ -1770,7 +1883,7 @@ Prompt caching is designed with strong privacy and data separation measures:
 
 These measures ensure that prompt caching maintains data privacy and security while offering performance benefits.
 
-Note: Starting February 5, 2026, caches will be isolated per workspace instead of per organization. This change applies to the Claude API and Azure. See [Cache storage and sharing](#cache-storage-and-sharing) for details.
+Note: Starting February 5, 2026, caches will be isolated per workspace instead of per organization. This change applies to the Claude API and Azure AI Foundry (preview). See [Cache storage and sharing](#cache-storage-and-sharing) for details.
 
   
 </section>

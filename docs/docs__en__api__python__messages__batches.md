@@ -743,7 +743,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -1467,7 +1467,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -1495,7 +1495,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class WebSearchToolRequestError: …`
 
-                - `error_code: Literal["invalid_tool_input", "unavailable", "max_uses_exceeded", 3 more]`
+                - `error_code: WebSearchToolResultErrorCode`
 
                   - `"invalid_tool_input"`
 
@@ -1564,7 +1564,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -1918,7 +1918,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -2440,6 +2440,29 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `str`
 
+    - `cache_control: Optional[CacheControlEphemeralParam]`
+
+      Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+      - `type: Literal["ephemeral"]`
+
+        - `"ephemeral"`
+
+      - `ttl: Optional[Literal["5m", "1h"]]`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
     - `container: Optional[str]`
 
       Container identifier for reuse across requests.
@@ -2495,14 +2518,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"auto"`
 
       - `"standard_only"`
-
-    - `speed: Optional[Literal["standard", "fast"]]`
-
-      The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-      - `"standard"`
-
-      - `"fast"`
 
     - `stop_sequences: Optional[SequenceNotStr[str]]`
 
@@ -2825,11 +2840,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -2892,11 +2909,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"bash_20250124"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -2945,11 +2964,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"code_execution_20250522"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -2996,11 +3017,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"code_execution_20250825"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -3049,11 +3072,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"code_execution_20260120"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -3100,11 +3125,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"memory_20250818"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -3153,11 +3180,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"text_editor_20250124"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -3206,11 +3235,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"text_editor_20250429"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -3259,11 +3290,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"text_editor_20250728"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -3316,11 +3349,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_search_20250305"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains: Optional[List[str]]`
 
@@ -3403,11 +3438,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_fetch_20250910"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains: Optional[List[str]]`
 
@@ -3476,11 +3513,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_search_20260209"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains: Optional[List[str]]`
 
@@ -3525,7 +3564,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-        - `user_location: Optional[WebSearchTool20260209UserLocation]`
+        - `user_location: Optional[UserLocation]`
 
           Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3563,11 +3602,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"web_fetch_20260209"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `allowed_domains: Optional[List[str]]`
 
@@ -3638,11 +3679,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"tool_search_tool_bm25"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -3691,11 +3734,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"tool_search_tool_regex"`
 
-        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825"]]]`
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
 
           - `"direct"`
 
           - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4513,7 +4558,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -4555,7 +4600,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -4609,7 +4654,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -4621,7 +4666,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class WebSearchToolResultError: …`
 
-                - `error_code: Literal["invalid_tool_input", "unavailable", "max_uses_exceeded", 3 more]`
+                - `error_code: WebSearchToolResultErrorCode`
 
                   - `"invalid_tool_input"`
 
@@ -4683,7 +4728,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -5264,14 +5309,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"priority"`
 
             - `"batch"`
-
-          - `speed: Optional[Literal["standard", "fast"]]`
-
-            The inference speed mode used for this request.
-
-            - `"standard"`
-
-            - `"fast"`
 
       - `type: Literal["succeeded"]`
 
@@ -5819,7 +5856,7 @@ print(message_batch_individual_response.custom_id)
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -5861,7 +5898,7 @@ print(message_batch_individual_response.custom_id)
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -5915,7 +5952,7 @@ print(message_batch_individual_response.custom_id)
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -5927,7 +5964,7 @@ print(message_batch_individual_response.custom_id)
 
               - `class WebSearchToolResultError: …`
 
-                - `error_code: Literal["invalid_tool_input", "unavailable", "max_uses_exceeded", 3 more]`
+                - `error_code: WebSearchToolResultErrorCode`
 
                   - `"invalid_tool_input"`
 
@@ -5989,7 +6026,7 @@ print(message_batch_individual_response.custom_id)
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -6571,14 +6608,6 @@ print(message_batch_individual_response.custom_id)
 
             - `"batch"`
 
-          - `speed: Optional[Literal["standard", "fast"]]`
-
-            The inference speed mode used for this request.
-
-            - `"standard"`
-
-            - `"fast"`
-
       - `type: Literal["succeeded"]`
 
         - `"succeeded"`
@@ -6918,7 +6947,7 @@ print(message_batch_individual_response.custom_id)
 
                 - `"code_execution_20250825"`
 
-            - `class CallerServerToolCaller20260120: …`
+            - `class ServerToolCaller20260120: …`
 
               - `tool_id: str`
 
@@ -6960,7 +6989,7 @@ print(message_batch_individual_response.custom_id)
 
                 - `"code_execution_20250825"`
 
-            - `class CallerServerToolCaller20260120: …`
+            - `class ServerToolCaller20260120: …`
 
               - `tool_id: str`
 
@@ -7014,7 +7043,7 @@ print(message_batch_individual_response.custom_id)
 
                 - `"code_execution_20250825"`
 
-            - `class CallerServerToolCaller20260120: …`
+            - `class ServerToolCaller20260120: …`
 
               - `tool_id: str`
 
@@ -7026,7 +7055,7 @@ print(message_batch_individual_response.custom_id)
 
             - `class WebSearchToolResultError: …`
 
-              - `error_code: Literal["invalid_tool_input", "unavailable", "max_uses_exceeded", 3 more]`
+              - `error_code: WebSearchToolResultErrorCode`
 
                 - `"invalid_tool_input"`
 
@@ -7088,7 +7117,7 @@ print(message_batch_individual_response.custom_id)
 
                 - `"code_execution_20250825"`
 
-            - `class CallerServerToolCaller20260120: …`
+            - `class ServerToolCaller20260120: …`
 
               - `tool_id: str`
 
@@ -7670,14 +7699,6 @@ print(message_batch_individual_response.custom_id)
 
           - `"batch"`
 
-        - `speed: Optional[Literal["standard", "fast"]]`
-
-          The inference speed mode used for this request.
-
-          - `"standard"`
-
-          - `"fast"`
-
     - `type: Literal["succeeded"]`
 
       - `"succeeded"`
@@ -7979,7 +8000,7 @@ print(message_batch_individual_response.custom_id)
 
               - `"code_execution_20250825"`
 
-          - `class CallerServerToolCaller20260120: …`
+          - `class ServerToolCaller20260120: …`
 
             - `tool_id: str`
 
@@ -8021,7 +8042,7 @@ print(message_batch_individual_response.custom_id)
 
               - `"code_execution_20250825"`
 
-          - `class CallerServerToolCaller20260120: …`
+          - `class ServerToolCaller20260120: …`
 
             - `tool_id: str`
 
@@ -8075,7 +8096,7 @@ print(message_batch_individual_response.custom_id)
 
               - `"code_execution_20250825"`
 
-          - `class CallerServerToolCaller20260120: …`
+          - `class ServerToolCaller20260120: …`
 
             - `tool_id: str`
 
@@ -8087,7 +8108,7 @@ print(message_batch_individual_response.custom_id)
 
           - `class WebSearchToolResultError: …`
 
-            - `error_code: Literal["invalid_tool_input", "unavailable", "max_uses_exceeded", 3 more]`
+            - `error_code: WebSearchToolResultErrorCode`
 
               - `"invalid_tool_input"`
 
@@ -8149,7 +8170,7 @@ print(message_batch_individual_response.custom_id)
 
               - `"code_execution_20250825"`
 
-          - `class CallerServerToolCaller20260120: …`
+          - `class ServerToolCaller20260120: …`
 
             - `tool_id: str`
 
@@ -8730,14 +8751,6 @@ print(message_batch_individual_response.custom_id)
         - `"priority"`
 
         - `"batch"`
-
-      - `speed: Optional[Literal["standard", "fast"]]`
-
-        The inference speed mode used for this request.
-
-        - `"standard"`
-
-        - `"fast"`
 
   - `type: Literal["succeeded"]`
 

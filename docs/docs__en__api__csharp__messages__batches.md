@@ -655,7 +655,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `JsonElement Type "code_execution_20250825"constant`
 
-                - `class CodeExecution20260120:`
+                - `class ServerToolCaller20260120:`
 
                   - `required string ToolID`
 
@@ -1283,7 +1283,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `JsonElement Type "code_execution_20250825"constant`
 
-                - `class CodeExecution20260120:`
+                - `class ServerToolCaller20260120:`
 
                   - `required string ToolID`
 
@@ -1307,7 +1307,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `class WebSearchToolRequestError:`
 
-                  - `required ErrorCode ErrorCode`
+                  - `required WebSearchToolResultErrorCode ErrorCode`
 
                     - `"invalid_tool_input"InvalidToolInput`
 
@@ -1366,7 +1366,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `JsonElement Type "code_execution_20250825"constant`
 
-                - `class CodeExecution20260120:`
+                - `class ServerToolCaller20260120:`
 
                   - `required string ToolID`
 
@@ -1668,7 +1668,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `JsonElement Type "code_execution_20250825"constant`
 
-                - `class CodeExecution20260120:`
+                - `class ServerToolCaller20260120:`
 
                   - `required string ToolID`
 
@@ -2105,6 +2105,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Our previous most fast and cost-effective
 
+      - `CacheControlEphemeral? CacheControl`
+
+        Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+        - `JsonElement Type "ephemeral"constant`
+
+        - `Ttl Ttl`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+          - `"5m"Ttl5m`
+
+          - `"1h"Ttl1h`
+
       - `string? Container`
 
         Container identifier for reuse across requests.
@@ -2158,14 +2179,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `"auto"Auto`
 
         - `"standard_only"StandardOnly`
-
-      - `Speed? Speed`
-
-        The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-        - `"standard"Standard`
-
-        - `"fast"Fast`
 
       - `IReadOnlyList<string> StopSequences`
 
@@ -2464,6 +2477,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20250825"CodeExecution20250825`
 
+            - `"code_execution_20260120"CodeExecution20260120`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2525,6 +2540,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20250825"CodeExecution20250825`
 
+            - `"code_execution_20260120"CodeExecution20260120`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2572,6 +2589,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20250825"CodeExecution20250825`
 
+            - `"code_execution_20260120"CodeExecution20260120`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2617,6 +2636,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20250825"CodeExecution20250825`
 
+            - `"code_execution_20260120"CodeExecution20260120`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2646,7 +2667,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `CodeExecutionTool20260120`
+        - `class CodeExecutionTool20260120:`
+
+          Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
           - `JsonElement Name "code_execution"constant`
 
@@ -2661,6 +2684,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"direct"Direct`
 
             - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -2706,6 +2731,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"direct"Direct`
 
             - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -2754,6 +2781,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20250825"CodeExecution20250825`
 
+            - `"code_execution_20260120"CodeExecution20260120`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2801,6 +2830,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20250825"CodeExecution20250825`
 
+            - `"code_execution_20260120"CodeExecution20260120`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2847,6 +2878,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"direct"Direct`
 
             - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -2898,6 +2931,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"direct"Direct`
 
             - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2978,6 +3013,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20250825"CodeExecution20250825`
 
+            - `"code_execution_20260120"CodeExecution20260120`
+
           - `IReadOnlyList<string>? AllowedDomains`
 
             List of domains to allow fetching from
@@ -3029,7 +3066,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `WebSearchTool20260209`
+        - `class WebSearchTool20260209:`
 
           - `JsonElement Name "web_search"constant`
 
@@ -3044,6 +3081,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"direct"Direct`
 
             - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -3108,7 +3147,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-        - `WebFetchTool20260209`
+        - `class WebFetchTool20260209:`
 
           - `JsonElement Name "web_fetch"constant`
 
@@ -3123,6 +3162,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"direct"Direct`
 
             - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -3195,6 +3236,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20250825"CodeExecution20250825`
 
+            - `"code_execution_20260120"CodeExecution20260120`
+
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -3243,6 +3286,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"direct"Direct`
 
             - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -3399,6 +3444,7 @@ BatchCreateParams parameters = new()
                     },
                 ],
                 Model = Model.ClaudeOpus4_6,
+                CacheControl = new() { Ttl = Ttl.Ttl5m },
                 Container = "container",
                 InferenceGeo = "inference_geo",
                 Metadata = new()
@@ -3417,7 +3463,6 @@ BatchCreateParams parameters = new()
                     },
                 },
                 ServiceTier = ServiceTier.Auto,
-                Speed = Speed.Standard,
                 StopSequences =
                 [
                     "string"
@@ -4131,7 +4176,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -4165,7 +4210,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -4211,7 +4256,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -4221,7 +4266,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class WebSearchToolResultError:`
 
-                - `required ErrorCode ErrorCode`
+                - `required WebSearchToolResultErrorCode ErrorCode`
 
                   - `"invalid_tool_input"InvalidToolInput`
 
@@ -4273,7 +4318,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -4761,14 +4806,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"priority"Priority`
 
             - `"batch"Batch`
-
-          - `required Speed? Speed`
-
-            The inference speed mode used for this request.
-
-            - `"standard"Standard`
-
-            - `"fast"Fast`
 
       - `JsonElement Type "succeeded"constant`
 
@@ -5234,7 +5271,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -5268,7 +5305,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -5314,7 +5351,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -5324,7 +5361,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
               - `class WebSearchToolResultError:`
 
-                - `required ErrorCode ErrorCode`
+                - `required WebSearchToolResultErrorCode ErrorCode`
 
                   - `"invalid_tool_input"InvalidToolInput`
 
@@ -5376,7 +5413,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -5865,14 +5902,6 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `"batch"Batch`
 
-          - `required Speed? Speed`
-
-            The inference speed mode used for this request.
-
-            - `"standard"Standard`
-
-            - `"fast"Fast`
-
       - `JsonElement Type "succeeded"constant`
 
     - `class MessageBatchErroredResult:`
@@ -6164,7 +6193,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
               - `JsonElement Type "code_execution_20250825"constant`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `required string ToolID`
 
@@ -6198,7 +6227,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
               - `JsonElement Type "code_execution_20250825"constant`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `required string ToolID`
 
@@ -6244,7 +6273,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
               - `JsonElement Type "code_execution_20250825"constant`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `required string ToolID`
 
@@ -6254,7 +6283,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `class WebSearchToolResultError:`
 
-              - `required ErrorCode ErrorCode`
+              - `required WebSearchToolResultErrorCode ErrorCode`
 
                 - `"invalid_tool_input"InvalidToolInput`
 
@@ -6306,7 +6335,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
               - `JsonElement Type "code_execution_20250825"constant`
 
-            - `class CodeExecution20260120:`
+            - `class ServerToolCaller20260120:`
 
               - `required string ToolID`
 
@@ -6795,14 +6824,6 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `"batch"Batch`
 
-        - `required Speed? Speed`
-
-          The inference speed mode used for this request.
-
-          - `"standard"Standard`
-
-          - `"fast"Fast`
-
     - `JsonElement Type "succeeded"constant`
 
   - `class MessageBatchErroredResult:`
@@ -7056,7 +7077,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `JsonElement Type "code_execution_20250825"constant`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `required string ToolID`
 
@@ -7090,7 +7111,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `JsonElement Type "code_execution_20250825"constant`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `required string ToolID`
 
@@ -7136,7 +7157,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `JsonElement Type "code_execution_20250825"constant`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `required string ToolID`
 
@@ -7146,7 +7167,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `class WebSearchToolResultError:`
 
-            - `required ErrorCode ErrorCode`
+            - `required WebSearchToolResultErrorCode ErrorCode`
 
               - `"invalid_tool_input"InvalidToolInput`
 
@@ -7198,7 +7219,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `JsonElement Type "code_execution_20250825"constant`
 
-          - `class CodeExecution20260120:`
+          - `class ServerToolCaller20260120:`
 
             - `required string ToolID`
 
@@ -7686,13 +7707,5 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
         - `"priority"Priority`
 
         - `"batch"Batch`
-
-      - `required Speed? Speed`
-
-        The inference speed mode used for this request.
-
-        - `"standard"Standard`
-
-        - `"fast"Fast`
 
   - `JsonElement Type "succeeded"constant`

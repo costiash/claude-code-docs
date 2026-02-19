@@ -229,7 +229,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -271,7 +271,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -325,7 +325,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -337,7 +337,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class WebSearchToolResultError: …`
 
-                - `error_code: Literal["invalid_tool_input", "unavailable", "max_uses_exceeded", 3 more]`
+                - `error_code: WebSearchToolResultErrorCode`
 
                   - `"invalid_tool_input"`
 
@@ -399,7 +399,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `class CallerServerToolCaller20260120: …`
+              - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
@@ -980,14 +980,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"priority"`
 
             - `"batch"`
-
-          - `speed: Optional[Literal["standard", "fast"]]`
-
-            The inference speed mode used for this request.
-
-            - `"standard"`
-
-            - `"fast"`
 
       - `type: Literal["succeeded"]`
 

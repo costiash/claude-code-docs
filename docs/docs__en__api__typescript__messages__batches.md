@@ -1497,7 +1497,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `WebSearchToolRequestError`
 
-                  - `error_code: "invalid_tool_input" | "unavailable" | "max_uses_exceeded" | 3 more`
+                  - `error_code: WebSearchToolResultErrorCode`
 
                     - `"invalid_tool_input"`
 
@@ -2415,6 +2415,29 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `(string & {})`
 
+      - `cache_control?: CacheControlEphemeral | null`
+
+        Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+        - `type: "ephemeral"`
+
+          - `"ephemeral"`
+
+        - `ttl?: "5m" | "1h"`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+          - `"5m"`
+
+          - `"1h"`
+
       - `container?: string | null`
 
         Container identifier for reuse across requests.
@@ -2470,14 +2493,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `"auto"`
 
         - `"standard_only"`
-
-      - `speed?: "standard" | "fast" | null`
-
-        The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-        - `"standard"`
-
-        - `"fast"`
 
       - `stop_sequences?: Array<string>`
 
@@ -2800,11 +2815,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -2867,11 +2884,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"bash_20250124"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -2920,11 +2939,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20250522"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -2971,11 +2992,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20250825"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -3024,11 +3047,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -3075,11 +3100,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"memory_20250818"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -3128,11 +3155,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"text_editor_20250124"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -3181,11 +3210,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"text_editor_20250429"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -3234,11 +3265,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"text_editor_20250728"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -3291,11 +3324,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"web_search_20250305"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `allowed_domains?: Array<string> | null`
 
@@ -3378,11 +3413,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"web_fetch_20250910"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `allowed_domains?: Array<string> | null`
 
@@ -3451,11 +3488,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"web_search_20260209"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `allowed_domains?: Array<string> | null`
 
@@ -3538,11 +3577,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"web_fetch_20260209"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `allowed_domains?: Array<string> | null`
 
@@ -3613,11 +3654,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"tool_search_tool_bm25"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -3666,11 +3709,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"tool_search_tool_regex"`
 
-          - `allowed_callers?: Array<"direct" | "code_execution_20250825">`
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120">`
 
             - `"direct"`
 
             - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -4596,7 +4641,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `WebSearchToolResultError`
 
-                - `error_code: "invalid_tool_input" | "unavailable" | "max_uses_exceeded" | 3 more`
+                - `error_code: WebSearchToolResultErrorCode`
 
                   - `"invalid_tool_input"`
 
@@ -5212,14 +5257,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"priority"`
 
             - `"batch"`
-
-          - `speed: "standard" | "fast" | null`
-
-            The inference speed mode used for this request.
-
-            - `"standard"`
-
-            - `"fast"`
 
       - `type: "succeeded"`
 
@@ -5874,7 +5911,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `WebSearchToolResultError`
 
-                - `error_code: "invalid_tool_input" | "unavailable" | "max_uses_exceeded" | 3 more`
+                - `error_code: WebSearchToolResultErrorCode`
 
                   - `"invalid_tool_input"`
 
@@ -6491,14 +6528,6 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `"batch"`
 
-          - `speed: "standard" | "fast" | null`
-
-            The inference speed mode used for this request.
-
-            - `"standard"`
-
-            - `"fast"`
-
       - `type: "succeeded"`
 
         - `"succeeded"`
@@ -6946,7 +6975,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `WebSearchToolResultError`
 
-              - `error_code: "invalid_tool_input" | "unavailable" | "max_uses_exceeded" | 3 more`
+              - `error_code: WebSearchToolResultErrorCode`
 
                 - `"invalid_tool_input"`
 
@@ -7563,14 +7592,6 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           - `"batch"`
 
-        - `speed: "standard" | "fast" | null`
-
-          The inference speed mode used for this request.
-
-          - `"standard"`
-
-          - `"fast"`
-
     - `type: "succeeded"`
 
       - `"succeeded"`
@@ -7980,7 +8001,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           - `WebSearchToolResultError`
 
-            - `error_code: "invalid_tool_input" | "unavailable" | "max_uses_exceeded" | 3 more`
+            - `error_code: WebSearchToolResultErrorCode`
 
               - `"invalid_tool_input"`
 
@@ -8596,14 +8617,6 @@ console.log(messageBatchIndividualResponse.custom_id);
         - `"priority"`
 
         - `"batch"`
-
-      - `speed: "standard" | "fast" | null`
-
-        The inference speed mode used for this request.
-
-        - `"standard"`
-
-        - `"fast"`
 
   - `type: "succeeded"`
 

@@ -705,7 +705,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -727,7 +727,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -1429,7 +1429,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -1451,7 +1451,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -1479,7 +1479,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `class WebSearchToolRequestError`
 
-            - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+            - `error_code: WebSearchToolResultErrorCode`
 
               - `:invalid_tool_input`
 
@@ -1526,7 +1526,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -1548,7 +1548,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -1880,7 +1880,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -1902,7 +1902,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -2401,6 +2401,29 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `String`
 
+- `cache_control: CacheControlEphemeral`
+
+  Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+  - `type: :ephemeral`
+
+    - `:ephemeral`
+
+  - `ttl: :"5m" | :"1h"`
+
+    The time-to-live for the cache control breakpoint.
+
+    This may be one the following values:
+
+    - `5m`: 5 minutes
+    - `1h`: 1 hour
+
+    Defaults to `5m`.
+
+    - `:"5m"`
+
+    - `:"1h"`
+
 - `container: String`
 
   Container identifier for reuse across requests.
@@ -2456,14 +2479,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
   - `:auto`
 
   - `:standard_only`
-
-- `speed: :standard | :fast`
-
-  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-  - `:standard`
-
-  - `:fast`
 
 - `stop_sequences: Array[String]`
 
@@ -2788,11 +2803,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -2855,11 +2872,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:bash_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -2908,11 +2927,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:code_execution_20250522`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -2959,11 +2980,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:code_execution_20250825`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -3012,11 +3035,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:code_execution_20260120`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -3063,11 +3088,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:memory_20250818`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -3116,11 +3143,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:text_editor_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -3169,11 +3198,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:text_editor_20250429`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -3222,11 +3253,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:text_editor_20250728`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -3279,11 +3312,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:web_search_20250305`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -3328,7 +3363,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `user_location: { type, city, country, 2 more}`
+    - `user_location: UserLocation`
 
       Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3366,11 +3401,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:web_fetch_20250910`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -3439,11 +3476,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:web_search_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -3488,7 +3527,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `user_location: { type, city, country, 2 more}`
+    - `user_location: UserLocation`
 
       Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3526,11 +3565,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:web_fetch_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -3601,11 +3642,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:tool_search_tool_bm25`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -3654,11 +3697,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:tool_search_tool_regex`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -3880,7 +3925,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `id: String`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -3902,7 +3947,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -3922,7 +3967,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `id: String`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -3944,7 +3989,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -3976,7 +4021,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `class WebSearchToolResultBlock`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -3998,7 +4043,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -4010,7 +4055,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `class WebSearchToolResultError`
 
-          - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+          - `error_code: WebSearchToolResultErrorCode`
 
             - `:invalid_tool_input`
 
@@ -4050,7 +4095,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `class WebFetchToolResultBlock`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -4072,7 +4117,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -4630,14 +4675,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `:priority`
 
       - `:batch`
-
-    - `speed: :standard | :fast`
-
-      The inference speed mode used for this request.
-
-      - `:standard`
-
-      - `:fast`
 
 ### Example
 
@@ -5352,7 +5389,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -5374,7 +5411,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -6076,7 +6113,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -6098,7 +6135,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -6126,7 +6163,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `class WebSearchToolRequestError`
 
-            - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+            - `error_code: WebSearchToolResultErrorCode`
 
               - `:invalid_tool_input`
 
@@ -6173,7 +6210,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -6195,7 +6232,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -6527,7 +6564,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -6549,7 +6586,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -7048,6 +7085,29 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `String`
 
+- `cache_control: CacheControlEphemeral`
+
+  Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+  - `type: :ephemeral`
+
+    - `:ephemeral`
+
+  - `ttl: :"5m" | :"1h"`
+
+    The time-to-live for the cache control breakpoint.
+
+    This may be one the following values:
+
+    - `5m`: 5 minutes
+    - `1h`: 1 hour
+
+    Defaults to `5m`.
+
+    - `:"5m"`
+
+    - `:"1h"`
+
 - `output_config: OutputConfig`
 
   Configuration options for the model's output, such as the output format.
@@ -7075,14 +7135,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `type: :json_schema`
 
       - `:json_schema`
-
-- `speed: :standard | :fast`
-
-  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-  - `:standard`
-
-  - `:fast`
 
 - `system_: String | Array[TextBlockParam]`
 
@@ -7383,11 +7435,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -7450,11 +7504,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:bash_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -7503,11 +7559,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:code_execution_20250522`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -7554,11 +7612,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:code_execution_20250825`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -7607,11 +7667,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:code_execution_20260120`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -7658,11 +7720,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:memory_20250818`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -7711,11 +7775,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:text_editor_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -7764,11 +7830,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:text_editor_20250429`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -7817,11 +7885,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:text_editor_20250728`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -7874,11 +7944,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:web_search_20250305`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -7923,7 +7995,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `user_location: { type, city, country, 2 more}`
+    - `user_location: UserLocation`
 
       Parameters for the user's location. Used to provide more relevant search results.
 
@@ -7961,11 +8033,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:web_fetch_20250910`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -8034,11 +8108,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:web_search_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -8083,7 +8159,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `user_location: { type, city, country, 2 more}`
+    - `user_location: UserLocation`
 
       Parameters for the user's location. Used to provide more relevant search results.
 
@@ -8121,11 +8197,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:web_fetch_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -8196,11 +8274,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:tool_search_tool_bm25`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -8249,11 +8329,13 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `:tool_search_tool_regex`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -8992,11 +9074,13 @@ puts(message_tokens_count)
 
     - `:code_execution_20250522`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: CacheControlEphemeral`
 
@@ -9045,11 +9129,70 @@ puts(message_tokens_count)
 
     - `:code_execution_20250825`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
+
+  - `cache_control: CacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: :ephemeral`
+
+      - `:ephemeral`
+
+    - `ttl: :"5m" | :"1h"`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `:"5m"`
+
+      - `:"1h"`
+
+  - `defer_loading: bool`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `strict: bool`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Code Execution Tool 20260120
+
+- `class CodeExecutionTool20260120`
+
+  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+  - `name: :code_execution`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `:code_execution`
+
+  - `type: :code_execution_20260120`
+
+    - `:code_execution_20260120`
+
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
+
+    - `:direct`
+
+    - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: CacheControlEphemeral`
 
@@ -9615,7 +9758,7 @@ puts(message_tokens_count)
 
     - `id: String`
 
-    - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+    - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
@@ -9637,7 +9780,7 @@ puts(message_tokens_count)
 
           - `:code_execution_20250825`
 
-      - `class CodeExecution20260120`
+      - `class ServerToolCaller20260120`
 
         - `tool_id: String`
 
@@ -9657,7 +9800,7 @@ puts(message_tokens_count)
 
     - `id: String`
 
-    - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+    - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
@@ -9679,7 +9822,7 @@ puts(message_tokens_count)
 
           - `:code_execution_20250825`
 
-      - `class CodeExecution20260120`
+      - `class ServerToolCaller20260120`
 
         - `tool_id: String`
 
@@ -9711,7 +9854,7 @@ puts(message_tokens_count)
 
   - `class WebSearchToolResultBlock`
 
-    - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+    - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
@@ -9733,7 +9876,7 @@ puts(message_tokens_count)
 
           - `:code_execution_20250825`
 
-      - `class CodeExecution20260120`
+      - `class ServerToolCaller20260120`
 
         - `tool_id: String`
 
@@ -9745,7 +9888,7 @@ puts(message_tokens_count)
 
       - `class WebSearchToolResultError`
 
-        - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+        - `error_code: WebSearchToolResultErrorCode`
 
           - `:invalid_tool_input`
 
@@ -9785,7 +9928,7 @@ puts(message_tokens_count)
 
   - `class WebFetchToolResultBlock`
 
-    - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+    - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
@@ -9807,7 +9950,7 @@ puts(message_tokens_count)
 
           - `:code_execution_20250825`
 
-      - `class CodeExecution20260120`
+      - `class ServerToolCaller20260120`
 
         - `tool_id: String`
 
@@ -10781,7 +10924,7 @@ puts(message_tokens_count)
 
         - `:"1h"`
 
-    - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+    - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
@@ -10803,7 +10946,7 @@ puts(message_tokens_count)
 
           - `:code_execution_20250825`
 
-      - `class CodeExecution20260120`
+      - `class ServerToolCaller20260120`
 
         - `tool_id: String`
 
@@ -11505,7 +11648,7 @@ puts(message_tokens_count)
 
         - `:"1h"`
 
-    - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+    - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
@@ -11527,7 +11670,7 @@ puts(message_tokens_count)
 
           - `:code_execution_20250825`
 
-      - `class CodeExecution20260120`
+      - `class ServerToolCaller20260120`
 
         - `tool_id: String`
 
@@ -11555,7 +11698,7 @@ puts(message_tokens_count)
 
       - `class WebSearchToolRequestError`
 
-        - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+        - `error_code: WebSearchToolResultErrorCode`
 
           - `:invalid_tool_input`
 
@@ -11602,7 +11745,7 @@ puts(message_tokens_count)
 
         - `:"1h"`
 
-    - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+    - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
@@ -11624,7 +11767,7 @@ puts(message_tokens_count)
 
           - `:code_execution_20250825`
 
-      - `class CodeExecution20260120`
+      - `class ServerToolCaller20260120`
 
         - `tool_id: String`
 
@@ -11956,7 +12099,7 @@ puts(message_tokens_count)
 
         - `:"1h"`
 
-    - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+    - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
       Tool invocation directly from the model.
 
@@ -11978,7 +12121,7 @@ puts(message_tokens_count)
 
           - `:code_execution_20250825`
 
-      - `class CodeExecution20260120`
+      - `class ServerToolCaller20260120`
 
         - `tool_id: String`
 
@@ -13181,11 +13324,13 @@ puts(message_tokens_count)
 
     - `:memory_20250818`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: CacheControlEphemeral`
 
@@ -13393,7 +13538,7 @@ puts(message_tokens_count)
 
       - `id: String`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -13415,7 +13560,7 @@ puts(message_tokens_count)
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -13435,7 +13580,7 @@ puts(message_tokens_count)
 
       - `id: String`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -13457,7 +13602,7 @@ puts(message_tokens_count)
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -13489,7 +13634,7 @@ puts(message_tokens_count)
 
     - `class WebSearchToolResultBlock`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -13511,7 +13656,7 @@ puts(message_tokens_count)
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -13523,7 +13668,7 @@ puts(message_tokens_count)
 
         - `class WebSearchToolResultError`
 
-          - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+          - `error_code: WebSearchToolResultErrorCode`
 
             - `:invalid_tool_input`
 
@@ -13563,7 +13708,7 @@ puts(message_tokens_count)
 
     - `class WebFetchToolResultBlock`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -13585,7 +13730,7 @@ puts(message_tokens_count)
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -14144,14 +14289,6 @@ puts(message_tokens_count)
 
       - `:batch`
 
-    - `speed: :standard | :fast`
-
-      The inference speed mode used for this request.
-
-      - `:standard`
-
-      - `:fast`
-
 ### Message Count Tokens Tool
 
 - `MessageCountTokensTool = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 12 more`
@@ -14180,11 +14317,13 @@ puts(message_tokens_count)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -14247,11 +14386,13 @@ puts(message_tokens_count)
 
       - `:bash_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -14300,11 +14441,13 @@ puts(message_tokens_count)
 
       - `:code_execution_20250522`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -14351,11 +14494,13 @@ puts(message_tokens_count)
 
       - `:code_execution_20250825`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -14404,11 +14549,13 @@ puts(message_tokens_count)
 
       - `:code_execution_20260120`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -14455,11 +14602,13 @@ puts(message_tokens_count)
 
       - `:memory_20250818`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -14508,11 +14657,13 @@ puts(message_tokens_count)
 
       - `:text_editor_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -14561,11 +14712,13 @@ puts(message_tokens_count)
 
       - `:text_editor_20250429`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -14614,11 +14767,13 @@ puts(message_tokens_count)
 
       - `:text_editor_20250728`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -14671,11 +14826,13 @@ puts(message_tokens_count)
 
       - `:web_search_20250305`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -14720,7 +14877,7 @@ puts(message_tokens_count)
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `user_location: { type, city, country, 2 more}`
+    - `user_location: UserLocation`
 
       Parameters for the user's location. Used to provide more relevant search results.
 
@@ -14758,11 +14915,13 @@ puts(message_tokens_count)
 
       - `:web_fetch_20250910`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -14831,11 +14990,13 @@ puts(message_tokens_count)
 
       - `:web_search_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -14880,7 +15041,7 @@ puts(message_tokens_count)
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `user_location: { type, city, country, 2 more}`
+    - `user_location: UserLocation`
 
       Parameters for the user's location. Used to provide more relevant search results.
 
@@ -14918,11 +15079,13 @@ puts(message_tokens_count)
 
       - `:web_fetch_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -14993,11 +15156,13 @@ puts(message_tokens_count)
 
       - `:tool_search_tool_bm25`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -15046,11 +15211,13 @@ puts(message_tokens_count)
 
       - `:tool_search_tool_regex`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -15751,7 +15918,7 @@ puts(message_tokens_count)
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -15773,7 +15940,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -16475,7 +16642,7 @@ puts(message_tokens_count)
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -16497,7 +16664,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -16525,7 +16692,7 @@ puts(message_tokens_count)
 
           - `class WebSearchToolRequestError`
 
-            - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+            - `error_code: WebSearchToolResultErrorCode`
 
               - `:invalid_tool_input`
 
@@ -16572,7 +16739,7 @@ puts(message_tokens_count)
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -16594,7 +16761,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -16926,7 +17093,7 @@ puts(message_tokens_count)
 
             - `:"1h"`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -16948,7 +17115,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -17907,7 +18074,7 @@ puts(message_tokens_count)
 
       - `id: String`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -17929,7 +18096,7 @@ puts(message_tokens_count)
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -17949,7 +18116,7 @@ puts(message_tokens_count)
 
       - `id: String`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -17971,7 +18138,7 @@ puts(message_tokens_count)
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -18003,7 +18170,7 @@ puts(message_tokens_count)
 
     - `class WebSearchToolResultBlock`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -18025,7 +18192,7 @@ puts(message_tokens_count)
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -18037,7 +18204,7 @@ puts(message_tokens_count)
 
         - `class WebSearchToolResultError`
 
-          - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+          - `error_code: WebSearchToolResultErrorCode`
 
             - `:invalid_tool_input`
 
@@ -18077,7 +18244,7 @@ puts(message_tokens_count)
 
     - `class WebFetchToolResultBlock`
 
-      - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+      - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
         Tool invocation directly from the model.
 
@@ -18099,7 +18266,7 @@ puts(message_tokens_count)
 
             - `:code_execution_20250825`
 
-        - `class CodeExecution20260120`
+        - `class ServerToolCaller20260120`
 
           - `tool_id: String`
 
@@ -18710,7 +18877,7 @@ puts(message_tokens_count)
 
         - `id: String`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -18732,7 +18899,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -18752,7 +18919,7 @@ puts(message_tokens_count)
 
         - `id: String`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -18774,7 +18941,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -18806,7 +18973,7 @@ puts(message_tokens_count)
 
       - `class WebSearchToolResultBlock`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -18828,7 +18995,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -18840,7 +19007,7 @@ puts(message_tokens_count)
 
           - `class WebSearchToolResultError`
 
-            - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+            - `error_code: WebSearchToolResultErrorCode`
 
               - `:invalid_tool_input`
 
@@ -18880,7 +19047,7 @@ puts(message_tokens_count)
 
       - `class WebFetchToolResultBlock`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -18902,7 +19069,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -19461,14 +19628,6 @@ puts(message_tokens_count)
 
         - `:batch`
 
-      - `speed: :standard | :fast`
-
-        The inference speed mode used for this request.
-
-        - `:standard`
-
-        - `:fast`
-
   - `type: :message_start`
 
     - `:message_start`
@@ -19658,7 +19817,7 @@ puts(message_tokens_count)
 
           - `id: String`
 
-          - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+          - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
@@ -19680,7 +19839,7 @@ puts(message_tokens_count)
 
                 - `:code_execution_20250825`
 
-            - `class CodeExecution20260120`
+            - `class ServerToolCaller20260120`
 
               - `tool_id: String`
 
@@ -19700,7 +19859,7 @@ puts(message_tokens_count)
 
           - `id: String`
 
-          - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+          - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
@@ -19722,7 +19881,7 @@ puts(message_tokens_count)
 
                 - `:code_execution_20250825`
 
-            - `class CodeExecution20260120`
+            - `class ServerToolCaller20260120`
 
               - `tool_id: String`
 
@@ -19754,7 +19913,7 @@ puts(message_tokens_count)
 
         - `class WebSearchToolResultBlock`
 
-          - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+          - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
@@ -19776,7 +19935,7 @@ puts(message_tokens_count)
 
                 - `:code_execution_20250825`
 
-            - `class CodeExecution20260120`
+            - `class ServerToolCaller20260120`
 
               - `tool_id: String`
 
@@ -19788,7 +19947,7 @@ puts(message_tokens_count)
 
             - `class WebSearchToolResultError`
 
-              - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+              - `error_code: WebSearchToolResultErrorCode`
 
                 - `:invalid_tool_input`
 
@@ -19828,7 +19987,7 @@ puts(message_tokens_count)
 
         - `class WebFetchToolResultBlock`
 
-          - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+          - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
@@ -19850,7 +20009,7 @@ puts(message_tokens_count)
 
                 - `:code_execution_20250825`
 
-            - `class CodeExecution20260120`
+            - `class ServerToolCaller20260120`
 
               - `tool_id: String`
 
@@ -20409,14 +20568,6 @@ puts(message_tokens_count)
 
           - `:batch`
 
-        - `speed: :standard | :fast`
-
-          The inference speed mode used for this request.
-
-          - `:standard`
-
-          - `:fast`
-
     - `type: :message_start`
 
       - `:message_start`
@@ -20631,7 +20782,7 @@ puts(message_tokens_count)
 
         - `id: String`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -20653,7 +20804,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -20673,7 +20824,7 @@ puts(message_tokens_count)
 
         - `id: String`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -20695,7 +20846,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -20727,7 +20878,7 @@ puts(message_tokens_count)
 
       - `class WebSearchToolResultBlock`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -20749,7 +20900,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -20761,7 +20912,7 @@ puts(message_tokens_count)
 
           - `class WebSearchToolResultError`
 
-            - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+            - `error_code: WebSearchToolResultErrorCode`
 
               - `:invalid_tool_input`
 
@@ -20801,7 +20952,7 @@ puts(message_tokens_count)
 
       - `class WebFetchToolResultBlock`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -20823,7 +20974,7 @@ puts(message_tokens_count)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -21499,6 +21650,16 @@ puts(message_tokens_count)
 
     - `:code_execution_20250825`
 
+### Server Tool Caller 20260120
+
+- `class ServerToolCaller20260120`
+
+  - `tool_id: String`
+
+  - `type: :code_execution_20260120`
+
+    - `:code_execution_20260120`
+
 ### Server Tool Usage
 
 - `class ServerToolUsage`
@@ -21517,7 +21678,7 @@ puts(message_tokens_count)
 
   - `id: String`
 
-  - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+  - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
     Tool invocation directly from the model.
 
@@ -21539,7 +21700,7 @@ puts(message_tokens_count)
 
         - `:code_execution_20250825`
 
-    - `class CodeExecution20260120`
+    - `class ServerToolCaller20260120`
 
       - `tool_id: String`
 
@@ -21620,7 +21781,7 @@ puts(message_tokens_count)
 
       - `:"1h"`
 
-  - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+  - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
     Tool invocation directly from the model.
 
@@ -21642,7 +21803,7 @@ puts(message_tokens_count)
 
         - `:code_execution_20250825`
 
-    - `class CodeExecution20260120`
+    - `class ServerToolCaller20260120`
 
       - `tool_id: String`
 
@@ -22544,11 +22705,13 @@ puts(message_tokens_count)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: CacheControlEphemeral`
 
@@ -22613,11 +22776,13 @@ puts(message_tokens_count)
 
     - `:bash_20250124`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: CacheControlEphemeral`
 
@@ -23484,11 +23649,13 @@ puts(message_tokens_count)
 
     - `:tool_search_tool_bm25`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: CacheControlEphemeral`
 
@@ -23539,11 +23706,13 @@ puts(message_tokens_count)
 
     - `:tool_search_tool_regex`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: CacheControlEphemeral`
 
@@ -23829,11 +23998,13 @@ puts(message_tokens_count)
 
     - `:text_editor_20250124`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: CacheControlEphemeral`
 
@@ -23884,11 +24055,13 @@ puts(message_tokens_count)
 
     - `:text_editor_20250429`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: CacheControlEphemeral`
 
@@ -23939,11 +24112,13 @@ puts(message_tokens_count)
 
     - `:text_editor_20250728`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `cache_control: CacheControlEphemeral`
 
@@ -24010,11 +24185,13 @@ puts(message_tokens_count)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -24077,11 +24254,13 @@ puts(message_tokens_count)
 
       - `:bash_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -24130,11 +24309,13 @@ puts(message_tokens_count)
 
       - `:code_execution_20250522`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -24181,11 +24362,13 @@ puts(message_tokens_count)
 
       - `:code_execution_20250825`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -24234,11 +24417,13 @@ puts(message_tokens_count)
 
       - `:code_execution_20260120`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -24285,11 +24470,13 @@ puts(message_tokens_count)
 
       - `:memory_20250818`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -24338,11 +24525,13 @@ puts(message_tokens_count)
 
       - `:text_editor_20250124`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -24391,11 +24580,13 @@ puts(message_tokens_count)
 
       - `:text_editor_20250429`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -24444,11 +24635,13 @@ puts(message_tokens_count)
 
       - `:text_editor_20250728`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -24501,11 +24694,13 @@ puts(message_tokens_count)
 
       - `:web_search_20250305`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -24550,7 +24745,7 @@ puts(message_tokens_count)
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `user_location: { type, city, country, 2 more}`
+    - `user_location: UserLocation`
 
       Parameters for the user's location. Used to provide more relevant search results.
 
@@ -24588,11 +24783,13 @@ puts(message_tokens_count)
 
       - `:web_fetch_20250910`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -24661,11 +24858,13 @@ puts(message_tokens_count)
 
       - `:web_search_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -24710,7 +24909,7 @@ puts(message_tokens_count)
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `user_location: { type, city, country, 2 more}`
+    - `user_location: UserLocation`
 
       Parameters for the user's location. Used to provide more relevant search results.
 
@@ -24748,11 +24947,13 @@ puts(message_tokens_count)
 
       - `:web_fetch_20260209`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `allowed_domains: Array[String]`
 
@@ -24823,11 +25024,13 @@ puts(message_tokens_count)
 
       - `:tool_search_tool_bm25`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -24876,11 +25079,13 @@ puts(message_tokens_count)
 
       - `:tool_search_tool_regex`
 
-    - `allowed_callers: Array[:direct | :code_execution_20250825]`
+    - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
       - `:direct`
 
       - `:code_execution_20250825`
+
+      - `:code_execution_20260120`
 
     - `cache_control: CacheControlEphemeral`
 
@@ -24919,7 +25124,7 @@ puts(message_tokens_count)
 
   - `id: String`
 
-  - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+  - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
     Tool invocation directly from the model.
 
@@ -24941,7 +25146,7 @@ puts(message_tokens_count)
 
         - `:code_execution_20250825`
 
-    - `class CodeExecution20260120`
+    - `class ServerToolCaller20260120`
 
       - `tool_id: String`
 
@@ -24994,7 +25199,7 @@ puts(message_tokens_count)
 
       - `:"1h"`
 
-  - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+  - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
     Tool invocation directly from the model.
 
@@ -25016,7 +25221,7 @@ puts(message_tokens_count)
 
         - `:code_execution_20250825`
 
-    - `class CodeExecution20260120`
+    - `class ServerToolCaller20260120`
 
       - `tool_id: String`
 
@@ -25102,13 +25307,29 @@ puts(message_tokens_count)
 
     - `:batch`
 
-  - `speed: :standard | :fast`
+### User Location
 
-    The inference speed mode used for this request.
+- `class UserLocation`
 
-    - `:standard`
+  - `type: :approximate`
 
-    - `:fast`
+    - `:approximate`
+
+  - `city: String`
+
+    The city of the user.
+
+  - `country: String`
+
+    The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+  - `region: String`
+
+    The region of the user.
+
+  - `timezone: String`
+
+    The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 ### Web Fetch Block
 
@@ -25453,11 +25674,90 @@ puts(message_tokens_count)
 
     - `:web_fetch_20250910`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
+
+  - `allowed_domains: Array[String]`
+
+    List of domains to allow fetching from
+
+  - `blocked_domains: Array[String]`
+
+    List of domains to block fetching from
+
+  - `cache_control: CacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: :ephemeral`
+
+      - `:ephemeral`
+
+    - `ttl: :"5m" | :"1h"`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `:"5m"`
+
+      - `:"1h"`
+
+  - `citations: CitationsConfigParam`
+
+    Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `enabled: bool`
+
+  - `defer_loading: bool`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `max_content_tokens: Integer`
+
+    Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+  - `max_uses: Integer`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `strict: bool`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Web Fetch Tool 20260209
+
+- `class WebFetchTool20260209`
+
+  - `name: :web_fetch`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `:web_fetch`
+
+  - `type: :web_fetch_20260209`
+
+    - `:web_fetch_20260209`
+
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
+
+    - `:direct`
+
+    - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `allowed_domains: Array[String]`
 
@@ -25516,7 +25816,7 @@ puts(message_tokens_count)
 
 - `class WebFetchToolResultBlock`
 
-  - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+  - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
     Tool invocation directly from the model.
 
@@ -25538,7 +25838,7 @@ puts(message_tokens_count)
 
         - `:code_execution_20250825`
 
-    - `class CodeExecution20260120`
+    - `class ServerToolCaller20260120`
 
       - `tool_id: String`
 
@@ -25960,7 +26260,7 @@ puts(message_tokens_count)
 
       - `:"1h"`
 
-  - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+  - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
     Tool invocation directly from the model.
 
@@ -25982,7 +26282,7 @@ puts(message_tokens_count)
 
         - `:code_execution_20250825`
 
-    - `class CodeExecution20260120`
+    - `class ServerToolCaller20260120`
 
       - `tool_id: String`
 
@@ -26110,11 +26410,13 @@ puts(message_tokens_count)
 
     - `:web_search_20250305`
 
-  - `allowed_callers: Array[:direct | :code_execution_20250825]`
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
     - `:direct`
 
     - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
 
   - `allowed_domains: Array[String]`
 
@@ -26159,7 +26461,98 @@ puts(message_tokens_count)
 
     When true, guarantees schema validation on tool names and inputs
 
-  - `user_location: { type, city, country, 2 more}`
+  - `user_location: UserLocation`
+
+    Parameters for the user's location. Used to provide more relevant search results.
+
+    - `type: :approximate`
+
+      - `:approximate`
+
+    - `city: String`
+
+      The city of the user.
+
+    - `country: String`
+
+      The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+    - `region: String`
+
+      The region of the user.
+
+    - `timezone: String`
+
+      The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+### Web Search Tool 20260209
+
+- `class WebSearchTool20260209`
+
+  - `name: :web_search`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `:web_search`
+
+  - `type: :web_search_20260209`
+
+    - `:web_search_20260209`
+
+  - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
+
+    - `:direct`
+
+    - `:code_execution_20250825`
+
+    - `:code_execution_20260120`
+
+  - `allowed_domains: Array[String]`
+
+    If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+  - `blocked_domains: Array[String]`
+
+    If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+  - `cache_control: CacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: :ephemeral`
+
+      - `:ephemeral`
+
+    - `ttl: :"5m" | :"1h"`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `:"5m"`
+
+      - `:"1h"`
+
+  - `defer_loading: bool`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `max_uses: Integer`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `strict: bool`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `user_location: UserLocation`
 
     Parameters for the user's location. Used to provide more relevant search results.
 
@@ -26187,7 +26580,7 @@ puts(message_tokens_count)
 
 - `class WebSearchToolRequestError`
 
-  - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+  - `error_code: WebSearchToolResultErrorCode`
 
     - `:invalid_tool_input`
 
@@ -26209,7 +26602,7 @@ puts(message_tokens_count)
 
 - `class WebSearchToolResultBlock`
 
-  - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+  - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
     Tool invocation directly from the model.
 
@@ -26231,7 +26624,7 @@ puts(message_tokens_count)
 
         - `:code_execution_20250825`
 
-    - `class CodeExecution20260120`
+    - `class ServerToolCaller20260120`
 
       - `tool_id: String`
 
@@ -26243,7 +26636,7 @@ puts(message_tokens_count)
 
     - `class WebSearchToolResultError`
 
-      - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+      - `error_code: WebSearchToolResultErrorCode`
 
         - `:invalid_tool_input`
 
@@ -26287,7 +26680,7 @@ puts(message_tokens_count)
 
   - `class WebSearchToolResultError`
 
-    - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+    - `error_code: WebSearchToolResultErrorCode`
 
       - `:invalid_tool_input`
 
@@ -26341,7 +26734,7 @@ puts(message_tokens_count)
 
     - `class WebSearchToolRequestError`
 
-      - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+      - `error_code: WebSearchToolResultErrorCode`
 
         - `:invalid_tool_input`
 
@@ -26388,7 +26781,7 @@ puts(message_tokens_count)
 
       - `:"1h"`
 
-  - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+  - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
     Tool invocation directly from the model.
 
@@ -26410,7 +26803,7 @@ puts(message_tokens_count)
 
         - `:code_execution_20250825`
 
-    - `class CodeExecution20260120`
+    - `class ServerToolCaller20260120`
 
       - `tool_id: String`
 
@@ -26438,7 +26831,7 @@ puts(message_tokens_count)
 
   - `class WebSearchToolRequestError`
 
-    - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+    - `error_code: WebSearchToolResultErrorCode`
 
       - `:invalid_tool_input`
 
@@ -26460,7 +26853,7 @@ puts(message_tokens_count)
 
 - `class WebSearchToolResultError`
 
-  - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+  - `error_code: WebSearchToolResultErrorCode`
 
     - `:invalid_tool_input`
 
@@ -26477,6 +26870,22 @@ puts(message_tokens_count)
   - `type: :web_search_tool_result_error`
 
     - `:web_search_tool_result_error`
+
+### Web Search Tool Result Error Code
+
+- `WebSearchToolResultErrorCode = :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+
+  - `:invalid_tool_input`
+
+  - `:unavailable`
+
+  - `:max_uses_exceeded`
+
+  - `:too_many_requests`
+
+  - `:query_too_long`
+
+  - `:request_too_large`
 
 # Batches
 
@@ -27201,7 +27610,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `:"1h"`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -27223,7 +27632,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -27925,7 +28334,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `:"1h"`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -27947,7 +28356,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -27975,7 +28384,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class WebSearchToolRequestError`
 
-                - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+                - `error_code: WebSearchToolResultErrorCode`
 
                   - `:invalid_tool_input`
 
@@ -28022,7 +28431,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `:"1h"`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -28044,7 +28453,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -28376,7 +28785,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `:"1h"`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -28398,7 +28807,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -28897,6 +29306,29 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `String`
 
+    - `cache_control: CacheControlEphemeral`
+
+      Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+      - `type: :ephemeral`
+
+        - `:ephemeral`
+
+      - `ttl: :"5m" | :"1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `:"5m"`
+
+        - `:"1h"`
+
     - `container: String`
 
       Container identifier for reuse across requests.
@@ -28952,14 +29384,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `:auto`
 
       - `:standard_only`
-
-    - `speed: :standard | :fast`
-
-      The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-      - `:standard`
-
-      - `:fast`
 
     - `stop_sequences: Array[String]`
 
@@ -29282,11 +29706,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: CacheControlEphemeral`
 
@@ -29349,11 +29775,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:bash_20250124`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: CacheControlEphemeral`
 
@@ -29402,11 +29830,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:code_execution_20250522`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: CacheControlEphemeral`
 
@@ -29453,11 +29883,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:code_execution_20250825`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: CacheControlEphemeral`
 
@@ -29506,11 +29938,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:code_execution_20260120`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: CacheControlEphemeral`
 
@@ -29557,11 +29991,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:memory_20250818`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: CacheControlEphemeral`
 
@@ -29610,11 +30046,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:text_editor_20250124`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: CacheControlEphemeral`
 
@@ -29663,11 +30101,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:text_editor_20250429`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: CacheControlEphemeral`
 
@@ -29716,11 +30156,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:text_editor_20250728`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: CacheControlEphemeral`
 
@@ -29773,11 +30215,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:web_search_20250305`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `allowed_domains: Array[String]`
 
@@ -29822,7 +30266,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-        - `user_location: { type, city, country, 2 more}`
+        - `user_location: UserLocation`
 
           Parameters for the user's location. Used to provide more relevant search results.
 
@@ -29860,11 +30304,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:web_fetch_20250910`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `allowed_domains: Array[String]`
 
@@ -29933,11 +30379,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:web_search_20260209`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `allowed_domains: Array[String]`
 
@@ -29982,7 +30430,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           When true, guarantees schema validation on tool names and inputs
 
-        - `user_location: { type, city, country, 2 more}`
+        - `user_location: UserLocation`
 
           Parameters for the user's location. Used to provide more relevant search results.
 
@@ -30020,11 +30468,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:web_fetch_20260209`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `allowed_domains: Array[String]`
 
@@ -30095,11 +30545,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:tool_search_tool_bm25`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: CacheControlEphemeral`
 
@@ -30148,11 +30600,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:tool_search_tool_regex`
 
-        - `allowed_callers: Array[:direct | :code_execution_20250825]`
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120]`
 
           - `:direct`
 
           - `:code_execution_20250825`
+
+          - `:code_execution_20260120`
 
         - `cache_control: CacheControlEphemeral`
 
@@ -30931,7 +31385,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `id: String`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -30953,7 +31407,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -30973,7 +31427,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `id: String`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -30995,7 +31449,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -31027,7 +31481,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `class WebSearchToolResultBlock`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -31049,7 +31503,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -31061,7 +31515,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class WebSearchToolResultError`
 
-                - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+                - `error_code: WebSearchToolResultErrorCode`
 
                   - `:invalid_tool_input`
 
@@ -31101,7 +31555,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `class WebFetchToolResultBlock`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -31123,7 +31577,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -31681,14 +32135,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `:priority`
 
             - `:batch`
-
-          - `speed: :standard | :fast`
-
-            The inference speed mode used for this request.
-
-            - `:standard`
-
-            - `:fast`
 
       - `type: :succeeded`
 
@@ -32211,7 +32657,7 @@ puts(message_batch_individual_response)
 
             - `id: String`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -32233,7 +32679,7 @@ puts(message_batch_individual_response)
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -32253,7 +32699,7 @@ puts(message_batch_individual_response)
 
             - `id: String`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -32275,7 +32721,7 @@ puts(message_batch_individual_response)
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -32307,7 +32753,7 @@ puts(message_batch_individual_response)
 
           - `class WebSearchToolResultBlock`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -32329,7 +32775,7 @@ puts(message_batch_individual_response)
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -32341,7 +32787,7 @@ puts(message_batch_individual_response)
 
               - `class WebSearchToolResultError`
 
-                - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+                - `error_code: WebSearchToolResultErrorCode`
 
                   - `:invalid_tool_input`
 
@@ -32381,7 +32827,7 @@ puts(message_batch_individual_response)
 
           - `class WebFetchToolResultBlock`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -32403,7 +32849,7 @@ puts(message_batch_individual_response)
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -32962,14 +33408,6 @@ puts(message_batch_individual_response)
 
             - `:batch`
 
-          - `speed: :standard | :fast`
-
-            The inference speed mode used for this request.
-
-            - `:standard`
-
-            - `:fast`
-
       - `type: :succeeded`
 
         - `:succeeded`
@@ -33287,7 +33725,7 @@ puts(message_batch_individual_response)
 
           - `id: String`
 
-          - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+          - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
@@ -33309,7 +33747,7 @@ puts(message_batch_individual_response)
 
                 - `:code_execution_20250825`
 
-            - `class CodeExecution20260120`
+            - `class ServerToolCaller20260120`
 
               - `tool_id: String`
 
@@ -33329,7 +33767,7 @@ puts(message_batch_individual_response)
 
           - `id: String`
 
-          - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+          - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
@@ -33351,7 +33789,7 @@ puts(message_batch_individual_response)
 
                 - `:code_execution_20250825`
 
-            - `class CodeExecution20260120`
+            - `class ServerToolCaller20260120`
 
               - `tool_id: String`
 
@@ -33383,7 +33821,7 @@ puts(message_batch_individual_response)
 
         - `class WebSearchToolResultBlock`
 
-          - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+          - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
@@ -33405,7 +33843,7 @@ puts(message_batch_individual_response)
 
                 - `:code_execution_20250825`
 
-            - `class CodeExecution20260120`
+            - `class ServerToolCaller20260120`
 
               - `tool_id: String`
 
@@ -33417,7 +33855,7 @@ puts(message_batch_individual_response)
 
             - `class WebSearchToolResultError`
 
-              - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+              - `error_code: WebSearchToolResultErrorCode`
 
                 - `:invalid_tool_input`
 
@@ -33457,7 +33895,7 @@ puts(message_batch_individual_response)
 
         - `class WebFetchToolResultBlock`
 
-          - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+          - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
             Tool invocation directly from the model.
 
@@ -33479,7 +33917,7 @@ puts(message_batch_individual_response)
 
                 - `:code_execution_20250825`
 
-            - `class CodeExecution20260120`
+            - `class ServerToolCaller20260120`
 
               - `tool_id: String`
 
@@ -34038,14 +34476,6 @@ puts(message_batch_individual_response)
 
           - `:batch`
 
-        - `speed: :standard | :fast`
-
-          The inference speed mode used for this request.
-
-          - `:standard`
-
-          - `:fast`
-
     - `type: :succeeded`
 
       - `:succeeded`
@@ -34325,7 +34755,7 @@ puts(message_batch_individual_response)
 
         - `id: String`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -34347,7 +34777,7 @@ puts(message_batch_individual_response)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -34367,7 +34797,7 @@ puts(message_batch_individual_response)
 
         - `id: String`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -34389,7 +34819,7 @@ puts(message_batch_individual_response)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -34421,7 +34851,7 @@ puts(message_batch_individual_response)
 
       - `class WebSearchToolResultBlock`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -34443,7 +34873,7 @@ puts(message_batch_individual_response)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -34455,7 +34885,7 @@ puts(message_batch_individual_response)
 
           - `class WebSearchToolResultError`
 
-            - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+            - `error_code: WebSearchToolResultErrorCode`
 
               - `:invalid_tool_input`
 
@@ -34495,7 +34925,7 @@ puts(message_batch_individual_response)
 
       - `class WebFetchToolResultBlock`
 
-        - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+        - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
           Tool invocation directly from the model.
 
@@ -34517,7 +34947,7 @@ puts(message_batch_individual_response)
 
               - `:code_execution_20250825`
 
-          - `class CodeExecution20260120`
+          - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
@@ -35075,14 +35505,6 @@ puts(message_batch_individual_response)
         - `:priority`
 
         - `:batch`
-
-      - `speed: :standard | :fast`
-
-        The inference speed mode used for this request.
-
-        - `:standard`
-
-        - `:fast`
 
   - `type: :succeeded`
 

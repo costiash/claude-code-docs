@@ -2643,6 +2643,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
   - `Optional<Container> container`
 
     Container identifier for reuse across requests.
@@ -2980,6 +2984,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3047,6 +3053,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3099,6 +3107,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -3153,6 +3163,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3203,6 +3215,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -3256,6 +3270,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -3316,6 +3332,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3372,6 +3390,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -3434,6 +3454,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3490,6 +3512,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -3552,6 +3576,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3613,6 +3639,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3666,6 +3694,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -3718,6 +3748,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -3775,6 +3807,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -3863,6 +3897,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<List<String>> allowedDomains`
 
         List of domains to allow fetching from
@@ -3935,6 +3971,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<List<String>> allowedDomains`
 
@@ -4023,6 +4061,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<List<String>> allowedDomains`
 
         List of domains to allow fetching from
@@ -4098,6 +4138,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
@@ -4150,6 +4192,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `DIRECT("direct")`
 
         - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 

@@ -69,16 +69,28 @@ All publicly released models are listed below with their status:
 | `claude-sonnet-4-6`         | Active              | N/A               | Not sooner than February 17, 2027 |
 | `claude-sonnet-4-5-20250929`| Active              | N/A               | Not sooner than September 29, 2026 |
 | `claude-sonnet-4-20250514`  | Active              | N/A               | Not sooner than May 14, 2026 |
-| `claude-3-7-sonnet-20250219`| Deprecated          | October 28, 2025  | February 19, 2026          |
+| `claude-3-7-sonnet-20250219`| Retired             | October 28, 2025  | February 19, 2026          |
 | `claude-haiku-4-5-20251001` | Active              | N/A               | Not sooner than October 15, 2026 |
-| `claude-3-5-haiku-20241022` | Deprecated          | December 19, 2025 | February 19, 2026          |
-| `claude-3-haiku-20240307`   | Active              | N/A               | Not sooner than March 7, 2025 |
+| `claude-3-5-haiku-20241022` | Retired             | December 19, 2025 | February 19, 2026          |
+| `claude-3-haiku-20240307`   | Deprecated          | February 19, 2026 | April 19, 2026             |
 
 ## Deprecation history
 
 All deprecations are listed below, with the most recent announcements at the top.
 
+### 2026-02-19: Claude Haiku 3 model
+
+On February 19, 2026, Anthropic notified developers using Claude Haiku 3 model of its upcoming retirement on the Claude API.
+
+| Retirement Date             | Deprecated Model            | Recommended Replacement         |
+|:----------------------------|:----------------------------|:--------------------------------|
+| April 19, 2026              | `claude-3-haiku-20240307`   | `claude-haiku-4-5-20251001`     |
+
 ### 2025-12-19: Claude Haiku 3.5 model
+
+<Note>
+This model was retired February 19, 2026.
+</Note>
 
 On December 19, 2025, Anthropic notified developers using Claude Haiku 3.5 model of its upcoming retirement on the Claude API.
 
@@ -87,6 +99,10 @@ On December 19, 2025, Anthropic notified developers using Claude Haiku 3.5 model
 | February 19, 2026           | `claude-3-5-haiku-20241022` | `claude-haiku-4-5-20251001`     |
 
 ### 2025-10-28: Claude Sonnet 3.7 model
+
+<Note>
+This model was retired February 19, 2026.
+</Note>
 
 On October 28, 2025, Anthropic notified developers using Claude Sonnet 3.7 model of its upcoming retirement on the Claude API.
 

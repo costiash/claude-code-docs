@@ -587,9 +587,13 @@ Haiku 4.5 pricing is $1 per million input tokens, $5 per million output tokens. 
 # From Haiku 3.5
 model = "claude-3-5-haiku-20241022"  # Before
 model = "claude-haiku-4-5-20251001"  # After
+
+# From Haiku 3
+model = "claude-3-haiku-20240307"  # Before
+model = "claude-haiku-4-5-20251001"  # After
 ```
 
-**Review new rate limits:** Haiku 4.5 has separate rate limits from Haiku 3.5. See [Rate limits documentation](/docs/en/api/rate-limits) for details.
+**Review new rate limits:** Haiku 4.5 has separate rate limits from Haiku 3.5 and Haiku 3. See [Rate limits documentation](/docs/en/api/rate-limits) for details.
 
 <Tip>
 For significant performance improvements on coding and reasoning tasks, consider enabling extended thinking with `thinking: {type: "enabled", budget_tokens: N}`.

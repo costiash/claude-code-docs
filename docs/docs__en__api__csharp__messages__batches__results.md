@@ -211,7 +211,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -245,7 +245,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -291,7 +291,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -301,7 +301,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class WebSearchToolResultError:`
 
-                - `required ErrorCode ErrorCode`
+                - `required WebSearchToolResultErrorCode ErrorCode`
 
                   - `"invalid_tool_input"InvalidToolInput`
 
@@ -353,7 +353,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `JsonElement Type "code_execution_20250825"constant`
 
-              - `class CodeExecution20260120:`
+              - `class ServerToolCaller20260120:`
 
                 - `required string ToolID`
 
@@ -841,14 +841,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"priority"Priority`
 
             - `"batch"Batch`
-
-          - `required Speed? Speed`
-
-            The inference speed mode used for this request.
-
-            - `"standard"Standard`
-
-            - `"fast"Fast`
 
       - `JsonElement Type "succeeded"constant`
 

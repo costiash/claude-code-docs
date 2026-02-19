@@ -207,7 +207,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `id: String`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -229,7 +229,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -249,7 +249,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `id: String`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -271,7 +271,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -303,7 +303,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `class WebSearchToolResultBlock`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -325,7 +325,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -337,7 +337,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class WebSearchToolResultError`
 
-                - `error_code: :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+                - `error_code: WebSearchToolResultErrorCode`
 
                   - `:invalid_tool_input`
 
@@ -377,7 +377,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `class WebFetchToolResultBlock`
 
-            - `caller_: DirectCaller | ServerToolCaller | { tool_id, type}`
+            - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
@@ -399,7 +399,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:code_execution_20250825`
 
-              - `class CodeExecution20260120`
+              - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
@@ -957,14 +957,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `:priority`
 
             - `:batch`
-
-          - `speed: :standard | :fast`
-
-            The inference speed mode used for this request.
-
-            - `:standard`
-
-            - `:fast`
 
       - `type: :succeeded`
 
