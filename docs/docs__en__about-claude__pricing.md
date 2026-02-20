@@ -71,12 +71,11 @@ For more information, see the [data residency documentation](/docs/en/build-with
 
 ### Fast mode pricing
 
-[Fast mode](/docs/en/build-with-claude/fast-mode) for Claude Opus 4.6 (research preview) provides significantly faster output at premium pricing (6x standard rates). Currently supported on Opus 4.6:
+[Fast mode](/docs/en/build-with-claude/fast-mode) for Claude Opus 4.6 (research preview) provides significantly faster output at premium pricing (6x standard rates). Fast mode pricing applies across the full context window, including requests over 200K input tokens. Currently supported on Opus 4.6:
 
-| Context window | Input | Output |
-|:---------------|:------|:-------|
-| ≤ 200K input tokens | $30 / MTok | $150 / MTok |
-| > 200K input tokens | $60 / MTok | $225 / MTok |
+| Input | Output |
+|:------|:-------|
+| $30 / MTok | $150 / MTok |
 
 Fast mode pricing stacks with other pricing modifiers:
 - [Prompt caching multipliers](#model-pricing) apply on top of fast mode pricing
@@ -109,7 +108,7 @@ For more information about batch processing, see the [batch processing documenta
 
 ### Long context pricing
 
-When using Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, or Sonnet 4 with the [1M token context window enabled](/docs/en/build-with-claude/context-windows#1m-token-context-window), requests that exceed 200K input tokens are automatically charged at premium long context rates:
+When using Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, or Sonnet 4 at standard speed with the [1M token context window enabled](/docs/en/build-with-claude/context-windows#1m-token-context-window), requests that exceed 200K input tokens are automatically charged at premium long context rates. [Fast mode](#fast-mode-pricing) includes the full 1M context window at no additional long context charge.
 
 <Note>
 The 1M token context window is currently in beta for organizations in [usage tier](/docs/en/api/rate-limits) 4 and organizations with custom rate limits. The 1M token context window is only available for Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4.

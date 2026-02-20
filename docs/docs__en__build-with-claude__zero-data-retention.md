@@ -46,6 +46,7 @@ These API endpoints process data in real-time:
 | Memory Tool | `/v1/messages` (with `memory` tool) | Client-side memory storage where you control data retention. |
 | Tool Search (client-side) | `/v1/messages` | [Custom client-side tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool#custom-tool-search-implementation) uses the standard Messages API. |
 | Context Management (compaction) | `/v1/messages` (with `context_management`) | Server-side compaction summarizes conversation context in real-time. |
+| Fast Mode | `/v1/messages` (with `speed: "fast"`) | Same Messages API endpoint with faster inference. ZDR applies regardless of speed setting. |
 
 ### Not ZDR-eligible
 

@@ -10,6 +10,10 @@ Fast mode provides significantly faster output token generation for Claude Opus 
 Fast mode is currently in research preview. [Join the waitlist](https://claude.com/fast-mode) to request access. Availability is limited while we gather feedback.
 </Note>
 
+<Note>
+This feature is [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+</Note>
+
 ## Supported models
 
 Fast mode is supported on the following models:
@@ -85,12 +89,11 @@ console.log(response.content[0].text);
 
 ## Pricing
 
-Fast mode is priced at 6x standard Opus rates for prompts ≤200K tokens, and 12x standard Opus rates for prompts > 200K tokens. The following table shows pricing for Claude Opus 4.6 with fast mode:
+Fast mode is priced at 6x standard Opus rates across the full context window. The following table shows pricing for Claude Opus 4.6 with fast mode:
 
-| Context window | Input | Output |
-|:---------------|:------|:-------|
-| ≤ 200K input tokens | $30 / MTok | $150 / MTok |
-| > 200K input tokens | $60 / MTok | $225 / MTok |
+| Input | Output |
+|:------|:-------|
+| $30 / MTok | $150 / MTok |
 
 Fast mode pricing stacks with other pricing modifiers:
 
