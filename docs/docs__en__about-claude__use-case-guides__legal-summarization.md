@@ -67,7 +67,7 @@ The text should be clear and easy to understand. If the audience is not legal ex
 The summary should present an unbiased and fair depiction of the legal arguments and positions.
 </section>
 
-See our guide on [establishing success criteria](/docs/en/test-and-evaluate/define-success) for more information.
+See our guide on [establishing success criteria](/docs/en/test-and-evaluate/develop-tests) for more information.
 
 ---
 

@@ -51,20 +51,20 @@
     "docs__en__about-claude__use-case-guides__customer-support-chat.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/use-case-guides/customer-support-chat",
       "original_md_url": "https://platform.claude.com/docs/en/about-claude/use-case-guides/customer-support-chat.md",
-      "hash": "0ccf1677e112da8af1171819341d131684fcc231144e47b8df82af01d8af292d",
-      "last_updated": "2026-02-13T03:52:58.039030"
+      "hash": "de630a17e190ea082e9abd964bf5303cf212967f5fde2e720093b8c37972c07e",
+      "last_updated": "2026-02-21T09:10:03.752509"
     },
     "docs__en__about-claude__use-case-guides__legal-summarization.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/use-case-guides/legal-summarization",
       "original_md_url": "https://platform.claude.com/docs/en/about-claude/use-case-guides/legal-summarization.md",
-      "hash": "23b3f948c801ac6209ea0e1b2db7ba7f0cb635d008c217c194ef608eee6dec75",
-      "last_updated": "2026-02-11T18:25:00.059994"
+      "hash": "c08eb3a6cb1924f9134599408e9f90d68caad9b87bb559fe80f165520d8aca46",
+      "last_updated": "2026-02-21T09:10:04.380421"
     },
     "docs__en__about-claude__use-case-guides__ticket-routing.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/use-case-guides/ticket-routing",
       "original_md_url": "https://platform.claude.com/docs/en/about-claude/use-case-guides/ticket-routing.md",
-      "hash": "097e64de6f810fafb9d64b5a90894d2e76e88ea3d156be3a47efb5aed156a7cf",
-      "last_updated": "2026-02-11T18:25:00.866424"
+      "hash": "eaa1a47fc8b420e0ec23b384549114636205b4597a4d7450b9105d3abe02c08d",
+      "last_updated": "2026-02-21T09:10:05.099413"
     },
     "docs__en__agent-sdk__cost-tracking.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/cost-tracking",
@@ -3432,12 +3432,6 @@
       "hash": "05cb816ef206e526e429cd2fcd5f01125f4334e0aece8c3bcfdbfff1d08bc65f",
       "last_updated": "2026-01-24T03:39:54.135619"
     },
-    "docs__en__test-and-evaluate__define-success.md": {
-      "original_url": "https://platform.claude.com/docs/en/test-and-evaluate/define-success",
-      "original_md_url": "https://platform.claude.com/docs/en/test-and-evaluate/define-success.md",
-      "hash": "6d2ddc7e9a9b78c494675cad1310f92400e95f2da2aad6467afaec7012ee9f45",
-      "last_updated": "2026-02-21T06:24:26.195332"
-    },
     "docs__en__test-and-evaluate__develop-tests.md": {
       "original_url": "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests",
       "original_md_url": "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests.md",
@@ -3461,12 +3455,6 @@
       "original_md_url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency.md",
       "hash": "6c9e6fb6eafe993d9294f9c11c0c8cb7d8e5197f8a540bc12d77435ef71621a1",
       "last_updated": "2026-02-21T06:24:28.760443"
-    },
-    "docs__en__test-and-evaluate__strengthen-guardrails__keep-claude-in-character.md": {
-      "original_url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/keep-claude-in-character",
-      "original_md_url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/keep-claude-in-character.md",
-      "hash": "6c9e6fb6eafe993d9294f9c11c0c8cb7d8e5197f8a540bc12d77435ef71621a1",
-      "last_updated": "2026-02-21T06:24:30.074774"
     },
     "docs__en__test-and-evaluate__strengthen-guardrails__mitigate-jailbreaks.md": {
       "original_url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks",
@@ -3519,10 +3507,10 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-02-21T06:24:34.691426",
-    "fetch_duration_seconds": 495.386565,
-    "total_pages_discovered": 783,
-    "pages_fetched_successfully": 586,
+    "last_fetch_completed": "2026-02-21T09:17:35.658994",
+    "fetch_duration_seconds": 457.699056,
+    "total_pages_discovered": 781,
+    "pages_fetched_successfully": 584,
     "pages_failed": 198,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
@@ -3726,10 +3714,10 @@
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 586,
+    "total_files": 584,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-02-21T06:24:34.691447",
+  "last_updated": "2026-02-21T09:17:35.659013",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

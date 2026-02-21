@@ -161,7 +161,7 @@ In addition to intent, ticket routing and prioritization may also be influenced 
 
 ### Establish success criteria
 
-Work with your support team to [define clear success criteria](/docs/en/test-and-evaluate/define-success) with measurable benchmarks, thresholds, and goals.
+Work with your support team to [define clear success criteria](/docs/en/test-and-evaluate/develop-tests) with measurable benchmarks, thresholds, and goals.
 
 Here are some standard criteria and benchmarks when using LLMs for support ticket routing:
 
