@@ -1,6 +1,6 @@
 # Get started with Claude
 
-Make your first API call to Claude and build a simple web search assistant
+Make your first API call to Claude and build a simple web search assistant.
 
 ---
 
@@ -15,7 +15,7 @@ Make your first API call to Claude and build a simple web search assistant
   <Tab title="cURL">
     <Steps>
       <Step title="Set your API key">
-        Get your API key at the [Claude Console](/settings/keys) and set it as an environment variable:
+        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
 
         ```bash
         export ANTHROPIC_API_KEY='your-api-key-here'
@@ -307,19 +307,22 @@ Make your first API call to Claude and build a simple web search assistant
 
 ## Next steps
 
-Now that you have made your first Claude API request, it's time to explore what else is possible:
+You made your first API call. Next, learn the Messages API patterns you'll use in every Claude integration.
+
+<Card title="Working with the Messages API" icon="messages" href="/docs/en/build-with-claude/working-with-messages">
+  Learn multi-turn conversations, system prompts, stop reasons, and other core patterns.
+</Card>
+
+Once you're comfortable with the basics, explore further:
 
 <CardGroup cols={3}>
-  <Card title="Working with Messages" icon="messages" href="/docs/en/build-with-claude/working-with-messages">
-    Learn common patterns for the Messages API.
+  <Card title="Models overview" icon="brain" href="/docs/en/about-claude/models/overview">
+    Compare Claude models by capability and cost.
   </Card>
-  <Card title="Features Overview" icon="brain" href="/docs/en/api/overview">
-    Explore Claude's advanced features and capabilities.
+  <Card title="Features overview" icon="list" href="/docs/en/build-with-claude/overview">
+    Browse all Claude capabilities: tools, context management, structured outputs, and more.
   </Card>
   <Card title="Client SDKs" icon="code-brackets" href="/docs/en/api/client-sdks">
-    Discover Anthropic client libraries.
-  </Card>
-  <Card title="Claude Cookbook" icon="chef-hat" href="https://platform.claude.com/cookbooks">
-    Learn with interactive Jupyter notebooks.
+    Reference documentation for Python, TypeScript, Java, and other client libraries.
   </Card>
 </CardGroup>
