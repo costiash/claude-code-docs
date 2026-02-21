@@ -100,31 +100,7 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/invites/{invit
 
 ### Workspaces
 
-For a comprehensive guide to workspaces, see [Workspaces](/docs/en/build-with-claude/workspaces).
-
-Create and manage [workspaces](/docs/en/api/admin-api/workspaces/get-workspace) ([console](/settings/workspaces)) to organize your resources:
-
-<CodeGroup>
-
-```bash Shell
-# Create workspace
-curl --request POST "https://api.anthropic.com/v1/organizations/workspaces" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  --data '{"name": "Production"}'
-
-# List workspaces
-curl "https://api.anthropic.com/v1/organizations/workspaces?limit=10&include_archived=false" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
-
-# Archive workspace
-curl --request POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/archive" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
-```
-
-</CodeGroup>
+For a comprehensive guide to workspaces, including Console and API examples, see [Workspaces](/docs/en/build-with-claude/workspaces).
 
 ### Workspace Members
 
@@ -211,22 +187,13 @@ This endpoint is useful for programmatically determining which organization an A
 
 For complete parameter details and response schemas, see the [Organization Info API reference](/docs/en/api/admin-api/organization/get-me).
 
-## Accessing usage and cost reports
+## Usage and cost reports
 
-To access usage and cost reports for your organization, use the Usage and Cost API endpoints:
+Track your organization's usage and costs with the [Usage and Cost API](/docs/en/build-with-claude/usage-cost-api).
 
-- The [**Usage endpoint**](/docs/en/build-with-claude/usage-cost-api#usage-api) (`/v1/organizations/usage_report/messages`) provides detailed usage data, including token counts and request metrics, grouped by various dimensions such as workspace, user, and model.
-- The [**Cost endpoint**](/docs/en/build-with-claude/usage-cost-api#cost-api) (`/v1/organizations/cost_report`) provides cost data associated with your organization's usage, allowing you to track expenses and allocate costs by workspace or description.
+## Claude Code analytics
 
-These endpoints provide detailed insights into your organization's usage and associated costs.
-
-## Accessing Claude Code analytics
-
-For organizations using Claude Code, the [**Claude Code Analytics API**](/docs/en/build-with-claude/claude-code-analytics-api) provides detailed productivity metrics and usage insights:
-
-- The [**Claude Code Analytics endpoint**](/docs/en/build-with-claude/claude-code-analytics-api) (`/v1/organizations/usage_report/claude_code`) provides daily aggregated metrics for Claude Code usage, including sessions, lines of code, commits, pull requests, tool usage statistics, and cost data broken down by user and model.
-
-This API enables you to track developer productivity, analyze Claude Code adoption, and build custom dashboards for your organization.
+Monitor developer productivity and Claude Code adoption with the [Claude Code Analytics API](/docs/en/build-with-claude/claude-code-analytics-api).
 
 ## Best practices
 
@@ -270,38 +237,4 @@ Organization invites expire after 21 days. There is currently no way to modify t
 
 </section>
 
-<section title="Are there limits on workspaces?">
-
-Yes, you can have a maximum of 100 workspaces per Organization. Archived workspaces do not count towards this limit.
-
-</section>
-
-<section title="What's the Default Workspace?">
-
-Every Organization has a "Default Workspace" that cannot be edited or removed, and has no ID. This Workspace does not appear in workspace list endpoints.
-
-</section>
-
-<section title="How do organization roles affect Workspace access?">
-
-Organization admins automatically get the `workspace_admin` role to all workspaces. Organization billing members automatically get the `workspace_billing` role. Organization users and developers must be manually added to each workspace.
-
-</section>
-
-<section title="Which roles can be assigned in workspaces?">
-
-Organization users and developers can be assigned `workspace_admin`, `workspace_developer`, or `workspace_user` roles. The `workspace_billing` role can't be manually assigned - it's inherited from having the organization `billing` role.
-
-</section>
-
-<section title="Can organization admin or billing members' workspace roles be changed?">
-
-Only organization billing members can have their workspace role upgraded to an admin role. Otherwise, organization admins and billing members can't have their workspace roles changed or be removed from workspaces while they hold those organization roles. Their workspace access must be modified by changing their organization role first.
-
-</section>
-
-<section title="What happens to workspace access when organization roles change?">
-
-If an organization admin or billing member is demoted to user or developer, they lose access to all workspaces except ones where they were manually assigned roles. When users are promoted to admin or billing roles, they gain automatic access to all workspaces.
-
-</section>
+For workspace-specific questions, see the [Workspaces FAQ](/docs/en/build-with-claude/workspaces#faq).

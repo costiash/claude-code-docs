@@ -13,7 +13,7 @@ This guide assumes that you have:
 2. Some ways to empirically test against those criteria
 3. A first draft prompt you want to improve
 
-If not, we highly suggest you spend time establishing that first. Check out [Define your success criteria](/docs/en/test-and-evaluate/define-success) and [Create strong empirical evaluations](/docs/en/test-and-evaluate/develop-tests) for tips and guidance.
+If not, we highly suggest you spend time establishing that first. Check out [Define success criteria and build evaluations](/docs/en/test-and-evaluate/develop-tests) for tips and guidance.
 
 <Card title="Prompt generator" icon="link" href="/dashboard">
   Don't have a first draft prompt? Try the prompt generator in the Claude Console!

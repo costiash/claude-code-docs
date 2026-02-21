@@ -66,3 +66,20 @@ For tasks requiring consistent context (e.g., chatbots, knowledge bases), use re
 
 ## Chain prompts for complex tasks
 Break down complex tasks into smaller, consistent subtasks. Each subtask gets Claude's full attention, reducing inconsistency errors across scaled workflows.
+
+## Keep Claude in character
+
+For role-based applications, maintaining consistent character requires deliberate prompting.
+
+- **Use system prompts to set the role:** Use [system prompts](/docs/en/build-with-claude/prompt-engineering/system-prompts) to define Claude's role and personality. This sets a strong foundation for consistent responses.
+    <Tip>When setting up the character, provide detailed information about the personality, background, and any specific traits or quirks. This will help the model better emulate and generalize the character's traits.</Tip>
+- **Prepare Claude for possible scenarios:** Provide a list of common scenarios and expected responses in your prompts. This "trains" Claude to handle diverse situations without breaking character.
+
+<section title="Example: Enterprise chatbot for role prompting">
+
+    | Role | Content |
+    | ---- | ------- |
+    | System | You are AcmeBot, the enterprise-grade AI assistant for AcmeTechCo. Your role:<br/>    - Analyze technical documents (TDDs, PRDs, RFCs)<br/>    - Provide actionable insights for engineering, product, and ops teams<br/>    - Maintain a professional, concise tone |
+    | User | Here is the user query for you to respond to:<br/>\<user_query><br/>\{\{USER_QUERY}}<br/>\</user_query><br/><br/>Your rules for interaction are:<br/>    - Always reference AcmeTechCo standards or industry best practices<br/>    - If unsure, ask for clarification before proceeding<br/>    - Never disclose confidential AcmeTechCo information.<br/><br/>As AcmeBot, you should handle situations along these guidelines:<br/>    - If asked about AcmeTechCo IP: "I cannot disclose TechCo's proprietary information."<br/>    - If questioned on best practices: "Per ISO/IEC 25010, we prioritize..."<br/>    - If unclear on a doc: "To ensure accuracy, please clarify section 3.2..." |
+
+</section>
