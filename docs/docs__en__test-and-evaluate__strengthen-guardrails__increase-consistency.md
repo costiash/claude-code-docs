@@ -71,7 +71,7 @@ Break down complex tasks into smaller, consistent subtasks. Each subtask gets Cl
 
 For role-based applications, maintaining consistent character requires deliberate prompting.
 
-- **Use system prompts to set the role:** Use [system prompts](/docs/en/build-with-claude/prompt-engineering/system-prompts) to define Claude's role and personality. This sets a strong foundation for consistent responses.
+- **Use system prompts to set the role:** Use [system prompts](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role) to define Claude's role and personality. This sets a strong foundation for consistent responses.
     <Tip>When setting up the character, provide detailed information about the personality, background, and any specific traits or quirks. This will help the model better emulate and generalize the character's traits.</Tip>
 - **Prepare Claude for possible scenarios:** Provide a list of common scenarios and expected responses in your prompts. This "trains" Claude to handle diverse situations without breaking character.
 

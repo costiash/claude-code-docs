@@ -8,7 +8,14 @@ Server-side context compaction for managing long conversations that approach con
 Server-side compaction is the recommended strategy for managing context in long-running conversations and agentic workflows. It handles context management automatically with minimal integration work.
 </Tip>
 
-Compaction extends the effective context length for long-running conversations and tasks by automatically summarizing older context when approaching the context window limit. This is ideal for:
+Compaction extends the effective context length for long-running conversations and tasks by automatically summarizing older context when approaching the context window limit. This isn't just about staying under a token cap. As conversations get longer, models struggle to maintain focus across the full history. Compaction keeps the active context focused and performant by replacing stale content with concise summaries.
+
+<Tip>
+For a deeper look at why long contexts degrade and how compaction helps, see
+[Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
+</Tip>
+
+This is ideal for:
 
 - Chat-based, multi-turn conversations where you want users to use one chat for a long period of time
 - Task-oriented prompts that require a lot of follow-up work (often tool use) that may exceed the 200K context window
@@ -560,7 +567,7 @@ Compaction requires an additional sampling step, which contributes to rate limit
 The `iterations` array shows usage for each sampling iteration. When compaction occurs, you'll see a `compaction` iteration followed by the main `message` iteration. The final iteration's token counts reflect the effective context size after compaction.
 
 <Note>
-The top-level `input_tokens` and `output_tokens` do not include compaction iteration usage—they reflect the sum of all non-compaction iterations. To calculate total tokens consumed and billed for a request, sum across all entries in the `usage.iterations` array.
+The top-level `input_tokens` and `output_tokens` do not include compaction iteration usage. They reflect the sum of all non-compaction iterations. To calculate total tokens consumed and billed for a request, sum across all entries in the `usage.iterations` array.
 
 If you previously relied on `usage.input_tokens` and `usage.output_tokens` for cost tracking or auditing, you'll need to update your tracking logic to aggregate across `usage.iterations` when compaction is enabled. The `iterations` array is only populated when a new compaction is triggered during the request. Re-applying a previous `compaction` block incurs no additional compaction cost, and the top-level usage fields remain accurate in that case.
 </Note>

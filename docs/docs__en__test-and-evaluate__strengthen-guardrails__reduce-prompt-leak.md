@@ -20,7 +20,7 @@ You can try using system prompts to isolate key information and context from use
 
 <section title="Example: Safeguarding proprietary analytics">
 
-    Notice that this system prompt is still predominantly a role prompt, which is the [most effective way to use system prompts](/docs/en/build-with-claude/prompt-engineering/system-prompts).
+    Notice that this system prompt is still predominantly a role prompt, which is the [most effective way to use system prompts](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
 
     | Role | Content |
     | ---- | ------- |

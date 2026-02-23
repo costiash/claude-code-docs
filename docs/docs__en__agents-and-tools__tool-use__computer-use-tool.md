@@ -2,7 +2,7 @@
 
 ---
 
-Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction.
+Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction. On [WebArena](https://webarena.dev/), a benchmark for autonomous web navigation across real websites, Claude achieves state-of-the-art results among single-agent systems, demonstrating strong ability to complete multi-step browser tasks end to end.
 
 <Note>
 Computer use is currently in beta and requires a [beta header](/docs/en/api/beta-headers):
@@ -336,6 +336,14 @@ Here are some tips on how to get the best quality outputs:
   If you repeatedly encounter a clear set of issues or know in advance the tasks
   Claude will need to complete, use the system prompt to provide Claude with
   explicit tips or instructions on how to do the tasks successfully.
+</Tip>
+
+<Tip>
+  For agents that span multiple sessions, run end-to-end verification at the
+  start of each session, not only after implementation. Browser-based checks
+  catch regressions from prior sessions that code-level review alone misses. See
+  [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
+  for details.
 </Tip>
 
 ### System prompts

@@ -2,7 +2,7 @@
 
 ---
 
-Claude is capable of interacting with tools and functions, allowing you to extend Claude's capabilities to perform a wider variety of tasks.
+Claude is capable of interacting with tools and functions, allowing you to extend Claude's capabilities to perform a wider variety of tasks. Each tool defines a contract: you specify what operations are available and what they return; Claude decides when and how to call them. Tool access is one of the highest-leverage primitives you can give an agent. On benchmarks like [LAB-Bench FigQA](https://lab-bench.org/) (scientific figure interpretation) and [SWE-bench](https://www.swebench.com/) (real-world software engineering), adding even simple tools produces outsized capability gains, often surpassing human expert baselines.
 
 <Tip>
   Learn everything you need to master tool use with Claude as part of the new [courses](https://anthropic.skilljar.com/)! Please
@@ -1208,6 +1208,10 @@ When you send a tool use prompt, just like any other API request, the response w
 ---
 
 ## Next Steps
+
+<Tip>
+Once your tool workflows grow beyond a handful of tools, explore [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use) to learn how [tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool) and [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) scale tool orchestration to hundreds of tools without blowing up your context window.
+</Tip>
 
 Explore the repository of ready-to-implement tool use code examples in the cookbooks:
 

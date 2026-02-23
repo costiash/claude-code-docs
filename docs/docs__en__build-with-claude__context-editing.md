@@ -10,7 +10,7 @@ Automatically manage conversation context as it grows with context editing.
 For most use cases, [server-side compaction](/docs/en/build-with-claude/compaction) is the primary strategy for managing context in long-running conversations. The strategies on this page are useful for specific scenarios where you need more fine-grained control over what content is cleared.
 </Note>
 
-Context editing allows you to selectively clear specific content from conversation history as it grows. This helps you optimize costs and stay within context window limits. This page covers:
+Context editing allows you to selectively clear specific content from conversation history as it grows. Beyond optimizing costs and staying within limits, this is about actively curating what Claude sees: context is a finite resource with diminishing returns, and irrelevant content degrades model focus. Context editing gives you fine-grained runtime control over that curation. For the broader principles behind context management, see [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents). This page covers:
 
 - **Tool result clearing** - Best for agentic workflows with heavy tool use where old tool results are no longer needed
 - **Thinking block clearing** - For managing thinking blocks when using extended thinking, with options to preserve recent thinking for context continuity

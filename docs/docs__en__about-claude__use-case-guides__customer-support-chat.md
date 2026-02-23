@@ -181,7 +181,7 @@ Acme's insurance offerings, which include car insurance and electric car
 insurance. You can also help customers get quotes for their insurance needs."""
 ```
 
-<Tip>While you may be tempted to put all your information inside a system prompt as a way to separate instructions from the user conversation, Claude actually works best with the bulk of its prompt content written inside the first `User` turn (with the only exception being role prompting). Read more at [Giving Claude a role with a system prompt](/docs/en/build-with-claude/prompt-engineering/system-prompts).</Tip>
+<Tip>While you may be tempted to put all your information inside a system prompt as a way to separate instructions from the user conversation, Claude actually works best with the bulk of its prompt content written inside the first `User` turn (with the only exception being role prompting). Read more at [Giving Claude a role with a system prompt](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).</Tip>
 
 It's best to break down complex prompts into subsections and write one part at a time. For each task, you might find greater success by following a step by step process to define the parts of the prompt Claude would need to do the task well. For this car insurance customer support example, you'll be writing piecemeal all the parts for a prompt starting with the "Greeting and general guidance" task. This also makes debugging your prompt easier as you can more quickly adjust individual parts of the overall prompt.
 
@@ -603,7 +603,7 @@ In some cases, streaming enables the use of more advanced models with higher bas
 As the complexity of your Chatbot grows, your application architecture can evolve to match. Before you add further layers to your architecture, consider the following less exhaustive options:
 
 - Ensure that you are making the most out of your prompts and optimizing through prompt engineering. Use our [prompt engineering guides](/docs/en/build-with-claude/prompt-engineering/overview) to write the most effective prompts.
-- Add additional [tools](/docs/en/build-with-claude/tool-use) to the prompt (which can include [prompt chains](/docs/en/build-with-claude/prompt-engineering/chain-prompts)) and see if you can achieve the functionality required.
+- Add additional [tools](/docs/en/build-with-claude/tool-use) to the prompt (which can include [prompt chains](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#chain-complex-prompts)) and see if you can achieve the functionality required.
 
 If your Chatbot handles incredibly varied tasks, you may want to consider adding a [separate intent classifier](https://platform.claude.com/cookbook/capabilities-classification-guide) to route the initial customer query. For the existing application, this would involve creating a decision tree that would route customer queries through the classifier and then to specialized conversations (with their own set of tools and system prompts). Note, this method requires an additional call to Claude that can increase latency.
 

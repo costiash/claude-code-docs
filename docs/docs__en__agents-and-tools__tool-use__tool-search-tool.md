@@ -2,12 +2,16 @@
 
 ---
 
-The tool search tool enables Claude to work with hundreds or thousands of tools by dynamically discovering and loading them on-demand. Instead of loading all tool definitions into the context window upfront, Claude searches your tool catalog—including tool names, descriptions, argument names, and argument descriptions—and loads only the tools it needs.
+The tool search tool enables Claude to work with hundreds or thousands of tools by dynamically discovering and loading them on-demand. Instead of loading all tool definitions into the context window upfront, Claude searches your tool catalog (including tool names, descriptions, argument names, and argument descriptions) and loads only the tools it needs.
 
-This approach solves two critical challenges as tool libraries scale:
+This approach solves two problems that compound quickly as tool libraries scale:
 
-- **Context efficiency**: Tool definitions can consume massive portions of your context window (50 tools ≈ 10-20K tokens), leaving less room for actual work
-- **Tool selection accuracy**: Claude's ability to correctly select tools degrades significantly with more than 30-50 conventionally-available tools
+- **Context bloat**: Tool definitions eat into your context budget fast. A typical multi-server setup (GitHub, Slack, Sentry, Grafana, Splunk) can consume ~55K tokens in definitions before Claude does any actual work. Tool search typically reduces this by over 85%, loading only the 3–5 tools Claude actually needs for a given request.
+- **Tool selection accuracy**: Claude's ability to correctly pick the right tool degrades significantly once you exceed 30–50 available tools. By surfacing a focused set of relevant tools on demand, tool search keeps selection accuracy high even across thousands of tools.
+
+<Tip>
+For background on the scaling challenges that tool search solves, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use). Tool search's on-demand loading is also an instance of the broader just-in-time retrieval principle described in [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
+</Tip>
 
 Although this is provided as a server-side tool, you can also implement your own client-side tool search functionality. See [Custom tool search implementation](#custom-tool-search-implementation) for details.
 
@@ -587,7 +591,7 @@ Errors during tool execution return a 200 response with error information in the
 
 **Debugging steps:**
 
-1. Check tool name and description—Claude searches BOTH fields
+1. Check tool name and description. Claude searches BOTH fields
 2. Test your pattern: `import re; re.search(r"your_pattern", "tool_name")`
 3. Remember searches are case-sensitive by default (use `(?i)` for case-insensitive)
 4. Claude uses broad patterns like `".*weather.*"` not exact matches
@@ -719,6 +723,7 @@ You can include the tool search tool in the [Messages Batches API](/docs/en/buil
 
 - Keep 3-5 most frequently used tools as non-deferred
 - Write clear, descriptive tool names and descriptions
+- Use consistent namespacing in tool names: prefix by service or resource (e.g., `github_`, `slack_`) so that search queries naturally surface the right tool group
 - Use semantic keywords in descriptions that match how users describe tasks
 - Add a system prompt section describing available tool categories: "You can search for tools to interact with Slack, GitHub, and Jira"
 - Monitor which tools Claude discovers to refine descriptions

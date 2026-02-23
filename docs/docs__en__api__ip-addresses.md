@@ -24,19 +24,14 @@ These are the stable IP addresses that Anthropic uses for outbound requests (for
 
 `160.79.104.0/21`
 
-*The following individual IP addresses are still in use, but will be phased out starting January 15, 2026.*
+### Phased out IP addresses
+
+The following IP addresses are no longer in use by Anthropic. If you have previously allowlisted these addresses, you should remove them from your firewall rules.
 
 ```text
 34.162.46.92/32
 34.162.102.82/32
 34.162.136.91/32
 34.162.142.92/32
-```
-
-### Phased out IP addresses
-
-The following IP addresses are no longer in use by Anthropic. If you have previously allowlisted these addresses, you should remove them from your firewall rules.
-
-```text
 34.162.183.95/32
 ```
