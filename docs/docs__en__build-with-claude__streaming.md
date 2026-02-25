@@ -28,13 +28,15 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
 
     const client = new Anthropic();
 
-    await client.messages.stream({
-      messages: [{ role: "user", content: "Hello" }],
-      model: "claude-opus-4-6",
-      max_tokens: 1024
-    }).on("text", (text) => {
-      console.log(text);
-    });
+    await client.messages
+      .stream({
+        messages: [{ role: "user", content: "Hello" }],
+        model: "claude-opus-4-6",
+        max_tokens: 1024
+      })
+      .on("text", (text) => {
+        console.log(text);
+      });
     ```
 </CodeGroup>
 
@@ -99,7 +101,7 @@ Event streams may also include any number of `ping` events.
 
 The API may occasionally send [errors](/docs/en/api/errors) in the event stream. For example, during periods of high usage, you may receive an `overloaded_error`, which would normally correspond to an HTTP 529 in a non-streaming context:
 
-```json Example error
+```sse Example error
 event: error
 data: {"type": "error", "error": {"type": "overloaded_error", "message": "Overloaded"}}
 ```
@@ -115,7 +117,7 @@ Each `content_block_delta` event contains a `delta` of a type that updates the `
 ### Text delta
 
 A `text` content block delta looks like:
-```json Text delta
+```sse Text delta
 event: content_block_delta
 data: {"type": "content_block_delta","index": 0,"delta": {"type": "text_delta", "text": "ello frien"}}
 ```
@@ -127,7 +129,7 @@ The deltas for `tool_use` content blocks correspond to updates for the `input` f
 You can accumulate the string deltas and parse the JSON once you receive a `content_block_stop` event, by using a library like [Pydantic](https://docs.pydantic.dev/latest/concepts/json/#partial-json-parsing) to do partial JSON parsing, or by using the [SDKs](/docs/en/api/client-sdks), which provide helpers to access parsed incremental values.
 
 A `tool_use` content block delta looks like:
-```json Input JSON delta
+```sse Input JSON delta
 event: content_block_delta
 data: {"type": "content_block_delta","index": 1,"delta": {"type": "input_json_delta","partial_json": "{\"location\": \"San Fra"}}}
 ```
@@ -140,13 +142,13 @@ When using [extended thinking](/docs/en/build-with-claude/extended-thinking#stre
 For thinking content, a special `signature_delta` event is sent just before the `content_block_stop` event. This signature is used to verify the integrity of the thinking block.
 
 A typical thinking delta looks like:
-```json Thinking delta
+```sse Thinking delta
 event: content_block_delta
 data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "I need to find the GCD of 1071 and 462 using the Euclidean algorithm.\n\n1071 = 2 × 462 + 147"}}
 ```
 
 The signature delta looks like:
-```json Signature delta
+```sse Signature delta
 event: content_block_delta
 data: {"type": "content_block_delta", "index": 0, "delta": {"type": "signature_delta", "signature": "EqQBCgIYAhIM1gbcDa9GJwZA2b3hGgxBdjrkzLoky3dl1pkiMOYds..."}}
 ```
@@ -198,7 +200,7 @@ with client.messages.stream(
 ```
 </CodeGroup>
 
-```json Response
+```sse Response
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-6", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
 
@@ -305,7 +307,7 @@ with client.messages.stream(
 ```
 </CodeGroup>
 
-```json Response
+```sse Response
 event: message_start
 data: {"type":"message_start","message":{"id":"msg_014p7gG3wDgGV9EUtLvnow3U","type":"message","role":"assistant","model":"claude-opus-4-6","stop_sequence":null,"usage":{"input_tokens":472,"output_tokens":2},"content":[],"stop_reason":null}}
 
@@ -450,7 +452,7 @@ with client.messages.stream(
 ```
 </CodeGroup>
 
-```json Response
+```sse Response
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-6", "stop_reason": null, "stop_sequence": null}}
 
@@ -538,9 +540,113 @@ with client.messages.stream(
     for text in stream.text_stream:
         print(text, end="", flush=True)
 ```
+
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.WebSearchTool20250305;
+
+public class WebSearchStreaming {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .addTool(WebSearchTool20250305.builder()
+                .maxUses(5L)
+                .build())
+            .addUserMessage("What is the weather like in New York City today?")
+            .build();
+
+        try (var streamResponse = client.messages().createStreaming(params)) {
+            streamResponse.stream().forEach(event -> {
+                event.contentBlockDelta().ifPresent(deltaEvent ->
+                    deltaEvent.delta().text().ifPresent(td ->
+                        System.out.print(td.text())
+                    )
+                );
+            });
+        }
+    }
+}
+```
+
+```go Go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Tools: []anthropic.ToolParam{
+			anthropic.NewWebSearchTool(anthropic.WebSearchToolParam{
+				Type:    anthropic.F(anthropic.ToolTypeWebSearch20250305),
+				Name:    anthropic.F("web_search"),
+				MaxUses: anthropic.Int(5),
+			}),
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What is the weather like in New York City today?")),
+		},
+	})
+
+	for stream.Next() {
+		event := stream.Current()
+		switch eventVariant := event.AsAny().(type) {
+		case anthropic.ContentBlockDeltaEvent:
+			switch deltaVariant := eventVariant.Delta.AsAny().(type) {
+			case anthropic.TextDelta:
+				fmt.Print(deltaVariant.Text)
+			}
+		}
+	}
+	if err := stream.Err(); err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+stream = client.messages.stream(
+  model: :"claude-opus-4-6",
+  max_tokens: 1024,
+  tools: [
+    {
+      type: "web_search_20250305",
+      name: "web_search",
+      max_uses: 5
+    }
+  ],
+  messages: [
+    {
+      role: "user",
+      content: "What is the weather like in New York City today?"
+    }
+  ]
+)
+
+stream.text.each { |text| print(text) }
+```
 </CodeGroup>
 
-```json Response
+```sse Response
 event: message_start
 data: {"type":"message_start","message":{"id":"msg_01G...","type":"message","role":"assistant","model":"claude-opus-4-6","content":[],"stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":2679,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":3}}}
 
@@ -637,6 +743,7 @@ The basic recovery strategy involves:
 ### Claude 4.6
 
 For Claude 4.6 models, you should add a user message that instructs the model to continue from where it left off. For example:
+
 ```text Sample prompt
 Your previous response was interrupted and ended with [previous_response]. Continue from where you left off.
 ```

@@ -122,7 +122,8 @@ async function main() {
     messages: [
       {
         role: "user",
-        content: "Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue"
+        content:
+          "Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue"
       }
     ],
     tools: [
@@ -132,7 +133,8 @@ async function main() {
       },
       {
         name: "query_database",
-        description: "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
+        description:
+          "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
         input_schema: {
           type: "object",
           properties: {
@@ -186,7 +188,9 @@ The `allowed_callers` field specifies which contexts can invoke a tool:
 {
   "name": "query_database",
   "description": "Execute a SQL query against the database",
-  "input_schema": {...},
+  "input_schema": {
+    // ...
+  },
   "allowed_callers": ["code_execution_20260120"]
 }
 ```
@@ -210,8 +214,8 @@ Every tool use block includes a `caller` field indicating how it was invoked:
   "type": "tool_use",
   "id": "toolu_abc123",
   "name": "query_database",
-  "input": {"sql": "<sql>"},
-  "caller": {"type": "direct"}
+  "input": { "sql": "<sql>" },
+  "caller": { "type": "direct" }
 }
 ```
 
@@ -221,7 +225,7 @@ Every tool use block includes a `caller` field indicating how it was invoked:
   "type": "tool_use",
   "id": "toolu_xyz789",
   "name": "query_database",
-  "input": {"sql": "<sql>"},
+  "input": { "sql": "<sql>" },
   "caller": {
     "type": "code_execution_20260120",
     "tool_id": "srvtoolu_abc123"
@@ -272,7 +276,9 @@ response = client.messages.create(
         {
             "name": "query_database",
             "description": "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
-            "input_schema": {...},
+            "input_schema": {
+                # ...
+            },
             "allowed_callers": ["code_execution_20260120"],
         },
     ],
@@ -283,10 +289,13 @@ response = client.messages.create(
 const response = await anthropic.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
-  messages: [{
-    role: "user",
-    content: "Query customer purchase history from the last quarter and identify our top 5 customers by revenue"
-  }],
+  messages: [
+    {
+      role: "user",
+      content:
+        "Query customer purchase history from the last quarter and identify our top 5 customers by revenue"
+    }
+  ],
   tools: [
     {
       type: "code_execution_20260120",
@@ -294,8 +303,11 @@ const response = await anthropic.messages.create({
     },
     {
       name: "query_database",
-      description: "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
-      input_schema: { /* ... */ },
+      description:
+        "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
+      input_schema: {
+        // ...
+      },
       allowed_callers: ["code_execution_20260120"]
     }
   ]
@@ -327,7 +339,7 @@ Claude writes code that calls your tool. The API pauses and returns:
       "type": "tool_use",
       "id": "toolu_def456",
       "name": "query_database",
-      "input": {"sql": "<sql>"},
+      "input": { "sql": "<sql>" },
       "caller": {
         "type": "code_execution_20260120",
         "tool_id": "srvtoolu_abc123"
@@ -403,7 +415,11 @@ const response = await anthropic.messages.create({
   max_tokens: 4096,
   container: "container_xyz789", // Reuse the container
   messages: [
-    { role: "user", content: "Query customer purchase history from the last quarter and identify our top 5 customers by revenue" },
+    {
+      role: "user",
+      content:
+        "Query customer purchase history from the last quarter and identify our top 5 customers by revenue"
+    },
     {
       role: "assistant",
       content: [
@@ -432,12 +448,15 @@ const response = await anthropic.messages.create({
         {
           type: "tool_result",
           tool_use_id: "toolu_def456",
-          content: "[{\"customer_id\": \"C1\", \"revenue\": 45000}, {\"customer_id\": \"C2\", \"revenue\": 38000}, ...]"
+          content:
+            '[{"customer_id": "C1", "revenue": 45000}, {"customer_id": "C2", "revenue": 38000}, ...]'
         }
       ]
     }
   ],
-  tools: [/* ... */]
+  tools: [
+    // ...
+  ]
 });
 ```
 </CodeGroup>
@@ -545,7 +564,7 @@ When code execution calls a tool:
   "type": "tool_use",
   "id": "toolu_abc123",
   "name": "query_database",
-  "input": {"sql": "<sql>"},
+  "input": { "sql": "<sql>" },
   "caller": {
     "type": "code_execution_20260120",
     "tool_id": "srvtoolu_xyz789"
@@ -656,21 +675,33 @@ When responding to programmatic tool calls, there are strict formatting requirem
 
 **Tool result only responses**: If there are pending programmatic tool calls waiting for results, your response message must contain **only** `tool_result` blocks. You cannot include any text content, even after the tool results.
 
+Invalid - Cannot include text when responding to programmatic tool calls:
+
 ```json
-// ❌ INVALID - Cannot include text when responding to programmatic tool calls
 {
   "role": "user",
   "content": [
-    {"type": "tool_result", "tool_use_id": "toolu_01", "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"},
-    {"type": "text", "text": "What should I do next?"}  // This will cause an error
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01",
+      "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"
+    },
+    { "type": "text", "text": "What should I do next?" }
   ]
 }
+```
 
-// ✅ VALID - Only tool results when responding to programmatic tool calls
+Valid - Only tool results when responding to programmatic tool calls:
+
+```json
 {
   "role": "user",
   "content": [
-    {"type": "tool_result", "tool_use_id": "toolu_01", "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"}
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01",
+      "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"
+    }
   ]
 }
 ```

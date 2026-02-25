@@ -90,7 +90,8 @@ const msg = await anthropic.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 2000,
   temperature: 1,
-  system: "You will play the role of Hal, a highly knowledgeable AI assistant with a humorous and often sarcastic personality. Engage in conversation with the user, providing informative and helpful responses while injecting wit, irony, and playful jabs. Your responses should be a mix of genuine information and sarcastic remarks that poke fun at the situation, the user's questions, or even yourself. Maintain a lighthearted and friendly tone throughout the conversation, ensuring that your sarcasm is not hurtful or offensive.",
+  system:
+    "You will play the role of Hal, a highly knowledgeable AI assistant with a humorous and often sarcastic personality. Engage in conversation with the user, providing informative and helpful responses while injecting wit, irony, and playful jabs. Your responses should be a mix of genuine information and sarcastic remarks that poke fun at the situation, the user's questions, or even yourself. Maintain a lighthearted and friendly tone throughout the conversation, ensuring that your sarcasm is not hurtful or offensive.",
   messages: [
     {
       role: "user",
@@ -122,7 +123,6 @@ const msg = await anthropic.messages.create({
   ]
 });
 console.log(msg);
-
 ```
 
 </Tab>
@@ -184,7 +184,8 @@ const msg = await client.messages.create({
   model: "anthropic.claude-opus-4-6-v1",
   max_tokens: 2000,
   temperature: 1,
-  system: "You will play the role of Hal, a highly knowledgeable AI assistant with a humorous and often sarcastic personality. Engage in conversation with the user, providing informative and helpful responses while injecting wit, irony, and playful jabs. Your responses should be a mix of genuine information and sarcastic remarks that poke fun at the situation, the user's questions, or even yourself. Maintain a lighthearted and friendly tone throughout the conversation, ensuring that your sarcasm is not hurtful or offensive.",
+  system:
+    "You will play the role of Hal, a highly knowledgeable AI assistant with a humorous and often sarcastic personality. Engage in conversation with the user, providing informative and helpful responses while injecting wit, irony, and playful jabs. Your responses should be a mix of genuine information and sarcastic remarks that poke fun at the situation, the user's questions, or even yourself. Maintain a lighthearted and friendly tone throughout the conversation, ensuring that your sarcasm is not hurtful or offensive.",
   messages: [
     {
       role: "user",
@@ -216,7 +217,6 @@ const msg = await client.messages.create({
   ]
 });
 console.log(msg);
-
 ```
 
 </Tab>
@@ -276,7 +276,8 @@ const msg = await client.messages.create({
   model: "claude-sonnet-4@20250514",
   max_tokens: 2000,
   temperature: 1,
-  system: "You will play the role of Hal, a highly knowledgeable AI assistant with a humorous and often sarcastic personality. Engage in conversation with the user, providing informative and helpful responses while injecting wit, irony, and playful jabs. Your responses should be a mix of genuine information and sarcastic remarks that poke fun at the situation, the user's questions, or even yourself. Maintain a lighthearted and friendly tone throughout the conversation, ensuring that your sarcasm is not hurtful or offensive.",
+  system:
+    "You will play the role of Hal, a highly knowledgeable AI assistant with a humorous and often sarcastic personality. Engage in conversation with the user, providing informative and helpful responses while injecting wit, irony, and playful jabs. Your responses should be a mix of genuine information and sarcastic remarks that poke fun at the situation, the user's questions, or even yourself. Maintain a lighthearted and friendly tone throughout the conversation, ensuring that your sarcasm is not hurtful or offensive.",
   messages: [
     {
       role: "user",

@@ -225,7 +225,7 @@ The simplest pattern - enable all tools from a server:
 ```json
 {
   "type": "mcp_toolset",
-  "mcp_server_name": "google-calendar-mcp",
+  "mcp_server_name": "google-calendar-mcp"
 }
 ```
 
@@ -557,7 +557,9 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 {
   "model": "claude-opus-4-6",
   "max_tokens": 1000,
-  "messages": [...],
+  "messages": [
+    // ...
+  ],
   "mcp_servers": [
     {
       "type": "url",
@@ -579,7 +581,9 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 {
   "model": "claude-opus-4-6",
   "max_tokens": 1000,
-  "messages": [...],
+  "messages": [
+    // ...
+  ],
   "mcp_servers": [
     {
       "type": "url",

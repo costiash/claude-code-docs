@@ -91,13 +91,17 @@ The bash tool maintains a persistent session:
 
 <section title="Example usage">
 
+Run a command:
+
 ```json
-// Run a command
 {
   "command": "ls -la *.py"
 }
+```
 
-// Restart the session
+Restart the session:
+
+```json
 {
   "restart": true
 }

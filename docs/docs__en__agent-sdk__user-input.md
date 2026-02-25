@@ -344,7 +344,8 @@ Beyond allowing or denying, you can modify the tool's input or provide context t
         // User doesn't want to delete, suggest archiving instead
         return {
           behavior: "deny",
-          message: "User doesn't want to delete files. They asked if you could compress them into an archive instead."
+          message:
+            "User doesn't want to delete files. They asked if you could compress them into an archive instead."
         };
       }
       return { behavior: "allow", updatedInput: input };
@@ -548,7 +549,9 @@ For multi-select questions, join multiple labels with `", "`. For free-text inpu
 
 ```json
 {
-  "questions": [...],
+  "questions": [
+    // ...
+  ],
   "answers": {
     "How should I format the output?": "Summary",
     "Which sections should I include?": "Introduction, Conclusion"

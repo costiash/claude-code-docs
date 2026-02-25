@@ -95,24 +95,28 @@ async function main() {
   const response = await anthropic.messages.create({
     model: "claude-opus-4-6",
     max_tokens: 1024,
-    tools: [{
-      name: "get_weather",
-      description: "Get the current weather in a given location",
-      input_schema: {
-        type: "object",
-        properties: {
-          location: {
-            type: "string",
-            description: "The city and state, e.g. San Francisco, CA"
-          }
-        },
-        required: ["location"]
+    tools: [
+      {
+        name: "get_weather",
+        description: "Get the current weather in a given location",
+        input_schema: {
+          type: "object",
+          properties: {
+            location: {
+              type: "string",
+              description: "The city and state, e.g. San Francisco, CA"
+            }
+          },
+          required: ["location"]
+        }
       }
-    }],
-    messages: [{
-      role: "user",
-      content: "Tell me the weather in San Francisco."
-    }]
+    ],
+    messages: [
+      {
+        role: "user",
+        content: "Tell me the weather in San Francisco."
+      }
+    ]
   });
 
   console.log(response);
@@ -491,7 +495,7 @@ Claude will return a response similar to:
       "type": "tool_use",
       "id": "toolu_01A09q90qw90lq917835lq9",
       "name": "get_weather",
-      "input": {"location": "San Francisco, CA", "unit": "celsius"}
+      "input": { "location": "San Francisco, CA", "unit": "celsius" }
     }
   ]
 }
@@ -959,7 +963,7 @@ For example, using the `get_weather` tool above, if you ask Claude "What's the w
   "type": "tool_use",
   "id": "toolu_01A09q90qw90lq917835lq9",
   "name": "get_weather",
-  "input": {"location": "New York, NY", "unit": "fahrenheit"}
+  "input": { "location": "New York, NY", "unit": "fahrenheit" }
 }
 ```
 

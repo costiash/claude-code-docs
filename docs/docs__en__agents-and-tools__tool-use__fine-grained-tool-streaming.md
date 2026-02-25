@@ -102,29 +102,33 @@ Here's an example of how to use fine-grained tool streaming with the API:
   const message = await anthropic.messages.stream({
     model: "claude-opus-4-6",
     max_tokens: 65536,
-    tools: [{
-      name: "make_file",
-      description: "Write text to a file",
-      eager_input_streaming: true,
-      input_schema: {
-        type: "object",
-        properties: {
-          filename: {
-            type: "string",
-            description: "The filename to write text to"
+    tools: [
+      {
+        name: "make_file",
+        description: "Write text to a file",
+        eager_input_streaming: true,
+        input_schema: {
+          type: "object",
+          properties: {
+            filename: {
+              type: "string",
+              description: "The filename to write text to"
+            },
+            lines_of_text: {
+              type: "array",
+              description: "An array of lines of text to write to the file"
+            }
           },
-          lines_of_text: {
-            type: "array",
-            description: "An array of lines of text to write to the file"
-          }
-        },
-        required: ["filename", "lines_of_text"]
+          required: ["filename", "lines_of_text"]
+        }
       }
-    }],
-    messages: [{
-      role: "user",
-      content: "Can you write a long poem and make a file called poem.txt?"
-    }]
+    ],
+    messages: [
+      {
+        role: "user",
+        content: "Can you write a long poem and make a file called poem.txt?"
+      }
+    ]
   });
 
   console.log(message.usage);

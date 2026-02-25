@@ -298,7 +298,8 @@ If you need to send PDFs from your local system or when a URL isn't available:
 
     async function main() {
       // Method 1: Fetch and encode a remote PDF
-      const pdfURL = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf";
+      const pdfURL =
+        "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf";
       const pdfResponse = await fetch(pdfURL);
       const arrayBuffer = await pdfResponse.arrayBuffer();
       const pdfBase64 = Buffer.from(arrayBuffer).toString("base64");
@@ -487,11 +488,12 @@ const anthropic = new Anthropic();
 
 async function main() {
   // Upload the PDF file
-  const fileUpload = await anthropic.beta.files.upload({
-    file: toFile(fs.createReadStream("document.pdf"), undefined, { type: "application/pdf" })
-  }, {
-    betas: ["files-api-2025-04-14"]
-  });
+  const fileUpload = await anthropic.beta.files.upload(
+    {
+      file: toFile(fs.createReadStream("document.pdf"), undefined, { type: "application/pdf" })
+    },
+    { betas: ["files-api-2025-04-14"] }
+  );
 
   // Use the uploaded file in a message
   const response = await anthropic.beta.messages.create({

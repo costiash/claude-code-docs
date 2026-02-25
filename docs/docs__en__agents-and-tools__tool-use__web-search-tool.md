@@ -178,11 +178,13 @@ async function main() {
         content: "What's the weather in NYC?"
       }
     ],
-    tools: [{
-      type: "web_search_20250305",
-      name: "web_search",
-      max_uses: 5
-    }]
+    tools: [
+      {
+        type: "web_search_20250305",
+        name: "web_search",
+        max_uses: 5
+      }
+    ]
   });
 
   console.log(response);
@@ -454,7 +456,7 @@ print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
 
 With streaming enabled, you'll receive search events as part of the stream. There will be a pause while the search executes:
 
-```json
+```sse
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_abc123", "type": "message"}}
 

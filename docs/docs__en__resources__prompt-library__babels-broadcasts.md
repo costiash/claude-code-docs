@@ -100,7 +100,6 @@ Create compelling product announcement tweets in the world's 10 most spoken lang
       ]
     });
     console.log(msg);
-
     ```
 
     ```python AWS Bedrock Python
@@ -153,7 +152,6 @@ Create compelling product announcement tweets in the world's 10 most spoken lang
       ]
     });
     console.log(msg);
-
     ```
 
     ```python Vertex AI Python
@@ -204,6 +202,5 @@ Create compelling product announcement tweets in the world's 10 most spoken lang
       ]
     });
     console.log(msg);
-
     ```
 </CodeGroup>

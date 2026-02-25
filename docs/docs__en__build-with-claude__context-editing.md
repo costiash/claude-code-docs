@@ -145,9 +145,7 @@ const response = await anthropic.beta.messages.create({
     }
   ],
   context_management: {
-    edits: [
-      { type: "clear_tool_uses_20250919" }
-    ]
+    edits: [{ type: "clear_tool_uses_20250919" }]
   },
   betas: ["context-management-2025-06-27"]
 });
@@ -321,7 +319,7 @@ curl https://api.anthropic.com/v1/messages \
     --data '{
         "model": "claude-opus-4-6",
         "max_tokens": 1024,
-        "messages": [...],
+        "messages": [/* ... */],
         "thinking": {
             "type": "enabled",
             "budget_tokens": 10000
@@ -368,7 +366,9 @@ const anthropic = new Anthropic({
 const response = await anthropic.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  messages: [/* ... */],
+  messages: [
+    // ...
+  ],
   thinking: {
     type: "enabled",
     budget_tokens: 10000
@@ -400,8 +400,9 @@ The `clear_thinking_20251015` strategy supports the following configuration:
 
 **Example configurations:**
 
+Keep thinking blocks from the last 3 assistant turns:
+
 ```json
-// Keep thinking blocks from the last 3 assistant turns
 {
   "type": "clear_thinking_20251015",
   "keep": {
@@ -409,8 +410,11 @@ The `clear_thinking_20251015` strategy supports the following configuration:
     "value": 3
   }
 }
+```
 
-// Keep all thinking blocks (maximizes cache hits)
+Keep all thinking blocks (maximizes cache hits):
+
+```json
 {
   "type": "clear_thinking_20251015",
   "keep": "all"
@@ -455,12 +459,16 @@ response = client.beta.messages.create(
 const response = await anthropic.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  messages: [/* ... */],
+  messages: [
+    // ...
+  ],
   thinking: {
     type: "enabled",
     budget_tokens: 10000
   },
-  tools: [/* ... */],
+  tools: [
+    // ...
+  ],
   betas: ["context-management-2025-06-27"],
   context_management: {
     edits: [
@@ -505,27 +513,31 @@ You can see which context edits were applied to your request using the `context_
 
 ```json Response
 {
-    "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
-    "type": "message",
-    "role": "assistant",
-    "content": [...],
-    "usage": {...},
-    "context_management": {
-        "applied_edits": [
-            // When using `clear_thinking_20251015`
-            {
-                "type": "clear_thinking_20251015",
-                "cleared_thinking_turns": 3,
-                "cleared_input_tokens": 15000
-            },
-            // When using `clear_tool_uses_20250919`
-            {
-                "type": "clear_tool_uses_20250919",
-                "cleared_tool_uses": 8,
-                "cleared_input_tokens": 50000
-            }
-        ]
-    }
+  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    // ...
+  ],
+  "usage": {
+    // ...
+  },
+  "context_management": {
+    "applied_edits": [
+      // When using `clear_thinking_20251015`
+      {
+        "type": "clear_thinking_20251015",
+        "cleared_thinking_turns": 3,
+        "cleared_input_tokens": 15000
+      },
+      // When using `clear_tool_uses_20250919`
+      {
+        "type": "clear_tool_uses_20250919",
+        "cleared_tool_uses": 8,
+        "cleared_input_tokens": 50000
+      }
+    ]
+  }
 }
 ```
 
@@ -533,17 +545,19 @@ For streaming responses, the context edits will be included in the final `messag
 
 ```json Streaming Response
 {
-    "type": "message_delta",
-    "delta": {
-        "stop_reason": "end_turn",
-        "stop_sequence": null
-    },
-    "usage": {
-        "output_tokens": 1024
-    },
-    "context_management": {
-        "applied_edits": [...]
-    }
+  "type": "message_delta",
+  "delta": {
+    "stop_reason": "end_turn",
+    "stop_sequence": null
+  },
+  "usage": {
+    "output_tokens": 1024
+  },
+  "context_management": {
+    "applied_edits": [
+      // ...
+    ]
+  }
 }
 ```
 
@@ -625,7 +639,9 @@ const response = await anthropic.beta.messages.countTokens({
       content: "Continue our conversation..."
     }
   ],
-  tools: [/* ... */], // Your tool definitions
+  tools: [
+    // ...
+  ], // Your tool definitions
   betas: ["context-management-2025-06-27"],
   context_management: {
     edits: [
@@ -646,16 +662,18 @@ const response = await anthropic.beta.messages.countTokens({
 
 console.log(`Original tokens: ${response.context_management?.original_input_tokens}`);
 console.log(`After clearing: ${response.input_tokens}`);
-console.log(`Savings: ${(response.context_management?.original_input_tokens || 0) - response.input_tokens} tokens`);
+console.log(
+  `Savings: ${(response.context_management?.original_input_tokens || 0) - response.input_tokens} tokens`
+);
 ```
 </CodeGroup>
 
 ```json Response
 {
-    "input_tokens": 25000,
-    "context_management": {
-        "original_input_tokens": 70000
-    }
+  "input_tokens": 25000,
+  "context_management": {
+    "original_input_tokens": 70000
+  }
 }
 ```
 
@@ -701,7 +719,9 @@ const anthropic = new Anthropic({
 const response = await anthropic.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
-  messages: [/* ... */],
+  messages: [
+    // ...
+  ],
   tools: [
     {
       type: "memory_20250818",
@@ -711,9 +731,7 @@ const response = await anthropic.beta.messages.create({
   ],
   betas: ["context-management-2025-06-27"],
   context_management: {
-    edits: [
-      { type: "clear_tool_uses_20250919" }
-    ]
+    edits: [{ type: "clear_tool_uses_20250919" }]
   }
 });
 ```
@@ -779,7 +797,9 @@ const client = new Anthropic();
 const runner = client.beta.messages.toolRunner({
   model: "claude-opus-4-6",
   max_tokens: 4096,
-  tools: [/* ... */],
+  tools: [
+    // ...
+  ],
   messages: [
     {
       role: "user",
@@ -810,10 +830,16 @@ As the conversation grows, the message history accumulates:
 [
   { "role": "user", "content": "Analyze all files and write a report..." },
   { "role": "assistant", "content": "I'll help. Let me start by reading..." },
-  { "role": "user", "content": [{ "type": "tool_result", "tool_use_id": "...", "content": "..." }] },
+  {
+    "role": "user",
+    "content": [{ "type": "tool_result", "tool_use_id": "...", "content": "..." }]
+  },
   { "role": "assistant", "content": "Based on file1.txt, I see..." },
-  { "role": "user", "content": [{ "type": "tool_result", "tool_use_id": "...", "content": "..." }] },
-  { "role": "assistant", "content": "After analyzing file2.txt..." },
+  {
+    "role": "user",
+    "content": [{ "type": "tool_result", "tool_use_id": "...", "content": "..." }]
+  },
+  { "role": "assistant", "content": "After analyzing file2.txt..." }
   // ... 50 more exchanges like this ...
 ]
 ```
@@ -855,18 +881,22 @@ compaction_control = {"enabled": True, "context_token_threshold": 50000}
 compaction_control = {"enabled": True, "context_token_threshold": 150000}
 ```
 
-```typescript TypeScript
-// More frequent compaction for memory-constrained scenarios
-compactionControl: {
+```typescript TypeScript hidelines={1,7..9,-1}
+const _ = {
+  // More frequent compaction for memory-constrained scenarios
+  compactionControl: {
     enabled: true,
     contextTokenThreshold: 50000
-}
+  }
+};
 
-// Less frequent compaction when you need more context
-compactionControl: {
+const __ = {
+  // Less frequent compaction when you need more context
+  compactionControl: {
     enabled: true,
     contextTokenThreshold: 150000
-}
+  }
+};
 ```
 
 </CodeGroup>
@@ -885,12 +915,14 @@ compaction_control = {
 }
 ```
 
-```typescript TypeScript
-compactionControl: {
+```typescript TypeScript hidelines={1,-1}
+const _ = {
+  compactionControl: {
     enabled: true,
     contextTokenThreshold: 100000,
-    model: 'claude-haiku-4-5'
-}
+    model: "claude-haiku-4-5"
+  }
+};
 ```
 
 </CodeGroup>
@@ -914,8 +946,9 @@ Wrap your summary in <summary></summary> tags.""",
 }
 ```
 
-```typescript TypeScript
-compactionControl: {
+```typescript TypeScript hidelines={1,-1}
+const _ = {
+  compactionControl: {
     enabled: true,
     contextTokenThreshold: 100000,
     summaryPrompt: `Summarize the research conducted so far, including:
@@ -924,7 +957,8 @@ compactionControl: {
 - Recommended next steps
 
 Wrap your summary in <summary></summary> tags.`
-}
+  }
+};
 ```
 
 </CodeGroup>

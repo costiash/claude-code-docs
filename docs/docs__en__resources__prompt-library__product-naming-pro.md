@@ -65,7 +65,8 @@ Create catchy product names from descriptions and keywords.
       model: "claude-opus-4-6",
       max_tokens: 1000,
       temperature: 1,
-      system: "Your task is to generate creative, memorable, and marketable product names based on the provided description and keywords. The product names should be concise (2-4 words), evocative, and easily understood by the target audience. Avoid generic or overly literal names. Instead, aim to create a name that stands out, captures the essence of the product, and leaves a lasting impression.",
+      system:
+        "Your task is to generate creative, memorable, and marketable product names based on the provided description and keywords. The product names should be concise (2-4 words), evocative, and easily understood by the target audience. Avoid generic or overly literal names. Instead, aim to create a name that stands out, captures the essence of the product, and leaves a lasting impression.",
       messages: [
         {
           role: "user",
@@ -79,7 +80,6 @@ Create catchy product names from descriptions and keywords.
       ]
     });
     console.log(msg);
-
     ```
 
     ```python AWS Bedrock Python
@@ -120,7 +120,8 @@ Create catchy product names from descriptions and keywords.
       model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 1000,
       temperature: 1,
-      system: "Your task is to generate creative, memorable, and marketable product names based on the provided description and keywords. The product names should be concise (2-4 words), evocative, and easily understood by the target audience. Avoid generic or overly literal names. Instead, aim to create a name that stands out, captures the essence of the product, and leaves a lasting impression.",
+      system:
+        "Your task is to generate creative, memorable, and marketable product names based on the provided description and keywords. The product names should be concise (2-4 words), evocative, and easily understood by the target audience. Avoid generic or overly literal names. Instead, aim to create a name that stands out, captures the essence of the product, and leaves a lasting impression.",
       messages: [
         {
           role: "user",
@@ -134,7 +135,6 @@ Create catchy product names from descriptions and keywords.
       ]
     });
     console.log(msg);
-
     ```
 
     ```python Vertex AI Python
@@ -173,7 +173,8 @@ Create catchy product names from descriptions and keywords.
       model: "claude-sonnet-4@20250514",
       max_tokens: 1000,
       temperature: 1,
-      system: "Your task is to generate creative, memorable, and marketable product names based on the provided description and keywords. The product names should be concise (2-4 words), evocative, and easily understood by the target audience. Avoid generic or overly literal names. Instead, aim to create a name that stands out, captures the essence of the product, and leaves a lasting impression.",
+      system:
+        "Your task is to generate creative, memorable, and marketable product names based on the provided description and keywords. The product names should be concise (2-4 words), evocative, and easily understood by the target audience. Avoid generic or overly literal names. Instead, aim to create a name that stands out, captures the essence of the product, and leaves a lasting impression.",
       messages: [
         {
           role: "user",
@@ -187,6 +188,5 @@ Create catchy product names from descriptions and keywords.
       ]
     });
     console.log(msg);
-
     ```
 </CodeGroup>

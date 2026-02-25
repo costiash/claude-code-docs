@@ -65,10 +65,12 @@ const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
   inference_geo: "us",
-  messages: [{
-    role: "user",
-    content: "Summarize the key points of this document."
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Summarize the key points of this document."
+    }
+  ]
 });
 
 console.log(response.content[0].text);

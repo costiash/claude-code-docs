@@ -129,7 +129,8 @@ const response = await client.messages.create({
   messages: [
     {
       role: "user",
-      content: "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
+      content:
+        "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
     }
   ],
   output_config: {
@@ -426,7 +427,8 @@ const response = await client.messages.parse({
   messages: [
     {
       role: "user",
-      content: "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
+      content:
+        "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
     }
   ],
   output_config: { format: zodOutputFormat(ContactInfoSchema) }
@@ -1392,26 +1394,28 @@ const response = await client.messages.create({
       content: "What's the weather like in San Francisco?"
     }
   ],
-  tools: [{
-    name: "get_weather",
-    description: "Get the current weather in a given location",
-    strict: true, // Enable strict mode
-    input_schema: {
-      type: "object",
-      properties: {
-        location: {
-          type: "string",
-          description: "The city and state, e.g. San Francisco, CA"
+  tools: [
+    {
+      name: "get_weather",
+      description: "Get the current weather in a given location",
+      strict: true, // Enable strict mode
+      input_schema: {
+        type: "object",
+        properties: {
+          location: {
+            type: "string",
+            description: "The city and state, e.g. San Francisco, CA"
+          },
+          unit: {
+            type: "string",
+            enum: ["celsius", "fahrenheit"]
+          }
         },
-        unit: {
-          type: "string",
-          enum: ["celsius", "fahrenheit"]
-        }
-      },
-      required: ["location"],
-      additionalProperties: false
+        required: ["location"],
+        additionalProperties: false
+      }
     }
-  }]
+  ]
 });
 console.log(response.content);
 ```
@@ -1486,20 +1490,22 @@ response = client.messages.create(
 const response = await client.messages.create({
   model: "claude-opus-4-6",
   messages: [{ role: "user", content: "Search for flights to Tokyo" }],
-  tools: [{
-    name: "search_flights",
-    strict: true,
-    input_schema: {
-      type: "object",
-      properties: {
-        destination: { type: "string" },
-        departure_date: { type: "string", format: "date" },
-        passengers: { type: "integer", enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
-      },
-      required: ["destination", "departure_date"],
-      additionalProperties: false
+  tools: [
+    {
+      name: "search_flights",
+      strict: true,
+      input_schema: {
+        type: "object",
+        properties: {
+          destination: { type: "string" },
+          departure_date: { type: "string", format: "date" },
+          passengers: { type: "integer", enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
+        },
+        required: ["destination", "departure_date"],
+        additionalProperties: false
+      }
     }
-  }]
+  ]
 });
 ```
 
@@ -1666,19 +1672,21 @@ const response = await client.messages.create({
     }
   },
   // Strict tool use: guaranteed tool parameters
-  tools: [{
-    name: "search_flights",
-    strict: true,
-    input_schema: {
-      type: "object",
-      properties: {
-        destination: { type: "string" },
-        date: { type: "string", format: "date" }
-      },
-      required: ["destination", "date"],
-      additionalProperties: false
+  tools: [
+    {
+      name: "search_flights",
+      strict: true,
+      input_schema: {
+        type: "object",
+        properties: {
+          destination: { type: "string" },
+          date: { type: "string", format: "date" }
+        },
+        required: ["destination", "date"],
+        additionalProperties: false
+      }
     }
-  }]
+  ]
 });
 ```
 

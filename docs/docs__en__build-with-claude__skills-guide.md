@@ -118,14 +118,18 @@ const response = await client.beta.messages.create({
       }
     ]
   },
-  messages: [{
-    role: "user",
-    content: "Create a presentation about renewable energy"
-  }],
-  tools: [{
-    type: "code_execution_20250825",
-    name: "code_execution"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Create a presentation about renewable energy"
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20250825",
+      name: "code_execution"
+    }
+  ]
 });
 ```
 
@@ -233,14 +237,14 @@ const response = await client.beta.messages.create({
   max_tokens: 4096,
   betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
   container: {
-    skills: [
-      { type: "anthropic", skill_id: "xlsx", version: "latest" }
-    ]
+    skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
   },
-  messages: [{
-    role: "user",
-    content: "Create an Excel file with a simple budget spreadsheet"
-  }],
+  messages: [
+    {
+      role: "user",
+      content: "Create an Excel file with a simple budget spreadsheet"
+    }
+  ],
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]
 });
 
@@ -433,9 +437,7 @@ const response1 = await client.beta.messages.create({
   max_tokens: 4096,
   betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
   container: {
-    skills: [
-      { type: "anthropic", skill_id: "xlsx", version: "latest" }
-    ]
+    skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
   },
   messages: [{ role: "user", content: "Analyze this sales data" }],
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]
@@ -454,9 +456,7 @@ const response2 = await client.beta.messages.create({
   betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
   container: {
     id: response1.container.id, // Reuse container
-    skills: [
-      { type: "anthropic", skill_id: "xlsx", version: "latest" }
-    ]
+    skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
   },
   messages,
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]
@@ -524,9 +524,7 @@ let response = await client.beta.messages.create({
   max_tokens: 4096,
   betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
   container: {
-    skills: [
-      { type: "custom", skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv", version: "latest" }
-    ]
+    skills: [{ type: "custom", skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv", version: "latest" }]
   },
   messages,
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]
@@ -674,14 +672,18 @@ const response = await client.beta.messages.create({
       }
     ]
   },
-  messages: [{
-    role: "user",
-    content: "Analyze sales data and create a presentation"
-  }],
-  tools: [{
-    type: "code_execution_20250825",
-    name: "code_execution"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Analyze sales data and create a presentation"
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20250825",
+      name: "code_execution"
+    }
+  ]
 });
 ```
 
@@ -786,12 +788,7 @@ const client = new Anthropic();
 // Option 1: Using a zip file
 const skill = await client.beta.skills.create({
   displayTitle: "Financial Analysis",
-  files: [
-    await toFile(
-      fs.createReadStream("financial_analysis_skill.zip"),
-      "skill.zip"
-    )
-  ],
+  files: [await toFile(fs.createReadStream("financial_analysis_skill.zip"), "skill.zip")],
   betas: ["skills-2025-10-02"]
 });
 
@@ -799,11 +796,9 @@ const skill = await client.beta.skills.create({
 const skill = await client.beta.skills.create({
   displayTitle: "Financial Analysis",
   files: [
-    await toFile(
-      fs.createReadStream("financial_skill/SKILL.md"),
-      "financial_skill/SKILL.md",
-      { type: "text/markdown" }
-    ),
+    await toFile(fs.createReadStream("financial_skill/SKILL.md"), "financial_skill/SKILL.md", {
+      type: "text/markdown"
+    }),
     await toFile(
       fs.createReadStream("financial_skill/analyze.py"),
       "financial_skill/analyze.py",
@@ -904,10 +899,9 @@ print(f"Created: {skill.created_at}")
 ```
 
 ```typescript TypeScript
-const skill = await client.beta.skills.retrieve(
-  "skill_01AbCdEfGhIjKlMnOpQrStUv",
-  { betas: ["skills-2025-10-02"] }
-);
+const skill = await client.beta.skills.retrieve("skill_01AbCdEfGhIjKlMnOpQrStUv", {
+  betas: ["skills-2025-10-02"]
+});
 
 console.log(`Skill: ${skill.display_title}`);
 console.log(`Latest version: ${skill.latest_version}`);
@@ -948,24 +942,20 @@ client.beta.skills.delete(
 
 ```typescript TypeScript
 // Step 1: Delete all versions
-const versions = await client.beta.skills.versions.list(
-  "skill_01AbCdEfGhIjKlMnOpQrStUv",
-  { betas: ["skills-2025-10-02"] }
-);
+const versions = await client.beta.skills.versions.list("skill_01AbCdEfGhIjKlMnOpQrStUv", {
+  betas: ["skills-2025-10-02"]
+});
 
 for (const version of versions.data) {
-  await client.beta.skills.versions.delete(
-    "skill_01AbCdEfGhIjKlMnOpQrStUv",
-    version.version,
-    { betas: ["skills-2025-10-02"] }
-  );
+  await client.beta.skills.versions.delete("skill_01AbCdEfGhIjKlMnOpQrStUv", version.version, {
+    betas: ["skills-2025-10-02"]
+  });
 }
 
 // Step 2: Delete the Skill
-await client.beta.skills.delete(
-  "skill_01AbCdEfGhIjKlMnOpQrStUv",
-  { betas: ["skills-2025-10-02"] }
-);
+await client.beta.skills.delete("skill_01AbCdEfGhIjKlMnOpQrStUv", {
+  betas: ["skills-2025-10-02"]
+});
 ```
 
 ```bash Shell
@@ -1045,15 +1035,10 @@ response = client.beta.messages.create(
 // Create a new version using a zip file
 const fs = require("fs");
 
-const newVersion = await client.beta.skills.versions.create(
-  "skill_01AbCdEfGhIjKlMnOpQrStUv",
-  {
-    files: [
-      fs.createReadStream("updated_skill.zip")
-    ],
-    betas: ["skills-2025-10-02"]
-  }
-);
+const newVersion = await client.beta.skills.versions.create("skill_01AbCdEfGhIjKlMnOpQrStUv", {
+  files: [fs.createReadStream("updated_skill.zip")],
+  betas: ["skills-2025-10-02"]
+});
 
 // Use specific version
 const response = await client.beta.messages.create({
@@ -1061,11 +1046,13 @@ const response = await client.beta.messages.create({
   max_tokens: 4096,
   betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
   container: {
-    skills: [{
-      type: "custom",
-      skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
-      version: newVersion.version
-    }]
+    skills: [
+      {
+        type: "custom",
+        skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+        version: newVersion.version
+      }
+    ]
   },
   messages: [{ role: "user", content: "Use updated Skill" }],
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]
@@ -1077,11 +1064,13 @@ const response = await client.beta.messages.create({
   max_tokens: 4096,
   betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
   container: {
-    skills: [{
-      type: "custom",
-      skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
-      version: "latest"
-    }]
+    skills: [
+      {
+        type: "custom",
+        skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+        version: "latest"
+      }
+    ]
   },
   messages: [{ role: "user", content: "Use latest Skill version" }],
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]
@@ -1236,9 +1225,7 @@ import fs from "fs";
 
 const dcfSkill = await client.beta.skills.create({
   displayTitle: "DCF Analysis",
-  files: [
-    await toFile(fs.createReadStream("dcf_skill.zip"), "skill.zip")
-  ],
+  files: [await toFile(fs.createReadStream("dcf_skill.zip"), "skill.zip")],
   betas: ["skills-2025-10-02"]
 });
 
@@ -1253,10 +1240,12 @@ const response = await client.beta.messages.create({
       { type: "custom", skill_id: dcfSkill.id, version: "latest" }
     ]
   },
-  messages: [{
-    role: "user",
-    content: "Build a DCF valuation model for a SaaS company with the attached financials"
-  }],
+  messages: [
+    {
+      role: "user",
+      content: "Build a DCF valuation model for a SaaS company with the attached financials"
+    }
+  ],
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]
 });
 ```
@@ -1425,9 +1414,7 @@ const response1 = await client.beta.messages.create({
   max_tokens: 4096,
   betas: ["code-execution-2025-08-25", "skills-2025-10-02", "prompt-caching-2024-07-31"],
   container: {
-    skills: [
-      { type: "anthropic", skill_id: "xlsx", version: "latest" }
-    ]
+    skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
   },
   messages: [{ role: "user", content: "Analyze sales data" }],
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]

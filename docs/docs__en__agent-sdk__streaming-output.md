@@ -97,7 +97,7 @@ type SDKPartialAssistantMessage = {
   parent_tool_use_id: string | null;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 </CodeGroup>

@@ -48,9 +48,7 @@ const anthropic = new Anthropic();
 const msg = await anthropic.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  messages: [
-    { role: "user", content: "Hello, Claude" }
-  ],
+  messages: [{ role: "user", content: "Hello, Claude" }],
   betas: ["files-api-2025-04-14"]
 });
 ```

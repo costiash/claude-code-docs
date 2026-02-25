@@ -112,7 +112,9 @@ The final `result` message contains the total cumulative usage from all steps in
 // Final result includes total usage
 const result = await query({
   prompt: "Multi-step task",
-  options: { /* ... */ }
+  options: {
+    // ...
+  }
 });
 
 console.log("Total usage:", result.usage);
@@ -126,14 +128,14 @@ The result message also includes `modelUsage`, which provides authoritative per-
 ```typescript
 // modelUsage provides per-model breakdown
 type ModelUsage = {
-  inputTokens: number
-  outputTokens: number
-  cacheReadInputTokens: number
-  cacheCreationInputTokens: number
-  webSearchRequests: number
-  costUSD: number
-  contextWindow: number
-}
+  inputTokens: number;
+  outputTokens: number;
+  cacheReadInputTokens: number;
+  cacheCreationInputTokens: number;
+  webSearchRequests: number;
+  costUSD: number;
+  contextWindow: number;
+};
 
 // Access from result message
 const result = await query({ prompt: "..." });
@@ -342,11 +344,14 @@ Here's how to aggregate usage data for a billing dashboard:
 
 ```typescript
 class BillingAggregator {
-  private userUsage = new Map<string, {
-    totalTokens: number;
-    totalCost: number;
-    conversations: number;
-  }>();
+  private userUsage = new Map<
+    string,
+    {
+      totalTokens: number;
+      totalCost: number;
+      conversations: number;
+    }
+  >();
 
   async processUserRequest(userId: string, prompt: string) {
     const tracker = new CostTracker();
@@ -359,8 +364,9 @@ class BillingAggregator {
       conversations: 0
     };
 
-    const totalTokens = stepUsages.reduce((sum, step) =>
-      sum + step.usage.input_tokens + step.usage.output_tokens, 0
+    const totalTokens = stepUsages.reduce(
+      (sum, step) => sum + step.usage.input_tokens + step.usage.output_tokens,
+      0
     );
 
     this.userUsage.set(userId, {
@@ -373,11 +379,13 @@ class BillingAggregator {
   }
 
   getUserBilling(userId: string) {
-    return this.userUsage.get(userId) || {
-      totalTokens: 0,
-      totalCost: 0,
-      conversations: 0
-    };
+    return (
+      this.userUsage.get(userId) || {
+        totalTokens: 0,
+        totalCost: 0,
+        conversations: 0
+      }
+    );
   }
 }
 ```

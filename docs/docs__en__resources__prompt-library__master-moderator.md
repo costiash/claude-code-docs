@@ -69,7 +69,6 @@ Evaluate user inputs for potential harmful or illegal content.
       ]
     });
     console.log(msg);
-
     ```
 
     ```python AWS Bedrock Python
@@ -122,7 +121,6 @@ Evaluate user inputs for potential harmful or illegal content.
       ]
     });
     console.log(msg);
-
     ```
 
     ```python Vertex AI Python
@@ -173,7 +171,6 @@ Evaluate user inputs for potential harmful or illegal content.
       ]
     });
     console.log(msg);
-
     ```
 
 </CodeGroup>

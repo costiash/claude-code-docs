@@ -52,10 +52,12 @@ const client = new Anthropic();
 const response = await client.messages.countTokens({
   model: "claude-opus-4-6",
   system: "You are a scientist",
-  messages: [{
-    role: "user",
-    content: "Hello, Claude"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Hello, Claude"
+    }
+  ]
 });
 
 console.log(response);
@@ -328,9 +330,10 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
-const image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+const image_url =
+  "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
 const image_media_type = "image/jpeg";
-const image_array_buffer = await ((await fetch(image_url)).arrayBuffer());
+const image_array_buffer = await (await fetch(image_url)).arrayBuffer();
 const image_data = Buffer.from(image_array_buffer).toString("base64");
 
 const response = await anthropic.messages.countTokens({
@@ -524,8 +527,10 @@ const response = await client.messages.countTokens({
       content: [
         {
           type: "thinking",
-          thinking: "This is a nice number theory question. Let's think about it step by step...",
-          signature: "EuYBCkQYAiJAgCs1le6/Pol5Z4/JMomVOouGrWdhYNsH3ukzUECbB6iWrSQtsQuRHJID6lWV..."
+          thinking:
+            "This is a nice number theory question. Let's think about it step by step...",
+          signature:
+            "EuYBCkQYAiJAgCs1le6/Pol5Z4/JMomVOouGrWdhYNsH3ukzUECbB6iWrSQtsQuRHJID6lWV..."
         },
         {
           type: "text",
@@ -672,23 +677,25 @@ const pdfBase64 = await readFile("document.pdf", { encoding: "base64" });
 
 const response = await client.messages.countTokens({
   model: "claude-opus-4-6",
-  messages: [{
-    role: "user",
-    content: [
-      {
-        type: "document",
-        source: {
-          type: "base64",
-          media_type: "application/pdf",
-          data: pdfBase64
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "document",
+          source: {
+            type: "base64",
+            media_type: "application/pdf",
+            data: pdfBase64
+          }
+        },
+        {
+          type: "text",
+          text: "Please summarize this document."
         }
-      },
-      {
-        type: "text",
-        text: "Please summarize this document."
-      }
-    ]
-  }]
+      ]
+    }
+  ]
 });
 
 console.log(response);

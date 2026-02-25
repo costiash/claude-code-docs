@@ -111,11 +111,11 @@ The response you would get is a JSON object containing the embeddings and the to
   "object": "list",
   "data": [
     {
-      "embedding": [-0.013131560757756233, 0.019828535616397858, ...],
+      "embedding": [-0.013131560757756233, 0.019828535616397858 /* ... */],
       "index": 0
     },
     {
-      "embedding": [-0.0069352793507277966, 0.020878976210951805, ...],
+      "embedding": [-0.0069352793507277966, 0.020878976210951805 /* ... */],
       "index": 1
     }
   ],
@@ -124,7 +124,6 @@ The response you would get is a JSON object containing the embeddings and the to
     "total_tokens": 10
   }
 }
-
 ```
 
 For more information on the Voyage HTTP API, see [the Voyage documentation](https://docs.voyageai.com/reference/embeddings-api).

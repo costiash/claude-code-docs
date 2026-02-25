@@ -118,10 +118,12 @@ const response = await client.messages.create({
     type: "enabled",
     budget_tokens: 10000
   },
-  messages: [{
-    role: "user",
-    content: "Are there an infinite number of prime numbers such that n mod 4 == 3?"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Are there an infinite number of prime numbers such that n mod 4 == 3?"
+    }
+  ]
 });
 
 // The response will contain summarized thinking blocks and text blocks
@@ -255,10 +257,12 @@ const stream = await client.messages.stream({
     type: "enabled",
     budget_tokens: 10000
   },
-  messages: [{
-    role: "user",
-    content: "What is the greatest common divisor of 1071 and 462?"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "What is the greatest common divisor of 1071 and 462?"
+    }
+  ]
 });
 
 let thinkingStarted = false;
@@ -297,7 +301,7 @@ for await (const event of stream) {
 </TryInConsoleButton>
 
 Example streaming output:
-```json
+```sse
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-sonnet-4-6", "stop_reason": null, "stop_sequence": null}}
 
@@ -448,9 +452,7 @@ const response = await client.messages.create({
     budget_tokens: 10000
   },
   tools: [weatherTool],
-  messages: [
-    { role: "user", content: "What's the weather in Paris?" }
-  ]
+  messages: [{ role: "user", content: "What's the weather in Paris?" }]
 });
 ```
 
@@ -460,25 +462,25 @@ The API response will include thinking, text, and tool_use blocks:
 
 ```json
 {
-    "content": [
-        {
-            "type": "thinking",
-            "thinking": "The user wants to know the current weather in Paris. I have access to a function `get_weather`...",
-            "signature": "BDaL4VrbR2Oj0hO4XpJxT28J5TILnCrrUXoKiiNBZW9P+nr8XSj1zuZzAl4egiCCpQNvfyUuFFJP5CncdYZEQPPmLxYsNrcs...."
-        },
-        {
-            "type": "text",
-            "text": "I can help you get the current weather information for Paris. Let me check that for you"
-        },
-        {
-            "type": "tool_use",
-            "id": "toolu_01CswdEQBMshySk6Y9DFKrfq",
-            "name": "get_weather",
-            "input": {
-                "location": "Paris"
-            }
-        }
-    ]
+  "content": [
+    {
+      "type": "thinking",
+      "thinking": "The user wants to know the current weather in Paris. I have access to a function `get_weather`...",
+      "signature": "BDaL4VrbR2Oj0hO4XpJxT28J5TILnCrrUXoKiiNBZW9P+nr8XSj1zuZzAl4egiCCpQNvfyUuFFJP5CncdYZEQPPmLxYsNrcs...."
+    },
+    {
+      "type": "text",
+      "text": "I can help you get the current weather information for Paris. Let me check that for you"
+    },
+    {
+      "type": "tool_use",
+      "id": "toolu_01CswdEQBMshySk6Y9DFKrfq",
+      "name": "get_weather",
+      "input": {
+        "location": "Paris"
+      }
+    }
+  ]
 }
 ```
 
@@ -526,10 +528,8 @@ continuation = client.messages.create(
 
 ```typescript TypeScript
 // Extract thinking block and tool use block
-const thinkingBlock = response.content.find(block =>
-  block.type === "thinking");
-const toolUseBlock = response.content.find(block =>
-  block.type === "tool_use");
+const thinkingBlock = response.content.find((block) => block.type === "thinking");
+const toolUseBlock = response.content.find((block) => block.type === "tool_use");
 
 // Call your actual weather API, here is where your actual API call would go
 // let's pretend this is what we get back
@@ -550,11 +550,16 @@ const continuation = await client.messages.create({
     // notice that the thinkingBlock is passed in as well as the toolUseBlock
     // if this is not passed in, an error is raised
     { role: "assistant", content: [thinkingBlock, toolUseBlock] },
-    { role: "user", content: [{
-      type: "tool_result",
-      tool_use_id: toolUseBlock.id,
-      content: `Current temperature: ${weatherData.temperature}°F`
-    }] }
+    {
+      role: "user",
+      content: [
+        {
+          type: "tool_result",
+          tool_use_id: toolUseBlock.id,
+          content: `Current temperature: ${weatherData.temperature}°F`
+        }
+      ]
+    }
   ]
 });
 ```
@@ -565,12 +570,12 @@ The API response will now **only** include text
 
 ```json
 {
-    "content": [
-        {
-            "type": "text",
-            "text": "Currently in Paris, the temperature is 88°F (31°C)"
-        }
-    ]
+  "content": [
+    {
+      "type": "text",
+      "text": "Currently in Paris, the temperature is 88°F (31°C)"
+    }
+  ]
 }
 ```
 
@@ -853,9 +858,9 @@ async function fetchArticleContent(url: string): Promise<string> {
   let text = $.text();
 
   // Break into lines and remove leading and trailing space on each
-  const lines = text.split("\n").map(line => line.trim());
+  const lines = text.split("\n").map((line) => line.trim());
   // Drop blank lines
-  text = lines.filter(line => line.length > 0).join("\n");
+  text = lines.filter((line) => line.length > 0).join("\n");
 
   return text;
 }
@@ -1058,9 +1063,9 @@ async function fetchArticleContent(url: string): Promise<string> {
   let text = $.text();
 
   // Clean up text (break into lines, remove whitespace)
-  const lines = text.split("\n").map(line => line.trim());
-  const chunks = lines.flatMap(line => line.split("  ").map(phrase => phrase.trim()));
-  text = chunks.filter(chunk => chunk).join("\n");
+  const lines = text.split("\n").map((line) => line.trim());
+  const chunks = lines.flatMap((line) => line.split("  ").map((phrase) => phrase.trim()));
+  text = chunks.filter((chunk) => chunk).join("\n");
 
   return text;
 }
@@ -1355,15 +1360,18 @@ const response = await client.messages.create({
     type: "enabled",
     budget_tokens: 10000
   },
-  messages: [{
-    role: "user",
-    content: "ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB"
-  }]
+  messages: [
+    {
+      role: "user",
+      content:
+        "ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB"
+    }
+  ]
 });
 
 // Identify redacted thinking blocks
 const hasRedactedThinking = response.content.some(
-  block => block.type === "redacted_thinking"
+  (block) => block.type === "redacted_thinking"
 );
 
 if (hasRedactedThinking) {
@@ -1372,7 +1380,7 @@ if (hasRedactedThinking) {
 
   // Extract all blocks (both redacted and non-redacted)
   const allThinkingBlocks = response.content.filter(
-    block => block.type === "thinking" || block.type === "redacted_thinking"
+    (block) => block.type === "thinking" || block.type === "redacted_thinking"
   );
 
   // When passing to subsequent requests, include all blocks without modification

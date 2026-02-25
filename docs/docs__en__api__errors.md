@@ -81,9 +81,7 @@ The official SDKs provide this value as a property on top-level response objects
   const message = await client.messages.create({
     model: "claude-opus-4-6",
     max_tokens: 1024,
-    messages: [
-      { role: "user", content: "Hello, Claude" }
-    ]
+    messages: [{ role: "user", content: "Hello, Claude" }]
   });
   console.log("Request ID:", message._request_id);
   ```

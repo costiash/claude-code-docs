@@ -476,9 +476,7 @@ You can implement your own tool search logic (e.g., using embeddings or semantic
 {
   "type": "tool_result",
   "tool_use_id": "toolu_your_tool_id",
-  "content": [
-    { "type": "tool_reference", "tool_name": "discovered_tool_name" }
-  ]
+  "content": [{ "type": "tool_reference", "tool_name": "discovered_tool_name" }]
 }
 ```
 
@@ -577,7 +575,7 @@ Errors during tool execution return a 200 response with error information in the
   "name": "my_tool",
   "description": "Full description here",
   "input_schema": {
-    /* complete schema */
+    // complete schema
   },
   "defer_loading": true
 }
@@ -673,7 +671,7 @@ The system automatically expands tool_reference blocks throughout the entire con
 
 With streaming enabled, you'll receive tool search events as part of the stream:
 
-```json
+```sse
 event: content_block_start
 data: {"type": "content_block_start", "index": 1, "content_block": {"type": "server_tool_use", "id": "srvtoolu_xyz789", "name": "tool_search_tool_regex"}}
 

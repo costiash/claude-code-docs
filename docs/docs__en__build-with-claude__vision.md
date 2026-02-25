@@ -137,7 +137,9 @@ async function getBase64Image(url: string): Promise<string> {
 
 // Usage
 async function prepareImages() {
-  const imageData = await getBase64Image("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg");
+  const imageData = await getBase64Image(
+    "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+  );
   // Now you can use imageData in your API calls
 }
 
@@ -607,11 +609,12 @@ const anthropic = new Anthropic();
 
 async function main() {
   // Upload the image file
-  const fileUpload = await anthropic.beta.files.upload({
-    file: toFile(fs.createReadStream("image.jpg"), undefined, { type: "image/jpeg" })
-  }, {
-    betas: ["files-api-2025-04-14"]
-  });
+  const fileUpload = await anthropic.beta.files.upload(
+    {
+      file: toFile(fs.createReadStream("image.jpg"), undefined, { type: "image/jpeg" })
+    },
+    { betas: ["files-api-2025-04-14"] }
+  );
 
   // Use the uploaded file in a message
   const response = await anthropic.beta.messages.create({

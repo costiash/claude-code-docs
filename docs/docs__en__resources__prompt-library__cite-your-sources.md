@@ -64,7 +64,8 @@ const msg = await anthropic.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 2000,
   temperature: 0,
-  system: "You are an expert research assistant. Here is a document you will answer questions about:  \n<doc>  \n[Full text of [Matterport SEC filing 10-K 2023](https://investors.matterport.com/node/9501/html), not pasted here for brevity]  \n</doc>  \n  \nFirst, find the quotes from the document that are most relevant to answering the question, and then print them in numbered order. Quotes should be relatively short.  \n  \nIf there are no relevant quotes, write \"No relevant quotes\" instead.  \n  \nThen, answer the question, starting with \"Answer:\". Do not include or reference quoted content verbatim in the answer. Don't say \"According to Quote [1]\" when answering. Instead make references to quotes relevant to each section of the answer solely by adding their bracketed numbers at the end of relevant sentences.  \n  \nThus, the format of your overall response should look like what's shown between the <example></example> tags. Make sure to follow the formatting and spacing exactly.  \n<example>  \nQuotes:  \n[1] \"Company X reported revenue of \$12 million in 2021.\"  \n[2] \"Almost 90% of revenue came from widget sales, with gadget sales making up the remaining 10%.\"  \n  \nAnswer:  \nCompany X earned \$12 million. [1] Almost 90% of it was from widget sales. [2]  \n</example>  \n  \nIf the question cannot be answered by the document, say so.",
+  system:
+    'You are an expert research assistant. Here is a document you will answer questions about:  \n<doc>  \n[Full text of [Matterport SEC filing 10-K 2023](https://investors.matterport.com/node/9501/html), not pasted here for brevity]  \n</doc>  \n  \nFirst, find the quotes from the document that are most relevant to answering the question, and then print them in numbered order. Quotes should be relatively short.  \n  \nIf there are no relevant quotes, write "No relevant quotes" instead.  \n  \nThen, answer the question, starting with "Answer:". Do not include or reference quoted content verbatim in the answer. Don\'t say "According to Quote [1]" when answering. Instead make references to quotes relevant to each section of the answer solely by adding their bracketed numbers at the end of relevant sentences.  \n  \nThus, the format of your overall response should look like what\'s shown between the <example></example> tags. Make sure to follow the formatting and spacing exactly.  \n<example>  \nQuotes:  \n[1] "Company X reported revenue of $12 million in 2021."  \n[2] "Almost 90% of revenue came from widget sales, with gadget sales making up the remaining 10%."  \n  \nAnswer:  \nCompany X earned $12 million. [1] Almost 90% of it was from widget sales. [2]  \n</example>  \n  \nIf the question cannot be answered by the document, say so.',
   messages: [
     {
       role: "user",
@@ -78,7 +79,6 @@ const msg = await anthropic.messages.create({
   ]
 });
 console.log(msg);
-
 ````
 
 </Tab>
@@ -122,7 +122,8 @@ const msg = await client.messages.create({
   model: "anthropic.claude-opus-4-6-v1",
   max_tokens: 2000,
   temperature: 0,
-  system: "You are an expert research assistant. Here is a document you will answer questions about:  \n<doc>  \n[Full text of [Matterport SEC filing 10-K 2023](https://investors.matterport.com/node/9501/html), not pasted here for brevity]  \n</doc>  \n  \nFirst, find the quotes from the document that are most relevant to answering the question, and then print them in numbered order. Quotes should be relatively short.  \n  \nIf there are no relevant quotes, write \"No relevant quotes\" instead.  \n  \nThen, answer the question, starting with \"Answer:\". Do not include or reference quoted content verbatim in the answer. Don't say \"According to Quote [1]\" when answering. Instead make references to quotes relevant to each section of the answer solely by adding their bracketed numbers at the end of relevant sentences.  \n  \nThus, the format of your overall response should look like what's shown between the <example></example> tags. Make sure to follow the formatting and spacing exactly.  \n<example>  \nQuotes:  \n[1] \"Company X reported revenue of \$12 million in 2021.\"  \n[2] \"Almost 90% of revenue came from widget sales, with gadget sales making up the remaining 10%.\"  \n  \nAnswer:  \nCompany X earned \$12 million. [1] Almost 90% of it was from widget sales. [2]  \n</example>  \n  \nIf the question cannot be answered by the document, say so.",
+  system:
+    'You are an expert research assistant. Here is a document you will answer questions about:  \n<doc>  \n[Full text of [Matterport SEC filing 10-K 2023](https://investors.matterport.com/node/9501/html), not pasted here for brevity]  \n</doc>  \n  \nFirst, find the quotes from the document that are most relevant to answering the question, and then print them in numbered order. Quotes should be relatively short.  \n  \nIf there are no relevant quotes, write "No relevant quotes" instead.  \n  \nThen, answer the question, starting with "Answer:". Do not include or reference quoted content verbatim in the answer. Don\'t say "According to Quote [1]" when answering. Instead make references to quotes relevant to each section of the answer solely by adding their bracketed numbers at the end of relevant sentences.  \n  \nThus, the format of your overall response should look like what\'s shown between the <example></example> tags. Make sure to follow the formatting and spacing exactly.  \n<example>  \nQuotes:  \n[1] "Company X reported revenue of $12 million in 2021."  \n[2] "Almost 90% of revenue came from widget sales, with gadget sales making up the remaining 10%."  \n  \nAnswer:  \nCompany X earned $12 million. [1] Almost 90% of it was from widget sales. [2]  \n</example>  \n  \nIf the question cannot be answered by the document, say so.',
   messages: [
     {
       role: "user",
@@ -136,7 +137,6 @@ const msg = await client.messages.create({
   ]
 });
 console.log(msg);
-
 ```
 
 </Tab>
@@ -178,7 +178,8 @@ const msg = await client.messages.create({
   model: "claude-sonnet-4@20250514",
   max_tokens: 2000,
   temperature: 0,
-  system: "You are an expert research assistant. Here is a document you will answer questions about:  \n<doc>  \n[Full text of [Matterport SEC filing 10-K 2023](https://investors.matterport.com/node/9501/html), not pasted here for brevity]  \n</doc>  \n  \nFirst, find the quotes from the document that are most relevant to answering the question, and then print them in numbered order. Quotes should be relatively short.  \n  \nIf there are no relevant quotes, write \"No relevant quotes\" instead.  \n  \nThen, answer the question, starting with \"Answer:\". Do not include or reference quoted content verbatim in the answer. Don't say \"According to Quote [1]\" when answering. Instead make references to quotes relevant to each section of the answer solely by adding their bracketed numbers at the end of relevant sentences.  \n  \nThus, the format of your overall response should look like what's shown between the <example></example> tags. Make sure to follow the formatting and spacing exactly.  \n<example>  \nQuotes:  \n[1] \"Company X reported revenue of \$12 million in 2021.\"  \n[2] \"Almost 90% of revenue came from widget sales, with gadget sales making up the remaining 10%.\"  \n  \nAnswer:  \nCompany X earned \$12 million. [1] Almost 90% of it was from widget sales. [2]  \n</example>  \n  \nIf the question cannot be answered by the document, say so.",
+  system:
+    'You are an expert research assistant. Here is a document you will answer questions about:  \n<doc>  \n[Full text of [Matterport SEC filing 10-K 2023](https://investors.matterport.com/node/9501/html), not pasted here for brevity]  \n</doc>  \n  \nFirst, find the quotes from the document that are most relevant to answering the question, and then print them in numbered order. Quotes should be relatively short.  \n  \nIf there are no relevant quotes, write "No relevant quotes" instead.  \n  \nThen, answer the question, starting with "Answer:". Do not include or reference quoted content verbatim in the answer. Don\'t say "According to Quote [1]" when answering. Instead make references to quotes relevant to each section of the answer solely by adding their bracketed numbers at the end of relevant sentences.  \n  \nThus, the format of your overall response should look like what\'s shown between the <example></example> tags. Make sure to follow the formatting and spacing exactly.  \n<example>  \nQuotes:  \n[1] "Company X reported revenue of $12 million in 2021."  \n[2] "Almost 90% of revenue came from widget sales, with gadget sales making up the remaining 10%."  \n  \nAnswer:  \nCompany X earned $12 million. [1] Almost 90% of it was from widget sales. [2]  \n</example>  \n  \nIf the question cannot be answered by the document, say so.',
   messages: [
     {
       role: "user",
@@ -192,7 +193,6 @@ const msg = await client.messages.create({
   ]
 });
 console.log(msg);
-
 ```
 
 </Tab>

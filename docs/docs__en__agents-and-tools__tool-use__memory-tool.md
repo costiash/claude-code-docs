@@ -176,13 +176,16 @@ const message = await anthropic.messages.create({
   messages: [
     {
       role: "user",
-      content: "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
+      content:
+        "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
     }
   ],
-  tools: [{
-    type: "memory_20250818",
-    name: "memory"
-  }]
+  tools: [
+    {
+      type: "memory_20250818",
+      name: "memory"
+    }
+  ]
 });
 ```
 
@@ -199,7 +202,7 @@ Shows directory contents or file contents with optional line ranges:
 {
   "command": "view",
   "path": "/memories",
-  "view_range": [1, 10]  // Optional: view specific lines
+  "view_range": [1, 10] // Optional: view specific lines
 }
 ```
 
@@ -472,7 +475,9 @@ const anthropic = new Anthropic({
 const response = await anthropic.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
-  messages: [/* ... */],
+  messages: [
+    // ...
+  ],
   tools: [
     {
       type: "memory_20250818",

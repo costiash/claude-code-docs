@@ -99,7 +99,7 @@ async function* generateMessages() {
   };
 
   // Wait for conditions or user input
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   // Follow-up with image
   yield {

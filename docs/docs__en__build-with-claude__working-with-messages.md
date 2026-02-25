@@ -48,9 +48,7 @@ This feature is [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data
   const message = await anthropic.messages.create({
     model: "claude-opus-4-6",
     max_tokens: 1024,
-    messages: [
-      { role: "user", content: "Hello, Claude" }
-    ]
+    messages: [{ role: "user", content: "Hello, Claude" }]
   });
   console.log(message);
   ```
@@ -135,21 +133,21 @@ await anthropic.messages.create({
 
 ```json JSON
 {
-    "id": "msg_018gCsTGsXkYJVqYPxTgDHBU",
-    "type": "message",
-    "role": "assistant",
-    "content": [
-        {
-            "type": "text",
-            "text": "Sure, I'd be happy to provide..."
-        }
-    ],
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 30,
-      "output_tokens": 309
+  "id": "msg_018gCsTGsXkYJVqYPxTgDHBU",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    {
+      "type": "text",
+      "text": "Sure, I'd be happy to provide..."
     }
+  ],
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "usage": {
+    "input_tokens": 30,
+    "output_tokens": 309
+  }
 }
 ```
 
@@ -201,7 +199,10 @@ You can pre-fill part of Claude's response in the last position of the input mes
     model: "claude-opus-4-6",
     max_tokens: 1,
     messages: [
-      { role: "user", content: "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae" },
+      {
+        role: "user",
+        content: "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"
+      },
       { role: "assistant", content: "The answer is (" }
     ]
   });
@@ -349,9 +350,10 @@ Claude can read both text and images in requests. Both `base64` and `url` source
   const anthropic = new Anthropic();
 
   // Option 1: Base64-encoded image
-  const image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+  const image_url =
+    "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
   const image_media_type = "image/jpeg";
-  const image_array_buffer = await ((await fetch(image_url)).arrayBuffer());
+  const image_array_buffer = await (await fetch(image_url)).arrayBuffer();
   const image_data = Buffer.from(image_array_buffer).toString("base64");
 
   const message = await anthropic.messages.create({

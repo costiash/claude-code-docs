@@ -58,7 +58,8 @@ Translate text from any language into any language.
       model: "claude-opus-4-6",
       max_tokens: 2000,
       temperature: 0.2,
-      system: "You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version.",
+      system:
+        "You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version.",
       messages: [
         {
           role: "user",
@@ -72,7 +73,6 @@ Translate text from any language into any language.
       ]
     });
     console.log(msg);
-
     ```
 
     ```python AWS Bedrock Python
@@ -113,7 +113,8 @@ Translate text from any language into any language.
       model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 2000,
       temperature: 0.2,
-      system: "You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version.",
+      system:
+        "You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version.",
       messages: [
         {
           role: "user",
@@ -127,7 +128,6 @@ Translate text from any language into any language.
       ]
     });
     console.log(msg);
-
     ```
 
     ```python Vertex AI Python
@@ -166,7 +166,8 @@ Translate text from any language into any language.
       model: "claude-sonnet-4@20250514",
       max_tokens: 2000,
       temperature: 0.2,
-      system: "You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version.",
+      system:
+        "You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version.",
       messages: [
         {
           role: "user",
@@ -180,6 +181,5 @@ Translate text from any language into any language.
       ]
     });
     console.log(msg);
-
     ```
 </CodeGroup>

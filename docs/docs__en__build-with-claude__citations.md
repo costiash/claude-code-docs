@@ -248,7 +248,8 @@ import Anthropic from "@anthropic-ai/sdk";
 const client = new Anthropic();
 
 // Long document content (e.g., technical documentation)
-const longDocument = "This is a very long document with thousands of words..." + " ... ".repeat(1000); // Minimum cacheable length
+const longDocument =
+  "This is a very long document with thousands of words..." + " ... ".repeat(1000); // Minimum cacheable length
 
 const response = await client.messages.create({
   model: "claude-opus-4-6",
@@ -548,7 +549,7 @@ For streaming responses, a `citations_delta` type is included that contains a si
 
 <section title="Example streaming events">
 
-```json
+```sse
 event: message_start
 data: {"type": "message_start", ...}
 

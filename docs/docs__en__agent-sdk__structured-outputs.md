@@ -39,11 +39,11 @@ To use this in your app, you'd need to parse out the title, convert "15 minutes"
   "prep_time_minutes": 15,
   "cook_time_minutes": 10,
   "ingredients": [
-    {"item": "all-purpose flour", "amount": 2.25, "unit": "cups"},
-    {"item": "butter, softened", "amount": 1, "unit": "cup"},
-    ...
+    { "item": "all-purpose flour", "amount": 2.25, "unit": "cups" },
+    { "item": "butter, softened", "amount": 1, "unit": "cup" }
+    // ...
   ],
-  "steps": ["Preheat oven to 375°F", "Cream butter and sugar", ...]
+  "steps": ["Preheat oven to 375°F", "Cream butter and sugar" /* ... */]
 }
 ```
 
@@ -140,22 +140,25 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
 const FeaturePlan = z.object({
   feature_name: z.string(),
   summary: z.string(),
-  steps: z.array(z.object({
-    step_number: z.number(),
-    description: z.string(),
-    estimated_complexity: z.enum(["low", "medium", "high"])
-  })),
+  steps: z.array(
+    z.object({
+      step_number: z.number(),
+      description: z.string(),
+      estimated_complexity: z.enum(["low", "medium", "high"])
+    })
+  ),
   risks: z.array(z.string())
 });
 
-type FeaturePlan = z.infer<typeof FeaturePlan>
+type FeaturePlan = z.infer<typeof FeaturePlan>;
 
 // Convert to JSON Schema
 const schema = z.toJSONSchema(FeaturePlan);
 
 // Use in query
 for await (const message of query({
-  prompt: "Plan how to add dark mode support to a React app. Break it into implementation steps.",
+  prompt:
+    "Plan how to add dark mode support to a React app. Break it into implementation steps.",
   options: {
     outputFormat: {
       type: "json_schema",
@@ -170,7 +173,7 @@ for await (const message of query({
       const plan: FeaturePlan = parsed.data;
       console.log(`Feature: ${plan.feature_name}`);
       console.log(`Summary: ${plan.summary}`);
-      plan.steps.forEach(step => {
+      plan.steps.forEach((step) => {
         console.log(`${step.step_number}. [${step.estimated_complexity}] ${step.description}`);
       });
     }
@@ -285,7 +288,7 @@ for await (const message of query({
   if (message.type === "result" && message.structured_output) {
     const data = message.structured_output;
     console.log(`Found ${data.total_count} TODOs`);
-    data.todos.forEach(todo => {
+    data.todos.forEach((todo) => {
       console.log(`${todo.file}:${todo.line} - ${todo.text}`);
       if (todo.author) {
         console.log(`  Added by ${todo.author} on ${todo.date}`);

@@ -43,16 +43,18 @@ Search results use the following structure:
 ```json
 {
   "type": "search_result",
-  "source": "https://example.com/article",  // Required: Source URL or identifier
-  "title": "Article Title",                  // Required: Title of the result
-  "content": [                               // Required: Array of text blocks
+  "source": "https://example.com/article", // Required: Source URL or identifier
+  "title": "Article Title", // Required: Title of the result
+  "content": [
+    // Required: Array of text blocks
     {
       "type": "text",
       "text": "The actual content of the search result..."
     }
   ],
-  "citations": {                             // Optional: Citation configuration
-    "enabled": true                          // Enable/disable citations for this result
+  "citations": {
+    // Optional: Citation configuration
+    "enabled": true // Enable/disable citations for this result
   }
 }
 ```
@@ -614,7 +616,7 @@ Add cache control for better performance:
   "type": "search_result",
   "source": "https://docs.company.com/guide",
   "title": "User Guide",
-  "content": [{"type": "text", "text": "..."}],
+  "content": [{ "type": "text", "text": "..." }],
   "cache_control": {
     "type": "ephemeral"
   }
@@ -630,9 +632,9 @@ By default, citations are disabled for search results. You can enable citations 
   "type": "search_result",
   "source": "https://docs.company.com/guide",
   "title": "User Guide",
-  "content": [{"type": "text", "text": "Important documentation..."}],
+  "content": [{ "type": "text", "text": "Important documentation..." }],
   "citations": {
-    "enabled": true  // Enable citations for this result
+    "enabled": true // Enable citations for this result
   }
 }
 ```

@@ -79,8 +79,8 @@ for await (const msg of session.stream()) {
   // Filter for assistant messages to get human-readable output
   if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === "text")
-      .map(block => block.text)
+      .filter((block) => block.type === "text")
+      .map((block) => block.text)
       .join("");
     console.log(text);
   }
@@ -103,8 +103,8 @@ const q = query({
 for await (const msg of q) {
   if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === "text")
-      .map(block => block.text)
+      .filter((block) => block.type === "text")
+      .map((block) => block.text)
       .join("");
     console.log(text);
   }
@@ -132,8 +132,8 @@ for await (const msg of session.stream()) {
   // Filter for assistant messages to get human-readable output
   if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === "text")
-      .map(block => block.text)
+      .filter((block) => block.type === "text")
+      .map((block) => block.text)
       .join("");
     console.log(text);
   }
@@ -144,8 +144,8 @@ await session.send("Multiply that by 2");
 for await (const msg of session.stream()) {
   if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === "text")
-      .map(block => block.text)
+      .filter((block) => block.type === "text")
+      .map((block) => block.text)
       .join("");
     console.log(text);
   }
@@ -183,8 +183,8 @@ const q = query({
 for await (const msg of q) {
   if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === "text")
-      .map(block => block.text)
+      .filter((block) => block.type === "text")
+      .map((block) => block.text)
       .join("");
     console.log(text);
   }
@@ -210,8 +210,8 @@ import {
 function getAssistantText(msg: SDKMessage): string | null {
   if (msg.type !== "assistant") return null;
   return msg.message.content
-    .filter(block => block.type === "text")
-    .map(block => block.text)
+    .filter((block) => block.type === "text")
+    .map((block) => block.text)
     .join("");
 }
 
@@ -263,8 +263,8 @@ for await (const msg of initialQuery) {
   sessionId = msg.session_id;
   if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === "text")
-      .map(block => block.text)
+      .filter((block) => block.type === "text")
+      .map((block) => block.text)
       .join("");
     console.log("Initial response:", text);
   }
@@ -284,8 +284,8 @@ const resumedQuery = query({
 for await (const msg of resumedQuery) {
   if (msg.type === "assistant") {
     const text = msg.message.content
-      .filter(block => block.type === "text")
-      .map(block => block.text)
+      .filter((block) => block.type === "text")
+      .map((block) => block.text)
       .join("");
     console.log("Resumed response:", text);
   }
@@ -331,7 +331,7 @@ Creates a new session for multi-turn conversations.
 function unstable_v2_createSession(options: {
   model: string;
   // Additional options supported
-}): Session
+}): Session;
 ```
 
 ### `unstable_v2_resumeSession()`
@@ -345,7 +345,7 @@ function unstable_v2_resumeSession(
     model: string;
     // Additional options supported
   }
-): Session
+): Session;
 ```
 
 ### `unstable_v2_prompt()`
@@ -359,7 +359,7 @@ function unstable_v2_prompt(
     model: string;
     // Additional options supported
   }
-): Promise<Result>
+): Promise<Result>;
 ```
 
 ### Session interface

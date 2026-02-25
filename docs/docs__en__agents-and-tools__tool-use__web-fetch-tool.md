@@ -197,11 +197,13 @@ async function main() {
         content: "Please analyze the content at https://example.com/article"
       }
     ],
-    tools: [{
-      type: "web_fetch_20250910",
-      name: "web_fetch",
-      max_uses: 5
-    }]
+    tools: [
+      {
+        type: "web_fetch_20250910",
+        name: "web_fetch",
+        max_uses: 5
+      }
+    ]
   });
 
   console.log(response);
@@ -315,7 +317,7 @@ Here's an example response structure:
             "data": "Full text content of the article..."
           },
           "title": "Article Title",
-          "citations": {"enabled": true}
+          "citations": { "enabled": true }
         },
         "retrieved_at": "2025-08-25T10:30:00Z"
       }
@@ -380,7 +382,7 @@ For PDF documents, the content will be returned as base64-encoded data:
         "media_type": "application/pdf",
         "data": "JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBvYmo..."
       },
-      "citations": {"enabled": true}
+      "citations": { "enabled": true }
     },
     "retrieved_at": "2025-08-25T10:30:02Z"
   }
@@ -510,7 +512,7 @@ print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
 
 With streaming enabled, fetch events are part of the stream with a pause during content retrieval:
 
-```json
+```sse
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_abc123", "type": "message"}}
 

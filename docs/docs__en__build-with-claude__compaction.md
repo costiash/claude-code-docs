@@ -111,11 +111,7 @@ const response = await client.beta.messages.create({
   max_tokens: 4096,
   messages,
   context_management: {
-    edits: [
-      {
-        type: "compact_20260112"
-      }
-    ]
+    edits: [{ type: "compact_20260112" }]
   }
 });
 
@@ -214,7 +210,8 @@ const response = await client.beta.messages.create({
     edits: [
       {
         type: "compact_20260112",
-        instructions: "Focus on preserving code snippets, variable names, and technical decisions."
+        instructions:
+          "Focus on preserving code snippets, variable names, and technical decisions."
       }
     ]
   }
@@ -473,18 +470,18 @@ Compaction works well with [prompt caching](/docs/en/build-with-claude/prompt-ca
 
 ```json
 {
-    "role": "assistant",
-    "content": [
-        {
-            "type": "compaction",
-            "content": "[summary text]",
-            "cache_control": {"type": "ephemeral"}
-        },
-        {
-            "type": "text",
-            "text": "Based on our conversation..."
-        }
-    ]
+  "role": "assistant",
+  "content": [
+    {
+      "type": "compaction",
+      "content": "[summary text]",
+      "cache_control": { "type": "ephemeral" }
+    },
+    {
+      "type": "text",
+      "text": "Based on our conversation..."
+    }
+  ]
 }
 ```
 
@@ -684,7 +681,7 @@ async function chat(userMessage: string): Promise<string> {
   messages.push({ role: "assistant", content: response.content });
 
   // Return the text content
-  const textBlock = response.content.find(block => block.type === "text");
+  const textBlock = response.content.find((block) => block.type === "text");
   return textBlock?.text ?? "";
 }
 
@@ -802,9 +799,7 @@ async function chat(userMessage: string): Promise<string> {
 
     // Preserve the last 2 messages (1 user + 1 assistant turn)
     // by including them after the compaction block
-    const preservedMessages = messages.length >= 2
-      ? messages.slice(-2)
-      : [...messages];
+    const preservedMessages = messages.length >= 2 ? messages.slice(-2) : [...messages];
 
     // Build new message list: compaction + preserved messages
     const messagesAfterCompaction: Anthropic.Beta.BetaMessageParam[] = [
@@ -831,7 +826,7 @@ async function chat(userMessage: string): Promise<string> {
   messages.push({ role: "assistant", content: response.content });
 
   // Return the text content
-  const textBlock = response.content.find(block => block.type === "text");
+  const textBlock = response.content.find((block) => block.type === "text");
   return textBlock?.text ?? "";
 }
 

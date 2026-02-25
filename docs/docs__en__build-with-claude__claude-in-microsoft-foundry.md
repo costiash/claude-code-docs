@@ -262,10 +262,7 @@ print(message.content)
 
 ```typescript TypeScript
 import AnthropicFoundry from "@anthropic-ai/foundry-sdk";
-import {
-  DefaultAzureCredential,
-  getBearerTokenProvider
-} from "@azure/identity";
+import { DefaultAzureCredential, getBearerTokenProvider } from "@azure/identity";
 
 // Get Entra ID token using token provider pattern
 const credential = new DefaultAzureCredential();

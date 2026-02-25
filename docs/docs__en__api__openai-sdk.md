@@ -58,9 +58,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
     });
 
     const response = await openai.chat.completions.create({
-      messages: [
-        { role: "user", content: "Who are you?" }
-      ],
+      messages: [{ role: "user", content: "Who are you?" }],
       model: "claude-opus-4-6" // Claude model name
     });
 
@@ -104,14 +102,11 @@ You can enable [extended thinking](/docs/en/build-with-claude/extended-thinking)
 
     ```typescript TypeScript
     const response = await openai.chat.completions.create({
-      messages: [
-        { role: "user", content: "Who are you?" }
-      ],
+      messages: [{ role: "user", content: "Who are you?" }],
       model: "claude-sonnet-4-6",
       // @ts-expect-error
       thinking: { type: "enabled", budget_tokens: 2000 }
     });
-
     ```
 </CodeGroup>
 

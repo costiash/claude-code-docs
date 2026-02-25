@@ -228,9 +228,7 @@ options = ClaudeAgentOptions(
 ```typescript TypeScript
 const options = {
   hooks: {
-    PreToolUse: [
-      { matcher: "Write|Edit", hooks: [validateFilePath] }
-    ]
+    PreToolUse: [{ matcher: "Write|Edit", hooks: [validateFilePath] }]
   }
 };
 ```

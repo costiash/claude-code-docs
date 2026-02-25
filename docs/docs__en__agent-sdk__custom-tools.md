@@ -29,14 +29,18 @@ const customServer = createSdkMcpServer({
         longitude: z.number().describe("Longitude coordinate")
       },
       async (args) => {
-        const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${args.latitude}&longitude=${args.longitude}&current=temperature_2m&temperature_unit=fahrenheit`);
+        const response = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${args.latitude}&longitude=${args.longitude}&current=temperature_2m&temperature_unit=fahrenheit`
+        );
         const data = await response.json();
 
         return {
-          content: [{
-            type: "text",
-            text: `Temperature: ${data.current.temperature_2m}°F`
-          }]
+          content: [
+            {
+              type: "text",
+              text: `Temperature: ${data.current.temperature_2m}°F`
+            }
+          ]
         };
       }
     )
@@ -182,9 +186,36 @@ const multiToolServer = createSdkMcpServer({
   name: "utilities",
   version: "1.0.0",
   tools: [
-    tool("calculate", "Perform calculations", { /* ... */ }, async (args) => { /* ... */ }),
-    tool("translate", "Translate text", { /* ... */ }, async (args) => { /* ... */ }),
-    tool("search_web", "Search the web", { /* ... */ }, async (args) => { /* ... */ })
+    tool(
+      "calculate",
+      "Perform calculations",
+      {
+        /* ... */
+      },
+      async (args) => {
+        // ...
+      }
+    ),
+    tool(
+      "translate",
+      "Translate text",
+      {
+        /* ... */
+      },
+      async (args) => {
+        // ...
+      }
+    ),
+    tool(
+      "search_web",
+      "Search the web",
+      {
+        /* ... */
+      },
+      async (args) => {
+        // ...
+      }
+    )
   ]
 });
 
@@ -312,10 +343,12 @@ tool(
 
     // Your processing logic here
     return {
-      content: [{
-        type: "text",
-        text: `Processed data for ${args.data.name}`
-      }]
+      content: [
+        {
+          type: "text",
+          text: `Processed data for ${args.data.name}`
+        }
+      ]
     };
   }
 );
@@ -395,26 +428,32 @@ tool(
 
       if (!response.ok) {
         return {
-          content: [{
-            type: "text",
-            text: `API error: ${response.status} ${response.statusText}`
-          }]
+          content: [
+            {
+              type: "text",
+              text: `API error: ${response.status} ${response.statusText}`
+            }
+          ]
         };
       }
 
       const data = await response.json();
       return {
-        content: [{
-          type: "text",
-          text: JSON.stringify(data, null, 2)
-        }]
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(data, null, 2)
+          }
+        ]
       };
     } catch (error) {
       return {
-        content: [{
-          type: "text",
-          text: `Failed to fetch data: ${error.message}`
-        }]
+        content: [
+          {
+            type: "text",
+            text: `Failed to fetch data: ${error.message}`
+          }
+        ]
       };
     }
   }
@@ -479,10 +518,12 @@ const databaseServer = createSdkMcpServer({
       async (args) => {
         const results = await db.query(args.query, args.params || []);
         return {
-          content: [{
-            type: "text",
-            text: `Found ${results.length} rows:\n${JSON.stringify(results, null, 2)}`
-          }]
+          content: [
+            {
+              type: "text",
+              text: `Found ${results.length} rows:\n${JSON.stringify(results, null, 2)}`
+            }
+          ]
         };
       }
     )
@@ -563,10 +604,12 @@ const apiGatewayServer = createSdkMcpServer({
 
         const data = await response.json();
         return {
-          content: [{
-            type: "text",
-            text: JSON.stringify(data, null, 2)
-          }]
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(data, null, 2)
+            }
+          ]
         };
       }
     )
@@ -672,17 +715,21 @@ const calculatorServer = createSdkMcpServer({
           const formatted = Number(result).toFixed(args.precision);
 
           return {
-            content: [{
-              type: "text",
-              text: `${args.expression} = ${formatted}`
-            }]
+            content: [
+              {
+                type: "text",
+                text: `${args.expression} = ${formatted}`
+              }
+            ]
           };
         } catch (error) {
           return {
-            content: [{
-              type: "text",
-              text: `Error: Invalid expression - ${error.message}`
-            }]
+            content: [
+              {
+                type: "text",
+                text: `Error: Invalid expression - ${error.message}`
+              }
+            ]
           };
         }
       }
@@ -701,17 +748,20 @@ const calculatorServer = createSdkMcpServer({
         const interest = amount - args.principal;
 
         return {
-          content: [{
-            type: "text",
-            text: "Investment Analysis:\n" +
-                  `Principal: $${args.principal.toFixed(2)}\n` +
-                  `Rate: ${(args.rate * 100).toFixed(2)}%\n` +
-                  `Time: ${args.time} years\n` +
-                  `Compounding: ${args.n} times per year\n\n` +
-                  `Final Amount: $${amount.toFixed(2)}\n` +
-                  `Interest Earned: $${interest.toFixed(2)}\n` +
-                  `Return: ${((interest / args.principal) * 100).toFixed(2)}%`
-          }]
+          content: [
+            {
+              type: "text",
+              text:
+                "Investment Analysis:\n" +
+                `Principal: $${args.principal.toFixed(2)}\n` +
+                `Rate: ${(args.rate * 100).toFixed(2)}%\n` +
+                `Time: ${args.time} years\n` +
+                `Compounding: ${args.n} times per year\n\n` +
+                `Final Amount: $${amount.toFixed(2)}\n` +
+                `Interest Earned: $${interest.toFixed(2)}\n` +
+                `Return: ${((interest / args.principal) * 100).toFixed(2)}%`
+            }
+          ]
         };
       }
     )

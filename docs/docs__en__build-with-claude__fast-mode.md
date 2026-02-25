@@ -76,10 +76,12 @@ const response = await client.beta.messages.create({
   max_tokens: 4096,
   speed: "fast",
   betas: ["fast-mode-2026-02-01"],
-  messages: [{
-    role: "user",
-    content: "Refactor this module to use dependency injection"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Refactor this module to use dependency injection"
+    }
+  ]
 });
 
 console.log(response.content[0].text);

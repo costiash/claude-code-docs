@@ -119,14 +119,18 @@ const response = await client.beta.messages.create({
       }
     ]
   },
-  messages: [{
-    role: "user",
-    content: "Create a presentation about renewable energy with 5 slides"
-  }],
-  tools: [{
-    type: "code_execution_20250825",
-    name: "code_execution"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Create a presentation about renewable energy with 5 slides"
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20250825",
+      name: "code_execution"
+    }
+  ]
 });
 
 console.log(response.content);
@@ -289,14 +293,18 @@ const response = await client.beta.messages.create({
       }
     ]
   },
-  messages: [{
-    role: "user",
-    content: "Create a quarterly sales tracking spreadsheet with sample data"
-  }],
-  tools: [{
-    type: "code_execution_20250825",
-    name: "code_execution"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Create a quarterly sales tracking spreadsheet with sample data"
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20250825",
+      name: "code_execution"
+    }
+  ]
 });
 ```
 
@@ -365,14 +373,18 @@ const response = await client.beta.messages.create({
       }
     ]
   },
-  messages: [{
-    role: "user",
-    content: "Write a 2-page report on the benefits of renewable energy"
-  }],
-  tools: [{
-    type: "code_execution_20250825",
-    name: "code_execution"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Write a 2-page report on the benefits of renewable energy"
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20250825",
+      name: "code_execution"
+    }
+  ]
 });
 ```
 
@@ -436,14 +448,18 @@ const response = await client.beta.messages.create({
       }
     ]
   },
-  messages: [{
-    role: "user",
-    content: "Generate a PDF invoice template"
-  }],
-  tools: [{
-    type: "code_execution_20250825",
-    name: "code_execution"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Generate a PDF invoice template"
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20250825",
+      name: "code_execution"
+    }
+  ]
 });
 ```
 

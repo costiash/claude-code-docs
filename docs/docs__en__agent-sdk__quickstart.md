@@ -221,11 +221,13 @@ options = ClaudeAgentOptions(
 )
 ```
 
-```typescript TypeScript
-options: {
-  allowedTools: ["Read", "Edit", "Glob", "WebSearch"],
-  permissionMode: "acceptEdits"
-}
+```typescript TypeScript hidelines={1,-1}
+const _ = {
+  options: {
+    allowedTools: ["Read", "Edit", "Glob", "WebSearch"],
+    permissionMode: "acceptEdits"
+  }
+};
 ```
 </CodeGroup>
 
@@ -240,12 +242,14 @@ options = ClaudeAgentOptions(
 )
 ```
 
-```typescript TypeScript
-options: {
-  allowedTools: ["Read", "Edit", "Glob"],
-  permissionMode: "acceptEdits",
-  systemPrompt: "You are a senior Python developer. Always follow PEP 8 style guidelines."
-}
+```typescript TypeScript hidelines={1,-1}
+const _ = {
+  options: {
+    allowedTools: ["Read", "Edit", "Glob"],
+    permissionMode: "acceptEdits",
+    systemPrompt: "You are a senior Python developer. Always follow PEP 8 style guidelines."
+  }
+};
 ```
 </CodeGroup>
 
@@ -258,11 +262,13 @@ options = ClaudeAgentOptions(
 )
 ```
 
-```typescript TypeScript
-options: {
-  allowedTools: ["Read", "Edit", "Glob", "Bash"],
-  permissionMode: "acceptEdits"
-}
+```typescript TypeScript hidelines={1,-1}
+const _ = {
+  options: {
+    allowedTools: ["Read", "Edit", "Glob", "Bash"],
+    permissionMode: "acceptEdits"
+  }
+};
 ```
 </CodeGroup>
 

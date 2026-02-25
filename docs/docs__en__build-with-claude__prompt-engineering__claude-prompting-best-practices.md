@@ -482,9 +482,9 @@ This is a very long task, so it may be beneficial to plan out your work clearly.
 // Structured state file (tests.json)
 {
   "tests": [
-    {"id": 1, "name": "authentication_flow", "status": "passing"},
-    {"id": 2, "name": "user_management", "status": "failing"},
-    {"id": 3, "name": "api_endpoints", "status": "not_started"}
+    { "id": 1, "name": "authentication_flow", "status": "passing" },
+    { "id": 2, "name": "user_management", "status": "failing" },
+    { "id": 3, "name": "api_endpoints", "status": "not_started" }
   ],
   "total": 200,
   "passing": 150,

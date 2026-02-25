@@ -382,33 +382,46 @@ Available in Claude Opus 4.6 and Claude Opus 4.5:
 
 <section title="Example actions">
 
+Take a screenshot:
+
 ```json
-// Take a screenshot
 {
   "action": "screenshot"
 }
+```
 
-// Click at position
+Click at position:
+
+```json
 {
   "action": "left_click",
   "coordinate": [500, 300]
 }
+```
 
-// Type text
+Type text:
+
+```json
 {
   "action": "type",
   "text": "Hello, world!"
 }
+```
 
-// Scroll down (Claude 4/3.7)
+Scroll down (Claude 4/3.7):
+
+```json
 {
   "action": "scroll",
   "coordinate": [500, 400],
   "scroll_direction": "down",
   "scroll_amount": 3
 }
+```
 
-// Zoom to view region in detail (Opus 4.5)
+Zoom to view region in detail (Opus 4.5):
+
+```json
 {
   "action": "zoom",
   "region": [100, 200, 400, 350]
@@ -421,29 +434,39 @@ Available in Claude Opus 4.6 and Claude Opus 4.5:
 
 To hold modifier keys (like Shift, Ctrl, or Alt) while performing click or scroll actions, use the `text` parameter on those actions. This is different from `hold_key`, which simply holds a key for a duration without performing other actions.
 
+Shift+click (e.g., for selecting a range of items):
+
 ```json
-// Shift+click (e.g., for selecting a range of items)
 {
   "action": "left_click",
   "coordinate": [500, 300],
   "text": "shift"
 }
+```
 
-// Ctrl+click (e.g., for multi-select on Windows/Linux)
+Ctrl+click (e.g., for multi-select on Windows/Linux):
+
+```json
 {
   "action": "left_click",
   "coordinate": [500, 300],
   "text": "ctrl"
 }
+```
 
-// Cmd+click (e.g., for multi-select on macOS)
+Cmd+click (e.g., for multi-select on macOS):
+
+```json
 {
   "action": "left_click",
   "coordinate": [500, 300],
   "text": "super"
 }
+```
 
-// Shift+scroll (e.g., for horizontal scrolling)
+Shift+scroll (e.g., for horizontal scrolling):
+
+```json
 {
   "action": "scroll",
   "coordinate": [500, 400],
@@ -478,10 +501,12 @@ Claude Sonnet 3.7 introduced a new "thinking" capability that allows you to see 
 
 To enable thinking, add a `thinking` parameter to your API request:
 
-```json
-"thinking": {
-  "type": "enabled",
-  "budget_tokens": 1024
+```json hidelines={1,-1}
+{
+  "thinking": {
+    "type": "enabled",
+    "budget_tokens": 1024
+  }
 }
 ```
 
@@ -667,7 +692,12 @@ const message = await anthropic.beta.messages.create({
       }
     }
   ],
-  messages: [{ role: "user", content: "Find flights from San Francisco to a place with warmer weather." }],
+  messages: [
+    {
+      role: "user",
+      content: "Find flights from San Francisco to a place with warmer weather."
+    }
+  ],
   betas: ["computer-use-2025-11-24"],
   thinking: { type: "enabled", budget_tokens: 1024 }
 });

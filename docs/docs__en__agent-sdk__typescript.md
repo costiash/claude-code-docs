@@ -29,7 +29,7 @@ function query({
 }: {
   prompt: string | AsyncIterable<SDKUserMessage>;
   options?: Options;
-}): Query
+}): Query;
 ```
 
 #### Parameters
@@ -53,7 +53,7 @@ function tool<Schema extends ZodRawShape>(
   description: string,
   inputSchema: Schema,
   handler: (args: z.infer<ZodObject<Schema>>, extra: unknown) => Promise<CallToolResult>
-): SdkMcpToolDefinition<Schema>
+): SdkMcpToolDefinition<Schema>;
 ```
 
 #### Parameters
@@ -74,7 +74,7 @@ function createSdkMcpServer(options: {
   name: string;
   version?: string;
   tools?: Array<SdkMcpToolDefinition<any>>;
-}): McpSdkServerConfigWithInstance
+}): McpSdkServerConfigWithInstance;
 ```
 
 #### Parameters
@@ -173,7 +173,7 @@ type AgentDefinition = {
   tools?: string[];
   prompt: string;
   model?: "sonnet" | "opus" | "haiku" | "inherit";
-}
+};
 ```
 
 | Field | Required | Description |
@@ -245,8 +245,12 @@ const result = query({
   prompt: "Review this PR",
   options: {
     // settingSources: [] is the default, no need to specify
-    agents: { /* ... */ },
-    mcpServers: { /* ... */ },
+    agents: {
+      // ...
+    },
+    mcpServers: {
+      // ...
+    },
     allowedTools: ["Read", "Grep", "Glob"]
   }
 });
@@ -284,7 +288,7 @@ type PermissionMode =
   | "default" // Standard permission behavior
   | "acceptEdits" // Auto-accept file edits
   | "bypassPermissions" // Bypass all permission checks
-  | "plan" // Planning mode - no execution
+  | "plan"; // Planning mode - no execution
 ```
 
 ### `CanUseTool`
@@ -317,7 +321,7 @@ type PermissionResult =
       behavior: "deny";
       message: string;
       interrupt?: boolean;
-    }
+    };
 ```
 
 ### `McpServerConfig`
@@ -340,7 +344,7 @@ type McpStdioServerConfig = {
   command: string;
   args?: string[];
   env?: Record<string, string>;
-}
+};
 ```
 
 #### `McpSSEServerConfig`
@@ -350,7 +354,7 @@ type McpSSEServerConfig = {
   type: "sse";
   url: string;
   headers?: Record<string, string>;
-}
+};
 ```
 
 #### `McpHttpServerConfig`
@@ -360,7 +364,7 @@ type McpHttpServerConfig = {
   type: "http";
   url: string;
   headers?: Record<string, string>;
-}
+};
 ```
 
 #### `McpSdkServerConfigWithInstance`
@@ -370,7 +374,7 @@ type McpSdkServerConfigWithInstance = {
   type: "sdk";
   name: string;
   instance: McpServer;
-}
+};
 ```
 
 ### `SdkPluginConfig`
@@ -381,7 +385,7 @@ Configuration for loading plugins in the SDK.
 type SdkPluginConfig = {
   type: "local";
   path: string;
-}
+};
 ```
 
 | Field | Type | Description |
@@ -427,7 +431,7 @@ type SDKAssistantMessage = {
   session_id: string;
   message: APIAssistantMessage; // From Anthropic SDK
   parent_tool_use_id: string | null;
-}
+};
 ```
 
 ### `SDKUserMessage`
@@ -441,7 +445,7 @@ type SDKUserMessage = {
   session_id: string;
   message: APIUserMessage; // From Anthropic SDK
   parent_tool_use_id: string | null;
-}
+};
 ```
 
 ### `SDKUserMessageReplay`
@@ -455,7 +459,7 @@ type SDKUserMessageReplay = {
   session_id: string;
   message: APIUserMessage;
   parent_tool_use_id: string | null;
-}
+};
 ```
 
 ### `SDKResultMessage`
@@ -498,7 +502,7 @@ type SDKResultMessage =
       modelUsage: { [modelName: string]: ModelUsage };
       permission_denials: SDKPermissionDenial[];
       errors: string[];
-    }
+    };
 ```
 
 ### `SDKSystemMessage`
@@ -522,7 +526,7 @@ type SDKSystemMessage = {
   permissionMode: PermissionMode;
   slash_commands: string[];
   output_style: string;
-}
+};
 ```
 
 ### `SDKPartialAssistantMessage`
@@ -536,7 +540,7 @@ type SDKPartialAssistantMessage = {
   parent_tool_use_id: string | null;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKCompactBoundaryMessage`
@@ -553,7 +557,7 @@ type SDKCompactBoundaryMessage = {
     trigger: "manual" | "auto";
     pre_tokens: number;
   };
-}
+};
 ```
 
 ### `SDKPermissionDenial`
@@ -565,7 +569,7 @@ type SDKPermissionDenial = {
   tool_name: string;
   tool_use_id: string;
   tool_input: ToolInput;
-}
+};
 ```
 
 ## Hook Types
@@ -645,7 +649,7 @@ type BaseHookInput = {
   transcript_path: string;
   cwd: string;
   permission_mode?: string;
-}
+};
 ```
 
 #### `PreToolUseHookInput`
@@ -655,7 +659,7 @@ type PreToolUseHookInput = BaseHookInput & {
   hook_event_name: "PreToolUse";
   tool_name: string;
   tool_input: unknown;
-}
+};
 ```
 
 #### `PostToolUseHookInput`
@@ -666,7 +670,7 @@ type PostToolUseHookInput = BaseHookInput & {
   tool_name: string;
   tool_input: unknown;
   tool_response: unknown;
-}
+};
 ```
 
 #### `PostToolUseFailureHookInput`
@@ -678,7 +682,7 @@ type PostToolUseFailureHookInput = BaseHookInput & {
   tool_input: unknown;
   error: string;
   is_interrupt?: boolean;
-}
+};
 ```
 
 #### `NotificationHookInput`
@@ -688,7 +692,7 @@ type NotificationHookInput = BaseHookInput & {
   hook_event_name: "Notification";
   message: string;
   title?: string;
-}
+};
 ```
 
 #### `UserPromptSubmitHookInput`
@@ -697,7 +701,7 @@ type NotificationHookInput = BaseHookInput & {
 type UserPromptSubmitHookInput = BaseHookInput & {
   hook_event_name: "UserPromptSubmit";
   prompt: string;
-}
+};
 ```
 
 #### `SessionStartHookInput`
@@ -706,7 +710,7 @@ type UserPromptSubmitHookInput = BaseHookInput & {
 type SessionStartHookInput = BaseHookInput & {
   hook_event_name: "SessionStart";
   source: "startup" | "resume" | "clear" | "compact";
-}
+};
 ```
 
 #### `SessionEndHookInput`
@@ -715,7 +719,7 @@ type SessionStartHookInput = BaseHookInput & {
 type SessionEndHookInput = BaseHookInput & {
   hook_event_name: "SessionEnd";
   reason: ExitReason; // String from EXIT_REASONS array
-}
+};
 ```
 
 #### `StopHookInput`
@@ -724,7 +728,7 @@ type SessionEndHookInput = BaseHookInput & {
 type StopHookInput = BaseHookInput & {
   hook_event_name: "Stop";
   stop_hook_active: boolean;
-}
+};
 ```
 
 #### `SubagentStartHookInput`
@@ -734,7 +738,7 @@ type SubagentStartHookInput = BaseHookInput & {
   hook_event_name: "SubagentStart";
   agent_id: string;
   agent_type: string;
-}
+};
 ```
 
 #### `SubagentStopHookInput`
@@ -743,7 +747,7 @@ type SubagentStartHookInput = BaseHookInput & {
 type SubagentStopHookInput = BaseHookInput & {
   hook_event_name: "SubagentStop";
   stop_hook_active: boolean;
-}
+};
 ```
 
 #### `PreCompactHookInput`
@@ -753,7 +757,7 @@ type PreCompactHookInput = BaseHookInput & {
   hook_event_name: "PreCompact";
   trigger: "manual" | "auto";
   custom_instructions: string | null;
-}
+};
 ```
 
 #### `PermissionRequestHookInput`
@@ -764,7 +768,7 @@ type PermissionRequestHookInput = BaseHookInput & {
   tool_name: string;
   tool_input: unknown;
   permission_suggestions?: PermissionUpdate[];
-}
+};
 ```
 
 ### `HookJSONOutput`
@@ -781,7 +785,7 @@ type HookJSONOutput = AsyncHookJSONOutput | SyncHookJSONOutput;
 type AsyncHookJSONOutput = {
   async: true;
   asyncTimeout?: number;
-}
+};
 ```
 
 #### `SyncHookJSONOutput`
@@ -813,7 +817,7 @@ type SyncHookJSONOutput = {
         hookEventName: "PostToolUse";
         additionalContext?: string;
       };
-}
+};
 ```
 
 ## Tool Input Types
@@ -1444,11 +1448,7 @@ Returns confirmation of successful edits with replacement count.
 **Tool name:** `Read`
 
 ```typescript
-type ReadOutput =
-  | TextFileOutput
-  | ImageFileOutput
-  | PDFFileOutput
-  | NotebookFileOutput;
+type ReadOutput = TextFileOutput | ImageFileOutput | PDFFileOutput | NotebookFileOutput;
 
 interface TextFileOutput {
   /**
@@ -1568,10 +1568,7 @@ Returns file paths matching the glob pattern, sorted by modification time.
 **Tool name:** `Grep`
 
 ```typescript
-type GrepOutput =
-  | GrepContentOutput
-  | GrepFilesOutput
-  | GrepCountOutput;
+type GrepOutput = GrepContentOutput | GrepFilesOutput | GrepCountOutput;
 
 interface GrepContentOutput {
   /**
@@ -1854,7 +1851,7 @@ type PermissionUpdate =
       type: "removeDirectories";
       directories: string[];
       destination: PermissionUpdateDestination;
-    }
+    };
 ```
 
 ### `PermissionBehavior`
@@ -1870,7 +1867,7 @@ type PermissionUpdateDestination =
   | "userSettings" // Global user settings
   | "projectSettings" // Per-directory project settings
   | "localSettings" // Gitignored local settings
-  | "session" // Current session only
+  | "session"; // Current session only
 ```
 
 ### `PermissionRuleValue`
@@ -1879,7 +1876,7 @@ type PermissionUpdateDestination =
 type PermissionRuleValue = {
   toolName: string;
   ruleContent?: string;
-}
+};
 ```
 
 ## Other Types
@@ -1911,7 +1908,7 @@ type SlashCommand = {
   name: string;
   description: string;
   argumentHint: string;
-}
+};
 ```
 
 ### `ModelInfo`
@@ -1923,7 +1920,7 @@ type ModelInfo = {
   value: string;
   displayName: string;
   description: string;
-}
+};
 ```
 
 ### `McpServerStatus`
@@ -1938,7 +1935,7 @@ type McpServerStatus = {
     name: string;
     version: string;
   };
-}
+};
 ```
 
 ### `AccountInfo`
@@ -1952,7 +1949,7 @@ type AccountInfo = {
   subscriptionType?: string;
   tokenSource?: string;
   apiKeySource?: string;
-}
+};
 ```
 
 ### `ModelUsage`
@@ -1968,7 +1965,7 @@ type ModelUsage = {
   webSearchRequests: number;
   costUSD: number;
   contextWindow: number;
-}
+};
 ```
 
 ### `ConfigScope`
@@ -1984,7 +1981,7 @@ A version of [`Usage`](#usage) with all nullable fields made non-nullable.
 ```typescript
 type NonNullableUsage = {
   [K in keyof Usage]: NonNullable<Usage[K]>;
-}
+};
 ```
 
 ### `Usage`
@@ -1997,7 +1994,7 @@ type Usage = {
   output_tokens: number | null;
   cache_creation_input_tokens?: number | null;
   cache_read_input_tokens?: number | null;
-}
+};
 ```
 
 ### `CallToolResult`
@@ -2011,7 +2008,7 @@ type CallToolResult = {
     // Additional fields vary by type
   }>;
   isError?: boolean;
-}
+};
 ```
 
 ### `AbortError`
@@ -2037,7 +2034,7 @@ type SandboxSettings = {
   network?: NetworkSandboxSettings;
   ignoreViolations?: SandboxIgnoreViolations;
   enableWeakerNestedSandbox?: boolean;
-}
+};
 ```
 
 | Property | Type | Default | Description |
@@ -2094,7 +2091,7 @@ type NetworkSandboxSettings = {
   allowAllUnixSockets?: boolean;
   httpProxyPort?: number;
   socksProxyPort?: number;
-}
+};
 ```
 
 | Property | Type | Default | Description |
@@ -2113,7 +2110,7 @@ Configuration for ignoring specific sandbox violations.
 type SandboxIgnoreViolations = {
   file?: string[];
   network?: string[];
-}
+};
 ```
 
 | Property | Type | Default | Description |

@@ -361,8 +361,7 @@ const getWeatherTool = betaZodTool({
   description: "Get the current weather in a given location",
   inputSchema: z.object({
     location: z.string().describe("The city and state, e.g. San Francisco, CA"),
-    unit: z.enum(["celsius", "fahrenheit"]).default("fahrenheit")
-      .describe("Temperature unit")
+    unit: z.enum(["celsius", "fahrenheit"]).default("fahrenheit").describe("Temperature unit")
   }),
   run: async (input) => {
     // In a full implementation, you'd call a weather API here
@@ -614,15 +613,13 @@ for await (const message of runner) {
   }
 
   // Customize the next request
-  runner.setMessagesParams(params => ({
+  runner.setMessagesParams((params) => ({
     ...params,
     max_tokens: 2048 // Increase tokens for next request
   }));
 
   // Or add additional messages
-  runner.pushMessages(
-    { role: "user", content: "Please be concise in your response." }
-  );
+  runner.pushMessages({ role: "user", content: "Please be concise in your response." });
 }
 ```
 
@@ -821,7 +818,9 @@ const runner = anthropic.beta.messages.toolRunner({
   model: "claude-opus-4-6",
   max_tokens: 1024,
   tools: [searchDocuments],
-  messages: [{ role: "user", content: "Search for information about the climate of San Francisco" }]
+  messages: [
+    { role: "user", content: "Search for information about the climate of San Francisco" }
+  ]
 });
 
 for await (const message of runner) {
@@ -1029,7 +1028,7 @@ For example, given the prompt "What's the weather like in San Francisco right no
       "type": "tool_use",
       "id": "toolu_01A09q90qw90lq917835lq9",
       "name": "get_weather",
-      "input": {"location": "San Francisco, CA"}
+      "input": { "location": "San Francisco, CA" }
     }
   ]
 }
@@ -1269,25 +1268,25 @@ The assistant message with parallel tool calls would look like this:
       "type": "tool_use",
       "id": "toolu_01",
       "name": "get_weather",
-      "input": {"location": "San Francisco, CA"}
+      "input": { "location": "San Francisco, CA" }
     },
     {
       "type": "tool_use",
       "id": "toolu_02",
       "name": "get_weather",
-      "input": {"location": "New York, NY"}
+      "input": { "location": "New York, NY" }
     },
     {
       "type": "tool_use",
       "id": "toolu_03",
       "name": "get_time",
-      "input": {"timezone": "America/Los_Angeles"}
+      "input": { "timezone": "America/Los_Angeles" }
     },
     {
       "type": "tool_use",
       "id": "toolu_04",
       "name": "get_time",
-      "input": {"timezone": "America/New_York"}
+      "input": { "timezone": "America/New_York" }
     }
   ]
 }
@@ -1455,20 +1454,22 @@ async function testParallelTools() {
   const response = await anthropic.messages.create({
     model: "claude-opus-4-6",
     max_tokens: 1024,
-    messages: [{
-      role: "user",
-      content: "What's the weather in SF and NYC, and what time is it there?"
-    }],
+    messages: [
+      {
+        role: "user",
+        content: "What's the weather in SF and NYC, and what time is it there?"
+      }
+    ],
     tools: tools
   });
 
   // Check for parallel tool calls
-  const toolUses = response.content.filter(block => block.type === "tool_use");
+  const toolUses = response.content.filter((block) => block.type === "tool_use");
   console.log(`\n✓ Claude made ${toolUses.length} tool calls`);
 
   if (toolUses.length > 1) {
     console.log("✓ Parallel tool calls detected!");
-    toolUses.forEach(tool => {
+    toolUses.forEach((tool) => {
       console.log(`  - ${tool.name}: ${JSON.stringify(tool.input)}`);
     });
   } else {
@@ -1476,16 +1477,14 @@ async function testParallelTools() {
   }
 
   // Simulate tool execution and format results correctly
-  const toolResults = toolUses.map(toolUse => {
+  const toolResults = toolUses.map((toolUse) => {
     let result;
     if (toolUse.name === "get_weather") {
       result = toolUse.input.location.includes("San Francisco")
         ? "San Francisco: 68°F, partly cloudy"
         : "New York: 45°F, clear skies";
     } else {
-      result = toolUse.input.timezone.includes("Los_Angeles")
-        ? "2:30 PM PST"
-        : "5:30 PM EST";
+      result = toolUse.input.timezone.includes("Los_Angeles") ? "2:30 PM PST" : "5:30 PM EST";
     }
 
     return {
@@ -1501,7 +1500,10 @@ async function testParallelTools() {
     model: "claude-opus-4-6",
     max_tokens: 1024,
     messages: [
-      { role: "user", content: "What's the weather in SF and NYC, and what time is it there?" },
+      {
+        role: "user",
+        content: "What's the weather in SF and NYC, and what time is it there?"
+      },
       { role: "assistant", content: response.content },
       { role: "user", content: toolResults } // All results in one message!
     ],
@@ -1611,7 +1613,7 @@ The response will have a `stop_reason` of `tool_use` and one or more `tool_use` 
       "type": "tool_use",
       "id": "toolu_01A09q90qw90lq917835lq9",
       "name": "get_weather",
-      "input": {"location": "San Francisco, CA", "unit": "celsius"}
+      "input": { "location": "San Francisco, CA", "unit": "celsius" }
     }
   ]
 }
@@ -1635,18 +1637,24 @@ When you receive a tool use response for a client tool, you should:
 
 For example, this will cause a 400 error:
 ```json
-{"role": "user", "content": [
-  {"type": "text", "text": "Here are the results:"},  // ❌ Text before tool_result
-  {"type": "tool_result", "tool_use_id": "toolu_01", ...}
-]}
+{
+  "role": "user",
+  "content": [
+    { "type": "text", "text": "Here are the results:" }, // ❌ Text before tool_result
+    { "type": "tool_result", "tool_use_id": "toolu_01" /* ... */ }
+  ]
+}
 ```
 
 This is correct:
 ```json
-{"role": "user", "content": [
-  {"type": "tool_result", "tool_use_id": "toolu_01", ...},
-  {"type": "text", "text": "What should I do next?"}  // ✅ Text after tool_result
-]}
+{
+  "role": "user",
+  "content": [
+    { "type": "tool_result", "tool_use_id": "toolu_01" /* ... */ },
+    { "type": "text", "text": "What should I do next?" } // ✅ Text after tool_result
+  ]
+}
 ```
 
 If you receive an error like "tool_use ids were found without tool_result blocks immediately after", check that your tool results are formatted correctly.
@@ -1679,13 +1687,13 @@ If you receive an error like "tool_use ids were found without tool_result blocks
       "type": "tool_result",
       "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
       "content": [
-        {"type": "text", "text": "15 degrees"},
+        { "type": "text", "text": "15 degrees" },
         {
           "type": "image",
           "source": {
             "type": "base64",
             "media_type": "image/jpeg",
-            "data": "/9j/4AAQSkZJRg...",
+            "data": "/9j/4AAQSkZJRg..."
           }
         }
       ]
@@ -1703,7 +1711,7 @@ If you receive an error like "tool_use ids were found without tool_result blocks
   "content": [
     {
       "type": "tool_result",
-      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9"
     }
   ]
 }
@@ -1721,7 +1729,7 @@ If you receive an error like "tool_use ids were found without tool_result blocks
       "type": "tool_result",
       "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
       "content": [
-        {"type": "text", "text": "The weather is"},
+        { "type": "text", "text": "The weather is" },
         {
           "type": "document",
           "source": {
@@ -1852,21 +1860,28 @@ const response = await anthropic.messages.create({
   messages: [
     {
       role: "user",
-      content: "Search for comprehensive information about quantum computing breakthroughs in 2025"
+      content:
+        "Search for comprehensive information about quantum computing breakthroughs in 2025"
     }
   ],
-  tools: [{
-    type: "web_search_20250305",
-    name: "web_search",
-    max_uses: 10
-  }]
+  tools: [
+    {
+      type: "web_search_20250305",
+      name: "web_search",
+      max_uses: 10
+    }
+  ]
 });
 
 // Check if the response has pause_turn stop reason
 if (response.stop_reason === "pause_turn") {
   // Continue the conversation with the paused content
   const messages = [
-    { role: "user", content: "Search for comprehensive information about quantum computing breakthroughs in 2025" },
+    {
+      role: "user",
+      content:
+        "Search for comprehensive information about quantum computing breakthroughs in 2025"
+    },
     { role: "assistant", content: response.content }
   ];
 
@@ -1875,11 +1890,13 @@ if (response.stop_reason === "pause_turn") {
     model: "claude-3-7-sonnet-latest",
     max_tokens: 1024,
     messages: messages,
-    tools: [{
-      type: "web_search_20250305",
-      name: "web_search",
-      max_uses: 10
-    }]
+    tools: [
+      {
+        type: "web_search_20250305",
+        name: "web_search",
+        max_uses: 10
+      }
+    ]
   });
 
   console.log(continuation);

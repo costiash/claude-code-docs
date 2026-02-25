@@ -58,7 +58,8 @@ Extract email addresses from a document into a JSON-formatted list.
       model: "claude-opus-4-6",
       max_tokens: 1000,
       temperature: 0,
-      system: "Precisely copy any email addresses from the following text and then write them, one per line. Only write an email address if it's precisely spelled out in the input text. If there are no email addresses in the text, write \"N/A\".  Do not say anything else.",
+      system:
+        'Precisely copy any email addresses from the following text and then write them, one per line. Only write an email address if it\'s precisely spelled out in the input text. If there are no email addresses in the text, write "N/A".  Do not say anything else.',
       messages: [
         {
           role: "user",
@@ -72,7 +73,6 @@ Extract email addresses from a document into a JSON-formatted list.
       ]
     });
     console.log(msg);
-
     ```
 
     ```python AWS Bedrock Python
@@ -113,7 +113,8 @@ Extract email addresses from a document into a JSON-formatted list.
       model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 1000,
       temperature: 0,
-      system: "Precisely copy any email addresses from the following text and then write them, one per line. Only write an email address if it's precisely spelled out in the input text. If there are no email addresses in the text, write \"N/A\".  Do not say anything else.",
+      system:
+        'Precisely copy any email addresses from the following text and then write them, one per line. Only write an email address if it\'s precisely spelled out in the input text. If there are no email addresses in the text, write "N/A".  Do not say anything else.',
       messages: [
         {
           role: "user",
@@ -127,7 +128,6 @@ Extract email addresses from a document into a JSON-formatted list.
       ]
     });
     console.log(msg);
-
     ```
 
     ```python Vertex AI Python
@@ -166,7 +166,8 @@ Extract email addresses from a document into a JSON-formatted list.
       model: "claude-sonnet-4@20250514",
       max_tokens: 1000,
       temperature: 0,
-      system: "Precisely copy any email addresses from the following text and then write them, one per line. Only write an email address if it's precisely spelled out in the input text. If there are no email addresses in the text, write \"N/A\".  Do not say anything else.",
+      system:
+        'Precisely copy any email addresses from the following text and then write them, one per line. Only write an email address if it\'s precisely spelled out in the input text. If there are no email addresses in the text, write "N/A".  Do not say anything else.',
       messages: [
         {
           role: "user",
@@ -180,6 +181,5 @@ Extract email addresses from a document into a JSON-formatted list.
       ]
     });
     console.log(msg);
-
     ```
 </CodeGroup>

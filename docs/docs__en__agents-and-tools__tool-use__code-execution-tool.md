@@ -110,10 +110,12 @@ async function main() {
         content: "Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
       }
     ],
-    tools: [{
-      type: "code_execution_20250825",
-      name: "code_execution"
-    }]
+    tools: [
+      {
+        type: "code_execution_20250825",
+        name: "code_execution"
+      }
+    ]
   });
 
   console.log(response);
@@ -195,14 +197,18 @@ response = client.messages.create(
 const response = await anthropic.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
-  messages: [{
-    role: "user",
-    content: "Check the Python version and list installed packages"
-  }],
-  tools: [{
-    type: "code_execution_20250825",
-    name: "code_execution"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Check the Python version and list installed packages"
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20250825",
+      name: "code_execution"
+    }
+  ]
 });
 ```
 </CodeGroup>
@@ -249,14 +255,19 @@ response = client.messages.create(
 const response = await anthropic.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
-  messages: [{
-    role: "user",
-    content: "Create a config.yaml file with database settings, then update the port from 5432 to 3306"
-  }],
-  tools: [{
-    type: "code_execution_20250825",
-    name: "code_execution"
-  }]
+  messages: [
+    {
+      role: "user",
+      content:
+        "Create a config.yaml file with database settings, then update the port from 5432 to 3306"
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20250825",
+      name: "code_execution"
+    }
+  ]
 });
 ```
 </CodeGroup>
@@ -361,17 +372,21 @@ async function main() {
     model: "claude-opus-4-6",
     betas: ["files-api-2025-04-14"],
     max_tokens: 4096,
-    messages: [{
-      role: "user",
-      content: [
-        { type: "text", text: "Analyze this CSV data" },
-        { type: "container_upload", file_id: fileObject.id }
-      ]
-    }],
-    tools: [{
-      type: "code_execution_20250825",
-      name: "code_execution"
-    }]
+    messages: [
+      {
+        role: "user",
+        content: [
+          { type: "text", text: "Analyze this CSV data" },
+          { type: "container_upload", file_id: fileObject.id }
+        ]
+      }
+    ],
+    tools: [
+      {
+        type: "code_execution_20250825",
+        name: "code_execution"
+      }
+    ]
   });
 
   console.log(response);
@@ -441,14 +456,18 @@ async function main() {
     model: "claude-opus-4-6",
     betas: ["files-api-2025-04-14"],
     max_tokens: 4096,
-    messages: [{
-      role: "user",
-      content: "Create a matplotlib visualization and save it as output.png"
-    }],
-    tools: [{
-      type: "code_execution_20250825",
-      name: "code_execution"
-    }]
+    messages: [
+      {
+        role: "user",
+        content: "Create a matplotlib visualization and save it as output.png"
+      }
+    ],
+    tools: [
+      {
+        type: "code_execution_20250825",
+        name: "code_execution"
+      }
+    ]
   });
 
   // Extract file IDs from the response
@@ -578,17 +597,24 @@ const response = await anthropic.beta.messages.create({
   model: "claude-opus-4-6",
   betas: ["files-api-2025-04-14"],
   max_tokens: 4096,
-  messages: [{
-    role: "user",
-    content: [
-      { type: "text", text: "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings" },
-      { type: "container_upload", file_id: fileObject.id }
-    ]
-  }],
-  tools: [{
-    type: "code_execution_20250825",
-    name: "code_execution"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"
+        },
+        { type: "container_upload", file_id: fileObject.id }
+      ]
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20250825",
+      name: "code_execution"
+    }
+  ]
 });
 
 // Claude might:
@@ -621,101 +647,109 @@ The code execution tool can return two types of results depending on the operati
 
 ### Bash command response
 
-```json
-{
-  "type": "server_tool_use",
-  "id": "srvtoolu_01B3C4D5E6F7G8H9I0J1K2L3",
-  "name": "bash_code_execution",
-  "input": {
-    "command": "ls -la | head -5"
+```json hidelines={1,-1}
+[
+  {
+    "type": "server_tool_use",
+    "id": "srvtoolu_01B3C4D5E6F7G8H9I0J1K2L3",
+    "name": "bash_code_execution",
+    "input": {
+      "command": "ls -la | head -5"
+    }
+  },
+  {
+    "type": "bash_code_execution_tool_result",
+    "tool_use_id": "srvtoolu_01B3C4D5E6F7G8H9I0J1K2L3",
+    "content": {
+      "type": "bash_code_execution_result",
+      "stdout": "total 24\ndrwxr-xr-x 2 user user 4096 Jan 1 12:00 .\ndrwxr-xr-x 3 user user 4096 Jan 1 11:00 ..\n-rw-r--r-- 1 user user  220 Jan 1 12:00 data.csv\n-rw-r--r-- 1 user user  180 Jan 1 12:00 config.json",
+      "stderr": "",
+      "return_code": 0
+    }
   }
-},
-{
-  "type": "bash_code_execution_tool_result",
-  "tool_use_id": "srvtoolu_01B3C4D5E6F7G8H9I0J1K2L3",
-  "content": {
-    "type": "bash_code_execution_result",
-    "stdout": "total 24\ndrwxr-xr-x 2 user user 4096 Jan 1 12:00 .\ndrwxr-xr-x 3 user user 4096 Jan 1 11:00 ..\n-rw-r--r-- 1 user user  220 Jan 1 12:00 data.csv\n-rw-r--r-- 1 user user  180 Jan 1 12:00 config.json",
-    "stderr": "",
-    "return_code": 0
-  }
-}
+]
 ```
 
 ### File operation responses
 
 **View file:**
-```json
-{
-  "type": "server_tool_use",
-  "id": "srvtoolu_01C4D5E6F7G8H9I0J1K2L3M4",
-  "name": "text_editor_code_execution",
-  "input": {
-    "command": "view",
-    "path": "config.json"
+```json hidelines={1,-1}
+[
+  {
+    "type": "server_tool_use",
+    "id": "srvtoolu_01C4D5E6F7G8H9I0J1K2L3M4",
+    "name": "text_editor_code_execution",
+    "input": {
+      "command": "view",
+      "path": "config.json"
+    }
+  },
+  {
+    "type": "text_editor_code_execution_tool_result",
+    "tool_use_id": "srvtoolu_01C4D5E6F7G8H9I0J1K2L3M4",
+    "content": {
+      "type": "text_editor_code_execution_result",
+      "file_type": "text",
+      "content": "{\n  \"setting\": \"value\",\n  \"debug\": true\n}",
+      "numLines": 4,
+      "startLine": 1,
+      "totalLines": 4
+    }
   }
-},
-{
-  "type": "text_editor_code_execution_tool_result",
-  "tool_use_id": "srvtoolu_01C4D5E6F7G8H9I0J1K2L3M4",
-  "content": {
-    "type": "text_editor_code_execution_result",
-    "file_type": "text",
-    "content": "{\n  \"setting\": \"value\",\n  \"debug\": true\n}",
-    "numLines": 4,
-    "startLine": 1,
-    "totalLines": 4
-  }
-}
+]
 ```
 
 **Create file:**
-```json
-{
-  "type": "server_tool_use",
-  "id": "srvtoolu_01D5E6F7G8H9I0J1K2L3M4N5",
-  "name": "text_editor_code_execution",
-  "input": {
-    "command": "create",
-    "path": "new_file.txt",
-    "file_text": "Hello, World!"
+```json hidelines={1,-1}
+[
+  {
+    "type": "server_tool_use",
+    "id": "srvtoolu_01D5E6F7G8H9I0J1K2L3M4N5",
+    "name": "text_editor_code_execution",
+    "input": {
+      "command": "create",
+      "path": "new_file.txt",
+      "file_text": "Hello, World!"
+    }
+  },
+  {
+    "type": "text_editor_code_execution_tool_result",
+    "tool_use_id": "srvtoolu_01D5E6F7G8H9I0J1K2L3M4N5",
+    "content": {
+      "type": "text_editor_code_execution_result",
+      "is_file_update": false
+    }
   }
-},
-{
-  "type": "text_editor_code_execution_tool_result",
-  "tool_use_id": "srvtoolu_01D5E6F7G8H9I0J1K2L3M4N5",
-  "content": {
-    "type": "text_editor_code_execution_result",
-    "is_file_update": false
-  }
-}
+]
 ```
 
 **Edit file (str_replace):**
-```json
-{
-  "type": "server_tool_use",
-  "id": "srvtoolu_01E6F7G8H9I0J1K2L3M4N5O6",
-  "name": "text_editor_code_execution",
-  "input": {
-    "command": "str_replace",
-    "path": "config.json",
-    "old_str": "\"debug\": true",
-    "new_str": "\"debug\": false"
+```json hidelines={1,-1}
+[
+  {
+    "type": "server_tool_use",
+    "id": "srvtoolu_01E6F7G8H9I0J1K2L3M4N5O6",
+    "name": "text_editor_code_execution",
+    "input": {
+      "command": "str_replace",
+      "path": "config.json",
+      "old_str": "\"debug\": true",
+      "new_str": "\"debug\": false"
+    }
+  },
+  {
+    "type": "text_editor_code_execution_tool_result",
+    "tool_use_id": "srvtoolu_01E6F7G8H9I0J1K2L3M4N5O6",
+    "content": {
+      "type": "text_editor_code_execution_result",
+      "oldStart": 3,
+      "oldLines": 1,
+      "newStart": 3,
+      "newLines": 1,
+      "lines": ["-  \"debug\": true", "+  \"debug\": false"]
+    }
   }
-},
-{
-  "type": "text_editor_code_execution_tool_result",
-  "tool_use_id": "srvtoolu_01E6F7G8H9I0J1K2L3M4N5O6",
-  "content": {
-    "type": "text_editor_code_execution_result",
-    "oldStart": 3,
-    "oldLines": 1,
-    "newStart": 3,
-    "newLines": 1,
-    "lines": ["-  \"debug\": true", "+  \"debug\": false"]
-  }
-}
+]
 ```
 
 ### Results
@@ -850,14 +884,18 @@ async function main() {
   const response1 = await anthropic.messages.create({
     model: "claude-opus-4-6",
     max_tokens: 4096,
-    messages: [{
-      role: "user",
-      content: "Write a file with a random number and save it to '/tmp/number.txt'"
-    }],
-    tools: [{
-      type: "code_execution_20250825",
-      name: "code_execution"
-    }]
+    messages: [
+      {
+        role: "user",
+        content: "Write a file with a random number and save it to '/tmp/number.txt'"
+      }
+    ],
+    tools: [
+      {
+        type: "code_execution_20250825",
+        name: "code_execution"
+      }
+    ]
   });
 
   // Extract the container ID from the first response
@@ -868,14 +906,18 @@ async function main() {
     container: containerId, // Reuse the same container
     model: "claude-opus-4-6",
     max_tokens: 4096,
-    messages: [{
-      role: "user",
-      content: "Read the number from '/tmp/number.txt' and calculate its square"
-    }],
-    tools: [{
-      type: "code_execution_20250825",
-      name: "code_execution"
-    }]
+    messages: [
+      {
+        role: "user",
+        content: "Read the number from '/tmp/number.txt' and calculate its square"
+      }
+    ],
+    tools: [
+      {
+        type: "code_execution_20250825",
+        name: "code_execution"
+      }
+    ]
   });
 
   console.log(response2.content);
@@ -931,7 +973,7 @@ curl https://api.anthropic.com/v1/messages \
 
 With streaming enabled, you'll receive code execution events as they occur:
 
-```json
+```sse
 event: content_block_start
 data: {"type": "content_block_start", "index": 1, "content_block": {"type": "server_tool_use", "id": "srvtoolu_xyz789", "name": "code_execution"}}
 

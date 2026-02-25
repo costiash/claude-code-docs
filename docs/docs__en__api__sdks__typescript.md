@@ -194,10 +194,16 @@ const screenshotTool = betaZodTool({
       // Include the error screenshot so the model can see what went wrong
       throw new ToolError([
         { type: "text", text: `Failed to load page: ${result.error}` },
-        { type: "image", source: { type: "base64", data: result.screenshot, media_type: "image/png" } }
+        {
+          type: "image",
+          source: { type: "base64", data: result.screenshot, media_type: "image/png" }
+        }
       ]);
     }
-    return { type: "image", source: { type: "base64", data: result.screenshot, media_type: "image/png" } };
+    return {
+      type: "image",
+      source: { type: "base64", data: result.screenshot, media_type: "image/png" }
+    };
   }
 });
 ```
@@ -261,7 +267,10 @@ await anthropic.beta.messages.create({
   messages: [
     {
       role: "user",
-      content: [mcpResourceToContent(resource), { type: "text", text: "Summarize this document" }]
+      content: [
+        mcpResourceToContent(resource),
+        { type: "text", text: "Summarize this document" }
+      ]
     }
   ]
 });
@@ -338,7 +347,9 @@ const client = new Anthropic();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
 await client.beta.files.upload({
-  file: await toFile(fs.createReadStream("/path/to/file"), undefined, { type: "application/json" }),
+  file: await toFile(fs.createReadStream("/path/to/file"), undefined, {
+    type: "application/json"
+  }),
   betas: ["files-api-2025-04-14"]
 });
 
@@ -435,9 +446,14 @@ const client = new Anthropic({
 });
 
 // Or, configure per-request:
-await client.messages.create({ max_tokens: 1024, messages: [{ role: "user", content: "Hello, Claude" }], model: "claude-opus-4-6" }, {
-  maxRetries: 5
-});
+await client.messages.create(
+  {
+    max_tokens: 1024,
+    messages: [{ role: "user", content: "Hello, Claude" }],
+    model: "claude-opus-4-6"
+  },
+  { maxRetries: 5 }
+);
 ```
 
 ## Timeouts
@@ -462,9 +478,14 @@ const client = new Anthropic({
 });
 
 // Override per-request:
-await client.messages.create({ max_tokens: 1024, messages: [{ role: "user", content: "Hello, Claude" }], model: "claude-opus-4-6" }, {
-  timeout: 5 * 1000
-});
+await client.messages.create(
+  {
+    max_tokens: 1024,
+    messages: [{ role: "user", content: "Hello, Claude" }],
+    model: "claude-opus-4-6"
+  },
+  { timeout: 5 * 1000 }
+);
 ```
 
 On timeout, an `APIConnectionTimeoutError` is thrown.

@@ -61,7 +61,8 @@ Find and extract airport codes from text.
       model: "claude-opus-4-6",
       max_tokens: 1000,
       temperature: 0,
-      system: "Your task is to analyze the provided text and identify any airport codes mentioned within it. Present these airport codes as a list in the order they appear in the text. If no airport codes are found, return an empty list.",
+      system:
+        "Your task is to analyze the provided text and identify any airport codes mentioned within it. Present these airport codes as a list in the order they appear in the text. If no airport codes are found, return an empty list.",
       messages: [
         {
           role: "user",
@@ -75,7 +76,6 @@ Find and extract airport codes from text.
       ]
     });
     console.log(msg);
-
     ```
 
     ```python AWS Bedrock Python
@@ -116,7 +116,8 @@ Find and extract airport codes from text.
       model: "anthropic.claude-opus-4-6-v1",
       max_tokens: 1000,
       temperature: 0,
-      system: "Your task is to analyze the provided text and identify any airport codes mentioned within it. Present these airport codes as a list in the order they appear in the text. If no airport codes are found, return an empty list.",
+      system:
+        "Your task is to analyze the provided text and identify any airport codes mentioned within it. Present these airport codes as a list in the order they appear in the text. If no airport codes are found, return an empty list.",
       messages: [
         {
           role: "user",
@@ -130,7 +131,6 @@ Find and extract airport codes from text.
       ]
     });
     console.log(msg);
-
     ```
 
     ```python Vertex AI Python
@@ -169,7 +169,8 @@ Find and extract airport codes from text.
       model: "claude-sonnet-4@20250514",
       max_tokens: 1000,
       temperature: 0,
-      system: "Your task is to analyze the provided text and identify any airport codes mentioned within it. Present these airport codes as a list in the order they appear in the text. If no airport codes are found, return an empty list.",
+      system:
+        "Your task is to analyze the provided text and identify any airport codes mentioned within it. Present these airport codes as a list in the order they appear in the text. If no airport codes are found, return an empty list.",
       messages: [
         {
           role: "user",
@@ -183,6 +184,5 @@ Find and extract airport codes from text.
       ]
     });
     console.log(msg);
-
     ```
 </CodeGroup>

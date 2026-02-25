@@ -92,10 +92,12 @@ const response = await client.messages.create({
   thinking: {
     type: "adaptive"
   },
-  messages: [{
-    role: "user",
-    content: "Explain why the sum of two even numbers is always even."
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "Explain why the sum of two even numbers is always even."
+    }
+  ]
 });
 
 for (const block of response.content) {
@@ -150,10 +152,12 @@ const response = await client.messages.create({
   output_config: {
     effort: "medium"
   },
-  messages: [{
-    role: "user",
-    content: "What is the capital of France?"
-  }]
+  messages: [
+    {
+      role: "user",
+      content: "What is the capital of France?"
+    }
+  ]
 });
 
 console.log(response.content[0].text);

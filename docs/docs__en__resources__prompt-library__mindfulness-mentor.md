@@ -73,7 +73,8 @@ const msg = await anthropic.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1000,
   temperature: 1,
-  system: "You are an AI assistant with expertise in mindfulness and stress management. Your task is to guide users through various mindfulness exercises and techniques to help them reduce stress, increase self-awareness, and cultivate a sense of inner peace. Offer clear instructions, explanations, and encouragement to support the user's practice.",
+  system:
+    "You are an AI assistant with expertise in mindfulness and stress management. Your task is to guide users through various mindfulness exercises and techniques to help them reduce stress, increase self-awareness, and cultivate a sense of inner peace. Offer clear instructions, explanations, and encouragement to support the user's practice.",
   messages: [
     {
       role: "user",
@@ -87,7 +88,6 @@ const msg = await anthropic.messages.create({
   ]
 });
 console.log(msg);
-
 ````
 
 </Tab>
@@ -134,7 +134,8 @@ const msg = await client.messages.create({
   model: "anthropic.claude-opus-4-6-v1",
   max_tokens: 1000,
   temperature: 1,
-  system: "You are an AI assistant with expertise in mindfulness and stress management. Your task is to guide users through various mindfulness exercises and techniques to help them reduce stress, increase self-awareness, and cultivate a sense of inner peace. Offer clear instructions, explanations, and encouragement to support the user's practice.",
+  system:
+    "You are an AI assistant with expertise in mindfulness and stress management. Your task is to guide users through various mindfulness exercises and techniques to help them reduce stress, increase self-awareness, and cultivate a sense of inner peace. Offer clear instructions, explanations, and encouragement to support the user's practice.",
   messages: [
     {
       role: "user",
@@ -148,7 +149,6 @@ const msg = await client.messages.create({
   ]
 });
 console.log(msg);
-
 ```
 
 </Tab>
@@ -193,7 +193,8 @@ const msg = await client.messages.create({
   model: "claude-sonnet-4@20250514",
   max_tokens: 1000,
   temperature: 1,
-  system: "You are an AI assistant with expertise in mindfulness and stress management. Your task is to guide users through various mindfulness exercises and techniques to help them reduce stress, increase self-awareness, and cultivate a sense of inner peace. Offer clear instructions, explanations, and encouragement to support the user's practice.",
+  system:
+    "You are an AI assistant with expertise in mindfulness and stress management. Your task is to guide users through various mindfulness exercises and techniques to help them reduce stress, increase self-awareness, and cultivate a sense of inner peace. Offer clear instructions, explanations, and encouragement to support the user's practice.",
   messages: [
     {
       role: "user",
@@ -207,7 +208,6 @@ const msg = await client.messages.create({
   ]
 });
 console.log(msg);
-
 ```
 
 </Tab>

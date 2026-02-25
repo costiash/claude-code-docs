@@ -45,26 +45,26 @@ Change all imports from `@anthropic-ai/claude-code` to `@anthropic-ai/claude-age
 import { query, tool, createSdkMcpServer } from "@anthropic-ai/claude-code";
 
 // After
-import {
-  query,
-  tool,
-  createSdkMcpServer
-} from "@anthropic-ai/claude-agent-sdk";
+import { query, tool, createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk";
 ```
 
 **4. Update package.json dependencies:**
 
 If you have the package listed in your `package.json`, update it:
 
+Before:
+
 ```json
-// Before
 {
   "dependencies": {
     "@anthropic-ai/claude-code": "^1.0.0"
   }
 }
+```
 
-// After
+After:
+
+```json
 {
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.1.0"
