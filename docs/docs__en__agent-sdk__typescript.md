@@ -573,12 +573,12 @@ type SDKAssistantMessage = {
   message: BetaMessage; // From Anthropic SDK
   parent_tool_use_id: string | null;
   error?: SDKAssistantMessageError;
-}
+};
 ```
 
 The `message` field is a [`BetaMessage`](/docs/en/api/messages) from the Anthropic SDK. It includes fields like `id`, `content`, `model`, `stop_reason`, and `usage`.
 
-`SDKAssistantMessageError` is one of: `'authentication_failed'`, `'billing_error'`, `'rate_limit'`, `'invalid_request'`, `'server_error'`, `'unknown'`, or `'max_output_tokens'`.
+`SDKAssistantMessageError` is one of: `'authentication_failed'`, `'billing_error'`, `'rate_limit'`, `'invalid_request'`, `'server_error'`, or `'unknown'`.
 
 ### `SDKUserMessage`
 

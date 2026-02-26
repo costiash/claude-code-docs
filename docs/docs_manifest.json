@@ -69,8 +69,8 @@
     "docs__en__agent-sdk__cost-tracking.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/cost-tracking",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/cost-tracking.md",
-      "hash": "6ba5951e0ef9cd4556178186890ea70edc6b5ba7106a8c24c4ea1ae7dae7236e",
-      "last_updated": "2026-02-25T15:23:40.173361"
+      "hash": "43c2f15be71bd162ea132bdf4273dbb877754838c1fdee65fa7b42c596641513",
+      "last_updated": "2026-02-26T18:19:26.326166"
     },
     "docs__en__agent-sdk__custom-tools.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/custom-tools",
@@ -207,8 +207,8 @@
     "docs__en__agent-sdk__typescript.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/typescript.md",
-      "hash": "8d654d73c46092849b853d585800e5467fd81a846c2fae262185332571d99801",
-      "last_updated": "2026-02-26T00:30:20.885604"
+      "hash": "c6fc171137fab376cc8c7b735ef519b4473956a845735326380a0ca75000e8de",
+      "last_updated": "2026-02-26T18:19:42.441389"
     },
     "docs__en__agent-sdk__typescript-v2-preview.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview",
@@ -3447,8 +3447,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-02-26T15:28:09.718837",
-    "fetch_duration_seconds": 464.201682,
+    "last_fetch_completed": "2026-02-26T18:28:11.167221",
+    "fetch_duration_seconds": 532.766162,
     "total_pages_discovered": 772,
     "pages_fetched_successfully": 574,
     "pages_failed": 199,
@@ -3658,7 +3658,7 @@
     "total_files": 574,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-02-26T15:28:09.718859",
+  "last_updated": "2026-02-26T18:28:11.167242",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
