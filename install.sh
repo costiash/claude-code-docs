@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs Installer v0.5.0 - Enhanced edition with breaking changes
+# Claude Code Docs Installer v0.5.1 - Bug fixes and CI improvements
 # This script installs claude-code-docs to ~/.claude-code-docs
 # Installation Strategy: Always perform a fresh installation at the fixed location
 #   1. Remove any existing installation at ~/.claude-code-docs (with user confirmation)
@@ -9,12 +9,12 @@ set -euo pipefail
 #   3. Set up commands and hooks
 #   4. Clean up any old installations in other locations
 
-echo "Claude Code Docs Installer v0.5.0"
+echo "Claude Code Docs Installer v0.5.1"
 echo "==============================="
 
 # Target version for upgrade messaging
-TARGET_VERSION="0.5.0"
-TARGET_DOCS="571"
+TARGET_VERSION="0.5.1"
+TARGET_DOCS=""  # Set after install from DOC_COUNT
 
 # Fixed installation location
 INSTALL_DIR="$HOME/.claude-code-docs"
@@ -92,14 +92,14 @@ show_upgrade_info() {
     echo "════════════════════════════════════════════════════════════════"
     echo ""
     echo "  Current: v$cur_version ($cur_docs documentation files)"
-    echo "  Target:  v$TARGET_VERSION ($TARGET_DOCS documentation files)"
+    echo "  Target:  v$TARGET_VERSION"
     echo ""
     echo "  What's New in v$TARGET_VERSION:"
-    echo "  • 2x documentation coverage ($TARGET_DOCS files)"
+    echo "  • 2x documentation coverage"
     echo "  • Domain-based filename convention (claude-code__*.md)"
     echo "  • Modular Python packages (fetcher/, lookup/)"
     echo "  • Safety thresholds for sync protection"
-    echo "  • 573 paths tracked across 6 categories"
+    echo "  • Paths tracked across 6 categories"
     echo ""
     echo "════════════════════════════════════════════════════════════════"
     echo ""
@@ -656,7 +656,7 @@ if [[ ! -d "$INSTALL_DIR/docs" ]]; then
 else
     DOC_COUNT=$(find "$INSTALL_DIR/docs" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
     if [[ "$DOC_COUNT" -lt 100 ]]; then
-        echo "  ⚠️  Only $DOC_COUNT documentation files found (expected ~571)"
+        echo "  ⚠️  Only $DOC_COUNT documentation files found (expected 250+)"
     else
         echo "  ✓ Documentation files installed ($DOC_COUNT files)"
     fi
@@ -690,6 +690,9 @@ echo ""
 echo "✅ Claude Code Docs v$TARGET_VERSION installed successfully!"
 echo ""
 
+# Set TARGET_DOCS from the doc count computed during verification
+TARGET_DOCS="${DOC_COUNT:-0}"
+
 # Show upgrade summary if this was an upgrade
 IFS='|' read -r prev_version prev_docs prev_packages <<< "$CURRENT_VERSION_INFO"
 if [[ "$prev_version" != "none" && "$prev_version" != "$TARGET_VERSION" ]]; then
@@ -719,9 +722,9 @@ echo ""
 echo "🔄 Updates: Run '/docs -t' to check for and pull latest documentation"
 echo ""
 
-# Show what's installed (573 paths tracked in manifest across 6 categories)
+# Show what's installed
 echo "📦 Installed Components:"
-echo "  • 573 documentation paths tracked (6 categories)"
+echo "  • Documentation paths tracked (6 categories)"
 echo "  • AI-powered /docs command"
 echo ""
 
@@ -766,7 +769,7 @@ else
     echo "  • Enhanced AI routing capabilities"
     echo ""
     echo "Without Python, you can:"
-    echo "  • Read all 573 documentation paths via /docs command"
+    echo "  • Read all documentation paths via /docs command"
     echo "  • Use AI-powered semantic queries"
     echo "  • Check documentation freshness"
     echo "  • View recent changes"

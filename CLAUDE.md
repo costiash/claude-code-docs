@@ -21,10 +21,10 @@ The docs are periodically updated via GitHub Actions with safeguards to prevent 
 This repository uses a **graceful degradation** approach:
 
 **Installation** (always the same):
-- 573 documentation paths tracked in manifest (6 categories)
-- 571 files downloaded
+- Documentation paths tracked in manifest (6 categories)
+- Documentation files downloaded
 - Python scripts for enhanced features
-- Full test suite (294 tests) and GitHub workflows
+- Full test suite (303 tests) and GitHub workflows
 
 **Runtime Features** (Python-dependent):
 - **Without Python 3.9+**: Basic documentation reading via shell scripts
@@ -395,7 +395,7 @@ When Python 3.9+ is installed, these additional capabilities are available:
 - **Full-text search**: `--search "keyword"` searches across all documentation content
 - **Category filtering**: `--category api` lists paths in specific categories
 - **Path validation**: `--validate` checks documentation integrity
-- **Active documentation**: Access to 573 paths across 6 categories:
+- **Active documentation**: Access to paths across 6 categories:
   - API Reference (377 paths, 65.8%) - Includes multi-language SDK docs (Python, TypeScript, Go, Java, Kotlin, Ruby)
   - Core Documentation (82 paths, 14.3%)
   - Prompt Library (65 paths, 11.3%)
@@ -409,7 +409,7 @@ See `enhancements/` directory for comprehensive feature documentation and exampl
 
 ```
 /
-├── docs/                   # 571 documentation files (.md format)
+├── docs/                   # Documentation files (.md format)
 │   ├── docs_manifest.json  # File tracking manifest
 │   └── .search_index.json  # Full-text search index (Python-generated)
 ├── scripts/
@@ -434,14 +434,14 @@ See `enhancements/` directory for comprehensive feature documentation and exampl
 │       ├── validation.py           # Path validation
 │       ├── formatting.py           # Output formatting
 │       └── cli.py                  # Main entry point
-├── paths_manifest.json     # Active paths manifest (573 paths, 6 categories)
+├── paths_manifest.json     # Active paths manifest (6 categories)
 ├── archive/               # Archived/deprecated scripts (git-ignored)
 ├── enhancements/          # Feature documentation
 │   ├── README.md          # Overview
 │   ├── FEATURES.md        # Technical specs
 │   ├── CAPABILITIES.md    # Detailed capabilities
 │   └── EXAMPLES.md        # Usage examples
-├── tests/                 # Test suite (294 tests, 294 passing)
+├── tests/                 # Test suite (303 tests, 303 passing)
 ├── install.sh            # Installation script
 └── CLAUDE.md             # This file (AI context)
 
@@ -464,8 +464,8 @@ When working on this repository:
 @scripts/fetcher/ - Documentation fetching package (8 modules)
 @scripts/lookup/ - Search & validation package (7 modules)
 @scripts/build_search_index.py - Full-text search indexing
-@paths_manifest.json - Active paths manifest (573 paths, 6 categories)
-@tests/ - Test suite (294 tests)
+@paths_manifest.json - Active paths manifest (6 categories)
+@tests/ - Test suite (303 tests)
 
 ### Automation
 @.github/workflows/ - Auto-update workflows (runs every 3 hours)
@@ -525,7 +525,7 @@ python3 scripts/lookup_paths.py --search "mcp"
 pytest tests/ -v
 
 # Run full test suite
-pytest tests/ -q  # Should see: 294 passed, 2 skipped
+pytest tests/ -q  # Should see: 303 passed
 ```
 
 ## Upstream Compatibility

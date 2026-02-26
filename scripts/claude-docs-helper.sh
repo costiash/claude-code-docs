@@ -6,7 +6,7 @@ set -euo pipefail
 # Installation path: ~/.claude-code-docs/scripts/claude-docs-helper.sh
 
 # Script version
-ENHANCED_VERSION="0.5.0"
+ENHANCED_VERSION="0.5.1"
 
 # Fixed installation path
 DOCS_PATH="$HOME/.claude-code-docs"
@@ -152,10 +152,12 @@ enhanced_search() {
     fi
 
     local query="$*"
-    echo "🔍 Searching 573 documentation paths for: $query"
+    local path_count
+    path_count=$(python3 -c "import json; data=json.load(open('$DOCS_PATH/paths_manifest.json')); print(data['metadata'].get('total_paths', 'all'))" 2>/dev/null || echo "all")
+    echo "🔍 Searching $path_count documentation paths for: $query"
     echo ""
 
-    if python3 "$SCRIPTS_PATH/lookup_paths.py" "$query" 2>/dev/null; then
+    if (cd "$DOCS_PATH" && python3 "$SCRIPTS_PATH/lookup_paths.py" "$query") 2>/dev/null; then
         echo ""
         echo "💡 Tip: Use '/docs <topic>' to read a specific document"
     else
@@ -180,7 +182,7 @@ search_content() {
     echo "📖 Searching documentation content for: $query"
     echo ""
 
-    if python3 "$SCRIPTS_PATH/lookup_paths.py" --search-content "$query" 2>/dev/null; then
+    if (cd "$DOCS_PATH" && python3 "$SCRIPTS_PATH/lookup_paths.py" --search-content "$query") 2>/dev/null; then
         echo ""
         echo "💡 Tip: Use '/docs <topic>' to read the full document"
     else
@@ -202,7 +204,7 @@ validate_paths() {
     echo "This may take 30-60 seconds..."
     echo ""
 
-    if python3 "$SCRIPTS_PATH/lookup_paths.py" --validate-all 2>/dev/null; then
+    if (cd "$DOCS_PATH" && python3 "$SCRIPTS_PATH/lookup_paths.py" --validate-all) 2>/dev/null; then
         echo ""
         echo "✅ Validation complete"
     else
@@ -211,7 +213,7 @@ validate_paths() {
     fi
 }
 
-# Update all documentation (fetch all 573 paths)
+# Update all documentation
 update_all_docs() {
     if ! check_enhanced_available; then
         echo "❌ Enhanced update not available"
@@ -222,18 +224,20 @@ update_all_docs() {
         return
     fi
 
-    echo "🔄 Updating all documentation (573 paths)..."
+    local path_count
+    path_count=$(python3 -c "import json; data=json.load(open('$DOCS_PATH/paths_manifest.json')); print(data['metadata'].get('total_paths', 'all'))" 2>/dev/null || echo "all")
+    echo "🔄 Updating all documentation ($path_count paths)..."
     echo "This may take 2-3 minutes..."
     echo ""
 
-    if python3 "$SCRIPTS_PATH/main.py" --update-all 2>/dev/null; then
+    if (cd "$DOCS_PATH" && python3 "$SCRIPTS_PATH/main.py" --update-all) 2>/dev/null; then
         echo ""
         echo "✅ Documentation updated successfully"
 
         # Rebuild search index if available
         if [[ -f "$SCRIPTS_PATH/build_search_index.py" ]]; then
             echo "Rebuilding search index..."
-            python3 "$SCRIPTS_PATH/build_search_index.py" >/dev/null 2>&1 || true
+            (cd "$DOCS_PATH" && python3 "$SCRIPTS_PATH/build_search_index.py") >/dev/null 2>&1 || true
         fi
     else
         echo "⚠️  Enhanced update failed"
@@ -251,12 +255,12 @@ show_enhanced_help() {
     echo "─────────────────────────────────────────────────────────────────"
     echo ""
     echo "Search & Discovery:"
-    echo "  --search <query>        Fuzzy search across 573 documentation paths"
+    echo "  --search <query>        Fuzzy search across documentation paths"
     echo "  --search-content <term> Full-text content search across all documentation"
     echo ""
     echo "Maintenance:"
     echo "  --validate              Validate all paths (check for 404s)"
-    echo "  --update-all            Fetch all 573 documentation pages"
+    echo "  --update-all            Fetch all documentation pages"
     echo ""
     echo "Status:"
     echo "  --version               Show version information"
@@ -307,7 +311,9 @@ show_version() {
         echo "  ✅ Path validation: Available"
     else
         echo "  ❌ Enhanced features: DISABLED"
-        echo "     (571 documentation files available, Python features require Python 3.9+)"
+        local doc_count
+        doc_count=$(find "$DOCS_PATH/docs" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+        echo "     ($doc_count documentation files available, Python features require Python 3.9+)"
     fi
     echo ""
 }

@@ -24,8 +24,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests>=2.32.0
-          pip install pytest pytest-cov pytest-asyncio pytest-mock pyyaml coverage
+          python3 -m pip install requests>=2.32.0
+          python3 -m pip install pytest pytest-cov pytest-asyncio pytest-mock pyyaml coverage
 
       - name: Generate coverage
         run: |
