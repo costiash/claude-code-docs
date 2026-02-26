@@ -1,6 +1,7 @@
 """Integration tests for GitHub Actions workflow simulation."""
 
 import pytest
+import re
 import sys
 from pathlib import Path
 import json
@@ -194,8 +195,8 @@ class TestHelperScriptPythonCalls:
 
         for call in python_calls:
             # Each call should use (cd ... && python3 ...) subshell pattern
-            assert 'cd' in call, (
-                f"Python call must be wrapped with cd to repo root: {call}"
+            assert re.search(r'\(cd\s+', call), (
+                f"Python call must use '(cd ...' subshell pattern: {call}"
             )
 
     @pytest.mark.integration

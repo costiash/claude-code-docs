@@ -98,8 +98,8 @@ jobs:
       continue-on-error: true
       run: |
         echo "Building full-text search index..."
-        python3 scripts/build_search_index.py
-        echo "✅ Search index built"
+        python3 scripts/build_search_index.py || echo "⚠️ Search index build failed — content search may be unavailable"
+        echo "✅ Search index step complete"
 
     - name: Check for changes
       id: verify-changed-files

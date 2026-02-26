@@ -230,14 +230,14 @@ update_all_docs() {
     echo "This may take 2-3 minutes..."
     echo ""
 
-    if python3 "$SCRIPTS_PATH/main.py" --update-all 2>/dev/null; then
+    if (cd "$DOCS_PATH" && python3 "$SCRIPTS_PATH/main.py" --update-all) 2>/dev/null; then
         echo ""
         echo "✅ Documentation updated successfully"
 
         # Rebuild search index if available
         if [[ -f "$SCRIPTS_PATH/build_search_index.py" ]]; then
             echo "Rebuilding search index..."
-            python3 "$SCRIPTS_PATH/build_search_index.py" >/dev/null 2>&1 || true
+            (cd "$DOCS_PATH" && python3 "$SCRIPTS_PATH/build_search_index.py") >/dev/null 2>&1 || true
         fi
     else
         echo "⚠️  Enhanced update failed"

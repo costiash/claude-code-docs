@@ -93,6 +93,9 @@ upstream/
 # Archive folder (legacy/orphaned scripts)
 archive/
 
+# Plan documents (local development only, contain local paths)
+docs/plans/
+
 # ============================================================================
 # Documentation & Tracking Files (DO NOT COMMIT)
 # ============================================================================
