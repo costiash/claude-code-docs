@@ -103,7 +103,7 @@ jobs:
       id: commit-msg
       run: |
         # Stage changes to see what will be committed
-        git add -A docs/
+        git add -A docs/ paths_manifest.json
 
         # Get list of changed files with proper quoting
         # Using printf with %q for shell-safe quoting would be ideal, but not available in all shells
