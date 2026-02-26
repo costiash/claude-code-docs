@@ -8,7 +8,13 @@ Verifies:
 """
 import pytest
 import json
+import sys
 from pathlib import Path
+
+# Add scripts directory to path for access to fetcher/lookup packages
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
+
+from fetcher.paths import url_to_safe_filename
 
 @pytest.fixture
 def project_root():
@@ -64,22 +70,12 @@ class TestPathsManifest:
                         f"Deprecated path found: {path} in {category}"
 
         # Method 2: Check that manifest paths have corresponding files on disk.
-        # Convert paths to expected filenames using the naming conventions:
-        #   claude_code paths (/docs/en/<page>) → claude-code__<page>.md
-        #   other paths (/docs/en/section/page) → docs__en__section__page.md
+        # Uses url_to_safe_filename() from fetcher.paths — the same production
+        # function used to generate filenames during doc fetching.
         orphaned_paths = []
         for category, paths in paths_manifest['categories'].items():
             for path in paths:
-                stripped = path.strip('/')
-                # Claude Code CLI pages: last segment becomes claude-code__<page>.md
-                if category == 'claude_code':
-                    page = stripped.rstrip('/').split('/')[-1]
-                    # Handle nested paths like sdk/migration-guide
-                    if stripped.startswith('docs/en/sdk/'):
-                        page = 'sdk__' + page
-                    expected_file = f"claude-code__{page}.md"
-                else:
-                    expected_file = stripped.replace('/', '__') + '.md'
+                expected_file = url_to_safe_filename(path)
 
                 if expected_file not in docs_files_on_disk:
                     orphaned_paths.append((category, path, expected_file))

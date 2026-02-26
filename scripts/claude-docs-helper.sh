@@ -6,7 +6,7 @@ set -euo pipefail
 # Installation path: ~/.claude-code-docs/scripts/claude-docs-helper.sh
 
 # Script version
-ENHANCED_VERSION="0.5.0"
+ENHANCED_VERSION="0.5.1"
 
 # Fixed installation path
 DOCS_PATH="$HOME/.claude-code-docs"
@@ -311,7 +311,9 @@ show_version() {
         echo "  ✅ Path validation: Available"
     else
         echo "  ❌ Enhanced features: DISABLED"
-        echo "     (571 documentation files available, Python features require Python 3.9+)"
+        local doc_count
+        doc_count=$(find "$DOCS_PATH/docs" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+        echo "     ($doc_count documentation files available, Python features require Python 3.9+)"
     fi
     echo ""
 }

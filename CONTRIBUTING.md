@@ -7,16 +7,16 @@ Thank you for contributing to the Enhanced Claude Code Documentation Mirror!
 This project extends [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs) with optional Python features:
 
 **Core Principle: Graceful Degradation**
-- Single installation (573 paths tracked across 6 categories + Python scripts)
+- Single installation (paths tracked across 6 categories + Python scripts)
 - Python features activate only when Python 3.9+ is available
 - Everything works without Python (basic `/docs` command)
 - No separate "modes" - just feature detection at runtime
 
 **Design Goals:**
-1. **Honesty**: Accurate claims about what we deliver (573 paths tracked, 571 files downloaded)
+1. **Honesty**: Accurate claims about what we deliver (paths tracked in manifest, files downloaded)
 2. **Simplicity**: One installation, automatic feature detection
 3. **Compatibility**: Works with upstream, same `/docs` interface
-4. **Testing**: All changes tested (294 tests)
+4. **Testing**: All changes tested (302 tests)
 
 ## Repository URL Strategy
 
@@ -125,7 +125,7 @@ pip install -e ".[dev]"
 ~/.claude-code-docs/claude-docs-helper.sh --validate
 
 # Run tests (REQUIRED before submitting PR)
-pytest tests/ -v  # Should see: 294 passed, 2 skipped
+pytest tests/ -v  # Should see: 302 passed
 
 # Test specific changes
 python scripts/lookup_paths.py "your test query"
@@ -136,7 +136,7 @@ python scripts/fetch_claude_docs.py --help
 - `scripts/fetch_claude_docs.py` - Documentation fetcher with auto-regeneration
 - `scripts/lookup_paths.py` - Search & validation
 - `scripts/build_search_index.py` - Full-text search indexing
-- `tests/` - Test suite (629 tests)
+- `tests/` - Test suite (302 tests)
 
 ## Code Standards
 
@@ -330,9 +330,8 @@ def test_search_paths_with_limit():
 ```
 
 **Current test status:**
-- Total: 296 tests
-- Passing: 294 (99.3%)
-- Skipped: 2 (intentional)
+- Total: 302 tests
+- Passing: 302 (100%)
 
 ## Pull Request Guidelines
 
@@ -415,7 +414,7 @@ git push origin v0.x.x
 
 **When to release:**
 - New Python features complete
-- All tests passing (294/296 or 296/296)
+- All tests passing (302/302)
 - Documentation updated
 
 **Process:**

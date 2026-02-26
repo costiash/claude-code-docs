@@ -1,7 +1,7 @@
 # Claude Code Documentation Tool
 
 [![Last Update](https://img.shields.io/github/last-commit/costiash/claude-code-docs/main.svg?label=docs%20updated)](https://github.com/costiash/claude-code-docs/commits/main)
-[![Tests](https://img.shields.io/badge/tests-294%20passing-success)](https://github.com/costiash/claude-code-docs/actions)
+[![Tests](https://img.shields.io/badge/tests-302%20passing-success)](https://github.com/costiash/claude-code-docs/actions)
 [![Coverage](https://img.shields.io/badge/coverage-17.6%25-yellow)](https://github.com/costiash/claude-code-docs)
 [![Python](https://img.shields.io/badge/python-3.9+-blue)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)](https://github.com/costiash/claude-code-docs)
@@ -27,7 +27,7 @@ Stop hunting through scattered docs. This tool provides instant access to **acti
 - ✅ **Auto-Validated** - Continuous validation detects broken links automatically
 - 🔄 **Always Fresh** - Repository updated every 3 hours; run `/docs -t` to pull latest
 - 🎯 **Graceful Degradation** - Works with or without Python
-- 🧪 **Well-Tested** - 296 tests (294 passing, 2 skipped)
+- 🧪 **Well-Tested** - 302 tests passing
 
 ## How It Works
 
@@ -252,7 +252,7 @@ For power users who want direct access to helper functions:
 - Documentation paths tracked in manifest (6 categories)
 - Documentation files downloaded
 - Modular Python packages for enhanced features
-- Full test suite (294 tests)
+- Full test suite (302 tests)
 
 **Modular Code Structure** - Python code organized into focused packages:
 ```
@@ -411,7 +411,7 @@ These safeguards protect against:
 - You can fork and install from your own repository
 
 **Validation:**
-- 294/296 tests passing (99.3% pass rate, 2 skipped)
+- 302/302 tests passing (100% pass rate)
 - Automated security testing in CI/CD
 
 ## Contributing
@@ -435,7 +435,7 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 
 # Run tests
-pytest tests/ -v  # Should see: 294 passed, 2 skipped
+pytest tests/ -v  # Should see: 302 passed
 ```
 
 ## Acknowledgments

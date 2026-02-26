@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs Installer v0.5.0 - Enhanced edition with breaking changes
+# Claude Code Docs Installer v0.5.1 - Bug fixes and CI improvements
 # This script installs claude-code-docs to ~/.claude-code-docs
 # Installation Strategy: Always perform a fresh installation at the fixed location
 #   1. Remove any existing installation at ~/.claude-code-docs (with user confirmation)
@@ -9,11 +9,11 @@ set -euo pipefail
 #   3. Set up commands and hooks
 #   4. Clean up any old installations in other locations
 
-echo "Claude Code Docs Installer v0.5.0"
+echo "Claude Code Docs Installer v0.5.1"
 echo "==============================="
 
 # Target version for upgrade messaging
-TARGET_VERSION="0.5.0"
+TARGET_VERSION="0.5.1"
 TARGET_DOCS=""  # Dynamic — determined at runtime
 
 # Fixed installation location

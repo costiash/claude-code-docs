@@ -78,6 +78,8 @@ class TestInternalLinksWork:
 
                 broken_links.append((md_file.name, text, url))
 
+        # Our docs corpus contains thousands of internal links; fewer than 100
+        # signals broken regex extraction or missing doc files, not sparse linking.
         assert total_links > 100, (
             f"Expected 100+ internal links in docs, found {total_links}. "
             f"Link extraction may be broken."
@@ -94,6 +96,10 @@ class TestInternalLinksWork:
             + "\n".join(f"  [{f}] '{t}' -> {u}"
                         for f, t, u in broken_links[:10])
         )
+
+        # Report link statistics for CI log visibility
+        print(f"\n  Link check passed: {total_links} total links, "
+              f"{len(broken_links)} unresolved ({broken_pct:.1f}%)")
 
     @pytest.mark.integration
     def test_relative_links_resolved(self):

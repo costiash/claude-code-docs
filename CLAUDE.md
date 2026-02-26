@@ -24,7 +24,7 @@ This repository uses a **graceful degradation** approach:
 - Documentation paths tracked in manifest (6 categories)
 - Documentation files downloaded
 - Python scripts for enhanced features
-- Full test suite (294 tests) and GitHub workflows
+- Full test suite (302 tests) and GitHub workflows
 
 **Runtime Features** (Python-dependent):
 - **Without Python 3.9+**: Basic documentation reading via shell scripts
@@ -441,7 +441,7 @@ See `enhancements/` directory for comprehensive feature documentation and exampl
 │   ├── FEATURES.md        # Technical specs
 │   ├── CAPABILITIES.md    # Detailed capabilities
 │   └── EXAMPLES.md        # Usage examples
-├── tests/                 # Test suite (294 tests, 294 passing)
+├── tests/                 # Test suite (302 tests, 302 passing)
 ├── install.sh            # Installation script
 └── CLAUDE.md             # This file (AI context)
 
@@ -465,7 +465,7 @@ When working on this repository:
 @scripts/lookup/ - Search & validation package (7 modules)
 @scripts/build_search_index.py - Full-text search indexing
 @paths_manifest.json - Active paths manifest (6 categories)
-@tests/ - Test suite (294 tests)
+@tests/ - Test suite (302 tests)
 
 ### Automation
 @.github/workflows/ - Auto-update workflows (runs every 3 hours)
@@ -525,7 +525,7 @@ python3 scripts/lookup_paths.py --search "mcp"
 pytest tests/ -v
 
 # Run full test suite
-pytest tests/ -q  # Should see: 294 passed, 2 skipped
+pytest tests/ -q  # Should see: 302 passed
 ```
 
 ## Upstream Compatibility
