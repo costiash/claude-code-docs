@@ -14,7 +14,7 @@ echo "==============================="
 
 # Target version for upgrade messaging
 TARGET_VERSION="0.5.1"
-TARGET_DOCS=""  # Dynamic — determined at runtime
+TARGET_DOCS=""  # Set after install from DOC_COUNT
 
 # Fixed installation location
 INSTALL_DIR="$HOME/.claude-code-docs"
@@ -689,6 +689,9 @@ fi
 echo ""
 echo "✅ Claude Code Docs v$TARGET_VERSION installed successfully!"
 echo ""
+
+# Set TARGET_DOCS from the doc count computed during verification
+TARGET_DOCS="${DOC_COUNT:-0}"
 
 # Show upgrade summary if this was an upgrade
 IFS='|' read -r prev_version prev_docs prev_packages <<< "$CURRENT_VERSION_INFO"
