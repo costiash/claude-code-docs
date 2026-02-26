@@ -27,8 +27,8 @@ jobs:
     
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r scripts/requirements.txt
+        python3 -m pip install --upgrade pip
+        python3 -m pip install -r scripts/requirements.txt
 
     # =================================================================
     # SAFEGUARD: Count files BEFORE fetch to detect mass deletions
@@ -46,7 +46,7 @@ jobs:
         GITHUB_REPOSITORY: ${{ github.repository }}
         GITHUB_REF_NAME: ${{ github.ref_name }}
       run: |
-        python scripts/fetch_claude_docs.py || echo "fetch_failed=true" >> $GITHUB_OUTPUT
+        python3 scripts/fetch_claude_docs.py || echo "fetch_failed=true" >> $GITHUB_OUTPUT
       continue-on-error: true
 
     # =================================================================
@@ -93,6 +93,14 @@ jobs:
 
         echo "✅ Safeguard validation passed: $AFTER files present"
 
+    - name: Build search index
+      if: steps.validate-safeguard.outputs.safeguard_triggered != 'true'
+      continue-on-error: true
+      run: |
+        echo "Building full-text search index..."
+        python3 scripts/build_search_index.py || echo "⚠️ Search index build failed — content search may be unavailable"
+        echo "✅ Search index step complete"
+
     - name: Check for changes
       id: verify-changed-files
       run: |
@@ -103,7 +111,7 @@ jobs:
       id: commit-msg
       run: |
         # Stage changes to see what will be committed
-        git add -A docs/
+        git add -A docs/ paths_manifest.json
 
         # Get list of changed files with proper quoting
         # Using printf with %q for shell-safe quoting would be ideal, but not available in all shells

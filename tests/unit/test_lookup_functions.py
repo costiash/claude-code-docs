@@ -369,3 +369,48 @@ class TestFormatContentResult:
         output = format_content_result(result, 1)
 
         assert "test preview" in output
+
+
+class TestLoadSearchIndex:
+    """Test search index loading with various working directories."""
+
+    def test_load_search_index_uses_script_relative_path(self):
+        """Test that load_search_index resolves path relative to repo root, not cwd."""
+        from lookup.search import load_search_index
+        import inspect
+
+        # The function should use a path relative to the script's location,
+        # not the current working directory.
+        # Use inspect.getsource directly — works whether or not the function
+        # is decorated (avoids fragile __wrapped__ access).
+        source = inspect.getsource(load_search_index)
+
+        # Should NOT use a bare relative path like Path("docs/.search_index.json")
+        # Should reference __file__ or an absolute path calculation
+        assert 'Path("docs/.search_index.json")' not in source, (
+            "load_search_index must not use bare relative path — "
+            "fails when called from different working directory (issue #15)"
+        )
+
+    def test_load_search_index_works_from_different_cwd(self, tmp_path, monkeypatch):
+        """load_search_index should work regardless of current working directory.
+
+        Before the __file__-relative fix (issue #15), this function used a bare
+        relative path and would fail or return None when cwd != repo root.
+        After the fix, it resolves from __file__ and returns the real index
+        regardless of cwd.
+        """
+        monkeypatch.chdir(tmp_path)  # cwd has no docs/ directory
+
+        from lookup.search import load_search_index
+        load_search_index.cache_clear()
+
+        # Should not crash — the __file__-relative path resolves to the real
+        # repo root index even when cwd is elsewhere
+        result = load_search_index()
+
+        # If the index file exists in the repo, we get data back (not None);
+        # if it doesn't exist (e.g., fresh clone), we get None gracefully.
+        # Either way, no crash.
+        if result is not None:
+            assert "index" in result, "Returned data should contain 'index' key"

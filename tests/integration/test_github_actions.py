@@ -1,6 +1,7 @@
 """Integration tests for GitHub Actions workflow simulation."""
 
 import pytest
+import re
 import sys
 from pathlib import Path
 import json
@@ -138,6 +139,79 @@ class TestWorkflowEnvironment:
         for script in scripts:
             assert script.exists(), f"Script not found: {script}"
             assert script.is_file()
+
+
+class TestManifestStaging:
+    """Test that CI/CD stages all required files."""
+
+    @pytest.mark.integration
+    def test_workflow_stages_paths_manifest(self, project_root):
+        """Test that update-docs workflow stages paths_manifest.json (not just docs/)."""
+        workflow_file = project_root / ".github" / "workflows" / "update-docs.yml"
+        content = workflow_file.read_text()
+
+        # The git add command must include paths_manifest.json
+        # It should NOT be just "git add -A docs/"
+        assert 'paths_manifest.json' in content, (
+            "Workflow must stage paths_manifest.json — currently only stages docs/"
+        )
+
+
+class TestSearchIndexGeneration:
+    """Test that CI/CD generates search index."""
+
+    @pytest.mark.integration
+    def test_workflow_builds_search_index(self, project_root):
+        """Test that update-docs workflow runs build_search_index.py."""
+        workflow_file = project_root / ".github" / "workflows" / "update-docs.yml"
+        content = workflow_file.read_text()
+
+        assert 'build_search_index.py' in content, (
+            "Workflow must run build_search_index.py to generate .search_index.json"
+        )
+
+    @pytest.mark.integration
+    def test_build_search_index_script_exists(self, project_root):
+        """Test that the search index builder script exists."""
+        script = project_root / "scripts" / "build_search_index.py"
+        assert script.exists(), "scripts/build_search_index.py must exist"
+
+
+class TestHelperScriptPythonCalls:
+    """Test that helper script Python calls use correct working directory."""
+
+    @pytest.mark.integration
+    def test_python_calls_use_subshell_cd(self, project_root):
+        """Test Python calls are wrapped with cd to repo root."""
+        helper = project_root / "scripts" / "claude-docs-helper.sh"
+        content = helper.read_text()
+
+        python_calls = [
+            line.strip() for line in content.splitlines()
+            if 'python3' in line
+            and not line.strip().startswith('#')
+            and 'lookup_paths.py' in line
+        ]
+
+        for call in python_calls:
+            # Each call should use (cd ... && python3 ...) subshell pattern
+            assert re.search(r'\(cd\s+', call), (
+                f"Python call must use '(cd ...' subshell pattern: {call}"
+            )
+
+    @pytest.mark.integration
+    def test_helper_no_hardcoded_path_counts(self, project_root):
+        """Test helper script doesn't contain hardcoded path counts."""
+        helper = project_root / "scripts" / "claude-docs-helper.sh"
+        content = helper.read_text()
+
+        # Should not hardcode specific numbers of paths
+        assert 'Searching 573' not in content, (
+            "Helper script must not hardcode '573' doc count"
+        )
+        assert 'fetch all 573' not in content.lower(), (
+            "Helper script must not hardcode '573' doc count"
+        )
 
 
 class TestWorkflowOutputs:

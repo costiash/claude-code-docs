@@ -23,8 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests>=2.32.0
-          pip install pytest pytest-cov pytest-asyncio pytest-mock pyyaml
+          python3 -m pip install requests>=2.32.0
+          python3 -m pip install pytest pytest-cov pytest-asyncio pytest-mock pyyaml
 
       - name: Run unit tests
         run: |
@@ -53,7 +53,7 @@ jobs:
       - name: Generate coverage reports
         run: |
           if [ -f "coverage.xml" ]; then
-            pip install coverage
+            python3 -m pip install coverage
             # Generate HTML coverage report
             coverage html -d htmlcov
             # Generate JSON coverage report
@@ -66,7 +66,7 @@ jobs:
       - name: Check coverage threshold
         run: |
           if [ -f "coverage.xml" ]; then
-            pip install coverage
+            python3 -m pip install coverage
             coverage report --fail-under=75 || echo "Coverage below 75% threshold - current: 78.7%"
           else
             echo "Skipping coverage check - no coverage data"
@@ -137,7 +137,7 @@ jobs:
         run: |
           # Test that enhanced mode works with Python
           bash -c 'set -e
-          pip install requests>=2.32.0
+          python3 -m pip install requests>=2.32.0
 
           # Verify Python scripts exist
           if [ -f "scripts/main.py" ] && [ -f "scripts/lookup_paths.py" ]; then
