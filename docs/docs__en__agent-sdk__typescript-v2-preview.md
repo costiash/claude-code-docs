@@ -34,7 +34,9 @@ import { unstable_v2_prompt } from "@anthropic-ai/claude-agent-sdk";
 const result = await unstable_v2_prompt("What is 2 + 2?", {
   model: "claude-opus-4-6"
 });
-console.log(result.result);
+if (result.subtype === "success") {
+  console.log(result.result);
+}
 ```
 
 <details>
@@ -331,7 +333,7 @@ Creates a new session for multi-turn conversations.
 function unstable_v2_createSession(options: {
   model: string;
   // Additional options supported
-}): Session;
+}): SDKSession;
 ```
 
 ### `unstable_v2_resumeSession()`
@@ -345,7 +347,7 @@ function unstable_v2_resumeSession(
     model: string;
     // Additional options supported
   }
-): Session;
+): SDKSession;
 ```
 
 ### `unstable_v2_prompt()`
@@ -359,15 +361,16 @@ function unstable_v2_prompt(
     model: string;
     // Additional options supported
   }
-): Promise<Result>;
+): Promise<SDKResultMessage>;
 ```
 
-### Session interface
+### SDKSession interface
 
 ```typescript
-interface Session {
-  send(message: string): Promise<void>;
-  stream(): AsyncGenerator<SDKMessage>;
+interface SDKSession {
+  readonly sessionId: string;
+  send(message: string | SDKUserMessage): Promise<void>;
+  stream(): AsyncGenerator<SDKMessage, void>;
   close(): void;
 }
 ```

@@ -7,7 +7,7 @@ Complete API reference for the TypeScript Agent SDK, including all functions, ty
 <script src="/components/typescript-sdk-type-links.js" defer />
 
 <Note>
-**Try the new V2 interface (preview):** A simplified interface with `send()` and `receive()` patterns is now available, making multi-turn conversations easier. [Learn more about the TypeScript V2 preview](/docs/en/agent-sdk/typescript-v2-preview)
+**Try the new V2 interface (preview):** A simplified interface with `send()` and `stream()` patterns is now available, making multi-turn conversations easier. [Learn more about the TypeScript V2 preview](/docs/en/agent-sdk/typescript-v2-preview)
 </Note>
 
 ## Installation
@@ -29,7 +29,7 @@ function query({
 }: {
   prompt: string | AsyncIterable<SDKUserMessage>;
   options?: Options;
-}): Query;
+}): Query
 ```
 
 #### Parameters
@@ -48,12 +48,13 @@ Returns a [`Query`](#query-1) object that extends `AsyncGenerator<`[`SDKMessage`
 Creates a type-safe MCP tool definition for use with SDK MCP servers.
 
 ```typescript
-function tool<Schema extends ZodRawShape>(
+function tool<Schema extends AnyZodRawShape>(
   name: string,
   description: string,
   inputSchema: Schema,
-  handler: (args: z.infer<ZodObject<Schema>>, extra: unknown) => Promise<CallToolResult>
-): SdkMcpToolDefinition<Schema>;
+  handler: (args: InferShape<Schema>, extra: unknown) => Promise<CallToolResult>,
+  extras?: { annotations?: ToolAnnotations }
+): SdkMcpToolDefinition<Schema>
 ```
 
 #### Parameters
@@ -62,8 +63,9 @@ function tool<Schema extends ZodRawShape>(
 | :-------- | :--- | :---------- |
 | `name` | `string` | The name of the tool |
 | `description` | `string` | A description of what the tool does |
-| `inputSchema` | `Schema extends ZodRawShape` | Zod schema defining the tool's input parameters |
+| `inputSchema` | `Schema extends AnyZodRawShape` | Zod schema defining the tool's input parameters (supports both Zod 3 and Zod 4) |
 | `handler` | `(args, extra) => Promise<`[`CallToolResult`](#calltoolresult)`>` | Async function that executes the tool logic |
+| `extras` | `{ annotations?: ToolAnnotations }` | Optional extra configuration including MCP tool annotations (e.g., `readOnly`, `destructive`, `openWorld`) |
 
 ### `createSdkMcpServer()`
 
@@ -74,7 +76,7 @@ function createSdkMcpServer(options: {
   name: string;
   version?: string;
   tools?: Array<SdkMcpToolDefinition<any>>;
-}): McpSdkServerConfigWithInstance;
+}): McpSdkServerConfigWithInstance
 ```
 
 #### Parameters
@@ -84,6 +86,50 @@ function createSdkMcpServer(options: {
 | `options.name` | `string` | The name of the MCP server |
 | `options.version` | `string` | Optional version string |
 | `options.tools` | `Array<SdkMcpToolDefinition>` | Array of tool definitions created with [`tool()`](#tool) |
+
+### `listSessions()`
+
+Discovers and lists past sessions with light metadata. Filter by project directory or list sessions across all projects.
+
+```typescript
+function listSessions(options?: ListSessionsOptions): Promise<SDKSessionInfo[]>
+```
+
+#### Parameters
+
+| Parameter | Type | Default | Description |
+| :-------- | :--- | :------ | :---------- |
+| `options.dir` | `string` | `undefined` | Directory to list sessions for. Returns sessions for this project (and its git worktrees). When omitted, returns sessions across all projects |
+| `options.limit` | `number` | `undefined` | Maximum number of sessions to return |
+
+#### Return type: `SDKSessionInfo`
+
+| Property | Type | Description |
+| :------- | :--- | :---------- |
+| `sessionId` | `string` | Unique session identifier (UUID) |
+| `summary` | `string` | Display title: custom title, auto-generated summary, or first prompt |
+| `lastModified` | `number` | Last modified time in milliseconds since epoch |
+| `fileSize` | `number` | Session file size in bytes |
+| `customTitle` | `string \| undefined` | User-set session title (via `/rename`) |
+| `firstPrompt` | `string \| undefined` | First meaningful user prompt in the session |
+| `gitBranch` | `string \| undefined` | Git branch at the end of the session |
+| `cwd` | `string \| undefined` | Working directory for the session |
+
+#### Example
+
+```typescript
+import { listSessions } from "@anthropic-ai/claude-agent-sdk";
+
+// List sessions for a specific project
+const sessions = await listSessions({ dir: "/path/to/project" });
+
+for (const session of sessions) {
+  console.log(`${session.summary} (${new Date(session.lastModified).toLocaleDateString()})`);
+}
+
+// List all sessions across all projects, limited to 10
+const recent = await listSessions({ limit: 10 });
+```
 
 ## Types
 
@@ -95,6 +141,7 @@ Configuration object for the `query()` function.
 | :------- | :--- | :------ | :---------- |
 | `abortController` | `AbortController` | `new AbortController()` | Controller for cancelling operations |
 | `additionalDirectories` | `string[]` | `[]` | Additional directories Claude can access |
+| `agent` | `string` | `undefined` | Agent name for the main thread. The agent must be defined in the `agents` option or in settings |
 | `agents` | `Record<string, [`AgentDefinition`](#agentdefinition)>` | `undefined` | Programmatically define subagents |
 | `allowDangerouslySkipPermissions` | `boolean` | `false` | Enable bypassing permissions. Required when using `permissionMode: 'bypassPermissions'` |
 | `allowedTools` | `string[]` | All tools | List of allowed tool names |
@@ -102,9 +149,12 @@ Configuration object for the `query()` function.
 | `canUseTool` | [`CanUseTool`](#canusetool) | `undefined` | Custom permission function for tool usage |
 | `continue` | `boolean` | `false` | Continue the most recent conversation |
 | `cwd` | `string` | `process.cwd()` | Current working directory |
+| `debug` | `boolean` | `false` | Enable debug mode for the Claude Code process |
+| `debugFile` | `string` | `undefined` | Write debug logs to a specific file path. Implicitly enables debug mode |
 | `disallowedTools` | `string[]` | `[]` | List of disallowed tool names |
+| `effort` | `'low' \| 'medium' \| 'high' \| 'max'` | `'high'` | Controls how much effort Claude puts into its response. Works with adaptive thinking to guide thinking depth |
 | `enableFileCheckpointing` | `boolean` | `false` | Enable file change tracking for rewinding. See [File checkpointing](/docs/en/agent-sdk/file-checkpointing) |
-| `env` | `Dict<string>` | `process.env` | Environment variables |
+| `env` | `Record<string, string \| undefined>` | `process.env` | Environment variables. Set `CLAUDE_AGENT_SDK_CLIENT_APP` to identify your app in the User-Agent header |
 | `executable` | `'bun' \| 'deno' \| 'node'` | Auto-detected | JavaScript runtime to use |
 | `executableArgs` | `string[]` | `[]` | Arguments to pass to the executable |
 | `extraArgs` | `Record<string, string \| null>` | `{}` | Additional arguments |
@@ -113,7 +163,7 @@ Configuration object for the `query()` function.
 | `hooks` | `Partial<Record<`[`HookEvent`](#hookevent)`, `[`HookCallbackMatcher`](#hookcallbackmatcher)`[]>>` | `{}` | Hook callbacks for events |
 | `includePartialMessages` | `boolean` | `false` | Include partial message events |
 | `maxBudgetUsd` | `number` | `undefined` | Maximum budget in USD for the query |
-| `maxThinkingTokens` | `number` | `undefined` | Maximum tokens for thinking process |
+| `maxThinkingTokens` | `number` | `undefined` | _Deprecated:_ Use `thinking` instead. Maximum tokens for thinking process |
 | `maxTurns` | `number` | `undefined` | Maximum conversation turns |
 | `mcpServers` | `Record<string, [`McpServerConfig`](#mcpserverconfig)>` | `{}` | MCP server configurations |
 | `model` | `string` | Default from CLI | Claude model to use |
@@ -121,14 +171,19 @@ Configuration object for the `query()` function.
 | `pathToClaudeCodeExecutable` | `string` | Uses built-in executable | Path to Claude Code executable |
 | `permissionMode` | [`PermissionMode`](#permissionmode) | `'default'` | Permission mode for the session |
 | `permissionPromptToolName` | `string` | `undefined` | MCP tool name for permission prompts |
+| `persistSession` | `boolean` | `true` | When `false`, disables session persistence to disk. Sessions cannot be resumed later |
 | `plugins` | [`SdkPluginConfig`](#sdkpluginconfig)`[]` | `[]` | Load custom plugins from local paths. See [Plugins](/docs/en/agent-sdk/plugins) for details |
+| `promptSuggestions` | `boolean` | `false` | Enable prompt suggestions. Emits a `prompt_suggestion` message after each turn with a predicted next user prompt |
 | `resume` | `string` | `undefined` | Session ID to resume |
 | `resumeSessionAt` | `string` | `undefined` | Resume session at a specific message UUID |
 | `sandbox` | [`SandboxSettings`](#sandboxsettings) | `undefined` | Configure sandbox behavior programmatically. See [Sandbox settings](#sandboxsettings) for details |
+| `sessionId` | `string` | Auto-generated | Use a specific UUID for the session instead of auto-generating one |
 | `settingSources` | [`SettingSource`](#settingsource)`[]` | `[]` (no settings) | Control which filesystem settings to load. When omitted, no settings are loaded. **Note:** Must include `'project'` to load CLAUDE.md files |
+| `spawnClaudeCodeProcess` | `(options: SpawnOptions) => SpawnedProcess` | `undefined` | Custom function to spawn the Claude Code process. Use to run Claude Code in VMs, containers, or remote environments |
 | `stderr` | `(data: string) => void` | `undefined` | Callback for stderr output |
 | `strictMcpConfig` | `boolean` | `false` | Enforce strict MCP validation |
 | `systemPrompt` | `string \| { type: 'preset'; preset: 'claude_code'; append?: string }` | `undefined` (minimal prompt) | System prompt configuration. Pass a string for custom prompt, or `{ type: 'preset', preset: 'claude_code' }` to use Claude Code's system prompt. When using the preset object form, add `append` to extend the system prompt with additional instructions |
+| `thinking` | [`ThinkingConfig`](#thinkingconfig) | `{ type: 'adaptive' }` for supported models | Controls Claude's thinking/reasoning behavior. See [`ThinkingConfig`](#thinkingconfig) for options |
 | `tools` | `string[] \| { type: 'preset'; preset: 'claude_code' }` | `undefined` | Tool configuration. Pass an array of tool names or use the preset to get Claude Code's default tools |
 
 ### `Query`
@@ -138,14 +193,24 @@ Interface returned by the `query()` function.
 ```typescript
 interface Query extends AsyncGenerator<SDKMessage, void> {
   interrupt(): Promise<void>;
-  rewindFiles(userMessageUuid: string): Promise<void>;
+  rewindFiles(
+    userMessageId: string,
+    options?: { dryRun?: boolean }
+  ): Promise<RewindFilesResult>;
   setPermissionMode(mode: PermissionMode): Promise<void>;
   setModel(model?: string): Promise<void>;
   setMaxThinkingTokens(maxThinkingTokens: number | null): Promise<void>;
+  initializationResult(): Promise<SDKControlInitializeResponse>;
   supportedCommands(): Promise<SlashCommand[]>;
   supportedModels(): Promise<ModelInfo[]>;
   mcpServerStatus(): Promise<McpServerStatus[]>;
   accountInfo(): Promise<AccountInfo>;
+  reconnectMcpServer(serverName: string): Promise<void>;
+  toggleMcpServer(serverName: string, enabled: boolean): Promise<void>;
+  setMcpServers(servers: Record<string, McpServerConfig>): Promise<McpSetServersResult>;
+  streamInput(stream: AsyncIterable<SDKUserMessage>): Promise<void>;
+  stopTask(taskId: string): Promise<void>;
+  close(): void;
 }
 ```
 
@@ -154,14 +219,35 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
 | Method | Description |
 | :----- | :---------- |
 | `interrupt()` | Interrupts the query (only available in streaming input mode) |
-| `rewindFiles(userMessageUuid)` | Restores files to their state at the specified user message. Requires `enableFileCheckpointing: true`. See [File checkpointing](/docs/en/agent-sdk/file-checkpointing) |
+| `rewindFiles(userMessageId, options?)` | Restores files to their state at the specified user message. Pass `{ dryRun: true }` to preview changes. Requires `enableFileCheckpointing: true`. See [File checkpointing](/docs/en/agent-sdk/file-checkpointing) |
 | `setPermissionMode()` | Changes the permission mode (only available in streaming input mode) |
 | `setModel()` | Changes the model (only available in streaming input mode) |
-| `setMaxThinkingTokens()` | Changes the maximum thinking tokens (only available in streaming input mode) |
+| `setMaxThinkingTokens()` | _Deprecated:_ Use the `thinking` option instead. Changes the maximum thinking tokens |
+| `initializationResult()` | Returns the full initialization result including supported commands, models, account info, and output style configuration |
 | `supportedCommands()` | Returns available slash commands |
 | `supportedModels()` | Returns available models with display info |
 | `mcpServerStatus()` | Returns status of connected MCP servers |
 | `accountInfo()` | Returns account information |
+| `reconnectMcpServer(serverName)` | Reconnect an MCP server by name |
+| `toggleMcpServer(serverName, enabled)` | Enable or disable an MCP server by name |
+| `setMcpServers(servers)` | Dynamically replace the set of MCP servers for this session. Returns info about which servers were added, removed, and any errors |
+| `streamInput(stream)` | Stream input messages to the query for multi-turn conversations |
+| `stopTask(taskId)` | Stop a running background task by ID |
+| `close()` | Close the query and terminate the underlying process. Forcefully ends the query and cleans up all resources |
+
+### `SDKControlInitializeResponse`
+
+Return type of `initializationResult()`. Contains session initialization data.
+
+```typescript
+type SDKControlInitializeResponse = {
+  commands: SlashCommand[];
+  output_style: string;
+  available_output_styles: string[];
+  models: ModelInfo[];
+  account: AccountInfo;
+}
+```
 
 ### `AgentDefinition`
 
@@ -171,17 +257,37 @@ Configuration for a subagent defined programmatically.
 type AgentDefinition = {
   description: string;
   tools?: string[];
+  disallowedTools?: string[];
   prompt: string;
   model?: "sonnet" | "opus" | "haiku" | "inherit";
-};
+  mcpServers?: AgentMcpServerSpec[];
+  skills?: string[];
+  maxTurns?: number;
+  criticalSystemReminder_EXPERIMENTAL?: string;
+}
 ```
 
 | Field | Required | Description |
 |:------|:---------|:------------|
 | `description` | Yes | Natural language description of when to use this agent |
-| `tools` | No | Array of allowed tool names. If omitted, inherits all tools |
+| `tools` | No | Array of allowed tool names. If omitted, inherits all tools from parent |
+| `disallowedTools` | No | Array of tool names to explicitly disallow for this agent |
 | `prompt` | Yes | The agent's system prompt |
-| `model` | No | Model override for this agent. If omitted, uses the main model |
+| `model` | No | Model override for this agent. If omitted or `'inherit'`, uses the main model |
+| `mcpServers` | No | MCP server specifications for this agent |
+| `skills` | No | Array of skill names to preload into the agent context |
+| `maxTurns` | No | Maximum number of agentic turns (API round-trips) before stopping |
+| `criticalSystemReminder_EXPERIMENTAL` | No | Experimental: Critical reminder added to the system prompt |
+
+### `AgentMcpServerSpec`
+
+Specifies MCP servers available to a subagent. Can be a server name (string referencing a server from the parent's `mcpServers` config) or an inline server configuration record mapping server names to configs.
+
+```typescript
+type AgentMcpServerSpec = string | Record<string, McpServerConfigForProcessTransport>;
+```
+
+Where `McpServerConfigForProcessTransport` is `McpStdioServerConfig | McpSSEServerConfig | McpHttpServerConfig | McpSdkServerConfig`.
 
 ### `SettingSource`
 
@@ -201,7 +307,7 @@ type SettingSource = "user" | "project" | "local";
 
 When `settingSources` is **omitted** or **undefined**, the SDK does **not** load any filesystem settings. This provides isolation for SDK applications.
 
-#### Why use settingSources?
+#### Why use settingSources
 
 **Load all filesystem settings (legacy behavior):**
 ```typescript
@@ -245,12 +351,8 @@ const result = query({
   prompt: "Review this PR",
   options: {
     // settingSources: [] is the default, no need to specify
-    agents: {
-      // ...
-    },
-    mcpServers: {
-      // ...
-    },
+    agents: { /* ... */ },
+    mcpServers: { /* ... */ },
     allowedTools: ["Read", "Grep", "Glob"]
   }
 });
@@ -288,7 +390,8 @@ type PermissionMode =
   | "default" // Standard permission behavior
   | "acceptEdits" // Auto-accept file edits
   | "bypassPermissions" // Bypass all permission checks
-  | "plan"; // Planning mode - no execution
+  | "plan" // Planning mode - no execution
+  | "dontAsk" // Don't prompt for permissions, deny if not pre-approved
 ```
 
 ### `CanUseTool`
@@ -298,13 +401,26 @@ Custom permission function type for controlling tool usage.
 ```typescript
 type CanUseTool = (
   toolName: string,
-  input: ToolInput,
+  input: Record<string, unknown>,
   options: {
     signal: AbortSignal;
     suggestions?: PermissionUpdate[];
+    blockedPath?: string;
+    decisionReason?: string;
+    toolUseID: string;
+    agentID?: string;
   }
 ) => Promise<PermissionResult>;
 ```
+
+| Option | Type | Description |
+| :----- | :--- | :---------- |
+| `signal` | `AbortSignal` | Signaled if the operation should be aborted |
+| `suggestions` | [`PermissionUpdate`](#permissionupdate)`[]` | Suggested permission updates so the user is not prompted again for this tool |
+| `blockedPath` | `string` | The file path that triggered the permission request, if applicable |
+| `decisionReason` | `string` | Explains why this permission request was triggered |
+| `toolUseID` | `string` | Unique identifier for this specific tool call within the assistant message |
+| `agentID` | `string` | If running within a sub-agent, the sub-agent's ID |
 
 ### `PermissionResult`
 
@@ -314,14 +430,16 @@ Result of a permission check.
 type PermissionResult =
   | {
       behavior: "allow";
-      updatedInput: ToolInput;
+      updatedInput?: Record<string, unknown>;
       updatedPermissions?: PermissionUpdate[];
+      toolUseID?: string;
     }
   | {
       behavior: "deny";
       message: string;
       interrupt?: boolean;
-    };
+      toolUseID?: string;
+    }
 ```
 
 ### `McpServerConfig`
@@ -344,7 +462,7 @@ type McpStdioServerConfig = {
   command: string;
   args?: string[];
   env?: Record<string, string>;
-};
+}
 ```
 
 #### `McpSSEServerConfig`
@@ -354,7 +472,7 @@ type McpSSEServerConfig = {
   type: "sse";
   url: string;
   headers?: Record<string, string>;
-};
+}
 ```
 
 #### `McpHttpServerConfig`
@@ -364,7 +482,7 @@ type McpHttpServerConfig = {
   type: "http";
   url: string;
   headers?: Record<string, string>;
-};
+}
 ```
 
 #### `McpSdkServerConfigWithInstance`
@@ -374,7 +492,17 @@ type McpSdkServerConfigWithInstance = {
   type: "sdk";
   name: string;
   instance: McpServer;
-};
+}
+```
+
+#### `McpClaudeAIProxyServerConfig`
+
+```typescript
+type McpClaudeAIProxyServerConfig = {
+  type: "claudeai-proxy";
+  url: string;
+  id: string;
+}
 ```
 
 ### `SdkPluginConfig`
@@ -385,7 +513,7 @@ Configuration for loading plugins in the SDK.
 type SdkPluginConfig = {
   type: "local";
   path: string;
-};
+}
 ```
 
 | Field | Type | Description |
@@ -417,7 +545,20 @@ type SDKMessage =
   | SDKResultMessage
   | SDKSystemMessage
   | SDKPartialAssistantMessage
-  | SDKCompactBoundaryMessage;
+  | SDKCompactBoundaryMessage
+  | SDKStatusMessage
+  | SDKHookStartedMessage
+  | SDKHookProgressMessage
+  | SDKHookResponseMessage
+  | SDKToolProgressMessage
+  | SDKAuthStatusMessage
+  | SDKTaskNotificationMessage
+  | SDKTaskStartedMessage
+  | SDKTaskProgressMessage
+  | SDKFilesPersistedEvent
+  | SDKToolUseSummaryMessage
+  | SDKRateLimitEvent
+  | SDKPromptSuggestionMessage;
 ```
 
 ### `SDKAssistantMessage`
@@ -429,10 +570,15 @@ type SDKAssistantMessage = {
   type: "assistant";
   uuid: UUID;
   session_id: string;
-  message: APIAssistantMessage; // From Anthropic SDK
+  message: BetaMessage; // From Anthropic SDK
   parent_tool_use_id: string | null;
-};
+  error?: SDKAssistantMessageError;
+}
 ```
+
+The `message` field is a [`BetaMessage`](/docs/en/api/messages) from the Anthropic SDK. It includes fields like `id`, `content`, `model`, `stop_reason`, and `usage`.
+
+`SDKAssistantMessageError` is one of: `'authentication_failed'`, `'billing_error'`, `'rate_limit'`, `'invalid_request'`, `'server_error'`, `'unknown'`, or `'max_output_tokens'`.
 
 ### `SDKUserMessage`
 
@@ -443,9 +589,11 @@ type SDKUserMessage = {
   type: "user";
   uuid?: UUID;
   session_id: string;
-  message: APIUserMessage; // From Anthropic SDK
+  message: MessageParam; // From Anthropic SDK
   parent_tool_use_id: string | null;
-};
+  isSynthetic?: boolean;
+  tool_use_result?: unknown;
+}
 ```
 
 ### `SDKUserMessageReplay`
@@ -457,9 +605,12 @@ type SDKUserMessageReplay = {
   type: "user";
   uuid: UUID;
   session_id: string;
-  message: APIUserMessage;
+  message: MessageParam;
   parent_tool_use_id: string | null;
-};
+  isSynthetic?: boolean;
+  tool_use_result?: unknown;
+  isReplay: true;
+}
 ```
 
 ### `SDKResultMessage`
@@ -478,6 +629,7 @@ type SDKResultMessage =
       is_error: boolean;
       num_turns: number;
       result: string;
+      stop_reason: string | null;
       total_cost_usd: number;
       usage: NonNullableUsage;
       modelUsage: { [modelName: string]: ModelUsage };
@@ -497,12 +649,13 @@ type SDKResultMessage =
       duration_api_ms: number;
       is_error: boolean;
       num_turns: number;
+      stop_reason: string | null;
       total_cost_usd: number;
       usage: NonNullableUsage;
       modelUsage: { [modelName: string]: ModelUsage };
       permission_denials: SDKPermissionDenial[];
       errors: string[];
-    };
+    }
 ```
 
 ### `SDKSystemMessage`
@@ -515,7 +668,10 @@ type SDKSystemMessage = {
   subtype: "init";
   uuid: UUID;
   session_id: string;
+  agents?: string[];
   apiKeySource: ApiKeySource;
+  betas?: string[];
+  claude_code_version: string;
   cwd: string;
   tools: string[];
   mcp_servers: {
@@ -526,7 +682,9 @@ type SDKSystemMessage = {
   permissionMode: PermissionMode;
   slash_commands: string[];
   output_style: string;
-};
+  skills: string[];
+  plugins: { name: string; path: string }[];
+}
 ```
 
 ### `SDKPartialAssistantMessage`
@@ -536,11 +694,11 @@ Streaming partial message (only when `includePartialMessages` is true).
 ```typescript
 type SDKPartialAssistantMessage = {
   type: "stream_event";
-  event: RawMessageStreamEvent; // From Anthropic SDK
+  event: BetaRawMessageStreamEvent; // From Anthropic SDK
   parent_tool_use_id: string | null;
   uuid: UUID;
   session_id: string;
-};
+}
 ```
 
 ### `SDKCompactBoundaryMessage`
@@ -557,7 +715,7 @@ type SDKCompactBoundaryMessage = {
     trigger: "manual" | "auto";
     pre_tokens: number;
   };
-};
+}
 ```
 
 ### `SDKPermissionDenial`
@@ -568,8 +726,8 @@ Information about a denied tool use.
 type SDKPermissionDenial = {
   tool_name: string;
   tool_use_id: string;
-  tool_input: ToolInput;
-};
+  tool_input: Record<string, unknown>;
+}
 ```
 
 ## Hook Types
@@ -593,7 +751,13 @@ type HookEvent =
   | "SubagentStart"
   | "SubagentStop"
   | "PreCompact"
-  | "PermissionRequest";
+  | "PermissionRequest"
+  | "Setup"
+  | "TeammateIdle"
+  | "TaskCompleted"
+  | "ConfigChange"
+  | "WorktreeCreate"
+  | "WorktreeRemove";
 ```
 
 ### `HookCallback`
@@ -616,6 +780,7 @@ Hook configuration with optional matcher.
 interface HookCallbackMatcher {
   matcher?: string;
   hooks: HookCallback[];
+  timeout?: number; // Timeout in seconds for all hooks in this matcher
 }
 ```
 
@@ -636,7 +801,13 @@ type HookInput =
   | SubagentStartHookInput
   | SubagentStopHookInput
   | PreCompactHookInput
-  | PermissionRequestHookInput;
+  | PermissionRequestHookInput
+  | SetupHookInput
+  | TeammateIdleHookInput
+  | TaskCompletedHookInput
+  | ConfigChangeHookInput
+  | WorktreeCreateHookInput
+  | WorktreeRemoveHookInput;
 ```
 
 ### `BaseHookInput`
@@ -649,7 +820,7 @@ type BaseHookInput = {
   transcript_path: string;
   cwd: string;
   permission_mode?: string;
-};
+}
 ```
 
 #### `PreToolUseHookInput`
@@ -659,7 +830,8 @@ type PreToolUseHookInput = BaseHookInput & {
   hook_event_name: "PreToolUse";
   tool_name: string;
   tool_input: unknown;
-};
+  tool_use_id: string;
+}
 ```
 
 #### `PostToolUseHookInput`
@@ -670,7 +842,8 @@ type PostToolUseHookInput = BaseHookInput & {
   tool_name: string;
   tool_input: unknown;
   tool_response: unknown;
-};
+  tool_use_id: string;
+}
 ```
 
 #### `PostToolUseFailureHookInput`
@@ -680,9 +853,10 @@ type PostToolUseFailureHookInput = BaseHookInput & {
   hook_event_name: "PostToolUseFailure";
   tool_name: string;
   tool_input: unknown;
+  tool_use_id: string;
   error: string;
   is_interrupt?: boolean;
-};
+}
 ```
 
 #### `NotificationHookInput`
@@ -692,7 +866,8 @@ type NotificationHookInput = BaseHookInput & {
   hook_event_name: "Notification";
   message: string;
   title?: string;
-};
+  notification_type: string;
+}
 ```
 
 #### `UserPromptSubmitHookInput`
@@ -701,7 +876,7 @@ type NotificationHookInput = BaseHookInput & {
 type UserPromptSubmitHookInput = BaseHookInput & {
   hook_event_name: "UserPromptSubmit";
   prompt: string;
-};
+}
 ```
 
 #### `SessionStartHookInput`
@@ -710,7 +885,9 @@ type UserPromptSubmitHookInput = BaseHookInput & {
 type SessionStartHookInput = BaseHookInput & {
   hook_event_name: "SessionStart";
   source: "startup" | "resume" | "clear" | "compact";
-};
+  agent_type?: string;
+  model?: string;
+}
 ```
 
 #### `SessionEndHookInput`
@@ -719,7 +896,7 @@ type SessionStartHookInput = BaseHookInput & {
 type SessionEndHookInput = BaseHookInput & {
   hook_event_name: "SessionEnd";
   reason: ExitReason; // String from EXIT_REASONS array
-};
+}
 ```
 
 #### `StopHookInput`
@@ -728,7 +905,8 @@ type SessionEndHookInput = BaseHookInput & {
 type StopHookInput = BaseHookInput & {
   hook_event_name: "Stop";
   stop_hook_active: boolean;
-};
+  last_assistant_message?: string;
+}
 ```
 
 #### `SubagentStartHookInput`
@@ -738,7 +916,7 @@ type SubagentStartHookInput = BaseHookInput & {
   hook_event_name: "SubagentStart";
   agent_id: string;
   agent_type: string;
-};
+}
 ```
 
 #### `SubagentStopHookInput`
@@ -747,7 +925,11 @@ type SubagentStartHookInput = BaseHookInput & {
 type SubagentStopHookInput = BaseHookInput & {
   hook_event_name: "SubagentStop";
   stop_hook_active: boolean;
-};
+  agent_id: string;
+  agent_transcript_path: string;
+  agent_type: string;
+  last_assistant_message?: string;
+}
 ```
 
 #### `PreCompactHookInput`
@@ -757,7 +939,7 @@ type PreCompactHookInput = BaseHookInput & {
   hook_event_name: "PreCompact";
   trigger: "manual" | "auto";
   custom_instructions: string | null;
-};
+}
 ```
 
 #### `PermissionRequestHookInput`
@@ -768,7 +950,67 @@ type PermissionRequestHookInput = BaseHookInput & {
   tool_name: string;
   tool_input: unknown;
   permission_suggestions?: PermissionUpdate[];
-};
+}
+```
+
+#### `SetupHookInput`
+
+```typescript
+type SetupHookInput = BaseHookInput & {
+  hook_event_name: "Setup";
+  trigger: "init" | "maintenance";
+}
+```
+
+#### `TeammateIdleHookInput`
+
+```typescript
+type TeammateIdleHookInput = BaseHookInput & {
+  hook_event_name: "TeammateIdle";
+  teammate_name: string;
+  team_name: string;
+}
+```
+
+#### `TaskCompletedHookInput`
+
+```typescript
+type TaskCompletedHookInput = BaseHookInput & {
+  hook_event_name: "TaskCompleted";
+  task_id: string;
+  task_subject: string;
+  task_description?: string;
+  teammate_name?: string;
+  team_name?: string;
+}
+```
+
+#### `ConfigChangeHookInput`
+
+```typescript
+type ConfigChangeHookInput = BaseHookInput & {
+  hook_event_name: "ConfigChange";
+  source: "user_settings" | "project_settings" | "local_settings" | "policy_settings" | "skills";
+  file_path?: string;
+}
+```
+
+#### `WorktreeCreateHookInput`
+
+```typescript
+type WorktreeCreateHookInput = BaseHookInput & {
+  hook_event_name: "WorktreeCreate";
+  name: string;
+}
+```
+
+#### `WorktreeRemoveHookInput`
+
+```typescript
+type WorktreeRemoveHookInput = BaseHookInput & {
+  hook_event_name: "WorktreeRemove";
+  worktree_path: string;
+}
 ```
 
 ### `HookJSONOutput`
@@ -785,7 +1027,7 @@ type HookJSONOutput = AsyncHookJSONOutput | SyncHookJSONOutput;
 type AsyncHookJSONOutput = {
   async: true;
   asyncTimeout?: number;
-};
+}
 ```
 
 #### `SyncHookJSONOutput`
@@ -804,6 +1046,7 @@ type SyncHookJSONOutput = {
         permissionDecision?: "allow" | "deny" | "ask";
         permissionDecisionReason?: string;
         updatedInput?: Record<string, unknown>;
+        additionalContext?: string;
       }
     | {
         hookEventName: "UserPromptSubmit";
@@ -814,39 +1057,75 @@ type SyncHookJSONOutput = {
         additionalContext?: string;
       }
     | {
+        hookEventName: "Setup";
+        additionalContext?: string;
+      }
+    | {
+        hookEventName: "SubagentStart";
+        additionalContext?: string;
+      }
+    | {
         hookEventName: "PostToolUse";
         additionalContext?: string;
+        updatedMCPToolOutput?: unknown;
+      }
+    | {
+        hookEventName: "PostToolUseFailure";
+        additionalContext?: string;
+      }
+    | {
+        hookEventName: "Notification";
+        additionalContext?: string;
+      }
+    | {
+        hookEventName: "PermissionRequest";
+        decision: {
+          behavior: "allow";
+          updatedInput?: Record<string, unknown>;
+          updatedPermissions?: PermissionUpdate[];
+        } | {
+          behavior: "deny";
+          message?: string;
+          interrupt?: boolean;
+        };
       };
-};
+}
 ```
 
 ## Tool Input Types
 
 Documentation of input schemas for all built-in Claude Code tools. These types are exported from `@anthropic-ai/claude-agent-sdk` and can be used for type-safe tool interactions.
 
-### `ToolInput`
+### `ToolInputSchemas`
 
-**Note:** This is a documentation-only type for clarity. It represents the union of all tool input types.
+Union of all tool input types, exported from `@anthropic-ai/claude-agent-sdk`.
 
 ```typescript
-type ToolInput =
+type ToolInputSchemas =
   | AgentInput
   | AskUserQuestionInput
   | BashInput
-  | BashOutputInput
+  | TaskOutputInput
+  | ConfigInput
+  | EnterWorktreeInput
+  | ExitPlanModeInput
   | FileEditInput
   | FileReadInput
   | FileWriteInput
   | GlobInput
   | GrepInput
-  | KillShellInput
-  | NotebookEditInput
-  | WebFetchInput
-  | WebSearchInput
-  | TodoWriteInput
-  | ExitPlanModeInput
   | ListMcpResourcesInput
-  | ReadMcpResourceInput;
+  | McpInput
+  | NotebookEditInput
+  | ReadMcpResourceInput
+  | SubscribeMcpResourceInput
+  | SubscribePollingInput
+  | TaskStopInput
+  | TodoWriteInput
+  | UnsubscribeMcpResourceInput
+  | UnsubscribePollingInput
+  | WebFetchInput
+  | WebSearchInput;
 ```
 
 ### Task
@@ -854,19 +1133,18 @@ type ToolInput =
 **Tool name:** `Task`
 
 ```typescript
-interface AgentInput {
-  /**
-   * A short (3-5 word) description of the task
-   */
+type AgentInput = {
   description: string;
-  /**
-   * The task for the agent to perform
-   */
   prompt: string;
-  /**
-   * The type of specialized agent to use for this task
-   */
   subagent_type: string;
+  model?: "sonnet" | "opus" | "haiku";
+  resume?: string;
+  run_in_background?: boolean;
+  max_turns?: number;
+  name?: string;
+  team_name?: string;
+  mode?: "acceptEdits" | "bypassPermissions" | "default" | "dontAsk" | "plan";
+  isolation?: "worktree";
 }
 ```
 
@@ -877,46 +1155,13 @@ Launches a new agent to handle complex, multi-step tasks autonomously.
 **Tool name:** `AskUserQuestion`
 
 ```typescript
-interface AskUserQuestionInput {
-  /**
-   * Questions to ask the user (1-4 questions)
-   */
+type AskUserQuestionInput = {
   questions: Array<{
-    /**
-     * The complete question to ask the user. Should be clear, specific,
-     * and end with a question mark.
-     */
     question: string;
-    /**
-     * Very short label displayed as a chip/tag (max 12 chars).
-     * Examples: "Auth method", "Library", "Approach"
-     */
     header: string;
-    /**
-     * The available choices (2-4 options). An "Other" option is
-     * automatically provided.
-     */
-    options: Array<{
-      /**
-       * Display text for this option (1-5 words)
-       */
-      label: string;
-      /**
-       * Explanation of what this option means
-       */
-      description: string;
-    }>;
-    /**
-     * Set to true to allow multiple selections
-     */
+    options: Array<{ label: string; description: string }>;
     multiSelect: boolean;
   }>;
-  /**
-   * User answers populated by the permission system.
-   * Maps question text to selected option label(s).
-   * Multi-select answers are comma-separated.
-   */
-  answers?: Record<string, string>;
 }
 ```
 
@@ -927,68 +1172,40 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
 **Tool name:** `Bash`
 
 ```typescript
-interface BashInput {
-  /**
-   * The command to execute
-   */
+type BashInput = {
   command: string;
-  /**
-   * Optional timeout in milliseconds (max 600000)
-   */
   timeout?: number;
-  /**
-   * Clear, concise description of what this command does in 5-10 words
-   */
   description?: string;
-  /**
-   * Set to true to run this command in the background
-   */
   run_in_background?: boolean;
+  dangerouslyDisableSandbox?: boolean;
 }
 ```
 
 Executes bash commands in a persistent shell session with optional timeout and background execution.
 
-### BashOutput
+### TaskOutput
 
-**Tool name:** `BashOutput`
+**Tool name:** `TaskOutput`
 
 ```typescript
-interface BashOutputInput {
-  /**
-   * The ID of the background shell to retrieve output from
-   */
-  bash_id: string;
-  /**
-   * Optional regex to filter output lines
-   */
-  filter?: string;
+type TaskOutputInput = {
+  task_id: string;
+  block: boolean;
+  timeout: number;
 }
 ```
 
-Retrieves output from a running or completed background bash shell.
+Retrieves output from a running or completed background task.
 
 ### Edit
 
 **Tool name:** `Edit`
 
 ```typescript
-interface FileEditInput {
-  /**
-   * The absolute path to the file to modify
-   */
+type FileEditInput = {
   file_path: string;
-  /**
-   * The text to replace
-   */
   old_string: string;
-  /**
-   * The text to replace it with (must be different from old_string)
-   */
   new_string: string;
-  /**
-   * Replace all occurrences of old_string (default false)
-   */
   replace_all?: boolean;
 }
 ```
@@ -1000,37 +1217,23 @@ Performs exact string replacements in files.
 **Tool name:** `Read`
 
 ```typescript
-interface FileReadInput {
-  /**
-   * The absolute path to the file to read
-   */
+type FileReadInput = {
   file_path: string;
-  /**
-   * The line number to start reading from
-   */
   offset?: number;
-  /**
-   * The number of lines to read
-   */
   limit?: number;
+  pages?: string;
 }
 ```
 
-Reads files from the local filesystem, including text, images, PDFs, and Jupyter notebooks.
+Reads files from the local filesystem, including text, images, PDFs, and Jupyter notebooks. Use `pages` for PDF page ranges (for example, `"1-5"`).
 
 ### Write
 
 **Tool name:** `Write`
 
 ```typescript
-interface FileWriteInput {
-  /**
-   * The absolute path to the file to write
-   */
+type FileWriteInput = {
   file_path: string;
-  /**
-   * The content to write to the file
-   */
   content: string;
 }
 ```
@@ -1042,14 +1245,8 @@ Writes a file to the local filesystem, overwriting if it exists.
 **Tool name:** `Glob`
 
 ```typescript
-interface GlobInput {
-  /**
-   * The glob pattern to match files against
-   */
+type GlobInput = {
   pattern: string;
-  /**
-   * The directory to search in (defaults to cwd)
-   */
   path?: string;
 }
 ```
@@ -1061,100 +1258,49 @@ Fast file pattern matching that works with any codebase size.
 **Tool name:** `Grep`
 
 ```typescript
-interface GrepInput {
-  /**
-   * The regular expression pattern to search for
-   */
+type GrepInput = {
   pattern: string;
-  /**
-   * File or directory to search in (defaults to cwd)
-   */
   path?: string;
-  /**
-   * Glob pattern to filter files (e.g. "*.js")
-   */
   glob?: string;
-  /**
-   * File type to search (e.g. "js", "py", "rust")
-   */
   type?: string;
-  /**
-   * Output mode: "content", "files_with_matches", or "count"
-   */
   output_mode?: "content" | "files_with_matches" | "count";
-  /**
-   * Case insensitive search
-   */
   "-i"?: boolean;
-  /**
-   * Show line numbers (for content mode)
-   */
   "-n"?: boolean;
-  /**
-   * Lines to show before each match
-   */
   "-B"?: number;
-  /**
-   * Lines to show after each match
-   */
   "-A"?: number;
-  /**
-   * Lines to show before and after each match
-   */
   "-C"?: number;
-  /**
-   * Limit output to first N lines/entries
-   */
+  context?: number;
   head_limit?: number;
-  /**
-   * Enable multiline mode
-   */
+  offset?: number;
   multiline?: boolean;
 }
 ```
 
 Powerful search tool built on ripgrep with regex support.
 
-### KillBash
+### TaskStop
 
-**Tool name:** `KillBash`
+**Tool name:** `TaskStop`
 
 ```typescript
-interface KillShellInput {
-  /**
-   * The ID of the background shell to kill
-   */
-  shell_id: string;
+type TaskStopInput = {
+  task_id?: string;
+  shell_id?: string; // Deprecated: use task_id
 }
 ```
 
-Kills a running background bash shell by its ID.
+Stops a running background task or shell by ID.
 
 ### NotebookEdit
 
 **Tool name:** `NotebookEdit`
 
 ```typescript
-interface NotebookEditInput {
-  /**
-   * The absolute path to the Jupyter notebook file
-   */
+type NotebookEditInput = {
   notebook_path: string;
-  /**
-   * The ID of the cell to edit
-   */
   cell_id?: string;
-  /**
-   * The new source for the cell
-   */
   new_source: string;
-  /**
-   * The type of the cell (code or markdown)
-   */
   cell_type?: "code" | "markdown";
-  /**
-   * The type of edit (replace, insert, delete)
-   */
   edit_mode?: "replace" | "insert" | "delete";
 }
 ```
@@ -1166,14 +1312,8 @@ Edits cells in Jupyter notebook files.
 **Tool name:** `WebFetch`
 
 ```typescript
-interface WebFetchInput {
-  /**
-   * The URL to fetch content from
-   */
+type WebFetchInput = {
   url: string;
-  /**
-   * The prompt to run on the fetched content
-   */
   prompt: string;
 }
 ```
@@ -1185,18 +1325,9 @@ Fetches content from a URL and processes it with an AI model.
 **Tool name:** `WebSearch`
 
 ```typescript
-interface WebSearchInput {
-  /**
-   * The search query to use
-   */
+type WebSearchInput = {
   query: string;
-  /**
-   * Only include results from these domains
-   */
   allowed_domains?: string[];
-  /**
-   * Never include results from these domains
-   */
   blocked_domains?: string[];
 }
 ```
@@ -1208,22 +1339,10 @@ Searches the web and returns formatted results.
 **Tool name:** `TodoWrite`
 
 ```typescript
-interface TodoWriteInput {
-  /**
-   * The updated todo list
-   */
+type TodoWriteInput = {
   todos: Array<{
-    /**
-     * The task description
-     */
     content: string;
-    /**
-     * The task status
-     */
     status: "pending" | "in_progress" | "completed";
-    /**
-     * Active form of the task description
-     */
     activeForm: string;
   }>;
 }
@@ -1236,25 +1355,22 @@ Creates and manages a structured task list for tracking progress.
 **Tool name:** `ExitPlanMode`
 
 ```typescript
-interface ExitPlanModeInput {
-  /**
-   * The plan to run by the user for approval
-   */
-  plan: string;
+type ExitPlanModeInput = {
+  allowedPrompts?: Array<{
+    tool: "Bash";
+    prompt: string;
+  }>;
 }
 ```
 
-Exits planning mode and prompts the user to approve the plan.
+Exits planning mode. Optionally specifies prompt-based permissions needed to implement the plan.
 
 ### ListMcpResources
 
 **Tool name:** `ListMcpResources`
 
 ```typescript
-interface ListMcpResourcesInput {
-  /**
-   * Optional server name to filter resources by
-   */
+type ListMcpResourcesInput = {
   server?: string;
 }
 ```
@@ -1266,47 +1382,67 @@ Lists available MCP resources from connected servers.
 **Tool name:** `ReadMcpResource`
 
 ```typescript
-interface ReadMcpResourceInput {
-  /**
-   * The MCP server name
-   */
+type ReadMcpResourceInput = {
   server: string;
-  /**
-   * The resource URI to read
-   */
   uri: string;
 }
 ```
 
 Reads a specific MCP resource from a server.
 
-## Tool Output Types
+### Config
 
-Documentation of output schemas for all built-in Claude Code tools. These types represent the actual response data returned by each tool.
-
-### `ToolOutput`
-
-**Note:** This is a documentation-only type for clarity. It represents the union of all tool output types.
+**Tool name:** `Config`
 
 ```typescript
-type ToolOutput =
-  | TaskOutput
+type ConfigInput = {
+  setting: string;
+  value?: string | boolean | number;
+}
+```
+
+Gets or sets a configuration value.
+
+### EnterWorktree
+
+**Tool name:** `EnterWorktree`
+
+```typescript
+type EnterWorktreeInput = {
+  name?: string;
+}
+```
+
+Creates and enters a temporary git worktree for isolated work.
+
+## Tool Output Types
+
+Documentation of output schemas for all built-in Claude Code tools. These types are exported from `@anthropic-ai/claude-agent-sdk` and represent the actual response data returned by each tool.
+
+### `ToolOutputSchemas`
+
+Union of all tool output types.
+
+```typescript
+type ToolOutputSchemas =
+  | AgentOutput
   | AskUserQuestionOutput
   | BashOutput
-  | BashOutputToolOutput
-  | EditOutput
-  | ReadOutput
-  | WriteOutput
+  | ConfigOutput
+  | EnterWorktreeOutput
+  | ExitPlanModeOutput
+  | FileEditOutput
+  | FileReadOutput
+  | FileWriteOutput
   | GlobOutput
   | GrepOutput
-  | KillBashOutput
-  | NotebookEditOutput
-  | WebFetchOutput
-  | WebSearchOutput
-  | TodoWriteOutput
-  | ExitPlanModeOutput
   | ListMcpResourcesOutput
-  | ReadMcpResourceOutput;
+  | NotebookEditOutput
+  | ReadMcpResourceOutput
+  | TaskStopOutput
+  | TodoWriteOutput
+  | WebFetchOutput
+  | WebSearchOutput;
 ```
 
 ### Task
@@ -1314,56 +1450,60 @@ type ToolOutput =
 **Tool name:** `Task`
 
 ```typescript
-interface TaskOutput {
-  /**
-   * Final result message from the subagent
-   */
-  result: string;
-  /**
-   * Token usage statistics
-   */
-  usage?: {
-    input_tokens: number;
-    output_tokens: number;
-    cache_creation_input_tokens?: number;
-    cache_read_input_tokens?: number;
-  };
-  /**
-   * Total cost in USD
-   */
-  total_cost_usd?: number;
-  /**
-   * Execution duration in milliseconds
-   */
-  duration_ms?: number;
-}
+type AgentOutput =
+  | {
+      status: "completed";
+      agentId: string;
+      content: Array<{ type: "text"; text: string }>;
+      totalToolUseCount: number;
+      totalDurationMs: number;
+      totalTokens: number;
+      usage: {
+        input_tokens: number;
+        output_tokens: number;
+        cache_creation_input_tokens: number | null;
+        cache_read_input_tokens: number | null;
+        server_tool_use: {
+          web_search_requests: number;
+          web_fetch_requests: number;
+        } | null;
+        service_tier: ("standard" | "priority" | "batch") | null;
+        cache_creation: {
+          ephemeral_1h_input_tokens: number;
+          ephemeral_5m_input_tokens: number;
+        } | null;
+      };
+      prompt: string;
+    }
+  | {
+      status: "async_launched";
+      agentId: string;
+      description: string;
+      prompt: string;
+      outputFile: string;
+      canReadOutputFile?: boolean;
+    }
+  | {
+      status: "sub_agent_entered";
+      description: string;
+      message: string;
+    };
 ```
 
-Returns the final result from the subagent after completing the delegated task.
+Returns the result from the subagent. Discriminated on the `status` field: `"completed"` for finished tasks, `"async_launched"` for background tasks, and `"sub_agent_entered"` for interactive subagents.
 
 ### AskUserQuestion
 
 **Tool name:** `AskUserQuestion`
 
 ```typescript
-interface AskUserQuestionOutput {
-  /**
-   * The questions that were asked
-   */
+type AskUserQuestionOutput = {
   questions: Array<{
     question: string;
     header: string;
-    options: Array<{
-      label: string;
-      description: string;
-    }>;
+    options: Array<{ label: string; description: string }>;
     multiSelect: boolean;
   }>;
-  /**
-   * The answers provided by the user.
-   * Maps question text to answer string.
-   * Multi-select answers are comma-separated.
-   */
   answers: Record<string, string>;
 }
 ```
@@ -1375,189 +1515,154 @@ Returns the questions asked and the user's answers.
 **Tool name:** `Bash`
 
 ```typescript
-interface BashOutput {
-  /**
-   * Combined stdout and stderr output
-   */
-  output: string;
-  /**
-   * Exit code of the command
-   */
-  exitCode: number;
-  /**
-   * Whether the command was killed due to timeout
-   */
-  killed?: boolean;
-  /**
-   * Shell ID for background processes
-   */
-  shellId?: string;
+type BashOutput = {
+  stdout: string;
+  stderr: string;
+  rawOutputPath?: string;
+  interrupted: boolean;
+  isImage?: boolean;
+  backgroundTaskId?: string;
+  backgroundedByUser?: boolean;
+  dangerouslyDisableSandbox?: boolean;
+  returnCodeInterpretation?: string;
+  structuredContent?: unknown[];
+  persistedOutputPath?: string;
+  persistedOutputSize?: number;
 }
 ```
 
-Returns command output with exit status. Background commands return immediately with a shellId.
-
-### BashOutput
-
-**Tool name:** `BashOutput`
-
-```typescript
-interface BashOutputToolOutput {
-  /**
-   * New output since last check
-   */
-  output: string;
-  /**
-   * Current shell status
-   */
-  status: "running" | "completed" | "failed";
-  /**
-   * Exit code (when completed)
-   */
-  exitCode?: number;
-}
-```
-
-Returns incremental output from background shells.
+Returns command output with stdout/stderr split. Background commands include a `backgroundTaskId`.
 
 ### Edit
 
 **Tool name:** `Edit`
 
 ```typescript
-interface EditOutput {
-  /**
-   * Confirmation message
-   */
-  message: string;
-  /**
-   * Number of replacements made
-   */
-  replacements: number;
-  /**
-   * File path that was edited
-   */
-  file_path: string;
+type FileEditOutput = {
+  filePath: string;
+  oldString: string;
+  newString: string;
+  originalFile: string;
+  structuredPatch: Array<{
+    oldStart: number;
+    oldLines: number;
+    newStart: number;
+    newLines: number;
+    lines: string[];
+  }>;
+  userModified: boolean;
+  replaceAll: boolean;
+  gitDiff?: {
+    filename: string;
+    status: "modified" | "added";
+    additions: number;
+    deletions: number;
+    changes: number;
+    patch: string;
+  };
 }
 ```
 
-Returns confirmation of successful edits with replacement count.
+Returns the structured diff of the edit operation.
 
 ### Read
 
 **Tool name:** `Read`
 
 ```typescript
-type ReadOutput = TextFileOutput | ImageFileOutput | PDFFileOutput | NotebookFileOutput;
-
-interface TextFileOutput {
-  /**
-   * File contents with line numbers
-   */
-  content: string;
-  /**
-   * Total number of lines in file
-   */
-  total_lines: number;
-  /**
-   * Lines actually returned
-   */
-  lines_returned: number;
-}
-
-interface ImageFileOutput {
-  /**
-   * Base64 encoded image data
-   */
-  image: string;
-  /**
-   * Image MIME type
-   */
-  mime_type: string;
-  /**
-   * File size in bytes
-   */
-  file_size: number;
-}
-
-interface PDFFileOutput {
-  /**
-   * Array of page contents
-   */
-  pages: Array<{
-    page_number: number;
-    text?: string;
-    images?: Array<{
-      image: string;
-      mime_type: string;
-    }>;
-  }>;
-  /**
-   * Total number of pages
-   */
-  total_pages: number;
-}
-
-interface NotebookFileOutput {
-  /**
-   * Jupyter notebook cells
-   */
-  cells: Array<{
-    cell_type: "code" | "markdown";
-    source: string;
-    outputs?: any[];
-    execution_count?: number;
-  }>;
-  /**
-   * Notebook metadata
-   */
-  metadata?: Record<string, any>;
-}
+type FileReadOutput =
+  | {
+      type: "text";
+      file: {
+        filePath: string;
+        content: string;
+        numLines: number;
+        startLine: number;
+        totalLines: number;
+      };
+    }
+  | {
+      type: "image";
+      file: {
+        base64: string;
+        type: "image/jpeg" | "image/png" | "image/gif" | "image/webp";
+        originalSize: number;
+        dimensions?: {
+          originalWidth?: number;
+          originalHeight?: number;
+          displayWidth?: number;
+          displayHeight?: number;
+        };
+      };
+    }
+  | {
+      type: "notebook";
+      file: {
+        filePath: string;
+        cells: unknown[];
+      };
+    }
+  | {
+      type: "pdf";
+      file: {
+        filePath: string;
+        base64: string;
+        originalSize: number;
+      };
+    }
+  | {
+      type: "parts";
+      file: {
+        filePath: string;
+        originalSize: number;
+        count: number;
+        outputDir: string;
+      };
+    };
 ```
 
-Returns file contents in format appropriate to file type.
+Returns file contents in a format appropriate to the file type. Discriminated on the `type` field.
 
 ### Write
 
 **Tool name:** `Write`
 
 ```typescript
-interface WriteOutput {
-  /**
-   * Success message
-   */
-  message: string;
-  /**
-   * Number of bytes written
-   */
-  bytes_written: number;
-  /**
-   * File path that was written
-   */
-  file_path: string;
+type FileWriteOutput = {
+  type: "create" | "update";
+  filePath: string;
+  content: string;
+  structuredPatch: Array<{
+    oldStart: number;
+    oldLines: number;
+    newStart: number;
+    newLines: number;
+    lines: string[];
+  }>;
+  originalFile: string | null;
+  gitDiff?: {
+    filename: string;
+    status: "modified" | "added";
+    additions: number;
+    deletions: number;
+    changes: number;
+    patch: string;
+  };
 }
 ```
 
-Returns confirmation after successfully writing the file.
+Returns the write result with structured diff information.
 
 ### Glob
 
 **Tool name:** `Glob`
 
 ```typescript
-interface GlobOutput {
-  /**
-   * Array of matching file paths
-   */
-  matches: string[];
-  /**
-   * Number of matches found
-   */
-  count: number;
-  /**
-   * Search directory used
-   */
-  search_path: string;
+type GlobOutput = {
+  durationMs: number;
+  numFiles: number;
+  filenames: string[];
+  truncated: boolean;
 }
 ```
 
@@ -1568,248 +1673,193 @@ Returns file paths matching the glob pattern, sorted by modification time.
 **Tool name:** `Grep`
 
 ```typescript
-type GrepOutput = GrepContentOutput | GrepFilesOutput | GrepCountOutput;
-
-interface GrepContentOutput {
-  /**
-   * Matching lines with context
-   */
-  matches: Array<{
-    file: string;
-    line_number?: number;
-    line: string;
-    before_context?: string[];
-    after_context?: string[];
-  }>;
-  /**
-   * Total number of matches
-   */
-  total_matches: number;
-}
-
-interface GrepFilesOutput {
-  /**
-   * Files containing matches
-   */
-  files: string[];
-  /**
-   * Number of files with matches
-   */
-  count: number;
-}
-
-interface GrepCountOutput {
-  /**
-   * Match counts per file
-   */
-  counts: Array<{
-    file: string;
-    count: number;
-  }>;
-  /**
-   * Total matches across all files
-   */
-  total: number;
+type GrepOutput = {
+  mode?: "content" | "files_with_matches" | "count";
+  numFiles: number;
+  filenames: string[];
+  content?: string;
+  numLines?: number;
+  numMatches?: number;
+  appliedLimit?: number;
+  appliedOffset?: number;
 }
 ```
 
-Returns search results in the format specified by output_mode.
+Returns search results. The shape varies by `mode`: file list, content with matches, or match counts.
 
-### KillBash
+### TaskStop
 
-**Tool name:** `KillBash`
+**Tool name:** `TaskStop`
 
 ```typescript
-interface KillBashOutput {
-  /**
-   * Success message
-   */
+type TaskStopOutput = {
   message: string;
-  /**
-   * ID of the killed shell
-   */
-  shell_id: string;
+  task_id: string;
+  task_type: string;
+  command?: string;
 }
 ```
 
-Returns confirmation after terminating the background shell.
+Returns confirmation after stopping the background task.
 
 ### NotebookEdit
 
 **Tool name:** `NotebookEdit`
 
 ```typescript
-interface NotebookEditOutput {
-  /**
-   * Success message
-   */
-  message: string;
-  /**
-   * Type of edit performed
-   */
-  edit_type: "replaced" | "inserted" | "deleted";
-  /**
-   * Cell ID that was affected
-   */
+type NotebookEditOutput = {
+  new_source: string;
   cell_id?: string;
-  /**
-   * Total cells in notebook after edit
-   */
-  total_cells: number;
+  cell_type: "code" | "markdown";
+  language: string;
+  edit_mode: string;
+  error?: string;
+  notebook_path: string;
+  original_file: string;
+  updated_file: string;
 }
 ```
 
-Returns confirmation after modifying the Jupyter notebook.
+Returns the result of the notebook edit with original and updated file contents.
 
 ### WebFetch
 
 **Tool name:** `WebFetch`
 
 ```typescript
-interface WebFetchOutput {
-  /**
-   * AI model's response to the prompt
-   */
-  response: string;
-  /**
-   * URL that was fetched
-   */
+type WebFetchOutput = {
+  bytes: number;
+  code: number;
+  codeText: string;
+  result: string;
+  durationMs: number;
   url: string;
-  /**
-   * Final URL after redirects
-   */
-  final_url?: string;
-  /**
-   * HTTP status code
-   */
-  status_code?: number;
 }
 ```
 
-Returns the AI's analysis of the fetched web content.
+Returns the fetched content with HTTP status and metadata.
 
 ### WebSearch
 
 **Tool name:** `WebSearch`
 
 ```typescript
-interface WebSearchOutput {
-  /**
-   * Search results
-   */
-  results: Array<{
-    title: string;
-    url: string;
-    snippet: string;
-    /**
-     * Additional metadata if available
-     */
-    metadata?: Record<string, any>;
-  }>;
-  /**
-   * Total number of results
-   */
-  total_results: number;
-  /**
-   * The query that was searched
-   */
+type WebSearchOutput = {
   query: string;
+  results: Array<
+    | {
+        tool_use_id: string;
+        content: Array<{ title: string; url: string }>;
+      }
+    | string
+  >;
+  durationSeconds: number;
 }
 ```
 
-Returns formatted search results from the web.
+Returns search results from the web.
 
 ### TodoWrite
 
 **Tool name:** `TodoWrite`
 
 ```typescript
-interface TodoWriteOutput {
-  /**
-   * Success message
-   */
-  message: string;
-  /**
-   * Current todo statistics
-   */
-  stats: {
-    total: number;
-    pending: number;
-    in_progress: number;
-    completed: number;
-  };
+type TodoWriteOutput = {
+  oldTodos: Array<{
+    content: string;
+    status: "pending" | "in_progress" | "completed";
+    activeForm: string;
+  }>;
+  newTodos: Array<{
+    content: string;
+    status: "pending" | "in_progress" | "completed";
+    activeForm: string;
+  }>;
 }
 ```
 
-Returns confirmation with current task statistics.
+Returns the previous and updated task lists.
 
 ### ExitPlanMode
 
 **Tool name:** `ExitPlanMode`
 
 ```typescript
-interface ExitPlanModeOutput {
-  /**
-   * Confirmation message
-   */
-  message: string;
-  /**
-   * Whether user approved the plan
-   */
-  approved?: boolean;
+type ExitPlanModeOutput = {
+  plan: string | null;
+  isAgent: boolean;
+  filePath?: string;
+  hasTaskTool?: boolean;
+  awaitingLeaderApproval?: boolean;
+  requestId?: string;
 }
 ```
 
-Returns confirmation after exiting plan mode.
+Returns the plan state after exiting plan mode.
 
 ### ListMcpResources
 
 **Tool name:** `ListMcpResources`
 
 ```typescript
-interface ListMcpResourcesOutput {
-  /**
-   * Available resources
-   */
-  resources: Array<{
-    uri: string;
-    name: string;
-    description?: string;
-    mimeType?: string;
-    server: string;
-  }>;
-  /**
-   * Total number of resources
-   */
-  total: number;
-}
+type ListMcpResourcesOutput = Array<{
+  uri: string;
+  name: string;
+  mimeType?: string;
+  description?: string;
+  server: string;
+}>;
 ```
 
-Returns list of available MCP resources.
+Returns an array of available MCP resources.
 
 ### ReadMcpResource
 
 **Tool name:** `ReadMcpResource`
 
 ```typescript
-interface ReadMcpResourceOutput {
-  /**
-   * Resource contents
-   */
+type ReadMcpResourceOutput = {
   contents: Array<{
     uri: string;
     mimeType?: string;
     text?: string;
-    blob?: string;
   }>;
-  /**
-   * Server that provided the resource
-   */
-  server: string;
 }
 ```
 
 Returns the contents of the requested MCP resource.
+
+### Config
+
+**Tool name:** `Config`
+
+```typescript
+type ConfigOutput = {
+  success: boolean;
+  operation?: "get" | "set";
+  setting?: string;
+  value?: unknown;
+  previousValue?: unknown;
+  newValue?: unknown;
+  error?: string;
+}
+```
+
+Returns the result of a configuration get or set operation.
+
+### EnterWorktree
+
+**Tool name:** `EnterWorktree`
+
+```typescript
+type EnterWorktreeOutput = {
+  worktreePath: string;
+  worktreeBranch?: string;
+  message: string;
+}
+```
+
+Returns information about the created git worktree.
 
 ## Permission Types
 
@@ -1851,7 +1901,7 @@ type PermissionUpdate =
       type: "removeDirectories";
       directories: string[];
       destination: PermissionUpdateDestination;
-    };
+    }
 ```
 
 ### `PermissionBehavior`
@@ -1867,7 +1917,8 @@ type PermissionUpdateDestination =
   | "userSettings" // Global user settings
   | "projectSettings" // Per-directory project settings
   | "localSettings" // Gitignored local settings
-  | "session"; // Current session only
+  | "session" // Current session only
+  | "cliArg" // CLI argument
 ```
 
 ### `PermissionRuleValue`
@@ -1876,7 +1927,7 @@ type PermissionUpdateDestination =
 type PermissionRuleValue = {
   toolName: string;
   ruleContent?: string;
-};
+}
 ```
 
 ## Other Types
@@ -1884,7 +1935,7 @@ type PermissionRuleValue = {
 ### `ApiKeySource`
 
 ```typescript
-type ApiKeySource = "user" | "project" | "org" | "temporary";
+type ApiKeySource = "user" | "project" | "org" | "temporary" | "oauth";
 ```
 
 ### `SdkBeta`
@@ -1908,7 +1959,7 @@ type SlashCommand = {
   name: string;
   description: string;
   argumentHint: string;
-};
+}
 ```
 
 ### `ModelInfo`
@@ -1920,7 +1971,10 @@ type ModelInfo = {
   value: string;
   displayName: string;
   description: string;
-};
+  supportsEffort?: boolean;
+  supportedEffortLevels?: ("low" | "medium" | "high" | "max")[];
+  supportsAdaptiveThinking?: boolean;
+}
 ```
 
 ### `McpServerStatus`
@@ -1930,13 +1984,40 @@ Status of a connected MCP server.
 ```typescript
 type McpServerStatus = {
   name: string;
-  status: "connected" | "failed" | "needs-auth" | "pending";
+  status: "connected" | "failed" | "needs-auth" | "pending" | "disabled";
   serverInfo?: {
     name: string;
     version: string;
   };
-};
+  error?: string;
+  config?: McpServerStatusConfig;
+  scope?: string;
+  tools?: {
+    name: string;
+    description?: string;
+    annotations?: {
+      readOnly?: boolean;
+      destructive?: boolean;
+      openWorld?: boolean;
+    };
+  }[];
+}
 ```
+
+### `McpServerStatusConfig`
+
+The configuration of an MCP server as reported by `mcpServerStatus()`. This is the union of all MCP server transport types.
+
+```typescript
+type McpServerStatusConfig =
+  | McpStdioServerConfig
+  | McpSSEServerConfig
+  | McpHttpServerConfig
+  | McpSdkServerConfig
+  | McpClaudeAIProxyServerConfig;
+```
+
+See [`McpServerConfig`](#mcpserverconfig) for details on each transport type.
 
 ### `AccountInfo`
 
@@ -1949,7 +2030,7 @@ type AccountInfo = {
   subscriptionType?: string;
   tokenSource?: string;
   apiKeySource?: string;
-};
+}
 ```
 
 ### `ModelUsage`
@@ -1965,7 +2046,8 @@ type ModelUsage = {
   webSearchRequests: number;
   costUSD: number;
   contextWindow: number;
-};
+  maxOutputTokens: number;
+}
 ```
 
 ### `ConfigScope`
@@ -1981,7 +2063,7 @@ A version of [`Usage`](#usage) with all nullable fields made non-nullable.
 ```typescript
 type NonNullableUsage = {
   [K in keyof Usage]: NonNullable<Usage[K]>;
-};
+}
 ```
 
 ### `Usage`
@@ -1994,7 +2076,7 @@ type Usage = {
   output_tokens: number | null;
   cache_creation_input_tokens?: number | null;
   cache_read_input_tokens?: number | null;
-};
+}
 ```
 
 ### `CallToolResult`
@@ -2008,7 +2090,303 @@ type CallToolResult = {
     // Additional fields vary by type
   }>;
   isError?: boolean;
-};
+}
+```
+
+### `ThinkingConfig`
+
+Controls Claude's thinking/reasoning behavior. Takes precedence over the deprecated `maxThinkingTokens`.
+
+```typescript
+type ThinkingConfig =
+  | { type: "adaptive" } // The model determines when and how much to reason (Opus 4.6+)
+  | { type: "enabled"; budgetTokens?: number } // Fixed thinking token budget
+  | { type: "disabled" } // No extended thinking
+```
+
+### `SpawnedProcess`
+
+Interface for custom process spawning (used with `spawnClaudeCodeProcess` option). `ChildProcess` already satisfies this interface.
+
+```typescript
+interface SpawnedProcess {
+  stdin: Writable;
+  stdout: Readable;
+  readonly killed: boolean;
+  readonly exitCode: number | null;
+  kill(signal: NodeJS.Signals): boolean;
+  on(event: "exit", listener: (code: number | null, signal: NodeJS.Signals | null) => void): void;
+  on(event: "error", listener: (error: Error) => void): void;
+  once(event: "exit", listener: (code: number | null, signal: NodeJS.Signals | null) => void): void;
+  once(event: "error", listener: (error: Error) => void): void;
+  off(event: "exit", listener: (code: number | null, signal: NodeJS.Signals | null) => void): void;
+  off(event: "error", listener: (error: Error) => void): void;
+}
+```
+
+### `SpawnOptions`
+
+Options passed to the custom spawn function.
+
+```typescript
+interface SpawnOptions {
+  command: string;
+  args: string[];
+  cwd?: string;
+  env: Record<string, string | undefined>;
+  signal: AbortSignal;
+}
+```
+
+### `McpSetServersResult`
+
+Result of a `setMcpServers()` operation.
+
+```typescript
+type McpSetServersResult = {
+  added: string[];
+  removed: string[];
+  errors: Record<string, string>;
+}
+```
+
+### `RewindFilesResult`
+
+Result of a `rewindFiles()` operation.
+
+```typescript
+type RewindFilesResult = {
+  canRewind: boolean;
+  error?: string;
+  filesChanged?: string[];
+  insertions?: number;
+  deletions?: number;
+}
+```
+
+### `SDKStatusMessage`
+
+Status update message (e.g., compacting).
+
+```typescript
+type SDKStatusMessage = {
+  type: "system";
+  subtype: "status";
+  status: "compacting" | null;
+  permissionMode?: PermissionMode;
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKTaskNotificationMessage`
+
+Notification when a background task completes, fails, or is stopped.
+
+```typescript
+type SDKTaskNotificationMessage = {
+  type: "system";
+  subtype: "task_notification";
+  task_id: string;
+  tool_use_id?: string;
+  status: "completed" | "failed" | "stopped";
+  output_file: string;
+  summary: string;
+  usage?: {
+    total_tokens: number;
+    tool_uses: number;
+    duration_ms: number;
+  };
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKToolUseSummaryMessage`
+
+Summary of tool usage in a conversation.
+
+```typescript
+type SDKToolUseSummaryMessage = {
+  type: "tool_use_summary";
+  summary: string;
+  preceding_tool_use_ids: string[];
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKHookStartedMessage`
+
+Emitted when a hook begins executing.
+
+```typescript
+type SDKHookStartedMessage = {
+  type: "system";
+  subtype: "hook_started";
+  hook_id: string;
+  hook_name: string;
+  hook_event: string;
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKHookProgressMessage`
+
+Emitted while a hook is running, with stdout/stderr output.
+
+```typescript
+type SDKHookProgressMessage = {
+  type: "system";
+  subtype: "hook_progress";
+  hook_id: string;
+  hook_name: string;
+  hook_event: string;
+  stdout: string;
+  stderr: string;
+  output: string;
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKHookResponseMessage`
+
+Emitted when a hook finishes executing.
+
+```typescript
+type SDKHookResponseMessage = {
+  type: "system";
+  subtype: "hook_response";
+  hook_id: string;
+  hook_name: string;
+  hook_event: string;
+  output: string;
+  stdout: string;
+  stderr: string;
+  exit_code?: number;
+  outcome: "success" | "error" | "cancelled";
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKToolProgressMessage`
+
+Emitted periodically while a tool is executing to indicate progress.
+
+```typescript
+type SDKToolProgressMessage = {
+  type: "tool_progress";
+  tool_use_id: string;
+  tool_name: string;
+  parent_tool_use_id: string | null;
+  elapsed_time_seconds: number;
+  task_id?: string;
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKAuthStatusMessage`
+
+Emitted during authentication flows.
+
+```typescript
+type SDKAuthStatusMessage = {
+  type: "auth_status";
+  isAuthenticating: boolean;
+  output: string[];
+  error?: string;
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKTaskStartedMessage`
+
+Emitted when a background task begins.
+
+```typescript
+type SDKTaskStartedMessage = {
+  type: "system";
+  subtype: "task_started";
+  task_id: string;
+  tool_use_id?: string;
+  description: string;
+  task_type?: string;
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKTaskProgressMessage`
+
+Emitted periodically while a background task is running.
+
+```typescript
+type SDKTaskProgressMessage = {
+  type: "system";
+  subtype: "task_progress";
+  task_id: string;
+  tool_use_id?: string;
+  description: string;
+  usage: {
+    total_tokens: number;
+    tool_uses: number;
+    duration_ms: number;
+  };
+  last_tool_name?: string;
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKFilesPersistedEvent`
+
+Emitted when file checkpoints are persisted to disk.
+
+```typescript
+type SDKFilesPersistedEvent = {
+  type: "system";
+  subtype: "files_persisted";
+  files: { filename: string; file_id: string }[];
+  failed: { filename: string; error: string }[];
+  processed_at: string;
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKRateLimitEvent`
+
+Emitted when the session encounters a rate limit.
+
+```typescript
+type SDKRateLimitEvent = {
+  type: "rate_limit_event";
+  rate_limit_info: {
+    status: "allowed" | "allowed_warning" | "rejected";
+    resetsAt?: number;
+    utilization?: number;
+  };
+  uuid: UUID;
+  session_id: string;
+}
+```
+
+### `SDKPromptSuggestionMessage`
+
+Emitted after each turn when `promptSuggestions` is enabled. Contains a predicted next user prompt.
+
+```typescript
+type SDKPromptSuggestionMessage = {
+  type: "prompt_suggestion";
+  suggestion: string;
+  uuid: UUID;
+  session_id: string;
+}
 ```
 
 ### `AbortError`
@@ -2031,38 +2409,32 @@ type SandboxSettings = {
   autoAllowBashIfSandboxed?: boolean;
   excludedCommands?: string[];
   allowUnsandboxedCommands?: boolean;
-  network?: NetworkSandboxSettings;
-  ignoreViolations?: SandboxIgnoreViolations;
+  network?: SandboxNetworkConfig;
+  filesystem?: SandboxFilesystemConfig;
+  ignoreViolations?: Record<string, string[]>;
   enableWeakerNestedSandbox?: boolean;
-};
+  ripgrep?: { command: string; args?: string[] };
+}
 ```
 
 | Property | Type | Default | Description |
 | :------- | :--- | :------ | :---------- |
 | `enabled` | `boolean` | `false` | Enable sandbox mode for command execution |
-| `autoAllowBashIfSandboxed` | `boolean` | `false` | Auto-approve bash commands when sandbox is enabled |
+| `autoAllowBashIfSandboxed` | `boolean` | `true` | Auto-approve bash commands when sandbox is enabled |
 | `excludedCommands` | `string[]` | `[]` | Commands that always bypass sandbox restrictions (e.g., `['docker']`). These run unsandboxed automatically without model involvement |
-| `allowUnsandboxedCommands` | `boolean` | `false` | Allow the model to request running commands outside the sandbox. When `true`, the model can set `dangerouslyDisableSandbox` in tool input, which falls back to the [permissions system](#permissions-fallback-for-unsandboxed-commands) |
-| `network` | [`NetworkSandboxSettings`](#networksandboxsettings) | `undefined` | Network-specific sandbox configuration |
-| `ignoreViolations` | [`SandboxIgnoreViolations`](#sandboxignoreviolations) | `undefined` | Configure which sandbox violations to ignore |
+| `allowUnsandboxedCommands` | `boolean` | `true` | Allow the model to request running commands outside the sandbox. When `true`, the model can set `dangerouslyDisableSandbox` in tool input, which falls back to the [permissions system](#permissions-fallback-for-unsandboxed-commands) |
+| `network` | [`SandboxNetworkConfig`](#sandboxnetworkconfig) | `undefined` | Network-specific sandbox configuration |
+| `filesystem` | [`SandboxFilesystemConfig`](#sandboxfilesystemconfig) | `undefined` | Filesystem-specific sandbox configuration for read/write restrictions |
+| `ignoreViolations` | `Record<string, string[]>` | `undefined` | Map of violation categories to patterns to ignore (e.g., `{ file: ['/tmp/*'], network: ['localhost'] }`) |
 | `enableWeakerNestedSandbox` | `boolean` | `false` | Enable a weaker nested sandbox for compatibility |
-
-<Note>
-**Filesystem and network access restrictions** are NOT configured via sandbox settings. Instead, they are derived from [permission rules](https://code.claude.com/docs/en/settings#permission-settings):
-
-- **Filesystem read restrictions**: Read deny rules
-- **Filesystem write restrictions**: Edit allow/deny rules
-- **Network restrictions**: WebFetch allow/deny rules
-
-Use sandbox settings for command execution sandboxing, and permission rules for filesystem and network access control.
-</Note>
+| `ripgrep` | `{ command: string; args?: string[] }` | `undefined` | Custom ripgrep binary configuration for sandbox environments |
 
 #### Example usage
 
 ```typescript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
-const result = await query({
+for await (const message of query({
   prompt: "Build and test my project",
   options: {
     sandbox: {
@@ -2073,50 +2445,58 @@ const result = await query({
       }
     }
   }
-});
+})) {
+  if ("result" in message) console.log(message.result);
+}
 ```
 
 <Warning>
 **Unix socket security**: The `allowUnixSockets` option can grant access to powerful system services. For example, allowing `/var/run/docker.sock` effectively grants full host system access through the Docker API, bypassing sandbox isolation. Only allow Unix sockets that are strictly necessary and understand the security implications of each.
 </Warning>
 
-### `NetworkSandboxSettings`
+### `SandboxNetworkConfig`
 
 Network-specific configuration for sandbox mode.
 
 ```typescript
-type NetworkSandboxSettings = {
+type SandboxNetworkConfig = {
+  allowedDomains?: string[];
+  allowManagedDomainsOnly?: boolean;
   allowLocalBinding?: boolean;
   allowUnixSockets?: string[];
   allowAllUnixSockets?: boolean;
   httpProxyPort?: number;
   socksProxyPort?: number;
-};
+}
 ```
 
 | Property | Type | Default | Description |
 | :------- | :--- | :------ | :---------- |
+| `allowedDomains` | `string[]` | `[]` | Domain names that sandboxed processes can access |
+| `allowManagedDomainsOnly` | `boolean` | `false` | Restrict network access to only the domains in `allowedDomains` |
 | `allowLocalBinding` | `boolean` | `false` | Allow processes to bind to local ports (e.g., for dev servers) |
 | `allowUnixSockets` | `string[]` | `[]` | Unix socket paths that processes can access (e.g., Docker socket) |
 | `allowAllUnixSockets` | `boolean` | `false` | Allow access to all Unix sockets |
 | `httpProxyPort` | `number` | `undefined` | HTTP proxy port for network requests |
 | `socksProxyPort` | `number` | `undefined` | SOCKS proxy port for network requests |
 
-### `SandboxIgnoreViolations`
+### `SandboxFilesystemConfig`
 
-Configuration for ignoring specific sandbox violations.
+Filesystem-specific configuration for sandbox mode.
 
 ```typescript
-type SandboxIgnoreViolations = {
-  file?: string[];
-  network?: string[];
-};
+type SandboxFilesystemConfig = {
+  allowWrite?: string[];
+  denyWrite?: string[];
+  denyRead?: string[];
+}
 ```
 
 | Property | Type | Default | Description |
 | :------- | :--- | :------ | :---------- |
-| `file` | `string[]` | `[]` | File path patterns to ignore violations for |
-| `network` | `string[]` | `[]` | Network patterns to ignore violations for |
+| `allowWrite` | `string[]` | `[]` | File path patterns to allow write access to |
+| `denyWrite` | `string[]` | `[]` | File path patterns to deny write access to |
+| `denyRead` | `string[]` | `[]` | File path patterns to deny read access to |
 
 ### Permissions Fallback for Unsandboxed Commands
 
@@ -2131,7 +2511,7 @@ When `allowUnsandboxedCommands` is enabled, the model can request to run command
 ```typescript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
-const result = await query({
+for await (const message of query({
   prompt: "Deploy my application",
   options: {
     sandbox: {
@@ -2142,16 +2522,20 @@ const result = await query({
     canUseTool: async (tool, input) => {
       // Check if the model is requesting to bypass the sandbox
       if (tool === "Bash" && input.dangerouslyDisableSandbox) {
-        // The model wants to run this command outside the sandbox
+        // The model is requesting to run this command outside the sandbox
         console.log(`Unsandboxed command requested: ${input.command}`);
 
-        // Return true to allow, false to deny
-        return isCommandAuthorized(input.command);
+        if (isCommandAuthorized(input.command)) {
+          return { behavior: "allow" as const, updatedInput: input };
+        }
+        return { behavior: "deny" as const, message: "Command not authorized for unsandboxed execution" };
       }
-      return true;
+      return { behavior: "allow" as const, updatedInput: input };
     }
   }
-});
+})) {
+  if ("result" in message) console.log(message.result);
+}
 ```
 
 This pattern enables you to:

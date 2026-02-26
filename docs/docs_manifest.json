@@ -135,8 +135,8 @@
     "docs__en__agent-sdk__python.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/python",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/python.md",
-      "hash": "5e9758e563b714ce7a5dc27d626c48ca699b14107f4c8346797937b4623003fe",
-      "last_updated": "2026-02-19T00:33:42.070651"
+      "hash": "e80014da272b63e6ef779f013e95a11214e03b38671ec691ad8600d5ac482436",
+      "last_updated": "2026-02-26T00:30:13.481502"
     },
     "docs__en__agent-sdk__quickstart.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/quickstart",
@@ -207,14 +207,14 @@
     "docs__en__agent-sdk__typescript.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/typescript.md",
-      "hash": "560b2a544fb2bb75eab535e1aa9e12d9f0e78d2524073396ab9a8ee370218a15",
-      "last_updated": "2026-02-25T15:23:55.415284"
+      "hash": "8d654d73c46092849b853d585800e5467fd81a846c2fae262185332571d99801",
+      "last_updated": "2026-02-26T00:30:20.885604"
     },
     "docs__en__agent-sdk__typescript-v2-preview.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview.md",
-      "hash": "189d803e090b13ea493091affd98671ee47d9860998a8716bbeccec040583f00",
-      "last_updated": "2026-02-25T15:23:56.066898"
+      "hash": "875911f085008b15fe27f82d8bdbca2789700de92ed211d7748911c6290cd62a",
+      "last_updated": "2026-02-26T00:30:21.500480"
     },
     "docs__en__agent-sdk__user-input.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/user-input",
@@ -2697,8 +2697,8 @@
     "docs__en__build-with-claude__structured-outputs.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs.md",
-      "hash": "26963de64382db7cba146e5b12314e244a5059d05ad0a227b4aca594c67090f0",
-      "last_updated": "2026-02-25T15:30:11.128329"
+      "hash": "409d68f103fe50b81ac57a95710424b8700168f34b2cccec141507140a4d4c12",
+      "last_updated": "2026-02-26T00:35:50.584293"
     },
     "docs__en__build-with-claude__token-counting.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
@@ -3447,8 +3447,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-02-25T21:21:00.330654",
-    "fetch_duration_seconds": 466.19982,
+    "last_fetch_completed": "2026-02-26T00:37:09.081852",
+    "fetch_duration_seconds": 429.819965,
     "total_pages_discovered": 772,
     "pages_fetched_successfully": 574,
     "pages_failed": 199,
@@ -3658,7 +3658,7 @@
     "total_files": 574,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-02-25T21:21:00.330684",
+  "last_updated": "2026-02-26T00:37:09.081872",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

@@ -1767,6 +1767,46 @@ Simple regex patterns work well. Complex patterns may result in 400 errors.
 The Python and TypeScript SDKs can automatically transform schemas with unsupported features by removing them and adding constraints to field descriptions. See [SDK-specific methods](#sdk-specific-methods) for details.
 </Tip>
 
+### Property ordering
+
+When using structured outputs, properties in objects maintain their defined ordering from your schema, with one important caveat: **required properties appear first, followed by optional properties**.
+
+For example, given this schema:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "notes": {"type": "string"},
+    "name": {"type": "string"},
+    "email": {"type": "string"},
+    "age": {"type": "integer"}
+  },
+  "required": ["name", "email"],
+  "additionalProperties": false
+}
+```
+
+The output will order properties as:
+
+1. `name` (required, in schema order)
+2. `email` (required, in schema order)
+3. `notes` (optional, in schema order)
+4. `age` (optional, in schema order)
+
+This means the output might look like:
+
+```json
+{
+  "name": "John Smith",
+  "email": "john@example.com",
+  "notes": "Interested in enterprise plan",
+  "age": 35
+}
+```
+
+If property order in the output is important to your application, ensure all properties are marked as required, or account for this reordering in your parsing logic.
+
 ### Invalid outputs
 
 While structured outputs guarantee schema compliance in most cases, there are scenarios where the output may not match your schema:
