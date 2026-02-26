@@ -93,6 +93,13 @@ jobs:
 
         echo "✅ Safeguard validation passed: $AFTER files present"
 
+    - name: Build search index
+      if: steps.validate-safeguard.outputs.safeguard_triggered != 'true'
+      run: |
+        echo "Building full-text search index..."
+        python scripts/build_search_index.py
+        echo "Search index built successfully"
+
     - name: Check for changes
       id: verify-changed-files
       run: |
