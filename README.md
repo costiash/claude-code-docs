@@ -17,12 +17,12 @@
 
 **Fast, searchable access to Claude Code documentation - locally, always up-to-date.**
 
-Stop hunting through scattered docs. This tool provides instant access to **573 actively maintained** Claude documentation paths covering API references, guides, examples, and changelogs.
+Stop hunting through scattered docs. This tool provides instant access to **actively maintained** Claude documentation paths covering API references, guides, examples, and changelogs.
 
 ## Key Features
 
 - 🤖 **AI-Powered Search** - Ask questions naturally, Claude understands intent and routes intelligently
-- 📚 **Complete Coverage** - 573 documentation paths tracked, 571 files downloaded
+- 📚 **Complete Coverage** - documentation paths tracked and files downloaded
 - 🔍 **Semantic Understanding** - No primitive keyword matching, leverages Claude's language understanding
 - ✅ **Auto-Validated** - Continuous validation detects broken links automatically
 - 🔄 **Always Fresh** - Repository updated every 3 hours; run `/docs -t` to pull latest
@@ -42,7 +42,7 @@ The magic is in combining a simple local file system with Claude's language unde
 
 ## What's Included
 
-**Documentation Paths** (573 tracked in manifest across 6 categories):
+**Documentation Paths** (tracked in manifest across 6 categories):
 - API Reference (377 paths, 65.8%) - Complete API docs, Admin API, Agent SDK
   - 🐍 **Python** (45 docs) | 📘 **TypeScript** (45 docs) | 🔷 **Go** (45 docs)
   - ☕ **Java** (45 docs) | 🟣 **Kotlin** (45 docs) | 💎 **Ruby** (45 docs)
@@ -56,7 +56,7 @@ The magic is in combining a simple local file system with Claude's language unde
 
 > 🚀 **No Python required!** Core features including AI-powered semantic search work with just bash. Python 3.9+ enables advanced full-text search and path validation.
 
-**Files Downloaded** (571 actual .md files)
+**Files Downloaded** (matching .md files)
 
 **Optional Python Features** (requires Python 3.9+):
 - Full-text content search (`--search-content`)
@@ -75,7 +75,7 @@ curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/inst
 
 **What it does:**
 1. Clones repository to `~/.claude-code-docs`
-2. Installs 571 documentation files
+2. Installs documentation files
 3. Sets up `/docs` command in Claude Code
 4. Verifies installation integrity
 
@@ -129,8 +129,8 @@ The installer will:
 
 | Metric | v0.4.x | v0.5.0 |
 |--------|--------|--------|
-| Documentation Files | ~270 | 571 |
-| Tracked Paths | 273 | 573 |
+| Documentation Files | ~270 | 570+ |
+| Tracked Paths | 273 | 570+ |
 | Python Modules | Monolithic | Modular (15 modules) |
 | Safety Thresholds | None | 3 safeguards |
 
@@ -228,7 +228,7 @@ The installer will:
 For power users who want direct access to helper functions:
 
 ```bash
-# Fuzzy search across 573 paths (requires Python 3.9+)
+# Fuzzy search across all paths (requires Python 3.9+)
 ~/.claude-code-docs/claude-docs-helper.sh --search "keyword"
 
 # Full-text content search (requires Python 3.9+)
@@ -249,8 +249,8 @@ For power users who want direct access to helper functions:
 ## Architecture
 
 **Single Installation** - Always installs complete repository:
-- 573 documentation paths tracked in manifest (6 categories)
-- 571 files downloaded
+- Documentation paths tracked in manifest (6 categories)
+- Documentation files downloaded
 - Modular Python packages for enhanced features
 - Full test suite (294 tests)
 
