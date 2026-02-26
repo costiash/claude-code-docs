@@ -2757,8 +2757,8 @@
     "claude-code__common-workflows.md": {
       "original_url": "https://platform.claude.com/docs/en/common-workflows",
       "original_md_url": "https://platform.claude.com/docs/en/common-workflows.md",
-      "hash": "6533cfffb2f1be731a1647cab762d1ab6d8bf020a60e20461bc13675c7d594e3",
-      "last_updated": "2026-02-21T18:16:20.924436"
+      "hash": "e50619ee94705ca2693cddc4c568d72c1d8c9a8975624ce23f28961ebc0ec335",
+      "last_updated": "2026-02-27T01:42:48.235844"
     },
     "claude-code__costs.md": {
       "original_url": "https://platform.claude.com/docs/en/costs",
@@ -2877,8 +2877,8 @@
     "claude-code__model-config.md": {
       "original_url": "https://platform.claude.com/docs/en/model-config",
       "original_md_url": "https://platform.claude.com/docs/en/model-config.md",
-      "hash": "ec5cae739e1940998659d71d5490be1dce3e96d5b57c626a2843c5e15b6301a9",
-      "last_updated": "2026-02-26T21:20:56.792405"
+      "hash": "4a18af5cf19662120ecfdc29073829a95edfc8d023703bb07adfa7880bf89476",
+      "last_updated": "2026-02-27T01:43:06.177983"
     },
     "claude-code__monitoring-usage.md": {
       "original_url": "https://platform.claude.com/docs/en/monitoring-usage",
@@ -2913,8 +2913,8 @@
     "claude-code__plugins.md": {
       "original_url": "https://platform.claude.com/docs/en/plugins",
       "original_md_url": "https://platform.claude.com/docs/en/plugins.md",
-      "hash": "b6d6c4f66eb2ac462db1ac24050797aacd07531402c5873737e454f77e5d3d24",
-      "last_updated": "2026-02-26T21:21:00.668123"
+      "hash": "27348fb357a565262475a9a2c437fd162dcce96cf0996c1b05c5079b7bf97691",
+      "last_updated": "2026-02-27T01:43:11.061639"
     },
     "claude-code__plugins-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/plugins-reference",
@@ -3339,8 +3339,8 @@
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
       "original_md_url": "https://platform.claude.com/docs/en/settings.md",
-      "hash": "e9ba5dd187f9452266d1c463ecaabf4e31190e9f5b97f5cab893145044237402",
-      "last_updated": "2026-02-26T21:21:48.706874"
+      "hash": "e7a0b5527f8940966cccfb77023593589d6074cbaf74916e6bfde45ffb4dc0d9",
+      "last_updated": "2026-02-27T01:44:06.802074"
     },
     "claude-code__setup.md": {
       "original_url": "https://platform.claude.com/docs/en/setup",
@@ -3441,14 +3441,14 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "81540da0e5b29bd3075f53eee7c88207eb5e71824299df630715a479378ef0bb",
-      "last_updated": "2026-02-26T06:32:50.788594",
+      "hash": "4a75e24fbfc05a392042454d427c56375866013e315ba054125d2e33ba7809fc",
+      "last_updated": "2026-02-27T01:44:18.734008",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-02-26T21:21:58.966425",
-    "fetch_duration_seconds": 486.623467,
+    "last_fetch_completed": "2026-02-27T01:44:18.734063",
+    "fetch_duration_seconds": 564.134847,
     "total_pages_discovered": 772,
     "pages_fetched_successfully": 574,
     "pages_failed": 199,
@@ -3658,7 +3658,7 @@
     "total_files": 574,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-02-26T21:21:58.966470",
+  "last_updated": "2026-02-27T01:44:18.734080",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
