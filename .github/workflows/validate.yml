@@ -23,7 +23,7 @@ jobs:
           pip install pytest pytest-cov pytest-asyncio pytest-mock pyyaml
 
       - name: Validate all paths reachable
-        run: python scripts/lookup_paths.py --validate-all
+        run: python3 scripts/lookup_paths.py --validate-all
 
       - name: Run validation tests
         run: |
