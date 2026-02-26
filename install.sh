@@ -14,7 +14,7 @@ echo "==============================="
 
 # Target version for upgrade messaging
 TARGET_VERSION="0.5.0"
-TARGET_DOCS="571"
+TARGET_DOCS=""  # Dynamic — determined at runtime
 
 # Fixed installation location
 INSTALL_DIR="$HOME/.claude-code-docs"
@@ -92,14 +92,14 @@ show_upgrade_info() {
     echo "════════════════════════════════════════════════════════════════"
     echo ""
     echo "  Current: v$cur_version ($cur_docs documentation files)"
-    echo "  Target:  v$TARGET_VERSION ($TARGET_DOCS documentation files)"
+    echo "  Target:  v$TARGET_VERSION"
     echo ""
     echo "  What's New in v$TARGET_VERSION:"
-    echo "  • 2x documentation coverage ($TARGET_DOCS files)"
+    echo "  • 2x documentation coverage"
     echo "  • Domain-based filename convention (claude-code__*.md)"
     echo "  • Modular Python packages (fetcher/, lookup/)"
     echo "  • Safety thresholds for sync protection"
-    echo "  • 573 paths tracked across 6 categories"
+    echo "  • Paths tracked across 6 categories"
     echo ""
     echo "════════════════════════════════════════════════════════════════"
     echo ""
@@ -656,7 +656,7 @@ if [[ ! -d "$INSTALL_DIR/docs" ]]; then
 else
     DOC_COUNT=$(find "$INSTALL_DIR/docs" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
     if [[ "$DOC_COUNT" -lt 100 ]]; then
-        echo "  ⚠️  Only $DOC_COUNT documentation files found (expected ~571)"
+        echo "  ⚠️  Only $DOC_COUNT documentation files found (expected 250+)"
     else
         echo "  ✓ Documentation files installed ($DOC_COUNT files)"
     fi
@@ -719,9 +719,9 @@ echo ""
 echo "🔄 Updates: Run '/docs -t' to check for and pull latest documentation"
 echo ""
 
-# Show what's installed (573 paths tracked in manifest across 6 categories)
+# Show what's installed
 echo "📦 Installed Components:"
-echo "  • 573 documentation paths tracked (6 categories)"
+echo "  • Documentation paths tracked (6 categories)"
 echo "  • AI-powered /docs command"
 echo ""
 
@@ -766,7 +766,7 @@ else
     echo "  • Enhanced AI routing capabilities"
     echo ""
     echo "Without Python, you can:"
-    echo "  • Read all 573 documentation paths via /docs command"
+    echo "  • Read all documentation paths via /docs command"
     echo "  • Use AI-powered semantic queries"
     echo "  • Check documentation freshness"
     echo "  • View recent changes"
