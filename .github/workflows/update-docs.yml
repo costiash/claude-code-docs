@@ -96,9 +96,10 @@ jobs:
     - name: Build search index
       if: steps.validate-safeguard.outputs.safeguard_triggered != 'true'
       run: |
+        set -e
         echo "Building full-text search index..."
-        python scripts/build_search_index.py
-        echo "Search index built successfully"
+        python3 scripts/build_search_index.py
+        echo "✅ Search index built"
 
     - name: Check for changes
       id: verify-changed-files

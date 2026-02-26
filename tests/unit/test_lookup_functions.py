@@ -380,8 +380,10 @@ class TestLoadSearchIndex:
         import inspect
 
         # The function should use a path relative to the script's location,
-        # not the current working directory
-        source = inspect.getsource(load_search_index.__wrapped__)
+        # not the current working directory.
+        # Use inspect.getsource directly — works whether or not the function
+        # is decorated (avoids fragile __wrapped__ access).
+        source = inspect.getsource(load_search_index)
 
         # Should NOT use a bare relative path like Path("docs/.search_index.json")
         # Should reference __file__ or an absolute path calculation

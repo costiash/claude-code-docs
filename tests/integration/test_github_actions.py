@@ -185,7 +185,6 @@ class TestHelperScriptPythonCalls:
         helper = project_root / "scripts" / "claude-docs-helper.sh"
         content = helper.read_text()
 
-        import re
         python_calls = [
             line.strip() for line in content.splitlines()
             if 'python3' in line
@@ -194,8 +193,10 @@ class TestHelperScriptPythonCalls:
         ]
 
         for call in python_calls:
-            # Each call should use (cd ... && python3 ...) pattern
-            assert True  # The actual fix is wrapping in subshell
+            # Each call should use (cd ... && python3 ...) subshell pattern
+            assert 'cd' in call, (
+                f"Python call must be wrapped with cd to repo root: {call}"
+            )
 
     @pytest.mark.integration
     def test_helper_no_hardcoded_path_counts(self, project_root):
