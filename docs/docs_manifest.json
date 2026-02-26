@@ -2745,8 +2745,8 @@
     "claude-code__claude-code-on-the-web.md": {
       "original_url": "https://platform.claude.com/docs/en/claude-code-on-the-web",
       "original_md_url": "https://platform.claude.com/docs/en/claude-code-on-the-web.md",
-      "hash": "da80f1d22c02c774554ce871e559d3d32f15f5eb759235a70b61db9973faadd2",
-      "last_updated": "2026-02-24T18:30:27.873166"
+      "hash": "fc6519defe5743b7fafb94f9f37b080363dfb0b1411f84a9b8035d658713475b",
+      "last_updated": "2026-02-26T09:26:22.282957"
     },
     "claude-code__cli-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/cli-reference",
@@ -3447,8 +3447,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-02-26T06:32:50.788724",
-    "fetch_duration_seconds": 448.432429,
+    "last_fetch_completed": "2026-02-26T09:27:35.985338",
+    "fetch_duration_seconds": 423.393785,
     "total_pages_discovered": 772,
     "pages_fetched_successfully": 574,
     "pages_failed": 199,
@@ -3658,7 +3658,7 @@
     "total_files": 574,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-02-26T06:32:50.788743",
+  "last_updated": "2026-02-26T09:27:35.985361",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
