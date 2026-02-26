@@ -5,6 +5,33 @@ All notable changes to the enhanced edition of claude-code-docs will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2026-02-27
+
+### Fixed
+- **Search index path resolution**: `load_search_index()` now resolves paths relative to `__file__` instead of relying on cwd, fixing content search failures when invoked from outside the repo root (fixes #15)
+- **Manifest staging in CI**: `paths_manifest.json` is now included in the git commit step — manifest updates were silently lost on every 3-hour sync
+- **Helper script cwd handling**: All Python calls wrapped in `(cd "$DOCS_PATH" && ...)` subshells for reliable execution from any directory
+- **`TARGET_DOCS` in installer**: Upgrade summary now correctly displays installed doc count instead of blank
+- **CI/CD `python3` consistency**: All workflow files use `python3 -m pip` (9 occurrences across 4 files)
+
+### Added
+- Search index auto-generated during CI sync with `continue-on-error` and log-visible failure messages
+- Behavioral test `test_load_search_index_works_from_different_cwd` for cwd independence
+- `test_no_deprecated_paths` reuses `url_to_safe_filename` from fetcher package instead of duplicating logic
+- `test_internal_links_in_manifest` logs pass statistics for CI visibility
+- Test count: 303 (up from 294)
+
+### Changed
+- **README.md rewritten**: 452 → ~120 lines — removed hardcoded counts, stale upgrade guide, redundant architecture section
+- Replaced all hardcoded path/doc counts with dynamic values across CLAUDE.md, CONTRIBUTING.md, and helper script
+- Plan documents moved to `.gitignore` (local development only)
+- `test_python_calls_use_subshell_cd` uses regex assertion for specificity
+
+### Updated
+- **Paths manifest**: 573 → 772 tracked paths (Anthropic added CLI, PHP, Terraform, C# SDK docs)
+- **Search index**: Rebuilt with 574 indexed files
+- **Documentation content**: Synced latest from Anthropic sitemaps
+
 ## [0.5.0] - 2025-12-06
 
 ### Breaking Changes
