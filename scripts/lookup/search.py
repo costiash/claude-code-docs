@@ -130,7 +130,9 @@ def create_enriched_search_results(
 @lru_cache(maxsize=1)
 def load_search_index() -> Optional[Dict]:
     """Load full-text search index (cached)."""
-    index_file = Path("docs/.search_index.json")
+    # Resolve path relative to the repo root (two levels up from this file)
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    index_file = repo_root / "docs" / ".search_index.json"
     if not index_file.exists():
         return None
 

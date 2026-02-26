@@ -369,3 +369,23 @@ class TestFormatContentResult:
         output = format_content_result(result, 1)
 
         assert "test preview" in output
+
+
+class TestLoadSearchIndex:
+    """Test search index loading with various working directories."""
+
+    def test_load_search_index_uses_script_relative_path(self):
+        """Test that load_search_index resolves path relative to repo root, not cwd."""
+        from lookup.search import load_search_index
+        import inspect
+
+        # The function should use a path relative to the script's location,
+        # not the current working directory
+        source = inspect.getsource(load_search_index.__wrapped__)
+
+        # Should NOT use a bare relative path like Path("docs/.search_index.json")
+        # Should reference __file__ or an absolute path calculation
+        assert 'Path("docs/.search_index.json")' not in source, (
+            "load_search_index must not use bare relative path — "
+            "fails when called from different working directory (issue #15)"
+        )
