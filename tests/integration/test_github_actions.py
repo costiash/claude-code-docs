@@ -140,6 +140,22 @@ class TestWorkflowEnvironment:
             assert script.is_file()
 
 
+class TestManifestStaging:
+    """Test that CI/CD stages all required files."""
+
+    @pytest.mark.integration
+    def test_workflow_stages_paths_manifest(self, project_root):
+        """Test that update-docs workflow stages paths_manifest.json (not just docs/)."""
+        workflow_file = project_root / ".github" / "workflows" / "update-docs.yml"
+        content = workflow_file.read_text()
+
+        # The git add command must include paths_manifest.json
+        # It should NOT be just "git add -A docs/"
+        assert 'paths_manifest.json' in content, (
+            "Workflow must stage paths_manifest.json — currently only stages docs/"
+        )
+
+
 class TestWorkflowOutputs:
     """Test workflow outputs and artifacts."""
 
