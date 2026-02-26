@@ -38,21 +38,64 @@ def broken_paths(project_root):
             return json.load(f)
     return {}
 
+@pytest.fixture
+def docs_files_on_disk(project_root):
+    """Get set of actual documentation files on disk."""
+    docs_dir = project_root / 'docs'
+    return set(f.name for f in docs_dir.glob('*.md'))
+
 class TestPathsManifest:
     """Tests for paths_manifest.json"""
 
-    def test_no_deprecated_paths(self, paths_manifest, broken_paths):
-        """Ensure manifest doesn't contain deprecated paths"""
-        if not broken_paths:
-            pytest.skip("broken_paths_categorized.json not available")
+    def test_no_deprecated_paths(self, paths_manifest, broken_paths, docs_files_on_disk):
+        """Ensure manifest doesn't contain deprecated paths.
 
-        deprecated = set(broken_paths.get('deprecated_paths', []))
+        Validates two ways:
+        1. Against broken_paths_categorized.json if available (explicit deprecated list)
+        2. Against actual files on disk — paths in manifest should have corresponding
+           doc files. Paths without files are likely deprecated or unfetchable.
+        """
+        # Method 1: Check against explicit deprecated list if available
+        if broken_paths:
+            deprecated = set(broken_paths.get('deprecated_paths', []))
+            for category, paths in paths_manifest['categories'].items():
+                for path in paths:
+                    assert path not in deprecated, \
+                        f"Deprecated path found: {path} in {category}"
 
-        # Check all categories
+        # Method 2: Check that manifest paths have corresponding files on disk.
+        # Convert paths to expected filenames using the naming conventions:
+        #   claude_code paths (/docs/en/<page>) → claude-code__<page>.md
+        #   other paths (/docs/en/section/page) → docs__en__section__page.md
+        orphaned_paths = []
         for category, paths in paths_manifest['categories'].items():
             for path in paths:
-                assert path not in deprecated, \
-                    f"Deprecated path found: {path} in {category}"
+                stripped = path.strip('/')
+                # Claude Code CLI pages: last segment becomes claude-code__<page>.md
+                if category == 'claude_code':
+                    page = stripped.rstrip('/').split('/')[-1]
+                    # Handle nested paths like sdk/migration-guide
+                    if stripped.startswith('docs/en/sdk/'):
+                        page = 'sdk__' + page
+                    expected_file = f"claude-code__{page}.md"
+                else:
+                    expected_file = stripped.replace('/', '__') + '.md'
+
+                if expected_file not in docs_files_on_disk:
+                    orphaned_paths.append((category, path, expected_file))
+
+        # Allow tolerance — some paths are unfetchable (HTML-only, redirects, SDK
+        # language variants). But more than 20% orphaned indicates manifest drift.
+        total_paths = sum(len(p) for p in paths_manifest['categories'].values())
+        orphan_pct = (len(orphaned_paths) / total_paths * 100) if total_paths > 0 else 0
+
+        assert orphan_pct < 20, (
+            f"{len(orphaned_paths)} of {total_paths} manifest paths ({orphan_pct:.1f}%) "
+            f"have no corresponding doc file on disk. "
+            f"First 10 orphans:\n"
+            + "\n".join(f"  [{cat}] {path} (expected: {f})"
+                        for cat, path, f in orphaned_paths[:10])
+        )
 
     def test_metadata_accuracy(self, paths_manifest):
         """Ensure metadata reflects actual content"""

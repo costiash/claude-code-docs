@@ -29,26 +29,71 @@ class TestInternalLinksWork:
             assert len(internal_links) > 0
 
     @pytest.mark.integration
-    def test_internal_links_in_manifest(self, sample_markdown, paths_manifest):
-        """Test internal links point to paths in manifest."""
-        links = re.findall(r'\[([^\]]+)\]\((/en/[^)#]+)', sample_markdown)
+    def test_internal_links_in_manifest(self, paths_manifest, project_root):
+        """Test internal links in actual docs point to paths in manifest.
 
-        if not links:
-            pytest.skip("No internal links in sample")
+        Scans all documentation files for internal links (markdown link syntax)
+        and validates that a reasonable percentage resolve to known manifest paths.
 
-        # Get all valid paths
-        all_paths = []
+        Two link patterns exist in the docs:
+          - /docs/en/... (platform docs linking to each other)
+          - /en/...      (Claude Code docs using short paths)
+        """
+        docs_dir = project_root / 'docs'
+
+        # Build set of all known manifest paths (stripped of leading /)
+        all_paths = set()
         for category_paths in paths_manifest['categories'].values():
-            all_paths.extend(category_paths)
+            for p in category_paths:
+                all_paths.add(p.strip('/'))
 
-        # Check each link
-        for text, url in links:
-            # Link should be in manifest (or be a valid path)
-            # Note: Some links may point to anchors within valid pages
-            base_path = url.split('#')[0]  # Remove fragment
+        # Scan real docs for internal links
+        total_links = 0
+        broken_links = []
 
-            # This test may need to be lenient for dynamically generated content
-            pass
+        for md_file in sorted(docs_dir.glob('*.md')):
+            try:
+                content = md_file.read_text(encoding='utf-8', errors='ignore')
+            except Exception:
+                continue
+
+            # Match markdown links: [text](/docs/en/...) or [text](/en/...)
+            links = re.findall(
+                r'\[([^\]]+)\]\((/(?:docs/)?en/[^)#\s]+)',
+                content
+            )
+
+            for text, url in links:
+                total_links += 1
+                clean_path = url.strip('/')
+
+                # Try exact match first
+                if clean_path in all_paths:
+                    continue
+
+                # Claude Code docs use /en/<page> which maps to /docs/en/<page>
+                # in the manifest
+                if clean_path.startswith('en/') and f'docs/{clean_path}' in all_paths:
+                    continue
+
+                broken_links.append((md_file.name, text, url))
+
+        assert total_links > 100, (
+            f"Expected 100+ internal links in docs, found {total_links}. "
+            f"Link extraction may be broken."
+        )
+
+        # Allow tolerance — some links point to pages that aren't in our manifest
+        # (e.g., pages only on code.claude.com, dynamically generated pages, or
+        # paths that use different naming than our sitemap discovers)
+        broken_pct = (len(broken_links) / total_links * 100) if total_links else 0
+
+        assert broken_pct < 30, (
+            f"{len(broken_links)} of {total_links} internal links ({broken_pct:.1f}%) "
+            f"don't resolve to manifest paths. First 10:\n"
+            + "\n".join(f"  [{f}] '{t}' -> {u}"
+                        for f, t, u in broken_links[:10])
+        )
 
     @pytest.mark.integration
     def test_relative_links_resolved(self):
