@@ -66,47 +66,55 @@ The magic is in combining a simple local file system with Claude's language unde
 
 ## Installation
 
-### Quick Install (2 minutes)
+### Method 1: Plugin Install (Recommended)
 
-**One command:**
+If you have Claude Code with plugin support:
+
+```bash
+/plugin marketplace add costiash/claude-code-docs
+/plugin install claude-docs
+```
+
+**What it does:**
+1. Installs the claude-docs plugin (provides /docs command + auto-discovery Skill)
+2. On first session, automatically clones documentation to `~/.claude-code-docs/`
+3. On each subsequent session, auto-updates docs via git pull
+
+**Requirements:** Claude Code with plugin support
+
+### Method 2: Script Install (Legacy)
+
+For environments without plugin support:
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
 ```
 
 **What it does:**
 1. Clones repository to `~/.claude-code-docs`
-2. Installs 571 documentation files
-3. Sets up `/docs` command in Claude Code
-4. Verifies installation integrity
+2. Sets up `/docs` command in `~/.claude/commands/docs.md`
+3. Installs helper scripts
 
-**Python features activate automatically if Python 3.9+ is installed.**
+**Requirements:** git, jq, curl. Optional: Python 3.9+ for enhanced search.
 
-### Installation Methods
+#### Script Install Variants
 
-**Method 1: Direct Install (interactive)**
-```bash
-curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
-```
-Works on: Local terminals, iTerm2, Terminal.app, SSH with `-t` flag
-
-**Method 2: Auto-Install (CI/CD-friendly)**
+**Auto-Install (CI/CD-friendly):**
 ```bash
 CLAUDE_DOCS_AUTO_INSTALL=yes curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
 ```
-Works on: **All environments** including GitHub Actions, Docker, cron jobs, SSH without `-t`
 
-**Method 3: Download First (most reliable)**
+**Download First (most reliable):**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh -o install.sh
 bash install.sh
 ```
-Works on: All interactive shells
 
 ### Requirements
 
 - **Required**: macOS 12+ or Linux (Ubuntu, Debian, Fedora, etc.)
-- **Required**: git, jq, curl (usually pre-installed)
-- **Optional**: Python 3.9+ (enables search/validation features)
+- **Required**: git (both methods), jq + curl (script install only)
+- **Optional**: Python 3.9+ (enables search/validation features in script install)
 
 ## Upgrading
 
