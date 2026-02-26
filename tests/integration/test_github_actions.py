@@ -156,6 +156,26 @@ class TestManifestStaging:
         )
 
 
+class TestSearchIndexGeneration:
+    """Test that CI/CD generates search index."""
+
+    @pytest.mark.integration
+    def test_workflow_builds_search_index(self, project_root):
+        """Test that update-docs workflow runs build_search_index.py."""
+        workflow_file = project_root / ".github" / "workflows" / "update-docs.yml"
+        content = workflow_file.read_text()
+
+        assert 'build_search_index.py' in content, (
+            "Workflow must run build_search_index.py to generate .search_index.json"
+        )
+
+    @pytest.mark.integration
+    def test_build_search_index_script_exists(self, project_root):
+        """Test that the search index builder script exists."""
+        script = project_root / "scripts" / "build_search_index.py"
+        assert script.exists(), "scripts/build_search_index.py must exist"
+
+
 class TestWorkflowOutputs:
     """Test workflow outputs and artifacts."""
 
