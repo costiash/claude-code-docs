@@ -187,8 +187,7 @@ class TestHelperScriptPythonCalls:
 
         import re
         python_calls = [
-            line.strip() for line in content.split('
-')
+            line.strip() for line in content.splitlines()
             if 'python3' in line
             and not line.strip().startswith('#')
             and 'lookup_paths.py' in line
