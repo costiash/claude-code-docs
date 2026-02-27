@@ -43,7 +43,7 @@ if [ ! -d "$DOCS_DIR" ]; then
 fi
 
 # Pull updates (non-blocking, timeout after 10s)
-cd "$DOCS_DIR" || exit 0
+cd "$DOCS_DIR" || { output_context "Claude docs directory missing. Re-run /docs -t to reinstall."; exit 0; }
 BEFORE=$(git rev-parse HEAD 2>/dev/null)
 run_with_timeout 10 git pull --ff-only origin main >/dev/null 2>&1 || true
 AFTER=$(git rev-parse HEAD 2>/dev/null)
