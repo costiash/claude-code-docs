@@ -81,11 +81,13 @@ class TestPathsManifest:
                     orphaned_paths.append((category, path, expected_file))
 
         # Allow tolerance — some paths are unfetchable (HTML-only, redirects, SDK
-        # language variants). But more than 20% orphaned indicates manifest drift.
+        # language variants). Threshold is 30% because the auto-update workflow
+        # adds paths from sitemaps that may be unfetchable (HTML-only, redirects,
+        # SDK language variants not yet downloaded).
         total_paths = sum(len(p) for p in paths_manifest['categories'].values())
         orphan_pct = (len(orphaned_paths) / total_paths * 100) if total_paths > 0 else 0
 
-        assert orphan_pct < 20, (
+        assert orphan_pct < 30, (
             f"{len(orphaned_paths)} of {total_paths} manifest paths ({orphan_pct:.1f}%) "
             f"have no corresponding doc file on disk. "
             f"First 10 orphans:\n"
