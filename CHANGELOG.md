@@ -28,8 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `test_python_calls_use_subshell_cd` uses regex assertion for specificity
 
 ### Updated
-- **Paths manifest**: 573 → 772 tracked paths (Anthropic added CLI, PHP, Terraform, C# SDK docs)
+- **Paths manifest**: Regenerated from live sitemaps (573 fetchable paths retained; 199 unfetchable paths excluded)
 - **Search index**: Rebuilt with 574 indexed files
+- **`test_search_index_file_count`**: Now compares against `docs_manifest.json` instead of hardcoded count
 - **Documentation content**: Synced latest from Anthropic sitemaps
 
 ## [0.5.0] - 2025-12-06
