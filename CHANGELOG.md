@@ -192,21 +192,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## Feature Comparison
-
-| Feature | Standard Mode | Enhanced Mode |
-|---------|--------------|---------------|
-| Documentation Files | 269 | 269 |
-| Documentation Paths | 269 | 449 |
-| Basic Search | ✓ | ✓ |
-| Full-Text Search | ✗ | ✓ |
-| Category Filtering | ✗ | ✓ |
-| Validation Tools | ✗ | ✓ |
-| Dependencies | Shell, git, jq | + Python 3.9+ |
-| Test Coverage | ✗ | 577 tests (72%) |
-
----
-
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to this enhanced edition.
