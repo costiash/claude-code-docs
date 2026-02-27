@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-02-27T18:22:27Z",
+  "generated_at": "2026-02-27T21:17:21Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -122,15 +122,15 @@
         "org",
         "com",
         "claude",
+        "session",
         "www",
         "code",
         "web",
-        "session",
         "environment",
         "access",
+        "sessions",
         "github",
         "network",
-        "sessions",
         "changes",
         "terminal",
         "default",
@@ -140,7 +140,7 @@
         "note",
         "when"
       ],
-      "word_count": 3108,
+      "word_count": 3236,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -239,11 +239,11 @@
         "mdcuhzi",
         "users",
         "api",
+        "session",
         "must",
         "off",
         "max",
         "using",
-        "session",
         "flow",
         "anthropic",
         "https",
@@ -252,7 +252,7 @@
         "our",
         "retention"
       ],
-      "word_count": 1281,
+      "word_count": 1313,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -470,13 +470,13 @@
         "decision",
         "control",
         "user",
-        "exit",
         "command",
-        "runs",
+        "exit",
         "only",
+        "runs",
         "description"
       ],
-      "word_count": 10471,
+      "word_count": 10525,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -1001,14 +1001,14 @@
         "only",
         "file",
         "configuration",
+        "hooks",
         "bash",
         "example",
         "mcp",
         "disable",
-        "commands",
-        "specific"
+        "environment"
       ],
-      "word_count": 7461,
+      "word_count": 7634,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1652,7 +1652,7 @@
         "output",
         "only"
       ],
-      "word_count": 4152,
+      "word_count": 4150,
       "file_path": "docs/docs__en__agent-sdk__hooks.md"
     },
     "/docs/en/agent-sdk/hosting": {
@@ -1876,7 +1876,7 @@
         "code",
         "example"
       ],
-      "word_count": 9788,
+      "word_count": 9790,
       "file_path": "docs/docs__en__agent-sdk__python.md"
     },
     "/docs/en/agent-sdk/quickstart": {
@@ -2240,7 +2240,7 @@
         "sdk",
         "prompt"
       ],
-      "word_count": 7737,
+      "word_count": 7745,
       "file_path": "docs/docs__en__agent-sdk__typescript.md"
     },
     "/docs/en/agent-sdk/user-input": {
@@ -13445,7 +13445,7 @@
         "request",
         "more"
       ],
-      "word_count": 9916,
+      "word_count": 9933,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {

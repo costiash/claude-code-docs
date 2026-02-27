@@ -302,7 +302,7 @@ The cache breakpoint automatically moves to the last cacheable block in each req
 By default, automatic caching uses a 5-minute TTL. You can specify a 1-hour TTL at 2x the base input token price:
 
 ```json
-"cache_control": {"type": "ephemeral", "ttl": "1h"}
+{ "cache_control": { "type": "ephemeral", "ttl": "1h" } }
 ```
 
 ### Combining with block-level caching
@@ -315,15 +315,15 @@ This lets you combine both approaches. For example, use explicit breakpoints to 
 {
   "model": "claude-opus-4-6",
   "max_tokens": 1024,
-  "cache_control": {"type": "ephemeral"},
+  "cache_control": { "type": "ephemeral" },
   "system": [
     {
       "type": "text",
       "text": "You are a helpful assistant.",
-      "cache_control": {"type": "ephemeral"}
+      "cache_control": { "type": "ephemeral" }
     }
   ],
-  "messages": [...]
+  "messages": [{ "role": "user", "content": "What are the key terms?" }]
 }
 ```
 

@@ -2413,7 +2413,9 @@ try:
     async for message in query(prompt="Hello"):
         print(message)
 except CLINotFoundError:
-    print("Claude Code CLI not found. Try reinstalling: pip install --force-reinstall claude-agent-sdk")
+    print(
+        "Claude Code CLI not found. Try reinstalling: pip install --force-reinstall claude-agent-sdk"
+    )
 except ProcessError as e:
     print(f"Process failed with exit code: {e.exit_code}")
 except CLIJSONDecodeError as e:
