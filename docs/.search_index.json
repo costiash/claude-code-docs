@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-02-27T06:29:24Z",
+  "generated_at": "2026-02-27T09:25:15Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -924,7 +924,7 @@
         "project",
         "git"
       ],
-      "word_count": 1399,
+      "word_count": 1359,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
