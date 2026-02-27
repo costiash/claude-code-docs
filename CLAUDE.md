@@ -104,9 +104,13 @@ When presenting options to users, always use these user-friendly labels:
 | Internal Category | User-Facing Label |
 |-------------------|-------------------|
 | `claude_code` | Claude Code CLI |
+| `agent_sdk` | Claude Agent SDK |
 | `api_reference` | Claude API |
+| `agents_and_tools` | Agents & Tools |
 | `core_documentation` | Claude Documentation |
-| Agent SDK paths (`/en/docs/agent-sdk/*`) | Claude Agent SDK |
+| `about_claude` | About Claude |
+| `get_started` | Getting Started |
+| `test_and_evaluate` | Testing & Evaluation |
 | `prompt_library` | Prompt Library |
 | `release_notes` | Release Notes |
 | `resources` | Resources |
@@ -156,9 +160,9 @@ When integrating with plugins:
 [Integration details from plugins.md]
 
 Sources:
-• Agent SDK Python Guide: https://docs.claude.com/en/docs/agent-sdk/python
-• Agent SDK Overview: https://docs.claude.com/en/docs/agent-sdk/overview
-• Plugins Integration: https://docs.claude.com/en/docs/agent-sdk/plugins"
+• Agent SDK Python Guide: https://platform.claude.com/en/docs/agent-sdk/python
+• Agent SDK Overview: https://platform.claude.com/en/docs/agent-sdk/overview
+• Plugins Integration: https://platform.claude.com/en/docs/agent-sdk/plugins"
 ```
 
 **Never show**: "Found 3 documents about hooks, which do you want to read?" ❌
@@ -300,9 +304,9 @@ Output:
 [Session persistence from sessions.md]
 
 Sources:
-• Agent SDK Python Guide: https://docs.claude.com/en/docs/agent-sdk/python
-• Agent SDK Overview: https://docs.claude.com/en/docs/agent-sdk/overview
-• Sessions: https://docs.claude.com/en/docs/agent-sdk/sessions"
+• Agent SDK Python Guide: https://platform.claude.com/en/docs/agent-sdk/python
+• Agent SDK Overview: https://platform.claude.com/en/docs/agent-sdk/overview
+• Sessions: https://platform.claude.com/en/docs/agent-sdk/sessions"
 ```
 
 #### Example 2: Ambiguous context (ask, then synthesize)
@@ -435,6 +439,12 @@ See `enhancements/` directory for comprehensive feature documentation and exampl
 │       ├── validation.py           # Path validation
 │       ├── formatting.py           # Output formatting
 │       └── cli.py                  # Main entry point
+├── plugin/                 # Claude Code Plugin (v0.6.0)
+│   ├── .claude-plugin/plugin.json  # Plugin metadata
+│   ├── commands/docs.md    # /docs slash command
+│   ├── skills/claude-docs/ # Auto-discovery Skill + manifest reference
+│   └── hooks/              # SessionStart hook (auto-update docs)
+├── .claude-plugin/marketplace.json # Marketplace registration
 ├── paths_manifest.json     # Active paths manifest (6 categories)
 ├── pyproject.toml          # Python project configuration
 ├── CHANGELOG.md            # Version history
@@ -458,7 +468,15 @@ See `enhancements/` directory for comprehensive feature documentation and exampl
 
 When working on this repository, read these files as needed (not auto-loaded to save context):
 
-### Core Files
+### Plugin Files
+- `plugin/.claude-plugin/plugin.json` - Plugin metadata (version, hooks)
+- `plugin/commands/docs.md` - `/docs` command implementation
+- `plugin/skills/claude-docs/SKILL.md` - Auto-discovery Skill (triggers automatically for Claude topics)
+- `plugin/skills/claude-docs/manifest-reference.md` - Category reference for the Skill
+- `plugin/hooks/hooks.json` + `sync-docs.sh` - SessionStart hook (auto-update docs)
+- `.claude-plugin/marketplace.json` - Marketplace registration
+
+### Core Files (Legacy Script Install)
 - `install.sh` - Installation script
 - `README.md` - User documentation
 - `CONTRIBUTING.md` - Contribution guidelines
@@ -505,8 +523,8 @@ Documentation is discovered from two sitemaps:
 ### Filename Conventions
 
 Files are named based on their source:
-- Platform docs: `en__docs__section__page.md` (double underscore for path separators)
-- Claude Code docs: `docs__en__page.md` (prefixed with `docs__`)
+- Claude Code CLI docs: `claude-code__<page>.md` (e.g., `claude-code__hooks.md`) → `https://code.claude.com/docs/en/<page>`
+- Platform docs: `docs__en__<section>__<page>.md` (e.g., `docs__en__agent-sdk__python.md`) → `https://platform.claude.com/en/docs/<section>/<page>`
 
 ## Working on This Repository
 

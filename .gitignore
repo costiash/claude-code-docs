@@ -20,7 +20,7 @@ wheels/
 venv/
 env/
 ENV/
-
+.env
 # ============================================================================
 # Testing & Coverage
 # ============================================================================
@@ -95,6 +95,10 @@ archive/
 
 # Plan documents (local development only, contain local paths)
 docs/plans/
+
+# Skill evaluation workspace (development artifacts)
+plugin/skills/claude-docs-workspace/
+plugin/skills/claude-docs/evals/
 
 # ============================================================================
 # Documentation & Tracking Files (DO NOT COMMIT)
