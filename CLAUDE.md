@@ -396,12 +396,12 @@ When Python 3.9+ is installed, these additional capabilities are available:
 - **Category filtering**: `--category api` lists paths in specific categories
 - **Path validation**: `--validate` checks documentation integrity
 - **Active documentation**: Access to paths across 6 categories:
-  - API Reference (377 paths, 65.8%) - Includes multi-language SDK docs (Python, TypeScript, Go, Java, Kotlin, Ruby)
-  - Core Documentation (82 paths, 14.3%)
-  - Prompt Library (65 paths, 11.3%)
-  - Claude Code (46 paths, 8.0%)
+  - API Reference (390 paths, 68.1%) - Includes multi-language SDK docs (Python, TypeScript, Go, Java, Kotlin, Ruby)
+  - Core Documentation (74 paths, 12.9%)
+  - Prompt Library (64 paths, 11.2%)
+  - Claude Code (43 paths, 7.5%)
   - Release Notes (2 paths)
-  - Resources (1 path)
+  - Resources (0 paths)
 
 See `enhancements/` directory for comprehensive feature documentation and examples.
 
@@ -414,6 +414,7 @@ See `enhancements/` directory for comprehensive feature documentation and exampl
 │   └── .search_index.json  # Full-text search index (Python-generated)
 ├── scripts/
 │   ├── claude-docs-helper.sh       # Main helper (feature detection)
+│   ├── claude-docs-helper.sh.template  # Template for base functionality
 │   ├── fetch_claude_docs.py        # Thin wrapper for fetcher package
 │   ├── lookup_paths.py             # Thin wrapper for lookup package
 │   ├── build_search_index.py       # Index builder (Python)
@@ -435,40 +436,46 @@ See `enhancements/` directory for comprehensive feature documentation and exampl
 │       ├── formatting.py           # Output formatting
 │       └── cli.py                  # Main entry point
 ├── paths_manifest.json     # Active paths manifest (6 categories)
+├── pyproject.toml          # Python project configuration
+├── CHANGELOG.md            # Version history
 ├── archive/               # Archived/deprecated scripts (git-ignored)
 ├── enhancements/          # Feature documentation
 │   ├── README.md          # Overview
 │   ├── FEATURES.md        # Technical specs
 │   ├── CAPABILITIES.md    # Detailed capabilities
-│   └── EXAMPLES.md        # Usage examples
+│   ├── EXAMPLES.md        # Usage examples
+│   └── TEST_EXECUTION_REPORT.md  # Test execution results
 ├── tests/                 # Test suite (303 tests, 303 passing)
+├── reports/               # Coverage and test reports
 ├── install.sh            # Installation script
+├── uninstall.sh           # Clean removal script
+├── index.html             # GitHub Pages landing page
 └── CLAUDE.md             # This file (AI context)
 
 ```
 
-## Files to Think About
+## Key Files
 
-When working on this repository:
+When working on this repository, read these files as needed (not auto-loaded to save context):
 
 ### Core Files
-@install.sh - Installation script
-@README.md - User documentation
-@CONTRIBUTING.md - Contribution guidelines
-@scripts/claude-docs-helper.sh - Main entry point (feature detection)
-@uninstall.sh - Clean removal
+- `install.sh` - Installation script
+- `README.md` - User documentation
+- `CONTRIBUTING.md` - Contribution guidelines
+- `scripts/claude-docs-helper.sh` - Main entry point (feature detection)
+- `uninstall.sh` - Clean removal
 
 ### Python Features
-@scripts/fetch_claude_docs.py - Thin wrapper for fetcher package (backwards compatible)
-@scripts/lookup_paths.py - Thin wrapper for lookup package (backwards compatible)
-@scripts/fetcher/ - Documentation fetching package (8 modules)
-@scripts/lookup/ - Search & validation package (7 modules)
-@scripts/build_search_index.py - Full-text search indexing
-@paths_manifest.json - Active paths manifest (6 categories)
-@tests/ - Test suite (303 tests)
+- `scripts/fetch_claude_docs.py` - Thin wrapper for fetcher package (backwards compatible)
+- `scripts/lookup_paths.py` - Thin wrapper for lookup package (backwards compatible)
+- `scripts/fetcher/` - Documentation fetching package (8 modules)
+- `scripts/lookup/` - Search & validation package (7 modules)
+- `scripts/build_search_index.py` - Full-text search indexing
+- `paths_manifest.json` - Active paths manifest (6 categories, ~573 paths)
+- `tests/` - Test suite (303 tests)
 
 ### Automation
-@.github/workflows/ - Auto-update workflows (runs every 3 hours)
+- `.github/workflows/` - Auto-update workflows (runs every 3 hours)
 
 ## Documentation Deletion Safeguards
 
@@ -504,6 +511,12 @@ Files are named based on their source:
 ## Working on This Repository
 
 **Critical Rule**: Changes must maintain graceful degradation - work with AND without Python.
+
+### Development Setup
+```bash
+# Install dependencies (uses uv)
+uv sync --group dev
+```
 
 ### Feature Detection
 The helper script checks Python availability at runtime:

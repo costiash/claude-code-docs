@@ -154,6 +154,8 @@ jobs:
         # Files already staged in previous step
         # Use environment variable to avoid shell interpretation
         git commit -m "${COMMIT_MESSAGE}"
+        # Pull with rebase to handle commits pushed during the fetch window
+        git pull --rebase origin main
         git push
 
     - name: Log failure if fetch failed
