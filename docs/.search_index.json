@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-02-26T23:44:36Z",
+  "generated_at": "2026-02-27T03:56:43Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "mcp",
         "mode"
       ],
-      "word_count": 16877,
+      "word_count": 16890,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -1629,30 +1629,30 @@
     },
     "/docs/en/agent-sdk/hooks": {
       "title": "Intercept and control agent behavior with hooks",
-      "content_preview": "# Intercept and control agent behavior with hooks  Intercept and customize agent behavior at key execution points with hooks  ---  Hooks let you intercept agent execution at key points to add validati...",
+      "content_preview": "# Intercept and control agent behavior with hooks  Intercept and customize agent behavior at key execution points with hooks  ---  Hooks are callback functions that run your code in response to agent ...",
       "keywords": [
-        "hook",
-        "sup",
-        "tool",
         "hooks",
-        "codegroup",
+        "tool",
+        "hook",
         "agent",
         "yes",
-        "tools",
-        "file",
-        "callback",
         "sdk",
-        "type",
-        "session",
-        "when",
-        "only",
-        "subagent",
-        "execution",
-        "operations",
+        "codegroup",
+        "callback",
         "event",
-        "typescript"
+        "tools",
+        "python",
+        "input",
+        "step",
+        "type",
+        "example",
+        "file",
+        "typescript",
+        "session",
+        "output",
+        "only"
       ],
-      "word_count": 3786,
+      "word_count": 4152,
       "file_path": "docs/docs__en__agent-sdk__hooks.md"
     },
     "/docs/en/agent-sdk/hosting": {
@@ -1873,10 +1873,10 @@
         "sdk",
         "model",
         "message",
-        "types",
-        "code"
+        "code",
+        "example"
       ],
-      "word_count": 9790,
+      "word_count": 9788,
       "file_path": "docs/docs__en__agent-sdk__python.md"
     },
     "/docs/en/agent-sdk/quickstart": {
@@ -2240,7 +2240,7 @@
         "sdk",
         "prompt"
       ],
-      "word_count": 7736,
+      "word_count": 7737,
       "file_path": "docs/docs__en__agent-sdk__typescript.md"
     },
     "/docs/en/agent-sdk/user-input": {

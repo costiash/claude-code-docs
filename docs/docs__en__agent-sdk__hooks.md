@@ -4,7 +4,7 @@ Intercept and customize agent behavior at key execution points with hooks
 
 ---
 
-Hooks let you intercept agent execution at key points to add validation, logging, security controls, or custom logic. With hooks, you can:
+Hooks are callback functions that run your code in response to agent events, like a tool being called, a session starting, or execution stopping. With hooks, you can:
 
 - **Block dangerous operations** before they execute, like destructive shell commands or unauthorized file access
 - **Log and audit** every tool call for compliance, debugging, or analytics
@@ -12,18 +12,38 @@ Hooks let you intercept agent execution at key points to add validation, logging
 - **Require human approval** for sensitive actions like database writes or API calls
 - **Track session lifecycle** to manage state, clean up resources, or send notifications
 
-A hook has two parts:
+This guide covers how hooks work, how to configure them, and provides examples for common patterns like blocking tools, modifying inputs, and forwarding notifications.
 
-1. **The callback function**: the logic that runs when the hook fires
-2. **The hook configuration**: tells the SDK which event to hook into (like `PreToolUse`) and which tools to match
+## How hooks work
 
-The following example blocks the agent from modifying `.env` files. First, define a callback that checks the file path, then pass it to `query()` to run before any Write or Edit tool call:
+<Steps>
+  <Step title="An event fires">
+    Something happens during agent execution and the SDK fires an event: a tool is about to be called (`PreToolUse`), a tool returned a result (`PostToolUse`), a subagent started or stopped, the agent is idle, or execution finished. See the [full list of events](#available-hooks).
+  </Step>
+  <Step title="The SDK collects registered hooks">
+    The SDK checks for hooks registered for that event type. This includes callback hooks you pass in `options.hooks` and shell command hooks from settings files, but only if you explicitly load them with [`settingSources`](/docs/en/agent-sdk/typescript#setting-source) or [`setting_sources`](/docs/en/agent-sdk/python#setting-source).
+  </Step>
+  <Step title="Matchers filter which hooks run">
+    If a hook has a [`matcher`](#matchers) pattern (like `"Write|Edit"`), the SDK tests it against the event's target (for example, the tool name). Hooks without a matcher run for every event of that type.
+  </Step>
+  <Step title="Callback functions execute">
+    Each matching hook's [callback function](#callback-functions) receives input about what's happening: the tool name, its arguments, the session ID, and other event-specific details.
+  </Step>
+  <Step title="Your callback returns a decision">
+    After performing any operations (logging, API calls, validation), your callback returns an [output object](#outputs) that tells the agent what to do: allow the operation, block it, modify the input, or inject context into the conversation.
+  </Step>
+</Steps>
+
+The following example puts these steps together. It registers a `PreToolUse` hook (step 1) with a `"Write|Edit"` matcher (step 3) so the callback only fires for file-writing tools. When triggered, the callback receives the tool's input (step 4), checks if the file path targets a `.env` file, and returns `permissionDecision: "deny"` to block the operation (step 5):
 
 <CodeGroup>
 
 ```python Python
 import asyncio
-from claude_agent_sdk import query, ClaudeAgentOptions, HookMatcher
+from claude_agent_sdk import (
+    AssistantMessage, ClaudeSDKClient, ClaudeAgentOptions,
+    HookMatcher, ResultMessage,
+)
 
 
 # Define a hook callback that receives tool call details
@@ -47,19 +67,22 @@ async def protect_env_files(input_data, tool_use_id, context):
 
 
 async def main():
-    async for message in query(
-        prompt="Update the database configuration",
-        options=ClaudeAgentOptions(
-            hooks={
-                # Register the hook for PreToolUse events
-                # The matcher filters to only Write and Edit tool calls
-                "PreToolUse": [
-                    HookMatcher(matcher="Write|Edit", hooks=[protect_env_files])
-                ]
-            }
-        ),
-    ):
-        print(message)
+    options = ClaudeAgentOptions(
+        hooks={
+            # Register the hook for PreToolUse events
+            # The matcher filters to only Write and Edit tool calls
+            "PreToolUse": [
+                HookMatcher(matcher="Write|Edit", hooks=[protect_env_files])
+            ]
+        }
+    )
+
+    async with ClaudeSDKClient(options=options) as client:
+        await client.query("Update the database configuration")
+        async for message in client.receive_response():
+            # Filter for assistant and result messages
+            if isinstance(message, (AssistantMessage, ResultMessage)):
+                print(message)
 
 
 asyncio.run(main())
@@ -73,15 +96,16 @@ const protectEnvFiles: HookCallback = async (input, toolUseID, { signal }) => {
   // Cast input to the specific hook type for type safety
   const preInput = input as PreToolUseHookInput;
 
-  // Extract the file path from the tool's input arguments
-  const filePath = preInput.tool_input?.file_path as string;
+  // Cast tool_input to access its properties (typed as unknown in the SDK)
+  const toolInput = preInput.tool_input as Record<string, unknown>;
+  const filePath = toolInput?.file_path as string;
   const fileName = filePath?.split("/").pop();
 
   // Block the operation if targeting a .env file
   if (fileName === ".env") {
     return {
       hookSpecificOutput: {
-        hookEventName: input.hook_event_name,
+        hookEventName: preInput.hook_event_name,
         permissionDecision: "deny",
         permissionDecisionReason: "Cannot modify .env files"
       }
@@ -102,74 +126,55 @@ for await (const message of query({
     }
   }
 })) {
-  console.log(message);
+  // Filter for assistant and result messages
+  if (message.type === "assistant" || message.type === "result") {
+    console.log(message);
+  }
 }
 ```
 
 </CodeGroup>
 
-This is a `PreToolUse` hook. It runs before the tool executes and can block or allow operations based on your logic. The rest of this guide covers all available hooks, their configuration options, and patterns for common use cases.
-
 ## Available hooks
 
-The SDK provides hooks for different stages of agent execution. Some hooks are available in both SDKs, while others are TypeScript-only because the Python SDK doesn't support them.
+The SDK provides hooks for different stages of agent execution. Some hooks are available in both SDKs, while others are TypeScript-only.
 
 | Hook Event | Python SDK | TypeScript SDK | What triggers it | Example use case |
 |------------|------------|----------------|------------------|------------------|
 | `PreToolUse` | Yes | Yes | Tool call request (can block or modify) | Block dangerous shell commands |
 | `PostToolUse` | Yes | Yes | Tool execution result | Log all file changes to audit trail |
-| `PostToolUseFailure` | No | Yes | Tool execution failure | Handle or log tool errors |
+| `PostToolUseFailure` | Yes | Yes | Tool execution failure | Handle or log tool errors |
 | `UserPromptSubmit` | Yes | Yes | User prompt submission | Inject additional context into prompts |
 | `Stop` | Yes | Yes | Agent execution stop | Save session state before exit |
-| `SubagentStart` | No | Yes | Subagent initialization | Track parallel task spawning |
+| `SubagentStart` | Yes | Yes | Subagent initialization | Track parallel task spawning |
 | `SubagentStop` | Yes | Yes | Subagent completion | Aggregate results from parallel tasks |
 | `PreCompact` | Yes | Yes | Conversation compaction request | Archive full transcript before summarizing |
-| `PermissionRequest` | No | Yes | Permission dialog would be displayed | Custom permission handling |
+| `PermissionRequest` | Yes | Yes | Permission dialog would be displayed | Custom permission handling |
 | `SessionStart` | No | Yes | Session initialization | Initialize logging and telemetry |
 | `SessionEnd` | No | Yes | Session termination | Clean up temporary resources |
-| `Notification` | No | Yes | Agent status messages | Send agent status updates to Slack or PagerDuty |
-
-## Common use cases
-
-Hooks are flexible enough to handle many different scenarios. Here are some of the most common patterns organized by category.
-
-<Tabs>
-  <Tab title="Security">
-    - Block dangerous commands (like `rm -rf /`, destructive SQL)
-    - Validate file paths before write operations
-    - Enforce allowlists/blocklists for tool usage
-  </Tab>
-  <Tab title="Logging">
-    - Create audit trails of all agent actions
-    - Track execution metrics and performance
-    - Debug agent behavior in development
-  </Tab>
-  <Tab title="Tool interception">
-    - Redirect file operations to sandboxed directories
-    - Inject environment variables or credentials
-    - Transform tool inputs or outputs
-  </Tab>
-  <Tab title="Authorization">
-    - Implement role-based access control
-    - Require human approval for sensitive operations
-    - Rate limit specific tool usage
-  </Tab>
-</Tabs>
+| `Notification` | Yes | Yes | Agent status messages | Send agent status updates to Slack or PagerDuty |
+| `Setup` | No | Yes | Session setup/maintenance | Run initialization tasks |
+| `TeammateIdle` | No | Yes | Teammate becomes idle | Reassign work or notify |
+| `TaskCompleted` | No | Yes | Background task completes | Aggregate results from parallel tasks |
+| `ConfigChange` | No | Yes | Configuration file changes | Reload settings dynamically |
+| `WorktreeCreate` | No | Yes | Git worktree created | Track isolated workspaces |
+| `WorktreeRemove` | No | Yes | Git worktree removed | Clean up workspace resources |
 
 ## Configure hooks
 
-To configure a hook for your agent, pass the hook in the `options.hooks` parameter when calling `query()`:
+To configure a hook, pass it in the `hooks` field of your agent options (`ClaudeAgentOptions` in Python, the `options` object in TypeScript):
 
 <CodeGroup>
 
 ```python Python
-async for message in query(
-    prompt="Your prompt",
-    options=ClaudeAgentOptions(
-        hooks={"PreToolUse": [HookMatcher(matcher="Bash", hooks=[my_callback])]}
-    ),
-):
-    print(message)
+options = ClaudeAgentOptions(
+    hooks={"PreToolUse": [HookMatcher(matcher="Bash", hooks=[my_callback])]}
+)
+
+async with ClaudeSDKClient(options=options) as client:
+    await client.query("Your prompt")
+    async for message in client.receive_response():
+        print(message)
 ```
 
 ```typescript TypeScript
@@ -189,23 +194,19 @@ for await (const message of query({
 
 The `hooks` option is a dictionary (Python) or object (TypeScript) where:
 - **Keys** are [hook event names](#available-hooks) (e.g., `'PreToolUse'`, `'PostToolUse'`, `'Stop'`)
-- **Values** are arrays of [matchers](#matchers), each containing an optional filter pattern and your [callback functions](#callback-function-inputs)
-
-Your hook callback functions receive [input data](#input-data) about the event and return a [response](#callback-outputs) so the agent knows to allow, block, or modify the operation.
+- **Values** are arrays of [matchers](#matchers), each containing an optional filter pattern and your [callback functions](#callback-functions)
 
 ### Matchers
 
-Use matchers to filter which tools trigger your callbacks:
+Use matchers to filter when your callbacks fire. The `matcher` field is a regex string that matches against a different value depending on the hook event type. For example, tool-based hooks match against the tool name, while `Notification` hooks match against the notification type. See the [Claude Code hooks reference](https://code.claude.com/docs/en/hooks#matcher-patterns) for the full list of matcher values for each event type.
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `matcher` | `string` | `undefined` | Regex pattern to match tool names. Built-in tools include `Bash`, `Read`, `Write`, `Edit`, `Glob`, `Grep`, `WebFetch`, `Task`, and others. MCP tools use the pattern `mcp__<server>__<action>`. |
+| `matcher` | `string` | `undefined` | Regex pattern matched against the event's filter field. For tool hooks, this is the tool name. Built-in tools include `Bash`, `Read`, `Write`, `Edit`, `Glob`, `Grep`, `WebFetch`, `Task`, and others (see [Tool Input Types](/docs/en/agent-sdk/typescript#tool-input-types) for the full list). MCP tools use the pattern `mcp__<server>__<action>`. |
 | `hooks` | `HookCallback[]` | - | Required. Array of callback functions to execute when the pattern matches |
-| `timeout` | `number` | `60` | Timeout in seconds; increase for hooks that make external API calls |
+| `timeout` | `number` | `60` | Timeout in seconds |
 
-Use the `matcher` pattern to target specific tools whenever possible. A matcher with `'Bash'` only runs for Bash commands, while omitting the pattern runs your callbacks for every tool call. Note that matchers only filter by **tool name**, not by file paths or other arguments—to filter by file path, check `tool_input.file_path` inside your callback.
-
-Matchers only apply to tool-based hooks (`PreToolUse`, `PostToolUse`, `PostToolUseFailure`, `PermissionRequest`). For lifecycle hooks like `Stop`, `SessionStart`, and `Notification`, matchers are ignored and the hook fires for all events of that type.
+Use the `matcher` pattern to target specific tools whenever possible. A matcher with `'Bash'` only runs for Bash commands, while omitting the pattern runs your callbacks for every occurrence of the event. Note that for tool-based hooks, matchers only filter by **tool name**, not by file paths or other arguments. To filter by file path, check `tool_input.file_path` inside your callback.
 
 <Tip>
 **Discovering tool names:** Check the `tools` array in the initial system message when your session starts, or add a hook without a matcher to log all tool calls.
@@ -213,223 +214,66 @@ Matchers only apply to tool-based hooks (`PreToolUse`, `PostToolUse`, `PostToolU
 **MCP tool naming:** MCP tools always start with `mcp__` followed by the server name and action: `mcp__<server>__<action>`. For example, if you configure a server named `playwright`, its tools will be named `mcp__playwright__browser_screenshot`, `mcp__playwright__browser_click`, etc. The server name comes from the key you use in the `mcpServers` configuration.
 </Tip>
 
-This example uses a matcher to run a hook only for file-modifying tools when the `PreToolUse` event fires:
+### Callback functions
 
-<CodeGroup>
-
-```python Python
-options = ClaudeAgentOptions(
-    hooks={
-        "PreToolUse": [HookMatcher(matcher="Write|Edit", hooks=[validate_file_path])]
-    }
-)
-```
-
-```typescript TypeScript
-const options = {
-  hooks: {
-    PreToolUse: [{ matcher: "Write|Edit", hooks: [validateFilePath] }]
-  }
-};
-```
-
-</CodeGroup>
-
-### Callback function inputs
+#### Inputs
 
 Every hook callback receives three arguments:
 
-1. **Input data** (`dict` / `HookInput`): Event details. See [input data](#input-data) for fields
-2. **Tool use ID** (`str | None` / `string | null`): Correlate `PreToolUse` and `PostToolUse` events
-3. **Context** (`HookContext`): In TypeScript, contains a `signal` property (`AbortSignal`) for cancellation. Pass this to async operations like `fetch()` so they automatically cancel if the hook times out. In Python, this argument is reserved for future use.
+1. **Input data:** A typed object containing event details. Each hook type has its own input shape (for example, `PreToolUseHookInput` includes `tool_name` and `tool_input`, while `NotificationHookInput` includes `message`). All hook inputs share common fields like `session_id`, `cwd`, and `hook_event_name`. See the full type definitions in the [TypeScript](/docs/en/agent-sdk/typescript#hook-input) and [Python](/docs/en/agent-sdk/python#hook-input) SDK references.
+2. **Tool use ID** (`str | None` / `string | undefined`): Correlates `PreToolUse` and `PostToolUse` events for the same tool call.
+3. **Context:** In TypeScript, contains a `signal` property (`AbortSignal`) for cancellation. In Python, this argument is reserved for future use.
 
-### Input data
+#### Outputs
 
-The first argument to your hook callback contains information about the event. Field names are identical across SDKs (both use snake_case).
+Your callback returns an object with two categories of fields:
 
-**Common fields** present in all hook types:
+- **Top-level fields** control the conversation: `systemMessage` injects a message into the conversation visible to the model, and `continue` (`continue_` in Python) determines whether the agent keeps running after this hook.
+- **`hookSpecificOutput`** controls the current operation. The fields inside depend on the hook event type. For `PreToolUse` hooks, this is where you set `permissionDecision` (`"allow"`, `"deny"`, or `"ask"`), `permissionDecisionReason`, and `updatedInput`. For `PostToolUse` hooks, you can set `additionalContext` to append information to the tool result.
+
+Return `{}` to allow the operation without changes. SDK callback hooks use the same JSON output format as [Claude Code shell command hooks](https://code.claude.com/docs/en/hooks#json-output), which documents every field and event-specific option. For the SDK type definitions, see the [TypeScript](/docs/en/agent-sdk/typescript#sync-hook-json-output) and [Python](/docs/en/agent-sdk/python#sync-hook-json-output) SDK references.
+
+<Note>
+When multiple hooks or permission rules apply, **deny** takes priority over **ask**, which takes priority over **allow**. If any hook returns `deny`, the operation is blocked regardless of other hooks.
+</Note>
+
+#### Asynchronous output
+
+By default, the agent waits for your hook to return before proceeding. If your hook performs a side effect (logging, sending a webhook) and doesn't need to influence the agent's behavior, you can return an async output instead. This tells the agent to continue immediately without waiting for the hook to finish:
+
+<CodeGroup>
+
+```python Python
+async def async_hook(input_data, tool_use_id, context):
+    # Start a background task, then return immediately
+    asyncio.create_task(send_to_logging_service(input_data))
+    return {"async_": True, "asyncTimeout": 30000}
+```
+
+```typescript TypeScript
+const asyncHook: HookCallback = async (input, toolUseID, { signal }) => {
+  // Start a background task, then return immediately
+  sendToLoggingService(input).catch(console.error);
+  return { async: true, asyncTimeout: 30000 };
+};
+```
+
+</CodeGroup>
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hook_event_name` | `string` | The hook type (`PreToolUse`, `PostToolUse`, etc.) |
-| `session_id` | `string` | Current session identifier |
-| `transcript_path` | `string` | Path to the conversation transcript |
-| `cwd` | `string` | Current working directory |
+| `async` | `true` | Signals async mode. The agent proceeds without waiting. In Python, use `async_` to avoid the reserved keyword. |
+| `asyncTimeout` | `number` | Optional timeout in milliseconds for the background operation |
 
-**Hook-specific fields** vary by hook type. Items marked <sup>TS</sup> are only available in the TypeScript SDK:
+<Note>
+Async outputs cannot block, modify, or inject context into the operation since the agent has already moved on. Use them only for side effects like logging, metrics, or notifications.
+</Note>
 
-| Field | Type | Description | Hooks |
-|-------|------|-------------|-------|
-| `tool_name` | `string` | Name of the tool being called | PreToolUse, PostToolUse, PostToolUseFailure<sup>TS</sup>, PermissionRequest<sup>TS</sup> |
-| `tool_input` | `object` | Arguments passed to the tool | PreToolUse, PostToolUse, PostToolUseFailure<sup>TS</sup>, PermissionRequest<sup>TS</sup> |
-| `tool_response` | `any` | Result returned from tool execution | PostToolUse |
-| `error` | `string` | Error message from tool execution failure | PostToolUseFailure<sup>TS</sup> |
-| `is_interrupt` | `boolean` | Whether the failure was caused by an interrupt | PostToolUseFailure<sup>TS</sup> |
-| `prompt` | `string` | The user's prompt text | UserPromptSubmit |
-| `stop_hook_active` | `boolean` | Whether a stop hook is currently processing | Stop, SubagentStop |
-| `agent_id` | `string` | Unique identifier for the subagent | SubagentStart<sup>TS</sup>, SubagentStop<sup>TS</sup> |
-| `agent_type` | `string` | Type/role of the subagent | SubagentStart<sup>TS</sup> |
-| `agent_transcript_path` | `string` | Path to the subagent's conversation transcript | SubagentStop<sup>TS</sup> |
-| `trigger` | `string` | What triggered compaction: `manual` or `auto` | PreCompact |
-| `custom_instructions` | `string` | Custom instructions provided for compaction | PreCompact |
-| `permission_suggestions` | `array` | Suggested permission updates for the tool | PermissionRequest<sup>TS</sup> |
-| `source` | `string` | How the session started: `startup`, `resume`, `clear`, or `compact` | SessionStart<sup>TS</sup> |
-| `reason` | `string` | Why the session ended: `clear`, `logout`, `prompt_input_exit`, `bypass_permissions_disabled`, or `other` | SessionEnd<sup>TS</sup> |
-| `message` | `string` | Status message from the agent | Notification<sup>TS</sup> |
-| `notification_type` | `string` | Type of notification: `permission_prompt`, `idle_prompt`, `auth_success`, or `elicitation_dialog` | Notification<sup>TS</sup> |
-| `title` | `string` | Optional title set by the agent | Notification<sup>TS</sup> |
+## Examples
 
-The code below defines a hook callback that uses `tool_name` and `tool_input` to log details about each tool call:
+### Modify tool input
 
-<CodeGroup>
-
-```python Python
-async def log_tool_calls(input_data, tool_use_id, context):
-    if input_data["hook_event_name"] == "PreToolUse":
-        print(f"Tool: {input_data['tool_name']}")
-        print(f"Input: {input_data['tool_input']}")
-    return {}
-```
-
-```typescript TypeScript
-const logToolCalls: HookCallback = async (input, toolUseID, { signal }) => {
-  if (input.hook_event_name === "PreToolUse") {
-    const preInput = input as PreToolUseHookInput;
-    console.log(`Tool: ${preInput.tool_name}`);
-    console.log("Input:", preInput.tool_input);
-  }
-  return {};
-};
-```
-
-</CodeGroup>
-
-### Callback outputs
-
-Your callback function returns an object that tells the SDK how to proceed. Return an empty object `{}` to allow the operation without changes. To block, modify, or add context to the operation, return an object with a `hookSpecificOutput` field containing your decision.
-
-**Top-level fields** (outside `hookSpecificOutput`):
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `continue` | `boolean` | Whether the agent should continue after this hook (default: `true`) |
-| `stopReason` | `string` | Message shown when `continue` is `false` |
-| `suppressOutput` | `boolean` | Hide stdout from the transcript (default: `false`) |
-| `systemMessage` | `string` | Message injected into the conversation for Claude to see |
-
-**Fields inside `hookSpecificOutput`**:
-
-| Field | Type | Hooks | Description |
-|-------|------|-------|-------------|
-| `hookEventName` | `string` | All | Required. Use `input.hook_event_name` to match the current event |
-| `permissionDecision` | `'allow'` \| `'deny'` \| `'ask'` | PreToolUse | Controls whether the tool executes |
-| `permissionDecisionReason` | `string` | PreToolUse | Explanation shown to Claude for the decision |
-| `updatedInput` | `object` | PreToolUse | Modified tool input (requires `permissionDecision: 'allow'`) |
-| `additionalContext` | `string` | PreToolUse, PostToolUse, UserPromptSubmit, SessionStart<sup>TS</sup>, SubagentStart<sup>TS</sup> | Context added to the conversation |
-
-This example blocks write operations to the `/etc` directory while injecting a system message to remind Claude about safe file practices:
-
-<CodeGroup>
-
-```python Python
-async def block_etc_writes(input_data, tool_use_id, context):
-    file_path = input_data["tool_input"].get("file_path", "")
-
-    if file_path.startswith("/etc"):
-        return {
-            # Top-level field: inject guidance into the conversation
-            "systemMessage": "Remember: system directories like /etc are protected.",
-            # hookSpecificOutput: block the operation
-            "hookSpecificOutput": {
-                "hookEventName": input_data["hook_event_name"],
-                "permissionDecision": "deny",
-                "permissionDecisionReason": "Writing to /etc is not allowed",
-            },
-        }
-    return {}
-```
-
-```typescript TypeScript
-const blockEtcWrites: HookCallback = async (input, toolUseID, { signal }) => {
-  const filePath = (input as PreToolUseHookInput).tool_input?.file_path as string;
-
-  if (filePath?.startsWith("/etc")) {
-    return {
-      // Top-level field: inject guidance into the conversation
-      systemMessage: "Remember: system directories like /etc are protected.",
-      // hookSpecificOutput: block the operation
-      hookSpecificOutput: {
-        hookEventName: input.hook_event_name,
-        permissionDecision: "deny",
-        permissionDecisionReason: "Writing to /etc is not allowed"
-      }
-    };
-  }
-  return {};
-};
-```
-
-</CodeGroup>
-
-#### Permission decision flow
-
-When multiple hooks or permission rules apply, the SDK evaluates them in this order:
-
-1. **Deny** rules are checked first (any match = immediate denial).
-2. **Ask** rules are checked second.
-3. **Allow** rules are checked third.
-4. **Default to Ask** if nothing matches.
-
-If any hook returns `deny`, the operation is blocked—other hooks returning `allow` won't override it.
-
-#### Block a tool
-
-Return a deny decision to prevent tool execution:
-
-<CodeGroup>
-
-```python Python
-async def block_dangerous_commands(input_data, tool_use_id, context):
-    if input_data["hook_event_name"] != "PreToolUse":
-        return {}
-
-    command = input_data["tool_input"].get("command", "")
-
-    if "rm -rf /" in command:
-        return {
-            "hookSpecificOutput": {
-                "hookEventName": input_data["hook_event_name"],
-                "permissionDecision": "deny",
-                "permissionDecisionReason": "Dangerous command blocked: rm -rf /",
-            }
-        }
-    return {}
-```
-
-```typescript TypeScript
-const blockDangerousCommands: HookCallback = async (input, toolUseID, { signal }) => {
-  if (input.hook_event_name !== "PreToolUse") return {};
-
-  const command = (input as PreToolUseHookInput).tool_input.command as string;
-
-  if (command?.includes("rm -rf /")) {
-    return {
-      hookSpecificOutput: {
-        hookEventName: input.hook_event_name,
-        permissionDecision: "deny",
-        permissionDecisionReason: "Dangerous command blocked: rm -rf /"
-      }
-    };
-  }
-  return {};
-};
-```
-
-</CodeGroup>
-
-#### Modify tool input
-
-Return updated input to change what the tool receives:
+This example intercepts Write tool calls and rewrites the `file_path` argument to prepend `/sandbox`, redirecting all file writes to a sandboxed directory. The callback returns `updatedInput` with the modified path and `permissionDecision: 'allow'` to auto-approve the rewritten operation:
 
 <CodeGroup>
 
@@ -458,14 +302,15 @@ const redirectToSandbox: HookCallback = async (input, toolUseID, { signal }) => 
   if (input.hook_event_name !== "PreToolUse") return {};
 
   const preInput = input as PreToolUseHookInput;
+  const toolInput = preInput.tool_input as Record<string, unknown>;
   if (preInput.tool_name === "Write") {
-    const originalPath = preInput.tool_input.file_path as string;
+    const originalPath = toolInput.file_path as string;
     return {
       hookSpecificOutput: {
-        hookEventName: input.hook_event_name,
+        hookEventName: preInput.hook_event_name,
         permissionDecision: "allow",
         updatedInput: {
-          ...preInput.tool_input,
+          ...toolInput,
           file_path: `/sandbox${originalPath}`
         }
       }
@@ -478,33 +323,60 @@ const redirectToSandbox: HookCallback = async (input, toolUseID, { signal }) => 
 </CodeGroup>
 
 <Note>
-When using `updatedInput`, you must also include `permissionDecision`. Always return a new object rather than mutating the original `tool_input`.
+When using `updatedInput`, you must also include `permissionDecision: 'allow'`. Always return a new object rather than mutating the original `tool_input`.
 </Note>
 
-#### Add a system message
+### Add context and block a tool
 
-Inject context into the conversation:
+This example blocks any attempt to write to the `/etc` directory and uses two output fields together: `permissionDecision: 'deny'` stops the tool call, while `systemMessage` injects a reminder into the conversation so the agent receives context about why the operation was blocked and avoids retrying it:
 
 <CodeGroup>
 
 ```python Python
-async def add_security_reminder(input_data, tool_use_id, context):
-    return {"systemMessage": "Remember to follow security best practices."}
+async def block_etc_writes(input_data, tool_use_id, context):
+    file_path = input_data["tool_input"].get("file_path", "")
+
+    if file_path.startswith("/etc"):
+        return {
+            # Top-level field: inject guidance into the conversation
+            "systemMessage": "Remember: system directories like /etc are protected.",
+            # hookSpecificOutput: block the operation
+            "hookSpecificOutput": {
+                "hookEventName": input_data["hook_event_name"],
+                "permissionDecision": "deny",
+                "permissionDecisionReason": "Writing to /etc is not allowed",
+            },
+        }
+    return {}
 ```
 
 ```typescript TypeScript
-const addSecurityReminder: HookCallback = async (input, toolUseID, { signal }) => {
-  return {
-    systemMessage: "Remember to follow security best practices."
-  };
+const blockEtcWrites: HookCallback = async (input, toolUseID, { signal }) => {
+  const preInput = input as PreToolUseHookInput;
+  const toolInput = preInput.tool_input as Record<string, unknown>;
+  const filePath = toolInput?.file_path as string;
+
+  if (filePath?.startsWith("/etc")) {
+    return {
+      // Top-level field: inject guidance into the conversation
+      systemMessage: "Remember: system directories like /etc are protected.",
+      // hookSpecificOutput: block the operation
+      hookSpecificOutput: {
+        hookEventName: preInput.hook_event_name,
+        permissionDecision: "deny",
+        permissionDecisionReason: "Writing to /etc is not allowed"
+      }
+    };
+  }
+  return {};
 };
 ```
 
 </CodeGroup>
 
-#### Auto-approve specific tools
+### Auto-approve specific tools
 
-Bypass permission prompts for trusted tools. This is useful when you want certain operations to run without user confirmation:
+By default, the agent may prompt for permission before using certain tools. This example auto-approves read-only filesystem tools (Read, Glob, Grep) by returning `permissionDecision: 'allow'`, letting them run without user confirmation while leaving all other tools subject to normal permission checks:
 
 <CodeGroup>
 
@@ -513,7 +385,7 @@ async def auto_approve_read_only(input_data, tool_use_id, context):
     if input_data["hook_event_name"] != "PreToolUse":
         return {}
 
-    read_only_tools = ["Read", "Glob", "Grep", "LS"]
+    read_only_tools = ["Read", "Glob", "Grep"]
     if input_data["tool_name"] in read_only_tools:
         return {
             "hookSpecificOutput": {
@@ -530,11 +402,11 @@ const autoApproveReadOnly: HookCallback = async (input, toolUseID, { signal }) =
   if (input.hook_event_name !== "PreToolUse") return {};
 
   const preInput = input as PreToolUseHookInput;
-  const readOnlyTools = ["Read", "Glob", "Grep", "LS"];
+  const readOnlyTools = ["Read", "Glob", "Grep"];
   if (readOnlyTools.includes(preInput.tool_name)) {
     return {
       hookSpecificOutput: {
-        hookEventName: input.hook_event_name,
+        hookEventName: preInput.hook_event_name,
         permissionDecision: "allow",
         permissionDecisionReason: "Read-only tool auto-approved"
       }
@@ -546,17 +418,9 @@ const autoApproveReadOnly: HookCallback = async (input, toolUseID, { signal }) =
 
 </CodeGroup>
 
-<Note>
-The `permissionDecision` field accepts three values: `'allow'` (auto-approve), `'deny'` (block), or `'ask'` (prompt for confirmation).
-</Note>
+### Chain multiple hooks
 
-## Handle advanced scenarios
-
-These patterns help you build more sophisticated hook systems for complex use cases.
-
-### Chaining multiple hooks
-
-Hooks execute in the order they appear in the array. Keep each hook focused on a single responsibility and chain multiple hooks for complex logic. This example runs all four hooks for every tool call (no matcher specified):
+Hooks execute in the order they appear in the array. Keep each hook focused on a single responsibility and chain multiple hooks for complex logic:
 
 <CodeGroup>
 
@@ -588,9 +452,9 @@ const options = {
 
 </CodeGroup>
 
-### Tool-specific matchers with regex
+### Filter with regex matchers
 
-Use regex patterns to match multiple tools:
+Use regex patterns to match multiple tools. This example registers three matchers with different scopes: the first triggers `file_security_hook` only for file modification tools, the second triggers `mcp_audit_hook` for any MCP tool (tools whose names start with `mcp__`), and the third triggers `global_logger` for every tool call regardless of name:
 
 <CodeGroup>
 
@@ -628,22 +492,19 @@ const options = {
 
 </CodeGroup>
 
-<Note>
-Matchers only match **tool names**, not file paths or other arguments. To filter by file path, check `tool_input.file_path` inside your hook callback.
-</Note>
+### Track subagent activity
 
-### Tracking subagent activity
-
-Use `SubagentStop` hooks to monitor subagent completion. The `tool_use_id` helps correlate parent agent calls with their subagents:
+Use `SubagentStop` hooks to monitor when subagents finish their work. See the full input type in the [TypeScript](/docs/en/agent-sdk/typescript#hook-input) and [Python](/docs/en/agent-sdk/python#hook-input) SDK references. This example logs a summary each time a subagent completes:
 
 <CodeGroup>
 
 ```python Python
 async def subagent_tracker(input_data, tool_use_id, context):
-    if input_data["hook_event_name"] == "SubagentStop":
-        print(f"[SUBAGENT] Completed")
-        print(f"  Tool use ID: {tool_use_id}")
-        print(f"  Stop hook active: {input_data.get('stop_hook_active')}")
+    # Log subagent details when it finishes
+    print(f"[SUBAGENT] Completed: {input_data['agent_id']}")
+    print(f"  Transcript: {input_data['agent_transcript_path']}")
+    print(f"  Tool use ID: {tool_use_id}")
+    print(f"  Stop hook active: {input_data.get('stop_hook_active')}")
     return {}
 
 
@@ -653,12 +514,17 @@ options = ClaudeAgentOptions(
 ```
 
 ```typescript TypeScript
+import { HookCallback, SubagentStopHookInput } from "@anthropic-ai/claude-agent-sdk";
+
 const subagentTracker: HookCallback = async (input, toolUseID, { signal }) => {
-  if (input.hook_event_name === "SubagentStop") {
-    console.log("[SUBAGENT] Completed");
-    console.log(`  Tool use ID: ${toolUseID}`);
-    console.log(`  Stop hook active: ${input.stop_hook_active}`);
-  }
+  // Cast to SubagentStopHookInput to access subagent-specific fields
+  const subInput = input as SubagentStopHookInput;
+
+  // Log subagent details when it finishes
+  console.log(`[SUBAGENT] Completed: ${subInput.agent_id}`);
+  console.log(`  Transcript: ${subInput.agent_transcript_path}`);
+  console.log(`  Tool use ID: ${toolUseID}`);
+  console.log(`  Stop hook active: ${subInput.stop_hook_active}`);
   return {};
 };
 
@@ -671,83 +537,185 @@ const options = {
 
 </CodeGroup>
 
-### Async operations in hooks
+### Make HTTP requests from hooks
 
-Hooks can perform async operations like HTTP requests. Handle errors gracefully by catching exceptions instead of throwing them. In TypeScript, pass the `signal` to `fetch()` so the request cancels if the hook times out:
+Hooks can perform asynchronous operations like HTTP requests. Catch errors inside your hook instead of letting them propagate, since an unhandled exception can interrupt the agent.
+
+This example sends a webhook after each tool completes, logging which tool ran and when. The hook catches errors so a failed webhook doesn't interrupt the agent:
 
 <CodeGroup>
 
 ```python Python
-import aiohttp
+import asyncio
+import json
+import urllib.request
 from datetime import datetime
 
 
+def _send_webhook(tool_name):
+    """Synchronous helper that POSTs tool usage data to an external webhook."""
+    data = json.dumps({
+        "tool": tool_name,
+        "timestamp": datetime.now().isoformat(),
+    }).encode()
+    req = urllib.request.Request(
+        "https://api.example.com/webhook",
+        data=data,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    urllib.request.urlopen(req)
+
+
 async def webhook_notifier(input_data, tool_use_id, context):
+    # Only fire after a tool completes (PostToolUse), not before
     if input_data["hook_event_name"] != "PostToolUse":
         return {}
 
     try:
-        async with aiohttp.ClientSession() as session:
-            await session.post(
-                "https://api.example.com/webhook",
-                json={
-                    "tool": input_data["tool_name"],
-                    "timestamp": datetime.now().isoformat(),
-                },
-            )
+        # Run the blocking HTTP call in a thread to avoid blocking the event loop
+        await asyncio.to_thread(_send_webhook, input_data["tool_name"])
     except Exception as e:
+        # Log the error but don't raise. A failed webhook shouldn't stop the agent
         print(f"Webhook request failed: {e}")
 
     return {}
 ```
 
 ```typescript TypeScript
+import { query, HookCallback, PostToolUseHookInput } from "@anthropic-ai/claude-agent-sdk";
+
 const webhookNotifier: HookCallback = async (input, toolUseID, { signal }) => {
+  // Only fire after a tool completes (PostToolUse), not before
   if (input.hook_event_name !== "PostToolUse") return {};
 
   try {
-    // Pass signal for proper cancellation
     await fetch("https://api.example.com/webhook", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         tool: (input as PostToolUseHookInput).tool_name,
         timestamp: new Date().toISOString()
       }),
+      // Pass signal so the request cancels if the hook times out
       signal
     });
   } catch (error) {
+    // Handle cancellation separately from other errors
     if (error instanceof Error && error.name === "AbortError") {
       console.log("Webhook request cancelled");
     }
+    // Don't re-throw. A failed webhook shouldn't stop the agent
   }
 
   return {};
 };
+
+// Register as a PostToolUse hook
+for await (const message of query({
+  prompt: "Refactor the auth module",
+  options: {
+    hooks: {
+      PostToolUse: [{ hooks: [webhookNotifier] }]
+    }
+  }
+})) {
+  console.log(message);
+}
 ```
 
 </CodeGroup>
 
-### Sending notifications (TypeScript only)
+### Forward notifications to Slack
 
-Use `Notification` hooks to receive status updates from the agent and forward them to external services like Slack or monitoring dashboards:
+Use `Notification` hooks to receive system notifications from the agent and forward them to external services. Notifications fire for specific event types: `permission_prompt` (Claude needs permission), `idle_prompt` (Claude is waiting for input), `auth_success` (authentication completed), and `elicitation_dialog` (Claude is prompting the user). Each notification includes a `message` field with a human-readable description and optionally a `title`.
+
+This example forwards every notification to a Slack channel. It requires a [Slack incoming webhook URL](https://api.slack.com/messaging/webhooks), which you create by adding an app to your Slack workspace and enabling incoming webhooks:
+
+<CodeGroup>
+
+```python Python
+import asyncio
+import json
+import urllib.request
+
+from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, HookMatcher
+
+
+def _send_slack_notification(message):
+    """Synchronous helper that sends a message to Slack via incoming webhook."""
+    data = json.dumps({"text": f"Agent status: {message}"}).encode()
+    req = urllib.request.Request(
+        "https://hooks.slack.com/services/YOUR/WEBHOOK/URL",
+        data=data,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    urllib.request.urlopen(req)
+
+
+async def notification_handler(input_data, tool_use_id, context):
+    try:
+        # Run the blocking HTTP call in a thread to avoid blocking the event loop
+        await asyncio.to_thread(
+            _send_slack_notification, input_data.get("message", "")
+        )
+    except Exception as e:
+        print(f"Failed to send notification: {e}")
+
+    # Return empty object. Notification hooks don't modify agent behavior
+    return {}
+
+
+async def main():
+    options = ClaudeAgentOptions(
+        hooks={
+            # Register the hook for Notification events (no matcher needed)
+            "Notification": [HookMatcher(hooks=[notification_handler])],
+        },
+    )
+
+    async with ClaudeSDKClient(options=options) as client:
+        await client.query("Analyze this codebase")
+        async for message in client.receive_response():
+            print(message)
+
+
+asyncio.run(main())
+```
 
 ```typescript TypeScript
 import { query, HookCallback, NotificationHookInput } from "@anthropic-ai/claude-agent-sdk";
 
+// Define a hook callback that sends notifications to Slack
 const notificationHandler: HookCallback = async (input, toolUseID, { signal }) => {
+  // Cast to NotificationHookInput to access the message field
   const notification = input as NotificationHookInput;
 
-  await fetch("https://hooks.slack.com/services/YOUR/WEBHOOK/URL", {
-    method: "POST",
-    body: JSON.stringify({
-      text: `Agent status: ${notification.message}`
-    }),
-    signal
-  });
+  try {
+    // POST the notification message to a Slack incoming webhook
+    await fetch("https://hooks.slack.com/services/YOUR/WEBHOOK/URL", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text: `Agent status: ${notification.message}`
+      }),
+      // Pass signal so the request cancels if the hook times out
+      signal
+    });
+  } catch (error) {
+    if (error instanceof Error && error.name === "AbortError") {
+      console.log("Notification cancelled");
+    } else {
+      console.error("Failed to send notification:", error);
+    }
+  }
 
+  // Return empty object. Notification hooks don't modify agent behavior
   return {};
 };
 
+// Register the hook for Notification events (no matcher needed)
 for await (const message of query({
   prompt: "Analyze this codebase",
   options: {
@@ -760,16 +728,16 @@ for await (const message of query({
 }
 ```
 
-## Fix common issues
+</CodeGroup>
 
-This section covers common issues and how to resolve them.
+## Fix common issues
 
 ### Hook not firing
 
 - Verify the hook event name is correct and case-sensitive (`PreToolUse`, not `preToolUse`)
 - Check that your matcher pattern matches the tool name exactly
 - Ensure the hook is under the correct event type in `options.hooks`
-- For `SubagentStop`, `Stop`, `SessionStart`, `SessionEnd`, and `Notification` hooks, matchers are ignored. These hooks fire for all events of that type.
+- For non-tool hooks like `Stop` and `SubagentStop`, matchers match against different fields (see [matcher patterns](https://code.claude.com/docs/en/hooks#matcher-patterns))
 - Hooks may not fire when the agent hits the [`max_turns`](/docs/en/agent-sdk/python#configuration-options) limit because the session ends before hooks can execute
 
 ### Matcher not filtering as expected
@@ -779,9 +747,11 @@ Matchers only match **tool names**, not file paths or other arguments. To filter
 ```typescript
 const myHook: HookCallback = async (input, toolUseID, { signal }) => {
   const preInput = input as PreToolUseHookInput;
-  const filePath = preInput.tool_input?.file_path as string;
+  const toolInput = preInput.tool_input as Record<string, unknown>;
+  const filePath = toolInput?.file_path as string;
   if (!filePath?.endsWith(".md")) return {}; // Skip non-markdown files
   // Process markdown files...
+  return {};
 };
 ```
 
@@ -803,7 +773,7 @@ const myHook: HookCallback = async (input, toolUseID, { signal }) => {
   ```typescript
   return {
     hookSpecificOutput: {
-      hookEventName: input.hook_event_name,
+      hookEventName: "PreToolUse",
       permissionDecision: "allow",
       updatedInput: { command: "new command" }
     }
@@ -813,9 +783,27 @@ const myHook: HookCallback = async (input, toolUseID, { signal }) => {
 - You must also return `permissionDecision: 'allow'` for the input modification to take effect
 - Include `hookEventName` in `hookSpecificOutput` to identify which hook type the output is for
 
-### Session hooks not available
+### Session hooks not available in Python
 
-`SessionStart`, `SessionEnd`, and `Notification` hooks are only available in the TypeScript SDK. The Python SDK does not support these events due to setup limitations.
+`SessionStart` and `SessionEnd` can be registered as SDK callback hooks in TypeScript, but are not available in the Python SDK (`HookEvent` omits them). In Python, they are only available as [shell command hooks](https://code.claude.com/docs/en/hooks#hook-events) defined in settings files (for example, `.claude/settings.json`). To load shell command hooks from your SDK application, include the appropriate setting source with [`setting_sources`](/docs/en/agent-sdk/python#setting-source) or [`settingSources`](/docs/en/agent-sdk/typescript#setting-source):
+
+<CodeGroup>
+
+```python Python
+options = ClaudeAgentOptions(
+    setting_sources=["project"],  # Loads .claude/settings.json including hooks
+)
+```
+
+```typescript TypeScript
+const options = {
+  settingSources: ["project"],  // Loads .claude/settings.json including hooks
+};
+```
+
+</CodeGroup>
+
+To run initialization logic as a Python SDK callback instead, use the first message from `client.receive_response()` as your trigger.
 
 ### Subagent permission prompts multiplying
 
@@ -826,16 +814,18 @@ When spawning multiple subagents, each one may request permissions separately. S
 A `UserPromptSubmit` hook that spawns subagents can create infinite loops if those subagents trigger the same hook. To prevent this:
 
 - Check for a subagent indicator in the hook input before spawning
-- Use the `parent_tool_use_id` field to detect if you're already in a subagent context
+- Use a shared variable or session state to track whether you're already inside a subagent
 - Scope hooks to only run for the top-level agent session
 
 ### systemMessage not appearing in output
 
 The `systemMessage` field adds context to the conversation that the model sees, but it may not appear in all SDK output modes. If you need to surface hook decisions to your application, log them separately or use a dedicated output channel.
 
-## Learn more
+## Related resources
 
+- [Claude Code hooks reference](https://code.claude.com/docs/en/hooks): full JSON input/output schemas, event documentation, and matcher patterns
+- [Claude Code hooks guide](https://code.claude.com/docs/en/hooks-guide): shell command hook examples and walkthroughs
+- [TypeScript SDK reference](/docs/en/agent-sdk/typescript): hook types, input/output definitions, and configuration options
+- [Python SDK reference](/docs/en/agent-sdk/python): hook types, input/output definitions, and configuration options
 - [Permissions](/docs/en/agent-sdk/permissions): control what your agent can do
-- [Custom Tools](/docs/en/agent-sdk/custom-tools): build tools to extend agent capabilities
-- [TypeScript SDK Reference](/docs/en/agent-sdk/typescript)
-- [Python SDK Reference](/docs/en/agent-sdk/python)
+- [Custom tools](/docs/en/agent-sdk/custom-tools): build tools to extend agent capabilities
