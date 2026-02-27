@@ -38,6 +38,7 @@ When presenting results to users:
 - `test_and_evaluate` → "Testing & Evaluation"
 - `prompt_library` → "Prompt Library"
 - `release_notes` → "Release Notes"
+- `resources` → "Resources"
 
 ## Dynamic Discovery
 

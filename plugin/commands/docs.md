@@ -78,7 +78,7 @@ After selection → synthesize within that context.
 
 - `$ARGUMENTS` is `-t` → Run freshness check
 - `$ARGUMENTS` is `what's new` → Show recent git log: `cd ~/.claude-code-docs && git log --oneline -10`
-- `$ARGUMENTS` is `uninstall` → Show: `rm -rf ~/.claude-code-docs && rm ~/.claude/commands/docs.md`
+- `$ARGUMENTS` is `uninstall` → Show plugin uninstall as primary: `/uninstall-plugin claude-docs`, with manual fallback: `rm -rf ~/.claude-code-docs`
 
 ## User's Request
 
