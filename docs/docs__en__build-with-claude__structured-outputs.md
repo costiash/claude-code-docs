@@ -863,10 +863,10 @@ class BookList {
 
 Annotation summary:
 
-- `@JsonClassDescription` -- Add a description to a class
-- `@JsonPropertyDescription` -- Add a description to a field or getter method
-- `@JsonIgnore` -- Exclude a `public` field or getter from the schema
-- `@JsonProperty` -- Include a non-`public` field or getter in the schema
+- `@JsonClassDescription`: Add a description to a class
+- `@JsonPropertyDescription`: Add a description to a field or getter method
+- `@JsonIgnore`: Exclude a `public` field or getter from the schema
+- `@JsonProperty`: Include a non-`public` field or getter in the schema
 
 If you use `@JsonProperty(required = false)`, the `false` value is ignored. Anthropic JSON schemas must mark all properties as required.
 
@@ -997,10 +997,10 @@ puts "#{contact.name} (#{contact.email})"
 
 The Ruby SDK supports additional model definition features for richer schemas:
 
-- **`doc:` keyword** -- Add descriptions to fields for more informative schema output
-- **`Anthropic::ArrayOf[T]`** -- Typed arrays with `min_length` and `max_length` constraints
-- **`Anthropic::EnumOf[:a, :b]`** -- Enum fields with constrained values
-- **`Anthropic::UnionOf[T1, T2]`** -- Union types mapped to `anyOf`
+- **`doc:` keyword:** Add descriptions to fields for more informative schema output
+- **`Anthropic::ArrayOf[T]`:** Typed arrays with `min_length` and `max_length` constraints
+- **`Anthropic::EnumOf[:a, :b]`:** Enum fields with constrained values
+- **`Anthropic::UnionOf[T1, T2]`:** Union types mapped to `anyOf`
 
 ```ruby
 class FamousNumber < Anthropic::BaseModel
@@ -1777,10 +1777,10 @@ For example, given this schema:
 {
   "type": "object",
   "properties": {
-    "notes": {"type": "string"},
-    "name": {"type": "string"},
-    "email": {"type": "string"},
-    "age": {"type": "integer"}
+    "notes": { "type": "string" },
+    "name": { "type": "string" },
+    "email": { "type": "string" },
+    "age": { "type": "integer" }
   },
   "required": ["name", "email"],
   "additionalProperties": false

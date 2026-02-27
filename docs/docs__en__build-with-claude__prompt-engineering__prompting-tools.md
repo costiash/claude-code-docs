@@ -52,7 +52,7 @@ The Console uses prompt templates and variables to power its tooling:
 
 Consider a simple application that translates English text to Spanish. The translated text would be variable since it changes between users or calls to Claude. You might use this prompt template:
 
-```
+```text
 Translate this text from English to Spanish: {{text}}
 ```
 

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-02-26T23:44:36Z",
+  "generated_at": "2026-02-27T21:17:21Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "mcp",
         "mode"
       ],
-      "word_count": 16877,
+      "word_count": 16890,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -122,15 +122,15 @@
         "org",
         "com",
         "claude",
+        "session",
         "www",
         "code",
         "web",
-        "session",
         "environment",
         "access",
+        "sessions",
         "github",
         "network",
-        "sessions",
         "changes",
         "terminal",
         "default",
@@ -140,7 +140,7 @@
         "note",
         "when"
       ],
-      "word_count": 3108,
+      "word_count": 3236,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -235,15 +235,15 @@
         "data",
         "code",
         "default",
-        "api",
         "tbpmhzr",
         "mdcuhzi",
         "users",
-        "off",
+        "api",
+        "session",
         "must",
+        "off",
         "max",
         "using",
-        "session",
         "flow",
         "anthropic",
         "https",
@@ -252,7 +252,7 @@
         "our",
         "retention"
       ],
-      "word_count": 1270,
+      "word_count": 1313,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -460,23 +460,23 @@
         "claude",
         "code",
         "when",
-        "input",
         "json",
+        "input",
         "tool",
-        "field",
         "fields",
-        "prompt",
+        "field",
         "event",
+        "prompt",
         "decision",
         "control",
         "user",
-        "runs",
+        "command",
         "exit",
-        "session",
         "only",
+        "runs",
         "description"
       ],
-      "word_count": 10045,
+      "word_count": 10525,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -544,10 +544,10 @@
         "anthropic",
         "through",
         "usage",
+        "baa",
         "api",
         "pro",
         "max",
-        "baa",
         "authentication",
         "compliance",
         "security",
@@ -560,7 +560,7 @@
         "subject",
         "commercial"
       ],
-      "word_count": 425,
+      "word_count": 446,
       "file_path": "docs/claude-code__legal-and-compliance.md"
     },
     "/claude-code/llm-gateway": {
@@ -924,7 +924,7 @@
         "project",
         "git"
       ],
-      "word_count": 1399,
+      "word_count": 1359,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1001,14 +1001,14 @@
         "only",
         "file",
         "configuration",
+        "hooks",
         "bash",
         "example",
         "mcp",
         "disable",
-        "commands",
-        "specific"
+        "environment"
       ],
-      "word_count": 7408,
+      "word_count": 7634,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1629,30 +1629,30 @@
     },
     "/docs/en/agent-sdk/hooks": {
       "title": "Intercept and control agent behavior with hooks",
-      "content_preview": "# Intercept and control agent behavior with hooks  Intercept and customize agent behavior at key execution points with hooks  ---  Hooks let you intercept agent execution at key points to add validati...",
+      "content_preview": "# Intercept and control agent behavior with hooks  Intercept and customize agent behavior at key execution points with hooks  ---  Hooks are callback functions that run your code in response to agent ...",
       "keywords": [
-        "hook",
-        "sup",
-        "tool",
         "hooks",
-        "codegroup",
+        "tool",
+        "hook",
         "agent",
         "yes",
-        "tools",
-        "file",
-        "callback",
         "sdk",
-        "type",
-        "session",
-        "when",
-        "only",
-        "subagent",
-        "execution",
-        "operations",
+        "codegroup",
+        "callback",
         "event",
-        "typescript"
+        "tools",
+        "python",
+        "input",
+        "step",
+        "type",
+        "example",
+        "file",
+        "typescript",
+        "session",
+        "output",
+        "only"
       ],
-      "word_count": 3786,
+      "word_count": 4150,
       "file_path": "docs/docs__en__agent-sdk__hooks.md"
     },
     "/docs/en/agent-sdk/hosting": {
@@ -1873,8 +1873,8 @@
         "sdk",
         "model",
         "message",
-        "types",
-        "code"
+        "code",
+        "example"
       ],
       "word_count": 9790,
       "file_path": "docs/docs__en__agent-sdk__python.md"
@@ -2240,7 +2240,7 @@
         "sdk",
         "prompt"
       ],
-      "word_count": 7736,
+      "word_count": 7745,
       "file_path": "docs/docs__en__agent-sdk__typescript.md"
     },
     "/docs/en/agent-sdk/user-input": {
@@ -13445,7 +13445,7 @@
         "request",
         "more"
       ],
-      "word_count": 9916,
+      "word_count": 9933,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {
@@ -13789,27 +13789,27 @@
       "content_preview": "# Zero Data Retention (ZDR)  Learn about Anthropic's Zero Data Retention (ZDR) policy, including which API endpoints and features are ZDR-eligible.  ---  This page provides a list of which API endpoin...",
       "keywords": [
         "zdr",
+        "claude",
         "data",
         "api",
-        "claude",
         "retention",
         "eligible",
+        "code",
         "anthropic",
         "tool",
-        "policy",
         "features",
-        "code",
+        "policy",
+        "organization",
+        "when",
+        "enterprise",
         "feature",
         "retained",
         "endpoints",
         "response",
         "arrangements",
-        "when",
-        "side",
-        "standard",
-        "search"
+        "side"
       ],
-      "word_count": 1206,
+      "word_count": 1298,
       "file_path": "docs/docs__en__build-with-claude__zero-data-retention.md"
     },
     "/docs/en/get-started": {
