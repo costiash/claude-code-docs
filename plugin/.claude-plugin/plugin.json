@@ -2,7 +2,9 @@
   "name": "claude-docs",
   "version": "0.6.0",
   "description": "Searchable local mirror of Claude documentation. Provides the /docs command for instant access to API references, guides, and tutorials. Docs auto-update via SessionStart hook.",
-  "author": "costiash",
+  "author": {
+    "name": "costiash"
+  },
   "repository": "https://github.com/costiash/claude-code-docs",
   "license": "MIT",
   "keywords": ["documentation", "claude", "api", "search", "reference"],

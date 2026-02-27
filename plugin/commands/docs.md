@@ -26,8 +26,8 @@ Analyze `$ARGUMENTS` to determine:
 **For direct lookup** — find files matching the topic:
 1. Use Glob to find: `~/.claude-code-docs/docs/*$TOPIC*.md`
 2. Common patterns:
-   - Claude Code CLI docs: `docs__en__<topic>.md`
-   - Platform docs: `docs/en__docs__<section>__<topic>.md`
+   - Claude Code CLI docs: `claude-code__<topic>.md`
+   - Platform docs: `docs__en__<section>__<topic>.md`
 3. Read the matching file(s)
 
 **For information search** — search content:
@@ -48,11 +48,11 @@ Analyze `$ARGUMENTS` to determine:
 ### Step 3: Categorize Results
 
 When results span multiple product areas, use these labels:
-- Files matching `docs__en__*.md` → **Claude Code CLI**
-- Files matching `en__docs__agent-sdk__*.md` → **Claude Agent SDK**
-- Files matching `en__api__*.md` → **Claude API**
-- Files matching `en__docs__build-with-claude__*.md` → **Claude Documentation**
-- Files matching `en__resources__prompt-library__*.md` → **Prompt Library**
+- Files matching `claude-code__*.md` → **Claude Code CLI**
+- Files matching `docs__en__agent-sdk__*.md` → **Claude Agent SDK**
+- Files matching `docs__en__api__*.md` → **Claude API**
+- Files matching `docs__en__build-with-claude__*.md` → **Claude Documentation**
+- Files matching `docs__en__resources__prompt-library__*.md` → **Prompt Library**
 
 ### Step 4: Present Results
 
@@ -71,7 +71,7 @@ After selection → synthesize within that context.
 ### Step 5: Always Include
 
 - Natural language synthesis (don't dump raw file contents)
-- Source links in format: `https://docs.anthropic.com/<path>`
+- Source links: `claude-code__*.md` → `https://code.claude.com/docs/en/<page>`, `docs__en__*.md` → `https://platform.claude.com/en/docs/<path>`
 - Suggest related topics when relevant
 
 ## Special Commands

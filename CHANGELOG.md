@@ -5,6 +5,30 @@ All notable changes to the enhanced edition of claude-code-docs will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-02-28
+
+### Added
+- **Native Claude Code Plugin**: New `plugin/` directory with full plugin structure
+  - `/docs` slash command — AI-powered documentation search with intent classification
+  - Auto-discovery Skill — Claude proactively searches docs for Claude-related questions without `/docs` prefix
+  - SessionStart hook — automatically clones/updates documentation on each session start
+  - Marketplace registration (`.claude-plugin/marketplace.json`)
+- **Plugin installation method**: Two-command install via `/install-plugin costiash/claude-code-docs` — no Python, jq, or curl required
+- **Scoped search strategy**: Skill instructions route queries to correct doc subcategories based on product context
+- **No-results fallback**: Skill suggests synonyms and `/docs -t` when searches return empty
+- **Expanded category taxonomy**: 11 documentation categories (up from 6) including `agent_sdk`, `agents_and_tools`, `about_claude`, `get_started`, `test_and_evaluate`
+- **Skill quality evaluation suite**: 6 evals with grading, benchmarking, and HTML review viewer (dev artifacts, gitignored)
+
+### Changed
+- **README rewritten**: More inviting, plugin-first installation, comparison table showing value proposition
+- **CLAUDE.md updated**: Added plugin files to structure/key files, fixed category labels table, added all 11 categories
+- **Filename conventions documented**: Corrected URL mapping rules (`claude-code__` → `code.claude.com`, `docs__en__` → `platform.claude.com`)
+
+### Fixed
+- **Broken domain references**: All plugin instruction files now cite correct domains (`platform.claude.com`, `code.claude.com`) — never `docs.anthropic.com` or `docs.claude.com`
+- **CLAUDE.md example URLs**: Fixed `docs.claude.com` → `platform.claude.com` in all code examples
+- **URL mapping in Skill and /docs command**: Filename-to-URL conversion rules corrected for both CLI and platform docs
+
 ## [0.5.1] - 2026-02-27
 
 ### Fixed

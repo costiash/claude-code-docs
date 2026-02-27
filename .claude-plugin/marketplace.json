@@ -1,4 +1,8 @@
 {
+  "name": "claude-code-docs",
+  "owner": {
+    "name": "costiash"
+  },
   "plugins": [
     {
       "name": "claude-docs",
