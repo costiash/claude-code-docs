@@ -118,4 +118,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for architecture overview, development se
 
 ## License
 
-Documentation content belongs to Anthropic. Tool code is open source.
+MIT License. Documentation content belongs to Anthropic. Tool code is open source — see [LICENSE](LICENSE).
