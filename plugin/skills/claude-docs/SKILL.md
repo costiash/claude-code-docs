@@ -79,8 +79,8 @@ Grep: "<keyword>" in ~/.claude-code-docs/docs/
 
 ### Determining Source URLs
 
-- Files starting with `claude-code__` → `https://code.claude.com/docs/en/<page>` (replace `claude-code__` prefix and `__` with `/`)
-- Files starting with `docs__en__` → `https://platform.claude.com/en/docs/<path>` (replace `docs__en__` prefix with `en/docs/` and remaining `__` with `/`)
+- Files starting with `claude-code__` → `https://code.claude.com/docs/en/<page>` (strip `.md` extension, replace `claude-code__` prefix and `__` with `/`)
+- Files starting with `docs__en__` → `https://platform.claude.com/en/docs/<path>` (strip `.md` extension, replace `docs__en__` prefix with `en/docs/` and remaining `__` with `/`)
 
 ## Reference Files
 
