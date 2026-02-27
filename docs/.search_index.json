@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-02-27T15:24:57Z",
+  "generated_at": "2026-02-27T18:22:27Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -235,12 +235,12 @@
         "data",
         "code",
         "default",
-        "api",
         "tbpmhzr",
         "mdcuhzi",
         "users",
-        "off",
+        "api",
         "must",
+        "off",
         "max",
         "using",
         "session",
@@ -252,7 +252,7 @@
         "our",
         "retention"
       ],
-      "word_count": 1270,
+      "word_count": 1281,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -460,23 +460,23 @@
         "claude",
         "code",
         "when",
-        "input",
         "json",
+        "input",
         "tool",
-        "field",
         "fields",
-        "prompt",
+        "field",
         "event",
+        "prompt",
         "decision",
         "control",
         "user",
-        "runs",
         "exit",
-        "session",
+        "command",
+        "runs",
         "only",
         "description"
       ],
-      "word_count": 10045,
+      "word_count": 10471,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -544,10 +544,10 @@
         "anthropic",
         "through",
         "usage",
+        "baa",
         "api",
         "pro",
         "max",
-        "baa",
         "authentication",
         "compliance",
         "security",
@@ -560,7 +560,7 @@
         "subject",
         "commercial"
       ],
-      "word_count": 425,
+      "word_count": 446,
       "file_path": "docs/claude-code__legal-and-compliance.md"
     },
     "/claude-code/llm-gateway": {
@@ -1008,7 +1008,7 @@
         "commands",
         "specific"
       ],
-      "word_count": 7420,
+      "word_count": 7461,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -13789,27 +13789,27 @@
       "content_preview": "# Zero Data Retention (ZDR)  Learn about Anthropic's Zero Data Retention (ZDR) policy, including which API endpoints and features are ZDR-eligible.  ---  This page provides a list of which API endpoin...",
       "keywords": [
         "zdr",
+        "claude",
         "data",
         "api",
-        "claude",
         "retention",
         "eligible",
+        "code",
         "anthropic",
         "tool",
-        "policy",
         "features",
-        "code",
+        "policy",
+        "organization",
+        "when",
+        "enterprise",
         "feature",
         "retained",
         "endpoints",
         "response",
         "arrangements",
-        "when",
-        "side",
-        "standard",
-        "search"
+        "side"
       ],
-      "word_count": 1206,
+      "word_count": 1298,
       "file_path": "docs/docs__en__build-with-claude__zero-data-retention.md"
     },
     "/docs/en/get-started": {

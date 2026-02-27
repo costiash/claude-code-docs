@@ -17,14 +17,14 @@ Zero Data Retention (ZDR) is Anthropic's commitment to ensuring that customer da
 **What ZDR covers**
 
 - **Certain Claude APIs**: ZDR applies to the Claude Messages and Token Counting APIs
-- **Claude Code**: ZDR applies when used with your enterprise API credentials
+- **Claude Code**: ZDR applies when used with enterprise API credentials or through Claude for Enterprise (see [Claude Code ZDR docs](https://code.claude.com/docs/en/zero-data-retention))
 
 **What ZDR does NOT cover**
 
 - **Beta products and features**: Products and features in beta unless specified otherwise
 - **Console and Workbench**: Any usage on Console or Workbench
 - **Claude consumer products**: Claude Free, Pro, or Max plans, including when customers on those plans use Claude's web, desktop, or mobile apps or Claude Code
-- **Claude for Work and Claude for Enterprise**: Claude for Work and Claude for Enterprise product interfaces are not covered by ZDR; only Commercial organization API keys are eligible
+- **Claude for Work and Claude for Enterprise**: Claude for Work and Claude for Enterprise product interfaces are not covered by ZDR, except for Claude Code when used through Claude for Enterprise with ZDR enabled on the organization. For other product interfaces, only Commercial organization API keys are eligible.
 - **Third-party integrations**: Data processed by third-party websites, tools, or other integrations is not covered by ZDR, though some may offer similar offerings. When using external services in conjunction with the Claude API, make sure to review those services' data handling practices.
 
 <Note>
@@ -112,12 +112,16 @@ No, only the Claude API is eligible for ZDR. For Claude deployments on AWS Bedro
 
 **Is Claude Code eligible for ZDR?**
 
-Claude Code ZDR eligibility depends on how you authenticate:
+Claude Code is eligible for ZDR through two paths:
 
-- **Eligible**: Claude Code used with pay-as-you-go API keys from a Commercial organization
-- **Not eligible**: Claude Code used via OAuth (premium seats through Claude for Enterprise)
+- **API keys**: Claude Code used with pay-as-you-go API keys from a Commercial organization
+- **Claude for Enterprise**: Claude Code used through Claude for Enterprise with ZDR enabled on the organization
+
+ZDR is enabled on a per-organization basis. Each new organization requires ZDR to be enabled separately by your account team. ZDR does not automatically apply to new organizations created under the same account.
 
 Additionally, if you have metrics logging enabled in Claude Code, productivity data (such as usage statistics) is exempted from ZDR and may be retained.
+
+For full details on ZDR for Claude Code on Claude for Enterprise, including disabled features and how to request enablement, see the [Claude Code ZDR documentation](https://code.claude.com/docs/en/zero-data-retention).
 
 **Does Claude for Excel support ZDR?**
 
