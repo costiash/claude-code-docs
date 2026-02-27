@@ -251,6 +251,10 @@ class TestSearchIndex:
 
         indexed_files = data.get('indexed_files', 0)
 
-        # Should match actual file count (269)
-        assert indexed_files == 269, \
-            f"Search index shows {indexed_files} files, expected 269"
+        # Should match docs_manifest.json — the source of truth for tracked files
+        docs_manifest_path = project_root / 'docs' / 'docs_manifest.json'
+        with open(docs_manifest_path) as f:
+            docs_manifest = json.load(f)
+        expected_count = len(docs_manifest.get('files', {}))
+        assert indexed_files == expected_count, \
+            f"Search index shows {indexed_files} files, expected {expected_count} (from docs_manifest.json)"
