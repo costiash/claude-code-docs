@@ -20,6 +20,26 @@
 
 ## Installation
 
+### Method 1: Plugin Install (Recommended)
+
+If you have Claude Code with plugin support:
+
+```bash
+/plugin marketplace add costiash/claude-code-docs
+/plugin install claude-docs
+```
+
+**What it does:**
+1. Installs the claude-docs plugin (provides `/docs` command + auto-discovery Skill)
+2. On first session, automatically clones documentation to `~/.claude-code-docs/`
+3. On each subsequent session, auto-updates docs via git pull
+
+**Requirements:** Claude Code with plugin support
+
+### Method 2: Script Install (Legacy)
+
+For environments without plugin support:
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
 ```
