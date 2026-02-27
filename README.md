@@ -22,7 +22,7 @@ Claude knows a lot — but documentation changes fast. API parameters shift, new
 
 ## Quick Start — Plugin Install (Recommended)
 
-Two commands, no dependencies:
+One command, no dependencies:
 
 ```bash
 /install-plugin costiash/claude-code-docs
