@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    {
+      "name": "claude-docs",
+      "description": "Searchable local mirror of Claude documentation — always fresh, always available",
+      "source": "./plugin"
+    }
+  ]
+}
