@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-02-27T15:17:11.155451Z",
-    "total_paths": 772,
+    "generated_at": "2026-02-27T18:14:00.946730Z",
+    "total_paths": 773,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-02-27T15:17:11.155457Z"
+    "last_regenerated": "2026-02-27T18:14:00.946736Z"
   },
   "categories": {
     "core_documentation": [
@@ -95,7 +95,8 @@
       "/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks",
       "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations",
       "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-latency",
-      "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak"
+      "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak",
+      "/docs/en/zero-data-retention"
     ],
     "api_reference": [
       "/docs/en/agent-sdk/cost-tracking",
