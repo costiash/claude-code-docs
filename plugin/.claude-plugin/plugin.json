@@ -1,11 +1,12 @@
 {
   "name": "claude-docs",
   "version": "0.6.0",
-  "description": "Searchable local mirror of Claude documentation. Provides the /docs command for instant access to API references, guides, and tutorials. Docs auto-update via SessionStart hook.",
+  "description": "Searchable local mirror of Claude documentation. Provides the /docs command for instant access to API references, guides, and tutorials. Auto-discovery Skill reads docs automatically when you ask Claude-related questions. Docs auto-update via SessionStart hook.",
   "author": {
     "name": "costiash"
   },
+  "homepage": "https://costiash.github.io/claude-code-docs/",
   "repository": "https://github.com/costiash/claude-code-docs",
   "license": "MIT",
-  "keywords": ["documentation", "claude", "api", "search", "reference"]
+  "keywords": ["documentation", "claude", "claude-code", "api", "agent-sdk", "search", "reference", "offline-docs"]
 }

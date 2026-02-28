@@ -3,11 +3,25 @@
   "owner": {
     "name": "costiash"
   },
+  "metadata": {
+    "description": "Always up-to-date Claude documentation at your fingertips — 574+ docs covering Claude Code CLI, API, Agent SDK, and more"
+  },
   "plugins": [
     {
       "name": "claude-docs",
-      "description": "Searchable local mirror of Claude documentation — always fresh, always available",
-      "source": "./plugin"
+      "source": "./plugin",
+      "homepage": "https://costiash.github.io/claude-code-docs/",
+      "category": "documentation",
+      "tags": [
+        "docs",
+        "reference",
+        "api-docs",
+        "sdk-docs",
+        "offline",
+        "auto-update",
+        "search",
+        "claude-code-plugin"
+      ]
     }
   ]
 }

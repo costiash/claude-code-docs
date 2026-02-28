@@ -59,6 +59,28 @@ CLAUDE_DOCS_AUTO_INSTALL=yes curl -fsSL https://raw.githubusercontent.com/costia
 
 **Requirements:** macOS 12+ or Linux, git, jq, curl. Python 3.9+ optional.
 
+## Team / Organization Adoption
+
+Auto-prompt every team member to install the plugin by adding this to your project's `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "claude-code-docs": {
+      "source": {
+        "source": "github",
+        "repo": "costiash/claude-code-docs"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "claude-docs@claude-code-docs": true
+  }
+}
+```
+
+Commit this file to your repository. When a team member trusts the project folder, they'll be prompted to install the marketplace and plugin automatically — no manual setup needed.
+
 ## Usage
 
 ### Direct Lookups
