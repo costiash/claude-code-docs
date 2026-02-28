@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-02-28T15:14:06Z",
+  "generated_at": "2026-02-28T18:16:21Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -620,31 +620,31 @@
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
-      "title": "Manage Claude's memory",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Manage Claude's memory  > Learn how to manage Claude Code's memory across sessions with different memory locations",
+      "title": "How Claude remembers your project",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # How Claude reme...",
       "keywords": [
         "claude",
-        "memory",
         "files",
-        "project",
-        "rules",
-        "directory",
-        "auto",
-        "code",
-        "specific",
-        "loaded",
-        "preferences",
-        "file",
-        "patterns",
         "instructions",
-        "directories",
+        "memory",
+        "rules",
+        "project",
+        "auto",
+        "directory",
+        "loaded",
+        "file",
+        "specific",
+        "session",
+        "context",
+        "them",
         "into",
-        "working",
-        "reads",
-        "memories",
-        "across"
+        "code",
+        "when",
+        "across",
+        "every",
+        "reads"
       ],
-      "word_count": 1985,
+      "word_count": 2723,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -804,15 +804,15 @@
         "icon",
         "install",
         "windows",
+        "files",
+        "commands",
         "tools",
         "desktop",
+        "build",
         "info",
-        "web",
-        "workflows",
-        "pull",
-        "coding"
+        "web"
       ],
-      "word_count": 1363,
+      "word_count": 1406,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -1064,7 +1064,7 @@
         "load",
         "example"
       ],
-      "word_count": 4078,
+      "word_count": 4077,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
