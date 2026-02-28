@@ -7,7 +7,7 @@
 
 > **Enhanced fork of [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs)** with native plugin support, auto-discovery Skill, and AI-powered semantic search.
 
-**574+ official Claude docs, always up-to-date, always at your fingertips.** Stop searching the web — ask Claude directly and get accurate answers grounded in official documentation.
+**Official Claude docs, always up-to-date, always at your fingertips.** Stop searching the web — ask Claude directly and get accurate answers grounded in official documentation.
 
 ## Why Use This?
 
@@ -29,7 +29,7 @@ One command, no dependencies:
 ```
 
 That's it. On your next session Claude will automatically:
-1. Clone 574+ documentation files to `~/.claude-code-docs/`
+1. Clone all documentation files to `~/.claude-code-docs/`
 2. Keep them updated every session via `git pull`
 3. Make the `/docs` command available for manual lookups
 4. Activate the **auto-discovery Skill** — Claude reads docs automatically when you ask Claude-related questions
@@ -93,7 +93,7 @@ Claude recognizes this is a documentation question and automatically reads the r
 
 ## Documentation Coverage
 
-574+ documentation files across 11 categories, updated every 3 hours:
+Documentation files across 11 categories, updated every 3 hours:
 
 - **API Reference** — Messages API, Admin API, multi-language SDKs (Python, TypeScript, Go, Java, Kotlin, Ruby)
 - **Agent SDK** — Python and TypeScript SDK guides, sessions, hooks, custom tools
@@ -140,7 +140,7 @@ Claude recognizes this is a documentation question and automatically reads the r
 - Input sanitization and path traversal protection
 - Sync safeguards prevent catastrophic documentation loss
 - All operations limited to documentation directory, HTTPS-only
-- Full test suite (303 tests) with security coverage
+- Full test suite with security coverage
 
 ## Contributing
 
