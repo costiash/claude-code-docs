@@ -7,6 +7,5 @@
   },
   "repository": "https://github.com/costiash/claude-code-docs",
   "license": "MIT",
-  "keywords": ["documentation", "claude", "api", "search", "reference"],
-  "hooks": "./hooks/hooks.json"
+  "keywords": ["documentation", "claude", "api", "search", "reference"]
 }
