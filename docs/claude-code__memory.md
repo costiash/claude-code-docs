@@ -282,7 +282,7 @@ The directory contains a `MEMORY.md` entrypoint and optional topic files:
 
 `MEMORY.md` acts as an index of the memory directory. Claude reads and writes files in this directory throughout your session, using `MEMORY.md` to keep track of what's stored where.
 
-Auto memory is machine-local and per-worktree. Files are not shared across machines, cloud environments, or worktrees.
+Auto memory is machine-local. All worktrees and subdirectories within the same git repository share one auto memory directory. Files are not shared across machines or cloud environments.
 
 ### How it works
 

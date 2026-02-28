@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-02-28T18:16:21Z",
+  "generated_at": "2026-02-28T21:12:25Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -434,21 +434,21 @@
         "code",
         "event",
         "tool",
-        "see",
         "json",
         "command",
+        "see",
         "tab",
         "file",
         "title",
         "input",
         "step",
+        "example",
         "exit",
         "run",
         "fires",
-        "matcher",
-        "example"
+        "matcher"
       ],
-      "word_count": 3967,
+      "word_count": 4201,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -473,8 +473,8 @@
         "command",
         "exit",
         "only",
-        "runs",
-        "description"
+        "agent",
+        "runs"
       ],
       "word_count": 10525,
       "file_path": "docs/claude-code__hooks.md"
@@ -504,7 +504,7 @@
         "text",
         "end"
       ],
-      "word_count": 2591,
+      "word_count": 2613,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -599,8 +599,8 @@
         "mcp",
         "server",
         "claude",
-        "step",
         "code",
+        "step",
         "command",
         "when",
         "const",
@@ -616,7 +616,7 @@
         "configuration",
         "project"
       ],
-      "word_count": 5814,
+      "word_count": 5869,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -644,7 +644,7 @@
         "every",
         "reads"
       ],
-      "word_count": 2723,
+      "word_count": 2734,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -995,8 +995,8 @@
         "when",
         "code",
         "project",
-        "user",
         "default",
+        "user",
         "file",
         "configuration",
         "files",
@@ -1008,7 +1008,7 @@
         "mcp",
         "disable"
       ],
-      "word_count": 7883,
+      "word_count": 7905,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1050,21 +1050,21 @@
         "files",
         "content",
         "invoke",
+        "code",
         "context",
         "subagent",
         "only",
         "frontmatter",
-        "code",
         "create",
         "note",
         "automatically",
+        "run",
+        "example",
         "arguments",
         "file",
-        "what",
-        "load",
-        "example"
+        "what"
       ],
-      "word_count": 4077,
+      "word_count": 4230,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1107,9 +1107,9 @@
         "context",
         "main",
         "tools",
+        "agent",
         "conversation",
         "only",
-        "agent",
         "specific",
         "tool",
         "run",
@@ -1120,7 +1120,7 @@
         "task",
         "prompt"
       ],
-      "word_count": 5141,
+      "word_count": 5163,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1232,7 +1232,7 @@
         "vuogha",
         "data"
       ],
-      "word_count": 3806,
+      "word_count": 3831,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
