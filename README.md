@@ -22,10 +22,11 @@ Claude knows a lot — but documentation changes fast. API parameters shift, new
 
 ## Quick Start — Plugin Install (Recommended)
 
-One command, no dependencies:
+Two commands, no dependencies:
 
 ```bash
-/install-plugin costiash/claude-code-docs
+/plugin marketplace add costiash/claude-code-docs
+/plugin install claude-docs@claude-code-docs
 ```
 
 That's it. On your next session Claude will automatically:
@@ -127,7 +128,7 @@ Documentation files across 11 categories, updated every 3 hours:
 
 **Plugin:**
 ```bash
-/plugin uninstall claude-docs
+/plugin uninstall claude-docs@claude-code-docs
 ```
 
 **Script install:**

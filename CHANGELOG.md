@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Auto-discovery Skill — Claude proactively searches docs for Claude-related questions without `/docs` prefix
   - SessionStart hook — automatically clones/updates documentation on each session start
   - Marketplace registration (`.claude-plugin/marketplace.json`)
-- **Plugin installation method**: Two-command install via `/install-plugin costiash/claude-code-docs` — no Python, jq, or curl required
+- **Plugin installation method**: Two-command install via `/plugin marketplace add` + `/plugin install` — no Python, jq, or curl required
 - **Scoped search strategy**: Skill instructions route queries to correct doc subcategories based on product context
 - **No-results fallback**: Skill suggests synonyms and `/docs -t` when searches return empty
 - **Expanded category taxonomy**: 11 documentation categories (up from 6) including `agent_sdk`, `agents_and_tools`, `about_claude`, `get_started`, `test_and_evaluate`

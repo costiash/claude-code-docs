@@ -2,7 +2,14 @@
 
 ## Quick Uninstall
 
-### For v0.3+ (installed at ~/.claude-code-docs)
+### Plugin Install
+
+If you installed via `/plugin install`:
+```bash
+/plugin uninstall claude-docs@claude-code-docs
+```
+
+### Script Install (v0.3+, installed at ~/.claude-code-docs)
 
 From anywhere, run:
 ```bash
@@ -76,7 +83,13 @@ After uninstalling, there should be no traces left except:
 
 ## Reinstalling
 
-To reinstall after uninstalling:
+**Plugin install (recommended):**
+```bash
+/plugin marketplace add costiash/claude-code-docs
+/plugin install claude-docs@claude-code-docs
+```
+
+**Script install:**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
 ```
