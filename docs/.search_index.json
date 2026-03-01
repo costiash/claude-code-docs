@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-02-28T21:12:25Z",
+  "generated_at": "2026-03-01T00:42:39Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -2226,21 +2226,21 @@
         "mcp",
         "configuration",
         "when",
-        "claude",
-        "sandbox",
         "model",
+        "claude",
         "description",
+        "sandbox",
+        "agent",
         "session",
         "file",
         "settings",
         "input",
-        "agent",
         "types",
+        "available",
         "user",
-        "sdk",
-        "prompt"
+        "sdk"
       ],
-      "word_count": 7745,
+      "word_count": 7836,
       "file_path": "docs/docs__en__agent-sdk__typescript.md"
     },
     "/docs/en/agent-sdk/user-input": {

@@ -207,8 +207,8 @@
     "docs__en__agent-sdk__typescript.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/typescript.md",
-      "hash": "0ae2ac29f283f8b79fe4173eebef0c75fe964cd26967462bf19e98a5366d8fd8",
-      "last_updated": "2026-02-27T21:09:45.584785"
+      "hash": "19ac7443e2ed9a0aad54fe12266a857b5b0c0956fa199e1ca86d8aa0c6252cac",
+      "last_updated": "2026-03-01T00:36:04.868940"
     },
     "docs__en__agent-sdk__typescript-v2-preview.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview",
@@ -3447,8 +3447,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-02-28T21:12:24.395388",
-    "fetch_duration_seconds": 405.938589,
+    "last_fetch_completed": "2026-03-01T00:42:38.201712",
+    "fetch_duration_seconds": 415.625167,
     "total_pages_discovered": 773,
     "pages_fetched_successfully": 574,
     "pages_failed": 200,
@@ -3659,7 +3659,7 @@
     "total_files": 574,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-02-28T21:12:24.395411",
+  "last_updated": "2026-03-01T00:42:38.201790",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
