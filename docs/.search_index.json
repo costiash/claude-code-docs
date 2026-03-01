@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-01T00:42:39Z",
+  "generated_at": "2026-03-01T04:01:36Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -168,7 +168,7 @@
         "mcp",
         "control"
       ],
-      "word_count": 2105,
+      "word_count": 2104,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -448,7 +448,7 @@
         "fires",
         "matcher"
       ],
-      "word_count": 4201,
+      "word_count": 4200,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -493,18 +493,18 @@
         "press",
         "background",
         "conversation",
-        "session",
-        "search",
+        "current",
+        "open",
         "previous",
         "normal",
-        "word",
-        "input",
         "see",
-        "current",
+        "session",
         "text",
-        "end"
+        "search",
+        "word",
+        "input"
       ],
-      "word_count": 2613,
+      "word_count": 3231,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -812,7 +812,7 @@
         "info",
         "web"
       ],
-      "word_count": 1406,
+      "word_count": 1420,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -1055,16 +1055,16 @@
         "subagent",
         "only",
         "frontmatter",
+        "automatically",
         "create",
         "note",
-        "automatically",
+        "work",
         "run",
         "example",
         "arguments",
-        "file",
-        "what"
+        "file"
       ],
-      "word_count": 4230,
+      "word_count": 4341,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {

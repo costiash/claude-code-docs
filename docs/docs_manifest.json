@@ -2751,8 +2751,8 @@
     "claude-code__cli-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/cli-reference",
       "original_md_url": "https://platform.claude.com/docs/en/cli-reference.md",
-      "hash": "54bc29afa52fd24042549ce05e890866510cbc1e6bcfc053d7d19d1cb761ab5b",
-      "last_updated": "2026-02-28T21:11:12.375236"
+      "hash": "88e9f20da5fcb29eeebf62a38e1f3f4deb54e6c0c45ef3dbaf1e6c60f42a01e3",
+      "last_updated": "2026-03-01T04:00:19.056802"
     },
     "claude-code__common-workflows.md": {
       "original_url": "https://platform.claude.com/docs/en/common-workflows",
@@ -2823,14 +2823,14 @@
     "claude-code__hooks-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks-guide",
       "original_md_url": "https://platform.claude.com/docs/en/hooks-guide.md",
-      "hash": "097bbeef35954e650863b50b58ac939d282201f7f9d0f49d8d209476a64f16ab",
-      "last_updated": "2026-02-28T21:11:21.022388"
+      "hash": "5117fb760c523ee399ac959c9b8a5086b5942de515e6238e87b03f6f78aea1d4",
+      "last_updated": "2026-03-01T04:00:27.606983"
     },
     "claude-code__interactive-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/interactive-mode",
       "original_md_url": "https://platform.claude.com/docs/en/interactive-mode.md",
-      "hash": "454bab4c3af76ad6bb434aa4a6549b984b2f0c269c9d2654e4c112dab8740b7a",
-      "last_updated": "2026-02-28T21:11:21.845881"
+      "hash": "1acbbb3cc2871caeae880a8a0384a14b566b3a5a1cf838aa3364f520b44e0482",
+      "last_updated": "2026-03-01T04:00:28.609849"
     },
     "docs__en__intro.md": {
       "original_url": "https://platform.claude.com/docs/en/intro",
@@ -2901,8 +2901,8 @@
     "claude-code__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/overview",
       "original_md_url": "https://platform.claude.com/docs/en/overview.md",
-      "hash": "558388a50a3efc26658b535868b5f5540eb0c7da846782b58009fd744803df0b",
-      "last_updated": "2026-02-28T18:15:23.768557"
+      "hash": "b050524226210d2e16afb28daaa981abd071826a26f7390d019cb8959d290adf",
+      "last_updated": "2026-03-01T04:00:36.141448"
     },
     "claude-code__plugin-marketplaces.md": {
       "original_url": "https://platform.claude.com/docs/en/plugin-marketplaces",
@@ -3351,8 +3351,8 @@
     "claude-code__skills.md": {
       "original_url": "https://platform.claude.com/docs/en/skills",
       "original_md_url": "https://platform.claude.com/docs/en/skills.md",
-      "hash": "660c9e0b3c047b5e9a1bb18f28ef07985061e27814a6888609d0ace40732faba",
-      "last_updated": "2026-02-28T21:12:14.950623"
+      "hash": "8b4f3a67a98b9f6c18bb155dbcc9dd06576f26f050a063dc0e3fc14f11078500",
+      "last_updated": "2026-03-01T04:01:25.260074"
     },
     "claude-code__statusline.md": {
       "original_url": "https://platform.claude.com/docs/en/statusline",
@@ -3447,8 +3447,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-01T00:42:38.201712",
-    "fetch_duration_seconds": 415.625167,
+    "last_fetch_completed": "2026-03-01T04:01:35.131606",
+    "fetch_duration_seconds": 447.744581,
     "total_pages_discovered": 773,
     "pages_fetched_successfully": 574,
     "pages_failed": 200,
@@ -3659,7 +3659,7 @@
     "total_files": 574,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-01T00:42:38.201790",
+  "last_updated": "2026-03-01T04:01:35.131630",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
