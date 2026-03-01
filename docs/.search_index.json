@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-01T04:01:36Z",
+  "generated_at": "2026-03-01T06:25:40Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -812,7 +812,7 @@
         "info",
         "web"
       ],
-      "word_count": 1420,
+      "word_count": 1405,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
