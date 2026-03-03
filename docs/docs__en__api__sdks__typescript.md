@@ -836,9 +836,9 @@ For detailed platform setup guides with code examples, see:
 
 The TypeScript SDK supports Bedrock, Vertex AI, and Foundry through separate npm packages:
 
-- **Bedrock**: `npm install @anthropic-ai/bedrock-sdk`: Provides `AnthropicBedrock` client
-- **Vertex AI**: `npm install @anthropic-ai/vertex-sdk`: Provides `AnthropicVertex` client
-- **Foundry**: `npm install @anthropic-ai/foundry-sdk`: Provides `AnthropicFoundry` client
+- **Bedrock:** `npm install @anthropic-ai/bedrock-sdk`: Provides `AnthropicBedrock` client
+- **Vertex AI:** `npm install @anthropic-ai/vertex-sdk`: Provides `AnthropicVertex` client
+- **Foundry:** `npm install @anthropic-ai/foundry-sdk`: Provides `AnthropicFoundry` client
 
 ## Semantic versioning
 

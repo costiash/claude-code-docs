@@ -21,7 +21,7 @@ This is ideal for:
 - Task-oriented prompts that require a lot of follow-up work (often tool use) that may exceed the 200K context window
 
 <Note>
-Compaction is currently in beta. Include the [beta header](/docs/en/api/beta-headers) `compact-2026-01-12` in your API requests to use this feature.
+Compaction is in beta. Include the [beta header](/docs/en/api/beta-headers) `compact-2026-01-12` in your API requests to use this feature.
 </Note>
 
 <Note>

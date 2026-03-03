@@ -62,9 +62,9 @@ Claude is smart enough to generalize from the explanation.
 Examples are one of the most reliable ways to steer Claude's output format, tone, and structure. A few well-crafted examples (known as few-shot or multishot prompting) can dramatically improve accuracy and consistency.
 
 When adding examples, make them:
-- **Relevant**: Mirror your actual use case closely.
-- **Diverse**: Cover edge cases and vary enough that Claude doesn't pick up unintended patterns.
-- **Structured**: Wrap examples in `<example>` tags (multiple examples in `<examples>` tags) so Claude can distinguish them from instructions.
+- **Relevant:** Mirror your actual use case closely.
+- **Diverse:** Cover edge cases and vary enough that Claude doesn't pick up unintended patterns.
+- **Structured:** Wrap examples in `<example>` tags (multiple examples in `<examples>` tags) so Claude can distinguish them from instructions.
 
 <Tip>Include 3–5 examples for best results. You can also ask Claude to evaluate your examples for relevance and diversity, or to generate additional ones based on your initial set.</Tip>
 
@@ -182,9 +182,9 @@ When an LLM is needed, please default to Claude Opus 4.6 unless the user request
 
 Claude's latest models have a more concise and natural communication style compared to previous models:
 
-- **More direct and grounded**: Provides fact-based progress reports rather than self-celebratory updates
-- **More conversational**: Slightly more fluent and colloquial, less machine-like
-- **Less verbose**: May skip detailed summaries for efficiency unless prompted otherwise
+- **More direct and grounded:** Provides fact-based progress reports rather than self-celebratory updates
+- **More conversational:** Slightly more fluent and colloquial, less machine-like
+- **Less verbose:** May skip detailed summaries for efficiency unless prompted otherwise
 
 This means Claude may skip verbal summaries after tool calls, jumping directly to the next action. If you prefer more visibility into its reasoning:
 
@@ -194,7 +194,7 @@ After completing a task that involves tool use, provide a quick summary of the w
 
 ### Control the format of responses
 
-There are a few ways that we have found to be particularly effective in steering output formatting:
+There are a few particularly effective ways to steer output formatting:
 
 1. **Tell Claude what to do instead of what not to do**
 
@@ -207,7 +207,7 @@ There are a few ways that we have found to be particularly effective in steering
 
 3. **Match your prompt style to the desired output**
 
-   The formatting style used in your prompt may influence Claude's response style. If you are still experiencing steerability issues with output formatting, we recommend as best as you can matching your prompt style to your desired output style. For example, removing markdown from your prompt can reduce the volume of markdown in the output.
+   The formatting style used in your prompt may influence Claude's response style. If you are still experiencing steerability issues with output formatting, try matching your prompt style to your desired output style as closely as possible. For example, removing markdown from your prompt can reduce the volume of markdown in the output.
 
 4. **Use detailed prompts for specific formatting preferences**
 
@@ -376,7 +376,7 @@ For Claude Sonnet 4.6 specifically, switching from adaptive to extended thinking
 
 Claude's latest models offer thinking capabilities that can be especially helpful for tasks involving reflection after tool use or complex multi-step reasoning. You can guide its initial or interleaved thinking for better results.
 
-Claude Opus 4.6 uses [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`), where Claude dynamically decides when and how much to think. Claude Sonnet 4.6 supports both adaptive thinking and manual extended thinking with [interleaved mode](/docs/en/build-with-claude/extended-thinking#interleaved-thinking). Claude calibrates its thinking based on two factors: the `effort` parameter and query complexity. Higher effort elicits more thinking, and more complex queries do the same. On easier queries that don't require thinking, the model responds directly. In internal evaluations, adaptive thinking reliably drives better performance than extended thinking, and we recommend moving to adaptive thinking to get the most intelligent responses.
+Claude Opus 4.6 uses [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`), where Claude dynamically decides when and how much to think. Claude Sonnet 4.6 supports both adaptive thinking and manual extended thinking with [interleaved mode](/docs/en/build-with-claude/extended-thinking#interleaved-thinking). Claude calibrates its thinking based on two factors: the `effort` parameter and query complexity. Higher effort elicits more thinking, and more complex queries do the same. On easier queries that don't require thinking, the model responds directly. In internal evaluations, adaptive thinking reliably drives better performance than extended thinking. Consider moving to adaptive thinking to get the most intelligent responses.
 
 For Sonnet 4.6, consider trying adaptive thinking for workloads that require agentic behavior such as multi-step tool use, complex coding tasks, and long-horizon agent loops. If adaptive thinking doesn't fit your use case, manual extended thinking with interleaved mode remains supported. Older models use manual thinking mode with `budget_tokens`.
 
@@ -613,7 +613,7 @@ Never speculate about code you have not opened. If the user references a specifi
 
 Claude Opus 4.5 and Claude Opus 4.6 have improved vision capabilities compared to previous Claude models. They perform better on image processing and data extraction tasks, particularly when there are multiple images present in context. These improvements carry over to computer use, where the models can more reliably interpret screenshots and UI elements. You can also use these models to analyze videos by breaking them up into frames.
 
-One technique we've found effective to further boost performance is to give Claude a crop tool or [skill](/docs/en/agents-and-tools/agent-skills/overview). We've seen consistent uplift on image evaluations when Claude is able to "zoom" in on relevant regions of an image. We've put together a [cookbook for the crop tool](https://platform.claude.com/cookbook/multimodal-crop-tool).
+One technique that has proven effective to further boost performance is to give Claude a crop tool or [skill](/docs/en/agents-and-tools/agent-skills/overview). Testing has shown consistent uplift on image evaluations when Claude is able to "zoom" in on relevant regions of an image. Anthropic has created a [cookbook for the crop tool](https://platform.claude.com/cookbook/multimodal-crop-tool).
 
 ### Frontend design
 

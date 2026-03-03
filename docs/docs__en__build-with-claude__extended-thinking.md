@@ -177,7 +177,7 @@ You can stream extended thinking responses using [server-sent events (SSE)](http
 
 When streaming is enabled for extended thinking, you receive thinking content via `thinking_delta` events.
 
-For more documention on streaming via the Messages API, see [Streaming Messages](/docs/en/build-with-claude/streaming).
+For more documentation on streaming via the Messages API, see [Streaming Messages](/docs/en/build-with-claude/streaming).
 
 Here's how to handle streaming with thinking:
 

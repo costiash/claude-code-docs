@@ -4,7 +4,7 @@ Access Claude models through Microsoft Foundry with Azure-native endpoints and a
 
 ---
 
-This guide will walk you through the process of setting up and making API calls to Claude in Foundry in Python, TypeScript, or using direct HTTP requests. When you can access Claude in Foundry, you will be billed for Claude usage in the Microsoft Marketplace with your Azure subscription, allowing you to access Claude's latest capabilities while managing costs through your Azure subscription.
+This guide walks you through the process of setting up and making API calls to Claude in Foundry in Python, TypeScript, or using direct HTTP requests. When you can access Claude in Foundry, you are billed for Claude usage in the Microsoft Marketplace with your Azure subscription, allowing you to access Claude's latest capabilities while managing costs through your Azure subscription.
 
 Regional availability: At launch, Claude is available as a Global Standard deployment type in Foundry resources (US DataZone coming soon). Pricing for Claude in the Microsoft Marketplace uses Anthropic's standard API pricing. Visit the [pricing page](https://claude.com/pricing#api) for details.
 
@@ -91,8 +91,8 @@ After creating your resource, deploy a Claude model to make it available for API
 2. Go to **Models + endpoints** and select **+ Deploy model** > **Deploy base model**
 3. Search for and select a Claude model (e.g., `claude-sonnet-4-6`)
 4. Configure deployment settings:
-   - **Deployment name**: Defaults to the model ID, but you can customize it (e.g., `my-claude-deployment`). The deployment name cannot be changed after it has been created.
-   - **Deployment type**: Select Global Standard (recommended for Claude)
+   - **Deployment name:** Defaults to the model ID, but you can customize it (e.g., `my-claude-deployment`). The deployment name cannot be changed after it has been created.
+   - **Deployment type:** Select Global Standard (recommended for Claude)
 5. Select **Deploy** and wait for provisioning to complete
 6. Once deployed, you can find your endpoint URL and keys under **Keys and Endpoint**
 
@@ -405,9 +405,9 @@ By default, deployment names match the model IDs shown above. However, you can c
 
 Azure provides comprehensive monitoring and logging capabilities for your Claude usage through standard Azure patterns:
 
-- **Azure Monitor**: Track API usage, latency, and error rates
-- **Azure Log Analytics**: Query and analyze request/response logs
-- **Cost Management**: Monitor and forecast costs associated with Claude usage
+- **Azure Monitor:** Track API usage, latency, and error rates
+- **Azure Log Analytics:** Query and analyze request/response logs
+- **Cost Management:** Monitor and forecast costs associated with Claude usage
 
 Anthropic recommends logging your activity on at least a 30-day rolling basis to understand usage patterns and investigate any potential issues.
 
@@ -419,21 +419,21 @@ Azure's logging services are configured within your Azure subscription. Enabling
 
 ### Authentication errors
 
-**Error**: `401 Unauthorized` or `Invalid API key`
+**Error:** `401 Unauthorized` or `Invalid API key`
 
-- **Solution**: Verify your API key is correct. You can obtain a new API key from the Azure portal under **Keys and Endpoint** for your Claude resource.
-- **Solution**: If using Azure Entra ID, ensure your access token is valid and hasn't expired. Tokens typically expire after 1 hour.
+- **Solution:** Verify your API key is correct. You can obtain a new API key from the Azure portal under **Keys and Endpoint** for your Claude resource.
+- **Solution:** If using Azure Entra ID, ensure your access token is valid and hasn't expired. Tokens typically expire after 1 hour.
 
-**Error**: `403 Forbidden`
+**Error:** `403 Forbidden`
 
-- **Solution**: Your Azure account may lack the necessary permissions. Ensure you have the appropriate Azure RBAC role assigned (e.g., "Cognitive Services OpenAI User").
+- **Solution:** Your Azure account may lack the necessary permissions. Ensure you have the appropriate Azure RBAC role assigned (e.g., "Cognitive Services OpenAI User").
 
 ### Rate limiting
 
-**Error**: `429 Too Many Requests`
+**Error:** `429 Too Many Requests`
 
-- **Solution**: You've exceeded your rate limit. Implement exponential backoff and retry logic in your application.
-- **Solution**: Consider requesting rate limit increases through the Azure portal or Azure support.
+- **Solution:** You've exceeded your rate limit. Implement exponential backoff and retry logic in your application.
+- **Solution:** Consider requesting rate limit increases through the Azure portal or Azure support.
 
 #### Rate limit headers
 
@@ -441,19 +441,19 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 
 ### Model and deployment errors
 
-**Error**: `Model not found` or `Deployment not found`
+**Error:** `Model not found` or `Deployment not found`
 
-- **Solution**: Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (e.g., `claude-sonnet-4-6`).
-- **Solution**: Ensure the model/deployment is available in your Azure region.
+- **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (e.g., `claude-sonnet-4-6`).
+- **Solution:** Ensure the model/deployment is available in your Azure region.
 
-**Error**: `Invalid model parameter`
+**Error:** `Invalid model parameter`
 
-- **Solution**: The model parameter should contain your deployment name, which can be customized in the Foundry portal. Verify the deployment exists and is properly configured.
+- **Solution:** The model parameter should contain your deployment name, which can be customized in the Foundry portal. Verify the deployment exists and is properly configured.
 
 ## Additional resources
 
-- **Foundry documentation**: [ai.azure.com/catalog](https://ai.azure.com/catalog/publishers/anthropic)
-- **Azure pricing**: [azure.microsoft.com/en-us/pricing](https://azure.microsoft.com/en-us/pricing/)
-- **Anthropic pricing details**: [Pricing documentation](/docs/en/about-claude/pricing#third-party-platform-pricing)
-- **Authentication guide**: See the [authentication section](#authentication) above
-- **Azure portal**: [portal.azure.com](https://portal.azure.com/)
+- **Foundry documentation:** [ai.azure.com/catalog](https://ai.azure.com/catalog/publishers/anthropic)
+- **Azure pricing:** [azure.microsoft.com/en-us/pricing](https://azure.microsoft.com/en-us/pricing/)
+- **Anthropic pricing details:** [Pricing documentation](/docs/en/about-claude/pricing#third-party-platform-pricing)
+- **Authentication guide:** See the [authentication section](#authentication) above
+- **Azure portal:** [portal.azure.com](https://portal.azure.com/)

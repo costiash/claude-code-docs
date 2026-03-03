@@ -55,7 +55,7 @@ In accordance with the [versioning](/docs/en/api/versioning) policy, the values 
 
 ## Request id
 
-Every API response includes a unique `request-id` header. This header contains a value such as `req_018EeWyXxfu5pfWkrYcMdjWG`. When contacting support about a specific request, please include this ID to help quickly resolve your issue.
+Every API response includes a unique `request-id` header. This header contains a value such as `req_018EeWyXxfu5pfWkrYcMdjWG`. When contacting support about a specific request, include this ID to help quickly resolve your issue.
 
 The official SDKs provide this value as a property on top-level response objects, containing the value of the `request-id` header:
 

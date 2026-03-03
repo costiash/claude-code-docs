@@ -623,7 +623,7 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 ## Deprecated version: mcp-client-2025-04-04
 
 <Note type="warning">
-  This version is deprecated. Please migrate to `mcp-client-2025-11-20` using the [migration guide](#migration-guide) above.
+  This version is deprecated. Migrate to `mcp-client-2025-11-20` using the [migration guide](#migration-guide) above.
 </Note>
 
 The previous version of the MCP connector included tool configuration directly in the MCP server definition:

@@ -9,9 +9,9 @@ The Vertex API for accessing Claude is nearly-identical to the [Messages API](/d
 * In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
 * In Vertex, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
 
-Vertex is also supported by Anthropic's official [client SDKs](/docs/en/api/client-sdks). This guide will walk you through the process of making a request to Claude on Vertex AI in either Python or TypeScript.
+Vertex is also supported by Anthropic's official [client SDKs](/docs/en/api/client-sdks). This guide walks you through the process of making a request to Claude on Vertex AI in either Python or TypeScript.
 
-Note that this guide assumes you have already have a GCP project that is able to use Vertex AI. See [using the Claude 3 models from Anthropic](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for more information on the setup required, as well as a full walkthrough.
+Note that this guide assumes you already have a GCP project that is able to use Vertex AI. See [using the Claude 3 models from Anthropic](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for more information on the setup required, as well as a full walkthrough.
 
 ## Install an SDK for accessing Vertex AI
 
@@ -67,7 +67,7 @@ The PHP SDK does not currently support Google Vertex AI. For available SDK platf
 
 ## Accessing Vertex AI
 
-### Model Availability
+### Model availability
 
 Note that Anthropic model availability varies by region. Search for "Claude" in the [Vertex AI Model Garden](https://cloud.google.com/model-garden) or go to [Use Claude 3](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for the latest information.
 
@@ -91,7 +91,7 @@ Note that Anthropic model availability varies by region. Search for "Claude" in 
 
 Before running requests you may need to run `gcloud auth application-default login` to authenticate with GCP.
 
-The following examples shows how to generate text from Claude on Vertex AI:
+The following examples show how to generate text from Claude on Vertex AI:
 <CodeGroup>
 
   ```python Python
@@ -264,8 +264,8 @@ For all currently supported features on Vertex AI, see [API features overview](/
 
 Starting with **Claude Sonnet 4.5 and all future models**, Google Vertex AI offers two endpoint types:
 
-- **Global endpoints**: Dynamic routing for maximum availability
-- **Regional endpoints**: Guaranteed data routing through specific geographic regions
+- **Global endpoints:** Dynamic routing for maximum availability
+- **Regional endpoints:** Guaranteed data routing through specific geographic regions
 
 Regional endpoints include a 10% pricing premium over global endpoints.
 

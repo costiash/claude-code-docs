@@ -989,7 +989,7 @@ When using [prompt caching](/docs/en/build-with-claude/prompt-caching#what-inval
 This diagram illustrates how each option works:
 
 <Frame>
-  ![Image](/docs/images/tool_choice.png)
+  ![Diagram showing the four tool_choice options: auto, any, tool, and none](/docs/images/tool_choice.png)
 </Frame>
 
 Note that when you have `tool_choice` as `any` or `tool`, the API prefills the assistant message to force a tool to be used. This means that the models will not emit a natural language response or explanation before `tool_use` content blocks, even if explicitly asked to do so.

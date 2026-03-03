@@ -2492,7 +2492,7 @@ for await (const message of query({
 ```
 
 <Warning>
-**Unix socket security**: The `allowUnixSockets` option can grant access to powerful system services. For example, allowing `/var/run/docker.sock` effectively grants full host system access through the Docker API, bypassing sandbox isolation. Only allow Unix sockets that are strictly necessary and understand the security implications of each.
+**Unix socket security:** The `allowUnixSockets` option can grant access to powerful system services. For example, allowing `/var/run/docker.sock` effectively grants full host system access through the Docker API, bypassing sandbox isolation. Only allow Unix sockets that are strictly necessary and understand the security implications of each.
 </Warning>
 
 ### `SandboxNetworkConfig`
@@ -2541,7 +2541,7 @@ type SandboxFilesystemConfig = {
 
 ### Permissions Fallback for Unsandboxed Commands
 
-When `allowUnsandboxedCommands` is enabled, the model can request to run commands outside the sandbox by setting `dangerouslyDisableSandbox: true` in the tool input. These requests fall back to the existing permissions system, meaning your `canUseTool` handler will be invoked, allowing you to implement custom authorization logic.
+When `allowUnsandboxedCommands` is enabled, the model can request to run commands outside the sandbox by setting `dangerouslyDisableSandbox: true` in the tool input. These requests fall back to the existing permissions system, meaning your `canUseTool` handler is invoked, allowing you to implement custom authorization logic.
 
 <Note>
 **`excludedCommands` vs `allowUnsandboxedCommands`:**
@@ -2584,9 +2584,9 @@ for await (const message of query({
 
 This pattern enables you to:
 
-- **Audit model requests**: Log when the model requests unsandboxed execution
-- **Implement allowlists**: Only permit specific commands to run unsandboxed
-- **Add approval workflows**: Require explicit authorization for privileged operations
+- **Audit model requests:** Log when the model requests unsandboxed execution
+- **Implement allowlists:** Only permit specific commands to run unsandboxed
+- **Add approval workflows:** Require explicit authorization for privileged operations
 
 <Warning>
 Commands running with `dangerouslyDisableSandbox: true` have full system access. Ensure your `canUseTool` handler validates these requests carefully.

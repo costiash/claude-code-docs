@@ -58,7 +58,7 @@ Consider questions like:
 * How are edge cases or ambiguous tickets handled?
 * How does the team prioritize tickets?
 
-The more you know about how humans handle certain cases, the better you will be able to work with Claude to do the task.
+The more you know about how humans handle certain cases, the better you can work with Claude to do the task.
 
 ### Define user intent categories
 A well-defined list of user intent categories is crucial for accurate support ticket classification with Claude. Claude’s ability to route tickets effectively within your system is directly proportional to how well-defined your system’s categories are.
@@ -397,7 +397,7 @@ Since we need to wait for the entire reasoning and intent text to be generated b
 
 Prompting often requires testing and optimization for it to be production ready. To determine the readiness of your solution, evaluate performance based on the success criteria and thresholds you established earlier.
 
-To run your evaluation, you will need test cases to run it on. The rest of this guide assumes you have already [developed your test cases](/docs/en/test-and-evaluate/develop-tests).
+To run your evaluation, you need test cases to run it on. The rest of this guide assumes you have already [developed your test cases](/docs/en/test-and-evaluate/develop-tests).
 
 ### Build an evaluation function
 
@@ -459,7 +459,7 @@ Let’s break down the edits we’ve made:
 
 ### Run your evaluation
 
-A proper evaluation requires clear thresholds and benchmarks to determine what is a good result. The script above will give us the runtime values for accuracy, response time, and cost per classification, but we still would need clearly established thresholds. For example:
+A proper evaluation requires clear thresholds and benchmarks to determine what is a good result. The script above gives us the runtime values for accuracy, response time, and cost per classification, but we still would need clearly established thresholds. For example:
 * **Accuracy:** 95% (out of 100 tests)
 * **Cost per classification:** 50% reduction on average (across 100 tests) from current routing method
 
@@ -526,7 +526,7 @@ Proper integration requires that you make some decisions regarding how your Clau
 * **Pull-Based:** Your code pulls for the latest tickets based on a given schedule and routes them at pull time.
     * This approach is easier to implement but might make unnecessary calls to the support ticket system when the pull frequency is too high or might be overly slow when the pull frequency is too low.
 
-For either of these approaches, you will need to wrap your script in a service. The choice of approach depends on what APIs your support ticketing system provides.
+For either of these approaches, you need to wrap your script in a service. The choice of approach depends on what APIs your support ticketing system provides.
 
 ***
 

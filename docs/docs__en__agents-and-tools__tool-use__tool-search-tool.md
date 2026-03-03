@@ -6,8 +6,8 @@ The tool search tool enables Claude to work with hundreds or thousands of tools 
 
 This approach solves two problems that compound quickly as tool libraries scale:
 
-- **Context bloat**: Tool definitions eat into your context budget fast. A typical multi-server setup (GitHub, Slack, Sentry, Grafana, Splunk) can consume ~55K tokens in definitions before Claude does any actual work. Tool search typically reduces this by over 85%, loading only the 3–5 tools Claude actually needs for a given request.
-- **Tool selection accuracy**: Claude's ability to correctly pick the right tool degrades significantly once you exceed 30–50 available tools. By surfacing a focused set of relevant tools on demand, tool search keeps selection accuracy high even across thousands of tools.
+- **Context bloat:** Tool definitions eat into your context budget fast. A typical multi-server setup (GitHub, Slack, Sentry, Grafana, Splunk) can consume ~55K tokens in definitions before Claude does any actual work. Tool search typically reduces this by over 85%, loading only the 3–5 tools Claude actually needs for a given request.
+- **Tool selection accuracy:** Claude's ability to correctly pick the right tool degrades significantly once you exceed 30–50 available tools. By surfacing a focused set of relevant tools on demand, tool search keeps selection accuracy high even across thousands of tools.
 
 <Tip>
 For background on the scaling challenges that tool search solves, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use). Tool search's on-demand loading is also an instance of the broader just-in-time retrieval principle described in [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
@@ -16,7 +16,7 @@ For background on the scaling challenges that tool search solves, see [Advanced 
 Although this is provided as a server-side tool, you can also implement your own client-side tool search functionality. See [Custom tool search implementation](#custom-tool-search-implementation) for details.
 
 <Note>
-Please reach out through our [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA) to share your feedback on this feature.
+Share feedback on this feature through the [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA).
 </Note>
 
 <Note>
@@ -329,10 +329,10 @@ When Claude uses the tool search tool, the response includes new block types:
 
 ### Understanding the response
 
-- **`server_tool_use`**: Indicates Claude is invoking the tool search tool
-- **`tool_search_tool_result`**: Contains the search results with a nested `tool_search_tool_search_result` object
-- **`tool_references`**: Array of `tool_reference` objects pointing to discovered tools
-- **`tool_use`**: Claude invoking the discovered tool
+- **`server_tool_use`:** Indicates Claude is invoking the tool search tool
+- **`tool_search_tool_result`:** Contains the search results with a nested `tool_search_tool_search_result` object
+- **`tool_references`:** Array of `tool_reference` objects pointing to discovered tools
+- **`tool_use`:** Claude invoking the discovered tool
 
 The `tool_reference` blocks are automatically expanded into full tool definitions before being shown to Claude. You don't need to handle this expansion yourself. It happens automatically in the API as long as you provide all matching tool definitions in the `tools` parameter.
 
@@ -551,9 +551,9 @@ Errors during tool execution return a 200 response with error information in the
 
 <section title="400 Error: All tools are deferred">
 
-**Cause**: You set `defer_loading: true` on ALL tools including the search tool
+**Cause:** You set `defer_loading: true` on ALL tools including the search tool
 
-**Fix**: Remove `defer_loading` from the tool search tool:
+**Fix:** Remove `defer_loading` from the tool search tool:
 
 ```json
 {
@@ -566,9 +566,9 @@ Errors during tool execution return a 200 response with error information in the
 
 <section title="400 Error: Missing tool definition">
 
-**Cause**: A `tool_reference` points to a tool not in your `tools` array
+**Cause:** A `tool_reference` points to a tool not in your `tools` array
 
-**Fix**: Ensure every tool that could be discovered has a complete definition:
+**Fix:** Ensure every tool that could be discovered has a complete definition:
 
 ```json
 {
@@ -585,7 +585,7 @@ Errors during tool execution return a 200 response with error information in the
 
 <section title="Claude doesn't find expected tools">
 
-**Cause**: Tool names or descriptions don't match the regex pattern
+**Cause:** Tool names or descriptions don't match the regex pattern
 
 **Debugging steps:**
 
@@ -594,7 +594,7 @@ Errors during tool execution return a 200 response with error information in the
 3. Remember searches are case-sensitive by default (use `(?i)` for case-insensitive)
 4. Claude uses broad patterns like `".*weather.*"` not exact matches
 
-**Tip**: Add common keywords to tool descriptions to improve discoverability
+**Tip:** Add common keywords to tool descriptions to improve discoverability
 
 </section>
 
@@ -696,10 +696,10 @@ You can include the tool search tool in the [Messages Batches API](/docs/en/buil
 
 ### Limits
 
-- **Maximum tools**: 10,000 tools in your catalog
-- **Search results**: Returns 3-5 most relevant tools per search
-- **Pattern length**: Maximum 200 characters for regex patterns
-- **Model support**: Sonnet 4.0+, Opus 4.0+ only (no Haiku)
+- **Maximum tools:** 10,000 tools in your catalog
+- **Search results:** Returns 3-5 most relevant tools per search
+- **Pattern length:** Maximum 200 characters for regex patterns
+- **Model support:** Sonnet 4.0+, Opus 4.0+ only (no Haiku)
 
 ### When to use tool search
 

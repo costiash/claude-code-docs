@@ -6,8 +6,8 @@ Manage where model inference runs and where data is stored with geographic contr
 
 Data residency controls let you manage where your data is processed and stored. Two independent settings govern this:
 
-- **Inference geo**: Controls where model inference runs, on a per-request basis. Set via the `inference_geo` API parameter or as a workspace default.
-- **Workspace geo**: Controls where data is stored at rest and where endpoint processing (image transcoding, code execution, etc.) happens. Configured at the workspace level in the [Console](https://platform.claude.com).
+- **Inference geo:** Controls where model inference runs, on a per-request basis. Set via the `inference_geo` API parameter or as a workspace default.
+- **Workspace geo:** Controls where data is stored at rest and where endpoint processing (image transcoding, code execution, etc.) happens. Configured at the workspace level in the [Console](https://platform.claude.com).
 
 ## Inference geo
 
@@ -105,8 +105,8 @@ The `inference_geo` parameter is only available on the Claude API (1P). On third
 
 Workspace settings also support restricting which inference geos are available:
 
-- **`allowed_inference_geos`**: Restricts which geos a workspace can use. If a request specifies an `inference_geo` not in this list, the API returns an error.
-- **`default_inference_geo`**: Sets the fallback geo when `inference_geo` is omitted from a request. Individual requests can override this by setting `inference_geo` explicitly.
+- **`allowed_inference_geos`:** Restricts which geos a workspace can use. If a request specifies an `inference_geo` not in this list, the API returns an error.
+- **`default_inference_geo`:** Sets the fallback geo when `inference_geo` is omitted from a request. Individual requests can override this by setting `inference_geo` explicitly.
 
 These settings can be configured through the Console or the [Admin API](/docs/en/build-with-claude/administration-api) under the `data_residency` field.
 
@@ -124,9 +124,9 @@ To set workspace geo, create a new workspace in the [Console](https://platform.c
 
 Data residency pricing varies by model generation:
 
-- **Claude Opus 4.6 and newer**: US-only inference (`inference_geo: "us"`) is priced at 1.1x the standard rate across all token pricing categories (input tokens, output tokens, cache writes, and cache reads).
+- **Claude Opus 4.6 and newer:** US-only inference (`inference_geo: "us"`) is priced at 1.1x the standard rate across all token pricing categories (input tokens, output tokens, cache writes, and cache reads).
 - **Global routing** (`inference_geo: "global"` or omitted): Standard pricing applies.
-- **Older models**: Existing pricing is unchanged regardless of `inference_geo` settings.
+- **Older models:** Existing pricing is unchanged regardless of `inference_geo` settings.
 
 This pricing applies to the Claude API (1P) only. Third-party platforms (AWS Bedrock, Google Vertex AI, Microsoft Foundry) have their own regional pricing. See the [pricing page](/docs/en/about-claude/pricing#data-residency-pricing) for details.
 
@@ -146,8 +146,8 @@ If your organization previously opted out of global routing to keep inference in
 
 The legacy opt-out was an organization-level setting that restricted all requests to US-based infrastructure. The new data residency controls replace this with two mechanisms:
 
-- **Per-request control**: The `inference_geo` parameter lets you specify `"us"` or `"global"` on each API call, giving you request-level flexibility.
-- **Workspace controls**: The `default_inference_geo` and `allowed_inference_geos` settings in the Console let you enforce geo policies across all keys in a workspace.
+- **Per-request control:** The `inference_geo` parameter lets you specify `"us"` or `"global"` on each API call, giving you request-level flexibility.
+- **Workspace controls:** The `default_inference_geo` and `allowed_inference_geos` settings in the Console let you enforce geo policies across all keys in a workspace.
 
 ### What happened to your workspace
 
@@ -169,9 +169,9 @@ Legacy models are unaffected by this migration. For current pricing on newer mod
 
 ## Current limitations
 
-- **Shared rate limits**: Rate limits are shared across all geos.
-- **Inference geo**: Only `"us"` and `"global"` are available at launch. Additional regions will be added over time.
-- **Workspace geo**: Only `"us"` is currently available. Workspace geo can't be changed after workspace creation.
+- **Shared rate limits:** Rate limits are shared across all geos.
+- **Inference geo:** Only `"us"` and `"global"` are available at launch. Additional regions will be added over time.
+- **Workspace geo:** Only `"us"` is currently available. Workspace geo can't be changed after workspace creation.
 
 ## Next steps
 

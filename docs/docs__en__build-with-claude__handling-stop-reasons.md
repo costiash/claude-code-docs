@@ -6,7 +6,7 @@ When you make a request to the Messages API, Claude's response includes a `stop_
 
 For details about `stop_reason` in the API response, see the [Messages API reference](/docs/en/api/messages).
 
-## What is stop_reason?
+## The stop_reason field
 
 The `stop_reason` field is part of every successful Messages API response. Unlike errors, which indicate failures in processing your request, `stop_reason` tells you why Claude successfully completed its response generation.
 

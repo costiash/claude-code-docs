@@ -7,7 +7,7 @@ The web fetch tool allows Claude to retrieve full content from specified web pag
 The latest web fetch tool version (`web_fetch_20260209`) supports **dynamic filtering** with Claude Opus 4.6 and Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. The previous tool version (`web_fetch_20250910`) remains available without dynamic filtering.
 
 <Note>
-Please use [this form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation.
+Use the [feedback form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation.
 </Note>
 
 <Note>
@@ -50,7 +50,7 @@ When you add the web fetch tool to your API request:
 4. Claude analyzes the fetched content and provides a response with optional citations.
 
 <Note>
-The web fetch tool currently does not support web sites dynamically rendered via Javascript.
+The web fetch tool currently does not support web sites dynamically rendered via JavaScript.
 </Note>
 
 ### Dynamic filtering with Opus 4.6 and Sonnet 4.6
@@ -243,7 +243,7 @@ The web fetch tool supports the following parameters:
 
 #### Max uses
 
-The `max_uses` parameter limits the number of web fetches performed. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` will be an error with the `max_uses_exceeded` error code. There is currently no default limit.
+The `max_uses` parameter limits the number of web fetches performed. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` is an error with the `max_uses_exceeded` error code. There is currently no default limit.
 
 #### Domain filtering
 
@@ -266,7 +266,7 @@ When configuring domain allow/block lists:
 
 #### Content limits
 
-The `max_content_tokens` parameter limits the amount of content that will be included in the context. If the fetched content exceeds this limit, it will be truncated. This helps control token usage when fetching large documents.
+The `max_content_tokens` parameter limits the amount of content included in the context. If the fetched content exceeds this limit, the tool truncates it. This helps control token usage when fetching large documents.
 
 <Note>
 The `max_content_tokens` parameter limit is approximate. The actual number of input tokens used can vary by a small amount.
@@ -363,10 +363,10 @@ Fetch results include:
 - `retrieved_at`: Timestamp when the content was retrieved
 
 <Note>
-The web fetch tool caches results to improve performance and reduce redundant requests. This means the content returned may not always be the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns.
+The web fetch tool caches results to improve performance and reduce redundant requests. The content returned may not always reflect the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns.
 </Note>
 
-For PDF documents, the content will be returned as base64-encoded data:
+For PDF documents, content is returned as base64-encoded data:
 
 ```json
 {

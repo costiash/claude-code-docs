@@ -377,8 +377,8 @@ For detailed platform setup guides with code examples, see:
 
 The Ruby SDK supports Bedrock and Vertex AI through dedicated client classes:
 
-- **Bedrock**: `Anthropic::BedrockClient`. Requires the `aws-sdk-bedrockruntime` gem.
-- **Vertex AI**: `Anthropic::VertexClient`. Requires the `googleauth` gem.
+- **Bedrock:** `Anthropic::BedrockClient`. Requires the `aws-sdk-bedrockruntime` gem.
+- **Vertex AI:** `Anthropic::VertexClient`. Requires the `googleauth` gem.
 
 ## Semantic versioning
 

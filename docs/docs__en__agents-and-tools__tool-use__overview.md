@@ -5,8 +5,8 @@
 Claude is capable of interacting with tools and functions, allowing you to extend Claude's capabilities to perform a wider variety of tasks. Each tool defines a contract: you specify what operations are available and what they return; Claude decides when and how to call them. Tool access is one of the highest-leverage primitives you can give an agent. On benchmarks like [LAB-Bench FigQA](https://lab-bench.org/) (scientific figure interpretation) and [SWE-bench](https://www.swebench.com/) (real-world software engineering), adding even simple tools produces outsized capability gains, often surpassing human expert baselines.
 
 <Tip>
-  Learn everything you need to master tool use with Claude as part of the new [courses](https://anthropic.skilljar.com/)! Please
-  continue to share your ideas and suggestions using this
+  Learn everything you need to master tool use with Claude as part of the new [courses](https://anthropic.skilljar.com/). Continue
+  to share your ideas and suggestions using this
   [form](https://forms.gle/BFnYc6iCkWoRzFgk7).
 </Tip>
 

@@ -47,6 +47,7 @@ These API endpoints process data in real-time:
 | Tool Search (client-side) | `/v1/messages` | [Custom client-side tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool#custom-tool-search-implementation) uses the standard Messages API. |
 | Context Management (compaction) | `/v1/messages` (with `context_management`) | Server-side compaction summarizes conversation context in real-time. |
 | Fast Mode | `/v1/messages` (with `speed: "fast"`) | Same Messages API endpoint with faster inference. ZDR applies regardless of speed setting. |
+| 1M Token Context Window | `/v1/messages` (with `anthropic-beta: context-1m-2025-08-07`) | Extended context processing uses the standard Messages API. ZDR applies even though this feature is in beta. |
 
 ### Not ZDR-eligible
 
@@ -56,7 +57,7 @@ The following is a non-exhaustive list of endpoints and features that store data
 | ------- | -------- | -------------------- | -------------------------- |
 | Batch API | `/v1/messages/batches` | Standard policy: 29-day retention. Use the `/v1/messages/batches` DELETE endpoint to delete message batches at any time after processing. | Batch processing requires asynchronous storage of responses. |
 | Code Execution | `/v1/messages` (with `code_execution` tool) | Container data retained up to 30 days. | Server-side code execution stores execution data and uploaded files beyond the immediate API response. |
-| Programmatic Tool Calling | `/v1/messages` (with `code_execution` tool) | Container data retained up to 30 days. | Built on code execution—uses sandbox containers that retain user data. |
+| Programmatic Tool Calling | `/v1/messages` (with `code_execution` tool) | Container data retained up to 30 days. | Built on code execution; uses sandbox containers that retain user data. |
 | Tool Search (server-side) | `/v1/messages` (with `tool_search` tool) | Data retained according to standard policy. | Server-side tool search indexes and stores tool catalog data beyond the immediate API response. |
 | Files API | `/v1/files` | Files retained until explicitly deleted. | Beta features are excluded from ZDR. Files uploaded via the Files API are retained for future API requests. |
 

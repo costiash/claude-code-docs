@@ -168,9 +168,9 @@ When you configure a tool to be callable from code execution and Claude decides 
 5. Once all code execution completes, Claude receives the final output and continues working on the task
 
 This approach is particularly useful for:
-- **Large data processing**: Filter or aggregate tool results before they reach Claude's context
-- **Multi-step workflows**: Save tokens and latency by calling tools serially or in a loop without sampling Claude in-between tool calls
-- **Conditional logic**: Make decisions based on intermediate tool results
+- **Large data processing:** Filter or aggregate tool results before they reach Claude's context
+- **Multi-step workflows:** Save tokens and latency by calling tools serially or in a loop without sampling Claude in-between tool calls
+- **Conditional logic:** Make decisions based on intermediate tool results
 
 <Note>
 Custom tools are converted to async Python functions to support parallel tool calling. When Claude writes code that calls your tools, it uses `await` (e.g., `result = await query_database("<sql>")`) and automatically includes the appropriate async wrapper function.
@@ -239,10 +239,10 @@ The `tool_id` references the code execution tool that made the programmatic call
 
 Programmatic tool calling uses the same containers as code execution:
 
-- **Container creation**: A new container is created for each session unless you reuse an existing one
-- **Expiration**: Containers expire after approximately 4.5 minutes of inactivity (subject to change)
-- **Container ID**: Returned in responses via the `container` field
-- **Reuse**: Pass the container ID to maintain state across requests
+- **Container creation:** A new container is created for each session unless you reuse an existing one
+- **Expiration:** Containers expire after approximately 4.5 minutes of inactivity (subject to change)
+- **Container ID:** Returned in responses via the `container` field
+- **Reuse:** Pass the container ID to maintain state across requests
 
 <Warning>
 When a tool is called programmatically and the container is waiting for your tool result, you must respond before the container expires. Monitor the `expires_at` field. If the container expires, Claude may treat the tool call as timed out and retry it.
@@ -257,7 +257,7 @@ Here's how a complete programmatic tool calling flow works:
 Send a request with code execution and a tool that allows programmatic calling. To enable programmatic calling, add the `allowed_callers` field to your tool definition.
 
 <Note>
-Provide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude will attempt to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.
+Provide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude attempts to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.
 </Note>
 
 <CodeGroup>
@@ -619,7 +619,7 @@ When all tool calls are satisfied and code completes:
 
 ### Container expiration during tool call
 
-If your tool takes too long to respond, the code execution will receive a `TimeoutError`. Claude sees this in stderr and will typically retry:
+If your tool takes too long to respond, the code execution receives a `TimeoutError`. Claude sees this in stderr and typically retries:
 
 ```json
 {
@@ -653,15 +653,15 @@ If your tool returns an error:
 }
 ```
 
-Claude's code will receive this error and can handle it appropriately.
+Claude's code receives this error and can handle it appropriately.
 
 ## Constraints and limitations
 
 ### Feature incompatibilities
 
-- **Structured outputs**: Tools with `strict: true` are not supported with programmatic calling
-- **Tool choice**: You cannot force programmatic calling of a specific tool via `tool_choice`
-- **Parallel tool use**: `disable_parallel_tool_use: true` is not supported with programmatic calling
+- **Structured outputs:** Tools with `strict: true` are not supported with programmatic calling
+- **Tool choice:** You cannot force programmatic calling of a specific tool via `tool_choice`
+- **Parallel tool use:** `disable_parallel_tool_use: true` is not supported with programmatic calling
 
 ### Tool restrictions
 
@@ -673,7 +673,7 @@ The following tools cannot currently be called programmatically, but support may
 
 When responding to programmatic tool calls, there are strict formatting requirements:
 
-**Tool result only responses**: If there are pending programmatic tool calls waiting for results, your response message must contain **only** `tool_result` blocks. You cannot include any text content, even after the tool results.
+**Tool result only responses:** If there are pending programmatic tool calls waiting for results, your response message must contain **only** `tool_result` blocks. You cannot include any text content, even after the tool results.
 
 Invalid - Cannot include text when responding to programmatic tool calls:
 
@@ -716,8 +716,8 @@ Programmatic tool calls are subject to the same rate limits as regular tool call
 
 When implementing custom tools that will be called programmatically:
 
-- **Tool results are returned as strings**: They can contain any content, including code snippets or executable commands that may be processed by the execution environment.
-- **Validate external tool results**: If your tool returns data from external sources or accepts user input, be aware of code injection risks if the output will be interpreted or executed as code.
+- **Tool results are returned as strings:** They can contain any content, including code snippets or executable commands that may be processed by the execution environment.
+- **Validate external tool results:** If your tool returns data from external sources or accepts user input, be aware of code injection risks if the output will be interpreted or executed as code.
 
 ## Token efficiency
 
@@ -741,9 +741,9 @@ Token counting for programmatic tool calls: Tool results from programmatic invoc
 
 ### Tool design
 
-- **Provide detailed output descriptions**: Since Claude deserializes tool results in code, clearly document the format (JSON structure, field types, etc.)
-- **Return structured data**: JSON or other easily parseable formats work best for programmatic processing
-- **Keep responses concise**: Return only necessary data to minimize processing overhead
+- **Provide detailed output descriptions:** Since Claude deserializes tool results in code, clearly document the format (JSON structure, field types, etc.)
+- **Return structured data:** JSON or other easily parseable formats work best for programmatic processing
+- **Keep responses concise:** Return only necessary data to minimize processing overhead
 
 ### When to use programmatic calling
 
@@ -791,9 +791,9 @@ Token counting for programmatic tool calls: Tool results from programmatic invoc
 
 Claude's training includes extensive exposure to code, making it effective at reasoning through and chaining function calls. When tools are presented as callable functions within a code execution environment, Claude can leverage this strength to:
 
-- **Reason naturally about tool composition**: Chain operations and handle dependencies as naturally as writing any Python code
-- **Process large results efficiently**: Filter down large tool outputs, extract only relevant data, or write intermediate results to files before returning summaries to the context window
-- **Reduce latency significantly**: Eliminate the overhead of re-sampling Claude between each tool call in multi-step workflows
+- **Reason naturally about tool composition:** Chain operations and handle dependencies as naturally as writing any Python code
+- **Process large results efficiently:** Filter down large tool outputs, extract only relevant data, or write intermediate results to files before returning summaries to the context window
+- **Reduce latency significantly:** Eliminate the overhead of re-sampling Claude between each tool call in multi-step workflows
 
 This approach enables workflows that would be impractical with traditional tool use (such as processing files over 1M tokens) by allowing Claude to work with data programmatically rather than loading everything into the conversation context.
 

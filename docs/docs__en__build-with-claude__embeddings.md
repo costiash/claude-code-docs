@@ -237,7 +237,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
 
   <section title="What is the relationship between characters, words, and tokens?">
 
-    Please see this [page](https://docs.voyageai.com/docs/tokenization?ref=anthropic).
+    See this [page](https://docs.voyageai.com/docs/tokenization?ref=anthropic).
   
 </section>
 

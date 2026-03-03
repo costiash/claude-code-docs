@@ -24,10 +24,10 @@ Older tool versions are not guaranteed to be backwards-compatible with newer mod
 
 ## Use cases
 
-- **Development workflows**: Run build commands, tests, and development tools
-- **System automation**: Execute scripts, manage files, automate tasks
-- **Data processing**: Process files, run analysis scripts, manage datasets
-- **Environment setup**: Install packages, configure environments
+- **Development workflows:** Run build commands, tests, and development tools
+- **System automation:** Execute scripts, manage files, automate tasks
+- **Data processing:** Process files, run analysis scripts, manage datasets
+- **Environment setup:** Install packages, configure environments
 
 ## Quick start
 
@@ -408,11 +408,11 @@ Git serves as a structured recovery mechanism in long-running agent workflows, n
 
 ## Limitations
 
-- **No interactive commands**: Cannot handle `vim`, `less`, or password prompts
-- **No GUI applications**: Command-line only
-- **Session scope**: Persists within conversation, lost between API calls
-- **Output limits**: Large outputs may be truncated
-- **No streaming**: Results returned after completion
+- **No interactive commands:** Cannot handle `vim`, `less`, or password prompts
+- **No GUI applications:** Command-line only
+- **Session scope:** Persists within conversation, lost between API calls
+- **Output limits:** Large outputs may be truncated
+- **No streaming:** Results returned after completion
 
 ## Combining with other tools
 

@@ -1905,7 +1905,7 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
     - Send a batch request with just a single request that has this shared prefix and a 1-hour cache block. This will get written to the 1-hour cache.
     - As soon as this is complete, submit the rest of the requests. You will have to monitor the job to know when it completes.
 
-    This is typically better than using the 5-minute cache simply because it’s common for batch requests to take between 5 minutes and 1 hour to complete. We’re considering ways to improve these cache hit rates and making this process more straightforward.
+    This is typically better than using the 5-minute cache simply because it's common for batch requests to take between 5 minutes and 1 hour to complete. Anthropic is considering ways to improve these cache hit rates and making this process more straightforward.
   
 </section>
   <section title="Why am I seeing the error `AttributeError: 'Beta' object has no attribute 'prompt_caching'` in Python?">

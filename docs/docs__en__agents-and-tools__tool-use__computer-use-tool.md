@@ -5,11 +5,11 @@
 Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction. On [WebArena](https://webarena.dev/), a benchmark for autonomous web navigation across real websites, Claude achieves state-of-the-art results among single-agent systems, demonstrating strong ability to complete multi-step browser tasks end to end.
 
 <Note>
-Computer use is currently in beta and requires a [beta header](/docs/en/api/beta-headers):
+Computer use is in beta and requires a [beta header](/docs/en/api/beta-headers):
 - `"computer-use-2025-11-24"` for Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5
 - `"computer-use-2025-01-24"` for Sonnet 4.5, Haiku 4.5, Opus 4.1, Sonnet 4, Opus 4, and Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
 
-Please reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
+Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
 </Note>
 
 <Note>
@@ -63,7 +63,7 @@ The model has been trained to resist these prompt injections, and an extra layer
 
 These precautions remain important even with the classifier defense layer in place.
 
-Finally, please inform end users of relevant risks and obtain their consent prior to enabling computer use in your own products.
+Inform end users of relevant risks and obtain their consent prior to enabling computer use in your own products.
 
 <Card
   title="Computer use reference implementation"
@@ -78,7 +78,7 @@ Get started quickly with the computer use reference implementation that includes
 </Card>
 
 <Tip>
-  Please use [this form](https://forms.gle/BT1hpBrqDPDUrCqo7) to provide
+  Use [this form](https://forms.gle/BT1hpBrqDPDUrCqo7) to provide
   feedback on the quality of the model responses, the API itself, or the quality
   of the documentation.
 </Tip>
@@ -330,7 +330,7 @@ Here are some tips on how to get the best quality outputs:
 2. Claude sometimes assumes outcomes of its actions without explicitly checking their results. To prevent this you can prompt Claude with `After each step, take a screenshot and carefully evaluate if you have achieved the right outcome. Explicitly show your thinking: "I have evaluated step X..." If not correct, try again. Only when you confirm a step was executed correctly should you move on to the next one.`
 3. Some UI elements (like dropdowns and scrollbars) might be tricky for Claude to manipulate using mouse movements. If you experience this, try prompting the model to use keyboard shortcuts.
 4. For repeatable tasks or UI interactions, include example screenshots and tool calls of successful outcomes in your prompt.
-5. If you need the model to log in, provide it with the username and password in your prompt inside xml tags like `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Please review the [guide on mitigating prompt injections](/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) before providing the model with login credentials.
+5. If you need the model to log in, provide it with the username and password in your prompt inside xml tags like `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Review the [guide on mitigating prompt injections](/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) before providing the model with login credentials.
 
 <Tip>
   If you repeatedly encounter a clear set of issues or know in advance the tasks
@@ -492,7 +492,7 @@ The `text` parameter in click/scroll actions accepts modifier keys like `shift`,
 | `enable_zoom` | No | Enable zoom action (`computer_20251124` only). Set to `true` to allow Claude to zoom into specific screen regions. Default: `false` |
 
 <Note>
-**Important**: The computer use tool must be explicitly executed by your application - Claude cannot execute it directly. You are responsible for implementing the screenshot capture, mouse movements, keyboard inputs, and other actions based on Claude's requests.
+**Important:** The computer use tool must be explicitly executed by your application - Claude cannot execute it directly. You are responsible for implementing the screenshot capture, mouse movements, keyboard inputs, and other actions based on Claude's requests.
 </Note>
 
 ### Enable thinking capability in Claude 4 models and Claude Sonnet 3.7
@@ -785,7 +785,7 @@ public class MultipleToolsExample {
 
 ### Build a custom computer use environment
 
-The [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is meant to help you get started with computer use. It includes all of the components needed have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You'll need:
+The [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is meant to help you get started with computer use. It includes all of the components needed to have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You'll need:
 
 - A virtualized or containerized environment suitable for computer use with Claude
 - An implementation of at least one of the Anthropic-defined computer use tools

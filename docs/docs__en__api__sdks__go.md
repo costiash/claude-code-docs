@@ -760,8 +760,8 @@ For detailed platform setup guides with code examples, see:
 
 The Go SDK supports Amazon Bedrock and Google Vertex AI through subpackages:
 
-- **Bedrock**: `import "github.com/anthropics/anthropic-sdk-go/bedrock"`. Use `bedrock.WithLoadDefaultConfig(ctx)` or `bedrock.WithConfig(cfg)`. Importing this package globally registers a decoder for `application/vnd.amazon.eventstream` for streaming.
-- **Vertex AI**: `import "github.com/anthropics/anthropic-sdk-go/vertex"`. Use `vertex.WithGoogleAuth(ctx, region, projectID)` or `vertex.WithCredentials(ctx, region, projectID, creds)`.
+- **Bedrock:** `import "github.com/anthropics/anthropic-sdk-go/bedrock"`. Use `bedrock.WithLoadDefaultConfig(ctx)` or `bedrock.WithConfig(cfg)`. Importing this package globally registers a decoder for `application/vnd.amazon.eventstream` for streaming.
+- **Vertex AI:** `import "github.com/anthropics/anthropic-sdk-go/vertex"`. Use `vertex.WithGoogleAuth(ctx, region, projectID)` or `vertex.WithCredentials(ctx, region, projectID, creds)`.
 
 ## Advanced usage
 

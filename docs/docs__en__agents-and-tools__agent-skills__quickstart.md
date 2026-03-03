@@ -12,14 +12,14 @@ This tutorial shows you how to use Agent Skills to create a PowerPoint presentat
 - Python 3.7+ or curl installed
 - Basic familiarity with making API requests
 
-## What are Agent Skills?
+## Agent Skills overview
 
 Pre-built Agent Skills extend Claude's capabilities with specialized expertise for tasks like creating documents, analyzing data, and processing files. Anthropic provides the following pre-built Agent Skills in the API:
 
-- **PowerPoint (pptx)**: Create and edit presentations
-- **Excel (xlsx)**: Create and analyze spreadsheets
-- **Word (docx)**: Create and edit documents
-- **PDF (pdf)**: Generate PDF documents
+- **PowerPoint (pptx):** Create and edit presentations
+- **Excel (xlsx):** Create and analyze spreadsheets
+- **Word (docx):** Create and edit documents
+- **PDF (pdf):** Generate PDF documents
 
 <Note>
 **Want to create custom Skills?** See the [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction) for examples of building your own Skills with domain-specific expertise.
@@ -168,12 +168,12 @@ curl https://api.anthropic.com/v1/messages \
 
 Let's break down what each part does:
 
-- **`container.skills`**: Specifies which Skills Claude can use
-- **`type: "anthropic"`**: Indicates this is an Anthropic-managed Skill
-- **`skill_id: "pptx"`**: The PowerPoint Skill identifier
-- **`version: "latest"`**: The Skill version set to the most recently published
-- **`tools`**: Enables code execution (required for Skills)
-- **Beta headers**: `code-execution-2025-08-25` and `skills-2025-10-02`
+- **`container.skills`:** Specifies which Skills Claude can use
+- **`type: "anthropic"`:** Indicates this is an Anthropic-managed Skill
+- **`skill_id: "pptx"`:** The PowerPoint Skill identifier
+- **`version: "latest"`:** The Skill version set to the most recently published
+- **`tools`:** Enables code execution (required for Skills)
+- **Beta headers:** `code-execution-2025-08-25` and `skills-2025-10-02`
 
 When you make this request, Claude automatically matches your task to the relevant Skill. Since you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude executes the Skill's code to create your presentation.
 
