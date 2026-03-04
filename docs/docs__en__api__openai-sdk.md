@@ -30,11 +30,14 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 ### Quick start example
 
 <CodeGroup>
-    ```python Python
+    
+    ```python Python nocheck
+    import os
+
     from openai import OpenAI
 
     client = OpenAI(
-        api_key="ANTHROPIC_API_KEY",  # Your Claude API key
+        api_key=os.environ.get("ANTHROPIC_API_KEY"),  # Your Claude API key
         base_url="https://api.anthropic.com/v1/",  # the Claude API endpoint
     )
 
@@ -49,7 +52,8 @@ To use the OpenAI SDK compatibility feature, you'll need to:
     print(response.choices[0].message.content)
     ```
 
-    ```typescript TypeScript
+    
+    ```typescript TypeScript nocheck
     import OpenAI from "openai";
 
     const openai = new OpenAI({
@@ -64,6 +68,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 
     console.log(response.choices[0].message.content);
     ```
+
 </CodeGroup>
 
 ## Important OpenAI compatibility limitations
@@ -92,15 +97,26 @@ Most of the inputs to the OpenAI SDK clearly map directly to Anthropic’s API p
 You can enable [extended thinking](/docs/en/build-with-claude/extended-thinking) capabilities by adding the `thinking` parameter. While this improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's detailed thought process. For full extended thinking features, including access to Claude's step-by-step reasoning output, use the native Claude API.
 
 <CodeGroup>
-    ```python Python
+    
+    ```python Python nocheck hidelines={1..8}
+    import os
+
+    from openai import OpenAI
+
+    client = OpenAI(
+        api_key=os.environ.get("ANTHROPIC_API_KEY"),
+        base_url="https://api.anthropic.com/v1/",
+    )
+
     response = client.chat.completions.create(
         model="claude-sonnet-4-6",
-        messages=...,
+        messages=[{"role": "user", "content": "Who are you?"}],
         extra_body={"thinking": {"type": "enabled", "budget_tokens": 2000}},
     )
     ```
 
-    ```typescript TypeScript
+    
+    ```typescript TypeScript nocheck
     const response = await openai.chat.completions.create({
       messages: [{ role: "user", content: "Who are you?" }],
       model: "claude-sonnet-4-6",
@@ -108,6 +124,7 @@ You can enable [extended thinking](/docs/en/build-with-claude/extended-thinking)
       thinking: { type: "enabled", budget_tokens: 2000 }
     });
     ```
+
 </CodeGroup>
 
 ## Rate limits

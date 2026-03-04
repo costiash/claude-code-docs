@@ -394,7 +394,7 @@ Extended thinking adds latency and should only be used when it will meaningfully
 
 If you are migrating from [extended thinking](/docs/en/build-with-claude/extended-thinking) with `budget_tokens`, replace your thinking configuration and move budget control to `effort`:
 
-```python Before (extended thinking, older models)
+```python Before (extended thinking, older models) nocheck
 client.messages.create(
     model="claude-sonnet-4-5-20250929",
     max_tokens=64000,
@@ -403,7 +403,7 @@ client.messages.create(
 )
 ```
 
-```python After (adaptive thinking)
+```python After (adaptive thinking) nocheck
 client.messages.create(
     model="claude-opus-4-6",
     max_tokens=64000,
@@ -680,7 +680,7 @@ Claude Sonnet 4.6 defaults to an effort level of `high`, in contrast to Claude S
 
 If you're not using extended thinking on Claude Sonnet 4.5, you can continue without it on Claude Sonnet 4.6. You should explicitly set effort to the level appropriate for your use case. At `low` effort with thinking disabled, you can expect similar or better performance relative to Claude Sonnet 4.5 with no extended thinking.
 
-```python
+```python nocheck
 client.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=8192,
@@ -698,7 +698,7 @@ If you're using extended thinking on Claude Sonnet 4.5, it continues to be suppo
 
 Start with `medium` effort. If you find latency is too high, consider reducing effort to `low`. If you need higher intelligence, consider increasing effort to `high` or migrating to Opus 4.6.
 
-```python
+```python nocheck
 client.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=16384,
@@ -712,7 +712,7 @@ client.messages.create(
 
 Start with `low` effort with extended thinking. If you need more depth, increase effort to `medium`.
 
-```python
+```python nocheck
 client.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=8192,

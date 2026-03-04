@@ -73,7 +73,7 @@ The official SDKs provide this value as a property on top-level response objects
   print(f"Request ID: {message._request_id}")
   ```
 
-  ```typescript TypeScript
+  ```typescript TypeScript hidelines={1..4}
   import Anthropic from "@anthropic-ai/sdk";
 
   const client = new Anthropic();
@@ -109,7 +109,8 @@ also will set a socket option for TCP keep-alive.
 If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) to get the complete `Message` object without writing event-handling code:
 
 <CodeGroup>
-    ```python Python
+    
+    ```python Python nocheck
     with client.messages.stream(
         max_tokens=128000,
         messages=[{"role": "user", "content": "Write a detailed analysis..."}],

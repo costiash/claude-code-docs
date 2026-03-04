@@ -163,7 +163,7 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
-```python Python
+```python Python hidelines={1..4,-1}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -182,13 +182,13 @@ response = client.messages.create(
 print(response)
 ```
 
-```typescript TypeScript
-import { Anthropic } from "@anthropic-ai/sdk";
+```typescript TypeScript hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
 
-const anthropic = new Anthropic();
+const client = new Anthropic();
 
 async function main() {
-  const response = await anthropic.messages.create({
+  const response = await client.messages.create({
     model: "claude-opus-4-6",
     max_tokens: 1024,
     messages: [
@@ -210,6 +210,35 @@ async function main() {
 }
 
 main().catch(console.error);
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new()
+        {
+            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+        };
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 1024,
+            Messages = [new() { Role = Role.User, Content = "Please analyze the content at https://example.com/article" }],
+            Tools = [new ToolUnion(new WebFetchTool20250910() { MaxUses = 5 })]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -429,7 +458,7 @@ The tool cannot fetch arbitrary URLs that Claude generates or URLs from containe
 
 Web fetch works seamlessly with web search for comprehensive information gathering:
 
-```python
+```python hidelines={1..4}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -465,7 +494,7 @@ In this workflow, Claude will:
 
 Web fetch works with [prompt caching](/docs/en/build-with-claude/prompt-caching). To enable prompt caching, add `cache_control` breakpoints in your request. Cached fetch results can be reused across conversation turns.
 
-```python
+```python hidelines={1..4}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -492,8 +521,13 @@ messages.append({"role": "assistant", "content": response1.content})
 messages.append(
     {
         "role": "user",
-        "content": "What methodology does the paper use?",
-        "cache_control": {"type": "ephemeral"},
+        "content": [
+            {
+                "type": "text",
+                "text": "What methodology does the paper use?",
+                "cache_control": {"type": "ephemeral"},
+            }
+        ],
     }
 )
 
@@ -505,7 +539,7 @@ response2 = client.messages.create(
 )
 
 # The second response benefits from cached fetch results
-print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
+print(f"Cache read tokens: {response2.usage.cache_read_input_tokens or 0}")
 ```
 
 ## Streaming

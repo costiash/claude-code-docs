@@ -86,7 +86,8 @@ The most powerful use case is returning search results from your custom tools. T
 ### Example: Knowledge base tool
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck
 from anthropic import Anthropic
 from anthropic.types import (
     MessageParam,
@@ -178,17 +179,17 @@ if response.content[0].type == "tool_use":
     )
 ```
 
-```typescript TypeScript
-import { Anthropic } from "@anthropic-ai/sdk";
+```typescript TypeScript hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
 // Define a knowledge base search tool
-const knowledgeBaseTool = {
+const knowledgeBaseTool: Anthropic.Messages.Tool = {
   name: "search_knowledge_base",
   description: "Search the company knowledge base for information",
   input_schema: {
-    type: "object",
+    type: "object" as const,
     properties: {
       query: {
         type: "string",
@@ -246,7 +247,8 @@ const response = await anthropic.messages.create({
 
 // Handle tool use and provide results
 if (response.content[0].type === "tool_use") {
-  const toolResult = searchKnowledgeBase(response.content[0].input.query);
+  const input = response.content[0].input as { query: string };
+  const toolResult = searchKnowledgeBase(input.query);
 
   const finalResponse = await anthropic.messages.create({
     model: "claude-opus-4-6", // Works with all supported models
@@ -268,6 +270,122 @@ if (response.content[0].type === "tool_use") {
   });
 }
 ```
+
+```csharp C# nocheck
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var knowledgeBaseTool = new Tool
+        {
+            Name = "search_knowledge_base",
+            Description = "Search the company knowledge base for information",
+            InputSchema = new
+            {
+                type = "object",
+                properties = new
+                {
+                    query = new
+                    {
+                        type = "string",
+                        description = "The search query"
+                    }
+                },
+                required = new[] { "query" }
+            }
+        };
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 1024,
+            Tools = new[] { knowledgeBaseTool },
+            Messages = new[]
+            {
+                new MessageParam
+                {
+                    Role = Role.User,
+                    Content = "How do I configure the timeout settings?"
+                }
+            }
+        };
+
+        var response = await client.Messages.Create(parameters);
+
+        if (response.Content[0] is ToolUseBlock toolUse)
+        {
+            var toolResult = SearchKnowledgeBase(toolUse.Input["query"].ToString());
+
+            var finalParameters = new MessageCreateParams
+            {
+                Model = Model.ClaudeOpus4_6,
+                MaxTokens = 1024,
+                Messages = new[]
+                {
+                    new MessageParam { Role = Role.User, Content = "How do I configure the timeout settings?" },
+                    new MessageParam { Role = Role.Assistant, Content = response.Content },
+                    new MessageParam
+                    {
+                        Role = Role.User,
+                        Content = new[]
+                        {
+                            new ToolResultBlockParam
+                            {
+                                ToolUseId = toolUse.Id,
+                                Content = toolResult
+                            }
+                        }
+                    }
+                }
+            };
+
+            var finalResponse = await client.Messages.Create(finalParameters);
+            Console.WriteLine(finalResponse);
+        }
+    }
+
+    private static List<SearchResultBlockParam> SearchKnowledgeBase(string query)
+    {
+        return new List<SearchResultBlockParam>
+        {
+            new SearchResultBlockParam
+            {
+                Source = "https://docs.company.com/product-guide",
+                Title = "Product Configuration Guide",
+                Content = new[]
+                {
+                    new TextBlockParam
+                    {
+                        Text = "To configure the product, navigate to Settings > Configuration. The default timeout is 30 seconds, but can be adjusted between 10-120 seconds based on your needs."
+                    }
+                },
+                Citations = new CitationsConfigParam { Enabled = true }
+            },
+            new SearchResultBlockParam
+            {
+                Source = "https://docs.company.com/troubleshooting",
+                Title = "Troubleshooting Guide",
+                Content = new[]
+                {
+                    new TextBlockParam
+                    {
+                        Text = "If you encounter timeout errors, first check the configuration settings. Common causes include network latency and incorrect timeout values."
+                    }
+                },
+                Citations = new CitationsConfigParam { Enabled = true }
+            }
+        };
+    }
+}
+```
 </CodeGroup>
 
 ## Method 2: Search results as top-level content
@@ -281,7 +399,59 @@ You can also provide search results directly in user messages. This is useful fo
 ### Example: Direct search results
 
 <CodeGroup>
-```python Python
+```bash Shell
+#!/bin/sh
+curl https://api.anthropic.com/v1/messages \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "model": "claude-opus-4-6",
+    "max_tokens": 1024,
+    "messages": [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "search_result",
+                    "source": "https://docs.company.com/api-reference",
+                    "title": "API Reference - Authentication",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium."
+                        }
+                    ],
+                    "citations": {
+                        "enabled": true
+                    }
+                },
+                {
+                    "type": "search_result",
+                    "source": "https://docs.company.com/quickstart",
+                    "title": "Getting Started Guide",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key."
+                        }
+                    ],
+                    "citations": {
+                        "enabled": true
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": "Based on these search results, how do I authenticate API requests and what are the rate limits?"
+                }
+            ]
+        }
+    ]
+}'
+```
+
+```python Python hidelines={1,3..4,-1}
 from anthropic import Anthropic
 from anthropic.types import MessageParam, TextBlockParam, SearchResultBlockParam
 
@@ -380,56 +550,68 @@ const response = await anthropic.messages.create({
 console.log(response);
 ```
 
-```bash Shell
-#!/bin/sh
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
         {
-            "role": "user",
-            "content": [
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 1024,
+            Messages =
+            [
+                new()
                 {
-                    "type": "search_result",
-                    "source": "https://docs.company.com/api-reference",
-                    "title": "API Reference - Authentication",
-                    "content": [
+                    Role = Role.User,
+                    Content =
+                    [
+                        new SearchResultBlockParam
                         {
-                            "type": "text",
-                            "text": "All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium."
-                        }
-                    ],
-                    "citations": {
-                        "enabled": true
-                    }
-                },
-                {
-                    "type": "search_result",
-                    "source": "https://docs.company.com/quickstart",
-                    "title": "Getting Started Guide",
-                    "content": [
+                            Source = "https://docs.company.com/api-reference",
+                            Title = "API Reference - Authentication",
+                            Content =
+                            [
+                                new TextBlockParam
+                                {
+                                    Text = "All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium."
+                                }
+                            ],
+                            Citations = new CitationsConfigParam { Enabled = true }
+                        },
+                        new SearchResultBlockParam
                         {
-                            "type": "text",
-                            "text": "To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key."
+                            Source = "https://docs.company.com/quickstart",
+                            Title = "Getting Started Guide",
+                            Content =
+                            [
+                                new TextBlockParam
+                                {
+                                    Text = "To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key."
+                                }
+                            ],
+                            Citations = new CitationsConfigParam { Enabled = true }
+                        },
+                        new TextBlockParam
+                        {
+                            Text = "Based on these search results, how do I authenticate API requests and what are the rate limits?"
                         }
-                    ],
-                    "citations": {
-                        "enabled": true
-                    }
-                },
-                {
-                    "type": "text",
-                    "text": "Based on these search results, how do I authenticate API requests and what are the rate limits?"
+                    ]
                 }
             ]
-        }
-    ]
-}'
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -540,7 +722,9 @@ Claude can cite specific blocks using the `start_block_index` and `end_block_ind
 
 You can use both tool-based and top-level search results in the same conversation:
 
-```python
+```python nocheck hidelines={1..2}
+from anthropic.types import MessageParam, SearchResultBlockParam, TextBlockParam
+
 # First message with top-level search results
 messages = [
     MessageParam(
@@ -573,7 +757,9 @@ messages = [
 
 Both methods support mixing search results with other content:
 
-```python
+```python nocheck hidelines={1..2}
+from anthropic.types import SearchResultBlockParam, TextBlockParam
+
 # In tool results
 tool_result = [
     SearchResultBlockParam(
@@ -677,7 +863,8 @@ Citations are all-or-nothing: either all search results in a request must have c
    - Keep formatting consistent
 
 3. **Handle errors gracefully**
-   ```python
+   
+   ```python nocheck
    def search_with_fallback(query):
        try:
            results = perform_search(query)

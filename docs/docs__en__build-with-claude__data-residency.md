@@ -56,7 +56,7 @@ print(response.content[0].text)
 print(f"Inference geo: {response.usage.inference_geo}")
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -73,7 +73,10 @@ const response = await client.messages.create({
   ]
 });
 
-console.log(response.content[0].text);
+const textBlock = response.content.find(
+  (block): block is Anthropic.TextBlock => block.type === "text"
+);
+console.log(textBlock?.text);
 // Check where inference actually ran
 console.log(`Inference geo: ${response.usage.inference_geo}`);
 ```

@@ -204,9 +204,6 @@ Common issues and solutions:
   <Card title="Start prompt engineering" icon="link" href="/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">
     Learn core techniques with worked examples.
   </Card>
-  <Card title="Prompt library" icon="link" href="/docs/en/resources/prompt-library/library">
-    Get inspired by a curated selection of prompts for various tasks and use cases.
-  </Card>
   <Card title="Test your prompts" icon="link" href="/docs/en/test-and-evaluate/eval-tool">
     Use the evaluation tool to test your improved prompts.
   </Card>

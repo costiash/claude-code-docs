@@ -40,7 +40,7 @@ This feature is [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data
   print(message)
   ```
 
-  ```typescript TypeScript
+  ```typescript TypeScript hidelines={1..4}
   import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();
@@ -51,6 +51,30 @@ This feature is [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data
     messages: [{ role: "user", content: "Hello, Claude" }]
   });
   console.log(message);
+  ```
+
+  ```csharp C#
+  using System;
+  using System.Threading.Tasks;
+  using Anthropic;
+  using Anthropic.Models.Messages;
+
+  class Program
+  {
+      static async Task Main()
+      {
+          AnthropicClient client = new();
+
+          var parameters = new MessageCreateParams
+          {
+              Model = Model.ClaudeOpus4_6,
+              MaxTokens = 1024,
+              Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
+          };
+          var message = await client.Messages.Create(parameters);
+          Console.WriteLine(message);
+      }
+  }
   ```
 </CodeGroup>
 
@@ -99,7 +123,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python
+```python Python hidelines={1..2,-1}
 import anthropic
 
 message = anthropic.Anthropic().messages.create(
@@ -114,7 +138,7 @@ message = anthropic.Anthropic().messages.create(
 print(message)
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -128,6 +152,36 @@ await anthropic.messages.create({
     { role: "user", content: "Can you describe LLMs to me?" }
   ]
 });
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 1024,
+            Messages =
+            [
+                new() { Role = Role.User, Content = "Hello, Claude" },
+                new() { Role = Role.Assistant, Content = "Hello!" },
+                new() { Role = Role.User, Content = "Can you describe LLMs to me?" }
+            ]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -173,7 +227,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
   }'
   ```
 
-  ```python Python
+  ```python Python hidelines={1..2,-1}
   import anthropic
 
   message = anthropic.Anthropic().messages.create(
@@ -190,7 +244,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
   print(message)
   ```
 
-  ```typescript TypeScript
+  ```typescript TypeScript hidelines={1..4}
   import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();
@@ -207,6 +261,34 @@ You can pre-fill part of Claude's response in the last position of the input mes
     ]
   });
   console.log(message);
+  ```
+
+  ```csharp C#
+  using System;
+  using System.Threading.Tasks;
+  using Anthropic;
+  using Anthropic.Models.Messages;
+
+  class Program
+  {
+      static async Task Main(string[] args)
+      {
+          AnthropicClient client = new();
+
+          var parameters = new MessageCreateParams
+          {
+              Model = Model.ClaudeOpus4_6,
+              MaxTokens = 1,
+              Messages = [
+                  new() { Role = Role.User, Content = "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae" },
+                  new() { Role = Role.Assistant, Content = "The answer is (" }
+              ]
+          };
+
+          var message = await client.Messages.Create(parameters);
+          Console.WriteLine(message);
+      }
+  }
   ```
 </CodeGroup>
 
@@ -289,7 +371,8 @@ Claude can read both text and images in requests. Both `base64` and `url` source
   }'
   ```
 
-  ```python Python
+  
+  ```python Python nocheck hidelines={-1}
   import anthropic
   import base64
   import httpx
@@ -344,7 +427,7 @@ Claude can read both text and images in requests. Both `base64` and `url` source
   print(message_from_url)
   ```
 
-  ```typescript TypeScript
+  ```typescript TypeScript hidelines={1..4}
   import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();
@@ -405,6 +488,84 @@ Claude can read both text and images in requests. Both `base64` and `url` source
     ]
   });
   console.log(messageFromUrl);
+  ```
+
+  ```csharp C#
+  using System;
+  using System.Collections.Generic;
+  using System.Net.Http;
+  using System.Threading.Tasks;
+  using Anthropic;
+  using Anthropic.Models.Messages;
+
+  public class Program
+  {
+      public static async Task Main(string[] args)
+      {
+          AnthropicClient client = new();
+
+          // Option 1: Base64-encoded image
+          string imageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+
+          using HttpClient httpClient = new();
+          byte[] imageBytes = await httpClient.GetByteArrayAsync(imageUrl);
+          string imageData = Convert.ToBase64String(imageBytes);
+
+          var parameters = new MessageCreateParams
+          {
+              Model = Model.ClaudeOpus4_6,
+              MaxTokens = 1024,
+              Messages =
+              [
+                  new()
+                  {
+                      Role = Role.User,
+                      Content = new MessageParamContent(new List<ContentBlockParam>
+                      {
+                          new ContentBlockParam(new ImageBlockParam(
+                              new ImageBlockParamSource(new Base64ImageSource()
+                              {
+                                  Data = imageData,
+                                  MediaType = MediaType.ImageJpeg,
+                              })
+                          )),
+                          new ContentBlockParam(new TextBlockParam("What is in the above image?")),
+                      }),
+                  }
+              ]
+          };
+
+          var message = await client.Messages.Create(parameters);
+          Console.WriteLine(message);
+
+          // Option 2: URL-referenced image
+          var parametersFromUrl = new MessageCreateParams
+          {
+              Model = Model.ClaudeOpus4_6,
+              MaxTokens = 1024,
+              Messages =
+              [
+                  new()
+                  {
+                      Role = Role.User,
+                      Content = new MessageParamContent(new List<ContentBlockParam>
+                      {
+                          new ContentBlockParam(new ImageBlockParam(
+                              new ImageBlockParamSource(new UrlImageSource()
+                              {
+                                  Url = new Uri("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"),
+                              })
+                          )),
+                          new ContentBlockParam(new TextBlockParam("What is in the above image?")),
+                      }),
+                  }
+              ]
+          };
+
+          var messageFromUrl = await client.Messages.Create(parametersFromUrl);
+          Console.WriteLine(messageFromUrl);
+      }
+  }
   ```
 </CodeGroup>
 

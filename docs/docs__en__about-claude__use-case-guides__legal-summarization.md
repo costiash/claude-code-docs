@@ -107,7 +107,7 @@ Before you begin summarizing documents, you need to prepare your data. This invo
 
 Here is a demonstration of this process on a sample pdf:
 
-```python
+```python nocheck
 from io import BytesIO
 import re
 
@@ -152,7 +152,7 @@ Claude can adapt to various summarization styles. You can change the details of 
 
 Here’s an example of how to create a prompt that ensures the generated summaries follow a consistent structure when analyzing sublease agreements:
 
-```python
+```python nocheck hidelines={1..4,-1}
 import anthropic
 
 # Initialize the Anthropic client
@@ -252,7 +252,7 @@ Legal summarization often involves handling long documents or many related docum
 
 Here's an example of how to perform meta-summarization:
 
-```python
+```python nocheck hidelines={1..4,-1}
 import anthropic
 
 # Initialize the Anthropic client

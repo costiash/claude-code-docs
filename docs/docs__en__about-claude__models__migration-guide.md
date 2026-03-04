@@ -29,7 +29,8 @@ These are not required but will improve your experience:
 1. **Migrate to adaptive thinking:** `thinking: {type: "enabled", budget_tokens: N}` is deprecated on Claude 4.6 models and will be removed in a future model release. Switch to `thinking: {type: "adaptive"}` and use the [effort parameter](/docs/en/build-with-claude/effort) to control thinking depth. See [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking).
 
    <CodeGroup>
-   ```python Before
+   
+   ```python Before nocheck
    response = client.beta.messages.create(
        model="claude-opus-4-5",
        max_tokens=16000,
@@ -39,14 +40,54 @@ These are not required but will improve your experience:
    )
    ```
 
-   ```python After
+   
+   ```python After nocheck
    response = client.messages.create(
        model="claude-opus-4-6",
        max_tokens=16000,
        thinking={"type": "adaptive"},
        output_config={"effort": "high"},
-       messages=[...],
+       messages=[{"role": "user", "content": "Your prompt here"}],
    )
+   ```
+
+   ```typescript TypeScript hidelines={1..4}
+   import Anthropic from "@anthropic-ai/sdk";
+
+   const client = new Anthropic();
+
+   const response = await client.messages.create({
+     model: "claude-opus-4-6",
+     max_tokens: 16000,
+     thinking: { type: "adaptive" },
+     output_config: { effort: "high" },
+     messages: [{ role: "user", content: "Your prompt here" }]
+   } as unknown as Anthropic.MessageCreateParamsNonStreaming);
+   ```
+
+   ```csharp C#
+   using Anthropic;
+   using Anthropic.Models.Messages;
+
+   public class Program
+   {
+       public static async Task Main(string[] args)
+       {
+           AnthropicClient client = new();
+
+           var parameters = new MessageCreateParams
+           {
+               Model = Model.ClaudeOpus4_6,
+               MaxTokens = 16000,
+               Thinking = new ThinkingConfigAdaptive(),
+               OutputConfig = new OutputConfig { Effort = Effort.High },
+               Messages = [new() { Role = Role.User, Content = "Your prompt here" }]
+           };
+
+           var response = await client.Messages.Create(parameters);
+           Console.WriteLine(response);
+       }
+   }
    ```
    </CodeGroup>
 
@@ -88,7 +129,8 @@ model = "claude-opus-4-6"  # After
 
    Use only `temperature` OR `top_p`, not both:
 
-   ```python
+   
+   ```python nocheck
    # Before - This will error in Claude 4+ models
    response = client.messages.create(
        model="claude-3-7-sonnet-20250219",
@@ -128,7 +170,8 @@ model = "claude-opus-4-6"  # After
 
    Update your application to [handle `refusal` stop reasons](/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals):
 
-   ```python
+   
+   ```python nocheck
    response = client.messages.create(...)
 
    if response.stop_reason == "refusal":
@@ -140,7 +183,8 @@ model = "claude-opus-4-6"  # After
 
    Claude 4.5+ models return a `model_context_window_exceeded` stop reason when generation stops due to hitting the context window limit, rather than the requested `max_tokens` limit. Update your application to handle this new stop reason:
 
-   ```python
+   
+   ```python nocheck
    response = client.messages.create(...)
 
    if response.stop_reason == "model_context_window_exceeded":
@@ -279,24 +323,6 @@ Sonnet 4.6 defaults to an effort level of `high`, in contrast to Sonnet 4.5 whic
 If you're not using extended thinking on Sonnet 4.5, you can continue without it on Sonnet 4.6. You should explicitly set effort to the level appropriate for your use case. At `low` effort with thinking disabled, you can expect similar or better performance relative to Sonnet 4.5 with no extended thinking.
 
 <CodeGroup>
-```python Python
-response = client.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=8192,
-    output_config={"effort": "low"},
-    messages=[{"role": "user", "content": "Your prompt here"}],
-)
-```
-
-```typescript TypeScript
-const response = await client.messages.create({
-  model: "claude-sonnet-4-6",
-  max_tokens: 8192,
-  output_config: { effort: "low" },
-  messages: [{ role: "user", content: "Your prompt here" }]
-});
-```
-
 ```bash Shell
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -317,6 +343,52 @@ curl https://api.anthropic.com/v1/messages \
     ]
 }'
 ```
+
+```python Python nocheck
+response = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=8192,
+    output_config={"effort": "low"},
+    messages=[{"role": "user", "content": "Your prompt here"}],
+)
+```
+
+```typescript TypeScript
+const response = await client.messages.create({
+  model: "claude-sonnet-4-6",
+  max_tokens: 8192,
+  output_config: { effort: "low" },
+  messages: [{ role: "user", content: "Your prompt here" }]
+});
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeSonnet4_6,
+            MaxTokens = 8192,
+            OutputConfig = new OutputConfig
+            {
+                Effort = Effort.Low
+            },
+            Messages = [new() { Role = Role.User, Content = "Your prompt here" }]
+        };
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
+```
 </CodeGroup>
 
 #### If you're using extended thinking
@@ -328,28 +400,6 @@ If you're using extended thinking on Sonnet 4.5, it continues to be supported on
 For agentic coding, frontend design, tool-heavy workflows, and complex enterprise workflows, start with `medium` effort. If you find latency is too high, consider reducing effort to `low`. If you need higher intelligence, consider increasing effort to `high` or migrating to Opus 4.6.
 
 <CodeGroup>
-```python Python
-response = client.beta.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=16384,
-    thinking={"type": "enabled", "budget_tokens": 16384},
-    output_config={"effort": "medium"},
-    betas=["interleaved-thinking-2025-05-14"],
-    messages=[{"role": "user", "content": "Your prompt here"}],
-)
-```
-
-```typescript TypeScript
-const response = await client.beta.messages.create({
-  model: "claude-sonnet-4-6",
-  max_tokens: 16384,
-  thinking: { type: "enabled", budget_tokens: 16384 },
-  output_config: { effort: "medium" },
-  betas: ["interleaved-thinking-2025-05-14"],
-  messages: [{ role: "user", content: "Your prompt here" }]
-});
-```
-
 ```bash Shell
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -375,19 +425,13 @@ curl https://api.anthropic.com/v1/messages \
     ]
 }'
 ```
-</CodeGroup>
 
-##### Chat and non-coding use cases
-
-For chat, content generation, search, classification, and other non-coding tasks, start with `low` effort with extended thinking. If you need more depth, increase effort to `medium`.
-
-<CodeGroup>
-```python Python
+```python Python nocheck
 response = client.beta.messages.create(
     model="claude-sonnet-4-6",
-    max_tokens=8192,
+    max_tokens=16384,
     thinking={"type": "enabled", "budget_tokens": 16384},
-    output_config={"effort": "low"},
+    output_config={"effort": "medium"},
     betas=["interleaved-thinking-2025-05-14"],
     messages=[{"role": "user", "content": "Your prompt here"}],
 )
@@ -396,14 +440,50 @@ response = client.beta.messages.create(
 ```typescript TypeScript
 const response = await client.beta.messages.create({
   model: "claude-sonnet-4-6",
-  max_tokens: 8192,
+  max_tokens: 16384,
   thinking: { type: "enabled", budget_tokens: 16384 },
-  output_config: { effort: "low" },
+  output_config: { effort: "medium" },
   betas: ["interleaved-thinking-2025-05-14"],
   messages: [{ role: "user", content: "Your prompt here" }]
 });
 ```
 
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = "claude-sonnet-4-6",
+            MaxTokens = 16384,
+            Thinking = new ThinkingConfigEnabled(budgetTokens: 16384),
+            OutputConfig = new OutputConfig
+            {
+                Effort = Effort.Medium
+            },
+            Messages = [new() { Role = Role.User, Content = "Your prompt here" }]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
+```
+</CodeGroup>
+
+##### Chat and non-coding use cases
+
+For chat, content generation, search, classification, and other non-coding tasks, start with `low` effort with extended thinking. If you need more depth, increase effort to `medium`.
+
+<CodeGroup>
 ```bash Shell
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -429,6 +509,58 @@ curl https://api.anthropic.com/v1/messages \
     ]
 }'
 ```
+
+```python Python nocheck
+response = client.beta.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=8192,
+    thinking={"type": "enabled", "budget_tokens": 16384},
+    output_config={"effort": "low"},
+    betas=["interleaved-thinking-2025-05-14"],
+    messages=[{"role": "user", "content": "Your prompt here"}],
+)
+```
+
+```typescript TypeScript
+const response = await client.beta.messages.create({
+  model: "claude-sonnet-4-6",
+  max_tokens: 8192,
+  thinking: { type: "enabled", budget_tokens: 16384 },
+  output_config: { effort: "low" },
+  betas: ["interleaved-thinking-2025-05-14"],
+  messages: [{ role: "user", content: "Your prompt here" }]
+});
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = "claude-sonnet-4-6",
+            MaxTokens = 8192,
+            Thinking = new ThinkingConfigEnabled(budgetTokens: 16384),
+            OutputConfig = new OutputConfig
+            {
+                Effort = Effort.Low
+            },
+            Messages = [new() { Role = Role.User, Content = "Your prompt here" }]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
+```
 </CodeGroup>
 
 ##### When to try adaptive thinking
@@ -442,26 +574,6 @@ The migration paths above use extended thinking with `budget_tokens` for predict
 When using adaptive thinking, evaluate `medium` and `high` effort on your tasks. The right level depends on your workload's tradeoff between quality, latency, and token usage.
 
 <CodeGroup>
-```python Python
-response = client.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=64000,
-    thinking={"type": "adaptive"},
-    output_config={"effort": "medium"},
-    messages=[{"role": "user", "content": "Your prompt here"}],
-)
-```
-
-```typescript TypeScript
-const response = await client.messages.create({
-  model: "claude-sonnet-4-6",
-  max_tokens: 64000,
-  thinking: { type: "adaptive" },
-  output_config: { effort: "medium" },
-  messages: [{ role: "user", content: "Your prompt here" }]
-});
-```
-
 ```bash Shell
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -484,6 +596,53 @@ curl https://api.anthropic.com/v1/messages \
         }
     ]
 }'
+```
+
+```python Python nocheck
+response = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=64000,
+    thinking={"type": "adaptive"},
+    output_config={"effort": "medium"},
+    messages=[{"role": "user", "content": "Your prompt here"}],
+)
+```
+
+```typescript TypeScript nocheck
+const response = await client.messages.create({
+  model: "claude-sonnet-4-6",
+  max_tokens: 64000,
+  thinking: { type: "adaptive" },
+  output_config: { effort: "medium" },
+  messages: [{ role: "user", content: "Your prompt here" }]
+});
+```
+
+```csharp C#
+using Anthropic;
+using Anthropic.Models.Messages;
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeSonnet4_6,
+            MaxTokens = 64000,
+            Thinking = new ThinkingConfigAdaptive(),
+            OutputConfig = new OutputConfig { Effort = Effort.Medium },
+            Messages = [new() { Role = Role.User, Content = "Your prompt here" }]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 

@@ -81,7 +81,7 @@ for block in response.content:
         print(f"\nResponse: {block.text}")
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -98,7 +98,7 @@ const response = await client.messages.create({
       content: "Explain why the sum of two even numbers is always even."
     }
   ]
-});
+} as unknown as Anthropic.MessageCreateParamsNonStreaming);
 
 for (const block of response.content) {
   if (block.type === "thinking") {
@@ -106,6 +106,48 @@ for (const block of response.content) {
   } else if (block.type === "text") {
     console.log(`\nResponse: ${block.text}`);
   }
+}
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 16000,
+            Thinking = new ThinkingConfigAdaptive(),
+            Messages = [
+                new() {
+                    Role = Role.User,
+                    Content = "Explain why the sum of two even numbers is always even."
+                }
+            ]
+        };
+
+        var message = await client.Messages.Create(parameters);
+
+        foreach (var block in message.Content)
+        {
+            if (block.TryPickThinking(out ThinkingBlock? thinking))
+            {
+                Console.WriteLine($"\nThinking: {thinking.Thinking}");
+            }
+            else if (block.TryPickText(out TextBlock? text))
+            {
+                Console.WriteLine($"\nResponse: {text.Text}");
+            }
+        }
+    }
 }
 ```
 </CodeGroup>
@@ -122,47 +164,6 @@ You can combine adaptive thinking with the [effort parameter](/docs/en/build-wit
 | `low` | Claude minimizes thinking. Skips thinking for simple tasks where speed matters most. |
 
 <CodeGroup>
-```python Python
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=16000,
-    thinking={"type": "adaptive"},
-    output_config={"effort": "medium"},
-    messages=[{"role": "user", "content": "What is the capital of France?"}],
-)
-
-print(response.content[0].text)
-```
-
-```typescript TypeScript
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
-const response = await client.messages.create({
-  model: "claude-opus-4-6",
-  max_tokens: 16000,
-  thinking: {
-    type: "adaptive"
-  },
-  output_config: {
-    effort: "medium"
-  },
-  messages: [
-    {
-      role: "user",
-      content: "What is the capital of France?"
-    }
-  ]
-});
-
-console.log(response.content[0].text);
-```
-
 ```bash Shell
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -185,6 +186,78 @@ curl https://api.anthropic.com/v1/messages \
         }
     ]
 }'
+```
+
+```python Python
+import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=16000,
+    thinking={"type": "adaptive"},
+    output_config={"effort": "medium"},
+    messages=[{"role": "user", "content": "What is the capital of France?"}],
+)
+
+print(response.content[0].text)
+```
+
+```typescript TypeScript hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const response = await client.messages.create({
+  model: "claude-opus-4-6",
+  max_tokens: 16000,
+  thinking: {
+    type: "adaptive"
+  },
+  output_config: {
+    effort: "medium"
+  },
+  messages: [
+    {
+      role: "user",
+      content: "What is the capital of France?"
+    }
+  ]
+} as unknown as Anthropic.MessageCreateParamsNonStreaming);
+
+for (const block of response.content) {
+  if (block.type === "text") {
+    console.log(block.text);
+  }
+}
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 16000,
+            Thinking = new ThinkingConfigAdaptive(),
+            OutputConfig = new OutputConfig { Effort = Effort.Medium },
+            Messages = [new() { Role = Role.User, Content = "What is the capital of France?" }]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -219,7 +292,7 @@ with client.messages.stream(
                 print(event.delta.text, end="", flush=True)
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -229,7 +302,7 @@ const stream = await client.messages.stream({
   max_tokens: 16000,
   thinking: { type: "adaptive" },
   messages: [{ role: "user", content: "What is the greatest common divisor of 1071 and 462?" }]
-});
+} as unknown as Anthropic.MessageStreamParams);
 
 for await (const event of stream) {
   if (event.type === "content_block_start") {
@@ -241,6 +314,34 @@ for await (const event of stream) {
       process.stdout.write(event.delta.text);
     }
   }
+}
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 16000,
+            Thinking = new ThinkingConfigAdaptive(),
+            Messages = [new() { Role = Role.User, Content = "What is the greatest common divisor of 1071 and 462?" }]
+        };
+
+        await foreach (var msg in client.Messages.CreateStreaming(parameters))
+        {
+            Console.Write(msg);
+        }
+    }
 }
 ```
 </CodeGroup>

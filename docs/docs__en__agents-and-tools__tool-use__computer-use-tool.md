@@ -88,31 +88,6 @@ Get started quickly with the computer use reference implementation that includes
 Here's how to get started with computer use:
 
 <CodeGroup>
-```python Python
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.beta.messages.create(
-    model="claude-opus-4-6",  # or another compatible model
-    max_tokens=1024,
-    tools=[
-        {
-            "type": "computer_20251124",
-            "name": "computer",
-            "display_width_px": 1024,
-            "display_height_px": 768,
-            "display_number": 1,
-        },
-        {"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"},
-        {"type": "bash_20250124", "name": "bash"},
-    ],
-    messages=[{"role": "user", "content": "Save a picture of a cat to my desktop."}],
-    betas=["computer-use-2025-11-24"],
-)
-print(response)
-```
-
 ```bash Shell
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
@@ -146,6 +121,107 @@ curl https://api.anthropic.com/v1/messages \
       }
     ]
   }'
+```
+
+```python Python
+import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.beta.messages.create(
+    model="claude-opus-4-6",  # or another compatible model
+    max_tokens=1024,
+    tools=[
+        {
+            "type": "computer_20251124",
+            "name": "computer",
+            "display_width_px": 1024,
+            "display_height_px": 768,
+            "display_number": 1,
+        },
+        {"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"},
+        {"type": "bash_20250124", "name": "bash"},
+    ],
+    messages=[{"role": "user", "content": "Save a picture of a cat to my desktop."}],
+    betas=["computer-use-2025-11-24"],
+)
+print(response)
+```
+
+```typescript TypeScript hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const response = await client.beta.messages.create({
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  tools: [
+    {
+      type: "computer_20251124",
+      name: "computer",
+      display_width_px: 1024,
+      display_height_px: 768,
+      display_number: 1
+    },
+    {
+      type: "text_editor_20250728",
+      name: "str_replace_based_edit_tool"
+    },
+    {
+      type: "bash_20250124",
+      name: "bash"
+    }
+  ],
+  messages: [{ role: "user", content: "Save a picture of a cat to my desktop." }],
+  betas: ["computer-use-2025-11-24"]
+});
+
+console.log(response);
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var client = new AnthropicClient();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 1024,
+            Tools = new BetaToolUnion[]
+            {
+                new BetaToolComputerUse20251124
+                {
+                    DisplayWidthPx = 1024,
+                    DisplayHeightPx = 768,
+                    DisplayNumber = 1
+                },
+                new BetaToolTextEditor20250728(),
+                new BetaToolBash20250124()
+            },
+            Messages = new[]
+            {
+                new BetaMessageParam
+                {
+                    Role = Role.User,
+                    Content = "Save a picture of a cat to my desktop."
+                }
+            },
+            Betas = new[] { "computer-use-2025-11-24" }
+        };
+
+        var response = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(response);
+    }
+}
 ```
 </CodeGroup>
 
@@ -232,7 +308,7 @@ A [reference implementation](https://github.com/anthropics/anthropic-quickstarts
 
 The core of computer use is the "agent loop" - a cycle where Claude requests tool actions, your application executes them, and returns results to Claude. Here's a simplified example:
 
-```python
+```python nocheck
 async def sampling_loop(
     *,
     model: str,
@@ -648,61 +724,136 @@ response = client.beta.messages.create(
 print(response)
 ```
 
-```typescript TypeScript
-import Anthropic from "@anthropic-ai/sdk";
+  ```typescript TypeScript hidelines={1..4}
+  import Anthropic from "@anthropic-ai/sdk";
 
-const anthropic = new Anthropic();
+  const anthropic = new Anthropic();
 
-const message = await anthropic.beta.messages.create({
-  model: "claude-opus-4-6",
-  max_tokens: 1024,
-  tools: [
-    {
-      type: "computer_20251124",
-      name: "computer",
-      display_width_px: 1024,
-      display_height_px: 768,
-      display_number: 1
-    },
-    {
-      type: "text_editor_20250728",
-      name: "str_replace_based_edit_tool"
-    },
-    {
-      type: "bash_20250124",
-      name: "bash"
-    },
-    {
-      name: "get_weather",
-      description: "Get the current weather in a given location",
-      input_schema: {
-        type: "object",
-        properties: {
-          location: {
-            type: "string",
-            description: "The city and state, e.g. San Francisco, CA"
+  const message = await anthropic.beta.messages.create({
+    model: "claude-opus-4-6",
+    max_tokens: 4096,
+    tools: [
+      {
+        type: "computer_20251124",
+        name: "computer",
+        display_width_px: 1024,
+        display_height_px: 768,
+        display_number: 1
+      },
+      {
+        type: "text_editor_20250728",
+        name: "str_replace_based_edit_tool"
+      },
+      {
+        type: "bash_20250124",
+        name: "bash"
+      },
+      {
+        name: "get_weather",
+        description: "Get the current weather in a given location",
+        input_schema: {
+          type: "object",
+          properties: {
+            location: {
+              type: "string",
+              description: "The city and state, e.g. San Francisco, CA"
+            },
+            unit: {
+              type: "string",
+              enum: ["celsius", "fahrenheit"],
+              description: "The unit of temperature, either 'celsius' or 'fahrenheit'"
+            }
           },
-          unit: {
-            type: "string",
-            enum: ["celsius", "fahrenheit"],
-            description: "The unit of temperature, either 'celsius' or 'fahrenheit'"
-          }
-        },
-        required: ["location"]
+          required: ["location"]
+        }
       }
-    }
-  ],
-  messages: [
-    {
-      role: "user",
-      content: "Find flights from San Francisco to a place with warmer weather."
-    }
-  ],
-  betas: ["computer-use-2025-11-24"],
-  thinking: { type: "enabled", budget_tokens: 1024 }
-});
-console.log(message);
-```
+    ],
+    messages: [
+      {
+        role: "user",
+        content: "Find flights from San Francisco to a place with warmer weather."
+      }
+    ],
+    betas: ["computer-use-2025-11-24"],
+    thinking: { type: "enabled", budget_tokens: 1024 }
+  });
+  console.log(message);
+  ```
+
+  
+  ```csharp C# nocheck
+  using System;
+  using System.Collections.Generic;
+  using System.Text.Json;
+  using System.Threading.Tasks;
+  using Anthropic;
+  using Anthropic.Models.Beta.Messages;
+
+  public class Program
+  {
+      public static async Task Main(string[] args)
+      {
+          AnthropicClient client = new()
+          {
+              ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+          };
+
+          var parameters = new MessageCreateParams
+          {
+              Model = Model.ClaudeOpus4_6,
+              MaxTokens = 1024,
+              Tools = new BetaToolUnion[]
+              {
+                  new BetaToolComputerUse20251124
+                  {
+                      DisplayWidthPx = 1024,
+                      DisplayHeightPx = 768,
+                      DisplayNumber = 1
+                  },
+                  new BetaToolTextEditor20250728(),
+                  new BetaToolBash20250124(),
+                  new BetaTool
+                  {
+                      Name = "get_weather",
+                      Description = "Get the current weather in a given location",
+                      InputSchema = new InputSchema
+                      {
+                          Properties = new Dictionary<string, JsonElement>
+                          {
+                              ["location"] = JsonSerializer.SerializeToElement(new
+                              {
+                                  type = "string",
+                                  description = "The city and state, e.g. San Francisco, CA"
+                              }),
+                              ["unit"] = JsonSerializer.SerializeToElement(new
+                              {
+                                  type = "string",
+                                  @enum = new[] { "celsius", "fahrenheit" },
+                                  description = "The unit of temperature, either 'celsius' or 'fahrenheit'"
+                              })
+                          },
+                          Required = ["location"]
+                      }
+                  }
+              },
+              Messages = new BetaMessageParam[]
+              {
+                  new()
+                  {
+                      Role = Role.User,
+                      Content = "Find flights from San Francisco to a place with warmer weather."
+                  }
+              },
+              Betas = ["computer-use-2025-11-24"],
+              Thinking = new BetaThinkingConfigParam(new BetaThinkingConfigEnabled(1024))
+          };
+
+          var message = await client.Beta.Messages.Create(parameters);
+          Console.WriteLine(message);
+      }
+  }
+  ```
+
 ```java Java
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
@@ -802,7 +953,8 @@ The computer use tool is implemented as a schema-less tool. When using this tool
   </Step>
   <Step title="Implement action handlers">
     Create functions to handle each action type that Claude might request:
-    ```python
+    
+    ```python nocheck
     def handle_computer_action(action_type, params):
         if action_type == "screenshot":
             return capture_screenshot()
@@ -816,7 +968,8 @@ The computer use tool is implemented as a schema-less tool. When using this tool
   </Step>
   <Step title="Process Claude's tool calls">
     Extract and execute tool calls from Claude's responses:
-    ```python
+    
+    ```python nocheck
     for content in response.content:
         if content.type == "tool_use":
             action = content.input["action"]
@@ -832,7 +985,8 @@ The computer use tool is implemented as a schema-less tool. When using this tool
   </Step>
   <Step title="Implement the agent loop">
     Create a loop that continues until Claude completes the task:
-    ```python
+    
+    ```python nocheck
     while True:
         response = client.beta.messages.create(...)
 
@@ -922,7 +1076,8 @@ This can cause Claude's click coordinates to miss their targets unless you handl
 To fix this, resize screenshots yourself and scale Claude's coordinates back up:
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck
 import math
 
 
@@ -953,7 +1108,7 @@ def execute_click(x, y):
     perform_click(screen_x, screen_y)
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 const MAX_LONG_EDGE = 1568;
 const MAX_PIXELS = 1_150_000;
 
@@ -1008,7 +1163,8 @@ When returning screenshots to Claude:
 <section title="Add action delays">
 
 Some applications need time to respond to actions:
-```python
+
+```python nocheck
 def click_and_wait(x, y, wait_time=0.5):
     click_at(x, y)
     time.sleep(wait_time)  # Allow UI to update
@@ -1019,7 +1175,8 @@ def click_and_wait(x, y, wait_time=0.5):
 <section title="Validate actions before execution">
 
 Check that requested actions are safe and valid:
-```python
+
+```python nocheck
 def validate_action(action_type, params):
     if action_type == "left_click":
         x, y = params.get("coordinate", (0, 0))
@@ -1033,7 +1190,8 @@ def validate_action(action_type, params):
 <section title="Log actions for debugging">
 
 Keep a log of all actions for troubleshooting:
-```python
+
+```python nocheck
 import logging
 
 

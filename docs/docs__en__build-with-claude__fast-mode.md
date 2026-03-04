@@ -48,7 +48,7 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
-```python Python
+```python Python nocheck
 import anthropic
 
 client = anthropic.Anthropic()
@@ -66,7 +66,7 @@ response = client.beta.messages.create(
 print(response.content[0].text)
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -84,7 +84,10 @@ const response = await client.beta.messages.create({
   ]
 });
 
-console.log(response.content[0].text);
+const textBlock = response.content.find(
+  (block): block is Anthropic.Beta.Messages.BetaTextBlock => block.type === "text"
+);
+console.log(textBlock?.text);
 ```
 
 </CodeGroup>
@@ -152,7 +155,7 @@ curl https://api.anthropic.com/v1/messages \
 }
 ```
 
-```python Python
+```python Python nocheck
 response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -208,7 +211,8 @@ Falling back from fast to standard speed will result in a [prompt cache](/docs/e
 Since setting `max_retries` to `0` also disables retries for other transient errors (overloaded, internal server errors), the examples below re-issue the original request with default retries for those cases.
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck hidelines={1..4}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -244,45 +248,48 @@ message = create_message_with_fast_fallback(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..3,-1}
 import Anthropic from "@anthropic-ai/sdk";
-
 const client = new Anthropic();
-
-async function createMessageWithFastFallback(
-  params: Anthropic.Beta.MessageCreateParams,
-  requestOptions?: Anthropic.RequestOptions,
-  maxAttempts: number = 3
-): Promise<Anthropic.Beta.Message> {
-  try {
-    return await client.beta.messages.create(params, requestOptions);
-  } catch (e) {
-    if (e instanceof Anthropic.RateLimitError && params.speed === "fast") {
-      const { speed, ...rest } = params;
-      return createMessageWithFastFallback(rest);
-    }
-    if (
-      e instanceof Anthropic.InternalServerError ||
-      e instanceof Anthropic.APIConnectionError
-    ) {
-      if (maxAttempts > 1) {
-        return createMessageWithFastFallback(params, requestOptions, maxAttempts - 1);
+(async () => {
+  async function createMessageWithFastFallback(
+    params: Anthropic.Beta.MessageCreateParams,
+    requestOptions?: Anthropic.RequestOptions,
+    maxAttempts: number = 3
+  ): Promise<Anthropic.Beta.Messages.BetaMessage> {
+    try {
+      return (await client.beta.messages.create(
+        params,
+        requestOptions
+      )) as Anthropic.Beta.Messages.BetaMessage;
+    } catch (e) {
+      if (e instanceof Anthropic.RateLimitError && params.speed === "fast") {
+        const { speed, ...rest } = params;
+        return createMessageWithFastFallback(rest);
       }
+      if (
+        e instanceof Anthropic.InternalServerError ||
+        e instanceof Anthropic.APIConnectionError
+      ) {
+        if (maxAttempts > 1) {
+          return createMessageWithFastFallback(params, requestOptions, maxAttempts - 1);
+        }
+      }
+      throw e;
     }
-    throw e;
   }
-}
 
-const message = await createMessageWithFastFallback(
-  {
-    model: "claude-opus-4-6",
-    max_tokens: 1024,
-    messages: [{ role: "user", content: "Hello" }],
-    betas: ["fast-mode-2026-02-01"],
-    speed: "fast"
-  },
-  { maxRetries: 0 }
-);
+  const message = await createMessageWithFastFallback(
+    {
+      model: "claude-opus-4-6",
+      max_tokens: 1024,
+      messages: [{ role: "user", content: "Hello" }],
+      betas: ["fast-mode-2026-02-01"],
+      speed: "fast"
+    },
+    { maxRetries: 0 }
+  );
+})();
 ```
 
 ```go Go

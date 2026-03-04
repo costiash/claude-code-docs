@@ -47,7 +47,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python
+```python Python hidelines={1..4,-1}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -203,7 +203,7 @@ Citations and prompt caching can be used together effectively.
 The citation blocks generated in responses cannot be cached directly, but the source documents they reference can be cached. To optimize performance, apply `cache_control` to your top-level document content blocks.
 
 <CodeGroup>
-```python Python
+```python Python hidelines={1..4,-1}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -240,9 +240,10 @@ response = client.messages.create(
         }
     ],
 )
+print(response)
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();

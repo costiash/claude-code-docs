@@ -839,7 +839,8 @@ The sections below focus on Skills that include executable scripts. If your Skil
 When writing scripts for Skills, handle error conditions rather than punting to Claude.
 
 **Good example: Handle errors explicitly:**
-```python
+
+```python nocheck
 def process_file(path):
     """Process a file, creating it if it doesn't exist."""
     try:
@@ -858,7 +859,8 @@ def process_file(path):
 ```
 
 **Bad example: Punt to Claude:**
-```python
+
+```python nocheck
 def process_file(path):
     # Just fail and let Claude figure it out
     return open(path).read()
@@ -867,7 +869,8 @@ def process_file(path):
 Configuration parameters should also be justified and documented to avoid "voodoo constants" (Ousterhout's law). If you don't know the right value, how will Claude determine it?
 
 **Good example: Self-documenting:**
-```python
+
+```python nocheck
 # HTTP requests typically complete within 30 seconds
 # Longer timeout accounts for slow connections
 REQUEST_TIMEOUT = 30
@@ -878,7 +881,8 @@ MAX_RETRIES = 3
 ```
 
 **Bad example: Magic numbers:**
-```python
+
+```python nocheck
 TIMEOUT = 47  # Why 47?
 RETRIES = 5  # Why 5?
 ```

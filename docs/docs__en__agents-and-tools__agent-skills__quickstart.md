@@ -42,7 +42,7 @@ for skill in skills.data:
     print(f"{skill.id}: {skill.display_title}")
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -75,7 +75,7 @@ This API returns each Skill's metadata: its name and description. Claude loads t
 Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
 <CodeGroup>
-```python Python
+```python Python hidelines={1..4,-1}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -100,7 +100,7 @@ response = client.beta.messages.create(
 print(response.content)
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -182,7 +182,11 @@ When you make this request, Claude automatically matches your task to the releva
 The presentation was created in the code execution container and saved as a file. The response includes a file reference with a file ID. Extract the file ID and download it using the Files API:
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck
+from typing import Any
+
+response: Any = None
 # Extract file ID from response
 file_id = None
 for block in response.content:
@@ -206,7 +210,7 @@ if file_id:
     print(f"Presentation saved to renewable_energy.pptx")
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 // Extract file ID from response
 let fileId: string | null = null;
 for (const block of response.content) {

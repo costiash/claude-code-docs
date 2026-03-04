@@ -40,7 +40,7 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();

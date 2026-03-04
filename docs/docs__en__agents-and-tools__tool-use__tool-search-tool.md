@@ -153,7 +153,7 @@ response = client.messages.create(
 print(response)
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -177,7 +177,7 @@ async function main() {
         name: "get_weather",
         description: "Get the weather at a specific location",
         input_schema: {
-          type: "object",
+          type: "object" as const,
           properties: {
             location: { type: "string" },
             unit: {
@@ -193,7 +193,7 @@ async function main() {
         name: "search_files",
         description: "Search through files in the workspace",
         input_schema: {
-          type: "object",
+          type: "object" as const,
           properties: {
             query: { type: "string" },
             file_types: {
@@ -212,6 +212,70 @@ async function main() {
 }
 
 main();
+```
+
+```csharp C# nocheck
+using System;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 2048,
+            Messages = [
+                new() {
+                    Role = Role.User,
+                    Content = "What is the weather in San Francisco?"
+                }
+            ],
+            Tools = [
+                new ToolUnion(new ToolSearchToolRegex20251119()),
+                new ToolUnion(new Tool()
+                {
+                    Name = "get_weather",
+                    Description = "Get the weather at a specific location",
+                    InputSchema = new InputSchema()
+                    {
+                        Properties = new Dictionary<string, JsonElement>
+                        {
+                            ["location"] = JsonSerializer.SerializeToElement(new { type = "string" }),
+                            ["unit"] = JsonSerializer.SerializeToElement(new { type = "string", @enum = new[] { "celsius", "fahrenheit" } }),
+                        },
+                        Required = ["location"],
+                    },
+                    DeferLoading = true,
+                }),
+                new ToolUnion(new Tool()
+                {
+                    Name = "search_files",
+                    Description = "Search through files in the workspace",
+                    InputSchema = new InputSchema()
+                    {
+                        Properties = new Dictionary<string, JsonElement>
+                        {
+                            ["query"] = JsonSerializer.SerializeToElement(new { type = "string" }),
+                            ["file_types"] = JsonSerializer.SerializeToElement(new { type = "array", items = new { type = "string" } }),
+                        },
+                        Required = ["query"],
+                    },
+                    DeferLoading = true,
+                }),
+            ]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 
 </CodeGroup>
@@ -384,7 +448,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python
+```python Python nocheck hidelines={1..4,-1}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -411,7 +475,7 @@ response = client.beta.messages.create(
 print(response)
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -458,6 +522,65 @@ async function main() {
 }
 
 main();
+```
+
+```csharp C# nocheck
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            Betas = new List<string> { "mcp-client-2025-11-20" },
+            MaxTokens = 2048,
+            McpServers = new List<BetaRequestMcpServerUrlDefinition>
+            {
+                new()
+                {
+                    Name = "database-server",
+                    Url = "https://mcp-db.example.com"
+                }
+            },
+            Tools = new List<BetaToolUnion>
+            {
+                new BetaToolSearchToolRegex20251119(),
+                new BetaMcpToolset
+                {
+                    McpServerName = "database-server",
+                    DefaultConfig = new BetaMcpToolDefaultConfig
+                    {
+                        DeferLoading = true
+                    },
+                    Configs = new Dictionary<string, BetaMcpToolConfig>
+                    {
+                        {
+                            "search_events", new BetaMcpToolConfig
+                            {
+                                DeferLoading = false
+                            }
+                        }
+                    }
+                }
+            },
+            Messages = new List<BetaMessageParam>
+            {
+                new() { Role = Role.User, Content = "What events are in my database?" }
+            }
+        };
+
+        var response = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(response);
+    }
+}
 ```
 
 </CodeGroup>
@@ -603,7 +726,7 @@ Errors during tool execution return a 200 response with error information in the
 Tool search works with [prompt caching](/docs/en/build-with-claude/prompt-caching). Add `cache_control` breakpoints to optimize multi-turn conversations:
 
 <CodeGroup>
-```python Python
+```python Python hidelines={1..4}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -637,8 +760,13 @@ messages.append({"role": "assistant", "content": response1.content})
 messages.append(
     {
         "role": "user",
-        "content": "What about New York?",
-        "cache_control": {"type": "ephemeral"},
+        "content": [
+            {
+                "type": "text",
+                "text": "What about New York?",
+                "cache_control": {"type": "ephemeral"},
+            }
+        ],
     }
 )
 
@@ -661,7 +789,132 @@ response2 = client.messages.create(
     ],
 )
 
-print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
+print(f"Cache read tokens: {response2.usage.cache_read_input_tokens or 0}")
+```
+
+```typescript TypeScript nocheck hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+async function main() {
+  const tools: Anthropic.Messages.ToolUnion[] = [
+    {
+      type: "tool_search_tool_regex_20251119",
+      name: "tool_search_tool_regex"
+    },
+    {
+      name: "get_weather",
+      description: "Get weather for a location",
+      input_schema: {
+        type: "object" as const,
+        properties: { location: { type: "string" } },
+        required: ["location"]
+      },
+      defer_loading: true
+    }
+  ];
+
+  const messages: Anthropic.Messages.MessageParam[] = [
+    { role: "user", content: "What's the weather in Seattle?" }
+  ];
+
+  const response1 = await client.messages.create({
+    model: "claude-opus-4-6",
+    max_tokens: 2048,
+    messages,
+    tools
+  });
+
+  messages.push({ role: "assistant", content: response1.content });
+  messages.push({
+    role: "user",
+    content: "What about New York?",
+    cache_control: { type: "ephemeral" }
+  });
+
+  const response2 = await client.messages.create({
+    model: "claude-opus-4-6",
+    max_tokens: 2048,
+    messages,
+    tools
+  });
+
+  console.log(`Cache read tokens: ${response2.usage.cache_read_input_tokens || 0}`);
+}
+
+main().catch(console.error);
+```
+
+```csharp C# nocheck
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var tools = new List<ToolUnion>
+        {
+            new ToolUnion(new ToolSearchToolRegex20251119()),
+            new ToolUnion(new Tool()
+            {
+                Name = "get_weather",
+                Description = "Get weather for a location",
+                InputSchema = new InputSchema()
+                {
+                    Properties = new Dictionary<string, JsonElement>
+                    {
+                        ["location"] = JsonSerializer.SerializeToElement(new { type = "string" }),
+                    },
+                    Required = ["location"],
+                },
+            }),
+        };
+
+        var parameters1 = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 2048,
+            Messages = [new() { Role = Role.User, Content = "What's the weather in Seattle?" }],
+            Tools = tools
+        };
+
+        var response1 = await client.Messages.Create(parameters1);
+
+        var parameters2 = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 2048,
+            Messages = [
+                new() { Role = Role.User, Content = "What's the weather in Seattle?" },
+                new() { Role = Role.Assistant, Content = response1.Content },
+                new()
+                {
+                    Role = Role.User,
+                    Content = new MessageParamContent(new List<ContentBlockParam>
+                    {
+                        new ContentBlockParam(new TextBlockParam("What about New York?")
+                        {
+                            CacheControl = new CacheControlEphemeral(),
+                        }),
+                    }),
+                },
+            ],
+            Tools = tools
+        };
+
+        var response2 = await client.Messages.Create(parameters2);
+
+        Console.WriteLine($"Cache read tokens: {response2.Usage.CacheReadInputTokens ?? 0}");
+    }
+}
 ```
 </CodeGroup>
 

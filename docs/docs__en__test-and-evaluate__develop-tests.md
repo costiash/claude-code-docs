@@ -561,6 +561,8 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 ```python
 import anthropic
 
+client = anthropic.Anthropic()
+
 
 def build_grader_prompt(answer, rubric):
     return f"""Grade this answer based on the rubric:

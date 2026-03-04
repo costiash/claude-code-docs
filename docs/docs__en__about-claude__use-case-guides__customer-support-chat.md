@@ -337,7 +337,7 @@ You only provide information and guidance.
 
 Now combine all these sections into a single string to use as your prompt.
 
-```python
+```python nocheck
 TASK_SPECIFIC_INSTRUCTIONS = " ".join(
     [
         STATIC_GREETINGS_AND_GENERAL,
@@ -404,7 +404,7 @@ In a file called `chatbot.py`, start by setting up the ChatBot class, which will
 
 The class should have two main methods: `generate_message` and `process_user_input`.
 
-```python
+```python nocheck
 from anthropic import Anthropic
 from config import IDENTITY, TOOLS, MODEL, get_quote
 from dotenv import load_dotenv
@@ -506,7 +506,7 @@ Test deploying this code with Streamlit using a main method. This `main()` funct
 
 Do this in a file called `app.py`
 
-```python
+```python nocheck
 import streamlit as st
 from chatbot import ChatBot
 from config import TASK_SPECIFIC_INSTRUCTIONS

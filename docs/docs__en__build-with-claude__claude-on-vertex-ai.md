@@ -30,6 +30,12 @@ npm install @anthropic-ai/vertex-sdk
 ```
 </Tab>
 
+<Tab title="Go">
+```bash
+go get github.com/anthropics/anthropic-sdk-go
+```
+</Tab>
+
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
@@ -44,12 +50,6 @@ implementation("com.anthropic:anthropic-java-vertex:2.+")
 </dependency>
 ```
 </CodeGroup>
-</Tab>
-
-<Tab title="Go">
-```bash
-go get github.com/anthropics/anthropic-sdk-go
-```
 </Tab>
 
 <Tab title="Ruby">
@@ -94,6 +94,26 @@ Before running requests you may need to run `gcloud auth application-default log
 The following examples show how to generate text from Claude on Vertex AI:
 <CodeGroup>
 
+  ```bash Shell
+  MODEL_ID=claude-opus-4-6
+  LOCATION=global
+  PROJECT_ID=MY_PROJECT_ID
+
+  curl \
+  -X POST \
+  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+  -H "Content-Type: application/json" \
+  https://$LOCATION-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${LOCATION}/publishers/anthropic/models/${MODEL_ID}:streamRawPredict -d \
+  '{
+    "anthropic_version": "vertex-2023-10-16",
+    "messages": [{
+      "role": "user",
+      "content": "Hey Claude!"
+    }],
+    "max_tokens": 100,
+  }'
+  ```
+
   ```python Python
   from anthropic import AnthropicVertex
 
@@ -115,7 +135,8 @@ The following examples show how to generate text from Claude on Vertex AI:
   print(message)
   ```
 
-  ```typescript TypeScript
+  
+  ```typescript TypeScript nocheck hidelines={1..2}
   import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
   const projectId = "MY_PROJECT_ID";
@@ -144,34 +165,29 @@ The following examples show how to generate text from Claude on Vertex AI:
   main();
   ```
 
-  ```java Java
-  import com.anthropic.client.AnthropicClient;
-  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-  import com.anthropic.models.messages.Message;
-  import com.anthropic.models.messages.MessageCreateParams;
-  import com.anthropic.vertex.backends.VertexBackend;
+  
+  ```csharp C# nocheck
+  using Anthropic;
+  using Anthropic.Models.Messages;
+  using Anthropic.Vertex;
 
-  public class VertexExample {
+  var projectId = "MY_PROJECT_ID";
+  var region = "global";
 
-    public static void main(String[] args) {
-      // Uses default Google Cloud credentials
-      AnthropicClient client = AnthropicOkHttpClient.builder()
-        .backend(VertexBackend.fromEnv())
-        .build();
+  var client = new AnthropicClient
+  {
+      Backend = new VertexBackend(projectId, region)
+  };
 
-      Message message = client
-        .messages()
-        .create(
-          MessageCreateParams.builder()
-            .model("claude-opus-4-6")
-            .maxTokens(100)
-            .addUserMessage("Hey Claude!")
-            .build()
-        );
+  var parameters = new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_6,
+      MaxTokens = 100,
+      Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
+  };
 
-      System.out.println(message);
-    }
-  }
+  var message = await client.Messages.Create(parameters);
+  Console.WriteLine(message);
   ```
 
   ```go Go
@@ -205,6 +221,36 @@ The following examples show how to generate text from Claude on Vertex AI:
   }
   ```
 
+  ```java Java
+  import com.anthropic.client.AnthropicClient;
+  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+  import com.anthropic.models.messages.Message;
+  import com.anthropic.models.messages.MessageCreateParams;
+  import com.anthropic.vertex.backends.VertexBackend;
+
+  public class VertexExample {
+
+    public static void main(String[] args) {
+      // Uses default Google Cloud credentials
+      AnthropicClient client = AnthropicOkHttpClient.builder()
+        .backend(VertexBackend.fromEnv())
+        .build();
+
+      Message message = client
+        .messages()
+        .create(
+          MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(100)
+            .addUserMessage("Hey Claude!")
+            .build()
+        );
+
+      System.out.println(message);
+    }
+  }
+  ```
+
   ```ruby Ruby
   require "anthropic"
 
@@ -222,25 +268,6 @@ The following examples show how to generate text from Claude on Vertex AI:
   puts message.content.first.text
   ```
 
-  ```bash Shell
-  MODEL_ID=claude-opus-4-6
-  LOCATION=global
-  PROJECT_ID=MY_PROJECT_ID
-
-  curl \
-  -X POST \
-  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-  -H "Content-Type: application/json" \
-  https://$LOCATION-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${LOCATION}/publishers/anthropic/models/${MODEL_ID}:streamRawPredict -d \
-  '{
-    "anthropic_version": "vertex-2023-10-16",
-    "messages": [{
-      "role": "user",
-      "content": "Hey Claude!"
-    }],
-    "max_tokens": 100,
-  }'
-  ```
 </CodeGroup>
 
 See the [client SDKs](/docs/en/api/client-sdks) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
@@ -295,6 +322,7 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 Set the `region` parameter to `"global"` when initializing the client:
 
 <CodeGroup>
+
 ```python Python
 from anthropic import AnthropicVertex
 
@@ -316,7 +344,7 @@ message = client.messages.create(
 print(message)
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck hidelines={1..2}
 import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 const projectId = "MY_PROJECT_ID";
@@ -339,26 +367,28 @@ const result = await client.messages.create({
 });
 ```
 
-```java Java
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.vertex.backends.VertexBackend;
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Messages;
+using Anthropic.Vertex;
 
-// Uses default Google Cloud credentials
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(VertexBackend.fromEnv())
-  .build();
+var projectId = "MY_PROJECT_ID";
+var region = "global";
 
-var message = client
-  .messages()
-  .create(
-    MessageCreateParams.builder()
-      .model("claude-opus-4-6")
-      .maxTokens(100)
-      .addUserMessage("Hey Claude!")
-      .build()
-  );
+var client = new AnthropicClient
+{
+    Backend = VertexBackend.FromEnvironment(projectId, region)
+};
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_6,
+    MaxTokens = 100,
+    Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
+};
+
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go
@@ -388,6 +418,28 @@ func main() {
 }
 ```
 
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.vertex.backends.VertexBackend;
+
+// Uses default Google Cloud credentials
+AnthropicClient client = AnthropicOkHttpClient.builder()
+  .backend(VertexBackend.fromEnv())
+  .build();
+
+var message = client
+  .messages()
+  .create(
+    MessageCreateParams.builder()
+      .model("claude-opus-4-6")
+      .maxTokens(100)
+      .addUserMessage("Hey Claude!")
+      .build()
+  );
+```
+
 ```ruby Ruby
 require "anthropic"
 
@@ -404,6 +456,7 @@ message = client.messages.create(
 
 puts message.content.first.text
 ```
+
 </CodeGroup>
 
 **Using regional endpoints:**
@@ -411,6 +464,7 @@ puts message.content.first.text
 Specify a specific region like `"us-east1"` or `"europe-west1"`:
 
 <CodeGroup>
+
 ```python Python
 from anthropic import AnthropicVertex
 
@@ -432,7 +486,7 @@ message = client.messages.create(
 print(message)
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck hidelines={1..2}
 import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 
 const projectId = "MY_PROJECT_ID";
@@ -455,31 +509,31 @@ const result = await client.messages.create({
 });
 ```
 
-```java Java
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.vertex.backends.VertexBackend;
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Messages;
 
-// Uses default Google Cloud credentials with specific region
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(
-    VertexBackend.builder()
-      .region("us-east1") // Specify a specific region
-      .project("MY_PROJECT_ID")
-      .build()
-  )
-  .build();
+var projectId = "MY_PROJECT_ID";
+var region = "us-east1";
 
-var message = client
-  .messages()
-  .create(
-    MessageCreateParams.builder()
-      .model("claude-opus-4-6")
-      .maxTokens(100)
-      .addUserMessage("Hey Claude!")
-      .build()
-  );
+AnthropicClient client = new()
+{
+    Backend = new VertexBackend
+    {
+        ProjectId = projectId,
+        Region = region
+    }
+};
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_6,
+    MaxTokens = 100,
+    Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
+};
+
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go
@@ -509,6 +563,33 @@ func main() {
 }
 ```
 
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.vertex.backends.VertexBackend;
+
+// Uses default Google Cloud credentials with specific region
+AnthropicClient client = AnthropicOkHttpClient.builder()
+  .backend(
+    VertexBackend.builder()
+      .region("us-east1") // Specify a specific region
+      .project("MY_PROJECT_ID")
+      .build()
+  )
+  .build();
+
+var message = client
+  .messages()
+  .create(
+    MessageCreateParams.builder()
+      .model("claude-opus-4-6")
+      .maxTokens(100)
+      .addUserMessage("Hey Claude!")
+      .build()
+  );
+```
+
 ```ruby Ruby
 require "anthropic"
 
@@ -525,6 +606,7 @@ message = client.messages.create(
 
 puts message.content.first.text
 ```
+
 </CodeGroup>
 
 ### Additional resources

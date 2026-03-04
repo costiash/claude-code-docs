@@ -105,7 +105,7 @@ The `allowed-tools` frontmatter field in SKILL.md is only supported when using C
 When using the SDK, control tool access through the main `allowedTools` option in your query configuration.
 </Note>
 
-To restrict tools for Skills in SDK applications, use the `allowedTools` option:
+To control tool access for Skills in SDK applications, use `allowedTools` to pre-approve specific tools. Without a `canUseTool` callback, anything not in the list is denied:
 
 <Note>
 Import statements from the first example are assumed in the following code snippets.
@@ -116,7 +116,7 @@ Import statements from the first example are assumed in the following code snipp
 ```python Python
 options = ClaudeAgentOptions(
     setting_sources=["user", "project"],  # Load Skills from filesystem
-    allowed_tools=["Skill", "Read", "Grep", "Glob"],  # Restricted toolset
+    allowed_tools=["Skill", "Read", "Grep", "Glob"],
 )
 
 async for message in query(prompt="Analyze the codebase structure", options=options):
@@ -124,12 +124,12 @@ async for message in query(prompt="Analyze the codebase structure", options=opti
 ```
 
 ```typescript TypeScript
-// Skills can only use Read, Grep, and Glob tools
 for await (const message of query({
   prompt: "Analyze the codebase structure",
   options: {
     settingSources: ["user", "project"], // Load Skills from filesystem
-    allowedTools: ["Skill", "Read", "Grep", "Glob"] // Restricted toolset
+    allowedTools: ["Skill", "Read", "Grep", "Glob"],
+    permissionMode: "dontAsk" // Deny anything not in allowedTools
   }
 })) {
   console.log(message);

@@ -170,7 +170,7 @@ message_batch = client.messages.batches.create(
 print(message_batch)
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -199,49 +199,46 @@ const messageBatch = await anthropic.messages.batches.create({
 console.log(messageBatch);
 ```
 
-```java Java
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.batches.*;
+```csharp C#
+using Anthropic;
 
-public class BatchExample {
+var client = new AnthropicClient();
 
-  public static void main(String[] args) {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+var batch = await client.Messages.Batches.CreateAsync(
+    new BatchCreateParams
+    {
+        Requests = new[]
+        {
+            new BatchCreateParams.Request
+            {
+                CustomId = "my-first-request",
+                Params = new BatchCreateParams.Request.Params
+                {
+                    Model = "claude-opus-4-6",
+                    MaxTokens = 1024,
+                    Messages = new[]
+                    {
+                        new MessageParam { Role = "user", Content = "Hello, world" }
+                    }
+                }
+            },
+            new BatchCreateParams.Request
+            {
+                CustomId = "my-second-request",
+                Params = new BatchCreateParams.Request.Params
+                {
+                    Model = "claude-opus-4-6",
+                    MaxTokens = 1024,
+                    Messages = new[]
+                    {
+                        new MessageParam { Role = "user", Content = "Hi again, friend" }
+                    }
+                }
+            }
+        }
+    });
 
-    BatchCreateParams params = BatchCreateParams.builder()
-      .addRequest(
-        BatchCreateParams.Request.builder()
-          .customId("my-first-request")
-          .params(
-            BatchCreateParams.Request.Params.builder()
-              .model(Model.CLAUDE_OPUS_4_6)
-              .maxTokens(1024)
-              .addUserMessage("Hello, world")
-              .build()
-          )
-          .build()
-      )
-      .addRequest(
-        BatchCreateParams.Request.builder()
-          .customId("my-second-request")
-          .params(
-            BatchCreateParams.Request.Params.builder()
-              .model(Model.CLAUDE_OPUS_4_6)
-              .maxTokens(1024)
-              .addUserMessage("Hi again, friend")
-              .build()
-          )
-          .build()
-      )
-      .build();
-
-    MessageBatch messageBatch = client.messages().batches().create(params);
-
-    System.out.println(messageBatch);
-  }
-}
+Console.WriteLine(batch);
 ```
 
 ```go Go
@@ -291,6 +288,88 @@ func main() {
 }
 ```
 
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.batches.*;
+
+public class BatchExample {
+
+  public static void main(String[] args) {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    BatchCreateParams params = BatchCreateParams.builder()
+      .addRequest(
+        BatchCreateParams.Request.builder()
+          .customId("my-first-request")
+          .params(
+            BatchCreateParams.Request.Params.builder()
+              .model(Model.CLAUDE_OPUS_4_6)
+              .maxTokens(1024)
+              .addUserMessage("Hello, world")
+              .build()
+          )
+          .build()
+      )
+      .addRequest(
+        BatchCreateParams.Request.builder()
+          .customId("my-second-request")
+          .params(
+            BatchCreateParams.Request.Params.builder()
+              .model(Model.CLAUDE_OPUS_4_6)
+              .maxTokens(1024)
+              .addUserMessage("Hi again, friend")
+              .build()
+          )
+          .build()
+      )
+      .build();
+
+    MessageBatch messageBatch = client.messages().batches().create(params);
+
+    System.out.println(messageBatch);
+  }
+}
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(
+    apiKey: getenv("ANTHROPIC_API_KEY")
+);
+
+$batch = $client->messages->batches->create(
+    requests: [
+        [
+            'custom_id' => 'my-first-request',
+            'params' => [
+                'model' => 'claude-opus-4-6',
+                'max_tokens' => 1024,
+                'messages' => [
+                    ['role' => 'user', 'content' => 'Hello, world']
+                ]
+            ]
+        ],
+        [
+            'custom_id' => 'my-second-request',
+            'params' => [
+                'model' => 'claude-opus-4-6',
+                'max_tokens' => 1024,
+                'messages' => [
+                    ['role' => 'user', 'content' => 'Hi again, friend']
+                ]
+            ]
+        ]
+    ],
+);
+
+print_r($batch);
+```
+
 ```ruby Ruby
 require "anthropic"
 
@@ -322,85 +401,6 @@ batch = client.messages.batches.create(
 )
 
 puts batch
-```
-
-```csharp C#
-using Anthropic;
-
-var client = new AnthropicClient();
-
-var batch = await client.Messages.Batches.CreateAsync(
-    new BatchCreateParams
-    {
-        Requests = new[]
-        {
-            new BatchCreateParams.Request
-            {
-                CustomId = "my-first-request",
-                Params = new BatchCreateParams.Request.Params
-                {
-                    Model = "claude-opus-4-6",
-                    MaxTokens = 1024,
-                    Messages = new[]
-                    {
-                        new MessageParam { Role = "user", Content = "Hello, world" }
-                    }
-                }
-            },
-            new BatchCreateParams.Request
-            {
-                CustomId = "my-second-request",
-                Params = new BatchCreateParams.Request.Params
-                {
-                    Model = "claude-opus-4-6",
-                    MaxTokens = 1024,
-                    Messages = new[]
-                    {
-                        new MessageParam { Role = "user", Content = "Hi again, friend" }
-                    }
-                }
-            }
-        }
-    });
-
-Console.WriteLine(batch);
-```
-
-```php PHP
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(
-    apiKey: getenv("ANTHROPIC_API_KEY")
-);
-
-$batch = $client->messages->batches->create([
-    'requests' => [
-        [
-            'custom_id' => 'my-first-request',
-            'params' => [
-                'model' => 'claude-opus-4-6',
-                'max_tokens' => 1024,
-                'messages' => [
-                    ['role' => 'user', 'content' => 'Hello, world']
-                ]
-            ]
-        ],
-        [
-            'custom_id' => 'my-second-request',
-            'params' => [
-                'model' => 'claude-opus-4-6',
-                'max_tokens' => 1024,
-                'messages' => [
-                    ['role' => 'user', 'content' => 'Hi again, friend']
-                ]
-            ]
-        ]
-    ]
-]);
-
-print_r($batch);
 ```
 
 </CodeGroup>
@@ -444,41 +444,6 @@ The Message Batch's `processing_status` field indicates the stage of processing 
 To poll a Message Batch, you'll need its `id`, which is provided in the response when creating a batch or by listing batches. You can implement a polling loop that checks the batch status periodically until processing has ended:
 
 <CodeGroup>
-```python Python
-import anthropic
-import time
-
-client = anthropic.Anthropic()
-
-message_batch = None
-while True:
-    message_batch = client.messages.batches.retrieve(MESSAGE_BATCH_ID)
-    if message_batch.processing_status == "ended":
-        break
-
-    print(f"Batch {MESSAGE_BATCH_ID} is still processing...")
-    time.sleep(60)
-print(message_batch)
-```
-
-```typescript TypeScript
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic();
-
-let messageBatch;
-while (true) {
-  messageBatch = await anthropic.messages.batches.retrieve(MESSAGE_BATCH_ID);
-  if (messageBatch.processing_status === "ended") {
-    break;
-  }
-
-  console.log(`Batch ${messageBatch} is still processing... waiting`);
-  await new Promise((resolve) => setTimeout(resolve, 60_000));
-}
-console.log(messageBatch);
-```
-
 ```bash Shell
 #!/bin/sh
 
@@ -493,6 +458,76 @@ done
 
 echo "Batch $MESSAGE_BATCH_ID has finished processing"
 ```
+
+```python Python nocheck hidelines={1,3..5,-1}
+import anthropic
+import time
+
+client = anthropic.Anthropic()
+
+MESSAGE_BATCH_ID = "msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d"
+
+message_batch = None
+while True:
+    message_batch = client.messages.batches.retrieve(MESSAGE_BATCH_ID)
+    if message_batch.processing_status == "ended":
+        break
+
+    print(f"Batch {MESSAGE_BATCH_ID} is still processing...")
+    time.sleep(60)
+print(message_batch)
+```
+
+```typescript TypeScript nocheck hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
+
+const anthropic = new Anthropic();
+
+const messageBatchId = "msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d";
+
+let messageBatch;
+while (true) {
+  messageBatch = await anthropic.messages.batches.retrieve(messageBatchId);
+  if (messageBatch.processing_status === "ended") {
+    break;
+  }
+
+  console.log(`Batch ${messageBatchId} is still processing... waiting`);
+  await new Promise((resolve) => setTimeout(resolve, 60_000));
+}
+console.log(messageBatch);
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages.Batches;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+        string messageBatchId = Environment.GetEnvironmentVariable("MESSAGE_BATCH_ID");
+
+        MessageBatch messageBatch = null;
+        while (true)
+        {
+            messageBatch = await client.Messages.Batches.Retrieve(messageBatchId);
+            if (messageBatch.ProcessingStatus == "ended")
+            {
+                break;
+            }
+
+            Console.WriteLine($"Batch {messageBatchId} is still processing...");
+            await Task.Delay(60000);
+        }
+        Console.WriteLine(messageBatch);
+    }
+}
+```
+
 </CodeGroup>
 
 ### Listing all Message Batches
@@ -500,29 +535,6 @@ echo "Batch $MESSAGE_BATCH_ID has finished processing"
 You can list all Message Batches in your Workspace using the [list endpoint](/docs/en/api/listing-message-batches). The API supports pagination, automatically fetching additional pages as needed:
 
 <CodeGroup>
-```python Python
-import anthropic
-
-client = anthropic.Anthropic()
-
-# Automatically fetches more pages as needed.
-for message_batch in client.messages.batches.list(limit=20):
-    print(message_batch)
-```
-
-```typescript TypeScript
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic();
-
-// Automatically fetches more pages as needed.
-for await (const messageBatch of anthropic.messages.batches.list({
-  limit: 20
-})) {
-  console.log(messageBatch);
-}
-```
-
 ```bash Shell
 #!/bin/sh
 
@@ -559,6 +571,56 @@ while [ "$has_more" = true ]; do
 done
 ```
 
+```python Python hidelines={1..4}
+import anthropic
+
+client = anthropic.Anthropic()
+
+# Automatically fetches more pages as needed.
+for message_batch in client.messages.batches.list(limit=20):
+    print(message_batch)
+```
+
+```typescript TypeScript hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
+
+const anthropic = new Anthropic();
+
+// Automatically fetches more pages as needed.
+for await (const messageBatch of anthropic.messages.batches.list({
+  limit: 20
+})) {
+  console.log(messageBatch);
+}
+```
+
+```csharp C# hidelines={1..10,-1}
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages.Batches;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new BatchListParams
+        {
+            Limit = 20
+        };
+
+        // Automatically fetches more pages as needed
+        var page = await client.Messages.Batches.List(parameters);
+        await foreach (var messageBatch in page.Paginate())
+        {
+            Console.WriteLine(messageBatch);
+        }
+    }
+}
+```
+
 ```java Java
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
@@ -579,6 +641,7 @@ public class BatchListExample {
   }
 }
 ```
+
 </CodeGroup>
 
 ### Retrieving batch results
@@ -637,7 +700,8 @@ curl "https://api.anthropic.com/v1/messages/batches/msgbatch_01HkcTjaV5uDC8jWR4Z
   done
 
 ```
-```python Python
+
+```python Python nocheck hidelines={1..4}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -660,7 +724,7 @@ for result in client.messages.batches.results(
             print(f"Request expired {result.custom_id}")
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -674,7 +738,7 @@ for await (const result of await anthropic.messages.batches.results(
       console.log(`Success! ${result.custom_id}`);
       break;
     case "errored":
-      if (result.result.error.type == "invalid_request") {
+      if (result.result.error.type === "invalid_request_error") {
         // Request body must be fixed before re-sending request
         console.log(`Validation error: ${result.custom_id}`);
       } else {
@@ -686,6 +750,44 @@ for await (const result of await anthropic.messages.batches.results(
       console.log(`Request expired: ${result.custom_id}`);
       break;
   }
+}
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages.Batches;
+
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        await foreach (var result in client.Messages.Batches.Results("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d"))
+        {
+            switch (result.Result.Type)
+            {
+                case "succeeded":
+                    Console.WriteLine($"Success! {result.CustomId}");
+                    break;
+                case "errored":
+                    if (result.Result.Error?.Type == "invalid_request")
+                    {
+                        Console.WriteLine($"Validation error: {result.CustomId}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Server error: {result.CustomId}");
+                    }
+                    break;
+                case "expired":
+                    Console.WriteLine($"Request expired: {result.CustomId}");
+                    break;
+            }
+        }
+    }
 }
 ```
 
@@ -756,10 +858,19 @@ Batch results can be returned in any order, and may not match the ordering of re
 You can cancel a Message Batch that is currently processing using the [cancel endpoint](/docs/en/api/canceling-message-batches). Immediately after cancellation, a batch's `processing_status` will be `canceling`. You can use the same polling technique described above to wait until cancellation is finalized. Canceled batches end up with a status of `ended` and may contain partial results for requests that were processed before cancellation.
 
 <CodeGroup>
-```python Python
+```bash Shell
+#!/bin/sh
+curl --request POST https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01"
+```
+
+```python Python nocheck hidelines={1..4,-1}
 import anthropic
 
 client = anthropic.Anthropic()
+
+MESSAGE_BATCH_ID = "msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d"
 
 message_batch = client.messages.batches.cancel(
     MESSAGE_BATCH_ID,
@@ -767,7 +878,7 @@ message_batch = client.messages.batches.cancel(
 print(message_batch)
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -776,11 +887,22 @@ const messageBatch = await anthropic.messages.batches.cancel(MESSAGE_BATCH_ID);
 console.log(messageBatch);
 ```
 
-```bash Shell
-#!/bin/sh
-curl --request POST https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01"
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages.Batches;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var messageBatch = await client.Messages.Batches.Cancel(MESSAGE_BATCH_ID);
+        Console.WriteLine(messageBatch);
+    }
+}
 ```
 
 ```java Java
@@ -801,6 +923,7 @@ public class BatchCancelExample {
   }
 }
 ```
+
 </CodeGroup>
 
 The response will show the batch in a `canceling` state:
@@ -893,7 +1016,7 @@ curl https://api.anthropic.com/v1/messages/batches \
 }'
 ```
 
-```python Python
+```python Python hidelines={1,4..6}
 import anthropic
 from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
 from anthropic.types.messages.batch_create_params import Request
@@ -954,7 +1077,7 @@ message_batch = client.messages.batches.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -1003,6 +1126,86 @@ const messageBatch = await anthropic.messages.batches.create({
     }
   ]
 });
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+using Anthropic.Models.Messages.Batches;
+
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        AnthropicClient client = new()
+        {
+            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+        };
+
+        var messageBatch = await client.Messages.Batches.Create(new BatchCreateParams
+        {
+            Requests =
+            [
+                new()
+                {
+                    CustomId = "my-first-request",
+                    Params = new()
+                    {
+                        Model = Model.ClaudeOpus4_6,
+                        MaxTokens = 1024,
+                        System =
+                        [
+                            new()
+                            {
+                                Type = "text",
+                                Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+                            },
+                            new()
+                            {
+                                Type = "text",
+                                Text = "<the entire contents of Pride and Prejudice>",
+                                CacheControl = new() { Type = "ephemeral" }
+                            }
+                        ],
+                        Messages =
+                        [
+                            new() { Role = Role.User, Content = "Analyze the major themes in Pride and Prejudice." }
+                        ]
+                    }
+                },
+                new()
+                {
+                    CustomId = "my-second-request",
+                    Params = new()
+                    {
+                        Model = Model.ClaudeOpus4_6,
+                        MaxTokens = 1024,
+                        System =
+                        [
+                            new()
+                            {
+                                Type = "text",
+                                Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+                            },
+                            new()
+                            {
+                                Type = "text",
+                                Text = "<the entire contents of Pride and Prejudice>",
+                                CacheControl = new() { Type = "ephemeral" }
+                            }
+                        ],
+                        Messages =
+                        [
+                            new() { Role = Role.User, Content = "Write a summary of Pride and Prejudice." }
+                        ]
+                    }
+                }
+            ]
+        });
+    }
+}
 ```
 
 ```java Java

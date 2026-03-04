@@ -43,6 +43,16 @@ pip install anthropic
 npm install @anthropic-ai/sdk
 ```
 </Tab>
+<Tab title="C#">
+```bash
+dotnet add package Anthropic
+```
+</Tab>
+<Tab title="Go">
+```bash
+go get github.com/anthropics/anthropic-sdk-go
+```
+</Tab>
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
@@ -58,24 +68,14 @@ implementation("com.anthropic:anthropic-java:2.11.1")
 ```
 </CodeGroup>
 </Tab>
-<Tab title="Go">
+<Tab title="PHP">
 ```bash
-go get github.com/anthropics/anthropic-sdk-go
+composer require anthropic-ai/sdk
 ```
 </Tab>
 <Tab title="Ruby">
 ```bash
 bundler add anthropic
-```
-</Tab>
-<Tab title="C#">
-```bash
-dotnet add package Anthropic
-```
-</Tab>
-<Tab title="PHP">
-```bash
-composer require anthropic-ai/sdk
 ```
 </Tab>
 </Tabs>
@@ -96,7 +96,7 @@ message = client.messages.create(
 print(message.content)
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -109,17 +109,19 @@ const message = await client.messages.create({
 console.log(message.content);
 ```
 
-```java Java
-AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+```csharp C# hidelines={2}
+using Anthropic;
+using Anthropic.Models.Messages;
 
-MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_4_6)
-    .maxTokens(1024L)
-    .addUserMessage("Hello, Claude")
-    .build();
+var client = new AnthropicClient();
 
-Message message = client.messages().create(params);
-System.out.println(message.content());
+var message = await client.Messages.Create(new MessageCreateParams
+{
+    Model = "claude-opus-4-6",
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
+});
+Console.WriteLine(message.Content);
 ```
 
 ```go Go
@@ -135,34 +137,21 @@ message, _ := client.Messages.New(context.Background(), anthropic.MessageNewPara
 fmt.Println(message.Content)
 ```
 
-```ruby Ruby
-client = Anthropic::Client.new
+```java Java
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-message = client.messages.create(
-  model: "claude-opus-4-6",
-  max_tokens: 1024,
-  messages: [
-    { role: "user", content: "Hello, Claude" }
-  ]
-)
-puts message.content
+MessageCreateParams params = MessageCreateParams.builder()
+    .model(Model.CLAUDE_OPUS_4_6)
+    .maxTokens(1024L)
+    .addUserMessage("Hello, Claude")
+    .build();
+
+Message message = client.messages().create(params);
+System.out.println(message.content());
 ```
 
-```csharp C#
-using Anthropic;
-
-var client = new AnthropicClient();
-
-var message = await client.Messages.Create(new MessageCreateParams
-{
-    Model = "claude-opus-4-6",
-    MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
-});
-Console.WriteLine(message.Content);
-```
-
-```php PHP
+```php PHP hidelines={1}
+<?php
 use Anthropic\Client;
 
 $client = new Client(apiKey: getenv('ANTHROPIC_API_KEY'));
@@ -175,6 +164,19 @@ $message = $client->messages->create(
     ],
 );
 echo $message->content[0]->text;
+```
+
+```ruby Ruby
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [
+    { role: "user", content: "Hello, Claude" }
+  ]
+)
+puts message.content
 ```
 </CodeGroup>
 
@@ -196,7 +198,8 @@ See individual SDK pages for platform-specific setup instructions.
 Access beta features using the `beta` namespace in any SDK:
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck
 message = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -205,13 +208,34 @@ message = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 const message = await client.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello" }],
   betas: ["feature-name"]
 });
+```
+
+```csharp C# nocheck
+var message = await client.Beta.Messages.Create(new MessageCreateParams
+{
+    Model = "claude-opus-4-6",
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "Hello" }],
+    Betas = ["feature-name"],
+});
+```
+
+```go Go
+message, _ := client.Beta.Messages.New(context.Background(), anthropic.BetaMessageNewParams{
+	Model:     anthropic.ModelClaudeOpus4_6,
+	MaxTokens: 1024,
+	Messages: []anthropic.BetaMessageParam{
+		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
+	},
+	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBeta("feature-name")},
+})
 ```
 
 ```java Java
@@ -228,15 +252,13 @@ MessageCreateParams params = MessageCreateParams.builder()
 client.beta().messages().create(params);
 ```
 
-```go Go
-message, _ := client.Beta.Messages.New(context.Background(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_6,
-	MaxTokens: 1024,
-	Messages: []anthropic.BetaMessageParam{
-		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
-	},
-	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBeta("feature-name")},
-})
+```php PHP nocheck
+$message = $client->beta->messages->create(
+    model: 'claude-opus-4-6',
+    maxTokens: 1024,
+    messages: [['role' => 'user', 'content' => 'Hello']],
+    betas: ['feature-name'],
+);
 ```
 
 ```ruby Ruby
@@ -246,25 +268,6 @@ message = anthropic.beta.messages.create(
   messages: [{ role: "user", content: "Hello" }],
   betas: ["feature-name"]
 )
-```
-
-```csharp C#
-var message = await client.Beta.Messages.Create(new MessageCreateParams
-{
-    Model = "claude-opus-4-6",
-    MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello" }],
-    Betas = ["feature-name"],
-});
-```
-
-```php PHP
-$message = $client->beta->messages->create(
-    model: 'claude-opus-4-6',
-    maxTokens: 1024,
-    messages: [['role' => 'user', 'content' => 'Hello']],
-    betas: ['feature-name'],
-);
 ```
 </CodeGroup>
 

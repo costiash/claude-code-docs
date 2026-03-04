@@ -41,6 +41,12 @@ npm install @anthropic-ai/foundry-sdk
 ```
 </Tab>
 
+<Tab title="C#">
+```bash
+dotnet add package Anthropic.Foundry
+```
+</Tab>
+
 <Tab title="Java">
 <Tabs>
 <Tab title="Gradle">
@@ -58,12 +64,6 @@ implementation("com.anthropic:anthropic-java-foundry:2.14.0")
 ```
 </Tab>
 </Tabs>
-</Tab>
-
-<Tab title="C#">
-```bash
-dotnet add package Anthropic.Foundry
-```
 </Tab>
 </Tabs>
 
@@ -126,6 +126,20 @@ The `resource` and `base_url` parameters are mutually exclusive. Provide either 
 **Example using API key:**
 
 <CodeGroup>
+```bash Shell
+curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
+  -H "content-type: application/json" \
+  -H "api-key: YOUR_AZURE_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": "Hello!"}
+    ]
+  }'
+```
+
 ```python Python
 import os
 from anthropic import AnthropicFoundry
@@ -143,7 +157,7 @@ message = client.messages.create(
 print(message.content)
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 import AnthropicFoundry from "@anthropic-ai/foundry-sdk";
 
 const client = new AnthropicFoundry({
@@ -159,29 +173,7 @@ const message = await client.messages.create({
 console.log(message.content);
 ```
 
-```java Java
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.foundry.backends.FoundryBackend;
-import com.anthropic.models.messages.MessageCreateParams;
-
-// Requires env vars: ANTHROPIC_FOUNDRY_API_KEY, ANTHROPIC_FOUNDRY_RESOURCE
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(FoundryBackend.fromEnv())
-  .build();
-
-MessageCreateParams params = MessageCreateParams.builder()
-  .model("claude-opus-4-6")
-  .maxTokens(1024)
-  .addUserMessage("Hello!")
-  .build();
-
-client.messages().create(params).content().stream()
-  .flatMap(block -> block.text().stream())
-  .forEach(textBlock -> System.out.println(textBlock.text()));
-```
-
-```csharp C#
+```csharp C# nocheck
 using Anthropic.Foundry;
 using Anthropic.Models.Messages;
 
@@ -205,18 +197,26 @@ Console.WriteLine(
         .Select(c => (c.Value as TextBlock)!.Text)));
 ```
 
-```bash Shell
-curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
-  -H "content-type: application/json" \
-  -H "api-key: YOUR_AZURE_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {"role": "user", "content": "Hello!"}
-    ]
-  }'
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.foundry.backends.FoundryBackend;
+import com.anthropic.models.messages.MessageCreateParams;
+
+// Requires env vars: ANTHROPIC_FOUNDRY_API_KEY, ANTHROPIC_FOUNDRY_RESOURCE
+AnthropicClient client = AnthropicOkHttpClient.builder()
+  .backend(FoundryBackend.fromEnv())
+  .build();
+
+MessageCreateParams params = MessageCreateParams.builder()
+  .model("claude-opus-4-6")
+  .maxTokens(1024)
+  .addUserMessage("Hello!")
+  .build();
+
+client.messages().create(params).content().stream()
+  .flatMap(block -> block.text().stream())
+  .forEach(textBlock -> System.out.println(textBlock.text()));
 ```
 </CodeGroup>
 
@@ -235,6 +235,24 @@ For enhanced security and centralized access management, you can use Entra ID (f
 **Example using Entra ID:**
 
 <CodeGroup>
+```bash Shell
+# Get Azure Entra ID token
+ACCESS_TOKEN=$(az account get-access-token --resource https://cognitiveservices.azure.com --query accessToken -o tsv)
+
+# Make request with token. Replace {resource} with your resource name
+curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
+  -H "content-type: application/json" \
+  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": "Hello!"}
+    ]
+  }'
+```
+
 ```python Python
 import os
 from anthropic import AnthropicFoundry
@@ -260,7 +278,7 @@ message = client.messages.create(
 print(message.content)
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 import AnthropicFoundry from "@anthropic-ai/foundry-sdk";
 import { DefaultAzureCredential, getBearerTokenProvider } from "@azure/identity";
 
@@ -284,6 +302,31 @@ const message = await client.messages.create({
   messages: [{ role: "user", content: "Hello!" }]
 });
 console.log(message.content);
+```
+
+```csharp C# nocheck
+using Anthropic.Foundry;
+using Anthropic.Models.Messages;
+using Azure.Identity;
+
+var client = new AnthropicFoundryClient(
+    new AnthropicFoundryIdentityTokenCredentials(
+        new DefaultAzureCredential(),
+        "example-resource"
+    )
+);
+
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = "claude-opus-4-6",
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "Hello!" }],
+});
+
+Console.WriteLine(
+    string.Join("", response.Content
+        .Where(c => c.Value is TextBlock)
+        .Select(c => (c.Value as TextBlock)!.Text)));
 ```
 
 ```java Java
@@ -316,49 +359,6 @@ MessageCreateParams params = MessageCreateParams.builder()
 client.messages().create(params).content().stream()
   .flatMap(block -> block.text().stream())
   .forEach(textBlock -> System.out.println(textBlock.text()));
-```
-
-```csharp C#
-using Anthropic.Foundry;
-using Anthropic.Models.Messages;
-using Azure.Identity;
-
-var client = new AnthropicFoundryClient(
-    new AnthropicFoundryIdentityTokenCredentials(
-        new DefaultAzureCredential(),
-        "example-resource"
-    )
-);
-
-var response = await client.Messages.Create(new MessageCreateParams
-{
-    Model = "claude-opus-4-6",
-    MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello!" }],
-});
-
-Console.WriteLine(
-    string.Join("", response.Content
-        .Where(c => c.Value is TextBlock)
-        .Select(c => (c.Value as TextBlock)!.Text)));
-```
-
-```bash Shell
-# Get Azure Entra ID token
-ACCESS_TOKEN=$(az account get-access-token --resource https://cognitiveservices.azure.com --query accessToken -o tsv)
-
-# Make request with token. Replace {resource} with your resource name
-curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
-  -H "content-type: application/json" \
-  -H "Authorization: Bearer $ACCESS_TOKEN" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {"role": "user", "content": "Hello!"}
-    ]
-  }'
 ```
 </CodeGroup>
 

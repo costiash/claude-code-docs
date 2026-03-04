@@ -98,12 +98,14 @@ response = client.beta.messages.create(
 messages.append({"role": "assistant", "content": response.content})
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
-const messages = [{ role: "user", content: "Help me build a website" }];
+const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
+  { role: "user", content: "Help me build a website" }
+];
 
 const response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
@@ -111,12 +113,59 @@ const response = await client.beta.messages.create({
   max_tokens: 4096,
   messages,
   context_management: {
-    edits: [{ type: "compact_20260112" }]
+    edits: [
+      {
+        type: "compact_20260112"
+      }
+    ]
   }
-});
+} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
 
 // Append the response (including any compaction block) to continue the conversation
-messages.push({ role: "assistant", content: response.content });
+messages.push({
+  role: "assistant",
+  content: response.content as unknown as Anthropic.Beta.Messages.BetaContentBlockParam[]
+});
+```
+
+```csharp C# nocheck
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var messages = new List<BetaMessageParam>
+        {
+            new() { Role = Role.User, Content = "Help me build a website" }
+        };
+
+        var parameters = new MessageCreateParams
+        {
+            Betas = new[] { "compact-2026-01-12" },
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Messages = messages,
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit()]
+            }
+        };
+
+        var response = await client.Beta.Messages.Create(parameters);
+
+        // Append the response (including any compaction block) to continue the conversation
+        messages.Add(new BetaMessageParam { Role = Role.Assistant, Content = response.Content });
+
+        Console.WriteLine(response);
+    }
+}
 ```
 </CodeGroup>
 
@@ -134,7 +183,11 @@ messages.push({ role: "assistant", content: response.content });
 Configure when compaction triggers using the `trigger` parameter:
 
 <CodeGroup>
-```python Python
+```python Python hidelines={1..4}
+import anthropic
+
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -151,7 +204,12 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..3}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
+
 const response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
   model: "claude-opus-4-6",
@@ -168,7 +226,40 @@ const response = await client.beta.messages.create({
       }
     ]
   }
-});
+} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Betas = new[] { "compact-2026-01-12" },
+            Messages = messages,
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit
+                {
+                    Trigger = new() { Type = "input_tokens", Value = 150000 }
+                }]
+            }
+        };
+
+        var message = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -183,7 +274,11 @@ You have written a partial transcript for the initial task above. Please write a
 You can provide custom instructions via the `instructions` parameter to replace this prompt entirely. Custom instructions don't supplement the default; they completely replace it:
 
 <CodeGroup>
-```python Python
+```python Python hidelines={1..4}
+import anthropic
+
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -200,7 +295,12 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck hidelines={1..3}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
+
 const response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
   model: "claude-opus-4-6",
@@ -215,7 +315,45 @@ const response = await client.beta.messages.create({
       }
     ]
   }
-});
+} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Betas = new[] { "compact-2026-01-12" },
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Messages = new[]
+            {
+                new BetaMessageParam { Role = Role.User, Content = "Help me build a Python web scraper" },
+                new BetaMessageParam { Role = Role.Assistant, Content = "I'll help you build a web scraper..." },
+                new BetaMessageParam { Role = Role.User, Content = "Add support for JavaScript-rendered pages" }
+            },
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit
+                {
+                    Instructions = "Focus on preserving code snippets, variable names, and technical decisions."
+                }]
+            }
+        };
+
+        var message = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -226,7 +364,11 @@ Use `pause_after_compaction` to pause the API after generating the compaction su
 When enabled, the API returns a message with the `compaction` stop reason after generating the compaction block:
 
 <CodeGroup>
-```python Python
+```python Python hidelines={1..4}
+import anthropic
+
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -252,7 +394,12 @@ if response.stop_reason == "compaction":
     )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..3}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
+
 let response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
   model: "claude-opus-4-6",
@@ -266,12 +413,15 @@ let response = await client.beta.messages.create({
       }
     ]
   }
-});
+} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
 
 // Check if compaction triggered a pause
-if (response.stop_reason === "compaction") {
+if ((response.stop_reason as string) === "compaction") {
   // Response contains only the compaction block
-  messages.push({ role: "assistant", content: response.content });
+  messages.push({
+    role: "assistant",
+    content: response.content as unknown as Anthropic.Beta.Messages.BetaContentBlockParam[]
+  });
 
   // Continue the request
   response = await client.beta.messages.create({
@@ -282,7 +432,66 @@ if (response.stop_reason === "compaction") {
     context_management: {
       edits: [{ type: "compact_20260112" }]
     }
-  });
+  } as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+}
+```
+
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var client = new AnthropicClient();
+        var messages = new List<BetaMessageParam>();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Betas = new[] { "compact-2026-01-12" },
+            Messages = messages,
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit
+                {
+                    PauseAfterCompaction = true
+                }]
+            }
+        };
+
+        var response = await client.Beta.Messages.Create(parameters);
+
+        if (response.StopReason == "compaction")
+        {
+            messages.Add(new BetaMessageParam
+            {
+                Role = Role.Assistant,
+                Content = response.Content
+            });
+
+            parameters = new MessageCreateParams
+            {
+                Model = "claude-opus-4-6",
+                MaxTokens = 4096,
+                Betas = new[] { "compact-2026-01-12" },
+                Messages = messages,
+                ContextManagement = new BetaContextManagementConfig
+                {
+                    Edits = [new BetaCompact20260112Edit()]
+                }
+            };
+
+            response = await client.Beta.Messages.Create(parameters);
+        }
+
+        Console.WriteLine(response);
+    }
 }
 ```
 </CodeGroup>
@@ -291,7 +500,11 @@ if (response.stop_reason === "compaction") {
 
 When a model works on long tasks with many tool-use iterations, total token consumption can grow significantly. You can combine `pause_after_compaction` with a compaction counter to estimate cumulative usage and gracefully wrap up the task once a budget is reached:
 
-```python Python
+```python Python hidelines={1..4}
+import anthropic
+
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 TRIGGER_THRESHOLD = 100_000
 TOTAL_TOKEN_BUDGET = 3_000_000
 n_compactions = 0
@@ -352,7 +565,18 @@ A long-running conversation may result in multiple compactions. The last compact
 You must pass the `compaction` block back to the API on subsequent requests to continue the conversation with the shortened prompt. The simplest approach is to append the entire response content to your messages:
 
 <CodeGroup>
-```python Python
+```python Python hidelines={1..4}
+import anthropic
+
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
+response = client.beta.messages.create(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    messages=messages,
+    context_management={"edits": [{"type": "compact_20260112"}]},
+)
 # After receiving a response with a compaction block
 messages.append({"role": "assistant", "content": response.content})
 
@@ -368,9 +592,28 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..3}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
+
+// Assume we already have a response from a previous request
+const response = await client.beta.messages.create({
+  betas: ["compact-2026-01-12"],
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  messages,
+  context_management: {
+    edits: [{ type: "compact_20260112" }]
+  }
+} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+
 // After receiving a response with a compaction block
-messages.push({ role: "assistant", content: response.content });
+messages.push({
+  role: "assistant",
+  content: response.content as unknown as Anthropic.Beta.Messages.BetaContentBlockParam[]
+});
 
 // Continue the conversation
 messages.push({ role: "user", content: "Now add error handling" });
@@ -383,7 +626,58 @@ const nextResponse = await client.beta.messages.create({
   context_management: {
     edits: [{ type: "compact_20260112" }]
   }
-});
+} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+```
+
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var messages = new List<BetaMessageParam>
+        {
+            new() { Role = Role.User, Content = "Help me build a web scraper" }
+        };
+
+        var response = await client.Beta.Messages.Create(new MessageCreateParams
+        {
+            Betas = ["compact-2026-01-12"],
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Messages = messages,
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit()]
+            }
+        });
+
+        messages.Add(new BetaMessageParam { Role = Role.Assistant, Content = response.Content });
+
+        messages.Add(new BetaMessageParam { Role = Role.User, Content = "Now add error handling" });
+
+        var nextResponse = await client.Beta.Messages.Create(new MessageCreateParams
+        {
+            Betas = ["compact-2026-01-12"],
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Messages = messages,
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit()]
+            }
+        });
+
+        Console.WriteLine(nextResponse);
+    }
+}
 ```
 </CodeGroup>
 
@@ -397,10 +691,11 @@ When the API receives a `compaction` block, all content blocks before it are ign
 When streaming responses with compaction enabled, you'll receive a `content_block_start` event when compaction begins. The compaction block streams differently from text blocks. You'll receive a `content_block_start` event, followed by a single `content_block_delta` with the complete summary content (no intermediate streaming), and then a `content_block_stop` event.
 
 <CodeGroup>
-```python Python
+```python Python hidelines={1..4}
 import anthropic
 
 client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 
 with client.beta.messages.stream(
     betas=["compact-2026-01-12"],
@@ -427,10 +722,11 @@ with client.beta.messages.stream(
     messages.append({"role": "assistant", "content": message.content})
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck hidelines={1..3}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
+const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
 
 const stream = await client.beta.messages.stream({
   betas: ["compact-2026-01-12"],
@@ -440,18 +736,20 @@ const stream = await client.beta.messages.stream({
   context_management: {
     edits: [{ type: "compact_20260112" }]
   }
-});
+} as unknown as Anthropic.Beta.Messages.BetaMessageStreamParams);
 
 for await (const event of stream) {
   if (event.type === "content_block_start") {
-    if (event.content_block.type === "compaction") {
+    if ((event.content_block as { type: string }).type === "compaction") {
       console.log("Compaction started...");
     } else if (event.content_block.type === "text") {
       console.log("Text response started...");
     }
   } else if (event.type === "content_block_delta") {
-    if (event.delta.type === "compaction_delta") {
-      console.log(`Compaction complete: ${event.delta.content.length} chars`);
+    if ((event.delta as { type: string }).type === "compaction_delta") {
+      console.log(
+        `Compaction complete: ${(event.delta as unknown as { content: string }).content.length} chars`
+      );
     } else if (event.delta.type === "text_delta") {
       process.stdout.write(event.delta.text);
     }
@@ -460,7 +758,62 @@ for await (const event of stream) {
 
 // Get the final accumulated message
 const message = await stream.finalMessage();
-messages.push({ role: "assistant", content: message.content });
+messages.push({
+  role: "assistant",
+  content: message.content as unknown as Anthropic.Beta.Messages.BetaContentBlockParam[]
+});
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var client = new AnthropicClient();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Messages = messages,
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit()]
+            }
+        };
+
+        await foreach (var streamEvent in client.Beta.Messages.CreateStreaming(parameters))
+        {
+            if (streamEvent.Type == "content_block_start")
+            {
+                if (streamEvent.ContentBlock?.Type == "compaction")
+                {
+                    Console.WriteLine("Compaction started...");
+                }
+                else if (streamEvent.ContentBlock?.Type == "text")
+                {
+                    Console.WriteLine("Text response started...");
+                }
+            }
+            else if (streamEvent.Type == "content_block_delta")
+            {
+                if (streamEvent.Delta?.Type == "compaction_delta")
+                {
+                    Console.WriteLine($"Compaction complete: {streamEvent.Delta.Content.Length} chars");
+                }
+                else if (streamEvent.Delta?.Type == "text_delta")
+                {
+                    Console.Write(streamEvent.Delta.Text);
+                }
+            }
+        }
+    }
+}
 ```
 </CodeGroup>
 
@@ -495,7 +848,11 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
 - Only the compaction summary needs to be written as a new cache entry
 
 <CodeGroup>
-```python Python
+```python Python hidelines={1..4}
+import anthropic
+
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -514,7 +871,12 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..3}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [];
+
 const response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
   model: "claude-opus-4-6",
@@ -530,7 +892,46 @@ const response = await client.beta.messages.create({
   context_management: {
     edits: [{ type: "compact_20260112" }]
   }
-});
+} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var client = new AnthropicClient();
+
+        var parameters = new MessageCreateParams
+        {
+            Betas = new[] { "compact-2026-01-12" },
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            System = new[]
+            {
+                new BetaTextBlockParam
+                {
+                    Type = "text",
+                    Text = "You are a helpful coding assistant...",
+                    CacheControl = new BetaCacheControlEphemeral()
+                }
+            },
+            Messages = Array.Empty<BetaMessageParam>(),
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit()]
+            }
+        };
+
+        var response = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(response);
+    }
+}
 ```
 </CodeGroup>
 
@@ -580,7 +981,11 @@ When using server tools (like web search), the compaction trigger is checked at 
 The token counting endpoint (`/v1/messages/count_tokens`) applies existing `compaction` blocks in your prompt but does not trigger new compactions. Use it to check your effective token count after previous compactions:
 
 <CodeGroup>
-```python Python
+```python Python hidelines={1..4}
+import anthropic
+
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 count_response = client.beta.messages.count_tokens(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -592,7 +997,14 @@ print(f"Current tokens: {count_response.input_tokens}")
 print(f"Original tokens: {count_response.context_management.original_input_tokens}")
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..3}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
+  { role: "user", content: "Summarize the key points of our conversation so far." }
+];
+
 const countResponse = await client.beta.messages.countTokens({
   betas: ["compact-2026-01-12"],
   model: "claude-opus-4-6",
@@ -600,10 +1012,40 @@ const countResponse = await client.beta.messages.countTokens({
   context_management: {
     edits: [{ type: "compact_20260112" }]
   }
-});
+} as unknown as Anthropic.Beta.Messages.MessageCountTokensParams);
 
 console.log(`Current tokens: ${countResponse.input_tokens}`);
-console.log(`Original tokens: ${countResponse.context_management.original_input_tokens}`);
+console.log(`Original tokens: ${countResponse.context_management!.original_input_tokens}`);
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var countParams = new MessageCountTokensParams
+        {
+            Model = "claude-opus-4-6",
+            Messages = messages,
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit()]
+            },
+            Betas = ["compact-2026-01-12"]
+        };
+
+        var countResponse = await client.Beta.Messages.CountTokens(countParams);
+        Console.WriteLine($"Current tokens: {countResponse.InputTokens}");
+        Console.WriteLine($"Original tokens: {countResponse.ContextManagement.OriginalInputTokens}");
+    }
+}
 ```
 </CodeGroup>
 
@@ -652,7 +1094,7 @@ print(chat("Now add rate limiting and error handling"))
 # ... continue as long as needed
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -690,6 +1132,54 @@ console.log(await chat("Help me build a Python web scraper"));
 console.log(await chat("Add support for JavaScript-rendered pages"));
 console.log(await chat("Now add rate limiting and error handling"));
 // ... continue as long as needed
+```
+
+```csharp C# nocheck
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+public class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+        List<BetaMessageParam> messages = new();
+
+        Console.WriteLine(await Chat(client, messages, "Help me build a Python web scraper"));
+        Console.WriteLine(await Chat(client, messages, "Add support for JavaScript-rendered pages"));
+        Console.WriteLine(await Chat(client, messages, "Now add rate limiting and error handling"));
+    }
+
+    static async Task<string> Chat(AnthropicClient client, List<BetaMessageParam> messages, string userMessage)
+    {
+        messages.Add(new() { Role = Role.User, Content = userMessage });
+
+        var parameters = new MessageCreateParams
+        {
+            Betas = new[] { "compact-2026-01-12" },
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Messages = messages,
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit
+                {
+                    Trigger = new() { Type = "input_tokens", Value = 100000 }
+                }]
+            }
+        };
+
+        var response = await client.Beta.Messages.Create(parameters);
+
+        messages.Add(new() { Role = Role.Assistant, Content = response.Content });
+
+        return response.Content.FirstOrDefault(block => block.Type == "text")?.Text ?? "";
+    }
+}
 ```
 </CodeGroup>
 
@@ -766,7 +1256,7 @@ print(chat("Now add rate limiting and error handling"))
 # ... continue as long as needed
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -835,6 +1325,82 @@ console.log(await chat("Help me build a Python web scraper"));
 console.log(await chat("Add support for JavaScript-rendered pages"));
 console.log(await chat("Now add rate limiting and error handling"));
 // ... continue as long as needed
+```
+
+```csharp C# nocheck
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+public class CompactionExample
+{
+    private static AnthropicClient client = new();
+    private static List<BetaMessageParam> messages = new();
+
+    static async Task<string> Chat(string userMessage)
+    {
+        messages.Add(new() { Role = Role.User, Content = userMessage });
+
+        var response = await client.Beta.Messages.Create(new MessageCreateParams
+        {
+            Betas = new[] { "compact-2026-01-12" },
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Messages = messages,
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit
+                {
+                    Trigger = new() { Type = "input_tokens", Value = 100000 },
+                    PauseAfterCompaction = true
+                }]
+            }
+        });
+
+        if (response.StopReason == "compaction")
+        {
+            var compactionBlock = response.Content[0];
+
+            var preserved = messages.Count >= 2
+                ? messages.Skip(messages.Count - 2).ToList()
+                : new List<BetaMessageParam>(messages);
+
+            var messagesAfterCompaction = new List<BetaMessageParam>
+            {
+                new() { Role = Role.Assistant, Content = new[] { compactionBlock } }
+            };
+            messagesAfterCompaction.AddRange(preserved);
+
+            response = await client.Beta.Messages.Create(new MessageCreateParams
+            {
+                Betas = new[] { "compact-2026-01-12" },
+                Model = "claude-opus-4-6",
+                MaxTokens = 4096,
+                Messages = messagesAfterCompaction,
+                ContextManagement = new BetaContextManagementConfig
+                {
+                    Edits = [new BetaCompact20260112Edit()]
+                }
+            });
+
+            messages = messagesAfterCompaction;
+        }
+
+        messages.Add(new() { Role = Role.Assistant, Content = response.Content });
+
+        return response.Content.FirstOrDefault(block => block.Type == "text")?.Text ?? "";
+    }
+
+    static async Task Main()
+    {
+        Console.WriteLine(await Chat("Help me build a Python web scraper"));
+        Console.WriteLine(await Chat("Add support for JavaScript-rendered pages"));
+        Console.WriteLine(await Chat("Now add rate limiting and error handling"));
+    }
+}
 ```
 </CodeGroup>
 

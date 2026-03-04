@@ -351,7 +351,7 @@ Everything that makes Claude Code powerful is available in the SDK:
     For interactive approval prompts and the `AskUserQuestion` tool, see [Handle approvals and user input](/docs/en/agent-sdk/user-input).
     </Note>
 
-    This example creates a read-only agent that can analyze but not modify code:
+    This example creates a read-only agent that can analyze but not modify code. `allowed_tools` pre-approves `Read`, `Glob`, and `Grep`.
 
     <CodeGroup>
     ```python Python
@@ -363,7 +363,7 @@ Everything that makes Claude Code powerful is available in the SDK:
         async for message in query(
             prompt="Review this code for best practices",
             options=ClaudeAgentOptions(
-                allowed_tools=["Read", "Glob", "Grep"], permission_mode="bypassPermissions"
+                allowed_tools=["Read", "Glob", "Grep"],
             ),
         ):
             if hasattr(message, "result"):
@@ -379,8 +379,7 @@ Everything that makes Claude Code powerful is available in the SDK:
     for await (const message of query({
       prompt: "Review this code for best practices",
       options: {
-        allowedTools: ["Read", "Glob", "Grep"],
-        permissionMode: "bypassPermissions"
+        allowedTools: ["Read", "Glob", "Grep"]
       }
     })) {
       if ("result" in message) console.log(message.result);
@@ -544,7 +543,7 @@ For partners integrating the Claude Agent SDK, use of Claude branding is optiona
 - "Claude Code" or "Claude Code Agent"
 - Claude Code-branded ASCII art or visual elements that mimic Claude Code
 
-Your product should maintain its own branding and not appear to be Claude Code or any Anthropic product. For questions about branding compliance, contact our [sales team](https://www.anthropic.com/contact-sales).
+Your product should maintain its own branding and not appear to be Claude Code or any Anthropic product. For questions about branding compliance, contact the Anthropic [sales team](https://www.anthropic.com/contact-sales).
 
 ## License and terms
 

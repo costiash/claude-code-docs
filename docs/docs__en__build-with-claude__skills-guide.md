@@ -81,7 +81,36 @@ Skills are specified using the `container` parameter in the Messages API. You ca
 The structure is identical for both Anthropic and custom Skills. Specify the required `type` and `skill_id`, and optionally include `version` to pin to a specific version:
 
 <CodeGroup>
-```python Python
+```bash Shell
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
+        {
+          "type": "anthropic",
+          "skill_id": "pptx",
+          "version": "latest"
+        }
+      ]
+    },
+    "messages": [{
+      "role": "user",
+      "content": "Create a presentation about renewable energy"
+    }],
+    "tools": [{
+      "type": "code_execution_20250825",
+      "name": "code_execution"
+    }]
+  }'
+```
+
+```python Python nocheck
 import anthropic
 
 client = anthropic.Anthropic()
@@ -100,7 +129,7 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -133,33 +162,57 @@ const response = await client.beta.messages.create({
 });
 ```
 
-```bash Shell
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 4096,
-    "container": {
-      "skills": [
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
         {
-          "type": "anthropic",
-          "skill_id": "pptx",
-          "version": "latest"
-        }
-      ]
-    },
-    "messages": [{
-      "role": "user",
-      "content": "Create a presentation about renewable energy"
-    }],
-    "tools": [{
-      "type": "code_execution_20250825",
-      "name": "code_execution"
-    }]
-  }'
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02" },
+            Container = new BetaContainerParams
+            {
+                Skills = new[]
+                {
+                    new BetaAnthropicSkillParams
+                    {
+                        Type = "anthropic",
+                        SkillId = "pptx",
+                        Version = "latest"
+                    }
+                }
+            },
+            Messages = new[]
+            {
+                new BetaMessageParam
+                {
+                    Role = Role.User,
+                    Content = "Create a presentation about renewable energy"
+                }
+            },
+            Tools = new[]
+            {
+                new BetaCodeExecutionToolParams
+                {
+                    Type = "code_execution_20250825",
+                    Name = "code_execution"
+                }
+            }
+        };
+
+        var message = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -176,7 +229,51 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 **Example: Creating and downloading an Excel file**
 
 <CodeGroup>
-```python Python
+```bash Shell
+# Step 1: Use a Skill to create a file
+RESPONSE=$(curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
+        {"type": "anthropic", "skill_id": "xlsx", "version": "latest"}
+      ]
+    },
+    "messages": [{
+      "role": "user",
+      "content": "Create an Excel file with a simple budget spreadsheet"
+    }],
+    "tools": [{
+      "type": "code_execution_20250825",
+      "name": "code_execution"
+    }]
+  }')
+
+# Step 2: Extract file_id from response (using jq)
+FILE_ID=$(echo "$RESPONSE" | jq -r '.content[] | select(.type=="bash_code_execution_tool_result") | .content | select(.type=="bash_code_execution_result") | .content[] | select(.file_id) | .file_id')
+
+# Step 3: Get filename from metadata
+FILENAME=$(curl "https://api.anthropic.com/v1/files/$FILE_ID" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14" | jq -r '.filename')
+
+# Step 4: Download the file using Files API
+curl "https://api.anthropic.com/v1/files/$FILE_ID/content" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14" \
+  --output "$FILENAME"
+
+echo "Downloaded: $FILENAME"
+```
+
+```python Python nocheck
 import anthropic
 
 client = anthropic.Anthropic()
@@ -226,7 +323,7 @@ for file_id in extract_file_ids(response):
     print(f"Downloaded: {file_metadata.filename}")
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -269,7 +366,7 @@ function extractFileIds(response: any): string[] {
 // Step 3: Download the file using Files API
 const fs = require("fs/promises");
 for (const fileId of extractFileIds(response)) {
-  const fileMetadata = await client.beta.files.retrieve_metadata(fileId, {
+  const fileMetadata = await client.beta.files.retrieveMetadata(fileId, {
     betas: ["files-api-2025-04-14"]
   });
   const fileContent = await client.beta.files.download(fileId, {
@@ -282,91 +379,112 @@ for (const fileId of extractFileIds(response)) {
 }
 ```
 
-```bash Shell
-# Step 1: Use a Skill to create a file
-RESPONSE=$(curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 4096,
-    "container": {
-      "skills": [
-        {"type": "anthropic", "skill_id": "xlsx", "version": "latest"}
-      ]
-    },
-    "messages": [{
-      "role": "user",
-      "content": "Create an Excel file with a simple budget spreadsheet"
-    }],
-    "tools": [{
-      "type": "code_execution_20250825",
-      "name": "code_execution"
-    }]
-  }')
+```csharp C# nocheck
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+using Anthropic.Models.Beta.Files;
 
-# Step 2: Extract file_id from response (using jq)
-FILE_ID=$(echo "$RESPONSE" | jq -r '.content[] | select(.type=="bash_code_execution_tool_result") | .content | select(.type=="bash_code_execution_result") | .content[] | select(.file_id) | .file_id')
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
 
-# Step 3: Get filename from metadata
-FILENAME=$(curl "https://api.anthropic.com/v1/files/$FILE_ID" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" | jq -r '.filename')
+        // Step 1: Use a Skill to create a file
+        var parameters = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02" },
+            Container = new BetaContainer
+            {
+                Skills = new[]
+                {
+                    new BetaSkill
+                    {
+                        Type = "anthropic",
+                        SkillId = "xlsx",
+                        Version = "latest"
+                    }
+                }
+            },
+            Messages = new[]
+            {
+                new BetaMessage
+                {
+                    Role = Role.User,
+                    Content = "Create an Excel file with a simple budget spreadsheet"
+                }
+            },
+            Tools = new[]
+            {
+                new BetaTool
+                {
+                    Type = "code_execution_20250825",
+                    Name = "code_execution"
+                }
+            }
+        };
 
-# Step 4: Download the file using Files API
-curl "https://api.anthropic.com/v1/files/$FILE_ID/content" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  --output "$FILENAME"
+        var response = await client.Beta.Messages.Create(parameters);
 
-echo "Downloaded: $FILENAME"
+        // Step 2: Extract file IDs from the response
+        var fileIds = ExtractFileIds(response);
+
+        // Step 3: Download the file using Files API
+        foreach (var fileId in fileIds)
+        {
+            var fileMetadata = await client.Beta.Files.RetrieveMetadata(fileId,
+                new FileRetrieveMetadataParams
+                {
+                    Betas = new[] { "files-api-2025-04-14" }
+                });
+
+            var fileContent = await client.Beta.Files.Download(fileId,
+                new FileDownloadParams
+                {
+                    Betas = new[] { "files-api-2025-04-14" }
+                });
+
+            // Step 4: Save to disk
+            await File.WriteAllBytesAsync(fileMetadata.Filename, fileContent);
+            Console.WriteLine($"Downloaded: {fileMetadata.Filename}");
+        }
+    }
+
+    static List<string> ExtractFileIds(BetaMessage response)
+    {
+        var fileIds = new List<string>();
+        foreach (var item in response.Content)
+        {
+            if (item is BetaBashCodeExecutionToolResult toolResult)
+            {
+                if (toolResult.Content is BetaBashCodeExecutionResult result)
+                {
+                    foreach (var content in result.Content)
+                    {
+                        if (content is BetaBashCodeExecutionResultFile file)
+                        {
+                            fileIds.Add(file.FileId);
+                        }
+                    }
+                }
+            }
+        }
+        return fileIds;
+    }
+}
 ```
 </CodeGroup>
 
 **Additional Files API operations:**
 
 <CodeGroup>
-```python Python
-# Get file metadata
-file_info = client.beta.files.retrieve_metadata(
-    file_id=file_id, betas=["files-api-2025-04-14"]
-)
-print(f"Filename: {file_info.filename}, Size: {file_info.size_bytes} bytes")
-
-# List all files
-files = client.beta.files.list(betas=["files-api-2025-04-14"])
-for file in files.data:
-    print(f"{file.filename} - {file.created_at}")
-
-# Delete a file
-client.beta.files.delete(file_id=file_id, betas=["files-api-2025-04-14"])
-```
-
-```typescript TypeScript
-// Get file metadata
-const fileInfo = await client.beta.files.retrieve_metadata(fileId, {
-  betas: ["files-api-2025-04-14"]
-});
-console.log(`Filename: ${fileInfo.filename}, Size: ${fileInfo.size_bytes} bytes`);
-
-// List all files
-const files = await client.beta.files.list({
-  betas: ["files-api-2025-04-14"]
-});
-for (const file of files.data) {
-  console.log(`${file.filename} - ${file.created_at}`);
-}
-
-// Delete a file
-await client.beta.files.delete(fileId, {
-  betas: ["files-api-2025-04-14"]
-});
-```
-
 ```bash Shell
 # Get file metadata
 curl "https://api.anthropic.com/v1/files/$FILE_ID" \
@@ -386,6 +504,82 @@ curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14"
 ```
+
+```python Python nocheck
+import anthropic
+
+client = anthropic.Anthropic()
+file_id = "file_abc123"
+# Get file metadata
+file_info = client.beta.files.retrieve_metadata(
+    file_id=file_id, betas=["files-api-2025-04-14"]
+)
+print(f"Filename: {file_info.filename}, Size: {file_info.size_bytes} bytes")
+
+# List all files
+files = client.beta.files.list(betas=["files-api-2025-04-14"])
+for file in files.data:
+    print(f"{file.filename} - {file.created_at}")
+
+# Delete a file
+client.beta.files.delete(file_id=file_id, betas=["files-api-2025-04-14"])
+```
+
+```typescript TypeScript nocheck hidelines={1..3}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+const fileId = "file_011CNha8iCJcU1wXNR6q4V8w";
+
+// Get file metadata
+const fileInfo = await client.beta.files.retrieveMetadata(fileId, {
+  betas: ["files-api-2025-04-14"]
+});
+console.log(`Filename: ${fileInfo.filename}, Size: ${fileInfo.size_bytes} bytes`);
+
+// List all files
+const files = await client.beta.files.list({
+  betas: ["files-api-2025-04-14"]
+});
+for (const file of files.data) {
+  console.log(`${file.filename} - ${file.created_at}`);
+}
+
+// Delete a file
+await client.beta.files.delete(fileId, {
+  betas: ["files-api-2025-04-14"]
+});
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Files;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+        string fileId = "file_abc123";
+
+        // Get file metadata
+        var fileInfo = await client.Beta.Files.RetrieveMetadata(fileId, new() { Betas = ["files-api-2025-04-14"] });
+        Console.WriteLine($"Filename: {fileInfo.Filename}, Size: {fileInfo.SizeBytes} bytes");
+
+        // List all files
+        var files = await client.Beta.Files.List(new() { Betas = ["files-api-2025-04-14"] });
+        foreach (var file in files.Data)
+        {
+            Console.WriteLine($"{file.Filename} - {file.CreatedAt}");
+        }
+
+        // Delete a file
+        await client.Beta.Files.Delete(fileId, new() { Betas = ["files-api-2025-04-14"] });
+    }
+}
+```
 </CodeGroup>
 
 <Note>
@@ -397,7 +591,8 @@ For complete details on the Files API, see the [Files API documentation](/docs/e
 Reuse the same container across multiple messages by specifying the container ID:
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck
 # First request creates container
 response1 = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -444,9 +639,12 @@ const response1 = await client.beta.messages.create({
 });
 
 // Continue conversation with same container
-const messages = [
+const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
   { role: "user", content: "Analyze this sales data" },
-  { role: "assistant", content: response1.content },
+  {
+    role: "assistant",
+    content: response1.content as Anthropic.Beta.Messages.BetaContentBlockParam[]
+  },
   { role: "user", content: "What was the total revenue?" }
 ];
 
@@ -455,12 +653,101 @@ const response2 = await client.beta.messages.create({
   max_tokens: 4096,
   betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
   container: {
-    id: response1.container.id, // Reuse container
+    id: response1.container!.id, // Reuse container
     skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
   },
   messages,
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]
 });
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+public class Program
+{
+    public static async Task Main()
+    {
+        var client = new AnthropicClient();
+
+        var parameters1 = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02" },
+            Container = new BetaContainerParam
+            {
+                Skills = new[]
+                {
+                    new BetaSkillParam
+                    {
+                        Type = "anthropic",
+                        SkillId = "xlsx",
+                        Version = "latest"
+                    }
+                }
+            },
+            Messages = new[]
+            {
+                new BetaMessageParam
+                {
+                    Role = Role.User,
+                    Content = "Analyze this sales data"
+                }
+            },
+            Tools = new[]
+            {
+                new BetaToolParam
+                {
+                    Type = "code_execution_20250825",
+                    Name = "code_execution"
+                }
+            }
+        };
+
+        var response1 = await client.Beta.Messages.Create(parameters1);
+
+        var parameters2 = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02" },
+            Container = new BetaContainerParam
+            {
+                Id = response1.Container.Id,
+                Skills = new[]
+                {
+                    new BetaSkillParam
+                    {
+                        Type = "anthropic",
+                        SkillId = "xlsx",
+                        Version = "latest"
+                    }
+                }
+            },
+            Messages = new[]
+            {
+                new BetaMessageParam { Role = Role.User, Content = "Analyze this sales data" },
+                new BetaMessageParam { Role = Role.Assistant, Content = response1.Content },
+                new BetaMessageParam { Role = Role.User, Content = "What was the total revenue?" }
+            },
+            Tools = new[]
+            {
+                new BetaToolParam
+                {
+                    Type = "code_execution_20250825",
+                    Name = "code_execution"
+                }
+            }
+        };
+
+        var response2 = await client.Beta.Messages.Create(parameters2);
+        Console.WriteLine(response2);
+    }
+}
 ```
 </CodeGroup>
 
@@ -469,90 +756,6 @@ const response2 = await client.beta.messages.create({
 Skills may perform operations that require multiple turns. Handle `pause_turn` stop reasons:
 
 <CodeGroup>
-```python Python
-messages = [{"role": "user", "content": "Process this large dataset"}]
-max_retries = 10
-
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [
-            {
-                "type": "custom",
-                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-                "version": "latest",
-            }
-        ]
-    },
-    messages=messages,
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
-
-# Handle pause_turn for long operations
-for i in range(max_retries):
-    if response.stop_reason != "pause_turn":
-        break
-
-    messages.append({"role": "assistant", "content": response.content})
-    response = client.beta.messages.create(
-        model="claude-opus-4-6",
-        max_tokens=4096,
-        betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-        container={
-            "id": response.container.id,
-            "skills": [
-                {
-                    "type": "custom",
-                    "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-                    "version": "latest",
-                }
-            ],
-        },
-        messages=messages,
-        tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-    )
-```
-
-```typescript TypeScript
-let messages = [{ role: "user" as const, content: "Process this large dataset" }];
-const maxRetries = 10;
-
-let response = await client.beta.messages.create({
-  model: "claude-opus-4-6",
-  max_tokens: 4096,
-  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
-  container: {
-    skills: [{ type: "custom", skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv", version: "latest" }]
-  },
-  messages,
-  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
-});
-
-// Handle pause_turn for long operations
-for (let i = 0; i < maxRetries; i++) {
-  if (response.stop_reason !== "pause_turn") {
-    break;
-  }
-
-  messages.push({ role: "assistant", content: response.content });
-  response = await client.beta.messages.create({
-    model: "claude-opus-4-6",
-    max_tokens: 4096,
-    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
-    container: {
-      id: response.container.id,
-      skills: [
-        { type: "custom", skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv", version: "latest" }
-      ]
-    },
-    messages,
-    tools: [{ type: "code_execution_20250825", name: "code_execution" }]
-  });
-}
-```
-
 ```bash Shell
 # Initial request
 RESPONSE=$(curl https://api.anthropic.com/v1/messages \
@@ -614,6 +817,162 @@ while [ "$STOP_REASON" = "pause_turn" ]; do
   STOP_REASON=$(echo "$RESPONSE" | jq -r '.stop_reason')
 done
 ```
+
+```python Python nocheck
+messages = [{"role": "user", "content": "Process this large dataset"}]
+max_retries = 10
+
+response = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    container={
+        "skills": [
+            {
+                "type": "custom",
+                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                "version": "latest",
+            }
+        ]
+    },
+    messages=messages,
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+
+# Handle pause_turn for long operations
+for i in range(max_retries):
+    if response.stop_reason != "pause_turn":
+        break
+
+    messages.append({"role": "assistant", "content": response.content})
+    response = client.beta.messages.create(
+        model="claude-opus-4-6",
+        max_tokens=4096,
+        betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+        container={
+            "id": response.container.id,
+            "skills": [
+                {
+                    "type": "custom",
+                    "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                    "version": "latest",
+                }
+            ],
+        },
+        messages=messages,
+        tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+    )
+```
+
+```typescript TypeScript nocheck hidelines={1..3}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
+  { role: "user", content: "Process this large dataset" }
+];
+const maxRetries = 10;
+
+let response = await client.beta.messages.create({
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [{ type: "custom", skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv", version: "latest" }]
+  },
+  messages,
+  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+});
+
+// Handle pause_turn for long operations
+for (let i = 0; i < maxRetries; i++) {
+  if (response.stop_reason !== "pause_turn") {
+    break;
+  }
+
+  messages.push({
+    role: "assistant" as const,
+    content: response.content as Anthropic.Beta.Messages.BetaContentBlockParam[]
+  });
+  response = await client.beta.messages.create({
+    model: "claude-opus-4-6",
+    max_tokens: 4096,
+    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+    container: {
+      id: response.container!.id,
+      skills: [
+        { type: "custom", skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv", version: "latest" }
+      ]
+    },
+    messages,
+    tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+  });
+}
+```
+
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+AnthropicClient client = new();
+
+var messages = new List<BetaMessageParam>
+{
+    new() { Role = Role.User, Content = "Process this large dataset" }
+};
+int maxRetries = 10;
+
+var response = await client.Beta.Messages.Create(new MessageCreateParams
+{
+    Model = "claude-opus-4-6",
+    MaxTokens = 4096,
+    Betas = ["code-execution-2025-08-25", "skills-2025-10-02"],
+    Container = new BetaContainerParam
+    {
+        Skills = [
+            new BetaSkillParam
+            {
+                Type = "custom",
+                SkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                Version = "latest"
+            }
+        ]
+    },
+    Messages = messages,
+    Tools = [new BetaToolParam { Type = "code_execution_20250825", Name = "code_execution" }]
+});
+
+for (int i = 0; i < maxRetries; i++)
+{
+    if (response.StopReason != "pause_turn")
+    {
+        break;
+    }
+
+    messages.Add(new BetaMessageParam { Role = Role.Assistant, Content = response.Content });
+
+    response = await client.Beta.Messages.Create(new MessageCreateParams
+    {
+        Model = "claude-opus-4-6",
+        MaxTokens = 4096,
+        Betas = ["code-execution-2025-08-25", "skills-2025-10-02"],
+        Container = new BetaContainerParam
+        {
+            Id = response.Container.Id,
+            Skills = [
+                new BetaSkillParam
+                {
+                    Type = "custom",
+                    SkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                    Version = "latest"
+                }
+            ]
+        },
+        Messages = messages,
+        Tools = [new BetaToolParam { Type = "code_execution_20250825", Name = "code_execution" }]
+    });
+}
+```
 </CodeGroup>
 
 <Note>
@@ -625,68 +984,6 @@ The response may include a `pause_turn` stop reason, which indicates that the AP
 Combine multiple Skills in a single request to handle complex workflows:
 
 <CodeGroup>
-```python Python
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [
-            {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
-            {"type": "anthropic", "skill_id": "pptx", "version": "latest"},
-            {
-                "type": "custom",
-                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-                "version": "latest",
-            },
-        ]
-    },
-    messages=[
-        {"role": "user", "content": "Analyze sales data and create a presentation"}
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
-```
-
-```typescript TypeScript
-const response = await client.beta.messages.create({
-  model: "claude-opus-4-6",
-  max_tokens: 4096,
-  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
-  container: {
-    skills: [
-      {
-        type: "anthropic",
-        skill_id: "xlsx",
-        version: "latest"
-      },
-      {
-        type: "anthropic",
-        skill_id: "pptx",
-        version: "latest"
-      },
-      {
-        type: "custom",
-        skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
-        version: "latest"
-      }
-    ]
-  },
-  messages: [
-    {
-      role: "user",
-      content: "Analyze sales data and create a presentation"
-    }
-  ],
-  tools: [
-    {
-      type: "code_execution_20250825",
-      name: "code_execution"
-    }
-  ]
-});
-```
-
 ```bash Shell
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -725,6 +1022,133 @@ curl https://api.anthropic.com/v1/messages \
     }]
   }'
 ```
+
+```python Python nocheck
+response = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    container={
+        "skills": [
+            {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
+            {"type": "anthropic", "skill_id": "pptx", "version": "latest"},
+            {
+                "type": "custom",
+                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                "version": "latest",
+            },
+        ]
+    },
+    messages=[
+        {"role": "user", "content": "Analyze sales data and create a presentation"}
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+```
+
+```typescript TypeScript nocheck
+const response = await client.beta.messages.create({
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [
+      {
+        type: "anthropic",
+        skill_id: "xlsx",
+        version: "latest"
+      },
+      {
+        type: "anthropic",
+        skill_id: "pptx",
+        version: "latest"
+      },
+      {
+        type: "custom",
+        skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+        version: "latest"
+      }
+    ]
+  },
+  messages: [
+    {
+      role: "user",
+      content: "Analyze sales data and create a presentation"
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20250825",
+      name: "code_execution"
+    }
+  ]
+});
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02" },
+            Container = new BetaContainerParams
+            {
+                Skills = new object[]
+                {
+                    new
+                    {
+                        type = "anthropic",
+                        skill_id = "xlsx",
+                        version = "latest"
+                    },
+                    new
+                    {
+                        type = "anthropic",
+                        skill_id = "pptx",
+                        version = "latest"
+                    },
+                    new
+                    {
+                        type = "custom",
+                        skill_id = "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                        version = "latest"
+                    }
+                }
+            },
+            Messages = new[]
+            {
+                new BetaMessageParam
+                {
+                    Role = Role.User,
+                    Content = "Analyze sales data and create a presentation"
+                }
+            },
+            Tools = new object[]
+            {
+                new
+                {
+                    type = "code_execution_20250825",
+                    name = "code_execution"
+                }
+            }
+        };
+
+        var message = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
+```
 </CodeGroup>
 
 ---
@@ -736,7 +1160,17 @@ curl https://api.anthropic.com/v1/messages \
 Upload your custom Skill to make it available in your workspace. You can upload using either a directory path or individual file objects.
 
 <CodeGroup>
-```python Python
+```bash Shell
+curl -X POST "https://api.anthropic.com/v1/skills" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02" \
+  -F "display_title=Financial Analysis" \
+  -F "files[]=@financial_skill/SKILL.md;filename=financial_skill/SKILL.md" \
+  -F "files[]=@financial_skill/analyze.py;filename=financial_skill/analyze.py"
+```
+
+```python Python nocheck
 import anthropic
 
 client = anthropic.Anthropic()
@@ -779,22 +1213,22 @@ print(f"Created skill: {skill.id}")
 print(f"Latest version: {skill.latest_version}")
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 import Anthropic, { toFile } from "@anthropic-ai/sdk";
 import fs from "fs";
 
 const client = new Anthropic();
 
 // Option 1: Using a zip file
-const skill = await client.beta.skills.create({
-  displayTitle: "Financial Analysis",
+const skillFromZip = await client.beta.skills.create({
+  display_title: "Financial Analysis",
   files: [await toFile(fs.createReadStream("financial_analysis_skill.zip"), "skill.zip")],
   betas: ["skills-2025-10-02"]
 });
 
 // Option 2: Using individual file objects
 const skill = await client.beta.skills.create({
-  displayTitle: "Financial Analysis",
+  display_title: "Financial Analysis",
   files: [
     await toFile(fs.createReadStream("financial_skill/SKILL.md"), "financial_skill/SKILL.md", {
       type: "text/markdown"
@@ -812,14 +1246,48 @@ console.log(`Created skill: ${skill.id}`);
 console.log(`Latest version: ${skill.latest_version}`);
 ```
 
-```bash Shell
-curl -X POST "https://api.anthropic.com/v1/skills" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: skills-2025-10-02" \
-  -F "display_title=Financial Analysis" \
-  -F "files[]=@financial_skill/SKILL.md;filename=financial_skill/SKILL.md" \
-  -F "files[]=@financial_skill/analyze.py;filename=financial_skill/analyze.py"
+```csharp C# nocheck
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Skills;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        // Option 1: Using a zip file
+        var parameters = new SkillCreateParams
+        {
+            DisplayTitle = "Financial Analysis",
+            Files = [
+                new FileStream("financial_analysis_skill.zip", FileMode.Open, FileAccess.Read)
+            ],
+            Betas = ["skills-2025-10-02"]
+        };
+
+        var skill = await client.Beta.Skills.Create(parameters);
+
+        // Option 2: Using individual files
+        var parameters2 = new SkillCreateParams
+        {
+            DisplayTitle = "Financial Analysis",
+            Files = [
+                new FileStream("financial_skill/SKILL.md", FileMode.Open, FileAccess.Read),
+                new FileStream("financial_skill/analyze.py", FileMode.Open, FileAccess.Read)
+            ],
+            Betas = ["skills-2025-10-02"]
+        };
+
+        var skill2 = await client.Beta.Skills.Create(parameters2);
+
+        Console.WriteLine($"Created skill: {skill.Id}");
+        Console.WriteLine($"Latest version: {skill.LatestVersion}");
+    }
+}
 ```
 </CodeGroup>
 
@@ -838,7 +1306,21 @@ For complete request/response schemas, see the [Create Skill API reference](/doc
 Retrieve all Skills available to your workspace, including both Anthropic pre-built Skills and your custom Skills. Use the `source` parameter to filter by skill type:
 
 <CodeGroup>
-```python Python
+```bash Shell
+# List all Skills
+curl "https://api.anthropic.com/v1/skills" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02"
+
+# List only custom Skills
+curl "https://api.anthropic.com/v1/skills?source=custom" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02"
+```
+
+```python Python nocheck
 # List all Skills
 skills = client.beta.skills.list(betas=["skills-2025-10-02"])
 
@@ -866,18 +1348,37 @@ const customSkills = await client.beta.skills.list({
 });
 ```
 
-```bash Shell
-# List all Skills
-curl "https://api.anthropic.com/v1/skills" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: skills-2025-10-02"
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Skills;
 
-# List only custom Skills
-curl "https://api.anthropic.com/v1/skills?source=custom" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: skills-2025-10-02"
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        // List all Skills
+        var skills = await client.Beta.Skills.List(new SkillListParams
+        {
+            Betas = new[] { "skills-2025-10-02" }
+        });
+
+        foreach (var skill in skills.Data)
+        {
+            Console.WriteLine($"{skill.Id}: {skill.DisplayTitle} (source: {skill.Source})");
+        }
+
+        // List only custom Skills
+        var customSkills = await client.Beta.Skills.List(new SkillListParams
+        {
+            Source = "custom",
+            Betas = new[] { "skills-2025-10-02" }
+        });
+    }
+}
 ```
 </CodeGroup>
 
@@ -888,7 +1389,14 @@ See the [List Skills API reference](/docs/en/api/skills/list-skills) for paginat
 Get details about a specific Skill:
 
 <CodeGroup>
-```python Python
+```bash Shell
+curl "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02"
+```
+
+```python Python nocheck
 skill = client.beta.skills.retrieve(
     skill_id="skill_01AbCdEfGhIjKlMnOpQrStUv", betas=["skills-2025-10-02"]
 )
@@ -898,7 +1406,7 @@ print(f"Latest version: {skill.latest_version}")
 print(f"Created: {skill.created_at}")
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 const skill = await client.beta.skills.retrieve("skill_01AbCdEfGhIjKlMnOpQrStUv", {
   betas: ["skills-2025-10-02"]
 });
@@ -908,11 +1416,28 @@ console.log(`Latest version: ${skill.latest_version}`);
 console.log(`Created: ${skill.created_at}`);
 ```
 
-```bash Shell
-curl "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: skills-2025-10-02"
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Skills;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var skill = await client.Beta.Skills.Retrieve(
+            "skill_01AbCdEfGhIjKlMnOpQrStUv",
+            new() { Betas = ["skills-2025-10-02"] }
+        );
+
+        Console.WriteLine($"Skill: {skill.DisplayTitle}");
+        Console.WriteLine($"Latest version: {skill.LatestVersion}");
+        Console.WriteLine($"Created: {skill.CreatedAt}");
+    }
+}
 ```
 </CodeGroup>
 
@@ -921,7 +1446,15 @@ curl "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
 To delete a Skill, you must first delete all its versions:
 
 <CodeGroup>
-```python Python
+```bash Shell
+# Delete all versions first, then delete the Skill
+curl -X DELETE "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02"
+```
+
+```python Python nocheck
 # Step 1: Delete all versions
 versions = client.beta.skills.versions.list(
     skill_id="skill_01AbCdEfGhIjKlMnOpQrStUv", betas=["skills-2025-10-02"]
@@ -940,7 +1473,11 @@ client.beta.skills.delete(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
 // Step 1: Delete all versions
 const versions = await client.beta.skills.versions.list("skill_01AbCdEfGhIjKlMnOpQrStUv", {
   betas: ["skills-2025-10-02"]
@@ -958,12 +1495,39 @@ await client.beta.skills.delete("skill_01AbCdEfGhIjKlMnOpQrStUv", {
 });
 ```
 
-```bash Shell
-# Delete all versions first, then delete the Skill
-curl -X DELETE "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: skills-2025-10-02"
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        // Step 1: Delete all versions
+        var versions = await client.Beta.Skills.Versions.List(
+            "skill_01AbCdEfGhIjKlMnOpQrStUv",
+            new() { Betas = ["skills-2025-10-02"] }
+        );
+
+        foreach (var version in versions.Data)
+        {
+            await client.Beta.Skills.Versions.Delete(
+                "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                version.Version,
+                new() { Betas = ["skills-2025-10-02"] }
+            );
+        }
+
+        // Step 2: Delete the Skill
+        await client.Beta.Skills.Delete(
+            "skill_01AbCdEfGhIjKlMnOpQrStUv",
+            new() { Betas = ["skills-2025-10-02"] }
+        );
+    }
+}
 ```
 </CodeGroup>
 
@@ -984,99 +1548,6 @@ Skills support versioning to manage updates safely:
 - Create new versions when updating Skill files
 
 <CodeGroup>
-```python Python
-# Create a new version
-from anthropic.lib import files_from_dir
-
-new_version = client.beta.skills.versions.create(
-    skill_id="skill_01AbCdEfGhIjKlMnOpQrStUv",
-    files=files_from_dir("/path/to/updated_skill"),
-    betas=["skills-2025-10-02"],
-)
-
-# Use specific version
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [
-            {
-                "type": "custom",
-                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-                "version": new_version.version,
-            }
-        ]
-    },
-    messages=[{"role": "user", "content": "Use updated Skill"}],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
-
-# Use latest version
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [
-            {
-                "type": "custom",
-                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-                "version": "latest",
-            }
-        ]
-    },
-    messages=[{"role": "user", "content": "Use latest Skill version"}],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
-```
-
-```typescript TypeScript
-// Create a new version using a zip file
-const fs = require("fs");
-
-const newVersion = await client.beta.skills.versions.create("skill_01AbCdEfGhIjKlMnOpQrStUv", {
-  files: [fs.createReadStream("updated_skill.zip")],
-  betas: ["skills-2025-10-02"]
-});
-
-// Use specific version
-const response = await client.beta.messages.create({
-  model: "claude-opus-4-6",
-  max_tokens: 4096,
-  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
-  container: {
-    skills: [
-      {
-        type: "custom",
-        skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
-        version: newVersion.version
-      }
-    ]
-  },
-  messages: [{ role: "user", content: "Use updated Skill" }],
-  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
-});
-
-// Use latest version
-const response = await client.beta.messages.create({
-  model: "claude-opus-4-6",
-  max_tokens: 4096,
-  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
-  container: {
-    skills: [
-      {
-        type: "custom",
-        skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
-        version: "latest"
-      }
-    ]
-  },
-  messages: [{ role: "user", content: "Use latest Skill version" }],
-  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
-});
-```
-
 ```bash Shell
 # Create a new version
 NEW_VERSION=$(curl -X POST "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv/versions" \
@@ -1126,6 +1597,190 @@ curl https://api.anthropic.com/v1/messages \
     "messages": [{"role": "user", "content": "Use latest Skill version"}],
     "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
   }'
+```
+
+```python Python nocheck
+# Create a new version
+from anthropic.lib import files_from_dir
+
+new_version = client.beta.skills.versions.create(
+    skill_id="skill_01AbCdEfGhIjKlMnOpQrStUv",
+    files=files_from_dir("/path/to/updated_skill"),
+    betas=["skills-2025-10-02"],
+)
+
+# Use specific version
+response = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    container={
+        "skills": [
+            {
+                "type": "custom",
+                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                "version": new_version.version,
+            }
+        ]
+    },
+    messages=[{"role": "user", "content": "Use updated Skill"}],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+
+# Use latest version
+response = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    container={
+        "skills": [
+            {
+                "type": "custom",
+                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                "version": "latest",
+            }
+        ]
+    },
+    messages=[{"role": "user", "content": "Use latest Skill version"}],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+```
+
+```typescript TypeScript nocheck hidelines={1}
+import Anthropic from "@anthropic-ai/sdk";
+import fs from "fs";
+
+const client = new Anthropic();
+
+// Create a new version using a zip file
+const newVersion = await client.beta.skills.versions.create("skill_01AbCdEfGhIjKlMnOpQrStUv", {
+  files: [fs.createReadStream("updated_skill.zip")],
+  betas: ["skills-2025-10-02"]
+});
+
+// Use specific version
+const specificVersionResponse = await client.beta.messages.create({
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [
+      {
+        type: "custom",
+        skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+        version: newVersion.version
+      }
+    ]
+  },
+  messages: [{ role: "user", content: "Use updated Skill" }],
+  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+});
+
+// Use latest version
+const latestVersionResponse = await client.beta.messages.create({
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [
+      {
+        type: "custom",
+        skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+        version: "latest"
+      }
+    ]
+  },
+  messages: [{ role: "user", content: "Use latest Skill version" }],
+  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+});
+```
+
+```csharp C# nocheck
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+using Anthropic.Models.Beta.Skills;
+
+class Program
+{
+    static async Task Main()
+    {
+        var client = new AnthropicClient
+        {
+            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+        };
+
+        // Create a new version
+        var versionParams = new SkillVersionCreateParams
+        {
+            Files = [File.OpenRead("/path/to/updated_skill/SKILL.md")],
+            Betas = ["skills-2025-10-02"]
+        };
+
+        var newVersion = await client.Beta.Skills.Versions.Create(
+            "skill_01AbCdEfGhIjKlMnOpQrStUv",
+            versionParams
+        );
+
+        // Use specific version
+        var specificVersionParams = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Betas = ["code-execution-2025-08-25", "skills-2025-10-02"],
+            Container = new()
+            {
+                Skills =
+                [
+                    new()
+                    {
+                        Type = "custom",
+                        SkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                        Version = newVersion.Version
+                    }
+                ]
+            },
+            Messages = [new() { Role = Role.User, Content = "Use updated Skill" }],
+            Tools =
+            [
+                new() { Type = "code_execution_20250825", Name = "code_execution" }
+            ]
+        };
+
+        var response = await client.Beta.Messages.Create(specificVersionParams);
+        Console.WriteLine(response);
+
+        // Use latest version
+        var latestVersionParams = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Betas = ["code-execution-2025-08-25", "skills-2025-10-02"],
+            Container = new()
+            {
+                Skills =
+                [
+                    new()
+                    {
+                        Type = "custom",
+                        SkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                        Version = "latest"
+                    }
+                ]
+            },
+            Messages = [new() { Role = Role.User, Content = "Use latest Skill version" }],
+            Tools =
+            [
+                new() { Type = "code_execution_20250825", Name = "code_execution" }
+            ]
+        };
+
+        var latestResponse = await client.Beta.Messages.Create(latestVersionParams);
+        Console.WriteLine(latestResponse);
+    }
+}
 ```
 </CodeGroup>
 
@@ -1187,69 +1842,6 @@ The progressive disclosure architecture ensures efficient context usage: Claude 
 Combine Excel and custom DCF analysis Skills:
 
 <CodeGroup>
-```python Python
-# Create custom DCF analysis Skill
-from anthropic.lib import files_from_dir
-
-dcf_skill = client.beta.skills.create(
-    display_title="DCF Analysis",
-    files=files_from_dir("/path/to/dcf_skill"),
-    betas=["skills-2025-10-02"],
-)
-
-# Use with Excel to create financial model
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [
-            {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
-            {"type": "custom", "skill_id": dcf_skill.id, "version": "latest"},
-        ]
-    },
-    messages=[
-        {
-            "role": "user",
-            "content": "Build a DCF valuation model for a SaaS company with the attached financials",
-        }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
-```
-
-```typescript TypeScript
-// Create custom DCF analysis Skill
-import { toFile } from "@anthropic-ai/sdk";
-import fs from "fs";
-
-const dcfSkill = await client.beta.skills.create({
-  displayTitle: "DCF Analysis",
-  files: [await toFile(fs.createReadStream("dcf_skill.zip"), "skill.zip")],
-  betas: ["skills-2025-10-02"]
-});
-
-// Use with Excel to create financial model
-const response = await client.beta.messages.create({
-  model: "claude-opus-4-6",
-  max_tokens: 4096,
-  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
-  container: {
-    skills: [
-      { type: "anthropic", skill_id: "xlsx", version: "latest" },
-      { type: "custom", skill_id: dcfSkill.id, version: "latest" }
-    ]
-  },
-  messages: [
-    {
-      role: "user",
-      content: "Build a DCF valuation model for a SaaS company with the attached financials"
-    }
-  ],
-  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
-});
-```
-
 ```bash Shell
 # Create custom DCF analysis Skill
 DCF_SKILL=$(curl -X POST "https://api.anthropic.com/v1/skills" \
@@ -1294,6 +1886,133 @@ curl https://api.anthropic.com/v1/messages \
     }]
   }"
 ```
+
+```python Python nocheck
+# Create custom DCF analysis Skill
+from anthropic.lib import files_from_dir
+
+dcf_skill = client.beta.skills.create(
+    display_title="DCF Analysis",
+    files=files_from_dir("/path/to/dcf_skill"),
+    betas=["skills-2025-10-02"],
+)
+
+# Use with Excel to create financial model
+response = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    container={
+        "skills": [
+            {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
+            {"type": "custom", "skill_id": dcf_skill.id, "version": "latest"},
+        ]
+    },
+    messages=[
+        {
+            "role": "user",
+            "content": "Build a DCF valuation model for a SaaS company with the attached financials",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+```
+
+```typescript TypeScript nocheck
+// Create custom DCF analysis Skill
+import Anthropic, { toFile } from "@anthropic-ai/sdk";
+import fs from "fs";
+
+const client = new Anthropic();
+
+const dcfSkill = await client.beta.skills.create({
+  display_title: "DCF Analysis",
+  files: [await toFile(fs.createReadStream("dcf_skill.zip"), "skill.zip")],
+  betas: ["skills-2025-10-02"]
+});
+
+// Use with Excel to create financial model
+const response = await client.beta.messages.create({
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [
+      { type: "anthropic", skill_id: "xlsx", version: "latest" },
+      { type: "custom", skill_id: dcfSkill.id, version: "latest" }
+    ]
+  },
+  messages: [
+    {
+      role: "user",
+      content: "Build a DCF valuation model for a SaaS company with the attached financials"
+    }
+  ],
+  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+});
+```
+
+```csharp C# nocheck hidelines={1..6,-1}
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+var client = new AnthropicClient();
+
+// Create custom DCF analysis Skill
+var dcfSkill = await client.Beta.Skills.Create(new SkillCreateParams
+{
+    DisplayTitle = "DCF Analysis",
+    Files = new[] { new SkillFileParam { Path = "dcf_skill/SKILL.md", Content = skillContent } },
+    Betas = new[] { "skills-2025-10-02" },
+});
+
+// Use with Excel to create financial model
+var parameters = new MessageCreateParams
+{
+    Model = "claude-opus-4-6",
+    MaxTokens = 4096,
+    Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02" },
+    Container = new BetaContainerParam
+    {
+        Skills = new[]
+        {
+            new BetaSkillParam
+            {
+                Type = "anthropic",
+                SkillId = "xlsx",
+                Version = "latest"
+            },
+            new BetaSkillParam
+            {
+                Type = "custom",
+                SkillId = dcfSkill.Id,
+                Version = "latest"
+            }
+        }
+    },
+    Messages = new[]
+    {
+        new BetaMessageParam
+        {
+            Role = Role.User,
+            Content = "Build a DCF valuation model for a SaaS company with the attached financials"
+        }
+    },
+    Tools = new[]
+    {
+        new BetaToolParam
+        {
+            Type = "code_execution_20250825",
+            Name = "code_execution"
+        }
+    }
+};
+
+var message = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(message);
+```
 </CodeGroup>
 
 ---
@@ -1334,7 +2053,8 @@ Combine Skills when tasks involve multiple document types or domains:
 ### Version Management Strategy
 
 **For production:**
-```python
+
+```python nocheck
 # Pin to specific versions for stability
 container = {
     "skills": [
@@ -1348,7 +2068,8 @@ container = {
 ```
 
 **For development:**
-```python
+
+```python nocheck
 # Use latest for active development
 container = {
     "skills": [
@@ -1366,7 +2087,46 @@ container = {
 When using prompt caching, note that changing the Skills list in your container breaks the cache:
 
 <CodeGroup>
-```python Python
+```bash Shell
+# First request creates cache
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02,prompt-caching-2024-07-31" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
+        {"type": "anthropic", "skill_id": "xlsx", "version": "latest"}
+      ]
+    },
+    "messages": [{"role": "user", "content": "Analyze sales data"}],
+    "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
+  }'
+
+# Adding/removing Skills breaks cache
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02,prompt-caching-2024-07-31" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
+        {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
+        {"type": "anthropic", "skill_id": "pptx", "version": "latest"}
+      ]
+    },
+    "messages": [{"role": "user", "content": "Create a presentation"}],
+    "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
+  }'
+```
+
+```python Python nocheck
 # First request creates cache
 response1 = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -1436,43 +2196,58 @@ const response2 = await client.beta.messages.create({
 });
 ```
 
-```bash Shell
-# First request creates cache
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02,prompt-caching-2024-07-31" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 4096,
-    "container": {
-      "skills": [
-        {"type": "anthropic", "skill_id": "xlsx", "version": "latest"}
-      ]
-    },
-    "messages": [{"role": "user", "content": "Analyze sales data"}],
-    "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
-  }'
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
 
-# Adding/removing Skills breaks cache
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02,prompt-caching-2024-07-31" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 4096,
-    "container": {
-      "skills": [
-        {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
-        {"type": "anthropic", "skill_id": "pptx", "version": "latest"}
-      ]
-    },
-    "messages": [{"role": "user", "content": "Create a presentation"}],
-    "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
-  }'
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        // First request creates cache
+        var parameters1 = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02", "prompt-caching-2024-07-31" },
+            Container = new BetaContainer
+            {
+                Skills = new[]
+                {
+                    new BetaSkill { Type = "anthropic", SkillId = "xlsx", Version = "latest" }
+                }
+            },
+            Messages = new[] { new BetaMessageParam { Role = Role.User, Content = "Analyze sales data" } },
+            Tools = new[] { new BetaTool { Type = "code_execution_20250825", Name = "code_execution" } }
+        };
+        var response1 = await client.Beta.Messages.Create(parameters1);
+        Console.WriteLine(response1);
+
+        // Adding/removing Skills breaks cache
+        var parameters2 = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02", "prompt-caching-2024-07-31" },
+            Container = new BetaContainer
+            {
+                Skills = new[]
+                {
+                    new BetaSkill { Type = "anthropic", SkillId = "xlsx", Version = "latest" },
+                    new BetaSkill { Type = "anthropic", SkillId = "pptx", Version = "latest" }
+                }
+            },
+            Messages = new[] { new BetaMessageParam { Role = Role.User, Content = "Create a presentation" } },
+            Tools = new[] { new BetaTool { Type = "code_execution_20250825", Name = "code_execution" } }
+        };
+        var response2 = await client.Beta.Messages.Create(parameters2);
+        Console.WriteLine(response2);
+    }
+}
 ```
 </CodeGroup>
 
@@ -1483,7 +2258,12 @@ For best caching performance, keep your Skills list consistent across requests.
 Handle Skill-related errors gracefully:
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck
+import anthropic
+
+client = anthropic.Anthropic()
+
 try:
     response = client.beta.messages.create(
         model="claude-opus-4-6",
@@ -1530,6 +2310,38 @@ try {
   } else {
     throw error;
   }
+}
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var client = new AnthropicClient();
+
+        try
+        {
+            var parameters = new MessageCreateParams
+            {
+                Model = Model.ClaudeOpus4_6,
+                MaxTokens = 4096,
+                Messages = [new() { Role = Role.User, Content = "Process data" }]
+            };
+
+            var message = await client.Beta.Messages.Create(parameters);
+            Console.WriteLine(message);
+        }
+        catch (Exception e) when (e.Message.Contains("skill"))
+        {
+            Console.WriteLine($"Skill error: {e.Message}");
+        }
+    }
 }
 ```
 </CodeGroup>

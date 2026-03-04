@@ -122,7 +122,7 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
@@ -149,6 +149,33 @@ const response = await anthropic.beta.messages.create({
   },
   betas: ["context-management-2025-06-27"]
 });
+```
+
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
+{
+    Model = "claude-opus-4-6",
+    MaxTokens = 4096,
+    Messages = [
+        new() { Role = Role.User, Content = "Search for recent developments in AI" }
+    ],
+    Tools = [
+        new() { Type = "web_search_20250305", Name = "web_search" }
+    ],
+    ContextManagement = new BetaContextManagementConfig()
+    {
+        Edits = [new BetaClearToolUses20250919Edit()]
+    },
+    Betas = ["context-management-2025-06-27"]
+};
+
+var response = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(response);
 ```
 
 </CodeGroup>
@@ -246,7 +273,7 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
@@ -302,6 +329,82 @@ const response = await anthropic.beta.messages.create({
 });
 ```
 
+```csharp C# nocheck
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 4096,
+            Messages = new List<BetaMessageParam>
+            {
+                new() { Role = Role.User, Content = "Create a simple command line calculator app using Python" }
+            },
+            Tools = new List<object>
+            {
+                new Dictionary<string, object>
+                {
+                    { "type", "text_editor_20250728" },
+                    { "name", "str_replace_based_edit_tool" },
+                    { "max_characters", 10000 }
+                },
+                new Dictionary<string, object>
+                {
+                    { "type", "web_search_20250305" },
+                    { "name", "web_search" },
+                    { "max_uses", 3 }
+                }
+            },
+            Betas = new List<string> { "context-management-2025-06-27" },
+            ContextManagement = new Dictionary<string, object>
+            {
+                {
+                    "edits", new List<object>
+                    {
+                        new Dictionary<string, object>
+                        {
+                            { "type", "clear_tool_uses_20250919" },
+                            { "trigger", new Dictionary<string, object>
+                                {
+                                    { "type", "input_tokens" },
+                                    { "value", 30000 }
+                                }
+                            },
+                            { "keep", new Dictionary<string, object>
+                                {
+                                    { "type", "tool_uses" },
+                                    { "value", 3 }
+                                }
+                            },
+                            { "clear_at_least", new Dictionary<string, object>
+                                {
+                                    { "type", "input_tokens" },
+                                    { "value", 5000 }
+                                }
+                            },
+                            { "exclude_tools", new List<string> { "web_search" } }
+                        }
+                    }
+                }
+            }
+        };
+
+        var message = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
+```
+
 </CodeGroup>
 
 ## Thinking block clearing usage
@@ -338,7 +441,7 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
-```python Python
+```python Python nocheck
 response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -356,7 +459,7 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
@@ -386,6 +489,50 @@ const response = await anthropic.beta.messages.create({
     ]
   }
 });
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            MaxTokens = 1024,
+            Messages = [],
+            Thinking = new BetaThinkingParam
+            {
+                Type = "enabled",
+                BudgetTokens = 10000
+            },
+            Betas = ["context-management-2025-06-27"],
+            ContextManagement = new BetaContextManagementConfig()
+            {
+                Edits = [
+                    new BetaClearThinking20251015Edit()
+                    {
+                        Keep = new BetaThinkingTurnsKeep
+                        {
+                            Type = "thinking_turns",
+                            Value = 2
+                        }
+                    }
+                ]
+            }
+        };
+
+        var message = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 
 </CodeGroup>
@@ -431,7 +578,7 @@ When using multiple strategies, the `clear_thinking_20251015` strategy must be l
 
 <CodeGroup>
 
-```python Python
+```python Python nocheck
 response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -493,6 +640,62 @@ const response = await anthropic.beta.messages.create({
     ]
   }
 });
+```
+
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 1024,
+            Messages = [],
+            Thinking = new ThinkingConfig
+            {
+                Type = "enabled",
+                BudgetTokens = 10000
+            },
+            Tools = [],
+            Betas = ["context-management-2025-06-27"],
+            ContextManagement = new BetaContextManagementConfig()
+            {
+                Edits = [
+                    new BetaClearThinking20251015Edit()
+                    {
+                        Keep = new KeepThinkingTurns
+                        {
+                            Type = "thinking_turns",
+                            Value = 2
+                        }
+                    },
+                    new BetaClearToolUses20250919Edit()
+                    {
+                        Trigger = new InputTokensTrigger
+                        {
+                            Type = "input_tokens",
+                            Value = 50000
+                        },
+                        Keep = new KeepToolUses
+                        {
+                            Type = "tool_uses",
+                            Value = 5
+                        }
+                    }
+                ]
+            }
+        };
+
+        var message = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 
 </CodeGroup>
@@ -600,7 +803,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     }'
 ```
 
-```python Python
+```python Python nocheck
 response = client.beta.messages.count_tokens(
     model="claude-opus-4-6",
     messages=[{"role": "user", "content": "Continue our conversation..."}],
@@ -624,7 +827,7 @@ print(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
@@ -666,6 +869,39 @@ console.log(
   `Savings: ${(response.context_management?.original_input_tokens || 0) - response.input_tokens} tokens`
 );
 ```
+
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+var client = new AnthropicClient
+{
+    ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+};
+
+var parameters = new BetaMessageTokensCountParams
+{
+    Model = "claude-opus-4-6",
+    Messages = [new() { Role = Role.User, Content = "Continue our conversation..." }],
+    Betas = ["context-management-2025-06-27"],
+    ContextManagement = new BetaContextManagementConfig
+    {
+        Edits = [
+            new BetaClearToolUses20250919Edit
+            {
+                Trigger = new BetaInputTokensTrigger { Value = 30000 },
+                Keep = new BetaToolUsesKeep { Value = 5 }
+            }
+        ]
+    }
+};
+
+var response = await client.Beta.Messages.CountTokens(parameters);
+
+Console.WriteLine($"Original tokens: {response.ContextManagement?.OriginalInputTokens}");
+Console.WriteLine($"After clearing: {response.InputTokens}");
+Console.WriteLine($"Savings: {(response.ContextManagement?.OriginalInputTokens ?? 0) - response.InputTokens} tokens");
+```
 </CodeGroup>
 
 ```json Response
@@ -695,7 +931,7 @@ To use both features together, enable them in your API request:
 
 <CodeGroup>
 
-```python Python
+```python Python nocheck
 response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
@@ -709,7 +945,7 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
@@ -734,6 +970,43 @@ const response = await anthropic.beta.messages.create({
     edits: [{ type: "clear_tool_uses_20250919" }]
   }
 });
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [],
+            Tools = [
+                new() {
+                    Type = "memory_20250818",
+                    Name = "memory"
+                }
+            ],
+            Betas = ["context-management-2025-06-27"],
+            ContextManagement = new BetaContextManagementConfig() {
+                Edits = [
+                    new BetaClearToolUses20250919Edit()
+                ]
+            }
+        };
+
+        var response = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(response);
+    }
+}
 ```
 
 </CodeGroup>
@@ -765,7 +1038,7 @@ Add `compaction_control` to your `tool_runner` call:
 
 <CodeGroup>
 
-```python Python
+```python Python nocheck hidelines={1..4}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -789,7 +1062,7 @@ for message in runner:
 final = runner.until_done()
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -817,6 +1090,46 @@ for await (const message of runner) {
 }
 
 const finalMessage = await runner.runUntilDone();
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+public class Program
+{
+    public static async Task Main()
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Tools = [],
+            Messages = [
+                new() {
+                    Role = Role.User,
+                    Content = "Analyze all the files in this directory and write a summary report."
+                }
+            ],
+            ContextManagement = new BetaContextManagementConfig()
+            {
+                Edits = [
+                    new BetaCompact20260112Edit()
+                    {
+                        ContextTokenThreshold = 100000
+                    }
+                ]
+            }
+        };
+
+        var message = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine($"Tokens used: {message.Usage.InputTokens}");
+    }
+}
 ```
 
 </CodeGroup>
@@ -1067,6 +1380,50 @@ logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
 // You'll see messages like:
 // Token usage 105000 has exceeded the threshold of 100000. Performing compaction.
 // Compaction complete. New token usage: 2500
+```
+
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class CompactionLogging
+{
+    static async Task Main()
+    {
+        var client = new AnthropicClient();
+        var messages = new List<BetaMessageParam>();
+
+        await Chat(client, messages, "Help me build a C# application");
+        await Chat(client, messages, "Add error handling");
+        await Chat(client, messages, "Now add logging");
+    }
+
+    static async Task<string> Chat(AnthropicClient client, List<BetaMessageParam> messages, string userMessage)
+    {
+        messages.Add(new BetaMessageParam { Role = Role.User, Content = userMessage });
+
+        var parameters = new MessageCreateParams
+        {
+            Betas = ["compact-2026-01-12"],
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = messages,
+            ContextManagement = new BetaContextManagementConfig
+            {
+                Edits = [new BetaCompact20260112Edit()]
+            }
+        };
+
+        var response = await client.Beta.Messages.Create(parameters);
+
+        messages.Add(new BetaMessageParam { Role = Role.Assistant, Content = response.Content });
+
+        Console.WriteLine($"Token usage: {response.Usage.InputTokens}");
+
+        var textBlock = response.Content.FirstOrDefault(b => b.Type == "text");
+        return textBlock?.Text ?? "";
+    }
+}
 ```
 
 </CodeGroup>

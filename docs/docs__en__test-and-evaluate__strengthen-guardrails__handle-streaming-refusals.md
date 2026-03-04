@@ -68,7 +68,7 @@ if echo "$response" | grep -q '"stop_reason":"refusal"'; then
 fi
 ```
 
-```python Python
+```python Python hidelines={1..4}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -98,7 +98,7 @@ except Exception as e:
     print(f"Error: {e}")
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck hidelines={1..3}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -126,6 +126,53 @@ try {
   }
 } catch (error) {
   console.error("Error:", error);
+}
+```
+
+```csharp C# nocheck
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    private static List<Message> messages = new();
+
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeSonnet4_6,
+            MaxTokens = 1024,
+            Messages = [new() { Role = Role.User, Content = "Hello" }]
+        };
+
+        try
+        {
+            await foreach (var msg in client.Messages.CreateStreaming(parameters))
+            {
+                if (msg.Type == "message_delta" && msg.Delta?.StopReason == "refusal")
+                {
+                    ResetConversation();
+                    break;
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error: {e.Message}");
+        }
+    }
+
+    private static void ResetConversation()
+    {
+        messages.Clear();
+        Console.WriteLine("Conversation reset due to refusal");
+    }
 }
 ```
 </CodeGroup>

@@ -163,7 +163,7 @@ message = client.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
@@ -180,13 +180,43 @@ const message = await anthropic.messages.create({
         "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
     }
   ],
-  tools: [
-    {
-      type: "memory_20250818",
-      name: "memory"
-    }
-  ]
+  tools: [{ type: "memory_20250818", name: "memory" }]
 });
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        AnthropicClient client = new()
+        {
+            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+        };
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 2048,
+            Messages = [
+                new()
+                {
+                    Role = Role.User,
+                    Content = "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
+                }
+            ],
+            Tools = [new ToolUnion(new MemoryTool20250818())]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 
 </CodeGroup>
@@ -444,7 +474,7 @@ To use both features together:
 
 <CodeGroup>
 
-```python Python
+```python Python nocheck
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
@@ -465,7 +495,7 @@ response = client.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
@@ -503,13 +533,53 @@ const response = await anthropic.messages.create({
 });
 ```
 
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_6,
+    MaxTokens = 4096,
+    Messages = [/* ... */],
+    Tools = [
+        new ToolUnion(new MemoryTool20250818()),
+        // Your other tools
+    ],
+    ContextManagement = new BetaContextManagementConfig
+    {
+        Edits = [
+            new BetaClearToolUses20250919Edit
+            {
+                Trigger = new InputTokensTrigger
+                {
+                    Type = "input_tokens",
+                    Value = 100000
+                },
+                Keep = new KeepToolUses
+                {
+                    Type = "tool_uses",
+                    Value = 3
+                }
+            }
+        ]
+    },
+    Betas = ["context-management-2025-06-27"]
+};
+
+var response = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(response);
+```
+
 </CodeGroup>
 
 You can also exclude memory tool calls from being cleared to ensure Claude always has access to recent memory operations:
 
 <CodeGroup>
 
-```python Python
+```python Python nocheck
 context_management = {
     "edits": [{"type": "clear_tool_uses_20250919", "exclude_tools": ["memory"]}]
 }

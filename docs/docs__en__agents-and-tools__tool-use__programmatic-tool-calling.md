@@ -110,13 +110,13 @@ response = client.messages.create(
 print(response)
 ```
 
-```typescript TypeScript
-import { Anthropic } from "@anthropic-ai/sdk";
+```typescript TypeScript hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
 
-const anthropic = new Anthropic();
+const client = new Anthropic();
 
 async function main() {
-  const response = await anthropic.messages.create({
+  const response = await client.messages.create({
     model: "claude-opus-4-6",
     max_tokens: 4096,
     messages: [
@@ -136,7 +136,7 @@ async function main() {
         description:
           "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
         input_schema: {
-          type: "object",
+          type: "object" as const,
           properties: {
             sql: {
               type: "string",
@@ -154,6 +154,60 @@ async function main() {
 }
 
 main().catch(console.error);
+```
+
+```csharp C#
+using Anthropic;
+using Anthropic.Models.Messages;
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [
+                new() {
+                    Role = Role.User,
+                    Content = "Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue"
+                }
+            ],
+            Tools = [
+                new ToolUnion(new Tool()
+                {
+                    Type = "code_execution_20260120",
+                    Name = "code_execution",
+                    InputSchema = new InputSchema(),
+                }),
+                new ToolUnion(new Tool()
+                {
+                    Name = "query_database",
+                    Description = "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
+                    InputSchema = new InputSchema()
+                    {
+                        Properties = new Dictionary<string, JsonElement>
+                        {
+                            ["sql"] = JsonSerializer.SerializeToElement(new { type = "string", description = "SQL query to execute" }),
+                        },
+                        Required = ["sql"],
+                    },
+                    AllowedCallers = ["code_execution_20260120"]
+                }),
+            ]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -261,7 +315,8 @@ Provide detailed descriptions of your tool's output format in the tool descripti
 </Note>
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
@@ -276,9 +331,7 @@ response = client.messages.create(
         {
             "name": "query_database",
             "description": "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
-            "input_schema": {
-                # ...
-            },
+            "input_schema": {...},
             "allowed_callers": ["code_execution_20260120"],
         },
     ],
@@ -286,7 +339,7 @@ response = client.messages.create(
 ```
 
 ```typescript TypeScript
-const response = await anthropic.messages.create({
+const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
   messages: [
@@ -312,6 +365,60 @@ const response = await anthropic.messages.create({
     }
   ]
 });
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new()
+        {
+            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+        };
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [
+                new() {
+                    Role = Role.User,
+                    Content = "Query customer purchase history from the last quarter and identify our top 5 customers by revenue"
+                }
+            ],
+            Tools = [
+                new() {
+                    Type = "code_execution_20260120",
+                    Name = "code_execution"
+                },
+                new() {
+                    Name = "query_database",
+                    Description = "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
+                    InputSchema = new() {
+                        Type = "object",
+                        Properties = new() {
+                            ["query"] = new() {
+                                Type = "string",
+                                Description = "The SQL query to execute"
+                            }
+                        },
+                        Required = ["query"]
+                    },
+                    AllowedCallers = ["code_execution_20260120"]
+                }
+            ]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -359,7 +466,8 @@ Claude writes code that calls your tool. The API pauses and returns:
 Include the full conversation history plus your tool result:
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
@@ -410,7 +518,7 @@ response = client.messages.create(
 ```
 
 ```typescript TypeScript
-const response = await anthropic.messages.create({
+const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
   container: "container_xyz789", // Reuse the container
@@ -455,9 +563,80 @@ const response = await anthropic.messages.create({
     }
   ],
   tools: [
-    // ...
+    /* ... */
   ]
 });
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Container = "container_xyz789",
+            Messages =
+            [
+                new()
+                {
+                    Role = Role.User,
+                    Content = "Query customer purchase history from the last quarter and identify our top 5 customers by revenue"
+                },
+                new()
+                {
+                    Role = Role.Assistant,
+                    Content = new ContentBlock[]
+                    {
+                        new TextBlock { Text = "I'll query the purchase history and analyze the results." },
+                        new ServerToolUseBlock
+                        {
+                            Id = "srvtoolu_abc123",
+                            Name = "code_execution",
+                            Input = new { code = "..." }
+                        },
+                        new ToolUseBlock
+                        {
+                            Id = "toolu_def456",
+                            Name = "query_database",
+                            Input = new { sql = "<sql>" },
+                            Caller = new ToolCaller
+                            {
+                                Type = "code_execution_20260120",
+                                ToolId = "srvtoolu_abc123"
+                            }
+                        }
+                    }
+                },
+                new()
+                {
+                    Role = Role.User,
+                    Content = new ContentBlockParam[]
+                    {
+                        new ToolResultBlockParam
+                        {
+                            ToolUseId = "toolu_def456",
+                            Content = "[{\"customer_id\": \"C1\", \"revenue\": 45000}, {\"customer_id\": \"C2\", \"revenue\": 38000}, ...]"
+                        }
+                    }
+                }
+            ],
+            Tools = []
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -498,7 +677,7 @@ Once the code execution completes, Claude provides the final response:
 
 Claude can write code that processes multiple items efficiently:
 
-```python
+```python nocheck
 # async wrapper omitted for clarity
 regions = ["West", "East", "Central", "North", "South"]
 results = {}
@@ -520,7 +699,7 @@ This pattern:
 
 Claude can stop processing as soon as success criteria are met:
 
-```python
+```python nocheck
 # async wrapper omitted for clarity
 endpoints = ["us-east", "eu-west", "apac"]
 for endpoint in endpoints:
@@ -532,7 +711,7 @@ for endpoint in endpoints:
 
 ### Conditional tool selection
 
-```python
+```python nocheck
 # async wrapper omitted for clarity
 file_info = await get_file_info(path)
 if file_info["size"] < 10000:
@@ -544,7 +723,7 @@ print(content)
 
 ### Data filtering
 
-```python
+```python nocheck
 # async wrapper omitted for clarity
 logs = await fetch_logs(server_id)
 errors = [log for log in logs if "ERROR" in log]
@@ -644,7 +823,7 @@ To prevent timeouts:
 
 If your tool returns an error:
 
-```python
+```python nocheck
 # Provide error information in the tool result
 {
     "type": "tool_result",

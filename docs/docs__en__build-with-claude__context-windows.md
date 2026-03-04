@@ -135,7 +135,7 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -146,6 +146,32 @@ const msg = await anthropic.beta.messages.create({
   messages: [{ role: "user", content: "Process this large document..." }],
   betas: ["context-1m-2025-08-07"]
 });
+```
+
+```csharp C# nocheck
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 1024,
+            Messages = [new() { Role = Role.User, Content = "Process this large document..." }],
+            Betas = ["context-1m-2025-08-07"]
+        };
+
+        var message = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 
 </CodeGroup>

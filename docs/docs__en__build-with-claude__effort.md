@@ -57,6 +57,24 @@ Sonnet 4.6 defaults to `high` effort. Explicitly set effort when using Sonnet 4.
 ## Basic usage
 
 <CodeGroup>
+```bash Shell
+curl https://api.anthropic.com/v1/messages \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --data '{
+        "model": "claude-opus-4-6",
+        "max_tokens": 4096,
+        "messages": [{
+            "role": "user",
+            "content": "Analyze the trade-offs between microservices and monolithic architectures"
+        }],
+        "output_config": {
+            "effort": "medium"
+        }
+    }'
+```
+
 ```python Python
 import anthropic
 
@@ -77,7 +95,7 @@ response = client.messages.create(
 print(response.content[0].text)
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -96,25 +114,39 @@ const response = await client.messages.create({
   }
 });
 
-console.log(response.content[0].text);
+const textBlock = response.content.find(
+  (block): block is Anthropic.TextBlock => block.type === "text"
+);
+console.log(textBlock?.text);
 ```
 
-```bash Shell
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [{
-            "role": "user",
-            "content": "Analyze the trade-offs between microservices and monolithic architectures"
-        }],
-        "output_config": {
-            "effort": "medium"
-        }
-    }'
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [new() { Role = Role.User, Content = "Analyze the trade-offs between microservices and monolithic architectures" }],
+            OutputConfig = new OutputConfig
+            {
+                Effort = Effort.Medium
+            }
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 
 </CodeGroup>

@@ -36,6 +36,14 @@ The `stop_reason` field is part of every successful Messages API response. Unlik
 The most common stop reason. Indicates Claude finished its response naturally.
 
 ```python
+from anthropic import Anthropic
+
+client = Anthropic()
+response = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}],
+)
 if response.stop_reason == "end_turn":
     # Process the complete response
     print(response.content[0].text)
@@ -51,7 +59,7 @@ Sometimes Claude returns an empty response (exactly 2-3 tokens with no content) 
 
 **How to prevent empty responses:**
 
-```python
+```python nocheck
 # INCORRECT: Adding text immediately after tool_result
 messages = [
     {"role": "user", "content": "Calculate the sum of 1234 and 5678"},
@@ -130,7 +138,7 @@ def handle_empty_response(client, messages):
 ### max_tokens
 Claude stopped because it reached the `max_tokens` limit specified in your request.
 
-```python
+```python nocheck
 # Request with limited tokens
 response = client.messages.create(
     model="claude-opus-4-6",
@@ -147,7 +155,7 @@ if response.stop_reason == "max_tokens":
 ### stop_sequence
 Claude encountered one of your custom stop sequences.
 
-```python
+```python nocheck
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -166,9 +174,30 @@ Claude is calling a tool and expects you to execute it.
 For most tool use implementations, we recommend using the [tool runner](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta) which automatically handles tool execution, result formatting, and conversation management.
 </Note>
 
-```python
+```python nocheck
+from anthropic import Anthropic
+
+client = Anthropic()
+weather_tool = {
+    "name": "get_weather",
+    "description": "Get the current weather in a given location",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "location": {"type": "string", "description": "City and state"},
+        },
+        "required": ["location"],
+    },
+}
+
+
+def execute_tool(name, tool_input):
+    """Execute a tool and return the result."""
+    return f"Weather in {tool_input.get('location', 'unknown')}: 72°F"
+
+
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     tools=[weather_tool],
     messages=[{"role": "user", "content": "What's the weather?"}],
@@ -187,7 +216,7 @@ Returned when the server-side sampling loop reaches its iteration limit while ex
 
 When this happens, the response may contain a `server_tool_use` block without a corresponding `server_tool_result`. To let Claude finish processing, continue the conversation by sending the response back as-is.
 
-```python
+```python nocheck
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -215,7 +244,7 @@ Your application should handle `pause_turn` in any agent loop that uses server t
 ### refusal
 Claude refused to generate a response due to safety concerns.
 
-```python
+```python nocheck
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -239,7 +268,7 @@ To learn more about refusals triggered by API safety filters for Claude Sonnet 4
 ### model_context_window_exceeded
 Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
 
-```python
+```python nocheck
 # Request with maximum tokens to get as much as possible
 response = client.messages.create(
     model="claude-opus-4-6",
@@ -265,7 +294,7 @@ This stop reason is available by default in Sonnet 4.5 and newer models. For ear
 
 Make it a habit to check the `stop_reason` in your response handling logic:
 
-```python
+```python nocheck
 def handle_response(response):
     if response.stop_reason == "tool_use":
         return handle_tool_use(response)
@@ -286,7 +315,7 @@ def handle_response(response):
 
 When a response is truncated due to token limits or context window:
 
-```python
+```python nocheck
 def handle_truncated_response(response):
     if response.stop_reason in ["max_tokens", "model_context_window_exceeded"]:
         # Option 1: Warn the user about the specific limit
@@ -313,7 +342,7 @@ def handle_truncated_response(response):
 
 When using [server tools](/docs/en/agents-and-tools/tool-use/overview#server-tools), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
-```python
+```python nocheck
 def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
     """
     Handle server tool conversations that may require multiple continuations.
@@ -358,8 +387,17 @@ It's important to distinguish between `stop_reason` values and actual errors:
 - Response contains error details
 
 ```python
+import anthropic
+from anthropic import Anthropic
+
+client = Anthropic()
+
 try:
-    response = client.messages.create(...)
+    response = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": "Hello!"}],
+    )
 
     # Handle successful response with stop_reason
     if response.stop_reason == "max_tokens":
@@ -381,7 +419,15 @@ When using streaming, `stop_reason` is:
 - Not provided in any other events
 
 ```python
-with client.messages.stream(...) as stream:
+from anthropic import Anthropic
+
+client = Anthropic()
+
+with client.messages.stream(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}],
+) as stream:
     for event in stream:
         if event.type == "message_delta":
             stop_reason = event.delta.stop_reason
@@ -397,7 +443,7 @@ with client.messages.stream(...) as stream:
 **Simpler with tool runner**: The example below shows manual tool handling. For most use cases, the [tool runner](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta) automatically handles tool execution with much less code.
 </Tip>
 
-```python
+```python nocheck
 def complete_tool_workflow(client, user_query, tools):
     messages = [{"role": "user", "content": user_query}]
 
@@ -418,7 +464,7 @@ def complete_tool_workflow(client, user_query, tools):
 
 ### Ensuring complete responses
 
-```python
+```python nocheck
 def get_complete_response(client, prompt, max_attempts=3):
     messages = [{"role": "user", "content": prompt}]
     full_response = ""
@@ -447,7 +493,7 @@ def get_complete_response(client, prompt, max_attempts=3):
 
 With the `model_context_window_exceeded` stop reason, you can request the maximum possible tokens without calculating input size:
 
-```python
+```python nocheck
 def get_max_possible_tokens(client, prompt):
     """
     Get as many tokens as possible within the model's context window

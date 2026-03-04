@@ -126,7 +126,7 @@ image2_data = base64.standard_b64encode(httpx.get(image2_url).content).decode("u
 # For URL-based images, you can use the URLs directly in your requests
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 import axios from "axios";
 
 // For base64-encoded images
@@ -143,6 +143,53 @@ async function prepareImages() {
   // Now you can use imageData in your API calls
 }
 
+// For URL-based images, you can use the URLs directly in your requests
+```
+
+```csharp C#
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+// For base64-encoded images
+async Task<string> DownloadAndEncodeImageAsync(string url)
+{
+    using var client = new HttpClient();
+    var bytes = await client.GetByteArrayAsync(url);
+    return Convert.ToBase64String(bytes);
+}
+
+// Usage:
+// var imageData = await DownloadAndEncodeImageAsync("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg");
+// For URL-based images, you can use the URLs directly in your requests
+```
+
+```go Go
+package main
+
+import (
+	"encoding/base64"
+	"io"
+	"net/http"
+)
+
+func downloadAndEncodeImage(url string) (string, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
+	return base64.StdEncoding.EncodeToString(data), nil
+}
+
+// Usage:
+// imageData, _ := downloadAndEncodeImage("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg")
 // For URL-based images, you can use the URLs directly in your requests
 ```
 
@@ -177,32 +224,18 @@ public class ImageHandlingExample {
 }
 ```
 
-```go Go
-package main
-
-import (
-	"encoding/base64"
-	"io"
-	"net/http"
-)
-
-func downloadAndEncodeImage(url string) (string, error) {
-	resp, err := http.Get(url)
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close()
-
-	data, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return "", err
-	}
-
-	return base64.StdEncoding.EncodeToString(data), nil
+```php PHP nocheck
+<?php
+// For base64-encoded images
+function downloadAndEncodeImage($url) {
+    $imageData = file_get_contents($url);
+    return base64_encode($imageData);
 }
 
-// Usage:
-// imageData, _ := downloadAndEncodeImage("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg")
+$image1Url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+$image1MediaType = "image/jpeg";
+$image1Data = downloadAndEncodeImage($image1Url);
+
 // For URL-based images, you can use the URLs directly in your requests
 ```
 
@@ -223,39 +256,6 @@ image1_media_type = "image/jpeg"
 image1_data = download_and_encode_image(image1_url)
 
 # For URL-based images, you can use the URLs directly in your requests
-```
-
-```csharp C#
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-// For base64-encoded images
-async Task<string> DownloadAndEncodeImageAsync(string url)
-{
-    using var client = new HttpClient();
-    var bytes = await client.GetByteArrayAsync(url);
-    return Convert.ToBase64String(bytes);
-}
-
-// Usage:
-// var imageData = await DownloadAndEncodeImageAsync("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg");
-// For URL-based images, you can use the URLs directly in your requests
-```
-
-```php PHP
-<?php
-// For base64-encoded images
-function downloadAndEncodeImage($url) {
-    $imageData = file_get_contents($url);
-    return base64_encode($imageData);
-}
-
-$image1Url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
-$image1MediaType = "image/jpeg";
-$image1Data = downloadAndEncodeImage($image1Url);
-
-// For URL-based images, you can use the URLs directly in your requests
 ```
 </CodeGroup>
 
@@ -293,8 +293,11 @@ Below are examples of how to include images in a Messages API request using base
         ]
       }'
     ```
-    ```python Python
+    ```python Python hidelines={3..5,-1}
     import anthropic
+
+    image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+    image1_media_type = "image/png"
 
     client = anthropic.Anthropic()
     message = client.messages.create(
@@ -319,7 +322,8 @@ Below are examples of how to include images in a Messages API request using base
     )
     print(message)
     ```
-    ```typescript TypeScript
+    
+    ```typescript TypeScript nocheck hidelines={1..2}
     import Anthropic from "@anthropic-ai/sdk";
 
     const anthropic = new Anthropic({
@@ -425,7 +429,7 @@ Below are examples of how to include images in a Messages API request using base
         ]
       }'
     ```
-    ```python Python
+    ```python Python hidelines={1..3,-1}
     import anthropic
 
     client = anthropic.Anthropic()
@@ -450,7 +454,7 @@ Below are examples of how to include images in a Messages API request using base
     )
     print(message)
     ```
-    ```typescript TypeScript
+    ```typescript TypeScript hidelines={1..2}
     import Anthropic from "@anthropic-ai/sdk";
 
     const anthropic = new Anthropic({
@@ -570,7 +574,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python
+```python Python nocheck hidelines={1..4,-1}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -601,20 +605,18 @@ message = client.beta.messages.create(
 print(message.content)
 ```
 
-```typescript TypeScript
-import { Anthropic, toFile } from "@anthropic-ai/sdk";
+```typescript TypeScript nocheck
+import Anthropic, { toFile } from "@anthropic-ai/sdk";
 import fs from "fs";
 
 const anthropic = new Anthropic();
 
 async function main() {
   // Upload the image file
-  const fileUpload = await anthropic.beta.files.upload(
-    {
-      file: toFile(fs.createReadStream("image.jpg"), undefined, { type: "image/jpeg" })
-    },
-    { betas: ["files-api-2025-04-14"] }
-  );
+  const fileUpload = await anthropic.beta.files.upload({
+    file: await toFile(fs.createReadStream("image.jpg"), undefined, { type: "image/jpeg" }),
+    betas: ["files-api-2025-04-14"]
+  });
 
   // Use the uploaded file in a message
   const response = await anthropic.beta.messages.create({
@@ -708,7 +710,13 @@ Ask Claude to describe one image.
 
 <Tabs>
   <Tab title="Using Base64">
-    ```python Python
+    ```python Python hidelines={1..6}
+    import anthropic
+
+    client = anthropic.Anthropic()
+    image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+    image1_media_type = "image/png"
+
     message = client.messages.create(
         model="claude-opus-4-6",
         max_tokens=1024,
@@ -768,7 +776,15 @@ Ask Claude to describe the differences between multiple images.
 
 <Tabs>
   <Tab title="Using Base64">
-    ```python Python
+    ```python Python hidelines={1..8}
+    import anthropic
+
+    client = anthropic.Anthropic()
+    image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+    image1_media_type = "image/png"
+    image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+    image2_media_type = "image/png"
+
     message = client.messages.create(
         model="claude-opus-4-6",
         max_tokens=1024,
@@ -847,7 +863,15 @@ Ask Claude to describe the differences between multiple images, while giving it 
 
 <Tabs>
   <Tab title="Using Base64">
-    ```python Python
+    ```python Python hidelines={1..8}
+    import anthropic
+
+    client = anthropic.Anthropic()
+    image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+    image1_media_type = "image/png"
+    image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+    image2_media_type = "image/png"
+
     message = client.messages.create(
         model="claude-opus-4-6",
         max_tokens=1024,

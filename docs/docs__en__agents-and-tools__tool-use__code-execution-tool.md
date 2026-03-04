@@ -95,13 +95,13 @@ response = client.messages.create(
 print(response)
 ```
 
-```typescript TypeScript
-import { Anthropic } from "@anthropic-ai/sdk";
+```typescript TypeScript hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
 
-const anthropic = new Anthropic();
+const client = new Anthropic();
 
 async function main() {
-  const response = await anthropic.messages.create({
+  const response = await client.messages.create({
     model: "claude-opus-4-6",
     max_tokens: 4096,
     messages: [
@@ -122,6 +122,37 @@ async function main() {
 }
 
 main().catch(console.error);
+```
+
+```csharp C# hidelines={1..10,-1}
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [
+                new() {
+                    Role = Role.User,
+                    Content = "Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+                }
+            ],
+            Tools = [new ToolUnion(new CodeExecutionTool20250825())]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -194,7 +225,7 @@ response = client.messages.create(
 ```
 
 ```typescript TypeScript
-const response = await anthropic.messages.create({
+const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
   messages: [
@@ -210,6 +241,32 @@ const response = await anthropic.messages.create({
     }
   ]
 });
+```
+
+```csharp C# hidelines={1..10,-1}
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [new() { Role = Role.User, Content = "Check the Python version and list installed packages" }],
+            Tools = [new ToolUnion(new CodeExecutionTool20250825())]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -252,7 +309,7 @@ response = client.messages.create(
 ```
 
 ```typescript TypeScript
-const response = await anthropic.messages.create({
+const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
   messages: [
@@ -269,6 +326,32 @@ const response = await anthropic.messages.create({
     }
   ]
 });
+```
+
+```csharp C# hidelines={1..10,-1}
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [new() { Role = Role.User, Content = "Create a config.yaml file with database settings, then update the port from 5432 to 3306" }],
+            Tools = [new ToolUnion(new CodeExecutionTool20250825())]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -327,7 +410,7 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
-```python Python
+```python Python nocheck hidelines={1..4}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -355,20 +438,21 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript
-import { Anthropic } from "@anthropic-ai/sdk";
+```typescript TypeScript nocheck
+import Anthropic, { toFile } from "@anthropic-ai/sdk";
 import { createReadStream } from "fs";
 
-const anthropic = new Anthropic();
+const client = new Anthropic();
 
 async function main() {
   // Upload a file
-  const fileObject = await anthropic.beta.files.create({
-    file: createReadStream("data.csv")
+  const fileObject = await client.beta.files.upload({
+    file: await toFile(createReadStream("data.csv"), undefined, { type: "text/csv" }),
+    betas: ["files-api-2025-04-14"]
   });
 
   // Use the file_id with code execution
-  const response = await anthropic.beta.messages.create({
+  const response = await client.beta.messages.create({
     model: "claude-opus-4-6",
     betas: ["files-api-2025-04-14"],
     max_tokens: 4096,
@@ -394,6 +478,48 @@ async function main() {
 
 main().catch(console.error);
 ```
+
+```csharp C# nocheck hidelines={1..9,-1}
+using Anthropic;
+using Anthropic.Models.Beta.Files;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        // Upload a file
+        var fileObject = await client.Beta.Files.Upload(new FileUploadParams
+        {
+            File = File.OpenRead("data.csv")
+        });
+
+        // Use the file_id with code execution
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            Betas = ["files-api-2025-04-14"],
+            MaxTokens = 4096,
+            Messages = [
+                new()
+                {
+                    Role = Role.User,
+                    Content = [
+                        new() { Type = "text", Text = "Analyze this CSV data" },
+                        new() { Type = "container_upload", FileId = fileObject.Id }
+                    ]
+                }
+            ],
+            Tools = [new ToolUnion(new CodeExecutionTool20250825())]
+        };
+
+        var response = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(response);
+    }
+}
+```
 </CodeGroup>
 
 #### Retrieve generated files
@@ -401,7 +527,8 @@ main().catch(console.error);
 When Claude creates files during code execution, you can retrieve these files using the Files API:
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck hidelines={1..5}
 from anthropic import Anthropic
 
 # Initialize the client
@@ -443,18 +570,17 @@ for file_id in extract_file_ids(response):
     print(f"Downloaded: {file_metadata.filename}")
 ```
 
-```typescript TypeScript
-import { Anthropic } from "@anthropic-ai/sdk";
+```typescript TypeScript hidelines={1}
+import Anthropic from "@anthropic-ai/sdk";
 import { writeFile } from "fs/promises";
 
-// Initialize the client
-const anthropic = new Anthropic();
+const client = new Anthropic();
 
 async function main() {
   // Request code execution that creates files
-  const response = await anthropic.beta.messages.create({
+  const response = await client.beta.messages.create({
     model: "claude-opus-4-6",
-    betas: ["files-api-2025-04-14"],
+    betas: ["code-execution-2025-08-25", "files-api-2025-04-14"],
     max_tokens: 4096,
     messages: [
       {
@@ -471,39 +597,90 @@ async function main() {
   });
 
   // Extract file IDs from the response
-  function extractFileIds(response: any): string[] {
-    const fileIds: string[] = [];
-    for (const item of response.content) {
-      if (item.type === "bash_code_execution_tool_result") {
-        const contentItem = item.content;
-        if (contentItem.type === "bash_code_execution_result" && contentItem.content) {
-          for (const file of contentItem.content) {
-            fileIds.push(file.file_id);
-          }
+  for (const item of response.content) {
+    if (item.type === "bash_code_execution_tool_result") {
+      const contentItem = item.content;
+      if (contentItem.type === "bash_code_execution_result" && contentItem.content) {
+        for (const file of contentItem.content) {
+          const fileMetadata = await client.beta.files.retrieveMetadata(file.file_id);
+          const fileResponse = await client.beta.files.download(file.file_id);
+          const fileBytes = Buffer.from(await fileResponse.arrayBuffer());
+          await writeFile(fileMetadata.filename, fileBytes);
+          console.log(`Downloaded: ${fileMetadata.filename}`);
         }
       }
     }
-    return fileIds;
-  }
-
-  // Download the created files
-  const fileIds = extractFileIds(response);
-  for (const fileId of fileIds) {
-    const fileMetadata = await anthropic.beta.files.retrieveMetadata(fileId);
-    const fileContent = await anthropic.beta.files.download(fileId);
-
-    // Convert ReadableStream to Buffer and save
-    const chunks: Uint8Array[] = [];
-    for await (const chunk of fileContent) {
-      chunks.push(chunk);
-    }
-    const buffer = Buffer.concat(chunks);
-    await writeFile(fileMetadata.filename, buffer);
-    console.log(`Downloaded: ${fileMetadata.filename}`);
   }
 }
 
 main().catch(console.error);
+```
+
+```csharp C# nocheck hidelines={1..13,-1}
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+public class Program
+{
+    static async Task Main(string[] args)
+    {
+        var client = new AnthropicClient();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [
+                new() {
+                    Role = Role.User,
+                    Content = "Create a matplotlib visualization and save it as output.png"
+                }
+            ],
+            Tools = [new ToolUnion(new CodeExecutionTool20250825())]
+        };
+
+        var response = await client.Beta.Messages.Create(parameters, ["files-api-2025-04-14"]);
+
+        var fileIds = ExtractFileIds(response);
+
+        foreach (var fileId in fileIds)
+        {
+            var fileMetadata = await client.Beta.Files.RetrieveMetadata(fileId);
+            var fileContent = await client.Beta.Files.Download(fileId);
+
+            await File.WriteAllBytesAsync(fileMetadata.Filename, fileContent);
+            Console.WriteLine($"Downloaded: {fileMetadata.Filename}");
+        }
+    }
+
+    static List<string> ExtractFileIds(dynamic response)
+    {
+        var fileIds = new List<string>();
+        foreach (var item in response.Content)
+        {
+            if (item.Type == "bash_code_execution_tool_result")
+            {
+                var contentItem = item.Content;
+                if (contentItem.Type == "bash_code_execution_result")
+                {
+                    foreach (var file in contentItem.Content)
+                    {
+                        if (file.FileId != null)
+                        {
+                            fileIds.Add(file.FileId);
+                        }
+                    }
+                }
+            }
+        }
+        return fileIds;
+    }
+}
 ```
 </CodeGroup>
 
@@ -553,7 +730,7 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
-```python Python
+```python Python nocheck
 # Upload a file
 file_object = client.beta.files.upload(
     file=open("data.csv", "rb"),
@@ -587,42 +764,98 @@ response = client.beta.messages.create(
 # 5. Use bash to organize files into a report directory
 ```
 
-```typescript TypeScript
-// Upload a file
-const fileObject = await anthropic.beta.files.create({
-  file: createReadStream("data.csv")
-});
+```typescript TypeScript nocheck
+import Anthropic, { toFile } from "@anthropic-ai/sdk";
+import { createReadStream } from "fs";
 
-const response = await anthropic.beta.messages.create({
-  model: "claude-opus-4-6",
-  betas: ["files-api-2025-04-14"],
-  max_tokens: 4096,
-  messages: [
+const client = new Anthropic();
+
+async function main() {
+  // Upload a file
+  const fileObject = await client.beta.files.upload({
+    file: await toFile(createReadStream("data.csv"), undefined, { type: "text/csv" }),
+    betas: ["files-api-2025-04-14"]
+  });
+
+  const response = await client.beta.messages.create({
+    model: "claude-opus-4-6",
+    betas: ["code-execution-2025-08-25", "files-api-2025-04-14"],
+    max_tokens: 4096,
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"
+          },
+          { type: "container_upload", file_id: fileObject.id }
+        ]
+      }
+    ],
+    tools: [
+      {
+        type: "code_execution_20250825",
+        name: "code_execution"
+      }
+    ]
+  });
+
+  console.log(response);
+}
+
+main().catch(console.error);
+```
+
+```csharp C# nocheck
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Beta.Files;
+using Anthropic.Models.Beta.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
     {
-      role: "user",
-      content: [
+        AnthropicClient client = new();
+
+        var fileObject = await client.Beta.Files.Upload(new FileUploadParams
         {
-          type: "text",
-          text: "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"
-        },
-        { type: "container_upload", file_id: fileObject.id }
-      ]
-    }
-  ],
-  tools: [
-    {
-      type: "code_execution_20250825",
-      name: "code_execution"
-    }
-  ]
-});
+            File = File.OpenRead("data.csv")
+        });
 
-// Claude might:
-// 1. Use bash to check file size and preview data
-// 2. Use text_editor to write Python code to analyze the CSV and create visualizations
-// 3. Use bash to run the Python code
-// 4. Use text_editor to create a README.md with findings
-// 5. Use bash to organize files into a report directory
+        var parameters = new MessageCreateParams
+        {
+            Model = "claude-opus-4-6",
+            Betas = ["files-api-2025-04-14"],
+            MaxTokens = 4096,
+            Messages = [
+                new() {
+                    Role = Role.User,
+                    Content = [
+                        new BetaTextBlockParam {
+                            Text = "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"
+                        },
+                        new BetaContainerUploadBlockParam {
+                            FileID = fileObject.Id
+                        }
+                    ]
+                }
+            ],
+            Tools = [
+                new BetaTool {
+                    Type = "code_execution_20250825",
+                    Name = "code_execution"
+                }
+            ]
+        };
+
+        var message = await client.Beta.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 
@@ -836,96 +1069,6 @@ This allows you to maintain created files between requests.
 ### Example
 
 <CodeGroup>
-```python Python
-import os
-from anthropic import Anthropic
-
-# Initialize the client
-client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-
-# First request: Create a file with a random number
-response1 = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[
-        {
-            "role": "user",
-            "content": "Write a file with a random number and save it to '/tmp/number.txt'",
-        }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
-
-# Extract the container ID from the first response
-container_id = response1.container.id
-
-# Second request: Reuse the container to read the file
-response2 = client.messages.create(
-    container=container_id,  # Reuse the same container
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[
-        {
-            "role": "user",
-            "content": "Read the number from '/tmp/number.txt' and calculate its square",
-        }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
-```
-
-```typescript TypeScript
-import { Anthropic } from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic();
-
-async function main() {
-  // First request: Create a file with a random number
-  const response1 = await anthropic.messages.create({
-    model: "claude-opus-4-6",
-    max_tokens: 4096,
-    messages: [
-      {
-        role: "user",
-        content: "Write a file with a random number and save it to '/tmp/number.txt'"
-      }
-    ],
-    tools: [
-      {
-        type: "code_execution_20250825",
-        name: "code_execution"
-      }
-    ]
-  });
-
-  // Extract the container ID from the first response
-  const containerId = response1.container.id;
-
-  // Second request: Reuse the container to read the file
-  const response2 = await anthropic.messages.create({
-    container: containerId, // Reuse the same container
-    model: "claude-opus-4-6",
-    max_tokens: 4096,
-    messages: [
-      {
-        role: "user",
-        content: "Read the number from '/tmp/number.txt' and calculate its square"
-      }
-    ],
-    tools: [
-      {
-        type: "code_execution_20250825",
-        name: "code_execution"
-      }
-    ]
-  });
-
-  console.log(response2.content);
-}
-
-main().catch(console.error);
-```
-
 ```bash Shell
 # First request: Create a file with a random number
 curl https://api.anthropic.com/v1/messages \
@@ -966,6 +1109,136 @@ curl https://api.anthropic.com/v1/messages \
             "name": "code_execution"
         }]
     }'
+```
+
+```python Python hidelines={1..5}
+import os
+from anthropic import Anthropic
+
+# Initialize the client
+client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+# First request: Create a file with a random number
+response1 = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    messages=[
+        {
+            "role": "user",
+            "content": "Write a file with a random number and save it to '/tmp/number.txt'",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+
+# Extract the container ID from the first response
+container_id = response1.container.id
+
+# Second request: Reuse the container to read the file
+response2 = client.messages.create(
+    container=container_id,  # Reuse the same container
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    messages=[
+        {
+            "role": "user",
+            "content": "Read the number from '/tmp/number.txt' and calculate its square",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+```
+
+```typescript TypeScript hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+async function main() {
+  // First request: Create a file with a random number
+  const response1 = await client.beta.messages.create({
+    model: "claude-opus-4-6",
+    betas: ["code-execution-2025-08-25"],
+    max_tokens: 4096,
+    messages: [
+      {
+        role: "user",
+        content: "Write a file with a random number and save it to '/tmp/number.txt'"
+      }
+    ],
+    tools: [
+      {
+        type: "code_execution_20250825",
+        name: "code_execution"
+      }
+    ]
+  });
+
+  // Extract the container ID from the first response
+  const containerId = response1.container!.id;
+
+  // Second request: Reuse the container to read the file
+  const response2 = await client.beta.messages.create({
+    container: containerId,
+    model: "claude-opus-4-6",
+    betas: ["code-execution-2025-08-25"],
+    max_tokens: 4096,
+    messages: [
+      {
+        role: "user",
+        content: "Read the number from '/tmp/number.txt' and calculate its square"
+      }
+    ],
+    tools: [
+      {
+        type: "code_execution_20250825",
+        name: "code_execution"
+      }
+    ]
+  });
+
+  console.log(response2.content);
+}
+
+main().catch(console.error);
+```
+
+```csharp C# nocheck hidelines={1..10,-1}
+using Anthropic;
+using Anthropic.Models.Messages;
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main()
+    {
+        AnthropicClient client = new();
+
+        var parameters1 = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [new() { Role = Role.User, Content = "Write a file with a random number and save it to '/tmp/number.txt'" }],
+            Tools = [new ToolUnion(new CodeExecutionTool20250825())]
+        };
+
+        var response1 = await client.Messages.Create(parameters1);
+        var containerId = response1.Container.Id;
+
+        var parameters2 = new MessageCreateParams
+        {
+            Container = containerId,
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [new() { Role = Role.User, Content = "Read the number from '/tmp/number.txt' and calculate its square" }],
+            Tools = [new ToolUnion(new CodeExecutionTool20250825())]
+        };
+
+        var response2 = await client.Messages.Create(parameters2);
+        Console.WriteLine(response2);
+    }
+}
 ```
 </CodeGroup>
 
@@ -1051,7 +1324,8 @@ To upgrade, update the tool type in your API requests:
 The code execution tool powers [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), which allows Claude to write code that calls your custom tools programmatically within the execution container. This enables efficient multi-tool workflows, data filtering before reaching Claude's context, and complex conditional logic.
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck
 # Enable programmatic calling for your tools
 response = client.messages.create(
     model="claude-opus-4-6",
@@ -1071,6 +1345,85 @@ response = client.messages.create(
         },
     ],
 )
+```
+
+```typescript TypeScript hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+async function main() {
+  const response = await client.beta.messages.create({
+    model: "claude-opus-4-6",
+    betas: ["code-execution-2025-08-25"],
+    max_tokens: 4096,
+    messages: [{ role: "user", content: "Get weather for 5 cities and find the warmest" }],
+    tools: [
+      { type: "code_execution_20250825", name: "code_execution" },
+      {
+        name: "get_weather",
+        description: "Get weather for a city",
+        input_schema: {
+          type: "object" as const,
+          properties: {
+            city: { type: "string" }
+          },
+          required: ["city"]
+        },
+        allowed_callers: ["code_execution_20250825"]
+      }
+    ]
+  });
+
+  console.log(response);
+}
+
+main().catch(console.error);
+```
+
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Messages;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [new() { Role = Role.User, Content = "Get weather for 5 cities and find the warmest" }],
+            Tools = new List<Tool>
+            {
+                new() { Type = "code_execution_20250825", Name = "code_execution" },
+                new()
+                {
+                    Name = "get_weather",
+                    Description = "Get weather for a city",
+                    InputSchema = new
+                    {
+                        type = "object",
+                        properties = new
+                        {
+                            city = new { type = "string" }
+                        },
+                        required = new[] { "city" }
+                    },
+                    AllowedCallers = new[] { "code_execution_20250825" }
+                }
+            }
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
 ```
 </CodeGroup>
 

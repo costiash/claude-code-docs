@@ -113,7 +113,7 @@ When selecting a model, it’s important to consider the size of your data. If c
 
 In order to use Claude for content moderation, Claude must understand the moderation requirements of your application. Let’s start by writing a prompt that allows you to define your moderation needs:
 
-```python
+```python nocheck
 import anthropic
 import json
 
@@ -190,7 +190,7 @@ Content moderation is a classification problem. Thus, you can use the same techn
 
 One additional consideration is that instead of treating content moderation as a binary classification problem, you may instead create multiple categories to represent various risk levels. Creating multiple risk levels allows you to adjust the aggressiveness of your moderation. For example, you might want to automatically block user queries that are deemed high risk, while users with many medium risk queries are flagged for human review.
 
-```python
+```python nocheck hidelines={1..6}
 import anthropic
 import json
 
@@ -289,7 +289,7 @@ In complex scenarios, it may be helpful to consider additional strategies to imp
 
 In addition to listing the unsafe categories in the prompt, further improvements can be made by providing definitions and phrases related to each category.
 
-```python
+```python nocheck hidelines={1..6}
 import anthropic
 import json
 
@@ -387,7 +387,7 @@ Notably, the definition for the `Specialized Advice` category now specifies the 
 
 To reduce costs in situations where real-time moderation isn't necessary, consider moderating messages in batches. Include multiple messages within the prompt's context, and ask Claude to assess which messages should be moderated.
 
-```python
+```python nocheck hidelines={1..6}
 import anthropic
 import json
 

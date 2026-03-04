@@ -30,6 +30,21 @@ All [active models](/docs/en/about-claude/models/overview) support token countin
 
 <CodeGroup>
 
+```bash Shell
+curl https://api.anthropic.com/v1/messages/count_tokens \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "content-type: application/json" \
+    --header "anthropic-version: 2023-06-01" \
+    --data '{
+      "model": "claude-opus-4-6",
+      "system": "You are a scientist",
+      "messages": [{
+        "role": "user",
+        "content": "Hello, Claude"
+      }]
+    }'
+```
+
 ```python Python
 import anthropic
 
@@ -44,7 +59,7 @@ response = client.messages.count_tokens(
 print(response.json())
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -63,19 +78,29 @@ const response = await client.messages.countTokens({
 console.log(response);
 ```
 
-```bash Shell
-curl https://api.anthropic.com/v1/messages/count_tokens \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "content-type: application/json" \
-    --header "anthropic-version: 2023-06-01" \
-    --data '{
-      "model": "claude-opus-4-6",
-      "system": "You are a scientist",
-      "messages": [{
-        "role": "user",
-        "content": "Hello, Claude"
-      }]
-    }'
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCountTokensParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            System = "You are a scientist",
+            Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
+        };
+
+        var response = await client.Messages.CountTokens(parameters);
+        Console.WriteLine(response);
+    }
+}
 ```
 
 ```java Java
@@ -115,64 +140,6 @@ public class CountTokensExample {
 
 <CodeGroup>
 
-```python Python
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.messages.count_tokens(
-    model="claude-opus-4-6",
-    tools=[
-        {
-            "name": "get_weather",
-            "description": "Get the current weather in a given location",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "location": {
-                        "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA",
-                    }
-                },
-                "required": ["location"],
-            },
-        }
-    ],
-    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
-)
-
-print(response.json())
-```
-
-```typescript TypeScript
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
-const response = await client.messages.countTokens({
-  model: "claude-opus-4-6",
-  tools: [
-    {
-      name: "get_weather",
-      description: "Get the current weather in a given location",
-      input_schema: {
-        type: "object",
-        properties: {
-          location: {
-            type: "string",
-            description: "The city and state, e.g. San Francisco, CA"
-          }
-        },
-        required: ["location"]
-      }
-    }
-  ],
-  messages: [{ role: "user", content: "What's the weather like in San Francisco?" }]
-});
-
-console.log(response);
-```
-
 ```bash Shell
 curl https://api.anthropic.com/v1/messages/count_tokens \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -203,6 +170,106 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         }
       ]
     }'
+```
+
+```python Python hidelines={1..4,-1}
+import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.count_tokens(
+    model="claude-opus-4-6",
+    tools=[
+        {
+            "name": "get_weather",
+            "description": "Get the current weather in a given location",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The city and state, e.g. San Francisco, CA",
+                    }
+                },
+                "required": ["location"],
+            },
+        }
+    ],
+    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
+)
+
+print(response.json())
+```
+
+```typescript TypeScript hidelines={1..4}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const response = await client.messages.countTokens({
+  model: "claude-opus-4-6",
+  tools: [
+    {
+      name: "get_weather",
+      description: "Get the current weather in a given location",
+      input_schema: {
+        type: "object",
+        properties: {
+          location: {
+            type: "string",
+            description: "The city and state, e.g. San Francisco, CA"
+          }
+        },
+        required: ["location"]
+      }
+    }
+  ],
+  messages: [{ role: "user", content: "What's the weather like in San Francisco?" }]
+});
+
+console.log(response);
+```
+
+```csharp C#
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCountTokensParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            Tools =
+            [
+                new MessageCountTokensTool(new Tool()
+                {
+                    Name = "get_weather",
+                    Description = "Get the current weather in a given location",
+                    InputSchema = new InputSchema()
+                    {
+                        Properties = new Dictionary<string, JsonElement>
+                        {
+                            ["location"] = JsonSerializer.SerializeToElement(new { type = "string", description = "The city and state, e.g. San Francisco, CA" }),
+                        },
+                        Required = ["location"],
+                    },
+                }),
+            ],
+            Messages = [new() { Role = Role.User, Content = "What's the weather like in San Francisco?" }]
+        };
+
+        var count = await client.Messages.CountTokens(parameters);
+        Console.WriteLine(count);
+    }
+}
 ```
 
 ```java Java
@@ -292,7 +359,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 }'
 ```
 
-```python Python
+```python Python nocheck hidelines={-1}
 import anthropic
 import base64
 import httpx
@@ -325,7 +392,7 @@ response = client.messages.count_tokens(
 print(response.json())
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -349,16 +416,65 @@ const response = await anthropic.messages.countTokens({
             media_type: image_media_type,
             data: image_data
           }
+        },
+        {
+          type: "text",
+          text: "Describe this image"
         }
       ]
-    },
-    {
-      type: "text",
-      text: "Describe this image"
     }
   ]
 });
 console.log(response);
+```
+
+```csharp C#
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        string imageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+
+        using HttpClient httpClient = new();
+        byte[] imageBytes = await httpClient.GetByteArrayAsync(imageUrl);
+        string imageData = Convert.ToBase64String(imageBytes);
+
+        var parameters = new MessageCountTokensParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            Messages =
+            [
+                new()
+                {
+                    Role = Role.User,
+                    Content = new MessageParamContent(new List<ContentBlockParam>
+                    {
+                        new ContentBlockParam(new ImageBlockParam(
+                            new ImageBlockParamSource(new Base64ImageSource()
+                            {
+                                Data = imageData,
+                                MediaType = MediaType.ImageJpeg,
+                            })
+                        )),
+                        new ContentBlockParam(new TextBlockParam("Describe this image")),
+                    }),
+                }
+            ]
+        };
+
+        var count = await client.Messages.CountTokens(parameters);
+        Console.WriteLine(count);
+    }
+}
 ```
 
 ```java Java
@@ -472,7 +588,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     }'
 ```
 
-```python Python
+```python Python nocheck hidelines={1..4,-1}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -506,7 +622,7 @@ response = client.messages.count_tokens(
 print(response.json())
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -546,6 +662,60 @@ const response = await client.messages.countTokens({
 });
 
 console.log(response);
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        AnthropicClient client = new()
+        {
+            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+        };
+
+        var parameters = new MessageCountTokensParams
+        {
+            Model = Model.ClaudeSonnet4_6,
+            Thinking = new ThinkingConfigEnabled(budgetTokens: 16000),
+            Messages =
+            [
+                new()
+                {
+                    Role = Role.User,
+                    Content = "Are there an infinite number of prime numbers such that n mod 4 == 3?"
+                },
+                new()
+                {
+                    Role = Role.Assistant,
+                    Content = new MessageParamContent(new List<ContentBlockParam>
+                    {
+                        new ContentBlockParam(new ThinkingBlockParam()
+                        {
+                            Thinking = "This is a nice number theory question. Let's think about it step by step...",
+                            Signature = "EuYBCkQYAiJAgCs1le6/Pol5Z4/JMomVOouGrWdhYNsH3ukzUECbB6iWrSQtsQuRHJID6lWV...",
+                        }),
+                        new ContentBlockParam(new TextBlockParam("Yes, there are infinitely many prime numbers p such that p mod 4 = 3...")),
+                    }),
+                },
+                new()
+                {
+                    Role = Role.User,
+                    Content = "Can you write a formal proof?"
+                }
+            ]
+        };
+
+        var response = await client.Messages.CountTokens(parameters);
+        Console.WriteLine(response);
+    }
+}
 ```
 
 ```java Java
@@ -635,7 +805,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     }'
 ```
 
-```python Python
+```python Python nocheck hidelines={-1}
 import base64
 import anthropic
 
@@ -667,7 +837,7 @@ response = client.messages.count_tokens(
 print(response.json())
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck hidelines={1}
 import Anthropic from "@anthropic-ai/sdk";
 import { readFile } from "fs/promises";
 
@@ -699,6 +869,52 @@ const response = await client.messages.countTokens({
 });
 
 console.log(response);
+```
+
+```csharp C#
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        byte[] pdfBytes = await File.ReadAllBytesAsync("document.pdf");
+        string pdfBase64 = Convert.ToBase64String(pdfBytes);
+
+        var parameters = new MessageCountTokensParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            Messages =
+            [
+                new()
+                {
+                    Role = Role.User,
+                    Content = new MessageParamContent(new List<ContentBlockParam>
+                    {
+                        new ContentBlockParam(new DocumentBlockParam(
+                            new DocumentBlockParamSource(new Base64PdfSource()
+                            {
+                                Data = pdfBase64,
+                                MediaType = MediaType.ApplicationPdf,
+                            })
+                        )),
+                        new ContentBlockParam(new TextBlockParam("Please summarize this document.")),
+                    }),
+                }
+            ]
+        };
+
+        var count = await client.Messages.CountTokens(parameters);
+        Console.WriteLine(count);
+    }
+}
 ```
 
 ```java Java
