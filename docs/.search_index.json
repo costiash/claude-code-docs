@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-04T06:26:06Z",
+  "generated_at": "2026-03-04T09:22:50Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -194,9 +194,9 @@
         "need",
         "create",
         "ask",
-        "default"
+        "conversation"
       ],
-      "word_count": 4366,
+      "word_count": 4368,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -684,12 +684,12 @@
         "environment",
         "settings",
         "models",
+        "sonnet",
         "when",
         "code",
-        "sonnet",
-        "opus",
         "users",
         "claude",
+        "opus",
         "context",
         "caching",
         "version",
@@ -700,7 +700,7 @@
         "variables",
         "prompt"
       ],
-      "word_count": 1469,
+      "word_count": 1468,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -995,8 +995,8 @@
         "when",
         "code",
         "project",
-        "default",
         "user",
+        "default",
         "file",
         "configuration",
         "files",
