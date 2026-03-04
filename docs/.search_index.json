@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-04T18:24:19Z",
+  "generated_at": "2026-03-04T21:18:29Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -604,8 +604,8 @@
         "command",
         "when",
         "const",
-        "tools",
         "url",
+        "tools",
         "title",
         "name",
         "tool",
@@ -616,7 +616,7 @@
         "configuration",
         "project"
       ],
-      "word_count": 5869,
+      "word_count": 5958,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -1082,17 +1082,17 @@
         "format",
         "com",
         "auto",
+        "line",
         "mintcdn",
         "fit",
         "max",
-        "line",
         "status",
         "context",
         "script",
         "data",
         "git"
       ],
-      "word_count": 4577,
+      "word_count": 4738,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
