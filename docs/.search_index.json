@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-05T00:40:13Z",
+  "generated_at": "2026-03-05T03:55:56Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -148,27 +148,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # CLI reference  ...",
       "keywords": [
         "claude",
-        "print",
         "session",
         "prompt",
-        "interactive",
-        "mode",
         "code",
-        "only",
+        "mode",
         "default",
+        "interactive",
         "when",
         "load",
         "see",
         "system",
+        "only",
         "file",
         "json",
         "model",
+        "print",
         "subagent",
         "flags",
         "mcp",
         "control"
       ],
-      "word_count": 2104,
+      "word_count": 2042,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -442,13 +442,13 @@
         "title",
         "input",
         "step",
+        "fires",
         "example",
         "exit",
         "run",
-        "fires",
         "matcher"
       ],
-      "word_count": 4200,
+      "word_count": 4227,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -458,25 +458,25 @@
         "hooks",
         "hook",
         "claude",
-        "code",
         "when",
+        "code",
         "json",
         "input",
-        "tool",
         "fields",
+        "tool",
         "field",
         "event",
-        "prompt",
         "decision",
         "control",
+        "prompt",
         "user",
-        "command",
+        "session",
         "exit",
-        "only",
-        "agent",
-        "runs"
+        "command",
+        "description",
+        "file"
       ],
-      "word_count": 10525,
+      "word_count": 11022,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -504,7 +504,7 @@
         "word",
         "input"
       ],
-      "word_count": 3231,
+      "word_count": 3268,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -616,7 +616,7 @@
         "configuration",
         "project"
       ],
-      "word_count": 5958,
+      "word_count": 6087,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -632,19 +632,19 @@
         "auto",
         "directory",
         "loaded",
-        "file",
         "specific",
+        "file",
         "session",
         "context",
+        "when",
         "them",
         "into",
         "code",
-        "when",
         "across",
         "every",
         "reads"
       ],
-      "word_count": 2734,
+      "word_count": 2765,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -689,18 +689,18 @@
         "code",
         "opus",
         "users",
+        "effort",
         "claude",
         "context",
         "caching",
+        "setting",
         "version",
         "uses",
-        "effort",
-        "setting",
         "disable",
         "variables",
         "prompt"
       ],
-      "word_count": 1479,
+      "word_count": 1508,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -826,21 +826,21 @@
         "string",
         "see",
         "add",
-        "create",
-        "marketplaces",
         "repository",
+        "marketplaces",
         "sources",
-        "paths",
+        "create",
         "url",
         "github",
+        "paths",
         "users",
         "files",
+        "field",
         "code",
         "version",
-        "source",
-        "field"
+        "source"
       ],
-      "word_count": 4014,
+      "word_count": 4276,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -988,19 +988,19 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code set...",
       "keywords": [
         "settings",
-        "claude",
         "set",
+        "claude",
         "see",
-        "managed",
         "when",
+        "managed",
         "code",
         "project",
-        "user",
         "default",
+        "user",
         "file",
+        "only",
         "configuration",
         "files",
-        "only",
         "example",
         "hooks",
         "bash",
@@ -1008,7 +1008,7 @@
         "mcp",
         "disable"
       ],
-      "word_count": 7914,
+      "word_count": 8099,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1054,17 +1054,17 @@
         "context",
         "subagent",
         "only",
+        "reference",
         "frontmatter",
         "automatically",
+        "file",
         "create",
         "note",
         "work",
-        "run",
-        "example",
-        "arguments",
-        "file"
+        "directory",
+        "run"
       ],
-      "word_count": 4341,
+      "word_count": 4411,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1073,8 +1073,8 @@
       "keywords": [
         "nibzeslajvh",
         "ydoq",
-        "code",
         "claude",
+        "code",
         "statusline",
         "images",
         "png",
@@ -1092,7 +1092,7 @@
         "data",
         "git"
       ],
-      "word_count": 4738,
+      "word_count": 4840,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
