@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-05T03:55:56Z",
+  "generated_at": "2026-03-05T06:27:28Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -476,7 +476,7 @@
         "description",
         "file"
       ],
-      "word_count": 11022,
+      "word_count": 11028,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
