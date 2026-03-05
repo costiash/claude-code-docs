@@ -201,47 +201,48 @@ console.log(messageBatch);
 
 ```csharp C#
 using Anthropic;
+using Anthropic.Models.Messages;
+using Anthropic.Models.Messages.Batches;
 
-var client = new AnthropicClient();
+AnthropicClient client = new();
 
-var batch = await client.Messages.Batches.CreateAsync(
-    new BatchCreateParams
-    {
-        Requests = new[]
+var batch = await client.Messages.Batches.Create(new BatchCreateParams
+{
+    Requests =
+    [
+        new()
         {
-            new BatchCreateParams.Request
+            CustomID = "my-first-request",
+            Params = new()
             {
-                CustomId = "my-first-request",
-                Params = new BatchCreateParams.Request.Params
-                {
-                    Model = "claude-opus-4-6",
-                    MaxTokens = 1024,
-                    Messages = new[]
-                    {
-                        new MessageParam { Role = "user", Content = "Hello, world" }
-                    }
-                }
-            },
-            new BatchCreateParams.Request
+                Model = Model.ClaudeOpus4_6,
+                MaxTokens = 1024,
+                Messages =
+                [
+                    new() { Role = Role.User, Content = "Hello, world" }
+                ]
+            }
+        },
+        new()
+        {
+            CustomID = "my-second-request",
+            Params = new()
             {
-                CustomId = "my-second-request",
-                Params = new BatchCreateParams.Request.Params
-                {
-                    Model = "claude-opus-4-6",
-                    MaxTokens = 1024,
-                    Messages = new[]
-                    {
-                        new MessageParam { Role = "user", Content = "Hi again, friend" }
-                    }
-                }
+                Model = Model.ClaudeOpus4_6,
+                MaxTokens = 1024,
+                Messages =
+                [
+                    new() { Role = Role.User, Content = "Hi again, friend" }
+                ]
             }
         }
-    });
+    ]
+});
 
 Console.WriteLine(batch);
 ```
 
-```go Go
+```go Go hidelines={1..12,-1}
 package main
 
 import (
@@ -255,11 +256,11 @@ func main() {
 	client := anthropic.NewClient()
 
 	batch, _ := client.Messages.Batches.New(context.Background(),
-		anthropic.BatchCreateParams{
-			Requests: []anthropic.BatchCreateParamsRequest{
+		anthropic.MessageBatchNewParams{
+			Requests: []anthropic.MessageBatchNewParamsRequest{
 				{
 					CustomID: "my-first-request",
-					Params: anthropic.BatchCreateParamsRequestParams{
+					Params: anthropic.MessageBatchNewParamsRequestParams{
 						Model:     anthropic.ModelClaudeOpus4_6,
 						MaxTokens: 1024,
 						Messages: []anthropic.MessageParam{
@@ -271,7 +272,7 @@ func main() {
 				},
 				{
 					CustomID: "my-second-request",
-					Params: anthropic.BatchCreateParamsRequestParams{
+					Params: anthropic.MessageBatchNewParamsRequestParams{
 						Model:     anthropic.ModelClaudeOpus4_6,
 						MaxTokens: 1024,
 						Messages: []anthropic.MessageParam{
@@ -288,7 +289,7 @@ func main() {
 }
 ```
 
-```java Java
+```java Java hidelines={1..8,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Model;
@@ -498,7 +499,7 @@ while (true) {
 console.log(messageBatch);
 ```
 
-```csharp C#
+```csharp C# nocheck
 using System;
 using System.Threading.Tasks;
 using Anthropic;
@@ -526,6 +527,106 @@ class Program
         Console.WriteLine(messageBatch);
     }
 }
+```
+
+```go Go nocheck hidelines={1..14,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+	"os"
+	"time"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+	messageBatchID := os.Getenv("MESSAGE_BATCH_ID")
+
+	var messageBatch *anthropic.MessageBatch
+	for {
+		var err error
+		messageBatch, err = client.Messages.Batches.Get(context.TODO(), messageBatchID)
+		if err != nil {
+			log.Fatal(err)
+		}
+		if messageBatch.ProcessingStatus == "ended" {
+			break
+		}
+
+		fmt.Printf("Batch %s is still processing...\n", messageBatchID)
+		time.Sleep(60 * time.Second)
+	}
+	fmt.Println(messageBatch)
+}
+```
+
+```java Java nocheck hidelines={1..6,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.batches.MessageBatch;
+
+public class MessageBatchPolling {
+    public static void main(String[] args) throws InterruptedException {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+        String messageBatchId = "msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d";
+
+        MessageBatch messageBatch = null;
+        while (true) {
+            messageBatch = client.messages().batches().retrieve(messageBatchId);
+            if (messageBatch.processingStatus().equals(MessageBatch.ProcessingStatus.ENDED)) {
+                break;
+            }
+
+            System.out.println("Batch " + messageBatchId + " is still processing...");
+            Thread.sleep(60000);
+        }
+        System.out.println(messageBatch);
+    }
+}
+```
+
+```php PHP hidelines={1..5} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$messageBatchId = getenv("MESSAGE_BATCH_ID");
+
+$messageBatch = null;
+while (true) {
+    $messageBatch = $client->messages->batches->retrieve(
+        messageBatchID: $messageBatchId,
+    );
+    if ($messageBatch->processingStatus === "ended") {
+        break;
+    }
+
+    echo "Batch {$messageBatchId} is still processing...\n";
+    sleep(60);
+}
+echo json_encode($messageBatch, JSON_PRETTY_PRINT);
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message_batch_id = ENV["MESSAGE_BATCH_ID"]
+message_batch = nil
+loop do
+  message_batch = client.messages.batches.retrieve(message_batch_id)
+  break if message_batch.processing_status == :ended
+
+  puts "Batch #{message_batch_id} is still processing..."
+  sleep 60
+end
+puts message_batch
 ```
 
 </CodeGroup>
@@ -621,7 +722,37 @@ class Program
 }
 ```
 
-```java Java
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	// Automatically fetches more pages as needed
+	iter := client.Messages.Batches.ListAutoPaging(context.TODO(), anthropic.MessageBatchListParams{
+		Limit: anthropic.Int(20),
+	})
+
+	for iter.Next() {
+		messageBatch := iter.Current()
+		fmt.Println(messageBatch)
+	}
+
+	if err := iter.Err(); err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+```java Java hidelines={1..7,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.batches.*;
@@ -635,11 +766,36 @@ public class BatchListExample {
     for (MessageBatch messageBatch : client
       .messages()
       .batches()
-      .list(BatchListParams.builder().limit(20).build())) {
+      .list(BatchListParams.builder().limit(20).build())
+      .autoPager()) {
       System.out.println(messageBatch);
     }
   }
 }
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+// Automatically fetches more pages as needed
+foreach ($client->messages->batches->list(limit: 20)->pagingEachItem() as $messageBatch) {
+    echo $messageBatch->id . "\n";
+}
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+# Automatically fetches more pages as needed
+client.messages.batches.list(limit: 20).auto_paging_each do |message_batch|
+  puts message_batch
+end
 ```
 
 </CodeGroup>
@@ -753,7 +909,7 @@ for await (const result of await anthropic.messages.batches.results(
 }
 ```
 
-```csharp C#
+```csharp C# nocheck
 using System;
 using System.Threading.Tasks;
 using Anthropic;
@@ -765,25 +921,25 @@ public class Program
     {
         AnthropicClient client = new();
 
-        await foreach (var result in client.Messages.Batches.Results("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d"))
+        await foreach (var result in client.Messages.Batches.ResultsStreaming("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d"))
         {
             switch (result.Result.Type)
             {
                 case "succeeded":
-                    Console.WriteLine($"Success! {result.CustomId}");
+                    Console.WriteLine($"Success! {result.CustomID}");
                     break;
                 case "errored":
                     if (result.Result.Error?.Type == "invalid_request")
                     {
-                        Console.WriteLine($"Validation error: {result.CustomId}");
+                        Console.WriteLine($"Validation error: {result.CustomID}");
                     }
                     else
                     {
-                        Console.WriteLine($"Server error: {result.CustomId}");
+                        Console.WriteLine($"Server error: {result.CustomID}");
                     }
                     break;
                 case "expired":
-                    Console.WriteLine($"Request expired: {result.CustomId}");
+                    Console.WriteLine($"Request expired: {result.CustomID}");
                     break;
             }
         }
@@ -791,7 +947,42 @@ public class Program
 }
 ```
 
-```java Java
+```go Go nocheck hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	stream := client.Messages.Batches.ResultsStreaming(context.TODO(), "msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d")
+
+	for stream.Next() {
+		result := stream.Current()
+
+		switch variant := result.Result.AsAny().(type) {
+		case anthropic.MessageBatchSucceededResult:
+			fmt.Printf("Success! %s\n", result.CustomID)
+		case anthropic.MessageBatchErroredResult:
+			fmt.Printf("Error: %s - %s\n", result.CustomID, variant.Error.Error.Message)
+		case anthropic.MessageBatchExpiredResult:
+			fmt.Printf("Request expired: %s\n", result.CustomID)
+		}
+	}
+
+	if err := stream.Err(); err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+```java Java nocheck hidelines={1..9,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.http.StreamResponse;
@@ -834,6 +1025,53 @@ public class BatchResultsExample {
     }
   }
 }
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+foreach ($client->messages->batches->resultsStream(messageBatchID: 'msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d') as $result) {
+    switch ($result->result->type) {
+        case "succeeded":
+            echo "Success! {$result->customID}\n";
+            break;
+        case "errored":
+            if ($result->result->error->error->type === "invalid_request_error") {
+                echo "Validation error: {$result->customID}\n";
+            } else {
+                echo "Server error: {$result->customID}\n";
+            }
+            break;
+        case "expired":
+            echo "Request expired: {$result->customID}\n";
+            break;
+    }
+}
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+client.messages.batches.results_streaming("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d").each do |result|
+  case result.result.type
+  when :succeeded
+    puts "Success! #{result.custom_id}"
+  when :errored
+    if result.result.error.type == :invalid_request
+      puts "Validation error: #{result.custom_id}"
+    else
+      puts "Server error: #{result.custom_id}"
+    end
+  when :expired
+    puts "Request expired: #{result.custom_id}"
+  end
+end
 ```
 
 </CodeGroup>
@@ -905,7 +1143,31 @@ class Program
 }
 ```
 
-```java Java
+```go Go nocheck hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+	"os"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+	messageBatchID := os.Getenv("MESSAGE_BATCH_ID")
+
+	messageBatch, err := client.Messages.Batches.Cancel(context.TODO(), messageBatchID)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(messageBatch)
+}
+```
+
+```java Java nocheck hidelines={1..7,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.batches.*;
@@ -918,10 +1180,33 @@ public class BatchCancelExample {
     MessageBatch messageBatch = client
       .messages()
       .batches()
-      .cancel(BatchCancelParams.builder().messageBatchId(MESSAGE_BATCH_ID).build());
+      .cancel("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d");
     System.out.println(messageBatch);
   }
 }
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$messageBatch = $client->messages->batches->cancel(
+    messageBatchID: 'msgbatch_example_id',
+);
+echo $messageBatch;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message_batch_id = ENV.fetch("MESSAGE_BATCH_ID")
+message_batch = client.messages.batches.cancel(message_batch_id)
+puts message_batch
 ```
 
 </CodeGroup>
@@ -1150,7 +1435,7 @@ public class Program
             [
                 new()
                 {
-                    CustomId = "my-first-request",
+                    CustomID = "my-first-request",
                     Params = new()
                     {
                         Model = Model.ClaudeOpus4_6,
@@ -1177,7 +1462,7 @@ public class Program
                 },
                 new()
                 {
-                    CustomId = "my-second-request",
+                    CustomID = "my-second-request",
                     Params = new()
                     {
                         Model = Model.ClaudeOpus4_6,
@@ -1208,7 +1493,69 @@ public class Program
 }
 ```
 
-```java Java
+```go Go hidelines={1..12,-1}
+package main
+
+import (
+	"context"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	messageBatch, err := client.Messages.Batches.New(context.TODO(), anthropic.MessageBatchNewParams{
+		Requests: []anthropic.MessageBatchNewParamsRequest{
+			{
+				CustomID: "my-first-request",
+				Params: anthropic.MessageBatchNewParamsRequestParams{
+					Model:     anthropic.ModelClaudeOpus4_6,
+					MaxTokens: 1024,
+					System: []anthropic.TextBlockParam{
+						{
+							Text: "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n",
+						},
+						{
+							Text:         "<the entire contents of Pride and Prejudice>",
+							CacheControl: anthropic.NewCacheControlEphemeralParam(),
+						},
+					},
+					Messages: []anthropic.MessageParam{
+						anthropic.NewUserMessage(anthropic.NewTextBlock("Analyze the major themes in Pride and Prejudice.")),
+					},
+				},
+			},
+			{
+				CustomID: "my-second-request",
+				Params: anthropic.MessageBatchNewParamsRequestParams{
+					Model:     anthropic.ModelClaudeOpus4_6,
+					MaxTokens: 1024,
+					System: []anthropic.TextBlockParam{
+						{
+							Text: "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n",
+						},
+						{
+							Text:         "<the entire contents of Pride and Prejudice>",
+							CacheControl: anthropic.NewCacheControlEphemeralParam(),
+						},
+					},
+					Messages: []anthropic.MessageParam{
+						anthropic.NewUserMessage(anthropic.NewTextBlock("Write a summary of Pride and Prejudice.")),
+					},
+				},
+			},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Printf("%+v\n", messageBatch)
+}
+```
+
+```java Java hidelines={1..11,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -1278,6 +1625,114 @@ public class BatchExample {
     MessageBatch messageBatch = client.messages().batches().create(createParams);
   }
 }
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$messageBatch = $client->messages->batches->create(
+    requests: [
+        [
+            'custom_id' => 'my-first-request',
+            'params' => [
+                'model' => 'claude-opus-4-6',
+                'max_tokens' => 1024,
+                'system' => [
+                    [
+                        'type' => 'text',
+                        'text' => 'You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n'
+                    ],
+                    [
+                        'type' => 'text',
+                        'text' => '<the entire contents of Pride and Prejudice>',
+                        'cache_control' => ['type' => 'ephemeral']
+                    ]
+                ],
+                'messages' => [
+                    ['role' => 'user', 'content' => 'Analyze the major themes in Pride and Prejudice.']
+                ]
+            ]
+        ],
+        [
+            'custom_id' => 'my-second-request',
+            'params' => [
+                'model' => 'claude-opus-4-6',
+                'max_tokens' => 1024,
+                'system' => [
+                    [
+                        'type' => 'text',
+                        'text' => 'You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n'
+                    ],
+                    [
+                        'type' => 'text',
+                        'text' => '<the entire contents of Pride and Prejudice>',
+                        'cache_control' => ['type' => 'ephemeral']
+                    ]
+                ],
+                'messages' => [
+                    ['role' => 'user', 'content' => 'Write a summary of Pride and Prejudice.']
+                ]
+            ]
+        ]
+    ],
+);
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message_batch = client.messages.batches.create(
+  requests: [
+    {
+      custom_id: "my-first-request",
+      params: {
+        model: "claude-opus-4-6",
+        max_tokens: 1024,
+        system: [
+          {
+            type: "text",
+            text: "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+          },
+          {
+            type: "text",
+            text: "<the entire contents of Pride and Prejudice>",
+            cache_control: { type: "ephemeral" }
+          }
+        ],
+        messages: [
+          { role: "user", content: "Analyze the major themes in Pride and Prejudice." }
+        ]
+      }
+    },
+    {
+      custom_id: "my-second-request",
+      params: {
+        model: "claude-opus-4-6",
+        max_tokens: 1024,
+        system: [
+          {
+            type: "text",
+            text: "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+          },
+          {
+            type: "text",
+            text: "<the entire contents of Pride and Prejudice>",
+            cache_control: { type: "ephemeral" }
+          }
+        ],
+        messages: [
+          { role: "user", content: "Write a summary of Pride and Prejudice." }
+        ]
+      }
+    }
+  ]
+)
 ```
 
 </CodeGroup>

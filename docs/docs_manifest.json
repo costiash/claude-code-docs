@@ -21,8 +21,8 @@
     "docs__en__about-claude__models__migration-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/models/migration-guide",
       "original_md_url": "https://platform.claude.com/docs/en/about-claude/models/migration-guide.md",
-      "hash": "81187d014147afaddfd21fcca234ee7143f51a2d193685852e8927048b28a7ba",
-      "last_updated": "2026-03-04T00:31:03.688291"
+      "hash": "dcff5c63499467ac4a66b01a13467248419503d33147ca7a82b6de89361a2f26",
+      "last_updated": "2026-03-05T00:31:55.275782"
     },
     "docs__en__about-claude__models__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/models/overview",
@@ -39,8 +39,8 @@
     "docs__en__about-claude__pricing.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "original_md_url": "https://platform.claude.com/docs/en/about-claude/pricing.md",
-      "hash": "c4a00da5c8d99c288c86e906ab9947687378ac049c7cc1cf6ad526bc502914d7",
-      "last_updated": "2026-02-20T18:16:34.861092"
+      "hash": "1b692096bbea58f463d354eec24f25d7aca125377c6f9af4641b84736773aaaf",
+      "last_updated": "2026-03-05T00:31:57.150000"
     },
     "docs__en__about-claude__use-case-guides__content-moderation.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/use-case-guides/content-moderation",
@@ -249,8 +249,8 @@
     "docs__en__agents-and-tools__mcp-connector.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-connector",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-connector.md",
-      "hash": "dcd3510f1a557dea3066cae56d2518b2dfae05d7e06851822244e5c7e2b9866e",
-      "last_updated": "2026-03-04T00:31:29.477893"
+      "hash": "ec1038f3abad03246cfcd539066368cf30bdc19c223bbddd83fee2fc991041a6",
+      "last_updated": "2026-03-05T00:32:22.005141"
     },
     "docs__en__agents-and-tools__remote-mcp-servers.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers",
@@ -267,14 +267,14 @@
     "docs__en__agents-and-tools__tool-use__code-execution-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool.md",
-      "hash": "9da9f3781f2cc61c81474be1c9e5116d7df334c4d3f1361f987bbe39044ffe9b",
-      "last_updated": "2026-03-04T00:31:31.420873"
+      "hash": "ef42371483965e6d21347468e801e99ab5431a7d5af6bea07465cb7364f64ba8",
+      "last_updated": "2026-03-05T00:32:23.905141"
     },
     "docs__en__agents-and-tools__tool-use__computer-use-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool.md",
-      "hash": "ac73429de666cea9250a87e2940f75807cb6997ea24f6beb471159bd608dd523",
-      "last_updated": "2026-03-04T00:31:32.106527"
+      "hash": "6b14d24d8d1d6f1d350120d3b1735abb32487059fca5e323a229ffc0dde1fc29",
+      "last_updated": "2026-03-05T00:32:24.562437"
     },
     "docs__en__agents-and-tools__tool-use__fine-grained-tool-streaming.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming",
@@ -285,50 +285,50 @@
     "docs__en__agents-and-tools__tool-use__implement-tool-use.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use.md",
-      "hash": "517ce595cf98a7fff14e153505b670542ca2d6d64214e1d69a66d69e43bcfd2a",
-      "last_updated": "2026-03-04T00:31:33.371947"
+      "hash": "98f396317f90afd20f45d81573a08b037464791df62d2515ce70c5498e817e48",
+      "last_updated": "2026-03-05T00:32:26.005818"
     },
     "docs__en__agents-and-tools__tool-use__memory-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool.md",
-      "hash": "83f939f1b354f2d55eedf036f0bb4192edf40e5675fddb9845c9e0beafd381ad",
-      "last_updated": "2026-03-04T00:31:34.256478"
+      "hash": "fb029a94f653adc539bbb6cd6c19c0c16718a768cf0a65e774294e3a36235c56",
+      "last_updated": "2026-03-05T00:32:26.630675"
     },
     "docs__en__agents-and-tools__tool-use__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview.md",
-      "hash": "715c69c15b61dc345054dae5c2ce3c2d0480d4d5e81bec4253ed9b98d383e1bd",
-      "last_updated": "2026-03-04T00:31:34.943983"
+      "hash": "0d1d2d6d3c7775581fec125578daf95b71d0846246839ef76d9384e37defff35",
+      "last_updated": "2026-03-05T00:32:27.311957"
     },
     "docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling.md",
-      "hash": "2b9deb190f268a151796fc37e57a11af692166500c760a92f859f65037aa010c",
-      "last_updated": "2026-03-04T00:31:35.624042"
+      "hash": "258c258559f0dbb28b578a2771ae3f5a879857de8f1776d8be00192d3a7609f0",
+      "last_updated": "2026-03-05T00:32:28.080506"
     },
     "docs__en__agents-and-tools__tool-use__text-editor-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool.md",
-      "hash": "f6524f29a417d4393a19572ffd1e427b58e83617d9746e41532943359033a031",
-      "last_updated": "2026-03-04T00:31:36.235201"
+      "hash": "4c5ce30aaf300504596d463463a150cddd62ab7546fb4aca3045791bffed0914",
+      "last_updated": "2026-03-05T00:32:28.723370"
     },
     "docs__en__agents-and-tools__tool-use__tool-search-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool.md",
-      "hash": "a4593ce98f612c99dd394ea8d70d5f77c9001cc078e04148bac9c28354c5f1a2",
-      "last_updated": "2026-03-04T00:31:36.831083"
+      "hash": "a9e2a3b4785f531730597bd1b10c5ee90e6575ee79928b261a24f9573a313e11",
+      "last_updated": "2026-03-05T00:32:29.389376"
     },
     "docs__en__agents-and-tools__tool-use__web-fetch-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool.md",
-      "hash": "477f4794f53fcf72b7c733ccddd9eb9a306412b5df5cf14b812922538dbf2926",
-      "last_updated": "2026-03-04T00:31:37.508232"
+      "hash": "b06c9b8b13827abda4ca2753126597f4405d755e8ebca7f75db0903b6845c305",
+      "last_updated": "2026-03-05T00:32:30.024824"
     },
     "docs__en__agents-and-tools__tool-use__web-search-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool.md",
-      "hash": "fdaeb7a1292bd0e6a0b4dfcd9a7176bf2bc1b514206eb901a66a5c352f0dc467",
-      "last_updated": "2026-03-04T00:31:38.187258"
+      "hash": "be2e3b016bcf4a7215c6bcf7bac3c8297876e90759c3e0a4bf3d1d1c906e419d",
+      "last_updated": "2026-03-05T00:32:30.690652"
     },
     "claude-code__amazon-bedrock.md": {
       "original_url": "https://platform.claude.com/docs/en/amazon-bedrock",
@@ -549,8 +549,8 @@
     "docs__en__api__beta.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta",
       "original_md_url": "https://platform.claude.com/docs/en/api/beta.md",
-      "hash": "49f26d24e033c15143fd8a65f966406108f008778250b6b894e2e76a56b691ab",
-      "last_updated": "2026-02-19T21:11:53.090159"
+      "hash": "d14b7b0ef31ab9d85b19129a8acb731be52482874facc5259ef25db25d68da1f",
+      "last_updated": "2026-03-05T00:32:55.342808"
     },
     "docs__en__api__beta-headers.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta-headers",
@@ -597,14 +597,14 @@
     "docs__en__api__beta__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/beta/messages.md",
-      "hash": "423d1b005c0ceed0d2b3dbd72d1f11a5b55ca8b9e941e8e6a8fdc02c0b736801",
-      "last_updated": "2026-02-19T21:11:58.022256"
+      "hash": "8b800959872c6b9c8fa7e128d28c7cd37338ebcab447a637b60e41c884470ab9",
+      "last_updated": "2026-03-05T00:33:00.406909"
     },
     "docs__en__api__beta__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/beta/messages/batches.md",
-      "hash": "4c2ff29ca689bbb979f7b0e0f33d5ef15f1f680fab55463741218c0f632eeb59",
-      "last_updated": "2026-02-19T21:11:58.756057"
+      "hash": "42ac32ff165c3d8415d4185c03f1c20c23a1aef3b4cdb7875707cc42c7867cae",
+      "last_updated": "2026-03-05T00:33:01.069132"
     },
     "docs__en__api__beta__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/cancel",
@@ -615,8 +615,8 @@
     "docs__en__api__beta__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/create.md",
-      "hash": "f42ec75e4f60f5f6938bb5f6f89b984e366d3a4231ef08d057f8aac191a9fb6e",
-      "last_updated": "2026-02-19T21:11:59.956312"
+      "hash": "b878870404a230b876b3e2e486245c5264ab96ccbec77adef94bc4d91e7464f0",
+      "last_updated": "2026-03-05T00:33:02.360526"
     },
     "docs__en__api__beta__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/delete",
@@ -633,8 +633,8 @@
     "docs__en__api__beta__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/results.md",
-      "hash": "84ae3996c35907a9a7685dcb8628b0b1ed869361ba1d6dbe89e1d932568c3354",
-      "last_updated": "2026-02-17T18:23:54.320690"
+      "hash": "038879440cab9df54ef2e433df169ca887320876dc0fafa668778f2c3da014e3",
+      "last_updated": "2026-03-05T00:33:04.228956"
     },
     "docs__en__api__beta__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta/messages/batches/retrieve",
@@ -645,14 +645,14 @@
     "docs__en__api__beta__messages__count_tokens.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta/messages/count_tokens",
       "original_md_url": "https://platform.claude.com/docs/en/api/beta/messages/count_tokens.md",
-      "hash": "3a976361e453dd2204c448d943ee481c31274101958f1004feeb15989129cc17",
-      "last_updated": "2026-02-19T21:12:03.052863"
+      "hash": "c0d0cb39b3e00adc2355028923578458036bf8979ec3918e2204d7fa2d4a6b1d",
+      "last_updated": "2026-03-05T00:33:05.518807"
     },
     "docs__en__api__beta__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/beta/messages/create.md",
-      "hash": "20df2585e93aefd83875ec3823f6ec953a5f56899e49d7f820b8e644cf5f9851",
-      "last_updated": "2026-02-19T21:12:03.684791"
+      "hash": "1e3e4161f5233b9e619805e05e49f58e83ee355abbd2c9024803f3ad8ffbe292",
+      "last_updated": "2026-03-05T00:33:06.186826"
     },
     "docs__en__api__beta__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta/models",
@@ -735,26 +735,26 @@
     "docs__en__api__client-sdks.md": {
       "original_url": "https://platform.claude.com/docs/en/api/client-sdks",
       "original_md_url": "https://platform.claude.com/docs/en/api/client-sdks.md",
-      "hash": "27ca3b4590c05608d65ffa589246a7e52ef4d3c8e1a758ffaaf4f25b674375b2",
-      "last_updated": "2026-03-04T00:32:39.053397"
+      "hash": "fe8609ddb21e5dd7078c7989cb1e948e0193797fb9178c390ca9d69467ef1866",
+      "last_updated": "2026-03-05T00:33:36.503963"
     },
     "docs__en__api__completions.md": {
       "original_url": "https://platform.claude.com/docs/en/api/completions",
       "original_md_url": "https://platform.claude.com/docs/en/api/completions.md",
-      "hash": "e9daddff5c72c545d02c31da02d3781ac21740e085911bbba04f08bee8b328e0",
-      "last_updated": "2026-02-17T18:24:23.660394"
+      "hash": "cf0f2a2a2bc404cafc07e0e680be35d52f952c09b8c57d2c3664804788973d1d",
+      "last_updated": "2026-03-05T00:33:37.147114"
     },
     "docs__en__api__completions__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/completions/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/completions/create.md",
-      "hash": "6556054190d7cdbb916c142a3ce561c3cc8dc7807bbfecb5186ab28aae2acf1a",
-      "last_updated": "2026-02-17T18:24:24.283985"
+      "hash": "db2231f4c889211f8234b89a288028105d1a2f877b53c7a42a38003b5b823e29",
+      "last_updated": "2026-03-05T00:33:37.803050"
     },
     "docs__en__api__csharp__beta.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/beta",
       "original_md_url": "https://platform.claude.com/docs/en/api/csharp/beta.md",
-      "hash": "45596d3c1b001d7a63df8490f80bcf7e068d717fbb68bab1c4acfc8895339792",
-      "last_updated": "2026-02-19T21:12:31.356169"
+      "hash": "5b636c5d04c3e30822b38f09ac31c98c59a8c52bb1e62c26329f72eb32106af0",
+      "last_updated": "2026-03-05T00:33:38.450547"
     },
     "docs__en__api__csharp__beta__files.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/beta/files",
@@ -795,14 +795,14 @@
     "docs__en__api__csharp__beta__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages.md",
-      "hash": "090275b9815b004e65e56cc131c65f3588245dc1c6500afe47c58b97bc048e1e",
-      "last_updated": "2026-02-19T21:12:35.954158"
+      "hash": "38c9651268d811dfcc617018839b796dc74be99b2a938173c4aa5d28a0723347",
+      "last_updated": "2026-03-05T00:33:43.173118"
     },
     "docs__en__api__csharp__beta__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches.md",
-      "hash": "e226ff6c8ef141ac32ebbee109c796a87a9a01758517489cd96f9c631c2e3de5",
-      "last_updated": "2026-02-19T21:12:36.670279"
+      "hash": "b936e0f1c3af013edab016b6173f3694260b491f82bdacd0251ece974152e2ee",
+      "last_updated": "2026-03-05T00:33:43.845676"
     },
     "docs__en__api__csharp__beta__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/cancel",
@@ -813,8 +813,8 @@
     "docs__en__api__csharp__beta__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/create.md",
-      "hash": "cb143caf3d19baf9d98d7dbb283b452f3c141dc05b80c13acc1cf58827ec4d28",
-      "last_updated": "2026-02-19T21:12:37.888113"
+      "hash": "69872b1016411860d6ebadc4b1de9ba3d4b4bea39c0b72f51efc52ff397f5239",
+      "last_updated": "2026-03-05T00:33:45.097655"
     },
     "docs__en__api__csharp__beta__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/delete",
@@ -831,8 +831,8 @@
     "docs__en__api__csharp__beta__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/results.md",
-      "hash": "3fe95a3517b47b14d9f59c5f84b457f309986ba18d5a9c21113ae2ffd975663c",
-      "last_updated": "2026-02-17T18:24:33.071831"
+      "hash": "6de1fdd0f47f502a00980426727fdf790b8296c6334536ec023031c5ffd6d024",
+      "last_updated": "2026-03-05T00:33:47.042210"
     },
     "docs__en__api__csharp__beta__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/retrieve",
@@ -849,8 +849,8 @@
     "docs__en__api__csharp__beta__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/csharp/beta/messages/create.md",
-      "hash": "97f6a8971716a888d99302d2bac59af30c1222e651e2e003534dc3afbdc27141",
-      "last_updated": "2026-02-19T21:12:42.102776"
+      "hash": "fb10f09fa9c99b4e44f2cf3edd56d28789c622f3c4739288a70028cf687bf5c1",
+      "last_updated": "2026-03-05T00:33:49.092348"
     },
     "docs__en__api__csharp__beta__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/beta/models",
@@ -933,14 +933,14 @@
     "docs__en__api__csharp__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/csharp/messages.md",
-      "hash": "7e5e2fa9198903f07ee9d3569261376d91c2bca917dbbc5f020d5459207ed554",
-      "last_updated": "2026-02-19T21:12:51.440049"
+      "hash": "3eb0c73f3facd6c0c900a5413cc85c9fa728a4828907a61d5c5e26b9070929de",
+      "last_updated": "2026-03-05T00:33:58.660712"
     },
     "docs__en__api__csharp__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/csharp/messages/batches.md",
-      "hash": "f961c5c682f2a3ecca4e13ef4b3bd83630c5f2075dcd2697f079b0030dd1a4e8",
-      "last_updated": "2026-02-19T21:12:52.185323"
+      "hash": "c15867db2042f49d980d5d03dd3cb39a2ff46e178918793be8e9575f51ec605f",
+      "last_updated": "2026-03-05T00:33:59.323754"
     },
     "docs__en__api__csharp__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/messages/batches/cancel",
@@ -951,8 +951,8 @@
     "docs__en__api__csharp__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/csharp/messages/batches/create.md",
-      "hash": "d2f29af5e84b8f2d39046fc7217567e17d4c59f49dc28820dd0b62f7af398add",
-      "last_updated": "2026-02-19T21:12:53.415661"
+      "hash": "3120f7d847a0eedea8057034f03f46e529619e0f8db4471e1ade7d9f239c386c",
+      "last_updated": "2026-03-05T00:34:00.638433"
     },
     "docs__en__api__csharp__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/messages/batches/delete",
@@ -969,8 +969,8 @@
     "docs__en__api__csharp__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/csharp/messages/batches/results.md",
-      "hash": "6497f2bfe328b9e1f72f0cf601a77f449342306f8d8628e36335f5eb7be399de",
-      "last_updated": "2026-02-19T21:12:55.303572"
+      "hash": "0c8c135704e0bc66ddc113b16e0fa24634e5d507ce343e6d1967652ebfc0a9fb",
+      "last_updated": "2026-03-05T00:34:02.618741"
     },
     "docs__en__api__csharp__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/messages/batches/retrieve",
@@ -987,8 +987,8 @@
     "docs__en__api__csharp__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/csharp/messages/create.md",
-      "hash": "787bae1eab0df42cab1757820695f05f13ff0348f38dcd4e7479cbb25da0a701",
-      "last_updated": "2026-02-19T21:12:57.229974"
+      "hash": "499777d939d8cbb976a81870304d11c796fd80026d6e907ca417d6a2354775db",
+      "last_updated": "2026-03-05T00:34:04.531977"
     },
     "docs__en__api__csharp__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/csharp/models",
@@ -1017,8 +1017,8 @@
     "docs__en__api__go__beta.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/beta",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/beta.md",
-      "hash": "65af29411d2bb618080c26db7baf9e7e3357a41b73767c5da9a56e72359b029d",
-      "last_updated": "2026-02-19T21:13:00.476686"
+      "hash": "4466ed9e92ea56e6115ff008dd636370fd3e791d0ee97aae7ac19778d0e09bc8",
+      "last_updated": "2026-03-05T00:34:07.837136"
     },
     "docs__en__api__go__beta__files.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/beta/files",
@@ -1059,14 +1059,14 @@
     "docs__en__api__go__beta__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/beta/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/beta/messages.md",
-      "hash": "c6fc3cc60a19ea71c06f5b90233eef20fd4b6aae55e5478690f1e457fd38e0d8",
-      "last_updated": "2026-02-19T21:13:05.138368"
+      "hash": "3473adec7ed757a5c9bf0489b61e6fbfe560bc71349d46bd8b98ab2f057f2f63",
+      "last_updated": "2026-03-05T00:34:13.208395"
     },
     "docs__en__api__go__beta__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/beta/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/beta/messages/batches.md",
-      "hash": "a09bd78979c6f3df3f432adf4b39d2e022ae0a375835ccc04583ee985c74e997",
-      "last_updated": "2026-02-19T21:13:05.834417"
+      "hash": "7d191754bd149bf0ebfa842c97ce82e30db309281dbed2d7cb4ba63eb1594def",
+      "last_updated": "2026-03-05T00:34:13.842427"
     },
     "docs__en__api__go__beta__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/beta/messages/batches/cancel",
@@ -1077,8 +1077,8 @@
     "docs__en__api__go__beta__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/beta/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/beta/messages/batches/create.md",
-      "hash": "694cafcaca735592f59178c359bdfd63064cd21c84cecc9e5c865f9e1d4c0b49",
-      "last_updated": "2026-02-19T21:13:07.210690"
+      "hash": "5ef3feab356b5284a0f2254c4ca2c003094ee75204a1c76161de5975c9ea6050",
+      "last_updated": "2026-03-05T00:34:15.180496"
     },
     "docs__en__api__go__beta__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/beta/messages/batches/delete",
@@ -1095,8 +1095,8 @@
     "docs__en__api__go__beta__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/beta/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/beta/messages/batches/results.md",
-      "hash": "d1c4eb81ac34bc7048e17f733b550571dbdfa1f7a2d6402af0c9d278b960462c",
-      "last_updated": "2026-02-17T18:25:02.361160"
+      "hash": "664fd4800dab6e7ba276b0a0f4fbb1a42dc3a04a08ed176aee3ab3a65db94743",
+      "last_updated": "2026-03-05T00:34:17.039100"
     },
     "docs__en__api__go__beta__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/beta/messages/batches/retrieve",
@@ -1113,8 +1113,8 @@
     "docs__en__api__go__beta__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/beta/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/beta/messages/create.md",
-      "hash": "63f60f92df768e65c8209fcfe6ab6538d484c4bca4dab98d263d812ff4c4c220",
-      "last_updated": "2026-02-19T21:13:10.893696"
+      "hash": "4d203a323a43a4b9def1fcf749f9c286128a563c81e858982b72b7ebf14bfa8b",
+      "last_updated": "2026-03-05T00:34:19.029901"
     },
     "docs__en__api__go__beta__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/beta/models",
@@ -1197,26 +1197,26 @@
     "docs__en__api__go__completions.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/completions",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/completions.md",
-      "hash": "1416212b5ba171052f3f8739b90b7689ec42bef35f2840701a06306d828e2dfb",
-      "last_updated": "2026-02-17T18:25:13.660284"
+      "hash": "739d469da5805170bfe873c8b3525471a08e47630b60571fd924fd0955424a83",
+      "last_updated": "2026-03-05T00:34:27.908232"
     },
     "docs__en__api__go__completions__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/completions/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/completions/create.md",
-      "hash": "851ef72ebde0a0ddb085adbde88e40f43bbe891f562099d60f1d4664c95c2e0b",
-      "last_updated": "2026-02-17T18:25:14.304093"
+      "hash": "9182b4296dd148bf2dedaea38a9368b9b49db3f8104cced0ebcf09e7d94a6882",
+      "last_updated": "2026-03-05T00:34:28.541205"
     },
     "docs__en__api__go__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/messages.md",
-      "hash": "00261107d53b787e413167dd1f47a7bf100428ebe34eb92312c29f593faedd64",
-      "last_updated": "2026-02-19T21:13:21.920785"
+      "hash": "36f4223db93e250f8350ef16c8da15394fd5f6ba415c54090f52708188d1f374",
+      "last_updated": "2026-03-05T00:34:29.354924"
     },
     "docs__en__api__go__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/messages/batches.md",
-      "hash": "ea17461bc9c0e039b726a3d153b187c5e22ab719c2d227ac16bf858a03b203db",
-      "last_updated": "2026-02-19T21:13:22.655857"
+      "hash": "39ca8e46aacd087381ccfb05c07fc0ce9c67e3f0cd2d08e106dcb2f63611b2bc",
+      "last_updated": "2026-03-05T00:34:30.013312"
     },
     "docs__en__api__go__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/messages/batches/cancel",
@@ -1227,8 +1227,8 @@
     "docs__en__api__go__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/messages/batches/create.md",
-      "hash": "e50bf1c341866a908df7bab971c30724012ca91e7d428a510fa489405c1f15a4",
-      "last_updated": "2026-02-19T21:13:23.904500"
+      "hash": "44a54aee749deb81cb89e08579a5c527045f581171b2af9a61e4ae60f2075f00",
+      "last_updated": "2026-03-05T00:34:31.277011"
     },
     "docs__en__api__go__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/messages/batches/delete",
@@ -1245,8 +1245,8 @@
     "docs__en__api__go__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/messages/batches/results.md",
-      "hash": "642e505e3c31db6acd014334335b43f64e9f8533681c2e08508e5e1f4f072329",
-      "last_updated": "2026-02-19T21:13:25.919313"
+      "hash": "308abd687b70832d50a85d1bef35d71e13a19b6046fe9560fb036a715016f7f2",
+      "last_updated": "2026-03-05T00:34:33.178163"
     },
     "docs__en__api__go__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/messages/batches/retrieve",
@@ -1263,8 +1263,8 @@
     "docs__en__api__go__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/go/messages/create.md",
-      "hash": "5ca8482a8d7053a80f3e725a3282fb1cd4c5a7fbc4b3cfdcd19db85a6f9c137b",
-      "last_updated": "2026-02-19T21:13:27.830820"
+      "hash": "57d8304798e6f54974b5fa0c2915add2a1ddaae5e508293828e4385e1aa3355e",
+      "last_updated": "2026-03-05T00:34:35.132536"
     },
     "docs__en__api__go__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/go/models",
@@ -1293,8 +1293,8 @@
     "docs__en__api__java__beta.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/beta.md",
-      "hash": "e709433b6cb4e7711581504fd0aaf780c7f35a2772e8b87ce0c48debb1600eae",
-      "last_updated": "2026-02-19T21:13:31.025461"
+      "hash": "a31ebe023bbbdb4e2d1d74c23287656be492e183e3b78c830dc1b55d39c37c25",
+      "last_updated": "2026-03-05T00:34:38.485897"
     },
     "docs__en__api__java__beta__files.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta/files",
@@ -1335,14 +1335,14 @@
     "docs__en__api__java__beta__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/beta/messages.md",
-      "hash": "6cb5c2542b30d82d30faed75ce70d2df591789dac68e85c1ce1e48c7196970cc",
-      "last_updated": "2026-02-19T21:13:35.417019"
+      "hash": "d4ddbc4ab029304e255e0d3dbc10f3f8a089b293ec9734dde205eaaeafd282d6",
+      "last_updated": "2026-03-05T00:34:43.027609"
     },
     "docs__en__api__java__beta__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/beta/messages/batches.md",
-      "hash": "393ba36ce8a4a9417766d852b04a85f990f6409977e74e87d2d807877e150ac3",
-      "last_updated": "2026-02-19T21:13:36.163434"
+      "hash": "e3b855fc00fcf0e6d6d9c2f1dd83496f0752e16fa60ea01d843e7896066a40dd",
+      "last_updated": "2026-03-05T00:34:43.696889"
     },
     "docs__en__api__java__beta__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta/messages/batches/cancel",
@@ -1353,8 +1353,8 @@
     "docs__en__api__java__beta__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/beta/messages/batches/create.md",
-      "hash": "148e25abcb09b0d5ca4426db8ccb521ab025bf701f1c121d38e0a3c6cd3bc690",
-      "last_updated": "2026-02-19T21:13:37.459654"
+      "hash": "83e9583cba5f3f044801e6f6da71cfb92922330b0e49f0936e1eb8b4f62e1128",
+      "last_updated": "2026-03-05T00:34:44.967116"
     },
     "docs__en__api__java__beta__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta/messages/batches/delete",
@@ -1371,8 +1371,8 @@
     "docs__en__api__java__beta__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/beta/messages/batches/results.md",
-      "hash": "1b92a2c498117c72c1e7e61f04cbc5379a65d1d331ea6e9e536266bf2e838db6",
-      "last_updated": "2026-02-17T18:25:33.938864"
+      "hash": "69a1c373e806d31d7684171288ac7c2639b75bbee94cacfab876f48537cec5f1",
+      "last_updated": "2026-03-05T00:34:46.844338"
     },
     "docs__en__api__java__beta__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta/messages/batches/retrieve",
@@ -1389,8 +1389,8 @@
     "docs__en__api__java__beta__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/beta/messages/create.md",
-      "hash": "54f8358f232cebf705874a6c7c10c9d45e52839a73beff43c5e51f1b61259daf",
-      "last_updated": "2026-02-19T21:13:41.333821"
+      "hash": "a3edc0a8810c8f57b4254bd1c268a1a56db13a8aa32bffbe3d61fd803c428ee5",
+      "last_updated": "2026-03-05T00:34:48.822163"
     },
     "docs__en__api__java__beta__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta/models",
@@ -1473,26 +1473,26 @@
     "docs__en__api__java__completions.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/completions",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/completions.md",
-      "hash": "762eac90ca8eabd29eb6090b67a5e60ae709171e83f3c5d3ccb0209ad25f1c44",
-      "last_updated": "2026-02-17T18:25:45.841568"
+      "hash": "84d724d36e120d66010788ca012199c7b9dc8127620e15454181d198092a2b95",
+      "last_updated": "2026-03-05T00:34:58.097989"
     },
     "docs__en__api__java__completions__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/completions/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/completions/create.md",
-      "hash": "4196e8a725e157fcbfab61346647d5dec0423540ee1f53ff45be85ba25b95fdb",
-      "last_updated": "2026-02-17T18:25:46.495742"
+      "hash": "cdf7c4fc5fd4acf83fc79a889ded912274b1f5a851fd0e6409d0e0aee4300880",
+      "last_updated": "2026-03-05T00:34:58.932776"
     },
     "docs__en__api__java__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/messages.md",
-      "hash": "ce6cdda6f7ae6592560ec50e5f8fd66c1a76d708413f9c1206d3f6693e4048f3",
-      "last_updated": "2026-02-19T21:13:51.289485"
+      "hash": "82e7218fdff4cad7c8c81621880bd78df0901fc848d65bbcc1e9c05189ada594",
+      "last_updated": "2026-03-05T00:34:59.588470"
     },
     "docs__en__api__java__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/messages/batches.md",
-      "hash": "17bc24d9e302442d21583b97ab88ee2836742bda0b143e751ae25cd435b8ecfa",
-      "last_updated": "2026-02-19T21:13:51.886932"
+      "hash": "58f4d2ac9721382fde3aa5064ef9761be0882da8d67104e691eefe10477cc149",
+      "last_updated": "2026-03-05T00:35:00.234637"
     },
     "docs__en__api__java__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/messages/batches/cancel",
@@ -1503,8 +1503,8 @@
     "docs__en__api__java__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/messages/batches/create.md",
-      "hash": "3daf686dfe54578f15d13a634bf082579773a1f1d4e27ce00d562ae01440e0ca",
-      "last_updated": "2026-02-19T21:13:53.174590"
+      "hash": "d02f27bb1067410be737ac0304c749be605dc389659a183c340272a450d98110",
+      "last_updated": "2026-03-05T00:35:01.497581"
     },
     "docs__en__api__java__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/messages/batches/delete",
@@ -1521,8 +1521,8 @@
     "docs__en__api__java__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/messages/batches/results.md",
-      "hash": "b5d8024d19fc907b5863a21a9a80a9d9f1e06c978569c93c7011128b19ec540f",
-      "last_updated": "2026-02-19T21:13:54.984393"
+      "hash": "ff9212eb1afddd2de299b3b0c4f53239f60f3afda9a216938539ad4ee04767c3",
+      "last_updated": "2026-03-05T00:35:03.470947"
     },
     "docs__en__api__java__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/messages/batches/retrieve",
@@ -1539,8 +1539,8 @@
     "docs__en__api__java__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/messages/create.md",
-      "hash": "b98eee032026bac46cd1acd6ff46fd0a945fda102853bdaff588e963fe56c1ed",
-      "last_updated": "2026-02-19T21:13:57.048326"
+      "hash": "d2dfcce0423f2b908f022ed9c646ccda7d27a07c366f87b8793f9831118ba626",
+      "last_updated": "2026-03-05T00:35:05.929842"
     },
     "docs__en__api__java__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/models",
@@ -1563,14 +1563,14 @@
     "docs__en__api__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/messages.md",
-      "hash": "726b6be58f2a73cb5fd95dd61f71185c529165c59eb4ae9b6d4b8bc726f49bc1",
-      "last_updated": "2026-02-19T21:14:17.708742"
+      "hash": "bf2ce604ce6e68b5b514d1a73e9b10c66877468c978e47a58ede8b58a94b023f",
+      "last_updated": "2026-03-05T00:35:58.253600"
     },
     "docs__en__api__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/messages/batches.md",
-      "hash": "5666259fae1e9e333188fb1338382cb6a3c20d16a54da1aab4142385e68b9641",
-      "last_updated": "2026-02-19T21:14:18.350655"
+      "hash": "70db90b164d2f744ba8f5bafbe16b5181351e694494e9d97dcd17be502ed05cd",
+      "last_updated": "2026-03-05T00:35:58.875035"
     },
     "docs__en__api__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/messages/batches/cancel",
@@ -1581,8 +1581,8 @@
     "docs__en__api__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/messages/batches/create.md",
-      "hash": "ee93884d5c60f364da19b09a499f041794935c83cf0c966cb2287700d2c5af1f",
-      "last_updated": "2026-02-19T21:14:19.650892"
+      "hash": "8471e069140379153e393187da862371fa8c5e7aa4906b32754822ec1be9fdab",
+      "last_updated": "2026-03-05T00:36:00.104433"
     },
     "docs__en__api__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/messages/batches/delete",
@@ -1599,8 +1599,8 @@
     "docs__en__api__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/messages/batches/results.md",
-      "hash": "11e2a3381b8ebec99c4488d4e1edc994de57d00e6057daaedaf14c360ab0f7e3",
-      "last_updated": "2026-02-19T21:14:21.436277"
+      "hash": "ca7d5edb5e6bcb2adfe805e9c0c08a2f41c678962b409740fdc761e38d57a03b",
+      "last_updated": "2026-03-05T00:36:02.152140"
     },
     "docs__en__api__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/messages/batches/retrieve",
@@ -1611,14 +1611,14 @@
     "docs__en__api__messages__count_tokens.md": {
       "original_url": "https://platform.claude.com/docs/en/api/messages/count_tokens",
       "original_md_url": "https://platform.claude.com/docs/en/api/messages/count_tokens.md",
-      "hash": "195b8b8dd79f6f199ba7c14280ac87e9c2059ae00f26414eabb7ae78dc811e67",
-      "last_updated": "2026-02-19T21:14:22.723649"
+      "hash": "1f195671417621eafae30e8b9a1ad59c890cc24008a741d7a92afcefaea87496",
+      "last_updated": "2026-03-05T00:36:03.415425"
     },
     "docs__en__api__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/messages/create.md",
-      "hash": "1735c35f16ea12c68ca2402e731896d1d51597aa71626becd8467625df5a9792",
-      "last_updated": "2026-02-19T21:14:23.358546"
+      "hash": "c794735640941b4f7fd0f388f5e8c8c1475d67563eb49c6aec9b003b7349faef",
+      "last_updated": "2026-03-05T00:36:04.061220"
     },
     "docs__en__api__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/models",
@@ -1653,8 +1653,8 @@
     "docs__en__api__python__beta.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/beta.md",
-      "hash": "eb0252e70cc1ca1799c0f8fb17748788bd0cabb601a6594401665883ae229085",
-      "last_updated": "2026-02-19T21:14:44.074882"
+      "hash": "4f9d783e7022ab95ea27f4a86c16782c062cd3d450cefb38d06be6075679a026",
+      "last_updated": "2026-03-05T00:36:32.406283"
     },
     "docs__en__api__python__beta__files.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/files",
@@ -1695,14 +1695,14 @@
     "docs__en__api__python__beta__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/beta/messages.md",
-      "hash": "8fdc721943a9002ea68eda7ca83203f3a5fbaee25a910d8f5400dbc131f4b0ca",
-      "last_updated": "2026-02-19T21:14:48.704243"
+      "hash": "4ccd66470d82d8b888d4829325905e1c9bfe9b237cb88e676ab39c22a521b68d",
+      "last_updated": "2026-03-05T00:36:36.964711"
     },
     "docs__en__api__python__beta__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/beta/messages/batches.md",
-      "hash": "5bb7f5e6d0c17b8a7475dbda02172b7fc8cec36d63fec6641b4ddf4650162677",
-      "last_updated": "2026-02-19T21:14:49.369266"
+      "hash": "b8d79ed7245535683c43d2674f7658db35a30a9ccc5b329522e38758f5e95ec7",
+      "last_updated": "2026-03-05T00:36:37.602031"
     },
     "docs__en__api__python__beta__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/messages/batches/cancel",
@@ -1713,8 +1713,8 @@
     "docs__en__api__python__beta__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/beta/messages/batches/create.md",
-      "hash": "af9a01ebbb3e8e39deddfde17b4bc72702249c8a240dadcfb0891464f4925e2e",
-      "last_updated": "2026-02-19T21:14:50.619486"
+      "hash": "51e29b6f4ed44871d5b8fc6380e021c76af6c3a05f34c6d4d591b0ecfdb3ef28",
+      "last_updated": "2026-03-05T00:36:38.913144"
     },
     "docs__en__api__python__beta__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/messages/batches/delete",
@@ -1731,8 +1731,8 @@
     "docs__en__api__python__beta__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/beta/messages/batches/results.md",
-      "hash": "bd3c8512aedf7812347db31401486257e69b6de61eb811f5093e3485b4c4f509",
-      "last_updated": "2026-02-17T18:26:51.490579"
+      "hash": "a91e17e2c621e58d0e8bb7da047f0501c96a29484d0ebd8cd7713a3436487c6a",
+      "last_updated": "2026-03-05T00:36:40.823748"
     },
     "docs__en__api__python__beta__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/messages/batches/retrieve",
@@ -1743,14 +1743,14 @@
     "docs__en__api__python__beta__messages__count_tokens.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/messages/count_tokens",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/beta/messages/count_tokens.md",
-      "hash": "226410c1e9f5d23a98369b30d3e49fc4424e95f38a364b547f478e5b42b62f41",
-      "last_updated": "2026-02-19T21:14:53.727460"
+      "hash": "b6096ea458465aed341ecdebc25f2c6075e13fbcf1c2f2f199303f5df68f4f82",
+      "last_updated": "2026-03-05T00:36:42.520621"
     },
     "docs__en__api__python__beta__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/beta/messages/create.md",
-      "hash": "0ba521ac96e096c0fa0c9503fa5a588df82363001646db9148eb0a162826092f",
-      "last_updated": "2026-02-19T21:14:54.320474"
+      "hash": "0b45d73de6e22d55cfbaf30927853514186ce4a3cd65d8c75dfe33a629c23079",
+      "last_updated": "2026-03-05T00:36:43.161228"
     },
     "docs__en__api__python__beta__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/beta/models",
@@ -1833,26 +1833,26 @@
     "docs__en__api__python__completions.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/completions",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/completions.md",
-      "hash": "bbbc1b3723b0566a61311e5ece2cfb4ff6eb8be52da81188316b8724735d281f",
-      "last_updated": "2026-02-17T18:27:04.180175"
+      "hash": "f49d56a90ff1e67b5cf13d4ca0c515caa39c507438221b496cb919b550a04f78",
+      "last_updated": "2026-03-05T00:36:52.177400"
     },
     "docs__en__api__python__completions__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/completions/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/completions/create.md",
-      "hash": "0bfa9d630c091bbd392740a7b3c16241e1a9638d7c16bdb45d0fec2034afe9fd",
-      "last_updated": "2026-02-17T18:27:04.795094"
+      "hash": "1b3162653890d5dd905db2d08fad013a4f1f0c522dbb7a3c07db6dbeaa0f633e",
+      "last_updated": "2026-03-05T00:36:52.812118"
     },
     "docs__en__api__python__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/messages.md",
-      "hash": "4e325d7cf0f079c65d1231650e87de635fe66df42b6fad6e56157b5ee936a365",
-      "last_updated": "2026-02-19T21:15:04.354663"
+      "hash": "0542cc03b64cab67e1ed5d34d976cd1d7006d0a4743004e47c534c48182cce97",
+      "last_updated": "2026-03-05T00:36:53.477300"
     },
     "docs__en__api__python__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/messages/batches.md",
-      "hash": "1da1fe99f967150c023adca128f70c6737f4e6cd4926a82b17e5654bbdfdd105",
-      "last_updated": "2026-02-19T21:15:05.013574"
+      "hash": "fe9a80f9296d0f78d8868319ad0934cc7aad745c74427dbd1d75039dedf8b4dc",
+      "last_updated": "2026-03-05T00:36:54.162252"
     },
     "docs__en__api__python__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/messages/batches/cancel",
@@ -1863,8 +1863,8 @@
     "docs__en__api__python__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/messages/batches/create.md",
-      "hash": "8c05d6ab117d8eb203e1d247371b00de97ed172c0330432b976222fee1c86c89",
-      "last_updated": "2026-02-19T21:15:06.234276"
+      "hash": "72b487c10fe83c40ccd9c01fbd3dbd8d6bf97d1e91d1534f742f2fb44b7838cd",
+      "last_updated": "2026-03-05T00:36:55.420763"
     },
     "docs__en__api__python__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/messages/batches/delete",
@@ -1881,8 +1881,8 @@
     "docs__en__api__python__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/messages/batches/results.md",
-      "hash": "a105a18d40bd7463754c8a4f16fe521a22f655a9abea8ba87dfa132f6f836dd3",
-      "last_updated": "2026-02-19T21:15:08.076952"
+      "hash": "937aa4cce57fc08bddac93bc3b244bbe57fa3989fa9786dd0e8d14e1fcf52af3",
+      "last_updated": "2026-03-05T00:36:57.465589"
     },
     "docs__en__api__python__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/messages/batches/retrieve",
@@ -1893,14 +1893,14 @@
     "docs__en__api__python__messages__count_tokens.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/messages/count_tokens",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/messages/count_tokens.md",
-      "hash": "c5ca6674538ccd5919599f1141224a8ee059e4ad72e4fd5300c590eedddddb48",
-      "last_updated": "2026-02-19T21:15:09.332084"
+      "hash": "da08d95d71f79955151323213326fd4ad7e396fa4375ef7f2546e112d9f862b0",
+      "last_updated": "2026-03-05T00:36:58.846799"
     },
     "docs__en__api__python__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/python/messages/create.md",
-      "hash": "7dc4787ae40d8b991b0e64ea08d6859ee03313e173454119d1ec5133a0856377",
-      "last_updated": "2026-02-19T21:15:09.941709"
+      "hash": "9aef2fedcc6d4ee8b3d3bc185532e0db6e8c25c808a86fb113dbc4d75982ea22",
+      "last_updated": "2026-03-05T00:36:59.498233"
     },
     "docs__en__api__python__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/python/models",
@@ -1929,8 +1929,8 @@
     "docs__en__api__ruby__beta.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/beta.md",
-      "hash": "cee0404e0e33b3c8f4687e9b067248c4c7ae583aeaff8800011d1ac1f3f1f20a",
-      "last_updated": "2026-02-19T21:15:13.073228"
+      "hash": "4bec5ce729a0b709e594a9ee796a1a4155216953416aca8748be7aff95c075a7",
+      "last_updated": "2026-03-05T00:37:02.931637"
     },
     "docs__en__api__ruby__beta__files.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta/files",
@@ -1971,14 +1971,14 @@
     "docs__en__api__ruby__beta__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages.md",
-      "hash": "ee20a3f5317396576070167f5cc9251535cc1a4c2fcbaeca202ca589cf9bc1a5",
-      "last_updated": "2026-02-19T21:15:17.663083"
+      "hash": "4a9f0f2d9ffbf0bbe99b0c864ef40df3b7362cf5283bfc17d33e7e691c566167",
+      "last_updated": "2026-03-05T00:37:07.619084"
     },
     "docs__en__api__ruby__beta__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/batches.md",
-      "hash": "e0a1fa79b837f6f2ea68022383d057e1820d5c1e004508fc9dd1953e5f36bc22",
-      "last_updated": "2026-02-19T21:15:18.307500"
+      "hash": "3c5f224eac50c3aa0e87564ad6670a85c8c3017a8de5ced4ddb525fb33cc2810",
+      "last_updated": "2026-03-05T00:37:08.310186"
     },
     "docs__en__api__ruby__beta__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/cancel",
@@ -1989,8 +1989,8 @@
     "docs__en__api__ruby__beta__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/create.md",
-      "hash": "e727d9e29e123ea38969eb433d4f727066006f0f33bb06bfca7bf904849a9b7e",
-      "last_updated": "2026-02-19T21:15:19.650090"
+      "hash": "d251f8b4fa1721352912e4053f93a7e434a73e67cdba9a985116b4fce2544054",
+      "last_updated": "2026-03-05T00:37:09.544710"
     },
     "docs__en__api__ruby__beta__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/delete",
@@ -2007,8 +2007,8 @@
     "docs__en__api__ruby__beta__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/results.md",
-      "hash": "a9b6c1413b4d65d2fee84c18be2a2dd09044826d56f8bd42aa1d6ad7e1df27ce",
-      "last_updated": "2026-02-17T18:27:22.729495"
+      "hash": "d8f1fb50b1e04bc89c7fecc5a292eef86f79624724c7a0e277f3af2371a50411",
+      "last_updated": "2026-03-05T00:37:11.440922"
     },
     "docs__en__api__ruby__beta__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/retrieve",
@@ -2019,14 +2019,14 @@
     "docs__en__api__ruby__beta__messages__count_tokens.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/count_tokens",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/count_tokens.md",
-      "hash": "b7d44d14b2cb4af5b01dc6f354401d954048f78c9298481a9e15ed1de7e904ed",
-      "last_updated": "2026-02-19T21:15:23.085783"
+      "hash": "f15036fdbb59b1424dc26796b9829290e8022d357acb99b81801f6d86f528065",
+      "last_updated": "2026-03-05T00:37:12.706826"
     },
     "docs__en__api__ruby__beta__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/beta/messages/create.md",
-      "hash": "90fe816c39680fdb50721d5f6596bc88fbebd36949c5db2137819f855c5ddf3e",
-      "last_updated": "2026-02-19T21:15:23.752132"
+      "hash": "0c7e42b0bdef3e1258d9d34873447f4e02b98d1a36bc9641a7a90f49dfb90ad2",
+      "last_updated": "2026-03-05T00:37:13.345798"
     },
     "docs__en__api__ruby__beta__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/beta/models",
@@ -2109,26 +2109,26 @@
     "docs__en__api__ruby__completions.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/completions",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/completions.md",
-      "hash": "32a2a7e3abdbf4543fb28ef0f18a7941571ba25c8315b58d55b202b1ba59178e",
-      "last_updated": "2026-02-17T18:27:33.380840"
+      "hash": "f60f335ccaeac5d3ea4482ed670236b1c1b89f3b2f75cbb9421f3c94ac75b6f0",
+      "last_updated": "2026-03-05T00:37:22.567856"
     },
     "docs__en__api__ruby__completions__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/completions/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/completions/create.md",
-      "hash": "1405257aaaa8d9618ecddd4722b86fe98127d778b8ce15f399aace2cf100e6f1",
-      "last_updated": "2026-02-17T18:27:34.040575"
+      "hash": "710f18f0570177afbb7cbf9db008b0d63982db10a04cdb067aaffaf993676df4",
+      "last_updated": "2026-03-05T00:37:23.208509"
     },
     "docs__en__api__ruby__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/messages.md",
-      "hash": "847af9f31a22dcf576069e637280f7407ff6d10ed0b9b8f4f67f219f17634d0b",
-      "last_updated": "2026-02-19T21:15:33.569462"
+      "hash": "5397445f6a6f8f5c9d862e09e28e01eded36f9323b53f026cf23783554b5f455",
+      "last_updated": "2026-03-05T00:37:23.855497"
     },
     "docs__en__api__ruby__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/messages/batches.md",
-      "hash": "49a4289a1f56743945d2896960e7190cb384ef946e3fc19224e3a8534ef89644",
-      "last_updated": "2026-02-19T21:15:34.202181"
+      "hash": "97effbeef49550e0d76600b53ffbbef656caf6ccdb5772242558dc23a5a47a92",
+      "last_updated": "2026-03-05T00:37:24.511312"
     },
     "docs__en__api__ruby__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/messages/batches/cancel",
@@ -2139,8 +2139,8 @@
     "docs__en__api__ruby__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/messages/batches/create.md",
-      "hash": "16cab8ab23fb824002f8b64fd5ae48a41e4b90b22e82445f53e1afcdc50e5337",
-      "last_updated": "2026-02-19T21:15:35.780868"
+      "hash": "369d4ee33bdbbc8f1c1033f2a46782cba53cdc38befc110a1ebe09a959acbc51",
+      "last_updated": "2026-03-05T00:37:25.807098"
     },
     "docs__en__api__ruby__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/messages/batches/delete",
@@ -2157,8 +2157,8 @@
     "docs__en__api__ruby__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/messages/batches/results.md",
-      "hash": "c5618a57245a921e6fc8194d7f2015fb08a16cb878891061b813d91b65112a36",
-      "last_updated": "2026-02-19T21:15:37.714112"
+      "hash": "9b4067798051736d7b90fab767f7b2e20e6a07e066fd8b82fef5346a4c54db80",
+      "last_updated": "2026-03-05T00:37:27.777591"
     },
     "docs__en__api__ruby__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/messages/batches/retrieve",
@@ -2169,14 +2169,14 @@
     "docs__en__api__ruby__messages__count_tokens.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/messages/count_tokens",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/messages/count_tokens.md",
-      "hash": "f35b77d12ac96f31c75f3a06dcb4e0fd7a86d933c5ebabb2fae6ac1f99405099",
-      "last_updated": "2026-02-19T21:15:39.037407"
+      "hash": "1aedf7dbcb7334dd797086d72863a908de1832d2c3ffa1837bf412b2d41555e4",
+      "last_updated": "2026-03-05T00:37:29.039176"
     },
     "docs__en__api__ruby__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/ruby/messages/create.md",
-      "hash": "fe3fe0c474e9a508cb28177d5fbfaa7dd016cc212e48993fa6d5c0967afc6771",
-      "last_updated": "2026-02-19T21:15:39.686667"
+      "hash": "b678518e957175167aaf65eab525dcd71c526c72267637b6d653e15d18fb4fc5",
+      "last_updated": "2026-03-05T00:37:29.686760"
     },
     "docs__en__api__ruby__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/ruby/models",
@@ -2205,20 +2205,20 @@
     "docs__en__api__sdks__go.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/go",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/go.md",
-      "hash": "1141a65089bcb390c55137fc02f6d7d527b645b6194157a1c4aa23bd91003fc0",
-      "last_updated": "2026-03-03T00:37:02.689480"
+      "hash": "6698868b22a44f534a4c94052369aa0a9e042ae344d98bd76c1a3b5e1db28a84",
+      "last_updated": "2026-03-05T00:37:32.884437"
     },
     "docs__en__api__sdks__java.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/java",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/java.md",
-      "hash": "a3d38fe23b1645ab4518fd367f2298525b3ca3ba5b09d39bfedab7ee0b3586f5",
-      "last_updated": "2026-03-03T00:37:04.400676"
+      "hash": "aaced48fa93ca55d0b2b9044fb8f49a7ab740f1ee07a3b39ad80178cc8b14c64",
+      "last_updated": "2026-03-05T00:37:33.537076"
     },
     "docs__en__api__sdks__php.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/php",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/php.md",
-      "hash": "6ad112189042ca81b97f7a1a22e2e1843e2acba8634d71e62ffff426cc2a793f",
-      "last_updated": "2026-03-03T00:37:05.026891"
+      "hash": "a353f06f255a2975b765866d6027e68183a8241f7b403c8c126c73684d7d2011",
+      "last_updated": "2026-03-05T00:37:39.331547"
     },
     "docs__en__api__sdks__python.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/python",
@@ -2229,8 +2229,8 @@
     "docs__en__api__sdks__ruby.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/ruby",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/ruby.md",
-      "hash": "a402fceceb2f5142a5ea738a5f4225efe0b9493003e9c9a3cd32377be833e5b9",
-      "last_updated": "2026-03-03T00:37:06.227630"
+      "hash": "882d0f3279e0f5dd4abb81dc8b000b69c16fec251a235b7c2effe7d97f1491b4",
+      "last_updated": "2026-03-05T00:37:41.490009"
     },
     "docs__en__api__sdks__typescript.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/typescript",
@@ -2253,8 +2253,8 @@
     "docs__en__api__typescript__beta.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/beta.md",
-      "hash": "3aa09d8f6cc204a08df01c065cc5e0631402fe0835dbe5df242b6a3a0ba8169a",
-      "last_updated": "2026-02-19T21:16:02.375372"
+      "hash": "48ef1fdf7c24dbb48850078a5bc461b0312aec24a5cd53a195595b006824fb40",
+      "last_updated": "2026-03-05T00:38:06.368836"
     },
     "docs__en__api__typescript__beta__files.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta/files",
@@ -2295,14 +2295,14 @@
     "docs__en__api__typescript__beta__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages.md",
-      "hash": "1eb174601f89a89d2189f9e904974c053aec9575f4e78367ecea90879b701164",
-      "last_updated": "2026-02-19T21:16:06.996732"
+      "hash": "df2698189cc5e78de03608fd55f2ed0df437dae6f08bbbed377482b218c3967e",
+      "last_updated": "2026-03-05T00:38:11.101429"
     },
     "docs__en__api__typescript__beta__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/batches.md",
-      "hash": "0b7c21baf3863d2387df11a653f19b1b2780da82437d2c55f22948ef45f0907d",
-      "last_updated": "2026-02-19T21:16:07.653302"
+      "hash": "c3d82746b6f3faf9c6665ec62b4d2cc63a8176f1815d89c459e82b2099746270",
+      "last_updated": "2026-03-05T00:38:11.770871"
     },
     "docs__en__api__typescript__beta__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/batches/cancel",
@@ -2313,8 +2313,8 @@
     "docs__en__api__typescript__beta__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/batches/create.md",
-      "hash": "ca4aab4fc54cc4d637de3eefbcae061f103a9e7b8e5fb063b322cee038ff3671",
-      "last_updated": "2026-02-19T21:16:08.986340"
+      "hash": "ef90c22239f83b1f696f8e0d073d8d3bd163e8008bee155b921d07d47968f9ca",
+      "last_updated": "2026-03-05T00:38:13.934867"
     },
     "docs__en__api__typescript__beta__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/batches/delete",
@@ -2331,8 +2331,8 @@
     "docs__en__api__typescript__beta__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/batches/results.md",
-      "hash": "666b6e7c23a6bcb692e0fa551cd80a571b30090186e11038429392d8016b2898",
-      "last_updated": "2026-02-17T18:28:14.816463"
+      "hash": "b0f7d71a3909fadc6de681ac13e161b564b5e2e7f1def146c7e29d3b147db768",
+      "last_updated": "2026-03-05T00:38:15.880617"
     },
     "docs__en__api__typescript__beta__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/batches/retrieve",
@@ -2343,14 +2343,14 @@
     "docs__en__api__typescript__beta__messages__count_tokens.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/count_tokens",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/count_tokens.md",
-      "hash": "1d347dc2cf306ce91ec1a71f3a77ed0d7f3fe7c1d24d8f7be4e951a9ed047d6d",
-      "last_updated": "2026-02-19T21:16:12.183556"
+      "hash": "a2e06b2090042a077dd639c92112468d1ab908ec1febad5e6efaa36ce5cb29f9",
+      "last_updated": "2026-03-05T00:38:17.147676"
     },
     "docs__en__api__typescript__beta__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/beta/messages/create.md",
-      "hash": "312b9243c346e737ed84432aa5c2377126c953816452e13a31991d9236a37378",
-      "last_updated": "2026-02-19T21:16:12.905362"
+      "hash": "40ac9151a850e3cec72e7bdfb7acb6800092c8f629893d6eaf6dec9bd97f7b45",
+      "last_updated": "2026-03-05T00:38:17.891506"
     },
     "docs__en__api__typescript__beta__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/beta/models",
@@ -2433,26 +2433,26 @@
     "docs__en__api__typescript__completions.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/completions",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/completions.md",
-      "hash": "b86cf93ea5bec16a3f81ed37496bc5b831a6517faaf4e7a99e62ea2ba1c25f1d",
-      "last_updated": "2026-02-17T18:28:25.987192"
+      "hash": "86aa00f3c94a4098884794a043fe7f1a4258b6878b621ade740a3af76b1a73b9",
+      "last_updated": "2026-03-05T00:38:26.880987"
     },
     "docs__en__api__typescript__completions__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/completions/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/completions/create.md",
-      "hash": "90f11cc6df48b87215c4f4a4f4907c433705eef014c6a83c52ecc5eb6aab96d6",
-      "last_updated": "2026-02-17T18:28:26.605755"
+      "hash": "89b8d96565eeae3f4f177837fcccac80e6a55079934c0e805c4d2336520bd9b5",
+      "last_updated": "2026-03-05T00:38:27.533805"
     },
     "docs__en__api__typescript__messages.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/messages",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/messages.md",
-      "hash": "74702d1ac2b4d4b37d89e52d99f65550dd5529822ff2c1f45ae377e8e7054286",
-      "last_updated": "2026-02-19T21:16:23.471776"
+      "hash": "917b55615524792ad10f2a2f8c6dce33c5bf34e7581bd5541b8487184f6a3f6c",
+      "last_updated": "2026-03-05T00:38:28.416828"
     },
     "docs__en__api__typescript__messages__batches.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/messages/batches",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/messages/batches.md",
-      "hash": "d328245980bd7fb5ac1606ea13144aafd12c4635a3b7cfeb136aca47be6e0839",
-      "last_updated": "2026-02-19T21:16:28.333036"
+      "hash": "1d05059dcd675eb894e46d1258035e65daf2491c330ef5a15b24692447273a32",
+      "last_updated": "2026-03-05T00:38:29.084496"
     },
     "docs__en__api__typescript__messages__batches__cancel.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/messages/batches/cancel",
@@ -2463,8 +2463,8 @@
     "docs__en__api__typescript__messages__batches__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/messages/batches/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/messages/batches/create.md",
-      "hash": "d61c3d38d2599e08ff59c87e88e8a5744fe8ef2f713cea1236979551c77bf70f",
-      "last_updated": "2026-02-19T21:16:29.625151"
+      "hash": "ed1544b814e822a12bb5a0d08bf90efbf19257b12f5d194b65e7c4a9835121de",
+      "last_updated": "2026-03-05T00:38:30.347132"
     },
     "docs__en__api__typescript__messages__batches__delete.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/messages/batches/delete",
@@ -2481,8 +2481,8 @@
     "docs__en__api__typescript__messages__batches__results.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/messages/batches/results",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/messages/batches/results.md",
-      "hash": "c58f85515bed352bca3d757224485d9c885bf684d4930c78ddb9ea6d79d34c52",
-      "last_updated": "2026-02-19T21:16:31.478011"
+      "hash": "8f791f32f30210d8376084213d5bbe0bc1fcdbad336040175eaa843fc121841f",
+      "last_updated": "2026-03-05T00:38:32.319973"
     },
     "docs__en__api__typescript__messages__batches__retrieve.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/messages/batches/retrieve",
@@ -2493,14 +2493,14 @@
     "docs__en__api__typescript__messages__count_tokens.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/messages/count_tokens",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/messages/count_tokens.md",
-      "hash": "c9fd5693f27e67e04a9794bb7f741f2f7b42dbc8a529bfe507e98aeba87bbf91",
-      "last_updated": "2026-02-19T21:16:32.684152"
+      "hash": "711b1a39ba1b6ff463b07e7644b8a3adff141e31e607d95bd182bc8df9dfd292",
+      "last_updated": "2026-03-05T00:38:33.692987"
     },
     "docs__en__api__typescript__messages__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/messages/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/typescript/messages/create.md",
-      "hash": "fda86c42023fdae4529ce76ba7f5c8b59ae915a7e29ffebdba4cbf447591b557",
-      "last_updated": "2026-02-19T21:16:33.297221"
+      "hash": "c5e4045fc30a0ba0bc4e0d26687fbfec9707c031cdf0b30f04ca56bdf0965b5b",
+      "last_updated": "2026-03-05T00:38:34.377313"
     },
     "docs__en__api__typescript__models.md": {
       "original_url": "https://platform.claude.com/docs/en/api/typescript/models",
@@ -2529,8 +2529,8 @@
     "docs__en__build-with-claude__adaptive-thinking.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md",
-      "hash": "94ce60293688154914cfad938358eaa7e0ff1367dac56f79e870a81725ddd8b6",
-      "last_updated": "2026-03-04T00:36:47.319346"
+      "hash": "98c65b6eb50ab376b41789a1bc235331fb719e5f930f26c0e9f66b4f4a6105f8",
+      "last_updated": "2026-03-05T00:38:38.272437"
     },
     "docs__en__build-with-claude__administration-api.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/administration-api",
@@ -2541,14 +2541,14 @@
     "docs__en__build-with-claude__batch-processing.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/batch-processing",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/batch-processing.md",
-      "hash": "b4a1230565fad521083df2e7371a1a1734875dc72b93c3736dbc43b1dfdd7ee7",
-      "last_updated": "2026-03-04T00:36:48.582754"
+      "hash": "8f816da2aa391bdcf6898348123d00ecff09bf6513bafccc214c195256d2316c",
+      "last_updated": "2026-03-05T00:38:39.833355"
     },
     "docs__en__build-with-claude__citations.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/citations",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/citations.md",
-      "hash": "0175bacccbd96a45feb1523744b126bae07a01ee8375b390e91b9a74343513a1",
-      "last_updated": "2026-03-04T00:36:49.279159"
+      "hash": "038a0d29a83a3af362b50b3e7e1d992d084bf838421e296657443be250a02a48",
+      "last_updated": "2026-03-05T00:38:40.621623"
     },
     "docs__en__build-with-claude__claude-code-analytics-api.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/claude-code-analytics-api",
@@ -2559,38 +2559,38 @@
     "docs__en__build-with-claude__claude-in-microsoft-foundry.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry.md",
-      "hash": "696f85f5711f392cfda5672219712656916c734c091ae5b81c9970c92864f41d",
-      "last_updated": "2026-03-04T00:36:50.610029"
+      "hash": "5e78e4ba4e712ed597644310355ccd2c5c4165bcd23ce8497951356bf6347e9b",
+      "last_updated": "2026-03-05T00:38:41.945818"
     },
     "docs__en__build-with-claude__claude-on-amazon-bedrock.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock.md",
-      "hash": "c4c5b5c30fe6ccedc9a83e438dfff8445fe124606d8103274ac98c13d76588d8",
-      "last_updated": "2026-03-04T00:36:51.211428"
+      "hash": "8d2e94e473dab91a7b6ea6b6dd56d6bdb3561504a74ac8d93064711419a01abc",
+      "last_updated": "2026-03-05T00:38:42.565042"
     },
     "docs__en__build-with-claude__claude-on-vertex-ai.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai.md",
-      "hash": "2345c8f9801790ae191b837b59259004c38a80d3a889f3a1c3faf3f3bf9e1286",
-      "last_updated": "2026-03-04T00:36:51.792620"
+      "hash": "b60bb8067a99b9aa25aee2fe499394b5ac8223d9ce21f087fabacfa954b829ec",
+      "last_updated": "2026-03-05T00:38:43.243622"
     },
     "docs__en__build-with-claude__compaction.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/compaction",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/compaction.md",
-      "hash": "9bb8964740b7e15d6437a552e22e2c938eb8ac46695b28995acaa28aa6acf695",
-      "last_updated": "2026-03-04T00:36:52.419704"
+      "hash": "0d527e14eb5cf56a61ea31e99fc164c8b899bea0fe87acccb263553a1627262b",
+      "last_updated": "2026-03-05T00:38:44.772998"
     },
     "docs__en__build-with-claude__context-editing.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/context-editing",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/context-editing.md",
-      "hash": "3e6d01d21d09d1e5e2ad4b1e5dd6c712e09ecdd79d147dc480a58df517fb6d0b",
-      "last_updated": "2026-03-04T00:36:53.125215"
+      "hash": "709b7f225f8822c9b6f7321160de335e54f703430d40e2e5c7254a7f4ad764bc",
+      "last_updated": "2026-03-05T00:38:45.482796"
     },
     "docs__en__build-with-claude__context-windows.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/context-windows.md",
-      "hash": "562cdea84befa6233b38e54f18431ec52c02f7e4129119d7db0cac5dd8226e0c",
-      "last_updated": "2026-03-04T00:36:53.727605"
+      "hash": "47d3a83e6acbf6115c315831a7e9b7785199e6ce08f26bfa52ddb930802225e5",
+      "last_updated": "2026-03-05T00:38:46.109602"
     },
     "docs__en__build-with-claude__data-residency.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/data-residency",
@@ -2601,8 +2601,8 @@
     "docs__en__build-with-claude__effort.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/effort",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/effort.md",
-      "hash": "b82c67904f01e76491e8ba634c4bf1aebb979d419a4389fe428155a9d9222233",
-      "last_updated": "2026-03-04T00:36:54.990470"
+      "hash": "83c3b8647320f73dc2e6e9ed42293b9232601e26413b1be51a53b73d74269343",
+      "last_updated": "2026-03-05T00:38:47.660676"
     },
     "docs__en__build-with-claude__embeddings.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/embeddings",
@@ -2613,20 +2613,20 @@
     "docs__en__build-with-claude__extended-thinking.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking.md",
-      "hash": "a71c05e4b5f03622244f95c671d529c8f3a1dd66b80aaa536408468f531aec0d",
-      "last_updated": "2026-03-04T00:36:56.280534"
+      "hash": "1676818abd1d8a3d4042f857a783578a71ad1cffbb2691dd1170d5a4dd490702",
+      "last_updated": "2026-03-05T00:38:49.005745"
     },
     "docs__en__build-with-claude__fast-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode.md",
-      "hash": "11aa620307fea2c0e95646c1d3522408d0b658bdc70ebaaa91b9bfc1277e0758",
-      "last_updated": "2026-03-04T00:36:56.973341"
+      "hash": "54c46cb9c3236de92968f8133ef9adf890a9d8b2ad1c9c4bb2dd2e186934baf4",
+      "last_updated": "2026-03-05T00:38:49.675230"
     },
     "docs__en__build-with-claude__files.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/files",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/files.md",
-      "hash": "b3f0e59015d63842fcd4c9cd2636029a294959d2651b2de3896a2f8f3f2d81ea",
-      "last_updated": "2026-03-04T00:36:57.655639"
+      "hash": "3421ba1d5f2abd213d728bfa1d81e4581c7cf7a284878f5e71b4849679d9b433",
+      "last_updated": "2026-03-05T00:38:50.353541"
     },
     "docs__en__build-with-claude__handling-stop-reasons.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons",
@@ -2649,14 +2649,14 @@
     "docs__en__build-with-claude__pdf-support.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/pdf-support",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/pdf-support.md",
-      "hash": "163a1ff82597aba15245aef51ddbafa31749e1d30a8c982bc0ac8b85bab98cb7",
-      "last_updated": "2026-03-04T00:37:00.352521"
+      "hash": "4c0ea6c243573b200fef0ae405d1cded06e86608c04acfbc07ead552167f4fe9",
+      "last_updated": "2026-03-05T00:38:53.119129"
     },
     "docs__en__build-with-claude__prompt-caching.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
-      "hash": "9b3c7d3538869a05bef2f8151ffa30bff5a778305db7985457cf2ac266c43d0d",
-      "last_updated": "2026-03-04T00:37:00.931785"
+      "hash": "7498f16301af19d728513a74766c96bfb48d12968376e467cdd09b0027a1ca19",
+      "last_updated": "2026-03-05T00:38:54.143372"
     },
     "docs__en__build-with-claude__prompt-engineering__claude-prompting-best-practices.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
@@ -2679,32 +2679,32 @@
     "docs__en__build-with-claude__search-results.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/search-results",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/search-results.md",
-      "hash": "7c536d4d0c3cd63aab94529a2802d476f5a4df1f86d4c390075298bdf5a01b79",
-      "last_updated": "2026-03-04T00:37:03.464170"
+      "hash": "580d6f5db75572900140f5fda8fa7867f80b569993efbe9df35fcc8ddb0a9886",
+      "last_updated": "2026-03-05T00:38:56.889804"
     },
     "docs__en__build-with-claude__skills-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/skills-guide",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/skills-guide.md",
-      "hash": "700072874f8abefbed23aed55816372dfd0b4b0c80d97abcaa55dc32f1471c98",
-      "last_updated": "2026-03-04T00:37:04.095820"
+      "hash": "4aa78d72abb5051a2db3788310359f36b4f11c14e5850cc20ff4732b94a12ca0",
+      "last_updated": "2026-03-05T00:38:57.640504"
     },
     "docs__en__build-with-claude__streaming.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/streaming",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/streaming.md",
-      "hash": "b9c3a89760642faad725688ba926f058934a61017a5dedde93df4cb3dd0925fa",
-      "last_updated": "2026-03-04T00:37:04.776369"
+      "hash": "3a614fef07dc9db7be2dc40d0bead5eeb647bbbde04d7da7a5e61b350f5735d6",
+      "last_updated": "2026-03-05T00:38:58.257986"
     },
     "docs__en__build-with-claude__structured-outputs.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs.md",
-      "hash": "fc11f31b2632a9777a15902f916d60076d1c4f2f6b6ddbec20a917ccd2023f32",
-      "last_updated": "2026-03-04T00:37:05.382145"
+      "hash": "d978d30d93456294d41a74924a775c333e45a54e23e4d3e63cf24a876630ef07",
+      "last_updated": "2026-03-05T00:38:58.876415"
     },
     "docs__en__build-with-claude__token-counting.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/token-counting.md",
-      "hash": "0337c33a4aba17c8954e464ec51c5a3801ee11540e436573ae21f8cd4939a2cb",
-      "last_updated": "2026-03-04T00:37:06.047736"
+      "hash": "f3906a48954a44abddbd359efc85b3717bcbaa4fd283381e4f8cdd04ad414fc2",
+      "last_updated": "2026-03-05T00:38:59.513859"
     },
     "docs__en__build-with-claude__usage-cost-api.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/usage-cost-api",
@@ -2715,14 +2715,14 @@
     "docs__en__build-with-claude__vision.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/vision",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/vision.md",
-      "hash": "91dc3fd1bc595806d69c7e808cfb79b07a18c8c4a4d2cc1b5c049354df1cb976",
-      "last_updated": "2026-03-04T00:37:07.299168"
+      "hash": "9df9b5bf1c3c73dd14755c7d9728a6eee9f219888cdcc363a60ffabb55694e7e",
+      "last_updated": "2026-03-05T00:39:01.397352"
     },
     "docs__en__build-with-claude__working-with-messages.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/working-with-messages",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/working-with-messages.md",
-      "hash": "97943d150392ea304ba78c4e4afe9e6e295ee0b773997b972d9f2b2ef8d11d17",
-      "last_updated": "2026-03-04T00:37:07.900991"
+      "hash": "a6d5879c4a0b754c526afdd10a2f9e74a3ac3a76b6b9fc8194ebb47c564a3313",
+      "last_updated": "2026-03-05T00:39:02.032656"
     },
     "docs__en__build-with-claude__workspaces.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/workspaces",
@@ -2787,8 +2787,8 @@
     "docs__en__get-started.md": {
       "original_url": "https://platform.claude.com/docs/en/get-started",
       "original_md_url": "https://platform.claude.com/docs/en/get-started.md",
-      "hash": "c3b12160f0d86957dc57fac69635aac52847f111a5e23c345964f011dee3b756",
-      "last_updated": "2026-03-04T00:37:16.311848"
+      "hash": "ccbe17a3e623cdb35afb13f3ef01028a83e95beeb0a87f7a1f25c61813f506ac",
+      "last_updated": "2026-03-05T00:39:42.028153"
     },
     "claude-code__github-actions.md": {
       "original_url": "https://platform.claude.com/docs/en/github-actions",
@@ -2943,8 +2943,8 @@
     "claude-code__sandboxing.md": {
       "original_url": "https://platform.claude.com/docs/en/sandboxing",
       "original_md_url": "https://platform.claude.com/docs/en/sandboxing.md",
-      "hash": "08c40e6c07334151ca3e276767c844a53c82f417bc6592d71595d6497d0513c0",
-      "last_updated": "2026-02-28T00:35:20.068631"
+      "hash": "72371b9ed0722c335ae8bc49afc5199262d7a1c486ccae9655056fea440d9c75",
+      "last_updated": "2026-03-05T00:39:58.870324"
     },
     "claude-code__security.md": {
       "original_url": "https://platform.claude.com/docs/en/security",
@@ -2955,8 +2955,8 @@
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
       "original_md_url": "https://platform.claude.com/docs/en/settings.md",
-      "hash": "e703aeb8a98b96eea4f9b98de05de8edb9d81dcbe678a77d12f0fbaaefadef98",
-      "last_updated": "2026-03-04T09:22:38.388827"
+      "hash": "26cdaf1c76cbe4380952c73ab846646ddfa95cc92b11eee308a93a8c47895582",
+      "last_updated": "2026-03-05T00:40:00.342047"
     },
     "claude-code__setup.md": {
       "original_url": "https://platform.claude.com/docs/en/setup",
@@ -3003,8 +3003,8 @@
     "docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md": {
       "original_url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals",
       "original_md_url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals.md",
-      "hash": "bf9ee08271243b469e24042296572fe11b6876318a8a0cb3cd6788a92292d51a",
-      "last_updated": "2026-03-04T00:37:40.881027"
+      "hash": "2fe7ec1e8431fbf240c3046969167cb1c4584d86b4ceb11f288f26983fc4a2b7",
+      "last_updated": "2026-03-05T00:40:05.683350"
     },
     "docs__en__test-and-evaluate__strengthen-guardrails__increase-consistency.md": {
       "original_url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency",
@@ -3057,14 +3057,14 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "8d923424077995e1421f3288c63d8081c123add1eae58e4f60625240d933792f",
-      "last_updated": "2026-03-04T12:21:47.205586",
+      "hash": "8a1759aa9a13d6f3bb7a967353e7220d209c263d28c0efdfd408eba959061b96",
+      "last_updated": "2026-03-05T00:40:11.703813",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-04T21:18:27.670672",
-    "fetch_duration_seconds": 413.082401,
+    "last_fetch_completed": "2026-03-05T00:40:11.703904",
+    "fetch_duration_seconds": 499.066183,
     "total_pages_discovered": 708,
     "pages_fetched_successfully": 510,
     "pages_failed": 199,
@@ -3274,7 +3274,7 @@
     "total_files": 510,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-04T21:18:27.670700",
+  "last_updated": "2026-03-05T00:40:11.703922",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

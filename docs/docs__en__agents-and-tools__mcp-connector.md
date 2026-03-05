@@ -80,7 +80,7 @@ response = client.beta.messages.create(
     mcp_servers=[
         {
             "type": "url",
-            "url": "https://mcp.example.com/sse",
+            "url": "https://example-server.modelcontextprotocol.io/sse",
             "name": "example-mcp",
             "authorization_token": "YOUR_TOKEN",
         }
@@ -163,6 +163,146 @@ class Program
         Console.WriteLine(message);
     }
 }
+```
+
+```go Go nocheck hidelines={1..13,-5..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1000,
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("What tools do you have available?")),
+		},
+		MCPServers: []anthropic.BetaRequestMCPServerURLDefinitionParam{
+			{
+				URL:                "https://example-server.modelcontextprotocol.io/sse",
+				Name:               "example-mcp",
+				AuthorizationToken: anthropic.String("YOUR_TOKEN"),
+			},
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfMCPToolset: &anthropic.BetaMCPToolsetParam{
+				MCPServerName: "example-mcp",
+			}},
+		},
+		Betas: []anthropic.AnthropicBeta{
+			anthropic.AnthropicBetaMCPClient2025_11_20,
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java nocheck hidelines={1..9,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.BetaMcpToolset;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaRequestMcpServerUrlDefinition;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+
+public class Main {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(1000L)
+            .addUserMessage("What tools do you have available?")
+            .addMcpServer(BetaRequestMcpServerUrlDefinition.builder()
+                .url("https://example-server.modelcontextprotocol.io/sse")
+                .name("example-mcp")
+                .authorizationToken("YOUR_TOKEN")
+                .build())
+            .addTool(BetaMcpToolset.builder()
+                .mcpServerName("example-mcp")
+                .build())
+            .addBeta("mcp-client-2025-11-20")
+            .build();
+
+        BetaMessage response = client.beta().messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->beta->messages->create(
+    maxTokens: 1000,
+    messages: [
+        ['role' => 'user', 'content' => 'What tools do you have available?']
+    ],
+    model: 'claude-opus-4-6',
+    mcpServers: [
+        [
+            'type' => 'url',
+            'url' => 'https://example-server.modelcontextprotocol.io/sse',
+            'name' => 'example-mcp',
+            'authorization_token' => 'YOUR_TOKEN',
+        ],
+    ],
+    tools: [
+        [
+            'type' => 'mcp_toolset',
+            'mcp_server_name' => 'example-mcp',
+        ],
+    ],
+    betas: ['mcp-client-2025-11-20'],
+);
+
+echo $message;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1000,
+  messages: [
+    { role: "user", content: "What tools do you have available?" }
+  ],
+  mcp_servers: [
+    {
+      type: "url",
+      url: "https://example-server.modelcontextprotocol.io/sse",
+      name: "example-mcp",
+      authorization_token: "YOUR_TOKEN"
+    }
+  ],
+  tools: [
+    {
+      type: "mcp_toolset",
+      mcp_server_name: "example-mcp"
+    }
+  ],
+  betas: ["mcp-client-2025-11-20"]
+)
+
+puts response
 ```
 </CodeGroup>
 

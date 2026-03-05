@@ -231,7 +231,7 @@ main().catch(console.error);
 
         **Gradle:**
         ```groovy
-        implementation("com.anthropic:anthropic-java:1.0.0")
+        implementation("com.anthropic:anthropic-java:2.15.0")
         ```
 
         **Maven:**
@@ -239,7 +239,7 @@ main().catch(console.error);
         <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java</artifactId>
-          <version>1.0.0</version>
+          <version>2.15.0</version>
         </dependency>
         ```
       </Step>
@@ -280,7 +280,8 @@ main().catch(console.error);
         ```
 
         **Example output:**
-        ```java
+        
+        ```java nocheck
         [ContentBlock{text=TextBlock{text=Here are some effective search strategies to find the latest renewable energy developments:
 
         ## Search Terms to Use:

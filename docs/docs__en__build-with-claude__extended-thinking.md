@@ -178,6 +178,133 @@ class Program
 }
 ```
 
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 16000,
+		Thinking:  anthropic.ThinkingConfigParamOfEnabled(10000),
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Are there an infinite number of prime numbers such that n mod 4 == 3?")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, block := range response.Content {
+		switch v := block.AsAny().(type) {
+		case anthropic.ThinkingBlock:
+			fmt.Printf("\nThinking summary: %s", v.Thinking)
+		case anthropic.TextBlock:
+			fmt.Printf("\nResponse: %s", v.Text)
+		}
+	}
+}
+```
+
+```java Java hidelines={1..8,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.Model;
+
+public class ExtendedThinkingExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(16000L)
+            .enabledThinking(10000L)
+            .addUserMessage("Are there an infinite number of prime numbers such that n mod 4 == 3?")
+            .build();
+
+        Message response = client.messages().create(params);
+
+        response.content().forEach(block -> {
+            block.thinking().ifPresent(thinkingBlock ->
+                System.out.println("\nThinking summary: " + thinkingBlock.thinking())
+            );
+            block.text().ifPresent(textBlock ->
+                System.out.println("\nResponse: " + textBlock.text())
+            );
+        });
+    }
+}
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 16000,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => 'Are there an infinite number of prime numbers such that n mod 4 == 3?'
+        ]
+    ],
+    model: 'claude-sonnet-4-6',
+    thinking: ['type' => 'enabled', 'budget_tokens' => 10000],
+);
+
+foreach ($message->content as $block) {
+    if ($block->type === 'thinking') {
+        echo "\nThinking summary: " . $block->thinking;
+    } elseif ($block->type === 'text') {
+        echo "\nResponse: " . $block->text;
+    }
+}
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 16000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 10000
+  },
+  messages: [
+    {
+      role: "user",
+      content: "Are there an infinite number of prime numbers such that n mod 4 == 3?"
+    }
+  ]
+)
+
+message.content.each do |block|
+  case block.type
+  when :thinking
+    puts "\nThinking summary: #{block.thinking}"
+  when :text
+    puts "\nResponse: #{block.text}"
+  end
+end
+```
+
 </CodeGroup>
 
 To turn on extended thinking, add a `thinking` object, with the `type` parameter set to `enabled` and the `budget_tokens` to a specified token budget for extended thinking. For Claude Opus 4.6, use `type: "adaptive"` instead. See [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) for details. While `type: "enabled"` with `budget_tokens` is still supported on Opus 4.6, it is deprecated and will be removed in a future release.
@@ -397,6 +524,194 @@ public class Program
 }
 ```
 
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 16000,
+		Thinking:  anthropic.ThinkingConfigParamOfEnabled(10000),
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What is the greatest common divisor of 1071 and 462?")),
+		},
+	})
+
+	thinkingStarted := false
+	responseStarted := false
+
+	for stream.Next() {
+		event := stream.Current()
+		switch eventVariant := event.AsAny().(type) {
+		case anthropic.ContentBlockStartEvent:
+			fmt.Printf("\nStarting %s block...\n", eventVariant.ContentBlock.Type)
+			thinkingStarted = false
+			responseStarted = false
+		case anthropic.ContentBlockDeltaEvent:
+			switch deltaVariant := eventVariant.Delta.AsAny().(type) {
+			case anthropic.ThinkingDelta:
+				if !thinkingStarted {
+					fmt.Print("Thinking: ")
+					thinkingStarted = true
+				}
+				fmt.Print(deltaVariant.Thinking)
+			case anthropic.TextDelta:
+				if !responseStarted {
+					fmt.Print("Response: ")
+					responseStarted = true
+				}
+				fmt.Print(deltaVariant.Text)
+			}
+		case anthropic.ContentBlockStopEvent:
+			fmt.Println("\nBlock complete.")
+		}
+	}
+
+	if err := stream.Err(); err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+```java Java hidelines={1..7,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+
+public class ExtendedThinkingStreaming {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(16000L)
+            .enabledThinking(10000L)
+            .addUserMessage("What is the greatest common divisor of 1071 and 462?")
+            .build();
+
+        try (var streamResponse = client.messages().createStreaming(params)) {
+            streamResponse.stream().forEach(event -> {
+                event.contentBlockStart().ifPresent(startEvent ->
+                    System.out.println("\nStarting block...")
+                );
+                event.contentBlockDelta().ifPresent(deltaEvent -> {
+                    deltaEvent.delta().thinking().ifPresent(td ->
+                        System.out.print(td.thinking())
+                    );
+                    deltaEvent.delta().text().ifPresent(td ->
+                        System.out.print(td.text())
+                    );
+                });
+                event.contentBlockStop().ifPresent(stopEvent ->
+                    System.out.println("\nBlock complete.")
+                );
+            });
+        }
+    }
+}
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$thinkingStarted = false;
+$responseStarted = false;
+
+$stream = $client->messages->createStream(
+    maxTokens: 16000,
+    messages: [
+        ['role' => 'user', 'content' => 'What is the greatest common divisor of 1071 and 462?']
+    ],
+    model: 'claude-sonnet-4-6',
+    thinking: ['type' => 'enabled', 'budget_tokens' => 10000],
+);
+
+foreach ($stream as $event) {
+    if ($event->type === 'content_block_start') {
+        echo "\nStarting {$event->contentBlock->type} block...\n";
+        $thinkingStarted = false;
+        $responseStarted = false;
+    } elseif ($event->type === 'content_block_delta') {
+        if ($event->delta->type === 'thinking_delta') {
+            if (!$thinkingStarted) {
+                echo "Thinking: ";
+                $thinkingStarted = true;
+            }
+            echo $event->delta->thinking;
+        } elseif ($event->delta->type === 'text_delta') {
+            if (!$responseStarted) {
+                echo "Response: ";
+                $responseStarted = true;
+            }
+            echo $event->delta->text;
+        }
+    } elseif ($event->type === 'content_block_stop') {
+        echo "\nBlock complete.\n";
+    }
+}
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+thinking_started = false
+response_started = false
+
+stream = client.messages.stream(
+  model: "claude-sonnet-4-6",
+  max_tokens: 16000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 10000
+  },
+  messages: [
+    { role: "user", content: "What is the greatest common divisor of 1071 and 462?" }
+  ]
+)
+
+stream.each do |event|
+  case event.type
+  when :content_block_start
+    puts "\nStarting #{event.content_block.type} block..."
+    thinking_started = false
+    response_started = false
+  when :content_block_delta
+    if event.delta.type == :thinking_delta
+      unless thinking_started
+        print "Thinking: "
+        thinking_started = true
+      end
+      print event.delta.thinking
+    elsif event.delta.type == :text_delta
+      unless response_started
+        print "Response: "
+        response_started = true
+      end
+      print event.delta.text
+    end
+  when :content_block_stop
+    puts "\nBlock complete."
+  end
+end
+```
+
 </CodeGroup>
 
 <TryInConsoleButton userPrompt="What is the greatest common divisor of 1071 and 462?" thinkingBudgetTokens={16000}>
@@ -599,6 +914,152 @@ class Program
         Console.WriteLine(message);
     }
 }
+```
+
+```go Go hidelines={1..13,-5..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	weatherTool := anthropic.ToolUnionParam{
+		OfTool: &anthropic.ToolParam{
+			Name:        "get_weather",
+			Description: anthropic.String("Get current weather for a location"),
+			InputSchema: anthropic.ToolInputSchemaParam{
+				Properties: map[string]any{
+					"location": map[string]any{
+						"type": "string",
+					},
+				},
+				Required: []string{"location"},
+			},
+		},
+	}
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 16000,
+		Thinking:  anthropic.ThinkingConfigParamOfEnabled(10000),
+		Tools:     []anthropic.ToolUnionParam{weatherTool},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather in Paris?")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..12,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.core.JsonValue;
+import java.util.List;
+import java.util.Map;
+
+public class ExtendedThinkingWithTools {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(16000L)
+            .enabledThinking(10000L)
+            .addTool(Tool.builder()
+                .name("get_weather")
+                .description("Get current weather for a location")
+                .inputSchema(Tool.InputSchema.builder()
+                    .properties(JsonValue.from(Map.of(
+                        "location", Map.of("type", "string")
+                    )))
+                    .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+                    .build())
+                .build())
+            .addUserMessage("What's the weather in Paris?")
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$weatherTool = [
+    'name' => 'get_weather',
+    'description' => 'Get current weather for a location',
+    'input_schema' => [
+        'type' => 'object',
+        'properties' => [
+            'location' => ['type' => 'string']
+        ],
+        'required' => ['location']
+    ]
+];
+
+$message = $client->messages->create(
+    maxTokens: 16000,
+    messages: [
+        ['role' => 'user', 'content' => "What's the weather in Paris?"]
+    ],
+    model: 'claude-sonnet-4-6',
+    thinking: ['type' => 'enabled', 'budget_tokens' => 10000],
+    tools: [$weatherTool],
+);
+echo $message;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+weather_tool = {
+  name: "get_weather",
+  description: "Get current weather for a location",
+  input_schema: {
+    type: "object",
+    properties: {
+      location: { type: "string" }
+    },
+    required: ["location"]
+  }
+}
+
+message = client.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 16000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 10000
+  },
+  tools: [weather_tool],
+  messages: [
+    { role: "user", content: "What's the weather in Paris?" }
+  ]
+)
+puts message
 ```
 
 </CodeGroup>
@@ -809,6 +1270,296 @@ public class Program
         Console.WriteLine(continuation);
     }
 }
+```
+
+```go Go hidelines={1..13,-6..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	weatherTool := anthropic.ToolUnionParam{
+		OfTool: &anthropic.ToolParam{
+			Name:        "get_weather",
+			Description: anthropic.String("Get current weather for a location"),
+			InputSchema: anthropic.ToolInputSchemaParam{
+				Properties: map[string]any{
+					"location": map[string]any{
+						"type":        "string",
+						"description": "City name",
+					},
+				},
+				Required: []string{"location"},
+			},
+		},
+	}
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 16000,
+		Thinking:  anthropic.ThinkingConfigParamOfEnabled(10000),
+		Tools:     []anthropic.ToolUnionParam{weatherTool},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What is the weather in Paris?")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var toolUseBlock anthropic.ToolUseBlock
+	for _, block := range response.Content {
+		switch v := block.AsAny().(type) {
+		case anthropic.ToolUseBlock:
+			toolUseBlock = v
+		}
+	}
+
+	weatherData := map[string]int{"temperature": 88}
+
+	continuation, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 16000,
+		Thinking:  anthropic.ThinkingConfigParamOfEnabled(10000),
+		Tools:     []anthropic.ToolUnionParam{weatherTool},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What is the weather in Paris?")),
+			response.ToParam(),
+			anthropic.NewUserMessage(
+				anthropic.NewToolResultBlock(toolUseBlock.ID, fmt.Sprintf("Current temperature: %d°F", weatherData["temperature"]), false),
+			),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(continuation)
+}
+```
+
+```java Java hidelines={1..18,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.ContentBlockParam;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.ToolResultBlockParam;
+import com.anthropic.models.messages.ToolUseBlock;
+import com.anthropic.models.messages.ToolUseBlockParam;
+import com.anthropic.models.messages.ThinkingBlock;
+import com.anthropic.models.messages.ThinkingBlockParam;
+import com.anthropic.core.JsonValue;
+import java.util.List;
+import java.util.Map;
+
+public class ExtendedThinkingToolUse {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        Tool weatherTool = Tool.builder()
+            .name("get_weather")
+            .description("Get current weather for a location")
+            .inputSchema(Tool.InputSchema.builder()
+                .properties(JsonValue.from(Map.of(
+                    "location", Map.of("type", "string", "description", "City name")
+                )))
+                .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+                .build())
+            .build();
+
+        MessageCreateParams initialParams = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(16000L)
+            .enabledThinking(10000L)
+            .addTool(weatherTool)
+            .addUserMessage("What is the weather in Paris?")
+            .build();
+
+        Message response = client.messages().create(initialParams);
+
+        ThinkingBlock thinkingBlock = null;
+        ToolUseBlock toolUseBlock = null;
+        for (var block : response.content()) {
+            if (block.thinking().isPresent()) {
+                thinkingBlock = block.thinking().get();
+            }
+            if (block.toolUse().isPresent()) {
+                toolUseBlock = block.toolUse().get();
+            }
+        }
+
+        int temperature = 88;
+
+        // Second request: pass back thinking block and tool result
+        MessageCreateParams continuationParams = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(16000L)
+            .enabledThinking(10000L)
+            .addTool(weatherTool)
+            .addUserMessage("What is the weather in Paris?")
+            .addAssistantMessageOfBlockParams(List.of(
+                ContentBlockParam.ofThinking(ThinkingBlockParam.builder()
+                    .thinking(thinkingBlock.thinking())
+                    .signature(thinkingBlock.signature())
+                    .build()),
+                ContentBlockParam.ofToolUse(ToolUseBlockParam.builder()
+                    .id(toolUseBlock.id())
+                    .name(toolUseBlock.name())
+                    .input(toolUseBlock._input())
+                    .build())
+            ))
+            .addUserMessageOfBlockParams(List.of(
+                ContentBlockParam.ofToolResult(
+                    ToolResultBlockParam.builder()
+                        .toolUseId(toolUseBlock.id())
+                        .content("Current temperature: " + temperature + "°F")
+                        .build()
+                )
+            ))
+            .build();
+
+        Message continuation = client.messages().create(continuationParams);
+        System.out.println(continuation);
+    }
+}
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$weatherTool = [
+    'name' => 'get_weather',
+    'description' => 'Get current weather for a location',
+    'input_schema' => [
+        'type' => 'object',
+        'properties' => [
+            'location' => [
+                'type' => 'string',
+                'description' => 'City name'
+            ]
+        ],
+        'required' => ['location']
+    ]
+];
+
+$response = $client->messages->create(
+    maxTokens: 16000,
+    messages: [
+        ['role' => 'user', 'content' => 'What is the weather in Paris?']
+    ],
+    model: 'claude-sonnet-4-6',
+    thinking: ['type' => 'enabled', 'budget_tokens' => 10000],
+    tools: [$weatherTool],
+);
+
+$thinkingBlock = null;
+$toolUseBlock = null;
+foreach ($response->content as $block) {
+    if ($block->type === 'thinking') {
+        $thinkingBlock = $block;
+    }
+    if ($block->type === 'tool_use') {
+        $toolUseBlock = $block;
+    }
+}
+
+$weatherData = ['temperature' => 88];
+
+$continuation = $client->messages->create(
+    maxTokens: 16000,
+    messages: [
+        ['role' => 'user', 'content' => 'What is the weather in Paris?'],
+        ['role' => 'assistant', 'content' => [$thinkingBlock, $toolUseBlock]],
+        ['role' => 'user', 'content' => [
+            [
+                'type' => 'tool_result',
+                'tool_use_id' => $toolUseBlock->id,
+                'content' => "Current temperature: {$weatherData['temperature']}°F"
+            ]
+        ]]
+    ],
+    model: 'claude-sonnet-4-6',
+    thinking: ['type' => 'enabled', 'budget_tokens' => 10000],
+    tools: [$weatherTool],
+);
+
+echo $continuation;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+weather_tool = {
+  name: "get_weather",
+  description: "Get current weather for a location",
+  input_schema: {
+    type: "object",
+    properties: {
+      location: { type: "string", description: "City name" }
+    },
+    required: ["location"]
+  }
+}
+
+response = client.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 16000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 10000
+  },
+  tools: [weather_tool],
+  messages: [
+    { role: "user", content: "What is the weather in Paris?" }
+  ]
+)
+
+thinking_block = response.content.find { |block| block.type == :thinking }
+tool_use_block = response.content.find { |block| block.type == :tool_use }
+
+raise "No tool_use block found" unless tool_use_block
+
+weather_data = { temperature: 88 }
+
+continuation = client.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 16000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 10000
+  },
+  tools: [weather_tool],
+  messages: [
+    { role: "user", content: "What is the weather in Paris?" },
+    { role: "assistant", content: [thinking_block, tool_use_block] },
+    { role: "user", content: [
+      {
+        type: "tool_result",
+        tool_use_id: tool_use_block.id,
+        content: "Current temperature: #{weather_data[:temperature]}°F"
+      }
+    ] }
+  ]
+)
+
+puts continuation
 ```
 
 </CodeGroup>
@@ -1258,6 +2009,335 @@ public class Program
     }
 }
 ```
+
+```go Go hidelines={1..15,-6..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	// Fetch book content
+	resp, err := http.Get("https://www.gutenberg.org/cache/epub/1342/pg1342.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	largeText := string(body)
+	if len(largeText) > 5000 {
+		largeText = largeText[:5000]
+	}
+
+	systemPrompt := []anthropic.TextBlockParam{
+		{Text: "You are an AI assistant that is tasked with literary analysis. Analyze the following text carefully."},
+		{
+			Text:         largeText,
+			CacheControl: anthropic.NewCacheControlEphemeralParam(),
+		},
+	}
+
+	messages := []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock("Analyze the tone of this passage.")),
+	}
+
+	// First request - establish cache
+	fmt.Println("First request - establishing cache")
+	response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 20000,
+		Thinking:  anthropic.ThinkingConfigParamOfEnabled(4000),
+		System:    systemPrompt,
+		Messages:  messages,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("First response usage: %+v\n", response1.Usage)
+
+	messages = append(messages, response1.ToParam())
+	messages = append(messages, anthropic.NewUserMessage(anthropic.NewTextBlock("Analyze the characters in this passage.")))
+
+	// Second request - same thinking parameters (cache hit expected)
+	fmt.Println("\nSecond request - same thinking parameters (cache hit expected)")
+	response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 20000,
+		Thinking:  anthropic.ThinkingConfigParamOfEnabled(4000),
+		System:    systemPrompt,
+		Messages:  messages,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Second response usage: %+v\n", response2.Usage)
+
+	// Third request - different thinking parameters (cache miss for messages)
+	fmt.Println("\nThird request - different thinking parameters (cache miss for messages)")
+	response3, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 20000,
+		Thinking:  anthropic.ThinkingConfigParamOfEnabled(8000),
+		System:    systemPrompt,
+		Messages:  messages,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Third response usage: %+v\n", response3.Usage)
+}
+```
+
+```java Java hidelines={1..15,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.CacheControlEphemeral;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.TextBlockParam;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.List;
+
+public class ThinkingCacheExample {
+    public static void main(String[] args) throws Exception {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        // Fetch book content
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://www.gutenberg.org/cache/epub/1342/pg1342.txt"))
+            .build();
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        String bookContent = response.body();
+        String largeText = bookContent.substring(0, Math.min(5000, bookContent.length()));
+
+        List<TextBlockParam> systemPrompt = List.of(
+            TextBlockParam.builder()
+                .text("You are an AI assistant that is tasked with literary analysis. Analyze the following text carefully.")
+                .build(),
+            TextBlockParam.builder()
+                .text(largeText)
+                .cacheControl(CacheControlEphemeral.builder().build())
+                .build()
+        );
+
+        // First request - establish cache
+        System.out.println("First request - establishing cache");
+        MessageCreateParams params1 = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(20000L)
+            .enabledThinking(4000L)
+            .systemOfTextBlockParams(systemPrompt)
+            .addUserMessage("Analyze the tone of this passage.")
+            .build();
+
+        Message response1 = client.messages().create(params1);
+        System.out.println("First response usage: " + response1.usage());
+
+        // Second request - same thinking parameters (cache hit expected)
+        System.out.println("\nSecond request - same thinking parameters (cache hit expected)");
+        MessageCreateParams params2 = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(20000L)
+            .enabledThinking(4000L)
+            .systemOfTextBlockParams(systemPrompt)
+            .addUserMessage("Analyze the tone of this passage.")
+            .addAssistantMessageOfBlockParams(response1.content().stream()
+                .map(block -> block.toParam())
+                .collect(java.util.stream.Collectors.toList()))
+            .addUserMessage("Analyze the characters in this passage.")
+            .build();
+
+        Message response2 = client.messages().create(params2);
+        System.out.println("Second response usage: " + response2.usage());
+
+        // Third request - different thinking parameters (cache miss for messages)
+        System.out.println("\nThird request - different thinking parameters (cache miss for messages)");
+        MessageCreateParams params3 = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(20000L)
+            .enabledThinking(8000L)
+            .systemOfTextBlockParams(systemPrompt)
+            .addUserMessage("Analyze the tone of this passage.")
+            .addAssistantMessageOfBlockParams(response1.content().stream()
+                .map(block -> block.toParam())
+                .collect(java.util.stream.Collectors.toList()))
+            .addUserMessage("Analyze the characters in this passage.")
+            .build();
+
+        Message response3 = client.messages().create(params3);
+        System.out.println("Third response usage: " + response3.usage());
+    }
+}
+```
+
+```php PHP hidelines={1..7}
+<?php
+
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+// Fetch book content
+$bookContent = file_get_contents("https://www.gutenberg.org/cache/epub/1342/pg1342.txt");
+$largeText = substr($bookContent, 0, 5000);
+
+$systemPrompt = [
+    [
+        'type' => 'text',
+        'text' => 'You are an AI assistant that is tasked with literary analysis. Analyze the following text carefully.'
+    ],
+    [
+        'type' => 'text',
+        'text' => $largeText,
+        'cache_control' => ['type' => 'ephemeral']
+    ]
+];
+
+$messages = [
+    ['role' => 'user', 'content' => 'Analyze the tone of this passage.']
+];
+
+// First request - establish cache
+echo "First request - establishing cache\n";
+$response1 = $client->messages->create(
+    maxTokens: 20000,
+    messages: $messages,
+    model: 'claude-sonnet-4-6',
+    system: $systemPrompt,
+    thinking: ['type' => 'enabled', 'budget_tokens' => 4000],
+);
+
+echo "First response usage: " . json_encode($response1->usage) . "\n";
+
+$messages[] = ['role' => 'assistant', 'content' => $response1->content];
+$messages[] = ['role' => 'user', 'content' => 'Analyze the characters in this passage.'];
+
+// Second request - same thinking parameters (cache hit expected)
+echo "\nSecond request - same thinking parameters (cache hit expected)\n";
+$response2 = $client->messages->create(
+    maxTokens: 20000,
+    messages: $messages,
+    model: 'claude-sonnet-4-6',
+    system: $systemPrompt,
+    thinking: ['type' => 'enabled', 'budget_tokens' => 4000],
+);
+
+echo "Second response usage: " . json_encode($response2->usage) . "\n";
+
+// Third request - different thinking parameters (cache miss for messages)
+echo "\nThird request - different thinking parameters (cache miss for messages)\n";
+$response3 = $client->messages->create(
+    maxTokens: 20000,
+    messages: $messages,
+    model: 'claude-sonnet-4-6',
+    system: $systemPrompt,
+    thinking: ['type' => 'enabled', 'budget_tokens' => 8000],
+);
+
+echo "Third response usage: " . json_encode($response3->usage) . "\n";
+```
+
+```ruby Ruby
+require "anthropic"
+require "net/http"
+require "uri"
+
+client = Anthropic::Client.new
+
+# Fetch book content
+uri = URI("https://www.gutenberg.org/cache/epub/1342/pg1342.txt")
+response = Net::HTTP.get_response(uri)
+book_content = response.body
+large_text = book_content[0...5000]
+
+system_prompt = [
+  {
+    type: "text",
+    text: "You are an AI assistant that is tasked with literary analysis. Analyze the following text carefully."
+  },
+  {
+    type: "text",
+    text: large_text,
+    cache_control: { type: "ephemeral" }
+  }
+]
+
+messages = [
+  { role: "user", content: "Analyze the tone of this passage." }
+]
+
+# First request - establish cache
+puts "First request - establishing cache"
+response1 = client.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 20000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 4000
+  },
+  system: system_prompt,
+  messages: messages
+)
+
+puts "First response usage: #{response1.usage}"
+
+messages << { role: "assistant", content: response1.content }
+messages << { role: "user", content: "Analyze the characters in this passage." }
+
+# Second request - same thinking parameters (cache hit expected)
+puts "\nSecond request - same thinking parameters (cache hit expected)"
+response2 = client.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 20000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 4000
+  },
+  system: system_prompt,
+  messages: messages
+)
+
+puts "Second response usage: #{response2.usage}"
+
+# Third request - different thinking parameters (cache miss for messages)
+puts "\nThird request - different thinking parameters (cache miss for messages)"
+response3 = client.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 20000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 8000
+  },
+  system: system_prompt,
+  messages: messages
+)
+
+puts "Third response usage: #{response3.usage}"
+```
+
 </CodeGroup>
 
 </section>
@@ -1602,6 +2682,469 @@ public class Program
 }
 ```
 
+```go Go hidelines={1..41,-5..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"strings"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func fetchArticleContent(url string) (string, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
+	text := string(body)
+	lines := strings.Split(text, "\n")
+	var cleanedLines []string
+	for _, line := range lines {
+		trimmed := strings.TrimSpace(line)
+		if trimmed != "" {
+			cleanedLines = append(cleanedLines, trimmed)
+		}
+	}
+
+	return strings.Join(cleanedLines, "\n"), nil
+}
+
+func main() {
+	client := anthropic.NewClient()
+
+	bookURL := "https://www.gutenberg.org/cache/epub/1342/pg1342.txt"
+	bookContent, err := fetchArticleContent(bookURL)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	largeText := bookContent
+	if len(largeText) > 5000 {
+		largeText = largeText[:5000]
+	}
+
+	// No system prompt - caching in messages instead
+	messages := []anthropic.MessageParam{
+		anthropic.NewUserMessage(
+			anthropic.ContentBlockParamUnion{OfText: &anthropic.TextBlockParam{
+				Text:         largeText,
+				CacheControl: anthropic.NewCacheControlEphemeralParam(),
+			}},
+			anthropic.NewTextBlock("Analyze the tone of this passage."),
+		),
+	}
+
+	// First request - establish cache
+	fmt.Println("First request - establishing cache")
+	response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 20000,
+		Thinking:  anthropic.ThinkingConfigParamOfEnabled(4000),
+		Messages:  messages,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("First response usage: %+v\n", response1.Usage)
+
+	messages = append(messages, response1.ToParam())
+	messages = append(messages, anthropic.NewUserMessage(anthropic.NewTextBlock("Analyze the characters in this passage.")))
+
+	// Second request - same thinking parameters (cache hit expected)
+	fmt.Println("\nSecond request - same thinking parameters (cache hit expected)")
+	response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 20000,
+		Thinking:  anthropic.ThinkingConfigParamOfEnabled(4000),
+		Messages:  messages,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Second response usage: %+v\n", response2.Usage)
+
+	messages = append(messages, response2.ToParam())
+	messages = append(messages, anthropic.NewUserMessage(anthropic.NewTextBlock("Analyze the setting in this passage.")))
+
+	// Third request - different thinking budget (cache miss expected)
+	fmt.Println("\nThird request - different thinking budget (cache miss expected)")
+	response3, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 20000,
+		Thinking:  anthropic.ThinkingConfigParamOfEnabled(8000),
+		Messages:  messages,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Third response usage: %+v\n", response3.Usage)
+}
+```
+
+```java Java hidelines={1..16,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.CacheControlEphemeral;
+import com.anthropic.models.messages.ContentBlockParam;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.TextBlockParam;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.List;
+
+public class CachingThinkingExample {
+    public static void main(String[] args) throws Exception {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        String bookUrl = "https://www.gutenberg.org/cache/epub/1342/pg1342.txt";
+        String bookContent = fetchArticleContent(bookUrl);
+        String largeText = bookContent.substring(0, Math.min(5000, bookContent.length()));
+
+        // First request - establishing cache
+        System.out.println("First request - establishing cache");
+        MessageCreateParams params1 = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(20000L)
+            .enabledThinking(4000L)
+            .addUserMessageOfBlockParams(List.of(
+                ContentBlockParam.ofText(TextBlockParam.builder()
+                    .text(largeText)
+                    .cacheControl(CacheControlEphemeral.builder().build())
+                    .build()),
+                ContentBlockParam.ofText(TextBlockParam.builder()
+                    .text("Analyze the tone of this passage.")
+                    .build())
+            ))
+            .build();
+
+        Message response1 = client.messages().create(params1);
+        System.out.println("First response usage: " + response1.usage());
+
+        // Second request - same thinking parameters (cache hit expected)
+        System.out.println("\nSecond request - same thinking parameters (cache hit expected)");
+        MessageCreateParams params2 = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(20000L)
+            .enabledThinking(4000L)
+            .addUserMessageOfBlockParams(List.of(
+                ContentBlockParam.ofText(TextBlockParam.builder()
+                    .text(largeText)
+                    .cacheControl(CacheControlEphemeral.builder().build())
+                    .build()),
+                ContentBlockParam.ofText(TextBlockParam.builder()
+                    .text("Analyze the tone of this passage.")
+                    .build())
+            ))
+            .addAssistantMessageOfBlockParams(response1.content().stream()
+                .map(block -> block.toParam())
+                .collect(java.util.stream.Collectors.toList()))
+            .addUserMessage("Analyze the characters in this passage.")
+            .build();
+
+        Message response2 = client.messages().create(params2);
+        System.out.println("Second response usage: " + response2.usage());
+
+        // Third request - different thinking budget (cache miss expected)
+        System.out.println("\nThird request - different thinking budget (cache miss expected)");
+        MessageCreateParams params3 = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(20000L)
+            .enabledThinking(8000L)
+            .addUserMessageOfBlockParams(List.of(
+                ContentBlockParam.ofText(TextBlockParam.builder()
+                    .text(largeText)
+                    .cacheControl(CacheControlEphemeral.builder().build())
+                    .build()),
+                ContentBlockParam.ofText(TextBlockParam.builder()
+                    .text("Analyze the tone of this passage.")
+                    .build())
+            ))
+            .addAssistantMessageOfBlockParams(response1.content().stream()
+                .map(block -> block.toParam())
+                .collect(java.util.stream.Collectors.toList()))
+            .addUserMessage("Analyze the characters in this passage.")
+            .addAssistantMessageOfBlockParams(response2.content().stream()
+                .map(block -> block.toParam())
+                .collect(java.util.stream.Collectors.toList()))
+            .addUserMessage("Analyze the setting in this passage.")
+            .build();
+
+        Message response3 = client.messages().create(params3);
+        System.out.println("Third response usage: " + response3.usage());
+    }
+
+    private static String fetchArticleContent(String url) throws Exception {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
+    }
+}
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+
+use Anthropic\Client;
+
+
+function fetchArticleContent($url) {
+    $content = file_get_contents($url);
+    $lines = explode("\n", $content);
+    $cleanedLines = array_filter(array_map('trim', $lines));
+    return implode("\n", $cleanedLines);
+}
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$bookUrl = "https://www.gutenberg.org/cache/epub/1342/pg1342.txt";
+$bookContent = fetchArticleContent($bookUrl);
+$largeText = substr($bookContent, 0, 5000);
+
+echo "First request - establishing cache\n";
+$response1 = $client->messages->create(
+    maxTokens: 20000,
+    messages: [[
+        'role' => 'user',
+        'content' => [
+            [
+                'type' => 'text',
+                'text' => $largeText,
+                'cache_control' => ['type' => 'ephemeral']
+            ],
+            [
+                'type' => 'text',
+                'text' => 'Analyze the tone of this passage.'
+            ]
+        ]
+    ]],
+    model: 'claude-sonnet-4-6',
+    thinking: ['type' => 'enabled', 'budget_tokens' => 4000],
+);
+
+echo "First response usage: " . json_encode($response1->usage) . "\n";
+
+echo "\nSecond request - same thinking parameters (cache hit expected)\n";
+$response2 = $client->messages->create(
+    maxTokens: 20000,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => [
+                [
+                    'type' => 'text',
+                    'text' => $largeText,
+                    'cache_control' => ['type' => 'ephemeral']
+                ],
+                [
+                    'type' => 'text',
+                    'text' => 'Analyze the tone of this passage.'
+                ]
+            ]
+        ],
+        [
+            'role' => 'assistant',
+            'content' => $response1->content
+        ],
+        [
+            'role' => 'user',
+            'content' => 'Analyze the characters in this passage.'
+        ]
+    ],
+    model: 'claude-sonnet-4-6',
+    thinking: ['type' => 'enabled', 'budget_tokens' => 4000],
+);
+
+echo "Second response usage: " . json_encode($response2->usage) . "\n";
+
+echo "\nThird request - different thinking budget (cache miss expected)\n";
+$response3 = $client->messages->create(
+    maxTokens: 20000,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => [
+                [
+                    'type' => 'text',
+                    'text' => $largeText,
+                    'cache_control' => ['type' => 'ephemeral']
+                ],
+                [
+                    'type' => 'text',
+                    'text' => 'Analyze the tone of this passage.'
+                ]
+            ]
+        ],
+        [
+            'role' => 'assistant',
+            'content' => $response1->content
+        ],
+        [
+            'role' => 'user',
+            'content' => 'Analyze the characters in this passage.'
+        ],
+        [
+            'role' => 'assistant',
+            'content' => $response2->content
+        ],
+        [
+            'role' => 'user',
+            'content' => 'Analyze the setting in this passage.'
+        ]
+    ],
+    model: 'claude-sonnet-4-6',
+    thinking: ['type' => 'enabled', 'budget_tokens' => 8000],
+);
+
+echo "Third response usage: " . json_encode($response3->usage) . "\n";
+```
+
+```ruby Ruby
+require "anthropic"
+require "net/http"
+require "uri"
+
+def fetch_article_content(url)
+  uri = URI.parse(url)
+  response = Net::HTTP.get_response(uri)
+  text = response.body
+
+  lines = text.split("\n").map(&:strip)
+  lines.reject(&:empty?).join("\n")
+end
+
+client = Anthropic::Client.new
+
+book_url = "https://www.gutenberg.org/cache/epub/1342/pg1342.txt"
+book_content = fetch_article_content(book_url)
+large_text = book_content[0...5000]
+
+puts "First request - establishing cache"
+response1 = client.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 20000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 4000
+  },
+  messages: [{
+    role: "user",
+    content: [
+      {
+        type: "text",
+        text: large_text,
+        cache_control: { type: "ephemeral" }
+      },
+      {
+        type: "text",
+        text: "Analyze the tone of this passage."
+      }
+    ]
+  }]
+)
+
+puts "First response usage: #{response1.usage}"
+
+puts "\nSecond request - same thinking parameters (cache hit expected)"
+response2 = client.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 20000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 4000
+  },
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: large_text,
+          cache_control: { type: "ephemeral" }
+        },
+        {
+          type: "text",
+          text: "Analyze the tone of this passage."
+        }
+      ]
+    },
+    {
+      role: "assistant",
+      content: response1.content
+    },
+    {
+      role: "user",
+      content: "Analyze the characters in this passage."
+    }
+  ]
+)
+
+puts "Second response usage: #{response2.usage}"
+
+puts "\nThird request - different thinking budget (cache miss expected)"
+response3 = client.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 20000,
+  thinking: {
+    type: "enabled",
+    budget_tokens: 8000
+  },
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: large_text,
+          cache_control: { type: "ephemeral" }
+        },
+        {
+          type: "text",
+          text: "Analyze the tone of this passage."
+        }
+      ]
+    },
+    {
+      role: "assistant",
+      content: response1.content
+    },
+    {
+      role: "user",
+      content: "Analyze the characters in this passage."
+    },
+    {
+      role: "assistant",
+      content: response2.content
+    },
+    {
+      role: "user",
+      content: "Analyze the setting in this passage."
+    }
+  ]
+)
+
+puts "Third response usage: #{response3.usage}"
+```
+
 </CodeGroup>
 
 Here is the output of the script (you may see slightly different numbers)
@@ -1696,195 +3239,9 @@ Here are some important considerations on thinking encryption:
 - The `signature` field is an opaque field and should not be interpreted or parsed - it exists solely for verification purposes.
 - `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](/docs/en/build-with-claude/claude-on-amazon-bedrock), and [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai)). Values generated on one platform will be compatible with another.
 
-### Thinking redaction
-
-Occasionally Claude's internal reasoning will be flagged by our safety systems. When this occurs, we encrypt some or all of the `thinking` block and return it to you as a `redacted_thinking` block. `redacted_thinking` blocks are decrypted when passed back to the API, allowing Claude to continue its response without losing context.
-
-When building customer-facing applications that use extended thinking:
-
-- Be aware that redacted thinking blocks contain encrypted content that isn't human-readable
-- Consider providing a simple explanation like: "Some of Claude's internal reasoning has been automatically encrypted for safety reasons. This doesn't affect the quality of responses."
-- If showing thinking blocks to users, you can filter out redacted blocks while preserving normal thinking blocks
-- Be transparent that using extended thinking features may occasionally result in some reasoning being encrypted
-- Implement appropriate error handling to gracefully manage redacted thinking without breaking your UI
-
-Here's an example showing both normal and redacted thinking blocks:
-
-```json
-{
-  "content": [
-    {
-      "type": "thinking",
-      "thinking": "Let me analyze this step by step...",
-      "signature": "WaUjzkypQ2mUEVM36O2TxuC06KN8xyfbJwyem2dw3URve/op91XWHOEBLLqIOMfFG/UvLEczmEsUjavL...."
-    },
-    {
-      "type": "redacted_thinking",
-      "data": "EmwKAhgBEgy3va3pzix/LafPsn4aDFIT2Xlxh0L5L8rLVyIwxtE3rAFBa8cr3qpPkNRj2YfWXGmKDxH4mPnZ5sQ7vB9URj2pLmN3kF8/dW5hR7xJ0aP1oLs9yTcMnKVf2wRpEGjH9XZaBt4UvDcPrQ..."
-    },
-    {
-      "type": "text",
-      "text": "Based on my analysis..."
-    }
-  ]
-}
-```
-
-<Note>
-Seeing redacted thinking blocks in your output is expected behavior. The model can still use this redacted reasoning to inform its responses while maintaining safety guardrails.
-
-If you need to test redacted thinking handling in your application, you can use this special test string as your prompt: `ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB`
-</Note>
-
-When passing `thinking` and `redacted_thinking` blocks back to the API in a multi-turn conversation, you must include the complete unmodified block back to the API for the last assistant turn. This is critical for maintaining the model's reasoning flow. We suggest always passing back all thinking blocks to the API. For more details, see the [Preserving thinking blocks](/docs/en/build-with-claude/extended-thinking#preserving-thinking-blocks) section.
-
-<section title="Example: Working with redacted thinking blocks">
-
-This example demonstrates how to handle `redacted_thinking` blocks that may appear in responses when Claude's internal reasoning contains content flagged by safety systems:
-
-<CodeGroup>
-```python Python hidelines={1..4}
-import anthropic
-
-client = anthropic.Anthropic()
-
-# Using a special prompt that triggers redacted thinking (for demonstration purposes only)
-response = client.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=16000,
-    thinking={"type": "enabled", "budget_tokens": 10000},
-    messages=[
-        {
-            "role": "user",
-            "content": "ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB",
-        }
-    ],
-)
-
-# Identify redacted thinking blocks
-has_redacted_thinking = any(
-    block.type == "redacted_thinking" for block in response.content
-)
-
-if has_redacted_thinking:
-    print("Response contains redacted thinking blocks")
-    # These blocks are still usable in subsequent requests
-
-    # Extract all blocks (both redacted and non-redacted)
-    all_thinking_blocks = [
-        block
-        for block in response.content
-        if block.type in ["thinking", "redacted_thinking"]
-    ]
-
-    # When passing to subsequent requests, include all blocks without modification
-    # This preserves the integrity of Claude's reasoning
-
-    print(f"Found {len(all_thinking_blocks)} thinking blocks total")
-    print(f"These blocks are still billable as output tokens")
-```
-
-```typescript TypeScript nocheck hidelines={1..4}
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
-// Using a special prompt that triggers redacted thinking (for demonstration purposes only)
-const response = await client.messages.create({
-  model: "claude-sonnet-4-6",
-  max_tokens: 16000,
-  thinking: {
-    type: "enabled",
-    budget_tokens: 10000
-  },
-  messages: [
-    {
-      role: "user",
-      content:
-        "ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB"
-    }
-  ]
-});
-
-// Identify redacted thinking blocks
-const hasRedactedThinking = response.content.some(
-  (block) => block.type === "redacted_thinking"
-);
-
-if (hasRedactedThinking) {
-  console.log("Response contains redacted thinking blocks");
-  // These blocks are still usable in subsequent requests
-
-  // Extract all blocks (both redacted and non-redacted)
-  const allThinkingBlocks = response.content.filter(
-    (block) => block.type === "thinking" || block.type === "redacted_thinking"
-  );
-
-  // When passing to subsequent requests, include all blocks without modification
-  // This preserves the integrity of Claude's reasoning
-
-  console.log(`Found ${allThinkingBlocks.length} thinking blocks total`);
-  console.log("These blocks are still billable as output tokens");
-}
-```
-
-```csharp C#
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Anthropic;
-using Anthropic.Models.Messages;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeSonnet4_6,
-            MaxTokens = 16000,
-            Thinking = new ThinkingConfigEnabled(budgetTokens: 10000),
-            Messages = [new() {
-                Role = Role.User,
-                Content = "ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB"
-            }]
-        };
-
-        var response = await client.Messages.Create(parameters);
-
-        bool hasRedactedThinking = response.Content.Any(block =>
-            block.TryPickRedactedThinking(out _));
-
-        if (hasRedactedThinking)
-        {
-            Console.WriteLine("Response contains redacted thinking blocks");
-
-            int thinkingBlockCount = response.Content.Count(block =>
-                block.TryPickThinking(out _) || block.TryPickRedactedThinking(out _));
-
-            Console.WriteLine($"Found {thinkingBlockCount} thinking blocks total");
-            Console.WriteLine("These blocks are still billable as output tokens");
-        }
-    }
-}
-```
-
-</CodeGroup>
-
-<TryInConsoleButton
-  userPrompt="ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB"
-  thinkingBudgetTokens={16000}
->
-  Try in Console
-</TryInConsoleButton>
-
-</section>
-
 ## Differences in thinking across model versions
 
-The Messages API handles thinking differently across Claude Sonnet 3.7 and Claude 4 models, primarily in redaction and summarization behavior.
+The Messages API handles thinking differently across Claude Sonnet 3.7 and Claude 4 models, primarily in summarization behavior.
 
 See the table below for a condensed comparison:
 

@@ -214,6 +214,146 @@ public class Program
     }
 }
 ```
+
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas: []anthropic.AnthropicBeta{
+			"code-execution-2025-08-25",
+			anthropic.AnthropicBetaSkills2025_10_02,
+		},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfContainers: &anthropic.BetaContainerParams{
+				Skills: []anthropic.BetaSkillParams{
+					{
+						Type:    anthropic.BetaSkillParamsTypeAnthropic,
+						SkillID: "pptx",
+						Version: anthropic.String("latest"),
+					},
+				},
+			},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Create a presentation about renewable energy")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..10,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaContainerParams;
+import com.anthropic.models.beta.messages.BetaSkillParams;
+import com.anthropic.models.beta.messages.BetaCodeExecutionTool20250825;
+
+public class Main {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(4096L)
+            .addBeta("code-execution-2025-08-25")
+            .addBeta("skills-2025-10-02")
+            .container(BetaContainerParams.builder()
+                .addSkill(BetaSkillParams.builder()
+                    .type(BetaSkillParams.Type.ANTHROPIC)
+                    .skillId("pptx")
+                    .version("latest")
+                    .build())
+                .build())
+            .addUserMessage("Create a presentation about renewable energy")
+            .addTool(BetaCodeExecutionTool20250825.builder().build())
+            .build();
+
+        BetaMessage response = client.beta().messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Create a presentation about renewable energy']
+    ],
+    model: 'claude-opus-4-6',
+    betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+    container: [
+        'skills' => [
+            [
+                'type' => 'anthropic',
+                'skill_id' => 'pptx',
+                'version' => 'latest'
+            ]
+        ]
+    ],
+    tools: [
+        ['type' => 'code_execution_20250825', 'name' => 'code_execution']
+    ]
+);
+
+echo $message;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [
+      {
+        type: "anthropic",
+        skill_id: "pptx",
+        version: "latest"
+      }
+    ]
+  },
+  messages: [
+    { role: "user", content: "Create a presentation about renewable energy" }
+  ],
+  tools: [
+    { type: "code_execution_20250825", name: "code_execution" }
+  ]
+)
+puts message
+```
 </CodeGroup>
 
 ### Downloading Generated Files
@@ -228,7 +368,9 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 
 **Example: Creating and downloading an Excel file**
 
-<CodeGroup>
+<Tabs>
+<Tab title="Shell">
+
 ```bash Shell
 # Step 1: Use a Skill to create a file
 RESPONSE=$(curl https://api.anthropic.com/v1/messages \
@@ -272,6 +414,9 @@ curl "https://api.anthropic.com/v1/files/$FILE_ID/content" \
 
 echo "Downloaded: $FILENAME"
 ```
+
+</Tab>
+<Tab title="Python">
 
 ```python Python nocheck
 import anthropic
@@ -322,6 +467,9 @@ for file_id in extract_file_ids(response):
     file_content.write_to_file(file_metadata.filename)
     print(f"Downloaded: {file_metadata.filename}")
 ```
+
+</Tab>
+<Tab title="TypeScript">
 
 ```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
@@ -378,6 +526,9 @@ for (const fileId of extractFileIds(response)) {
   console.log(`Downloaded: ${fileMetadata.filename}`);
 }
 ```
+
+</Tab>
+<Tab title="C#">
 
 ```csharp C# nocheck
 using System;
@@ -480,7 +631,310 @@ class Program
     }
 }
 ```
-</CodeGroup>
+
+</Tab>
+<Tab title="Go">
+
+```go Go hidelines={1..15,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"io"
+	"log"
+	"os"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	// Step 1: Use a Skill to create a file
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas:     []anthropic.AnthropicBeta{"code-execution-2025-08-25", anthropic.AnthropicBetaSkills2025_10_02},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfContainers: &anthropic.BetaContainerParams{
+				Skills: []anthropic.BetaSkillParams{
+					{
+						Type:    anthropic.BetaSkillParamsTypeAnthropic,
+						SkillID: "xlsx",
+						Version: anthropic.String("latest"),
+					},
+				},
+			},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Create an Excel file with a simple budget spreadsheet")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Step 2: Extract file IDs from the response
+	fileIDs := extractFileIDs(response)
+
+	// Step 3: Download the file using Files API
+	for _, fileID := range fileIDs {
+		fileMetadata, err := client.Beta.Files.GetMetadata(context.TODO(), fileID, anthropic.BetaFileGetMetadataParams{
+			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fileContent, err := client.Beta.Files.Download(context.TODO(), fileID, anthropic.BetaFileDownloadParams{
+			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// Step 4: Save to disk
+		out, err := os.Create(fileMetadata.Filename)
+		if err != nil {
+			log.Fatal(err)
+		}
+		io.Copy(out, fileContent.Body)
+		out.Close()
+		fileContent.Body.Close()
+		fmt.Printf("Downloaded: %s\n", fileMetadata.Filename)
+	}
+}
+
+func extractFileIDs(response *anthropic.BetaMessage) []string {
+	var fileIDs []string
+	for _, item := range response.Content {
+		switch v := item.AsAny().(type) {
+		case anthropic.BetaBashCodeExecutionToolResultBlock:
+			for _, output := range v.Content.Content {
+				if output.FileID != "" {
+					fileIDs = append(fileIDs, output.FileID)
+				}
+			}
+		}
+	}
+	return fileIDs
+}
+```
+
+</Tab>
+<Tab title="Java">
+
+```java Java nocheck hidelines={1..17,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaContainerParams;
+import com.anthropic.models.beta.messages.BetaSkillParams;
+import com.anthropic.models.beta.messages.BetaCodeExecutionTool20250825;
+import com.anthropic.models.beta.messages.BetaContentBlock;
+import com.anthropic.models.beta.files.FileMetadata;
+import com.anthropic.core.http.HttpResponse;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SkillsFileDownload {
+    public static void main(String[] args) throws Exception {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        // Step 1: Use a Skill to create a file
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(4096L)
+            .addBeta("code-execution-2025-08-25")
+            .addBeta("skills-2025-10-02")
+            .container(BetaContainerParams.builder()
+                .addSkill(BetaSkillParams.builder()
+                    .type(BetaSkillParams.Type.ANTHROPIC)
+                    .skillId("xlsx")
+                    .version("latest")
+                    .build())
+                .build())
+            .addUserMessage("Create an Excel file with a simple budget spreadsheet")
+            .addTool(BetaCodeExecutionTool20250825.builder().build())
+            .build();
+
+        BetaMessage response = client.beta().messages().create(params);
+
+        // Step 2: Extract file IDs from the response
+        List<String> fileIds = new ArrayList<>();
+        for (BetaContentBlock block : response.content()) {
+            if (block.isCodeExecutionToolResult()) {
+                var toolResult = block.asCodeExecutionToolResult();
+                for (var content : toolResult.content()) {
+                    content.file().ifPresent(file -> fileIds.add(file.fileId()));
+                }
+            }
+        }
+
+        // Step 3: Download the file using Files API
+        for (String fileId : fileIds) {
+            FileMetadata fileMetadata = client.beta().files().retrieveMetadata(fileId);
+            HttpResponse fileContent = client.beta().files().download(fileId);
+
+            // Step 4: Save to disk
+            try (InputStream is = fileContent.body();
+                 FileOutputStream fos = new FileOutputStream(fileMetadata.filename())) {
+                is.transferTo(fos);
+            }
+            System.out.println("Downloaded: " + fileMetadata.filename());
+        }
+    }
+}
+```
+
+</Tab>
+<Tab title="PHP">
+
+<Note>
+The PHP SDK doesn't include a file download method. Use `retrieveMetadata()` for file info, then download the file content via the REST API.
+</Note>
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+// Step 1: Use a Skill to create a file
+$response = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Create an Excel file with a simple budget spreadsheet']
+    ],
+    model: 'claude-opus-4-6',
+    betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+    container: [
+        'skills' => [
+            ['type' => 'anthropic', 'skill_id' => 'xlsx', 'version' => 'latest']
+        ]
+    ],
+    tools: [
+        ['type' => 'code_execution_20250825', 'name' => 'code_execution']
+    ]
+);
+
+// Step 2: Extract file IDs from the response
+function extractFileIds($response) {
+    $fileIds = [];
+    foreach ($response->content as $item) {
+        if ($item->type === 'bash_code_execution_tool_result') {
+            $contentItem = $item->content;
+            if ($contentItem->type === 'bash_code_execution_result') {
+                foreach ($contentItem->content as $file) {
+                    if (isset($file->fileID)) {
+                        $fileIds[] = $file->fileID;
+                    }
+                }
+            }
+        }
+    }
+    return $fileIds;
+}
+
+// Step 3: Get metadata and download via REST API
+$apiKey = getenv("ANTHROPIC_API_KEY");
+foreach (extractFileIds($response) as $fileId) {
+    $fileMetadata = $client->beta->files->retrieveMetadata(
+        fileID: $fileId,
+        betas: ['files-api-2025-04-14']
+    );
+
+    // Download file content via REST API
+    $context = stream_context_create([
+        'http' => [
+            'header' => implode("\r\n", [
+                "x-api-key: $apiKey",
+                "anthropic-version: 2023-06-01",
+                "anthropic-beta: files-api-2025-04-14",
+            ]),
+        ],
+    ]);
+    $fileContent = file_get_contents(
+        "https://api.anthropic.com/v1/files/$fileId/content",
+        false,
+        $context
+    );
+
+    // Step 4: Save to disk
+    file_put_contents($fileMetadata->filename, $fileContent);
+    echo "Downloaded: {$fileMetadata->filename}\n";
+}
+```
+
+</Tab>
+<Tab title="Ruby">
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+# Step 1: Use a Skill to create a file
+response = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
+  },
+  messages: [
+    {
+      role: "user",
+      content: "Create an Excel file with a simple budget spreadsheet"
+    }
+  ],
+  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+)
+
+# Step 2: Extract file IDs from the response
+def extract_file_ids(response)
+  file_ids = []
+  response.content.each do |item|
+    if item.type == :bash_code_execution_tool_result
+      content_item = item.content
+      if content_item.type == :bash_code_execution_result
+        content_item.content.each do |file|
+          file_ids << file.file_id if file.respond_to?(:file_id)
+        end
+      end
+    end
+  end
+  file_ids
+end
+
+# Step 3: Download the file using Files API
+extract_file_ids(response).each do |file_id|
+  file_metadata = client.beta.files.retrieve_metadata(
+    file_id,
+    betas: ["files-api-2025-04-14"]
+  )
+
+  file_content = client.beta.files.download(
+    file_id,
+    betas: ["files-api-2025-04-14"]
+  )
+
+  # Step 4: Save to disk
+  File.binwrite(file_metadata.filename, file_content.read)
+  puts "Downloaded: #{file_metadata.filename}"
+end
+```
+
+</Tab>
+</Tabs>
 
 **Additional Files API operations:**
 
@@ -580,6 +1034,132 @@ class Program
     }
 }
 ```
+
+```go Go nocheck hidelines={1..12,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+	fileID := "file_abc123"
+
+	// Get file metadata
+	fileInfo, err := client.Beta.Files.GetMetadata(context.TODO(), fileID, anthropic.BetaFileGetMetadataParams{
+		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Filename: %s, Size: %d bytes\n", fileInfo.Filename, fileInfo.SizeBytes)
+
+	// List all files
+	files := client.Beta.Files.ListAutoPaging(context.TODO(), anthropic.BetaFileListParams{
+		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+	})
+	for files.Next() {
+		file := files.Current()
+		fmt.Printf("%s - %s\n", file.Filename, file.CreatedAt)
+	}
+
+	// Delete a file
+	_, err = client.Beta.Files.Delete(context.TODO(), fileID, anthropic.BetaFileDeleteParams{
+		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+```java Java nocheck hidelines={1..7,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.files.FileMetadata;
+import com.anthropic.models.beta.files.FileListPage;
+
+public class FileManagement {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+        String fileId = "file_abc123";
+
+        // Get file metadata
+        FileMetadata fileInfo = client.beta().files().retrieveMetadata(fileId);
+        System.out.println("Filename: " + fileInfo.filename() + ", Size: " + fileInfo.sizeBytes() + " bytes");
+
+        // List all files
+        FileListPage files = client.beta().files().list();
+        for (var file : files.data()) {
+            System.out.println(file.filename() + " - " + file.createdAt());
+        }
+
+        // Delete a file
+        client.beta().files().delete(fileId);
+    }
+}
+```
+
+```php PHP hidelines={1..5} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$fileId = "file_abc123";
+
+// Get file metadata
+$fileInfo = $client->beta->files->retrieveMetadata(
+    fileID: $fileId,
+    betas: ['files-api-2025-04-14']
+);
+echo "Filename: {$fileInfo->filename}, Size: {$fileInfo->sizeBytes} bytes\n";
+
+// List all files
+$files = $client->beta->files->list(
+    betas: ['files-api-2025-04-14']
+);
+foreach ($files->data as $file) {
+    echo "{$file->filename} - {$file->createdAt}\n";
+}
+
+// Delete a file
+$client->beta->files->delete(
+    fileID: $fileId,
+    betas: ['files-api-2025-04-14']
+);
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+file_id = "file_abc123"
+
+# Get file metadata
+file_info = client.beta.files.retrieve_metadata(
+  file_id,
+  betas: ["files-api-2025-04-14"]
+)
+puts "Filename: #{file_info.filename}, Size: #{file_info.size_bytes} bytes"
+
+# List all files
+files = client.beta.files.list(betas: ["files-api-2025-04-14"])
+files.data.each do |file|
+  puts "#{file.filename} - #{file.created_at}"
+end
+
+# Delete a file
+client.beta.files.delete(
+  file_id,
+  betas: ["files-api-2025-04-14"]
+)
+```
 </CodeGroup>
 
 <Note>
@@ -678,7 +1258,7 @@ public class Program
             Model = "claude-opus-4-6",
             MaxTokens = 4096,
             Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02" },
-            Container = new BetaContainerParam
+            Container = new BetaContainerParams
             {
                 Skills = new[]
                 {
@@ -715,7 +1295,7 @@ public class Program
             Model = "claude-opus-4-6",
             MaxTokens = 4096,
             Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02" },
-            Container = new BetaContainerParam
+            Container = new BetaContainerParams
             {
                 Id = response1.Container.Id,
                 Skills = new[]
@@ -748,6 +1328,220 @@ public class Program
         Console.WriteLine(response2);
     }
 }
+```
+
+```go Go nocheck hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response1, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas:     []anthropic.AnthropicBeta{"code-execution-2025-08-25", anthropic.AnthropicBetaSkills2025_10_02},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfContainers: &anthropic.BetaContainerParams{
+				Skills: []anthropic.BetaSkillParams{
+					{
+						Type:    anthropic.BetaSkillParamsTypeAnthropic,
+						SkillID: "xlsx",
+						Version: anthropic.String("latest"),
+					},
+				},
+			},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Analyze this sales data")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	response2, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas:     []anthropic.AnthropicBeta{"code-execution-2025-08-25", anthropic.AnthropicBetaSkills2025_10_02},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfString: anthropic.String(response1.Container.ID),
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Analyze this sales data")),
+			response1.ToParam(),
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("What was the total revenue?")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(response2)
+}
+```
+
+```java Java hidelines={1..10,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaContainerParams;
+import com.anthropic.models.beta.messages.BetaSkillParams;
+import com.anthropic.models.beta.messages.BetaCodeExecutionTool20250825;
+
+public class ContainerReuse {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params1 = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(4096L)
+            .addBeta("code-execution-2025-08-25")
+            .addBeta("skills-2025-10-02")
+            .container(BetaContainerParams.builder()
+                .addSkill(BetaSkillParams.builder()
+                    .type(BetaSkillParams.Type.ANTHROPIC)
+                    .skillId("xlsx")
+                    .version("latest")
+                    .build())
+                .build())
+            .addUserMessage("Analyze this sales data")
+            .addTool(BetaCodeExecutionTool20250825.builder().build())
+            .build();
+
+        BetaMessage response1 = client.beta().messages().create(params1);
+
+        MessageCreateParams params2 = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(4096L)
+            .addBeta("code-execution-2025-08-25")
+            .addBeta("skills-2025-10-02")
+            .container(BetaContainerParams.builder()
+                .id(response1.container().get().id())
+                .addSkill(BetaSkillParams.builder()
+                    .type(BetaSkillParams.Type.ANTHROPIC)
+                    .skillId("xlsx")
+                    .version("latest")
+                    .build())
+                .build())
+            .addUserMessage("Analyze this sales data")
+            .addMessage(response1)
+            .addUserMessage("What was the total revenue?")
+            .addTool(BetaCodeExecutionTool20250825.builder().build())
+            .build();
+
+        BetaMessage response2 = client.beta().messages().create(params2);
+        System.out.println(response2);
+    }
+}
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$response1 = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Analyze this sales data']
+    ],
+    model: 'claude-opus-4-6',
+    betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+    container: [
+        'skills' => [
+            ['type' => 'anthropic', 'skill_id' => 'xlsx', 'version' => 'latest']
+        ]
+    ],
+    tools: [
+        ['type' => 'code_execution_20250825', 'name' => 'code_execution']
+    ]
+);
+
+$messages = [
+    ['role' => 'user', 'content' => 'Analyze this sales data'],
+    ['role' => 'assistant', 'content' => $response1->content],
+    ['role' => 'user', 'content' => 'What was the total revenue?']
+];
+
+$response2 = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: $messages,
+    model: 'claude-opus-4-6',
+    betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+    container: [
+        'id' => $response1->container->id,
+        'skills' => [
+            ['type' => 'anthropic', 'skill_id' => 'xlsx', 'version' => 'latest']
+        ]
+    ],
+    tools: [
+        ['type' => 'code_execution_20250825', 'name' => 'code_execution']
+    ]
+);
+
+echo $response2;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response1 = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
+  },
+  messages: [
+    { role: "user", content: "Analyze this sales data" }
+  ],
+  tools: [
+    { type: "code_execution_20250825", name: "code_execution" }
+  ]
+)
+
+messages = [
+  { role: "user", content: "Analyze this sales data" },
+  { role: "assistant", content: response1.content },
+  { role: "user", content: "What was the total revenue?" }
+]
+
+response2 = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    id: response1.container.id,
+    skills: [
+      { type: "anthropic", skill_id: "xlsx", version: "latest" }
+    ]
+  },
+  messages: messages,
+  tools: [
+    { type: "code_execution_20250825", name: "code_execution" }
+  ]
+)
+
+puts response2
 ```
 </CodeGroup>
 
@@ -927,7 +1721,7 @@ var response = await client.Beta.Messages.Create(new MessageCreateParams
     Model = "claude-opus-4-6",
     MaxTokens = 4096,
     Betas = ["code-execution-2025-08-25", "skills-2025-10-02"],
-    Container = new BetaContainerParam
+    Container = new BetaContainerParams
     {
         Skills = [
             new BetaSkillParam
@@ -956,7 +1750,7 @@ for (int i = 0; i < maxRetries; i++)
         Model = "claude-opus-4-6",
         MaxTokens = 4096,
         Betas = ["code-execution-2025-08-25", "skills-2025-10-02"],
-        Container = new BetaContainerParam
+        Container = new BetaContainerParams
         {
             Id = response.Container.Id,
             Skills = [
@@ -972,6 +1766,258 @@ for (int i = 0; i < maxRetries; i++)
         Tools = [new BetaToolParam { Type = "code_execution_20250825", Name = "code_execution" }]
     });
 }
+```
+
+```go Go nocheck hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	messages := []anthropic.BetaMessageParam{
+		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Process this large dataset")),
+	}
+	maxRetries := 10
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas:     []anthropic.AnthropicBeta{"code-execution-2025-08-25", anthropic.AnthropicBetaSkills2025_10_02},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfContainers: &anthropic.BetaContainerParams{
+				Skills: []anthropic.BetaSkillParams{
+					{
+						Type:    anthropic.BetaSkillParamsTypeCustom,
+						SkillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+						Version: anthropic.String("latest"),
+					},
+				},
+			},
+		},
+		Messages: messages,
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for i := 0; i < maxRetries; i++ {
+		if response.StopReason != "pause_turn" {
+			break
+		}
+
+		messages = append(messages, response.ToParam())
+
+		response, err = client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+			Model:     "claude-opus-4-6",
+			MaxTokens: 4096,
+			Betas:     []anthropic.AnthropicBeta{"code-execution-2025-08-25", anthropic.AnthropicBetaSkills2025_10_02},
+			Container: anthropic.BetaMessageNewParamsContainerUnion{
+				OfString: anthropic.String(response.Container.ID),
+			},
+			Messages: messages,
+			Tools: []anthropic.BetaToolUnionParam{
+				{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+			},
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	fmt.Println(response)
+}
+```
+
+```java Java nocheck hidelines={1..14,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaMessageParam;
+import com.anthropic.models.beta.messages.BetaContainerParams;
+import com.anthropic.models.beta.messages.BetaSkillParams;
+import com.anthropic.models.beta.messages.BetaCodeExecutionTool20250825;
+import java.util.ArrayList;
+import java.util.List;
+import com.anthropic.models.beta.messages.BetaStopReason;
+
+public class Main {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        List<BetaMessageParam> messages = new ArrayList<>();
+        messages.add(
+            BetaMessageParam.builder()
+                .role(BetaMessageParam.Role.USER)
+                .content("Process this large dataset")
+                .build()
+        );
+        int maxRetries = 10;
+
+        BetaMessage response = client.beta().messages().create(
+            MessageCreateParams.builder()
+                .model("claude-opus-4-6")
+                .maxTokens(4096L)
+                .addBeta("code-execution-2025-08-25")
+                .addBeta("skills-2025-10-02")
+                .container(BetaContainerParams.builder()
+                    .addSkill(BetaSkillParams.builder()
+                        .type(BetaSkillParams.Type.CUSTOM)
+                        .skillId("skill_01AbCdEfGhIjKlMnOpQrStUv")
+                        .version("latest")
+                        .build())
+                    .build())
+                .messages(messages)
+                .addTool(BetaCodeExecutionTool20250825.builder().build())
+                .build());
+
+        for (int i = 0; i < maxRetries; i++) {
+            if (!response.stopReason().isPresent()
+                    || !response.stopReason().get().equals(BetaStopReason.PAUSE_TURN)) {
+                break;
+            }
+
+            messages.add(response.toParam());
+
+            response = client.beta().messages().create(
+                MessageCreateParams.builder()
+                    .model("claude-opus-4-6")
+                    .maxTokens(4096L)
+                    .addBeta("code-execution-2025-08-25")
+                    .addBeta("skills-2025-10-02")
+                    .container(BetaContainerParams.builder()
+                        .id(response.container().get().id())
+                        .addSkill(BetaSkillParams.builder()
+                            .type(BetaSkillParams.Type.CUSTOM)
+                            .skillId("skill_01AbCdEfGhIjKlMnOpQrStUv")
+                            .version("latest")
+                            .build())
+                        .build())
+                    .messages(messages)
+                    .addTool(BetaCodeExecutionTool20250825.builder().build())
+                    .build());
+        }
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$messages = [
+    ['role' => 'user', 'content' => 'Process this large dataset']
+];
+$maxRetries = 10;
+
+$response = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: $messages,
+    model: 'claude-opus-4-6',
+    betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+    container: [
+        'skills' => [
+            [
+                'type' => 'custom',
+                'skill_id' => 'skill_01AbCdEfGhIjKlMnOpQrStUv',
+                'version' => 'latest'
+            ]
+        ]
+    ],
+    tools: [['type' => 'code_execution_20250825', 'name' => 'code_execution']]
+);
+
+for ($i = 0; $i < $maxRetries; $i++) {
+    if ($response->stopReason !== 'pause_turn') {
+        break;
+    }
+
+    $messages[] = ['role' => 'assistant', 'content' => $response->content];
+
+    $response = $client->beta->messages->create(
+        maxTokens: 4096,
+        messages: $messages,
+        model: 'claude-opus-4-6',
+        betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+        container: [
+            'id' => $response->container->id,
+            'skills' => [
+                [
+                    'type' => 'custom',
+                    'skill_id' => 'skill_01AbCdEfGhIjKlMnOpQrStUv',
+                    'version' => 'latest'
+                ]
+            ]
+        ],
+        tools: [['type' => 'code_execution_20250825', 'name' => 'code_execution']]
+    );
+}
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+messages = [
+  { role: "user", content: "Process this large dataset" }
+]
+max_retries = 10
+
+response = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [
+      {
+        type: "custom",
+        skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+        version: "latest"
+      }
+    ]
+  },
+  messages: messages,
+  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+)
+
+max_retries.times do
+  break if response.stop_reason != :pause_turn
+
+  messages << { role: "assistant", content: response.content }
+
+  response = client.beta.messages.create(
+    model: "claude-opus-4-6",
+    max_tokens: 4096,
+    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+    container: {
+      id: response.container.id,
+      skills: [
+        {
+          type: "custom",
+          skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+          version: "latest"
+        }
+      ]
+    },
+    messages: messages,
+    tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+  )
+end
 ```
 </CodeGroup>
 
@@ -1149,6 +2195,189 @@ public class Program
     }
 }
 ```
+
+```go Go nocheck hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas: []anthropic.AnthropicBeta{
+			"code-execution-2025-08-25",
+			anthropic.AnthropicBetaSkills2025_10_02,
+		},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfContainers: &anthropic.BetaContainerParams{
+				Skills: []anthropic.BetaSkillParams{
+					{
+						Type:    anthropic.BetaSkillParamsTypeAnthropic,
+						SkillID: "xlsx",
+						Version: anthropic.String("latest"),
+					},
+					{
+						Type:    anthropic.BetaSkillParamsTypeAnthropic,
+						SkillID: "pptx",
+						Version: anthropic.String("latest"),
+					},
+					{
+						Type:    anthropic.BetaSkillParamsTypeCustom,
+						SkillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+						Version: anthropic.String("latest"),
+					},
+				},
+			},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Analyze sales data and create a presentation")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java nocheck hidelines={1..11,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaContainerParams;
+import com.anthropic.models.beta.messages.BetaSkillParams;
+import com.anthropic.models.beta.messages.BetaCodeExecutionTool20250825;
+import java.util.List;
+
+public class SkillsExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(4096L)
+            .addBeta("code-execution-2025-08-25")
+            .addBeta("skills-2025-10-02")
+            .container(BetaContainerParams.builder()
+                .skills(List.of(
+                    BetaSkillParams.builder()
+                        .type(BetaSkillParams.Type.ANTHROPIC)
+                        .skillId("xlsx")
+                        .version("latest")
+                        .build(),
+                    BetaSkillParams.builder()
+                        .type(BetaSkillParams.Type.ANTHROPIC)
+                        .skillId("pptx")
+                        .version("latest")
+                        .build(),
+                    BetaSkillParams.builder()
+                        .type(BetaSkillParams.Type.CUSTOM)
+                        .skillId("skill_01AbCdEfGhIjKlMnOpQrStUv")
+                        .version("latest")
+                        .build()
+                ))
+                .build())
+            .addUserMessage("Analyze sales data and create a presentation")
+            .addTool(BetaCodeExecutionTool20250825.builder().build())
+            .build();
+
+        BetaMessage response = client.beta().messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Analyze sales data and create a presentation']
+    ],
+    model: 'claude-opus-4-6',
+    betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+    container: [
+        'skills' => [
+            [
+                'type' => 'anthropic',
+                'skill_id' => 'xlsx',
+                'version' => 'latest'
+            ],
+            [
+                'type' => 'anthropic',
+                'skill_id' => 'pptx',
+                'version' => 'latest'
+            ],
+            [
+                'type' => 'custom',
+                'skill_id' => 'skill_01AbCdEfGhIjKlMnOpQrStUv',
+                'version' => 'latest'
+            ]
+        ]
+    ],
+    tools: [
+        ['type' => 'code_execution_20250825', 'name' => 'code_execution']
+    ]
+);
+
+echo $message;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [
+      {
+        type: "anthropic",
+        skill_id: "xlsx",
+        version: "latest"
+      },
+      {
+        type: "anthropic",
+        skill_id: "pptx",
+        version: "latest"
+      },
+      {
+        type: "custom",
+        skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+        version: "latest"
+      }
+    ]
+  },
+  messages: [
+    { role: "user", content: "Analyze sales data and create a presentation" }
+  ],
+  tools: [
+    { type: "code_execution_20250825", name: "code_execution" }
+  ]
+)
+puts message
+```
 </CodeGroup>
 
 ---
@@ -1289,6 +2518,162 @@ class Program
     }
 }
 ```
+
+```go Go nocheck hidelines={1..15,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"io"
+	"log"
+	"os"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	// Option 1: Using a zip file
+	zipFile, err := os.Open("financial_analysis_skill.zip")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer zipFile.Close()
+
+	skill, err := client.Beta.Skills.New(context.TODO(), anthropic.BetaSkillNewParams{
+		DisplayTitle: anthropic.String("Financial Analysis"),
+		Files:        []io.Reader{zipFile},
+		Betas:        []anthropic.AnthropicBeta{anthropic.AnthropicBetaSkills2025_10_02},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Option 2: Using individual files
+	skillMd, err := os.Open("financial_skill/SKILL.md")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer skillMd.Close()
+
+	analyzePy, err := os.Open("financial_skill/analyze.py")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer analyzePy.Close()
+
+	skill2, err := client.Beta.Skills.New(context.TODO(), anthropic.BetaSkillNewParams{
+		DisplayTitle: anthropic.String("Financial Analysis"),
+		Files:        []io.Reader{skillMd, analyzePy},
+		Betas:        []anthropic.AnthropicBeta{anthropic.AnthropicBetaSkills2025_10_02},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Created skill: %s\n", skill.ID)
+	fmt.Printf("Latest version: %s\n", skill.LatestVersion)
+	fmt.Printf("Created skill 2: %s\n", skill2.ID)
+}
+```
+
+```java Java nocheck hidelines={1..10,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.skills.SkillCreateParams;
+import com.anthropic.models.beta.skills.SkillCreateResponse;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+
+public class SkillCreate {
+    public static void main(String[] args) throws IOException {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        // Option 1: Using a zip file
+        SkillCreateParams params = SkillCreateParams.builder()
+            .displayTitle("Financial Analysis")
+            .addFile(new FileInputStream("financial_analysis_skill.zip"))
+            .addBeta("skills-2025-10-02")
+            .build();
+
+        SkillCreateResponse skill = client.beta().skills().create(params);
+
+        // Option 2: Using individual files
+        SkillCreateParams params2 = SkillCreateParams.builder()
+            .displayTitle("Financial Analysis")
+            .addFile(Path.of("financial_skill/SKILL.md"))
+            .addFile(Path.of("financial_skill/analyze.py"))
+            .addBeta("skills-2025-10-02")
+            .build();
+
+        SkillCreateResponse skill2 = client.beta().skills().create(params2);
+
+        System.out.println("Created skill: " + skill.id());
+        System.out.println("Latest version: " + skill.latestVersion());
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+// Option 1: Using a zip file
+$skill = $client->beta->skills->create(
+    displayTitle: 'Financial Analysis',
+    files: [
+        fopen('financial_analysis_skill.zip', 'r')
+    ],
+    betas: ['skills-2025-10-02']
+);
+
+// Option 2: Using individual files
+$skill = $client->beta->skills->create(
+    displayTitle: 'Financial Analysis',
+    files: [
+        fopen('financial_skill/SKILL.md', 'r'),
+        fopen('financial_skill/analyze.py', 'r')
+    ],
+    betas: ['skills-2025-10-02']
+);
+
+echo "Created skill: {$skill->id}\n";
+echo "Latest version: {$skill->latestVersion}\n";
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+# Option 1: Using a zip file
+skill = client.beta.skills.create(
+  display_title: "Financial Analysis",
+  files: [
+    File.open("financial_analysis_skill.zip", "rb")
+  ],
+  betas: ["skills-2025-10-02"]
+)
+
+# Option 2: Using individual files
+skill = client.beta.skills.create(
+  display_title: "Financial Analysis",
+  files: [
+    File.open("financial_skill/SKILL.md", "rb"),
+    File.open("financial_skill/analyze.py", "rb")
+  ],
+  betas: ["skills-2025-10-02"]
+)
+
+puts "Created skill: #{skill.id}"
+puts "Latest version: #{skill.latest_version}"
+```
 </CodeGroup>
 
 **Requirements:**
@@ -1380,6 +2765,121 @@ class Program
     }
 }
 ```
+
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	// List all Skills
+	skills := client.Beta.Skills.ListAutoPaging(context.TODO(), anthropic.BetaSkillListParams{
+		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaSkills2025_10_02},
+	})
+
+	for skills.Next() {
+		skill := skills.Current()
+		fmt.Printf("%s: %s (source: %s)\n", skill.ID, skill.DisplayTitle, skill.Source)
+	}
+	if skills.Err() != nil {
+		log.Fatal(skills.Err())
+	}
+
+	// List only custom Skills
+	customSkills := client.Beta.Skills.ListAutoPaging(context.TODO(), anthropic.BetaSkillListParams{
+		Source: anthropic.String("custom"),
+		Betas:  []anthropic.AnthropicBeta{anthropic.AnthropicBetaSkills2025_10_02},
+	})
+
+	for customSkills.Next() {
+		skill := customSkills.Current()
+		fmt.Printf("%s: %s (source: %s)\n", skill.ID, skill.DisplayTitle, skill.Source)
+	}
+}
+```
+
+```java Java hidelines={1..8,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.skills.SkillListParams;
+import com.anthropic.models.beta.skills.SkillListPage;
+import com.anthropic.models.beta.skills.SkillListResponse;
+
+public class ListSkills {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        // List all Skills
+        SkillListParams params = SkillListParams.builder()
+            .addBeta("skills-2025-10-02")
+            .build();
+
+        SkillListPage skills = client.beta().skills().list(params);
+
+        for (SkillListResponse skill : skills.data()) {
+            System.out.println(skill.id() + ": " + skill.displayTitle() + " (source: " + skill.source() + ")");
+        }
+
+        // List only custom Skills
+        SkillListParams customParams = SkillListParams.builder()
+            .source("custom")
+            .addBeta("skills-2025-10-02")
+            .build();
+
+        SkillListPage customSkills = client.beta().skills().list(customParams);
+    }
+}
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+// List all Skills
+$skills = $client->beta->skills->list(
+    betas: ['skills-2025-10-02']
+);
+
+foreach ($skills->data as $skill) {
+    echo "{$skill->id}: {$skill->displayTitle} (source: {$skill->source})\n";
+}
+
+// List only custom Skills
+$customSkills = $client->beta->skills->list(
+    source: 'custom',
+    betas: ['skills-2025-10-02']
+);
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+# List all Skills
+skills = client.beta.skills.list(betas: ["skills-2025-10-02"])
+
+skills.data.each do |skill|
+  puts "#{skill.id}: #{skill.display_title} (source: #{skill.source})"
+end
+
+# List only custom Skills
+custom_skills = client.beta.skills.list(
+  source: "custom",
+  betas: ["skills-2025-10-02"]
+)
+```
 </CodeGroup>
 
 See the [List Skills API reference](/docs/en/api/skills/list-skills) for pagination and filtering options.
@@ -1438,6 +2938,93 @@ class Program
         Console.WriteLine($"Created: {skill.CreatedAt}");
     }
 }
+```
+
+```go Go nocheck hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	skill, err := client.Beta.Skills.Get(
+		context.TODO(),
+		"skill_01AbCdEfGhIjKlMnOpQrStUv",
+		anthropic.BetaSkillGetParams{
+			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaSkills2025_10_02},
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Skill: %s\n", skill.DisplayTitle)
+	fmt.Printf("Latest version: %s\n", skill.LatestVersion)
+	fmt.Printf("Created: %s\n", skill.CreatedAt)
+}
+```
+
+```java Java nocheck hidelines={1..7,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.skills.SkillRetrieveParams;
+import com.anthropic.models.beta.skills.SkillRetrieveResponse;
+
+public class RetrieveSkill {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        SkillRetrieveResponse skill = client.beta().skills().retrieve(
+            "skill_01AbCdEfGhIjKlMnOpQrStUv",
+            SkillRetrieveParams.builder()
+                .addBeta("skills-2025-10-02")
+                .build()
+        );
+
+        System.out.println("Skill: " + skill.displayTitle());
+        System.out.println("Latest version: " + skill.latestVersion());
+        System.out.println("Created: " + skill.createdAt());
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$skill = $client->beta->skills->retrieve(
+    skillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+    betas: ["skills-2025-10-02"]
+);
+
+echo "Skill: " . $skill->displayTitle . "\n";
+echo "Latest version: " . $skill->latestVersion . "\n";
+echo "Created: " . $skill->createdAt . "\n";
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+skill = client.beta.skills.retrieve(
+  "skill_01AbCdEfGhIjKlMnOpQrStUv",
+  betas: ["skills-2025-10-02"]
+)
+
+puts "Skill: #{skill.display_title}"
+puts "Latest version: #{skill.latest_version}"
+puts "Created: #{skill.created_at}"
 ```
 </CodeGroup>
 
@@ -1528,6 +3115,152 @@ class Program
         );
     }
 }
+```
+
+```go Go nocheck hidelines={1..12,-1}
+package main
+
+import (
+	"context"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	// Step 1: Delete all versions
+	versions := client.Beta.Skills.Versions.ListAutoPaging(
+		context.TODO(),
+		"skill_01AbCdEfGhIjKlMnOpQrStUv",
+		anthropic.BetaSkillVersionListParams{
+			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaSkills2025_10_02},
+		},
+	)
+
+	for versions.Next() {
+		version := versions.Current()
+		_, err := client.Beta.Skills.Versions.Delete(
+			context.TODO(),
+			version.Version,
+			anthropic.BetaSkillVersionDeleteParams{
+				SkillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+				Betas:   []anthropic.AnthropicBeta{anthropic.AnthropicBetaSkills2025_10_02},
+			},
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	// Step 2: Delete the Skill
+	_, err := client.Beta.Skills.Delete(
+		context.TODO(),
+		"skill_01AbCdEfGhIjKlMnOpQrStUv",
+		anthropic.BetaSkillDeleteParams{
+			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaSkills2025_10_02},
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+```java Java nocheck hidelines={1..9,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.skills.SkillDeleteParams;
+import com.anthropic.models.beta.skills.versions.VersionListParams;
+import com.anthropic.models.beta.skills.versions.VersionListPage;
+import com.anthropic.models.beta.skills.versions.VersionDeleteParams;
+
+public class DeleteSkill {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        // Step 1: Delete all versions
+        VersionListPage versions = client.beta().skills().versions().list(
+            "skill_01AbCdEfGhIjKlMnOpQrStUv",
+            VersionListParams.builder()
+                .addBeta("skills-2025-10-02")
+                .build()
+        );
+
+        for (var version : versions.data()) {
+            client.beta().skills().versions().delete(
+                version.version(),
+                VersionDeleteParams.builder()
+                    .skillId("skill_01AbCdEfGhIjKlMnOpQrStUv")
+                    .addBeta("skills-2025-10-02")
+                    .build()
+            );
+        }
+
+        // Step 2: Delete the Skill
+        client.beta().skills().delete(
+            "skill_01AbCdEfGhIjKlMnOpQrStUv",
+            SkillDeleteParams.builder()
+                .addBeta("skills-2025-10-02")
+                .build()
+        );
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+// Step 1: Delete all versions
+$versions = $client->beta->skills->versions->list(
+    skillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+    betas: ["skills-2025-10-02"]
+);
+
+foreach ($versions->data as $version) {
+    $client->beta->skills->versions->delete(
+        skillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+        version: $version->version,
+        betas: ["skills-2025-10-02"]
+    );
+}
+
+// Step 2: Delete the Skill
+$client->beta->skills->delete(
+    skillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+    betas: ["skills-2025-10-02"]
+);
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+# Step 1: Delete all versions
+versions = client.beta.skills.versions.list(
+  "skill_01AbCdEfGhIjKlMnOpQrStUv",
+  betas: ["skills-2025-10-02"]
+)
+
+versions.data.each do |version|
+  client.beta.skills.versions.delete(
+    version.version,
+    skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+    betas: ["skills-2025-10-02"]
+  )
+end
+
+# Step 2: Delete the Skill
+client.beta.skills.delete(
+  "skill_01AbCdEfGhIjKlMnOpQrStUv",
+  betas: ["skills-2025-10-02"]
+)
 ```
 </CodeGroup>
 
@@ -1782,6 +3515,268 @@ class Program
     }
 }
 ```
+
+```go Go nocheck hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"io"
+	"log"
+	"os"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	// Create a new version
+	skillFile := mustOpen("/path/to/updated_skill/SKILL.md")
+	defer skillFile.Close()
+
+	newVersion, err := client.Beta.Skills.Versions.New(
+		context.TODO(),
+		"skill_01AbCdEfGhIjKlMnOpQrStUv",
+		anthropic.BetaSkillVersionNewParams{
+			Files: []io.Reader{skillFile},
+			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaSkills2025_10_02},
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Use specific version
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas:     []anthropic.AnthropicBeta{"code-execution-2025-08-25", anthropic.AnthropicBetaSkills2025_10_02},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfContainers: &anthropic.BetaContainerParams{
+				Skills: []anthropic.BetaSkillParams{
+					{
+						Type:    anthropic.BetaSkillParamsTypeCustom,
+						SkillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+						Version: anthropic.String(newVersion.Version),
+					},
+				},
+			},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Use updated Skill")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+
+	// Use latest version
+	latestResponse, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas:     []anthropic.AnthropicBeta{"code-execution-2025-08-25", anthropic.AnthropicBetaSkills2025_10_02},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfContainers: &anthropic.BetaContainerParams{
+				Skills: []anthropic.BetaSkillParams{
+					{
+						Type:    anthropic.BetaSkillParamsTypeCustom,
+						SkillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+						Version: anthropic.String("latest"),
+					},
+				},
+			},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Use latest Skill version")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(latestResponse)
+}
+
+func mustOpen(path string) *os.File {
+	f, err := os.Open(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return f
+}
+```
+
+```java Java nocheck hidelines={1..13,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaContainerParams;
+import com.anthropic.models.beta.messages.BetaSkillParams;
+import com.anthropic.models.beta.messages.BetaCodeExecutionTool20250825;
+import com.anthropic.models.beta.skills.versions.VersionCreateParams;
+import com.anthropic.models.beta.skills.versions.VersionCreateResponse;
+import java.nio.file.Path;
+
+public class SkillVersioning {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        // Create a new version
+        VersionCreateParams versionParams = VersionCreateParams.builder()
+            .addFile(Path.of("/path/to/updated_skill/SKILL.md"))
+            .addBeta("skills-2025-10-02")
+            .build();
+
+        VersionCreateResponse newVersion = client.beta().skills().versions()
+            .create("skill_01AbCdEfGhIjKlMnOpQrStUv", versionParams);
+
+        // Use specific version
+        MessageCreateParams specificVersionParams = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(4096L)
+            .addBeta("code-execution-2025-08-25")
+            .addBeta("skills-2025-10-02")
+            .container(BetaContainerParams.builder()
+                .addSkill(BetaSkillParams.builder()
+                    .type(BetaSkillParams.Type.CUSTOM)
+                    .skillId("skill_01AbCdEfGhIjKlMnOpQrStUv")
+                    .version(newVersion.version())
+                    .build())
+                .build())
+            .addUserMessage("Use updated Skill")
+            .addTool(BetaCodeExecutionTool20250825.builder().build())
+            .build();
+
+        BetaMessage response = client.beta().messages().create(specificVersionParams);
+        System.out.println(response);
+
+        // Use latest version
+        MessageCreateParams latestVersionParams = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(4096L)
+            .addBeta("code-execution-2025-08-25")
+            .addBeta("skills-2025-10-02")
+            .container(BetaContainerParams.builder()
+                .addSkill(BetaSkillParams.builder()
+                    .type(BetaSkillParams.Type.CUSTOM)
+                    .skillId("skill_01AbCdEfGhIjKlMnOpQrStUv")
+                    .version("latest")
+                    .build())
+                .build())
+            .addUserMessage("Use latest Skill version")
+            .addTool(BetaCodeExecutionTool20250825.builder().build())
+            .build();
+
+        BetaMessage latestResponse = client.beta().messages().create(latestVersionParams);
+        System.out.println(latestResponse);
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+// Create a new version
+$newVersion = $client->beta->skills->versions->create(
+    skillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+    files: [fopen("/path/to/updated_skill/SKILL.md", "r")],
+    betas: ["skills-2025-10-02"]
+);
+
+// Use specific version
+$response = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: [['role' => 'user', 'content' => 'Use updated Skill']],
+    model: 'claude-opus-4-6',
+    betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+    container: [
+        'skills' => [[
+            'type' => 'custom',
+            'skill_id' => 'skill_01AbCdEfGhIjKlMnOpQrStUv',
+            'version' => $newVersion->version
+        ]]
+    ],
+    tools: [['type' => 'code_execution_20250825', 'name' => 'code_execution']]
+);
+echo $response;
+
+// Use latest version
+$latestResponse = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: [['role' => 'user', 'content' => 'Use latest Skill version']],
+    model: 'claude-opus-4-6',
+    betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+    container: [
+        'skills' => [[
+            'type' => 'custom',
+            'skill_id' => 'skill_01AbCdEfGhIjKlMnOpQrStUv',
+            'version' => 'latest'
+        ]]
+    ],
+    tools: [['type' => 'code_execution_20250825', 'name' => 'code_execution']]
+);
+echo $latestResponse;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+# Create a new version
+new_version = client.beta.skills.versions.create(
+  "skill_01AbCdEfGhIjKlMnOpQrStUv",
+  files: [File.open("/path/to/updated_skill/SKILL.md")],
+  betas: ["skills-2025-10-02"]
+)
+
+# Use specific version
+response = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [{
+      type: "custom",
+      skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+      version: new_version.version
+    }]
+  },
+  messages: [{ role: "user", content: "Use updated Skill" }],
+  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+)
+puts response
+
+# Use latest version
+latest_response = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [{
+      type: "custom",
+      skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+      version: "latest"
+    }]
+  },
+  messages: [{ role: "user", content: "Use latest Skill version" }],
+  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+)
+puts latest_response
+```
 </CodeGroup>
 
 See the [Create Skill Version API reference](/docs/en/api/skills/create-skill-version) for complete details.
@@ -1974,7 +3969,7 @@ var parameters = new MessageCreateParams
     Model = "claude-opus-4-6",
     MaxTokens = 4096,
     Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02" },
-    Container = new BetaContainerParam
+    Container = new BetaContainerParams
     {
         Skills = new[]
         {
@@ -2012,6 +4007,171 @@ var parameters = new MessageCreateParams
 
 var message = await client.Beta.Messages.Create(parameters);
 Console.WriteLine(message);
+```
+
+```go Go nocheck hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	// Create custom DCF analysis Skill (ID obtained from Skills API)
+	dcfSkillID := "skill_01AbCdEfGhIjKlMnOpQrStUv"
+
+	// Use with Excel to create financial model
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas: []anthropic.AnthropicBeta{
+			"code-execution-2025-08-25",
+			anthropic.AnthropicBetaSkills2025_10_02,
+		},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfContainers: &anthropic.BetaContainerParams{
+				Skills: []anthropic.BetaSkillParams{
+					{
+						Type:    anthropic.BetaSkillParamsTypeAnthropic,
+						SkillID: "xlsx",
+						Version: anthropic.String("latest"),
+					},
+					{
+						Type:    anthropic.BetaSkillParamsTypeCustom,
+						SkillID: dcfSkillID,
+						Version: anthropic.String("latest"),
+					},
+				},
+			},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Build a DCF valuation model for a SaaS company with the attached financials")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java nocheck hidelines={1..11,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaContainerParams;
+import com.anthropic.models.beta.messages.BetaSkillParams;
+import com.anthropic.models.beta.messages.BetaCodeExecutionTool20250825;
+import java.util.List;
+
+public class CustomSkillExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        // Create custom DCF analysis Skill (via Skills API)
+        String dcfSkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv"; // From Skills API create response
+
+        // Use with Excel Skill to create financial model
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(4096L)
+            .addBeta("code-execution-2025-08-25")
+            .addBeta("skills-2025-10-02")
+            .container(BetaContainerParams.builder()
+                .skills(List.of(
+                    BetaSkillParams.builder()
+                        .type(BetaSkillParams.Type.ANTHROPIC)
+                        .skillId("xlsx")
+                        .version("latest")
+                        .build(),
+                    BetaSkillParams.builder()
+                        .type(BetaSkillParams.Type.CUSTOM)
+                        .skillId(dcfSkillId)
+                        .version("latest")
+                        .build()
+                ))
+                .build())
+            .addUserMessage("Build a DCF valuation model for a SaaS company with the attached financials")
+            .addTool(BetaCodeExecutionTool20250825.builder().build())
+            .build();
+
+        BetaMessage response = client.beta().messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+// Create custom DCF analysis Skill
+$dcfSkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv"; // From API response
+
+// Use with Excel to create financial model
+$message = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Build a DCF valuation model for a SaaS company with the attached financials']
+    ],
+    model: 'claude-opus-4-6',
+    betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+    container: [
+        'skills' => [
+            ['type' => 'anthropic', 'skill_id' => 'xlsx', 'version' => 'latest'],
+            ['type' => 'custom', 'skill_id' => $dcfSkillId, 'version' => 'latest']
+        ]
+    ],
+    tools: [
+        ['type' => 'code_execution_20250825', 'name' => 'code_execution']
+    ]
+);
+echo $message->content[0]->text;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+# Create custom DCF analysis Skill
+dcf_skill = client.beta.skills.create(
+  display_title: "DCF Analysis",
+  files: [
+    File.open("dcf_skill/SKILL.md", "rb")
+  ],
+  betas: ["skills-2025-10-02"]
+)
+
+# Use with Excel to create financial model
+response = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+  container: {
+    skills: [
+      { type: "anthropic", skill_id: "xlsx", version: "latest" },
+      { type: "custom", skill_id: dcf_skill.id, version: "latest" }
+    ]
+  },
+  messages: [
+    { role: "user", content: "Build a DCF valuation model for a SaaS company with the attached financials" }
+  ],
+  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+)
 ```
 </CodeGroup>
 
@@ -2249,6 +4409,257 @@ public class Program
     }
 }
 ```
+
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	// First request creates cache
+	response1, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas: []anthropic.AnthropicBeta{
+			"code-execution-2025-08-25",
+			anthropic.AnthropicBetaSkills2025_10_02,
+			anthropic.AnthropicBetaPromptCaching2024_07_31,
+		},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfContainers: &anthropic.BetaContainerParams{
+				Skills: []anthropic.BetaSkillParams{
+					{
+						Type:    anthropic.BetaSkillParamsTypeAnthropic,
+						SkillID: "xlsx",
+						Version: anthropic.String("latest"),
+					},
+				},
+			},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Analyze sales data")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response1)
+
+	// Adding/removing Skills breaks cache
+	response2, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas: []anthropic.AnthropicBeta{
+			"code-execution-2025-08-25",
+			anthropic.AnthropicBetaSkills2025_10_02,
+			anthropic.AnthropicBetaPromptCaching2024_07_31,
+		},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfContainers: &anthropic.BetaContainerParams{
+				Skills: []anthropic.BetaSkillParams{
+					{
+						Type:    anthropic.BetaSkillParamsTypeAnthropic,
+						SkillID: "xlsx",
+						Version: anthropic.String("latest"),
+					},
+					{
+						Type:    anthropic.BetaSkillParamsTypeAnthropic,
+						SkillID: "pptx",
+						Version: anthropic.String("latest"),
+					},
+				},
+			},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Create a presentation")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response2)
+}
+```
+
+```java Java hidelines={1..11,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaContainerParams;
+import com.anthropic.models.beta.messages.BetaSkillParams;
+import com.anthropic.models.beta.messages.BetaCodeExecutionTool20250825;
+import java.util.List;
+
+public class SkillsCaching {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        // First request creates cache
+        MessageCreateParams params1 = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(4096L)
+            .addBeta("code-execution-2025-08-25")
+            .addBeta("skills-2025-10-02")
+            .addBeta("prompt-caching-2024-07-31")
+            .container(BetaContainerParams.builder()
+                .skills(List.of(
+                    BetaSkillParams.builder()
+                        .type(BetaSkillParams.Type.ANTHROPIC)
+                        .skillId("xlsx")
+                        .version("latest")
+                        .build()
+                ))
+                .build())
+            .addUserMessage("Analyze sales data")
+            .addTool(BetaCodeExecutionTool20250825.builder().build())
+            .build();
+
+        BetaMessage response1 = client.beta().messages().create(params1);
+        System.out.println(response1);
+
+        // Adding/removing Skills breaks cache
+        MessageCreateParams params2 = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(4096L)
+            .addBeta("code-execution-2025-08-25")
+            .addBeta("skills-2025-10-02")
+            .addBeta("prompt-caching-2024-07-31")
+            .container(BetaContainerParams.builder()
+                .skills(List.of(
+                    BetaSkillParams.builder()
+                        .type(BetaSkillParams.Type.ANTHROPIC)
+                        .skillId("xlsx")
+                        .version("latest")
+                        .build(),
+                    BetaSkillParams.builder()
+                        .type(BetaSkillParams.Type.ANTHROPIC)
+                        .skillId("pptx")
+                        .version("latest")
+                        .build()
+                ))
+                .build())
+            .addUserMessage("Create a presentation")
+            .addTool(BetaCodeExecutionTool20250825.builder().build())
+            .build();
+
+        BetaMessage response2 = client.beta().messages().create(params2);
+        System.out.println(response2);
+    }
+}
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+// First request creates cache
+$response1 = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Analyze sales data']
+    ],
+    model: 'claude-opus-4-6',
+    betas: [
+        'code-execution-2025-08-25',
+        'skills-2025-10-02',
+        'prompt-caching-2024-07-31'
+    ],
+    container: [
+        'skills' => [
+            ['type' => 'anthropic', 'skill_id' => 'xlsx', 'version' => 'latest']
+        ]
+    ],
+    tools: [
+        ['type' => 'code_execution_20250825', 'name' => 'code_execution']
+    ]
+);
+echo $response1;
+
+// Adding/removing Skills breaks cache
+$response2 = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Create a presentation']
+    ],
+    model: 'claude-opus-4-6',
+    betas: [
+        'code-execution-2025-08-25',
+        'skills-2025-10-02',
+        'prompt-caching-2024-07-31'
+    ],
+    container: [
+        'skills' => [
+            ['type' => 'anthropic', 'skill_id' => 'xlsx', 'version' => 'latest'],
+            ['type' => 'anthropic', 'skill_id' => 'pptx', 'version' => 'latest']
+        ]
+    ],
+    tools: [
+        ['type' => 'code_execution_20250825', 'name' => 'code_execution']
+    ]
+);
+echo $response2;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+# First request creates cache
+response1 = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: [
+    "code-execution-2025-08-25",
+    "skills-2025-10-02",
+    "prompt-caching-2024-07-31"
+  ],
+  container: {
+    skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
+  },
+  messages: [{ role: "user", content: "Analyze sales data" }],
+  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+)
+puts response1
+
+# Adding/removing Skills breaks cache
+response2 = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  betas: [
+    "code-execution-2025-08-25",
+    "skills-2025-10-02",
+    "prompt-caching-2024-07-31"
+  ],
+  container: {
+    skills: [
+      { type: "anthropic", skill_id: "xlsx", version: "latest" },
+      { type: "anthropic", skill_id: "pptx", version: "latest" }
+    ]
+  },
+  messages: [{ role: "user", content: "Create a presentation" }],
+  tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+)
+puts response2
+```
 </CodeGroup>
 
 For best caching performance, keep your Skills list consistent across requests.
@@ -2289,7 +4700,7 @@ except anthropic.BadRequestError as e:
         raise
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 try {
   const response = await client.beta.messages.create({
     model: "claude-opus-4-6",
@@ -2317,7 +4728,7 @@ try {
 using System;
 using System.Threading.Tasks;
 using Anthropic;
-using Anthropic.Models.Messages;
+using Anthropic.Models.Beta.Messages;
 
 class Program
 {
@@ -2329,9 +4740,22 @@ class Program
         {
             var parameters = new MessageCreateParams
             {
-                Model = Model.ClaudeOpus4_6,
+                Model = "claude-opus-4-6",
                 MaxTokens = 4096,
-                Messages = [new() { Role = Role.User, Content = "Process data" }]
+                Betas = ["code-execution-2025-08-25", "skills-2025-10-02"],
+                Container = new BetaContainerParams
+                {
+                    Skills = [
+                        new BetaSkillParam
+                        {
+                            Type = "custom",
+                            SkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv",
+                            Version = "latest"
+                        }
+                    ]
+                },
+                Messages = [new() { Role = Role.User, Content = "Process data" }],
+                Tools = [new BetaToolParam { Type = "code_execution_20250825", Name = "code_execution" }]
             };
 
             var message = await client.Beta.Messages.Create(parameters);
@@ -2343,6 +4767,166 @@ class Program
         }
     }
 }
+```
+
+```go Go nocheck hidelines={1..14,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+	"strings"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	_, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 4096,
+		Betas:     []anthropic.AnthropicBeta{"code-execution-2025-08-25", anthropic.AnthropicBetaSkills2025_10_02},
+		Container: anthropic.BetaMessageNewParamsContainerUnion{
+			OfContainers: &anthropic.BetaContainerParams{
+				Skills: []anthropic.BetaSkillParams{
+					{
+						Type:    anthropic.BetaSkillParamsTypeCustom,
+						SkillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+						Version: anthropic.String("latest"),
+					},
+				},
+			},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Process data")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+		},
+	})
+
+	if err != nil {
+		if strings.Contains(err.Error(), "skill") {
+			fmt.Printf("Skill error: %v\n", err)
+		} else {
+			log.Fatal(err)
+		}
+	}
+}
+```
+
+```java Java nocheck hidelines={1..10,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaContainerParams;
+import com.anthropic.models.beta.messages.BetaSkillParams;
+import com.anthropic.models.beta.messages.BetaCodeExecutionTool20250825;
+
+public class SkillErrorHandling {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        try {
+            MessageCreateParams params = MessageCreateParams.builder()
+                .model("claude-opus-4-6")
+                .maxTokens(4096L)
+                .addBeta("code-execution-2025-08-25")
+                .addBeta("skills-2025-10-02")
+                .container(BetaContainerParams.builder()
+                    .addSkill(BetaSkillParams.builder()
+                        .type(BetaSkillParams.Type.CUSTOM)
+                        .skillId("skill_01AbCdEfGhIjKlMnOpQrStUv")
+                        .version("latest")
+                        .build())
+                    .build())
+                .addUserMessage("Process data")
+                .addTool(BetaCodeExecutionTool20250825.builder().build())
+                .build();
+
+            BetaMessage response = client.beta().messages().create(params);
+            System.out.println(response);
+        } catch (Exception e) {
+            if (e.getMessage().contains("skill")) {
+                System.err.println("Skill error: " + e.getMessage());
+            } else {
+                throw e;
+            }
+        }
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+try {
+    $message = $client->beta->messages->create(
+        maxTokens: 4096,
+        messages: [
+            ['role' => 'user', 'content' => 'Process data']
+        ],
+        model: 'claude-opus-4-6',
+        betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+        container: [
+            'skills' => [
+                [
+                    'type' => 'custom',
+                    'skill_id' => 'skill_01AbCdEfGhIjKlMnOpQrStUv',
+                    'version' => 'latest'
+                ]
+            ]
+        ],
+        tools: [
+            ['type' => 'code_execution_20250825', 'name' => 'code_execution']
+        ]
+    );
+    echo $message->content[0]->text;
+} catch (Exception $e) {
+    if (str_contains($e->getMessage(), 'skill')) {
+        echo "Skill error: " . $e->getMessage();
+    } else {
+        throw $e;
+    }
+}
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+begin
+  response = client.beta.messages.create(
+    model: "claude-opus-4-6",
+    max_tokens: 4096,
+    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+    container: {
+      skills: [
+        {
+          type: "custom",
+          skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
+          version: "latest"
+        }
+      ]
+    },
+    messages: [{ role: "user", content: "Process data" }],
+    tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+  )
+rescue Anthropic::Errors::BadRequestError => e
+  if e.message.include?("skill")
+    puts "Skill error: #{e.message}"
+  else
+    raise
+  end
+end
 ```
 </CodeGroup>
 

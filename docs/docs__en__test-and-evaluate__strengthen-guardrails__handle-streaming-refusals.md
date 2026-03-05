@@ -175,6 +175,163 @@ class Program
     }
 }
 ```
+
+```go Go nocheck hidelines={1..9,18..20,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+var messages []anthropic.MessageParam
+
+func resetConversation() {
+	messages = []anthropic.MessageParam{}
+	fmt.Println("Conversation reset due to refusal")
+}
+
+func main() {
+	client := anthropic.NewClient()
+
+	stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.Model("claude-sonnet-4-6"),
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello")),
+		},
+	})
+
+streamLoop:
+	for stream.Next() {
+		event := stream.Current()
+		switch eventVariant := event.AsAny().(type) {
+		case anthropic.MessageDeltaEvent:
+			if eventVariant.Delta.StopReason == "refusal" {
+				resetConversation()
+				break streamLoop
+			}
+		}
+	}
+
+	if err := stream.Err(); err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+```java Java hidelines={1..15,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.MessageParam;
+import com.anthropic.models.messages.Model;
+import com.anthropic.core.http.StreamResponse;
+import com.anthropic.models.messages.RawMessageStreamEvent;
+import com.anthropic.models.messages.StopReason;
+import java.util.ArrayList;
+import java.util.List;
+
+public class RefusalHandling {
+    private static List<MessageParam> messages = new ArrayList<>();
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_SONNET_4_6)
+            .maxTokens(1024L)
+            .addUserMessage("Hello")
+            .build();
+
+        try (StreamResponse<RawMessageStreamEvent> stream = client.messages().createStreaming(params)) {
+            stream.stream().forEach(event -> {
+                event.messageDelta().ifPresent(deltaEvent -> {
+                    deltaEvent.delta().stopReason().ifPresent(stopReason -> {
+                        if (stopReason.equals(StopReason.REFUSAL)) {
+                            resetConversation();
+                        }
+                    });
+                });
+            });
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+
+    private static void resetConversation() {
+        messages.clear();
+        System.out.println("Conversation reset due to content policy violation");
+    }
+}
+```
+
+```php PHP nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$messages = [];
+
+function resetConversation(&$messages) {
+    $messages = [];
+    echo "Conversation reset due to refusal\n";
+}
+
+try {
+    $stream = $client->messages->createStream(
+        maxTokens: 1024,
+        messages: [
+            ['role' => 'user', 'content' => 'Hello']
+        ],
+        model: 'claude-sonnet-4-6',
+    );
+
+    foreach ($stream as $event) {
+        if (isset($event->type) && $event->type === 'message_delta') {
+            if (isset($event->delta->stopReason) && $event->delta->stopReason === 'refusal') {
+                resetConversation($messages);
+                break;
+            }
+        }
+    }
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage() . "\n";
+}
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+messages = []
+
+def reset_conversation(messages)
+  messages.clear
+  puts "Conversation reset due to refusal"
+end
+
+begin
+  stream = client.messages.stream(
+    model: :"claude-sonnet-4-6",
+    max_tokens: 1024,
+    messages: [{ role: "user", content: "Hello" }]
+  )
+
+  stream.each do |event|
+    if event.type == :message_delta && event.delta.stop_reason == :refusal
+      reset_conversation(messages)
+      break
+    end
+  end
+rescue => e
+  puts "Error: #{e.message}"
+end
+```
 </CodeGroup>
 
 <Note>

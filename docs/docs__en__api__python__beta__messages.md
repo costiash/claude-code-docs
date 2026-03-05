@@ -2599,34 +2599,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]`
+  - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `claude-opus-4-6` - Most intelligent model for building agents and coding
-    - `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
-    - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+    - `claude-sonnet-4-6` - Best combination of speed and intelligence
+    - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+    - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
     - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-    - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
-    - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
-    - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+    - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+    - `claude-sonnet-4-5` - High-performance model for agents and coding
+    - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+    - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+    - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+    - `claude-opus-4-0` - Powerful model for complex tasks
+    - `claude-opus-4-20250514` - Powerful model for complex tasks
     - `claude-sonnet-4-0` - High-performance model with extended thinking
-    - `claude-4-sonnet-20250514` - High-performance model with extended thinking
-    - `claude-sonnet-4-5` - Our best model for real-world agents and coding
-    - `claude-sonnet-4-5-20250929` - Our best model for real-world agents and coding
-    - `claude-opus-4-0` - Our most capable model
-    - `claude-opus-4-20250514` - Our most capable model
-    - `claude-4-opus-20250514` - Our most capable model
-    - `claude-opus-4-1-20250805` - Our most capable model
-    - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+    - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+    - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
     - `"claude-opus-4-6"`
 
@@ -2634,87 +2627,59 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `"claude-sonnet-4-6"`
 
-      Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+      Best combination of speed and intelligence
 
-    - `"claude-opus-4-5-20251101"`
+    - `"claude-haiku-4-5"`
 
-      Premium model combining maximum intelligence with practical performance
+      Fastest model with near-frontier intelligence
+
+    - `"claude-haiku-4-5-20251001"`
+
+      Fastest model with near-frontier intelligence
 
     - `"claude-opus-4-5"`
 
       Premium model combining maximum intelligence with practical performance
 
-    - `"claude-3-7-sonnet-latest"`
+    - `"claude-opus-4-5-20251101"`
 
-      High-performance model with early extended thinking
+      Premium model combining maximum intelligence with practical performance
 
-    - `"claude-3-7-sonnet-20250219"`
+    - `"claude-sonnet-4-5"`
 
-      High-performance model with early extended thinking
+      High-performance model for agents and coding
 
-    - `"claude-3-5-haiku-latest"`
+    - `"claude-sonnet-4-5-20250929"`
 
-      Fastest and most compact model for near-instant responsiveness
+      High-performance model for agents and coding
 
-    - `"claude-3-5-haiku-20241022"`
+    - `"claude-opus-4-1"`
 
-      Our fastest model
+      Exceptional model for specialized complex tasks
 
-    - `"claude-haiku-4-5"`
+    - `"claude-opus-4-1-20250805"`
 
-      Hybrid model, capable of near-instant responses and extended thinking
+      Exceptional model for specialized complex tasks
 
-    - `"claude-haiku-4-5-20251001"`
+    - `"claude-opus-4-0"`
 
-      Hybrid model, capable of near-instant responses and extended thinking
+      Powerful model for complex tasks
 
-    - `"claude-sonnet-4-20250514"`
+    - `"claude-opus-4-20250514"`
 
-      High-performance model with extended thinking
+      Powerful model for complex tasks
 
     - `"claude-sonnet-4-0"`
 
       High-performance model with extended thinking
 
-    - `"claude-4-sonnet-20250514"`
+    - `"claude-sonnet-4-20250514"`
 
       High-performance model with extended thinking
 
-    - `"claude-sonnet-4-5"`
-
-      Our best model for real-world agents and coding
-
-    - `"claude-sonnet-4-5-20250929"`
-
-      Our best model for real-world agents and coding
-
-    - `"claude-opus-4-0"`
-
-      Our most capable model
-
-    - `"claude-opus-4-20250514"`
-
-      Our most capable model
-
-    - `"claude-4-opus-20250514"`
-
-      Our most capable model
-
-    - `"claude-opus-4-1-20250805"`
-
-      Our most capable model
-
-    - `"claude-3-opus-latest"`
-
-      Excels at writing and complex tasks
-
-    - `"claude-3-opus-20240229"`
-
-      Excels at writing and complex tasks
-
     - `"claude-3-haiku-20240307"`
 
-      Our previous most fast and cost-effective
+      Fast and cost-effective model
 
   - `str`
 
@@ -5603,34 +5568,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]`
+    - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `claude-opus-4-6` - Most intelligent model for building agents and coding
-      - `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
-      - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+      - `claude-sonnet-4-6` - Best combination of speed and intelligence
+      - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+      - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
       - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-      - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
-      - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
-      - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+      - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+      - `claude-sonnet-4-5` - High-performance model for agents and coding
+      - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+      - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+      - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+      - `claude-opus-4-0` - Powerful model for complex tasks
+      - `claude-opus-4-20250514` - Powerful model for complex tasks
       - `claude-sonnet-4-0` - High-performance model with extended thinking
-      - `claude-4-sonnet-20250514` - High-performance model with extended thinking
-      - `claude-sonnet-4-5` - Our best model for real-world agents and coding
-      - `claude-sonnet-4-5-20250929` - Our best model for real-world agents and coding
-      - `claude-opus-4-0` - Our most capable model
-      - `claude-opus-4-20250514` - Our most capable model
-      - `claude-4-opus-20250514` - Our most capable model
-      - `claude-opus-4-1-20250805` - Our most capable model
-      - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+      - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+      - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
       - `"claude-opus-4-6"`
 
@@ -5638,87 +5596,59 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"claude-sonnet-4-6"`
 
-        Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+        Best combination of speed and intelligence
 
-      - `"claude-opus-4-5-20251101"`
+      - `"claude-haiku-4-5"`
 
-        Premium model combining maximum intelligence with practical performance
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
 
       - `"claude-opus-4-5"`
 
         Premium model combining maximum intelligence with practical performance
 
-      - `"claude-3-7-sonnet-latest"`
+      - `"claude-opus-4-5-20251101"`
 
-        High-performance model with early extended thinking
+        Premium model combining maximum intelligence with practical performance
 
-      - `"claude-3-7-sonnet-20250219"`
+      - `"claude-sonnet-4-5"`
 
-        High-performance model with early extended thinking
+        High-performance model for agents and coding
 
-      - `"claude-3-5-haiku-latest"`
+      - `"claude-sonnet-4-5-20250929"`
 
-        Fastest and most compact model for near-instant responsiveness
+        High-performance model for agents and coding
 
-      - `"claude-3-5-haiku-20241022"`
+      - `"claude-opus-4-1"`
 
-        Our fastest model
+        Exceptional model for specialized complex tasks
 
-      - `"claude-haiku-4-5"`
+      - `"claude-opus-4-1-20250805"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Exceptional model for specialized complex tasks
 
-      - `"claude-haiku-4-5-20251001"`
+      - `"claude-opus-4-0"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Powerful model for complex tasks
 
-      - `"claude-sonnet-4-20250514"`
+      - `"claude-opus-4-20250514"`
 
-        High-performance model with extended thinking
+        Powerful model for complex tasks
 
       - `"claude-sonnet-4-0"`
 
         High-performance model with extended thinking
 
-      - `"claude-4-sonnet-20250514"`
+      - `"claude-sonnet-4-20250514"`
 
         High-performance model with extended thinking
 
-      - `"claude-sonnet-4-5"`
-
-        Our best model for real-world agents and coding
-
-      - `"claude-sonnet-4-5-20250929"`
-
-        Our best model for real-world agents and coding
-
-      - `"claude-opus-4-0"`
-
-        Our most capable model
-
-      - `"claude-opus-4-20250514"`
-
-        Our most capable model
-
-      - `"claude-4-opus-20250514"`
-
-        Our most capable model
-
-      - `"claude-opus-4-1-20250805"`
-
-        Our most capable model
-
-      - `"claude-3-opus-latest"`
-
-        Excels at writing and complex tasks
-
-      - `"claude-3-opus-20240229"`
-
-        Excels at writing and complex tasks
-
       - `"claude-3-haiku-20240307"`
 
-        Our previous most fast and cost-effective
+        Fast and cost-effective model
 
     - `str`
 
@@ -5944,15 +5874,15 @@ from anthropic import Anthropic
 client = Anthropic(
     api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
-beta_message = client.beta.messages.create(
+for message in client.beta.messages.create(
     max_tokens=1024,
     messages=[{
         "content": "Hello, world",
         "role": "user",
     }],
     model="claude-opus-4-6",
-)
-print(beta_message.id)
+):
+  print(message)
 ```
 
 ## Count Tokens
@@ -8546,34 +8476,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]`
+  - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `claude-opus-4-6` - Most intelligent model for building agents and coding
-    - `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
-    - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+    - `claude-sonnet-4-6` - Best combination of speed and intelligence
+    - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+    - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
     - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-    - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
-    - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
-    - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+    - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+    - `claude-sonnet-4-5` - High-performance model for agents and coding
+    - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+    - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+    - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+    - `claude-opus-4-0` - Powerful model for complex tasks
+    - `claude-opus-4-20250514` - Powerful model for complex tasks
     - `claude-sonnet-4-0` - High-performance model with extended thinking
-    - `claude-4-sonnet-20250514` - High-performance model with extended thinking
-    - `claude-sonnet-4-5` - Our best model for real-world agents and coding
-    - `claude-sonnet-4-5-20250929` - Our best model for real-world agents and coding
-    - `claude-opus-4-0` - Our most capable model
-    - `claude-opus-4-20250514` - Our most capable model
-    - `claude-4-opus-20250514` - Our most capable model
-    - `claude-opus-4-1-20250805` - Our most capable model
-    - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+    - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+    - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
     - `"claude-opus-4-6"`
 
@@ -8581,87 +8504,59 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `"claude-sonnet-4-6"`
 
-      Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+      Best combination of speed and intelligence
 
-    - `"claude-opus-4-5-20251101"`
+    - `"claude-haiku-4-5"`
 
-      Premium model combining maximum intelligence with practical performance
+      Fastest model with near-frontier intelligence
+
+    - `"claude-haiku-4-5-20251001"`
+
+      Fastest model with near-frontier intelligence
 
     - `"claude-opus-4-5"`
 
       Premium model combining maximum intelligence with practical performance
 
-    - `"claude-3-7-sonnet-latest"`
+    - `"claude-opus-4-5-20251101"`
 
-      High-performance model with early extended thinking
+      Premium model combining maximum intelligence with practical performance
 
-    - `"claude-3-7-sonnet-20250219"`
+    - `"claude-sonnet-4-5"`
 
-      High-performance model with early extended thinking
+      High-performance model for agents and coding
 
-    - `"claude-3-5-haiku-latest"`
+    - `"claude-sonnet-4-5-20250929"`
 
-      Fastest and most compact model for near-instant responsiveness
+      High-performance model for agents and coding
 
-    - `"claude-3-5-haiku-20241022"`
+    - `"claude-opus-4-1"`
 
-      Our fastest model
+      Exceptional model for specialized complex tasks
 
-    - `"claude-haiku-4-5"`
+    - `"claude-opus-4-1-20250805"`
 
-      Hybrid model, capable of near-instant responses and extended thinking
+      Exceptional model for specialized complex tasks
 
-    - `"claude-haiku-4-5-20251001"`
+    - `"claude-opus-4-0"`
 
-      Hybrid model, capable of near-instant responses and extended thinking
+      Powerful model for complex tasks
 
-    - `"claude-sonnet-4-20250514"`
+    - `"claude-opus-4-20250514"`
 
-      High-performance model with extended thinking
+      Powerful model for complex tasks
 
     - `"claude-sonnet-4-0"`
 
       High-performance model with extended thinking
 
-    - `"claude-4-sonnet-20250514"`
+    - `"claude-sonnet-4-20250514"`
 
       High-performance model with extended thinking
 
-    - `"claude-sonnet-4-5"`
-
-      Our best model for real-world agents and coding
-
-    - `"claude-sonnet-4-5-20250929"`
-
-      Our best model for real-world agents and coding
-
-    - `"claude-opus-4-0"`
-
-      Our most capable model
-
-    - `"claude-opus-4-20250514"`
-
-      Our most capable model
-
-    - `"claude-4-opus-20250514"`
-
-      Our most capable model
-
-    - `"claude-opus-4-1-20250805"`
-
-      Our most capable model
-
-    - `"claude-3-opus-latest"`
-
-      Excels at writing and complex tasks
-
-    - `"claude-3-opus-20240229"`
-
-      Excels at writing and complex tasks
-
     - `"claude-3-haiku-20240307"`
 
-      Our previous most fast and cost-effective
+      Fast and cost-effective model
 
   - `str`
 
@@ -17749,34 +17644,27 @@ print(beta_message_tokens_count.context_management)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]`
+    - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `claude-opus-4-6` - Most intelligent model for building agents and coding
-      - `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
-      - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+      - `claude-sonnet-4-6` - Best combination of speed and intelligence
+      - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+      - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
       - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-      - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
-      - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
-      - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+      - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+      - `claude-sonnet-4-5` - High-performance model for agents and coding
+      - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+      - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+      - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+      - `claude-opus-4-0` - Powerful model for complex tasks
+      - `claude-opus-4-20250514` - Powerful model for complex tasks
       - `claude-sonnet-4-0` - High-performance model with extended thinking
-      - `claude-4-sonnet-20250514` - High-performance model with extended thinking
-      - `claude-sonnet-4-5` - Our best model for real-world agents and coding
-      - `claude-sonnet-4-5-20250929` - Our best model for real-world agents and coding
-      - `claude-opus-4-0` - Our most capable model
-      - `claude-opus-4-20250514` - Our most capable model
-      - `claude-4-opus-20250514` - Our most capable model
-      - `claude-opus-4-1-20250805` - Our most capable model
-      - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+      - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+      - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
       - `"claude-opus-4-6"`
 
@@ -17784,87 +17672,59 @@ print(beta_message_tokens_count.context_management)
 
       - `"claude-sonnet-4-6"`
 
-        Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+        Best combination of speed and intelligence
 
-      - `"claude-opus-4-5-20251101"`
+      - `"claude-haiku-4-5"`
 
-        Premium model combining maximum intelligence with practical performance
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
 
       - `"claude-opus-4-5"`
 
         Premium model combining maximum intelligence with practical performance
 
-      - `"claude-3-7-sonnet-latest"`
+      - `"claude-opus-4-5-20251101"`
 
-        High-performance model with early extended thinking
+        Premium model combining maximum intelligence with practical performance
 
-      - `"claude-3-7-sonnet-20250219"`
+      - `"claude-sonnet-4-5"`
 
-        High-performance model with early extended thinking
+        High-performance model for agents and coding
 
-      - `"claude-3-5-haiku-latest"`
+      - `"claude-sonnet-4-5-20250929"`
 
-        Fastest and most compact model for near-instant responsiveness
+        High-performance model for agents and coding
 
-      - `"claude-3-5-haiku-20241022"`
+      - `"claude-opus-4-1"`
 
-        Our fastest model
+        Exceptional model for specialized complex tasks
 
-      - `"claude-haiku-4-5"`
+      - `"claude-opus-4-1-20250805"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Exceptional model for specialized complex tasks
 
-      - `"claude-haiku-4-5-20251001"`
+      - `"claude-opus-4-0"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Powerful model for complex tasks
 
-      - `"claude-sonnet-4-20250514"`
+      - `"claude-opus-4-20250514"`
 
-        High-performance model with extended thinking
+        Powerful model for complex tasks
 
       - `"claude-sonnet-4-0"`
 
         High-performance model with extended thinking
 
-      - `"claude-4-sonnet-20250514"`
+      - `"claude-sonnet-4-20250514"`
 
         High-performance model with extended thinking
 
-      - `"claude-sonnet-4-5"`
-
-        Our best model for real-world agents and coding
-
-      - `"claude-sonnet-4-5-20250929"`
-
-        Our best model for real-world agents and coding
-
-      - `"claude-opus-4-0"`
-
-        Our most capable model
-
-      - `"claude-opus-4-20250514"`
-
-        Our most capable model
-
-      - `"claude-4-opus-20250514"`
-
-        Our most capable model
-
-      - `"claude-opus-4-1-20250805"`
-
-        Our most capable model
-
-      - `"claude-3-opus-latest"`
-
-        Excels at writing and complex tasks
-
-      - `"claude-3-opus-20240229"`
-
-        Excels at writing and complex tasks
-
       - `"claude-3-haiku-20240307"`
 
-        Our previous most fast and cost-effective
+        Fast and cost-effective model
 
     - `str`
 
@@ -23096,34 +22956,27 @@ print(beta_message_tokens_count.context_management)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]`
+      - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `claude-opus-4-6` - Most intelligent model for building agents and coding
-        - `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
-        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+        - `claude-sonnet-4-6` - Best combination of speed and intelligence
+        - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+        - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
         - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-        - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
-        - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
-        - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+        - `claude-sonnet-4-5` - High-performance model for agents and coding
+        - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+        - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-0` - Powerful model for complex tasks
+        - `claude-opus-4-20250514` - Powerful model for complex tasks
         - `claude-sonnet-4-0` - High-performance model with extended thinking
-        - `claude-4-sonnet-20250514` - High-performance model with extended thinking
-        - `claude-sonnet-4-5` - Our best model for real-world agents and coding
-        - `claude-sonnet-4-5-20250929` - Our best model for real-world agents and coding
-        - `claude-opus-4-0` - Our most capable model
-        - `claude-opus-4-20250514` - Our most capable model
-        - `claude-4-opus-20250514` - Our most capable model
-        - `claude-opus-4-1-20250805` - Our most capable model
-        - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+        - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+        - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
         - `"claude-opus-4-6"`
 
@@ -23131,87 +22984,59 @@ print(beta_message_tokens_count.context_management)
 
         - `"claude-sonnet-4-6"`
 
-          Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+          Best combination of speed and intelligence
 
-        - `"claude-opus-4-5-20251101"`
+        - `"claude-haiku-4-5"`
 
-          Premium model combining maximum intelligence with practical performance
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
 
         - `"claude-opus-4-5"`
 
           Premium model combining maximum intelligence with practical performance
 
-        - `"claude-3-7-sonnet-latest"`
+        - `"claude-opus-4-5-20251101"`
 
-          High-performance model with early extended thinking
+          Premium model combining maximum intelligence with practical performance
 
-        - `"claude-3-7-sonnet-20250219"`
+        - `"claude-sonnet-4-5"`
 
-          High-performance model with early extended thinking
+          High-performance model for agents and coding
 
-        - `"claude-3-5-haiku-latest"`
+        - `"claude-sonnet-4-5-20250929"`
 
-          Fastest and most compact model for near-instant responsiveness
+          High-performance model for agents and coding
 
-        - `"claude-3-5-haiku-20241022"`
+        - `"claude-opus-4-1"`
 
-          Our fastest model
+          Exceptional model for specialized complex tasks
 
-        - `"claude-haiku-4-5"`
+        - `"claude-opus-4-1-20250805"`
 
-          Hybrid model, capable of near-instant responses and extended thinking
+          Exceptional model for specialized complex tasks
 
-        - `"claude-haiku-4-5-20251001"`
+        - `"claude-opus-4-0"`
 
-          Hybrid model, capable of near-instant responses and extended thinking
+          Powerful model for complex tasks
 
-        - `"claude-sonnet-4-20250514"`
+        - `"claude-opus-4-20250514"`
 
-          High-performance model with extended thinking
+          Powerful model for complex tasks
 
         - `"claude-sonnet-4-0"`
 
           High-performance model with extended thinking
 
-        - `"claude-4-sonnet-20250514"`
+        - `"claude-sonnet-4-20250514"`
 
           High-performance model with extended thinking
 
-        - `"claude-sonnet-4-5"`
-
-          Our best model for real-world agents and coding
-
-        - `"claude-sonnet-4-5-20250929"`
-
-          Our best model for real-world agents and coding
-
-        - `"claude-opus-4-0"`
-
-          Our most capable model
-
-        - `"claude-opus-4-20250514"`
-
-          Our most capable model
-
-        - `"claude-4-opus-20250514"`
-
-          Our most capable model
-
-        - `"claude-opus-4-1-20250805"`
-
-          Our most capable model
-
-        - `"claude-3-opus-latest"`
-
-          Excels at writing and complex tasks
-
-        - `"claude-3-opus-20240229"`
-
-          Excels at writing and complex tasks
-
         - `"claude-3-haiku-20240307"`
 
-          Our previous most fast and cost-effective
+          Fast and cost-effective model
 
       - `str`
 
@@ -24367,34 +24192,27 @@ print(beta_message_tokens_count.context_management)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]`
+        - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `claude-opus-4-6` - Most intelligent model for building agents and coding
-          - `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
-          - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+          - `claude-sonnet-4-6` - Best combination of speed and intelligence
+          - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+          - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
           - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-          - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
-          - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
-          - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+          - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+          - `claude-sonnet-4-5` - High-performance model for agents and coding
+          - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+          - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+          - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+          - `claude-opus-4-0` - Powerful model for complex tasks
+          - `claude-opus-4-20250514` - Powerful model for complex tasks
           - `claude-sonnet-4-0` - High-performance model with extended thinking
-          - `claude-4-sonnet-20250514` - High-performance model with extended thinking
-          - `claude-sonnet-4-5` - Our best model for real-world agents and coding
-          - `claude-sonnet-4-5-20250929` - Our best model for real-world agents and coding
-          - `claude-opus-4-0` - Our most capable model
-          - `claude-opus-4-20250514` - Our most capable model
-          - `claude-4-opus-20250514` - Our most capable model
-          - `claude-opus-4-1-20250805` - Our most capable model
-          - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+          - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+          - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           - `"claude-opus-4-6"`
 
@@ -24402,87 +24220,59 @@ print(beta_message_tokens_count.context_management)
 
           - `"claude-sonnet-4-6"`
 
-            Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+            Best combination of speed and intelligence
 
-          - `"claude-opus-4-5-20251101"`
+          - `"claude-haiku-4-5"`
 
-            Premium model combining maximum intelligence with practical performance
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
 
           - `"claude-opus-4-5"`
 
             Premium model combining maximum intelligence with practical performance
 
-          - `"claude-3-7-sonnet-latest"`
+          - `"claude-opus-4-5-20251101"`
 
-            High-performance model with early extended thinking
+            Premium model combining maximum intelligence with practical performance
 
-          - `"claude-3-7-sonnet-20250219"`
+          - `"claude-sonnet-4-5"`
 
-            High-performance model with early extended thinking
+            High-performance model for agents and coding
 
-          - `"claude-3-5-haiku-latest"`
+          - `"claude-sonnet-4-5-20250929"`
 
-            Fastest and most compact model for near-instant responsiveness
+            High-performance model for agents and coding
 
-          - `"claude-3-5-haiku-20241022"`
+          - `"claude-opus-4-1"`
 
-            Our fastest model
+            Exceptional model for specialized complex tasks
 
-          - `"claude-haiku-4-5"`
+          - `"claude-opus-4-1-20250805"`
 
-            Hybrid model, capable of near-instant responses and extended thinking
+            Exceptional model for specialized complex tasks
 
-          - `"claude-haiku-4-5-20251001"`
+          - `"claude-opus-4-0"`
 
-            Hybrid model, capable of near-instant responses and extended thinking
+            Powerful model for complex tasks
 
-          - `"claude-sonnet-4-20250514"`
+          - `"claude-opus-4-20250514"`
 
-            High-performance model with extended thinking
+            Powerful model for complex tasks
 
           - `"claude-sonnet-4-0"`
 
             High-performance model with extended thinking
 
-          - `"claude-4-sonnet-20250514"`
+          - `"claude-sonnet-4-20250514"`
 
             High-performance model with extended thinking
 
-          - `"claude-sonnet-4-5"`
-
-            Our best model for real-world agents and coding
-
-          - `"claude-sonnet-4-5-20250929"`
-
-            Our best model for real-world agents and coding
-
-          - `"claude-opus-4-0"`
-
-            Our most capable model
-
-          - `"claude-opus-4-20250514"`
-
-            Our most capable model
-
-          - `"claude-4-opus-20250514"`
-
-            Our most capable model
-
-          - `"claude-opus-4-1-20250805"`
-
-            Our most capable model
-
-          - `"claude-3-opus-latest"`
-
-            Excels at writing and complex tasks
-
-          - `"claude-3-opus-20240229"`
-
-            Excels at writing and complex tasks
-
           - `"claude-3-haiku-20240307"`
 
-            Our previous most fast and cost-effective
+            Fast and cost-effective model
 
         - `str`
 
@@ -35288,34 +35078,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]`
+      - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `claude-opus-4-6` - Most intelligent model for building agents and coding
-        - `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
-        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+        - `claude-sonnet-4-6` - Best combination of speed and intelligence
+        - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+        - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
         - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-        - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
-        - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
-        - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+        - `claude-sonnet-4-5` - High-performance model for agents and coding
+        - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+        - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-0` - Powerful model for complex tasks
+        - `claude-opus-4-20250514` - Powerful model for complex tasks
         - `claude-sonnet-4-0` - High-performance model with extended thinking
-        - `claude-4-sonnet-20250514` - High-performance model with extended thinking
-        - `claude-sonnet-4-5` - Our best model for real-world agents and coding
-        - `claude-sonnet-4-5-20250929` - Our best model for real-world agents and coding
-        - `claude-opus-4-0` - Our most capable model
-        - `claude-opus-4-20250514` - Our most capable model
-        - `claude-4-opus-20250514` - Our most capable model
-        - `claude-opus-4-1-20250805` - Our most capable model
-        - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+        - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+        - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
         - `"claude-opus-4-6"`
 
@@ -35323,87 +35106,59 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `"claude-sonnet-4-6"`
 
-          Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+          Best combination of speed and intelligence
 
-        - `"claude-opus-4-5-20251101"`
+        - `"claude-haiku-4-5"`
 
-          Premium model combining maximum intelligence with practical performance
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
 
         - `"claude-opus-4-5"`
 
           Premium model combining maximum intelligence with practical performance
 
-        - `"claude-3-7-sonnet-latest"`
+        - `"claude-opus-4-5-20251101"`
 
-          High-performance model with early extended thinking
+          Premium model combining maximum intelligence with practical performance
 
-        - `"claude-3-7-sonnet-20250219"`
+        - `"claude-sonnet-4-5"`
 
-          High-performance model with early extended thinking
+          High-performance model for agents and coding
 
-        - `"claude-3-5-haiku-latest"`
+        - `"claude-sonnet-4-5-20250929"`
 
-          Fastest and most compact model for near-instant responsiveness
+          High-performance model for agents and coding
 
-        - `"claude-3-5-haiku-20241022"`
+        - `"claude-opus-4-1"`
 
-          Our fastest model
+          Exceptional model for specialized complex tasks
 
-        - `"claude-haiku-4-5"`
+        - `"claude-opus-4-1-20250805"`
 
-          Hybrid model, capable of near-instant responses and extended thinking
+          Exceptional model for specialized complex tasks
 
-        - `"claude-haiku-4-5-20251001"`
+        - `"claude-opus-4-0"`
 
-          Hybrid model, capable of near-instant responses and extended thinking
+          Powerful model for complex tasks
 
-        - `"claude-sonnet-4-20250514"`
+        - `"claude-opus-4-20250514"`
 
-          High-performance model with extended thinking
+          Powerful model for complex tasks
 
         - `"claude-sonnet-4-0"`
 
           High-performance model with extended thinking
 
-        - `"claude-4-sonnet-20250514"`
+        - `"claude-sonnet-4-20250514"`
 
           High-performance model with extended thinking
 
-        - `"claude-sonnet-4-5"`
-
-          Our best model for real-world agents and coding
-
-        - `"claude-sonnet-4-5-20250929"`
-
-          Our best model for real-world agents and coding
-
-        - `"claude-opus-4-0"`
-
-          Our most capable model
-
-        - `"claude-opus-4-20250514"`
-
-          Our most capable model
-
-        - `"claude-4-opus-20250514"`
-
-          Our most capable model
-
-        - `"claude-opus-4-1-20250805"`
-
-          Our most capable model
-
-        - `"claude-3-opus-latest"`
-
-          Excels at writing and complex tasks
-
-        - `"claude-3-opus-20240229"`
-
-          Excels at writing and complex tasks
-
         - `"claude-3-haiku-20240307"`
 
-          Our previous most fast and cost-effective
+          Fast and cost-effective model
 
       - `str`
 
@@ -39104,34 +38859,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]`
+          - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `claude-opus-4-6` - Most intelligent model for building agents and coding
-            - `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
-            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+            - `claude-sonnet-4-6` - Best combination of speed and intelligence
+            - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+            - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
             - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-            - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
-            - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
-            - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+            - `claude-sonnet-4-5` - High-performance model for agents and coding
+            - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+            - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-0` - Powerful model for complex tasks
+            - `claude-opus-4-20250514` - Powerful model for complex tasks
             - `claude-sonnet-4-0` - High-performance model with extended thinking
-            - `claude-4-sonnet-20250514` - High-performance model with extended thinking
-            - `claude-sonnet-4-5` - Our best model for real-world agents and coding
-            - `claude-sonnet-4-5-20250929` - Our best model for real-world agents and coding
-            - `claude-opus-4-0` - Our most capable model
-            - `claude-opus-4-20250514` - Our most capable model
-            - `claude-4-opus-20250514` - Our most capable model
-            - `claude-opus-4-1-20250805` - Our most capable model
-            - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+            - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+            - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             - `"claude-opus-4-6"`
 
@@ -39139,87 +38887,59 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"claude-sonnet-4-6"`
 
-              Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+              Best combination of speed and intelligence
 
-            - `"claude-opus-4-5-20251101"`
+            - `"claude-haiku-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
 
             - `"claude-opus-4-5"`
 
               Premium model combining maximum intelligence with practical performance
 
-            - `"claude-3-7-sonnet-latest"`
+            - `"claude-opus-4-5-20251101"`
 
-              High-performance model with early extended thinking
+              Premium model combining maximum intelligence with practical performance
 
-            - `"claude-3-7-sonnet-20250219"`
+            - `"claude-sonnet-4-5"`
 
-              High-performance model with early extended thinking
+              High-performance model for agents and coding
 
-            - `"claude-3-5-haiku-latest"`
+            - `"claude-sonnet-4-5-20250929"`
 
-              Fastest and most compact model for near-instant responsiveness
+              High-performance model for agents and coding
 
-            - `"claude-3-5-haiku-20241022"`
+            - `"claude-opus-4-1"`
 
-              Our fastest model
+              Exceptional model for specialized complex tasks
 
-            - `"claude-haiku-4-5"`
+            - `"claude-opus-4-1-20250805"`
 
-              Hybrid model, capable of near-instant responses and extended thinking
+              Exceptional model for specialized complex tasks
 
-            - `"claude-haiku-4-5-20251001"`
+            - `"claude-opus-4-0"`
 
-              Hybrid model, capable of near-instant responses and extended thinking
+              Powerful model for complex tasks
 
-            - `"claude-sonnet-4-20250514"`
+            - `"claude-opus-4-20250514"`
 
-              High-performance model with extended thinking
+              Powerful model for complex tasks
 
             - `"claude-sonnet-4-0"`
 
               High-performance model with extended thinking
 
-            - `"claude-4-sonnet-20250514"`
+            - `"claude-sonnet-4-20250514"`
 
               High-performance model with extended thinking
 
-            - `"claude-sonnet-4-5"`
-
-              Our best model for real-world agents and coding
-
-            - `"claude-sonnet-4-5-20250929"`
-
-              Our best model for real-world agents and coding
-
-            - `"claude-opus-4-0"`
-
-              Our most capable model
-
-            - `"claude-opus-4-20250514"`
-
-              Our most capable model
-
-            - `"claude-4-opus-20250514"`
-
-              Our most capable model
-
-            - `"claude-opus-4-1-20250805"`
-
-              Our most capable model
-
-            - `"claude-3-opus-latest"`
-
-              Excels at writing and complex tasks
-
-            - `"claude-3-opus-20240229"`
-
-              Excels at writing and complex tasks
-
             - `"claude-3-haiku-20240307"`
 
-              Our previous most fast and cost-effective
+              Fast and cost-effective model
 
           - `str`
 
@@ -39549,10 +39269,10 @@ from anthropic import Anthropic
 client = Anthropic(
     api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
-beta_message_batch_individual_response = client.beta.messages.batches.results(
+for batch in client.beta.messages.batches.results(
     message_batch_id="message_batch_id",
-)
-print(beta_message_batch_individual_response.custom_id)
+):
+  print(batch)
 ```
 
 ## Domain Types
@@ -40710,34 +40430,27 @@ print(beta_message_batch_individual_response.custom_id)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]`
+          - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `claude-opus-4-6` - Most intelligent model for building agents and coding
-            - `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
-            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+            - `claude-sonnet-4-6` - Best combination of speed and intelligence
+            - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+            - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
             - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-            - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
-            - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
-            - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+            - `claude-sonnet-4-5` - High-performance model for agents and coding
+            - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+            - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-0` - Powerful model for complex tasks
+            - `claude-opus-4-20250514` - Powerful model for complex tasks
             - `claude-sonnet-4-0` - High-performance model with extended thinking
-            - `claude-4-sonnet-20250514` - High-performance model with extended thinking
-            - `claude-sonnet-4-5` - Our best model for real-world agents and coding
-            - `claude-sonnet-4-5-20250929` - Our best model for real-world agents and coding
-            - `claude-opus-4-0` - Our most capable model
-            - `claude-opus-4-20250514` - Our most capable model
-            - `claude-4-opus-20250514` - Our most capable model
-            - `claude-opus-4-1-20250805` - Our most capable model
-            - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+            - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+            - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             - `"claude-opus-4-6"`
 
@@ -40745,87 +40458,59 @@ print(beta_message_batch_individual_response.custom_id)
 
             - `"claude-sonnet-4-6"`
 
-              Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+              Best combination of speed and intelligence
 
-            - `"claude-opus-4-5-20251101"`
+            - `"claude-haiku-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
 
             - `"claude-opus-4-5"`
 
               Premium model combining maximum intelligence with practical performance
 
-            - `"claude-3-7-sonnet-latest"`
+            - `"claude-opus-4-5-20251101"`
 
-              High-performance model with early extended thinking
+              Premium model combining maximum intelligence with practical performance
 
-            - `"claude-3-7-sonnet-20250219"`
+            - `"claude-sonnet-4-5"`
 
-              High-performance model with early extended thinking
+              High-performance model for agents and coding
 
-            - `"claude-3-5-haiku-latest"`
+            - `"claude-sonnet-4-5-20250929"`
 
-              Fastest and most compact model for near-instant responsiveness
+              High-performance model for agents and coding
 
-            - `"claude-3-5-haiku-20241022"`
+            - `"claude-opus-4-1"`
 
-              Our fastest model
+              Exceptional model for specialized complex tasks
 
-            - `"claude-haiku-4-5"`
+            - `"claude-opus-4-1-20250805"`
 
-              Hybrid model, capable of near-instant responses and extended thinking
+              Exceptional model for specialized complex tasks
 
-            - `"claude-haiku-4-5-20251001"`
+            - `"claude-opus-4-0"`
 
-              Hybrid model, capable of near-instant responses and extended thinking
+              Powerful model for complex tasks
 
-            - `"claude-sonnet-4-20250514"`
+            - `"claude-opus-4-20250514"`
 
-              High-performance model with extended thinking
+              Powerful model for complex tasks
 
             - `"claude-sonnet-4-0"`
 
               High-performance model with extended thinking
 
-            - `"claude-4-sonnet-20250514"`
+            - `"claude-sonnet-4-20250514"`
 
               High-performance model with extended thinking
 
-            - `"claude-sonnet-4-5"`
-
-              Our best model for real-world agents and coding
-
-            - `"claude-sonnet-4-5-20250929"`
-
-              Our best model for real-world agents and coding
-
-            - `"claude-opus-4-0"`
-
-              Our most capable model
-
-            - `"claude-opus-4-20250514"`
-
-              Our most capable model
-
-            - `"claude-4-opus-20250514"`
-
-              Our most capable model
-
-            - `"claude-opus-4-1-20250805"`
-
-              Our most capable model
-
-            - `"claude-3-opus-latest"`
-
-              Excels at writing and complex tasks
-
-            - `"claude-3-opus-20240229"`
-
-              Excels at writing and complex tasks
-
             - `"claude-3-haiku-20240307"`
 
-              Our previous most fast and cost-effective
+              Fast and cost-effective model
 
           - `str`
 
@@ -42109,34 +41794,27 @@ print(beta_message_batch_individual_response.custom_id)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]`
+        - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `claude-opus-4-6` - Most intelligent model for building agents and coding
-          - `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
-          - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+          - `claude-sonnet-4-6` - Best combination of speed and intelligence
+          - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+          - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
           - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-          - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
-          - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
-          - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+          - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+          - `claude-sonnet-4-5` - High-performance model for agents and coding
+          - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+          - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+          - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+          - `claude-opus-4-0` - Powerful model for complex tasks
+          - `claude-opus-4-20250514` - Powerful model for complex tasks
           - `claude-sonnet-4-0` - High-performance model with extended thinking
-          - `claude-4-sonnet-20250514` - High-performance model with extended thinking
-          - `claude-sonnet-4-5` - Our best model for real-world agents and coding
-          - `claude-sonnet-4-5-20250929` - Our best model for real-world agents and coding
-          - `claude-opus-4-0` - Our most capable model
-          - `claude-opus-4-20250514` - Our most capable model
-          - `claude-4-opus-20250514` - Our most capable model
-          - `claude-opus-4-1-20250805` - Our most capable model
-          - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+          - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+          - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           - `"claude-opus-4-6"`
 
@@ -42144,87 +41822,59 @@ print(beta_message_batch_individual_response.custom_id)
 
           - `"claude-sonnet-4-6"`
 
-            Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+            Best combination of speed and intelligence
 
-          - `"claude-opus-4-5-20251101"`
+          - `"claude-haiku-4-5"`
 
-            Premium model combining maximum intelligence with practical performance
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
 
           - `"claude-opus-4-5"`
 
             Premium model combining maximum intelligence with practical performance
 
-          - `"claude-3-7-sonnet-latest"`
+          - `"claude-opus-4-5-20251101"`
 
-            High-performance model with early extended thinking
+            Premium model combining maximum intelligence with practical performance
 
-          - `"claude-3-7-sonnet-20250219"`
+          - `"claude-sonnet-4-5"`
 
-            High-performance model with early extended thinking
+            High-performance model for agents and coding
 
-          - `"claude-3-5-haiku-latest"`
+          - `"claude-sonnet-4-5-20250929"`
 
-            Fastest and most compact model for near-instant responsiveness
+            High-performance model for agents and coding
 
-          - `"claude-3-5-haiku-20241022"`
+          - `"claude-opus-4-1"`
 
-            Our fastest model
+            Exceptional model for specialized complex tasks
 
-          - `"claude-haiku-4-5"`
+          - `"claude-opus-4-1-20250805"`
 
-            Hybrid model, capable of near-instant responses and extended thinking
+            Exceptional model for specialized complex tasks
 
-          - `"claude-haiku-4-5-20251001"`
+          - `"claude-opus-4-0"`
 
-            Hybrid model, capable of near-instant responses and extended thinking
+            Powerful model for complex tasks
 
-          - `"claude-sonnet-4-20250514"`
+          - `"claude-opus-4-20250514"`
 
-            High-performance model with extended thinking
+            Powerful model for complex tasks
 
           - `"claude-sonnet-4-0"`
 
             High-performance model with extended thinking
 
-          - `"claude-4-sonnet-20250514"`
+          - `"claude-sonnet-4-20250514"`
 
             High-performance model with extended thinking
 
-          - `"claude-sonnet-4-5"`
-
-            Our best model for real-world agents and coding
-
-          - `"claude-sonnet-4-5-20250929"`
-
-            Our best model for real-world agents and coding
-
-          - `"claude-opus-4-0"`
-
-            Our most capable model
-
-          - `"claude-opus-4-20250514"`
-
-            Our most capable model
-
-          - `"claude-4-opus-20250514"`
-
-            Our most capable model
-
-          - `"claude-opus-4-1-20250805"`
-
-            Our most capable model
-
-          - `"claude-3-opus-latest"`
-
-            Excels at writing and complex tasks
-
-          - `"claude-3-opus-20240229"`
-
-            Excels at writing and complex tasks
-
           - `"claude-3-haiku-20240307"`
 
-            Our previous most fast and cost-effective
+            Fast and cost-effective model
 
         - `str`
 
@@ -43470,34 +43120,27 @@ print(beta_message_batch_individual_response.custom_id)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]`
+      - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `claude-opus-4-6` - Most intelligent model for building agents and coding
-        - `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
-        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+        - `claude-sonnet-4-6` - Best combination of speed and intelligence
+        - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+        - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
         - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-        - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
-        - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
-        - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+        - `claude-sonnet-4-5` - High-performance model for agents and coding
+        - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+        - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-0` - Powerful model for complex tasks
+        - `claude-opus-4-20250514` - Powerful model for complex tasks
         - `claude-sonnet-4-0` - High-performance model with extended thinking
-        - `claude-4-sonnet-20250514` - High-performance model with extended thinking
-        - `claude-sonnet-4-5` - Our best model for real-world agents and coding
-        - `claude-sonnet-4-5-20250929` - Our best model for real-world agents and coding
-        - `claude-opus-4-0` - Our most capable model
-        - `claude-opus-4-20250514` - Our most capable model
-        - `claude-4-opus-20250514` - Our most capable model
-        - `claude-opus-4-1-20250805` - Our most capable model
-        - `claude-3-opus-latest` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-opus-20240229` - Deprecated: Will reach end-of-life on January 5th, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
+        - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+        - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
         - `"claude-opus-4-6"`
 
@@ -43505,87 +43148,59 @@ print(beta_message_batch_individual_response.custom_id)
 
         - `"claude-sonnet-4-6"`
 
-          Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+          Best combination of speed and intelligence
 
-        - `"claude-opus-4-5-20251101"`
+        - `"claude-haiku-4-5"`
 
-          Premium model combining maximum intelligence with practical performance
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
 
         - `"claude-opus-4-5"`
 
           Premium model combining maximum intelligence with practical performance
 
-        - `"claude-3-7-sonnet-latest"`
+        - `"claude-opus-4-5-20251101"`
 
-          High-performance model with early extended thinking
+          Premium model combining maximum intelligence with practical performance
 
-        - `"claude-3-7-sonnet-20250219"`
+        - `"claude-sonnet-4-5"`
 
-          High-performance model with early extended thinking
+          High-performance model for agents and coding
 
-        - `"claude-3-5-haiku-latest"`
+        - `"claude-sonnet-4-5-20250929"`
 
-          Fastest and most compact model for near-instant responsiveness
+          High-performance model for agents and coding
 
-        - `"claude-3-5-haiku-20241022"`
+        - `"claude-opus-4-1"`
 
-          Our fastest model
+          Exceptional model for specialized complex tasks
 
-        - `"claude-haiku-4-5"`
+        - `"claude-opus-4-1-20250805"`
 
-          Hybrid model, capable of near-instant responses and extended thinking
+          Exceptional model for specialized complex tasks
 
-        - `"claude-haiku-4-5-20251001"`
+        - `"claude-opus-4-0"`
 
-          Hybrid model, capable of near-instant responses and extended thinking
+          Powerful model for complex tasks
 
-        - `"claude-sonnet-4-20250514"`
+        - `"claude-opus-4-20250514"`
 
-          High-performance model with extended thinking
+          Powerful model for complex tasks
 
         - `"claude-sonnet-4-0"`
 
           High-performance model with extended thinking
 
-        - `"claude-4-sonnet-20250514"`
+        - `"claude-sonnet-4-20250514"`
 
           High-performance model with extended thinking
 
-        - `"claude-sonnet-4-5"`
-
-          Our best model for real-world agents and coding
-
-        - `"claude-sonnet-4-5-20250929"`
-
-          Our best model for real-world agents and coding
-
-        - `"claude-opus-4-0"`
-
-          Our most capable model
-
-        - `"claude-opus-4-20250514"`
-
-          Our most capable model
-
-        - `"claude-4-opus-20250514"`
-
-          Our most capable model
-
-        - `"claude-opus-4-1-20250805"`
-
-          Our most capable model
-
-        - `"claude-3-opus-latest"`
-
-          Excels at writing and complex tasks
-
-        - `"claude-3-opus-20240229"`
-
-          Excels at writing and complex tasks
-
         - `"claude-3-haiku-20240307"`
 
-          Our previous most fast and cost-effective
+          Fast and cost-effective model
 
       - `str`
 

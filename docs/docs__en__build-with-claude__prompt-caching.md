@@ -111,7 +111,39 @@ class Program
 }
 ```
 
-```java Java
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:        anthropic.ModelClaudeOpus4_6,
+		MaxTokens:    1024,
+		CacheControl: anthropic.NewCacheControlEphemeralParam(),
+		System: []anthropic.TextBlockParam{
+			{Text: "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style."},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Analyze the major themes in 'Pride and Prejudice'.")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response.Usage)
+}
+```
+
+```java Java hidelines={1..10,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -136,6 +168,46 @@ public class PromptCachingExample {
     System.out.println(message.usage());
   }
 }
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+use Anthropic\Messages\CacheControlEphemeral;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$response = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => "Analyze the major themes in 'Pride and Prejudice'."]
+    ],
+    model: 'claude-opus-4-6',
+    cacheControl: CacheControlEphemeral::with(),
+    system: "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.",
+);
+echo json_encode($response->usage);
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  cache_control: {type: "ephemeral"},
+  system: "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.",
+  messages: [
+    {
+      role: "user",
+      content: "Analyze the major themes in 'Pride and Prejudice'."
+    }
+  ]
+)
+puts response.usage
 ```
 </CodeGroup>
 
@@ -289,7 +361,7 @@ const response = await client.messages.create({
 console.log(response.usage);
 ```
 
-```java Java
+```java Java hidelines={1..10,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -316,6 +388,28 @@ public class AutomaticCachingExample {
         System.out.println(message.usage());
     }
 }
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+use Anthropic\Messages\CacheControlEphemeral;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$response = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'My name is Alex. I work on machine learning.'],
+        ['role' => 'assistant', 'content' => 'Nice to meet you, Alex! How can I help with your ML work today?'],
+        ['role' => 'user', 'content' => 'What did I say I work on?'],
+    ],
+    model: 'claude-opus-4-6',
+    cacheControl: CacheControlEphemeral::with(),
+    system: 'You are a helpful assistant that remembers our conversation.',
+);
+echo json_encode($response->usage);
 ```
 </CodeGroup>
 
@@ -779,7 +873,7 @@ const response = await client.messages.create({
 console.log(response);
 ```
 
-```csharp C#
+```csharp C# hidelines={1..9,-1}
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -827,7 +921,44 @@ public class Program
 }
 ```
 
-```java Java
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		System: []anthropic.TextBlockParam{
+			{
+				Text: "You are an AI assistant tasked with analyzing legal documents.",
+			},
+			{
+				Text:         "Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]",
+				CacheControl: anthropic.NewCacheControlEphemeralParam(),
+			},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What are the key terms and conditions in this agreement?")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%+v\n", response)
+}
+```
+
+```java Java hidelines={1..12,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -865,6 +996,67 @@ public class LegalDocumentAnalysisExample {
     System.out.println(message);
   }
 }
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => 'What are the key terms and conditions in this agreement?'
+        ]
+    ],
+    model: 'claude-opus-4-6',
+    system: [
+        [
+            'type' => 'text',
+            'text' => 'You are an AI assistant tasked with analyzing legal documents.'
+        ],
+        [
+            'type' => 'text',
+            'text' => 'Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]',
+            'cache_control' => ['type' => 'ephemeral']
+        ]
+    ],
+);
+
+echo $message->content[0]->text;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  system: [
+    {
+      type: "text",
+      text: "You are an AI assistant tasked with analyzing legal documents."
+    },
+    {
+      type: "text",
+      text: "Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]",
+      cache_control: { type: "ephemeral" }
+    }
+  ],
+  messages: [
+    {
+      role: "user",
+      content: "What are the key terms and conditions in this agreement?"
+    }
+  ]
+)
+puts message
 ```
 </CodeGroup>
 This example demonstrates basic prompt caching usage, caching the full text of the legal agreement as a prefix while keeping the user instruction uncached.
@@ -1044,7 +1236,7 @@ const response = await client.messages.create({
 console.log(response);
 ```
 
-```csharp C#
+```csharp C# hidelines={1..9,-1}
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -1107,7 +1299,69 @@ public class Program
 }
 ```
 
-```java Java
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Tools: []anthropic.ToolUnionParam{
+			{OfTool: &anthropic.ToolParam{
+				Name:        "get_weather",
+				Description: anthropic.String("Get the current weather in a given location"),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"location": map[string]any{
+							"type":        "string",
+							"description": "The city and state, e.g. San Francisco, CA",
+						},
+						"unit": map[string]any{
+							"type":        "string",
+							"enum":        []string{"celsius", "fahrenheit"},
+							"description": "The unit of temperature, either celsius or fahrenheit",
+						},
+					},
+					Required: []string{"location"},
+				},
+			}},
+			{OfTool: &anthropic.ToolParam{
+				Name:        "get_time",
+				Description: anthropic.String("Get the current time in a given time zone"),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"timezone": map[string]any{
+							"type":        "string",
+							"description": "The IANA time zone name, e.g. America/Los_Angeles",
+						},
+					},
+					Required: []string{"timezone"},
+				},
+				CacheControl: anthropic.NewCacheControlEphemeralParam(),
+			}},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What is the weather and time in New York?")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..15,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -1195,6 +1449,111 @@ public class ToolsWithCacheControlExample {
     System.out.println(message);
   }
 }
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'What is the weather and time in New York?']
+    ],
+    model: 'claude-opus-4-6',
+    tools: [
+        [
+            'name' => 'get_weather',
+            'description' => 'Get the current weather in a given location',
+            'input_schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'location' => [
+                        'type' => 'string',
+                        'description' => 'The city and state, e.g. San Francisco, CA'
+                    ],
+                    'unit' => [
+                        'type' => 'string',
+                        'enum' => ['celsius', 'fahrenheit'],
+                        'description' => 'The unit of temperature, either celsius or fahrenheit'
+                    ]
+                ],
+                'required' => ['location']
+            ]
+        ],
+        [
+            'name' => 'get_time',
+            'description' => 'Get the current time in a given time zone',
+            'input_schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'timezone' => [
+                        'type' => 'string',
+                        'description' => 'The IANA time zone name, e.g. America/Los_Angeles'
+                    ]
+                ],
+                'required' => ['timezone']
+            ],
+            'cache_control' => ['type' => 'ephemeral']
+        ]
+    ],
+);
+
+echo $message;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  tools: [
+    {
+      name: "get_weather",
+      description: "Get the current weather in a given location",
+      input_schema: {
+        type: "object",
+        properties: {
+          location: {
+            type: "string",
+            description: "The city and state, e.g. San Francisco, CA"
+          },
+          unit: {
+            type: "string",
+            enum: ["celsius", "fahrenheit"],
+            description: "The unit of temperature, either celsius or fahrenheit"
+          }
+        },
+        required: ["location"]
+      }
+    },
+    {
+      name: "get_time",
+      description: "Get the current time in a given time zone",
+      input_schema: {
+        type: "object",
+        properties: {
+          timezone: {
+            type: "string",
+            description: "The IANA time zone name, e.g. America/Los_Angeles"
+          }
+        },
+        required: ["timezone"]
+      },
+      cache_control: { type: "ephemeral" }
+    }
+  ],
+  messages: [
+    { role: "user", content: "What is the weather and time in New York?" }
+  ]
+)
+puts message
 ```
 </CodeGroup>
 
@@ -1366,7 +1725,7 @@ const response = await client.messages.create({
 console.log(response);
 ```
 
-```csharp C#
+```csharp C# hidelines={1..5}
 using Anthropic;
 using Anthropic.Models.Messages;
 using System.Collections.Generic;
@@ -1420,7 +1779,52 @@ var message = await client.Messages.Create(parameters);
 Console.WriteLine(message);
 ```
 
-```java Java
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		System: []anthropic.TextBlockParam{
+			{
+				Text:         "...long system prompt",
+				CacheControl: anthropic.NewCacheControlEphemeralParam(),
+			},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, can you tell me more about the solar system?")),
+			anthropic.NewAssistantMessage(anthropic.NewTextBlock("Certainly! The solar system is the collection of celestial bodies that orbit our Sun. It consists of eight planets, numerous moons, asteroids, comets, and other objects. The planets, in order from closest to farthest from the Sun, are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Each planet has its own unique characteristics and features. Is there a specific aspect of the solar system you would like to know more about?")),
+			{
+				Role: anthropic.MessageParamRoleUser,
+				Content: []anthropic.ContentBlockParamUnion{
+					anthropic.NewTextBlock("Good to know."),
+					{OfText: &anthropic.TextBlockParam{
+						Text:         "Tell me more about Mars.",
+						CacheControl: anthropic.NewCacheControlEphemeralParam(),
+					}},
+				},
+			},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..13,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -1471,6 +1875,99 @@ public class ConversationWithCacheControlExample {
     System.out.println(message);
   }
 }
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => [
+                [
+                    'type' => 'text',
+                    'text' => 'Hello, can you tell me more about the solar system?'
+                ]
+            ]
+        ],
+        [
+            'role' => 'assistant',
+            'content' => "Certainly! The solar system is the collection of celestial bodies that orbit our Sun. It consists of eight planets, numerous moons, asteroids, comets, and other objects. The planets, in order from closest to farthest from the Sun, are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Each planet has its own unique characteristics and features. Is there a specific aspect of the solar system you would like to know more about?"
+        ],
+        [
+            'role' => 'user',
+            'content' => [
+                ['type' => 'text', 'text' => 'Good to know.'],
+                [
+                    'type' => 'text',
+                    'text' => 'Tell me more about Mars.',
+                    'cache_control' => ['type' => 'ephemeral']
+                ]
+            ]
+        ]
+    ],
+    model: 'claude-opus-4-6',
+    system: [
+        [
+            'type' => 'text',
+            'text' => '...long system prompt',
+            'cache_control' => ['type' => 'ephemeral']
+        ]
+    ],
+);
+
+echo $message->content[0]->text;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  system: [
+    {
+      type: "text",
+      text: "...long system prompt",
+      cache_control: { type: "ephemeral" }
+    }
+  ],
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "Hello, can you tell me more about the solar system?"
+        }
+      ]
+    },
+    {
+      role: "assistant",
+      content: "Certainly! The solar system is the collection of celestial bodies that orbit our Sun. It consists of eight planets, numerous moons, asteroids, comets, and other objects. The planets, in order from closest to farthest from the Sun, are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Each planet has its own unique characteristics and features. Is there a specific aspect of the solar system you would like to know more about?"
+    },
+    {
+      role: "user",
+      content: [
+        { type: "text", text: "Good to know." },
+        {
+          type: "text",
+          text: "Tell me more about Mars.",
+          cache_control: { type: "ephemeral" }
+        }
+      ]
+    }
+  ]
+)
+puts message
 ```
 </CodeGroup>
 
@@ -1791,7 +2288,7 @@ const response = await client.messages.create({
 console.log(response);
 ```
 
-```csharp C#
+```csharp C# hidelines={1..10,-1}
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -1865,7 +2362,7 @@ public class Program
                     {
                         new ContentBlockParam(new ToolUseBlockParam()
                         {
-                            Id = "tool_1",
+                            ID = "tool_1",
                             Name = "search_documents",
                             Input = JsonSerializer.SerializeToElement(new { query = "Mars rovers" }),
                         }),
@@ -1909,7 +2406,94 @@ public class Program
 }
 ```
 
-```java Java
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Tools: []anthropic.ToolUnionParam{
+			{OfTool: &anthropic.ToolParam{
+				Name:        "search_documents",
+				Description: anthropic.String("Search through the knowledge base"),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"query": map[string]any{
+							"type":        "string",
+							"description": "Search query",
+						},
+					},
+					Required: []string{"query"},
+				},
+			}},
+			{OfTool: &anthropic.ToolParam{
+				Name:        "get_document",
+				Description: anthropic.String("Retrieve a specific document by ID"),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"doc_id": map[string]any{
+							"type":        "string",
+							"description": "Document ID",
+						},
+					},
+					Required: []string{"doc_id"},
+				},
+				CacheControl: anthropic.NewCacheControlEphemeralParam(),
+			}},
+		},
+		System: []anthropic.TextBlockParam{
+			{
+				Text:         "You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base",
+				CacheControl: anthropic.NewCacheControlEphemeralParam(),
+			},
+			{
+				Text:         "# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]",
+				CacheControl: anthropic.NewCacheControlEphemeralParam(),
+			},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Can you search for information about Mars rovers?")),
+			anthropic.NewAssistantMessage(anthropic.NewToolUseBlock(
+				"tool_1",
+				map[string]any{"query": "Mars rovers"},
+				"search_documents",
+			)),
+			anthropic.NewUserMessage(anthropic.NewToolResultBlock(
+				"tool_1",
+				"Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)",
+				false,
+			)),
+			anthropic.NewAssistantMessage(anthropic.NewTextBlock("I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document.")),
+			{
+				Role: anthropic.MessageParamRoleUser,
+				Content: []anthropic.ContentBlockParamUnion{
+					{OfText: &anthropic.TextBlockParam{
+						Text:         "Yes, please tell me about the Perseverance rover specifically.",
+						CacheControl: anthropic.NewCacheControlEphemeralParam(),
+					}},
+				},
+			},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..19,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -2039,6 +2623,211 @@ public class MultipleCacheBreakpointsExample {
     System.out.println(message);
   }
 }
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => 'Can you search for information about Mars rovers?'
+        ],
+        [
+            'role' => 'assistant',
+            'content' => [
+                [
+                    'type' => 'tool_use',
+                    'id' => 'tool_1',
+                    'name' => 'search_documents',
+                    'input' => ['query' => 'Mars rovers']
+                ]
+            ]
+        ],
+        [
+            'role' => 'user',
+            'content' => [
+                [
+                    'type' => 'tool_result',
+                    'tool_use_id' => 'tool_1',
+                    'content' => 'Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)'
+                ]
+            ]
+        ],
+        [
+            'role' => 'assistant',
+            'content' => [
+                [
+                    'type' => 'text',
+                    'text' => 'I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document.'
+                ]
+            ]
+        ],
+        [
+            'role' => 'user',
+            'content' => [
+                [
+                    'type' => 'text',
+                    'text' => 'Yes, please tell me about the Perseverance rover specifically.',
+                    'cache_control' => ['type' => 'ephemeral']
+                ]
+            ]
+        ]
+    ],
+    model: 'claude-opus-4-6',
+    system: [
+        [
+            'type' => 'text',
+            'text' => "You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base",
+            'cache_control' => ['type' => 'ephemeral']
+        ],
+        [
+            'type' => 'text',
+            'text' => "# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]",
+            'cache_control' => ['type' => 'ephemeral']
+        ]
+    ],
+    tools: [
+        [
+            'name' => 'search_documents',
+            'description' => 'Search through the knowledge base',
+            'input_schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'query' => [
+                        'type' => 'string',
+                        'description' => 'Search query'
+                    ]
+                ],
+                'required' => ['query']
+            ]
+        ],
+        [
+            'name' => 'get_document',
+            'description' => 'Retrieve a specific document by ID',
+            'input_schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'doc_id' => [
+                        'type' => 'string',
+                        'description' => 'Document ID'
+                    ]
+                ],
+                'required' => ['doc_id']
+            ],
+            'cache_control' => ['type' => 'ephemeral']
+        ]
+    ],
+);
+
+echo $message;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  tools: [
+    {
+      name: "search_documents",
+      description: "Search through the knowledge base",
+      input_schema: {
+        type: "object",
+        properties: {
+          query: {
+            type: "string",
+            description: "Search query"
+          }
+        },
+        required: ["query"]
+      }
+    },
+    {
+      name: "get_document",
+      description: "Retrieve a specific document by ID",
+      input_schema: {
+        type: "object",
+        properties: {
+          doc_id: {
+            type: "string",
+            description: "Document ID"
+          }
+        },
+        required: ["doc_id"]
+      },
+      cache_control: { type: "ephemeral" }
+    }
+  ],
+  system: [
+    {
+      type: "text",
+      text: "You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base",
+      cache_control: { type: "ephemeral" }
+    },
+    {
+      type: "text",
+      text: "# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]",
+      cache_control: { type: "ephemeral" }
+    }
+  ],
+  messages: [
+    {
+      role: "user",
+      content: "Can you search for information about Mars rovers?"
+    },
+    {
+      role: "assistant",
+      content: [
+        {
+          type: "tool_use",
+          id: "tool_1",
+          name: "search_documents",
+          input: { query: "Mars rovers" }
+        }
+      ]
+    },
+    {
+      role: "user",
+      content: [
+        {
+          type: "tool_result",
+          tool_use_id: "tool_1",
+          content: "Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)"
+        }
+      ]
+    },
+    {
+      role: "assistant",
+      content: [
+        {
+          type: "text",
+          text: "I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document."
+        }
+      ]
+    },
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "Yes, please tell me about the Perseverance rover specifically.",
+          cache_control: { type: "ephemeral" }
+        }
+      ]
+    }
+  ]
+)
+puts message
 ```
 </CodeGroup>
 
@@ -2229,9 +3018,11 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
 
   This error typically appears when you have upgraded your SDK or you are using outdated code examples. Prompt caching is now generally available, so you no longer need the beta prefix. Instead of:
     <CodeGroup>
-      ```python
+      
+      ```python Python nocheck
       client.beta.prompt_caching.messages.create(**params)
       ```
+
       
       ```typescript TypeScript nocheck hidelines={1..4}
       import Anthropic from "@anthropic-ai/sdk";
@@ -2253,12 +3044,40 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
 
       console.log(response);
       ```
+
+      
+      ```php PHP hidelines={1..6} nocheck
+      <?php
+
+      use Anthropic\Client;
+
+      $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+      $message = $client->beta->promptCaching->messages->create(
+          maxTokens: 1024,
+          messages: [
+              ['role' => 'user', 'content' => 'Summarize the key points']
+          ],
+          model: 'claude-opus-4-6',
+          system: [
+              [
+                  'type' => 'text',
+                  'text' => 'You are an expert on this large document...',
+                  'cache_control' => ['type' => 'ephemeral']
+              ]
+          ],
+      );
+
+      echo $message->content[0]->text;
+      ```
     </CodeGroup>
     Simply use:
     <CodeGroup>
-      ```python
+      
+      ```python Python nocheck
       client.messages.create(**params)
       ```
+
       ```typescript TypeScript hidelines={1..4}
       import Anthropic from "@anthropic-ai/sdk";
 
@@ -2278,6 +3097,53 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
       });
 
       console.log(response);
+      ```
+
+      ```php PHP hidelines={1..6}
+      <?php
+
+      use Anthropic\Client;
+
+      $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+      $message = $client->messages->create(
+          maxTokens: 1024,
+          messages: [
+              ['role' => 'user', 'content' => 'Summarize the key points']
+          ],
+          model: 'claude-opus-4-6',
+          system: [
+              [
+                  'type' => 'text',
+                  'text' => 'You are an expert on this large document...',
+                  'cache_control' => ['type' => 'ephemeral']
+              ]
+          ],
+      );
+
+      echo $message->content[0]->text;
+      ```
+
+      ```ruby Ruby
+      require "anthropic"
+
+      client = Anthropic::Client.new
+
+      message = client.messages.create(
+        model: "claude-opus-4-6",
+        max_tokens: 1024,
+        system: [
+          {
+            type: "text",
+            text: "You are an expert on this large document...",
+            cache_control: { type: "ephemeral" }
+          }
+        ],
+        messages: [
+          { role: "user", content: "Summarize the key points" }
+        ]
+      )
+      puts message.content.first.text
       ```
     </CodeGroup>
   

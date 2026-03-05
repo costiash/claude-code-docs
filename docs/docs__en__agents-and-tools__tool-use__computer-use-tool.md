@@ -223,6 +223,149 @@ class Program
     }
 }
 ```
+
+```go Go nocheck hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfComputerUseTool20251124: &anthropic.BetaToolComputerUse20251124Param{
+				DisplayWidthPx:  1024,
+				DisplayHeightPx: 768,
+				DisplayNumber:   anthropic.Int(1),
+			}},
+			{OfTextEditor20250728: &anthropic.BetaToolTextEditor20250728Param{}},
+			{OfBashTool20250124: &anthropic.BetaToolBash20250124Param{}},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Save a picture of a cat to my desktop.")),
+		},
+		Betas: []anthropic.AnthropicBeta{
+			anthropic.AnthropicBetaComputerUse2025_11_24,
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..10,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaToolBash20250124;
+import com.anthropic.models.beta.messages.BetaToolComputerUse20251124;
+import com.anthropic.models.beta.messages.BetaToolTextEditor20250728;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+
+public class ComputerUseExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(1024L)
+            .addTool(BetaToolComputerUse20251124.builder()
+                .displayWidthPx(1024L)
+                .displayHeightPx(768L)
+                .displayNumber(1L)
+                .build())
+            .addTool(BetaToolTextEditor20250728.builder().build())
+            .addTool(BetaToolBash20250124.builder().build())
+            .addUserMessage("Save a picture of a cat to my desktop.")
+            .addBeta("computer-use-2025-11-24")
+            .build();
+
+        BetaMessage response = client.beta().messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$response = $client->beta->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'Save a picture of a cat to my desktop.'],
+    ],
+    model: 'claude-opus-4-6',
+    tools: [
+        [
+            'type' => 'computer_20251124',
+            'name' => 'computer',
+            'display_width_px' => 1024,
+            'display_height_px' => 768,
+            'display_number' => 1,
+        ],
+        [
+            'type' => 'text_editor_20250728',
+            'name' => 'str_replace_based_edit_tool',
+        ],
+        [
+            'type' => 'bash_20250124',
+            'name' => 'bash',
+        ],
+    ],
+    betas: ['computer-use-2025-11-24'],
+);
+
+echo $response;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  tools: [
+    {
+      type: "computer_20251124",
+      name: "computer",
+      display_width_px: 1024,
+      display_height_px: 768,
+      display_number: 1
+    },
+    {
+      type: "text_editor_20250728",
+      name: "str_replace_based_edit_tool"
+    },
+    {
+      type: "bash_20250124",
+      name: "bash"
+    }
+  ],
+  messages: [
+    { role: "user", content: "Save a picture of a cat to my desktop." }
+  ],
+  betas: ["computer-use-2025-11-24"]
+)
+
+puts response
+```
 </CodeGroup>
 
 <Note>
@@ -681,7 +824,7 @@ client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
     model="claude-opus-4-6",
-    max_tokens=1024,
+    max_tokens=2000,
     tools=[
         {
             "type": "computer_20251124",
@@ -801,7 +944,7 @@ print(response)
           var parameters = new MessageCreateParams
           {
               Model = Model.ClaudeOpus4_6,
-              MaxTokens = 1024,
+              MaxTokens = 2000,
               Tools = new BetaToolUnion[]
               {
                   new BetaToolComputerUse20251124
@@ -854,17 +997,73 @@ print(response)
   }
   ```
 
-```java Java
+  
+  ```go Go nocheck hidelines={1..11,-1}
+  package main
+
+  import (
+  	"context"
+  	"fmt"
+  	"log"
+
+  	"github.com/anthropics/anthropic-sdk-go"
+  )
+
+  func main() {
+  	client := anthropic.NewClient()
+
+  	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+  		Model:     anthropic.ModelClaudeOpus4_6,
+  		MaxTokens: 16384,
+  		Tools: []anthropic.BetaToolUnionParam{
+  			{OfComputerUseTool20251124: &anthropic.BetaToolComputerUse20251124Param{
+  				DisplayWidthPx:  1024,
+  				DisplayHeightPx: 768,
+  				DisplayNumber:   anthropic.Int(1),
+  			}},
+  			{OfTextEditor20250728: &anthropic.BetaToolTextEditor20250728Param{}},
+  			{OfBashTool20250124: &anthropic.BetaToolBash20250124Param{}},
+  			{OfTool: &anthropic.BetaToolParam{
+  				Name:        "get_weather",
+  				Description: anthropic.String("Get the current weather in a given location"),
+  				InputSchema: anthropic.BetaToolInputSchemaParam{
+  					Properties: map[string]any{
+  						"location": map[string]any{
+  							"type":        "string",
+  							"description": "The city and state, e.g. San Francisco, CA",
+  						},
+  						"unit": map[string]any{
+  							"type":        "string",
+  							"enum":        []string{"celsius", "fahrenheit"},
+  							"description": "The unit of temperature, either 'celsius' or 'fahrenheit'",
+  						},
+  					},
+  					Required: []string{"location"},
+  				},
+  			}},
+  		},
+  		Messages: []anthropic.BetaMessageParam{
+  			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Find flights from San Francisco to a place with warmer weather.")),
+  		},
+  		Thinking: anthropic.BetaThinkingConfigParamOfEnabled(1024),
+  		Betas:    []anthropic.AnthropicBeta{anthropic.AnthropicBetaComputerUse2025_11_24},
+  	})
+  	if err != nil {
+  		log.Fatal(err)
+  	}
+  	fmt.Println(response)
+  }
+  ```
+
+```java Java hidelines={1..15,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
 import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaThinkingConfigEnabled;
-import com.anthropic.models.beta.messages.BetaThinkingConfigParam;
 import com.anthropic.models.beta.messages.BetaTool;
 import com.anthropic.models.beta.messages.BetaToolBash20250124;
-import com.anthropic.models.beta.messages.BetaToolComputerUse20250124;
-import com.anthropic.models.beta.messages.BetaToolTextEditor20250124;
+import com.anthropic.models.beta.messages.BetaToolComputerUse20251124;
+import com.anthropic.models.beta.messages.BetaToolTextEditor20250728;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 import java.util.List;
 import java.util.Map;
@@ -876,15 +1075,15 @@ public class MultipleToolsExample {
 
     MessageCreateParams params = MessageCreateParams.builder()
       .model("claude-opus-4-6")
-      .maxTokens(1024)
+      .maxTokens(16384L)
       .addTool(
-        BetaToolComputerUse20250124.builder()
-          .displayWidthPx(1024)
-          .displayHeightPx(768)
-          .displayNumber(1)
+        BetaToolComputerUse20251124.builder()
+          .displayWidthPx(1024L)
+          .displayHeightPx(768L)
+          .displayNumber(1L)
           .build()
       )
-      .addTool(BetaToolTextEditor20250124.builder().build())
+      .addTool(BetaToolTextEditor20250728.builder().build())
       .addTool(BetaToolBash20250124.builder().build())
       .addTool(
         BetaTool.builder()
@@ -893,36 +1092,33 @@ public class MultipleToolsExample {
           .inputSchema(
             BetaTool.InputSchema.builder()
               .properties(
-                JsonValue.from(
-                  Map.of(
+                BetaTool.InputSchema.Properties.builder()
+                  .putAdditionalProperty(
                     "location",
-                    Map.of(
-                      "type",
-                      "string",
-                      "description",
-                      "The city and state, e.g. San Francisco, CA"
-                    ),
-                    "unit",
-                    Map.of(
-                      "type",
-                      "string",
-                      "enum",
-                      List.of("celsius", "fahrenheit"),
-                      "description",
-                      "The unit of temperature, either 'celsius' or 'fahrenheit'"
+                    JsonValue.from(
+                      Map.of(
+                        "type", "string",
+                        "description", "The city and state, e.g. San Francisco, CA"
+                      )
                     )
                   )
-                )
+                  .putAdditionalProperty(
+                    "unit",
+                    JsonValue.from(
+                      Map.of(
+                        "type", "string",
+                        "enum", List.of("celsius", "fahrenheit"),
+                        "description", "The unit of temperature, either 'celsius' or 'fahrenheit'"
+                      )
+                    )
+                  )
+                  .build()
               )
               .build()
           )
           .build()
       )
-      .thinking(
-        BetaThinkingConfigParam.ofEnabled(
-          BetaThinkingConfigEnabled.builder().budgetTokens(1024).build()
-        )
-      )
+      .enabledThinking(1024L)
       .addUserMessage("Find flights from San Francisco to a place with warmer weather.")
       .addBeta("computer-use-2025-11-24")
       .build();
@@ -932,6 +1128,122 @@ public class MultipleToolsExample {
   }
 }
 ```
+
+  
+  ```php PHP hidelines={1..6} nocheck
+  <?php
+
+  use Anthropic\Client;
+
+  $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+  $message = $client->beta->messages->create(
+      maxTokens: 2000,
+      messages: [
+          ['role' => 'user', 'content' => 'Find flights from San Francisco to a place with warmer weather.'],
+      ],
+      model: 'claude-opus-4-6',
+      tools: [
+          [
+              'type' => 'computer_20251124',
+              'name' => 'computer',
+              'display_width_px' => 1024,
+              'display_height_px' => 768,
+              'display_number' => 1,
+          ],
+          [
+              'type' => 'text_editor_20250728',
+              'name' => 'str_replace_based_edit_tool',
+          ],
+          [
+              'type' => 'bash_20250124',
+              'name' => 'bash',
+          ],
+          [
+              'name' => 'get_weather',
+              'description' => 'Get the current weather in a given location',
+              'input_schema' => [
+                  'type' => 'object',
+                  'properties' => [
+                      'location' => [
+                          'type' => 'string',
+                          'description' => 'The city and state, e.g. San Francisco, CA',
+                      ],
+                      'unit' => [
+                          'type' => 'string',
+                          'enum' => ['celsius', 'fahrenheit'],
+                          'description' => 'The unit of temperature, either \'celsius\' or \'fahrenheit\'',
+                      ],
+                  ],
+                  'required' => ['location'],
+              ],
+          ],
+      ],
+      betas: ['computer-use-2025-11-24'],
+      thinking: ['type' => 'enabled', 'budget_tokens' => 1024],
+  );
+
+  echo $message;
+  ```
+
+  ```ruby Ruby
+    require "anthropic"
+
+    client = Anthropic::Client.new
+
+    message = client.beta.messages.create(
+      model: "claude-opus-4-6",
+      max_tokens: 2000,
+      tools: [
+        {
+          type: "computer_20251124",
+          name: "computer",
+          display_width_px: 1024,
+          display_height_px: 768,
+          display_number: 1
+        },
+        {
+          type: "text_editor_20250728",
+          name: "str_replace_based_edit_tool"
+        },
+        {
+          type: "bash_20250124",
+          name: "bash"
+        },
+        {
+          name: "get_weather",
+          description: "Get the current weather in a given location",
+          input_schema: {
+            type: "object",
+            properties: {
+              location: {
+                type: "string",
+                description: "The city and state, e.g. San Francisco, CA"
+              },
+              unit: {
+                type: "string",
+                enum: ["celsius", "fahrenheit"],
+                description: "The unit of temperature, either 'celsius' or 'fahrenheit'"
+              }
+            },
+            required: ["location"]
+          }
+        }
+      ],
+      messages: [
+        {
+          role: "user",
+          content: "Find flights from San Francisco to a place with warmer weather."
+        }
+      ],
+      betas: ["computer-use-2025-11-24"],
+      thinking: {
+        type: "enabled",
+        budget_tokens: 1024
+      }
+    )
+    puts message
+  ```
 </CodeGroup>
 
 ### Build a custom computer use environment

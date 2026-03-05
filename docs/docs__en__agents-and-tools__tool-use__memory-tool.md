@@ -219,6 +219,111 @@ public class Program
 }
 ```
 
+```go Go hidelines={1..11,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 2048,
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfMemoryTool20250818: &anthropic.BetaMemoryTool20250818Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..9,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MemoryTool20250818;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+
+public class MemoryToolExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(2048L)
+            .addUserMessage("I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.")
+            .addTool(MemoryTool20250818.builder().build())
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 2048,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this.",
+        ],
+    ],
+    model: 'claude-opus-4-6',
+    tools: [
+        [
+            'type' => 'memory_20250818',
+            'name' => 'memory',
+        ],
+    ],
+);
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 2048,
+  messages: [
+    {
+      role: "user",
+      content: "I'm working on a Python web scraper that keeps crashing with a timeout error. Here's the problematic function:\n\n```python\ndef fetch_page(url, retries=3):\n    for i in range(retries):\n        try:\n            response = requests.get(url, timeout=5)\n            return response.text\n        except requests.exceptions.Timeout:\n            if i == retries - 1:\n                raise\n            time.sleep(1)\n```\n\nPlease help me debug this."
+    }
+  ],
+  tools: [
+    {
+      type: "memory_20250818",
+      name: "memory"
+    }
+  ]
+)
+puts message
+```
+
 </CodeGroup>
 
 ## Tool commands
@@ -495,7 +600,7 @@ response = client.messages.create(
 )
 ```
 
-```typescript TypeScript hidelines={1..2}
+```typescript TypeScript nocheck hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
@@ -573,6 +678,159 @@ var response = await client.Beta.Messages.Create(parameters);
 Console.WriteLine(response);
 ```
 
+```go Go hidelines={1..11,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 4096,
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("What do you remember about me?")),
+		},
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfMemoryTool20250818: &anthropic.BetaMemoryTool20250818Param{}},
+			// Your other tools
+		},
+		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaContextManagement2025_06_27},
+		ContextManagement: anthropic.BetaContextManagementConfigParam{
+			Edits: []anthropic.BetaContextManagementConfigEditUnionParam{{
+				OfClearToolUses20250919: &anthropic.BetaClearToolUses20250919EditParam{
+					Trigger: anthropic.BetaClearToolUses20250919EditTriggerUnionParam{
+						OfInputTokens: &anthropic.BetaInputTokensTriggerParam{
+							Value: 100000,
+						},
+					},
+					Keep: anthropic.BetaToolUsesKeepParam{
+						Value: 3,
+					},
+				},
+			}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java nocheck hidelines={1..12,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.AnthropicBeta;
+import com.anthropic.models.beta.messages.BetaClearToolUses20250919Edit;
+import com.anthropic.models.beta.messages.BetaContextManagementConfig;
+import com.anthropic.models.beta.messages.BetaMemoryTool20250818;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+
+public class ContextManagementExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(4096L)
+            .addTool(BetaMemoryTool20250818.builder().build())
+            .addUserMessage("Help me with a task.")
+            .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+            .contextManagement(BetaContextManagementConfig.builder()
+                .addEdit(BetaClearToolUses20250919Edit.builder()
+                    .inputTokensTrigger(100000L)
+                    .toolUsesKeep(3L)
+                    .build())
+                .build())
+            .build();
+
+        BetaMessage response = client.beta().messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: [],
+    model: 'claude-opus-4-6',
+    tools: [
+        [
+            'type' => 'memory_20250818',
+            'name' => 'memory',
+        ],
+    ],
+    betas: ['context-management-2025-06-27'],
+    contextManagement: [
+        'edits' => [
+            [
+                'type' => 'clear_tool_uses_20250919',
+                'trigger' => [
+                    'type' => 'input_tokens',
+                    'value' => 100000,
+                ],
+                'keep' => [
+                    'type' => 'tool_uses',
+                    'value' => 3,
+                ],
+            ],
+        ],
+    ],
+);
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.beta.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  messages: [],
+  tools: [
+    {
+      type: "memory_20250818",
+      name: "memory"
+    }
+  ],
+  betas: ["context-management-2025-06-27"],
+  context_management: {
+    edits: [
+      {
+        type: "clear_tool_uses_20250919",
+        trigger: {
+          type: "input_tokens",
+          value: 100000
+        },
+        keep: {
+          type: "tool_uses",
+          value: 3
+        }
+      }
+    ]
+  }
+)
+puts message
+```
+
 </CodeGroup>
 
 You can also exclude memory tool calls from being cleared to ensure Claude always has access to recent memory operations:
@@ -585,7 +843,7 @@ context_management = {
 }
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 context_management: {
   edits: [
     {
@@ -593,6 +851,43 @@ context_management: {
       exclude_tools: ["memory"]
     }
   ];
+}
+```
+
+```csharp C# nocheck
+var contextManagement = new BetaContextManagementConfig
+{
+    Edits = [new BetaClearToolUses20250919Edit { ExcludeTools = ["memory"] }]
+};
+```
+
+```go Go nocheck
+contextManagement := anthropic.BetaContextManagementConfigParam{
+	Edits: []anthropic.BetaContextManagementConfigEditUnionParam{{
+		OfClearToolUses20250919: &anthropic.BetaClearToolUses20250919EditParam{
+			ExcludeTools: []string{"memory"},
+		},
+	}},
+}
+```
+
+```java Java nocheck
+BetaContextManagementConfig contextManagement = BetaContextManagementConfig.builder()
+    .addEdit(BetaClearToolUses20250919Edit.builder()
+        .addExcludeTool("memory")
+        .build())
+    .build();
+```
+
+```php PHP nocheck
+$contextManagement = [
+    'edits' => [['type' => 'clear_tool_uses_20250919', 'exclude_tools' => ['memory']]]
+];
+```
+
+```ruby Ruby nocheck
+context_management = {
+  edits: [{ type: "clear_tool_uses_20250919", exclude_tools: ["memory"] }]
 }
 ```
 

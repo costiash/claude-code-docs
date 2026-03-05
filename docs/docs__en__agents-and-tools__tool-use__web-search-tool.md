@@ -218,6 +218,111 @@ class Program
     }
 }
 ```
+
+```go Go hidelines={1..11,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather in NYC?")),
+		},
+		Tools: []anthropic.ToolUnionParam{
+			{OfWebSearchTool20250305: &anthropic.WebSearchTool20250305Param{
+				MaxUses: anthropic.Int(5),
+			}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..9,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.WebSearchTool20250305;
+
+public class WebSearchExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .addUserMessage("What's the weather in NYC?")
+            .addTool(WebSearchTool20250305.builder()
+                .maxUses(5L)
+                .build())
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => "What's the weather in NYC?"],
+    ],
+    model: 'claude-opus-4-6',
+    tools: [
+        [
+            'type' => 'web_search_20250305',
+            'name' => 'web_search',
+            'max_uses' => 5,
+        ],
+    ],
+);
+
+echo $message;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [
+    { role: "user", content: "What's the weather in NYC?" }
+  ],
+  tools: [{
+    type: "web_search_20250305",
+    name: "web_search",
+    max_uses: 5
+  }]
+)
+puts message
+```
 </CodeGroup>
 
 ### Tool definition
@@ -412,7 +517,7 @@ For multi-turn conversations, set a `cache_control` breakpoint on or after the l
 For example, to use prompt caching with web search for a multi-turn conversation:
 
 <CodeGroup>
-```python hidelines={1..4}
+```python Python hidelines={1..4}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -597,6 +702,262 @@ var parameters2 = new MessageCreateParams
 var response2 = await client.Messages.Create(parameters2);
 
 Console.WriteLine($"Cache read tokens: {response2.Usage.CacheReadInputTokens ?? 0}");
+```
+
+```go Go nocheck hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	webSearchTool := anthropic.ToolUnionParam{
+		OfWebSearchTool20250305: &anthropic.WebSearchTool20250305Param{
+			UserLocation: anthropic.WebSearchTool20250305UserLocationParam{
+				City:     anthropic.String("San Francisco"),
+				Region:   anthropic.String("California"),
+				Country:  anthropic.String("US"),
+				Timezone: anthropic.String("America/Los_Angeles"),
+			},
+		},
+	}
+
+	messages := []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock("What's the current weather in San Francisco today?")),
+	}
+
+	response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages:  messages,
+		Tools:     []anthropic.ToolUnionParam{webSearchTool},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Convert assistant response to a message param
+	messages = append(messages, response1.ToParam())
+
+	// Second request with cache breakpoint after the search results
+	followUp := anthropic.NewTextBlock("Should I expect rain later this week?")
+	followUp.OfText.CacheControl = anthropic.NewCacheControlEphemeralParam()
+	messages = append(messages, anthropic.NewUserMessage(followUp))
+
+	response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages:  messages,
+		Tools:     []anthropic.ToolUnionParam{webSearchTool},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Cache read tokens: %d\n", response2.Usage.CacheReadInputTokens)
+}
+```
+
+```java Java hidelines={1..15,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.CacheControlEphemeral;
+import com.anthropic.models.messages.ContentBlockParam;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.MessageParam;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.TextBlockParam;
+import com.anthropic.models.messages.UserLocation;
+import com.anthropic.models.messages.WebSearchTool20250305;
+import java.util.ArrayList;
+import java.util.List;
+
+public class WebSearchWithCache {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        WebSearchTool20250305 webSearchTool = WebSearchTool20250305.builder()
+            .userLocation(UserLocation.builder()
+                .city("San Francisco")
+                .region("California")
+                .country("US")
+                .timezone("America/Los_Angeles")
+                .build())
+            .build();
+
+        List<MessageParam> messages = new ArrayList<>();
+        messages.add(MessageParam.builder()
+            .role(MessageParam.Role.USER)
+            .content("What's the current weather in San Francisco today?")
+            .build());
+
+        Message response1 = client.messages().create(
+            MessageCreateParams.builder()
+                .model(Model.CLAUDE_OPUS_4_6)
+                .maxTokens(1024L)
+                .messages(messages)
+                .addTool(webSearchTool)
+                .build());
+
+        messages.add(response1.toParam());
+
+        messages.add(MessageParam.builder()
+            .role(MessageParam.Role.USER)
+            .contentOfBlockParams(List.of(
+                ContentBlockParam.ofText(
+                    TextBlockParam.builder()
+                        .text("Should I expect rain later this week?")
+                        .cacheControl(CacheControlEphemeral.builder().build())
+                        .build())
+            ))
+            .build());
+
+        Message response2 = client.messages().create(
+            MessageCreateParams.builder()
+                .model(Model.CLAUDE_OPUS_4_6)
+                .maxTokens(1024L)
+                .messages(messages)
+                .addTool(webSearchTool)
+                .build());
+
+        System.out.println("Cache read tokens: " +
+            response2.usage().cacheReadInputTokens().orElse(0L));
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$messages = [
+    ['role' => 'user', 'content' => "What's the current weather in San Francisco today?"]
+];
+
+$response1 = $client->messages->create(
+    maxTokens: 1024,
+    messages: $messages,
+    model: 'claude-opus-4-6',
+    tools: [
+        [
+            'type' => 'web_search_20250305',
+            'name' => 'web_search',
+            'user_location' => [
+                'type' => 'approximate',
+                'city' => 'San Francisco',
+                'region' => 'California',
+                'country' => 'US',
+                'timezone' => 'America/Los_Angeles',
+            ],
+        ],
+    ],
+);
+
+$messages[] = ['role' => 'assistant', 'content' => $response1->content];
+
+$messages[] = [
+    'role' => 'user',
+    'content' => [[
+        'type' => 'text',
+        'text' => 'Should I expect rain later this week?',
+        'cache_control' => ['type' => 'ephemeral'],
+    ]],
+];
+
+$response2 = $client->messages->create(
+    maxTokens: 1024,
+    messages: $messages,
+    model: 'claude-opus-4-6',
+    tools: [
+        [
+            'type' => 'web_search_20250305',
+            'name' => 'web_search',
+            'user_location' => [
+                'type' => 'approximate',
+                'city' => 'San Francisco',
+                'region' => 'California',
+                'country' => 'US',
+                'timezone' => 'America/Los_Angeles',
+            ],
+        ],
+    ],
+);
+
+echo "Cache read tokens: " . ($response2->usage->cacheReadInputTokens ?? 0) . "\n";
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+messages = [
+  { role: "user", content: "What's the current weather in San Francisco today?" }
+]
+
+response1 = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: messages,
+  tools: [
+    {
+      type: "web_search_20250305",
+      name: "web_search",
+      user_location: {
+        type: "approximate",
+        city: "San Francisco",
+        region: "California",
+        country: "US",
+        timezone: "America/Los_Angeles"
+      }
+    }
+  ]
+)
+
+messages << { role: "assistant", content: response1.content }
+
+messages << {
+  role: "user",
+  content: [
+    {
+      type: "text",
+      text: "Should I expect rain later this week?",
+      cache_control: { type: "ephemeral" }
+    }
+  ]
+}
+
+response2 = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: messages,
+  tools: [
+    {
+      type: "web_search_20250305",
+      name: "web_search",
+      user_location: {
+        type: "approximate",
+        city: "San Francisco",
+        region: "California",
+        country: "US",
+        timezone: "America/Los_Angeles"
+      }
+    }
+  ]
+)
+
+puts "Cache read tokens: #{response2.usage.cache_read_input_tokens || 0}"
 ```
 
 </CodeGroup>

@@ -76,6 +76,87 @@ This feature is [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data
       }
   }
   ```
+
+  ```go Go hidelines={1..13,-1}
+  package main
+
+  import (
+  	"context"
+  	"fmt"
+  	"log"
+
+  	"github.com/anthropics/anthropic-sdk-go"
+  )
+
+  func main() {
+  	client := anthropic.NewClient()
+
+  	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  		Model:     anthropic.ModelClaudeOpus4_6,
+  		MaxTokens: 1024,
+  		Messages: []anthropic.MessageParam{
+  			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
+  		},
+  	})
+  	if err != nil {
+  		log.Fatal(err)
+  	}
+  	fmt.Println(response)
+  }
+  ```
+
+  ```java Java hidelines={1..8,-1}
+  import com.anthropic.client.AnthropicClient;
+  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+  import com.anthropic.models.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Message;
+  import com.anthropic.models.messages.Model;
+
+  public class Main {
+      public static void main(String[] args) {
+          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+          MessageCreateParams params = MessageCreateParams.builder()
+              .model(Model.CLAUDE_OPUS_4_6)
+              .maxTokens(1024L)
+              .addUserMessage("Hello, Claude")
+              .build();
+
+          Message response = client.messages().create(params);
+          System.out.println(response);
+      }
+  }
+  ```
+
+  ```php PHP
+  <?php
+
+  use Anthropic\Client;
+
+  $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+  $message = $client->messages->create(
+      maxTokens: 1024,
+      messages: [['role' => 'user', 'content' => 'Hello, Claude']],
+      model: 'claude-opus-4-6',
+  );
+  echo $message->content[0]->text;
+  ```
+
+  ```ruby Ruby
+  require "anthropic"
+
+  client = Anthropic::Client.new
+
+  message = client.messages.create(
+    model: "claude-opus-4-6",
+    max_tokens: 1024,
+    messages: [
+      { role: "user", content: "Hello, Claude" }
+    ]
+  )
+  puts message
+  ```
 </CodeGroup>
 
 ```json JSON
@@ -183,6 +264,98 @@ class Program
     }
 }
 ```
+
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
+			anthropic.NewAssistantMessage(anthropic.NewTextBlock("Hello!")),
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Can you describe LLMs to me?")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..8,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.Model;
+
+public class MultiTurnConversation {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .addUserMessage("Hello, Claude")
+            .addAssistantMessage("Hello!")
+            .addUserMessage("Can you describe LLMs to me?")
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'Hello, Claude'],
+        ['role' => 'assistant', 'content' => 'Hello!'],
+        ['role' => 'user', 'content' => 'Can you describe LLMs to me?'],
+    ],
+    model: 'claude-opus-4-6',
+);
+
+echo $message->content[0]->text;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [
+    { role: "user", content: "Hello, Claude" },
+    { role: "assistant", content: "Hello!" },
+    { role: "user", content: "Can you describe LLMs to me?" }
+  ]
+)
+puts message
+```
 </CodeGroup>
 
 ```json JSON
@@ -289,6 +462,96 @@ You can pre-fill part of Claude's response in the last position of the input mes
           Console.WriteLine(message);
       }
   }
+  ```
+
+  ```go Go hidelines={1..13,-1}
+  package main
+
+  import (
+  	"context"
+  	"fmt"
+  	"log"
+
+  	"github.com/anthropics/anthropic-sdk-go"
+  )
+
+  func main() {
+  	client := anthropic.NewClient()
+
+  	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  		Model:     anthropic.ModelClaudeOpus4_6,
+  		MaxTokens: 1,
+  		Messages: []anthropic.MessageParam{
+  			anthropic.NewUserMessage(anthropic.NewTextBlock("What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae")),
+  			anthropic.NewAssistantMessage(anthropic.NewTextBlock("The answer is (")),
+  		},
+  	})
+  	if err != nil {
+  		log.Fatal(err)
+  	}
+  	fmt.Println(response)
+  }
+  ```
+
+  ```java Java hidelines={1..8,-1}
+  import com.anthropic.client.AnthropicClient;
+  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+  import com.anthropic.models.messages.MessageCreateParams;
+  import com.anthropic.models.messages.Message;
+  import com.anthropic.models.messages.Model;
+
+  public class PrefillExample {
+      public static void main(String[] args) {
+          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+          MessageCreateParams params = MessageCreateParams.builder()
+              .model(Model.CLAUDE_OPUS_4_6)
+              .maxTokens(1L)
+              .addUserMessage("What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae")
+              .addAssistantMessage("The answer is (")
+              .build();
+
+          Message response = client.messages().create(params);
+          System.out.println(response);
+      }
+  }
+  ```
+
+  ```php PHP hidelines={1..6}
+  <?php
+
+  use Anthropic\Client;
+
+  $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+  $message = $client->messages->create(
+      maxTokens: 1,
+      messages: [
+          ['role' => 'user', 'content' => 'What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae'],
+          ['role' => 'assistant', 'content' => 'The answer is ('],
+      ],
+      model: 'claude-opus-4-6',
+  );
+  echo $message->content[0]->text;
+  ```
+
+  ```ruby Ruby
+  require "anthropic"
+
+  client = Anthropic::Client.new
+
+  message = client.messages.create(
+    model: "claude-opus-4-6",
+    max_tokens: 1,
+    messages: [
+      {
+        role: "user",
+        content: "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"
+      },
+      { role: "assistant", content: "The answer is (" }
+    ]
+  )
+  puts message
   ```
 </CodeGroup>
 
@@ -427,7 +690,8 @@ Claude can read both text and images in requests. Both `base64` and `url` source
   print(message_from_url)
   ```
 
-  ```typescript TypeScript hidelines={1..4}
+  
+  ```typescript TypeScript nocheck hidelines={1..4}
   import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();
@@ -490,7 +754,8 @@ Claude can read both text and images in requests. Both `base64` and `url` source
   console.log(messageFromUrl);
   ```
 
-  ```csharp C#
+  
+  ```csharp C# nocheck
   using System;
   using System.Collections.Generic;
   using System.Net.Http;
@@ -566,6 +831,279 @@ Claude can read both text and images in requests. Both `base64` and `url` source
           Console.WriteLine(messageFromUrl);
       }
   }
+  ```
+
+  
+  ```go Go nocheck hidelines={1..16,-1}
+  package main
+
+  import (
+  	"context"
+  	"encoding/base64"
+  	"fmt"
+  	"io"
+  	"log"
+  	"net/http"
+
+  	"github.com/anthropics/anthropic-sdk-go"
+  )
+
+  func main() {
+  	client := anthropic.NewClient()
+
+  	// Option 1: Base64-encoded image
+  	imageURL := "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+
+  	req, err := http.NewRequest("GET", imageURL, nil)
+  	if err != nil {
+  		log.Fatal(err)
+  	}
+  	req.Header.Set("User-Agent", "AnthropicDocsBot/1.0")
+
+  	resp, err := http.DefaultClient.Do(req)
+  	if err != nil {
+  		log.Fatal(err)
+  	}
+  	defer resp.Body.Close()
+
+  	imageBytes, err := io.ReadAll(resp.Body)
+  	if err != nil {
+  		log.Fatal(err)
+  	}
+  	imageData := base64.StdEncoding.EncodeToString(imageBytes)
+
+  	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  		Model:     anthropic.ModelClaudeOpus4_6,
+  		MaxTokens: 1024,
+  		Messages: []anthropic.MessageParam{
+  			anthropic.NewUserMessage(
+  				anthropic.NewImageBlockBase64("image/jpeg", imageData),
+  				anthropic.NewTextBlock("What is in the above image?"),
+  			),
+  		},
+  	})
+  	if err != nil {
+  		log.Fatal(err)
+  	}
+  	fmt.Println(message)
+
+  	// Option 2: URL-referenced image
+  	messageFromURL, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  		Model:     anthropic.ModelClaudeOpus4_6,
+  		MaxTokens: 1024,
+  		Messages: []anthropic.MessageParam{
+  			anthropic.NewUserMessage(
+  				anthropic.NewImageBlock(anthropic.URLImageSourceParam{
+  					URL: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+  				}),
+  				anthropic.NewTextBlock("What is in the above image?"),
+  			),
+  		},
+  	})
+  	if err != nil {
+  		log.Fatal(err)
+  	}
+  	fmt.Println(messageFromURL)
+  }
+  ```
+
+  
+  ```java Java nocheck hidelines={1..12,-1}
+  import com.anthropic.client.AnthropicClient;
+  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+  import com.anthropic.models.messages.*;
+  import java.net.URI;
+  import java.net.http.HttpClient;
+  import java.net.http.HttpRequest;
+  import java.net.http.HttpResponse;
+  import java.util.Base64;
+  import java.util.List;
+
+  public class VisionExample {
+      public static void main(String[] args) throws Exception {
+          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+          // Option 1: Base64-encoded image
+          String imageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+
+          HttpClient httpClient = HttpClient.newHttpClient();
+          HttpRequest request = HttpRequest.newBuilder().uri(URI.create(imageUrl)).build();
+          HttpResponse<byte[]> response = httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
+          String imageData = Base64.getEncoder().encodeToString(response.body());
+
+          List<ContentBlockParam> base64Content = List.of(
+              ContentBlockParam.ofImage(
+                  ImageBlockParam.builder()
+                      .source(Base64ImageSource.builder()
+                          .data(imageData)
+                          .mediaType(Base64ImageSource.MediaType.IMAGE_JPEG)
+                          .build())
+                      .build()),
+              ContentBlockParam.ofText(
+                  TextBlockParam.builder()
+                      .text("What is in the above image?")
+                      .build())
+          );
+
+          Message message = client.messages().create(
+              MessageCreateParams.builder()
+                  .model(Model.CLAUDE_OPUS_4_6)
+                  .maxTokens(1024L)
+                  .addUserMessageOfBlockParams(base64Content)
+                  .build());
+          System.out.println(message);
+
+          // Option 2: URL-referenced image
+          List<ContentBlockParam> urlContent = List.of(
+              ContentBlockParam.ofImage(
+                  ImageBlockParam.builder()
+                      .source(UrlImageSource.builder()
+                          .url("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg")
+                          .build())
+                      .build()),
+              ContentBlockParam.ofText(
+                  TextBlockParam.builder()
+                      .text("What is in the above image?")
+                      .build())
+          );
+
+          Message messageFromUrl = client.messages().create(
+              MessageCreateParams.builder()
+                  .model(Model.CLAUDE_OPUS_4_6)
+                  .maxTokens(1024L)
+                  .addUserMessageOfBlockParams(urlContent)
+                  .build());
+          System.out.println(messageFromUrl);
+      }
+  }
+  ```
+
+  
+  ```php PHP hidelines={1..6} nocheck
+  <?php
+
+  use Anthropic\Client;
+
+  $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+  // Option 1: Base64-encoded image
+  $image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+  $image_media_type = "image/jpeg";
+  $image_data = base64_encode(file_get_contents($image_url));
+
+  $message = $client->messages->create(
+      maxTokens: 1024,
+      messages: [
+          [
+              'role' => 'user',
+              'content' => [
+                  [
+                      'type' => 'image',
+                      'source' => [
+                          'type' => 'base64',
+                          'media_type' => $image_media_type,
+                          'data' => $image_data,
+                      ],
+                  ],
+                  [
+                      'type' => 'text',
+                      'text' => 'What is in the above image?',
+                  ],
+              ],
+          ],
+      ],
+      model: 'claude-opus-4-6',
+  );
+  echo $message;
+
+  // Option 2: URL-referenced image
+  $message_from_url = $client->messages->create(
+      maxTokens: 1024,
+      messages: [
+          [
+              'role' => 'user',
+              'content' => [
+                  [
+                      'type' => 'image',
+                      'source' => [
+                          'type' => 'url',
+                          'url' => 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg',
+                      ],
+                  ],
+                  [
+                      'type' => 'text',
+                      'text' => 'What is in the above image?',
+                  ],
+              ],
+          ],
+      ],
+      model: 'claude-opus-4-6',
+  );
+  echo $message_from_url;
+  ```
+
+  
+  ```ruby Ruby nocheck
+  require "anthropic"
+  require "base64"
+  require "net/http"
+
+  client = Anthropic::Client.new
+
+  # Option 1: Base64-encoded image
+  image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+  image_media_type = "image/jpeg"
+  image_data = Base64.strict_encode64(Net::HTTP.get(URI(image_url)))
+
+  message = client.messages.create(
+    model: "claude-opus-4-6",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "image",
+            source: {
+              type: "base64",
+              media_type: image_media_type,
+              data: image_data
+            }
+          },
+          {
+            type: "text",
+            text: "What is in the above image?"
+          }
+        ]
+      }
+    ]
+  )
+  puts message
+
+  # Option 2: URL-referenced image
+  message_from_url = client.messages.create(
+    model: "claude-opus-4-6",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "image",
+            source: {
+              type: "url",
+              url: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+            }
+          },
+          {
+            type: "text",
+            text: "What is in the above image?"
+          }
+        ]
+      }
+    ]
+  )
+  puts message_from_url
   ```
 </CodeGroup>
 

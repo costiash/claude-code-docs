@@ -12,7 +12,7 @@ For API feature documentation with code examples, see the [API reference](/docs/
 
 ## Installation
 
-```go
+```go nocheck
 import (
 	"github.com/anthropics/anthropic-sdk-go" // imported as anthropic
 )
@@ -30,7 +30,7 @@ This library requires Go 1.22+.
 
 ## Usage
 
-```go
+```go nocheck
 package main
 
 import (
@@ -94,7 +94,8 @@ fmt.Printf("%+v\n", message.Content)
 </section>
 <section title="System prompts">
 
-```go
+```go hidelines={1,10..11}
+messages := []anthropic.MessageParam{anthropic.NewUserMessage(anthropic.NewTextBlock("Hello"))}
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	Model:     anthropic.ModelClaudeOpus4_6,
 	MaxTokens: 1024,
@@ -103,6 +104,8 @@ message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	},
 	Messages: messages,
 })
+_ = message
+_ = err
 ```
 
 </section>
@@ -145,7 +148,7 @@ if stream.Err() != nil {
 </section>
 <section title="Tool calling">
 
-```go
+```go hidelines={1..18,99..135}
 package main
 
 import (
@@ -300,7 +303,7 @@ tag `` `json:"...,omitzero"` ``. Its zero value is considered omitted.
 
 The `param.IsOmitted(any)` function can confirm the presence of any `omitzero` field.
 
-```go
+```go nocheck
 p := anthropic.ExampleParams{
 	ID:   "id_xxx",                // required property
 	Name: anthropic.String("..."), // optional property
@@ -318,7 +321,7 @@ p := anthropic.ExampleParams{
 To send `null` instead of a `param.Opt[T]`, use `param.Null[T]()`.
 To send `null` instead of a struct `T`, use `param.NullStruct[T]()`.
 
-```go
+```go nocheck
 p.Name = param.Null[string]()       // 'null' instead of string
 p.Point = param.NullStruct[Point]() // 'null' instead of struct
 
@@ -336,7 +339,7 @@ For security reasons, only use `SetExtraFields` with trusted data.
 
 To send a custom value instead of a struct, use the generic function `param.Override` (e.g., `param.Override[anthropic.FooParams](12)`).
 
-```go
+```go nocheck
 // In cases where the API specifies a given type,
 // but you want to send something else, use [SetExtraFields]:
 p.SetExtraFields(map[string]any{
@@ -355,7 +358,7 @@ only one field can be non-zero. The non-zero field will be serialized.
 Sub-properties of the union can be accessed via methods on the union struct.
 These methods return a mutable pointer to the underlying data, if present.
 
-```go
+```go nocheck
 // Only one field can be non-zero, use param.IsOmitted() to check if a field is set
 type AnimalUnionParam struct {
 	OfCat *Cat `json:",omitzero,inline`
@@ -383,7 +386,7 @@ All fields in response structs are ordinary value types (not pointers or wrapper
 Response structs also include a special `JSON` field containing metadata about
 each property.
 
-```go
+```go nocheck
 type Animal struct {
 	Name   string `json:"name,nullable"`
 	Owners int    `json:"owners"`
@@ -402,7 +405,7 @@ To handle optional data, use the `.Valid()` method on the JSON field.
 
 If `.Valid()` is false, the corresponding field will simply be its zero value.
 
-```go
+```go nocheck
 raw := `{"owners": 1, "name": null}`
 
 var res Animal
@@ -434,7 +437,7 @@ any properties in the json response that were not specified
 in the struct. This can be useful for API features not yet
 present in the SDK.
 
-```go
+```go nocheck
 body := res.JSON.ExtraFields["my_unexpected_field"].Raw()
 ```
 
@@ -447,7 +450,7 @@ To convert it to a variant use the `.AsFooVariant()` method or the `.AsAny()` me
 If a response value union contains primitive values, primitive fields will be alongside
 the properties but prefixed with `Of` and feature the tag `json:"...,inline"`.
 
-```go
+```go nocheck
 type AnimalUnion struct {
 	// From variants [Dog], [Cat]
 	Owner Person `json:"owner"`
@@ -477,42 +480,6 @@ default:
 }
 ```
 
-## Streaming
-
-Use the streaming API for real-time responses:
-
-```go
-stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_6,
-	MaxTokens: 1024,
-	Messages: []anthropic.MessageParam{
-		anthropic.NewUserMessage(anthropic.NewTextBlock("What is a quaternion?")),
-	},
-})
-
-message := anthropic.Message{}
-for stream.Next() {
-	event := stream.Current()
-	err := message.Accumulate(event)
-	if err != nil {
-		panic(err)
-	}
-
-	switch eventVariant := event.AsAny().(type) {
-	case anthropic.ContentBlockDeltaEvent:
-		switch deltaVariant := eventVariant.Delta.AsAny().(type) {
-		case anthropic.TextDelta:
-			print(deltaVariant.Text)
-		}
-
-	}
-}
-
-if stream.Err() != nil {
-	panic(stream.Err())
-}
-```
-
 ## Error handling
 
 When the API returns a non-success status code, the SDK returns an error with type
@@ -523,27 +490,39 @@ from the response headers, which is useful for troubleshooting with Anthropic su
 
 To handle errors, use the `errors.As` pattern:
 
-```go
-_, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	MaxTokens: 1024,
-	Messages: []anthropic.MessageParam{{
-		Content: []anthropic.ContentBlockParamUnion{{
-			OfText: &anthropic.TextBlockParam{
-				Text: "What is a quaternion?",
-			},
+```go hidelines={1..11,33}
+package main
+
+import (
+	"context"
+	"errors"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+	_, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{{
+			Content: []anthropic.ContentBlockParamUnion{{
+				OfText: &anthropic.TextBlockParam{
+					Text: "What is a quaternion?",
+				},
+			}},
+			Role: anthropic.MessageParamRoleUser,
 		}},
-		Role: anthropic.MessageParamRoleUser,
-	}},
-	Model: anthropic.ModelClaudeOpus4_6,
-})
-if err != nil {
-	var apierr *anthropic.Error
-	if errors.As(err, &apierr) {
-		println("Request ID:", apierr.RequestID)
-		println(string(apierr.DumpRequest(true)))  // Prints the serialized HTTP request
-		println(string(apierr.DumpResponse(true))) // Prints the serialized HTTP response
+		Model: anthropic.ModelClaudeOpus4_6,
+	})
+	if err != nil {
+		var apierr *anthropic.Error
+		if errors.As(err, &apierr) {
+			println("Request ID:", apierr.RequestID)
+			println(string(apierr.DumpRequest(true)))  // Prints the serialized HTTP request
+			println(string(apierr.DumpResponse(true))) // Prints the serialized HTTP response
+		}
+		panic(err.Error()) // GET "/v1/messages": 400 Bad Request (Request-ID: req_xxx) { ... }
 	}
-	panic(err.Error()) // GET "/v1/messages": 400 Bad Request (Request-ID: req_xxx) { ... }
 }
 ```
 
@@ -558,29 +537,41 @@ and >=500 Internal errors.
 
 You can use the `WithMaxRetries` option to configure or disable this:
 
-```go
-// Configure the default for all requests:
-client := anthropic.NewClient(
-	option.WithMaxRetries(0), // default is 2
+```go hidelines={1..10,17,34}
+package main
+
+import (
+	"context"
+
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
-// Override per-request:
-client.Messages.New(
-	context.TODO(),
-	anthropic.MessageNewParams{
-		MaxTokens: 1024,
-		Messages: []anthropic.MessageParam{{
-			Content: []anthropic.ContentBlockParamUnion{{
-				OfText: &anthropic.TextBlockParam{
-					Text: "What is a quaternion?",
-				},
-			}},
-			Role: anthropic.MessageParamRoleUser,
-		}},
-		Model: anthropic.ModelClaudeOpus4_6,
-	},
-	option.WithMaxRetries(5),
-)
+func main() {
+	// Configure the default for all requests:
+	client := anthropic.NewClient(
+		option.WithMaxRetries(0), // default is 2
+	)
+
+	// Override per-request:
+	_, _ =
+		client.Messages.New(
+			context.TODO(),
+			anthropic.MessageNewParams{
+				MaxTokens: 1024,
+				Messages: []anthropic.MessageParam{{
+					Content: []anthropic.ContentBlockParamUnion{{
+						OfText: &anthropic.TextBlockParam{
+							Text: "What is a quaternion?",
+						},
+					}},
+					Role: anthropic.MessageParamRoleUser,
+				}},
+				Model: anthropic.ModelClaudeOpus4_6,
+			},
+			option.WithMaxRetries(5),
+		)
+}
 ```
 
 ## Timeouts
@@ -590,27 +581,41 @@ Requests do not time out by default; use context to configure a timeout for a re
 Note that if a request is [retried](#retries), the context timeout does not start over.
 To set a per-retry timeout, use `option.WithRequestTimeout()`.
 
-```go
-// This sets the timeout for the request, including all the retries.
-ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
-defer cancel()
-client.Messages.New(
-	ctx,
-	anthropic.MessageNewParams{
-		MaxTokens: 1024,
-		Messages: []anthropic.MessageParam{{
-			Content: []anthropic.ContentBlockParamUnion{{
-				OfText: &anthropic.TextBlockParam{
-					Text: "What is a quaternion?",
-				},
-			}},
-			Role: anthropic.MessageParamRoleUser,
-		}},
-		Model: anthropic.ModelClaudeOpus4_6,
-	},
-	// This sets the per-retry timeout
-	option.WithRequestTimeout(20*time.Second),
+```go hidelines={1..12,16,34}
+package main
+
+import (
+	"context"
+	"time"
+
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
+
+func main() {
+	client := anthropic.NewClient()
+	// This sets the timeout for the request, including all the retries.
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
+	defer cancel()
+	_, _ =
+		client.Messages.New(
+			ctx,
+			anthropic.MessageNewParams{
+				MaxTokens: 1024,
+				Messages: []anthropic.MessageParam{{
+					Content: []anthropic.ContentBlockParamUnion{{
+						OfText: &anthropic.TextBlockParam{
+							Text: "What is a quaternion?",
+						},
+					}},
+					Role: anthropic.MessageParamRoleUser,
+				}},
+				Model: anthropic.ModelClaudeOpus4_6,
+			},
+			// This sets the per-retry timeout
+			option.WithRequestTimeout(20*time.Second),
+		)
+}
 ```
 
 ## Long requests
@@ -632,7 +637,7 @@ Request parameters that correspond to file uploads in multipart requests are typ
 part with the file name of "anonymous_file" and content-type of "application/octet-stream", so the recommended approach is to specify a custom content-type with the `anthropic.File(reader io.Reader, filename string, contentType string)`
 helper, which easily wraps any `io.Reader` with the appropriate file name and content type.
 
-```go
+```go nocheck
 // A file from the file system
 file, err := os.Open("/path/to/file.json")
 anthropic.BetaFileUploadParams{
@@ -696,7 +701,7 @@ This library uses the functional options pattern. Functions defined in the
 `RequestConfig`. These options can be supplied to the client or at individual
 requests. For example:
 
-```go
+```go nocheck
 client := anthropic.NewClient(
 	// Adds a header to every request made by the client
 	option.WithHeader("X-Some-Header", "custom_header_info"),
@@ -721,22 +726,40 @@ See the [full list of request options](https://pkg.go.dev/github.com/anthropics/
 The SDK provides `option.WithMiddleware`, which applies the given
 middleware to requests.
 
-```go
-client := anthropic.NewClient(
-	option.WithMiddleware(func(req *http.Request, next option.MiddlewareNext) (res *http.Response, err error) {
-		// Before the request
-		start := time.Now()
-		LogReq(req)
+```go hidelines={1..16,32..33}
+package main
 
-		// Forward the request to the next handler
-		res, err = next(req)
+import (
+	"net/http"
+	"time"
 
-		// Handle stuff after the request
-		LogRes(res, err, time.Since(start))
-
-		return res, err
-	}),
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
+
+var _ = anthropic.ModelClaudeOpus4_6
+
+func LogReq(req *http.Request)                              {}
+func LogRes(res *http.Response, err error, d time.Duration) {}
+
+func main() {
+	client := anthropic.NewClient(
+		option.WithMiddleware(func(req *http.Request, next option.MiddlewareNext) (res *http.Response, err error) {
+			// Before the request
+			start := time.Now()
+			LogReq(req)
+
+			// Forward the request to the next handler
+			res, err = next(req)
+
+			// Handle stuff after the request
+			LogRes(res, err, time.Since(start))
+
+			return res, err
+		}),
+	)
+	_ = client
+}
 ```
 
 When multiple middlewares are provided as variadic arguments, the middlewares
@@ -770,32 +793,46 @@ The Go SDK supports Amazon Bedrock and Google Vertex AI through subpackages:
 You can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when
 you need to examine response headers, status codes, or other details.
 
-```go
-// Create a variable to store the HTTP response
-var response *http.Response
-message, err := client.Messages.New(
-	context.TODO(),
-	anthropic.MessageNewParams{
-		MaxTokens: 1024,
-		Messages: []anthropic.MessageParam{{
-			Content: []anthropic.ContentBlockParamUnion{{
-				OfText: &anthropic.TextBlockParam{
-					Text: "What is a quaternion?",
-				},
-			}},
-			Role: anthropic.MessageParamRoleUser,
-		}},
-		Model: anthropic.ModelClaudeOpus4_6,
-	},
-	option.WithResponseInto(&response),
-)
-if err != nil {
-	// handle error
-}
-fmt.Printf("%+v\n", message)
+```go hidelines={1..13,39}
+package main
 
-fmt.Printf("Status Code: %d\n", response.StatusCode)
-fmt.Printf("Headers: %+#v\n", response.Header)
+import (
+	"context"
+	"fmt"
+	"net/http"
+
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
+)
+
+func main() {
+	client := anthropic.NewClient()
+	// Create a variable to store the HTTP response
+	var response *http.Response
+	message, err := client.Messages.New(
+		context.TODO(),
+		anthropic.MessageNewParams{
+			MaxTokens: 1024,
+			Messages: []anthropic.MessageParam{{
+				Content: []anthropic.ContentBlockParamUnion{{
+					OfText: &anthropic.TextBlockParam{
+						Text: "What is a quaternion?",
+					},
+				}},
+				Role: anthropic.MessageParamRoleUser,
+			}},
+			Model: anthropic.ModelClaudeOpus4_6,
+		},
+		option.WithResponseInto(&response),
+	)
+	if err != nil {
+		// handle error
+	}
+	fmt.Printf("%+v\n", message)
+
+	fmt.Printf("Status Code: %d\n", response.StatusCode)
+	fmt.Printf("Headers: %+#v\n", response.Header)
+}
 ```
 
 ### Making custom/undocumented requests
@@ -808,7 +845,7 @@ endpoints, params, or response properties, the library can still be used.
 To make requests to undocumented endpoints, you can use `client.Get`, `client.Post`, and other HTTP verbs.
 `RequestOptions` on the client, such as retries, will be respected when making these requests.
 
-```go
+```go nocheck
 var (
 	// params can be an io.Reader, a []byte, an encoding/json serializable object,
 	// or a "...Params" struct defined in this library.
@@ -829,7 +866,7 @@ if err != nil {
 To make requests using undocumented parameters, you may use either the `option.WithQuerySet()`
 or the `option.WithJSONSet()` methods.
 
-```go
+```go nocheck
 params := FooNewParams{
 	ID: "id_xxxx",
 	Data: FooNewParamsData{

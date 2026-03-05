@@ -5811,87 +5811,59 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
-        Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+        Best combination of speed and intelligence
 
-      - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+      - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
 
-        Premium model combining maximum intelligence with practical performance
+        Fastest model with near-frontier intelligence
+
+      - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
 
       - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
         Premium model combining maximum intelligence with practical performance
 
-      - `const ModelClaude3_7SonnetLatest Model = "claude-3-7-sonnet-latest"`
+      - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-        High-performance model with early extended thinking
+        Premium model combining maximum intelligence with practical performance
 
-      - `const ModelClaude3_7Sonnet20250219 Model = "claude-3-7-sonnet-20250219"`
+      - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
-        High-performance model with early extended thinking
+        High-performance model for agents and coding
 
-      - `const ModelClaude3_5HaikuLatest Model = "claude-3-5-haiku-latest"`
+      - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
 
-        Fastest and most compact model for near-instant responsiveness
+        High-performance model for agents and coding
 
-      - `const ModelClaude3_5Haiku20241022 Model = "claude-3-5-haiku-20241022"`
+      - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-        Our fastest model
+        Exceptional model for specialized complex tasks
 
-      - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
+      - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Exceptional model for specialized complex tasks
 
-      - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+      - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Powerful model for complex tasks
 
-      - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
+      - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
 
-        High-performance model with extended thinking
+        Powerful model for complex tasks
 
       - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
 
         High-performance model with extended thinking
 
-      - `const ModelClaude4Sonnet20250514 Model = "claude-4-sonnet-20250514"`
+      - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
 
         High-performance model with extended thinking
 
-      - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
-
-        Our best model for real-world agents and coding
-
-      - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
-
-        Our best model for real-world agents and coding
-
-      - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-        Our most capable model
-
-      - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-        Our most capable model
-
-      - `const ModelClaude4Opus20250514 Model = "claude-4-opus-20250514"`
-
-        Our most capable model
-
-      - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
-
-        Our most capable model
-
-      - `const ModelClaude3OpusLatest Model = "claude-3-opus-latest"`
-
-        Excels at writing and complex tasks
-
-      - `const ModelClaude_3_Opus_20240229 Model = "claude-3-opus-20240229"`
-
-        Excels at writing and complex tasks
-
       - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
 
-        Our previous most fast and cost-effective
+        Fast and cost-effective model
 
     - `string`
 
@@ -17596,87 +17568,59 @@ func main() {
 
       - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
-        Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+        Best combination of speed and intelligence
 
-      - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+      - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
 
-        Premium model combining maximum intelligence with practical performance
+        Fastest model with near-frontier intelligence
+
+      - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
 
       - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
         Premium model combining maximum intelligence with practical performance
 
-      - `const ModelClaude3_7SonnetLatest Model = "claude-3-7-sonnet-latest"`
+      - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-        High-performance model with early extended thinking
+        Premium model combining maximum intelligence with practical performance
 
-      - `const ModelClaude3_7Sonnet20250219 Model = "claude-3-7-sonnet-20250219"`
+      - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
-        High-performance model with early extended thinking
+        High-performance model for agents and coding
 
-      - `const ModelClaude3_5HaikuLatest Model = "claude-3-5-haiku-latest"`
+      - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
 
-        Fastest and most compact model for near-instant responsiveness
+        High-performance model for agents and coding
 
-      - `const ModelClaude3_5Haiku20241022 Model = "claude-3-5-haiku-20241022"`
+      - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-        Our fastest model
+        Exceptional model for specialized complex tasks
 
-      - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
+      - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Exceptional model for specialized complex tasks
 
-      - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+      - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Powerful model for complex tasks
 
-      - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
+      - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
 
-        High-performance model with extended thinking
+        Powerful model for complex tasks
 
       - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
 
         High-performance model with extended thinking
 
-      - `const ModelClaude4Sonnet20250514 Model = "claude-4-sonnet-20250514"`
+      - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
 
         High-performance model with extended thinking
 
-      - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
-
-        Our best model for real-world agents and coding
-
-      - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
-
-        Our best model for real-world agents and coding
-
-      - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-        Our most capable model
-
-      - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-        Our most capable model
-
-      - `const ModelClaude4Opus20250514 Model = "claude-4-opus-20250514"`
-
-        Our most capable model
-
-      - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
-
-        Our most capable model
-
-      - `const ModelClaude3OpusLatest Model = "claude-3-opus-latest"`
-
-        Excels at writing and complex tasks
-
-      - `const ModelClaude_3_Opus_20240229 Model = "claude-3-opus-20240229"`
-
-        Excels at writing and complex tasks
-
       - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
 
-        Our previous most fast and cost-effective
+        Fast and cost-effective model
 
     - `string`
 
@@ -22916,87 +22860,59 @@ func main() {
 
         - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
-          Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+          Best combination of speed and intelligence
 
-        - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+        - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
 
-          Premium model combining maximum intelligence with practical performance
+          Fastest model with near-frontier intelligence
+
+        - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
 
         - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
           Premium model combining maximum intelligence with practical performance
 
-        - `const ModelClaude3_7SonnetLatest Model = "claude-3-7-sonnet-latest"`
+        - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-          High-performance model with early extended thinking
+          Premium model combining maximum intelligence with practical performance
 
-        - `const ModelClaude3_7Sonnet20250219 Model = "claude-3-7-sonnet-20250219"`
+        - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
-          High-performance model with early extended thinking
+          High-performance model for agents and coding
 
-        - `const ModelClaude3_5HaikuLatest Model = "claude-3-5-haiku-latest"`
+        - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
 
-          Fastest and most compact model for near-instant responsiveness
+          High-performance model for agents and coding
 
-        - `const ModelClaude3_5Haiku20241022 Model = "claude-3-5-haiku-20241022"`
+        - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-          Our fastest model
+          Exceptional model for specialized complex tasks
 
-        - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
+        - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-          Hybrid model, capable of near-instant responses and extended thinking
+          Exceptional model for specialized complex tasks
 
-        - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+        - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
 
-          Hybrid model, capable of near-instant responses and extended thinking
+          Powerful model for complex tasks
 
-        - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
+        - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
 
-          High-performance model with extended thinking
+          Powerful model for complex tasks
 
         - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
 
           High-performance model with extended thinking
 
-        - `const ModelClaude4Sonnet20250514 Model = "claude-4-sonnet-20250514"`
+        - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
 
           High-performance model with extended thinking
 
-        - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
-
-          Our best model for real-world agents and coding
-
-        - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
-
-          Our best model for real-world agents and coding
-
-        - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-          Our most capable model
-
-        - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-          Our most capable model
-
-        - `const ModelClaude4Opus20250514 Model = "claude-4-opus-20250514"`
-
-          Our most capable model
-
-        - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
-
-          Our most capable model
-
-        - `const ModelClaude3OpusLatest Model = "claude-3-opus-latest"`
-
-          Excels at writing and complex tasks
-
-        - `const ModelClaude_3_Opus_20240229 Model = "claude-3-opus-20240229"`
-
-          Excels at writing and complex tasks
-
         - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
 
-          Our previous most fast and cost-effective
+          Fast and cost-effective model
 
       - `string`
 
@@ -24164,87 +24080,59 @@ func main() {
 
           - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
-            Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+            Best combination of speed and intelligence
 
-          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+          - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
 
-            Premium model combining maximum intelligence with practical performance
+            Fastest model with near-frontier intelligence
+
+          - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
 
           - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
             Premium model combining maximum intelligence with practical performance
 
-          - `const ModelClaude3_7SonnetLatest Model = "claude-3-7-sonnet-latest"`
+          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-            High-performance model with early extended thinking
+            Premium model combining maximum intelligence with practical performance
 
-          - `const ModelClaude3_7Sonnet20250219 Model = "claude-3-7-sonnet-20250219"`
+          - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
-            High-performance model with early extended thinking
+            High-performance model for agents and coding
 
-          - `const ModelClaude3_5HaikuLatest Model = "claude-3-5-haiku-latest"`
+          - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
 
-            Fastest and most compact model for near-instant responsiveness
+            High-performance model for agents and coding
 
-          - `const ModelClaude3_5Haiku20241022 Model = "claude-3-5-haiku-20241022"`
+          - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-            Our fastest model
+            Exceptional model for specialized complex tasks
 
-          - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
+          - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-            Hybrid model, capable of near-instant responses and extended thinking
+            Exceptional model for specialized complex tasks
 
-          - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+          - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
 
-            Hybrid model, capable of near-instant responses and extended thinking
+            Powerful model for complex tasks
 
-          - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
+          - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
 
-            High-performance model with extended thinking
+            Powerful model for complex tasks
 
           - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
 
             High-performance model with extended thinking
 
-          - `const ModelClaude4Sonnet20250514 Model = "claude-4-sonnet-20250514"`
+          - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
 
             High-performance model with extended thinking
 
-          - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
-
-            Our best model for real-world agents and coding
-
-          - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
-
-            Our best model for real-world agents and coding
-
-          - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-            Our most capable model
-
-          - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-            Our most capable model
-
-          - `const ModelClaude4Opus20250514 Model = "claude-4-opus-20250514"`
-
-            Our most capable model
-
-          - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
-
-            Our most capable model
-
-          - `const ModelClaude3OpusLatest Model = "claude-3-opus-latest"`
-
-            Excels at writing and complex tasks
-
-          - `const ModelClaude_3_Opus_20240229 Model = "claude-3-opus-20240229"`
-
-            Excels at writing and complex tasks
-
           - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
 
-            Our previous most fast and cost-effective
+            Fast and cost-effective model
 
         - `string`
 
@@ -35058,87 +34946,59 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
-            Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+            Best combination of speed and intelligence
 
-          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+          - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
 
-            Premium model combining maximum intelligence with practical performance
+            Fastest model with near-frontier intelligence
+
+          - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
 
           - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
             Premium model combining maximum intelligence with practical performance
 
-          - `const ModelClaude3_7SonnetLatest Model = "claude-3-7-sonnet-latest"`
+          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-            High-performance model with early extended thinking
+            Premium model combining maximum intelligence with practical performance
 
-          - `const ModelClaude3_7Sonnet20250219 Model = "claude-3-7-sonnet-20250219"`
+          - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
-            High-performance model with early extended thinking
+            High-performance model for agents and coding
 
-          - `const ModelClaude3_5HaikuLatest Model = "claude-3-5-haiku-latest"`
+          - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
 
-            Fastest and most compact model for near-instant responsiveness
+            High-performance model for agents and coding
 
-          - `const ModelClaude3_5Haiku20241022 Model = "claude-3-5-haiku-20241022"`
+          - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-            Our fastest model
+            Exceptional model for specialized complex tasks
 
-          - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
+          - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-            Hybrid model, capable of near-instant responses and extended thinking
+            Exceptional model for specialized complex tasks
 
-          - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+          - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
 
-            Hybrid model, capable of near-instant responses and extended thinking
+            Powerful model for complex tasks
 
-          - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
+          - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
 
-            High-performance model with extended thinking
+            Powerful model for complex tasks
 
           - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
 
             High-performance model with extended thinking
 
-          - `const ModelClaude4Sonnet20250514 Model = "claude-4-sonnet-20250514"`
+          - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
 
             High-performance model with extended thinking
 
-          - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
-
-            Our best model for real-world agents and coding
-
-          - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
-
-            Our best model for real-world agents and coding
-
-          - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-            Our most capable model
-
-          - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-            Our most capable model
-
-          - `const ModelClaude4Opus20250514 Model = "claude-4-opus-20250514"`
-
-            Our most capable model
-
-          - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
-
-            Our most capable model
-
-          - `const ModelClaude3OpusLatest Model = "claude-3-opus-latest"`
-
-            Excels at writing and complex tasks
-
-          - `const ModelClaude_3_Opus_20240229 Model = "claude-3-opus-20240229"`
-
-            Excels at writing and complex tasks
-
           - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
 
-            Our previous most fast and cost-effective
+            Fast and cost-effective model
 
         - `string`
 
@@ -38936,87 +38796,59 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
-              Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+              Best combination of speed and intelligence
 
-            - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+            - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Fastest model with near-frontier intelligence
+
+            - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
 
             - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
               Premium model combining maximum intelligence with practical performance
 
-            - `const ModelClaude3_7SonnetLatest Model = "claude-3-7-sonnet-latest"`
+            - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-              High-performance model with early extended thinking
+              Premium model combining maximum intelligence with practical performance
 
-            - `const ModelClaude3_7Sonnet20250219 Model = "claude-3-7-sonnet-20250219"`
+            - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
-              High-performance model with early extended thinking
+              High-performance model for agents and coding
 
-            - `const ModelClaude3_5HaikuLatest Model = "claude-3-5-haiku-latest"`
+            - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
 
-              Fastest and most compact model for near-instant responsiveness
+              High-performance model for agents and coding
 
-            - `const ModelClaude3_5Haiku20241022 Model = "claude-3-5-haiku-20241022"`
+            - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-              Our fastest model
+              Exceptional model for specialized complex tasks
 
-            - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
+            - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-              Hybrid model, capable of near-instant responses and extended thinking
+              Exceptional model for specialized complex tasks
 
-            - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+            - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
 
-              Hybrid model, capable of near-instant responses and extended thinking
+              Powerful model for complex tasks
 
-            - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
+            - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
 
-              High-performance model with extended thinking
+              Powerful model for complex tasks
 
             - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
 
               High-performance model with extended thinking
 
-            - `const ModelClaude4Sonnet20250514 Model = "claude-4-sonnet-20250514"`
+            - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
 
               High-performance model with extended thinking
 
-            - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
-
-              Our best model for real-world agents and coding
-
-            - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
-
-              Our best model for real-world agents and coding
-
-            - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-              Our most capable model
-
-            - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-              Our most capable model
-
-            - `const ModelClaude4Opus20250514 Model = "claude-4-opus-20250514"`
-
-              Our most capable model
-
-            - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
-
-              Our most capable model
-
-            - `const ModelClaude3OpusLatest Model = "claude-3-opus-latest"`
-
-              Excels at writing and complex tasks
-
-            - `const ModelClaude_3_Opus_20240229 Model = "claude-3-opus-20240229"`
-
-              Excels at writing and complex tasks
-
             - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
 
-              Our previous most fast and cost-effective
+              Fast and cost-effective model
 
           - `string`
 
@@ -39361,10 +39193,13 @@ func main() {
 
     },
   )
-  if stream.Err() != nil {
+  for stream.Next() {
+  fmt.Printf("%+v\n", stream.Current())
+  }
+  err := stream.Err()
+  if err != nil {
     panic(err.Error())
   }
-  fmt.Printf("%+v\n", betaMessageBatchIndividualResponse.CustomID)
 }
 ```
 
@@ -40535,87 +40370,59 @@ func main() {
 
             - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
-              Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+              Best combination of speed and intelligence
 
-            - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+            - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Fastest model with near-frontier intelligence
+
+            - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
 
             - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
               Premium model combining maximum intelligence with practical performance
 
-            - `const ModelClaude3_7SonnetLatest Model = "claude-3-7-sonnet-latest"`
+            - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-              High-performance model with early extended thinking
+              Premium model combining maximum intelligence with practical performance
 
-            - `const ModelClaude3_7Sonnet20250219 Model = "claude-3-7-sonnet-20250219"`
+            - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
-              High-performance model with early extended thinking
+              High-performance model for agents and coding
 
-            - `const ModelClaude3_5HaikuLatest Model = "claude-3-5-haiku-latest"`
+            - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
 
-              Fastest and most compact model for near-instant responsiveness
+              High-performance model for agents and coding
 
-            - `const ModelClaude3_5Haiku20241022 Model = "claude-3-5-haiku-20241022"`
+            - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-              Our fastest model
+              Exceptional model for specialized complex tasks
 
-            - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
+            - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-              Hybrid model, capable of near-instant responses and extended thinking
+              Exceptional model for specialized complex tasks
 
-            - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+            - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
 
-              Hybrid model, capable of near-instant responses and extended thinking
+              Powerful model for complex tasks
 
-            - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
+            - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
 
-              High-performance model with extended thinking
+              Powerful model for complex tasks
 
             - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
 
               High-performance model with extended thinking
 
-            - `const ModelClaude4Sonnet20250514 Model = "claude-4-sonnet-20250514"`
+            - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
 
               High-performance model with extended thinking
 
-            - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
-
-              Our best model for real-world agents and coding
-
-            - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
-
-              Our best model for real-world agents and coding
-
-            - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-              Our most capable model
-
-            - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-              Our most capable model
-
-            - `const ModelClaude4Opus20250514 Model = "claude-4-opus-20250514"`
-
-              Our most capable model
-
-            - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
-
-              Our most capable model
-
-            - `const ModelClaude3OpusLatest Model = "claude-3-opus-latest"`
-
-              Excels at writing and complex tasks
-
-            - `const ModelClaude_3_Opus_20240229 Model = "claude-3-opus-20240229"`
-
-              Excels at writing and complex tasks
-
             - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
 
-              Our previous most fast and cost-effective
+              Fast and cost-effective model
 
           - `string`
 
@@ -41911,87 +41718,59 @@ func main() {
 
           - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
-            Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+            Best combination of speed and intelligence
 
-          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+          - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
 
-            Premium model combining maximum intelligence with practical performance
+            Fastest model with near-frontier intelligence
+
+          - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
 
           - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
             Premium model combining maximum intelligence with practical performance
 
-          - `const ModelClaude3_7SonnetLatest Model = "claude-3-7-sonnet-latest"`
+          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-            High-performance model with early extended thinking
+            Premium model combining maximum intelligence with practical performance
 
-          - `const ModelClaude3_7Sonnet20250219 Model = "claude-3-7-sonnet-20250219"`
+          - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
-            High-performance model with early extended thinking
+            High-performance model for agents and coding
 
-          - `const ModelClaude3_5HaikuLatest Model = "claude-3-5-haiku-latest"`
+          - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
 
-            Fastest and most compact model for near-instant responsiveness
+            High-performance model for agents and coding
 
-          - `const ModelClaude3_5Haiku20241022 Model = "claude-3-5-haiku-20241022"`
+          - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-            Our fastest model
+            Exceptional model for specialized complex tasks
 
-          - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
+          - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-            Hybrid model, capable of near-instant responses and extended thinking
+            Exceptional model for specialized complex tasks
 
-          - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+          - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
 
-            Hybrid model, capable of near-instant responses and extended thinking
+            Powerful model for complex tasks
 
-          - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
+          - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
 
-            High-performance model with extended thinking
+            Powerful model for complex tasks
 
           - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
 
             High-performance model with extended thinking
 
-          - `const ModelClaude4Sonnet20250514 Model = "claude-4-sonnet-20250514"`
+          - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
 
             High-performance model with extended thinking
 
-          - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
-
-            Our best model for real-world agents and coding
-
-          - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
-
-            Our best model for real-world agents and coding
-
-          - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-            Our most capable model
-
-          - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-            Our most capable model
-
-          - `const ModelClaude4Opus20250514 Model = "claude-4-opus-20250514"`
-
-            Our most capable model
-
-          - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
-
-            Our most capable model
-
-          - `const ModelClaude3OpusLatest Model = "claude-3-opus-latest"`
-
-            Excels at writing and complex tasks
-
-          - `const ModelClaude_3_Opus_20240229 Model = "claude-3-opus-20240229"`
-
-            Excels at writing and complex tasks
-
           - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
 
-            Our previous most fast and cost-effective
+            Fast and cost-effective model
 
         - `string`
 
@@ -43249,87 +43028,59 @@ func main() {
 
         - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
-          Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+          Best combination of speed and intelligence
 
-        - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+        - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
 
-          Premium model combining maximum intelligence with practical performance
+          Fastest model with near-frontier intelligence
+
+        - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
 
         - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
           Premium model combining maximum intelligence with practical performance
 
-        - `const ModelClaude3_7SonnetLatest Model = "claude-3-7-sonnet-latest"`
+        - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-          High-performance model with early extended thinking
+          Premium model combining maximum intelligence with practical performance
 
-        - `const ModelClaude3_7Sonnet20250219 Model = "claude-3-7-sonnet-20250219"`
+        - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
-          High-performance model with early extended thinking
+          High-performance model for agents and coding
 
-        - `const ModelClaude3_5HaikuLatest Model = "claude-3-5-haiku-latest"`
+        - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
 
-          Fastest and most compact model for near-instant responsiveness
+          High-performance model for agents and coding
 
-        - `const ModelClaude3_5Haiku20241022 Model = "claude-3-5-haiku-20241022"`
+        - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-          Our fastest model
+          Exceptional model for specialized complex tasks
 
-        - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
+        - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-          Hybrid model, capable of near-instant responses and extended thinking
+          Exceptional model for specialized complex tasks
 
-        - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
+        - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
 
-          Hybrid model, capable of near-instant responses and extended thinking
+          Powerful model for complex tasks
 
-        - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
+        - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
 
-          High-performance model with extended thinking
+          Powerful model for complex tasks
 
         - `const ModelClaudeSonnet4_0 Model = "claude-sonnet-4-0"`
 
           High-performance model with extended thinking
 
-        - `const ModelClaude4Sonnet20250514 Model = "claude-4-sonnet-20250514"`
+        - `const ModelClaudeSonnet4_20250514 Model = "claude-sonnet-4-20250514"`
 
           High-performance model with extended thinking
 
-        - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
-
-          Our best model for real-world agents and coding
-
-        - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
-
-          Our best model for real-world agents and coding
-
-        - `const ModelClaudeOpus4_0 Model = "claude-opus-4-0"`
-
-          Our most capable model
-
-        - `const ModelClaudeOpus4_20250514 Model = "claude-opus-4-20250514"`
-
-          Our most capable model
-
-        - `const ModelClaude4Opus20250514 Model = "claude-4-opus-20250514"`
-
-          Our most capable model
-
-        - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
-
-          Our most capable model
-
-        - `const ModelClaude3OpusLatest Model = "claude-3-opus-latest"`
-
-          Excels at writing and complex tasks
-
-        - `const ModelClaude_3_Opus_20240229 Model = "claude-3-opus-20240229"`
-
-          Excels at writing and complex tasks
-
         - `const ModelClaude_3_Haiku_20240307 Model = "claude-3-haiku-20240307"`
 
-          Our previous most fast and cost-effective
+          Fast and cost-effective model
 
       - `string`
 

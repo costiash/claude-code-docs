@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-04T21:18:29Z",
+  "generated_at": "2026-03-05T00:40:13Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -11,24 +11,24 @@
         "when",
         "added",
         "claude",
-        "code",
         "improved",
-        "commands",
-        "command",
-        "being",
+        "code",
         "sessions",
-        "tool",
+        "command",
+        "commands",
+        "being",
         "instead",
         "file",
-        "anthropics",
-        "support",
+        "tool",
+        "memory",
         "mcp",
         "where",
+        "mode",
+        "support",
         "session",
-        "now",
-        "memory"
+        "now"
       ],
-      "word_count": 17363,
+      "word_count": 19133,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -938,8 +938,8 @@
         "permission",
         "claude",
         "code",
-        "sandboxing",
         "settings",
+        "sandboxing",
         "security",
         "bash",
         "filesystem",
@@ -952,7 +952,7 @@
         "sandboxed",
         "isolation"
       ],
-      "word_count": 2288,
+      "word_count": 2297,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -1008,7 +1008,7 @@
         "mcp",
         "disable"
       ],
-      "word_count": 7905,
+      "word_count": 7914,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1344,7 +1344,7 @@
         "extended",
         "beta"
       ],
-      "word_count": 3669,
+      "word_count": 4601,
       "file_path": "docs/docs__en__about-claude__models__migration-guide.md"
     },
     "/docs/en/about-claude/models/overview": {
@@ -1409,26 +1409,26 @@
       "keywords": [
         "mtok",
         "tokens",
-        "claude",
         "pricing",
+        "claude",
         "input",
         "tool",
         "sonnet",
-        "opus",
         "api",
+        "cache",
+        "opus",
         "token",
+        "prompt",
         "usage",
         "output",
         "context",
-        "additional",
         "standard",
-        "prompt",
-        "web",
-        "note",
-        "per",
-        "models"
+        "caching",
+        "additional",
+        "see",
+        "web"
       ],
-      "word_count": 3008,
+      "word_count": 3236,
       "file_path": "docs/docs__en__about-claude__pricing.md"
     },
     "/docs/en/about-claude/use-case-guides/content-moderation": {
@@ -2408,7 +2408,7 @@
         "version",
         "beta"
       ],
-      "word_count": 2443,
+      "word_count": 2697,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/remote-mcp-servers": {
@@ -2492,7 +2492,7 @@
         "edit",
         "web"
       ],
-      "word_count": 4747,
+      "word_count": 7345,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -2520,7 +2520,7 @@
         "implementation",
         "mouse"
       ],
-      "word_count": 5499,
+      "word_count": 6179,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
@@ -2576,7 +2576,7 @@
         "user",
         "tip"
       ],
-      "word_count": 9470,
+      "word_count": 13266,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__implement-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/memory-tool": {
@@ -2585,26 +2585,26 @@
       "keywords": [
         "memory",
         "claude",
-        "tool",
-        "file",
-        "path",
-        "context",
         "retries",
-        "return",
-        "files",
-        "directory",
-        "what",
+        "tool",
         "response",
-        "line",
-        "time",
-        "side",
         "url",
         "requests",
         "timeout",
-        "error",
-        "session"
+        "return",
+        "file",
+        "path",
+        "time",
+        "context",
+        "files",
+        "python",
+        "text",
+        "directory",
+        "what",
+        "line",
+        "side"
       ],
-      "word_count": 2862,
+      "word_count": 3557,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__memory-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/overview": {
@@ -2632,7 +2632,7 @@
         "result",
         "call"
       ],
-      "word_count": 6172,
+      "word_count": 8157,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/programmatic-tool-calling": {
@@ -2660,7 +2660,7 @@
         "processing",
         "call"
       ],
-      "word_count": 4035,
+      "word_count": 5426,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md"
     },
     "/docs/en/agents-and-tools/tool-use/text-editor-tool": {
@@ -2688,7 +2688,7 @@
         "codegroup",
         "return"
       ],
-      "word_count": 4885,
+      "word_count": 4892,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__text-editor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-search-tool": {
@@ -2716,7 +2716,7 @@
         "context",
         "only"
       ],
-      "word_count": 3165,
+      "word_count": 4654,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-search-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-fetch-tool": {
@@ -2744,7 +2744,7 @@
         "response",
         "citations"
       ],
-      "word_count": 2254,
+      "word_count": 2450,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -2772,7 +2772,7 @@
         "sonnet",
         "only"
       ],
-      "word_count": 2413,
+      "word_count": 3153,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -3711,8 +3711,8 @@
       "keywords": [
         "tool",
         "cache",
-        "model",
         "control",
+        "model",
         "breakpoint",
         "content",
         "block",
@@ -3730,7 +3730,7 @@
         "live",
         "minutes"
       ],
-      "word_count": 111375,
+      "word_count": 110627,
       "file_path": "docs/docs__en__api__beta.md"
     },
     "/docs/en/api/beta/files": {
@@ -3896,9 +3896,9 @@
       "keywords": [
         "tool",
         "cache",
-        "model",
         "control",
         "breakpoint",
+        "model",
         "content",
         "block",
         "create",
@@ -3915,7 +3915,7 @@
         "minutes",
         "input"
       ],
-      "word_count": 107015,
+      "word_count": 106267,
       "file_path": "docs/docs__en__api__beta__messages.md"
     },
     "/docs/en/api/beta/messages/batches": {
@@ -3943,7 +3943,7 @@
         "results",
         "block"
       ],
-      "word_count": 28384,
+      "word_count": 28044,
       "file_path": "docs/docs__en__api__beta__messages__batches.md"
     },
     "/docs/en/api/beta/messages/batches/cancel": {
@@ -3982,8 +3982,8 @@
         "control",
         "cache",
         "breakpoint",
-        "model",
         "content",
+        "model",
         "block",
         "may",
         "one",
@@ -3999,7 +3999,7 @@
         "true",
         "message"
       ],
-      "word_count": 12544,
+      "word_count": 12476,
       "file_path": "docs/docs__en__api__beta__messages__batches__create.md"
     },
     "/docs/en/api/beta/messages/batches/delete": {
@@ -4073,7 +4073,6 @@
         "cache",
         "invocation",
         "response",
-        "our",
         "which",
         "content",
         "were",
@@ -4081,9 +4080,10 @@
         "generated",
         "directly",
         "create",
-        "message"
+        "message",
+        "output"
       ],
-      "word_count": 3485,
+      "word_count": 3417,
       "file_path": "docs/docs__en__api__beta__messages__batches__results.md"
     },
     "/docs/en/api/beta/messages/batches/retrieve": {
@@ -4139,7 +4139,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 11573,
+      "word_count": 11505,
       "file_path": "docs/docs__en__api__beta__messages__count_tokens.md"
     },
     "/docs/en/api/beta/messages/create": {
@@ -4148,9 +4148,9 @@
       "keywords": [
         "tool",
         "cache",
-        "model",
         "control",
         "breakpoint",
+        "model",
         "content",
         "block",
         "one",
@@ -4167,7 +4167,7 @@
         "true",
         "number"
       ],
-      "word_count": 15051,
+      "word_count": 14915,
       "file_path": "docs/docs__en__api__beta__messages__create.md"
     },
     "/docs/en/api/beta/models": {
@@ -4559,7 +4559,7 @@
         "beta",
         "platform"
       ],
-      "word_count": 688,
+      "word_count": 737,
       "file_path": "docs/docs__en__api__client-sdks.md"
     },
     "/docs/en/api/completions": {
@@ -4567,27 +4567,27 @@
       "content_preview": "# Completions  ## Create  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/me...",
       "keywords": [
         "model",
-        "our",
-        "most",
         "performance",
-        "extended",
-        "thinking",
-        "capable",
-        "high",
+        "intelligence",
+        "tasks",
         "stop",
-        "agents",
-        "coding",
+        "high",
+        "complex",
         "maximum",
         "prompt",
         "models",
         "see",
         "details",
-        "intelligence",
-        "near",
-        "instant",
-        "may"
+        "agents",
+        "coding",
+        "may",
+        "additional",
+        "options",
+        "complete",
+        "completions",
+        "text"
       ],
-      "word_count": 1435,
+      "word_count": 1231,
       "file_path": "docs/docs__en__api__completions.md"
     },
     "/docs/en/api/completions/create": {
@@ -4595,27 +4595,27 @@
       "content_preview": "## Create  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/messages) going f...",
       "keywords": [
         "model",
-        "our",
-        "most",
         "performance",
-        "extended",
-        "thinking",
-        "capable",
-        "high",
+        "intelligence",
         "stop",
+        "tasks",
         "maximum",
         "prompt",
-        "agents",
-        "coding",
+        "high",
+        "complex",
         "models",
         "see",
         "details",
         "may",
         "only",
         "additional",
-        "options"
+        "options",
+        "agents",
+        "coding",
+        "text",
+        "complete"
       ],
-      "word_count": 1094,
+      "word_count": 958,
       "file_path": "docs/docs__en__api__completions__create.md"
     },
     "/docs/en/api/csharp/beta": {
@@ -4643,7 +4643,7 @@
         "live",
         "minutes"
       ],
-      "word_count": 93312,
+      "word_count": 92700,
       "file_path": "docs/docs__en__api__csharp__beta.md"
     },
     "/docs/en/api/csharp/beta/files": {
@@ -4826,7 +4826,7 @@
         "minutes",
         "input"
       ],
-      "word_count": 89162,
+      "word_count": 88550,
       "file_path": "docs/docs__en__api__csharp__beta__messages.md"
     },
     "/docs/en/api/csharp/beta/messages/batches": {
@@ -4854,7 +4854,7 @@
         "results",
         "block"
       ],
-      "word_count": 24973,
+      "word_count": 24633,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/cancel": {
@@ -4910,7 +4910,7 @@
         "true",
         "message"
       ],
-      "word_count": 10925,
+      "word_count": 10857,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__create.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/delete": {
@@ -4984,7 +4984,6 @@
         "cache",
         "invocation",
         "response",
-        "our",
         "which",
         "content",
         "were",
@@ -4992,9 +4991,10 @@
         "generated",
         "directly",
         "create",
-        "message"
+        "message",
+        "output"
       ],
-      "word_count": 3039,
+      "word_count": 2971,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__results.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/retrieve": {
@@ -5061,8 +5061,8 @@
         "cache",
         "control",
         "breakpoint",
-        "model",
         "content",
+        "model",
         "block",
         "create",
         "one",
@@ -5078,7 +5078,7 @@
         "true",
         "number"
       ],
-      "word_count": 11987,
+      "word_count": 11919,
       "file_path": "docs/docs__en__api__csharp__beta__messages__create.md"
     },
     "/docs/en/api/csharp/beta/models": {
@@ -5451,9 +5451,9 @@
       "keywords": [
         "tool",
         "cache",
-        "model",
         "control",
         "breakpoint",
+        "model",
         "content",
         "block",
         "one",
@@ -5470,7 +5470,7 @@
         "invocation",
         "number"
       ],
-      "word_count": 71624,
+      "word_count": 71012,
       "file_path": "docs/docs__en__api__csharp__messages.md"
     },
     "/docs/en/api/csharp/messages/batches": {
@@ -5498,7 +5498,7 @@
         "block",
         "values"
       ],
-      "word_count": 19606,
+      "word_count": 19266,
       "file_path": "docs/docs__en__api__csharp__messages__batches.md"
     },
     "/docs/en/api/csharp/messages/batches/cancel": {
@@ -5554,7 +5554,7 @@
         "message",
         "true"
       ],
-      "word_count": 8901,
+      "word_count": 8833,
       "file_path": "docs/docs__en__api__csharp__messages__batches__create.md"
     },
     "/docs/en/api/csharp/messages/batches/delete": {
@@ -5622,7 +5622,6 @@
         "request",
         "invocation",
         "results",
-        "our",
         "response",
         "generated",
         "directly",
@@ -5632,13 +5631,14 @@
         "used",
         "input",
         "requests",
-        "most",
+        "batch",
+        "content",
         "performance",
-        "extended",
-        "thinking",
-        "batch"
+        "one",
+        "result",
+        "api"
       ],
-      "word_count": 2221,
+      "word_count": 2153,
       "file_path": "docs/docs__en__api__csharp__messages__batches__results.md"
     },
     "/docs/en/api/csharp/messages/batches/retrieve": {
@@ -5722,7 +5722,7 @@
         "true",
         "used"
       ],
-      "word_count": 9521,
+      "word_count": 9453,
       "file_path": "docs/docs__en__api__csharp__messages__create.md"
     },
     "/docs/en/api/csharp/models": {
@@ -5862,7 +5862,7 @@
         "location",
         "url"
       ],
-      "word_count": 114604,
+      "word_count": 113747,
       "file_path": "docs/docs__en__api__go__beta.md"
     },
     "/docs/en/api/go/beta/files": {
@@ -6025,8 +6025,8 @@
       "title": "Messages",
       "content_preview": "# Messages  ## Create  `client.Beta.Messages.New(ctx, params) (*BetaMessage, error)`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the model wi...",
       "keywords": [
-        "const",
         "type",
+        "const",
         "struct",
         "int",
         "stringtype",
@@ -6046,7 +6046,7 @@
         "url",
         "betabase"
       ],
-      "word_count": 108862,
+      "word_count": 108005,
       "file_path": "docs/docs__en__api__go__beta__messages.md"
     },
     "/docs/en/api/go/beta/messages/batches": {
@@ -6074,7 +6074,7 @@
         "block",
         "results"
       ],
-      "word_count": 29895,
+      "word_count": 29422,
       "file_path": "docs/docs__en__api__go__beta__messages__batches.md"
     },
     "/docs/en/api/go/beta/messages/batches/cancel": {
@@ -6113,8 +6113,8 @@
         "control",
         "cache",
         "breakpoint",
-        "model",
         "content",
+        "model",
         "block",
         "may",
         "one",
@@ -6130,7 +6130,7 @@
         "true",
         "message"
       ],
-      "word_count": 12922,
+      "word_count": 12826,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__create.md"
     },
     "/docs/en/api/go/beta/messages/batches/delete": {
@@ -6204,7 +6204,6 @@
         "cache",
         "invocation",
         "response",
-        "our",
         "which",
         "content",
         "were",
@@ -6212,9 +6211,10 @@
         "generated",
         "directly",
         "create",
-        "message"
+        "message",
+        "output"
       ],
-      "word_count": 3753,
+      "word_count": 3664,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__results.md"
     },
     "/docs/en/api/go/beta/messages/batches/retrieve": {
@@ -6295,10 +6295,10 @@
         "codeexecution",
         "block",
         "betacachecontrolephemeralttlttl",
-        "model",
-        "allowedcallercodeexecution"
+        "allowedcallercodeexecution",
+        "time"
       ],
-      "word_count": 14606,
+      "word_count": 14510,
       "file_path": "docs/docs__en__api__go__beta__messages__create.md"
     },
     "/docs/en/api/go/beta/models": {
@@ -6673,24 +6673,24 @@
         "model",
         "claude",
         "anthropicbeta",
-        "opus",
-        "sonnet",
-        "modelclaude",
-        "haiku",
         "modelclaudeopus",
+        "opus",
         "completion",
         "stop",
         "modelclaudesonnet",
+        "sonnet",
         "param",
+        "haiku",
         "tokens",
         "prompt",
-        "latest",
         "body",
         "sequences",
         "completions",
-        "text"
+        "text",
+        "api",
+        "models"
       ],
-      "word_count": 1401,
+      "word_count": 1209,
       "file_path": "docs/docs__en__api__go__completions.md"
     },
     "/docs/en/api/go/completions/create": {
@@ -6698,27 +6698,27 @@
       "content_preview": "## Create  `client.Completions.New(ctx, params) (*Completion, error)`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Me...",
       "keywords": [
         "const",
+        "anthropicbeta",
         "model",
         "claude",
-        "anthropicbeta",
-        "opus",
-        "sonnet",
         "param",
-        "modelclaude",
         "stop",
-        "haiku",
+        "modelclaudeopus",
+        "opus",
         "completion",
         "prompt",
-        "modelclaudeopus",
         "body",
         "modelclaudesonnet",
+        "sonnet",
         "text",
         "api",
         "models",
         "our",
-        "tokens"
+        "tokens",
+        "sequences",
+        "field"
       ],
-      "word_count": 984,
+      "word_count": 888,
       "file_path": "docs/docs__en__api__go__completions__create.md"
     },
     "/docs/en/api/go/messages": {
@@ -6746,7 +6746,7 @@
         "location",
         "url"
       ],
-      "word_count": 88847,
+      "word_count": 87894,
       "file_path": "docs/docs__en__api__go__messages.md"
     },
     "/docs/en/api/go/messages/batches": {
@@ -6774,7 +6774,7 @@
         "block",
         "values"
       ],
-      "word_count": 23526,
+      "word_count": 23053,
       "file_path": "docs/docs__en__api__go__messages__batches.md"
     },
     "/docs/en/api/go/messages/batches/cancel": {
@@ -6830,7 +6830,7 @@
         "message",
         "true"
       ],
-      "word_count": 10530,
+      "word_count": 10434,
       "file_path": "docs/docs__en__api__go__messages__batches__create.md"
     },
     "/docs/en/api/go/messages/batches/delete": {
@@ -6898,7 +6898,6 @@
         "request",
         "invocation",
         "results",
-        "our",
         "response",
         "generated",
         "directly",
@@ -6908,13 +6907,14 @@
         "used",
         "input",
         "requests",
-        "most",
+        "batch",
+        "content",
         "performance",
-        "extended",
-        "thinking",
-        "batch"
+        "one",
+        "result",
+        "api"
       ],
-      "word_count": 2798,
+      "word_count": 2709,
       "file_path": "docs/docs__en__api__go__messages__batches__results.md"
     },
     "/docs/en/api/go/messages/batches/retrieve": {
@@ -6992,13 +6992,13 @@
         "codeexecution",
         "allowedcaller",
         "stringtype",
-        "model",
         "block",
+        "model",
         "time",
         "ephemeral",
         "cachecontrolephemeralttlttl"
       ],
-      "word_count": 11688,
+      "word_count": 11592,
       "file_path": "docs/docs__en__api__go__messages__create.md"
     },
     "/docs/en/api/go/models": {
@@ -7138,7 +7138,7 @@
         "live",
         "minutes"
       ],
-      "word_count": 92798,
+      "word_count": 92186,
       "file_path": "docs/docs__en__api__java__beta.md"
     },
     "/docs/en/api/java/beta/files": {
@@ -7321,7 +7321,7 @@
         "minutes",
         "input"
       ],
-      "word_count": 88660,
+      "word_count": 88048,
       "file_path": "docs/docs__en__api__java__beta__messages.md"
     },
     "/docs/en/api/java/beta/messages/batches": {
@@ -7349,7 +7349,7 @@
         "block",
         "results"
       ],
-      "word_count": 24564,
+      "word_count": 24224,
       "file_path": "docs/docs__en__api__java__beta__messages__batches.md"
     },
     "/docs/en/api/java/beta/messages/batches/cancel": {
@@ -7405,7 +7405,7 @@
         "true",
         "message"
       ],
-      "word_count": 10725,
+      "word_count": 10657,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__create.md"
     },
     "/docs/en/api/java/beta/messages/batches/delete": {
@@ -7479,7 +7479,6 @@
         "cache",
         "invocation",
         "response",
-        "our",
         "which",
         "content",
         "were",
@@ -7487,9 +7486,10 @@
         "generated",
         "directly",
         "create",
-        "message"
+        "message",
+        "output"
       ],
-      "word_count": 3010,
+      "word_count": 2942,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__results.md"
     },
     "/docs/en/api/java/beta/messages/batches/retrieve": {
@@ -7556,8 +7556,8 @@
         "cache",
         "control",
         "breakpoint",
-        "model",
         "content",
+        "model",
         "block",
         "create",
         "one",
@@ -7573,7 +7573,7 @@
         "true",
         "number"
       ],
-      "word_count": 11993,
+      "word_count": 11925,
       "file_path": "docs/docs__en__api__java__beta__messages__create.md"
     },
     "/docs/en/api/java/beta/models": {
@@ -7945,27 +7945,27 @@
       "content_preview": "# Completions  ## Create  `Completion completions().create(CompletionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`  **post** `/v1/complete`  [Legacy] Create a Text Complet...",
       "keywords": [
         "model",
-        "our",
-        "most",
-        "performance",
-        "extended",
-        "thinking",
         "stop",
-        "capable",
-        "high",
+        "performance",
+        "intelligence",
         "maximum",
-        "agents",
-        "coding",
+        "tasks",
+        "high",
+        "complex",
         "may",
         "prompt",
         "completions",
         "text",
         "models",
         "only",
-        "intelligence",
-        "near"
+        "agents",
+        "coding",
+        "see",
+        "additional",
+        "details",
+        "options"
       ],
-      "word_count": 1077,
+      "word_count": 941,
       "file_path": "docs/docs__en__api__java__completions.md"
     },
     "/docs/en/api/java/completions/create": {
@@ -7973,27 +7973,27 @@
       "content_preview": "## Create  `Completion completions().create(CompletionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text ...",
       "keywords": [
         "model",
-        "our",
         "stop",
-        "most",
-        "performance",
-        "extended",
-        "thinking",
         "maximum",
         "only",
         "prompt",
-        "capable",
+        "performance",
         "text",
         "models",
         "may",
-        "high",
+        "tasks",
+        "intelligence",
         "completions",
         "see",
+        "our",
         "additional",
         "details",
-        "options"
+        "options",
+        "sequences",
+        "high",
+        "complex"
       ],
-      "word_count": 772,
+      "word_count": 704,
       "file_path": "docs/docs__en__api__java__completions__create.md"
     },
     "/docs/en/api/java/messages": {
@@ -8002,9 +8002,9 @@
       "keywords": [
         "tool",
         "cache",
-        "model",
         "control",
         "breakpoint",
+        "model",
         "content",
         "block",
         "one",
@@ -8021,7 +8021,7 @@
         "invocation",
         "number"
       ],
-      "word_count": 71645,
+      "word_count": 71033,
       "file_path": "docs/docs__en__api__java__messages.md"
     },
     "/docs/en/api/java/messages/batches": {
@@ -8049,7 +8049,7 @@
         "block",
         "values"
       ],
-      "word_count": 19415,
+      "word_count": 19075,
       "file_path": "docs/docs__en__api__java__messages__batches.md"
     },
     "/docs/en/api/java/messages/batches/cancel": {
@@ -8105,7 +8105,7 @@
         "message",
         "true"
       ],
-      "word_count": 8771,
+      "word_count": 8703,
       "file_path": "docs/docs__en__api__java__messages__batches__create.md"
     },
     "/docs/en/api/java/messages/batches/delete": {
@@ -8173,7 +8173,6 @@
         "request",
         "invocation",
         "results",
-        "our",
         "response",
         "generated",
         "directly",
@@ -8183,13 +8182,14 @@
         "used",
         "input",
         "requests",
-        "most",
+        "batch",
+        "content",
         "performance",
-        "extended",
-        "thinking",
-        "batch"
+        "one",
+        "result",
+        "api"
       ],
-      "word_count": 2227,
+      "word_count": 2159,
       "file_path": "docs/docs__en__api__java__messages__batches__results.md"
     },
     "/docs/en/api/java/messages/batches/retrieve": {
@@ -8273,7 +8273,7 @@
         "true",
         "used"
       ],
-      "word_count": 9586,
+      "word_count": 9518,
       "file_path": "docs/docs__en__api__java__messages__create.md"
     },
     "/docs/en/api/java/models": {
@@ -8385,7 +8385,7 @@
         "invocation",
         "number"
       ],
-      "word_count": 85976,
+      "word_count": 85160,
       "file_path": "docs/docs__en__api__messages.md"
     },
     "/docs/en/api/messages/batches": {
@@ -8413,7 +8413,7 @@
         "block",
         "values"
       ],
-      "word_count": 22238,
+      "word_count": 21898,
       "file_path": "docs/docs__en__api__messages__batches.md"
     },
     "/docs/en/api/messages/batches/cancel": {
@@ -8469,7 +8469,7 @@
         "message",
         "true"
       ],
-      "word_count": 10202,
+      "word_count": 10134,
       "file_path": "docs/docs__en__api__messages__batches__create.md"
     },
     "/docs/en/api/messages/batches/delete": {
@@ -8537,7 +8537,6 @@
         "request",
         "invocation",
         "results",
-        "our",
         "response",
         "generated",
         "directly",
@@ -8547,13 +8546,14 @@
         "used",
         "input",
         "requests",
-        "most",
+        "batch",
+        "content",
         "performance",
-        "extended",
-        "thinking",
-        "batch"
+        "one",
+        "result",
+        "api"
       ],
-      "word_count": 2556,
+      "word_count": 2488,
       "file_path": "docs/docs__en__api__messages__batches__results.md"
     },
     "/docs/en/api/messages/batches/retrieve": {
@@ -8609,7 +8609,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 9281,
+      "word_count": 9213,
       "file_path": "docs/docs__en__api__messages__count_tokens.md"
     },
     "/docs/en/api/messages/create": {
@@ -8637,7 +8637,7 @@
         "true",
         "used"
       ],
-      "word_count": 11863,
+      "word_count": 11727,
       "file_path": "docs/docs__en__api__messages__create.md"
     },
     "/docs/en/api/models": {
@@ -8785,8 +8785,8 @@
       "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `Union[str, Literal[\"message-batches-2024-09-24\", \"prompt-caching-2024-07-31\", \"computer-use-2024-10-22\", 17 more]]`    - `str`    - `Literal[\"message-ba...",
       "keywords": [
         "tool",
-        "model",
         "cache",
+        "model",
         "control",
         "breakpoint",
         "content",
@@ -8805,7 +8805,7 @@
         "live",
         "minutes"
       ],
-      "word_count": 98414,
+      "word_count": 96117,
       "file_path": "docs/docs__en__api__python__beta.md"
     },
     "/docs/en/api/python/beta/files": {
@@ -8969,8 +8969,8 @@
       "content_preview": "# Messages  ## Create  `beta.messages.create(MessageCreateParams**kwargs)  -> BetaMessage`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the mo...",
       "keywords": [
         "tool",
-        "model",
         "cache",
+        "model",
         "control",
         "breakpoint",
         "content",
@@ -8989,7 +8989,7 @@
         "minutes",
         "input"
       ],
-      "word_count": 94314,
+      "word_count": 92017,
       "file_path": "docs/docs__en__api__python__beta__messages.md"
     },
     "/docs/en/api/python/beta/messages/batches": {
@@ -9012,12 +9012,12 @@
         "one",
         "create",
         "requests",
-        "our",
         "may",
         "processing",
-        "block"
+        "block",
+        "results"
       ],
-      "word_count": 26199,
+      "word_count": 25155,
       "file_path": "docs/docs__en__api__python__beta__messages__batches.md"
     },
     "/docs/en/api/python/beta/messages/batches/cancel": {
@@ -9073,7 +9073,7 @@
         "true",
         "message"
       ],
-      "word_count": 11103,
+      "word_count": 10894,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__create.md"
     },
     "/docs/en/api/python/beta/messages/batches/delete": {
@@ -9142,22 +9142,22 @@
         "tool",
         "input",
         "used",
-        "our",
         "request",
         "results",
-        "most",
-        "thinking",
         "cache",
         "invocation",
         "performance",
-        "docs",
-        "capable",
-        "extended",
         "response",
         "which",
-        "content"
+        "content",
+        "were",
+        "intelligence",
+        "entry",
+        "generated",
+        "directly",
+        "create"
       ],
-      "word_count": 3325,
+      "word_count": 3117,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__results.md"
     },
     "/docs/en/api/python/beta/messages/batches/retrieve": {
@@ -9213,7 +9213,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 10175,
+      "word_count": 9966,
       "file_path": "docs/docs__en__api__python__beta__messages__count_tokens.md"
     },
     "/docs/en/api/python/beta/messages/create": {
@@ -9241,7 +9241,7 @@
         "true",
         "number"
       ],
-      "word_count": 13520,
+      "word_count": 13103,
       "file_path": "docs/docs__en__api__python__beta__messages__create.md"
     },
     "/docs/en/api/python/beta/models": {
@@ -9613,27 +9613,27 @@
       "content_preview": "# Completions  ## Create  `completions.create(CompletionCreateParams**kwargs)  -> Completion`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/messages) going forward.  Future",
       "keywords": [
         "model",
-        "our",
-        "most",
         "performance",
-        "docs",
-        "capable",
-        "extended",
-        "thinking",
+        "intelligence",
+        "tasks",
+        "high",
+        "complex",
         "agents",
         "coding",
-        "high",
-        "more",
-        "anthropic",
-        "information",
-        "intelligence",
-        "deprecated",
-        "reach",
-        "end",
-        "life",
-        "please"
+        "maximum",
+        "stop",
+        "fastest",
+        "near",
+        "frontier",
+        "premium",
+        "combining",
+        "practical",
+        "exceptional",
+        "specialized",
+        "powerful",
+        "extended"
       ],
-      "word_count": 2244,
+      "word_count": 1618,
       "file_path": "docs/docs__en__api__python__completions.md"
     },
     "/docs/en/api/python/completions/create": {
@@ -9641,27 +9641,27 @@
       "content_preview": "## Create  `completions.create(CompletionCreateParams**kwargs)  -> Completion`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend usin...",
       "keywords": [
         "model",
-        "our",
-        "most",
         "performance",
-        "docs",
-        "capable",
-        "extended",
-        "thinking",
+        "intelligence",
+        "tasks",
+        "high",
+        "complex",
+        "maximum",
         "agents",
         "coding",
-        "high",
-        "more",
-        "anthropic",
-        "information",
-        "maximum",
-        "intelligence",
-        "deprecated",
-        "reach",
-        "end",
-        "life"
+        "stop",
+        "prompt",
+        "fastest",
+        "near",
+        "frontier",
+        "premium",
+        "combining",
+        "practical",
+        "exceptional",
+        "specialized",
+        "powerful"
       ],
-      "word_count": 1630,
+      "word_count": 1213,
       "file_path": "docs/docs__en__api__python__completions__create.md"
     },
     "/docs/en/api/python/messages": {
@@ -9687,9 +9687,9 @@
         "minutes",
         "when",
         "invocation",
-        "our"
+        "number"
       ],
-      "word_count": 76659,
+      "word_count": 74153,
       "file_path": "docs/docs__en__api__python__messages.md"
     },
     "/docs/en/api/python/messages/batches": {
@@ -9704,20 +9704,20 @@
         "control",
         "breakpoint",
         "requests",
-        "our",
         "content",
         "time",
         "number",
         "processing",
         "one",
         "may",
-        "most",
         "request",
         "results",
-        "thinking",
-        "extended"
+        "invocation",
+        "performance",
+        "create",
+        "block"
       ],
-      "word_count": 20925,
+      "word_count": 19881,
       "file_path": "docs/docs__en__api__python__messages__batches.md"
     },
     "/docs/en/api/python/messages/batches/cancel": {
@@ -9753,10 +9753,10 @@
       "content_preview": "## Create  `messages.batches.create(BatchCreateParams**kwargs)  -> MessageBatch`  **post** `/v1/messages/batches`  Send a batch of Message creation requests.  The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing",
       "keywords": [
         "tool",
-        "model",
         "cache",
         "control",
         "breakpoint",
+        "model",
         "content",
         "may",
         "block",
@@ -9773,7 +9773,7 @@
         "message",
         "true"
       ],
-      "word_count": 9124,
+      "word_count": 8915,
       "file_path": "docs/docs__en__api__python__messages__batches__create.md"
     },
     "/docs/en/api/python/messages/batches/delete": {
@@ -9838,26 +9838,26 @@
       "keywords": [
         "model",
         "tool",
-        "our",
         "request",
-        "most",
         "invocation",
         "performance",
-        "docs",
-        "capable",
-        "extended",
-        "thinking",
         "results",
         "response",
+        "intelligence",
         "generated",
         "directly",
         "tokens",
         "number",
         "message",
-        "more",
-        "used"
+        "used",
+        "input",
+        "high",
+        "complex",
+        "tasks",
+        "requests",
+        "batch"
       ],
-      "word_count": 2519,
+      "word_count": 2311,
       "file_path": "docs/docs__en__api__python__messages__batches__results.md"
     },
     "/docs/en/api/python/messages/batches/retrieve": {
@@ -9893,10 +9893,10 @@
       "content_preview": "## Count Tokens  `messages.count_tokens(MessageCountTokensParams**kwargs)  -> MessageTokensCount`  **post** `/v1/messages/count_tokens`  Count the number of tokens in a Message.  The Token Count API c...",
       "keywords": [
         "tool",
-        "model",
         "cache",
         "control",
         "breakpoint",
+        "model",
         "content",
         "block",
         "one",
@@ -9913,15 +9913,15 @@
         "true",
         "blocks"
       ],
-      "word_count": 8236,
+      "word_count": 8027,
       "file_path": "docs/docs__en__api__python__messages__count_tokens.md"
     },
     "/docs/en/api/python/messages/create": {
       "title": "Untitled",
       "content_preview": "## Create  `messages.create(MessageCreateParams**kwargs)  -> Message`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the model will generate the...",
       "keywords": [
-        "model",
         "tool",
+        "model",
         "cache",
         "control",
         "breakpoint",
@@ -9938,10 +9938,10 @@
         "live",
         "minutes",
         "when",
-        "our",
-        "true"
+        "true",
+        "used"
       ],
-      "word_count": 10798,
+      "word_count": 10381,
       "file_path": "docs/docs__en__api__python__messages__create.md"
     },
     "/docs/en/api/python/models": {
@@ -10062,8 +10062,8 @@
       "keywords": [
         "tool",
         "cache",
-        "model",
         "control",
+        "model",
         "breakpoint",
         "content",
         "block",
@@ -10081,7 +10081,7 @@
         "live",
         "minutes"
       ],
-      "word_count": 95246,
+      "word_count": 94496,
       "file_path": "docs/docs__en__api__ruby__beta.md"
     },
     "/docs/en/api/ruby/beta/files": {
@@ -10246,9 +10246,9 @@
       "keywords": [
         "tool",
         "cache",
-        "model",
         "control",
         "breakpoint",
+        "model",
         "content",
         "block",
         "create",
@@ -10265,7 +10265,7 @@
         "minutes",
         "input"
       ],
-      "word_count": 91375,
+      "word_count": 90625,
       "file_path": "docs/docs__en__api__ruby__beta__messages.md"
     },
     "/docs/en/api/ruby/beta/messages/batches": {
@@ -10293,7 +10293,7 @@
         "block",
         "results"
       ],
-      "word_count": 24712,
+      "word_count": 24372,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/cancel": {
@@ -10332,8 +10332,8 @@
         "control",
         "cache",
         "breakpoint",
-        "model",
         "content",
+        "model",
         "block",
         "may",
         "one",
@@ -10349,7 +10349,7 @@
         "true",
         "message"
       ],
-      "word_count": 10887,
+      "word_count": 10819,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__create.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/delete": {
@@ -10423,7 +10423,6 @@
         "cache",
         "invocation",
         "response",
-        "our",
         "which",
         "content",
         "were",
@@ -10431,9 +10430,10 @@
         "generated",
         "directly",
         "create",
-        "message"
+        "message",
+        "output"
       ],
-      "word_count": 3008,
+      "word_count": 2940,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__results.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/retrieve": {
@@ -10489,7 +10489,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 9955,
+      "word_count": 9887,
       "file_path": "docs/docs__en__api__ruby__beta__messages__count_tokens.md"
     },
     "/docs/en/api/ruby/beta/messages/create": {
@@ -10498,9 +10498,9 @@
       "keywords": [
         "tool",
         "cache",
-        "model",
         "control",
         "breakpoint",
+        "model",
         "content",
         "block",
         "one",
@@ -10517,7 +10517,7 @@
         "true",
         "number"
       ],
-      "word_count": 13007,
+      "word_count": 12869,
       "file_path": "docs/docs__en__api__ruby__beta__messages__create.md"
     },
     "/docs/en/api/ruby/beta/models": {
@@ -10889,27 +10889,27 @@
       "content_preview": "# Completions  ## Create  `completions.create(**kwargs) -> Completion`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [M...",
       "keywords": [
         "model",
-        "our",
-        "most",
         "performance",
-        "extended",
-        "thinking",
-        "capable",
-        "high",
+        "intelligence",
+        "tasks",
         "stop",
-        "agents",
-        "coding",
+        "high",
+        "complex",
         "maximum",
         "prompt",
         "models",
         "see",
         "details",
-        "intelligence",
-        "near",
-        "instant",
-        "may"
+        "agents",
+        "coding",
+        "may",
+        "additional",
+        "options",
+        "complete",
+        "completions",
+        "text"
       ],
-      "word_count": 1382,
+      "word_count": 1176,
       "file_path": "docs/docs__en__api__ruby__completions.md"
     },
     "/docs/en/api/ruby/completions/create": {
@@ -10917,27 +10917,27 @@
       "content_preview": "## Create  `completions.create(**kwargs) -> Completion`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](ht...",
       "keywords": [
         "model",
-        "our",
-        "most",
         "performance",
-        "extended",
-        "thinking",
-        "capable",
-        "high",
+        "intelligence",
         "stop",
+        "tasks",
         "maximum",
         "prompt",
-        "agents",
-        "coding",
+        "high",
+        "complex",
         "models",
         "see",
         "details",
         "may",
         "only",
         "additional",
-        "options"
+        "options",
+        "agents",
+        "coding",
+        "text",
+        "complete"
       ],
-      "word_count": 1053,
+      "word_count": 915,
       "file_path": "docs/docs__en__api__ruby__completions__create.md"
     },
     "/docs/en/api/ruby/messages": {
@@ -10965,7 +10965,7 @@
         "invocation",
         "number"
       ],
-      "word_count": 73279,
+      "word_count": 72461,
       "file_path": "docs/docs__en__api__ruby__messages.md"
     },
     "/docs/en/api/ruby/messages/batches": {
@@ -10993,7 +10993,7 @@
         "block",
         "values"
       ],
-      "word_count": 19376,
+      "word_count": 19036,
       "file_path": "docs/docs__en__api__ruby__messages__batches.md"
     },
     "/docs/en/api/ruby/messages/batches/cancel": {
@@ -11049,7 +11049,7 @@
         "message",
         "true"
       ],
-      "word_count": 8869,
+      "word_count": 8801,
       "file_path": "docs/docs__en__api__ruby__messages__batches__create.md"
     },
     "/docs/en/api/ruby/messages/batches/delete": {
@@ -11117,7 +11117,6 @@
         "request",
         "invocation",
         "results",
-        "our",
         "response",
         "generated",
         "directly",
@@ -11127,13 +11126,14 @@
         "used",
         "input",
         "requests",
-        "most",
+        "batch",
+        "content",
         "performance",
-        "extended",
-        "thinking",
-        "batch"
+        "one",
+        "result",
+        "api"
       ],
-      "word_count": 2197,
+      "word_count": 2129,
       "file_path": "docs/docs__en__api__ruby__messages__batches__results.md"
     },
     "/docs/en/api/ruby/messages/batches/retrieve": {
@@ -11189,7 +11189,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 7970,
+      "word_count": 7902,
       "file_path": "docs/docs__en__api__ruby__messages__count_tokens.md"
     },
     "/docs/en/api/ruby/messages/create": {
@@ -11217,7 +11217,7 @@
         "true",
         "used"
       ],
-      "word_count": 10244,
+      "word_count": 10106,
       "file_path": "docs/docs__en__api__ruby__messages__create.md"
     },
     "/docs/en/api/ruby/models": {
@@ -11357,7 +11357,7 @@
         "vertex",
         "result"
       ],
-      "word_count": 2871,
+      "word_count": 2928,
       "file_path": "docs/docs__en__api__sdks__go.md"
     },
     "/docs/en/api/sdks/java": {
@@ -11385,7 +11385,7 @@
         "requests",
         "when"
       ],
-      "word_count": 4388,
+      "word_count": 4435,
       "file_path": "docs/docs__en__api__sdks__java.md"
     },
     "/docs/en/api/sdks/php": {
@@ -11413,7 +11413,7 @@
         "response",
         "errors"
       ],
-      "word_count": 800,
+      "word_count": 823,
       "file_path": "docs/docs__en__api__sdks__php.md"
     },
     "/docs/en/api/sdks/python": {
@@ -11469,7 +11469,7 @@
         "documentation",
         "examples"
       ],
-      "word_count": 1498,
+      "word_count": 1534,
       "file_path": "docs/docs__en__api__sdks__ruby.md"
     },
     "/docs/en/api/sdks/typescript": {
@@ -11562,9 +11562,9 @@
       "keywords": [
         "tool",
         "cache",
-        "model",
         "control",
         "breakpoint",
+        "model",
         "content",
         "block",
         "number",
@@ -11581,7 +11581,7 @@
         "live",
         "minutes"
       ],
-      "word_count": 97330,
+      "word_count": 96582,
       "file_path": "docs/docs__en__api__typescript__beta.md"
     },
     "/docs/en/api/typescript/beta/files": {
@@ -11746,9 +11746,9 @@
       "keywords": [
         "tool",
         "cache",
-        "model",
         "control",
         "breakpoint",
+        "model",
         "content",
         "block",
         "create",
@@ -11765,7 +11765,7 @@
         "minutes",
         "input"
       ],
-      "word_count": 93036,
+      "word_count": 92288,
       "file_path": "docs/docs__en__api__typescript__beta__messages.md"
     },
     "/docs/en/api/typescript/beta/messages/batches": {
@@ -11793,7 +11793,7 @@
         "block",
         "results"
       ],
-      "word_count": 25147,
+      "word_count": 24807,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/cancel": {
@@ -11849,7 +11849,7 @@
         "true",
         "message"
       ],
-      "word_count": 11103,
+      "word_count": 11035,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__create.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/delete": {
@@ -11923,7 +11923,6 @@
         "cache",
         "invocation",
         "response",
-        "our",
         "which",
         "content",
         "were",
@@ -11931,9 +11930,10 @@
         "generated",
         "directly",
         "create",
-        "message"
+        "message",
+        "output"
       ],
-      "word_count": 3049,
+      "word_count": 2981,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__results.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/retrieve": {
@@ -11989,7 +11989,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 10183,
+      "word_count": 10115,
       "file_path": "docs/docs__en__api__typescript__beta__messages__count_tokens.md"
     },
     "/docs/en/api/typescript/beta/messages/create": {
@@ -11999,8 +11999,8 @@
         "tool",
         "cache",
         "control",
-        "model",
         "breakpoint",
+        "model",
         "content",
         "block",
         "one",
@@ -12017,7 +12017,7 @@
         "true",
         "number"
       ],
-      "word_count": 13344,
+      "word_count": 13208,
       "file_path": "docs/docs__en__api__typescript__beta__messages__create.md"
     },
     "/docs/en/api/typescript/beta/models": {
@@ -12389,27 +12389,27 @@
       "content_preview": "# Completions  ## Create  `client.completions.create(CompletionCreateParamsparams, RequestOptionsoptions?): Completion | Stream<Completion>`  **post** `/v1/complete`  [Legacy] Create a Text Completion...",
       "keywords": [
         "model",
-        "our",
-        "most",
         "performance",
-        "extended",
-        "thinking",
-        "capable",
-        "high",
+        "intelligence",
+        "tasks",
         "param",
         "stop",
-        "agents",
-        "coding",
+        "high",
+        "complex",
         "body",
         "maximum",
-        "intelligence",
-        "near",
-        "instant",
+        "agents",
+        "coding",
         "see",
         "may",
-        "details"
+        "details",
+        "prompt",
+        "completions",
+        "text",
+        "models",
+        "only"
       ],
-      "word_count": 1447,
+      "word_count": 1243,
       "file_path": "docs/docs__en__api__typescript__completions.md"
     },
     "/docs/en/api/typescript/completions/create": {
@@ -12417,27 +12417,27 @@
       "content_preview": "## Create  `client.completions.create(CompletionCreateParamsparams, RequestOptionsoptions?): Completion | Stream<Completion>`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Com...",
       "keywords": [
         "model",
-        "our",
-        "most",
-        "performance",
-        "extended",
-        "thinking",
         "param",
-        "capable",
+        "performance",
         "body",
-        "high",
+        "intelligence",
         "stop",
+        "tasks",
         "maximum",
-        "agents",
-        "coding",
+        "high",
+        "complex",
         "see",
         "details",
         "may",
         "only",
         "prompt",
-        "intelligence"
+        "agents",
+        "coding",
+        "text",
+        "using",
+        "models"
       ],
-      "word_count": 1129,
+      "word_count": 993,
       "file_path": "docs/docs__en__api__typescript__completions__create.md"
     },
     "/docs/en/api/typescript/messages": {
@@ -12445,8 +12445,8 @@
       "content_preview": "# Messages  ## Create  `client.messages.create(MessageCreateParamsbody, RequestOptionsoptions?): Message | Stream<RawMessageStreamEvent>`  **post** `/v1/messages`  Send a structured list of input mess...",
       "keywords": [
         "tool",
-        "model",
         "cache",
+        "model",
         "control",
         "breakpoint",
         "content",
@@ -12465,7 +12465,7 @@
         "invocation",
         "number"
       ],
-      "word_count": 74503,
+      "word_count": 73687,
       "file_path": "docs/docs__en__api__typescript__messages.md"
     },
     "/docs/en/api/typescript/messages/batches": {
@@ -12493,7 +12493,7 @@
         "block",
         "values"
       ],
-      "word_count": 19655,
+      "word_count": 19315,
       "file_path": "docs/docs__en__api__typescript__messages__batches.md"
     },
     "/docs/en/api/typescript/messages/batches/cancel": {
@@ -12549,7 +12549,7 @@
         "message",
         "true"
       ],
-      "word_count": 9041,
+      "word_count": 8973,
       "file_path": "docs/docs__en__api__typescript__messages__batches__create.md"
     },
     "/docs/en/api/typescript/messages/batches/delete": {
@@ -12617,7 +12617,6 @@
         "request",
         "invocation",
         "results",
-        "our",
         "response",
         "generated",
         "directly",
@@ -12627,13 +12626,14 @@
         "used",
         "input",
         "requests",
-        "most",
+        "batch",
+        "content",
         "performance",
-        "extended",
-        "thinking",
-        "batch"
+        "one",
+        "result",
+        "api"
       ],
-      "word_count": 2211,
+      "word_count": 2143,
       "file_path": "docs/docs__en__api__typescript__messages__batches__results.md"
     },
     "/docs/en/api/typescript/messages/batches/retrieve": {
@@ -12689,7 +12689,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 8135,
+      "word_count": 8067,
       "file_path": "docs/docs__en__api__typescript__messages__count_tokens.md"
     },
     "/docs/en/api/typescript/messages/create": {
@@ -12717,7 +12717,7 @@
         "true",
         "used"
       ],
-      "word_count": 10471,
+      "word_count": 10335,
       "file_path": "docs/docs__en__api__typescript__messages__create.md"
     },
     "/docs/en/api/typescript/models": {
@@ -12840,24 +12840,24 @@
         "claude",
         "adaptive",
         "extended",
-        "blocks",
-        "when",
         "tokens",
         "mode",
+        "when",
         "models",
-        "output",
         "opus",
         "sonnet",
         "effort",
+        "output",
+        "blocks",
+        "manual",
         "note",
-        "api",
         "more",
         "prompt",
-        "back",
+        "parameter",
         "using",
-        "reasoning"
+        "tool"
       ],
-      "word_count": 2608,
+      "word_count": 3118,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/administration-api": {
@@ -12913,7 +12913,7 @@
         "within",
         "result"
       ],
-      "word_count": 4954,
+      "word_count": 6026,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -12941,7 +12941,7 @@
         "include",
         "pdf"
       ],
-      "word_count": 2295,
+      "word_count": 2296,
       "file_path": "docs/docs__en__build-with-claude__citations.md"
     },
     "/docs/en/build-with-claude/claude-code-analytics-api": {
@@ -12977,32 +12977,32 @@
       "content_preview": "# Claude in Microsoft Foundry  Access Claude models through Microsoft Foundry with Azure-native endpoints and authentication.  ---  This guide walks you through the process of setting up and making AP...",
       "keywords": [
         "foundry",
+        "tab",
         "azure",
         "claude",
         "api",
+        "title",
         "resource",
         "deployment",
+        "note",
         "model",
         "access",
-        "tab",
-        "name",
-        "through",
-        "note",
         "microsoft",
         "authentication",
         "anthropic",
+        "name",
+        "through",
+        "entra",
         "portal",
         "keys",
-        "entra",
-        "using",
-        "rate"
+        "python"
       ],
-      "word_count": 2054,
+      "word_count": 2271,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock": {
       "title": "Claude on Amazon Bedrock",
-      "content_preview": "# Claude on Amazon Bedrock  Anthropic's Claude models are now generally available through Amazon Bedrock.  ---  Calling Claude through Bedrock slightly differs from how you would call Claude when usin...",
+      "content_preview": "# Claude on Amazon Bedrock  Anthropic's Claude models are now generally available through Amazon Bedrock.  ---  Calling Claude through Bedrock slightly differs from how you would call Claude when using Anthropic's client SDKs. This guide walks you through completing an API call to Claude on Bedrock",
       "keywords": [
         "claude",
         "yes",
@@ -13011,21 +13011,21 @@
         "aws",
         "sonnet",
         "tab",
-        "note",
         "codegroup",
         "opus",
         "endpoints",
+        "note",
         "pricing",
         "regional",
-        "amazon",
         "models",
-        "available",
         "api",
-        "support",
+        "title",
         "model",
+        "amazon",
+        "available",
         "through"
       ],
-      "word_count": 2404,
+      "word_count": 2730,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -13034,26 +13034,26 @@
       "keywords": [
         "claude",
         "vertex",
-        "sonnet",
         "tab",
+        "sonnet",
         "endpoints",
-        "opus",
         "anthropic",
-        "note",
+        "opus",
         "codegroup",
         "pricing",
         "models",
-        "google",
+        "title",
         "regional",
+        "google",
+        "note",
         "model",
         "tooltip",
         "haiku",
         "global",
         "through",
-        "api",
-        "client"
+        "api"
       ],
-      "word_count": 1619,
+      "word_count": 1793,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -13081,7 +13081,7 @@
         "usage",
         "note"
       ],
-      "word_count": 4602,
+      "word_count": 8151,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -13109,7 +13109,7 @@
         "history",
         "blocks"
       ],
-      "word_count": 4957,
+      "word_count": 7369,
       "file_path": "docs/docs__en__build-with-claude__context-editing.md"
     },
     "/docs/en/build-with-claude/context-windows": {
@@ -13129,15 +13129,15 @@
         "model",
         "turn",
         "input",
-        "blocks",
         "sonnet",
         "limits",
         "block",
         "when",
+        "blocks",
         "api",
         "components"
       ],
-      "word_count": 2100,
+      "word_count": 2257,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/data-residency": {
@@ -13175,15 +13175,15 @@
         "effort",
         "thinking",
         "claude",
-        "token",
         "when",
+        "token",
         "parameter",
         "tool",
-        "levels",
         "opus",
-        "high",
+        "levels",
         "calls",
         "sonnet",
+        "high",
         "tasks",
         "lower",
         "capability",
@@ -13193,7 +13193,7 @@
         "tokens",
         "best"
       ],
-      "word_count": 1243,
+      "word_count": 1443,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -13234,22 +13234,22 @@
         "tool",
         "extended",
         "when",
-        "api",
         "tokens",
         "context",
         "opus",
+        "api",
         "note",
         "turn",
-        "reasoning",
-        "response",
         "models",
+        "response",
         "token",
-        "model",
         "interleaved",
-        "output",
-        "request"
+        "request",
+        "model",
+        "sonnet",
+        "output"
       ],
-      "word_count": 8882,
+      "word_count": 11971,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -13277,7 +13277,7 @@
         "card",
         "model"
       ],
-      "word_count": 1393,
+      "word_count": 1537,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -13305,7 +13305,7 @@
         "supported",
         "models"
       ],
-      "word_count": 2321,
+      "word_count": 3134,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -13417,7 +13417,7 @@
         "each",
         "image"
       ],
-      "word_count": 2902,
+      "word_count": 2913,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -13445,7 +13445,7 @@
         "request",
         "more"
       ],
-      "word_count": 11117,
+      "word_count": 13806,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {
@@ -13557,7 +13557,7 @@
         "level",
         "when"
       ],
-      "word_count": 3139,
+      "word_count": 4776,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -13565,27 +13565,27 @@
       "content_preview": "# Using Agent Skills with the API  Learn how to use Agent Skills to extend Claude's capabilities through the API.  ---  Agent Skills extend Claude's capabilities through organized folders of instructi...",
       "keywords": [
         "skills",
-        "codegroup",
         "api",
+        "codegroup",
         "skill",
+        "tab",
         "custom",
+        "note",
+        "title",
         "files",
         "code",
         "execution",
-        "note",
         "card",
         "create",
         "agent",
         "claude",
         "request",
         "container",
+        "file",
         "using",
-        "reference",
-        "when",
-        "versions",
-        "anthropic"
+        "reference"
       ],
-      "word_count": 6618,
+      "word_count": 12066,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
@@ -13598,22 +13598,22 @@
         "content",
         "codegroup",
         "request",
-        "thinking",
+        "stream",
         "response",
         "each",
+        "thinking",
         "block",
         "delta",
         "claude",
         "message",
-        "stream",
         "using",
         "sdks",
+        "sdk",
         "types",
         "json",
-        "blocks",
-        "may"
+        "blocks"
       ],
-      "word_count": 3163,
+      "word_count": 4515,
       "file_path": "docs/docs__en__build-with-claude__streaming.md"
     },
     "/docs/en/build-with-claude/structured-outputs": {
@@ -13641,7 +13641,7 @@
         "tab",
         "example"
       ],
-      "word_count": 8722,
+      "word_count": 11183,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/token-counting": {
@@ -13669,7 +13669,7 @@
         "only",
         "does"
       ],
-      "word_count": 2464,
+      "word_count": 3582,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/usage-cost-api": {
@@ -13725,7 +13725,7 @@
         "vision",
         "multiple"
       ],
-      "word_count": 3515,
+      "word_count": 3536,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -13753,7 +13753,7 @@
         "zdr",
         "multiple"
       ],
-      "word_count": 1585,
+      "word_count": 2664,
       "file_path": "docs/docs__en__build-with-claude__working-with-messages.md"
     },
     "/docs/en/build-with-claude/workspaces": {
@@ -13837,7 +13837,7 @@
         "variable",
         "run"
       ],
-      "word_count": 1041,
+      "word_count": 1042,
       "file_path": "docs/docs__en__get-started.md"
     },
     "/docs/en/intro": {
@@ -15797,7 +15797,7 @@
         "error",
         "future"
       ],
-      "word_count": 757,
+      "word_count": 1087,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md"
     },
     "/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency": {

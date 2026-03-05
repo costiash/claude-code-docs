@@ -26,7 +26,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more`
+  - `:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-haiku-4-5" | 12 more`
 
     The model that will complete your prompt.
 
@@ -38,87 +38,59 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `:"claude-sonnet-4-6"`
 
-      Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+      Best combination of speed and intelligence
 
-    - `:"claude-opus-4-5-20251101"`
+    - `:"claude-haiku-4-5"`
 
-      Premium model combining maximum intelligence with practical performance
+      Fastest model with near-frontier intelligence
+
+    - `:"claude-haiku-4-5-20251001"`
+
+      Fastest model with near-frontier intelligence
 
     - `:"claude-opus-4-5"`
 
       Premium model combining maximum intelligence with practical performance
 
-    - `:"claude-3-7-sonnet-latest"`
+    - `:"claude-opus-4-5-20251101"`
 
-      High-performance model with early extended thinking
+      Premium model combining maximum intelligence with practical performance
 
-    - `:"claude-3-7-sonnet-20250219"`
+    - `:"claude-sonnet-4-5"`
 
-      High-performance model with early extended thinking
+      High-performance model for agents and coding
 
-    - `:"claude-3-5-haiku-latest"`
+    - `:"claude-sonnet-4-5-20250929"`
 
-      Fastest and most compact model for near-instant responsiveness
+      High-performance model for agents and coding
 
-    - `:"claude-3-5-haiku-20241022"`
+    - `:"claude-opus-4-1"`
 
-      Our fastest model
+      Exceptional model for specialized complex tasks
 
-    - `:"claude-haiku-4-5"`
+    - `:"claude-opus-4-1-20250805"`
 
-      Hybrid model, capable of near-instant responses and extended thinking
+      Exceptional model for specialized complex tasks
 
-    - `:"claude-haiku-4-5-20251001"`
+    - `:"claude-opus-4-0"`
 
-      Hybrid model, capable of near-instant responses and extended thinking
+      Powerful model for complex tasks
 
-    - `:"claude-sonnet-4-20250514"`
+    - `:"claude-opus-4-20250514"`
 
-      High-performance model with extended thinking
+      Powerful model for complex tasks
 
     - `:"claude-sonnet-4-0"`
 
       High-performance model with extended thinking
 
-    - `:"claude-4-sonnet-20250514"`
+    - `:"claude-sonnet-4-20250514"`
 
       High-performance model with extended thinking
 
-    - `:"claude-sonnet-4-5"`
-
-      Our best model for real-world agents and coding
-
-    - `:"claude-sonnet-4-5-20250929"`
-
-      Our best model for real-world agents and coding
-
-    - `:"claude-opus-4-0"`
-
-      Our most capable model
-
-    - `:"claude-opus-4-20250514"`
-
-      Our most capable model
-
-    - `:"claude-4-opus-20250514"`
-
-      Our most capable model
-
-    - `:"claude-opus-4-1-20250805"`
-
-      Our most capable model
-
-    - `:"claude-3-opus-latest"`
-
-      Excels at writing and complex tasks
-
-    - `:"claude-3-opus-20240229"`
-
-      Excels at writing and complex tasks
-
     - `:"claude-3-haiku-20240307"`
 
-      Our previous most fast and cost-effective
+      Fast and cost-effective model
 
   - `String`
 
@@ -160,13 +132,11 @@ Future models and features will not be compatible with Text Completions. See our
 
   Human:"`, and may include additional built-in stop sequences in the future. By providing the stop_sequences parameter, you may include additional strings that will cause the model to stop generating.
 
-- `stream: false`
+- `stream: bool`
 
   Whether to incrementally stream the response using server-sent events.
 
   See [streaming](https://docs.claude.com/en/api/streaming) for details.
-
-  - `false`
 
 - `temperature: Float`
 
@@ -260,7 +230,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more`
+    - `:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-haiku-4-5" | 12 more`
 
       The model that will complete your prompt.
 
@@ -272,87 +242,59 @@ Future models and features will not be compatible with Text Completions. See our
 
       - `:"claude-sonnet-4-6"`
 
-        Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+        Best combination of speed and intelligence
 
-      - `:"claude-opus-4-5-20251101"`
+      - `:"claude-haiku-4-5"`
 
-        Premium model combining maximum intelligence with practical performance
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
 
       - `:"claude-opus-4-5"`
 
         Premium model combining maximum intelligence with practical performance
 
-      - `:"claude-3-7-sonnet-latest"`
+      - `:"claude-opus-4-5-20251101"`
 
-        High-performance model with early extended thinking
+        Premium model combining maximum intelligence with practical performance
 
-      - `:"claude-3-7-sonnet-20250219"`
+      - `:"claude-sonnet-4-5"`
 
-        High-performance model with early extended thinking
+        High-performance model for agents and coding
 
-      - `:"claude-3-5-haiku-latest"`
+      - `:"claude-sonnet-4-5-20250929"`
 
-        Fastest and most compact model for near-instant responsiveness
+        High-performance model for agents and coding
 
-      - `:"claude-3-5-haiku-20241022"`
+      - `:"claude-opus-4-1"`
 
-        Our fastest model
+        Exceptional model for specialized complex tasks
 
-      - `:"claude-haiku-4-5"`
+      - `:"claude-opus-4-1-20250805"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Exceptional model for specialized complex tasks
 
-      - `:"claude-haiku-4-5-20251001"`
+      - `:"claude-opus-4-0"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Powerful model for complex tasks
 
-      - `:"claude-sonnet-4-20250514"`
+      - `:"claude-opus-4-20250514"`
 
-        High-performance model with extended thinking
+        Powerful model for complex tasks
 
       - `:"claude-sonnet-4-0"`
 
         High-performance model with extended thinking
 
-      - `:"claude-4-sonnet-20250514"`
+      - `:"claude-sonnet-4-20250514"`
 
         High-performance model with extended thinking
 
-      - `:"claude-sonnet-4-5"`
-
-        Our best model for real-world agents and coding
-
-      - `:"claude-sonnet-4-5-20250929"`
-
-        Our best model for real-world agents and coding
-
-      - `:"claude-opus-4-0"`
-
-        Our most capable model
-
-      - `:"claude-opus-4-20250514"`
-
-        Our most capable model
-
-      - `:"claude-4-opus-20250514"`
-
-        Our most capable model
-
-      - `:"claude-opus-4-1-20250805"`
-
-        Our most capable model
-
-      - `:"claude-3-opus-latest"`
-
-        Excels at writing and complex tasks
-
-      - `:"claude-3-opus-20240229"`
-
-        Excels at writing and complex tasks
-
       - `:"claude-3-haiku-20240307"`
 
-        Our previous most fast and cost-effective
+        Fast and cost-effective model
 
     - `String`
 
@@ -411,7 +353,7 @@ puts(completion)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more`
+    - `:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-haiku-4-5" | 12 more`
 
       The model that will complete your prompt.
 
@@ -423,87 +365,59 @@ puts(completion)
 
       - `:"claude-sonnet-4-6"`
 
-        Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+        Best combination of speed and intelligence
 
-      - `:"claude-opus-4-5-20251101"`
+      - `:"claude-haiku-4-5"`
 
-        Premium model combining maximum intelligence with practical performance
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
 
       - `:"claude-opus-4-5"`
 
         Premium model combining maximum intelligence with practical performance
 
-      - `:"claude-3-7-sonnet-latest"`
+      - `:"claude-opus-4-5-20251101"`
 
-        High-performance model with early extended thinking
+        Premium model combining maximum intelligence with practical performance
 
-      - `:"claude-3-7-sonnet-20250219"`
+      - `:"claude-sonnet-4-5"`
 
-        High-performance model with early extended thinking
+        High-performance model for agents and coding
 
-      - `:"claude-3-5-haiku-latest"`
+      - `:"claude-sonnet-4-5-20250929"`
 
-        Fastest and most compact model for near-instant responsiveness
+        High-performance model for agents and coding
 
-      - `:"claude-3-5-haiku-20241022"`
+      - `:"claude-opus-4-1"`
 
-        Our fastest model
+        Exceptional model for specialized complex tasks
 
-      - `:"claude-haiku-4-5"`
+      - `:"claude-opus-4-1-20250805"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Exceptional model for specialized complex tasks
 
-      - `:"claude-haiku-4-5-20251001"`
+      - `:"claude-opus-4-0"`
 
-        Hybrid model, capable of near-instant responses and extended thinking
+        Powerful model for complex tasks
 
-      - `:"claude-sonnet-4-20250514"`
+      - `:"claude-opus-4-20250514"`
 
-        High-performance model with extended thinking
+        Powerful model for complex tasks
 
       - `:"claude-sonnet-4-0"`
 
         High-performance model with extended thinking
 
-      - `:"claude-4-sonnet-20250514"`
+      - `:"claude-sonnet-4-20250514"`
 
         High-performance model with extended thinking
 
-      - `:"claude-sonnet-4-5"`
-
-        Our best model for real-world agents and coding
-
-      - `:"claude-sonnet-4-5-20250929"`
-
-        Our best model for real-world agents and coding
-
-      - `:"claude-opus-4-0"`
-
-        Our most capable model
-
-      - `:"claude-opus-4-20250514"`
-
-        Our most capable model
-
-      - `:"claude-4-opus-20250514"`
-
-        Our most capable model
-
-      - `:"claude-opus-4-1-20250805"`
-
-        Our most capable model
-
-      - `:"claude-3-opus-latest"`
-
-        Excels at writing and complex tasks
-
-      - `:"claude-3-opus-20240229"`
-
-        Excels at writing and complex tasks
-
       - `:"claude-3-haiku-20240307"`
 
-        Our previous most fast and cost-effective
+        Fast and cost-effective model
 
     - `String`
 

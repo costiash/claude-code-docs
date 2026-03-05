@@ -194,7 +194,7 @@ var message = await client.Messages.Create(parameters);
 Console.WriteLine(message);
 ```
 
-```go Go
+```go Go hidelines={1..12,-3..-1}
 package main
 
 import (
@@ -237,23 +237,37 @@ func main() {
 }
 ```
 
-```java Java
+```java Java hidelines={1..6}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.*;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.StructuredMessage;
+import com.anthropic.models.messages.StructuredMessageCreateParams;
+import com.anthropic.models.messages.Model;
 
-AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+class ContactInfo {
+    public String name;
+    public String email;
+    public String plan_interest;
+    public boolean demo_requested;
+}
 
-// Java SDK uses class-based structured outputs
-// See the Java SDK page for annotation-based approach
-MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_4_6)
-    .maxTokens(1024)
-    .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.")
-    .build();
+public class StructuredOutputQuickStart {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-Message message = client.beta().messages().create(params);
-System.out.println(message.content());
+        StructuredMessageCreateParams<ContactInfo> params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024)
+            .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.")
+            .outputFormat(ContactInfo.class)
+            .build();
+
+        StructuredMessage<ContactInfo> response = client.messages().create(params);
+        ContactInfo contact = response.output(ContactInfo.class);
+        System.out.println(contact.name + " (" + contact.email + ")");
+    }
+}
 ```
 
 ```php PHP
@@ -265,7 +279,7 @@ $client = new Client(
     apiKey: getenv("ANTHROPIC_API_KEY")
 );
 
-$response = $client->beta->messages->create(
+$response = $client->messages->create(
     maxTokens: 1024,
     messages: [
         [
@@ -274,19 +288,20 @@ $response = $client->beta->messages->create(
         ]
     ],
     model: 'claude-opus-4-6',
-    betas: ['structured-outputs-2025-11-13'],
-    outputFormat: [
-        'type' => 'json_schema',
-        'schema' => [
-            'type' => 'object',
-            'properties' => [
-                'name' => ['type' => 'string'],
-                'email' => ['type' => 'string'],
-                'plan_interest' => ['type' => 'string'],
-                'demo_requested' => ['type' => 'boolean']
-            ],
-            'required' => ['name', 'email', 'plan_interest', 'demo_requested'],
-            'additionalProperties' => false
+    outputConfig: [
+        'format' => [
+            'type' => 'json_schema',
+            'schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'email' => ['type' => 'string'],
+                    'plan_interest' => ['type' => 'string'],
+                    'demo_requested' => ['type' => 'boolean']
+                ],
+                'required' => ['name', 'email', 'plan_interest', 'demo_requested'],
+                'additionalProperties' => false
+            ]
         ]
     ],
 );
@@ -479,7 +494,7 @@ var contact = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
 Console.WriteLine($"{contact["name"]} ({contact["email"]})");
 ```
 
-```go Go
+```go Go hidelines={1..2,4..7,28..29,-1}
 package main
 
 import (
@@ -526,13 +541,18 @@ func main() {
 		},
 	})
 
-	var contact ContactInfo
-	json.Unmarshal([]byte(message.Content[0].AsResponseTextBlock().Text), &contact)
-	fmt.Printf("%s (%s)\n", contact.Name, contact.Email)
+	for _, block := range message.Content {
+		switch variant := block.AsAny().(type) {
+		case anthropic.TextBlock:
+			var contact ContactInfo
+			json.Unmarshal([]byte(variant.Text), &contact)
+			fmt.Printf("%s (%s)\n", contact.Name, contact.Email)
+		}
+	}
 }
 ```
 
-```java Java
+```java Java hidelines={1..5}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -560,7 +580,7 @@ ContactInfo contact = response.output(ContactInfo.class);
 System.out.println(contact.name + " (" + contact.email + ")");
 ```
 
-```php PHP
+```php PHP hidelines={1..8}
 <?php
 
 use Anthropic\Client;
@@ -790,7 +810,7 @@ The Go SDK works with raw JSON schemas. Define a Go struct with json tags, gener
 
 <section title="Example usage">
 
-```go
+```go hidelines={1..2,4..7,27..28,-1}
 package main
 
 import (
@@ -836,9 +856,14 @@ func main() {
 		},
 	})
 
-	var contact ContactInfo
-	json.Unmarshal([]byte(message.Content[0].AsResponseTextBlock().Text), &contact)
-	fmt.Printf("%s (%s)\n", contact.Name, contact.Email)
+	for _, block := range message.Content {
+		switch variant := block.AsAny().(type) {
+		case anthropic.TextBlock:
+			var contact ContactInfo
+			json.Unmarshal([]byte(variant.Text), &contact)
+			fmt.Printf("%s (%s)\n", contact.Name, contact.Email)
+		}
+	}
 }
 ```
 
@@ -853,8 +878,11 @@ Pass a Java class to `outputFormat()` and the SDK automatically derives a JSON s
 
 <section title="Example usage">
 
-```java
+```java hidelines={1..6}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.StructuredMessage;
 import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 
@@ -864,16 +892,22 @@ class ContactInfo {
     public String planInterest;
 }
 
-StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_4_6)
-  .maxTokens(1024)
-  .outputFormat(ContactInfo.class)
-  .addUserMessage("...")
-  .build();
+public class StructuredOutputExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-var response = client.messages().create(createParams);
-ContactInfo contact = response.output(ContactInfo.class);
-System.out.println(contact.name + " (" + contact.email + ")");
+        StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024)
+            .outputFormat(ContactInfo.class)
+            .addUserMessage("...")
+            .build();
+
+        StructuredMessage<ContactInfo> response = client.messages().create(createParams);
+        ContactInfo contact = response.output(ContactInfo.class);
+        System.out.println(contact.name + " (" + contact.email + ")");
+    }
+}
 ```
 
 </section>
@@ -897,18 +931,30 @@ Key points:
 - **Version compatibility**: Local validation may fail while remote validation succeeds if the SDK version is outdated.
 - **Disabling local validation**: Pass `JsonSchemaLocalValidation.NO` if you encounter compatibility issues:
 
-```java
+```java hidelines={1..2,4..6,8..15,22..23}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonSchemaLocalValidation;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.beta.messages.StructuredMessageCreateParams;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 
-StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_4_6)
-  .maxTokens(2048)
-  .outputFormat(BookList.class, JsonSchemaLocalValidation.NO)
-  .addUserMessage("List some famous late twentieth century novels.")
-  .build();
+class BookList {
+    public java.util.List<String> books;
+}
+
+public class LocalValidationExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(2048)
+            .outputFormat(BookList.class, JsonSchemaLocalValidation.NO)
+            .addUserMessage("List some famous late twentieth century novels.")
+            .build();
+    }
+}
 ```
 
 </section>
@@ -945,10 +991,11 @@ Each class must define at least one property for the JSON schema. A validation e
 
 You can use Jackson Databind annotations to enrich the JSON schema derived from your Java classes:
 
-```java
+```java hidelines={1..4,34}
 import com.fasterxml.jackson.annotation.JsonClassDescription;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import java.util.List;
 
 class Person {
 
@@ -975,9 +1022,10 @@ class Book {
 }
 
 class BookList {
-
   public List<Book> books;
 }
+
+public class Example { public static void main(String[] args) {} }
 ```
 
 Annotation summary:
@@ -991,9 +1039,10 @@ If you use `@JsonProperty(required = false)`, the `false` value is ignored. Anth
 
 You can also use OpenAPI Swagger 2 `@Schema` and `@ArraySchema` annotations for type-specific constraints:
 
-```java
+```java hidelines={1..3,19}
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
 
 class Article {
 
@@ -1008,6 +1057,8 @@ class Article {
   @Schema(minimum = "1")
   public int pageCount;
 }
+
+public class Example { public static void main(String[] args) {} }
 ```
 
 Local validation checks that you haven't used any unsupported constraint keywords, but constraint values aren't validated locally. For example, an unsupported `"format"` value may pass local validation but cause a remote error.
@@ -1110,7 +1161,7 @@ class Output < Anthropic::BaseModel
   required :numbers, Anthropic::ArrayOf[FamousNumber], min_length: 3, max_length: 5
 end
 
-message = anthropic.messages.create(
+message = client.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [{role: "user", content: "give me some famous numbers"}],
@@ -1163,7 +1214,7 @@ class Invoice(BaseModel):
 
 response = client.messages.parse(
     model="claude-opus-4-6",
-    max_tokens=1024,
+    max_tokens=4096,
     output_format=Invoice,
     messages=[
         {"role": "user", "content": f"Extract invoice data from: {invoice_text}"}
@@ -1189,7 +1240,7 @@ const InvoiceSchema = z.object({
 const invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
 const response = await client.messages.parse({
   model: "claude-opus-4-6",
-  max_tokens: 1024,
+  max_tokens: 4096,
   output_config: { format: zodOutputFormat(InvoiceSchema) },
   messages: [{ role: "user", content: `Extract invoice data from: ${invoiceText}` }]
 });
@@ -1242,7 +1293,7 @@ public class InvoiceExtraction
                                 items = new
                                 {
                                     type = "object",
-                                    additionalProperties = true,
+                                    additionalProperties = false,
                                 },
                             },
                             customer_name = new { type = "string" },
@@ -1256,6 +1307,129 @@ public class InvoiceExtraction
 
         var message = await client.Messages.Create(parameters);
         Console.WriteLine(message);
+    }
+}
+```
+
+```go Go hidelines={1..13,-10..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	invoiceText := "..."
+
+	schema := map[string]any{
+		"type":                 "object",
+		"additionalProperties": false,
+		"properties": map[string]any{
+			"invoice_number": map[string]any{"type": "string"},
+			"date":           map[string]any{"type": "string"},
+			"total_amount":   map[string]any{"type": "number"},
+			"line_items": map[string]any{
+				"type": "array",
+				"items": map[string]any{
+					"type":                 "object",
+					"additionalProperties": false,
+					"properties": map[string]any{
+						"description": map[string]any{"type": "string"},
+						"quantity":    map[string]any{"type": "number"},
+						"unit_price":  map[string]any{"type": "number"},
+					},
+					"required": []string{"description", "quantity", "unit_price"},
+				},
+			},
+			"customer_name": map[string]any{"type": "string"},
+		},
+		"required": []string{"invoice_number", "date", "total_amount", "line_items", "customer_name"},
+	}
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 4096,
+		OutputConfig: anthropic.OutputConfigParam{
+			Format: anthropic.JSONOutputFormatParam{
+				Schema: schema,
+			},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock(fmt.Sprintf("Extract invoice data from: %s", invoiceText))),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, block := range response.Content {
+		switch variant := block.AsAny().(type) {
+		case anthropic.TextBlock:
+			fmt.Println(variant.Text)
+		}
+	}
+}
+```
+
+```java Java hidelines={1..10,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.StructuredMessage;
+import com.anthropic.models.messages.StructuredMessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+import java.util.Map;
+
+public class InvoiceExtraction {
+    static class LineItem {
+        @JsonProperty("description")
+        public String description;
+
+        @JsonProperty("quantity")
+        public int quantity;
+
+        @JsonProperty("unit_price")
+        public double unitPrice;
+    }
+
+    static class Invoice {
+        @JsonProperty("invoice_number")
+        public String invoiceNumber;
+
+        @JsonProperty("date")
+        public String date;
+
+        @JsonProperty("total_amount")
+        public double totalAmount;
+
+        @JsonProperty("line_items")
+        public List<LineItem> lineItems;
+
+        @JsonProperty("customer_name")
+        public String customerName;
+    }
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        String invoiceText = "...";
+
+        StructuredMessageCreateParams<Invoice> params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(4096L)
+            .outputFormat(Invoice.class)
+            .addUserMessage("Extract invoice data from: " + invoiceText)
+            .build();
+
+        StructuredMessage<Invoice> response = client.messages().create(params);
+        System.out.println(response);
     }
 }
 ```
@@ -1301,6 +1475,46 @@ $message = $client->messages->create(
 );
 
 echo $message;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+invoice_text = "..."
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  output_config: {
+    format: {
+      type: :json_schema,
+      schema: {
+        type: "object",
+        properties: {
+          invoice_number: { type: "string" },
+          date: { type: "string" },
+          total_amount: { type: "number" },
+          line_items: {
+            type: "array",
+            items: {
+              type: "object",
+              additionalProperties: false
+            }
+          },
+          customer_name: { type: "string" }
+        },
+        required: ["invoice_number", "date", "total_amount", "line_items", "customer_name"],
+        additionalProperties: false
+      }
+    }
+  },
+  messages: [
+    { role: "user", content: "Extract invoice data from: #{invoice_text}" }
+  ]
+)
+puts message.content.first.text
 ```
 
 </CodeGroup>
@@ -1400,7 +1614,106 @@ var message = await client.Messages.Create(parameters);
 Console.WriteLine(message);
 ```
 
-```php PHP
+```go Go hidelines={1..14,-1}
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	feedbackText := "Great product, fast shipping!"
+
+	schema := map[string]any{
+		"type": "object",
+		"properties": map[string]any{
+			"category":   map[string]any{"type": "string"},
+			"confidence": map[string]any{"type": "number"},
+			"tags":       map[string]any{"type": "array", "items": map[string]any{"type": "string"}},
+			"sentiment":  map[string]any{"type": "string"},
+		},
+		"required":             []string{"category", "confidence", "tags", "sentiment"},
+		"additionalProperties": false,
+	}
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		OutputConfig: anthropic.OutputConfigParam{
+			Format: anthropic.JSONOutputFormatParam{
+				Schema: schema,
+			},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock(fmt.Sprintf("Classify this feedback: %s", feedbackText))),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, block := range response.Content {
+		switch variant := block.AsAny().(type) {
+		case anthropic.TextBlock:
+			var result map[string]any
+			json.Unmarshal([]byte(variant.Text), &result)
+			fmt.Println(result)
+		}
+	}
+}
+```
+
+```java Java hidelines={1..9,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.StructuredMessage;
+import com.anthropic.models.messages.StructuredMessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+
+public class ClassificationExample {
+    static class Classification {
+        @JsonProperty("category")
+        public String category;
+
+        @JsonProperty("confidence")
+        public double confidence;
+
+        @JsonProperty("tags")
+        public List<String> tags;
+
+        @JsonProperty("sentiment")
+        public String sentiment;
+    }
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        String feedbackText = "Great product, fast shipping!";
+
+        StructuredMessageCreateParams<Classification> params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .outputFormat(Classification.class)
+            .addUserMessage("Classify this feedback: " + feedbackText)
+            .build();
+
+        StructuredMessage<Classification> response = client.messages().create(params);
+        Classification result = response.output(Classification.class);
+        System.out.println(result.category + " (" + result.confidence + ")");
+    }
+}
+```
+
+```php PHP hidelines={1..6}
 <?php
 
 use Anthropic\Client;
@@ -1415,8 +1728,49 @@ $message = $client->messages->create(
         ['role' => 'user', 'content' => "Classify this feedback: {$feedbackText}"]
     ],
     model: 'claude-opus-4-6',
+    outputConfig: [
+        'format' => [
+            'type' => 'json_schema',
+            'schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'category' => ['type' => 'string'],
+                    'confidence' => ['type' => 'number'],
+                    'tags' => ['type' => 'array', 'items' => ['type' => 'string']],
+                    'sentiment' => ['type' => 'string']
+                ],
+                'required' => ['category', 'confidence', 'tags', 'sentiment'],
+                'additionalProperties' => false
+            ]
+        ]
+    ],
 );
 echo $message->content[0]->text;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+class Classification < Anthropic::BaseModel
+  required :category, String
+  required :confidence, Float
+  required :tags, Anthropic::ArrayOf[String]
+  required :sentiment, String
+end
+
+feedback_text = "Great product, fast shipping!"
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  output_config: {format: Classification},
+  messages: [
+    {role: "user", content: "Classify this feedback: #{feedback_text}"}
+  ]
+)
+puts message.parsed_output
 ```
 
 </CodeGroup>
@@ -1497,13 +1851,13 @@ var parameters = new MessageCreateParams
                 ["properties"] = JsonSerializer.SerializeToElement(new
                 {
                     status = new { type = "string" },
-                    data = new { type = "object", additionalProperties = true },
+                    data = new { type = "object", additionalProperties = false },
                     errors = new
                     {
                         type = "array",
-                        items = new { type = "object", additionalProperties = true },
+                        items = new { type = "object", additionalProperties = false },
                     },
-                    metadata = new { type = "object", additionalProperties = true },
+                    metadata = new { type = "object", additionalProperties = false },
                 }),
                 ["required"] = JsonSerializer.SerializeToElement(new[] { "status", "data", "metadata" }),
                 ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
@@ -1514,6 +1868,111 @@ var parameters = new MessageCreateParams
 
 var message = await client.Messages.Create(parameters);
 Console.WriteLine(message);
+```
+
+```go Go hidelines={1..13,-10..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		OutputConfig: anthropic.OutputConfigParam{
+			Format: anthropic.JSONOutputFormatParam{
+				Schema: map[string]any{
+					"type":                 "object",
+					"additionalProperties": false,
+					"properties": map[string]any{
+						"status": map[string]any{
+							"type": "string",
+						},
+						"data": map[string]any{
+							"type":                 "object",
+							"additionalProperties": false,
+						},
+						"errors": map[string]any{
+							"type": "array",
+							"items": map[string]any{
+								"type":                 "object",
+								"additionalProperties": false,
+							},
+						},
+						"metadata": map[string]any{
+							"type":                 "object",
+							"additionalProperties": false,
+						},
+					},
+					"required": []string{"status", "data", "metadata"},
+				},
+			},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Process this request: ...")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, block := range response.Content {
+		switch variant := block.AsAny().(type) {
+		case anthropic.TextBlock:
+			fmt.Println(variant.Text)
+		}
+	}
+}
+```
+
+```java Java hidelines={1..10,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.StructuredMessage;
+import com.anthropic.models.messages.StructuredMessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+import java.util.Map;
+
+public class StructuredOutputExample {
+    static class APIResponse {
+        @JsonProperty("status")
+        public String status;
+
+        @JsonProperty("data")
+        public Map<String, Object> data;
+
+        @JsonProperty("errors")
+        public List<Map<String, Object>> errors;
+
+        @JsonProperty("metadata")
+        public Map<String, Object> metadata;
+    }
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        StructuredMessageCreateParams<APIResponse> params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .outputFormat(APIResponse.class)
+            .addUserMessage("Process this request: ...")
+            .build();
+
+        StructuredMessage<APIResponse> response = client.messages().create(params);
+        APIResponse result = response.output(APIResponse.class);
+        System.out.println(result.status);
+    }
+}
 ```
 
 ```php PHP hidelines={1..5}
@@ -1551,6 +2010,40 @@ $message = $client->messages->create(
 );
 
 echo $message;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  output_config: {
+    format: {
+      type: :json_schema,
+      schema: {
+        type: "object",
+        properties: {
+          status: { type: "string" },
+          data: { type: "object", additionalProperties: false },
+          errors: {
+            type: "array",
+            items: { type: "object", additionalProperties: false }
+          },
+          metadata: { type: "object", additionalProperties: false }
+        },
+        required: ["status", "data", "metadata"],
+        additionalProperties: false
+      }
+    }
+  },
+  messages: [
+    { role: "user", content: "Process this request: ..." }
+  ]
+)
+puts message.content.first.text
 ```
 
 </CodeGroup>
@@ -1723,7 +2216,6 @@ public class Program
                             ["unit"] = JsonSerializer.SerializeToElement(new { type = "string", @enum = new[] { "celsius", "fahrenheit" } }),
                         },
                         Required = ["location"],
-                        AdditionalProperties = false,
                     },
                 }),
             ]
@@ -1735,7 +2227,112 @@ public class Program
 }
 ```
 
-```php PHP
+```go Go hidelines={1..13,-5..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather like in San Francisco?")),
+		},
+		Tools: []anthropic.ToolUnionParam{
+			{OfTool: &anthropic.ToolParam{
+				Name:        "get_weather",
+				Description: anthropic.String("Get the current weather in a given location"),
+				Strict:      anthropic.Bool(true),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"location": map[string]any{
+							"type":        "string",
+							"description": "The city and state, e.g. San Francisco, CA",
+						},
+						"unit": map[string]any{
+							"type": "string",
+							"enum": []string{"celsius", "fahrenheit"},
+						},
+					},
+					Required: []string{"location"},
+					ExtraFields: map[string]any{
+						"additionalProperties": false,
+					},
+				}}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response.Content)
+}
+```
+
+```java Java hidelines={1..13,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.Tool.InputSchema;
+import java.util.List;
+import java.util.Map;
+
+public class StrictToolExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        InputSchema schema = InputSchema.builder()
+            .properties(
+                JsonValue.from(
+                    Map.of(
+                        "location", Map.of(
+                            "type", "string",
+                            "description", "The city and state, e.g. San Francisco, CA"
+                        ),
+                        "unit", Map.of(
+                            "type", "string",
+                            "enum", List.of("celsius", "fahrenheit")
+                        )
+                    )
+                )
+            )
+            .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+            .putAdditionalProperty("additionalProperties", JsonValue.from(false))
+            .build();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .addUserMessage("What's the weather like in San Francisco?")
+            .addTool(
+                Tool.builder()
+                    .name("get_weather")
+                    .description("Get the current weather in a given location")
+                    .strict(true)
+                    .inputSchema(schema)
+                    .build()
+            )
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response.content());
+    }
+}
+```
+
+```php PHP hidelines={1..6}
 <?php
 
 use Anthropic\Client;
@@ -1773,6 +2370,43 @@ $message = $client->messages->create(
 );
 
 echo $message;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [
+    { role: "user", content: "What's the weather like in San Francisco?" }
+  ],
+  tools: [
+    {
+      name: "get_weather",
+      description: "Get the current weather in a given location",
+      strict: true,
+      input_schema: {
+        type: "object",
+        properties: {
+          location: {
+            type: "string",
+            description: "The city and state, e.g. San Francisco, CA"
+          },
+          unit: {
+            type: "string",
+            enum: ["celsius", "fahrenheit"]
+          }
+        },
+        required: ["location"],
+        additionalProperties: false
+      }
+    }
+  ]
+)
+puts message.content
 ```
 
 </CodeGroup>
@@ -1908,7 +2542,6 @@ class Program
                             ["passengers"] = JsonSerializer.SerializeToElement(new { type = "integer", @enum = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } }),
                         },
                         Required = ["destination", "departure_date"],
-                        AdditionalProperties = false,
                     },
                 }),
             ]
@@ -1918,6 +2551,179 @@ class Program
         Console.WriteLine(message);
     }
 }
+```
+
+```go Go hidelines={1..13,-5..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Search for flights to Tokyo")),
+		},
+		Tools: []anthropic.ToolUnionParam{
+			{OfTool: &anthropic.ToolParam{
+				Name:   "search_flights",
+				Strict: anthropic.Bool(true),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"destination": map[string]any{
+							"type": "string",
+						},
+						"departure_date": map[string]any{
+							"type":   "string",
+							"format": "date",
+						},
+						"passengers": map[string]any{
+							"type": "integer",
+							"enum": []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+						},
+					},
+					Required: []string{"destination", "departure_date"},
+					ExtraFields: map[string]any{
+						"additionalProperties": false,
+					},
+				}}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..13,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.Tool.InputSchema;
+import java.util.List;
+import java.util.Map;
+
+public class StrictToolExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        InputSchema schema = InputSchema.builder()
+            .properties(
+                JsonValue.from(
+                    Map.of(
+                        "destination", Map.of("type", "string"),
+                        "departure_date", Map.of("type", "string", "format", "date"),
+                        "passengers", Map.of(
+                            "type", "integer",
+                            "enum", List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+                        )
+                    )
+                )
+            )
+            .putAdditionalProperty("required", JsonValue.from(List.of("destination", "departure_date")))
+            .putAdditionalProperty("additionalProperties", JsonValue.from(false))
+            .build();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .addUserMessage("Search for flights to Tokyo")
+            .addTool(
+                Tool.builder()
+                    .name("search_flights")
+                    .strict(true)
+                    .inputSchema(schema)
+                    .build()
+            )
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'Search for flights to Tokyo']
+    ],
+    model: 'claude-opus-4-6',
+    tools: [
+        [
+            'name' => 'search_flights',
+            'strict' => true,
+            'input_schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'destination' => ['type' => 'string'],
+                    'departure_date' => ['type' => 'string', 'format' => 'date'],
+                    'passengers' => [
+                        'type' => 'integer',
+                        'enum' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    ]
+                ],
+                'required' => ['destination', 'departure_date'],
+                'additionalProperties' => false
+            ]
+        ]
+    ],
+);
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [
+    { role: "user", content: "Search for flights to Tokyo" }
+  ],
+  tools: [
+    {
+      name: "search_flights",
+      strict: true,
+      input_schema: {
+        type: "object",
+        properties: {
+          destination: { type: "string" },
+          departure_date: { type: "string", format: "date" },
+          passengers: {
+            type: "integer",
+            enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+          }
+        },
+        required: ["destination", "departure_date"],
+        additionalProperties: false
+      }
+    }
+  ]
+)
+puts message
 ```
 
 </CodeGroup>
@@ -2048,7 +2854,6 @@ class Program
                             ["travelers"] = JsonSerializer.SerializeToElement(new { type = "integer", @enum = new[] { 1, 2, 3, 4, 5, 6 } }),
                         },
                         Required = ["origin", "destination", "departure_date"],
-                        AdditionalProperties = false,
                     },
                 }),
                 new ToolUnion(new Tool()
@@ -2064,7 +2869,6 @@ class Program
                             ["guests"] = JsonSerializer.SerializeToElement(new { type = "integer", @enum = new[] { 1, 2, 3, 4 } }),
                         },
                         Required = ["city", "check_in"],
-                        AdditionalProperties = false,
                     },
                 }),
             ]
@@ -2076,7 +2880,137 @@ class Program
 }
 ```
 
-```php PHP
+```go Go hidelines={1..13,-5..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Help me plan a trip to Paris for 2 people")),
+		},
+		Tools: []anthropic.ToolUnionParam{
+			{OfTool: &anthropic.ToolParam{
+				Name:   "search_flights",
+				Strict: anthropic.Bool(true),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"origin":         map[string]any{"type": "string"},
+						"destination":    map[string]any{"type": "string"},
+						"departure_date": map[string]any{"type": "string", "format": "date"},
+						"travelers":      map[string]any{"type": "integer", "enum": []int{1, 2, 3, 4, 5, 6}},
+					},
+					Required: []string{"origin", "destination", "departure_date"},
+					ExtraFields: map[string]any{
+						"additionalProperties": false,
+					},
+				}}},
+			{OfTool: &anthropic.ToolParam{
+				Name:   "search_hotels",
+				Strict: anthropic.Bool(true),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"city":     map[string]any{"type": "string"},
+						"check_in": map[string]any{"type": "string", "format": "date"},
+						"guests":   map[string]any{"type": "integer", "enum": []int{1, 2, 3, 4}},
+					},
+					Required: []string{"city", "check_in"},
+					ExtraFields: map[string]any{
+						"additionalProperties": false,
+					},
+				}}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..13,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.Tool.InputSchema;
+import java.util.List;
+import java.util.Map;
+
+public class StrictToolExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        InputSchema flightsSchema = InputSchema.builder()
+            .properties(
+                JsonValue.from(
+                    Map.of(
+                        "origin", Map.of("type", "string"),
+                        "destination", Map.of("type", "string"),
+                        "departure_date", Map.of("type", "string", "format", "date"),
+                        "travelers", Map.of("type", "integer", "enum", List.of(1, 2, 3, 4, 5, 6))
+                    )
+                )
+            )
+            .putAdditionalProperty("required", JsonValue.from(List.of("origin", "destination", "departure_date")))
+            .putAdditionalProperty("additionalProperties", JsonValue.from(false))
+            .build();
+
+        InputSchema hotelsSchema = InputSchema.builder()
+            .properties(
+                JsonValue.from(
+                    Map.of(
+                        "city", Map.of("type", "string"),
+                        "check_in", Map.of("type", "string", "format", "date"),
+                        "guests", Map.of("type", "integer", "enum", List.of(1, 2, 3, 4))
+                    )
+                )
+            )
+            .putAdditionalProperty("required", JsonValue.from(List.of("city", "check_in")))
+            .putAdditionalProperty("additionalProperties", JsonValue.from(false))
+            .build();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .addUserMessage("Help me plan a trip to Paris for 2 people")
+            .addTool(
+                Tool.builder()
+                    .name("search_flights")
+                    .strict(true)
+                    .inputSchema(flightsSchema)
+                    .build()
+            )
+            .addTool(
+                Tool.builder()
+                    .name("search_hotels")
+                    .strict(true)
+                    .inputSchema(hotelsSchema)
+                    .build()
+            )
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP hidelines={1..6}
 <?php
 
 use Anthropic\Client;
@@ -2123,6 +3057,52 @@ $message = $client->messages->create(
 );
 
 echo $message->content[0]->text;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [
+    { role: "user", content: "Help me plan a trip to Paris for 2 people" }
+  ],
+  tools: [
+    {
+      name: "search_flights",
+      strict: true,
+      input_schema: {
+        type: "object",
+        properties: {
+          origin: { type: "string" },
+          destination: { type: "string" },
+          departure_date: { type: "string", format: "date" },
+          travelers: { type: "integer", enum: [1, 2, 3, 4, 5, 6] }
+        },
+        required: ["origin", "destination", "departure_date"],
+        additionalProperties: false
+      }
+    },
+    {
+      name: "search_hotels",
+      strict: true,
+      input_schema: {
+        type: "object",
+        properties: {
+          city: { type: "string" },
+          check_in: { type: "string", format: "date" },
+          guests: { type: "integer", enum: [1, 2, 3, 4] }
+        },
+        required: ["city", "check_in"],
+        additionalProperties: false
+      }
+    }
+  ]
+)
+puts message
 ```
 
 </CodeGroup>
@@ -2244,6 +3224,7 @@ var parameters = new MessageCreateParams
     Model = Model.ClaudeOpus4_6,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Help me plan a trip to Paris for next month" }],
+    // JSON outputs: structured response format
     OutputConfig = new OutputConfig
     {
         Format = new JsonOutputFormat
@@ -2253,68 +3234,29 @@ var parameters = new MessageCreateParams
                 ["type"] = JsonSerializer.SerializeToElement("object"),
                 ["properties"] = JsonSerializer.SerializeToElement(new
                 {
-                    destinations = new
-                    {
-                        type = "array",
-                        items = new
-                        {
-                            type = "object",
-                            properties = new
-                            {
-                                city = new { type = "string" },
-                                country = new { type = "string" },
-                            },
-                            required = new[] { "city", "country" },
-                            additionalProperties = false,
-                        },
-                    },
-                    travel_dates = new
-                    {
-                        type = "object",
-                        properties = new
-                        {
-                            start = new { type = "string" },
-                            end = new { type = "string" },
-                        },
-                        required = new[] { "start", "end" },
-                        additionalProperties = false,
-                    },
-                    budget_range = new
-                    {
-                        type = "object",
-                        properties = new
-                        {
-                            min = new { type = "number" },
-                            max = new { type = "number" },
-                            currency = new { type = "string" },
-                        },
-                        required = new[] { "min", "max", "currency" },
-                        additionalProperties = false,
-                    },
+                    summary = new { type = "string" },
+                    next_steps = new { type = "array", items = new { type = "string" } },
                 }),
-                ["required"] = JsonSerializer.SerializeToElement(new[] { "destinations", "travel_dates", "budget_range" }),
+                ["required"] = JsonSerializer.SerializeToElement(new[] { "summary", "next_steps" }),
                 ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
             },
         },
     },
+    // Strict tool use: guaranteed tool parameters
     Tools =
     [
         new Tool
         {
             Name = "search_flights",
-            Description = "Search for available flights between two cities",
             Strict = true,
             InputSchema = new InputSchema
             {
                 Properties = new Dictionary<string, JsonElement>
                 {
-                    ["departure_city"] = JsonSerializer.SerializeToElement(new { type = "string", description = "City to depart from" }),
-                    ["destination_city"] = JsonSerializer.SerializeToElement(new { type = "string", description = "City to fly to" }),
-                    ["date"] = JsonSerializer.SerializeToElement(new { type = "string", description = "Travel date (YYYY-MM-DD)" }),
-                    ["max_price"] = JsonSerializer.SerializeToElement(new { type = "number", description = "Maximum ticket price in USD" }),
+                    ["destination"] = JsonSerializer.SerializeToElement(new { type = "string" }),
+                    ["date"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date" }),
                 },
-                Required = ["departure_city", "destination_city", "date", "max_price"],
-                AdditionalProperties = false,
+                Required = ["destination", "date"],
             },
         }
     ],
@@ -2324,7 +3266,125 @@ var message = await client.Messages.Create(parameters);
 Console.WriteLine(message);
 ```
 
-```php PHP
+```go Go hidelines={1..13,-5..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Help me plan a trip to Paris for next month")),
+		},
+		// JSON outputs: structured response format
+		OutputConfig: anthropic.OutputConfigParam{
+			Format: anthropic.JSONOutputFormatParam{
+				Schema: map[string]any{
+					"type":                 "object",
+					"additionalProperties": false,
+					"properties": map[string]any{
+						"summary":    map[string]any{"type": "string"},
+						"next_steps": map[string]any{"type": "array", "items": map[string]any{"type": "string"}},
+					},
+					"required": []string{"summary", "next_steps"},
+				},
+			},
+		},
+		// Strict tool use: guaranteed tool parameters
+		Tools: []anthropic.ToolUnionParam{
+			{OfTool: &anthropic.ToolParam{
+				Name:   "search_flights",
+				Strict: anthropic.Bool(true),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"destination": map[string]any{"type": "string"},
+						"date":        map[string]any{"type": "string", "format": "date"},
+					},
+					Required: []string{"destination", "date"},
+					ExtraFields: map[string]any{
+						"additionalProperties": false,
+					},
+				}}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response.Content)
+}
+```
+
+```java Java hidelines={1..15,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.JsonOutputFormat;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.OutputConfig;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.Tool.InputSchema;
+import java.util.List;
+import java.util.Map;
+
+public class StructuredOutputExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        // JSON outputs: structured response format
+        JsonOutputFormat.Schema outputSchema = JsonOutputFormat.Schema.builder()
+            .putAdditionalProperty("type", JsonValue.from("object"))
+            .putAdditionalProperty("properties", JsonValue.from(Map.of(
+                "summary", Map.of("type", "string"),
+                "next_steps", Map.of("type", "array", "items", Map.of("type", "string"))
+            )))
+            .putAdditionalProperty("required", JsonValue.from(List.of("summary", "next_steps")))
+            .putAdditionalProperty("additionalProperties", JsonValue.from(false))
+            .build();
+
+        // Strict tool use: guaranteed tool parameters
+        InputSchema toolSchema = InputSchema.builder()
+            .properties(JsonValue.from(Map.of(
+                "destination", Map.of("type", "string"),
+                "date", Map.of("type", "string", "format", "date")
+            )))
+            .putAdditionalProperty("required", JsonValue.from(List.of("destination", "date")))
+            .putAdditionalProperty("additionalProperties", JsonValue.from(false))
+            .build();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .addUserMessage("Help me plan a trip to Paris for next month")
+            .outputConfig(OutputConfig.builder()
+                .format(JsonOutputFormat.builder().schema(outputSchema).build())
+                .build())
+            .addTool(Tool.builder()
+                .name("search_flights")
+                .description("Search for available flights to a destination on a specific date")
+                .strict(true)
+                .inputSchema(toolSchema)
+                .build())
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP hidelines={1..6}
 <?php
 
 use Anthropic\Client;
@@ -2337,8 +3397,85 @@ $message = $client->messages->create(
         ['role' => 'user', 'content' => 'Help me plan a trip to Paris for next month']
     ],
     model: 'claude-opus-4-6',
+    // JSON outputs: structured response format
+    outputConfig: [
+        'format' => [
+            'type' => 'json_schema',
+            'schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'summary' => ['type' => 'string'],
+                    'next_steps' => ['type' => 'array', 'items' => ['type' => 'string']]
+                ],
+                'required' => ['summary', 'next_steps'],
+                'additionalProperties' => false
+            ]
+        ]
+    ],
+    // Strict tool use: guaranteed tool parameters
+    tools: [
+        [
+            'name' => 'search_flights',
+            'strict' => true,
+            'input_schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'destination' => ['type' => 'string'],
+                    'date' => ['type' => 'string', 'format' => 'date']
+                ],
+                'required' => ['destination', 'date'],
+                'additionalProperties' => false
+            ]
+        ]
+    ],
 );
-echo $message->content[0]->text;
+echo $message;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [
+    {role: "user", content: "Help me plan a trip to Paris for next month"}
+  ],
+  # JSON outputs: structured response format
+  output_config: {
+    format: {
+      type: :json_schema,
+      schema: {
+        type: "object",
+        properties: {
+          summary: {type: "string"},
+          next_steps: {type: "array", items: {type: "string"}}
+        },
+        required: ["summary", "next_steps"],
+        additionalProperties: false
+      }
+    }
+  },
+  # Strict tool use: guaranteed tool parameters
+  tools: [
+    {
+      name: "search_flights",
+      strict: true,
+      input_schema: {
+        type: "object",
+        properties: {
+          destination: {type: "string"},
+          date: {type: "string", format: "date"}
+        },
+        required: ["destination", "date"],
+        additionalProperties: false
+      }
+    }
+  ]
+)
+puts message
 ```
 
 </CodeGroup>

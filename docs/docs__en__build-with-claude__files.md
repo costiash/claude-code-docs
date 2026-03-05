@@ -83,44 +83,65 @@ var file = await client.Beta.Files.Upload(
 Console.WriteLine(file.Id);
 ```
 
-```go Go
+```go Go hidelines={12..16}
 package main
 
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/anthropics/anthropic-sdk-go"
 )
 
+func init() {
+	os.MkdirAll("/path/to", 0755)
+	os.WriteFile("/path/to/document.pdf", []byte("%PDF-1.4 test"), 0644)
+}
+
 func main() {
 	client := anthropic.NewClient()
 
-	file, _ := os.Open("/path/to/document.pdf")
+	file, err := os.Open("/path/to/document.pdf")
+	if err != nil {
+		log.Fatal(err)
+	}
 	defer file.Close()
 
-	response, _ := client.Beta.Files.Upload(context.Background(),
+	response, err := client.Beta.Files.Upload(context.Background(),
 		anthropic.BetaFileUploadParams{
-			File: file,
+			File:  file,
+			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
 		})
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	fmt.Println(response.ID)
 }
 ```
 
-```java Java
+```java Java nocheck hidelines={1..8,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.files.FileUploadParams;
+import com.anthropic.models.beta.files.FileMetadata;
 import java.nio.file.Path;
 
-AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+public class UploadFile {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-var file = client.beta().files().upload(
-    Path.of("/path/to/document.pdf")
-);
+        FileMetadata file = client.beta().files().upload(
+            FileUploadParams.builder()
+                .file(Path.of("/path/to/document.pdf"))
+                .build()
+        );
 
-System.out.println(file.id());
+        System.out.println(file.id());
+    }
+}
 ```
 
 ```php PHP nocheck
@@ -140,7 +161,7 @@ $file = $client->beta->files->upload(
 echo $file->id;
 ```
 
-```ruby Ruby
+```ruby Ruby nocheck
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -298,12 +319,13 @@ var response = await client.Beta.Messages.Create(
 Console.WriteLine(response);
 ```
 
-```go Go
+```go Go nocheck hidelines={1..13,-6..-1}
 package main
 
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/anthropics/anthropic-sdk-go"
 )
@@ -311,66 +333,72 @@ import (
 func main() {
 	client := anthropic.NewClient()
 
-	response, _ := client.Beta.Messages.New(context.Background(),
+	response, err := client.Beta.Messages.New(context.Background(),
 		anthropic.BetaMessageNewParams{
 			Model:     anthropic.ModelClaudeOpus4_6,
 			MaxTokens: 1024,
 			Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
 			Messages: []anthropic.BetaMessageParam{
-				{
-					Role: "user",
-					Content: []anthropic.BetaContentBlockParam{
-						anthropic.NewBetaTextBlock("Please summarize this document for me."),
-						{
-							Type: "document",
-							Source: &anthropic.BetaDocumentSourceParam{
-								Type:   "file",
-								FileID: "file_011CNha8iCJcU1wXNR6q4V8w",
-							},
-						},
-					},
-				},
+				anthropic.NewBetaUserMessage(
+					anthropic.NewBetaTextBlock("Please summarize this document for me."),
+					anthropic.NewBetaDocumentBlock(anthropic.BetaFileDocumentSourceParam{
+						FileID: "file_011CNha8iCJcU1wXNR6q4V8w",
+					}),
+				),
 			},
 		})
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	fmt.Println(response)
 }
 ```
 
-```java Java
+```java Java nocheck hidelines={1..13,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.*;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.beta.messages.BetaContentBlockParam;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaRequestDocumentBlock;
+import com.anthropic.models.beta.messages.BetaFileDocumentSource;
+import com.anthropic.models.beta.messages.BetaTextBlockParam;
+import com.anthropic.models.beta.messages.MessageCreateParams;
+import java.util.List;
 
-AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+public class UseFileInMessages {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_4_6)
-    .maxTokens(1024)
-    .addMessage(MessageParam.builder()
-        .role(Role.USER)
-        .content(ContentBlockParam.ofText("Please summarize this document for me."))
-        .content(ContentBlockParam.ofDocument(DocumentBlockParam.builder()
-            .source(DocumentBlockParam.Source.ofFile(
-                DocumentBlockParam.Source.File.builder()
-                    .fileId("file_011CNha8iCJcU1wXNR6q4V8w")
-                    .build()))
-            .build()))
-        .build())
-    .build();
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .addBeta("files-api-2025-04-14")
+            .maxTokens(1024)
+            .addUserMessageOfBetaContentBlockParams(List.of(
+                BetaContentBlockParam.ofText(BetaTextBlockParam.builder()
+                    .text("Please summarize this document for me.")
+                    .build()),
+                BetaContentBlockParam.ofDocument(BetaRequestDocumentBlock.builder()
+                    .source(BetaFileDocumentSource.builder()
+                        .fileId("file_011CNha8iCJcU1wXNR6q4V8w")
+                        .build())
+                    .build())
+            ))
+            .build();
 
-Message message = client.beta().messages().create(params);
-System.out.println(message);
+        BetaMessage message = client.beta().messages().create(params);
+        System.out.println(message);
+    }
+}
 ```
 
-```php PHP nocheck
+```php PHP hidelines={1..6} nocheck
 <?php
 
 use Anthropic\Client;
 
-$client = new Client(
-    apiKey: getenv("ANTHROPIC_API_KEY")
-);
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 
 $response = $client->beta->messages->create(
     maxTokens: 1024,
@@ -396,7 +424,7 @@ $response = $client->beta->messages->create(
 print_r($response);
 ```
 
-```ruby Ruby
+```ruby Ruby nocheck
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -568,6 +596,135 @@ class Program
     }
 }
 ```
+
+```go Go hidelines={12..15}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+	"os"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func init() {
+	os.WriteFile("document.txt", []byte("This is a test document for upload."), 0644)
+}
+
+func main() {
+	client := anthropic.NewClient()
+
+	// Example: Reading a text file
+	textContent, err := os.ReadFile("document.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock(
+				fmt.Sprintf("Here's the document content:\n\n%s\n\nPlease summarize this document.", string(textContent)),
+			)),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(response.Content[0].Text)
+}
+```
+
+```java Java nocheck hidelines={1..11,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.Model;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
+
+public class FileUploadExample {
+    public static void main(String[] args) throws IOException {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        // Example: Reading a text file
+        String textContent = Files.readString(Paths.get("document.txt"));
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .addUserMessage("Here's the document content:\n\n" + textContent + "\n\nPlease summarize this document.")
+            .build();
+
+        Message response = client.messages().create(params);
+        response.content().stream()
+            .flatMap(block -> block.text().stream())
+            .forEach(textBlock -> System.out.println(textBlock.text()));
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+// Example: Reading a text file
+$textContent = file_get_contents("document.txt");
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => [
+                [
+                    'type' => 'text',
+                    'text' => "Here's the document content:\n\n{$textContent}\n\nPlease summarize this document."
+                ]
+            ]
+        ]
+    ],
+    model: 'claude-opus-4-6',
+);
+
+echo $message->content[0]->text;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+# Example: Reading a text file
+text_content = File.read("document.txt")
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "Here's the document content:\n\n#{text_content}\n\nPlease summarize this document."
+        }
+      ]
+    }
+  ]
+)
+
+puts message.content.first.text
+```
 </CodeGroup>
 
 <Note>
@@ -655,6 +812,69 @@ class Program
     }
 }
 ```
+
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	files, err := client.Beta.Files.List(context.TODO(), anthropic.BetaFileListParams{
+		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(files)
+}
+```
+
+```java Java hidelines={1..6,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.files.FileListPage;
+
+public class ListFiles {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        FileListPage files = client.beta().files().list();
+        System.out.println(files);
+    }
+}
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$files = $client->beta->files->list(
+    betas: ['files-api-2025-04-14'],
+);
+print_r($files);
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+files = client.beta.files.list(
+  betas: ["files-api-2025-04-14"]
+)
+puts files
+```
 </CodeGroup>
 
 #### Get file metadata
@@ -701,6 +921,76 @@ class Program
     }
 }
 ```
+
+```go Go nocheck hidelines={1..13,-6..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	file, err := client.Beta.Files.GetMetadata(
+		context.TODO(),
+		"file_011CNha8iCJcU1wXNR6q4V8w",
+		anthropic.BetaFileGetMetadataParams{
+			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(file)
+}
+```
+
+```java Java nocheck hidelines={1..6,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.files.FileMetadata;
+
+public class RetrieveFileMetadata {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        FileMetadata file = client.beta().files().retrieveMetadata(
+            "file_011CNha8iCJcU1wXNR6q4V8w"
+        );
+
+        System.out.println(file);
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$file = $client->beta->files->retrieveMetadata(
+    fileID: 'file_011CNha8iCJcU1wXNR6q4V8w',
+    betas: ['files-api-2025-04-14'],
+);
+echo $file;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+file = client.beta.files.retrieve_metadata("file_011CNha8iCJcU1wXNR6q4V8w")
+puts file
+```
 </CodeGroup>
 
 #### Delete a file
@@ -745,6 +1035,66 @@ class Program
         await client.Beta.Files.Delete("file_011CNha8iCJcU1wXNR6q4V8w");
     }
 }
+```
+
+```go Go nocheck hidelines={1..12,-4..-1}
+package main
+
+import (
+	"context"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	_, err := client.Beta.Files.Delete(
+		context.TODO(),
+		"file_011CNha8iCJcU1wXNR6q4V8w",
+		anthropic.BetaFileDeleteParams{
+			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+```java Java nocheck hidelines={1..5,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+
+public class DeleteFile {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        client.beta().files().delete("file_011CNha8iCJcU1wXNR6q4V8w");
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$result = $client->beta->files->delete(
+    fileID: 'file_011CNha8iCJcU1wXNR6q4V8w',
+    betas: ['files-api-2025-04-14'],
+);
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+result = client.beta.files.delete("file_011CNha8iCJcU1wXNR6q4V8w")
 ```
 </CodeGroup>
 
@@ -804,6 +1154,95 @@ class Program
         await File.WriteAllBytesAsync("downloaded_file.txt", fileContent);
     }
 }
+```
+
+```go Go nocheck hidelines={1..14,-4..-1}
+package main
+
+import (
+	"context"
+	"io"
+	"log"
+	"os"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	resp, err := client.Beta.Files.Download(
+		context.TODO(),
+		"file_011CNha8iCJcU1wXNR6q4V8w",
+		anthropic.BetaFileDownloadParams{
+			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+
+	fileContent, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = os.WriteFile("downloaded_file.txt", fileContent, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+```java Java nocheck hidelines={1..11,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.http.HttpResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+
+public class DownloadFile {
+    public static void main(String[] args) throws IOException {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        try (HttpResponse response = client.beta().files().download(
+                "file_011CNha8iCJcU1wXNR6q4V8w")) {
+            try (InputStream body = response.body()) {
+                Files.copy(body, Path.of("downloaded_file.txt"),
+                    StandardCopyOption.REPLACE_EXISTING);
+            }
+        }
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$fileContent = $client->beta->files->download(
+    fileID: 'file_011CNha8iCJcU1wXNR6q4V8w',
+    betas: ['files-api-2025-04-14'],
+);
+
+file_put_contents("downloaded_file.txt", $fileContent);
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+file_content = client.beta.files.download("file_011CNha8iCJcU1wXNR6q4V8w")
+
+File.binwrite("downloaded_file.txt", file_content.read)
 ```
 </CodeGroup>
 

@@ -209,6 +209,173 @@ class Program
     }
 }
 ```
+
+```go Go hidelines={1..13,-5..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 4096,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue")),
+		},
+		Tools: []anthropic.ToolUnionParam{
+			{OfCodeExecutionTool20260120: &anthropic.CodeExecutionTool20260120Param{}},
+			{OfTool: &anthropic.ToolParam{
+				Name:        "query_database",
+				Description: anthropic.String("Execute a SQL query against the sales database. Returns a list of rows as JSON objects."),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"sql": map[string]any{
+							"type":        "string",
+							"description": "SQL query to execute",
+						},
+					},
+					Required: []string{"sql"},
+				},
+				AllowedCallers: []string{"code_execution_20260120"},
+			}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..13,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.Tool.InputSchema;
+import com.anthropic.models.messages.CodeExecutionTool20260120;
+import java.util.List;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model("claude-opus-4-6")
+            .maxTokens(4096L)
+            .addUserMessage("Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue")
+            .addTool(CodeExecutionTool20260120.builder().build())
+            .addTool(Tool.builder()
+                .name("query_database")
+                .description("Execute a SQL query against the sales database. Returns a list of rows as JSON objects.")
+                .inputSchema(InputSchema.builder()
+                    .properties(JsonValue.from(Map.of(
+                        "sql", Map.of(
+                            "type", "string",
+                            "description", "SQL query to execute"
+                        )
+                    )))
+                    .putAdditionalProperty("required", JsonValue.from(List.of("sql")))
+                    .build())
+                .allowedCallers(List.of(Tool.AllowedCaller.of("code_execution_20260120")))
+                .build())
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue'],
+    ],
+    model: 'claude-opus-4-6',
+    tools: [
+        [
+            'type' => 'code_execution_20260120',
+            'name' => 'code_execution',
+        ],
+        [
+            'name' => 'query_database',
+            'description' => 'Execute a SQL query against the sales database. Returns a list of rows as JSON objects.',
+            'input_schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'sql' => [
+                        'type' => 'string',
+                        'description' => 'SQL query to execute',
+                    ],
+                ],
+                'required' => ['sql'],
+            ],
+            'allowed_callers' => ['code_execution_20260120'],
+        ],
+    ],
+);
+
+echo $message;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  messages: [
+    {
+      role: "user",
+      content: "Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue"
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20260120",
+      name: "code_execution"
+    },
+    {
+      name: "query_database",
+      description: "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
+      input_schema: {
+        type: "object",
+        properties: {
+          sql: {
+            type: "string",
+            description: "SQL query to execute"
+          }
+        },
+        required: ["sql"]
+      },
+      allowed_callers: ["code_execution_20260120"]
+    }
+  ]
+)
+
+puts message
+```
 </CodeGroup>
 
 ## How programmatic tool calling works
@@ -338,7 +505,7 @@ response = client.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
@@ -403,12 +570,12 @@ class Program
                     InputSchema = new() {
                         Type = "object",
                         Properties = new() {
-                            ["query"] = new() {
+                            ["sql"] = new() {
                                 Type = "string",
                                 Description = "The SQL query to execute"
                             }
                         },
-                        Required = ["query"]
+                        Required = ["sql"]
                     },
                     AllowedCallers = ["code_execution_20260120"]
                 }
@@ -419,6 +586,175 @@ class Program
         Console.WriteLine(message);
     }
 }
+```
+
+```go Go hidelines={1..13,-5..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 4096,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Query customer purchase history from the last quarter and identify our top 5 customers by revenue")),
+		},
+		Tools: []anthropic.ToolUnionParam{
+			{OfCodeExecutionTool20260120: &anthropic.CodeExecutionTool20260120Param{}},
+			{OfTool: &anthropic.ToolParam{
+				Name:        "query_database",
+				Description: anthropic.String("Execute a SQL query against the sales database. Returns a list of rows as JSON objects."),
+				InputSchema: anthropic.ToolInputSchemaParam{
+					Properties: map[string]any{
+						"sql": map[string]any{
+							"type":        "string",
+							"description": "The SQL query to execute",
+						},
+					},
+					Required: []string{"sql"},
+				},
+				AllowedCallers: []string{"code_execution_20260120"},
+			}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..14,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.Tool.InputSchema;
+import com.anthropic.models.messages.CodeExecutionTool20260120;
+import java.util.List;
+import java.util.Map;
+
+public class CodeExecutionExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        InputSchema querySchema = InputSchema.builder()
+            .properties(JsonValue.from(Map.of(
+                "sql", Map.of(
+                    "type", "string",
+                    "description", "The SQL query to execute"
+                )
+            )))
+            .putAdditionalProperty("required", JsonValue.from(List.of("sql")))
+            .build();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(4096L)
+            .addUserMessage("Query customer purchase history from the last quarter and identify our top 5 customers by revenue")
+            .addTool(CodeExecutionTool20260120.builder().build())
+            .addTool(Tool.builder()
+                .name("query_database")
+                .description("Execute a SQL query against the sales database. Returns a list of rows as JSON objects.")
+                .inputSchema(querySchema)
+                .allowedCallers(List.of(Tool.AllowedCaller.of("code_execution_20260120")))
+                .build())
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP hidelines={1..6}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Query customer purchase history from the last quarter and identify our top 5 customers by revenue'],
+    ],
+    model: 'claude-opus-4-6',
+    tools: [
+        [
+            'type' => 'code_execution_20260120',
+            'name' => 'code_execution',
+        ],
+        [
+            'name' => 'query_database',
+            'description' => 'Execute a SQL query against the sales database. Returns a list of rows as JSON objects.',
+            'input_schema' => [
+                'type' => 'object',
+                'properties' => [
+                    'sql' => [
+                        'type' => 'string',
+                        'description' => 'The SQL query to execute',
+                    ],
+                ],
+                'required' => ['sql'],
+            ],
+            'allowed_callers' => ['code_execution_20260120'],
+        ],
+    ],
+);
+
+echo $message->content[0]->text;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  messages: [
+    {
+      role: "user",
+      content: "Query customer purchase history from the last quarter and identify our top 5 customers by revenue"
+    }
+  ],
+  tools: [
+    {
+      type: "code_execution_20260120",
+      name: "code_execution"
+    },
+    {
+      name: "query_database",
+      description: "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
+      input_schema: {
+        type: "object",
+        properties: {
+          sql: {
+            type: "string",
+            description: "The SQL query to execute"
+          }
+        },
+        required: ["sql"]
+      },
+      allowed_callers: ["code_execution_20260120"]
+    }
+  ]
+)
+puts message
 ```
 </CodeGroup>
 
@@ -517,7 +853,7 @@ response = client.messages.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 4096,
@@ -624,7 +960,7 @@ class Program
                     {
                         new ToolResultBlockParam
                         {
-                            ToolUseId = "toolu_def456",
+                            ToolUseID = "toolu_def456",
                             Content = "[{\"customer_id\": \"C1\", \"revenue\": 45000}, {\"customer_id\": \"C2\", \"revenue\": 38000}, ...]"
                         }
                     }
@@ -637,6 +973,249 @@ class Program
         Console.WriteLine(message);
     }
 }
+```
+
+```go Go nocheck hidelines={1..13,-5..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 4096,
+		Container: anthropic.MessageNewParamsContainerUnion{
+			OfString: anthropic.String("container_xyz789"),
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Query customer purchase history from the last quarter and identify our top 5 customers by revenue")),
+			{
+				Role: anthropic.MessageParamRoleAssistant,
+				Content: []anthropic.ContentBlockParamUnion{
+					anthropic.NewTextBlock("I'll query the purchase history and analyze the results."),
+					{OfServerToolUse: &anthropic.ServerToolUseBlockParam{
+						ID:    "srvtoolu_abc123",
+						Name:  anthropic.ServerToolUseBlockParamNameCodeExecution,
+						Input: map[string]any{"code": "..."},
+					}},
+					{OfToolUse: &anthropic.ToolUseBlockParam{
+						ID:    "toolu_def456",
+						Name:  "query_database",
+						Input: map[string]any{"sql": "<sql>"},
+						Caller: anthropic.ServerToolUseBlockParamCallerUnion{
+							OfCodeExecution20260120: &anthropic.ServerToolCaller20260120Param{
+								ToolID: "srvtoolu_abc123",
+							},
+						},
+					}},
+				},
+			},
+			{
+				Role: anthropic.MessageParamRoleUser,
+				Content: []anthropic.ContentBlockParamUnion{
+					{OfToolResult: &anthropic.ToolResultBlockParam{
+						ToolUseID: "toolu_def456",
+						Content: []anthropic.ToolResultBlockParamContentUnion{
+							{OfText: &anthropic.TextBlockParam{
+								Text: `[{"customer_id": "C1", "revenue": 45000}, {"customer_id": "C2", "revenue": 38000}, ...]`,
+							}},
+						},
+					}},
+				},
+			},
+		},
+		Tools: []anthropic.ToolUnionParam{
+			{OfCodeExecutionTool20260120: &anthropic.CodeExecutionTool20260120Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java nocheck hidelines={1..17,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.CodeExecutionTool20260120;
+import com.anthropic.models.messages.ContentBlockParam;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.ServerToolUseBlockParam;
+import com.anthropic.models.messages.TextBlockParam;
+import com.anthropic.models.messages.ToolResultBlockParam;
+import com.anthropic.models.messages.ToolUseBlockParam;
+import java.util.List;
+import java.util.Map;
+
+public class ContainerReuse {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(4096L)
+            .container("container_xyz789")
+            .addUserMessage("Query customer purchase history from the last quarter and identify our top 5 customers by revenue")
+            .addAssistantMessageOfBlockParams(List.of(
+                ContentBlockParam.ofText(
+                    TextBlockParam.builder()
+                        .text("I'll query the purchase history and analyze the results.")
+                        .build()),
+                ContentBlockParam.ofServerToolUse(
+                    ServerToolUseBlockParam.builder()
+                        .id("srvtoolu_abc123")
+                        .name("code_execution")
+                        .input(JsonValue.from(Map.of("code", "...")))
+                        .build()),
+                ContentBlockParam.ofToolUse(
+                    ToolUseBlockParam.builder()
+                        .id("toolu_def456")
+                        .name("query_database")
+                        .input(JsonValue.from(Map.of("sql", "<sql>")))
+                        .codeExecution20260120Caller("srvtoolu_abc123")
+                        .build())
+            ))
+            .addUserMessageOfBlockParams(List.of(
+                ContentBlockParam.ofToolResult(
+                    ToolResultBlockParam.builder()
+                        .toolUseId("toolu_def456")
+                        .content("[{\"customer_id\": \"C1\", \"revenue\": 45000}, {\"customer_id\": \"C2\", \"revenue\": 38000}, ...]")
+                        .build())
+            ))
+            .addTool(CodeExecutionTool20260120.builder().build())
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 4096,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => 'Query customer purchase history from the last quarter and identify our top 5 customers by revenue',
+        ],
+        [
+            'role' => 'assistant',
+            'content' => [
+                [
+                    'type' => 'text',
+                    'text' => "I'll query the purchase history and analyze the results.",
+                ],
+                [
+                    'type' => 'server_tool_use',
+                    'id' => 'srvtoolu_abc123',
+                    'name' => 'code_execution',
+                    'input' => ['code' => '...'],
+                ],
+                [
+                    'type' => 'tool_use',
+                    'id' => 'toolu_def456',
+                    'name' => 'query_database',
+                    'input' => ['sql' => '<sql>'],
+                    'caller' => [
+                        'type' => 'code_execution_20260120',
+                        'tool_id' => 'srvtoolu_abc123',
+                    ],
+                ],
+            ],
+        ],
+        [
+            'role' => 'user',
+            'content' => [
+                [
+                    'type' => 'tool_result',
+                    'tool_use_id' => 'toolu_def456',
+                    'content' => '[{"customer_id": "C1", "revenue": 45000}, {"customer_id": "C2", "revenue": 38000}, ...]',
+                ],
+            ],
+        ],
+    ],
+    model: 'claude-opus-4-6',
+    container: 'container_xyz789',
+    tools: [],
+);
+
+echo $message;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  container: "container_xyz789",
+  messages: [
+    {
+      role: "user",
+      content: "Query customer purchase history from the last quarter and identify our top 5 customers by revenue"
+    },
+    {
+      role: "assistant",
+      content: [
+        {
+          type: "text",
+          text: "I'll query the purchase history and analyze the results."
+        },
+        {
+          type: "server_tool_use",
+          id: "srvtoolu_abc123",
+          name: "code_execution",
+          input: { code: "..." }
+        },
+        {
+          type: "tool_use",
+          id: "toolu_def456",
+          name: "query_database",
+          input: { sql: "<sql>" },
+          caller: {
+            type: "code_execution_20260120",
+            tool_id: "srvtoolu_abc123"
+          }
+        }
+      ]
+    },
+    {
+      role: "user",
+      content: [
+        {
+          type: "tool_result",
+          tool_use_id: "toolu_def456",
+          content: '[{"customer_id": "C1", "revenue": 45000}, {"customer_id": "C2", "revenue": 38000}, ...]'
+        }
+      ]
+    }
+  ],
+  tools: [
+    { type: "code_execution_20260120", name: "code_execution" }
+  ]
+)
+puts message
 ```
 </CodeGroup>
 

@@ -164,17 +164,24 @@ async Task<string> DownloadAndEncodeImageAsync(string url)
 // For URL-based images, you can use the URLs directly in your requests
 ```
 
-```go Go
+```go Go hidelines={1..8,30..37}
 package main
 
 import (
 	"encoding/base64"
+	"fmt"
 	"io"
 	"net/http"
 )
 
 func downloadAndEncodeImage(url string) (string, error) {
-	resp, err := http.Get(url)
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return "", err
+	}
+	req.Header.Set("User-Agent", "AnthropicDocsBot/1.0")
+
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return "", err
 	}
@@ -188,12 +195,16 @@ func downloadAndEncodeImage(url string) (string, error) {
 	return base64.StdEncoding.EncodeToString(data), nil
 }
 
-// Usage:
-// imageData, _ := downloadAndEncodeImage("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg")
-// For URL-based images, you can use the URLs directly in your requests
+func main() {
+	imageData, err := downloadAndEncodeImage("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(imageData[:50])
+}
 ```
 
-```java Java
+```java Java nocheck hidelines={1..7,-1}
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -361,23 +372,28 @@ Below are examples of how to include images in a Messages API request using base
     main();
     ```
 
-    ```java Java
+    
+    ```java Java nocheck hidelines={1..8,-1}
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.models.messages.*;
-    import java.io.IOException;
     import java.util.List;
 
     public class VisionExample {
 
-      public static void main(String[] args) throws IOException, InterruptedException {
+      public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-        String imageData = ""; // // Base64-encoded image data as string
+        String imageData = ""; // Base64-encoded image data as string
 
         List<ContentBlockParam> contentBlockParams = List.of(
           ContentBlockParam.ofImage(
             ImageBlockParam.builder()
-              .source(Base64ImageSource.builder().data(imageData).build())
+              .source(
+                Base64ImageSource.builder()
+                  .mediaType(Base64ImageSource.MediaType.IMAGE_JPEG)
+                  .data(imageData)
+                  .build()
+              )
               .build()
           ),
           ContentBlockParam.ofText(TextBlockParam.builder().text("Describe this image.").build())
@@ -490,7 +506,7 @@ Below are examples of how to include images in a Messages API request using base
 
     main();
     ```
-    ```java Java
+    ```java Java hidelines={1..9,-1}
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.models.messages.*;
@@ -649,11 +665,11 @@ async function main() {
 main();
 ```
 
-```java Java
+```java Java nocheck hidelines={1..13,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.File;
-import com.anthropic.models.files.FileUploadParams;
+import com.anthropic.models.beta.files.FileMetadata;
+import com.anthropic.models.beta.files.FileUploadParams;
 import com.anthropic.models.messages.*;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -666,7 +682,7 @@ public class ImageFilesExample {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     // Upload the image file
-    File file = client
+    FileMetadata file = client
       .beta()
       .files()
       .upload(

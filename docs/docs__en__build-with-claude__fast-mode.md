@@ -90,6 +90,36 @@ const textBlock = response.content.find(
 console.log(textBlock?.text);
 ```
 
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	anthropic "github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 4096,
+		Speed:     anthropic.BetaMessageNewParamsSpeedFast,
+		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFastMode2026_02_01},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Refactor this module to use dependency injection")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response.Content[0].AsText().Text)
+}
+```
+
 </CodeGroup>
 
 ## Pricing
@@ -179,7 +209,37 @@ const response = await client.beta.messages.create({
 console.log(response.usage.speed); // "fast" or "standard"
 ```
 
-```ruby Ruby
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	anthropic "github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Speed:     anthropic.BetaMessageNewParamsSpeedFast,
+		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFastMode2026_02_01},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response.Usage.Speed) // "fast" or "standard"
+}
+```
+
+```ruby Ruby nocheck
 response = anthropic.beta.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 1024,
@@ -272,7 +332,7 @@ const client = new Anthropic();
         e instanceof Anthropic.APIConnectionError
       ) {
         if (maxAttempts > 1) {
-          return createMessageWithFastFallback(params, requestOptions, maxAttempts - 1);
+          return createMessageWithFastFallback(params, undefined, maxAttempts - 1);
         }
       }
       throw e;
@@ -292,12 +352,13 @@ const client = new Anthropic();
 })();
 ```
 
-```go Go
+```go Go hidelines={1..11}
 package main
 
 import (
 	"context"
 	"errors"
+	"fmt"
 
 	anthropic "github.com/anthropics/anthropic-sdk-go"
 	"github.com/anthropics/anthropic-sdk-go/option"
@@ -326,9 +387,32 @@ func createMessageWithFastFallback(
 	}
 	return message, nil
 }
+
+func main() {
+	client := anthropic.NewClient()
+	message, err := createMessageWithFastFallback(
+		context.TODO(),
+		&client,
+		anthropic.BetaMessageNewParams{
+			Model:     anthropic.ModelClaudeOpus4_6,
+			MaxTokens: 1024,
+			Messages: []anthropic.BetaMessageParam{
+				anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
+			},
+			Speed: "fast",
+			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFastMode2026_02_01},
+		},
+		3,
+		option.WithMaxRetries(0),
+	)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(message)
+}
 ```
 
-```ruby Ruby
+```ruby Ruby nocheck
 require "anthropic"
 
 anthropic = Anthropic::Client.new
@@ -341,7 +425,7 @@ rescue Anthropic::Errors::RateLimitError
   create_message_with_fast_fallback(client, **params)
 rescue Anthropic::Errors::InternalServerError, Anthropic::Errors::APIConnectionError
   raise unless max_attempts > 1
-  create_message_with_fast_fallback(client, request_options: request_options, max_attempts: max_attempts - 1, **params)
+  create_message_with_fast_fallback(client, max_attempts: max_attempts - 1, **params)
 end
 
 message = create_message_with_fast_fallback(

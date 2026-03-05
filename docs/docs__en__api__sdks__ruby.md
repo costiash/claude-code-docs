@@ -44,7 +44,9 @@ puts(message.content)
 
 The SDK provides support for streaming responses using Server-Sent Events (SSE).
 
-```ruby
+```ruby hidelines={1..2}
+require "anthropic"
+anthropic = Anthropic::Client.new
 stream = anthropic.messages.stream(
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}],
@@ -60,7 +62,9 @@ end
 
 This library provides several conveniences for streaming messages, for example:
 
-```ruby
+```ruby hidelines={1..2}
+require "anthropic"
+anthropic = Anthropic::Client.new
 stream = anthropic.messages.stream(
   max_tokens: 1024,
   messages: [{role: :user, content: "Say hello there!"}],
@@ -110,7 +114,9 @@ For complete structured outputs documentation including Ruby examples, see [Stru
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Anthropic::Errors::APIError` will be thrown:
 
-```ruby
+```ruby hidelines={1..2}
+require "anthropic"
+anthropic = Anthropic::Client.new
 begin
   message = anthropic.messages.create(
     max_tokens: 1024,
@@ -196,7 +202,9 @@ List methods in the Claude API are paginated.
 
 This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
 
-```ruby
+```ruby hidelines={1..2}
+require "anthropic"
+anthropic = Anthropic::Client.new
 page = anthropic.messages.batches.list(limit: 20)
 
 # Fetch single item from page.
@@ -246,7 +254,9 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 
 You can provide typesafe request parameters like so:
 
-```ruby
+```ruby hidelines={1..2}
+require "anthropic"
+anthropic = Anthropic::Client.new
 anthropic.messages.create(
   max_tokens: 1024,
   messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
@@ -256,7 +266,9 @@ anthropic.messages.create(
 
 Or, equivalently:
 
-```ruby
+```ruby hidelines={1..2}
+require "anthropic"
+anthropic = Anthropic::Client.new
 # Hashes work, but are not typesafe:
 anthropic.messages.create(
   max_tokens: 1024,
