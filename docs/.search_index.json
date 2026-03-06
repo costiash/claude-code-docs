@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-05T21:18:51Z",
+  "generated_at": "2026-03-06T00:42:09Z",
   "indexed_files": 574,
   "index": {
     "/changelog": {
@@ -196,7 +196,7 @@
         "create",
         "conversation"
       ],
-      "word_count": 4344,
+      "word_count": 4346,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -532,7 +532,7 @@
         "automatically",
         "see"
       ],
-      "word_count": 856,
+      "word_count": 858,
       "file_path": "docs/claude-code__jetbrains.md"
     },
     "/claude-code/legal-and-compliance": {
@@ -616,7 +616,7 @@
         "configuration",
         "project"
       ],
-      "word_count": 6087,
+      "word_count": 6050,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -952,7 +952,7 @@
         "sandboxed",
         "isolation"
       ],
-      "word_count": 2297,
+      "word_count": 2296,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -1204,7 +1204,7 @@
         "powershell",
         "command"
       ],
-      "word_count": 4525,
+      "word_count": 4531,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
