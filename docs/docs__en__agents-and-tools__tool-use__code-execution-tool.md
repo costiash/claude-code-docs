@@ -13,7 +13,7 @@ Reach out through the [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to sh
 </Note>
 
 <Note>
-This feature is **not** covered by [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) arrangements. Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ## Model compatibility
@@ -2122,7 +2122,7 @@ class Program
         };
 
         var response1 = await client.Messages.Create(parameters1);
-        var containerId = response1.Container.Id;
+        var containerId = response1.Container!.ID;
 
         var parameters2 = new MessageCreateParams
         {

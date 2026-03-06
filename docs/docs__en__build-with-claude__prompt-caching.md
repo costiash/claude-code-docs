@@ -361,6 +361,84 @@ const response = await client.messages.create({
 console.log(response.usage);
 ```
 
+```csharp C# hidelines={1..8,-1}
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 1024,
+            CacheControl = new CacheControlEphemeral(),
+            System = "You are a helpful assistant that remembers our conversation.",
+            Messages =
+            [
+                new()
+                {
+                    Role = Role.User,
+                    Content = "My name is Alex. I work on machine learning."
+                },
+                new()
+                {
+                    Role = Role.Assistant,
+                    Content = "Nice to meet you, Alex! How can I help with your ML work today?"
+                },
+                new()
+                {
+                    Role = Role.User,
+                    Content = "What did I say I work on?"
+                }
+            ]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message.Usage);
+    }
+}
+```
+
+```go Go hidelines={1..13,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:        anthropic.ModelClaudeOpus4_6,
+		MaxTokens:    1024,
+		CacheControl: anthropic.NewCacheControlEphemeralParam(),
+		System: []anthropic.TextBlockParam{
+			{Text: "You are a helpful assistant that remembers our conversation."},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("My name is Alex. I work on machine learning.")),
+			anthropic.NewAssistantMessage(anthropic.NewTextBlock("Nice to meet you, Alex! How can I help with your ML work today?")),
+			anthropic.NewUserMessage(anthropic.NewTextBlock("What did I say I work on?")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response.Usage)
+}
+```
+
 ```java Java hidelines={1..10,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
@@ -410,6 +488,25 @@ $response = $client->messages->create(
     system: 'You are a helpful assistant that remembers our conversation.',
 );
 echo json_encode($response->usage);
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  cache_control: {type: "ephemeral"},
+  system: "You are a helpful assistant that remembers our conversation.",
+  messages: [
+    {role: "user", content: "My name is Alex. I work on machine learning."},
+    {role: "assistant", content: "Nice to meet you, Alex! How can I help with your ML work today?"},
+    {role: "user", content: "What did I say I work on?"}
+  ]
+)
+puts response.usage
 ```
 </CodeGroup>
 
@@ -759,7 +856,7 @@ The 5-minute and 1-hour cache behave the same with respect to latency. You will 
 
 You can use both 1-hour and 5-minute cache controls in the same request, but with an important constraint: Cache entries with longer TTL must appear before shorter TTLs (that is, a 1-hour cache entry must appear before any 5-minute cache entries).
 
-When mixing TTLs, we determine three billing locations in your prompt:
+When mixing TTLs, the API determines three billing locations in your prompt:
 1. Position `A`: The token count at the highest cache hit (or 0 if no hits).
 2. Position `B`: The token count at the highest 1-hour `cache_control` block after `A` (or equals `A` if none exist).
 3. Position `C`: The token count at the last `cache_control` block.
@@ -779,9 +876,9 @@ Here are 3 examples. This depicts the input tokens of 3 requests, each of which 
 ---
 ## Prompt caching examples
 
-To help you get started with prompt caching, we've prepared a [prompt caching cookbook](https://platform.claude.com/cookbook/misc-prompt-caching) with detailed examples and best practices.
+To help you get started with prompt caching, the [prompt caching cookbook](https://platform.claude.com/cookbook/misc-prompt-caching) provides detailed examples and best practices.
 
-Below, we've included several code snippets that showcase various prompt caching patterns. These examples demonstrate how to implement caching in different scenarios, helping you understand the practical applications of this feature:
+The following code snippets showcase various prompt caching patterns. These examples demonstrate how to implement caching in different scenarios, helping you understand the practical applications of this feature:
 
 <section title="Large context caching example">
 
@@ -1557,7 +1654,7 @@ puts message
 ```
 </CodeGroup>
 
-In this example, we demonstrate caching tool definitions.
+This example demonstrates caching tool definitions.
 
 The `cache_control` parameter is placed on the final tool (`get_time`) to designate all of the tools as part of the static prefix.
 
@@ -1971,9 +2068,9 @@ puts message
 ```
 </CodeGroup>
 
-In this example, we demonstrate how to use prompt caching in a multi-turn conversation.
+This example demonstrates how to use prompt caching in a multi-turn conversation.
 
-During each turn, we mark the final block of the final message with `cache_control` so the conversation can be incrementally cached. The system will automatically lookup and use the longest previously cached sequence of blocks for follow-up messages. That is, blocks that were previously marked with a `cache_control` block are later not marked with this, but they will still be considered a cache hit (and also a cache refresh!) if they are hit within 5 minutes.
+During each turn, the final block of the final message is marked with `cache_control` so the conversation can be incrementally cached. The system will automatically lookup and use the longest previously cached sequence of blocks for follow-up messages. That is, blocks that were previously marked with a `cache_control` block are later not marked with this, but they will still be considered a cache hit (and also a cache refresh!) if they are hit within 5 minutes.
 
 In addition, note that the `cache_control` parameter is placed on the system message. This is to ensure that if this gets evicted from the cache (after not being used for more than 5 minutes), it will get added back to the cache on the next request.
 
@@ -2364,7 +2461,10 @@ public class Program
                         {
                             ID = "tool_1",
                             Name = "search_documents",
-                            Input = JsonSerializer.SerializeToElement(new { query = "Mars rovers" }),
+                            Input = new Dictionary<string, JsonElement>
+                            {
+                                ["query"] = JsonSerializer.SerializeToElement("Mars rovers"),
+                            },
                         }),
                     }),
                 },

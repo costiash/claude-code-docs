@@ -12,7 +12,7 @@ Batch processing is a powerful approach for handling large volumes of requests e
 The Message Batches API is Anthropic's first implementation of this pattern.
 
 <Note>
-This feature is **not** covered by [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) arrangements. Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ---
@@ -1415,6 +1415,7 @@ const messageBatch = await anthropic.messages.batches.create({
 
 ```csharp C#
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Messages;
@@ -1440,20 +1441,18 @@ public class Program
                     {
                         Model = Model.ClaudeOpus4_6,
                         MaxTokens = 1024,
-                        System =
-                        [
+                        System = new List<TextBlockParam>
+                        {
                             new()
                             {
-                                Type = "text",
                                 Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
                             },
                             new()
                             {
-                                Type = "text",
                                 Text = "<the entire contents of Pride and Prejudice>",
-                                CacheControl = new() { Type = "ephemeral" }
+                                CacheControl = new()
                             }
-                        ],
+                        },
                         Messages =
                         [
                             new() { Role = Role.User, Content = "Analyze the major themes in Pride and Prejudice." }
@@ -1467,20 +1466,18 @@ public class Program
                     {
                         Model = Model.ClaudeOpus4_6,
                         MaxTokens = 1024,
-                        System =
-                        [
+                        System = new List<TextBlockParam>
+                        {
                             new()
                             {
-                                Type = "text",
                                 Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
                             },
                             new()
                             {
-                                Type = "text",
                                 Text = "<the entire contents of Pride and Prejudice>",
-                                CacheControl = new() { Type = "ephemeral" }
+                                CacheControl = new()
                             }
-                        ],
+                        },
                         Messages =
                         [
                             new() { Role = Role.User, Content = "Write a summary of Pride and Prejudice." }

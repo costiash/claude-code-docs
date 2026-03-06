@@ -1917,7 +1917,7 @@ $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,
-    messages: [],
+    messages: [['role' => 'user', 'content' => 'Hello, Claude']],
     model: 'claude-opus-4-6',
     betas: ['compact-2026-01-12'],
     system: [

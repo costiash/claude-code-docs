@@ -15,7 +15,7 @@ This feature requires the code execution tool to be enabled.
 </Note>
 
 <Note>
-This feature is **not** covered by [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) arrangements. Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ## Model compatibility
@@ -181,12 +181,7 @@ class Program
                 }
             ],
             Tools = [
-                new ToolUnion(new Tool()
-                {
-                    Type = "code_execution_20260120",
-                    Name = "code_execution",
-                    InputSchema = new InputSchema(),
-                }),
+                new CodeExecutionTool20260120(),
                 new ToolUnion(new Tool()
                 {
                     Name = "query_database",

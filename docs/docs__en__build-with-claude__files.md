@@ -9,7 +9,7 @@ The Files API is in beta. Reach out through the [feedback form](https://forms.gl
 </Note>
 
 <Note>
-This feature is in beta and is **not** covered by [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) arrangements. Beta features are excluded from ZDR.
+This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). Beta features are excluded from ZDR.
 </Note>
 
 ## Supported models

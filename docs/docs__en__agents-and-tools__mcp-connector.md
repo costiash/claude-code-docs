@@ -11,7 +11,7 @@ Claude's Model Context Protocol (MCP) connector feature enables you to connect t
 </Note>
 
 <Note>
-This feature is in beta and is **not** covered by [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) arrangements. Beta features are excluded from ZDR.
+This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). Beta features are excluded from ZDR.
 </Note>
 
 ## Key features

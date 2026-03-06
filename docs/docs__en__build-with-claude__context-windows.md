@@ -100,7 +100,7 @@ The 1M token context window is in beta for organizations in [usage tier](/docs/e
 </Note>
 
 <Note>
-This feature is [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 To use the 1M token context window, include the `context-1m-2025-08-07` [beta header](/docs/en/api/beta-headers) in your API requests:

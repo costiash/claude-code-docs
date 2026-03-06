@@ -2370,7 +2370,14 @@ public class Program
 
         var response = await client.Messages.Create(parameters);
 
-        var toolUses = response.Content.Where(block => block.Type == "tool_use").ToList();
+        var toolUses = new List<ToolUseBlock>();
+        foreach (var block in response.Content)
+        {
+            if (block.TryPickToolUse(out var toolUse))
+            {
+                toolUses.Add(toolUse);
+            }
+        }
         Console.WriteLine($"\n\u2713 Claude made {toolUses.Count} tool calls");
 
         if (toolUses.Count > 1)
@@ -2405,7 +2412,7 @@ public class Program
 
             toolResults.Add(new ContentBlockParam(new ToolResultBlockParam()
             {
-                ToolUseID = toolUse.Id,
+                ToolUseID = toolUse.ID,
                 Content = result,
             }));
         }
@@ -2417,14 +2424,15 @@ public class Program
             MaxTokens = 1024,
             Messages = [
                 new() { Role = Role.User, Content = "What's the weather in SF and NYC, and what time is it there?" },
-                new() { Role = Role.Assistant, Content = response.Content },
+                new() { Role = Role.Assistant, Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
                 new() { Role = Role.User, Content = new MessageParamContent(toolResults) }
             ],
             Tools = tools
         };
 
         var finalResponse = await client.Messages.Create(finalParameters);
-        Console.WriteLine($"\nClaude's response:\n{finalResponse.Content[0].Text}");
+        finalResponse.Content[0].TryPickText(out var text);
+        Console.WriteLine($"\nClaude's response:\n{text?.Text}");
 
         Console.WriteLine("\n--- Verification ---");
         Console.WriteLine($"\u2713 Tool results sent in single user message: {toolResults.Count} results");
@@ -3467,6 +3475,7 @@ main().catch(console.error);
 using Anthropic;
 using Anthropic.Models.Messages;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 class Program
@@ -3503,7 +3512,7 @@ class Program
                     },
                     new() {
                         Role = Role.Assistant,
-                        Content = response.Content
+                        Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
                     }
                 ],
                 Tools = [new ToolUnion(new WebSearchTool20250305() { MaxUses = 10 })]

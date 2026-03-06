@@ -144,7 +144,9 @@ The following examples show how to print a list of all the Claude models availab
   ```bash AWS CLI
   aws bedrock list-foundation-models --region=us-west-2 --by-provider anthropic --query "modelSummaries[*].modelId"
   ```
-  ```python Boto3 (Python)
+
+  
+  ```python Boto3 (Python) nocheck
   import boto3
 
   bedrock = boto3.client(service_name="bedrock")
@@ -304,7 +306,8 @@ The following examples show how to print a list of all the Claude models availab
 The following examples show how to generate text from Claude on Bedrock:
 
 <CodeGroup>
-  ```python Python
+  
+  ```python Python nocheck
   from anthropic import AnthropicBedrock
 
   client = AnthropicBedrock(
@@ -385,7 +388,8 @@ The following examples show how to generate text from Claude on Bedrock:
           .Select(c => (c.Value as TextBlock)!.Text)));
   ```
 
-  ```go Go hidelines={1..2,10..11,-1}
+  
+  ```go Go nocheck hidelines={1..2,10..11,-1}
   package main
 
   import (
@@ -470,7 +474,8 @@ The following examples show how to generate text from Claude on Bedrock:
   echo $message->content[0]->text;
   ```
 
-  ```ruby Ruby
+  
+  ```ruby Ruby nocheck
   require "anthropic"
 
   client = Anthropic::BedrockClient.new
@@ -484,7 +489,8 @@ The following examples show how to generate text from Claude on Bedrock:
   puts message.content.first.text
   ```
 
-  ```python Boto3 (Python)
+  
+  ```python Boto3 (Python) nocheck
   import boto3
   import json
 
@@ -674,7 +680,8 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 The model IDs for Claude Sonnet 4.5 and 4 already include the `global.` prefix:
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck
 from anthropic import AnthropicBedrock
 
 client = AnthropicBedrock(aws_region="us-west-2")
@@ -784,7 +791,7 @@ $message = $client->messages->create(
 );
 ```
 
-```ruby Ruby
+```ruby Ruby nocheck
 require "anthropic"
 
 # Default credentials resolve region from AWS_REGION env var
@@ -804,7 +811,8 @@ message = client.messages.create(
 To use regional endpoints, remove the `global.` prefix from the model ID:
 
 <CodeGroup>
-```python Python
+
+```python Python nocheck
 from anthropic import AnthropicBedrock
 
 client = AnthropicBedrock(aws_region="us-west-2")
@@ -916,7 +924,7 @@ $message = $client->messages->create(
 );
 ```
 
-```ruby Ruby
+```ruby Ruby nocheck
 require "anthropic"
 
 # Using US regional endpoint (CRIS)

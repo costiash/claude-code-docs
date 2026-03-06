@@ -40,8 +40,7 @@ These are not required but will improve your experience:
    )
    ```
 
-   
-   ```python After nocheck
+   ```python After
    response = client.messages.create(
        model="claude-opus-4-6",
        max_tokens=16000,
@@ -437,7 +436,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python nocheck
+```python Python
 response = client.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=8192,
@@ -612,7 +611,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python nocheck
+```python Python
 response = client.beta.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=16384,
@@ -638,7 +637,8 @@ const response = await client.beta.messages.create({
 using System;
 using System.Threading.Tasks;
 using Anthropic;
-using Anthropic.Models.Messages;
+using Anthropic.Models.Beta;
+using Anthropic.Models.Beta.Messages;
 
 class Program
 {
@@ -650,12 +650,12 @@ class Program
         {
             Model = "claude-sonnet-4-6",
             MaxTokens = 16384,
-            Thinking = new ThinkingConfigEnabled(budgetTokens: 16384),
-            OutputConfig = new OutputConfig
+            Thinking = new BetaThinkingConfigEnabled { BudgetTokens = 16384 },
+            OutputConfig = new BetaOutputConfig
             {
                 Effort = Effort.Medium
             },
-            Betas = ["interleaved-thinking-2025-05-14"],
+            Betas = [AnthropicBeta.InterleavedThinking2025_05_14],
             Messages = [new() { Role = Role.User, Content = "Your prompt here" }]
         };
 
@@ -803,7 +803,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python nocheck
+```python Python
 response = client.beta.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=8192,
@@ -829,7 +829,8 @@ const response = await client.beta.messages.create({
 using System;
 using System.Threading.Tasks;
 using Anthropic;
-using Anthropic.Models.Messages;
+using Anthropic.Models.Beta;
+using Anthropic.Models.Beta.Messages;
 
 class Program
 {
@@ -841,12 +842,12 @@ class Program
         {
             Model = "claude-sonnet-4-6",
             MaxTokens = 8192,
-            Thinking = new ThinkingConfigEnabled(budgetTokens: 16384),
-            OutputConfig = new OutputConfig
+            Thinking = new BetaThinkingConfigEnabled { BudgetTokens = 16384 },
+            OutputConfig = new BetaOutputConfig
             {
                 Effort = Effort.Low
             },
-            Betas = ["interleaved-thinking-2025-05-14"],
+            Betas = [AnthropicBeta.InterleavedThinking2025_05_14],
             Messages = [new() { Role = Role.User, Content = "Your prompt here" }]
         };
 

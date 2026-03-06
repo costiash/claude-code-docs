@@ -13,7 +13,7 @@ For complete API reference including request/response schemas and all parameters
 </Note>
 
 <Note>
-This feature is in beta and is **not** covered by [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) arrangements. Beta features are excluded from ZDR.
+This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). Beta features are excluded from ZDR.
 </Note>
 
 ## Quick Links
@@ -801,7 +801,7 @@ public class SkillsFileDownload {
 The PHP SDK doesn't include a file download method. Use `retrieveMetadata()` for file info, then download the file content via the REST API.
 </Note>
 
-```php PHP
+```php PHP nocheck
 <?php
 
 use Anthropic\Client;
@@ -1171,8 +1171,7 @@ For complete details on the Files API, see the [Files API documentation](/docs/e
 Reuse the same container across multiple messages by specifying the container ID:
 
 <CodeGroup>
-
-```python Python nocheck
+```python Python
 # First request creates container
 response1 = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -2705,7 +2704,7 @@ curl "https://api.anthropic.com/v1/skills?source=custom" \
   -H "anthropic-beta: skills-2025-10-02"
 ```
 
-```python Python nocheck
+```python Python
 # List all Skills
 skills = client.beta.skills.list(betas=["skills-2025-10-02"])
 
@@ -4286,7 +4285,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python nocheck
+```python Python
 # First request creates cache
 response1 = client.beta.messages.create(
     model="claude-opus-4-6",

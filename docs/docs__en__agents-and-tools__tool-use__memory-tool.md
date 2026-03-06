@@ -13,7 +13,7 @@ Reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to sh
 </Note>
 
 <Note>
-This feature is [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## Use cases

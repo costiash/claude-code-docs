@@ -51,7 +51,7 @@ Here's an example of how to use fine-grained tool streaming with the API:
         }
       ],
       "stream": true
-    }' | jq '.usage'
+    }'
   ```
 
   ```python Python

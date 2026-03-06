@@ -255,7 +255,7 @@ await foreach (var item in page.Paginate())
 
 To access individual page items and manually request the next page, use the `Items` property, and `HasNext` and `Next` methods:
 
-```csharp nocheck
+```csharp
 using System;
 
 var page = await client.Messages.Batches.List();

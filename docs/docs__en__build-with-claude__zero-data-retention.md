@@ -24,8 +24,8 @@ Zero Data Retention (ZDR) is Anthropic's commitment to ensuring that customer da
 - **Beta products and features**: Products and features in beta unless specified otherwise
 - **Console and Workbench**: Any usage on Console or Workbench
 - **Claude consumer products**: Claude Free, Pro, or Max plans, including when customers on those plans use Claude's web, desktop, or mobile apps or Claude Code
-- **Claude for Work and Claude for Enterprise**: Claude for Work and Claude for Enterprise product interfaces are not covered by ZDR, except for Claude Code when used through Claude for Enterprise with ZDR enabled on the organization. For other product interfaces, only Commercial organization API keys are eligible.
-- **Third-party integrations**: Data processed by third-party websites, tools, or other integrations is not covered by ZDR, though some may offer similar offerings. When using external services in conjunction with the Claude API, make sure to review those services' data handling practices.
+- **Claude for Work and Claude for Enterprise**: Claude for Work and Claude for Enterprise product interfaces are **not ZDR-eligible**, except for Claude Code when used through Claude for Enterprise with ZDR enabled on the organization. For other product interfaces, only Commercial organization API keys are eligible.
+- **Third-party integrations**: Data processed by third-party websites, tools, or other integrations is **not ZDR-eligible**, though some may offer similar offerings. When using external services in conjunction with the Claude API, make sure to review those services' data handling practices.
 
 <Note>
 For the most up-to-date information on what products and features are ZDR-eligible, please refer to your contract terms or contact your Anthropic account representative.
@@ -33,7 +33,7 @@ For the most up-to-date information on what products and features are ZDR-eligib
 
 ## ZDR eligibility by product/feature
 
-### Fully ZDR-eligible
+### ZDR-eligible
 
 These API endpoints process data in real-time:
 
@@ -41,8 +41,8 @@ These API endpoints process data in real-time:
 | ------- | -------- | ----------- |
 | Messages API | `/v1/messages` | Standard API calls for generating Claude responses. |
 | Token Counting | `/v1/messages/count_tokens` | Count tokens before sending requests. |
-| Web Search | `/v1/messages` (with `web_search` tool) | Real-time web search results returned in the API response. |
-| Web Fetch | `/v1/messages` (with `web_fetch` tool) | Fetched web content returned in the API response. |
+| Web Search | `/v1/messages` (with `web_search` tool) | Basic tool version (`web_search_20250305`) is ZDR-eligible. The `web_search_20260209` version with dynamic filtering is **not** ZDR-eligible by default. See [Web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool) for details. |
+| Web Fetch | `/v1/messages` (with `web_fetch` tool) | Basic tool version (`web_fetch_20250910`) is ZDR-eligible. Website publishers may retain URL parameters. The `web_fetch_20260209` version with dynamic filtering is **not** ZDR-eligible by default. See [Web fetch tool](/docs/en/agents-and-tools/tool-use/web-fetch-tool) for details. |
 | Memory Tool | `/v1/messages` (with `memory` tool) | Client-side memory storage where you control data retention. |
 | Tool Search (client-side) | `/v1/messages` | [Custom client-side tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool#custom-tool-search-implementation) uses the standard Messages API. |
 | Context Management (compaction) | `/v1/messages` (with `context_management`) | Server-side compaction summarizes conversation context in real-time. |
@@ -51,7 +51,7 @@ These API endpoints process data in real-time:
 
 ### Not ZDR-eligible
 
-The following is a non-exhaustive list of endpoints and features that store data beyond when the API response is generated and are **not covered by ZDR arrangements**:
+The following is a non-exhaustive list of endpoints and features that store data beyond when the API response is generated and are **not ZDR-eligible**:
 
 | Feature | Endpoint | Data Retention Policy | Why It's Not ZDR-Eligible |
 | ------- | -------- | -------------------- | -------------------------- |

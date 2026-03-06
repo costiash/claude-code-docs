@@ -11,7 +11,23 @@ Use the [feedback form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback
 </Note>
 
 <Note>
-This feature is [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+The basic web fetch tool (`web_fetch_20250910`) is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention).
+
+While our native web fetch tool is ZDR-eligible, website publishers may retain any parameters passed to the URL if Claude fetches content from their site.
+
+The `web_fetch_20260209` version with dynamic filtering is **not** ZDR-eligible by default because dynamic filtering relies on code execution internally.
+
+To use `web_fetch_20260209` with ZDR, disable dynamic filtering by setting `"allowed_callers": ["direct"]` on the tool:
+
+```json
+{
+  "type": "web_fetch_20260209",
+  "name": "web_fetch",
+  "allowed_callers": ["direct"]
+}
+```
+
+This restricts the tool to direct invocation only, bypassing the internal code execution step.
 </Note>
 
 <Warning>
@@ -50,7 +66,7 @@ When you add the web fetch tool to your API request:
 4. Claude analyzes the fetched content and provides a response with optional citations.
 
 <Note>
-The web fetch tool currently does not support web sites dynamically rendered via JavaScript.
+The web fetch tool currently does not support websites dynamically rendered via JavaScript.
 </Note>
 
 ### Dynamic filtering with Opus 4.6 and Sonnet 4.6
@@ -133,6 +149,131 @@ async function main() {
 }
 
 main().catch(console.error);
+```
+
+```csharp C#
+using System;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new()
+        {
+            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+        };
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 4096,
+            Messages = [new() { Role = Role.User, Content = "Fetch the content at https://example.com/research-paper and extract the key findings." }],
+            Tools = [new ToolUnion(new WebFetchTool20260209())]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
+```
+
+```go Go hidelines={1..13,-5..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 4096,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Fetch the content at https://example.com/research-paper and extract the key findings.")),
+		},
+		Tools: []anthropic.ToolUnionParam{
+			{OfWebFetchTool20260209: &anthropic.WebFetchTool20260209Param{}},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java hidelines={1..9,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.WebFetchTool20260209;
+
+public class WebFetchExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(4096L)
+            .addUserMessage("Fetch the content at https://example.com/research-paper and extract the key findings.")
+            .addTool(WebFetchTool20260209.builder().build())
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Fetch the content at https://example.com/research-paper and extract the key findings.']
+    ],
+    model: 'claude-opus-4-6',
+    tools: [[
+        'type' => 'web_fetch_20260209',
+        'name' => 'web_fetch',
+    ]],
+);
+echo $message;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 4096,
+  messages: [
+    { role: "user", content: "Fetch the content at https://example.com/research-paper and extract the key findings." }
+  ],
+  tools: [{
+    type: "web_fetch_20260209",
+    name: "web_fetch"
+  }]
+)
+puts message
 ```
 </CodeGroup>
 

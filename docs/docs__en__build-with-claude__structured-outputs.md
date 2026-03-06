@@ -260,11 +260,11 @@ public class StructuredOutputQuickStart {
             .model(Model.CLAUDE_OPUS_4_6)
             .maxTokens(1024)
             .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.")
-            .outputFormat(ContactInfo.class)
+            .outputConfig(ContactInfo.class)
             .build();
 
         StructuredMessage<ContactInfo> response = client.messages().create(params);
-        ContactInfo contact = response.output(ContactInfo.class);
+        ContactInfo contact = response.content().get(0).asText().text();
         System.out.println(contact.name + " (" + contact.email + ")");
     }
 }
@@ -385,7 +385,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
 
 - **Python**: [Pydantic](https://docs.pydantic.dev/) models with `client.messages.parse()`
 - **TypeScript**: [Zod](https://zod.dev/) schemas with `zodOutputFormat()`
-- **Java**: Plain Java classes with automatic schema derivation via `outputFormat(Class<T>)`
+- **Java**: Plain Java classes with automatic schema derivation via `outputConfig(Class<T>)`
 - **Ruby**: `Anthropic::BaseModel` classes with `output_config: {format: Model}`
 - **C#**, **Go**, **PHP**: Raw JSON schemas passed via `output_config`
 
@@ -552,10 +552,11 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..5}
+```java Java hidelines={1..6,15..16,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.StructuredMessage;
 import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 
@@ -566,18 +567,22 @@ class ContactInfo {
     public boolean demoRequested;
 }
 
-AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+public class NativeSchemaExample {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_4_6)
-  .maxTokens(1024)
-  .outputFormat(ContactInfo.class)
-  .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.")
-  .build();
+        StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024)
+            .outputConfig(ContactInfo.class)
+            .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.")
+            .build();
 
-var response = client.messages().create(createParams);
-ContactInfo contact = response.output(ContactInfo.class);
-System.out.println(contact.name + " (" + contact.email + ")");
+        StructuredMessage<ContactInfo> response = client.messages().create(createParams);
+        ContactInfo contact = response.content().get(0).asText().text();
+        System.out.println(contact.name + " (" + contact.email + ")");
+    }
+}
 ```
 
 ```php PHP hidelines={1..8}
@@ -872,9 +877,9 @@ func main() {
 </Tab>
 <Tab title="Java">
 
-**`outputFormat(Class<T>)` method**
+**`outputConfig(Class<T>)` method**
 
-Pass a Java class to `outputFormat()` and the SDK automatically derives a JSON schema, validates it, and returns a `StructuredMessageCreateParams<T>`. Access the parsed result via `response.output(Class<T>)`.
+Pass a Java class to `outputConfig()` and the SDK automatically derives a JSON schema, validates it, and returns a `StructuredMessageCreateParams<T>`. Access the parsed result via `response.content().get(0).asText().text()`.
 
 <section title="Example usage">
 
@@ -899,12 +904,12 @@ public class StructuredOutputExample {
         StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_6)
             .maxTokens(1024)
-            .outputFormat(ContactInfo.class)
+            .outputConfig(ContactInfo.class)
             .addUserMessage("...")
             .build();
 
         StructuredMessage<ContactInfo> response = client.messages().create(createParams);
-        ContactInfo contact = response.output(ContactInfo.class);
+        ContactInfo contact = response.content().get(0).asText().text();
         System.out.println(contact.name + " (" + contact.email + ")");
     }
 }
@@ -922,7 +927,7 @@ If an error occurs while converting a JSON response to a Java class instance, th
 
 <section title="Local schema validation">
 
-Structured outputs support a [subset of the JSON Schema language](/docs/en/build-with-claude/structured-outputs#json-schema-limitations). Schemas are generated automatically from classes to align with this subset. The `outputFormat(Class<T>)` method performs a validation check on the schema derived from the specified class.
+Structured outputs support a [subset of the JSON Schema language](/docs/en/build-with-claude/structured-outputs#json-schema-limitations). Schemas are generated automatically from classes to align with this subset. The `outputConfig(Class<T>)` method performs a validation check on the schema derived from the specified class.
 
 Key points:
 
@@ -950,7 +955,7 @@ public class LocalValidationExample {
         StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_6)
             .maxTokens(2048)
-            .outputFormat(BookList.class, JsonSchemaLocalValidation.NO)
+            .outputConfig(BookList.class, JsonSchemaLocalValidation.NO)
             .addUserMessage("List some famous late twentieth century novels.")
             .build();
     }
@@ -1299,6 +1304,7 @@ public class InvoiceExtraction
                             customer_name = new { type = "string" },
                         }),
                         ["required"] = JsonSerializer.SerializeToElement(new[] { "invoice_number", "date", "total_amount", "line_items", "customer_name" }),
+                        ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
                     },
                 },
             },
@@ -1424,7 +1430,7 @@ public class InvoiceExtraction {
         StructuredMessageCreateParams<Invoice> params = MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_6)
             .maxTokens(4096L)
-            .outputFormat(Invoice.class)
+            .outputConfig(Invoice.class)
             .addUserMessage("Extract invoice data from: " + invoiceText)
             .build();
 
@@ -1702,12 +1708,12 @@ public class ClassificationExample {
         StructuredMessageCreateParams<Classification> params = MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_6)
             .maxTokens(1024L)
-            .outputFormat(Classification.class)
+            .outputConfig(Classification.class)
             .addUserMessage("Classify this feedback: " + feedbackText)
             .build();
 
         StructuredMessage<Classification> response = client.messages().create(params);
-        Classification result = response.output(Classification.class);
+        Classification result = response.content().get(0).asText().text();
         System.out.println(result.category + " (" + result.confidence + ")");
     }
 }
@@ -1964,12 +1970,12 @@ public class StructuredOutputExample {
         StructuredMessageCreateParams<APIResponse> params = MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_6)
             .maxTokens(1024L)
-            .outputFormat(APIResponse.class)
+            .outputConfig(APIResponse.class)
             .addUserMessage("Process this request: ...")
             .build();
 
         StructuredMessage<APIResponse> response = client.messages().create(params);
-        APIResponse result = response.output(APIResponse.class);
+        APIResponse result = response.content().get(0).asText().text();
         System.out.println(result.status);
     }
 }
@@ -2208,15 +2214,16 @@ public class Program
                     Name = "get_weather",
                     Description = "Get the current weather in a given location",
                     Strict = true,
-                    InputSchema = new InputSchema()
+                    InputSchema = new InputSchema(new Dictionary<string, JsonElement>
                     {
-                        Properties = new Dictionary<string, JsonElement>
+                        ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
                         {
-                            ["location"] = JsonSerializer.SerializeToElement(new { type = "string", description = "The city and state, e.g. San Francisco, CA" }),
-                            ["unit"] = JsonSerializer.SerializeToElement(new { type = "string", @enum = new[] { "celsius", "fahrenheit" } }),
-                        },
-                        Required = ["location"],
-                    },
+                            ["location"] = new { type = "string", description = "The city and state, e.g. San Francisco, CA" },
+                            ["unit"] = new { type = "string", @enum = new[] { "celsius", "fahrenheit" } },
+                        }),
+                        ["required"] = JsonSerializer.SerializeToElement(new[] { "location" }),
+                        ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
+                    }),
                 }),
             ]
         };
@@ -2533,16 +2540,17 @@ class Program
                 {
                     Name = "search_flights",
                     Strict = true,
-                    InputSchema = new InputSchema()
+                    InputSchema = new InputSchema(new Dictionary<string, JsonElement>
                     {
-                        Properties = new Dictionary<string, JsonElement>
+                        ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
                         {
-                            ["destination"] = JsonSerializer.SerializeToElement(new { type = "string" }),
-                            ["departure_date"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date" }),
-                            ["passengers"] = JsonSerializer.SerializeToElement(new { type = "integer", @enum = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } }),
-                        },
-                        Required = ["destination", "departure_date"],
-                    },
+                            ["destination"] = new { type = "string" },
+                            ["departure_date"] = new { type = "string", format = "date" },
+                            ["passengers"] = new { type = "integer", @enum = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } },
+                        }),
+                        ["required"] = JsonSerializer.SerializeToElement(new[] { "destination", "departure_date" }),
+                        ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
+                    }),
                 }),
             ]
         };
@@ -2844,32 +2852,34 @@ class Program
                 {
                     Name = "search_flights",
                     Strict = true,
-                    InputSchema = new InputSchema()
+                    InputSchema = new InputSchema(new Dictionary<string, JsonElement>
                     {
-                        Properties = new Dictionary<string, JsonElement>
+                        ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
                         {
-                            ["origin"] = JsonSerializer.SerializeToElement(new { type = "string" }),
-                            ["destination"] = JsonSerializer.SerializeToElement(new { type = "string" }),
-                            ["departure_date"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date" }),
-                            ["travelers"] = JsonSerializer.SerializeToElement(new { type = "integer", @enum = new[] { 1, 2, 3, 4, 5, 6 } }),
-                        },
-                        Required = ["origin", "destination", "departure_date"],
-                    },
+                            ["origin"] = new { type = "string" },
+                            ["destination"] = new { type = "string" },
+                            ["departure_date"] = new { type = "string", format = "date" },
+                            ["travelers"] = new { type = "integer", @enum = new[] { 1, 2, 3, 4, 5, 6 } },
+                        }),
+                        ["required"] = JsonSerializer.SerializeToElement(new[] { "origin", "destination", "departure_date" }),
+                        ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
+                    }),
                 }),
                 new ToolUnion(new Tool()
                 {
                     Name = "search_hotels",
                     Strict = true,
-                    InputSchema = new InputSchema()
+                    InputSchema = new InputSchema(new Dictionary<string, JsonElement>
                     {
-                        Properties = new Dictionary<string, JsonElement>
+                        ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
                         {
-                            ["city"] = JsonSerializer.SerializeToElement(new { type = "string" }),
-                            ["check_in"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date" }),
-                            ["guests"] = JsonSerializer.SerializeToElement(new { type = "integer", @enum = new[] { 1, 2, 3, 4 } }),
-                        },
-                        Required = ["city", "check_in"],
-                    },
+                            ["city"] = new { type = "string" },
+                            ["check_in"] = new { type = "string", format = "date" },
+                            ["guests"] = new { type = "integer", @enum = new[] { 1, 2, 3, 4 } },
+                        }),
+                        ["required"] = JsonSerializer.SerializeToElement(new[] { "city", "check_in" }),
+                        ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
+                    }),
                 }),
             ]
         };
@@ -3249,15 +3259,16 @@ var parameters = new MessageCreateParams
         {
             Name = "search_flights",
             Strict = true,
-            InputSchema = new InputSchema
+            InputSchema = new InputSchema(new Dictionary<string, JsonElement>
             {
-                Properties = new Dictionary<string, JsonElement>
+                ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
                 {
-                    ["destination"] = JsonSerializer.SerializeToElement(new { type = "string" }),
-                    ["date"] = JsonSerializer.SerializeToElement(new { type = "string", format = "date" }),
-                },
-                Required = ["destination", "date"],
-            },
+                    ["destination"] = new { type = "string" },
+                    ["date"] = new { type = "string", format = "date" },
+                }),
+                ["required"] = JsonSerializer.SerializeToElement(new[] { "destination", "date" }),
+                ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
+            }),
         }
     ],
 };

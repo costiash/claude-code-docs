@@ -1200,7 +1200,11 @@ You would then need to execute the `get_weather` function with the provided inpu
                             {
                                 ID = "toolu_01A09q90qw90lq917835lq9",
                                 Name = "get_weather",
-                                Input = JsonSerializer.SerializeToElement(new { location = "San Francisco, CA", unit = "celsius" }),
+                                Input = new Dictionary<string, JsonElement>
+                                {
+                                    ["location"] = JsonSerializer.SerializeToElement("San Francisco, CA"),
+                                    ["unit"] = JsonSerializer.SerializeToElement("celsius"),
+                                },
                             }),
                         }),
                     },
