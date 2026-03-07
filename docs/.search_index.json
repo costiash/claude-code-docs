@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-07T00:37:08Z",
+  "generated_at": "2026-03-07T03:49:42Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -812,7 +812,7 @@
         "tasks",
         "info"
       ],
-      "word_count": 1443,
+      "word_count": 1408,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -1005,10 +1005,10 @@
         "hooks",
         "bash",
         "commands",
-        "mcp",
-        "disable"
+        "disable",
+        "mcp"
       ],
-      "word_count": 8099,
+      "word_count": 8132,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1057,14 +1057,14 @@
         "reference",
         "frontmatter",
         "automatically",
+        "run",
+        "example",
         "file",
         "create",
         "note",
-        "work",
-        "directory",
-        "run"
+        "work"
       ],
-      "word_count": 4411,
+      "word_count": 4467,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
