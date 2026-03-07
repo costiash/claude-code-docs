@@ -41,7 +41,8 @@ The MCP connector uses two components:
 This example enables all tools from an MCP server with default configuration:
 
 <CodeGroup>
-```bash Shell
+
+```bash Shell nocheck
 curl https://api.anthropic.com/v1/messages \
   -H "Content-Type: application/json" \
   -H "X-API-Key: $ANTHROPIC_API_KEY" \

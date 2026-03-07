@@ -221,9 +221,9 @@ Alternatively, you can use the `#next_page?` and `#next_page` methods for more g
 
 ```ruby hidelines={1}
 page = client.messages.batches.list(limit: 20)
-if page.next_page?
-  new_page = page.next_page
-  puts(new_page.data[0].id)
+while page.next_page?
+  page = page.next_page
+  page.data&.each { |batch| puts(batch.id) }
 end
 ```
 
@@ -231,7 +231,7 @@ end
 
 Request parameters that correspond to file uploads can be passed as raw contents, a [`Pathname`](https://rubyapi.org/3.2/o/pathname) instance, [`StringIO`](https://rubyapi.org/3.2/o/stringio), or more.
 
-```ruby hidelines={1..2}
+```ruby hidelines={1..2} nocheck
 require "anthropic"
 anthropic = Anthropic::Client.new
 require "pathname"
@@ -348,7 +348,7 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 The `extra_` parameters of the same name override the documented parameters. For security reasons, ensure these methods are only used with trusted input data.
 </Warning>
 
-```ruby hidelines={1..3}
+```ruby hidelines={1..3} nocheck
 require "anthropic"
 anthropic = Anthropic::Client.new
 value = "example"
@@ -375,7 +375,7 @@ If you want to explicitly send an extra param, you can do so with the `extra_que
 
 To make requests to undocumented endpoints while retaining the benefit of auth, retries, and so on, you can make requests using `client.request`, like so:
 
-```ruby
+```ruby nocheck
 response = client.request(
   method: :post,
   path: '/undocumented/endpoint',

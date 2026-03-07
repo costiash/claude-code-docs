@@ -381,11 +381,7 @@ When the library is unable to connect to the API,
 or if the API returns a non-success status code (i.e., 4xx or 5xx response),
 a subclass of `APIError` will be thrown:
 
-```typescript hidelines={1..4}
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
+```typescript
 const message = await client.messages
   .create({
     max_tokens: 1024,

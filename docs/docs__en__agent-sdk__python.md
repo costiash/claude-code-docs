@@ -557,7 +557,7 @@ class ClaudeAgentOptions:
 | `permission_mode`             | `PermissionMode \| None`                     | `None`               | Permission mode for tool usage                                                                                                                                                          |
 | `continue_conversation`       | `bool`                                       | `False`              | Continue the most recent conversation                                                                                                                                                   |
 | `resume`                      | `str \| None`                                | `None`               | Session ID to resume                                                                                                                                                                    |
-| `max_turns`                   | `int \| None`                                | `None`               | Maximum conversation turns                                                                                                                                                              |
+| `max_turns`                   | `int \| None`                                | `None`               | Maximum agentic turns (tool-use round trips)                                                                                                                                            |
 | `max_budget_usd`              | `float \| None`                              | `None`               | Maximum budget in USD for the session                                                                                                                                                   |
 | `disallowed_tools`            | `list[str]`                                  | `[]`                 | Tools to always deny. Deny rules are checked first and override `allowed_tools` and `permission_mode` (including `bypassPermissions`)                                                   |
 | `enable_file_checkpointing`   | `bool`                                       | `False`              | Enable file change tracking for rewinding. See [File checkpointing](/docs/en/agent-sdk/file-checkpointing)                                                                              |
@@ -1096,6 +1096,7 @@ class ResultMessage:
     total_cost_usd: float | None = None
     usage: dict[str, Any] | None = None
     result: str | None = None
+    stop_reason: str | None = None
     structured_output: Any = None
 ```
 

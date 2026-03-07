@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-06T21:10:05.166448Z",
-    "total_paths": 708,
+    "generated_at": "2026-03-07T00:30:44.949385Z",
+    "total_paths": 709,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-03-06T21:10:05.166455Z"
+    "last_regenerated": "2026-03-07T00:30:44.949392Z"
   },
   "categories": {
     "core_documentation": [
@@ -99,6 +99,8 @@
       "/docs/en/zero-data-retention"
     ],
     "api_reference": [
+      "/docs/en/agent-sdk/agent-loop",
+      "/docs/en/agent-sdk/claude-code-features",
       "/docs/en/agent-sdk/cost-tracking",
       "/docs/en/agent-sdk/custom-tools",
       "/docs/en/agent-sdk/file-checkpointing",
@@ -116,7 +118,6 @@
       "/docs/en/agent-sdk/sessions",
       "/docs/en/agent-sdk/skills",
       "/docs/en/agent-sdk/slash-commands",
-      "/docs/en/agent-sdk/stop-reasons",
       "/docs/en/agent-sdk/streaming-output",
       "/docs/en/agent-sdk/streaming-vs-single-mode",
       "/docs/en/agent-sdk/structured-outputs",

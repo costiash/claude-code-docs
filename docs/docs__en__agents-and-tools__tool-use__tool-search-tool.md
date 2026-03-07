@@ -641,7 +641,8 @@ The `tool_reference` blocks are automatically expanded into full tool definition
 The tool search tool works with [MCP servers](/docs/en/agents-and-tools/mcp-connector). Add the `"mcp-client-2025-11-20"` [beta header](/docs/en/api/beta-headers) to your API request, and then use `mcp_toolset` with `default_config` to defer loading MCP tools:
 
 <CodeGroup>
-```bash Shell
+
+```bash Shell nocheck
 curl https://api.anthropic.com/v1/messages \
   --header "x-api-key: $ANTHROPIC_API_KEY" \
   --header "anthropic-version: 2023-06-01" \

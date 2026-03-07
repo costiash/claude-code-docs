@@ -511,26 +511,27 @@ puts response
 
 IMAGE_URL="https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
 IMAGE_MEDIA_TYPE="image/jpeg"
-IMAGE_BASE64=$(curl "$IMAGE_URL" | base64)
+IMAGE_BASE64=$(curl -s "$IMAGE_URL" | base64 | tr -d '\n')
 
 curl https://api.anthropic.com/v1/messages/count_tokens \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \
      --header "content-type: application/json" \
-     --data \
-'{
+     --data @- <<EOF
+{
     "model": "claude-opus-4-6",
     "messages": [
         {"role": "user", "content": [
             {"type": "image", "source": {
                 "type": "base64",
-                "media_type": "'$IMAGE_MEDIA_TYPE'",
-                "data": "'$IMAGE_BASE64'"
+                "media_type": "$IMAGE_MEDIA_TYPE",
+                "data": "$IMAGE_BASE64"
             }},
             {"type": "text", "text": "Describe this image"}
         ]}
     ]
-}'
+}
+EOF
 ```
 
 ```python Python nocheck hidelines={-1}
@@ -846,7 +847,8 @@ See [how the context window is calculated with extended thinking](/docs/en/build
 </Note>
 
 <CodeGroup>
-```bash Shell
+
+```bash Shell nocheck
 curl https://api.anthropic.com/v1/messages/count_tokens \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "content-type: application/json" \
@@ -1196,31 +1198,36 @@ Token counting supports PDFs with the same [limitations](/docs/en/build-with-cla
 </Note>
 
 <CodeGroup>
-```bash Shell
+```bash Shell hidelines={1..3}
+PDF_URL="https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+PDF_BASE64=$(curl -s "$PDF_URL" | base64 | tr -d '\n')
+
 curl https://api.anthropic.com/v1/messages/count_tokens \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "content-type: application/json" \
     --header "anthropic-version: 2023-06-01" \
-    --data '{
-      "model": "claude-opus-4-6",
-      "messages": [{
-        "role": "user",
-        "content": [
-          {
-            "type": "document",
-            "source": {
-              "type": "base64",
-              "media_type": "application/pdf",
-              "data": "'$(base64 -i document.pdf)'"
-            }
-          },
-          {
-            "type": "text",
-            "text": "Please summarize this document."
-          }
-        ]
-      }]
-    }'
+    --data @- <<EOF
+{
+  "model": "claude-opus-4-6",
+  "messages": [{
+    "role": "user",
+    "content": [
+      {
+        "type": "document",
+        "source": {
+          "type": "base64",
+          "media_type": "application/pdf",
+          "data": "$PDF_BASE64"
+        }
+      },
+      {
+        "type": "text",
+        "text": "Please summarize this document."
+      }
+    ]
+  }]
+}
+EOF
 ```
 
 ```python Python nocheck hidelines={-1}

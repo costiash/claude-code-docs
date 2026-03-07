@@ -148,7 +148,7 @@ public class TextEditorToolExample {
 Provide the text editor tool (named `str_replace_editor`) to Claude using the Messages API:
 <CodeGroup>
 
-```bash Shell
+```bash Shell nocheck
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \

@@ -1011,7 +1011,7 @@ You would then need to execute the `get_weather` function with the provided inpu
                 "content": [
                     {
                         "type": "text",
-                        "text": "I'll check the current weather in San Francisco for you."
+                        "text": "I'\''ll check the current weather in San Francisco for you."
                     },
                     {
                         "type": "tool_use",

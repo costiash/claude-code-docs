@@ -130,7 +130,8 @@ Before running requests you may need to run `gcloud auth application-default log
 The following examples show how to generate text from Claude on Vertex AI:
 <CodeGroup>
 
-  ```bash Shell
+  
+  ```bash Shell nocheck
   MODEL_ID=claude-opus-4-6
   LOCATION=global
   PROJECT_ID=MY_PROJECT_ID

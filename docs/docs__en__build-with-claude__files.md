@@ -470,10 +470,10 @@ The Files API supports different file types that correspond to different content
 For file types that are not supported as `document` blocks (.csv, .txt, .md, .docx, .xlsx), convert the files to plain text, and include the content directly in your message:
 
 <CodeGroup>
-```bash Shell
+```bash Shell hidelines={3}
 # Example: Reading a text file and sending it as plain text
 # Note: For files with special characters, consider base64 encoding
-TEXT_CONTENT=$(cat document.txt | jq -Rs .)
+TEXT_CONTENT="This is a sample document. It has multiple lines."
 
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \

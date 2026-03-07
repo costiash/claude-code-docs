@@ -445,8 +445,22 @@ The Message Batch's `processing_status` field indicates the stage of processing 
 To poll a Message Batch, you'll need its `id`, which is provided in the response when creating a batch or by listing batches. You can implement a polling loop that checks the batch status periodically until processing has ended:
 
 <CodeGroup>
-```bash Shell
+```bash Shell hidelines={2..15,23}
 #!/bin/sh
+MESSAGE_BATCH_ID=$(curl -s https://api.anthropic.com/v1/messages/batches \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data '{
+    "requests": [{
+      "custom_id": "test-1",
+      "params": {
+        "model": "claude-opus-4-6",
+        "max_tokens": 100,
+        "messages": [{"role": "user", "content": "Hi"}]
+      }
+    }]
+  }' | jq -r '.id')
 
 until [[ $(curl -s "https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID" \
           --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -454,6 +468,7 @@ until [[ $(curl -s "https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH
           | grep -o '"processing_status":[[:space:]]*"[^"]*"' \
           | cut -d'"' -f4) == "ended" ]]; do
     echo "Batch $MESSAGE_BATCH_ID is still processing..."
+    break
     sleep 60
 done
 
@@ -1096,8 +1111,22 @@ Batch results can be returned in any order, and may not match the ordering of re
 You can cancel a Message Batch that is currently processing using the [cancel endpoint](/docs/en/api/canceling-message-batches). Immediately after cancellation, a batch's `processing_status` will be `canceling`. You can use the same polling technique described above to wait until cancellation is finalized. Canceled batches end up with a status of `ended` and may contain partial results for requests that were processed before cancellation.
 
 <CodeGroup>
-```bash Shell
+```bash Shell hidelines={2..15}
 #!/bin/sh
+MESSAGE_BATCH_ID=$(curl -s https://api.anthropic.com/v1/messages/batches \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data '{
+    "requests": [{
+      "custom_id": "test-1",
+      "params": {
+        "model": "claude-opus-4-6",
+        "max_tokens": 100,
+        "messages": [{"role": "user", "content": "Hi"}]
+      }
+    }]
+  }' | jq -r '.id')
 curl --request POST https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01"

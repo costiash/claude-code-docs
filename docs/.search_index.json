@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-06T21:17:09Z",
-  "indexed_files": 574,
+  "generated_at": "2026-03-07T00:37:08Z",
+  "indexed_files": 575,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -11,8 +11,8 @@
         "when",
         "added",
         "claude",
-        "code",
         "improved",
+        "code",
         "sessions",
         "command",
         "being",
@@ -20,15 +20,15 @@
         "instead",
         "tool",
         "file",
-        "memory",
         "mcp",
-        "now",
-        "where",
-        "mode",
+        "memory",
         "session",
-        "support"
+        "where",
+        "now",
+        "after",
+        "mode"
       ],
-      "word_count": 19672,
+      "word_count": 20186,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -123,24 +123,24 @@
         "com",
         "claude",
         "session",
-        "www",
         "code",
+        "www",
         "web",
         "environment",
         "access",
         "sessions",
-        "github",
         "network",
+        "run",
+        "cloud",
+        "setup",
+        "github",
+        "default",
+        "hooks",
         "changes",
         "terminal",
-        "default",
-        "run",
-        "hooks",
-        "tasks",
-        "note",
-        "when"
+        "script"
       ],
-      "word_count": 3236,
+      "word_count": 3661,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -260,27 +260,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Use Claude Code...",
       "keywords": [
         "claude",
-        "code",
         "desktop",
+        "code",
         "session",
         "sessions",
         "app",
         "see",
-        "cli",
-        "settings",
         "when",
+        "run",
+        "task",
+        "settings",
+        "cli",
         "remote",
         "available",
         "servers",
-        "windows",
-        "configuration",
-        "files",
-        "file",
+        "tasks",
         "mode",
-        "server",
-        "auto"
+        "windows",
+        "file",
+        "configuration"
       ],
-      "word_count": 5139,
+      "word_count": 6141,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -809,10 +809,10 @@
         "tools",
         "desktop",
         "build",
-        "info",
-        "web"
+        "tasks",
+        "info"
       ],
-      "word_count": 1405,
+      "word_count": 1443,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -1543,6 +1543,62 @@
       "word_count": 3894,
       "file_path": "docs/docs__en__about-claude__use-case-guides__ticket-routing.md"
     },
+    "/docs/en/agent-sdk/agent-loop": {
+      "title": "How the agent loop works",
+      "content_preview": "# How the agent loop works  Understand the message lifecycle, tool execution, context window, and architecture that power your SDK agents.  ---  The Agent SDK lets you embed Claude Code's autonomous a...",
+      "keywords": [
+        "tool",
+        "claude",
+        "sdk",
+        "tools",
+        "agent",
+        "loop",
+        "see",
+        "message",
+        "context",
+        "calls",
+        "only",
+        "when",
+        "session",
+        "what",
+        "before",
+        "result",
+        "turns",
+        "python",
+        "typescript",
+        "prompt"
+      ],
+      "word_count": 3940,
+      "file_path": "docs/docs__en__agent-sdk__agent-loop.md"
+    },
+    "/docs/en/agent-sdk/claude-code-features": {
+      "title": "Use Claude Code features in the SDK",
+      "content_preview": "# Use Claude Code features in the SDK  Load project instructions, skills, hooks, and other Claude Code features into your SDK agents.  ---  The Agent SDK is built on the same foundation as Claude Code...",
+      "keywords": [
+        "agent",
+        "claude",
+        "sdk",
+        "project",
+        "hooks",
+        "skills",
+        "code",
+        "see",
+        "when",
+        "files",
+        "filesystem",
+        "loads",
+        "user",
+        "includes",
+        "full",
+        "context",
+        "features",
+        "feature",
+        "tool",
+        "subagents"
+      ],
+      "word_count": 1916,
+      "file_path": "docs/docs__en__agent-sdk__claude-code-features.md"
+    },
     "/docs/en/agent-sdk/cost-tracking": {
       "title": "Track cost and usage",
       "content_preview": "# Track cost and usage  Learn how to track token usage, deduplicate parallel tool calls, and calculate costs with the Claude Agent SDK.  ---  The Claude Agent SDK provides detailed token usage informa...",
@@ -1876,7 +1932,7 @@
         "message",
         "code"
       ],
-      "word_count": 9825,
+      "word_count": 9834,
       "file_path": "docs/docs__en__agent-sdk__python.md"
     },
     "/docs/en/agent-sdk/quickstart": {
@@ -1936,31 +1992,31 @@
       "file_path": "docs/docs__en__agent-sdk__secure-deployment.md"
     },
     "/docs/en/agent-sdk/sessions": {
-      "title": "Session Management",
-      "content_preview": "# Session Management  Understanding how the Claude Agent SDK handles sessions and session resumption  ---  # Session Management  The Claude Agent SDK provides session management capabilities for handling conversation state and resumption. Sessions allow you to continue conversations across multiple",
+      "title": "Work with sessions",
+      "content_preview": "# Work with sessions  How sessions persist agent conversation history, and when to use continue, resume, and fork to return to a prior run.  ---  A session is the conversation history the SDK accumula...",
       "keywords": [
         "session",
-        "sessions",
-        "conversation",
-        "original",
-        "codegroup",
-        "sdk",
-        "continue",
-        "when",
-        "new",
-        "resuming",
-        "forking",
-        "management",
-        "claude",
-        "resume",
-        "option",
-        "history",
-        "branch",
         "agent",
-        "handles",
-        "resumption"
+        "sdk",
+        "resume",
+        "python",
+        "typescript",
+        "sessions",
+        "call",
+        "fork",
+        "file",
+        "docs",
+        "context",
+        "history",
+        "already",
+        "most",
+        "first",
+        "conversation",
+        "continue",
+        "result",
+        "full"
       ],
-      "word_count": 964,
+      "word_count": 1995,
       "file_path": "docs/docs__en__agent-sdk__sessions.md"
     },
     "/docs/en/agent-sdk/skills": {
@@ -2018,34 +2074,6 @@
       ],
       "word_count": 1449,
       "file_path": "docs/docs__en__agent-sdk__slash-commands.md"
-    },
-    "/docs/en/agent-sdk/stop-reasons": {
-      "title": "Handle stop reasons",
-      "content_preview": "# Handle stop reasons  Understand why Claude stopped generating and handle refusals, token limits, and other termination conditions  ---  When Claude finishes generating a response, the underlying API...",
-      "keywords": [
-        "stop",
-        "reason",
-        "result",
-        "message",
-        "error",
-        "events",
-        "before",
-        "response",
-        "stream",
-        "python",
-        "limit",
-        "messages",
-        "model",
-        "last",
-        "assistant",
-        "refusals",
-        "token",
-        "api",
-        "sdk",
-        "check"
-      ],
-      "word_count": 821,
-      "file_path": "docs/docs__en__agent-sdk__stop-reasons.md"
     },
     "/docs/en/agent-sdk/streaming-output": {
       "title": "Stream responses in real-time",
@@ -2135,28 +2163,28 @@
       "title": "Subagents in the SDK",
       "content_preview": "# Subagents in the SDK  Define and invoke subagents to isolate context, run tasks in parallel, and apply specialized instructions in your Claude Agent SDK applications.  ---  Subagents are separate ag...",
       "keywords": [
-        "subagents",
         "subagent",
+        "subagents",
         "agent",
         "claude",
         "tool",
+        "prompt",
         "when",
         "example",
         "code",
         "session",
-        "main",
         "based",
+        "task",
         "codegroup",
+        "note",
+        "main",
+        "only",
+        "parent",
         "tools",
         "context",
-        "prompt",
-        "note",
-        "define",
-        "tasks",
-        "agents",
-        "files"
+        "conversation"
       ],
-      "word_count": 2891,
+      "word_count": 3058,
       "file_path": "docs/docs__en__agent-sdk__subagents.md"
     },
     "/docs/en/agent-sdk/todo-tracking": {
@@ -2240,7 +2268,7 @@
         "user",
         "sdk"
       ],
-      "word_count": 7869,
+      "word_count": 7872,
       "file_path": "docs/docs__en__agent-sdk__typescript.md"
     },
     "/docs/en/agent-sdk/user-input": {
@@ -2408,7 +2436,7 @@
         "version",
         "beta"
       ],
-      "word_count": 2696,
+      "word_count": 2697,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/remote-mcp-servers": {
@@ -2688,7 +2716,7 @@
         "codegroup",
         "return"
       ],
-      "word_count": 4892,
+      "word_count": 4893,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__text-editor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-search-tool": {
@@ -2716,7 +2744,7 @@
         "context",
         "only"
       ],
-      "word_count": 4654,
+      "word_count": 4655,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-search-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-fetch-tool": {
@@ -11329,7 +11357,7 @@
         "which",
         "https"
       ],
-      "word_count": 1711,
+      "word_count": 1718,
       "file_path": "docs/docs__en__api__sdks__csharp.md"
     },
     "/docs/en/api/sdks/go": {
@@ -11469,7 +11497,7 @@
         "documentation",
         "examples"
       ],
-      "word_count": 1555,
+      "word_count": 1562,
       "file_path": "docs/docs__en__api__sdks__ruby.md"
     },
     "/docs/en/api/sdks/typescript": {
@@ -11497,7 +11525,7 @@
         "undocumented",
         "see"
       ],
-      "word_count": 3672,
+      "word_count": 3662,
       "file_path": "docs/docs__en__api__sdks__typescript.md"
     },
     "/docs/en/api/service-tiers": {
@@ -12913,7 +12941,7 @@
         "within",
         "result"
       ],
-      "word_count": 6009,
+      "word_count": 6092,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -12997,7 +13025,7 @@
         "keys",
         "python"
       ],
-      "word_count": 2271,
+      "word_count": 2273,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock": {
@@ -13053,7 +13081,7 @@
         "through",
         "api"
       ],
-      "word_count": 1793,
+      "word_count": 1794,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -13109,7 +13137,7 @@
         "history",
         "blocks"
       ],
-      "word_count": 7368,
+      "word_count": 7369,
       "file_path": "docs/docs__en__build-with-claude__context-editing.md"
     },
     "/docs/en/build-with-claude/context-windows": {
@@ -13277,7 +13305,7 @@
         "card",
         "model"
       ],
-      "word_count": 2199,
+      "word_count": 2207,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -13305,7 +13333,7 @@
         "supported",
         "models"
       ],
-      "word_count": 3133,
+      "word_count": 3137,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -13445,7 +13473,7 @@
         "request",
         "more"
       ],
-      "word_count": 14078,
+      "word_count": 14074,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {
@@ -13669,7 +13697,7 @@
         "only",
         "does"
       ],
-      "word_count": 3583,
+      "word_count": 3603,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/usage-cost-api": {
@@ -13710,22 +13738,22 @@
         "section",
         "api",
         "title",
+        "request",
         "using",
         "tab",
         "example",
-        "request",
+        "base",
         "examples",
         "these",
         "text",
         "prompt",
         "per",
-        "base",
+        "size",
         "url",
         "codegroup",
-        "vision",
-        "multiple"
+        "vision"
       ],
-      "word_count": 4329,
+      "word_count": 4427,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -13739,11 +13767,11 @@
         "see",
         "guide",
         "response",
+        "using",
         "examples",
         "vision",
         "conversational",
         "computer",
-        "using",
         "patterns",
         "basic",
         "requests",
@@ -13751,9 +13779,9 @@
         "feature",
         "data",
         "zdr",
-        "multiple"
+        "through"
       ],
-      "word_count": 2665,
+      "word_count": 2682,
       "file_path": "docs/docs__en__build-with-claude__working-with-messages.md"
     },
     "/docs/en/build-with-claude/workspaces": {

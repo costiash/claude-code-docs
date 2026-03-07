@@ -1202,7 +1202,6 @@ curl https://api.anthropic.com/v1/messages \
                 "required": ["location"]
             }
         },
-        # many more tools
         {
             "name": "get_time",
             "description": "Get the current time in a given time zone",
@@ -1700,7 +1699,7 @@ curl https://api.anthropic.com/v1/messages \
             "content": [
                 {
                     "type": "text",
-                    "text": "Hello, can you tell me more about the solar system?",
+                    "text": "Hello, can you tell me more about the solar system?"
                 }
             ]
         },
