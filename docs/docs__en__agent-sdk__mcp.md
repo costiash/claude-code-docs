@@ -176,7 +176,7 @@ Wildcards (`*`) let you allow all tools from a server without listing each one i
 Instead of listing allowed tools, you can change the permission mode to grant broader access:
 
 - `permissionMode: "acceptEdits"`: Automatically approves tool usage (still prompts for destructive operations)
-- `permissionMode: "bypassPermissions"`: Skips all safety prompts, including for destructive operations like file deletion or running shell commands. Use with caution, especially in production. This mode propagates to subagents spawned by the Task tool.
+- `permissionMode: "bypassPermissions"`: Skips all safety prompts, including for destructive operations like file deletion or running shell commands. Use with caution, especially in production. This mode propagates to subagents spawned by the Agent tool.
 
 ```typescript hidelines={1,-1}
 const _ = {

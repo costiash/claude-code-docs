@@ -1125,7 +1125,7 @@ tool_use_block = next(
 )
 
 # Call your actual weather API, here is where your actual API call would go
-# let's pretend this is what we get back
+# Let's pretend this is what we get back
 weather_data = {"temperature": 88}
 
 # Second request - Include thinking block and tool result
@@ -1164,7 +1164,7 @@ const toolUseBlock = response.content.find(
 );
 
 // Call your actual weather API, here is where your actual API call would go
-// let's pretend this is what we get back
+// Let's pretend this is what we get back
 const weatherData = { temperature: 88 };
 
 if (thinkingBlock && toolUseBlock) {

@@ -69,14 +69,14 @@
     "docs__en__agent-sdk__agent-loop.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/agent-loop",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/agent-loop.md",
-      "hash": "b1f6a1fda8e225cfec2e6546cdcf63a125c753d8338f9014fac5a441bd6ddab4",
-      "last_updated": "2026-03-07T00:30:52.127112"
+      "hash": "6bf96039bcd0f159ea737a1c6535120cc1c48e4d7fef0b6f40533953345a48ed",
+      "last_updated": "2026-03-08T03:48:52.807648"
     },
     "docs__en__agent-sdk__claude-code-features.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/claude-code-features",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/claude-code-features.md",
-      "hash": "c928506c11f811005992a1d53c7ad105a5c5b595fdd965dcdc660699671e24a2",
-      "last_updated": "2026-03-07T00:30:52.740926"
+      "hash": "f595aa5cedf1681c04fc2542601942372e90b5c5c50eae7412df2880f808d7bb",
+      "last_updated": "2026-03-08T03:48:54.103290"
     },
     "docs__en__agent-sdk__cost-tracking.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/cost-tracking",
@@ -99,8 +99,8 @@
     "docs__en__agent-sdk__hooks.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/hooks",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/hooks.md",
-      "hash": "b33c733831e8be5685571de320e06cf5636d84fe6888425da67f8ac0d3ef86c3",
-      "last_updated": "2026-02-27T21:09:33.235230"
+      "hash": "ae2b6464cbbef1b20747369c6c12f833edd1cb25259a51bff534f80f5bed122f",
+      "last_updated": "2026-03-08T03:48:56.469421"
     },
     "docs__en__agent-sdk__hosting.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/hosting",
@@ -111,8 +111,8 @@
     "docs__en__agent-sdk__mcp.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/mcp",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/mcp.md",
-      "hash": "c5980a3a2c9f94a60674412c5883269ee43504747f5a3e2dbdb69b9702478c9d",
-      "last_updated": "2026-02-25T15:23:44.040629"
+      "hash": "ca09a5daef76363f8509cb958455841c07aa91c9183a07efbe618a629a6108fe",
+      "last_updated": "2026-03-08T03:48:57.723812"
     },
     "docs__en__agent-sdk__migration-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/migration-guide",
@@ -129,8 +129,8 @@
     "docs__en__agent-sdk__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/overview",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/overview.md",
-      "hash": "f92080b38c6147d17d0a418961d8f807a006703bbb0439425fa6213f555bad6b",
-      "last_updated": "2026-03-04T00:31:14.671961"
+      "hash": "eb743e6414a1ef7b407ddeff4e7670c73a4b2cf524b799fb50c14b8f9c9ba53b",
+      "last_updated": "2026-03-08T03:48:59.492934"
     },
     "docs__en__agent-sdk__permissions.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/permissions",
@@ -147,8 +147,8 @@
     "docs__en__agent-sdk__python.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/python",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/python.md",
-      "hash": "4ec27455e8a3912b2c5dfa6ab386a7f54f926beffb6324a137f0c33c7126bcb1",
-      "last_updated": "2026-03-07T00:31:00.060909"
+      "hash": "c57cfd0ccfbc50b528483e5a3e86e0459edd7d9d7721ef582a1fc2a1e9389abd",
+      "last_updated": "2026-03-08T03:49:01.265406"
     },
     "docs__en__agent-sdk__quickstart.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/quickstart",
@@ -165,8 +165,8 @@
     "docs__en__agent-sdk__sessions.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/sessions",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/sessions.md",
-      "hash": "ee9d66318fe851efd2e7793fba73519b6892b14d3f6417d0dd9e546a5ac0ca2c",
-      "last_updated": "2026-03-07T00:31:01.962622"
+      "hash": "635af467bd4265e1c24c74f96c7766e73cf2991a58d4c14ba98ee4f146574426",
+      "last_updated": "2026-03-08T03:49:03.092597"
     },
     "docs__en__agent-sdk__skills.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/skills",
@@ -201,8 +201,8 @@
     "docs__en__agent-sdk__subagents.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/subagents",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/subagents.md",
-      "hash": "bea24235c52672225ba7500f70369f76697a6db629a4f8562cb9b48948569e3e",
-      "last_updated": "2026-03-07T00:31:05.665815"
+      "hash": "8da42a175969379f5f58430d6bcb455a7c7c88939641bf2d21b821b89e801f45",
+      "last_updated": "2026-03-08T03:49:06.631660"
     },
     "docs__en__agent-sdk__todo-tracking.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/todo-tracking",
@@ -213,8 +213,8 @@
     "docs__en__agent-sdk__typescript.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/typescript.md",
-      "hash": "362cca585175e4d042be2d8d6f5c7ca3c61ffcce874e3a1a0f68224a7ccd389d",
-      "last_updated": "2026-03-07T00:31:06.909502"
+      "hash": "c021b68ee21bfcd51381894ca4259fde04f02c092262a0f315def4e1d06b4b72",
+      "last_updated": "2026-03-08T03:49:07.834512"
     },
     "docs__en__agent-sdk__typescript-v2-preview.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview",
@@ -225,8 +225,8 @@
     "docs__en__agent-sdk__user-input.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/user-input",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/user-input.md",
-      "hash": "cff6b6edca9918d8079d6ffe8be6eae236b1b76c14c5a2c85ff3d40c210c08ea",
-      "last_updated": "2026-02-25T15:23:56.767469"
+      "hash": "6887e8b0de077e192dbcf1bdd8725c83390096cf16ef4ef2e161b88417f051a6",
+      "last_updated": "2026-03-08T03:49:09.007703"
     },
     "docs__en__agents-and-tools__agent-skills__best-practices.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices",
@@ -2619,8 +2619,8 @@
     "docs__en__build-with-claude__extended-thinking.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking.md",
-      "hash": "f199f36046a4af51c58999bffb72de4588b86962e7a6c34eb360419ff412591d",
-      "last_updated": "2026-03-06T03:54:13.818066"
+      "hash": "b8a6d213aa78627f18e42dcf9a709c609eac3491107dc33c1d10542508ae9b98",
+      "last_updated": "2026-03-08T03:53:57.982552"
     },
     "docs__en__build-with-claude__fast-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode",
@@ -3069,8 +3069,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-08T00:38:37.313497",
-    "fetch_duration_seconds": 389.667927,
+    "last_fetch_completed": "2026-03-08T03:54:47.743941",
+    "fetch_duration_seconds": 362.345515,
     "total_pages_discovered": 710,
     "pages_fetched_successfully": 511,
     "pages_failed": 200,
@@ -3281,7 +3281,7 @@
     "total_files": 511,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-08T00:38:37.313523",
+  "last_updated": "2026-03-08T03:54:47.743971",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

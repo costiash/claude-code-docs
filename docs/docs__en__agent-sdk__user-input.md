@@ -515,10 +515,10 @@ The input contains Claude's generated questions in a `questions` array. Each que
 |-------|-------------|
 | `question` | The full question text to display |
 | `header` | Short label for the question (max 12 characters) |
-| `options` | Array of 2-4 choices, each with `label` and `description` |
+| `options` | Array of 2-4 choices, each with `label` and `description`. TypeScript: optionally `preview` (see [below](#option-previews-type-script)) |
 | `multiSelect` | If `true`, users can select multiple options |
 
-Here's an example of the structure you'll receive:
+The structure your callback receives:
 
 ```json
 {
@@ -533,6 +533,48 @@ Here's an example of the structure you'll receive:
       "multiSelect": false
     }
   ]
+}
+```
+
+#### Option previews (TypeScript)
+
+`toolConfig.askUserQuestion.previewFormat` adds a `preview` field to each option so your app can show a visual mockup alongside the label. Without this setting, Claude does not generate previews and the field is absent.
+
+| `previewFormat` | `preview` contains |
+|:----------------|:-----------------------|
+| unset (default) | Field is absent. Claude does not generate previews. |
+| `"markdown"` | ASCII art and fenced code blocks |
+| `"html"` | A styled `
+` fragment (the SDK rejects `<script>`, `<style>`, and `<!DOCTYPE>` before your callback runs) |
+
+The format applies to all questions in the session. Claude includes `preview` on options where a visual comparison helps (layout choices, color schemes) and omits it where one wouldn't (yes/no confirmations, text-only choices). Check for `undefined` before rendering.
+
+```typescript
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "Help me choose a card layout",
+  options: {
+    toolConfig: {
+      askUserQuestion: { previewFormat: "html" },
+    },
+    canUseTool: async (toolName, input) => {
+      // input.questions[].options[].preview is an HTML string or undefined
+      return { behavior: "allow", updatedInput: input };
+    },
+  },
+})) {
+  // ...
+}
+```
+
+An option with an HTML preview:
+
+```json
+{
+  "label": "Compact",
+  "description": "Title and metric value only",
+  "preview": "<div style=\"padding:12px;border:1px solid #ddd;border-radius:8px\"><div style=\"font-size:12px;color:#666\">Active users</div><div style=\"font-size:28px;font-weight:600\">1,284</div></div>"
 }
 ```
 
@@ -739,7 +781,7 @@ main();
 
 ## Limitations
 
-- **Subagents**: `AskUserQuestion` is not currently available in subagents spawned via the Task tool
+- **Subagents**: `AskUserQuestion` is not currently available in subagents spawned via the Agent tool
 - **Question limits**: each `AskUserQuestion` call supports 1-4 questions with 2-4 options each
 
 ## Other ways to get user input

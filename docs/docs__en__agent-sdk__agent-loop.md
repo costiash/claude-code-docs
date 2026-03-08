@@ -119,7 +119,7 @@ The SDK includes the same tools that power Claude Code:
 | **Execution** | `Bash` | Run shell commands, scripts, git operations |
 | **Web** | `WebSearch`, `WebFetch` | Search the web, fetch and parse pages |
 | **Discovery** | `ToolSearch` | Dynamically find and load tools on-demand instead of preloading all of them |
-| **Orchestration** | `Task`, `Skill`, `AskUserQuestion`, `TodoWrite` | Spawn subagents, invoke skills, ask the user, track tasks |
+| **Orchestration** | `Agent`, `Skill`, `AskUserQuestion`, `TodoWrite` | Spawn subagents, invoke skills, ask the user, track tasks |
 
 Beyond built-in tools, you can:
 
