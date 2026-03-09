@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-09T18:26:46Z",
+  "generated_at": "2026-03-09T21:17:36Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -336,7 +336,7 @@
         "google",
         "security"
       ],
-      "word_count": 3187,
+      "word_count": 3222,
       "file_path": "docs/claude-code__github-actions.md"
     },
     "/claude-code/gitlab-ci-cd": {
@@ -494,17 +494,17 @@
         "background",
         "conversation",
         "current",
-        "open",
         "previous",
         "normal",
         "see",
         "session",
+        "open",
         "text",
         "search",
         "word",
         "input"
       ],
-      "word_count": 3268,
+      "word_count": 3252,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -796,23 +796,23 @@
         "tab",
         "title",
         "accordion",
-        "terminal",
         "get",
+        "terminal",
         "run",
         "app",
         "work",
         "icon",
         "install",
         "windows",
+        "review",
         "files",
         "commands",
         "tools",
         "desktop",
         "build",
-        "tasks",
-        "info"
+        "tasks"
       ],
-      "word_count": 1408,
+      "word_count": 1421,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
