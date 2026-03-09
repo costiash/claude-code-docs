@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-09T18:20:16.537453Z",
-    "total_paths": 710,
+    "generated_at": "2026-03-09T21:11:12.434941Z",
+    "total_paths": 711,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-03-09T18:20:16.537460Z"
+    "last_regenerated": "2026-03-09T21:11:12.434947Z"
   },
   "categories": {
     "core_documentation": [
@@ -76,6 +76,7 @@
       "/docs/en/build-with-claude/workspaces",
       "/docs/en/build-with-claude/zero-data-retention",
       "/docs/en/chrome",
+      "/docs/en/code-review",
       "/docs/en/desktop-quickstart",
       "/docs/en/discover-plugins",
       "/docs/en/fast-mode",
