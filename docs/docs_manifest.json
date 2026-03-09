@@ -39,8 +39,8 @@
     "docs__en__about-claude__pricing.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "original_md_url": "https://platform.claude.com/docs/en/about-claude/pricing.md",
-      "hash": "1b692096bbea58f463d354eec24f25d7aca125377c6f9af4641b84736773aaaf",
-      "last_updated": "2026-03-05T00:31:57.150000"
+      "hash": "8e8a6076f82134c504e371b411e49ef256591fd97a120ac6930b1871ec0e04a4",
+      "last_updated": "2026-03-09T15:23:37.910405"
     },
     "docs__en__about-claude__use-case-guides__content-moderation.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/use-case-guides/content-moderation",
@@ -2601,8 +2601,8 @@
     "docs__en__build-with-claude__data-residency.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/data-residency",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/data-residency.md",
-      "hash": "4b84f1d51239a9f5f9dd8d17af5d8057fbf63bc77e015b606f7a8e2ded5a32ac",
-      "last_updated": "2026-03-04T00:36:54.301848"
+      "hash": "81a39a5b30fd5730acbda247dcfdb583d79d1670bb2f0646519b9e5b931d3441",
+      "last_updated": "2026-03-09T15:29:04.924195"
     },
     "docs__en__build-with-claude__effort.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -3069,8 +3069,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-09T12:22:23.404922",
-    "fetch_duration_seconds": 382.502868,
+    "last_fetch_completed": "2026-03-09T15:29:54.901407",
+    "fetch_duration_seconds": 381.34411,
     "total_pages_discovered": 710,
     "pages_fetched_successfully": 511,
     "pages_failed": 200,
@@ -3281,7 +3281,7 @@
     "total_files": 511,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-09T12:22:23.404950",
+  "last_updated": "2026-03-09T15:29:54.901434",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

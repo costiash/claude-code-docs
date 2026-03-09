@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-09T12:22:25Z",
+  "generated_at": "2026-03-09T15:29:56Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -1428,7 +1428,7 @@
         "see",
         "web"
       ],
-      "word_count": 3236,
+      "word_count": 3234,
       "file_path": "docs/docs__en__about-claude__pricing.md"
     },
     "/docs/en/about-claude/use-case-guides/content-moderation": {
@@ -13193,7 +13193,7 @@
         "level",
         "legacy"
       ],
-      "word_count": 1025,
+      "word_count": 1023,
       "file_path": "docs/docs__en__build-with-claude__data-residency.md"
     },
     "/docs/en/build-with-claude/effort": {

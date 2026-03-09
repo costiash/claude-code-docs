@@ -131,7 +131,7 @@ Data residency pricing varies by model generation:
 - **Global routing** (`inference_geo: "global"` or omitted): Standard pricing applies.
 - **Older models:** Existing pricing is unchanged regardless of `inference_geo` settings.
 
-This pricing applies to the Claude API (1P) only. Third-party platforms (AWS Bedrock, Google Vertex AI, Microsoft Foundry) have their own regional pricing. See the [pricing page](/docs/en/about-claude/pricing#data-residency-pricing) for details.
+This pricing applies to the Claude API (1P) only. Third-party platforms (AWS Bedrock, Google Vertex AI) have their own regional pricing. See the [pricing page](/docs/en/about-claude/pricing#data-residency-pricing) for details.
 
 <Note>
 If you use [Priority Tier](/docs/en/api/service-tiers), the 1.1x multiplier for US-only inference also affects how tokens are counted against your Priority Tier capacity. Each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your committed TPM, consistent with how other pricing multipliers (prompt caching, long context) affect burndown rates.

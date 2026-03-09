@@ -83,7 +83,7 @@ For implementation details, supported models, and code examples, see the [prompt
 
 For Claude Opus 4.6 and newer models, specifying US-only inference via the `inference_geo` parameter incurs a 1.1x multiplier on all token pricing categories, including input tokens, output tokens, cache writes, and cache reads. Global routing (the default) uses standard pricing.
 
-This applies to the Claude API (1P) only. Third-party platforms have their own regional pricing. See [AWS Bedrock](https://aws.amazon.com/bedrock/pricing/), [Google Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/pricing), and [Microsoft Foundry](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/#pricing) for details. Earlier models retain their existing pricing regardless of `inference_geo` settings.
+This applies to the Claude API (1P) only. Third-party platforms have their own regional pricing. See [AWS Bedrock](https://aws.amazon.com/bedrock/pricing/) and [Google Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/pricing) for details. Earlier models retain their existing pricing regardless of `inference_geo` settings.
 
 For more information, see the [data residency documentation](/docs/en/build-with-claude/data-residency).
 
