@@ -170,7 +170,7 @@ const [latest] = await listSessions({ dir: "/path/to/project", limit: 1 });
 if (latest) {
   const messages = await getSessionMessages(latest.sessionId, {
     dir: "/path/to/project",
-    limit: 20,
+    limit: 20
   });
 
   for (const msg of messages) {

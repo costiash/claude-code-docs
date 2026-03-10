@@ -53,7 +53,7 @@ const msg = await anthropic.beta.messages.create({
 });
 ```
 
-```bash cURL
+```bash Shell
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \

@@ -384,12 +384,15 @@ puts(response.usage.speed)  # "fast" or "standard"
 ```
 </CodeGroup>
 
-```json JSON
+```json JSON hidelines={5..8}
 {
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
   "role": "assistant",
-  ...
+  "content": [{ "type": "text", "text": "Hello!" }],
+  "model": "claude-opus-4-6",
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
   "usage": {
     "input_tokens": 523,
     "output_tokens": 1842,

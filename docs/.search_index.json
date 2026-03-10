@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-10T00:35:32Z",
+  "generated_at": "2026-03-10T03:54:27Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -14,21 +14,21 @@
         "improved",
         "code",
         "sessions",
-        "command",
         "being",
-        "commands",
-        "instead",
         "tool",
+        "command",
+        "instead",
+        "commands",
         "file",
-        "mcp",
-        "memory",
         "session",
-        "where",
-        "now",
         "after",
-        "mode"
+        "now",
+        "memory",
+        "mcp",
+        "mode",
+        "where"
       ],
-      "word_count": 20186,
+      "word_count": 21032,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -280,7 +280,7 @@
         "file",
         "configuration"
       ],
-      "word_count": 6141,
+      "word_count": 6139,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -631,20 +631,20 @@
         "project",
         "auto",
         "directory",
+        "file",
         "loaded",
         "specific",
-        "file",
         "session",
         "context",
         "when",
         "them",
-        "into",
         "code",
+        "into",
         "across",
         "every",
         "reads"
       ],
-      "word_count": 2765,
+      "word_count": 2721,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -1003,12 +1003,12 @@
         "files",
         "example",
         "hooks",
-        "bash",
+        "mcp",
         "commands",
         "disable",
-        "mcp"
+        "bash"
       ],
-      "word_count": 8132,
+      "word_count": 8273,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -13305,7 +13305,7 @@
         "card",
         "model"
       ],
-      "word_count": 2207,
+      "word_count": 2220,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -13669,7 +13669,7 @@
         "tab",
         "example"
       ],
-      "word_count": 11240,
+      "word_count": 11393,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/token-counting": {

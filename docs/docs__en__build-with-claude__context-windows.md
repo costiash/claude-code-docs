@@ -107,7 +107,7 @@ To use the 1M token context window, include the `context-1m-2025-08-07` [beta he
 
 <CodeGroup>
 
-```bash cURL
+```bash Shell
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \

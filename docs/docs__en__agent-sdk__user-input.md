@@ -556,13 +556,13 @@ for await (const message of query({
   prompt: "Help me choose a card layout",
   options: {
     toolConfig: {
-      askUserQuestion: { previewFormat: "html" },
+      askUserQuestion: { previewFormat: "html" }
     },
     canUseTool: async (toolName, input) => {
       // input.questions[].options[].preview is an HTML string or undefined
       return { behavior: "allow", updatedInput: input };
-    },
-  },
+    }
+  }
 })) {
   // ...
 }

@@ -674,7 +674,12 @@ client = anthropic.Anthropic()
 response = client.messages.parse(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[{"role": "user", "content": "..."}],
+    messages=[
+        {
+            "role": "user",
+            "content": "Extract contact info: John Smith, john@example.com, interested in the Pro plan",
+        }
+    ],
     output_format=ContactInfo,
 )
 
@@ -905,7 +910,7 @@ public class StructuredOutputExample {
             .model(Model.CLAUDE_OPUS_4_6)
             .maxTokens(1024)
             .outputConfig(ContactInfo.class)
-            .addUserMessage("...")
+            .addUserMessage("Extract contact info: John Smith, john@example.com, interested in the Pro plan")
             .build();
 
         StructuredMessage<ContactInfo> response = client.messages().create(createParams);
@@ -1137,7 +1142,12 @@ client = Anthropic::Client.new
 message = client.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  messages: [{role: "user", content: "..."}],
+  messages: [
+    {
+      role: "user",
+      content: "Extract contact info: John Smith, john@example.com, interested in the Pro plan"
+    }
+  ],
   output_config: {format: ContactInfo}
 )
 
@@ -1274,7 +1284,7 @@ public class InvoiceExtraction
     {
         AnthropicClient client = new();
 
-        string invoiceText = "...";
+        string invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
 
         var parameters = new MessageCreateParams
         {
@@ -1331,7 +1341,7 @@ import (
 func main() {
 	client := anthropic.NewClient()
 
-	invoiceText := "..."
+	invoiceText := "Invoice #12345, Date: 2024-01-15, Total: $500.00"
 
 	schema := map[string]any{
 		"type":                 "object",
@@ -1425,7 +1435,7 @@ public class InvoiceExtraction {
     public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        String invoiceText = "...";
+        String invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
 
         StructuredMessageCreateParams<Invoice> params = MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_6)
@@ -1447,7 +1457,7 @@ use Anthropic\Client;
 
 $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 
-$invoiceText = "...";
+$invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
 
 $message = $client->messages->create(
     maxTokens: 4096,
@@ -1488,7 +1498,7 @@ require "anthropic"
 
 client = Anthropic::Client.new
 
-invoice_text = "..."
+invoice_text = "Invoice #12345, Date: 2024-01-15, Total: $500.00"
 
 message = client.messages.create(
   model: "claude-opus-4-6",
@@ -2463,7 +2473,7 @@ client = Anthropic()
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[{"role": "user", "content": "Search for flights to Tokyo"}],
+    messages=[{"role": "user", "content": "Search for flights to Tokyo departing June 1, 2026"}],
     tools=[
         {
             "name": "search_flights",
@@ -2509,7 +2519,7 @@ const searchFlightsTool: Anthropic.Tool = {
 const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  messages: [{ role: "user", content: "Search for flights to Tokyo" }],
+  messages: [{ role: "user", content: "Search for flights to Tokyo departing June 1, 2026" }],
   tools: [searchFlightsTool]
 });
 ```
@@ -2534,7 +2544,7 @@ class Program
         {
             Model = Model.ClaudeOpus4_6,
             MaxTokens = 1024,
-            Messages = [new() { Role = Role.User, Content = "Search for flights to Tokyo" }],
+            Messages = [new() { Role = Role.User, Content = "Search for flights to Tokyo departing June 1, 2026" }],
             Tools = [
                 new ToolUnion(new Tool()
                 {
@@ -2579,7 +2589,7 @@ func main() {
 		Model:     anthropic.ModelClaudeOpus4_6,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("Search for flights to Tokyo")),
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Search for flights to Tokyo departing June 1, 2026")),
 		},
 		Tools: []anthropic.ToolUnionParam{
 			{OfTool: &anthropic.ToolParam{
@@ -2649,7 +2659,7 @@ public class StrictToolExample {
         MessageCreateParams params = MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_6)
             .maxTokens(1024L)
-            .addUserMessage("Search for flights to Tokyo")
+            .addUserMessage("Search for flights to Tokyo departing June 1, 2026")
             .addTool(
                 Tool.builder()
                     .name("search_flights")
@@ -2675,7 +2685,7 @@ $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 $message = $client->messages->create(
     maxTokens: 1024,
     messages: [
-        ['role' => 'user', 'content' => 'Search for flights to Tokyo']
+        ['role' => 'user', 'content' => 'Search for flights to Tokyo departing June 1, 2026']
     ],
     model: 'claude-opus-4-6',
     tools: [
@@ -2709,7 +2719,7 @@ message = client.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
-    { role: "user", content: "Search for flights to Tokyo" }
+    { role: "user", content: "Search for flights to Tokyo departing June 1, 2026" }
   ],
   tools: [
     {
@@ -2751,7 +2761,12 @@ client = Anthropic()
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[{"role": "user", "content": "Help me plan a trip to Paris for 2 people"}],
+    messages=[
+        {
+            "role": "user",
+            "content": "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026",
+        }
+    ],
     tools=[
         {
             "name": "search_flights",
@@ -2826,7 +2841,13 @@ const tools: Anthropic.Tool[] = [
 const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  messages: [{ role: "user", content: "Help me plan a trip to Paris for 2 people" }],
+  messages: [
+    {
+      role: "user",
+      content:
+        "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026",
+    },
+  ],
   tools: tools
 });
 ```
@@ -2846,7 +2867,7 @@ class Program
         {
             Model = Model.ClaudeOpus4_6,
             MaxTokens = 1024,
-            Messages = [new() { Role = Role.User, Content = "Help me plan a trip to Paris for 2 people" }],
+            Messages = [new() { Role = Role.User, Content = "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026" }],
             Tools = [
                 new ToolUnion(new Tool()
                 {
@@ -2908,7 +2929,7 @@ func main() {
 		Model:     anthropic.ModelClaudeOpus4_6,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("Help me plan a trip to Paris for 2 people")),
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026")),
 		},
 		Tools: []anthropic.ToolUnionParam{
 			{OfTool: &anthropic.ToolParam{
@@ -2997,7 +3018,7 @@ public class StrictToolExample {
         MessageCreateParams params = MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_6)
             .maxTokens(1024L)
-            .addUserMessage("Help me plan a trip to Paris for 2 people")
+            .addUserMessage("Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026")
             .addTool(
                 Tool.builder()
                     .name("search_flights")
@@ -3030,7 +3051,7 @@ $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 $message = $client->messages->create(
     maxTokens: 1024,
     messages: [
-        ['role' => 'user', 'content' => 'Help me plan a trip to Paris for 2 people']
+        ['role' => 'user', 'content' => 'Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026']
     ],
     model: 'claude-opus-4-6',
     tools: [
@@ -3078,7 +3099,7 @@ message = client.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
-    { role: "user", content: "Help me plan a trip to Paris for 2 people" }
+    { role: "user", content: "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026" }
   ],
   tools: [
     {
@@ -3135,7 +3156,7 @@ response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
-        {"role": "user", "content": "Help me plan a trip to Paris for next month"}
+        {"role": "user", "content": "Help me plan a trip to Paris departing May 15, 2026"}
     ],
     # JSON outputs: structured response format
     output_config={
@@ -3175,7 +3196,7 @@ response = client.messages.create(
 const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  messages: [{ role: "user", content: "Help me plan a trip to Paris for next month" }],
+  messages: [{ role: "user", content: "Help me plan a trip to Paris departing May 15, 2026" }],
   // JSON outputs: structured response format
   output_config: {
     format: {
@@ -3233,7 +3254,7 @@ var parameters = new MessageCreateParams
 {
     Model = Model.ClaudeOpus4_6,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Help me plan a trip to Paris for next month" }],
+    Messages = [new() { Role = Role.User, Content = "Help me plan a trip to Paris departing May 15, 2026" }],
     // JSON outputs: structured response format
     OutputConfig = new OutputConfig
     {
@@ -3295,7 +3316,7 @@ func main() {
 		Model:     anthropic.ModelClaudeOpus4_6,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("Help me plan a trip to Paris for next month")),
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Help me plan a trip to Paris departing May 15, 2026")),
 		},
 		// JSON outputs: structured response format
 		OutputConfig: anthropic.OutputConfigParam{
@@ -3377,7 +3398,7 @@ public class StructuredOutputExample {
         MessageCreateParams params = MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_4_6)
             .maxTokens(1024L)
-            .addUserMessage("Help me plan a trip to Paris for next month")
+            .addUserMessage("Help me plan a trip to Paris departing May 15, 2026")
             .outputConfig(OutputConfig.builder()
                 .format(JsonOutputFormat.builder().schema(outputSchema).build())
                 .build())
@@ -3405,7 +3426,7 @@ $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 $message = $client->messages->create(
     maxTokens: 1024,
     messages: [
-        ['role' => 'user', 'content' => 'Help me plan a trip to Paris for next month']
+        ['role' => 'user', 'content' => 'Help me plan a trip to Paris departing May 15, 2026']
     ],
     model: 'claude-opus-4-6',
     // JSON outputs: structured response format
@@ -3452,7 +3473,7 @@ message = client.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 1024,
   messages: [
-    {role: "user", content: "Help me plan a trip to Paris for next month"}
+    {role: "user", content: "Help me plan a trip to Paris departing May 15, 2026"}
   ],
   # JSON outputs: structured response format
   output_config: {
