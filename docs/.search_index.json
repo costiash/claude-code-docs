@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-10T18:26:46Z",
+  "generated_at": "2026-03-10T21:17:41Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -13313,27 +13313,27 @@
       "content_preview": "# Files API  ---  The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution t...",
       "keywords": [
         "files",
-        "file",
         "api",
-        "codegroup",
-        "content",
+        "file",
         "note",
-        "using",
         "tool",
-        "type",
+        "storage",
+        "claude",
+        "using",
         "code",
         "execution",
-        "storage",
-        "block",
-        "claude",
-        "uploading",
-        "download",
-        "images",
         "beta",
+        "models",
+        "upload",
+        "uploading",
+        "content",
+        "download",
+        "calls",
         "supported",
-        "models"
+        "type",
+        "created"
       ],
-      "word_count": 3137,
+      "word_count": 2620,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {

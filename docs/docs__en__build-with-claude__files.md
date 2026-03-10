@@ -22,7 +22,7 @@ The Files API is currently not supported on Amazon Bedrock or Google Vertex AI.
 
 The Files API provides a simple create-once, use-many-times approach for working with files:
 
-- **Upload files** to our secure storage and receive a unique `file_id`
+- **Upload files** to Anthropic's secure storage and receive a unique `file_id`
 - **Download files** that are created from skills or the code execution tool
 - **Reference files** in [Messages](/docs/en/api/messages) requests using the `file_id` instead of re-uploading content
 - **Manage your files** with list, retrieve, and delete operations
@@ -38,111 +38,74 @@ To use the Files API, you'll need to include the beta feature header: `anthropic
 Upload a file to be referenced in future API calls:
 
 <CodeGroup>
-```bash Shell
+
+````bash
 curl -X POST https://api.anthropic.com/v1/files \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
   -F "file=@/path/to/document.pdf"
-```
+````
 
-```python Python nocheck
-import anthropic
-
-client = anthropic.Anthropic()
-client.beta.files.upload(
+````python
+uploaded = client.beta.files.upload(
     file=("document.pdf", open("/path/to/document.pdf", "rb"), "application/pdf"),
 )
-```
+````
 
-```typescript TypeScript nocheck
-import Anthropic, { toFile } from "@anthropic-ai/sdk";
-import fs from "fs";
-
-const anthropic = new Anthropic();
-
-await anthropic.beta.files.upload({
-  file: await toFile(fs.createReadStream("/path/to/document.pdf"), undefined, {
-    type: "application/pdf"
-  }),
-  betas: ["files-api-2025-04-14"]
+````typescript
+const uploaded = await anthropic.beta.files.upload({
+  file: await toFile(
+    fs.createReadStream("/path/to/document.pdf"),
+    undefined,
+    { type: "application/pdf" },
+  ),
+  betas: ["files-api-2025-04-14"],
 });
-```
+````
 
-```csharp C# nocheck
-using Anthropic;
-
-var client = new AnthropicClient();
-
-var file = await client.Beta.Files.Upload(
+````csharp
+var uploaded = await client.Beta.Files.Upload(
     new FileUploadParams
     {
         File = File.OpenRead("/path/to/document.pdf")
     });
 
-Console.WriteLine(file.Id);
-```
+Console.WriteLine(uploaded.Id);
+````
 
-```go Go hidelines={12..16}
-package main
+````go
+f, err := os.Open("/path/to/document.pdf")
+if err != nil {
+	log.Fatal(err)
+}
+defer f.Close()
 
-import (
-	"context"
-	"fmt"
-	"log"
-	"os"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func init() {
-	os.MkdirAll("/path/to", 0755)
-	os.WriteFile("/path/to/document.pdf", []byte("%PDF-1.4 test"), 0644)
+response, err := client.Beta.Files.Upload(context.Background(),
+	anthropic.BetaFileUploadParams{
+		File:  anthropic.File(f, "document.pdf", "application/pdf"),
+		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+	})
+if err != nil {
+	log.Fatal(err)
 }
 
-func main() {
-	client := anthropic.NewClient()
+fmt.Println(response.ID)
+````
 
-	file, err := os.Open("/path/to/document.pdf")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
+````java
+FileMetadata file = client.beta().files().upload(
+    FileUploadParams.builder()
+        .file(MultipartField.<InputStream>builder()
+            .value(Files.newInputStream(Path.of("/path/to/document.pdf")))
+            .filename("document.pdf")
+            .contentType("application/pdf")
+            .build())
+        .build()
+);
 
-	response, err := client.Beta.Files.Upload(context.Background(),
-		anthropic.BetaFileUploadParams{
-			File:  file,
-			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
-		})
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(response.ID)
-}
-```
-
-```java Java nocheck hidelines={1..8,-1}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.files.FileUploadParams;
-import com.anthropic.models.beta.files.FileMetadata;
-import java.nio.file.Path;
-
-public class UploadFile {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        FileMetadata file = client.beta().files().upload(
-            FileUploadParams.builder()
-                .file(Path.of("/path/to/document.pdf"))
-                .build()
-        );
-
-        System.out.println(file.id());
-    }
-}
-```
+System.out.println(file.id());
+````
 
 ```php PHP nocheck
 <?php
@@ -161,17 +124,17 @@ $file = $client->beta->files->upload(
 echo $file->id;
 ```
 
-```ruby Ruby nocheck
-require "anthropic"
-
-client = Anthropic::Client.new
-
+````ruby
 file = client.beta.files.upload(
-  file: File.open("/path/to/document.pdf", "rb")
+  file: Anthropic::FilePart.new(
+    Pathname("/path/to/document.pdf"),
+    content_type: "application/pdf"
+  )
 )
 
 puts file.id
-```
+````
+
 </CodeGroup>
 
 The response from uploading a file will include:
@@ -193,41 +156,40 @@ The response from uploading a file will include:
 Once uploaded, reference the file using its `file_id`:
 
 <CodeGroup>
-```bash Shell
+
+````bash
 curl -X POST https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
   -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "text",
-            "text": "Please summarize this document for me."
-          },
-          {
-            "type": "document",
-            "source": {
-              "type": "file",
-              "file_id": "file_011CNha8iCJcU1wXNR6q4V8w"
-            }
+  -d @- <<EOF
+{
+  "model": "claude-opus-4-6",
+  "max_tokens": 1024,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "Please summarize this document for me."
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "file",
+            "file_id": "$FILE_ID"
           }
-        ]
-      }
-    ]
-  }'
-```
+        }
+      ]
+    }
+  ]
+}
+EOF
+````
 
-```python Python nocheck hidelines={1..4,-1}
-import anthropic
-
-client = anthropic.Anthropic()
-
+````python
 response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -240,7 +202,7 @@ response = client.beta.messages.create(
                     "type": "document",
                     "source": {
                         "type": "file",
-                        "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+                        "file_id": file_id,
                     },
                 },
             ],
@@ -249,13 +211,9 @@ response = client.beta.messages.create(
     betas=["files-api-2025-04-14"],
 )
 print(response)
-```
+````
 
-```typescript TypeScript nocheck hidelines={1..4}
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic();
-
+````typescript
 const response = await anthropic.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
@@ -265,29 +223,25 @@ const response = await anthropic.beta.messages.create({
       content: [
         {
           type: "text",
-          text: "Please summarize this document for me."
+          text: "Please summarize this document for me.",
         },
         {
           type: "document",
           source: {
             type: "file",
-            file_id: "file_011CNha8iCJcU1wXNR6q4V8w"
-          }
-        }
-      ]
-    }
+            file_id: uploaded.id,
+          },
+        },
+      ],
+    },
   ],
-  betas: ["files-api-2025-04-14"]
+  betas: ["files-api-2025-04-14"],
 });
 
 console.log(response);
-```
+````
 
-```csharp C# nocheck
-using Anthropic;
-
-var client = new AnthropicClient();
-
+````csharp
 var response = await client.Beta.Messages.Create(
     new MessageCreateParams
     {
@@ -308,7 +262,7 @@ var response = await client.Beta.Messages.Create(
                         source = new
                         {
                             type = "file",
-                            file_id = "file_011CNha8iCJcU1wXNR6q4V8w"
+                            file_id = fileId
                         }
                     }
                 }
@@ -317,89 +271,52 @@ var response = await client.Beta.Messages.Create(
     });
 
 Console.WriteLine(response);
-```
+````
 
-```go Go nocheck hidelines={1..13,-6..-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
-	response, err := client.Beta.Messages.New(context.Background(),
-		anthropic.BetaMessageNewParams{
-			Model:     anthropic.ModelClaudeOpus4_6,
-			MaxTokens: 1024,
-			Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
-			Messages: []anthropic.BetaMessageParam{
-				anthropic.NewBetaUserMessage(
-					anthropic.NewBetaTextBlock("Please summarize this document for me."),
-					anthropic.NewBetaDocumentBlock(anthropic.BetaFileDocumentSourceParam{
-						FileID: "file_011CNha8iCJcU1wXNR6q4V8w",
-					}),
-				),
-			},
-		})
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(response)
+````go
+msg, err := client.Beta.Messages.New(context.Background(),
+	anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(
+				anthropic.NewBetaTextBlock("Please summarize this document for me."),
+				anthropic.NewBetaDocumentBlock(anthropic.BetaFileDocumentSourceParam{
+					FileID: fileID,
+				}),
+			),
+		},
+	})
+if err != nil {
+	log.Fatal(err)
 }
-```
 
-```java Java nocheck hidelines={1..13,-1}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.beta.messages.BetaContentBlockParam;
-import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaRequestDocumentBlock;
-import com.anthropic.models.beta.messages.BetaFileDocumentSource;
-import com.anthropic.models.beta.messages.BetaTextBlockParam;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import java.util.List;
+fmt.Println(msg)
+````
 
-public class UseFileInMessages {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+````java
+MessageCreateParams params = MessageCreateParams.builder()
+    .model(Model.CLAUDE_OPUS_4_6)
+    .addBeta("files-api-2025-04-14")
+    .maxTokens(1024)
+    .addUserMessageOfBetaContentBlockParams(List.of(
+        BetaContentBlockParam.ofText(BetaTextBlockParam.builder()
+            .text("Please summarize this document for me.")
+            .build()),
+        BetaContentBlockParam.ofDocument(BetaRequestDocumentBlock.builder()
+            .source(BetaFileDocumentSource.builder()
+                .fileId(fileId)
+                .build())
+            .build())
+    ))
+    .build();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .addBeta("files-api-2025-04-14")
-            .maxTokens(1024)
-            .addUserMessageOfBetaContentBlockParams(List.of(
-                BetaContentBlockParam.ofText(BetaTextBlockParam.builder()
-                    .text("Please summarize this document for me.")
-                    .build()),
-                BetaContentBlockParam.ofDocument(BetaRequestDocumentBlock.builder()
-                    .source(BetaFileDocumentSource.builder()
-                        .fileId("file_011CNha8iCJcU1wXNR6q4V8w")
-                        .build())
-                    .build())
-            ))
-            .build();
+BetaMessage message = client.beta().messages().create(params);
+System.out.println(message);
+````
 
-        BetaMessage message = client.beta().messages().create(params);
-        System.out.println(message);
-    }
-}
-```
-
-```php PHP hidelines={1..6} nocheck
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
+````php
 $response = $client->beta->messages->create(
     maxTokens: 1024,
     messages: [
@@ -411,7 +328,7 @@ $response = $client->beta->messages->create(
                     'type' => 'document',
                     'source' => [
                         'type' => 'file',
-                        'file_id' => 'file_011CNha8iCJcU1wXNR6q4V8w'
+                        'file_id' => $fileId
                     ]
                 ]
             ]
@@ -422,13 +339,9 @@ $response = $client->beta->messages->create(
 );
 
 print_r($response);
-```
+````
 
-```ruby Ruby nocheck
-require "anthropic"
-
-client = Anthropic::Client.new
-
+````ruby
 response = client.beta.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 1024,
@@ -442,7 +355,7 @@ response = client.beta.messages.create(
           type: "document",
           source: {
             type: "file",
-            file_id: "file_011CNha8iCJcU1wXNR6q4V8w"
+            file_id: file_id
           }
         }
       ]
@@ -451,7 +364,8 @@ response = client.beta.messages.create(
 )
 
 puts response
-```
+````
+
 </CodeGroup>
 
 ### File types and content blocks
@@ -882,115 +796,63 @@ puts files
 Retrieve information about a specific file:
 
 <CodeGroup>
-```bash Shell
-curl https://api.anthropic.com/v1/files/file_011CNha8iCJcU1wXNR6q4V8w \
+
+````bash
+curl "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14"
-```
+````
 
-```python Python nocheck hidelines={1..3}
-import anthropic
+````python
+file = client.beta.files.retrieve_metadata(file_id)
+````
 
-client = anthropic.Anthropic()
-file = client.beta.files.retrieve_metadata("file_011CNha8iCJcU1wXNR6q4V8w")
-```
-
-```typescript TypeScript nocheck
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic();
-const file = await anthropic.beta.files.retrieveMetadata("file_011CNha8iCJcU1wXNR6q4V8w", {
-  betas: ["files-api-2025-04-14"]
+````typescript
+const file = await anthropic.beta.files.retrieveMetadata(uploaded.id, {
+  betas: ["files-api-2025-04-14"],
 });
-```
+````
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
-using Anthropic;
+````csharp
+var file = await client.Beta.Files.RetrieveMetadata(fileId);
+Console.WriteLine(file);
+````
 
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var file = await client.Beta.Files.RetrieveMetadata("file_011CNha8iCJcU1wXNR6q4V8w");
-        Console.WriteLine(file);
-    }
-}
-```
-
-```go Go nocheck hidelines={1..13,-6..-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
+````go
+metadata, err := client.Beta.Files.GetMetadata(
+	context.TODO(),
+	fileID,
+	anthropic.BetaFileGetMetadataParams{
+		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+	},
 )
-
-func main() {
-	client := anthropic.NewClient()
-
-	file, err := client.Beta.Files.GetMetadata(
-		context.TODO(),
-		"file_011CNha8iCJcU1wXNR6q4V8w",
-		anthropic.BetaFileGetMetadataParams{
-			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
-		},
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(file)
+if err != nil {
+	log.Fatal(err)
 }
-```
 
-```java Java nocheck hidelines={1..6,-1}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.files.FileMetadata;
+fmt.Println(metadata)
+````
 
-public class RetrieveFileMetadata {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+````java
+FileMetadata metadata = client.beta().files().retrieveMetadata(fileId);
 
-        FileMetadata file = client.beta().files().retrieveMetadata(
-            "file_011CNha8iCJcU1wXNR6q4V8w"
-        );
+System.out.println(metadata);
+````
 
-        System.out.println(file);
-    }
-}
-```
-
-```php PHP hidelines={1..6} nocheck
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
+````php
 $file = $client->beta->files->retrieveMetadata(
-    fileID: 'file_011CNha8iCJcU1wXNR6q4V8w',
+    fileID: $fileId,
     betas: ['files-api-2025-04-14'],
 );
 echo $file;
-```
+````
 
-```ruby Ruby nocheck
-require "anthropic"
-
-client = Anthropic::Client.new
-
-file = client.beta.files.retrieve_metadata("file_011CNha8iCJcU1wXNR6q4V8w")
+````ruby
+file = client.beta.files.retrieve_metadata(file_id)
 puts file
-```
+````
+
 </CodeGroup>
 
 #### Delete a file
@@ -998,104 +860,56 @@ puts file
 Remove a file from your workspace:
 
 <CodeGroup>
-```bash Shell
-curl -X DELETE https://api.anthropic.com/v1/files/file_011CNha8iCJcU1wXNR6q4V8w \
+
+````bash
+curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14"
-```
+````
 
-```python Python nocheck hidelines={1..3}
-import anthropic
+````python
+result = client.beta.files.delete(file_id)
+````
 
-client = anthropic.Anthropic()
-result = client.beta.files.delete("file_011CNha8iCJcU1wXNR6q4V8w")
-```
-
-```typescript TypeScript nocheck
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic();
-await anthropic.beta.files.delete("file_011CNha8iCJcU1wXNR6q4V8w", {
-  betas: ["files-api-2025-04-14"]
+````typescript
+await anthropic.beta.files.delete(uploaded.id, {
+  betas: ["files-api-2025-04-14"],
 });
-```
+````
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
-using Anthropic;
+````csharp
+await client.Beta.Files.Delete(fileId);
+````
 
-class Program
-{
-    static async Task Main()
-    {
-        AnthropicClient client = new();
-
-        await client.Beta.Files.Delete("file_011CNha8iCJcU1wXNR6q4V8w");
-    }
-}
-```
-
-```go Go nocheck hidelines={1..12,-4..-1}
-package main
-
-import (
-	"context"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
+````go
+_, err = client.Beta.Files.Delete(
+	context.TODO(),
+	fileID,
+	anthropic.BetaFileDeleteParams{
+		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+	},
 )
-
-func main() {
-	client := anthropic.NewClient()
-
-	_, err := client.Beta.Files.Delete(
-		context.TODO(),
-		"file_011CNha8iCJcU1wXNR6q4V8w",
-		anthropic.BetaFileDeleteParams{
-			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
-		},
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
+if err != nil {
+	log.Fatal(err)
 }
-```
+````
 
-```java Java nocheck hidelines={1..5,-1}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+````java
+client.beta().files().delete(fileId);
+````
 
-public class DeleteFile {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        client.beta().files().delete("file_011CNha8iCJcU1wXNR6q4V8w");
-    }
-}
-```
-
-```php PHP hidelines={1..6} nocheck
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
+````php
 $result = $client->beta->files->delete(
-    fileID: 'file_011CNha8iCJcU1wXNR6q4V8w',
+    fileID: $fileId,
     betas: ['files-api-2025-04-14'],
 );
-```
+````
 
-```ruby Ruby nocheck
-require "anthropic"
+````ruby
+result = client.beta.files.delete(file_id)
+````
 
-client = Anthropic::Client.new
-
-result = client.beta.files.delete("file_011CNha8iCJcU1wXNR6q4V8w")
-```
 </CodeGroup>
 
 ### Downloading a file
@@ -1103,122 +917,69 @@ result = client.beta.files.delete("file_011CNha8iCJcU1wXNR6q4V8w")
 Download files that have been created by skills or the code execution tool:
 
 <CodeGroup>
-```bash Shell
-curl -X GET "https://api.anthropic.com/v1/files/file_011CNha8iCJcU1wXNR6q4V8w/content" \
+
+````bash
+curl -X GET "https://api.anthropic.com/v1/files/$FILE_ID/content" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
   --output downloaded_file.txt
-```
+````
 
-```python Python nocheck hidelines={1..3}
-import anthropic
-
-client = anthropic.Anthropic()
-file_content = client.beta.files.download("file_011CNha8iCJcU1wXNR6q4V8w")
+````python
+file_content = client.beta.files.download(file_id)
 
 # Save to file
-with open("downloaded_file.txt", "w") as f:
-    f.write(file_content.decode("utf-8"))
-```
+file_content.write_to_file("downloaded_file.txt")
+````
 
-```typescript TypeScript nocheck hidelines={1}
-import Anthropic from "@anthropic-ai/sdk";
-import fs from "fs/promises";
-
-const anthropic = new Anthropic();
-
-const response = await anthropic.beta.files.download("file_011CNha8iCJcU1wXNR6q4V8w", {
-  betas: ["files-api-2025-04-14"]
+````typescript
+const content = await anthropic.beta.files.download(uploaded.id, {
+  betas: ["files-api-2025-04-14"],
 });
 
-// Save to file
-const content = Buffer.from(await response.arrayBuffer());
-await fs.writeFile("downloaded_file.txt", content);
-```
+const bytes = Buffer.from(await content.arrayBuffer());
+await fsp.writeFile("downloaded_file.txt", bytes);
+````
 
-```csharp C# nocheck
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using Anthropic;
+````csharp
+byte[] fileContent = await client.Beta.Files.Download(fileId);
 
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
+await File.WriteAllBytesAsync("downloaded_file.txt", fileContent);
+````
 
-        byte[] fileContent = await client.Beta.Files.Download("file_011CNha8iCJcU1wXNR6q4V8w");
-
-        await File.WriteAllBytesAsync("downloaded_file.txt", fileContent);
-    }
-}
-```
-
-```go Go nocheck hidelines={1..14,-4..-1}
-package main
-
-import (
-	"context"
-	"io"
-	"log"
-	"os"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
+````go
+func downloadFile(client anthropic.Client, fileID string) error {
 	resp, err := client.Beta.Files.Download(
 		context.TODO(),
-		"file_011CNha8iCJcU1wXNR6q4V8w",
+		fileID,
 		anthropic.BetaFileDownloadParams{
 			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
 		},
 	)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	defer resp.Body.Close()
 
 	fileContent, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
-	err = os.WriteFile("downloaded_file.txt", fileContent, 0644)
-	if err != nil {
-		log.Fatal(err)
-	}
+	return os.WriteFile("downloaded_file.txt", fileContent, 0644)
 }
-```
 
-```java Java nocheck hidelines={1..11,-1}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.core.http.HttpResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+````
 
-public class DownloadFile {
-    public static void main(String[] args) throws IOException {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        try (HttpResponse response = client.beta().files().download(
-                "file_011CNha8iCJcU1wXNR6q4V8w")) {
-            try (InputStream body = response.body()) {
-                Files.copy(body, Path.of("downloaded_file.txt"),
-                    StandardCopyOption.REPLACE_EXISTING);
-            }
-        }
+````java
+try (HttpResponse response = client.beta().files().download(fileId)) {
+    try (InputStream body = response.body()) {
+        Files.copy(body, Path.of("downloaded_file.txt"),
+            StandardCopyOption.REPLACE_EXISTING);
     }
 }
-```
+````
 
 ```php PHP hidelines={1..6} nocheck
 <?php
@@ -1235,15 +996,12 @@ $fileContent = $client->beta->files->download(
 file_put_contents("downloaded_file.txt", $fileContent);
 ```
 
-```ruby Ruby nocheck
-require "anthropic"
-
-client = Anthropic::Client.new
-
-file_content = client.beta.files.download("file_011CNha8iCJcU1wXNR6q4V8w")
+````ruby
+file_content = client.beta.files.download(file_id)
 
 File.binwrite("downloaded_file.txt", file_content.read)
-```
+````
+
 </CodeGroup>
 
 <Note>
@@ -1265,7 +1023,7 @@ You can only download files that were created by [skills](/docs/en/build-with-cl
 - Files persist until you delete them
 - Deleted files cannot be recovered
 - Files are inaccessible via the API shortly after deletion, but they may persist in active `Messages` API calls and associated tool uses
-- Files that users delete will be deleted in accordance with our [data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data).
+- Files that users delete will be deleted in accordance with Anthropic's [data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data).
 
 ---
 
