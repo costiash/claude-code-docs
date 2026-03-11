@@ -741,7 +741,7 @@ for await (const message of query({
 - Check that your matcher pattern matches the tool name exactly
 - Ensure the hook is under the correct event type in `options.hooks`
 - For non-tool hooks like `Stop` and `SubagentStop`, matchers match against different fields (see [matcher patterns](https://code.claude.com/docs/en/hooks#matcher-patterns))
-- Hooks may not fire when the agent hits the [`max_turns`](/docs/en/agent-sdk/python#configuration-options) limit because the session ends before hooks can execute
+- Hooks may not fire when the agent hits the [`max_turns`](/docs/en/agent-sdk/python#claude-agent-options) limit because the session ends before hooks can execute
 
 ### Matcher not filtering as expected
 

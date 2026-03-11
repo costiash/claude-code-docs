@@ -36,12 +36,12 @@ function query({
 
 | Parameter | Type | Description |
 | :-------- | :--- | :---------- |
-| `prompt` | `string \| AsyncIterable<`[`SDKUserMessage`](#sdkusermessage)`>` | The input prompt as a string or async iterable for streaming mode |
+| `prompt` | `string \| AsyncIterable<`[`SDKUserMessage`](#sdkuser-message)`>` | The input prompt as a string or async iterable for streaming mode |
 | `options` | [`Options`](#options) | Optional configuration object (see Options type below) |
 
 #### Returns
 
-Returns a [`Query`](#query-object) object that extends `AsyncGenerator<`[`SDKMessage`](#sdkmessage)`, void>` with additional methods.
+Returns a [`Query`](#query-object) object that extends `AsyncGenerator<`[`SDKMessage`](#sdk-message)`, void>` with additional methods.
 
 ### `tool()`
 
@@ -64,7 +64,7 @@ function tool<Schema extends AnyZodRawShape>(
 | `name` | `string` | The name of the tool |
 | `description` | `string` | A description of what the tool does |
 | `inputSchema` | `Schema extends AnyZodRawShape` | Zod schema defining the tool's input parameters (supports both Zod 3 and Zod 4) |
-| `handler` | `(args, extra) => Promise<`[`CallToolResult`](#calltoolresult)`>` | Async function that executes the tool logic |
+| `handler` | `(args, extra) => Promise<`[`CallToolResult`](#call-tool-result)`>` | Async function that executes the tool logic |
 | `extras` | `{ annotations?: ToolAnnotations }` | Optional extra configuration including MCP tool annotations (e.g., `readOnly`, `destructive`, `openWorld`) |
 
 ### `createSdkMcpServer()`
@@ -190,11 +190,11 @@ Configuration object for the `query()` function.
 | `abortController` | `AbortController` | `new AbortController()` | Controller for cancelling operations |
 | `additionalDirectories` | `string[]` | `[]` | Additional directories Claude can access |
 | `agent` | `string` | `undefined` | Agent name for the main thread. The agent must be defined in the `agents` option or in settings |
-| `agents` | `Record<string, [`AgentDefinition`](#agentdefinition)>` | `undefined` | Programmatically define subagents |
+| `agents` | `Record<string, [`AgentDefinition`](#agent-definition)>` | `undefined` | Programmatically define subagents |
 | `allowDangerouslySkipPermissions` | `boolean` | `false` | Enable bypassing permissions. Required when using `permissionMode: 'bypassPermissions'` |
 | `allowedTools` | `string[]` | `[]` | Tools to auto-approve without prompting. This does not restrict Claude to only these tools; unlisted tools fall through to `permissionMode` and `canUseTool`. Use `disallowedTools` to block tools. See [Permissions](/docs/en/agent-sdk/permissions#allow-and-deny-rules) |
-| `betas` | [`SdkBeta`](#sdkbeta)`[]` | `[]` | Enable beta features (e.g., `['context-1m-2025-08-07']`) |
-| `canUseTool` | [`CanUseTool`](#canusetool) | `undefined` | Custom permission function for tool usage |
+| `betas` | [`SdkBeta`](#sdk-beta)`[]` | `[]` | Enable beta features (e.g., `['context-1m-2025-08-07']`) |
+| `canUseTool` | [`CanUseTool`](#can-use-tool) | `undefined` | Custom permission function for tool usage |
 | `continue` | `boolean` | `false` | Continue the most recent conversation |
 | `cwd` | `string` | `process.cwd()` | Current working directory |
 | `debug` | `boolean` | `false` | Enable debug mode for the Claude Code process |
@@ -208,30 +208,30 @@ Configuration object for the `query()` function.
 | `extraArgs` | `Record<string, string \| null>` | `{}` | Additional arguments |
 | `fallbackModel` | `string` | `undefined` | Model to use if primary fails |
 | `forkSession` | `boolean` | `false` | When resuming with `resume`, fork to a new session ID instead of continuing the original session |
-| `hooks` | `Partial<Record<`[`HookEvent`](#hookevent)`, `[`HookCallbackMatcher`](#hookcallbackmatcher)`[]>>` | `{}` | Hook callbacks for events |
+| `hooks` | `Partial<Record<`[`HookEvent`](#hook-event)`, `[`HookCallbackMatcher`](#hook-callback-matcher)`[]>>` | `{}` | Hook callbacks for events |
 | `includePartialMessages` | `boolean` | `false` | Include partial message events |
 | `maxBudgetUsd` | `number` | `undefined` | Maximum budget in USD for the query |
 | `maxThinkingTokens` | `number` | `undefined` | _Deprecated:_ Use `thinking` instead. Maximum tokens for thinking process |
 | `maxTurns` | `number` | `undefined` | Maximum agentic turns (tool-use round trips) |
-| `mcpServers` | `Record<string, [`McpServerConfig`](#mcpserverconfig)>` | `{}` | MCP server configurations |
+| `mcpServers` | `Record<string, [`McpServerConfig`](#mcp-server-config)>` | `{}` | MCP server configurations |
 | `model` | `string` | Default from CLI | Claude model to use |
 | `outputFormat` | `{ type: 'json_schema', schema: JSONSchema }` | `undefined` | Define output format for agent results. See [Structured outputs](/docs/en/agent-sdk/structured-outputs) for details |
 | `pathToClaudeCodeExecutable` | `string` | Uses built-in executable | Path to Claude Code executable |
-| `permissionMode` | [`PermissionMode`](#permissionmode) | `'default'` | Permission mode for the session |
+| `permissionMode` | [`PermissionMode`](#permission-mode) | `'default'` | Permission mode for the session |
 | `permissionPromptToolName` | `string` | `undefined` | MCP tool name for permission prompts |
 | `persistSession` | `boolean` | `true` | When `false`, disables session persistence to disk. Sessions cannot be resumed later |
-| `plugins` | [`SdkPluginConfig`](#sdkpluginconfig)`[]` | `[]` | Load custom plugins from local paths. See [Plugins](/docs/en/agent-sdk/plugins) for details |
+| `plugins` | [`SdkPluginConfig`](#sdk-plugin-config)`[]` | `[]` | Load custom plugins from local paths. See [Plugins](/docs/en/agent-sdk/plugins) for details |
 | `promptSuggestions` | `boolean` | `false` | Enable prompt suggestions. Emits a `prompt_suggestion` message after each turn with a predicted next user prompt |
 | `resume` | `string` | `undefined` | Session ID to resume |
 | `resumeSessionAt` | `string` | `undefined` | Resume session at a specific message UUID |
-| `sandbox` | [`SandboxSettings`](#sandboxsettings) | `undefined` | Configure sandbox behavior programmatically. See [Sandbox settings](#sandboxsettings) for details |
+| `sandbox` | [`SandboxSettings`](#sandbox-settings) | `undefined` | Configure sandbox behavior programmatically. See [Sandbox settings](#sandbox-settings) for details |
 | `sessionId` | `string` | Auto-generated | Use a specific UUID for the session instead of auto-generating one |
 | `settingSources` | [`SettingSource`](#setting-source)`[]` | `[]` (no settings) | Control which filesystem settings to load. When omitted, no settings are loaded. **Note:** Must include `'project'` to load CLAUDE.md files |
 | `spawnClaudeCodeProcess` | `(options: SpawnOptions) => SpawnedProcess` | `undefined` | Custom function to spawn the Claude Code process. Use to run Claude Code in VMs, containers, or remote environments |
 | `stderr` | `(data: string) => void` | `undefined` | Callback for stderr output |
 | `strictMcpConfig` | `boolean` | `false` | Enforce strict MCP validation |
 | `systemPrompt` | `string \| { type: 'preset'; preset: 'claude_code'; append?: string }` | `undefined` (minimal prompt) | System prompt configuration. Pass a string for custom prompt, or `{ type: 'preset', preset: 'claude_code' }` to use Claude Code's system prompt. When using the preset object form, add `append` to extend the system prompt with additional instructions |
-| `thinking` | [`ThinkingConfig`](#thinkingconfig) | `{ type: 'adaptive' }` for supported models | Controls Claude's thinking/reasoning behavior. See [`ThinkingConfig`](#thinkingconfig) for options |
+| `thinking` | [`ThinkingConfig`](#thinking-config) | `{ type: 'adaptive' }` for supported models | Controls Claude's thinking/reasoning behavior. See [`ThinkingConfig`](#thinking-config) for options |
 | `toolConfig` | [`ToolConfig`](#tool-config) | `undefined` | Configuration for built-in tool behavior. See [`ToolConfig`](#tool-config) for details |
 | `tools` | `string[] \| { type: 'preset'; preset: 'claude_code' }` | `undefined` | Tool configuration. Pass an array of tool names or use the preset to get Claude Code's default tools |
 
@@ -472,7 +472,7 @@ type CanUseTool = (
 | Option | Type | Description |
 | :----- | :--- | :---------- |
 | `signal` | `AbortSignal` | Signaled if the operation should be aborted |
-| `suggestions` | [`PermissionUpdate`](#permissionupdate)`[]` | Suggested permission updates so the user is not prompted again for this tool |
+| `suggestions` | [`PermissionUpdate`](#permission-update)`[]` | Suggested permission updates so the user is not prompted again for this tool |
 | `blockedPath` | `string` | The file path that triggered the permission request, if applicable |
 | `decisionReason` | `string` | Explains why this permission request was triggered |
 | `toolUseID` | `string` | Unique identifier for this specific tool call within the assistant message |
@@ -2117,7 +2117,7 @@ type McpServerStatusConfig =
   | McpClaudeAIProxyServerConfig;
 ```
 
-See [`McpServerConfig`](#mcpserverconfig) for details on each transport type.
+See [`McpServerConfig`](#mcp-server-config) for details on each transport type.
 
 ### `AccountInfo`
 
@@ -2532,8 +2532,8 @@ type SandboxSettings = {
 | `autoAllowBashIfSandboxed` | `boolean` | `true` | Auto-approve bash commands when sandbox is enabled |
 | `excludedCommands` | `string[]` | `[]` | Commands that always bypass sandbox restrictions (e.g., `['docker']`). These run unsandboxed automatically without model involvement |
 | `allowUnsandboxedCommands` | `boolean` | `true` | Allow the model to request running commands outside the sandbox. When `true`, the model can set `dangerouslyDisableSandbox` in tool input, which falls back to the [permissions system](#permissions-fallback-for-unsandboxed-commands) |
-| `network` | [`SandboxNetworkConfig`](#sandboxnetworkconfig) | `undefined` | Network-specific sandbox configuration |
-| `filesystem` | [`SandboxFilesystemConfig`](#sandboxfilesystemconfig) | `undefined` | Filesystem-specific sandbox configuration for read/write restrictions |
+| `network` | [`SandboxNetworkConfig`](#sandbox-network-config) | `undefined` | Network-specific sandbox configuration |
+| `filesystem` | [`SandboxFilesystemConfig`](#sandbox-filesystem-config) | `undefined` | Filesystem-specific sandbox configuration for read/write restrictions |
 | `ignoreViolations` | `Record<string, string[]>` | `undefined` | Map of violation categories to patterns to ignore (e.g., `{ file: ['/tmp/*'], network: ['localhost'] }`) |
 | `enableWeakerNestedSandbox` | `boolean` | `false` | Enable a weaker nested sandbox for compatibility |
 | `ripgrep` | `{ command: string; args?: string[] }` | `undefined` | Custom ripgrep binary configuration for sandbox environments |
