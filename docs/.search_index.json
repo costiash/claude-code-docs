@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-11T18:28:43Z",
+  "generated_at": "2026-03-11T21:18:12Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -39,24 +39,24 @@
         "claude",
         "code",
         "model",
+        "inference",
         "aws",
         "credentials",
-        "configuration",
         "variables",
-        "inference",
+        "settings",
+        "configuration",
         "when",
         "environment",
-        "settings",
-        "region",
-        "amazon",
-        "iam",
-        "models",
-        "note",
+        "profile",
+        "versions",
         "see",
         "these",
-        "file"
+        "region",
+        "file",
+        "amazon",
+        "iam"
       ],
-      "word_count": 1055,
+      "word_count": 1200,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -504,7 +504,7 @@
         "context",
         "open"
       ],
-      "word_count": 3527,
+      "word_count": 3490,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -680,27 +680,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Model configura...",
       "keywords": [
         "model",
-        "set",
         "environment",
-        "settings",
-        "models",
-        "sonnet",
-        "when",
+        "set",
         "code",
+        "settings",
+        "when",
+        "claude",
+        "models",
+        "version",
+        "sonnet",
         "opus",
         "users",
         "effort",
-        "claude",
-        "context",
-        "caching",
         "setting",
-        "version",
         "uses",
-        "disable",
+        "context",
         "variables",
-        "prompt"
+        "caching",
+        "specific",
+        "ids"
       ],
-      "word_count": 1508,
+      "word_count": 1754,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -766,25 +766,25 @@
         "output",
         "claude",
         "styles",
+        "prompt",
         "code",
         "system",
-        "prompt",
         "style",
         "default",
         "file",
         "software",
         "engineering",
-        "such",
         "files",
         "tasks",
-        "directly",
         "instructions",
         "custom",
-        "level",
         "frontmatter",
-        "complete"
+        "complete",
+        "agent",
+        "such",
+        "coding"
       ],
-      "word_count": 656,
+      "word_count": 671,
       "file_path": "docs/claude-code__output-styles.md"
     },
     "/claude-code/overview": {
@@ -1008,7 +1008,7 @@
         "disable",
         "bash"
       ],
-      "word_count": 8273,
+      "word_count": 8313,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
