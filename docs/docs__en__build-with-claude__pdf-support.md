@@ -64,7 +64,7 @@ When using PDF support through Amazon Bedrock's Converse API, there are two dist
 If customers report that Claude isn't seeing images or charts in their PDFs when using the Converse API, they likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.
 
 <Note>
-This is a known constraint with the Converse API that we're working to address. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.
+This is a known constraint with the Converse API. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.
 </Note>
 
 <Note>
@@ -1045,7 +1045,7 @@ public class MessagesBatchDocumentExample {
     icon="file"
     href="https://platform.claude.com/cookbook/multimodal-getting-started-with-vision"
   >
-    Explore practical examples of PDF processing in our cookbook recipe.
+    Explore practical examples of PDF processing in the cookbook recipe.
   </Card>
 
   <Card

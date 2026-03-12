@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-11T21:18:12Z",
+  "generated_at": "2026-03-12T00:33:56Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -13400,8 +13400,8 @@
         "azureaibeta",
         "claude",
         "claudeapi",
-        "bedrock",
         "vertexai",
+        "bedrock",
         "context",
         "tools",
         "tool",
@@ -13417,7 +13417,7 @@
         "availability",
         "token"
       ],
-      "word_count": 1143,
+      "word_count": 1144,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
@@ -13445,7 +13445,7 @@
         "each",
         "image"
       ],
-      "word_count": 2913,
+      "word_count": 2908,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -13901,27 +13901,27 @@
       "content_preview": "# Claude Developer Platform  Updates to the Claude Developer Platform, including the Claude API, client SDKs, and the Claude Console.  ---  <Tip> For release notes on Claude Apps, see the [Release not...",
       "keywords": [
         "claude",
-        "our",
         "api",
-        "more",
         "tool",
+        "more",
         "beta",
-        "documentation",
         "launched",
         "now",
+        "model",
         "sonnet",
         "models",
+        "our",
         "learn",
-        "model",
         "available",
         "read",
+        "support",
         "opus",
         "console",
         "usage",
         "header",
-        "support"
+        "new"
       ],
-      "word_count": 4300,
+      "word_count": 4255,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {
@@ -15804,18 +15804,17 @@
       "title": "Streaming refusals",
       "content_preview": "# Streaming refusals  ---  Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `\"refusal\"`** when streaming classifiers intervene to handle potential policy vi...",
       "keywords": [
-        "refusal",
         "refusals",
         "when",
+        "refusal",
         "api",
         "streaming",
         "response",
-        "note",
         "claude",
         "tip",
         "sonnet",
         "reset",
-        "handling",
+        "note",
         "responses",
         "handle",
         "safety",
@@ -15823,9 +15822,10 @@
         "context",
         "types",
         "error",
-        "future"
+        "future",
+        "handling"
       ],
-      "word_count": 1087,
+      "word_count": 1064,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md"
     },
     "/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency": {

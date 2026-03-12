@@ -58,7 +58,7 @@ To qualify for the next tier, you must meet a deposit requirement. To minimize t
     <tr>
       <td>Tier 4</td>
       <td>\$400</td>
-      <td>\$5,000</td>
+      <td>\$200,000</td>
     </tr>
     <tr>
       <td>Monthly Invoicing</td>
