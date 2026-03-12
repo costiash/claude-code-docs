@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-12T18:27:27Z",
+  "generated_at": "2026-03-12T21:18:07Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -628,23 +628,23 @@
         "instructions",
         "memory",
         "rules",
-        "project",
         "auto",
+        "project",
         "directory",
         "file",
         "loaded",
         "specific",
         "session",
+        "code",
         "context",
         "when",
         "them",
-        "code",
         "into",
         "across",
         "every",
         "reads"
       ],
-      "word_count": 2775,
+      "word_count": 2791,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -1008,7 +1008,7 @@
         "disable",
         "bash"
       ],
-      "word_count": 8485,
+      "word_count": 8509,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {

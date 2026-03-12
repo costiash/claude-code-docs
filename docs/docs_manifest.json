@@ -2775,8 +2775,8 @@
     "claude-code__data-usage.md": {
       "original_url": "https://platform.claude.com/docs/en/data-usage",
       "original_md_url": "https://platform.claude.com/docs/en/data-usage.md",
-      "hash": "8e7c2b9f2255f32909cf0178ab6e555ac4207c0ce6fbe40c3e4271a58c16a927",
-      "last_updated": "2026-03-11T03:54:20.131499"
+      "hash": "6a7176ef748a1984093c54fd941b5a3410975db52df4902f5e9a911f74fe8992",
+      "last_updated": "2026-03-12T21:17:32.644468"
     },
     "claude-code__desktop.md": {
       "original_url": "https://platform.claude.com/docs/en/desktop",
@@ -2823,8 +2823,8 @@
     "claude-code__hooks.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks",
       "original_md_url": "https://platform.claude.com/docs/en/hooks.md",
-      "hash": "eaeab448b1c900506d8772d1efec8a45c1772c2f24429d285e373c5833d4968f",
-      "last_updated": "2026-03-12T18:26:58.802852"
+      "hash": "ca4258726bf5fced6b1dd4e9cb0fb27c37470d059e96307b01fae355672c38b6",
+      "last_updated": "2026-03-12T21:17:38.757333"
     },
     "claude-code__hooks-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks-guide",
@@ -2871,8 +2871,8 @@
     "claude-code__memory.md": {
       "original_url": "https://platform.claude.com/docs/en/memory",
       "original_md_url": "https://platform.claude.com/docs/en/memory.md",
-      "hash": "322e241d8de6c7f8d811eb737a49fbf8264e60a5cfc2954c3b9c12e71ffdbc9d",
-      "last_updated": "2026-03-12T18:27:04.085790"
+      "hash": "bef19115c1321c792b2b320c59ac6ce06989b7f87e71e81d09a2d4cdb4f50318",
+      "last_updated": "2026-03-12T21:17:44.222040"
     },
     "claude-code__microsoft-foundry.md": {
       "original_url": "https://platform.claude.com/docs/en/microsoft-foundry",
@@ -2961,8 +2961,8 @@
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
       "original_md_url": "https://platform.claude.com/docs/en/settings.md",
-      "hash": "933c9e80bdf409e8bff00ef5ae865a4f63a633a2ffef86c3ee65621ab0e22769",
-      "last_updated": "2026-03-12T18:27:14.645113"
+      "hash": "83590c0f050edaf83517837f0e682cf33764aac171814ffeab1c034778c152be",
+      "last_updated": "2026-03-12T21:17:54.794168"
     },
     "claude-code__setup.md": {
       "original_url": "https://platform.claude.com/docs/en/setup",
@@ -3057,8 +3057,8 @@
     "claude-code__vs-code.md": {
       "original_url": "https://platform.claude.com/docs/en/vs-code",
       "original_md_url": "https://platform.claude.com/docs/en/vs-code.md",
-      "hash": "4fcf4baa55d399f6e00ea7fec641dc0fec57a19b83519e51d9830e9ed17a7472",
-      "last_updated": "2026-03-11T03:54:50.840552"
+      "hash": "7d1407517f2e16facb6cd116b80c321a75b9c2cc6de9df35c3a7db3cac236bec",
+      "last_updated": "2026-03-12T21:18:05.226306"
     },
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
@@ -3069,11 +3069,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-12T18:27:25.728006",
-    "fetch_duration_seconds": 407.954765,
-    "total_pages_discovered": 711,
+    "last_fetch_completed": "2026-03-12T21:18:06.146455",
+    "fetch_duration_seconds": 389.036694,
+    "total_pages_discovered": 712,
     "pages_fetched_successfully": 511,
-    "pages_failed": 201,
+    "pages_failed": 202,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/agent-teams",
@@ -3261,6 +3261,7 @@
       "/docs/en/api/terraform/models/retrieve",
       "/docs/en/authentication",
       "/docs/en/best-practices",
+      "/docs/en/changelog",
       "/docs/en/chrome",
       "/docs/en/code-review",
       "/docs/en/desktop-quickstart",
@@ -3282,7 +3283,7 @@
     "total_files": 511,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-12T18:27:25.728032",
+  "last_updated": "2026-03-12T21:18:06.146472",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
