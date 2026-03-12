@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-12T15:29:48Z",
+  "generated_at": "2026-03-12T18:27:27Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -156,19 +156,19 @@
         "interactive",
         "when",
         "load",
+        "model",
         "see",
         "system",
         "only",
         "file",
         "json",
-        "model",
         "print",
         "subagent",
         "flags",
         "mcp",
         "control"
       ],
-      "word_count": 2042,
+      "word_count": 2051,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -476,7 +476,7 @@
         "description",
         "file"
       ],
-      "word_count": 10996,
+      "word_count": 11045,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -497,14 +497,14 @@
         "session",
         "prompt",
         "normal",
+        "context",
         "search",
-        "previous",
         "when",
         "see",
-        "context",
-        "open"
+        "open",
+        "text"
       ],
-      "word_count": 3490,
+      "word_count": 3491,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -601,22 +601,22 @@
         "claude",
         "code",
         "step",
-        "command",
         "when",
+        "command",
         "const",
         "url",
         "tools",
         "title",
         "name",
-        "tool",
         "add",
+        "tool",
         "http",
         "stdio",
         "example",
         "configuration",
         "project"
       ],
-      "word_count": 6050,
+      "word_count": 6077,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -644,7 +644,7 @@
         "every",
         "reads"
       ],
-      "word_count": 2721,
+      "word_count": 2775,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -826,21 +826,21 @@
         "string",
         "see",
         "add",
-        "repository",
         "marketplaces",
+        "repository",
         "sources",
         "create",
+        "paths",
         "url",
         "github",
-        "paths",
         "users",
         "files",
         "field",
         "code",
         "version",
-        "source"
+        "example"
       ],
-      "word_count": 4276,
+      "word_count": 4376,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -888,15 +888,15 @@
         "see",
         "when",
         "root",
+        "test",
         "lsp",
         "agents",
         "configuration",
         "add",
-        "test",
-        "note",
-        "file"
+        "marketplace",
+        "note"
       ],
-      "word_count": 2164,
+      "word_count": 2215,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -990,15 +990,15 @@
         "settings",
         "set",
         "claude",
-        "see",
         "when",
+        "see",
         "managed",
         "code",
         "project",
         "default",
         "user",
-        "file",
         "only",
+        "file",
         "configuration",
         "files",
         "example",
@@ -1008,7 +1008,7 @@
         "disable",
         "bash"
       ],
-      "word_count": 8313,
+      "word_count": 8485,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1104,23 +1104,23 @@
         "claude",
         "when",
         "code",
+        "conversation",
         "context",
         "main",
-        "conversation",
         "tools",
         "agent",
         "only",
-        "specific",
         "tool",
+        "specific",
         "run",
         "hooks",
         "create",
         "step",
         "each",
-        "task",
-        "prompt"
+        "model",
+        "task"
       ],
-      "word_count": 5199,
+      "word_count": 5410,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
