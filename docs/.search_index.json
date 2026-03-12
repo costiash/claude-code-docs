@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-12T12:21:46Z",
+  "generated_at": "2026-03-12T15:29:48Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -1885,26 +1885,26 @@
       "keywords": [
         "plugins",
         "plugin",
-        "commands",
         "paths",
+        "skills",
         "directory",
         "codegroup",
         "path",
         "sdk",
-        "load",
-        "skills",
+        "commands",
+        "note",
         "file",
         "example",
-        "check",
-        "custom",
+        "load",
         "claude",
+        "slash",
+        "check",
+        "code",
         "agents",
         "agent",
-        "slash",
-        "complete",
-        "loading"
+        "invoked"
       ],
-      "word_count": 1175,
+      "word_count": 1223,
       "file_path": "docs/docs__en__agent-sdk__plugins.md"
     },
     "/docs/en/agent-sdk/python": {
@@ -2052,9 +2052,9 @@
       "content_preview": "# Slash Commands in the SDK  Learn how to use slash commands to control Claude Code sessions through the SDK  ---  Slash commands provide a way to control Claude Code sessions with special commands th...",
       "keywords": [
         "commands",
+        "slash",
         "sdk",
         "codegroup",
-        "slash",
         "command",
         "custom",
         "create",
@@ -2062,17 +2062,17 @@
         "available",
         "file",
         "conversation",
+        "claude",
         "history",
         "using",
-        "claude",
+        "format",
         "code",
         "subagents",
+        "legacy",
         "control",
-        "sessions",
-        "these",
-        "like"
+        "sessions"
       ],
-      "word_count": 1449,
+      "word_count": 1502,
       "file_path": "docs/docs__en__agent-sdk__slash-commands.md"
     },
     "/docs/en/agent-sdk/streaming-output": {

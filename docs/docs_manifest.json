@@ -141,8 +141,8 @@
     "docs__en__agent-sdk__plugins.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/plugins",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/plugins.md",
-      "hash": "ca7bb6c53f95d87b45d0a543eaf487b28334b892587781f92cd8636084221ce4",
-      "last_updated": "2026-02-25T15:23:47.203610"
+      "hash": "1bba286003dfc60f305cca2811146a2321ea20e622207cb14d1cf92883b2202f",
+      "last_updated": "2026-03-12T15:22:48.067524"
     },
     "docs__en__agent-sdk__python.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/python",
@@ -177,8 +177,8 @@
     "docs__en__agent-sdk__slash-commands.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/slash-commands",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/slash-commands.md",
-      "hash": "2902514f299066a4ae19e62191a1b4082326be7f8e4059d827b4217acb90b18a",
-      "last_updated": "2026-02-11T18:25:11.897145"
+      "hash": "71e16305b88b1c32f9f7dcfb8942ed6ddb7ad86adbb9addfd808af0d0d9150f4",
+      "last_updated": "2026-03-12T15:22:52.057993"
     },
     "docs__en__agent-sdk__streaming-output.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/streaming-output",
@@ -3069,8 +3069,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-12T12:21:44.971683",
-    "fetch_duration_seconds": 406.44291,
+    "last_fetch_completed": "2026-03-12T15:29:47.043005",
+    "fetch_duration_seconds": 434.916654,
     "total_pages_discovered": 711,
     "pages_fetched_successfully": 511,
     "pages_failed": 201,
@@ -3282,7 +3282,7 @@
     "total_files": 511,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-12T12:21:44.971706",
+  "last_updated": "2026-03-12T15:29:47.043021",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
