@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-12T18:20:38.367704Z",
-    "total_paths": 711,
+    "generated_at": "2026-03-12T21:11:37.586149Z",
+    "total_paths": 712,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-03-12T18:20:38.367711Z"
+    "last_regenerated": "2026-03-12T21:11:37.586155Z"
   },
   "categories": {
     "core_documentation": [
@@ -75,6 +75,7 @@
       "/docs/en/build-with-claude/working-with-messages",
       "/docs/en/build-with-claude/workspaces",
       "/docs/en/build-with-claude/zero-data-retention",
+      "/docs/en/changelog",
       "/docs/en/chrome",
       "/docs/en/code-review",
       "/docs/en/desktop-quickstart",
