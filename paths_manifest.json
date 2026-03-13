@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-13T15:18:34.483652Z",
-    "total_paths": 712,
+    "generated_at": "2026-03-13T18:14:15.010861Z",
+    "total_paths": 715,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-03-13T15:18:34.483661Z"
+    "last_regenerated": "2026-03-13T18:14:15.010869Z"
   },
   "categories": {
     "core_documentation": [
@@ -78,8 +78,10 @@
       "/docs/en/changelog",
       "/docs/en/chrome",
       "/docs/en/code-review",
+      "/docs/en/commands",
       "/docs/en/desktop-quickstart",
       "/docs/en/discover-plugins",
+      "/docs/en/env-vars",
       "/docs/en/fast-mode",
       "/docs/en/features-overview",
       "/docs/en/get-started",
@@ -99,6 +101,7 @@
       "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations",
       "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-latency",
       "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak",
+      "/docs/en/tools-reference",
       "/docs/en/zero-data-retention"
     ],
     "api_reference": [
