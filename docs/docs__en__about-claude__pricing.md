@@ -295,9 +295,9 @@ The web fetch tool is available on the Claude API at **no additional cost**. You
 To protect against inadvertently fetching large content that would consume excessive tokens, use the `max_content_tokens` parameter to set appropriate limits based on your use case and budget considerations.
 
 Example token usage for typical content:
-- Average web page (10KB): ~2,500 tokens
-- Large documentation page (100KB): ~25,000 tokens  
-- Research paper PDF (500KB): ~125,000 tokens
+- Average web page (10&nbsp;kB): ~2,500 tokens
+- Large documentation page (100&nbsp;kB): ~25,000 tokens
+- Research paper PDF (500&nbsp;kB): ~125,000 tokens
 
 #### Computer use tool
 

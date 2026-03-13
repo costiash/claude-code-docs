@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-13T18:20:58Z",
+  "generated_at": "2026-03-13T21:19:10Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -149,14 +149,15 @@
       "keywords": [
         "session",
         "claude",
-        "prompt",
         "mode",
         "interactive",
+        "prompt",
         "code",
         "default",
         "only",
         "print",
         "flags",
+        "start",
         "json",
         "model",
         "see",
@@ -164,11 +165,10 @@
         "system",
         "load",
         "file",
-        "start",
         "output",
         "mcp"
       ],
-      "word_count": 1604,
+      "word_count": 1648,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -740,23 +740,23 @@
         "authentication",
         "proxy",
         "environment",
-        "variables",
         "enterprise",
+        "variables",
+        "access",
         "network",
+        "configuration",
         "custom",
         "security",
         "note",
-        "configuration",
+        "configure",
         "environments",
         "certificate",
         "mtls",
         "through",
-        "access",
-        "documentation",
-        "index",
-        "https"
+        "api",
+        "anthropic"
       ],
-      "word_count": 368,
+      "word_count": 441,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -10064,10 +10064,10 @@
         "limits",
         "limit",
         "tokens",
+        "tier",
         "per",
         "sup",
         "maximum",
-        "tier",
         "minute",
         "claude",
         "input",
@@ -10075,13 +10075,13 @@
         "tab",
         "api",
         "output",
+        "spend",
         "batch",
-        "number",
         "usage",
-        "itpm",
-        "priority"
+        "number",
+        "organization"
       ],
-      "word_count": 2748,
+      "word_count": 2943,
       "file_path": "docs/docs__en__api__rate-limits.md"
     },
     "/docs/en/api/ruby/beta": {
@@ -13445,7 +13445,7 @@
         "files",
         "note"
       ],
-      "word_count": 2969,
+      "word_count": 2968,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -13669,7 +13669,7 @@
         "tab",
         "example"
       ],
-      "word_count": 11393,
+      "word_count": 11399,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/token-counting": {
@@ -13753,7 +13753,7 @@
         "codegroup",
         "vision"
       ],
-      "word_count": 4472,
+      "word_count": 4471,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {

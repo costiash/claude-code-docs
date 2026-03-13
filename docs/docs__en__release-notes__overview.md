@@ -124,7 +124,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 ### August 26, 2025
 - We've increased rate limits on the [1M token context window](/docs/en/build-with-claude/context-windows) for Claude Sonnet 4 on the Claude API.
-- The 1m token context window is now available on Google Cloud's Vertex AI. For more information, see [Claude on Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai).
+- The 1M token context window is now available on Google Cloud's Vertex AI. For more information, see [Claude on Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai).
 
 ### August 19, 2025
 - Request IDs are now included directly in error response bodies alongside the existing `request-id` header. Learn more in [Errors](/docs/en/api/errors#error-shapes).

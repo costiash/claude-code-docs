@@ -2473,7 +2473,12 @@ client = Anthropic()
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[{"role": "user", "content": "Search for flights to Tokyo departing June 1, 2026"}],
+    messages=[
+        {
+            "role": "user",
+            "content": "Search for flights to Tokyo departing June 1, 2026",
+        }
+    ],
     tools=[
         {
             "name": "search_flights",
@@ -2845,8 +2850,8 @@ const response = await client.messages.create({
     {
       role: "user",
       content:
-        "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026",
-    },
+        "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026"
+    }
   ],
   tools: tools
 });
@@ -3156,7 +3161,10 @@ response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
-        {"role": "user", "content": "Help me plan a trip to Paris departing May 15, 2026"}
+        {
+            "role": "user",
+            "content": "Help me plan a trip to Paris departing May 15, 2026",
+        }
     ],
     # JSON outputs: structured response format
     output_config={

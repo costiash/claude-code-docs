@@ -98,7 +98,7 @@ print(message.content)
 
 ### Long context prompting
 
-When working with large documents or data-rich inputs (20K+ tokens), structure your prompt carefully to get the best results:
+When working with large documents or data-rich inputs (20k+ tokens), structure your prompt carefully to get the best results:
 
 - **Put longform data at the top**: Place your long documents and inputs near the top of your prompt, above your query, instructions, and examples. This can significantly improve performance across all models.
 

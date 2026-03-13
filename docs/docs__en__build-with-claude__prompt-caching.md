@@ -3005,7 +3005,7 @@ This pattern is especially powerful for:
 
     **Important:** `input_tokens` does NOT represent all input tokens - only the portion after your last cache breakpoint. If you have cached content, `input_tokens` will typically be much smaller than your total input.
 
-    **Example:** With a 200K token document cached and a 50 token user question:
+    **Example:** With a 200k token document cached and a 50 token user question:
     - `cache_read_input_tokens`: 200,000
     - `cache_creation_input_tokens`: 0
     - `input_tokens`: 50

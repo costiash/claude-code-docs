@@ -17,7 +17,7 @@ Claude works with any standard PDF. However, you should ensure your request size
 
 | Requirement | Limit |
 |------------|--------|
-| Maximum request size | 32 MB ([varies by platform](/docs/en/api/overview#request-size-limits)) |
+| Maximum request size | 32&nbsp;MB ([varies by platform](/docs/en/api/overview#request-size-limits)) |
 | Maximum pages per request | 600 (100 for models with a 200k-token context window) |
 | Format | Standard PDF (no passwords/encryption) |
 

@@ -27,7 +27,7 @@ You can include multiple images in a single request: up to 20 for [claude.ai](ht
 If you submit an image larger than 8000x8000 px, it is rejected. If you submit more than 20 images in one API request, this limit is 2000x2000 px.
 
 <Note>
-While the API supports up to 600 images per request, [request size limits](/docs/en/api/overview#request-size-limits) (32 MB for standard endpoints; lower on some third-party platforms) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
+While the API supports up to 600 images per request, [request size limits](/docs/en/api/overview#request-size-limits) (32&nbsp;MB for standard endpoints; lower on some third-party platforms) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 </Note>
 
 ### Evaluate image size
@@ -1447,8 +1447,8 @@ Always carefully review and verify Claude's image interpretations, especially fo
   <section title="Is there a limit to the image file size I can upload?">
 
     Yes, there are limits:
-    - API: Maximum 5MB per image
-    - claude.ai: Maximum 10MB per image
+    - API: Maximum 5&nbsp;MB per image
+    - claude.ai: Maximum 10&nbsp;MB per image
 
     Images larger than these limits are rejected and return an error when using the API.
 

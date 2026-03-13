@@ -6,7 +6,7 @@ The tool search tool enables Claude to work with hundreds or thousands of tools 
 
 This approach solves two problems that compound quickly as tool libraries scale:
 
-- **Context bloat:** Tool definitions eat into your context budget fast. A typical multi-server setup (GitHub, Slack, Sentry, Grafana, Splunk) can consume ~55K tokens in definitions before Claude does any actual work. Tool search typically reduces this by over 85%, loading only the 3–5 tools Claude actually needs for a given request.
+- **Context bloat:** Tool definitions eat into your context budget fast. A typical multi-server setup (GitHub, Slack, Sentry, Grafana, Splunk) can consume ~55k tokens in definitions before Claude does any actual work. Tool search typically reduces this by over 85%, loading only the 3–5 tools Claude actually needs for a given request.
 - **Tool selection accuracy:** Claude's ability to correctly pick the right tool degrades significantly once you exceed 30–50 available tools. By surfacing a focused set of relevant tools on demand, tool search keeps selection accuracy high even across thousands of tools.
 
 <Tip>
@@ -1658,7 +1658,7 @@ You can include the tool search tool in the [Messages Batches API](/docs/en/buil
 **Good use cases:**
 
 - 10+ tools available in your system
-- Tool definitions consuming >10K tokens
+- Tool definitions consuming >10k tokens
 - Experiencing tool selection accuracy issues with large tool sets
 - Building MCP-powered systems with multiple servers (200+ tools)
 - Tool library growing over time

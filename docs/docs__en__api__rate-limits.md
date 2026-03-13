@@ -18,9 +18,9 @@ These limits apply to both Standard and Priority Tier usage. For more informatio
 * Limits are designed to prevent API abuse, while minimizing impact on common customer usage patterns.
 * Limits are defined by **usage tier**, where each tier is associated with a different set of spend and rate limits.
 * Your organization will increase tiers automatically as you reach certain thresholds while using the API.
-  Limits are set at the organization level. You can see your organization's limits in the [Limits page](/settings/limits) in the [Claude Console](/).
-* You may hit rate limits over shorter time intervals. For instance, a rate of 60 requests per minute (RPM) may be enforced as 1 request per second. Short bursts of requests at a high volume can surpass the rate limit and result in rate limit errors.
-* The limits outlined below are the standard tier limits. If you're seeking higher, custom limits or Priority Tier for enhanced service levels, contact sales through the [Claude Console](/settings/limits).
+  Limits are set at the organization level. You can see your organization's limits on the [Limits](/settings/limits) page in the [Claude Console](/).
+* You may hit rate limits over shorter time intervals. For instance, a rate of 60 requests per minute (RPM) may be enforced as 1 request per second. Short bursts of requests can exceed the limit and trigger rate limit errors.
+* The limits outlined below are the standard tier limits. If you're seeking higher, custom limits or Priority Tier for enhanced service levels, contact sales on the [Limits](/settings/limits) page.
 * The API uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) to do rate limiting. This means that your capacity is continuously replenished up to your maximum limit, rather than being reset at fixed intervals.
 * All limits described here represent maximum allowed usage, not guaranteed minimums. These limits are intended to reduce unintentional overspend and ensure fair distribution of resources among users.
 
@@ -72,6 +72,36 @@ To qualify for the next tier, you must meet a deposit requirement. To minimize t
 **Credit Purchase** shows the cumulative credit purchases (excluding tax) required to advance to that tier. You advance immediately upon reaching the threshold.
 
 **Max Credit Purchase** limits the maximum amount you can add to your account in a single transaction to prevent account overfunding.
+</Note>
+
+## Increasing your spend limits
+
+Your organization has two kinds of spend limits: a customer-set limit you control directly, and a tier-enforced ceiling set by your usage tier. Each has a different process for increasing it.
+
+### Customer-set spend limits
+
+You can set a spend limit lower than your tier's ceiling to control costs. To adjust it:
+
+<Steps>
+  <Step title="Navigate to the Limits page">
+    Go to [Settings > Limits](/settings/limits) in the Claude Console.
+  </Step>
+  <Step title="Open the spend limit editor">
+    In the **Spend limits** section, click **Change Limit** (or **Set spend limit** if no limit is currently set).
+  </Step>
+  <Step title="Adjust your spend limit">
+    Enter a new value. Your customer-set limit cannot exceed your current tier's limit.
+  </Step>
+</Steps>
+
+### Tier-enforced spend limits
+
+When you need a limit higher than your tier's ceiling (Tier 4's ceiling is $200,000 per month), click **Contact Sales** on the [Limits](/settings/limits) page. This opens the contact form in a new tab, and a member of the sales team will follow up by email when your organization is upgraded.
+
+Monthly Invoicing removes the monthly spend cap entirely and uses Net-30 payment terms by default.
+
+<Note>
+Support can also raise tier-enforced limits. For urgent needs, contact [support](https://support.anthropic.com).
 </Note>
 
 ## Rate limits
@@ -231,7 +261,7 @@ The response includes `anthropic-fast-*` headers that indicate your fast mode ra
 
 You can monitor your rate limit usage on the [Usage](/usage) page of the [Claude Console](/).
 
-In addition to providing token and request charts, the Usage page provides two separate rate limit charts. Use these charts to see what headroom you have to grow, when you may be hitting peak use, better undersand what rate limits to request, or how you can improve your caching rates. The charts visualize a number of metrics for a given rate limit (e.g. per model):
+In addition to providing token and request charts, the Usage page provides two separate rate limit charts. Use these charts to see what headroom you have to grow, when you may be hitting peak use, better understand what rate limits to request, or how you can improve your caching rates. The charts visualize a number of metrics for a given rate limit (e.g. per model):
 
 - The **Rate Limit - Input Tokens** chart includes:
   - Hourly maximum uncached input tokens per minute
