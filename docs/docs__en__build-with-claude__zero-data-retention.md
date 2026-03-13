@@ -47,7 +47,7 @@ These API endpoints process data in real-time:
 | Tool Search (client-side) | `/v1/messages` | [Custom client-side tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool#custom-tool-search-implementation) uses the standard Messages API. |
 | Context Management (compaction) | `/v1/messages` (with `context_management`) | Server-side compaction summarizes conversation context in real-time. |
 | Fast Mode | `/v1/messages` (with `speed: "fast"`) | Same Messages API endpoint with faster inference. ZDR applies regardless of speed setting. |
-| 1M Token Context Window | `/v1/messages` (with `anthropic-beta: context-1m-2025-08-07`) | Extended context processing uses the standard Messages API. ZDR applies even though this feature is in beta. |
+| 1M Token Context Window | `/v1/messages` | Extended context processing uses the standard Messages API. ZDR applies for all supported models, including beta access on Claude Sonnet 4.5 and Sonnet 4. |
 
 ### Not ZDR-eligible
 

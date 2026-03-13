@@ -24,7 +24,7 @@ _<sup>1</sup>For chat interfaces, such as for [claude.ai](https://claude.ai/), c
 
 * **Progressive token accumulation:** As the conversation advances through turns, each user message and assistant response accumulates within the context window. Previous turns are preserved completely.
 * **Linear growth pattern:** The context usage grows linearly with each turn, with previous turns preserved completely.
-* **200K token capacity:** The total available context window (200,000 tokens) represents the maximum capacity for storing conversation history and generating new output from Claude.
+* **Context window capacity:** The total available context window (up to 1M tokens) represents the maximum capacity for storing conversation history and generating new output from Claude.
 * **Input-output flow:** Each turn consists of:
   - **Input phase:** Contains all previous conversation history plus the current user message
   - **Output phase:** Generates a text response that becomes part of a future input
@@ -91,187 +91,13 @@ Claude Sonnet 3.7 does not support interleaved thinking, so there is no interlea
 For more information about using tools with extended thinking, see the [extended thinking guide](/docs/en/build-with-claude/extended-thinking#extended-thinking-with-tool-use).
 </Note>
 
-## 1M token context window
-
-Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4 support a 1-million token context window. This extended context window allows you to process much larger documents, maintain longer conversations, and work with more extensive codebases.
+Claude Opus 4.6 and Sonnet 4.6 have a 1M-token context window.
 
 <Note>
-The 1M token context window is in beta for organizations in [usage tier](/docs/en/api/rate-limits) 4 and organizations with custom rate limits. The 1M token context window is only available for Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4.
+Claude Sonnet 4.5 and Sonnet 4 require the `context-1m-2025-08-07` [beta header](/docs/en/api/beta-headers) for requests beyond 200k tokens (available to organizations in [usage tier](/docs/en/api/rate-limits) 4 and those with custom rate limits). Other Claude models have a 200k-token context window.
 </Note>
 
-<Note>
-This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
-</Note>
-
-To use the 1M token context window, include the `context-1m-2025-08-07` [beta header](/docs/en/api/beta-headers) in your API requests:
-
-<CodeGroup>
-
-```bash Shell
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: context-1m-2025-08-07" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {"role": "user", "content": "Process this large document..."}
-    ]
-  }'
-```
-
-```python Python
-from anthropic import Anthropic
-
-client = Anthropic()
-
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Process this large document..."}],
-    betas=["context-1m-2025-08-07"],
-)
-```
-
-```typescript TypeScript hidelines={1..4}
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic();
-
-const msg = await anthropic.beta.messages.create({
-  model: "claude-opus-4-6",
-  max_tokens: 1024,
-  messages: [{ role: "user", content: "Process this large document..." }],
-  betas: ["context-1m-2025-08-07"]
-});
-```
-
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
-using Anthropic;
-using Anthropic.Models.Beta.Messages;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 1024,
-            Messages = [new() { Role = Role.User, Content = "Process this large document..." }],
-            Betas = ["context-1m-2025-08-07"]
-        };
-
-        var message = await client.Beta.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
-```
-
-```go Go hidelines={1..13,-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
-	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
-		MaxTokens: 1024,
-		Messages: []anthropic.BetaMessageParam{
-			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Process this large document...")),
-		},
-		Betas: []anthropic.AnthropicBeta{
-			anthropic.AnthropicBetaContext1m2025_08_07,
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
-
-```java Java hidelines={1..8,-1}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.beta.messages.BetaMessage;
-
-public class Example {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model("claude-opus-4-6")
-            .maxTokens(1024L)
-            .addUserMessage("Process this large document...")
-            .addBeta("context-1m-2025-08-07")
-            .build();
-
-        BetaMessage response = client.beta().messages().create(params);
-        System.out.println(response);
-    }
-}
-```
-
-```php PHP
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-$message = $client->beta->messages->create(
-    maxTokens: 1024,
-    messages: [
-        ['role' => 'user', 'content' => 'Process this large document...']
-    ],
-    model: 'claude-opus-4-6',
-    betas: ['context-1m-2025-08-07'],
-);
-
-echo $message->content[0]->text;
-```
-
-```ruby Ruby
-require "anthropic"
-
-client = Anthropic::Client.new
-
-message = client.beta.messages.create(
-  model: "claude-opus-4-6",
-  max_tokens: 1024,
-  messages: [
-    { role: "user", content: "Process this large document..." }
-  ],
-  betas: ["context-1m-2025-08-07"]
-)
-puts message
-```
-
-</CodeGroup>
-
-**Important considerations:**
-- **Beta status:** This is a beta feature subject to change. Features and pricing may be modified or removed in future releases.
-- **Usage tier requirement:** The 1M token context window is available to organizations in [usage tier](/docs/en/api/rate-limits) 4 and organizations with custom rate limits. Lower tier organizations must advance to usage tier 4 to access this feature.
-- **Availability:** The 1M token context window is currently available on the Claude API, [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry), [Amazon Bedrock](/docs/en/build-with-claude/claude-on-amazon-bedrock), and [Google Cloud's Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai).
-- **Pricing:** Requests exceeding 200K tokens are automatically charged at premium rates (2x input, 1.5x output pricing). See the [pricing documentation](/docs/en/about-claude/pricing#long-context-pricing) for details.
-- **Rate limits:** Long context requests have dedicated rate limits. See the [rate limits documentation](/docs/en/api/rate-limits#long-context-rate-limits) for details.
-- **Multimodal considerations:** When processing large numbers of images or PDFs, be aware that the files can vary in token usage. When pairing a large prompt with a large number of images, you may hit [request size limits](/docs/en/api/overview#request-size-limits).
+A single request can include up to 600 images or PDF pages (100 for models with a 200k-token context window). When sending many images or large documents, you may approach [request size limits](/docs/en/api/overview#request-size-limits) before the token limit.
 
 ## Context awareness in Claude Sonnet 4.6, Sonnet 4.5, and Haiku 4.5
 
@@ -282,15 +108,15 @@ Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 feature **context awa
 At the start of a conversation, Claude receives information about its total context window:
 
 ```xml
-<budget:token_budget>200000</budget:token_budget>
+<budget:token_budget>1000000</budget:token_budget>
 ```
 
-The budget is set to 200K tokens (standard), 500K tokens (claude.ai Enterprise), or 1M tokens (beta, for eligible organizations).
+The budget is set to 1M tokens (200k for models with a smaller context window).
 
 After each tool call, Claude receives an update on remaining capacity:
 
 ```xml
-<system_warning>Token usage: 35000/200000; 165000 remaining</system_warning>
+<system_warning>Token usage: 35000/1000000; 965000 remaining</system_warning>
 ```
 
 This awareness helps Claude determine how much capacity remains for work and enables more effective execution on long-running tasks. Image tokens are included in these budgets.
@@ -310,7 +136,7 @@ For prompting guidance on leveraging context awareness, see the [prompting best 
 
 ## Managing context with compaction
 
-If your conversations regularly approach context window limits, [server-side compaction](/docs/en/build-with-claude/compaction) is the recommended approach. Compaction provides server-side summarization that automatically condenses earlier parts of a conversation, enabling long-running conversations beyond context limits with minimal integration work. It is currently available in beta for Claude Opus 4.6.
+If your conversations regularly approach context window limits, [server-side compaction](/docs/en/build-with-claude/compaction) is the recommended approach. Compaction provides server-side summarization that automatically condenses earlier parts of a conversation, enabling long-running conversations beyond context limits with minimal integration work. It is currently available in beta for Claude Opus 4.6 and Sonnet 4.6.
 
 For more specialized needs, [context editing](/docs/en/build-with-claude/context-editing) offers additional strategies:
 - **Tool result clearing** - Clear old tool results in agentic workflows

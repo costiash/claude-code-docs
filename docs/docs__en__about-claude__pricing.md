@@ -89,7 +89,7 @@ For more information, see the [data residency documentation](/docs/en/build-with
 
 ### Fast mode pricing
 
-[Fast mode](/docs/en/build-with-claude/fast-mode) for Claude Opus 4.6 (research preview) provides significantly faster output at premium pricing (6x standard rates). Fast mode pricing applies across the full context window, including requests over 200K input tokens. Currently supported on Opus 4.6:
+[Fast mode](/docs/en/build-with-claude/fast-mode) for Claude Opus 4.6 (research preview) provides significantly faster output at premium pricing (6x standard rates). Fast mode pricing applies across the full context window, including requests over 200k input tokens. Currently supported on Opus 4.6:
 
 | Input | Output |
 |:------|:-------|
@@ -126,31 +126,25 @@ For more information about batch processing, see the [batch processing documenta
 
 ### Long context pricing
 
-When using Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, or Sonnet 4 at standard speed with the [1M token context window enabled](/docs/en/build-with-claude/context-windows#1m-token-context-window), requests that exceed 200K input tokens are automatically charged at premium long context rates. [Fast mode](#fast-mode-pricing) includes the full 1M context window at no additional long context charge.
+Claude Opus 4.6 and Sonnet 4.6 include the full [1M token context window](/docs/en/build-with-claude/context-windows) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
 
-<Note>
-The 1M token context window is currently in beta for organizations in [usage tier](/docs/en/api/rate-limits) 4 and organizations with custom rate limits. The 1M token context window is only available for Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4.
-</Note>
+For Claude Sonnet 4.5 and Sonnet 4, the 1M token context window is in beta for organizations in [usage tier](/docs/en/api/rate-limits) 4 and organizations with custom rate limits. When the `context-1m-2025-08-07` beta header is included, requests that exceed 200k input tokens are automatically charged at premium long context rates:
 
-| Model | ≤ 200K input tokens | > 200K input tokens |
-|-------|-----------------------------------|-------------------------------------|
-| Claude Opus 4.6 | Input: $5 / MTok | Input: $10 / MTok |
-|  | Output: $25 / MTok | Output: $37.50 / MTok |
-| Claude Sonnet 4.6 / 4.5 / 4 | Input: $3 / MTok | Input: $6 / MTok |
-|  | Output: $15 / MTok | Output: $22.50 / MTok |
+| Model | ≤ 200k input tokens<br />Input | ≤ 200k input tokens<br />Output | > 200k input tokens<br />Input | > 200k input tokens<br />Output |
+| --- | --- | --- | --- | --- |
+| Claude Sonnet 4.5 / 4 | \$3 / MTok | \$15 / MTok | \$6 / MTok | \$22.50 / MTok |
 
-Long context pricing stacks with other pricing modifiers:
+Long context pricing for Sonnet 4.5 and Sonnet 4 stacks with other pricing modifiers:
 - The [Batch API 50% discount](#batch-processing) applies to long context pricing
 - [Prompt caching multipliers](#model-pricing) apply on top of long context pricing
-- The [data residency 1.1x multiplier](#data-residency-pricing) applies on top of long context pricing
 
 <Note>
-Even with the beta flag enabled, requests with fewer than 200K input tokens are charged at standard rates. If your request exceeds 200K input tokens, all tokens incur premium pricing.
+Even with the beta flag enabled, requests with fewer than 200k input tokens are charged at standard rates. If your request exceeds 200k input tokens, all tokens incur premium pricing.
 
-The 200K threshold is based solely on input tokens (including cache reads/writes). Output token count does not affect pricing tier selection, though output tokens are charged at the higher rate when the input threshold is exceeded.
+The 200k threshold is based solely on input tokens (including cache reads/writes). Output token count does not affect pricing tier selection, though output tokens are charged at the higher rate when the input threshold is exceeded.
 </Note>
 
-To check if your API request was charged at the 1M context window rates, examine the `usage` object in the API response:
+For Claude Sonnet 4.5 and Sonnet 4, to check if your API request was charged at premium long context rates, examine the `usage` object in the API response:
 
 ```json
 {
@@ -168,7 +162,7 @@ Calculate the total input tokens by summing:
 - `cache_creation_input_tokens` (if using prompt caching)
 - `cache_read_input_tokens` (if using prompt caching)
 
-If the total exceeds 200,000 tokens, the entire request was billed at 1M context rates.
+If the total exceeds 200,000 tokens, the entire request was billed at premium long context rates.
 
 For more information about the `usage` object, see the [API response documentation](/docs/en/api/messages#response-usage).
 

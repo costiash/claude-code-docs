@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-13T15:25:32Z",
+  "generated_at": "2026-03-13T18:20:58Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -19,16 +19,16 @@
         "tool",
         "commands",
         "instead",
-        "now",
         "session",
+        "now",
         "after",
         "file",
         "memory",
-        "mcp",
         "mode",
+        "mcp",
         "where"
       ],
-      "word_count": 21759,
+      "word_count": 22040,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -147,28 +147,28 @@
       "title": "CLI reference",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # CLI reference  ...",
       "keywords": [
-        "claude",
         "session",
+        "claude",
         "prompt",
-        "code",
         "mode",
-        "default",
         "interactive",
-        "when",
-        "load",
+        "code",
+        "default",
+        "only",
+        "print",
+        "flags",
+        "json",
         "model",
         "see",
+        "agent",
         "system",
-        "only",
+        "load",
         "file",
-        "json",
-        "print",
-        "subagent",
-        "flags",
-        "mcp",
-        "control"
+        "start",
+        "output",
+        "mcp"
       ],
-      "word_count": 2051,
+      "word_count": 1604,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -376,23 +376,23 @@
         "vertex",
         "code",
         "models",
-        "note",
         "google",
+        "note",
         "cloud",
+        "when",
         "gcp",
         "access",
-        "when",
         "supported",
         "environment",
         "set",
         "variables",
         "documentation",
         "project",
+        "sonnet",
         "region",
-        "endpoints",
-        "support"
+        "endpoints"
       ],
-      "word_count": 796,
+      "word_count": 812,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -466,9 +466,9 @@
         "tool",
         "field",
         "event",
+        "prompt",
         "decision",
         "control",
-        "prompt",
         "user",
         "session",
         "exit",
@@ -476,7 +476,7 @@
         "description",
         "file"
       ],
-      "word_count": 11045,
+      "word_count": 11105,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -484,27 +484,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Interactive mod...",
       "keywords": [
         "claude",
-        "code",
         "command",
-        "mode",
         "commands",
-        "conversation",
+        "code",
+        "mode",
+        "press",
         "history",
         "line",
-        "press",
-        "current",
         "background",
-        "session",
-        "prompt",
-        "normal",
-        "context",
+        "conversation",
         "search",
-        "when",
+        "normal",
+        "word",
+        "input",
+        "text",
+        "prompt",
+        "previous",
+        "end",
         "see",
-        "open",
-        "text"
+        "context"
       ],
-      "word_count": 3491,
+      "word_count": 2435,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -636,15 +636,15 @@
         "specific",
         "session",
         "code",
-        "context",
         "when",
         "them",
+        "context",
         "into",
-        "across",
         "every",
+        "across",
         "reads"
       ],
-      "word_count": 2791,
+      "word_count": 2834,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -680,27 +680,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Model configura...",
       "keywords": [
         "model",
+        "opus",
         "environment",
-        "set",
         "code",
-        "settings",
+        "context",
+        "set",
         "when",
         "claude",
+        "settings",
+        "sonnet",
         "models",
         "version",
-        "sonnet",
-        "opus",
-        "users",
+        "uses",
         "effort",
         "setting",
-        "uses",
-        "context",
+        "users",
         "variables",
         "caching",
         "specific",
-        "ids"
+        "usage"
       ],
-      "word_count": 1754,
+      "word_count": 1888,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -988,27 +988,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code set...",
       "keywords": [
         "settings",
-        "set",
-        "claude",
-        "when",
-        "see",
         "managed",
-        "code",
+        "claude",
+        "see",
         "project",
-        "default",
         "user",
         "only",
-        "file",
+        "when",
+        "code",
         "configuration",
-        "files",
-        "example",
+        "file",
         "hooks",
-        "mcp",
-        "commands",
-        "disable",
-        "bash"
+        "default",
+        "marketplace",
+        "files",
+        "set",
+        "permission",
+        "marketplaces",
+        "scopes",
+        "example"
       ],
-      "word_count": 8509,
+      "word_count": 5630,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1034,7 +1034,7 @@
         "see",
         "macos",
         "run",
-        "linux"
+        "settings"
       ],
       "word_count": 1546,
       "file_path": "docs/claude-code__setup.md"
@@ -1051,20 +1051,20 @@
         "content",
         "invoke",
         "code",
-        "context",
-        "subagent",
-        "only",
         "reference",
+        "subagent",
+        "context",
+        "only",
         "frontmatter",
         "automatically",
-        "run",
         "example",
+        "run",
         "file",
         "create",
-        "note",
-        "work"
+        "commands",
+        "note"
       ],
-      "word_count": 4467,
+      "word_count": 4459,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1120,7 +1120,7 @@
         "model",
         "task"
       ],
-      "word_count": 5410,
+      "word_count": 5436,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1353,26 +1353,26 @@
       "keywords": [
         "claude",
         "sup",
-        "tooltip",
-        "tokens",
         "opus",
+        "tooltip",
         "sonnet",
+        "tokens",
         "mtok",
         "yes",
         "models",
         "output",
+        "haiku",
+        "model",
+        "anthropic",
         "tooltipcontent",
         "words",
         "unicode",
         "characters",
-        "model",
-        "haiku",
-        "anthropic",
         "input",
         "cutoff",
         "api"
       ],
-      "word_count": 1261,
+      "word_count": 1224,
       "file_path": "docs/docs__en__about-claude__models__overview.md"
     },
     "/docs/en/about-claude/models/whats-new-claude-4-6": {
@@ -1382,25 +1382,25 @@
         "claude",
         "thinking",
         "opus",
-        "tool",
         "sonnet",
+        "tool",
         "models",
-        "adaptive",
         "web",
+        "adaptive",
         "effort",
         "card",
-        "beta",
         "parameter",
         "model",
-        "context",
         "output",
         "mode",
         "new",
-        "token",
+        "beta",
         "code",
-        "api"
+        "api",
+        "token",
+        "now"
       ],
-      "word_count": 1066,
+      "word_count": 1048,
       "file_path": "docs/docs__en__about-claude__models__whats-new-claude-4-6.md"
     },
     "/docs/en/about-claude/pricing": {
@@ -1415,20 +1415,20 @@
         "tool",
         "sonnet",
         "api",
-        "cache",
-        "opus",
         "token",
+        "cache",
         "prompt",
+        "opus",
         "usage",
-        "output",
-        "context",
         "standard",
+        "output",
         "caching",
-        "additional",
+        "context",
         "see",
-        "web"
+        "additional",
+        "request"
       ],
-      "word_count": 3234,
+      "word_count": 3224,
       "file_path": "docs/docs__en__about-claude__pricing.md"
     },
     "/docs/en/about-claude/use-case-guides/content-moderation": {
@@ -1921,8 +1921,8 @@
         "output",
         "field",
         "identifier",
-        "name",
         "claude",
+        "name",
         "message",
         "optional",
         "sandbox",
@@ -1932,7 +1932,7 @@
         "subagent",
         "sdk"
       ],
-      "word_count": 11065,
+      "word_count": 11102,
       "file_path": "docs/docs__en__agent-sdk__python.md"
     },
     "/docs/en/agent-sdk/quickstart": {
@@ -2268,7 +2268,7 @@
         "user",
         "see"
       ],
-      "word_count": 8209,
+      "word_count": 8229,
       "file_path": "docs/docs__en__agent-sdk__typescript.md"
     },
     "/docs/en/agent-sdk/user-input": {
@@ -8785,15 +8785,16 @@
       "content_preview": "# API Overview  ---  The Claude API is a RESTful API at `https://api.anthropic.com` that provides programmatic access to Claude models. The primary API is the Messages API (`POST /v1/messages`) for co...",
       "keywords": [
         "api",
-        "claude",
         "limits",
+        "claude",
         "messages",
-        "card",
         "request",
+        "card",
         "rate",
         "see",
         "response",
         "sdks",
+        "note",
         "anthropic",
         "client",
         "title",
@@ -8802,10 +8803,9 @@
         "docs",
         "access",
         "get",
-        "started",
-        "console"
+        "started"
       ],
-      "word_count": 1016,
+      "word_count": 1048,
       "file_path": "docs/docs__en__api__overview.md"
     },
     "/docs/en/api/python/beta": {
@@ -10062,26 +10062,26 @@
       "keywords": [
         "rate",
         "limits",
-        "tokens",
         "limit",
+        "tokens",
         "per",
+        "sup",
         "maximum",
         "tier",
-        "sup",
-        "claude",
         "minute",
+        "claude",
         "input",
         "requests",
         "tab",
-        "output",
         "api",
-        "sonnet",
+        "output",
         "batch",
-        "usage",
         "number",
-        "token"
+        "usage",
+        "itpm",
+        "priority"
       ],
-      "word_count": 2925,
+      "word_count": 2748,
       "file_path": "docs/docs__en__api__rate-limits.md"
     },
     "/docs/en/api/ruby/beta": {
@@ -11535,25 +11535,25 @@
         "tier",
         "tokens",
         "priority",
+        "claude",
         "per",
         "token",
-        "capacity",
         "requests",
-        "claude",
+        "capacity",
         "input",
-        "request",
+        "sonnet",
         "service",
+        "request",
         "output",
+        "opus",
         "tiers",
         "standard",
         "cache",
         "note",
         "other",
-        "minute",
-        "only",
-        "availability"
+        "minute"
       ],
-      "word_count": 826,
+      "word_count": 869,
       "file_path": "docs/docs__en__api__service-tiers.md"
     },
     "/docs/en/api/supported-regions": {
@@ -13011,11 +13011,11 @@
         "api",
         "title",
         "resource",
-        "deployment",
         "note",
+        "deployment",
         "model",
-        "access",
         "microsoft",
+        "access",
         "authentication",
         "anthropic",
         "name",
@@ -13025,7 +13025,7 @@
         "keys",
         "python"
       ],
-      "word_count": 2273,
+      "word_count": 2316,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock": {
@@ -13036,8 +13036,8 @@
         "yes",
         "bedrock",
         "anthropic",
-        "aws",
         "sonnet",
+        "aws",
         "tab",
         "codegroup",
         "opus",
@@ -13045,15 +13045,15 @@
         "note",
         "pricing",
         "regional",
+        "amazon",
         "models",
         "api",
         "title",
         "model",
-        "amazon",
         "available",
         "through"
       ],
-      "word_count": 2739,
+      "word_count": 2764,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -13062,26 +13062,26 @@
       "keywords": [
         "claude",
         "vertex",
-        "tab",
         "sonnet",
+        "tab",
+        "opus",
         "endpoints",
         "anthropic",
-        "opus",
+        "note",
         "codegroup",
         "pricing",
         "models",
         "title",
         "regional",
+        "api",
         "google",
-        "note",
         "model",
         "tooltip",
         "haiku",
         "global",
-        "through",
-        "api"
+        "through"
       ],
-      "word_count": 1794,
+      "word_count": 1866,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -13109,7 +13109,7 @@
         "usage",
         "note"
       ],
-      "word_count": 8157,
+      "word_count": 8156,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -13148,24 +13148,24 @@
         "thinking",
         "window",
         "claude",
-        "token",
         "extended",
         "tool",
-        "tokens",
+        "token",
         "output",
+        "tokens",
         "more",
         "model",
         "turn",
-        "input",
-        "sonnet",
-        "limits",
         "block",
-        "when",
+        "input",
         "blocks",
-        "api",
-        "components"
+        "components",
+        "models",
+        "sonnet",
+        "when",
+        "conversation"
       ],
-      "word_count": 2258,
+      "word_count": 1731,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/data-residency": {
@@ -13277,7 +13277,7 @@
         "sonnet",
         "output"
       ],
-      "word_count": 11969,
+      "word_count": 11967,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -13286,17 +13286,17 @@
       "keywords": [
         "fast",
         "mode",
-        "rate",
         "pricing",
+        "rate",
         "output",
         "speed",
-        "tokens",
-        "limit",
         "token",
         "api",
+        "tokens",
+        "limit",
+        "opus",
         "standard",
         "limits",
-        "opus",
         "claude",
         "per",
         "note",
@@ -13305,7 +13305,7 @@
         "card",
         "model"
       ],
-      "word_count": 2220,
+      "word_count": 2194,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -13398,26 +13398,26 @@
       "keywords": [
         "platformavailability",
         "azureaibeta",
-        "claude",
         "claudeapi",
+        "claude",
         "vertexai",
         "bedrock",
-        "context",
         "tools",
         "tool",
+        "context",
         "web",
         "api",
         "files",
-        "claudeapibeta",
         "search",
         "capabilities",
         "when",
         "feature",
         "description",
         "availability",
-        "token"
+        "thinking",
+        "claudeapibeta"
       ],
-      "word_count": 1144,
+      "word_count": 1134,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
@@ -13432,8 +13432,8 @@
         "document",
         "support",
         "visual",
-        "citations",
         "page",
+        "citations",
         "codegroup",
         "when",
         "processing",
@@ -13441,11 +13441,11 @@
         "charts",
         "analysis",
         "content",
-        "note",
-        "each",
-        "image"
+        "request",
+        "files",
+        "note"
       ],
-      "word_count": 2908,
+      "word_count": 2969,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -13753,7 +13753,7 @@
         "codegroup",
         "vision"
       ],
-      "word_count": 4427,
+      "word_count": 4472,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -13828,16 +13828,16 @@
         "features",
         "policy",
         "organization",
-        "feature",
         "when",
         "enterprise",
+        "feature",
         "retained",
         "endpoints",
         "standard",
         "side",
         "arrangements"
       ],
-      "word_count": 1355,
+      "word_count": 1359,
       "file_path": "docs/docs__en__build-with-claude__zero-data-retention.md"
     },
     "/docs/en/get-started": {
@@ -13913,15 +13913,15 @@
         "our",
         "learn",
         "available",
+        "opus",
+        "token",
         "read",
         "support",
-        "opus",
         "console",
-        "usage",
         "header",
-        "new"
+        "usage"
       ],
-      "word_count": 4255,
+      "word_count": 4345,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {

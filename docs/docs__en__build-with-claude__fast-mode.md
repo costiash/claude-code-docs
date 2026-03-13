@@ -221,7 +221,7 @@ For complete pricing details, see the [pricing page](/docs/en/about-claude/prici
 
 ## Rate limits
 
-Fast mode has a dedicated rate limit that is separate from standard Opus rate limits. Unlike standard speed, which has separate limits for ≤200K and >200K input tokens, fast mode uses a single rate limit that covers the full context range. When your fast mode rate limit is exceeded, the API returns a `429` error with a `retry-after` header indicating when capacity will be available.
+Fast mode has a dedicated rate limit that is separate from standard Opus rate limits. When your fast mode rate limit is exceeded, the API returns a `429` error with a `retry-after` header indicating when capacity will be available.
 
 The response includes headers that indicate your fast mode rate limit status:
 

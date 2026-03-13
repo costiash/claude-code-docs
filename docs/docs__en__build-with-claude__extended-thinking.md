@@ -316,10 +316,10 @@ The `budget_tokens` parameter determines the maximum number of tokens Claude is 
 </Warning>
 
 <Note>
-Claude Opus 4.6 supports up to 128K output tokens. Earlier models support up to 64K output tokens.
+Claude Opus 4.6 supports up to 128k output tokens. Earlier models support up to 64k output tokens.
 </Note>
 
-`budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window (200k tokens).
+`budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window.
 
 ### Summarized thinking
 

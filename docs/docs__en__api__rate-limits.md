@@ -101,7 +101,7 @@ The `input_tokens` field only represents tokens that appear **after your last ca
 total_input_tokens = cache_read_input_tokens + cache_creation_input_tokens + input_tokens
 ```
 
-This means when you have cached content, `input_tokens` will typically be much smaller than your total input. For example, with a 200K token cached document and a 50 token user question, you'd see `input_tokens: 50` even though the total input is 200,050 tokens.
+This means when you have cached content, `input_tokens` will typically be much smaller than your total input. For example, with a 200k token cached document and a 50 token user question, you'd see `input_tokens: 50` even though the total input is 200,050 tokens.
 
 For rate limit purposes on most models, only `input_tokens` + `cache_creation_input_tokens` count toward your ITPM limit, making [prompt caching](/docs/en/build-with-claude/prompt-caching) an effective way to increase your effective throughput.
 </Note>
@@ -133,10 +133,6 @@ You can check your current rate limits and behavior in the [Claude Console](/set
 
 <Note>
 Rate limits are currently shared across all `inference_geo` values. Requests with `inference_geo: "us"` and `inference_geo: "global"` draw from the same rate limit pool.
-</Note>
-
-<Note>
-For long context requests (>200K tokens) when using the `context-1m-2025-08-07` beta header with Claude Opus 4.x or Sonnet 4.x, separate rate limits apply. See [Long context rate limits](#long-context-rate-limits) below.
 </Note>
 
 <Tabs>
@@ -230,29 +226,6 @@ If you're seeking higher limits for an Enterprise use case, contact sales throug
 When using [fast mode](/docs/en/build-with-claude/fast-mode) (`speed: "fast"`) on Opus 4.6 (research preview), dedicated rate limits apply that are separate from standard Opus rate limits. When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header.
 
 The response includes `anthropic-fast-*` headers that indicate your fast mode rate limit status. See the [fast mode documentation](/docs/en/build-with-claude/fast-mode#rate-limits) for details on these headers.
-
-### Long context rate limits
-
-When using Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, or Sonnet 4 with the [1M token context window enabled](/docs/en/build-with-claude/context-windows#1m-token-context-window), the following dedicated rate limits apply to requests exceeding 200K tokens.
-
-<Note>
-The 1M token context window is currently in beta for organizations in usage tier 4 and organizations with custom rate limits. The 1M token context window is only available for Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4.
-</Note>
-
-<Tabs>
-<Tab title="Tier 4">
-| Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
-| -------------------------------------- | --------------------------------------- |
-| 1,000,000                              | 200,000                                 |
-</Tab>
-<Tab title="Custom">
-For custom long context rate limits for enterprise use cases, contact sales through the [Claude Console](/settings/limits).
-</Tab>
-</Tabs>
-
-<Tip>
-To get the most out of the 1M token context window with rate limits, use [prompt caching](/docs/en/build-with-claude/prompt-caching).
-</Tip>
 
 ### Monitoring your rate limits in the Console
 

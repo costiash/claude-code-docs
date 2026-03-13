@@ -117,6 +117,10 @@ The API has different maximum request sizes depending on the endpoint:
 
 If you exceed these limits, you'll receive a 413 `request_too_large` error.
 
+<Note>
+Third-party platforms have their own request size limits: Vertex AI limits requests to 30 MB, and Amazon Bedrock limits requests to 20 MB. Consult your platform's documentation for current values.
+</Note>
+
 ### Response Headers
 
 The Claude API includes the following headers in every response:

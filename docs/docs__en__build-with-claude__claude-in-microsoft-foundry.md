@@ -469,6 +469,14 @@ Foundry includes request identifiers in HTTP response headers for debugging and 
 
 Claude on Foundry supports most of Claude's powerful features. You can find all the features currently supported in the [overview documentation](/docs/en/build-with-claude/overview).
 
+### Context window
+
+Claude Opus 4.6, Sonnet 4.6, and Sonnet 4.5 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Microsoft Foundry.
+
+<Note>
+For Claude Sonnet 4.5, the 1M-token context window is in beta. To use, include the `context-1m-2025-08-07` [beta header](/docs/en/api/beta-headers) in your API requests.
+</Note>
+
 ### Features not supported
 
 - Admin API (`/v1/organizations/*` endpoints)

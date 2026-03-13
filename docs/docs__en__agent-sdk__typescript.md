@@ -2029,7 +2029,11 @@ type SdkBeta = "context-1m-2025-08-07";
 
 | Value | Description | Compatible Models |
 |:------|:------------|:------------------|
-| `'context-1m-2025-08-07'` | Enables 1 million token [context window](/docs/en/build-with-claude/context-windows) | Claude Opus 4.6, Claude Sonnet 4.5, Claude Sonnet 4 |
+| `'context-1m-2025-08-07'` | Enables the 1 million token [context window](/docs/en/build-with-claude/context-windows). | Claude Sonnet 4.5, Claude Sonnet 4 |
+
+<Note>
+Claude Opus 4.6 and Sonnet 4.6 have a 1M token context window. Including `context-1m-2025-08-07` has no effect on those models.
+</Note>
 
 ### `SlashCommand`
 

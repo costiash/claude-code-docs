@@ -1020,7 +1020,11 @@ Literal type for SDK beta features.
 SdkBeta = Literal["context-1m-2025-08-07"]
 ```
 
-Use with the `betas` field in `ClaudeAgentOptions` to enable beta features.
+Use with the `betas` field in `ClaudeAgentOptions` to enable beta features. Use `context-1m-2025-08-07` with Claude Sonnet 4.5 and Sonnet 4 to enable the 1M-token context window.
+
+<Note>
+Claude Opus 4.6 and Sonnet 4.6 have a 1M token context window. Including `context-1m-2025-08-07` has no effect on those models.
+</Note>
 
 ### `McpSdkServerConfig`
 

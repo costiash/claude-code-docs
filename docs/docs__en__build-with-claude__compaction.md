@@ -18,7 +18,7 @@ For a deeper look at why long contexts degrade and how compaction helps, see
 This is ideal for:
 
 - Chat-based, multi-turn conversations where you want users to use one chat for a long period of time
-- Task-oriented prompts that require a lot of follow-up work (often tool use) that may exceed the 200K context window
+- Task-oriented prompts that require a lot of follow-up work (often tool use) that may exceed the context window
 
 <Note>
 Compaction is in beta. Include the [beta header](/docs/en/api/beta-headers) `compact-2026-01-12` in your API requests to use this feature.

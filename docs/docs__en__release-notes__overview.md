@@ -10,13 +10,18 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### March 13, 2026
+- The [1M token context window](/docs/en/build-with-claude/context-windows) is now generally available for Claude Opus 4.6 and Sonnet 4.6 at standard pricing. Requests over 200k tokens work automatically for these models with no beta header required. The 1M token context window remains in beta for Claude Sonnet 4.5 and Sonnet 4.
+- We've removed the dedicated 1M rate limits for all supported models. Your standard account limits now apply across every context length.
+- We've raised the media limit from 100 to 600 images or PDF pages per request when using the 1M token context window.
+
 ### February 19, 2026
 - We've launched **automatic caching** for the Messages API. Add a single `cache_control` field to your request body and the system automatically caches the last cacheable block, moving the cache point forward as conversations grow. No manual breakpoint management required. Works alongside existing block-level cache control for fine-grained optimization. Available on the Claude API and Azure AI Foundry (preview). Learn more in [Prompt caching](/docs/en/build-with-claude/prompt-caching#automatic-caching).
 - We've retired the Claude Sonnet 3.7 model (`claude-3-7-sonnet-20250219`) and the Claude Haiku 3.5 model (`claude-3-5-haiku-20241022`). All requests to these models will now return an error. We recommend upgrading to [Claude Sonnet 4.6](/docs/en/about-claude/models/overview#latest-models-comparison) and [Claude Haiku 4.5](/docs/en/about-claude/models/overview#latest-models-comparison) respectively. Researchers can request ongoing access through the [External Researcher Access Program](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program).
 - We announced the deprecation of the Claude Haiku 3 model (`claude-3-haiku-20240307`), with retirement scheduled for April 19, 2026. We recommend migrating to [Claude Haiku 4.5](/docs/en/about-claude/models/overview#latest-models-comparison). Read more in [model deprecations](/docs/en/about-claude/model-deprecations).
 
 ### February 17, 2026
-- We've launched [Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6), our latest balanced model combining speed and intelligence for everyday tasks. Sonnet 4.6 delivers improved agentic search performance while consuming fewer tokens. Sonnet 4.6 supports [extended thinking](/docs/en/build-with-claude/extended-thinking) and a [1M token context window](/docs/en/build-with-claude/context-windows#1m-token-context-window) (beta). See [Models & Pricing](/docs/en/about-claude/models) for details.
+- We've launched [Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6), our latest balanced model combining speed and intelligence for everyday tasks. Sonnet 4.6 delivers improved agentic search performance while consuming fewer tokens. Sonnet 4.6 supports [extended thinking](/docs/en/build-with-claude/extended-thinking) and a [1M token context window](/docs/en/build-with-claude/context-windows) (beta). See [Models & Pricing](/docs/en/about-claude/models) for details.
 - API [code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool) is now **free when used with web search or web fetch**. Sandboxed code execution improves model capability and token efficiency. See the [pricing details](/docs/en/agents-and-tools/tool-use/code-execution-tool#usage-and-pricing) for standalone usage.
 - The [web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool) and [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) are now generally available (no beta header required). Web search and web fetch now support [dynamic filtering](/docs/en/agents-and-tools/tool-use/web-search-tool#dynamic-filtering-with-opus-46-and-sonnet-46), which uses code execution to filter results before they reach the context window for better performance and reduced token cost.
 - The [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool), [web fetch tool](/docs/en/agents-and-tools/tool-use/web-fetch-tool), [tool search tool](/docs/en/agents-and-tools/tool-use/tool-search-tool), [tool use examples](/docs/en/agents-and-tools/tool-use/implement-tool-use#providing-tool-use-examples), and [memory tool](/docs/en/agents-and-tools/tool-use/memory-tool) are now generally available (no beta header required).
@@ -29,7 +34,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 - The [effort parameter](/docs/en/build-with-claude/effort) is now generally available (no beta header required) and supports Claude Opus 4.6. Effort replaces `budget_tokens` for controlling thinking depth on new models.
 - We've launched the [compaction API](/docs/en/build-with-claude/compaction) in beta, providing server-side context summarization for effectively infinite conversations. Available on Opus 4.6.
 - We've introduced [data residency controls](/docs/en/build-with-claude/data-residency), allowing you to specify where model inference runs with the `inference_geo` parameter. US-only inference is available at 1.1x pricing for models released after February 1, 2026.
-- The [1M token context window](/docs/en/build-with-claude/context-windows#1m-token-context-window) is now available in beta for Claude Opus 4.6, in addition to Sonnet 4.5 and Sonnet 4. [Long context pricing](/docs/en/about-claude/pricing#long-context-pricing) applies to requests exceeding 200K input tokens.
+- The [1M token context window](/docs/en/build-with-claude/context-windows) is now available in beta for Claude Opus 4.6, in addition to Sonnet 4.5 and Sonnet 4. [Long context pricing](/docs/en/about-claude/pricing#long-context-pricing) applies to requests exceeding 200k input tokens.
 - [Fine-grained tool streaming](/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming) is now generally available on all models and platforms (no beta header required). The `output_format` parameter for [structured outputs](/docs/en/build-with-claude/structured-outputs) has been moved to `output_config.format`.
 
 ### January 29, 2026
@@ -118,7 +123,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 - We launched a beta version of the [PHP SDK](https://github.com/anthropics/anthropic-sdk-php).
 
 ### August 26, 2025
-- We've increased rate limits on the [1M token context window](/docs/en/build-with-claude/context-windows#1m-token-context-window) for Claude Sonnet 4 on the Claude API. For more information, see [Long context rate limits](/docs/en/api/rate-limits#long-context-rate-limits).
+- We've increased rate limits on the [1M token context window](/docs/en/build-with-claude/context-windows) for Claude Sonnet 4 on the Claude API.
 - The 1m token context window is now available on Google Cloud's Vertex AI. For more information, see [Claude on Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai).
 
 ### August 19, 2025
@@ -133,7 +138,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 - The 1-hour cache duration for prompt caching is now generally available. You can now use the extended cache TTL without a beta header. Learn more in [Prompt caching](/docs/en/build-with-claude/prompt-caching#1-hour-cache-duration).
 
 ### August 12, 2025
-- We've launched beta support for a [1M token context window](/docs/en/build-with-claude/context-windows#1m-token-context-window) in Claude Sonnet 4 on the Claude API and Amazon Bedrock.
+- We've launched beta support for a [1M token context window](/docs/en/build-with-claude/context-windows) in Claude Sonnet 4 on the Claude API and Amazon Bedrock.
 
 ### August 11, 2025
 - Some customers might encounter 429 (`rate_limit_error`) [errors](/docs/en/api/errors) following a sharp increase in API usage due to acceleration limits on the API. Previously, 529 (`overloaded_error`) errors would occur in similar scenarios.

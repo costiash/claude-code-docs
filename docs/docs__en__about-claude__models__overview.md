@@ -26,16 +26,14 @@ Once you've picked a model, [learn how to make your first API call](/docs/en/get
 | **[Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking)** | Yes | Yes | No |
 | **[Priority Tier](/docs/en/api/service-tiers)** | Yes | Yes | Yes |
 | **Comparative latency** | Moderate | Fast | Fastest |
-| **Context window** | <Tooltip tooltipContent="~150K words \ ~680K unicode characters">200K tokens</Tooltip> / <br/> <Tooltip tooltipContent="~750K words \ ~3.4M unicode characters">1M tokens</Tooltip> (beta)<sup>3</sup> | <Tooltip tooltipContent="~150K words \ ~680K unicode characters">200K tokens</Tooltip> / <br/> <Tooltip tooltipContent="~750K words \ ~3.4M unicode characters">1M tokens</Tooltip> (beta)<sup>3</sup> | <Tooltip tooltipContent="~150K words \ ~680K unicode characters">200K tokens</Tooltip> |
-| **Max output** | 128K tokens | 64K tokens | 64K tokens |
+| **Context window** | <Tooltip tooltipContent="~750k words \ ~3.4M unicode characters">1M tokens</Tooltip> | <Tooltip tooltipContent="~750k words \ ~3.4M unicode characters">1M tokens</Tooltip> | <Tooltip tooltipContent="~150k words \ ~680k unicode characters">200k tokens</Tooltip> |
+| **Max output** | 128k tokens | 64k tokens | 64k tokens |
 | **Reliable knowledge cutoff** | May 2025<sup>2</sup> | Aug 2025<sup>2</sup> | Feb 2025 |
 | **Training data cutoff** | Aug 2025 | Jan 2026 | Jul 2025 |
 
 _<sup>1 - See the [pricing page](/docs/en/about-claude/pricing) for complete pricing information including batch API discounts, prompt caching rates, extended thinking costs, and vision processing fees.</sup>_
 
 _<sup>2 - **Reliable knowledge cutoff** indicates the date through which a model's knowledge is most extensive and reliable. **Training data cutoff** is the broader date range of training data used. For more information, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).</sup>_
-
-_<sup>3 - Claude Opus 4.6 and Sonnet 4.6 support a [1M token context window](/docs/en/build-with-claude/context-windows#1m-token-context-window) when using the `context-1m-2025-08-07` beta header. [Long context pricing](/docs/en/about-claude/pricing#long-context-pricing) applies to requests exceeding 200K tokens.</sup>_
 
 <Note>Models with the same snapshot date (e.g., 20240620) are identical across all platforms and do not change. The snapshot date in the model name ensures consistency and allows developers to rely on stable performance across different environments.</Note>
 
@@ -55,8 +53,8 @@ The following models are still available. Consider migrating to current models f
 | **[Extended thinking](/docs/en/build-with-claude/extended-thinking)** | Yes | Yes | Yes | Yes | Yes | No |
 | **[Priority Tier](/docs/en/api/service-tiers)** | Yes | Yes | Yes | Yes | Yes | No |
 | **Comparative latency** | Fast | Moderate | Moderate | Fast | Moderate | Fast |
-| **Context window** | <Tooltip tooltipContent="~150K words \ ~680K unicode characters">200K tokens</Tooltip> / <br/> <Tooltip tooltipContent="~750K words \ ~3.4M unicode characters">1M tokens</Tooltip> (beta)<sup>1</sup> | <Tooltip tooltipContent="~150K words \ ~680K unicode characters">200K tokens</Tooltip> | <Tooltip tooltipContent="~150K words \ ~680K unicode characters">200K tokens</Tooltip> | <Tooltip tooltipContent="~150K words \ ~680K unicode characters">200K tokens</Tooltip> / <br/> <Tooltip tooltipContent="~750K words \ ~3.4M unicode characters">1M tokens</Tooltip> (beta)<sup>1</sup> | <Tooltip tooltipContent="~150K words \ ~680K unicode characters">200K tokens</Tooltip> | <Tooltip tooltipContent="~150K words \ ~680K unicode characters">200K tokens</Tooltip> |
-| **Max output** | 64K tokens | 64K tokens | 32K tokens | 64K tokens | 32K tokens | 4K tokens |
+| **Context window** | <Tooltip tooltipContent="~750k words \ ~3.4M unicode characters">1M</Tooltip> (or <Tooltip tooltipContent="~150k words \ ~680k unicode characters">200k</Tooltip><sup>1</sup>) tokens | <Tooltip tooltipContent="~150k words \ ~680k unicode characters">200k tokens</Tooltip> | <Tooltip tooltipContent="~150k words \ ~680k unicode characters">200k tokens</Tooltip> | <Tooltip tooltipContent="~750k words \ ~3.4M unicode characters">1M</Tooltip> (or <Tooltip tooltipContent="~150k words \ ~680k unicode characters">200k</Tooltip><sup>1</sup>) tokens | <Tooltip tooltipContent="~150k words \ ~680k unicode characters">200k tokens</Tooltip> | <Tooltip tooltipContent="~150k words \ ~680k unicode characters">200k tokens</Tooltip> |
+| **Max output** | 64k tokens | 64k tokens | 32k tokens | 64k tokens | 32k tokens | 4k tokens |
 | **Reliable knowledge cutoff** | Jan 2025<sup>2</sup> | May 2025<sup>2</sup> | Jan 2025<sup>2</sup> | Jan 2025<sup>2</sup> | Jan 2025<sup>2</sup> | <sup>3</sup> |
 | **Training data cutoff** | Jul 2025 | Aug 2025 | Mar 2025 | Mar 2025 | Mar 2025 | Aug 2023 |
 
@@ -64,7 +62,7 @@ The following models are still available. Consider migrating to current models f
 Claude Haiku 3 (`claude-3-haiku-20240307`) is deprecated and will be retired on April 19, 2026. Migrate to [Claude Haiku 4.5](/docs/en/about-claude/models/overview#latest-models-comparison) before the retirement date. See [model deprecations](/docs/en/about-claude/model-deprecations) for details.
 </Warning>
 
-_<sup>1 - Claude Sonnet 4.5 and Claude Sonnet 4 support a [1M token context window](/docs/en/build-with-claude/context-windows#1m-token-context-window) when using the `context-1m-2025-08-07` beta header. [Long context pricing](/docs/en/about-claude/pricing#long-context-pricing) applies to requests exceeding 200K tokens.</sup>_
+_<sup>1 - Claude Opus 4.5, Opus 4.1, Opus 4, Haiku 4.5, and earlier models have a 200k-token context window. Claude Sonnet 4.5 and Sonnet 4 default to 200k but can access a [1M-token context window](/docs/en/build-with-claude/context-windows) by including the `context-1m-2025-08-07` beta header. [Long context pricing](/docs/en/about-claude/pricing#long-context-pricing) applies to requests exceeding 200k tokens.</sup>_
 
 _<sup>2 - **Reliable knowledge cutoff** indicates the date through which a model's knowledge is most extensive and reliable. **Training data cutoff** is the broader date range of training data used.</sup>_
 

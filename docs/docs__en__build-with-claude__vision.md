@@ -22,12 +22,12 @@ Use Claude’s vision capabilities via:
 
 ### Basics and limits
 
-You can include multiple images in a single request (up to 20 for [claude.ai](https://claude.ai/) and 100 for API requests). Claude will analyze all provided images when formulating its response. This can be helpful for comparing or contrasting images.
+You can include multiple images in a single request: up to 20 for [claude.ai](https://claude.ai/), and up to 600 for API requests (100 for models with a 200k-token context window). Claude will analyze all provided images when formulating its response. This can be helpful for comparing or contrasting images.
 
 If you submit an image larger than 8000x8000 px, it is rejected. If you submit more than 20 images in one API request, this limit is 2000x2000 px.
 
 <Note>
-While the API supports 100 images per request, there is a [32MB request size limit](/docs/en/api/overview#request-size-limits) for standard endpoints.
+While the API supports up to 600 images per request, [request size limits](/docs/en/api/overview#request-size-limits) (32 MB for standard endpoints; lower on some third-party platforms) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 </Note>
 
 ### Evaluate image size
@@ -42,7 +42,7 @@ If your input image is too large and needs to be resized, it increases latency o
   both dimensions).
 </Tip>
 
-Here is a table of maximum image sizes accepted by the API that will not be resized for common aspect ratios. With Claude Opus 4.6, these images use approximately 1,600 tokens and around $4.80/1K images.
+Here is a table of maximum image sizes accepted by the API that will not be resized for common aspect ratios. With Claude Sonnet 4.6, these images use approximately 1,600 tokens and around $4.80/1k images.
 
 | Aspect ratio | Image size   |
 | ------------ | ------------ |
@@ -58,9 +58,9 @@ Each image you include in a request to Claude counts towards your token usage. T
 
 If your image does not need to be resized, you can estimate the number of tokens used through this algorithm: `tokens = (width px * height px)/750`
 
-Here are examples of approximate tokenization and costs for different image sizes within the API's size constraints based on Claude Opus 4.6 per-token price of $3 per million input tokens:
+Here are examples of approximate tokenization and costs for different image sizes within the API's size constraints based on Claude Sonnet 4.6 per-token price of $3 per million input tokens:
 
-| Image size                    | \# of Tokens | Cost / image | Cost / 1K images |
+| Image size                    | \# of Tokens | Cost / image | Cost / 1k images |
 | ----------------------------- | ------------ | ------------ | ---------------- |
 | 200x200 px(0.04 megapixels)   | \~54         | \~$0.00016   | \~$0.16          |
 | 1000x1000 px(1 megapixel)     | \~1334       | \~$0.004     | \~$4.00          |
@@ -1458,7 +1458,7 @@ Always carefully review and verify Claude's image interpretations, especially fo
   <section title="How many images can I include in one request?">
 
     The image limits are:
-    - Messages API: Up to 100 images per request
+    - Messages API: Up to 600 images per request (100 for models with a 200k-token context window)
     - claude.ai: Up to 20 images per turn
 
     Requests exceeding these limits are rejected and return an error.
