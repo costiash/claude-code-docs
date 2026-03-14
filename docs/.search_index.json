@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-14T00:36:25Z",
+  "generated_at": "2026-03-14T03:54:57Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -16,19 +16,19 @@
         "sessions",
         "being",
         "command",
-        "tool",
-        "commands",
+        "after",
+        "now",
         "instead",
         "session",
-        "now",
-        "after",
-        "file",
-        "memory",
+        "commands",
+        "tool",
         "mode",
+        "file",
         "mcp",
+        "memory",
         "where"
       ],
-      "word_count": 22040,
+      "word_count": 22627,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -150,25 +150,25 @@
         "session",
         "claude",
         "mode",
-        "interactive",
         "prompt",
+        "interactive",
+        "only",
         "code",
         "default",
-        "only",
         "print",
         "flags",
         "start",
+        "name",
         "json",
         "model",
         "see",
+        "flag",
         "agent",
         "system",
         "load",
-        "file",
-        "output",
-        "mcp"
+        "file"
       ],
-      "word_count": 1648,
+      "word_count": 1742,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -180,23 +180,23 @@
         "title",
         "code",
         "tip",
+        "session",
         "steps",
         "when",
-        "session",
         "thinking",
         "mode",
         "worktree",
         "specific",
         "plan",
+        "ask",
         "documentation",
         "sessions",
         "tips",
         "need",
-        "ask",
         "create",
-        "conversation"
+        "default"
       ],
-      "word_count": 4346,
+      "word_count": 4435,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -435,20 +435,20 @@
         "event",
         "tool",
         "json",
-        "command",
         "see",
-        "tab",
         "file",
-        "title",
+        "command",
         "input",
-        "step",
-        "fires",
         "example",
+        "session",
         "exit",
+        "after",
+        "reference",
+        "block",
         "run",
-        "matcher"
+        "prompt"
       ],
-      "word_count": 4227,
+      "word_count": 4117,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -459,24 +459,24 @@
         "hook",
         "claude",
         "when",
-        "json",
         "input",
+        "json",
         "code",
+        "field",
         "fields",
         "tool",
-        "field",
+        "user",
         "event",
         "prompt",
         "decision",
         "control",
-        "user",
         "session",
         "exit",
-        "command",
-        "description",
-        "file"
+        "runs",
+        "only",
+        "description"
       ],
-      "word_count": 11105,
+      "word_count": 11829,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -603,8 +603,8 @@
         "step",
         "when",
         "command",
-        "const",
         "url",
+        "const",
         "tools",
         "title",
         "name",
@@ -616,7 +616,7 @@
         "configuration",
         "project"
       ],
-      "word_count": 6077,
+      "word_count": 6227,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -683,10 +683,10 @@
         "opus",
         "environment",
         "code",
-        "context",
         "set",
         "when",
         "claude",
+        "context",
         "settings",
         "sonnet",
         "models",
@@ -700,7 +700,7 @@
         "specific",
         "usage"
       ],
-      "word_count": 1888,
+      "word_count": 1999,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -812,7 +812,7 @@
         "build",
         "tasks"
       ],
-      "word_count": 1451,
+      "word_count": 1421,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -924,7 +924,7 @@
         "project",
         "git"
       ],
-      "word_count": 1389,
+      "word_count": 1359,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -997,18 +997,18 @@
         "when",
         "code",
         "configuration",
+        "default",
         "file",
         "hooks",
-        "default",
         "marketplace",
         "files",
         "set",
         "permission",
         "marketplaces",
-        "scopes",
-        "example"
+        "example",
+        "scopes"
       ],
-      "word_count": 5630,
+      "word_count": 5807,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
