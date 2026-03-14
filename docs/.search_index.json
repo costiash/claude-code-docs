@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-13T21:19:10Z",
+  "generated_at": "2026-03-14T00:36:25Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -812,7 +812,7 @@
         "build",
         "tasks"
       ],
-      "word_count": 1421,
+      "word_count": 1451,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -924,7 +924,7 @@
         "project",
         "git"
       ],
-      "word_count": 1359,
+      "word_count": 1389,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1159,9 +1159,9 @@
         "code",
         "through",
         "tab",
+        "enterprise",
         "proxy",
         "environment",
-        "enterprise",
         "configuration",
         "gateway",
         "more",

@@ -2853,8 +2853,8 @@
     "claude-code__legal-and-compliance.md": {
       "original_url": "https://platform.claude.com/docs/en/legal-and-compliance",
       "original_md_url": "https://platform.claude.com/docs/en/legal-and-compliance.md",
-      "hash": "2ef1dd8d49a9d3f2b4a027e40524f30c92597cf0488d7df1368f798767a7dc9c",
-      "last_updated": "2026-02-27T18:21:16.164593"
+      "hash": "1e34536633a1b259f36724aa11bd73e6675c1fe3a5072ce57383558278611cba",
+      "last_updated": "2026-03-14T00:36:01.372742"
     },
     "claude-code__llm-gateway.md": {
       "original_url": "https://platform.claude.com/docs/en/llm-gateway",
@@ -2907,8 +2907,8 @@
     "claude-code__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/overview",
       "original_md_url": "https://platform.claude.com/docs/en/overview.md",
-      "hash": "bce3d9653a2f9ca445a6b066fb434387ffa1e428e7672f48efb533326353dced",
-      "last_updated": "2026-03-09T21:17:17.168204"
+      "hash": "70ca5ecf748b2a5580570d4971e887a3c3992e5db62eb3a6e8888fcc052bc12a",
+      "last_updated": "2026-03-14T00:36:06.627138"
     },
     "claude-code__plugin-marketplaces.md": {
       "original_url": "https://platform.claude.com/docs/en/plugin-marketplaces",
@@ -2931,8 +2931,8 @@
     "claude-code__quickstart.md": {
       "original_url": "https://platform.claude.com/docs/en/quickstart",
       "original_md_url": "https://platform.claude.com/docs/en/quickstart.md",
-      "hash": "3260d14990a58a78fdce64c617f1583e05049ab23cc41eb8900f90d464724988",
-      "last_updated": "2026-02-27T09:24:18.211931"
+      "hash": "8ebf3060aa2a846cbf64fc386f42269d4ba065804ea1fd60c41f464a418eb600",
+      "last_updated": "2026-03-14T00:36:09.223159"
     },
     "docs__en__release-notes__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/release-notes/overview",
@@ -3045,8 +3045,8 @@
     "claude-code__third-party-integrations.md": {
       "original_url": "https://platform.claude.com/docs/en/third-party-integrations",
       "original_md_url": "https://platform.claude.com/docs/en/third-party-integrations.md",
-      "hash": "3c359e2659934cb85d5d873fb6a3bc6a2d3639d6d919fae2e7de491d957622ad",
-      "last_updated": "2026-03-13T18:20:54.458368"
+      "hash": "b5a21b99addff87484773a87e61c22a696689050909515f16ad41437cf7a693a",
+      "last_updated": "2026-03-14T00:36:22.184815"
     },
     "claude-code__troubleshooting.md": {
       "original_url": "https://platform.claude.com/docs/en/troubleshooting",
@@ -3069,8 +3069,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-13T21:19:09.120247",
-    "fetch_duration_seconds": 446.788137,
+    "last_fetch_completed": "2026-03-14T00:36:24.447921",
+    "fetch_duration_seconds": 381.41377,
     "total_pages_discovered": 715,
     "pages_fetched_successfully": 511,
     "pages_failed": 205,
@@ -3286,7 +3286,7 @@
     "total_files": 511,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-13T21:19:09.120270",
+  "last_updated": "2026-03-14T00:36:24.447949",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
