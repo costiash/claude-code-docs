@@ -4,7 +4,7 @@ Process PDFs with Claude. Extract text, analyze charts, and understand visual co
 
 ---
 
-You can now ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:
+You can ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:
 - Analyzing financial reports and understanding charts/tables
 - Extracting key information from legal documents
 - Translation assistance for documents
@@ -13,7 +13,7 @@ You can now ask Claude about any text, pictures, charts, and tables in PDFs you 
 ## Before you begin
 
 ### Check PDF requirements
-Claude works with any standard PDF. However, you should ensure your request size meets these requirements when using PDF support:
+Claude works with any standard PDF. Ensure your request size meets these requirements:
 
 | Requirement | Limit |
 |------------|--------|
@@ -24,7 +24,7 @@ Claude works with any standard PDF. However, you should ensure your request size
 Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](#option-3-files-api) and referencing by `file_id` to keep request payloads small.
 
 <Tip>
-Dense PDFs (many small-font pages, complex tables, or heavy graphics) can fill the context window before reaching the page limit. If this happens, try splitting the document into sections.
+Dense PDFs (many small-font pages, complex tables, or heavy graphics) can fill the context window before reaching the page limit. Requests with large PDFs can also fail before reaching the page limit, even when using the Files API. Try splitting the document into sections; for large files, since each page is processed as an image, downsampling embedded images can also help.
 </Tip>
 
 Since PDF support relies on Claude's vision capabilities, it is subject to the same [limitations and considerations](/docs/en/build-with-claude/vision#limitations) as other vision tasks.
