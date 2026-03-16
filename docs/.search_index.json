@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-16T15:33:45Z",
+  "generated_at": "2026-03-16T18:31:05Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -428,8 +428,8 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Automate workflows with hooks  > Run shell commands automatically when Claude Code edits files, finishes tasks, or",
       "keywords": [
         "hooks",
-        "claude",
         "hook",
+        "claude",
         "when",
         "code",
         "event",
@@ -438,17 +438,17 @@
         "see",
         "file",
         "command",
+        "session",
         "input",
         "example",
-        "session",
         "exit",
-        "after",
+        "matcher",
         "reference",
-        "block",
-        "run",
-        "prompt"
+        "after",
+        "prompt",
+        "block"
       ],
-      "word_count": 4117,
+      "word_count": 4426,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -472,11 +472,11 @@
         "control",
         "session",
         "exit",
-        "runs",
         "only",
-        "description"
+        "file",
+        "runs"
       ],
-      "word_count": 11829,
+      "word_count": 12102,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -1092,7 +1092,7 @@
         "name",
         "directory"
       ],
-      "word_count": 4728,
+      "word_count": 4737,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1117,10 +1117,10 @@
         "create",
         "step",
         "each",
-        "model",
-        "task"
+        "session",
+        "model"
       ],
-      "word_count": 5436,
+      "word_count": 5499,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -5850,19 +5850,19 @@
         "limits",
         "streaming",
         "value",
+        "issue",
         "size",
         "warning",
         "codegroup",
         "message",
-        "issue",
+        "there",
         "may",
         "also",
         "maximum",
         "when",
-        "these",
-        "includes"
+        "these"
       ],
-      "word_count": 794,
+      "word_count": 814,
       "file_path": "docs/docs__en__api__errors.md"
     },
     "/docs/en/api/go/beta": {
@@ -10066,22 +10066,22 @@
         "tokens",
         "tier",
         "per",
-        "sup",
         "maximum",
+        "sup",
         "minute",
         "claude",
         "input",
         "requests",
+        "spend",
         "tab",
         "api",
         "output",
-        "spend",
         "batch",
         "usage",
         "number",
         "organization"
       ],
-      "word_count": 2943,
+      "word_count": 2970,
       "file_path": "docs/docs__en__api__rate-limits.md"
     },
     "/docs/en/api/ruby/beta": {
