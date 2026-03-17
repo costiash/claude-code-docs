@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-17T18:30:42Z",
+  "generated_at": "2026-03-17T21:22:14Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -495,8 +495,8 @@
         "conversation",
         "search",
         "normal",
-        "word",
         "input",
+        "word",
         "text",
         "prompt",
         "previous",
@@ -504,7 +504,7 @@
         "note",
         "see"
       ],
-      "word_count": 2452,
+      "word_count": 2488,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -747,16 +747,16 @@
         "configuration",
         "custom",
         "security",
+        "through",
         "note",
         "configure",
         "environments",
         "certificate",
         "mtls",
-        "through",
         "api",
-        "anthropic"
+        "urls"
       ],
-      "word_count": 441,
+      "word_count": 491,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -1008,7 +1008,7 @@
         "marketplaces",
         "scopes"
       ],
-      "word_count": 5866,
+      "word_count": 5892,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
