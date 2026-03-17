@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-17T15:33:41Z",
+  "generated_at": "2026-03-17T18:30:42Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -180,23 +180,23 @@
         "title",
         "code",
         "tip",
+        "when",
         "session",
         "steps",
-        "when",
         "thinking",
         "mode",
         "worktree",
-        "specific",
         "plan",
+        "specific",
         "ask",
         "documentation",
         "sessions",
         "tips",
         "need",
-        "create",
-        "default"
+        "name",
+        "create"
       ],
-      "word_count": 4435,
+      "word_count": 4480,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -209,9 +209,9 @@
         "when",
         "costs",
         "usage",
+        "per",
         "token",
         "tokens",
-        "per",
         "users",
         "team",
         "teams",
@@ -224,7 +224,7 @@
         "user",
         "only"
       ],
-      "word_count": 1866,
+      "word_count": 1874,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -399,17 +399,18 @@
       "title": "Run Claude Code programmatically",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Run Claude Code programmatically  > Use the Agent SDK to run Claude Code programmatically from the CLI, Python, or",
       "keywords": [
-        "cli",
         "claude",
+        "cli",
         "agent",
         "sdk",
-        "example",
         "code",
+        "example",
+        "session",
         "options",
         "structured",
         "output",
         "json",
-        "session",
+        "event",
         "documentation",
         "run",
         "python",
@@ -417,10 +418,9 @@
         "tools",
         "note",
         "flag",
-        "prompt",
-        "text"
+        "prompt"
       ],
-      "word_count": 915,
+      "word_count": 1067,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -428,12 +428,12 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Automate workflows with hooks  > Run shell commands automatically when Claude Code edits files, finishes tasks, or",
       "keywords": [
         "hooks",
-        "claude",
         "hook",
+        "claude",
         "when",
         "code",
-        "event",
         "tool",
+        "event",
         "json",
         "see",
         "file",
@@ -444,11 +444,11 @@
         "exit",
         "matcher",
         "after",
-        "reference",
         "prompt",
+        "reference",
         "block"
       ],
-      "word_count": 4421,
+      "word_count": 4488,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "only",
         "runs"
       ],
-      "word_count": 12059,
+      "word_count": 12084,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -501,10 +501,10 @@
         "prompt",
         "previous",
         "end",
-        "see",
-        "context"
+        "note",
+        "see"
       ],
-      "word_count": 2435,
+      "word_count": 2452,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -644,7 +644,7 @@
         "across",
         "reads"
       ],
-      "word_count": 2834,
+      "word_count": 2877,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -824,23 +824,23 @@
         "plugins",
         "git",
         "string",
+        "marketplaces",
         "see",
         "add",
-        "marketplaces",
+        "code",
         "repository",
-        "sources",
-        "create",
         "paths",
+        "directory",
+        "sources",
+        "claude",
+        "create",
         "url",
         "github",
         "users",
-        "files",
-        "field",
-        "code",
-        "version",
-        "example"
+        "example",
+        "files"
       ],
-      "word_count": 4373,
+      "word_count": 4752,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -857,18 +857,18 @@
         "directory",
         "files",
         "file",
+        "command",
         "paths",
         "commands",
         "install",
         "servers",
         "lsp",
         "language",
-        "command",
         "string",
         "see",
         "skills"
       ],
-      "word_count": 3360,
+      "word_count": 3369,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -937,22 +937,22 @@
         "network",
         "permission",
         "claude",
-        "code",
         "settings",
+        "code",
         "sandboxing",
         "security",
         "bash",
-        "filesystem",
-        "when",
         "paths",
         "allow",
+        "filesystem",
+        "when",
         "through",
         "tools",
         "configuration",
         "sandboxed",
         "isolation"
       ],
-      "word_count": 2296,
+      "word_count": 2380,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -992,11 +992,11 @@
         "claude",
         "see",
         "project",
-        "user",
         "only",
+        "user",
         "when",
-        "code",
         "default",
+        "code",
         "configuration",
         "file",
         "hooks",
@@ -1004,11 +1004,11 @@
         "files",
         "set",
         "permission",
+        "paths",
         "marketplaces",
-        "example",
         "scopes"
       ],
-      "word_count": 5804,
+      "word_count": 5866,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1107,8 +1107,8 @@
         "conversation",
         "context",
         "main",
-        "tools",
         "agent",
+        "tools",
         "only",
         "tool",
         "specific",
@@ -1117,10 +1117,10 @@
         "create",
         "step",
         "each",
-        "session",
-        "model"
+        "task",
+        "session"
       ],
-      "word_count": 5499,
+      "word_count": 5537,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
