@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-18T09:29:09Z",
+  "generated_at": "2026-03-18T12:28:59Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -155,20 +155,20 @@
         "only",
         "code",
         "default",
+        "see",
         "print",
         "flags",
         "start",
         "name",
         "json",
         "model",
-        "see",
         "flag",
         "agent",
+        "permission",
         "system",
-        "load",
-        "file"
+        "load"
       ],
-      "word_count": 1742,
+      "word_count": 1752,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -252,7 +252,7 @@
         "sessions",
         "security"
       ],
-      "word_count": 1307,
+      "word_count": 1304,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -280,7 +280,7 @@
         "file",
         "configuration"
       ],
-      "word_count": 6139,
+      "word_count": 6147,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -1112,15 +1112,15 @@
         "tool",
         "only",
         "session",
-        "specific",
         "prompt",
+        "specific",
+        "step",
         "run",
         "hooks",
-        "create",
         "task",
         "model"
       ],
-      "word_count": 5856,
+      "word_count": 5924,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1232,7 +1232,7 @@
         "install",
         "windows"
       ],
-      "word_count": 3835,
+      "word_count": 3837,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
