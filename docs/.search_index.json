@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-18T04:00:27Z",
+  "generated_at": "2026-03-18T06:34:59Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -448,7 +448,7 @@
         "reference",
         "block"
       ],
-      "word_count": 4488,
+      "word_count": 4489,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "only",
         "runs"
       ],
-      "word_count": 12105,
+      "word_count": 12106,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -812,7 +812,7 @@
         "build",
         "tasks"
       ],
-      "word_count": 1421,
+      "word_count": 1465,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -868,7 +868,7 @@
         "string",
         "see"
       ],
-      "word_count": 3782,
+      "word_count": 3789,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -1003,12 +1003,12 @@
         "marketplace",
         "files",
         "set",
+        "example",
         "permission",
         "paths",
-        "marketplaces",
-        "scopes"
+        "marketplaces"
       ],
-      "word_count": 5919,
+      "word_count": 5961,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1134,12 +1134,12 @@
         "enter",
         "iterm",
         "notifications",
+        "set",
+        "settings",
         "when",
         "line",
         "shift",
-        "set",
         "terminals",
-        "settings",
         "hooks",
         "file",
         "setup",
@@ -1148,7 +1148,7 @@
         "configure",
         "custom"
       ],
-      "word_count": 553,
+      "word_count": 560,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
@@ -1188,12 +1188,12 @@
         "windows",
         "install",
         "wsl",
+        "see",
         "issues",
         "linux",
-        "see",
         "path",
-        "installation",
         "check",
+        "installation",
         "installer",
         "macos",
         "file",
@@ -1204,7 +1204,7 @@
         "powershell",
         "command"
       ],
-      "word_count": 4531,
+      "word_count": 4678,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
