@@ -1,6 +1,6 @@
-# Claude Developer Platform
+# Claude Platform
 
-Updates to the Claude Developer Platform, including the Claude API, client SDKs, and the Claude Console.
+Updates to the Claude Platform, including the Claude API, client SDKs, and the Claude Console.
 
 ---
 

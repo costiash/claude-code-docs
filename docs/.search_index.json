@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-17T21:22:14Z",
+  "generated_at": "2026-03-18T00:40:29Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -14,21 +14,21 @@
         "improved",
         "code",
         "sessions",
-        "being",
         "now",
+        "being",
         "instead",
         "command",
         "tool",
         "after",
         "session",
-        "commands",
         "mode",
+        "commands",
         "memory",
         "file",
         "mcp",
         "bash"
       ],
-      "word_count": 23322,
+      "word_count": 23767,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -476,7 +476,7 @@
         "only",
         "runs"
       ],
-      "word_count": 12084,
+      "word_count": 12105,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -614,9 +614,9 @@
         "stdio",
         "example",
         "configuration",
-        "project"
+        "plugin"
       ],
-      "word_count": 6236,
+      "word_count": 6246,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -634,17 +634,17 @@
         "file",
         "loaded",
         "specific",
-        "session",
+        "settings",
+        "managed",
         "code",
+        "session",
         "when",
         "them",
         "context",
         "into",
-        "every",
-        "across",
-        "reads"
+        "every"
       ],
-      "word_count": 2877,
+      "word_count": 3008,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -829,8 +829,8 @@
         "add",
         "code",
         "repository",
-        "paths",
         "directory",
+        "paths",
         "sources",
         "claude",
         "create",
@@ -840,7 +840,7 @@
         "example",
         "files"
       ],
-      "word_count": 4752,
+      "word_count": 4764,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -851,24 +851,24 @@
         "server",
         "claude",
         "plugins",
-        "code",
-        "mcp",
-        "when",
         "directory",
+        "code",
+        "when",
+        "mcp",
         "files",
+        "lsp",
         "file",
+        "commands",
+        "language",
         "command",
         "paths",
-        "commands",
         "install",
-        "servers",
-        "lsp",
-        "language",
+        "default",
+        "scope",
         "string",
-        "see",
-        "skills"
+        "see"
       ],
-      "word_count": 3369,
+      "word_count": 3782,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -13897,8 +13897,8 @@
       "file_path": "docs/docs__en__intro.md"
     },
     "/docs/en/release-notes/overview": {
-      "title": "Claude Developer Platform",
-      "content_preview": "# Claude Developer Platform  Updates to the Claude Developer Platform, including the Claude API, client SDKs, and the Claude Console.  ---  <Tip> For release notes on Claude Apps, see the [Release not...",
+      "title": "Claude Platform",
+      "content_preview": "# Claude Platform  Updates to the Claude Platform, including the Claude API, client SDKs, and the Claude Console.  ---  <Tip> For release notes on Claude Apps, see the [Release notes for Claude Apps i...",
       "keywords": [
         "claude",
         "api",
@@ -13921,7 +13921,7 @@
         "header",
         "usage"
       ],
-      "word_count": 4396,
+      "word_count": 4394,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {
