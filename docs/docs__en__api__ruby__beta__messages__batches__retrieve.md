@@ -14,7 +14,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   ID of the Message Batch.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 

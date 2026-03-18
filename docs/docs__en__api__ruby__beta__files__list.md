@@ -22,7 +22,7 @@ List Files
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 

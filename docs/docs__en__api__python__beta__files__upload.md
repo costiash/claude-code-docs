@@ -108,7 +108,7 @@ client = Anthropic(
     api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
 )
 file_metadata = client.beta.files.upload(
-    file=b"raw file contents",
+    file=b"Example data",
 )
 print(file_metadata.id)
 ```

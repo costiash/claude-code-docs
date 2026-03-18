@@ -97,7 +97,10 @@ Upload File
 ### Example
 
 ```csharp
-FileUploadParams parameters = new() { File = Encoding.UTF8.GetBytes("text") };
+FileUploadParams parameters = new()
+{
+    File = Encoding.UTF8.GetBytes("Example data")
+};
 
 var fileMetadata = await client.Beta.Files.Upload(parameters);
 

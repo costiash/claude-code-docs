@@ -162,7 +162,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   Recommended for advanced use cases only. You usually only need to use `temperature`.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 

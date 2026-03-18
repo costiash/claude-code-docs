@@ -12,7 +12,7 @@ Get File Metadata
 
   ID of the File.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 

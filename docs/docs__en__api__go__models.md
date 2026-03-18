@@ -84,6 +84,158 @@ The Models API response can be used to determine which models are available for 
 
     Unique model identifier.
 
+  - `Capabilities ModelCapabilities`
+
+    Model capability information.
+
+    - `Batch CapabilitySupport`
+
+      Whether the model supports the Batch API.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Citations CapabilitySupport`
+
+      Whether the model supports citation generation.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `CodeExecution CapabilitySupport`
+
+      Whether the model supports code execution tools.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `ContextManagement ContextManagementCapability`
+
+      Context management support and available strategies.
+
+      - `ClearThinking20251015 CapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `ClearToolUses20250919 CapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Compact20260112 CapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Effort EffortCapability`
+
+      Effort (reasoning_effort) support and available levels.
+
+      - `High CapabilitySupport`
+
+        Whether the model supports high effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Low CapabilitySupport`
+
+        Whether the model supports low effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Max CapabilitySupport`
+
+        Whether the model supports max effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Medium CapabilitySupport`
+
+        Whether the model supports medium effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `ImageInput CapabilitySupport`
+
+      Whether the model accepts image content blocks.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `PDFInput CapabilitySupport`
+
+      Whether the model accepts PDF content blocks.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `StructuredOutputs CapabilitySupport`
+
+      Whether the model supports structured output / JSON mode / strict tool schemas.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Thinking ThinkingCapability`
+
+      Thinking capability and supported type configurations.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+      - `Types ThinkingTypes`
+
+        Supported thinking type configurations.
+
+        - `Adaptive CapabilitySupport`
+
+          Whether the model supports thinking with type 'adaptive' (auto).
+
+          - `Supported bool`
+
+            Whether this capability is supported by the model.
+
+        - `Enabled CapabilitySupport`
+
+          Whether the model supports thinking with type 'enabled'.
+
+          - `Supported bool`
+
+            Whether this capability is supported by the model.
+
   - `CreatedAt Time`
 
     RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
@@ -91,6 +243,14 @@ The Models API response can be used to determine which models are available for 
   - `DisplayName string`
 
     A human-readable name for the model.
+
+  - `MaxInputTokens int64`
+
+    Maximum input context window size in tokens for this model.
+
+  - `MaxTokens int64`
+
+    Maximum value for the `max_tokens` parameter when using this model.
 
   - `Type Model`
 
@@ -201,6 +361,158 @@ The Models API response can be used to determine information about a specific mo
 
     Unique model identifier.
 
+  - `Capabilities ModelCapabilities`
+
+    Model capability information.
+
+    - `Batch CapabilitySupport`
+
+      Whether the model supports the Batch API.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Citations CapabilitySupport`
+
+      Whether the model supports citation generation.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `CodeExecution CapabilitySupport`
+
+      Whether the model supports code execution tools.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `ContextManagement ContextManagementCapability`
+
+      Context management support and available strategies.
+
+      - `ClearThinking20251015 CapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `ClearToolUses20250919 CapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Compact20260112 CapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Effort EffortCapability`
+
+      Effort (reasoning_effort) support and available levels.
+
+      - `High CapabilitySupport`
+
+        Whether the model supports high effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Low CapabilitySupport`
+
+        Whether the model supports low effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Max CapabilitySupport`
+
+        Whether the model supports max effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Medium CapabilitySupport`
+
+        Whether the model supports medium effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `ImageInput CapabilitySupport`
+
+      Whether the model accepts image content blocks.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `PDFInput CapabilitySupport`
+
+      Whether the model accepts PDF content blocks.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `StructuredOutputs CapabilitySupport`
+
+      Whether the model supports structured output / JSON mode / strict tool schemas.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Thinking ThinkingCapability`
+
+      Thinking capability and supported type configurations.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+      - `Types ThinkingTypes`
+
+        Supported thinking type configurations.
+
+        - `Adaptive CapabilitySupport`
+
+          Whether the model supports thinking with type 'adaptive' (auto).
+
+          - `Supported bool`
+
+            Whether this capability is supported by the model.
+
+        - `Enabled CapabilitySupport`
+
+          Whether the model supports thinking with type 'enabled'.
+
+          - `Supported bool`
+
+            Whether this capability is supported by the model.
+
   - `CreatedAt Time`
 
     RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
@@ -208,6 +520,14 @@ The Models API response can be used to determine information about a specific mo
   - `DisplayName string`
 
     A human-readable name for the model.
+
+  - `MaxInputTokens int64`
+
+    Maximum input context window size in tokens for this model.
+
+  - `MaxTokens int64`
+
+    Maximum value for the `max_tokens` parameter when using this model.
 
   - `Type Model`
 
@@ -250,6 +570,246 @@ func main() {
 
 ## Domain Types
 
+### Capability Support
+
+- `type CapabilitySupport struct{…}`
+
+  Indicates whether a capability is supported.
+
+  - `Supported bool`
+
+    Whether this capability is supported by the model.
+
+### Context Management Capability
+
+- `type ContextManagementCapability struct{…}`
+
+  Context management capability details.
+
+  - `ClearThinking20251015 CapabilitySupport`
+
+    Indicates whether a capability is supported.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `ClearToolUses20250919 CapabilitySupport`
+
+    Indicates whether a capability is supported.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Compact20260112 CapabilitySupport`
+
+    Indicates whether a capability is supported.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Supported bool`
+
+    Whether this capability is supported by the model.
+
+### Effort Capability
+
+- `type EffortCapability struct{…}`
+
+  Effort (reasoning_effort) capability details.
+
+  - `High CapabilitySupport`
+
+    Whether the model supports high effort level.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Low CapabilitySupport`
+
+    Whether the model supports low effort level.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Max CapabilitySupport`
+
+    Whether the model supports max effort level.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Medium CapabilitySupport`
+
+    Whether the model supports medium effort level.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Supported bool`
+
+    Whether this capability is supported by the model.
+
+### Model Capabilities
+
+- `type ModelCapabilities struct{…}`
+
+  Model capability information.
+
+  - `Batch CapabilitySupport`
+
+    Whether the model supports the Batch API.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Citations CapabilitySupport`
+
+    Whether the model supports citation generation.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `CodeExecution CapabilitySupport`
+
+    Whether the model supports code execution tools.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `ContextManagement ContextManagementCapability`
+
+    Context management support and available strategies.
+
+    - `ClearThinking20251015 CapabilitySupport`
+
+      Indicates whether a capability is supported.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `ClearToolUses20250919 CapabilitySupport`
+
+      Indicates whether a capability is supported.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Compact20260112 CapabilitySupport`
+
+      Indicates whether a capability is supported.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Effort EffortCapability`
+
+    Effort (reasoning_effort) support and available levels.
+
+    - `High CapabilitySupport`
+
+      Whether the model supports high effort level.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Low CapabilitySupport`
+
+      Whether the model supports low effort level.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Max CapabilitySupport`
+
+      Whether the model supports max effort level.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Medium CapabilitySupport`
+
+      Whether the model supports medium effort level.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `ImageInput CapabilitySupport`
+
+    Whether the model accepts image content blocks.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `PDFInput CapabilitySupport`
+
+    Whether the model accepts PDF content blocks.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `StructuredOutputs CapabilitySupport`
+
+    Whether the model supports structured output / JSON mode / strict tool schemas.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Thinking ThinkingCapability`
+
+    Thinking capability and supported type configurations.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+    - `Types ThinkingTypes`
+
+      Supported thinking type configurations.
+
+      - `Adaptive CapabilitySupport`
+
+        Whether the model supports thinking with type 'adaptive' (auto).
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Enabled CapabilitySupport`
+
+        Whether the model supports thinking with type 'enabled'.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
 ### Model Info
 
 - `type ModelInfo struct{…}`
@@ -257,6 +817,158 @@ func main() {
   - `ID string`
 
     Unique model identifier.
+
+  - `Capabilities ModelCapabilities`
+
+    Model capability information.
+
+    - `Batch CapabilitySupport`
+
+      Whether the model supports the Batch API.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Citations CapabilitySupport`
+
+      Whether the model supports citation generation.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `CodeExecution CapabilitySupport`
+
+      Whether the model supports code execution tools.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `ContextManagement ContextManagementCapability`
+
+      Context management support and available strategies.
+
+      - `ClearThinking20251015 CapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `ClearToolUses20250919 CapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Compact20260112 CapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Effort EffortCapability`
+
+      Effort (reasoning_effort) support and available levels.
+
+      - `High CapabilitySupport`
+
+        Whether the model supports high effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Low CapabilitySupport`
+
+        Whether the model supports low effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Max CapabilitySupport`
+
+        Whether the model supports max effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Medium CapabilitySupport`
+
+        Whether the model supports medium effort level.
+
+        - `Supported bool`
+
+          Whether this capability is supported by the model.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `ImageInput CapabilitySupport`
+
+      Whether the model accepts image content blocks.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `PDFInput CapabilitySupport`
+
+      Whether the model accepts PDF content blocks.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `StructuredOutputs CapabilitySupport`
+
+      Whether the model supports structured output / JSON mode / strict tool schemas.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Thinking ThinkingCapability`
+
+      Thinking capability and supported type configurations.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+      - `Types ThinkingTypes`
+
+        Supported thinking type configurations.
+
+        - `Adaptive CapabilitySupport`
+
+          Whether the model supports thinking with type 'adaptive' (auto).
+
+          - `Supported bool`
+
+            Whether this capability is supported by the model.
+
+        - `Enabled CapabilitySupport`
+
+          Whether the model supports thinking with type 'enabled'.
+
+          - `Supported bool`
+
+            Whether this capability is supported by the model.
 
   - `CreatedAt Time`
 
@@ -266,6 +978,14 @@ func main() {
 
     A human-readable name for the model.
 
+  - `MaxInputTokens int64`
+
+    Maximum input context window size in tokens for this model.
+
+  - `MaxTokens int64`
+
+    Maximum value for the `max_tokens` parameter when using this model.
+
   - `Type Model`
 
     Object type.
@@ -273,3 +993,55 @@ func main() {
     For Models, this is always `"model"`.
 
     - `const ModelModel Model = "model"`
+
+### Thinking Capability
+
+- `type ThinkingCapability struct{…}`
+
+  Thinking capability details.
+
+  - `Supported bool`
+
+    Whether this capability is supported by the model.
+
+  - `Types ThinkingTypes`
+
+    Supported thinking type configurations.
+
+    - `Adaptive CapabilitySupport`
+
+      Whether the model supports thinking with type 'adaptive' (auto).
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Enabled CapabilitySupport`
+
+      Whether the model supports thinking with type 'enabled'.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+### Thinking Types
+
+- `type ThinkingTypes struct{…}`
+
+  Supported thinking type configurations.
+
+  - `Adaptive CapabilitySupport`
+
+    Whether the model supports thinking with type 'adaptive' (auto).
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Enabled CapabilitySupport`
+
+    Whether the model supports thinking with type 'enabled'.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.

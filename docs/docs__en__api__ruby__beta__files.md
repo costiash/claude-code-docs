@@ -14,7 +14,7 @@ Upload File
 
   The file to upload
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -107,7 +107,7 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-file_metadata = anthropic.beta.files.upload(file: Pathname(__FILE__))
+file_metadata = anthropic.beta.files.upload(file: StringIO.new("Example data"))
 
 puts(file_metadata)
 ```
@@ -136,7 +136,7 @@ List Files
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -248,7 +248,7 @@ Download File
 
   ID of the File.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -326,7 +326,7 @@ Get File Metadata
 
   ID of the File.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -438,7 +438,7 @@ Delete File
 
   ID of the File.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 

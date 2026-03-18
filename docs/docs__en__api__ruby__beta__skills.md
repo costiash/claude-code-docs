@@ -22,7 +22,7 @@ Create Skill
 
   All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -158,7 +158,7 @@ List Skills
   * `"custom"`: only return user-created skills
   * `"anthropic"`: only return Anthropic-created skills
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -279,7 +279,7 @@ Get Skill
 
   The format and length of IDs may change over time.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -400,7 +400,7 @@ Delete Skill
 
   The format and length of IDs may change over time.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -500,7 +500,7 @@ Create Skill Version
 
   All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -634,7 +634,7 @@ List Skill Versions
 
   Optionally set to the `next_page` token from the previous response.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -764,7 +764,7 @@ Get Skill Version
 
   Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -894,7 +894,7 @@ Delete Skill Version
 
   Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 

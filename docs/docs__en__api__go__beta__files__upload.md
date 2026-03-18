@@ -120,7 +120,7 @@ func main() {
     option.WithAPIKey("my-anthropic-api-key"),
   )
   fileMetadata, err := client.Beta.Files.Upload(context.TODO(), anthropic.BetaFileUploadParams{
-    File: io.Reader(bytes.NewBuffer([]byte("some file contents"))),
+    File: io.Reader(bytes.NewBuffer([]byte("Example data"))),
   })
   if err != nil {
     panic(err.Error())

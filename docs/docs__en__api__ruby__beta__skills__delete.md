@@ -14,7 +14,7 @@ Delete Skill
 
   The format and length of IDs may change over time.
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 

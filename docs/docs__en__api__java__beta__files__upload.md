@@ -114,7 +114,7 @@ public final class Main {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         FileUploadParams params = FileUploadParams.builder()
-            .file(ByteArrayInputStream("some content".getBytes()))
+            .file(ByteArrayInputStream("Example data".getBytes()))
             .build();
         FileMetadata fileMetadata = client.beta().files().upload(params);
     }

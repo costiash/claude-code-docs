@@ -64,11 +64,163 @@ The Models API response can be used to determine information about a specific mo
 
 ### Returns
 
-- `BetaModelInfo = object { id, created_at, display_name, type }`
+- `BetaModelInfo = object { id, capabilities, created_at, 4 more }`
 
   - `id: string`
 
     Unique model identifier.
+
+  - `capabilities: BetaModelCapabilities`
+
+    Model capability information.
+
+    - `batch: BetaCapabilitySupport`
+
+      Whether the model supports the Batch API.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `citations: BetaCapabilitySupport`
+
+      Whether the model supports citation generation.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `code_execution: BetaCapabilitySupport`
+
+      Whether the model supports code execution tools.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `context_management: BetaContextManagementCapability`
+
+      Context management support and available strategies.
+
+      - `clear_thinking_20251015: BetaCapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
+
+      - `clear_tool_uses_20250919: BetaCapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
+
+      - `compact_20260112: BetaCapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `effort: BetaEffortCapability`
+
+      Effort (reasoning_effort) support and available levels.
+
+      - `high: BetaCapabilitySupport`
+
+        Whether the model supports high effort level.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
+
+      - `low: BetaCapabilitySupport`
+
+        Whether the model supports low effort level.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
+
+      - `max: BetaCapabilitySupport`
+
+        Whether the model supports max effort level.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
+
+      - `medium: BetaCapabilitySupport`
+
+        Whether the model supports medium effort level.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `image_input: BetaCapabilitySupport`
+
+      Whether the model accepts image content blocks.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `pdf_input: BetaCapabilitySupport`
+
+      Whether the model accepts PDF content blocks.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `structured_outputs: BetaCapabilitySupport`
+
+      Whether the model supports structured output / JSON mode / strict tool schemas.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `thinking: BetaThinkingCapability`
+
+      Thinking capability and supported type configurations.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+      - `types: BetaThinkingTypes`
+
+        Supported thinking type configurations.
+
+        - `adaptive: BetaCapabilitySupport`
+
+          Whether the model supports thinking with type 'adaptive' (auto).
+
+          - `supported: boolean`
+
+            Whether this capability is supported by the model.
+
+        - `enabled: BetaCapabilitySupport`
+
+          Whether the model supports thinking with type 'enabled'.
+
+          - `supported: boolean`
+
+            Whether this capability is supported by the model.
 
   - `created_at: string`
 
@@ -77,6 +229,14 @@ The Models API response can be used to determine information about a specific mo
   - `display_name: string`
 
     A human-readable name for the model.
+
+  - `max_input_tokens: number`
+
+    Maximum input context window size in tokens for this model.
+
+  - `max_tokens: number`
+
+    Maximum value for the `max_tokens` parameter when using this model.
 
   - `type: "model"`
 

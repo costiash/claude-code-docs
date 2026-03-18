@@ -12,7 +12,7 @@ Upload File
 
   The file to upload
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -105,7 +105,7 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-file_metadata = anthropic.beta.files.upload(file: Pathname(__FILE__))
+file_metadata = anthropic.beta.files.upload(file: StringIO.new("Example data"))
 
 puts(file_metadata)
 ```

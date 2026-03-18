@@ -20,7 +20,7 @@ Delete Skill Version
 
   Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-- `anthropic_beta: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 

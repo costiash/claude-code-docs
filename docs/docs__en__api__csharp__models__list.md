@@ -80,6 +80,158 @@ The Models API response can be used to determine which models are available for 
 
       Unique model identifier.
 
+    - `required ModelCapabilities? Capabilities`
+
+      Model capability information.
+
+      - `required CapabilitySupport Batch`
+
+        Whether the model supports the Batch API.
+
+        - `required Boolean Supported`
+
+          Whether this capability is supported by the model.
+
+      - `required CapabilitySupport Citations`
+
+        Whether the model supports citation generation.
+
+        - `required Boolean Supported`
+
+          Whether this capability is supported by the model.
+
+      - `required CapabilitySupport CodeExecution`
+
+        Whether the model supports code execution tools.
+
+        - `required Boolean Supported`
+
+          Whether this capability is supported by the model.
+
+      - `required ContextManagementCapability ContextManagement`
+
+        Context management support and available strategies.
+
+        - `required CapabilitySupport? ClearThinking20251015`
+
+          Indicates whether a capability is supported.
+
+          - `required Boolean Supported`
+
+            Whether this capability is supported by the model.
+
+        - `required CapabilitySupport? ClearToolUses20250919`
+
+          Indicates whether a capability is supported.
+
+          - `required Boolean Supported`
+
+            Whether this capability is supported by the model.
+
+        - `required CapabilitySupport? Compact20260112`
+
+          Indicates whether a capability is supported.
+
+          - `required Boolean Supported`
+
+            Whether this capability is supported by the model.
+
+        - `required Boolean Supported`
+
+          Whether this capability is supported by the model.
+
+      - `required EffortCapability Effort`
+
+        Effort (reasoning_effort) support and available levels.
+
+        - `required CapabilitySupport High`
+
+          Whether the model supports high effort level.
+
+          - `required Boolean Supported`
+
+            Whether this capability is supported by the model.
+
+        - `required CapabilitySupport Low`
+
+          Whether the model supports low effort level.
+
+          - `required Boolean Supported`
+
+            Whether this capability is supported by the model.
+
+        - `required CapabilitySupport Max`
+
+          Whether the model supports max effort level.
+
+          - `required Boolean Supported`
+
+            Whether this capability is supported by the model.
+
+        - `required CapabilitySupport Medium`
+
+          Whether the model supports medium effort level.
+
+          - `required Boolean Supported`
+
+            Whether this capability is supported by the model.
+
+        - `required Boolean Supported`
+
+          Whether this capability is supported by the model.
+
+      - `required CapabilitySupport ImageInput`
+
+        Whether the model accepts image content blocks.
+
+        - `required Boolean Supported`
+
+          Whether this capability is supported by the model.
+
+      - `required CapabilitySupport PdfInput`
+
+        Whether the model accepts PDF content blocks.
+
+        - `required Boolean Supported`
+
+          Whether this capability is supported by the model.
+
+      - `required CapabilitySupport StructuredOutputs`
+
+        Whether the model supports structured output / JSON mode / strict tool schemas.
+
+        - `required Boolean Supported`
+
+          Whether this capability is supported by the model.
+
+      - `required ThinkingCapability Thinking`
+
+        Thinking capability and supported type configurations.
+
+        - `required Boolean Supported`
+
+          Whether this capability is supported by the model.
+
+        - `required ThinkingTypes Types`
+
+          Supported thinking type configurations.
+
+          - `required CapabilitySupport Adaptive`
+
+            Whether the model supports thinking with type 'adaptive' (auto).
+
+            - `required Boolean Supported`
+
+              Whether this capability is supported by the model.
+
+          - `required CapabilitySupport Enabled`
+
+            Whether the model supports thinking with type 'enabled'.
+
+            - `required Boolean Supported`
+
+              Whether this capability is supported by the model.
+
     - `required DateTimeOffset CreatedAt`
 
       RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
@@ -87,6 +239,14 @@ The Models API response can be used to determine which models are available for 
     - `required string DisplayName`
 
       A human-readable name for the model.
+
+    - `required Long? MaxInputTokens`
+
+      Maximum input context window size in tokens for this model.
+
+    - `required Long? MaxTokens`
+
+      Maximum value for the `max_tokens` parameter when using this model.
 
     - `JsonElement Type "model"constant`
 
