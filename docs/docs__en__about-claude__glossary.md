@@ -36,7 +36,7 @@ Model Context Protocol (MCP) is an open protocol that standardizes how applicati
 
 ## MCP connector
 
-The MCP connector is a feature that allows API users to connect to MCP servers directly from the Messages API without building an MCP client. This enables seamless integration with MCP-compatible tools and services through the Claude API. The MCP connector supports features like tool calling and is available in public beta. See our [MCP connector documentation](/docs/en/agents-and-tools/mcp-connector) to learn more.
+The MCP connector is a feature that allows API users to connect to MCP servers directly from the Messages API without building an MCP client. This enables seamless integration with MCP-compatible tools and services through the Claude API. The MCP connector supports features like tool calling and is available in beta. See the [MCP connector documentation](/docs/en/agents-and-tools/mcp-connector) to learn more.
 
 ## Pretraining
 

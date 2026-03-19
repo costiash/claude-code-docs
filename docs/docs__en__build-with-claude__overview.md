@@ -14,6 +14,19 @@ Claude's API surface is organized into five areas:
 
 If you're new, start with [model capabilities](#model-capabilities) and [tools](#tools). Return to the other sections when you're ready to optimize cost, latency, or scale.
 
+## Feature availability
+
+Features on the Claude Platform are assigned one of the following availability classifications per platform (shown in the Availability column of each table below). Not all features pass through every stage. A feature may enter at any classification and may skip stages.
+
+| Classification | Description |
+|----------------|-------------|
+| **Beta**<sup>*</sup> | Preview features used for gathering feedback and iterating on a less mature use case. Availability may be limited, including through sign-up requirements or waitlists, and may not be publicly announced. <br/><br/> Features may change significantly or be discontinued based on feedback. Not guaranteed for ongoing production use. Breaking changes are possible with notice, and some platform-specific limitations may apply. Beta features have a [beta header](/docs/en/api/beta-headers). |
+| **Generally available (GA)** | Feature is stable, fully supported, and recommended for production use. Should not have a beta header or other indicator that the feature is in a preview state. Covered by standard API [versioning](/docs/en/api/versioning) guarantees. |
+| **Deprecated** | Feature is still functional but no longer recommended. A migration path and removal timeline are provided. |
+| **Retired** | Feature is no longer available. |
+
+_<sup>*</sup> May carry a qualifier indicating narrower availability or added constraints (for example, "beta: research preview"). See the feature's page for details._
+
 ## Model capabilities
 
 Ways to steer Claude and Claude's direct outputs, including response format, reasoning depth, and input modalities.

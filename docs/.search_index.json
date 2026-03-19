@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-19T15:26:04Z",
+  "generated_at": "2026-03-19T18:27:23Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -1260,7 +1260,7 @@
         "window",
         "large"
       ],
-      "word_count": 1376,
+      "word_count": 1375,
       "file_path": "docs/docs__en__about-claude__glossary.md"
     },
     "/docs/en/about-claude/model-deprecations": {
@@ -1269,16 +1269,16 @@
       "keywords": [
         "model",
         "models",
-        "retirement",
         "claude",
+        "retirement",
         "anthropic",
         "deprecated",
         "date",
+        "recommended",
         "active",
         "note",
-        "recommended",
-        "retired",
         "replacement",
+        "retired",
         "february",
         "than",
         "november",
@@ -1288,7 +1288,7 @@
         "sooner",
         "api"
       ],
-      "word_count": 1124,
+      "word_count": 1116,
       "file_path": "docs/docs__en__about-claude__model-deprecations.md"
     },
     "/docs/en/about-claude/models/choosing-a-model": {
@@ -1316,7 +1316,7 @@
         "these",
         "what"
       ],
-      "word_count": 609,
+      "word_count": 610,
       "file_path": "docs/docs__en__about-claude__models__choosing-a-model.md"
     },
     "/docs/en/about-claude/models/migration-guide": {
@@ -1393,14 +1393,14 @@
         "model",
         "output",
         "mode",
-        "new",
         "beta",
+        "new",
         "code",
         "api",
         "token",
         "now"
       ],
-      "word_count": 1048,
+      "word_count": 1049,
       "file_path": "docs/docs__en__about-claude__models__whats-new-claude-4-6.md"
     },
     "/docs/en/about-claude/pricing": {
@@ -1428,7 +1428,7 @@
         "additional",
         "request"
       ],
-      "word_count": 3224,
+      "word_count": 3225,
       "file_path": "docs/docs__en__about-claude__pricing.md"
     },
     "/docs/en/about-claude/use-case-guides/content-moderation": {
@@ -10081,7 +10081,7 @@
         "number",
         "organization"
       ],
-      "word_count": 2970,
+      "word_count": 2972,
       "file_path": "docs/docs__en__api__rate-limits.md"
     },
     "/docs/en/api/ruby/beta": {
@@ -13281,8 +13281,8 @@
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
-      "title": "Fast mode (research preview)",
-      "content_preview": "# Fast mode (research preview)  Higher output speed for Claude Opus 4.6, delivering significantly faster token generation for latency-sensitive and agentic workflows.  ---  Fast mode provides signific...",
+      "title": "Fast mode (beta: research preview)",
+      "content_preview": "# Fast mode (beta: research preview)  Higher output speed for Claude Opus 4.6, delivering significantly faster token generation for latency-sensitive and agentic workflows.  ---  Fast mode provides si...",
       "keywords": [
         "fast",
         "mode",
@@ -13305,7 +13305,7 @@
         "card",
         "model"
       ],
-      "word_count": 2194,
+      "word_count": 2196,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -13398,26 +13398,26 @@
       "keywords": [
         "platformavailability",
         "azureaibeta",
-        "claudeapi",
         "claude",
+        "claudeapi",
         "vertexai",
         "bedrock",
+        "feature",
         "tools",
         "tool",
         "context",
+        "availability",
         "api",
         "web",
+        "features",
         "capabilities",
         "files",
-        "search",
-        "model",
-        "when",
-        "feature",
+        "may",
         "description",
-        "availability",
-        "thinking"
+        "search",
+        "model"
       ],
-      "word_count": 1159,
+      "word_count": 1369,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
@@ -13669,7 +13669,7 @@
         "tab",
         "example"
       ],
-      "word_count": 11399,
+      "word_count": 11398,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/token-counting": {
@@ -13725,7 +13725,7 @@
         "filter",
         "tip"
       ],
-      "word_count": 1456,
+      "word_count": 1457,
       "file_path": "docs/docs__en__build-with-claude__usage-cost-api.md"
     },
     "/docs/en/build-with-claude/vision": {

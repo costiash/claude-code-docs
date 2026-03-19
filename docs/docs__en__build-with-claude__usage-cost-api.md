@@ -162,7 +162,7 @@ bucket_width=1d" \
 Models released before February 2026 (prior to Claude Opus 4.6) don't support the `inference_geo` request parameter, so their usage reports return `"not_available"` for this dimension. You can use `not_available` as a filter value in `inference_geos[]` to target those models.
 </Note>
 
-#### Fast mode (research preview)
+#### Fast mode (beta: research preview)
 
 Track [fast mode](/docs/en/build-with-claude/fast-mode) usage by grouping and filtering with the `speed` dimension. This is useful for monitoring standard vs. fast mode usage.
 
