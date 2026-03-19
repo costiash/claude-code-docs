@@ -257,7 +257,7 @@ _<sup>* - Opus 4.1 does not allow both `temperature` and `top_p` parameters to b
 ### December 17th, 2024
 The following features are now generally available in the Claude API:
 
-- [Models API](/docs/en/api/models-list): Query available models, validate model IDs, and resolve [model aliases](/docs/en/about-claude/models#model-names) to their canonical model IDs.
+- [Models API](/docs/en/api/models/list): Query available models, validate model IDs, and resolve [model aliases](/docs/en/about-claude/models#model-names) to their canonical model IDs.
 - [Message Batches API](/docs/en/build-with-claude/batch-processing): Process large batches of messages asynchronously at 50% of the standard API cost.
 - [Token counting API](/docs/en/build-with-claude/token-counting): Calculate token counts for Messages before sending them to Claude.
 - [Prompt Caching](/docs/en/build-with-claude/prompt-caching): Reduce costs by up to 90% and latency by up to 80% by caching and reusing prompt content.

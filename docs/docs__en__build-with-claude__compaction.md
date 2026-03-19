@@ -128,9 +128,10 @@ messages.push({
 });
 ```
 
-```csharp C# nocheck
+```csharp C#
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Beta.Messages;
@@ -148,7 +149,7 @@ class Program
 
         var parameters = new MessageCreateParams
         {
-            Betas = new[] { "compact-2026-01-12" },
+            Betas = ["compact-2026-01-12"],
             Model = "claude-opus-4-6",
             MaxTokens = 4096,
             Messages = messages,
@@ -161,7 +162,11 @@ class Program
         var response = await client.Beta.Messages.Create(parameters);
 
         // Append the response (including any compaction block) to continue the conversation
-        messages.Add(new BetaMessageParam { Role = Role.Assistant, Content = response.Content });
+        messages.Add(new BetaMessageParam
+        {
+            Role = Role.Assistant,
+            Content = response.Content.Select(b => new BetaContentBlockParam(b.Json)).ToList()
+        });
 
         Console.WriteLine(response);
     }
@@ -207,7 +212,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..9,-1}
+```java Java hidelines={1..9,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -353,8 +358,9 @@ const response = await client.beta.messages.create({
 } as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
 ```
 
-```csharp C# nocheck
+```csharp C# hidelines={1..12,-2..-1}
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Beta.Messages;
@@ -364,12 +370,13 @@ class Program
     static async Task Main(string[] args)
     {
         AnthropicClient client = new();
+        List<BetaMessageParam> messages = [new() { Role = Role.User, Content = "Hello" }];
 
         var parameters = new MessageCreateParams
         {
             Model = "claude-opus-4-6",
             MaxTokens = 4096,
-            Betas = new[] { "compact-2026-01-12" },
+            Betas = ["compact-2026-01-12"],
             Messages = messages,
             ContextManagement = new BetaContextManagementConfig
             {
@@ -420,7 +427,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..11,-1}
+```java Java hidelines={1..11,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -564,7 +571,7 @@ const response = await client.beta.messages.create({
 } as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
 ```
 
-```csharp C# nocheck
+```csharp C#
 using System;
 using System.Threading.Tasks;
 using Anthropic;
@@ -578,15 +585,15 @@ class Program
 
         var parameters = new MessageCreateParams
         {
-            Betas = new[] { "compact-2026-01-12" },
+            Betas = ["compact-2026-01-12"],
             Model = "claude-opus-4-6",
             MaxTokens = 4096,
-            Messages = new[]
-            {
+            Messages =
+            [
                 new BetaMessageParam { Role = Role.User, Content = "Help me build a Python web scraper" },
                 new BetaMessageParam { Role = Role.Assistant, Content = "I'll help you build a web scraper..." },
                 new BetaMessageParam { Role = Role.User, Content = "Add support for JavaScript-rendered pages" }
-            },
+            ],
             ContextManagement = new BetaContextManagementConfig
             {
                 Edits = [new BetaCompact20260112Edit
@@ -639,7 +646,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..11,-1}
+```java Java hidelines={1..11,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -807,11 +814,12 @@ if ((response.stop_reason as string) === "compaction") {
 }
 ```
 
-```csharp C# nocheck
+```csharp C#
 using Anthropic;
 using Anthropic.Models.Beta.Messages;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 class Program
@@ -825,7 +833,7 @@ class Program
         {
             Model = "claude-opus-4-6",
             MaxTokens = 4096,
-            Betas = new[] { "compact-2026-01-12" },
+            Betas = ["compact-2026-01-12"],
             Messages = messages,
             ContextManagement = new BetaContextManagementConfig
             {
@@ -838,19 +846,19 @@ class Program
 
         var response = await client.Beta.Messages.Create(parameters);
 
-        if (response.StopReason == "compaction")
+        if (response.StopReason == BetaStopReason.Compaction)
         {
             messages.Add(new BetaMessageParam
             {
                 Role = Role.Assistant,
-                Content = response.Content
+                Content = response.Content.Select(b => new BetaContentBlockParam(b.Json)).ToList()
             });
 
-            parameters = new MessageCreateParams
+            parameters = new()
             {
                 Model = "claude-opus-4-6",
                 MaxTokens = 4096,
-                Betas = new[] { "compact-2026-01-12" },
+                Betas = ["compact-2026-01-12"],
                 Messages = messages,
                 ContextManagement = new BetaContextManagementConfig
                 {
@@ -922,7 +930,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..12,-1}
+```java Java hidelines={1..12,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -990,7 +998,7 @@ $response = $client->beta->messages->create(
         'edits' => [
             [
                 'type' => 'compact_20260112',
-                'pause_after_compaction' => true
+                'pauseAfterCompaction' => true
             ]
         ]
     ]
@@ -1190,11 +1198,12 @@ const nextResponse = await client.beta.messages.create({
 } as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
 ```
 
-```csharp C# nocheck
+```csharp C#
 using Anthropic;
 using Anthropic.Models.Beta.Messages;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 class Program
@@ -1208,7 +1217,7 @@ class Program
             new() { Role = Role.User, Content = "Help me build a web scraper" }
         };
 
-        var response = await client.Beta.Messages.Create(new MessageCreateParams
+        var response = await client.Beta.Messages.Create(new()
         {
             Betas = ["compact-2026-01-12"],
             Model = "claude-opus-4-6",
@@ -1220,11 +1229,15 @@ class Program
             }
         });
 
-        messages.Add(new BetaMessageParam { Role = Role.Assistant, Content = response.Content });
+        messages.Add(new BetaMessageParam
+        {
+            Role = Role.Assistant,
+            Content = response.Content.Select(b => new BetaContentBlockParam(b.Json)).ToList()
+        });
 
         messages.Add(new BetaMessageParam { Role = Role.User, Content = "Now add error handling" });
 
-        var nextResponse = await client.Beta.Messages.Create(new MessageCreateParams
+        var nextResponse = await client.Beta.Messages.Create(new()
         {
             Betas = ["compact-2026-01-12"],
             Model = "claude-opus-4-6",
@@ -1294,7 +1307,7 @@ func main() {
 }
 ```
 
-```java Java nocheck
+```java Java
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -1496,8 +1509,9 @@ messages.push({
 });
 ```
 
-```csharp C# nocheck
+```csharp C# hidelines={1..12,-2..-1}
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Beta.Messages;
@@ -1507,6 +1521,7 @@ class Program
     static async Task Main(string[] args)
     {
         var client = new AnthropicClient();
+        List<BetaMessageParam> messages = [new() { Role = Role.User, Content = "Hello" }];
 
         var parameters = new MessageCreateParams
         {
@@ -1522,26 +1537,26 @@ class Program
 
         await foreach (var streamEvent in client.Beta.Messages.CreateStreaming(parameters))
         {
-            if (streamEvent.Type == "content_block_start")
+            if (streamEvent.TryPickContentBlockStart(out var startEvent))
             {
-                if (streamEvent.ContentBlock?.Type == "compaction")
+                if (startEvent.ContentBlock.TryPickBetaCompaction(out _))
                 {
                     Console.WriteLine("Compaction started...");
                 }
-                else if (streamEvent.ContentBlock?.Type == "text")
+                else if (startEvent.ContentBlock.TryPickBetaText(out _))
                 {
                     Console.WriteLine("Text response started...");
                 }
             }
-            else if (streamEvent.Type == "content_block_delta")
+            else if (streamEvent.TryPickContentBlockDelta(out var deltaEvent))
             {
-                if (streamEvent.Delta?.Type == "compaction_delta")
+                if (deltaEvent.Delta.TryPickCompaction(out var compactionDelta))
                 {
-                    Console.WriteLine($"Compaction complete: {streamEvent.Delta.Content.Length} chars");
+                    Console.WriteLine($"Compaction complete: {compactionDelta.Content?.Length ?? 0} chars");
                 }
-                else if (streamEvent.Delta?.Type == "text_delta")
+                else if (deltaEvent.Delta.TryPickText(out var textDelta))
                 {
-                    Console.Write(streamEvent.Delta.Text);
+                    Console.Write(textDelta.Text);
                 }
             }
         }
@@ -1600,7 +1615,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..10,-1}
+```java Java hidelines={1..10,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -1634,7 +1649,7 @@ public class CompactionStreamingExample {
 
                 event.contentBlockDelta().ifPresent(deltaEvent -> {
                     deltaEvent.delta().compaction().ifPresent(cd ->
-                        System.out.println("Compaction complete: " + cd.content().length() + " chars")
+                        System.out.println("Compaction complete: " + cd.content().map(String::length).orElse(0) + " chars")
                     );
                     deltaEvent.delta().text().ifPresent(td ->
                         System.out.print(td.text())
@@ -1796,8 +1811,9 @@ const response = await client.beta.messages.create({
 } as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
 ```
 
-```csharp C# nocheck
+```csharp C#
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Beta.Messages;
@@ -1810,19 +1826,18 @@ class Program
 
         var parameters = new MessageCreateParams
         {
-            Betas = new[] { "compact-2026-01-12" },
+            Betas = ["compact-2026-01-12"],
             Model = "claude-opus-4-6",
             MaxTokens = 4096,
-            System = new[]
+            System = new List<BetaTextBlockParam>
             {
-                new BetaTextBlockParam
+                new()
                 {
-                    Type = "text",
                     Text = "You are a helpful coding assistant...",
                     CacheControl = new BetaCacheControlEphemeral()
                 }
             },
-            Messages = Array.Empty<BetaMessageParam>(),
+            Messages = [],
             ContextManagement = new BetaContextManagementConfig
             {
                 Edits = [new BetaCompact20260112Edit()]
@@ -1872,7 +1887,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..14,-1}
+```java Java hidelines={1..14,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -2049,8 +2064,9 @@ console.log(`Current tokens: ${countResponse.input_tokens}`);
 console.log(`Original tokens: ${countResponse.context_management!.original_input_tokens}`);
 ```
 
-```csharp C# nocheck
+```csharp C# hidelines={1..12,-2..-1}
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Beta.Messages;
@@ -2060,6 +2076,7 @@ class Program
     static async Task Main(string[] args)
     {
         AnthropicClient client = new();
+        List<BetaMessageParam> messages = [new() { Role = Role.User, Content = "Hello" }];
 
         var countParams = new MessageCountTokensParams
         {
@@ -2074,7 +2091,7 @@ class Program
 
         var countResponse = await client.Beta.Messages.CountTokens(countParams);
         Console.WriteLine($"Current tokens: {countResponse.InputTokens}");
-        Console.WriteLine($"Original tokens: {countResponse.ContextManagement.OriginalInputTokens}");
+        Console.WriteLine($"Original tokens: {countResponse.ContextManagement?.OriginalInputTokens}");
     }
 }
 ```
@@ -2112,7 +2129,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..11,-1}
+```java Java hidelines={1..11,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.BetaMessageTokensCount;
@@ -2268,7 +2285,7 @@ console.log(await chat("Now add rate limiting and error handling"));
 // ... continue as long as needed
 ```
 
-```csharp C# nocheck
+```csharp C#
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2294,7 +2311,7 @@ public class Program
 
         var parameters = new MessageCreateParams
         {
-            Betas = new[] { "compact-2026-01-12" },
+            Betas = ["compact-2026-01-12"],
             Model = "claude-opus-4-6",
             MaxTokens = 4096,
             Messages = messages,
@@ -2309,9 +2326,17 @@ public class Program
 
         var response = await client.Beta.Messages.Create(parameters);
 
-        messages.Add(new() { Role = Role.Assistant, Content = response.Content });
+        messages.Add(new()
+        {
+            Role = Role.Assistant,
+            Content = response.Content.Select(b => new BetaContentBlockParam(b.Json)).ToList()
+        });
 
-        return response.Content.FirstOrDefault(block => block.Type == "text")?.Text ?? "";
+        return response.Content
+            .Select(b => b.Value)
+            .OfType<BetaTextBlock>()
+            .Select(tb => tb.Text)
+            .FirstOrDefault() ?? "";
     }
 }
 ```
@@ -2368,7 +2393,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..12,-1}
+```java Java hidelines={1..12,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -2499,7 +2524,7 @@ puts chat(client, messages, "Now add rate limiting and error handling")
 ```
 </CodeGroup>
 
-Here's an example that uses `pause_after_compaction` to preserve the last two messages (one user + one assistant turn) verbatim instead of summarizing them:
+Here's an example that uses `pause_after_compaction` to preserve the prior exchange and the current user message (three messages total) verbatim instead of summarizing them:
 
 <CodeGroup>
 ```python Python
@@ -2535,9 +2560,9 @@ def chat(user_message: str) -> str:
         # Get the compaction block from the response
         compaction_block = response.content[0]
 
-        # Preserve the last 2 messages (1 user + 1 assistant turn)
+        # Preserve the prior exchange + current user message (3 messages)
         # by including them after the compaction block
-        preserved_messages = messages[-2:] if len(messages) >= 2 else messages
+        preserved_messages = messages[-3:] if len(messages) >= 3 else messages
 
         # Build new message list: compaction + preserved messages
         new_assistant_content = [compaction_block]
@@ -2603,9 +2628,9 @@ async function chat(userMessage: string): Promise<string> {
     // Get the compaction block from the response
     const compactionBlock = response.content[0];
 
-    // Preserve the last 2 messages (1 user + 1 assistant turn)
+    // Preserve the prior exchange + current user message (3 messages)
     // by including them after the compaction block
-    const preservedMessages = messages.length >= 2 ? messages.slice(-2) : [...messages];
+    const preservedMessages = messages.length >= 3 ? messages.slice(-3) : [...messages];
 
     // Build new message list: compaction + preserved messages
     const messagesAfterCompaction: Anthropic.Beta.BetaMessageParam[] = [
@@ -2643,7 +2668,7 @@ console.log(await chat("Now add rate limiting and error handling"));
 // ... continue as long as needed
 ```
 
-```csharp C# nocheck
+```csharp C#
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2660,9 +2685,9 @@ public class CompactionExample
     {
         messages.Add(new() { Role = Role.User, Content = userMessage });
 
-        var response = await client.Beta.Messages.Create(new MessageCreateParams
+        var response = await client.Beta.Messages.Create(new()
         {
-            Betas = new[] { "compact-2026-01-12" },
+            Betas = ["compact-2026-01-12"],
             Model = "claude-opus-4-6",
             MaxTokens = 4096,
             Messages = messages,
@@ -2676,23 +2701,28 @@ public class CompactionExample
             }
         });
 
-        if (response.StopReason == "compaction")
+        if (response.StopReason == BetaStopReason.Compaction)
         {
-            var compactionBlock = response.Content[0];
+            if (!response.Content[0].TryPickCompaction(out var cb))
+                throw new InvalidOperationException("Expected compaction block");
 
-            var preserved = messages.Count >= 2
-                ? messages.Skip(messages.Count - 2).ToList()
+            var preserved = messages.Count >= 3
+                ? messages.Skip(messages.Count - 3).ToList()
                 : new List<BetaMessageParam>(messages);
 
             var messagesAfterCompaction = new List<BetaMessageParam>
             {
-                new() { Role = Role.Assistant, Content = new[] { compactionBlock } }
+                new()
+                {
+                    Role = Role.Assistant,
+                    Content = new List<BetaContentBlockParam> { new BetaCompactionBlockParam(cb.Content) }
+                }
             };
             messagesAfterCompaction.AddRange(preserved);
 
-            response = await client.Beta.Messages.Create(new MessageCreateParams
+            response = await client.Beta.Messages.Create(new()
             {
-                Betas = new[] { "compact-2026-01-12" },
+                Betas = ["compact-2026-01-12"],
                 Model = "claude-opus-4-6",
                 MaxTokens = 4096,
                 Messages = messagesAfterCompaction,
@@ -2705,9 +2735,17 @@ public class CompactionExample
             messages = messagesAfterCompaction;
         }
 
-        messages.Add(new() { Role = Role.Assistant, Content = response.Content });
+        messages.Add(new()
+        {
+            Role = Role.Assistant,
+            Content = response.Content.Select(b => new BetaContentBlockParam(b.Json)).ToList()
+        });
 
-        return response.Content.FirstOrDefault(block => block.Type == "text")?.Text ?? "";
+        return response.Content
+            .Select(b => b.Value)
+            .OfType<BetaTextBlock>()
+            .Select(tb => tb.Text)
+            .FirstOrDefault() ?? "";
     }
 
     static async Task Main()
@@ -2761,8 +2799,8 @@ func chat(userMessage string) string {
 		compactionParam := response.Content[0].ToParam()
 
 		var preserved []anthropic.BetaMessageParam
-		if len(messages) >= 2 {
-			preserved = messages[len(messages)-2:]
+		if len(messages) >= 3 {
+			preserved = messages[len(messages)-3:]
 		} else {
 			preserved = messages
 		}
@@ -2807,7 +2845,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..12,-1}
+```java Java hidelines={1..12,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -2850,9 +2888,9 @@ public class CompactionExample {
         // Check if compaction occurred and paused
         if (response.stopReason().isPresent()
                 && response.stopReason().get().equals(BetaStopReason.COMPACTION)) {
-            // Preserve the last 2 messages (1 user + 1 assistant turn)
-            List<BetaMessageParam> preservedMessages = messages.size() >= 2
-                ? new ArrayList<>(messages.subList(messages.size() - 2, messages.size()))
+            // Preserve the prior exchange + current user message (3 messages)
+            List<BetaMessageParam> preservedMessages = messages.size() >= 3
+                ? new ArrayList<>(messages.subList(messages.size() - 3, messages.size()))
                 : new ArrayList<>(messages);
 
             // Build new message list: compaction + preserved messages
@@ -2917,7 +2955,7 @@ function chat($client, &$messages, $userMessage) {
                 [
                     'type' => 'compact_20260112',
                     'trigger' => ['type' => 'input_tokens', 'value' => 100000],
-                    'pause_after_compaction' => true
+                    'pauseAfterCompaction' => true
                 ]
             ]
         ]
@@ -2926,8 +2964,8 @@ function chat($client, &$messages, $userMessage) {
     if ($response->stopReason === 'compaction') {
         $compactionBlock = $response->content[0];
 
-        $preserved = count($messages) >= 2
-            ? array_slice($messages, -2)
+        $preserved = count($messages) >= 3
+            ? array_slice($messages, -3)
             : $messages;
 
         $messagesAfterCompaction = array_merge(
@@ -2991,7 +3029,7 @@ def chat(client, messages, user_message)
   if response.stop_reason == :compaction
     compaction_block = response.content[0]
 
-    preserved = messages.length >= 2 ? messages[-2..-1] : messages.dup
+    preserved = messages.length >= 3 ? messages[-3..-1] : messages.dup
 
     messages_after_compaction = [
       { role: "assistant", content: [compaction_block] }

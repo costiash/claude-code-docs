@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-18T21:20:26Z",
+  "generated_at": "2026-03-19T00:40:44Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -14,13 +14,13 @@
         "improved",
         "code",
         "sessions",
-        "now",
         "being",
+        "now",
         "instead",
-        "command",
-        "tool",
-        "after",
         "session",
+        "command",
+        "after",
+        "tool",
         "mode",
         "commands",
         "memory",
@@ -28,7 +28,7 @@
         "mcp",
         "bash"
       ],
-      "word_count": 23767,
+      "word_count": 24014,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -168,7 +168,7 @@
         "system",
         "load"
       ],
-      "word_count": 1752,
+      "word_count": 1766,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -440,15 +440,15 @@
         "command",
         "input",
         "example",
-        "session",
         "exit",
+        "session",
         "matcher",
         "after",
         "prompt",
         "reference",
         "block"
       ],
-      "word_count": 4489,
+      "word_count": 4564,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -470,13 +470,13 @@
         "prompt",
         "decision",
         "control",
-        "session",
-        "file",
         "exit",
         "only",
+        "session",
+        "output",
         "runs"
       ],
-      "word_count": 12106,
+      "word_count": 12407,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -680,12 +680,12 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Model configura...",
       "keywords": [
         "model",
-        "opus",
-        "environment",
         "code",
-        "set",
-        "when",
+        "opus",
         "claude",
+        "set",
+        "environment",
+        "when",
         "context",
         "settings",
         "sonnet",
@@ -693,14 +693,14 @@
         "version",
         "uses",
         "effort",
+        "variables",
         "setting",
         "users",
-        "variables",
-        "caching",
-        "specific",
-        "usage"
+        "default",
+        "ids",
+        "caching"
       ],
-      "word_count": 1999,
+      "word_count": 2127,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -812,7 +812,7 @@
         "build",
         "tasks"
       ],
-      "word_count": 1465,
+      "word_count": 1420,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -828,11 +828,11 @@
         "see",
         "add",
         "code",
-        "repository",
         "directory",
         "paths",
-        "sources",
+        "repository",
         "claude",
+        "sources",
         "create",
         "url",
         "github",
@@ -840,7 +840,7 @@
         "example",
         "files"
       ],
-      "word_count": 4764,
+      "word_count": 4799,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -849,26 +849,26 @@
       "keywords": [
         "plugin",
         "server",
+        "when",
         "claude",
         "plugins",
         "directory",
         "code",
-        "when",
         "mcp",
         "files",
-        "lsp",
         "file",
+        "lsp",
         "commands",
+        "default",
         "language",
         "command",
         "paths",
         "install",
-        "default",
+        "configuration",
         "scope",
-        "string",
-        "see"
+        "string"
       ],
-      "word_count": 3789,
+      "word_count": 3986,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -933,18 +933,18 @@
       "keywords": [
         "sandbox",
         "access",
+        "permission",
         "commands",
         "network",
-        "permission",
-        "claude",
         "settings",
+        "claude",
         "code",
         "sandboxing",
+        "paths",
         "security",
         "bash",
-        "paths",
-        "allow",
         "filesystem",
+        "allow",
         "when",
         "through",
         "tools",
@@ -952,7 +952,7 @@
         "sandboxed",
         "isolation"
       ],
-      "word_count": 2380,
+      "word_count": 2429,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -990,25 +990,25 @@
         "settings",
         "managed",
         "claude",
-        "see",
         "project",
+        "see",
         "only",
         "user",
         "when",
         "default",
         "code",
         "configuration",
-        "file",
         "hooks",
+        "file",
         "marketplace",
         "files",
+        "paths",
+        "permission",
         "set",
         "example",
-        "permission",
-        "paths",
         "marketplaces"
       ],
-      "word_count": 5961,
+      "word_count": 6012,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1110,8 +1110,8 @@
         "agent",
         "tools",
         "tool",
-        "only",
         "session",
+        "only",
         "prompt",
         "specific",
         "step",
@@ -1120,7 +1120,7 @@
         "task",
         "model"
       ],
-      "word_count": 5924,
+      "word_count": 5940,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1215,9 +1215,9 @@
         "claude",
         "open",
         "extension",
+        "new",
         "panel",
         "icon",
-        "new",
         "conversation",
         "click",
         "see",
@@ -1232,7 +1232,7 @@
         "install",
         "windows"
       ],
-      "word_count": 3837,
+      "word_count": 3853,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
@@ -13109,7 +13109,7 @@
         "usage",
         "note"
       ],
-      "word_count": 8156,
+      "word_count": 8181,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -13417,7 +13417,7 @@
         "availability",
         "thinking"
       ],
-      "word_count": 1158,
+      "word_count": 1159,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
