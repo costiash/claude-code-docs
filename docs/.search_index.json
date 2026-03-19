@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-19T03:59:45Z",
+  "generated_at": "2026-03-19T06:31:19Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -1232,7 +1232,7 @@
         "install",
         "windows"
       ],
-      "word_count": 3853,
+      "word_count": 4239,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
