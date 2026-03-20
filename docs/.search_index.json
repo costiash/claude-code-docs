@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-20T15:25:00Z",
+  "generated_at": "2026-03-20T18:22:28Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -162,13 +162,13 @@
         "name",
         "json",
         "model",
+        "mcp",
         "flag",
         "agent",
-        "enable",
         "permission",
         "system"
       ],
-      "word_count": 1820,
+      "word_count": 1824,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -998,17 +998,17 @@
         "default",
         "code",
         "configuration",
+        "marketplace",
         "hooks",
         "file",
-        "marketplace",
         "files",
         "paths",
-        "permission",
         "set",
+        "permission",
         "example",
         "marketplaces"
       ],
-      "word_count": 6042,
+      "word_count": 6131,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1051,10 +1051,10 @@
         "content",
         "invoke",
         "code",
+        "only",
         "reference",
         "subagent",
         "context",
-        "only",
         "frontmatter",
         "automatically",
         "example",
@@ -1064,7 +1064,7 @@
         "commands",
         "note"
       ],
-      "word_count": 4459,
+      "word_count": 4489,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1078,21 +1078,21 @@
         "claude",
         "code",
         "git",
+        "window",
         "session",
+        "codegroup",
         "statusline",
         "output",
-        "codegroup",
+        "usage",
         "json",
         "directory",
-        "window",
         "frame",
         "nibzeslajvh",
         "ydoq",
         "images",
-        "png",
-        "name"
+        "png"
       ],
-      "word_count": 4808,
+      "word_count": 5140,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
