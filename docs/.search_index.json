@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-20T00:38:18Z",
+  "generated_at": "2026-03-20T03:55:25Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -448,7 +448,7 @@
         "reference",
         "block"
       ],
-      "word_count": 4564,
+      "word_count": 4565,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -471,12 +471,12 @@
         "decision",
         "control",
         "exit",
-        "only",
         "session",
+        "only",
         "output",
         "runs"
       ],
-      "word_count": 12407,
+      "word_count": 12421,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -682,17 +682,17 @@
         "model",
         "code",
         "opus",
-        "claude",
         "set",
         "environment",
         "when",
+        "claude",
         "context",
         "settings",
         "sonnet",
         "models",
+        "effort",
         "version",
         "uses",
-        "effort",
         "variables",
         "setting",
         "users",
@@ -700,7 +700,7 @@
         "ids",
         "caching"
       ],
-      "word_count": 2127,
+      "word_count": 2175,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -840,7 +840,7 @@
         "example",
         "files"
       ],
-      "word_count": 4799,
+      "word_count": 4800,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -1080,19 +1080,19 @@
         "git",
         "session",
         "statusline",
+        "output",
         "codegroup",
         "json",
-        "output",
+        "directory",
         "window",
         "frame",
         "nibzeslajvh",
         "ydoq",
         "images",
         "png",
-        "name",
-        "directory"
+        "name"
       ],
-      "word_count": 4737,
+      "word_count": 4808,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1120,7 +1120,7 @@
         "task",
         "model"
       ],
-      "word_count": 5940,
+      "word_count": 5974,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
