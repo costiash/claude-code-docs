@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-20T12:21:23Z",
+  "generated_at": "2026-03-20T15:25:00Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -840,7 +840,7 @@
         "example",
         "files"
       ],
-      "word_count": 4800,
+      "word_count": 4787,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -1106,10 +1106,10 @@
         "code",
         "main",
         "conversation",
-        "context",
-        "agent",
         "tools",
+        "context",
         "tool",
+        "agent",
         "session",
         "only",
         "prompt",
@@ -1118,9 +1118,9 @@
         "run",
         "hooks",
         "task",
-        "model"
+        "uses"
       ],
-      "word_count": 5974,
+      "word_count": 6062,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
