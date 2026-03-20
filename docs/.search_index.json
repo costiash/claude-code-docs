@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-20T18:22:28Z",
+  "generated_at": "2026-03-20T21:16:40Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -946,13 +946,13 @@
         "filesystem",
         "allow",
         "when",
+        "configuration",
         "through",
         "tools",
-        "configuration",
         "sandboxed",
         "isolation"
       ],
-      "word_count": 2429,
+      "word_count": 2475,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -1048,23 +1048,23 @@
         "skills",
         "when",
         "files",
-        "content",
         "invoke",
         "code",
-        "only",
-        "reference",
-        "subagent",
         "context",
-        "frontmatter",
-        "automatically",
-        "example",
-        "run",
         "file",
-        "create",
-        "commands",
-        "note"
+        "reference",
+        "content",
+        "only",
+        "automatically",
+        "directory",
+        "load",
+        "session",
+        "what",
+        "frontmatter",
+        "them",
+        "name"
       ],
-      "word_count": 4489,
+      "word_count": 4495,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
