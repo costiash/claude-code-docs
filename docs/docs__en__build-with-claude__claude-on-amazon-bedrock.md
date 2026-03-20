@@ -50,14 +50,14 @@ go get github.com/anthropics/anthropic-sdk-go/bedrock
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-bedrock:2.15.0")
+implementation("com.anthropic:anthropic-java-bedrock:2.18.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.15.0</version>
+    <version>2.18.0</version>
 </dependency>
 ```
 

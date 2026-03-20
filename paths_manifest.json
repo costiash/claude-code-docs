@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-19T21:13:36.796313Z",
-    "total_paths": 671,
+    "generated_at": "2026-03-20T00:32:18.394314Z",
+    "total_paths": 673,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-03-19T21:13:36.796323Z"
+    "last_regenerated": "2026-03-20T00:32:18.394320Z"
   },
   "categories": {
     "core_documentation": [
@@ -76,6 +76,8 @@
       "/docs/en/build-with-claude/workspaces",
       "/docs/en/build-with-claude/zero-data-retention",
       "/docs/en/changelog",
+      "/docs/en/channels",
+      "/docs/en/channels-reference",
       "/docs/en/chrome",
       "/docs/en/code-review",
       "/docs/en/commands",

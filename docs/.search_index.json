@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-19T21:20:08Z",
+  "generated_at": "2026-03-20T00:38:18Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -14,21 +14,21 @@
         "improved",
         "code",
         "sessions",
-        "being",
         "now",
+        "being",
         "instead",
+        "tool",
         "session",
         "command",
-        "after",
-        "tool",
         "mode",
+        "after",
         "commands",
-        "memory",
         "file",
+        "memory",
         "mcp",
         "bash"
       ],
-      "word_count": 24014,
+      "word_count": 24289,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -164,11 +164,11 @@
         "model",
         "flag",
         "agent",
+        "enable",
         "permission",
-        "system",
-        "load"
+        "system"
       ],
-      "word_count": 1766,
+      "word_count": 1820,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -595,8 +595,8 @@
       "title": "Connect Claude Code to tools via MCP",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Connect Claude ...",
       "keywords": [
-        "servers",
         "mcp",
+        "servers",
         "server",
         "claude",
         "code",
@@ -616,7 +616,7 @@
         "configuration",
         "plugin"
       ],
-      "word_count": 6246,
+      "word_count": 6346,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -812,7 +812,7 @@
         "build",
         "tasks"
       ],
-      "word_count": 1420,
+      "word_count": 1471,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -1008,7 +1008,7 @@
         "example",
         "marketplaces"
       ],
-      "word_count": 6012,
+      "word_count": 6042,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -2408,7 +2408,7 @@
         "pdf",
         "note"
       ],
-      "word_count": 1527,
+      "word_count": 1528,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__quickstart.md"
     },
     "/docs/en/agents-and-tools/mcp-connector": {
@@ -2436,7 +2436,7 @@
         "version",
         "beta"
       ],
-      "word_count": 2697,
+      "word_count": 2698,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/remote-mcp-servers": {
@@ -2520,7 +2520,7 @@
         "edit",
         "web"
       ],
-      "word_count": 7344,
+      "word_count": 7365,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -11385,7 +11385,7 @@
         "vertex",
         "result"
       ],
-      "word_count": 2928,
+      "word_count": 3188,
       "file_path": "docs/docs__en__api__sdks__go.md"
     },
     "/docs/en/api/sdks/java": {
@@ -13277,7 +13277,7 @@
         "output",
         "streaming"
       ],
-      "word_count": 13405,
+      "word_count": 13388,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -13445,7 +13445,7 @@
         "analysis",
         "content"
       ],
-      "word_count": 2992,
+      "word_count": 3034,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -13457,23 +13457,23 @@
         "prompt",
         "tokens",
         "mtok",
-        "cached",
-        "content",
-        "blocks",
-        "claude",
         "block",
+        "cached",
+        "breakpoint",
+        "claude",
+        "content",
+        "request",
+        "blocks",
         "section",
         "system",
-        "when",
-        "breakpoint",
         "user",
+        "when",
         "breakpoints",
         "tool",
-        "input",
-        "request",
-        "more"
+        "requests",
+        "input"
       ],
-      "word_count": 14074,
+      "word_count": 14413,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {
@@ -13613,7 +13613,7 @@
         "using",
         "reference"
       ],
-      "word_count": 12063,
+      "word_count": 12074,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
@@ -13753,7 +13753,7 @@
         "per",
         "url"
       ],
-      "word_count": 4526,
+      "word_count": 4534,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {

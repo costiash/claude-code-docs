@@ -32,7 +32,7 @@ For more information, see [Differences in thinking across model versions](#diffe
 
 When extended thinking is turned on, Claude creates `thinking` content blocks where it outputs its internal reasoning. Claude incorporates insights from this reasoning before crafting a final response.
 
-The API response will include `thinking` content blocks, followed by `text` content blocks.
+The API response includes `thinking` content blocks, followed by `text` content blocks.
 
 Here's an example of the default response format:
 
@@ -98,7 +98,7 @@ response = client.messages.create(
     ],
 )
 
-# The response will contain summarized thinking blocks and text blocks
+# The response contains summarized thinking blocks and text blocks
 for block in response.content:
     if block.type == "thinking":
         print(f"\nThinking summary: {block.thinking}")
@@ -126,7 +126,7 @@ const response = await client.messages.create({
   ]
 });
 
-// The response will contain summarized thinking blocks and text blocks
+// The response contains summarized thinking blocks and text blocks
 for (const block of response.content) {
   if (block.type === "thinking") {
     console.log(`\nThinking summary: ${block.thinking}`);
@@ -424,7 +424,7 @@ for block in response.content:
 
 <Tab title="TypeScript">
 <Note>
-TypeScript SDK types do not yet include `display`. The type assertion passes it through at runtime; the SDK forwards unknown parameters to the API.
+TypeScript SDK types don't yet include `display`. The type assertion passes it through at runtime; the SDK forwards unknown parameters to the API.
 </Note>
 ```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
@@ -554,7 +554,10 @@ func main() {
 	req.Header.Set("anthropic-version", "2023-06-01")
 	req.Header.Set("content-type", "application/json")
 
-	resp, _ := http.DefaultClient.Do(req)
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		panic(err)
+	}
 	defer resp.Body.Close()
 	respBody, _ := io.ReadAll(resp.Body)
 
@@ -1196,10 +1199,10 @@ When using extended thinking with tool use, be aware of the following limitation
 
 ### Toggling thinking modes in conversations
 
-You cannot toggle thinking in the middle of an assistant turn, including during tool use loops. The entire assistant turn should operate in a single thinking mode:
+You can't toggle thinking in the middle of an assistant turn, including during tool use loops. The entire assistant turn should operate in a single thinking mode:
 
 - **If thinking is enabled**, the final assistant turn should start with a thinking block.
-- **If thinking is disabled**, the final assistant turn should not contain any thinking blocks
+- **If thinking is disabled**, the final assistant turn shouldn't contain any thinking blocks
 
 From the model's perspective, **tool use loops are part of the assistant turn**. An assistant turn doesn't complete until Claude finishes its full response, which may include multiple tool calls and results.
 
@@ -1484,7 +1487,7 @@ puts message
 
 </CodeGroup>
 
-The API response will include thinking, text, and tool_use blocks:
+The API response includes thinking, text, and tool_use blocks:
 
 ```json
 {
@@ -1549,7 +1552,7 @@ tool_use_block = next(
 weather_data = {"temperature": 88}
 
 # Second request - Include thinking block and tool result
-# No new thinking blocks will be generated in the response
+# No new thinking blocks are generated in the response
 continuation = client.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=16000,
@@ -1589,7 +1592,7 @@ const weatherData = { temperature: 88 };
 
 if (thinkingBlock && toolUseBlock) {
   // Second request - Include thinking block and tool result
-  // No new thinking blocks will be generated in the response
+  // No new thinking blocks are generated in the response
   const continuation = await client.messages.create({
     model: "claude-sonnet-4-6",
     max_tokens: 16000,
@@ -1984,7 +1987,7 @@ puts continuation
 
 </CodeGroup>
 
-The API response will now **only** include text
+The API response now includes **only** text
 
 ```json
 {
@@ -2004,23 +2007,23 @@ The API response will now **only** include text
 During tool use, you must pass `thinking` blocks back to the API, and you must include the complete unmodified block back to the API. This is critical for maintaining the model's reasoning flow and conversation integrity.
 
 <Tip>
-While you can omit `thinking` blocks from prior `assistant` role turns, always pass back all thinking blocks to the API for any multi-turn conversation. The API will:
-- Automatically filter the provided thinking blocks
-- Use the relevant thinking blocks necessary to preserve the model's reasoning
-- Only bill for the input tokens for the blocks shown to Claude
+While you can omit `thinking` blocks from prior `assistant` role turns, always pass back all thinking blocks to the API for any multi-turn conversation. The API:
+- Automatically filters the provided thinking blocks
+- Uses the relevant thinking blocks necessary to preserve the model's reasoning
+- Only bills for the input tokens for the blocks shown to Claude
 </Tip>
 
 <Note>
 When toggling thinking modes during a conversation, remember that the entire assistant turn (including tool use loops) must operate in a single thinking mode. For more details, see [Toggling thinking modes in conversations](#toggling-thinking-modes-in-conversations).
 </Note>
 
-When Claude invokes tools, it is pausing its construction of a response to await external information. When tool results are returned, Claude will continue building that existing response. This necessitates preserving thinking blocks during tool use, for a couple of reasons:
+When Claude invokes tools, it is pausing its construction of a response to await external information. When tool results are returned, Claude continues building that existing response. This necessitates preserving thinking blocks during tool use, for a couple of reasons:
 
 1. **Reasoning continuity**: The thinking blocks capture Claude's step-by-step reasoning that led to tool requests. When you post tool results, including the original thinking ensures Claude can continue its reasoning from where it left off.
 
 2. **Context maintenance**: While tool results appear as user messages in the API structure, they're part of a continuous reasoning flow. Preserving thinking blocks maintains this conceptual flow across multiple API calls. For more information on context management, see the [guide on context windows](/docs/en/build-with-claude/context-windows).
 
-**Important**: When providing `thinking` blocks, the entire sequence of consecutive `thinking` blocks must match the outputs generated by the model during the original request; you cannot rearrange or modify the sequence of these blocks.
+**Important**: When providing `thinking` blocks, the entire sequence of consecutive `thinking` blocks must match the outputs generated by the model during the original request; you can't rearrange or modify the sequence of these blocks.
 
 ### Interleaved thinking
 
@@ -3729,7 +3732,7 @@ The billed output token count will **not** match the visible token count in the 
 
 ### Performance considerations
 
-- **Response times:** Be prepared for potentially longer response times due to the additional processing required for the reasoning process. Factor in that generating thinking blocks may increase overall response time.
+- **Response times:** Be prepared for longer response times due to additional processing. Generating thinking blocks increases overall response time.
 - **Streaming requirements:** The SDKs require streaming when `max_tokens` is greater than 21,333 to avoid HTTP timeouts on long-running requests. This is a client-side validation, not an API restriction. If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) to get the complete `Message` object without handling individual events. See [Streaming Messages](/docs/en/build-with-claude/streaming#get-the-final-message-without-handling-events) for details. When streaming, be prepared to handle both thinking and text content blocks as they arrive.
 - **Omitting thinking for latency:** If your application doesn't display thinking content, set `display: "omitted"` on the thinking configuration to reduce time-to-first-text-token. See [Controlling thinking display](#controlling-thinking-display).
 
@@ -3737,13 +3740,13 @@ The billed output token count will **not** match the visible token count in the 
 
 - Thinking isn't compatible with `temperature` or `top_k` modifications as well as [forced tool use](/docs/en/agents-and-tools/tool-use/implement-tool-use#forcing-tool-use).
 - When thinking is enabled, you can set `top_p` to values between 1 and 0.95.
-- You cannot pre-fill responses when thinking is enabled.
+- You can't pre-fill responses when thinking is enabled.
 - Changes to the thinking budget invalidate cached prompt prefixes that include messages. However, cached system prompts and tool definitions will continue to work when thinking parameters change.
 
 ### Usage guidelines
 
-- **Task selection:** Use extended thinking for particularly complex tasks that benefit from step-by-step reasoning like math, coding, and analysis.
-- **Context handling:** You do not need to remove previous thinking blocks yourself. The Claude API automatically ignores thinking blocks from previous turns and they are not included when calculating context usage.
+- **Task selection:** Use extended thinking for particularly complex tasks that benefit from step-by-step reasoning, like math, coding, and analysis.
+- **Context handling:** You don't need to remove previous thinking blocks yourself. The Claude API automatically ignores thinking blocks from previous turns and they aren't included when calculating context usage.
 - **Prompt engineering:** Review the [extended thinking prompting tips](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#leverage-thinking-and-interleaved-thinking-capabilities) if you want to maximize Claude's thinking capabilities.
 
 ## Next steps

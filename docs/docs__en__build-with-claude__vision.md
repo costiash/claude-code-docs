@@ -815,7 +815,9 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
 </Tip>
 
 <CodeGroup>
-```bash Shell
+```bash Shell hidelines={1..2}
+cd "$(mktemp -d)"
+curl -sSo image.jpg https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg
 # First, upload your image to the Files API
 curl -X POST https://api.anthropic.com/v1/files \
   -H "x-api-key: $ANTHROPIC_API_KEY" \

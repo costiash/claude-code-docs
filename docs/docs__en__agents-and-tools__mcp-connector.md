@@ -633,7 +633,7 @@ npm install @anthropic-ai/sdk @modelcontextprotocol/sdk
 
 Import the helpers from the beta namespace:
 
-```typescript
+```typescript nocheck
 import {
   mcpTools,
   mcpMessages,

@@ -239,7 +239,7 @@ if (fileId) {
 }
 ```
 
-```bash Shell
+```bash Shell nocheck
 # Extract file_id from response (using jq)
 FILE_ID=$(echo "$RESPONSE" | jq -r '.content[] | select(.type=="tool_use" and .name=="code_execution") | .content[] | select(.file_id) | .file_id')
 
