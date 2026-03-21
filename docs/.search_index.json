@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-21T18:16:30Z",
+  "generated_at": "2026-03-21T21:14:08Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -709,17 +709,17 @@
       "keywords": [
         "attributes",
         "metrics",
+        "events",
         "code",
         "tool",
-        "events",
         "claude",
         "when",
         "example",
-        "standard",
         "user",
+        "standard",
+        "prompt",
         "event",
         "default",
-        "prompt",
         "counter",
         "session",
         "logs",
@@ -728,7 +728,7 @@
         "request",
         "api"
       ],
-      "word_count": 2808,
+      "word_count": 2884,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -864,11 +864,11 @@
         "command",
         "paths",
         "install",
+        "agents",
         "configuration",
-        "scope",
-        "string"
+        "scope"
       ],
-      "word_count": 3986,
+      "word_count": 4032,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -1008,7 +1008,7 @@
         "example",
         "marketplaces"
       ],
-      "word_count": 6216,
+      "word_count": 6252,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1131,24 +1131,24 @@
         "code",
         "claude",
         "notification",
-        "enter",
         "iterm",
-        "notifications",
         "set",
         "settings",
+        "notifications",
+        "enter",
         "when",
+        "file",
         "line",
         "shift",
+        "ghostty",
+        "kitty",
         "terminals",
         "hooks",
-        "file",
+        "mode",
         "setup",
-        "works",
-        "command",
-        "configure",
-        "custom"
+        "works"
       ],
-      "word_count": 560,
+      "word_count": 632,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
