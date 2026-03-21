@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-20T21:16:40Z",
+  "generated_at": "2026-03-21T00:36:43Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -15,20 +15,20 @@
         "code",
         "sessions",
         "now",
-        "being",
         "instead",
+        "being",
         "tool",
         "session",
-        "command",
         "mode",
+        "command",
         "after",
         "commands",
-        "file",
         "memory",
+        "file",
         "mcp",
         "bash"
       ],
-      "word_count": 24289,
+      "word_count": 24720,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -280,7 +280,7 @@
         "file",
         "configuration"
       ],
-      "word_count": 6147,
+      "word_count": 6154,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -993,22 +993,22 @@
         "project",
         "see",
         "only",
-        "user",
         "when",
-        "default",
+        "user",
         "code",
+        "default",
         "configuration",
         "marketplace",
         "hooks",
         "file",
+        "set",
         "files",
         "paths",
-        "set",
         "permission",
         "example",
         "marketplaces"
       ],
-      "word_count": 6131,
+      "word_count": 6216,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {

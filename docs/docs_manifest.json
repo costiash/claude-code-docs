@@ -2781,8 +2781,8 @@
     "claude-code__desktop.md": {
       "original_url": "https://platform.claude.com/docs/en/desktop",
       "original_md_url": "https://platform.claude.com/docs/en/desktop.md",
-      "hash": "5ccc7b3a233e7ca694404904527777464f5f4101e8d2cc9c01b1c38a6f363633",
-      "last_updated": "2026-03-18T12:28:26.181650"
+      "hash": "ccc0cb823b26c16f38eeed898241e997213f1fc885cf08d29407a240e4a9a245",
+      "last_updated": "2026-03-21T00:36:10.239687"
     },
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
@@ -2961,8 +2961,8 @@
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
       "original_md_url": "https://platform.claude.com/docs/en/settings.md",
-      "hash": "b9e667667e22b71c593e5f6e4aeb73c2ce40567f6b293e94f2dd9bd4e844f3b1",
-      "last_updated": "2026-03-20T18:22:15.378832"
+      "hash": "fa98eea5bfd44dbc41292be1d6f92771f9670e454402d3b0949f788e0ab1ee7d",
+      "last_updated": "2026-03-21T00:36:30.806567"
     },
     "claude-code__setup.md": {
       "original_url": "https://platform.claude.com/docs/en/setup",
@@ -3063,14 +3063,14 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "1a939b5e399c12a1d1cb2479c65206fc31e3427bce97ea30d036381102ef0522",
-      "last_updated": "2026-03-20T00:38:17.169790",
+      "hash": "d46412f25088414db6471c2b2607d4d568747286b2c906f8cc625bff892ce1d6",
+      "last_updated": "2026-03-21T00:36:41.976158",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-20T21:16:39.240442",
-    "fetch_duration_seconds": 375.889728,
+    "last_fetch_completed": "2026-03-21T00:36:41.976259",
+    "fetch_duration_seconds": 365.324868,
     "total_pages_discovered": 673,
     "pages_fetched_successfully": 511,
     "pages_failed": 163,
@@ -3244,7 +3244,7 @@
     "total_files": 511,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-20T21:16:39.240467",
+  "last_updated": "2026-03-21T00:36:41.976278",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
