@@ -42,7 +42,7 @@ for skill in skills.data:
     print(f"{skill.id}: {skill.display_title}")
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -75,7 +75,7 @@ This API returns each Skill's metadata: its name and description. Claude loads t
 Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
 <CodeGroup>
-```python Python hidelines={1..4,-1}
+```python Python
 import anthropic
 
 client = anthropic.Anthropic()
@@ -100,7 +100,7 @@ response = client.beta.messages.create(
 print(response.content)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();

@@ -55,7 +55,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -84,7 +84,7 @@ response = client.messages.create(
 print(response)
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..7,-3..-1}
 import { Anthropic } from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
@@ -212,7 +212,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..14,-1}
+```java Java hidelines={1..14,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -265,7 +265,7 @@ public class GetWeatherExample {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -299,7 +299,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -455,7 +455,7 @@ Then pass these converted tools to Claude:
 
 <CodeGroup>
 
-```python Python nocheck hidelines={1..4}
+```python Python nocheck hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -469,7 +469,7 @@ response = client.messages.create(
 )
 ```
 
-```typescript TypeScript nocheck hidelines={1..3}
+```typescript TypeScript nocheck hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -509,7 +509,7 @@ class Program
 }
 ```
 
-```go Go nocheck hidelines={1..11,-5..-1}
+```go Go nocheck hidelines={1..10,-1}
 package main
 
 import (
@@ -538,7 +538,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..10,-1}
+```java Java nocheck hidelines={1..10,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -565,7 +565,7 @@ public class Main {
 }
 ```
 
-```php PHP hidelines={1..5} nocheck
+```php PHP hidelines={1..4} nocheck
 <?php
 
 use Anthropic\Client;
@@ -584,7 +584,7 @@ $message = $client->messages->create(
 echo $message->content[0]->text;
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -647,7 +647,7 @@ Here are a few code examples demonstrating various tool use patterns and techniq
     }'
     ```
 
-    ```python Python hidelines={1..4,-1}
+    ```python Python hidelines={1..2}
     import anthropic
 
     client = anthropic.Anthropic()
@@ -684,7 +684,7 @@ Here are a few code examples demonstrating various tool use patterns and techniq
     print(response)
     ```
 
-    ```typescript TypeScript hidelines={1..4}
+    ```typescript TypeScript hidelines={1..2}
     import Anthropic from "@anthropic-ai/sdk";
 
     const client = new Anthropic();
@@ -761,7 +761,7 @@ Here are a few code examples demonstrating various tool use patterns and techniq
     }
     ```
 
-    ```go Go hidelines={1..12,-1}
+    ```go Go hidelines={1..10,-1}
     package main
 
     import (
@@ -808,7 +808,7 @@ Here are a few code examples demonstrating various tool use patterns and techniq
     }
     ```
 
-    ```java Java hidelines={1..14,-1}
+    ```java Java hidelines={1..14,-2..}
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.core.JsonValue;
@@ -870,7 +870,7 @@ Here are a few code examples demonstrating various tool use patterns and techniq
     }
     ```
 
-    ```php PHP hidelines={1..6}
+    ```php PHP hidelines={1..4}
     <?php
 
     use Anthropic\Client;
@@ -909,7 +909,7 @@ Here are a few code examples demonstrating various tool use patterns and techniq
     echo $message;
     ```
 
-    ```ruby Ruby
+    ```ruby Ruby hidelines={1..2}
     require "anthropic"
 
     client = Anthropic::Client.new
@@ -1096,7 +1096,7 @@ You would then need to execute the `get_weather` function with the provided inpu
     print(response)
     ```
 
-    ```typescript TypeScript hidelines={1..4}
+    ```typescript TypeScript hidelines={1..2}
     import Anthropic from "@anthropic-ai/sdk";
 
     const client = new Anthropic();
@@ -1229,7 +1229,7 @@ You would then need to execute the `get_weather` function with the provided inpu
     }
     ```
 
-    ```go Go hidelines={1..12,-1}
+    ```go Go hidelines={1..10,-1}
     package main
 
     import (
@@ -1277,7 +1277,7 @@ You would then need to execute the `get_weather` function with the provided inpu
     }
     ```
 
-   ```java Java hidelines={1..11,-1}
+   ```java Java hidelines={1..11,-2..}
    import com.anthropic.client.AnthropicClient;
    import com.anthropic.client.okhttp.AnthropicOkHttpClient;
    import com.anthropic.core.JsonValue;
@@ -1364,7 +1364,7 @@ You would then need to execute the `get_weather` function with the provided inpu
    }
    ```
 
-    ```php PHP hidelines={1..6}
+    ```php PHP hidelines={1..4}
     <?php
 
     use Anthropic\Client;
@@ -1434,7 +1434,7 @@ You would then need to execute the `get_weather` function with the provided inpu
     echo $message;
     ```
 
-    ```ruby Ruby
+    ```ruby Ruby hidelines={1..2}
     require "anthropic"
 
     client = Anthropic::Client.new
@@ -1556,7 +1556,7 @@ You can provide Claude with multiple tools to choose from in a single request. H
     }'
     ```
 
-    ```python Python hidelines={1..4,-1}
+    ```python Python hidelines={1..2}
     import anthropic
 
     client = anthropic.Anthropic()
@@ -1609,7 +1609,7 @@ You can provide Claude with multiple tools to choose from in a single request. H
     print(response)
     ```
 
-    ```typescript TypeScript hidelines={1..4}
+    ```typescript TypeScript hidelines={1..2}
     import Anthropic from "@anthropic-ai/sdk";
 
     const client = new Anthropic();
@@ -1714,7 +1714,7 @@ You can provide Claude with multiple tools to choose from in a single request. H
     }
     ```
 
-    ```go Go hidelines={1..12,-1}
+    ```go Go hidelines={1..10,-1}
     package main
 
     import (
@@ -1764,7 +1764,7 @@ You can provide Claude with multiple tools to choose from in a single request. H
     }
     ```
 
-    ```java Java hidelines={1..14,-1}
+    ```java Java hidelines={1..14,-2..}
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.core.JsonValue;
@@ -1854,7 +1854,7 @@ You can provide Claude with multiple tools to choose from in a single request. H
     }
     ```
 
-    ```php PHP hidelines={1..6}
+    ```php PHP hidelines={1..4}
     <?php
 
     use Anthropic\Client;
@@ -1910,7 +1910,7 @@ You can provide Claude with multiple tools to choose from in a single request. H
     echo $message;
     ```
 
-    ```ruby Ruby
+    ```ruby Ruby hidelines={1..2}
     require "anthropic"
 
     client = Anthropic::Client.new
@@ -2061,7 +2061,7 @@ Here's an example of using a `get_location` tool to get the user's location, the
     )
     ```
 
-    ```typescript TypeScript hidelines={1..4}
+    ```typescript TypeScript hidelines={1..2}
     import Anthropic from "@anthropic-ai/sdk";
 
     const client = new Anthropic();
@@ -2142,7 +2142,7 @@ Here's an example of using a `get_location` tool to get the user's location, the
     }
     ```
 
-    ```go Go hidelines={1..12,-1}
+    ```go Go hidelines={1..10,-1}
     package main
 
     import (
@@ -2189,7 +2189,7 @@ Here's an example of using a `get_location` tool to get the user's location, the
     }
     ```
 
-    ```java Java hidelines={1..14,-1}
+    ```java Java hidelines={1..14,-2..}
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.core.JsonValue;
@@ -2266,7 +2266,7 @@ Here's an example of using a `get_location` tool to get the user's location, the
     }
     ```
 
-    ```php PHP hidelines={1..6}
+    ```php PHP hidelines={1..4}
     <?php
 
     use Anthropic\Client;
@@ -2313,7 +2313,7 @@ Here's an example of using a `get_location` tool to get the user's location, the
     echo $message;
     ```
 
-    ```ruby Ruby
+    ```ruby Ruby hidelines={1..2}
     require "anthropic"
 
     client = Anthropic::Client.new

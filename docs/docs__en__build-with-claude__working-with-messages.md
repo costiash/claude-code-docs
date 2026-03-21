@@ -29,7 +29,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
   }'
   ```
 
-  ```python Python
+  ```python Python hidelines={1..2}
   import anthropic
 
   message = anthropic.Anthropic().messages.create(
@@ -40,7 +40,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
   print(message)
   ```
 
-  ```typescript TypeScript hidelines={1..4}
+  ```typescript TypeScript hidelines={1..2}
   import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();
@@ -77,7 +77,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
   }
   ```
 
-  ```go Go hidelines={1..13,-1}
+  ```go Go hidelines={1..11,-1}
   package main
 
   import (
@@ -105,7 +105,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
   }
   ```
 
-  ```java Java hidelines={1..8,-1}
+  ```java Java hidelines={1..8,-2..}
   import com.anthropic.client.AnthropicClient;
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
   import com.anthropic.models.messages.MessageCreateParams;
@@ -128,7 +128,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
   }
   ```
 
-  ```php PHP
+  ```php PHP hidelines={1..4}
   <?php
 
   use Anthropic\Client;
@@ -143,7 +143,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
   echo $message->content[0]->text;
   ```
 
-  ```ruby Ruby
+  ```ruby Ruby hidelines={1..2}
   require "anthropic"
 
   client = Anthropic::Client.new
@@ -204,7 +204,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1..2,-1}
+```python Python hidelines={1..2}
 import anthropic
 
 message = anthropic.Anthropic().messages.create(
@@ -219,7 +219,7 @@ message = anthropic.Anthropic().messages.create(
 print(message)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -265,7 +265,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -295,7 +295,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..8,-1}
+```java Java hidelines={1..8,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -320,7 +320,7 @@ public class MultiTurnConversation {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -340,7 +340,7 @@ $message = $client->messages->create(
 echo $message->content[0]->text;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -400,7 +400,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
   }'
   ```
 
-  ```python Python hidelines={1..2,-1}
+  ```python Python hidelines={1..2}
   import anthropic
 
   message = anthropic.Anthropic().messages.create(
@@ -417,7 +417,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
   print(message)
   ```
 
-  ```typescript TypeScript hidelines={1..4}
+  ```typescript TypeScript hidelines={1..2}
   import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();
@@ -464,7 +464,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
   }
   ```
 
-  ```go Go hidelines={1..13,-1}
+  ```go Go hidelines={1..11,-1}
   package main
 
   import (
@@ -493,7 +493,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
   }
   ```
 
-  ```java Java hidelines={1..8,-1}
+  ```java Java hidelines={1..8,-2..}
   import com.anthropic.client.AnthropicClient;
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
   import com.anthropic.models.messages.MessageCreateParams;
@@ -517,7 +517,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
   }
   ```
 
-  ```php PHP hidelines={1..6}
+  ```php PHP hidelines={1..4}
   <?php
 
   use Anthropic\Client;
@@ -535,7 +535,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
   echo $message->content[0]->text;
   ```
 
-  ```ruby Ruby
+  ```ruby Ruby hidelines={1..2}
   require "anthropic"
 
   client = Anthropic::Client.new
@@ -635,7 +635,7 @@ Claude can read both text and images in requests. Images can be supplied using t
   ```
 
   
-  ```python Python nocheck hidelines={-1}
+  ```python Python nocheck hidelines={1}
   import anthropic
   import base64
   import httpx
@@ -691,7 +691,7 @@ Claude can read both text and images in requests. Images can be supplied using t
   ```
 
   
-  ```typescript TypeScript nocheck hidelines={1..4}
+  ```typescript TypeScript nocheck hidelines={1..2}
   import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();
@@ -908,7 +908,7 @@ Claude can read both text and images in requests. Images can be supplied using t
   ```
 
   
-  ```java Java nocheck hidelines={1..12,-1}
+  ```java Java nocheck hidelines={1..12,-2..}
   import com.anthropic.client.AnthropicClient;
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
   import com.anthropic.models.messages.*;
@@ -979,7 +979,7 @@ Claude can read both text and images in requests. Images can be supplied using t
   ```
 
   
-  ```php PHP hidelines={1..6} nocheck
+  ```php PHP hidelines={1..4} nocheck
   <?php
 
   use Anthropic\Client;
@@ -1043,7 +1043,7 @@ Claude can read both text and images in requests. Images can be supplied using t
   ```
 
   
-  ```ruby Ruby nocheck
+  ```ruby Ruby nocheck hidelines={1}
   require "anthropic"
   require "base64"
   require "net/http"

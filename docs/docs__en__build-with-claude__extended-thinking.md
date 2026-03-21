@@ -81,7 +81,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -106,7 +106,7 @@ for block in response.content:
         print(f"\nResponse: {block.text}")
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -178,7 +178,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -215,7 +215,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..8,-1}
+```java Java hidelines={1..8,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -247,7 +247,7 @@ public class ExtendedThinkingExample {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -275,7 +275,7 @@ foreach ($message->content as $block) {
 }
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -393,7 +393,7 @@ curl https://api.anthropic.com/v1/messages \
 </Tab>
 
 <Tab title="Python">
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -426,7 +426,7 @@ for block in response.content:
 <Note>
 TypeScript SDK types don't yet include `display`. The type assertion passes it through at runtime; the SDK forwards unknown parameters to the API.
 </Note>
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -641,7 +641,7 @@ public class ThinkingDisplay {
 <Note>
 Native SDK support for the `display` field is coming soon. Until then, you can use a direct HTTP request:
 </Note>
-```php PHP
+```php PHP hidelines={1..2}
 <?php
 
 $body = json_encode([
@@ -685,7 +685,7 @@ foreach ($response["content"] as $block) {
 <Note>
 Native SDK support for the `display` field is coming soon. Until then, you can use a direct HTTP request:
 </Note>
-```ruby Ruby hidelines={1..4}
+```ruby Ruby
 require "net/http"
 require "json"
 require "uri"
@@ -781,7 +781,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1..4}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -821,7 +821,7 @@ with client.messages.stream(
             print("\nBlock complete.")
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -931,7 +931,7 @@ public class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -990,7 +990,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..7,-1}
+```java Java hidelines={1..7,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -1029,7 +1029,7 @@ public class ExtendedThinkingStreaming {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1073,7 +1073,7 @@ foreach ($stream as $event) {
 }
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1339,7 +1339,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-5..-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1384,7 +1384,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..12,-1}
+```java Java hidelines={1..12,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -1422,7 +1422,7 @@ public class ExtendedThinkingWithTools {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1453,7 +1453,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1516,7 +1516,7 @@ The API response includes thinking, text, and tool_use blocks:
 Now let's continue the conversation and use the tool
 
 <CodeGroup>
-```python Python hidelines={1..4}
+```python Python hidelines={1}
 import anthropic
 from typing import Any
 
@@ -1695,7 +1695,7 @@ public class Program
 }
 ```
 
-```go Go hidelines={1..13,-6..-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1769,7 +1769,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..18,-1}
+```java Java hidelines={1..10,13..18,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.ContentBlockParam;
@@ -1858,7 +1858,7 @@ public class ExtendedThinkingToolUse {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1924,7 +1924,7 @@ $continuation = $client->messages->create(
 echo $continuation;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -2174,7 +2174,7 @@ User: [Text response, cache=True]
 <section title="System prompt caching (preserved when thinking changes)">
 
 <CodeGroup>
-```python Python hidelines={1,4..5}
+```python Python hidelines={1}
 from anthropic import Anthropic
 import requests
 from bs4 import BeautifulSoup
@@ -2528,7 +2528,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..15,-1}
+```java Java hidelines={1..2,4..15,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -2615,7 +2615,7 @@ public class ThinkingCacheExample {
 }
 ```
 
-```php PHP hidelines={1..7}
+```php PHP hidelines={1..5}
 <?php
 
 
@@ -2683,7 +2683,7 @@ $response3 = $client->messages->create(
 echo "Third response usage: " . json_encode($response3->usage) . "\n";
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1}
 require "anthropic"
 require "net/http"
 require "uri"
@@ -2767,7 +2767,7 @@ puts "Third response usage: #{response3.usage}"
 <section title="Messages caching (invalidated when thinking changes)">
 
 <CodeGroup>
-```python Python hidelines={1,4..5}
+```python Python hidelines={1}
 from anthropic import Anthropic
 import requests
 from bs4 import BeautifulSoup
@@ -3105,7 +3105,7 @@ public class Program
 }
 ```
 
-```go Go hidelines={1..41,-5..-1}
+```go Go hidelines={1..41,-1}
 package main
 
 import (
@@ -3216,7 +3216,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..16,-1}
+```java Java hidelines={1..2,4..16,94..95,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -3441,7 +3441,7 @@ $response3 = $client->messages->create(
 echo "Third response usage: " . json_encode($response3->usage) . "\n";
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1}
 require "anthropic"
 require "net/http"
 require "uri"

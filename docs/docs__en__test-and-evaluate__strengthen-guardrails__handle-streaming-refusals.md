@@ -68,7 +68,7 @@ if echo "$response" | grep -q '"stop_reason":"refusal"'; then
 fi
 ```
 
-```python Python hidelines={1..4}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -98,7 +98,7 @@ except Exception as e:
     print(f"Error: {e}")
 ```
 
-```typescript TypeScript nocheck hidelines={1..3}
+```typescript TypeScript nocheck hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -176,7 +176,7 @@ class Program
 }
 ```
 
-```go Go nocheck hidelines={1..9,18..20,-1}
+```go Go nocheck hidelines={1..10,17..18,-1..}
 package main
 
 import (
@@ -223,7 +223,7 @@ streamLoop:
 }
 ```
 
-```java Java hidelines={1..15,-1}
+```java Java hidelines={1..5,9..12,14..15,37..38,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -269,7 +269,7 @@ public class RefusalHandling {
 }
 ```
 
-```php PHP nocheck
+```php PHP nocheck hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -304,7 +304,7 @@ try {
 }
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new

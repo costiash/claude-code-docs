@@ -110,7 +110,7 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -153,7 +153,7 @@ response = client.messages.create(
 print(response)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..5,-3..-1}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -278,7 +278,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -338,7 +338,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..14,-1}
+```java Java hidelines={1..8,10..14,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -404,7 +404,7 @@ public class ToolSearchExample {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -460,7 +460,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -685,7 +685,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python nocheck hidelines={1..4,-1}
+```python Python nocheck hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -712,7 +712,7 @@ response = client.beta.messages.create(
 print(response)
 ```
 
-```typescript TypeScript nocheck hidelines={1..4}
+```typescript TypeScript nocheck hidelines={1..5,-3..-1}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -820,7 +820,7 @@ class Program
 }
 ```
 
-```go Go nocheck hidelines={1..13,-1}
+```go Go nocheck hidelines={1..11,-1}
 package main
 
 import (
@@ -871,7 +871,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..14,-1}
+```java Java nocheck hidelines={1..4,9..14,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.MessageCreateParams;
@@ -920,7 +920,7 @@ public class McpClientExample {
 }
 ```
 
-```php PHP hidelines={1..6} nocheck
+```php PHP hidelines={1..4} nocheck
 <?php
 
 use Anthropic\Client;
@@ -960,7 +960,7 @@ $response = $client->beta->messages->create(
 echo $response;
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1146,7 +1146,7 @@ Tool search works with [prompt caching](/docs/en/build-with-claude/prompt-cachin
 
 <CodeGroup>
 
-```python Python nocheck hidelines={1..4}
+```python Python nocheck hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -1212,7 +1212,7 @@ response2 = client.messages.create(
 print(f"Cache read tokens: {response2.usage.cache_read_input_tokens or 0}")
 ```
 
-```typescript TypeScript nocheck hidelines={1..4}
+```typescript TypeScript nocheck hidelines={1..5,-3..-1}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -1338,7 +1338,7 @@ public class Program
 }
 ```
 
-```go Go nocheck hidelines={1..13,-1}
+```go Go nocheck hidelines={1..11,-1}
 package main
 
 import (
@@ -1409,7 +1409,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..18,-1}
+```java Java nocheck hidelines={1..3,5..12,14..19,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -1497,7 +1497,7 @@ public class ToolSearchCaching {
 }
 ```
 
-```php PHP hidelines={1..6} nocheck
+```php PHP hidelines={1..4} nocheck
 <?php
 
 use Anthropic\Client;
@@ -1559,7 +1559,7 @@ $response2 = $client->messages->create(
 echo "Cache read tokens: " . ($response2->usage->cacheReadInputTokens ?? 0) . "\n";
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new

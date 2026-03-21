@@ -54,7 +54,7 @@ Here's an example of how to use fine-grained tool streaming with the API:
     }'
   ```
 
-  ```python Python
+  ```python Python hidelines={1..2}
   import anthropic
 
   client = anthropic.Anthropic()
@@ -97,7 +97,7 @@ Here's an example of how to use fine-grained tool streaming with the API:
   print(final_message.usage)
   ```
 
-  ```typescript TypeScript hidelines={1..4}
+  ```typescript TypeScript hidelines={1..2}
   import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();

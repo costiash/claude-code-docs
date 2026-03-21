@@ -123,7 +123,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -148,7 +148,7 @@ response = client.beta.messages.create(
 print(response)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -224,7 +224,7 @@ class Program
 }
 ```
 
-```go Go nocheck hidelines={1..13,-1}
+```go Go nocheck hidelines={1..11,-1}
 package main
 
 import (
@@ -264,7 +264,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..10,-1}
+```java Java hidelines={1..3,7..10,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.BetaMessage;
@@ -297,7 +297,7 @@ public class ComputerUseExample {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -333,7 +333,7 @@ $response = $client->beta->messages->create(
 echo $response;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -817,7 +817,7 @@ The computer use tool can be combined with other tools to create more powerful a
     }'
   ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -867,7 +867,7 @@ response = client.beta.messages.create(
 print(response)
 ```
 
-  ```typescript TypeScript hidelines={1..4}
+  ```typescript TypeScript hidelines={1..2}
   import Anthropic from "@anthropic-ai/sdk";
 
   const anthropic = new Anthropic();
@@ -1055,7 +1055,7 @@ print(response)
   }
   ```
 
-```java Java hidelines={1..15,-1}
+```java Java hidelines={1..5,9..15,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -1130,7 +1130,7 @@ public class MultipleToolsExample {
 ```
 
   
-  ```php PHP hidelines={1..6} nocheck
+  ```php PHP hidelines={1..4} nocheck
   <?php
 
   use Anthropic\Client;
@@ -1186,7 +1186,7 @@ public class MultipleToolsExample {
   echo $message;
   ```
 
-  ```ruby Ruby
+  ```ruby Ruby hidelines={1..2}
     require "anthropic"
 
     client = Anthropic::Client.new

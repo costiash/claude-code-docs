@@ -57,7 +57,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -81,7 +81,7 @@ for block in response.content:
         print(f"\nResponse: {block.text}")
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -190,7 +190,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..10,-1}
+```java Java hidelines={1..5,7..9,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -223,7 +223,7 @@ public class ExtendedThinkingExample {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -251,7 +251,7 @@ foreach ($message->content as $block) {
 }
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -317,7 +317,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -333,7 +333,7 @@ response = client.messages.create(
 print(response.content[0].text)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -389,7 +389,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -423,7 +423,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..11,-1}
+```java Java hidelines={1..5,8..10,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -454,7 +454,7 @@ public class Main {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -474,7 +474,7 @@ $message = $client->messages->create(
 echo $message->content[0]->text;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -502,7 +502,7 @@ puts message.content.first.text
 Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/streaming). Thinking blocks are streamed via `thinking_delta` events just like manual thinking mode:
 
 <CodeGroup>
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -528,7 +528,7 @@ with client.messages.stream(
                 print(event.delta.text, end="", flush=True)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -581,7 +581,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -626,7 +626,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..8,-1}
+```java Java hidelines={1..4,6..8,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -669,7 +669,7 @@ public class StreamingThinkingExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -698,7 +698,7 @@ foreach ($stream as $event) {
 }
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new

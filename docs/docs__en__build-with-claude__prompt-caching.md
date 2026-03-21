@@ -36,7 +36,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -56,7 +56,7 @@ response = client.messages.create(
 print(response.usage.model_dump_json())
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -77,7 +77,7 @@ const response = await client.messages.create({
 console.log(response.usage);
 ```
 
-```csharp C# hidelines={1..8,-1}
+```csharp C# hidelines={1..9,-2..}
 using System;
 using System.Threading.Tasks;
 using Anthropic;
@@ -111,7 +111,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -143,7 +143,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..10,-1}
+```java Java hidelines={1..2,4..10,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -170,7 +170,7 @@ public class PromptCachingExample {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..3,5}
 <?php
 
 use Anthropic\Client;
@@ -190,7 +190,7 @@ $response = $client->messages->create(
 echo json_encode($response->usage);
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -317,7 +317,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python hidelines={1..4,-1}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -339,7 +339,7 @@ response = client.messages.create(
 print(response.usage.model_dump_json())
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -361,7 +361,7 @@ const response = await client.messages.create({
 console.log(response.usage);
 ```
 
-```csharp C# hidelines={1..8,-1}
+```csharp C# hidelines={1..9,-2..}
 using System;
 using System.Threading.Tasks;
 using Anthropic;
@@ -405,7 +405,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -439,7 +439,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..10,-1}
+```java Java hidelines={1..2,4..10,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -468,7 +468,7 @@ public class AutomaticCachingExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..3,5}
 <?php
 
 use Anthropic\Client;
@@ -490,7 +490,7 @@ $response = $client->messages->create(
 echo json_encode($response->usage);
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -918,7 +918,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1..4,-1}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -947,7 +947,7 @@ response = client.messages.create(
 print(response.model_dump_json())
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -976,7 +976,7 @@ const response = await client.messages.create({
 console.log(response);
 ```
 
-```csharp C# hidelines={1..9,-1}
+```csharp C# hidelines={1..10,-2..}
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -1024,7 +1024,7 @@ public class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1061,7 +1061,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..12,-1}
+```java Java hidelines={1..2,4..12,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -1101,7 +1101,7 @@ public class LegalDocumentAnalysisExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1133,7 +1133,7 @@ $message = $client->messages->create(
 echo $message->content[0]->text;
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1233,7 +1233,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1..4,-1}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -1283,7 +1283,7 @@ response = client.messages.create(
 print(response.model_dump_json())
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -1338,7 +1338,7 @@ const response = await client.messages.create({
 console.log(response);
 ```
 
-```csharp C# hidelines={1..9,-1}
+```csharp C# hidelines={1..10,-2..}
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -1401,7 +1401,7 @@ public class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1463,7 +1463,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..15,-1}
+```java Java hidelines={1..3,5..15,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -1553,7 +1553,7 @@ public class ToolsWithCacheControlExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1607,7 +1607,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1731,7 +1731,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1..4,-1}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -1777,7 +1777,7 @@ response = client.messages.create(
 print(response.model_dump_json())
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -1827,7 +1827,7 @@ const response = await client.messages.create({
 console.log(response);
 ```
 
-```csharp C# hidelines={1..5}
+```csharp C# hidelines={1..6}
 using Anthropic;
 using Anthropic.Models.Messages;
 using System.Collections.Generic;
@@ -1881,7 +1881,7 @@ var message = await client.Messages.Create(parameters);
 Console.WriteLine(message);
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1926,7 +1926,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..13,-1}
+```java Java hidelines={1..2,4..13,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -1979,7 +1979,7 @@ public class ConversationWithCacheControlExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -2027,7 +2027,7 @@ $message = $client->messages->create(
 echo $message->content[0]->text;
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -2193,7 +2193,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1..4,-1}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -2288,7 +2288,7 @@ response = client.messages.create(
 print(response.model_dump_json())
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -2390,7 +2390,7 @@ const response = await client.messages.create({
 console.log(response);
 ```
 
-```csharp C# hidelines={1..10,-1}
+```csharp C# hidelines={1..11,-2..}
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -2511,7 +2511,7 @@ public class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -2598,7 +2598,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..19,-1}
+```java Java hidelines={1..3,5..19,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -2730,7 +2730,7 @@ public class MultipleCacheBreakpointsExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -2834,7 +2834,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -3129,7 +3129,7 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
       ```
 
       
-      ```typescript TypeScript nocheck hidelines={1..4}
+      ```typescript TypeScript nocheck hidelines={1..2}
       import Anthropic from "@anthropic-ai/sdk";
 
       const client = new Anthropic();
@@ -3151,7 +3151,7 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
       ```
 
       
-      ```php PHP hidelines={1..6} nocheck
+      ```php PHP hidelines={1..4} nocheck
       <?php
 
       use Anthropic\Client;
@@ -3183,7 +3183,7 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
       client.messages.create(**params)
       ```
 
-      ```typescript TypeScript hidelines={1..4}
+      ```typescript TypeScript hidelines={1..2}
       import Anthropic from "@anthropic-ai/sdk";
 
       const client = new Anthropic();
@@ -3204,7 +3204,7 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
       console.log(response);
       ```
 
-      ```php PHP hidelines={1..6}
+      ```php PHP hidelines={1..4}
       <?php
 
       use Anthropic\Client;
@@ -3229,7 +3229,7 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
       echo $message->content[0]->text;
       ```
 
-      ```ruby Ruby
+      ```ruby Ruby hidelines={1..2}
       require "anthropic"
 
       client = Anthropic::Client.new

@@ -87,7 +87,7 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -106,7 +106,7 @@ response = client.messages.create(
 print(response)
 ```
 
-```typescript TypeScript nocheck hidelines={1..4}
+```typescript TypeScript nocheck hidelines={1..5,-3..-1}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -188,7 +188,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..9,-1}
+```java Java hidelines={1..5,7..9,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -213,7 +213,7 @@ public class WebSearchExample {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -237,7 +237,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -288,7 +288,7 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
-```python Python hidelines={1..4,-1}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -302,7 +302,7 @@ response = client.messages.create(
 print(response)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..5,-3..-1}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -391,7 +391,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..9,-1}
+```java Java hidelines={1..5,7..9,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -418,7 +418,7 @@ public class WebSearchExample {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -443,7 +443,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -656,7 +656,7 @@ For multi-turn conversations, set a `cache_control` breakpoint on or after the l
 For example, to use prompt caching with web search for a multi-turn conversation:
 
 <CodeGroup>
-```python Python hidelines={1..4}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -725,7 +725,7 @@ response2 = client.messages.create(
 print(f"Cache read tokens: {response2.usage.cache_read_input_tokens or 0}")
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..5,-3..-1}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -848,7 +848,7 @@ var response2 = await client.Messages.Create(parameters2);
 Console.WriteLine($"Cache read tokens: {response2.Usage.CacheReadInputTokens ?? 0}");
 ```
 
-```go Go nocheck hidelines={1..13,-1}
+```go Go nocheck hidelines={1..11,-1}
 package main
 
 import (
@@ -909,7 +909,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..15,-1}
+```java Java hidelines={1..2,4..9,12..16,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.CacheControlEphemeral;
@@ -978,7 +978,7 @@ public class WebSearchWithCache {
 }
 ```
 
-```php PHP hidelines={1..6} nocheck
+```php PHP hidelines={1..4} nocheck
 <?php
 
 use Anthropic\Client;
@@ -1041,7 +1041,7 @@ $response2 = $client->messages->create(
 echo "Cache read tokens: " . ($response2->usage->cacheReadInputTokens ?? 0) . "\n";
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new

@@ -98,7 +98,7 @@ You can enable [extended thinking](/docs/en/build-with-claude/extended-thinking)
 
 <CodeGroup>
     
-    ```python Python nocheck hidelines={1..8}
+    ```python Python nocheck hidelines={1..9}
     import os
 
     from openai import OpenAI

@@ -61,7 +61,7 @@ Every API response includes a unique `request-id` header. This header contains a
 The official SDKs provide this value as a property on top-level response objects, containing the value of the `request-id` header:
 
 <CodeGroup>
-  ```python Python
+  ```python Python hidelines={1..2}
   import anthropic
 
   client = anthropic.Anthropic()
@@ -74,7 +74,7 @@ The official SDKs provide this value as a property on top-level response objects
   print(f"Request ID: {message._request_id}")
   ```
 
-  ```typescript TypeScript hidelines={1..4}
+  ```typescript TypeScript hidelines={1..2}
   import Anthropic from "@anthropic-ai/sdk";
 
   const client = new Anthropic();

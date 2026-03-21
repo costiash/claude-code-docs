@@ -47,7 +47,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python hidelines={1..4,-1}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -78,7 +78,7 @@ response = client.messages.create(
 print(response)
 ```
 
-```java Java hidelines={1..8,-1}
+```java Java hidelines={1..8,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.*;
@@ -235,7 +235,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1..4,-1}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -275,7 +275,7 @@ response = client.messages.create(
 print(response)
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();

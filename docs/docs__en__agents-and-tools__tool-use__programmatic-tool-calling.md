@@ -205,7 +205,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-5..-1}
+```go Go hidelines={1..13,-1}
 package main
 
 import (
@@ -250,7 +250,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..13,-1}
+```java Java hidelines={1..7,9..13,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -583,7 +583,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-5..-1}
+```go Go hidelines={1..13,-1}
 package main
 
 import (
@@ -628,7 +628,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..14,-1}
+```java Java hidelines={1..8,10..14,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -970,7 +970,7 @@ class Program
 }
 ```
 
-```go Go nocheck hidelines={1..13,-5..-1}
+```go Go nocheck hidelines={1..13,-1}
 package main
 
 import (
@@ -1038,7 +1038,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..17,-1}
+```java Java nocheck hidelines={1..3,5..8,10..17,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;

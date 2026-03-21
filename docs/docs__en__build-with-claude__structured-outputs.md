@@ -82,7 +82,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -194,7 +194,7 @@ var message = await client.Messages.Create(parameters);
 Console.WriteLine(message);
 ```
 
-```go Go hidelines={1..12,-3..-1}
+```go Go hidelines={1..10,-1}
 package main
 
 import (
@@ -237,7 +237,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..6}
+```java Java hidelines={1..7}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -270,7 +270,7 @@ public class StructuredOutputQuickStart {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -309,7 +309,7 @@ $response = $client->messages->create(
 echo $response->content[0]->text;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -494,7 +494,7 @@ var contact = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
 Console.WriteLine($"{contact["name"]} ({contact["email"]})");
 ```
 
-```go Go hidelines={1..2,4..7,28..29,-1}
+```go Go hidelines={1..2,4..7,27..29,-1}
 package main
 
 import (
@@ -552,7 +552,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..6,15..16,-1}
+```java Java hidelines={1..7,14..16,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -585,7 +585,7 @@ public class NativeSchemaExample {
 }
 ```
 
-```php PHP hidelines={1..8}
+```php PHP hidelines={1..3,6}
 <?php
 
 use Anthropic\Client;
@@ -617,7 +617,7 @@ $data = json_decode($response->content[0]->text, true);
 echo $data['name'] . ' (' . $data['email'] . ')';
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -658,7 +658,7 @@ The `parse()` method automatically transforms your Pydantic model, validates the
 
 <section title="Example usage">
 
-```python hidelines={2,11}
+```python hidelines={2..4,9..12}
 from pydantic import BaseModel
 import anthropic
 
@@ -820,7 +820,7 @@ The Go SDK works with raw JSON schemas. Define a Go struct with json tags, gener
 
 <section title="Example usage">
 
-```go hidelines={1..2,4..7,27..28,-1}
+```go hidelines={1..2,4..7,26..28,-1}
 package main
 
 import (
@@ -888,7 +888,7 @@ Pass a Java class to `outputConfig()` and the SDK automatically derives a JSON s
 
 <section title="Example usage">
 
-```java hidelines={1..6}
+```java hidelines={1..7}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -941,7 +941,7 @@ Key points:
 - **Version compatibility**: Local validation may fail while remote validation succeeds if the SDK version is outdated.
 - **Disabling local validation**: Pass `JsonSchemaLocalValidation.NO` if you encounter compatibility issues:
 
-```java hidelines={1..2,4..6,8..15,22..23}
+```java hidelines={1..2,4..15,22..23}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonSchemaLocalValidation;
@@ -1001,7 +1001,7 @@ Each class must define at least one property for the JSON schema. A validation e
 
 You can use Jackson Databind annotations to enrich the JSON schema derived from your Java classes:
 
-```java hidelines={1..4,34}
+```java hidelines={4..5,-2..}
 import com.fasterxml.jackson.annotation.JsonClassDescription;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
@@ -1049,7 +1049,7 @@ If you use `@JsonProperty(required = false)`, the `false` value is ignored. Anth
 
 You can also use OpenAPI Swagger 2 `@Schema` and `@ArraySchema` annotations for type-specific constraints:
 
-```java hidelines={1..3,19}
+```java hidelines={3..4,-2..}
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
@@ -1086,7 +1086,7 @@ The PHP SDK passes raw JSON schemas as associative arrays via `OutputConfig::wit
 
 <section title="Example usage">
 
-```php
+```php hidelines={1..3,6}
 <?php
 
 use Anthropic\Client;
@@ -1128,7 +1128,7 @@ Define a model class extending `Anthropic::BaseModel` and pass it as the format 
 
 <section title="Example usage">
 
-```ruby
+```ruby hidelines={1..2}
 require "anthropic"
 
 class ContactInfo < Anthropic::BaseModel
@@ -1214,7 +1214,7 @@ Extract structured data from unstructured text:
 
 <CodeGroup>
 
-```python Python nocheck hidelines={1..2}
+```python Python nocheck
 from pydantic import BaseModel
 from typing import List
 
@@ -1327,7 +1327,7 @@ public class InvoiceExtraction
 }
 ```
 
-```go Go hidelines={1..13,-10..-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1392,7 +1392,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..10,-1}
+```java Java hidelines={1..6,8..10}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -1450,7 +1450,7 @@ public class InvoiceExtraction {
 }
 ```
 
-```php PHP hidelines={1..5}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1493,7 +1493,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1543,12 +1543,12 @@ Classify content with structured categories:
 
 <CodeGroup>
 
-```python Python hidelines={1..3}
+```python Python hidelines={1}
 from anthropic import Anthropic
-
-client = Anthropic()
 from pydantic import BaseModel
 from typing import List
+
+client = Anthropic()
 
 
 class Classification(BaseModel):
@@ -1590,7 +1590,7 @@ const response = await client.messages.parse({
 });
 ```
 
-```csharp C# hidelines={1..6,-1}
+```csharp C# hidelines={1..7}
 using System.Collections.Generic;
 using System.Text.Json;
 using Anthropic;
@@ -1685,7 +1685,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..9,-1}
+```java Java hidelines={1..6,8..9}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -1729,7 +1729,7 @@ public class ClassificationExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1764,7 +1764,7 @@ $message = $client->messages->create(
 echo $message->content[0]->text;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1799,12 +1799,12 @@ Generate API-ready responses:
 
 <CodeGroup>
 
-```python Python hidelines={1..3}
+```python Python hidelines={1}
 from anthropic import Anthropic
-
-client = Anthropic()
 from pydantic import BaseModel
 from typing import List, Optional
+
+client = Anthropic()
 
 
 class APIResponse(BaseModel):
@@ -1844,7 +1844,7 @@ const response = await client.messages.parse({
 });
 ```
 
-```csharp C# hidelines={1..6,-1}
+```csharp C# hidelines={1..7}
 using System.Collections.Generic;
 using System.Text.Json;
 using Anthropic;
@@ -1886,7 +1886,7 @@ var message = await client.Messages.Create(parameters);
 Console.WriteLine(message);
 ```
 
-```go Go hidelines={1..13,-10..-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1948,7 +1948,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..10,-1}
+```java Java hidelines={1..6,8..9}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -1957,21 +1957,44 @@ import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
-import java.util.Map;
 
 public class StructuredOutputExample {
+    static class APIData {
+        @JsonProperty("message")
+        public String message;
+
+        @JsonProperty("resource_id")
+        public String resourceId;
+    }
+
+    static class APIError {
+        @JsonProperty("code")
+        public String code;
+
+        @JsonProperty("message")
+        public String message;
+    }
+
+    static class APIMetadata {
+        @JsonProperty("request_id")
+        public String requestId;
+
+        @JsonProperty("timestamp")
+        public String timestamp;
+    }
+
     static class APIResponse {
         @JsonProperty("status")
         public String status;
 
         @JsonProperty("data")
-        public Map<String, Object> data;
+        public APIData data;
 
         @JsonProperty("errors")
-        public List<Map<String, Object>> errors;
+        public List<APIError> errors;
 
         @JsonProperty("metadata")
-        public Map<String, Object> metadata;
+        public APIMetadata metadata;
     }
 
     public static void main(String[] args) {
@@ -1991,7 +2014,7 @@ public class StructuredOutputExample {
 }
 ```
 
-```php PHP hidelines={1..5}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -2028,7 +2051,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -2124,7 +2147,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python hidelines={1..4,-1}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -2244,7 +2267,7 @@ public class Program
 }
 ```
 
-```go Go hidelines={1..13,-5..-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -2294,7 +2317,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..13,-1}
+```java Java hidelines={1..13,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -2349,7 +2372,7 @@ public class StrictToolExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -2389,7 +2412,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -2466,7 +2489,7 @@ Ensure tool parameters exactly match your schema:
 
 <CodeGroup>
 
-```python Python hidelines={1..3}
+```python Python hidelines={1..2}
 from anthropic import Anthropic
 
 client = Anthropic()
@@ -2501,7 +2524,7 @@ response = client.messages.create(
 )
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -2576,7 +2599,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-5..-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -2628,7 +2651,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..13,-1}
+```java Java hidelines={1..13,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -2680,7 +2703,7 @@ public class StrictToolExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -2715,7 +2738,7 @@ $message = $client->messages->create(
 );
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -2759,7 +2782,7 @@ Build reliable multi-step agents with guaranteed tool parameters:
 
 <CodeGroup>
 
-```python Python hidelines={1..3}
+```python Python hidelines={1..2}
 from anthropic import Anthropic
 
 client = Anthropic()
@@ -2806,7 +2829,7 @@ response = client.messages.create(
 )
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -2916,7 +2939,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-5..-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -2975,7 +2998,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..13,-1}
+```java Java hidelines={1..13,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -3046,7 +3069,7 @@ public class StrictToolExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -3095,7 +3118,7 @@ $message = $client->messages->create(
 echo $message->content[0]->text;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -3250,7 +3273,7 @@ for (const block of response.content) {
 }
 ```
 
-```csharp C# hidelines={1..6,-1}
+```csharp C# hidelines={1..7}
 using System.Collections.Generic;
 using System.Text.Json;
 using Anthropic;
@@ -3306,7 +3329,7 @@ var message = await client.Messages.Create(parameters);
 Console.WriteLine(message);
 ```
 
-```go Go hidelines={1..13,-5..-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -3364,7 +3387,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..15,-1}
+```java Java hidelines={1..15,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -3424,7 +3447,7 @@ public class StructuredOutputExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -3472,7 +3495,7 @@ $message = $client->messages->create(
 echo $message;
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new

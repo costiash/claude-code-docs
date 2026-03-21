@@ -61,7 +61,7 @@ implementation("com.anthropic:anthropic-java-bedrock:2.18.0")
 </dependency>
 ```
 
-```java Java nocheck hidelines={1..9,-1}
+```java Java nocheck hidelines={7..9,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.bedrock.backends.BedrockBackend;
@@ -237,7 +237,7 @@ The following examples show how to print a list of all the Claude models availab
   ```
 
   
-  ```java Java nocheck hidelines={1..8,-1}
+  ```java Java nocheck hidelines={6..8,-2..}
   import software.amazon.awssdk.regions.Region;
   import software.amazon.awssdk.services.bedrock.BedrockClient;
   import software.amazon.awssdk.services.bedrock.model.ListFoundationModelsRequest;
@@ -332,7 +332,7 @@ The following examples show how to generate text from Claude on Bedrock:
   ```
 
   
-  ```typescript TypeScript nocheck hidelines={1..21}
+  ```typescript TypeScript nocheck
   import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 
   const client = new AnthropicBedrock({
@@ -421,7 +421,7 @@ The following examples show how to generate text from Claude on Bedrock:
   ```
 
   
-  ```java Java nocheck hidelines={1..9,-1}
+  ```java Java nocheck hidelines={6..9,-2..}
   import com.anthropic.bedrock.backends.BedrockBackend;
   import com.anthropic.client.AnthropicClient;
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
@@ -583,7 +583,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..5}
+```java Java nocheck
 import com.anthropic.bedrock.backends.BedrockBackend;
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
@@ -695,7 +695,7 @@ message = client.messages.create(
 )
 ```
 
-```typescript TypeScript nocheck hidelines={1..6}
+```typescript TypeScript nocheck
 import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 
 const client = new AnthropicBedrock({
@@ -728,7 +728,7 @@ var response = await client.Messages.Create(new MessageCreateParams
 });
 ```
 
-```go Go hidelines={1..10,-1}
+```go Go hidelines={1..2,9..10,-1}
 package main
 
 import (
@@ -755,7 +755,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..5}
+```java Java nocheck
 import com.anthropic.bedrock.backends.BedrockBackend;
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
@@ -827,7 +827,7 @@ message = client.messages.create(
 )
 ```
 
-```typescript TypeScript nocheck hidelines={1..7}
+```typescript TypeScript nocheck
 import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
 
 const client = new AnthropicBedrock({
@@ -859,7 +859,7 @@ var response = await client.Messages.Create(new MessageCreateParams
 });
 ```
 
-```go Go hidelines={1..10,-1}
+```go Go hidelines={1..2,9..10,-1}
 package main
 
 import (
@@ -887,7 +887,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..5}
+```java Java nocheck
 import com.anthropic.bedrock.backends.BedrockBackend;
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;

@@ -125,7 +125,7 @@ asyncio.run(main())
 
 The SDK provides support for streaming responses using Server-Sent Events (SSE).
 
-```python hidelines={1..3}
+```python hidelines={1..2}
 from anthropic import Anthropic
 
 client = Anthropic()
@@ -147,7 +147,7 @@ for event in stream:
 
 The async client uses the exact same interface:
 
-```python hidelines={1..3}
+```python hidelines={1..2}
 from anthropic import AsyncAnthropic
 
 client = AsyncAnthropic()
@@ -171,7 +171,7 @@ async for event in stream:
 
 The SDK also provides streaming helpers that use context managers and provide access to the accumulated text and the final message:
 
-```python hidelines={1..4}
+```python hidelines={1..6}
 import asyncio
 from anthropic import AsyncAnthropic
 
@@ -306,7 +306,7 @@ client.messages.batches.create(
 
 Once a Message Batch has been processed, indicated by `.processing_status == 'ended'`, you can access the results with `.batches.results()`:
 
-```python nocheck hidelines={1..4}
+```python nocheck hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -351,7 +351,7 @@ The async client uses the exact same interface. If you pass a `PathLike` instanc
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `APIError` is raised:
 
-```python hidelines={2..4}
+```python hidelines={2..5}
 import anthropic
 from anthropic import Anthropic
 
@@ -481,7 +481,7 @@ The SDK sets a [TCP socket keep-alive](https://tldp.org/HOWTO/TCP-Keepalive-HOWT
 
 List methods in the Claude API are paginated. You can use the `for` syntax to iterate through items across all pages:
 
-```python hidelines={1..3}
+```python hidelines={1..2}
 from anthropic import Anthropic
 
 client = Anthropic()
@@ -495,7 +495,7 @@ print(all_batches)
 
 For async iteration:
 
-```python hidelines={1..4}
+```python hidelines={1..6}
 import asyncio
 from anthropic import AsyncAnthropic
 
@@ -609,7 +609,7 @@ if response.my_field is None:
 
 The "raw" `Response` returned by `httpx` can be accessed via the `.with_raw_response` property on the client. This is useful for accessing response headers or other metadata:
 
-```python hidelines={1..3}
+```python hidelines={1..2}
 from anthropic import Anthropic
 
 client = Anthropic()
@@ -721,7 +721,7 @@ Use `DefaultHttpxClient` and `DefaultAsyncHttpxClient` instead of raw `httpx.Cli
 
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
-```python nocheck
+```python nocheck hidelines={1..2}
 from anthropic import Anthropic
 
 with Anthropic() as client:
@@ -738,7 +738,7 @@ You can access most beta API features through the `beta` property of the client.
 
 For example, to use the [Files API](/docs/en/build-with-claude/files):
 
-```python nocheck hidelines={1..3}
+```python nocheck hidelines={1..2}
 from anthropic import Anthropic
 
 client = Anthropic()
@@ -794,7 +794,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 If you've upgraded to the latest version but aren't seeing new features you were expecting, your Python environment is likely still using an older version. You can determine the version being used at runtime with:
 
-```python
+```python hidelines={1..2}
 import anthropic
 
 print(anthropic.__version__)

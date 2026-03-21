@@ -284,7 +284,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-5..-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -346,7 +346,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..13,-1}
+```java Java hidelines={1..13,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -1798,7 +1798,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..15,-1}
+```java Java nocheck hidelines={1..15,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -3266,7 +3266,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..13}
+```java Java nocheck hidelines={1..8,10..13}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -3587,7 +3587,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..9,-1}
+```java Java hidelines={1..4,7..9,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;

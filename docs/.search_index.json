@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-21T15:14:49Z",
+  "generated_at": "2026-03-21T18:16:30Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -336,7 +336,7 @@
         "google",
         "security"
       ],
-      "word_count": 3222,
+      "word_count": 3227,
       "file_path": "docs/claude-code__github-actions.md"
     },
     "/claude-code/gitlab-ci-cd": {
@@ -1344,7 +1344,7 @@
         "extended",
         "beta"
       ],
-      "word_count": 4609,
+      "word_count": 4615,
       "file_path": "docs/docs__en__about-claude__models__migration-guide.md"
     },
     "/docs/en/about-claude/models/overview": {
@@ -1456,7 +1456,7 @@
         "should",
         "examples"
       ],
-      "word_count": 3238,
+      "word_count": 3239,
       "file_path": "docs/docs__en__about-claude__use-case-guides__content-moderation.md"
     },
     "/docs/en/about-claude/use-case-guides/customer-support-chat": {
@@ -1540,7 +1540,7 @@
         "cost",
         "more"
       ],
-      "word_count": 3894,
+      "word_count": 3890,
       "file_path": "docs/docs__en__about-claude__use-case-guides__ticket-routing.md"
     },
     "/docs/en/agent-sdk/agent-loop": {
@@ -2408,7 +2408,7 @@
         "pdf",
         "note"
       ],
-      "word_count": 1528,
+      "word_count": 1525,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__quickstart.md"
     },
     "/docs/en/agents-and-tools/mcp-connector": {
@@ -2436,7 +2436,7 @@
         "version",
         "beta"
       ],
-      "word_count": 2698,
+      "word_count": 2701,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/remote-mcp-servers": {
@@ -2520,7 +2520,7 @@
         "edit",
         "web"
       ],
-      "word_count": 7365,
+      "word_count": 7377,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -2548,7 +2548,7 @@
         "implementation",
         "mouse"
       ],
-      "word_count": 6178,
+      "word_count": 6183,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
@@ -2576,7 +2576,7 @@
         "available",
         "models"
       ],
-      "word_count": 759,
+      "word_count": 760,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__fine-grained-tool-streaming.md"
     },
     "/docs/en/agents-and-tools/tool-use/implement-tool-use": {
@@ -2632,7 +2632,7 @@
         "line",
         "side"
       ],
-      "word_count": 3558,
+      "word_count": 3562,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__memory-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/overview": {
@@ -2660,7 +2660,7 @@
         "result",
         "call"
       ],
-      "word_count": 8159,
+      "word_count": 8168,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/programmatic-tool-calling": {
@@ -2716,7 +2716,7 @@
         "codegroup",
         "return"
       ],
-      "word_count": 4893,
+      "word_count": 5084,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__text-editor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-search-tool": {
@@ -2744,7 +2744,7 @@
         "context",
         "only"
       ],
-      "word_count": 4655,
+      "word_count": 4660,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-search-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-fetch-tool": {
@@ -2772,7 +2772,7 @@
         "data",
         "citations"
       ],
-      "word_count": 2793,
+      "word_count": 2799,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -2800,7 +2800,7 @@
         "opus",
         "sonnet"
       ],
-      "word_count": 3511,
+      "word_count": 3517,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -3730,7 +3730,7 @@
         "multiple",
         "names"
       ],
-      "word_count": 374,
+      "word_count": 375,
       "file_path": "docs/docs__en__api__beta-headers.md"
     },
     "/docs/en/api/beta": {
@@ -4587,7 +4587,7 @@
         "beta",
         "platform"
       ],
-      "word_count": 737,
+      "word_count": 736,
       "file_path": "docs/docs__en__api__client-sdks.md"
     },
     "/docs/en/api/completions": {
@@ -5862,7 +5862,7 @@
         "when",
         "these"
       ],
-      "word_count": 814,
+      "word_count": 815,
       "file_path": "docs/docs__en__api__errors.md"
     },
     "/docs/en/api/go/beta": {
@@ -11441,7 +11441,7 @@
         "response",
         "errors"
       ],
-      "word_count": 823,
+      "word_count": 827,
       "file_path": "docs/docs__en__api__sdks__php.md"
     },
     "/docs/en/api/sdks/python": {
@@ -11469,7 +11469,7 @@
         "provides",
         "responses"
       ],
-      "word_count": 2766,
+      "word_count": 2768,
       "file_path": "docs/docs__en__api__sdks__python.md"
     },
     "/docs/en/api/sdks/ruby": {
@@ -11497,7 +11497,7 @@
         "documentation",
         "examples"
       ],
-      "word_count": 1562,
+      "word_count": 1574,
       "file_path": "docs/docs__en__api__sdks__ruby.md"
     },
     "/docs/en/api/sdks/typescript": {
@@ -11525,7 +11525,7 @@
         "undocumented",
         "see"
       ],
-      "word_count": 3662,
+      "word_count": 3663,
       "file_path": "docs/docs__en__api__sdks__typescript.md"
     },
     "/docs/en/api/service-tiers": {
@@ -12885,7 +12885,7 @@
         "full",
         "request"
       ],
-      "word_count": 3500,
+      "word_count": 3507,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/administration-api": {
@@ -12941,7 +12941,7 @@
         "within",
         "result"
       ],
-      "word_count": 6092,
+      "word_count": 6101,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -13025,7 +13025,7 @@
         "keys",
         "python"
       ],
-      "word_count": 2316,
+      "word_count": 2315,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock": {
@@ -13053,7 +13053,7 @@
         "available",
         "through"
       ],
-      "word_count": 2764,
+      "word_count": 2758,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -13081,7 +13081,7 @@
         "global",
         "through"
       ],
-      "word_count": 1866,
+      "word_count": 1861,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -13109,7 +13109,7 @@
         "usage",
         "note"
       ],
-      "word_count": 8181,
+      "word_count": 8193,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -13137,7 +13137,7 @@
         "history",
         "blocks"
       ],
-      "word_count": 7369,
+      "word_count": 7375,
       "file_path": "docs/docs__en__build-with-claude__context-editing.md"
     },
     "/docs/en/build-with-claude/context-windows": {
@@ -13193,7 +13193,7 @@
         "level",
         "legacy"
       ],
-      "word_count": 1023,
+      "word_count": 1024,
       "file_path": "docs/docs__en__build-with-claude__data-residency.md"
     },
     "/docs/en/build-with-claude/effort": {
@@ -13221,7 +13221,7 @@
         "tokens",
         "best"
       ],
-      "word_count": 1443,
+      "word_count": 1446,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -13277,7 +13277,7 @@
         "output",
         "streaming"
       ],
-      "word_count": 13388,
+      "word_count": 13397,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -13305,7 +13305,7 @@
         "card",
         "model"
       ],
-      "word_count": 2196,
+      "word_count": 2199,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -13333,7 +13333,7 @@
         "type",
         "created"
       ],
-      "word_count": 2620,
+      "word_count": 2624,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -13445,7 +13445,7 @@
         "analysis",
         "content"
       ],
-      "word_count": 3034,
+      "word_count": 3036,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -13473,7 +13473,7 @@
         "requests",
         "input"
       ],
-      "word_count": 14413,
+      "word_count": 14422,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {
@@ -13585,7 +13585,7 @@
         "level",
         "when"
       ],
-      "word_count": 4776,
+      "word_count": 4779,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -13613,7 +13613,7 @@
         "using",
         "reference"
       ],
-      "word_count": 12074,
+      "word_count": 12095,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
@@ -13641,7 +13641,7 @@
         "json",
         "blocks"
       ],
-      "word_count": 4545,
+      "word_count": 4553,
       "file_path": "docs/docs__en__build-with-claude__streaming.md"
     },
     "/docs/en/build-with-claude/structured-outputs": {
@@ -13669,7 +13669,7 @@
         "tab",
         "example"
       ],
-      "word_count": 11398,
+      "word_count": 11444,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/token-counting": {
@@ -13697,7 +13697,7 @@
         "only",
         "does"
       ],
-      "word_count": 3603,
+      "word_count": 3609,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/usage-cost-api": {
@@ -13753,7 +13753,7 @@
         "per",
         "url"
       ],
-      "word_count": 4534,
+      "word_count": 4544,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -13781,7 +13781,7 @@
         "zdr",
         "through"
       ],
-      "word_count": 2682,
+      "word_count": 2688,
       "file_path": "docs/docs__en__build-with-claude__working-with-messages.md"
     },
     "/docs/en/build-with-claude/workspaces": {
@@ -15825,7 +15825,7 @@
         "future",
         "handling"
       ],
-      "word_count": 1064,
+      "word_count": 1066,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md"
     },
     "/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency": {

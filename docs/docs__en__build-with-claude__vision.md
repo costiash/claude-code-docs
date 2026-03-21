@@ -163,7 +163,7 @@ async Task<string> DownloadAndEncodeImageAsync(string url)
 // For URL-based images, you can use the URLs directly in your requests
 ```
 
-```go Go hidelines={1..8,30..37}
+```go Go hidelines={1..9,-8..}
 package main
 
 import (
@@ -234,7 +234,7 @@ public class ImageHandlingExample {
 }
 ```
 
-```php PHP nocheck
+```php PHP nocheck hidelines={1}
 <?php
 // For base64-encoded images
 function downloadAndEncodeImage($url) {
@@ -307,7 +307,7 @@ Below are examples of how to include images in a Messages API request using base
     }
     EOF
     ```
-    ```python Python hidelines={3..5,-1}
+    ```python Python hidelines={1..2}
     import anthropic
 
     image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
@@ -409,7 +409,7 @@ Below are examples of how to include images in a Messages API request using base
 
     Console.WriteLine(message);
     ```
-    ```go Go
+    ```go Go hidelines={1..11,-1}
     package main
 
     import (
@@ -444,7 +444,7 @@ Below are examples of how to include images in a Messages API request using base
     ```
 
     
-    ```java Java nocheck hidelines={1..8,-1}
+    ```java Java nocheck hidelines={1..8,-2..}
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.models.messages.*;
@@ -483,7 +483,7 @@ Below are examples of how to include images in a Messages API request using base
       }
     }
     ```
-    ```php PHP
+    ```php PHP hidelines={1..4}
     <?php
 
     use Anthropic\Client;
@@ -515,7 +515,7 @@ Below are examples of how to include images in a Messages API request using base
 
     print_r($message);
     ```
-    ```ruby Ruby
+    ```ruby Ruby hidelines={1..2}
     require "anthropic"
 
     client = Anthropic::Client.new
@@ -578,7 +578,7 @@ Below are examples of how to include images in a Messages API request using base
         ]
       }'
     ```
-    ```python Python hidelines={1..3,-1}
+    ```python Python hidelines={1..2}
     import anthropic
 
     client = anthropic.Anthropic()
@@ -671,7 +671,7 @@ Below are examples of how to include images in a Messages API request using base
 
     Console.WriteLine(message);
     ```
-    ```go Go
+    ```go Go hidelines={1..11,-1}
     package main
 
     import (
@@ -704,7 +704,7 @@ Below are examples of how to include images in a Messages API request using base
     	fmt.Println(message)
     }
     ```
-    ```java Java hidelines={1..9,-1}
+    ```java Java hidelines={1..9,-2..}
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.models.messages.*;
@@ -743,7 +743,7 @@ Below are examples of how to include images in a Messages API request using base
       }
     }
     ```
-    ```php PHP
+    ```php PHP hidelines={1..4}
     <?php
 
     use Anthropic\Client;
@@ -772,7 +772,7 @@ Below are examples of how to include images in a Messages API request using base
 
     print_r($message);
     ```
-    ```ruby Ruby
+    ```ruby Ruby hidelines={1..2}
     require "anthropic"
 
     client = Anthropic::Client.new
@@ -855,7 +855,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python nocheck hidelines={1..4,-1}
+```python Python nocheck hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -967,7 +967,7 @@ var response = await client.Beta.Messages.Create(
 Console.WriteLine(response);
 ```
 
-```go Go nocheck
+```go Go nocheck hidelines={1..12,-1}
 package main
 
 import (
@@ -1021,7 +1021,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..13,-1}
+```java Java nocheck hidelines={1..2,5..13,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.files.FileMetadata;
@@ -1067,7 +1067,7 @@ public class ImageFilesExample {
 }
 ```
 
-```php PHP nocheck
+```php PHP nocheck hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1102,7 +1102,7 @@ $message = $client->beta->messages->create(
 print_r($message->content);
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1149,7 +1149,7 @@ Ask Claude to describe one image.
 
 <Tabs>
   <Tab title="Using Base64">
-    ```python Python hidelines={1..6}
+    ```python Python hidelines={1..2}
     import anthropic
 
     client = anthropic.Anthropic()
@@ -1215,7 +1215,7 @@ Ask Claude to describe the differences between multiple images.
 
 <Tabs>
   <Tab title="Using Base64">
-    ```python Python hidelines={1..8}
+    ```python Python hidelines={1..2}
     import anthropic
 
     client = anthropic.Anthropic()
@@ -1302,7 +1302,7 @@ Ask Claude to describe the differences between multiple images, while giving it 
 
 <Tabs>
   <Tab title="Using Base64">
-    ```python Python hidelines={1..8}
+    ```python Python hidelines={1..2}
     import anthropic
 
     client = anthropic.Anthropic()

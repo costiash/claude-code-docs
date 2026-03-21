@@ -69,7 +69,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python nocheck
+```python Python nocheck hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -91,7 +91,7 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript nocheck hidelines={1..4}
+```typescript TypeScript nocheck hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -166,7 +166,7 @@ class Program
 }
 ```
 
-```go Go nocheck hidelines={1..13,-5..-1}
+```go Go nocheck hidelines={1..11,-1}
 package main
 
 import (
@@ -209,7 +209,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..9,-1}
+```java Java nocheck hidelines={1..2,4,6..9,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.BetaMcpToolset;
@@ -242,7 +242,7 @@ public class Main {
 }
 ```
 
-```php PHP nocheck
+```php PHP nocheck hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -275,7 +275,7 @@ $message = $client->beta->messages->create(
 echo $message;
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new

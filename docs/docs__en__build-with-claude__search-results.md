@@ -87,7 +87,7 @@ The most powerful use case is returning search results from your custom tools. T
 
 <CodeGroup>
 
-```python Python nocheck
+```python Python nocheck hidelines={1}
 from anthropic import Anthropic
 from anthropic.types import (
     MessageParam,
@@ -179,7 +179,7 @@ if response.content[0].type == "tool_use":
     )
 ```
 
-```typescript TypeScript nocheck hidelines={1..4}
+```typescript TypeScript nocheck hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -387,7 +387,7 @@ public class Program
 }
 ```
 
-```go Go nocheck hidelines={1..12,-1}
+```go Go nocheck hidelines={1..12,77..78}
 package main
 
 import (
@@ -488,7 +488,7 @@ func searchKnowledgeBase(query string) []anthropic.ToolResultBlockParamContentUn
 }
 ```
 
-```java Java nocheck hidelines={1..19,-1}
+```java Java nocheck hidelines={1..3,5..7,9..19,75..76,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.ContentBlockParam;
@@ -596,7 +596,7 @@ public class SearchKnowledgeBaseExample {
 }
 ```
 
-```php PHP nocheck
+```php PHP nocheck hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -691,7 +691,7 @@ if ($toolUseBlock !== null) {
 }
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -835,7 +835,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```python Python hidelines={1,3..4,-1}
+```python Python hidelines={1}
 from anthropic import Anthropic
 from anthropic.types import MessageParam, TextBlockParam, SearchResultBlockParam
 
@@ -885,7 +885,7 @@ response = client.messages.create(
 print(response.model_dump_json(indent=2))
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -998,7 +998,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -1044,7 +1044,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..13,-1}
+```java Java hidelines={1..3,5..7,9..13,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.ContentBlockParam;
@@ -1102,7 +1102,7 @@ public class SearchResultExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -1152,7 +1152,7 @@ $message = $client->messages->create(
 echo json_encode($message, JSON_PRETTY_PRINT);
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1308,7 +1308,7 @@ Claude can cite specific blocks using the `start_block_index` and `end_block_ind
 
 You can use both tool-based and top-level search results in the same conversation:
 
-```python nocheck hidelines={1..2}
+```python nocheck
 from anthropic.types import MessageParam, SearchResultBlockParam, TextBlockParam
 
 # First message with top-level search results
@@ -1343,7 +1343,7 @@ messages = [
 
 Both methods support mixing search results with other content:
 
-```python nocheck hidelines={1..2}
+```python nocheck
 from anthropic.types import SearchResultBlockParam, TextBlockParam
 
 # In tool results

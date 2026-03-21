@@ -45,7 +45,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -59,7 +59,7 @@ response = client.messages.count_tokens(
 print(response.json())
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -103,7 +103,7 @@ class Program
 }
 ```
 
-```go Go hidelines={1..13,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -134,7 +134,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..9,-1}
+```java Java hidelines={1..2,5..9,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCountTokensParams;
@@ -158,7 +158,7 @@ public class CountTokensExample {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -176,7 +176,7 @@ $response = $client->messages->countTokens(
 echo json_encode($response);
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -237,7 +237,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     }'
 ```
 
-```python Python hidelines={1..4,-1}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -266,7 +266,7 @@ response = client.messages.count_tokens(
 print(response.json())
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -382,7 +382,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..14,-1}
+```java Java hidelines={1..3,6..14,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -434,7 +434,7 @@ public class CountTokensWithToolsExample {
 }
 ```
 
-```php PHP hidelines={1..6}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -467,7 +467,7 @@ $response = $client->messages->countTokens(
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -534,7 +534,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 EOF
 ```
 
-```python Python nocheck hidelines={-1}
+```python Python nocheck hidelines={1}
 import anthropic
 import base64
 import httpx
@@ -567,7 +567,7 @@ response = client.messages.count_tokens(
 print(response.json())
 ```
 
-```typescript TypeScript nocheck hidelines={1..4}
+```typescript TypeScript nocheck hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -706,7 +706,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..19,-1}
+```java Java nocheck hidelines={1..2,4..5,8..19,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Base64ImageSource;
@@ -765,7 +765,7 @@ public class CountTokensImageExample {
 }
 ```
 
-```php PHP hidelines={1..4,9..10} nocheck
+```php PHP hidelines={1..4} nocheck
 <?php
 
 use Anthropic\Client;
@@ -798,7 +798,7 @@ $response = $client->messages->countTokens(
 print_r($response);
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1}
 require "anthropic"
 require "base64"
 require "net/http"
@@ -886,7 +886,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     }'
 ```
 
-```python Python nocheck hidelines={1..4,-1}
+```python Python nocheck hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -920,7 +920,7 @@ response = client.messages.count_tokens(
 print(response.json())
 ```
 
-```typescript TypeScript nocheck hidelines={1..4}
+```typescript TypeScript nocheck hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -1056,7 +1056,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..13,-1}
+```java Java nocheck hidelines={1..3,6..7,9..13,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.ContentBlockParam;
@@ -1104,7 +1104,7 @@ public class CountTokensThinkingExample {
 }
 ```
 
-```php PHP hidelines={1..6} nocheck
+```php PHP hidelines={1..4} nocheck
 <?php
 
 use Anthropic\Client;
@@ -1146,7 +1146,7 @@ $response = $client->messages->countTokens(
 echo json_encode($response);
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -1230,7 +1230,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 EOF
 ```
 
-```python Python nocheck hidelines={-1}
+```python Python nocheck
 import base64
 import anthropic
 
@@ -1383,7 +1383,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..17,-1}
+```java Java nocheck hidelines={1..2,4,8..17,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Base64PdfSource;
@@ -1432,7 +1432,7 @@ public class CountTokensPdfExample {
 }
 ```
 
-```php PHP hidelines={1..6} nocheck
+```php PHP hidelines={1..4} nocheck
 <?php
 
 use Anthropic\Client;
@@ -1467,7 +1467,7 @@ $response = $client->messages->countTokens(
 echo json_encode($response);
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1}
 require "anthropic"
 require "base64"
 

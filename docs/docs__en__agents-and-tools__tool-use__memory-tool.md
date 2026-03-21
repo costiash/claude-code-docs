@@ -145,7 +145,7 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -250,7 +250,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..9,-1}
+```java Java hidelines={1..2,4..9,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MemoryTool20250818;
@@ -275,7 +275,7 @@ public class MemoryToolExample {
 }
 ```
 
-```php PHP
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
@@ -300,7 +300,7 @@ $message = $client->messages->create(
 );
 ```
 
-```ruby Ruby
+```ruby Ruby hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new
@@ -725,7 +725,7 @@ func main() {
 }
 ```
 
-```java Java nocheck hidelines={1..12,-1}
+```java Java nocheck hidelines={1..2,7..12,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.AnthropicBeta;
@@ -760,7 +760,7 @@ public class ContextManagementExample {
 }
 ```
 
-```php PHP hidelines={1..6} nocheck
+```php PHP hidelines={1..4} nocheck
 <?php
 
 use Anthropic\Client;
@@ -796,7 +796,7 @@ $message = $client->beta->messages->create(
 );
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
 
 client = Anthropic::Client.new

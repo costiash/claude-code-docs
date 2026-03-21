@@ -217,7 +217,7 @@ Console.WriteLine(
 
 <Tab title="Java">
 
-```java Java nocheck hidelines={1..5}
+```java Java nocheck
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.foundry.backends.FoundryBackend;
@@ -393,7 +393,7 @@ Console.WriteLine(
 
 <Tab title="Java">
 
-```java Java nocheck hidelines={1..4,7..8}
+```java Java nocheck hidelines={1..2,4,8}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.foundry.backends.FoundryBackend;

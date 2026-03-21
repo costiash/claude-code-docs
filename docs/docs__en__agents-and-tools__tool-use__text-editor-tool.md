@@ -65,7 +65,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -89,7 +89,7 @@ response = client.messages.create(
 )
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -113,7 +113,7 @@ const response = await anthropic.messages.create({
 });
 ```
 
-```java Java hidelines={1..10,-1}
+```java Java hidelines={1..5,7..10,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -171,7 +171,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python nocheck
+```python Python nocheck hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -189,7 +189,7 @@ response = client.messages.create(
 )
 ```
 
-```typescript TypeScript nocheck hidelines={1..4}
+```typescript TypeScript nocheck hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -212,7 +212,7 @@ const response = await anthropic.messages.create({
 });
 ```
 
-```java Java nocheck hidelines={1..10,-1}
+```java Java nocheck hidelines={1..5,7..10,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -461,7 +461,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```python Python hidelines={1..4}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -479,7 +479,7 @@ response = client.messages.create(
 )
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -502,7 +502,7 @@ const response = await anthropic.messages.create({
 });
 ```
 
-```java Java hidelines={1..10,-1}
+```java Java hidelines={1..5,7..10,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -650,7 +650,7 @@ response = client.messages.create(
 )
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
@@ -702,27 +702,61 @@ const response = await anthropic.messages.create({
 });
 ```
 
-```java Java hidelines={1..10,-1}
+```java Java hidelines={1..9,11..16,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.ContentBlockParam;
 import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.TextBlockParam;
+import com.anthropic.models.messages.ToolResultBlockParam;
 import com.anthropic.models.messages.ToolTextEditor20250728;
+import com.anthropic.models.messages.ToolUseBlockParam;
+import java.util.List;
 
-public class TextEditorToolExample {
+public class TextEditorToolResultExample {
 
   public static void main(String[] args) {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-    ToolTextEditor20250728 editorTool =
-      ToolTextEditor20250728.builder().build();
-
     MessageCreateParams params = MessageCreateParams.builder()
       .model(Model.CLAUDE_OPUS_4_6)
       .maxTokens(1024)
-      .addTool(editorTool)
+      .addTool(ToolTextEditor20250728.builder().build())
       .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+      .addAssistantMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofText(
+            TextBlockParam.builder()
+              .text("I'll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue.")
+              .build()
+          ),
+          ContentBlockParam.ofToolUse(
+            ToolUseBlockParam.builder()
+              .id("toolu_01AbCdEfGhIjKlMnOpQrStU")
+              .name("str_replace_based_edit_tool")
+              .input(
+                ToolUseBlockParam.Input.builder()
+                  .putAdditionalProperty("command", JsonValue.from("view"))
+                  .putAdditionalProperty("path", JsonValue.from("primes.py"))
+                  .build()
+              )
+              .build()
+          )
+        )
+      )
+      .addUserMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofToolResult(
+            ToolResultBlockParam.builder()
+              .toolUseId("toolu_01AbCdEfGhIjKlMnOpQrStU")
+              .content("1: def is_prime(n):\n2:     \"\"\"Check if a number is prime.\"\"\"\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     \"\"\"Generate a list of prime numbers up to the given limit.\"\"\"\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     \"\"\"Main function to demonstrate prime number generation.\"\"\"\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f\"Prime numbers up to {limit}:\")\n29:     print(prime_list)\n30:     print(f\"Found {len(prime_list)} prime numbers.\")\n31: \n32: if __name__ == \"__main__\":\n33:     main()")
+              .build()
+          )
+        )
+      )
       .build();
 
     Message message = client.messages().create(params);
@@ -856,7 +890,7 @@ const response = await client.messages.create({
 });
 ```
 
-```java Java hidelines={1..16,-1}
+```java Java hidelines={1..9,11..16,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -953,7 +987,7 @@ This example demonstrates how Claude Sonnet 3.7 uses the text editor tool to fix
 
 First, your application provides Claude with the text editor tool and a prompt to fix a syntax error:
 
-```python nocheck hidelines={1..4,-1}
+```python nocheck hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()

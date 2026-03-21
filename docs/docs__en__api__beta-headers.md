@@ -27,7 +27,7 @@ When using the SDK, you can specify beta headers in the request options:
 
 <CodeGroup>
 
-```python Python
+```python Python hidelines={1..2}
 from anthropic import Anthropic
 
 client = Anthropic()
@@ -40,7 +40,7 @@ response = client.beta.messages.create(
 )
 ```
 
-```typescript TypeScript hidelines={1..4}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
