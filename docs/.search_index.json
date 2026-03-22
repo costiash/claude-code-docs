@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-22T15:14:34Z",
+  "generated_at": "2026-03-22T18:16:37Z",
   "indexed_files": 575,
   "index": {
     "/changelog": {
@@ -154,21 +154,21 @@
         "interactive",
         "only",
         "code",
-        "default",
         "see",
+        "default",
+        "file",
+        "start",
+        "mcp",
         "print",
         "flags",
-        "start",
         "name",
         "json",
         "model",
-        "mcp",
         "flag",
         "agent",
-        "permission",
-        "system"
+        "permission"
       ],
-      "word_count": 1824,
+      "word_count": 1868,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -401,26 +401,26 @@
       "keywords": [
         "claude",
         "cli",
+        "mode",
         "agent",
         "sdk",
-        "code",
         "example",
+        "code",
+        "bare",
         "session",
+        "note",
+        "prompt",
+        "without",
+        "json",
+        "run",
+        "tools",
+        "flag",
         "options",
         "structured",
         "output",
-        "json",
-        "event",
-        "documentation",
-        "run",
-        "python",
-        "typescript",
-        "tools",
-        "note",
-        "flag",
-        "prompt"
+        "event"
       ],
-      "word_count": 1067,
+      "word_count": 1336,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -488,12 +488,12 @@
         "commands",
         "code",
         "mode",
+        "line",
         "press",
         "history",
-        "line",
         "background",
-        "conversation",
         "search",
+        "conversation",
         "normal",
         "input",
         "word",
@@ -504,7 +504,7 @@
         "note",
         "see"
       ],
-      "word_count": 2488,
+      "word_count": 2506,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -595,8 +595,8 @@
       "title": "Connect Claude Code to tools via MCP",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Connect Claude ...",
       "keywords": [
-        "mcp",
         "servers",
+        "mcp",
         "server",
         "claude",
         "code",
@@ -616,7 +616,7 @@
         "configuration",
         "plugin"
       ],
-      "word_count": 6346,
+      "word_count": 6376,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -1000,15 +1000,15 @@
         "configuration",
         "marketplace",
         "hooks",
-        "file",
         "set",
+        "file",
         "files",
         "paths",
         "permission",
         "example",
         "marketplaces"
       ],
-      "word_count": 6252,
+      "word_count": 6278,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
