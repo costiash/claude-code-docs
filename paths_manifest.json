@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-23T15:25:30.965745Z",
-    "total_paths": 673,
+    "generated_at": "2026-03-23T18:20:22.804595Z",
+    "total_paths": 675,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-03-23T15:25:30.965753Z"
+    "last_regenerated": "2026-03-23T18:20:22.804602Z"
   },
   "categories": {
     "core_documentation": [
@@ -105,6 +105,7 @@
       "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak",
       "/docs/en/tools-reference",
       "/docs/en/voice-dictation",
+      "/docs/en/web-scheduled-tasks",
       "/docs/en/zero-data-retention"
     ],
     "api_reference": [
@@ -132,6 +133,7 @@
       "/docs/en/agent-sdk/structured-outputs",
       "/docs/en/agent-sdk/subagents",
       "/docs/en/agent-sdk/todo-tracking",
+      "/docs/en/agent-sdk/tool-search",
       "/docs/en/agent-sdk/typescript",
       "/docs/en/agent-sdk/typescript-v2-preview",
       "/docs/en/agent-sdk/user-input",
