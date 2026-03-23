@@ -2919,8 +2919,8 @@
     "claude-code__plugin-marketplaces.md": {
       "original_url": "https://platform.claude.com/docs/en/plugin-marketplaces",
       "original_md_url": "https://platform.claude.com/docs/en/plugin-marketplaces.md",
-      "hash": "48ed00a91032e4e37e31be6d67be1967749d84d69a7714571693241f3089d7ea",
-      "last_updated": "2026-03-20T15:24:41.091559"
+      "hash": "6168e4f8ef56b93633b75c283eb3f9d481572d671110a6a99f6dff1e495f4361",
+      "last_updated": "2026-03-23T21:20:47.052432"
     },
     "claude-code__plugins.md": {
       "original_url": "https://platform.claude.com/docs/en/plugins",
@@ -3075,8 +3075,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-23T18:26:52.080566",
-    "fetch_duration_seconds": 389.998381,
+    "last_fetch_completed": "2026-03-23T21:21:05.017108",
+    "fetch_duration_seconds": 409.256519,
     "total_pages_discovered": 675,
     "pages_fetched_successfully": 512,
     "pages_failed": 164,
@@ -3251,7 +3251,7 @@
     "total_files": 512,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-23T18:26:52.080587",
+  "last_updated": "2026-03-23T21:21:05.017132",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
