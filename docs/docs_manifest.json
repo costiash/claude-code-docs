@@ -87,8 +87,8 @@
     "docs__en__agent-sdk__custom-tools.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/custom-tools",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/custom-tools.md",
-      "hash": "9ec8013ef1a26daf9c2b09ec7dbe9f4b7703735234190e2285be57885db6c9d9",
-      "last_updated": "2026-02-25T15:23:41.345430"
+      "hash": "b15d4fd831df1692c6515296cc219e6258f4d298e7cbb04472b2b24c103b356f",
+      "last_updated": "2026-03-23T18:20:32.432084"
     },
     "docs__en__agent-sdk__file-checkpointing.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/file-checkpointing",
@@ -111,8 +111,8 @@
     "docs__en__agent-sdk__mcp.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/mcp",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/mcp.md",
-      "hash": "ca09a5daef76363f8509cb958455841c07aa91c9183a07efbe618a629a6108fe",
-      "last_updated": "2026-03-08T03:48:57.723812"
+      "hash": "5d14acb6084469798cd0fa2c56f495bf595eaae07afa82a51647601edce6d5a3",
+      "last_updated": "2026-03-23T18:20:35.064348"
     },
     "docs__en__agent-sdk__migration-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/migration-guide",
@@ -147,8 +147,8 @@
     "docs__en__agent-sdk__python.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/python",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/python.md",
-      "hash": "9f513f1154a930a2bd176d0b96b5b2547a29dfbb3377dfb6cd7c2e1d41aa2dfd",
-      "last_updated": "2026-03-13T18:14:31.143183"
+      "hash": "018b8ec2a0c9da28f888cb9b33b4849167983ce9c0bb711f38e7631fc2186443",
+      "last_updated": "2026-03-23T18:20:38.977645"
     },
     "docs__en__agent-sdk__quickstart.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/quickstart",
@@ -210,11 +210,17 @@
       "hash": "68a0609de5b8f3775de1c7e06c0ed605bd1854317d90aaa5b1f880e8184ddd37",
       "last_updated": "2026-02-25T15:23:54.655655"
     },
+    "docs__en__agent-sdk__tool-search.md": {
+      "original_url": "https://platform.claude.com/docs/en/agent-sdk/tool-search",
+      "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/tool-search.md",
+      "hash": "cf80a6490afc1e57b5920a08d5d418a6eef651090d0a46c37e917bafecb0d308",
+      "last_updated": "2026-03-23T18:20:46.278311"
+    },
     "docs__en__agent-sdk__typescript.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/typescript.md",
-      "hash": "ff33e85ab91f95874ea685bbdf52a96f9bbc565781a195365216000d9a0232f2",
-      "last_updated": "2026-03-13T18:14:38.333726"
+      "hash": "8e48a990a1d2730ab813851fd350abd4006fe78d1ba3573081e84a011e7f7a53",
+      "last_updated": "2026-03-23T18:20:46.861173"
     },
     "docs__en__agent-sdk__typescript-v2-preview.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview",
@@ -225,8 +231,8 @@
     "docs__en__agent-sdk__user-input.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/user-input",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/user-input.md",
-      "hash": "45ca422f0af0ca77cfc46fb0d816159ecd89e6a01a01dc951e61408a488425dd",
-      "last_updated": "2026-03-11T00:29:47.868613"
+      "hash": "e6e173cbbad614a83010b94dd4bfdc103a8c32b1828331c2063cf4980e3557cf",
+      "last_updated": "2026-03-23T18:20:48.125252"
     },
     "docs__en__agents-and-tools__agent-skills__best-practices.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices",
@@ -2589,8 +2595,8 @@
     "docs__en__build-with-claude__context-editing.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/context-editing",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/context-editing.md",
-      "hash": "fde9ce1ce92685ff0e58df5443cc6b09cc80f0434ed5b154063f57793572f1c3",
-      "last_updated": "2026-03-21T18:15:36.517035"
+      "hash": "b53de0eff1a569c25b5aea8d8db2417c5432f798a2e1a885fd203d7aa4ab6be3",
+      "last_updated": "2026-03-23T18:25:54.897786"
     },
     "docs__en__build-with-claude__context-windows.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
@@ -2751,8 +2757,8 @@
     "claude-code__claude-code-on-the-web.md": {
       "original_url": "https://platform.claude.com/docs/en/claude-code-on-the-web",
       "original_md_url": "https://platform.claude.com/docs/en/claude-code-on-the-web.md",
-      "hash": "08f75b97436998208463683f91c30374ce3197f05e83a88c5c985edfd18d1521",
-      "last_updated": "2026-03-07T00:36:32.644939"
+      "hash": "1e21c1e67ef542e98828c725a464373bc07c127647dd2f04a4f3287be878d43b",
+      "last_updated": "2026-03-23T18:26:13.633755"
     },
     "claude-code__cli-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/cli-reference",
@@ -2763,8 +2769,8 @@
     "claude-code__common-workflows.md": {
       "original_url": "https://platform.claude.com/docs/en/common-workflows",
       "original_md_url": "https://platform.claude.com/docs/en/common-workflows.md",
-      "hash": "9e2fa06b05af186f66e14cc7b97042027e1ced6586f112e9d777a08fb121ca90",
-      "last_updated": "2026-03-17T18:30:03.889059"
+      "hash": "2e4564ec66f7e38102827cec6d2f6fd712928c4db4c840427dc76347705571e1",
+      "last_updated": "2026-03-23T18:26:15.489339"
     },
     "claude-code__costs.md": {
       "original_url": "https://platform.claude.com/docs/en/costs",
@@ -2781,8 +2787,8 @@
     "claude-code__desktop.md": {
       "original_url": "https://platform.claude.com/docs/en/desktop",
       "original_md_url": "https://platform.claude.com/docs/en/desktop.md",
-      "hash": "ccc0cb823b26c16f38eeed898241e997213f1fc885cf08d29407a240e4a9a245",
-      "last_updated": "2026-03-21T00:36:10.239687"
+      "hash": "37fd2bb6b940930bf16f2fb392619c40cc6a2a5cb88b341a2513f2f28f1a4181",
+      "last_updated": "2026-03-23T18:26:17.413580"
     },
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
@@ -2907,8 +2913,8 @@
     "claude-code__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/overview",
       "original_md_url": "https://platform.claude.com/docs/en/overview.md",
-      "hash": "ab88fc29e021f76360cc27d60a3ae223cd9470751ac2360009ae2838b60ab1b9",
-      "last_updated": "2026-03-20T00:37:59.670179"
+      "hash": "aafa12c85e38cc90eaf76c3a7a9098e353407b472600aa12f98a19d0ed8ba2ab",
+      "last_updated": "2026-03-23T18:26:32.721402"
     },
     "claude-code__plugin-marketplaces.md": {
       "original_url": "https://platform.claude.com/docs/en/plugin-marketplaces",
@@ -3069,11 +3075,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-23T15:31:55.161909",
-    "fetch_duration_seconds": 384.780684,
-    "total_pages_discovered": 673,
-    "pages_fetched_successfully": 511,
-    "pages_failed": 163,
+    "last_fetch_completed": "2026-03-23T18:26:52.080566",
+    "fetch_duration_seconds": 389.998381,
+    "total_pages_discovered": 675,
+    "pages_fetched_successfully": 512,
+    "pages_failed": 164,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/agent-teams",
@@ -3237,14 +3243,15 @@
       "/docs/en/slack",
       "/docs/en/tools-reference",
       "/docs/en/voice-dictation",
+      "/docs/en/web-scheduled-tasks",
       "/docs/en/zero-data-retention"
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 511,
+    "total_files": 512,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-23T15:31:55.161929",
+  "last_updated": "2026-03-23T18:26:52.080587",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

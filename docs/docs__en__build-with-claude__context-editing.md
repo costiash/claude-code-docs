@@ -37,7 +37,7 @@ This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](
 
 The `clear_tool_uses_20250919` strategy clears tool results when conversation context grows beyond your configured threshold. This is particularly useful for agentic workflows with heavy tool use. Older tool results (like file contents or search results) are no longer needed once Claude has processed them.
 
-When activated, the API automatically clears the oldest tool results in chronological order. Each cleared result is replaced with placeholder text so Claude knows it was removed. By default, only tool results are cleared. You can optionally clear both tool results and tool calls (the tool use parameters) by setting `clear_tool_inputs` to true.
+When activated, the API automatically clears the oldest tool results in chronological order. The API replaces each cleared result with placeholder text so Claude knows it was removed. By default, only tool results are cleared. You can optionally clear both tool results and tool calls (the tool use parameters) by setting `clear_tool_inputs` to true.
 
 ### Thinking block clearing
 
@@ -1951,7 +1951,7 @@ puts response
 ## Client-side compaction (SDK)
 
 <Warning>
-**Server-side compaction is recommended over SDK compaction.** [Server-side compaction](/docs/en/build-with-claude/compaction) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
+**Anthropic recommends server-side compaction over SDK compaction.** [Server-side compaction](/docs/en/build-with-claude/compaction) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
 </Warning>
 
 <Note>
@@ -1971,237 +1971,128 @@ When compaction is enabled, the SDK monitors token usage after each model respon
 
 ### Using compaction
 
-Add `compaction_control` to your `tool_runner` call:
+Add `compaction_control` to your `tool_runner` call to enable automatic summarization when token usage exceeds the threshold.
 
-<CodeGroup>
+<Tabs>
+<Tab title="Python">
 
-```python Python nocheck hidelines={1..2}
+```python Python hidelines={1..10}
 import anthropic
+from anthropic import beta_tool
+
+
+@beta_tool
+def read_file(path: str) -> str:
+    """Read the contents of a file."""
+    return "file contents..."
+
 
 client = anthropic.Anthropic()
 
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-6",
-    max_tokens=4096,
-    tools=[...],
-    messages=[
-        {
-            "role": "user",
-            "content": "Analyze all the files in this directory and write a summary report.",
-        }
-    ],
+    max_tokens=1024,
+    tools=[read_file],
+    messages=[{"role": "user", "content": "What's in config.json?"}],
     compaction_control={"enabled": True, "context_token_threshold": 100000},
 )
 
 for message in runner:
     print(f"Tokens used: {message.usage.input_tokens}")
-
-final = runner.until_done()
 ```
 
-```typescript TypeScript hidelines={1..2}
+</Tab>
+<Tab title="TypeScript">
+
+```typescript TypeScript hidelines={1..15,-3..}
 import Anthropic from "@anthropic-ai/sdk";
+import { betaTool } from "@anthropic-ai/sdk/helpers/beta/json-schema";
 
-const client = new Anthropic();
-
-const runner = client.beta.messages.toolRunner({
-  model: "claude-opus-4-6",
-  max_tokens: 4096,
-  tools: [
-    // ...
-  ],
-  messages: [
-    {
-      role: "user",
-      content: "Analyze all the files in this directory and write a summary report."
-    }
-  ],
-  compactionControl: {
-    enabled: true,
-    contextTokenThreshold: 100000
-  }
+const readFile = betaTool({
+  name: "read_file",
+  description: "Read the contents of a file",
+  inputSchema: {
+    type: "object",
+    properties: { path: { type: "string" } },
+    required: ["path"]
+  },
+  run: async () => "file contents..."
 });
 
-for await (const message of runner) {
-  console.log("Tokens used:", message.usage.input_tokens);
+async function main() {
+  const client = new Anthropic();
+
+  const runner = client.beta.messages.toolRunner({
+    model: "claude-opus-4-6",
+    max_tokens: 1024,
+    tools: [readFile],
+    messages: [{ role: "user", content: "What's in config.json?" }],
+    compactionControl: { enabled: true, contextTokenThreshold: 100000 }
+  });
+
+  for await (const message of runner) {
+    console.log(`Tokens used: ${message.usage.input_tokens}`);
+  }
 }
 
-const finalMessage = await runner.runUntilDone();
+main();
 ```
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
-using Anthropic;
-using Anthropic.Models.Beta.Messages;
+</Tab>
+<Tab title="C#">
 
-public class Program
-{
-    public static async Task Main()
-    {
-        AnthropicClient client = new();
+<Note>
+The C# SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+</Note>
 
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 4096,
-            Tools = [],
-            Messages = [
-                new() {
-                    Role = Role.User,
-                    Content = "Analyze all the files in this directory and write a summary report."
-                }
-            ],
-            ContextManagement = new BetaContextManagementConfig()
-            {
-                Edits = [
-                    new BetaCompact20260112Edit()
-                    {
-                        Trigger = new BetaInputTokensTrigger(100000)
-                    }
-                ]
-            }
-        };
+</Tab>
+<Tab title="Go">
 
-        var message = await client.Beta.Messages.Create(parameters);
-        Console.WriteLine($"Tokens used: {message.Usage.InputTokens}");
-    }
-}
-```
+<Note>
+The Go SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+</Note>
 
-```go Go nocheck hidelines={1..11,-1}
-package main
+</Tab>
+<Tab title="Java">
 
-import (
-	"context"
-	"fmt"
-	"log"
+<Note>
+The Java SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+</Note>
 
-	"github.com/anthropics/anthropic-sdk-go"
-)
+</Tab>
+<Tab title="PHP">
 
-func main() {
-	client := anthropic.NewClient()
+<Note>
+The PHP SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+</Note>
 
-	messages := []anthropic.BetaMessageParam{
-		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Analyze all the files in this directory and write a summary report.")),
-	}
+</Tab>
+<Tab title="Ruby">
 
-	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
-		MaxTokens: 4096,
-		Tools:     []anthropic.BetaToolUnionParam{},
-		Messages:  messages,
-		ContextManagement: anthropic.BetaContextManagementConfigParam{
-			Edits: []anthropic.BetaContextManagementConfigEditUnionParam{
-				{OfCompact20260112: &anthropic.BetaCompact20260112EditParam{
-					Trigger: anthropic.BetaInputTokensTriggerParam{
-						Value: 100000,
-					},
-				}},
-			},
-		},
-		Betas: []anthropic.AnthropicBeta{"compact-2026-01-12"},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Printf("Tokens used: %d\n", response.Usage.InputTokens)
-}
-```
-
-```java Java nocheck hidelines={1..4,8,10..12,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaContextManagementConfig;
-import com.anthropic.models.beta.messages.BetaCompact20260112Edit;
-import com.anthropic.models.beta.messages.BetaInputTokensTrigger;
-import com.anthropic.models.messages.Model;
-import com.anthropic.helpers.BetaToolRunner;
-
-public class CompactionExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        BetaToolRunner toolRunner = client.beta().messages().toolRunner(
-            MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_6)
-                .maxTokens(4096L)
-                .addUserMessage("Analyze all the files in this directory and write a summary report.")
-                .addBeta("compact-2026-01-12")
-                .contextManagement(BetaContextManagementConfig.builder()
-                    .addEdit(BetaCompact20260112Edit.builder()
-                        .trigger(BetaInputTokensTrigger.builder()
-                            .value(100000L)
-                            .build())
-                        .build())
-                    .build())
-                .build());
-
-        for (BetaMessage message : toolRunner) {
-            System.out.println("Tokens used: " + message.usage().inputTokens());
-        }
-    }
-}
-```
-
-```php PHP hidelines={1..4} nocheck
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-$messages = [
-    [
-        'role' => 'user',
-        'content' => 'Analyze all the files in this directory and write a summary report.'
-    ]
-];
-
-$response = $client->beta->messages->create(
-    maxTokens: 4096,
-    messages: $messages,
-    model: 'claude-opus-4-6',
-    betas: ['compact-2026-01-12'],
-    tools: [],
-    contextManagement: [
-        'edits' => [
-            [
-                'type' => 'compact_20260112',
-                'trigger' => ['type' => 'input_tokens', 'value' => 100000]
-            ]
-        ]
-    ],
-);
-
-echo "Tokens used: " . $response->usage->inputTokens . "\n";
-```
-
-```ruby Ruby nocheck hidelines={1..2}
+```ruby Ruby hidelines={1..15}
 require "anthropic"
+
+class ReadFileInput < Anthropic::BaseModel
+  required :path, String, doc: "Path to the file"
+end
+
+class ReadFile < Anthropic::BaseTool
+  doc "Read the contents of a file"
+  input_schema ReadFileInput
+
+  def call(input)
+    "file contents..."
+  end
+end
 
 client = Anthropic::Client.new
 
 runner = client.beta.messages.tool_runner(
   model: "claude-opus-4-6",
-  max_tokens: 4096,
-  tools: [
-    # ...
-  ],
-  messages: [
-    {
-      role: "user",
-      content: "Analyze all the files in this directory and write a summary report."
-    }
-  ],
-  compaction_control: {
-    enabled: true,
-    context_token_threshold: 100000
-  }
+  max_tokens: 1024,
+  tools: [ReadFile.new],
+  messages: [{ role: "user", content: "What's in config.json?" }],
+  compaction_control: { enabled: true, context_token_threshold: 100000 }
 )
 
 runner.each_message do |message|
@@ -2209,7 +2100,8 @@ runner.each_message do |message|
 end
 ```
 
-</CodeGroup>
+</Tab>
+</Tabs>
 
 #### What happens during compaction
 
@@ -2433,13 +2325,16 @@ The SDK calculates total usage as 63,000 + 270,000 = 333,000 tokens. However, th
 
 #### Tool use edge cases
 
-When compaction is triggered while a tool use response is pending, the SDK removes the tool use block from the message history before generating the summary. Claude will re-issue the tool call after resuming from the summary if still needed.
+When the SDK triggers compaction while a tool use response is pending, it removes the tool use block from the message history before generating the summary. Claude will re-issue the tool call after resuming from the summary if still needed.
 
 ### Monitoring compaction
 
-Enable logging to track when compaction occurs:
+Understanding when compaction triggers helps you tune thresholds and verify expected behavior.
 
-<CodeGroup>
+<Tabs>
+<Tab title="Python">
+
+The Python SDK logs compaction events at the INFO level. Enable the `anthropic.lib.tools` logger:
 
 ```python Python
 import logging
@@ -2452,219 +2347,123 @@ logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
 # INFO: Compaction complete. New token usage: 2500
 ```
 
-```typescript TypeScript
-// The SDK logs compaction events to the console
-// You'll see messages like:
-// Token usage 105000 has exceeded the threshold of 100000. Performing compaction.
-// Compaction complete. New token usage: 2500
-```
+</Tab>
+<Tab title="TypeScript">
 
-```csharp C# nocheck
-using Anthropic;
-using Anthropic.Models.Beta.Messages;
+The TypeScript SDK's `toolRunner` supports compaction but does not log events. Detect compaction by watching `runner.params.messages.length` shrink between turns:
 
-class CompactionLogging
-{
-    static async Task Main()
-    {
-        var client = new AnthropicClient();
-        var messages = new List<BetaMessageParam>();
+```typescript TypeScript hidelines={1..25,-3..}
+import Anthropic from "@anthropic-ai/sdk";
+import { betaTool } from "@anthropic-ai/sdk/helpers/beta/json-schema";
 
-        await Chat(client, messages, "Help me build a C# application");
-        await Chat(client, messages, "Add error handling");
-        await Chat(client, messages, "Now add logging");
+const readFile = betaTool({
+  name: "read_file",
+  description: "Read the contents of a file",
+  inputSchema: {
+    type: "object",
+    properties: { path: { type: "string" } },
+    required: ["path"]
+  },
+  run: async () => "file contents..."
+});
+
+async function main() {
+  const client = new Anthropic();
+
+  const runner = client.beta.messages.toolRunner({
+    model: "claude-opus-4-6",
+    max_tokens: 1024,
+    tools: [readFile],
+    messages: [{ role: "user", content: "What's in config.json?" }],
+    compactionControl: { enabled: true, contextTokenThreshold: 100000 }
+  });
+
+  let prevMsgCount = 0;
+  for await (const message of runner) {
+    const currMsgCount = runner.params.messages.length;
+    if (currMsgCount < prevMsgCount) {
+      console.log(`Compaction occurred: ${prevMsgCount} -> ${currMsgCount} messages`);
+      console.log(`Input tokens after compaction: ${message.usage.input_tokens}`);
     }
-
-    static async Task<string> Chat(AnthropicClient client, List<BetaMessageParam> messages, string userMessage)
-    {
-        messages.Add(new BetaMessageParam { Role = Role.User, Content = userMessage });
-
-        var parameters = new MessageCreateParams
-        {
-            Betas = ["compact-2026-01-12"],
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 4096,
-            Messages = messages,
-            ContextManagement = new BetaContextManagementConfig
-            {
-                Edits = [new BetaCompact20260112Edit()]
-            }
-        };
-
-        var response = await client.Beta.Messages.Create(parameters);
-
-        messages.Add(new BetaMessageParam { Role = Role.Assistant, Content = response.Content });
-
-        Console.WriteLine($"Token usage: {response.Usage.InputTokens}");
-
-        var textBlock = response.Content.FirstOrDefault(b => b.Type == "text");
-        return textBlock?.Text ?? "";
-    }
+    prevMsgCount = currMsgCount;
+  }
 }
+
+main();
 ```
 
-```go Go nocheck hidelines={1..13,19..20}
-package main
+</Tab>
+<Tab title="C#">
 
-import (
-	"context"
-	"fmt"
-	"log"
+<Note>
+The C# SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
+</Note>
 
-	"github.com/anthropics/anthropic-sdk-go"
+</Tab>
+<Tab title="Go">
+
+<Note>
+The Go SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
+</Note>
+
+</Tab>
+<Tab title="Java">
+
+<Note>
+The Java SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
+</Note>
+
+</Tab>
+<Tab title="PHP">
+
+<Note>
+The PHP SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
+</Note>
+
+</Tab>
+<Tab title="Ruby">
+
+The Ruby SDK supports an `on_compact:` callback that fires when compaction occurs. Add it to your `compaction_control` configuration:
+
+```ruby Ruby hidelines={1..15}
+require "anthropic"
+
+class ReadFileInput < Anthropic::BaseModel
+  required :path, String, doc: "Path to the file"
+end
+
+class ReadFile < Anthropic::BaseTool
+  doc "Read the contents of a file"
+  input_schema ReadFileInput
+
+  def call(input)
+    "file contents..."
+  end
+end
+
+client = Anthropic::Client.new
+
+runner = client.beta.messages.tool_runner(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  tools: [ReadFile.new],
+  messages: [{ role: "user", content: "What's in config.json?" }],
+  compaction_control: {
+    enabled: true,
+    context_token_threshold: 100000,
+    on_compact: ->(tokens_before, tokens_after) do
+      puts "Compaction occurred: #{tokens_before} -> #{tokens_after} tokens"
+    end
+  }
 )
 
-func main() {
-	client := anthropic.NewClient()
-
-	messages := []anthropic.BetaMessageParam{}
-
-	chat(client, &messages, "Help me build a Go application")
-	chat(client, &messages, "Add error handling")
-	chat(client, &messages, "Now add logging")
-}
-
-func chat(client anthropic.Client, messages *[]anthropic.BetaMessageParam, userMessage string) string {
-	*messages = append(*messages, anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(userMessage)))
-
-	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Betas:     []anthropic.AnthropicBeta{"compact-2026-01-12"},
-		Model:     anthropic.ModelClaudeOpus4_6,
-		MaxTokens: 4096,
-		Messages:  *messages,
-		ContextManagement: anthropic.BetaContextManagementConfigParam{
-			Edits: []anthropic.BetaContextManagementConfigEditUnionParam{
-				{OfCompact20260112: &anthropic.BetaCompact20260112EditParam{}},
-			},
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Append the response (including any compaction block) to continue the conversation
-	*messages = append(*messages, response.ToParam())
-
-	fmt.Printf("Token usage: %d\n", response.Usage.InputTokens)
-
-	for _, block := range response.Content {
-		switch variant := block.AsAny().(type) {
-		case anthropic.BetaTextBlock:
-			fmt.Println(variant.Text)
-			return variant.Text
-		}
-	}
-	return ""
-}
+runner.each_message do |message|
+  puts "Tokens: #{message.usage.input_tokens}"
+end
 ```
 
-```java Java nocheck hidelines={1..5,8..13,25..26,-1}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaMessageParam;
-import com.anthropic.models.beta.messages.BetaContextManagementConfig;
-import com.anthropic.models.beta.messages.BetaCompact20260112Edit;
-import com.anthropic.models.messages.Model;
-import java.util.ArrayList;
-import java.util.List;
-
-public class CompactionLogging {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-        List<BetaMessageParam> messages = new ArrayList<>();
-
-        String response = chat(client, messages, "Help me build a Java application");
-        System.out.println(response);
-
-        response = chat(client, messages, "Add error handling");
-        System.out.println(response);
-
-        response = chat(client, messages, "Now add logging");
-        System.out.println(response);
-    }
-
-    private static String chat(AnthropicClient client, List<BetaMessageParam> messages, String userMessage) {
-        messages.add(BetaMessageParam.builder()
-            .role(BetaMessageParam.Role.USER)
-            .content(userMessage)
-            .build());
-
-        MessageCreateParams params = MessageCreateParams.builder()
-            .addBeta("compact-2026-01-12")
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(4096L)
-            .messages(messages)
-            .contextManagement(BetaContextManagementConfig.builder()
-                .addEdit(BetaCompact20260112Edit.builder().build())
-                .build())
-            .build();
-
-        BetaMessage response = client.beta().messages().create(params);
-
-        messages.add(response.toParam());
-
-        System.out.println("Token usage: " + response.usage().inputTokens());
-
-        return response.content().stream()
-            .filter(block -> block.text().isPresent())
-            .map(block -> block.text().get().text())
-            .findFirst()
-            .orElse("");
-    }
-}
-```
-
-```php PHP hidelines={1..5} nocheck
-<?php
-
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-$messages = [];
-
-function chat($client, &$messages, $userMessage) {
-    $messages[] = ['role' => 'user', 'content' => $userMessage];
-
-    $response = $client->beta->messages->create(
-        maxTokens: 4096,
-        messages: $messages,
-        model: 'claude-opus-4-6',
-        betas: ['compact-2026-01-12'],
-        contextManagement: [
-            'edits' => [
-                ['type' => 'compact_20260112']
-            ]
-        ],
-    );
-
-    $messages[] = ['role' => 'assistant', 'content' => $response->content];
-
-    echo "Token usage: " . $response->usage->inputTokens . "\n";
-
-    foreach ($response->content as $block) {
-        if ($block->type === 'text') {
-            return $block->text;
-        }
-    }
-    return '';
-}
-
-echo chat($client, $messages, "Help me build a PHP application") . "\n";
-echo chat($client, $messages, "Add error handling") . "\n";
-echo chat($client, $messages, "Now add logging") . "\n";
-```
-
-```ruby Ruby nocheck
-# The SDK logs compaction events when verbose logging is enabled.
-# You'll see messages like:
-# Token usage 105000 has exceeded the threshold of 100000. Performing compaction.
-# Compaction complete. New token usage: 2500
-```
-
-</CodeGroup>
+</Tab>
+</Tabs>
 
 ### When to use compaction
 

@@ -115,7 +115,7 @@ def tool(
 | `name`         | `str`                        | Unique identifier for the tool                                                                                                   |
 | `description`  | `str`                        | Human-readable description of what the tool does                                                                                 |
 | `input_schema` | `type \| dict[str, Any]`     | Schema defining the tool's input parameters (see below)                                                                          |
-| `annotations`  | `ToolAnnotations \| None`    | Optional MCP tool annotations (e.g., `readOnlyHint`, `destructiveHint`, `openWorldHint`). Imported from `mcp.types`              |
+| `annotations`  | [`ToolAnnotations`](#tool-annotations)` \| None` | Optional MCP tool annotations providing behavioral hints to clients                                                              |
 
 #### Input schema options
 
@@ -151,6 +151,33 @@ from typing import Any
 @tool("greet", "Greet a user", {"name": str})
 async def greet(args: dict[str, Any]) -> dict[str, Any]:
     return {"content": [{"type": "text", "text": f"Hello, {args['name']}!"}]}
+```
+
+#### `ToolAnnotations`
+
+Re-exported from `mcp.types` (also available as `from claude_agent_sdk import ToolAnnotations`). All fields are optional hints; clients should not rely on them for security decisions.
+
+| Field | Type | Default | Description |
+| :---- | :--- | :------ | :---------- |
+| `title` | `str \| None` | `None` | Human-readable title for the tool |
+| `readOnlyHint` | `bool \| None` | `False` | If `True`, the tool does not modify its environment |
+| `destructiveHint` | `bool \| None` | `True` | If `True`, the tool may perform destructive updates (only meaningful when `readOnlyHint` is `False`) |
+| `idempotentHint` | `bool \| None` | `False` | If `True`, repeated calls with the same arguments have no additional effect (only meaningful when `readOnlyHint` is `False`) |
+| `openWorldHint` | `bool \| None` | `True` | If `True`, the tool interacts with external entities (for example, web search). If `False`, the tool's domain is closed (for example, a memory tool) |
+
+```python
+from claude_agent_sdk import tool, ToolAnnotations
+from typing import Any
+
+
+@tool(
+    "search",
+    "Search the web",
+    {"query": str},
+    annotations=ToolAnnotations(readOnlyHint=True, openWorldHint=True),
+)
+async def search(args: dict[str, Any]) -> dict[str, Any]:
+    return {"content": [{"type": "text", "text": f"Results for: {args['query']}"}]}
 ```
 
 ### `create_sdk_mcp_server()`
@@ -448,7 +475,7 @@ asyncio.run(main())
 
 ```python
 import asyncio
-from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions
+from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, ResultMessage
 
 
 async def interruptible_task():
@@ -456,7 +483,7 @@ async def interruptible_task():
 
     async with ClaudeSDKClient(options=options) as client:
         # Start a long-running task
-        await client.query("Count from 1 to 100 slowly")
+        await client.query("Count from 1 to 100 slowly, using the bash sleep command")
 
         # Let it run for a bit
         await asyncio.sleep(2)
@@ -465,16 +492,27 @@ async def interruptible_task():
         await client.interrupt()
         print("Task interrupted!")
 
+        # Drain the interrupted task's messages (including its ResultMessage)
+        async for message in client.receive_response():
+            if isinstance(message, ResultMessage):
+                print(f"Interrupted task finished with subtype={message.subtype!r}")
+                # subtype is "error_during_execution" for interrupted tasks
+
         # Send a new command
         await client.query("Just say hello instead")
 
+        # Now receive the new response
         async for message in client.receive_response():
-            # Process the new response
-            pass
+            if isinstance(message, ResultMessage) and message.subtype == "success":
+                print(f"New result: {message.result}")
 
 
 asyncio.run(interruptible_task())
 ```
+
+<Note>
+**Buffer behavior after interrupt:** `interrupt()` sends a stop signal but does not clear the message buffer. Messages already produced by the interrupted task, including its `ResultMessage` (with `subtype="error_during_execution"`), remain in the stream. You must drain them with `receive_response()` before reading the response to a new query. If you send a new query immediately after `interrupt()` and call `receive_response()` only once, you'll receive the interrupted task's messages, not the new query's response.
+</Note>
 
 #### Example - Advanced permission control
 
@@ -526,6 +564,10 @@ asyncio.run(main())
 ```
 
 ## Types
+
+<Note>
+**`@dataclass` vs `TypedDict`:** This SDK uses two kinds of types. Classes decorated with `@dataclass` (such as `ResultMessage`, `AgentDefinition`, `TextBlock`) are object instances at runtime and support attribute access: `msg.result`. Classes defined with `TypedDict` (such as `ThinkingConfigEnabled`, `McpStdioServerConfig`, `SyncHookJSONOutput`) are **plain dicts at runtime** and require key access: `config["budget_tokens"]`, not `config.budget_tokens`. The `ClassName(field=value)` call syntax works for both, but only dataclasses produce objects with attributes.
+</Note>
 
 ### `SdkMcpTool`
 
@@ -1012,6 +1054,20 @@ ThinkingConfig = ThinkingConfigAdaptive | ThinkingConfigEnabled | ThinkingConfig
 | `enabled` | `type`, `budget_tokens` | Enable thinking with a specific token budget |
 | `disabled` | `type` | Disable thinking |
 
+Because these are `TypedDict` classes, they're plain dicts at runtime. Either construct them as dict literals or call the class like a constructor; both produce a `dict`. Access fields with `config["budget_tokens"]`, not `config.budget_tokens`:
+
+```python
+from claude_agent_sdk import ClaudeAgentOptions, ThinkingConfigEnabled
+
+# Option 1: dict literal (recommended, no import needed)
+options = ClaudeAgentOptions(thinking={"type": "enabled", "budget_tokens": 20000})
+
+# Option 2: constructor-style (returns a plain dict)
+config = ThinkingConfigEnabled(type="enabled", budget_tokens=20000)
+print(config["budget_tokens"])  # 20000
+# config.budget_tokens would raise AttributeError
+```
+
 ### `SdkBeta`
 
 Literal type for SDK beta features.
@@ -1186,6 +1242,7 @@ AssistantMessageError = Literal[
     "rate_limit",
     "invalid_request",
     "server_error",
+    "max_output_tokens",
     "unknown",
 ]
 ```
@@ -1481,6 +1538,10 @@ HookEvent = Literal[
     "PermissionRequest",  # Called when a permission decision is needed
 ]
 ```
+
+<Note>
+The TypeScript SDK supports additional hook events not yet available in Python: `SessionStart`, `SessionEnd`, `Setup`, `TeammateIdle`, `TaskCompleted`, `ConfigChange`, `WorktreeCreate`, and `WorktreeRemove`.
+</Note>
 
 ### `HookCallback`
 
