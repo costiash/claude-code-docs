@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-23T21:14:16.297388Z",
-    "total_paths": 675,
+    "generated_at": "2026-03-24T00:29:16.400492Z",
+    "total_paths": 676,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-03-23T21:14:16.297397Z"
+    "last_regenerated": "2026-03-24T00:29:16.400499Z"
   },
   "categories": {
     "core_documentation": [
@@ -91,6 +91,7 @@
       "/docs/en/intro",
       "/docs/en/keybindings",
       "/docs/en/permissions",
+      "/docs/en/platforms",
       "/docs/en/remote-control",
       "/docs/en/scheduled-tasks",
       "/docs/en/server-managed-settings",
