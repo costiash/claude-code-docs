@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-23T21:21:06Z",
+  "generated_at": "2026-03-24T00:35:21Z",
   "indexed_files": 576,
   "index": {
     "/changelog": {
@@ -260,27 +260,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Use Claude Code...",
       "keywords": [
         "claude",
-        "desktop",
-        "code",
         "session",
-        "sessions",
+        "desktop",
         "app",
+        "code",
+        "sessions",
         "task",
-        "see",
-        "run",
         "when",
-        "tasks",
+        "see",
         "settings",
-        "remote",
+        "run",
+        "tasks",
         "cli",
+        "remote",
+        "click",
         "local",
         "available",
-        "click",
-        "file",
-        "servers",
-        "mode"
+        "computer",
+        "files",
+        "runs"
       ],
-      "word_count": 6282,
+      "word_count": 7383,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -798,9 +798,9 @@
         "title",
         "run",
         "tasks",
+        "desktop",
         "get",
         "terminal",
-        "desktop",
         "app",
         "work",
         "icon",
@@ -812,7 +812,7 @@
         "web",
         "commands"
       ],
-      "word_count": 1546,
+      "word_count": 1561,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -941,18 +941,18 @@
         "code",
         "sandboxing",
         "paths",
-        "security",
         "bash",
+        "security",
         "filesystem",
-        "allow",
         "when",
+        "allow",
+        "tools",
         "configuration",
         "through",
-        "tools",
-        "sandboxed",
-        "isolation"
+        "system",
+        "sandboxed"
       ],
-      "word_count": 2475,
+      "word_count": 2549,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {

@@ -2787,8 +2787,8 @@
     "claude-code__desktop.md": {
       "original_url": "https://platform.claude.com/docs/en/desktop",
       "original_md_url": "https://platform.claude.com/docs/en/desktop.md",
-      "hash": "37fd2bb6b940930bf16f2fb392619c40cc6a2a5cb88b341a2513f2f28f1a4181",
-      "last_updated": "2026-03-23T18:26:17.413580"
+      "hash": "41c6dd8a3f1dd0869d496478bd8e8f9945a6a96af8a02729b1a26351214cdbcb",
+      "last_updated": "2026-03-24T00:34:46.871233"
     },
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
@@ -2913,8 +2913,8 @@
     "claude-code__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/overview",
       "original_md_url": "https://platform.claude.com/docs/en/overview.md",
-      "hash": "aafa12c85e38cc90eaf76c3a7a9098e353407b472600aa12f98a19d0ed8ba2ab",
-      "last_updated": "2026-03-23T18:26:32.721402"
+      "hash": "3464bb2b4d1aff01f1da5b5e8f68d06a7ba93d807c98f79a9bf2f1a030194ffb",
+      "last_updated": "2026-03-24T00:35:01.361227"
     },
     "claude-code__plugin-marketplaces.md": {
       "original_url": "https://platform.claude.com/docs/en/plugin-marketplaces",
@@ -2955,8 +2955,8 @@
     "claude-code__sandboxing.md": {
       "original_url": "https://platform.claude.com/docs/en/sandboxing",
       "original_md_url": "https://platform.claude.com/docs/en/sandboxing.md",
-      "hash": "21779615a4ad6bbef9200580ea0fa2bcad087ceefe3fb07b40d5931f00756c3f",
-      "last_updated": "2026-03-20T21:16:25.577012"
+      "hash": "fcd727507020cb5089b9de53cdd8304e0c84222a39c3938cfdfe4a749a5072a4",
+      "last_updated": "2026-03-24T00:35:06.452244"
     },
     "claude-code__security.md": {
       "original_url": "https://platform.claude.com/docs/en/security",
@@ -3075,11 +3075,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-23T21:21:05.017108",
-    "fetch_duration_seconds": 409.256519,
-    "total_pages_discovered": 675,
+    "last_fetch_completed": "2026-03-24T00:35:19.813198",
+    "fetch_duration_seconds": 364.266892,
+    "total_pages_discovered": 676,
     "pages_fetched_successfully": 512,
-    "pages_failed": 164,
+    "pages_failed": 165,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/agent-teams",
@@ -3236,6 +3236,7 @@
       "/docs/en/how-claude-code-works",
       "/docs/en/keybindings",
       "/docs/en/permissions",
+      "/docs/en/platforms",
       "/docs/en/remote-control",
       "/docs/en/resources/overview",
       "/docs/en/scheduled-tasks",
@@ -3251,7 +3252,7 @@
     "total_files": 512,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-23T21:21:05.017132",
+  "last_updated": "2026-03-24T00:35:19.813227",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
