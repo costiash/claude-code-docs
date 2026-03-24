@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-24T15:34:44Z",
+  "generated_at": "2026-03-24T18:30:35Z",
   "indexed_files": 576,
   "index": {
     "/changelog": {
@@ -152,23 +152,23 @@
         "mode",
         "prompt",
         "interactive",
+        "see",
         "only",
         "code",
-        "see",
+        "print",
         "default",
         "file",
         "start",
+        "json",
         "mcp",
-        "print",
         "flags",
         "name",
-        "json",
         "model",
         "flag",
         "agent",
         "permission"
       ],
-      "word_count": 1868,
+      "word_count": 1933,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -262,25 +262,25 @@
         "claude",
         "session",
         "desktop",
-        "app",
         "code",
+        "app",
         "sessions",
         "task",
+        "settings",
         "when",
         "see",
-        "settings",
         "run",
         "tasks",
         "cli",
         "remote",
         "click",
-        "local",
         "available",
+        "local",
         "computer",
-        "files",
-        "runs"
+        "mode",
+        "auto"
       ],
-      "word_count": 7383,
+      "word_count": 7517,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -476,7 +476,7 @@
         "output",
         "runs"
       ],
-      "word_count": 12421,
+      "word_count": 12422,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -487,24 +487,24 @@
         "command",
         "commands",
         "code",
-        "mode",
         "line",
         "press",
         "history",
+        "mode",
         "background",
         "search",
         "conversation",
-        "normal",
         "input",
         "word",
+        "normal",
+        "see",
         "text",
         "prompt",
         "previous",
         "end",
-        "note",
-        "see"
+        "note"
       ],
-      "word_count": 2506,
+      "word_count": 2516,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -568,8 +568,8 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # LLM gateway configuration  > Learn how to configure Claude Code to work with LLM gateway solutions. Covers gateway",
       "keywords": [
         "claude",
-        "code",
         "litellm",
+        "code",
         "api",
         "through",
         "model",
@@ -586,9 +586,9 @@
         "authentication",
         "anthropic",
         "headers",
-        "note"
+        "configure"
       ],
-      "word_count": 617,
+      "word_count": 657,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
@@ -812,7 +812,7 @@
         "web",
         "commands"
       ],
-      "word_count": 1561,
+      "word_count": 1562,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -999,16 +999,16 @@
         "default",
         "configuration",
         "marketplace",
-        "hooks",
         "set",
+        "hooks",
         "file",
         "files",
         "paths",
         "permission",
         "example",
-        "marketplaces"
+        "rules"
       ],
-      "word_count": 6278,
+      "word_count": 6360,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1116,11 +1116,11 @@
         "specific",
         "step",
         "run",
+        "uses",
         "hooks",
-        "task",
-        "uses"
+        "task"
       ],
-      "word_count": 6062,
+      "word_count": 6109,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1232,7 +1232,7 @@
         "install",
         "windows"
       ],
-      "word_count": 4239,
+      "word_count": 4275,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
