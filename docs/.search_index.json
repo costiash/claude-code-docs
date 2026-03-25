@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-25T15:36:39Z",
+  "generated_at": "2026-03-25T18:30:09Z",
   "indexed_files": 576,
   "index": {
     "/changelog": {
@@ -680,27 +680,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Model configura...",
       "keywords": [
         "model",
+        "environment",
         "code",
         "opus",
         "set",
-        "environment",
         "when",
         "claude",
+        "sonnet",
         "context",
         "settings",
-        "sonnet",
-        "models",
         "effort",
+        "models",
         "version",
-        "uses",
-        "variables",
         "setting",
-        "users",
+        "uses",
         "default",
-        "ids",
-        "caching"
+        "variables",
+        "reasoning",
+        "users",
+        "level"
       ],
-      "word_count": 2175,
+      "word_count": 2258,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
