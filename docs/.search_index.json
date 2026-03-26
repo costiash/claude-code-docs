@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-26T12:30:45Z",
+  "generated_at": "2026-03-26T15:38:36Z",
   "indexed_files": 576,
   "index": {
     "/changelog": {
@@ -448,7 +448,7 @@
         "prompt",
         "run"
       ],
-      "word_count": 4839,
+      "word_count": 4852,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -468,15 +468,15 @@
         "file",
         "user",
         "event",
-        "decision",
         "control",
+        "decision",
         "prompt",
         "session",
         "command",
-        "only",
-        "output"
+        "runs",
+        "only"
       ],
-      "word_count": 13149,
+      "word_count": 13481,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -493,8 +493,8 @@
         "history",
         "background",
         "search",
-        "conversation",
         "input",
+        "conversation",
         "prompt",
         "word",
         "normal",
@@ -504,7 +504,7 @@
         "end",
         "note"
       ],
-      "word_count": 2615,
+      "word_count": 2626,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -608,15 +608,15 @@
         "tools",
         "title",
         "name",
-        "add",
         "tool",
+        "add",
         "http",
+        "configuration",
         "stdio",
         "example",
-        "configuration",
         "project"
       ],
-      "word_count": 6558,
+      "word_count": 6605,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -868,7 +868,7 @@
         "language",
         "paths"
       ],
-      "word_count": 4426,
+      "word_count": 4438,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -1036,7 +1036,7 @@
         "macos",
         "settings"
       ],
-      "word_count": 1581,
+      "word_count": 1566,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1051,20 +1051,20 @@
         "code",
         "file",
         "arguments",
-        "invoke",
         "automatically",
+        "invoke",
         "session",
         "create",
+        "uses",
         "reference",
         "them",
         "invocation",
         "context",
         "name",
         "step",
-        "content",
-        "commands"
+        "content"
       ],
-      "word_count": 4556,
+      "word_count": 4601,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
