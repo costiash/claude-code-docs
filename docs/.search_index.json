@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-25T21:21:00Z",
+  "generated_at": "2026-03-26T00:41:41Z",
   "indexed_files": 576,
   "index": {
     "/changelog": {
@@ -12,23 +12,23 @@
         "added",
         "claude",
         "improved",
-        "code",
         "now",
+        "code",
         "sessions",
-        "session",
-        "being",
         "instead",
         "tool",
-        "mode",
+        "session",
+        "being",
         "after",
+        "mode",
         "command",
         "commands",
-        "memory",
         "mcp",
+        "memory",
         "file",
         "bash"
       ],
-      "word_count": 25901,
+      "word_count": 26578,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -153,8 +153,8 @@
         "prompt",
         "interactive",
         "see",
-        "only",
         "code",
+        "only",
         "print",
         "default",
         "file",
@@ -168,7 +168,7 @@
         "agent",
         "permission"
       ],
-      "word_count": 1933,
+      "word_count": 1955,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -474,9 +474,9 @@
         "prompt",
         "session",
         "output",
-        "exit"
+        "runs"
       ],
-      "word_count": 13003,
+      "word_count": 13112,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -632,19 +632,19 @@
         "project",
         "directory",
         "file",
-        "loaded",
         "specific",
-        "settings",
-        "managed",
+        "loaded",
         "code",
-        "session",
-        "when",
         "them",
+        "settings",
+        "session",
+        "managed",
         "context",
+        "when",
         "into",
         "every"
       ],
-      "word_count": 3008,
+      "word_count": 3132,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -851,24 +851,24 @@
         "when",
         "server",
         "claude",
-        "plugins",
         "directory",
+        "plugins",
         "code",
         "mcp",
+        "default",
         "files",
         "file",
-        "see",
         "lsp",
+        "see",
         "commands",
         "configuration",
+        "agents",
+        "servers",
         "command",
-        "default",
         "language",
-        "paths",
-        "install",
-        "agents"
+        "paths"
       ],
-      "word_count": 4360,
+      "word_count": 4426,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -994,8 +994,8 @@
         "see",
         "when",
         "only",
-        "user",
         "default",
+        "user",
         "code",
         "file",
         "files",
@@ -1008,7 +1008,7 @@
         "example",
         "permission"
       ],
-      "word_count": 6630,
+      "word_count": 6662,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1024,47 +1024,47 @@
         "title",
         "version",
         "updates",
+        "powershell",
         "tabs",
         "native",
         "wsl",
         "npm",
-        "powershell",
+        "see",
         "update",
         "auto",
-        "see",
-        "macos",
         "run",
+        "macos",
         "settings"
       ],
-      "word_count": 1546,
+      "word_count": 1581,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
       "title": "Extend Claude with skills",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Extend Claude w...",
       "keywords": [
-        "skill",
         "claude",
+        "skill",
         "skills",
         "when",
         "files",
-        "invoke",
         "code",
-        "context",
         "file",
-        "reference",
-        "content",
-        "only",
+        "arguments",
+        "invoke",
         "automatically",
-        "directory",
-        "load",
         "session",
-        "what",
-        "frontmatter",
+        "create",
+        "reference",
         "them",
-        "name"
+        "invocation",
+        "context",
+        "name",
+        "step",
+        "content",
+        "commands"
       ],
-      "word_count": 4495,
+      "word_count": 4556,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1114,13 +1114,13 @@
         "only",
         "prompt",
         "specific",
+        "model",
         "step",
         "run",
         "uses",
-        "hooks",
-        "task"
+        "hooks"
       ],
-      "word_count": 6147,
+      "word_count": 6195,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1216,23 +1216,23 @@
         "open",
         "extension",
         "new",
+        "conversation",
+        "tab",
         "panel",
         "icon",
-        "conversation",
-        "click",
         "see",
+        "click",
         "cli",
+        "prompt",
         "file",
         "editor",
-        "tab",
         "settings",
         "terminal",
-        "prompt",
+        "windows",
         "when",
-        "install",
-        "windows"
+        "install"
       ],
-      "word_count": 4275,
+      "word_count": 4483,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
