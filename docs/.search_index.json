@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-26T18:31:48Z",
+  "generated_at": "2026-03-26T21:18:54Z",
   "indexed_files": 576,
   "index": {
     "/changelog": {
@@ -189,14 +189,14 @@
         "plan",
         "ask",
         "specific",
+        "sessions",
         "documentation",
         "tasks",
-        "sessions",
         "need",
-        "tips",
-        "name"
+        "files",
+        "tips"
       ],
-      "word_count": 4694,
+      "word_count": 4789,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -278,9 +278,9 @@
         "local",
         "computer",
         "mode",
-        "auto"
+        "files"
       ],
-      "word_count": 7529,
+      "word_count": 7546,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
