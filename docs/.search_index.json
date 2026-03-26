@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-26T06:37:14Z",
+  "generated_at": "2026-03-26T09:31:25Z",
   "indexed_files": 576,
   "index": {
     "/changelog": {
@@ -1414,21 +1414,21 @@
         "input",
         "tool",
         "sonnet",
-        "api",
         "token",
         "cache",
+        "api",
         "prompt",
         "opus",
         "usage",
         "standard",
         "output",
         "caching",
-        "context",
         "see",
+        "context",
         "additional",
         "request"
       ],
-      "word_count": 3225,
+      "word_count": 3216,
       "file_path": "docs/docs__en__about-claude__pricing.md"
     },
     "/docs/en/about-claude/use-case-guides/content-moderation": {

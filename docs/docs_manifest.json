@@ -39,8 +39,8 @@
     "docs__en__about-claude__pricing.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "original_md_url": "https://platform.claude.com/docs/en/about-claude/pricing.md",
-      "hash": "45dab68353d019072ff76e99f21d6cb11e464ed37b8130846a91890e2f78aa70",
-      "last_updated": "2026-03-19T18:21:16.613160"
+      "hash": "9d309b5aa7baa6dbb2de1bc8c6d38688a576ffa170939f248403995c410b04a2",
+      "last_updated": "2026-03-26T09:25:01.481247"
     },
     "docs__en__about-claude__use-case-guides__content-moderation.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/use-case-guides/content-moderation",
@@ -3075,8 +3075,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-26T06:37:13.035312",
-    "fetch_duration_seconds": 417.544679,
+    "last_fetch_completed": "2026-03-26T09:31:24.359046",
+    "fetch_duration_seconds": 387.680342,
     "total_pages_discovered": 677,
     "pages_fetched_successfully": 512,
     "pages_failed": 166,
@@ -3253,7 +3253,7 @@
     "total_files": 512,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-26T06:37:13.035334",
+  "last_updated": "2026-03-26T09:31:24.359074",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
