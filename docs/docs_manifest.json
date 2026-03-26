@@ -2763,8 +2763,8 @@
     "claude-code__cli-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/cli-reference",
       "original_md_url": "https://platform.claude.com/docs/en/cli-reference.md",
-      "hash": "54d8525b23e54f48b6e9eae8bec3a80d41f4bca27b665929beefc59541eb3ff2",
-      "last_updated": "2026-03-26T00:41:03.572795"
+      "hash": "f6bab34b393de81dba14ea5026ed89ce524984741bed4a401b48ced852079d78",
+      "last_updated": "2026-03-26T06:36:36.587778"
     },
     "claude-code__common-workflows.md": {
       "original_url": "https://platform.claude.com/docs/en/common-workflows",
@@ -2925,8 +2925,8 @@
     "claude-code__plugins.md": {
       "original_url": "https://platform.claude.com/docs/en/plugins",
       "original_md_url": "https://platform.claude.com/docs/en/plugins.md",
-      "hash": "fd9190577eaed4d341547e80e93e0a9934a265328a413d0ad728cfc05273a6a5",
-      "last_updated": "2026-03-20T03:55:07.202238"
+      "hash": "af997a33286650b989d97a592ceaebe4c6e11e9fefad6137ce9c70da6fcc121f",
+      "last_updated": "2026-03-26T06:36:56.223300"
     },
     "claude-code__plugins-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/plugins-reference",
@@ -3075,8 +3075,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-26T04:04:51.554775",
-    "fetch_duration_seconds": 361.223344,
+    "last_fetch_completed": "2026-03-26T06:37:13.035312",
+    "fetch_duration_seconds": 417.544679,
     "total_pages_discovered": 677,
     "pages_fetched_successfully": 512,
     "pages_failed": 166,
@@ -3253,7 +3253,7 @@
     "total_files": 512,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-26T04:04:51.554801",
+  "last_updated": "2026-03-26T06:37:13.035334",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
