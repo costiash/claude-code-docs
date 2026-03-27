@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-27T12:24:48Z",
+  "generated_at": "2026-03-27T15:27:34Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -178,8 +178,8 @@
         "step",
         "claude",
         "title",
-        "tip",
         "code",
+        "tip",
         "when",
         "session",
         "steps",
@@ -187,16 +187,16 @@
         "mode",
         "worktree",
         "plan",
-        "ask",
         "specific",
-        "sessions",
-        "documentation",
-        "tasks",
-        "need",
+        "ask",
         "files",
-        "tips"
+        "default",
+        "worktrees",
+        "branch",
+        "sessions",
+        "need"
       ],
-      "word_count": 4789,
+      "word_count": 4969,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -476,7 +476,7 @@
         "runs",
         "only"
       ],
-      "word_count": 13481,
+      "word_count": 13513,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -616,7 +616,7 @@
         "example",
         "project"
       ],
-      "word_count": 6606,
+      "word_count": 6627,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -995,8 +995,8 @@
         "when",
         "only",
         "default",
-        "user",
         "code",
+        "user",
         "file",
         "files",
         "set",
@@ -1008,7 +1008,7 @@
         "example",
         "permission"
       ],
-      "word_count": 6662,
+      "word_count": 6736,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {

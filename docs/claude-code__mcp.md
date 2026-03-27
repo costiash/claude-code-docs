@@ -1077,13 +1077,13 @@ Tool search is enabled by default: MCP tools are deferred and discovered on dema
 
 Control tool search behavior with the `ENABLE_TOOL_SEARCH` environment variable:
 
-| Value      | Behavior                                                                           |
-| :--------- | :--------------------------------------------------------------------------------- |
-| (unset)    | Enabled by default. Disabled when `ANTHROPIC_BASE_URL` is a non-first-party host   |
-| `true`     | Always enabled, including for non-first-party `ANTHROPIC_BASE_URL`                 |
-| `auto`     | Activates when MCP tools exceed 10% of context                                     |
-| `auto:<N>` | Activates at custom threshold, where `<N>` is a percentage (e.g., `auto:5` for 5%) |
-| `false`    | Disabled, all MCP tools loaded upfront                                             |
+| Value      | Behavior                                                                                                                       |
+| :--------- | :----------------------------------------------------------------------------------------------------------------------------- |
+| (unset)    | All MCP tools deferred and loaded on demand. Falls back to loading upfront when `ANTHROPIC_BASE_URL` is a non-first-party host |
+| `true`     | All MCP tools deferred, including for non-first-party `ANTHROPIC_BASE_URL`                                                     |
+| `auto`     | Threshold mode: tools load upfront if they fit within 10% of the context window, deferred otherwise                            |
+| `auto:<N>` | Threshold mode with a custom percentage, where `<N>` is 0-100 (e.g., `auto:5` for 5%)                                          |
+| `false`    | All MCP tools loaded upfront, no deferral                                                                                      |
 
 ```bash  theme={null}
 # Use a custom 5% threshold
