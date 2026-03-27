@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-27T18:29:02Z",
+  "generated_at": "2026-03-27T21:19:40Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -168,7 +168,7 @@
         "agent",
         "permission"
       ],
-      "word_count": 1955,
+      "word_count": 1984,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -999,8 +999,8 @@
         "user",
         "file",
         "files",
-        "set",
         "marketplace",
+        "set",
         "configuration",
         "hooks",
         "paths",
@@ -1428,7 +1428,7 @@
         "additional",
         "request"
       ],
-      "word_count": 3216,
+      "word_count": 3215,
       "file_path": "docs/docs__en__about-claude__pricing.md"
     },
     "/docs/en/about-claude/use-case-guides/content-moderation": {
@@ -2822,13 +2822,13 @@
         "call",
         "request",
         "server",
+        "more",
         "prompt",
         "additional",
         "api",
-        "where",
-        "based"
+        "where"
       ],
-      "word_count": 1058,
+      "word_count": 1064,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/parallel-tool-use": {
@@ -13319,10 +13319,10 @@
         "yes",
         "tool",
         "retention",
+        "anthropic",
         "eligible",
         "features",
         "code",
-        "anthropic",
         "section",
         "standard",
         "see",
@@ -13512,24 +13512,24 @@
         "when",
         "codegroup",
         "context",
-        "api",
         "prompt",
+        "api",
         "summary",
         "block",
-        "content",
         "long",
+        "content",
         "conversation",
         "response",
         "token",
         "messages",
         "blocks",
         "cache",
+        "iteration",
         "after",
         "claude",
-        "trigger",
-        "usage"
+        "trigger"
       ],
-      "word_count": 8214,
+      "word_count": 8247,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -13710,9 +13710,9 @@
         "rate",
         "output",
         "speed",
+        "tokens",
         "token",
         "api",
-        "tokens",
         "limit",
         "opus",
         "standard",
@@ -13725,7 +13725,7 @@
         "card",
         "model"
       ],
-      "word_count": 2199,
+      "word_count": 2205,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -13882,8 +13882,8 @@
         "breakpoint",
         "claude",
         "content",
-        "blocks",
         "request",
+        "blocks",
         "section",
         "system",
         "when",
@@ -13893,7 +13893,7 @@
         "input",
         "requests"
       ],
-      "word_count": 13277,
+      "word_count": 13375,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {

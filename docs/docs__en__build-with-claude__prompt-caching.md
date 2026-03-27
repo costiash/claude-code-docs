@@ -642,7 +642,9 @@ The minimum cacheable prompt length is:
 - 4096 tokens for Claude Haiku 4.5
 - 2048 tokens for Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations)) and Claude Haiku 3
 
-Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens will be processed without caching. To see if a prompt was cached, see the response usage [fields](/docs/en/build-with-claude/prompt-caching#tracking-cache-performance).
+Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens will be processed without caching, and no error is returned. To verify whether a prompt was cached, check the response usage [fields](/docs/en/build-with-claude/prompt-caching#tracking-cache-performance): if both `cache_creation_input_tokens` and `cache_read_input_tokens` are 0, the prompt was not cached (likely because it did not meet the minimum length requirement).
+
+If your prompt falls just short of the minimum for the model you are using, expanding the cached content to reach the threshold is often worthwhile. Cache reads cost significantly less than uncached input tokens, so reaching the minimum can reduce costs for frequently reused prompts.
 
 For concurrent requests, note that a cache entry only becomes available after the first response begins. If you need cache hits for parallel requests, wait for the first response before sending subsequent requests.
 
@@ -803,7 +805,7 @@ If experiencing unexpected behavior:
 - Ensure cached sections are identical across calls. For explicit breakpoints, verify that `cache_control` markers are in the same locations
 - Check that calls are made within the cache lifetime (5 minutes by default)
 - Verify that `tool_choice` and image usage remain consistent between calls
-- Validate that you are caching at least the minimum number of tokens
+- Validate that you are caching at least the minimum number of tokens for the model you are using (see [Cache limitations](#cache-limitations)). Length-based caching failures are silent: the request succeeds but both `cache_creation_input_tokens` and `cache_read_input_tokens` will be 0
 - Confirm your breakpoint is on a block that stays identical across requests. Cache writes happen only at the breakpoint, and if that block changes (timestamps, per-request context, the incoming message), the prefix hash never matches. The lookback does not find stable content behind the breakpoint; it only finds entries that earlier requests wrote at their own breakpoints
 - Verify that the keys in your `tool_use` content blocks have stable ordering as some languages (for example, Swift, Go) randomize key order during JSON conversion, breaking caches
 

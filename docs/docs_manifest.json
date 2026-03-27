@@ -39,8 +39,8 @@
     "docs__en__about-claude__pricing.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "original_md_url": "https://platform.claude.com/docs/en/about-claude/pricing.md",
-      "hash": "9d309b5aa7baa6dbb2de1bc8c6d38688a576ffa170939f248403995c410b04a2",
-      "last_updated": "2026-03-26T09:25:01.481247"
+      "hash": "0e1c7837f633576d999e983fc1fab1ccc4a6f149c8002a0d31668d4b65978685",
+      "last_updated": "2026-03-27T21:13:17.486561"
     },
     "docs__en__about-claude__use-case-guides__content-moderation.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/use-case-guides/content-moderation",
@@ -339,8 +339,8 @@
     "docs__en__agents-and-tools__tool-use__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview.md",
-      "hash": "5a06b43633272e591168299bc205ca11fcff724af4007070433643a65cf8006c",
-      "last_updated": "2026-03-27T00:36:47.968206"
+      "hash": "9cfae879402b619a5af59b98a76b6f47c8b3d797891c0c916a9d6fd5bc2390a0",
+      "last_updated": "2026-03-27T21:13:50.818169"
     },
     "docs__en__agents-and-tools__tool-use__parallel-tool-use.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use",
@@ -2631,8 +2631,8 @@
     "docs__en__build-with-claude__api-and-data-retention.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md",
-      "hash": "a7c4722160ec1488e2fb80e23b6f88ba51b70696e53582a41a56d0f177be441c",
-      "last_updated": "2026-03-27T00:41:47.383538"
+      "hash": "ba128651a21b7016c711c44f7190cc1f10e8716118b1105ba28c7c15546b9186",
+      "last_updated": "2026-03-27T21:18:39.656524"
     },
     "docs__en__build-with-claude__batch-processing.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/batch-processing",
@@ -2673,8 +2673,8 @@
     "docs__en__build-with-claude__compaction.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/compaction",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/compaction.md",
-      "hash": "6be6f25e513dc31aecb1257c05aeb6bf58d5cd34ca3c05e0355ed42dec151166",
-      "last_updated": "2026-03-27T00:41:51.849876"
+      "hash": "71cb71a9e6fd28d433d06ddd5b7256fe9ed3dd9e1a819fbbf8b482510617b187",
+      "last_updated": "2026-03-27T21:18:43.969216"
     },
     "docs__en__build-with-claude__context-editing.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/context-editing",
@@ -2715,8 +2715,8 @@
     "docs__en__build-with-claude__fast-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode.md",
-      "hash": "15db153c38b9be407647b749c94a8e193eb95adf3de73e0f7610373503a7c53c",
-      "last_updated": "2026-03-27T00:41:56.248262"
+      "hash": "df52ecbb0b0ffdcc743c33ebaf808f9d9f9ae4c6ad736a7c834781f68e4ea405",
+      "last_updated": "2026-03-27T21:18:48.287086"
     },
     "docs__en__build-with-claude__files.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/files",
@@ -2751,8 +2751,8 @@
     "docs__en__build-with-claude__prompt-caching.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
-      "hash": "8899978efe4db58699e4b57aee1b1637c693340ffda7dfaec0d588e896b7ee34",
-      "last_updated": "2026-03-27T00:42:00.062801"
+      "hash": "085a5c53471a2f2d3835799b02b7b8bd9741f62117e9ba45bff70c5409618826",
+      "last_updated": "2026-03-27T21:18:51.969250"
     },
     "docs__en__build-with-claude__prompt-engineering__claude-prompting-best-practices.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
@@ -2841,8 +2841,8 @@
     "claude-code__cli-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/cli-reference",
       "original_md_url": "https://platform.claude.com/docs/en/cli-reference.md",
-      "hash": "f6bab34b393de81dba14ea5026ed89ce524984741bed4a401b48ced852079d78",
-      "last_updated": "2026-03-26T06:36:36.587778"
+      "hash": "c4ea4d4b8afcf0d4eecc7ded0e50000eac3c14d4f5e9c9c91f39f8d380b21a4e",
+      "last_updated": "2026-03-27T21:19:02.233842"
     },
     "claude-code__common-workflows.md": {
       "original_url": "https://platform.claude.com/docs/en/common-workflows",
@@ -3045,8 +3045,8 @@
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
       "original_md_url": "https://platform.claude.com/docs/en/settings.md",
-      "hash": "96bae900752c35bf32c2fe8c31b8aa2f6e12d9b88538a7d47a338a49173d6cc4",
-      "last_updated": "2026-03-27T18:28:48.829342"
+      "hash": "12c85a0cd342baca42ad88361f72a61f4a9fe1bcc5feef3bf1c0ffef33f752ac",
+      "last_updated": "2026-03-27T21:19:27.760623"
     },
     "claude-code__setup.md": {
       "original_url": "https://platform.claude.com/docs/en/setup",
@@ -3153,8 +3153,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-27T18:29:00.542660",
-    "fetch_duration_seconds": 380.386649,
+    "last_fetch_completed": "2026-03-27T21:19:39.251816",
+    "fetch_duration_seconds": 386.063139,
     "total_pages_discovered": 692,
     "pages_fetched_successfully": 525,
     "pages_failed": 168,
@@ -3333,7 +3333,7 @@
     "total_files": 525,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-27T18:29:00.542678",
+  "last_updated": "2026-03-27T21:19:39.251842",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
