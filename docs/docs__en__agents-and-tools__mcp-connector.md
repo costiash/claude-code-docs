@@ -11,7 +11,7 @@ Claude's Model Context Protocol (MCP) connector feature enables you to connect t
 </Note>
 
 <Note>
-This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). Beta features are excluded from ZDR.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ## Key features
@@ -89,6 +89,8 @@ response = client.beta.messages.create(
     tools=[{"type": "mcp_toolset", "mcp_server_name": "example-mcp"}],
     betas=["mcp-client-2025-11-20"],
 )
+
+print(response)
 ```
 
 ```typescript TypeScript nocheck hidelines={1..2}
@@ -121,49 +123,45 @@ const response = await anthropic.beta.messages.create({
   ],
   betas: ["mcp-client-2025-11-20"]
 });
+
+console.log(response);
 ```
 
-```csharp C# nocheck
+```csharp C# nocheck hidelines={1..6}
 using Anthropic;
 using Anthropic.Models.Beta.Messages;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
+    Model = Model.ClaudeOpus4_6,
+    MaxTokens = 1000,
+    Messages = new List<BetaMessageParam>
     {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
+        new() { Role = Role.User, Content = "What tools do you have available?" }
+    },
+    McpServers = new List<BetaRequestMcpServerUrlDefinition>
+    {
+        new()
         {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 1000,
-            Messages = new List<BetaMessageParam>
-            {
-                new() { Role = Role.User, Content = "What tools do you have available?" }
-            },
-            McpServers = new List<BetaRequestMcpServerUrlDefinition>
-            {
-                new()
-                {
-                    Url = "https://example-server.modelcontextprotocol.io/sse",
-                    Name = "example-mcp",
-                    AuthorizationToken = "YOUR_TOKEN"
-                }
-            },
-            Tools = new List<BetaToolUnion>
-            {
-                new BetaMcpToolset("example-mcp")
-            },
-            Betas = new List<string> { "mcp-client-2025-11-20" }
-        };
+            Url = "https://example-server.modelcontextprotocol.io/sse",
+            Name = "example-mcp",
+            AuthorizationToken = "YOUR_TOKEN"
+        }
+    },
+    Tools = new List<BetaToolUnion>
+    {
+        new BetaMcpToolset("example-mcp")
+    },
+    Betas = new List<string> { "mcp-client-2025-11-20" }
+};
 
-        var message = await client.Beta.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go nocheck hidelines={1..11,-1}
@@ -370,6 +368,8 @@ Each tool (whether configured in `default_config` or in `configs`) supports the 
 |----------|------|---------|-------------|
 | `enabled` | boolean | `true` | Whether this tool is enabled |
 | `defer_loading` | boolean | `false` | If true, tool description is not sent to the model initially. Used with [Tool Search Tool](/docs/en/agents-and-tools/tool-use/tool-search-tool). |
+
+For the full directory of Anthropic-provided tools and optional properties like `defer_loading`, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference). For searching across large tool sets, see [Tool search tool](/docs/en/agents-and-tools/tool-use/tool-search-tool).
 
 ### Configuration merging
 
@@ -651,7 +651,7 @@ import {
 
 ### Use MCP tools
 
-Convert MCP tools for use with the SDK's [tool runner](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta), which handles tool execution automatically:
+Convert MCP tools for use with the SDK's [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner), which handles tool execution automatically:
 
 ```typescript nocheck hidelines={1}
 import Anthropic from "@anthropic-ai/sdk";
@@ -722,6 +722,12 @@ await anthropic.beta.files.upload({ file: mcpResourceToFile(fileResource) });
 ### Error handling
 
 The conversion functions throw `UnsupportedMCPValueError` if an MCP value isn't supported by the Claude API. This can happen with unsupported content types, MIME types, or non-HTTP resource links.
+
+## Data retention
+
+The MCP Connector is not covered by ZDR arrangements. Data exchanged with MCP servers, including tool definitions and execution results, is retained according to Anthropic's standard data retention policy.
+
+For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
 
 ## Migration guide
 

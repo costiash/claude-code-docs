@@ -5,7 +5,7 @@
 Prompt caching optimizes your API usage by allowing resuming from specific prefixes in your prompts. This significantly reduces processing time and costs for repetitive tasks or prompts with consistent elements.
 
 <Note>
-Prompt caching stores KV cache representations and cryptographic hashes of cached content, but does not store the raw text of prompts or responses. This may be suitable for customers who require [ZDR-type data retention](/docs/en/build-with-claude/zero-data-retention) commitments. See [cache lifetime](/docs/en/build-with-claude/prompt-caching#what-is-the-cache-lifetime) for details.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 There are two ways to enable prompt caching:
@@ -1175,507 +1175,43 @@ For subsequent requests within the cache lifetime:
 - `cache_read_input_tokens`: Number of tokens in the entire cached system message
 
 </section>
+
 <section title="Caching tool definitions">
 
-<CodeGroup>
+Tool definitions can be cached by placing `cache_control` on the last tool in your `tools` array. All tools defined before and including that tool are cached as a single prefix.
 
-```bash Shell
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "tools": [
-        {
-            "name": "get_weather",
-            "description": "Get the current weather in a given location",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "location": {
-                        "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA"
-                    },
-                    "unit": {
-                        "type": "string",
-                        "enum": ["celsius", "fahrenheit"],
-                        "description": "The unit of temperature, either celsius or fahrenheit"
-                    }
-                },
-                "required": ["location"]
-            }
-        },
-        {
-            "name": "get_time",
-            "description": "Get the current time in a given time zone",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "timezone": {
-                        "type": "string",
-                        "description": "The IANA time zone name, e.g. America/Los_Angeles"
-                    }
-                },
-                "required": ["timezone"]
-            },
-            "cache_control": {"type": "ephemeral"}
-        }
-    ],
-    "messages": [
-        {
-            "role": "user",
-            "content": "What is the weather and time in New York?"
-        }
-    ]
-}'
-```
-
-```python Python hidelines={1..2}
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    tools=[
-        {
-            "name": "get_weather",
-            "description": "Get the current weather in a given location",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "location": {
-                        "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA",
-                    },
-                    "unit": {
-                        "type": "string",
-                        "enum": ["celsius", "fahrenheit"],
-                        "description": "The unit of temperature, either 'celsius' or 'fahrenheit'",
-                    },
-                },
-                "required": ["location"],
-            },
-        },
-        # many more tools
-        {
-            "name": "get_time",
-            "description": "Get the current time in a given time zone",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "timezone": {
-                        "type": "string",
-                        "description": "The IANA time zone name, e.g. America/Los_Angeles",
-                    }
-                },
-                "required": ["timezone"],
-            },
-            "cache_control": {"type": "ephemeral"},
-        },
-    ],
-    messages=[{"role": "user", "content": "What's the weather and time in New York?"}],
-)
-print(response.model_dump_json())
-```
-
-```typescript TypeScript hidelines={1..2}
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
-const response = await client.messages.create({
-  model: "claude-opus-4-6",
-  max_tokens: 1024,
-  tools: [
-    {
-      name: "get_weather",
-      description: "Get the current weather in a given location",
-      input_schema: {
-        type: "object",
-        properties: {
-          location: {
-            type: "string",
-            description: "The city and state, e.g. San Francisco, CA"
-          },
-          unit: {
-            type: "string",
-            enum: ["celsius", "fahrenheit"],
-            description: "The unit of temperature, either 'celsius' or 'fahrenheit'"
-          }
-        },
-        required: ["location"]
-      }
-    },
-    // many more tools
-    {
-      name: "get_time",
-      description: "Get the current time in a given time zone",
-      input_schema: {
-        type: "object",
-        properties: {
-          timezone: {
-            type: "string",
-            description: "The IANA time zone name, e.g. America/Los_Angeles"
-          }
-        },
-        required: ["timezone"]
-      },
-      cache_control: { type: "ephemeral" }
-    }
-  ],
-  messages: [
-    {
-      role: "user",
-      content: "What's the weather and time in New York?"
-    }
-  ]
-});
-console.log(response);
-```
-
-```csharp C# hidelines={1..10,-2..}
-using System;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Anthropic;
-using Anthropic.Models.Messages;
-
-public class Program
+```json
 {
-    public static async Task Main(string[] args)
+  "model": "claude-opus-4-6",
+  "max_tokens": 1024,
+  "tools": [
     {
-        AnthropicClient client = new()
-        {
-            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
-        };
-
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 1024,
-            Tools =
-            [
-                new ToolUnion(new Tool()
-                {
-                    Name = "get_weather",
-                    Description = "Get the current weather in a given location",
-                    InputSchema = new InputSchema()
-                    {
-                        Properties = new Dictionary<string, JsonElement>
-                        {
-                            ["location"] = JsonSerializer.SerializeToElement(new { type = "string", description = "The city and state, e.g. San Francisco, CA" }),
-                            ["unit"] = JsonSerializer.SerializeToElement(new { type = "string", @enum = new[] { "celsius", "fahrenheit" }, description = "The unit of temperature, either celsius or fahrenheit" }),
-                        },
-                        Required = ["location"],
-                    },
-                }),
-                new ToolUnion(new Tool()
-                {
-                    Name = "get_time",
-                    Description = "Get the current time in a given time zone",
-                    InputSchema = new InputSchema()
-                    {
-                        Properties = new Dictionary<string, JsonElement>
-                        {
-                            ["timezone"] = JsonSerializer.SerializeToElement(new { type = "string", description = "The IANA time zone name, e.g. America/Los_Angeles" }),
-                        },
-                        Required = ["timezone"],
-                    },
-                    CacheControl = new CacheControlEphemeral(),
-                }),
-            ],
-            Messages =
-            [
-                new() { Role = Role.User, Content = "What is the weather and time in New York?" }
-            ]
-        };
-
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
-```
-
-```go Go hidelines={1..11,-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
-	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
-		MaxTokens: 1024,
-		Tools: []anthropic.ToolUnionParam{
-			{OfTool: &anthropic.ToolParam{
-				Name:        "get_weather",
-				Description: anthropic.String("Get the current weather in a given location"),
-				InputSchema: anthropic.ToolInputSchemaParam{
-					Properties: map[string]any{
-						"location": map[string]any{
-							"type":        "string",
-							"description": "The city and state, e.g. San Francisco, CA",
-						},
-						"unit": map[string]any{
-							"type":        "string",
-							"enum":        []string{"celsius", "fahrenheit"},
-							"description": "The unit of temperature, either celsius or fahrenheit",
-						},
-					},
-					Required: []string{"location"},
-				},
-			}},
-			{OfTool: &anthropic.ToolParam{
-				Name:        "get_time",
-				Description: anthropic.String("Get the current time in a given time zone"),
-				InputSchema: anthropic.ToolInputSchemaParam{
-					Properties: map[string]any{
-						"timezone": map[string]any{
-							"type":        "string",
-							"description": "The IANA time zone name, e.g. America/Los_Angeles",
-						},
-					},
-					Required: []string{"timezone"},
-				},
-				CacheControl: anthropic.NewCacheControlEphemeralParam(),
-			}},
-		},
-		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("What is the weather and time in New York?")),
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
-
-```java Java hidelines={1..3,5..15,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.core.JsonValue;
-import com.anthropic.models.messages.CacheControlEphemeral;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.Tool;
-import com.anthropic.models.messages.Tool.InputSchema;
-import java.util.List;
-import java.util.Map;
-
-public class ToolsWithCacheControlExample {
-
-  public static void main(String[] args) {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-    // Weather tool schema
-    InputSchema weatherSchema = InputSchema.builder()
-      .properties(
-        JsonValue.from(
-          Map.of(
-            "location",
-            Map.of(
-              "type",
-              "string",
-              "description",
-              "The city and state, e.g. San Francisco, CA"
-            ),
-            "unit",
-            Map.of(
-              "type",
-              "string",
-              "enum",
-              List.of("celsius", "fahrenheit"),
-              "description",
-              "The unit of temperature, either celsius or fahrenheit"
-            )
-          )
-        )
-      )
-      .putAdditionalProperty("required", JsonValue.from(List.of("location")))
-      .build();
-
-    // Time tool schema
-    InputSchema timeSchema = InputSchema.builder()
-      .properties(
-        JsonValue.from(
-          Map.of(
-            "timezone",
-            Map.of(
-              "type",
-              "string",
-              "description",
-              "The IANA time zone name, e.g. America/Los_Angeles"
-            )
-          )
-        )
-      )
-      .putAdditionalProperty("required", JsonValue.from(List.of("timezone")))
-      .build();
-
-    MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_4_6)
-      .maxTokens(1024)
-      .addTool(
-        Tool.builder()
-          .name("get_weather")
-          .description("Get the current weather in a given location")
-          .inputSchema(weatherSchema)
-          .build()
-      )
-      .addTool(
-        Tool.builder()
-          .name("get_time")
-          .description("Get the current time in a given time zone")
-          .inputSchema(timeSchema)
-          .cacheControl(CacheControlEphemeral.builder().build())
-          .build()
-      )
-      .addUserMessage("What is the weather and time in New York?")
-      .build();
-
-    Message message = client.messages().create(params);
-    System.out.println(message);
-  }
-}
-```
-
-```php PHP hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-$message = $client->messages->create(
-    maxTokens: 1024,
-    messages: [
-        ['role' => 'user', 'content' => 'What is the weather and time in New York?']
-    ],
-    model: 'claude-opus-4-6',
-    tools: [
-        [
-            'name' => 'get_weather',
-            'description' => 'Get the current weather in a given location',
-            'input_schema' => [
-                'type' => 'object',
-                'properties' => [
-                    'location' => [
-                        'type' => 'string',
-                        'description' => 'The city and state, e.g. San Francisco, CA'
-                    ],
-                    'unit' => [
-                        'type' => 'string',
-                        'enum' => ['celsius', 'fahrenheit'],
-                        'description' => 'The unit of temperature, either celsius or fahrenheit'
-                    ]
-                ],
-                'required' => ['location']
-            ]
-        ],
-        [
-            'name' => 'get_time',
-            'description' => 'Get the current time in a given time zone',
-            'input_schema' => [
-                'type' => 'object',
-                'properties' => [
-                    'timezone' => [
-                        'type' => 'string',
-                        'description' => 'The IANA time zone name, e.g. America/Los_Angeles'
-                    ]
-                ],
-                'required' => ['timezone']
-            ],
-            'cache_control' => ['type' => 'ephemeral']
-        ]
-    ],
-);
-
-echo $message;
-```
-
-```ruby Ruby nocheck hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-message = client.messages.create(
-  model: "claude-opus-4-6",
-  max_tokens: 1024,
-  tools: [
-    {
-      name: "get_weather",
-      description: "Get the current weather in a given location",
-      input_schema: {
-        type: "object",
-        properties: {
-          location: {
-            type: "string",
-            description: "The city and state, e.g. San Francisco, CA"
-          },
-          unit: {
-            type: "string",
-            enum: ["celsius", "fahrenheit"],
-            description: "The unit of temperature, either celsius or fahrenheit"
-          }
-        },
-        required: ["location"]
+      "name": "get_weather",
+      "description": "Get the current weather in a given location",
+      "input_schema": {
+        "type": "object",
+        "properties": { "location": { "type": "string" } },
+        "required": ["location"]
       }
     },
     {
-      name: "get_time",
-      description: "Get the current time in a given time zone",
-      input_schema: {
-        type: "object",
-        properties: {
-          timezone: {
-            type: "string",
-            description: "The IANA time zone name, e.g. America/Los_Angeles"
-          }
-        },
-        required: ["timezone"]
+      "name": "get_time",
+      "description": "Get the current time in a given time zone",
+      "input_schema": {
+        "type": "object",
+        "properties": { "timezone": { "type": "string" } },
+        "required": ["timezone"]
       },
-      cache_control: { type: "ephemeral" }
+      "cache_control": { "type": "ephemeral" }
     }
   ],
-  messages: [
-    { role: "user", content: "What is the weather and time in New York?" }
-  ]
-)
-puts message
+  "messages": [{ "role": "user", "content": "What is the weather and time in New York?" }]
+}
 ```
-</CodeGroup>
 
-This example demonstrates caching tool definitions.
+On the first request, `cache_creation_input_tokens` reflects the token count of all tool definitions. On subsequent requests within the cache lifetime, those tokens appear under `cache_read_input_tokens` instead.
 
-The `cache_control` parameter is placed on the final tool (`get_time`) to designate all of the tools as part of the static prefix.
-
-This means that all tool definitions, including `get_weather` and any other tools defined before `get_time`, will be cached as a single prefix.
-
-This approach is useful when you have a consistent set of tools that you want to reuse across multiple requests without re-processing them each time.
-
-For the first request:
-- `input_tokens`: Number of tokens in the user message
-- `cache_creation_input_tokens`: Number of tokens in all tool definitions and system prompt
-- `cache_read_input_tokens`: 0 (no cache hit on first request)
-
-For subsequent requests within the cache lifetime:
-- `input_tokens`: Number of tokens in the user message
-- `cache_creation_input_tokens`: 0 (no new cache creation)
-- `cache_read_input_tokens`: Number of tokens in all cached tool definitions and system prompt
+For detailed interaction between tool definitions, `defer_loading`, and cache invalidation, see [Tool use with prompt caching](/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching).
 
 </section>
 
@@ -2969,6 +2505,14 @@ This pattern is especially powerful for:
 - Applications that need to optimize different parts of the prompt independently
 
 </section>
+
+## Data retention
+
+Prompt caching (both automatic and explicit) is ZDR eligible. Anthropic does not store the raw text of your prompts or Claude's responses.
+
+KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 60 minutes (extended), after which they are promptly, though not immediately, deleted. Cache entries are isolated between organizations.
+
+For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
 
 ---
 ## FAQ

@@ -2,22 +2,13 @@
 
 ---
 
-Claude can use an Anthropic-defined text editor tool to view and modify text files, helping you debug, fix, and improve your code or other text documents. This allows Claude to directly interact with your files, providing hands-on assistance rather than just suggesting changes.
+<Note>
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+</Note>
 
-## Model compatibility
+Claude can use an Anthropic-schema text editor tool to view and modify text files, helping you debug, fix, and improve your code or other text documents. This allows Claude to directly interact with your files, providing hands-on assistance rather than just suggesting changes.
 
-| Model | Tool Version |
-|-------|--------------|
-| Claude 4.x models | `text_editor_20250728` |
-| Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) | `text_editor_20250124` |
-
-<Warning>
-The `text_editor_20250728` tool for Claude 4 models does not include the `undo_edit` command. If you require this functionality, you'll need to use Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)).
-</Warning>
-
-<Warning>
-Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
-</Warning>
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 ## When to use the text editor tool
 
@@ -29,8 +20,6 @@ Some examples of when to use the text editor tool are:
 
 ## Use the text editor tool
 
-<Tabs>
-<Tab title="Claude 4">
 Provide the text editor tool (named `str_replace_based_edit_tool`) to Claude using the Messages API.
 
 You can optionally specify a `max_characters` parameter to control truncation when viewing large files.
@@ -87,6 +76,8 @@ response = client.messages.create(
         }
     ],
 )
+
+print(response)
 ```
 
 ```typescript TypeScript hidelines={1..2}
@@ -111,9 +102,11 @@ const response = await anthropic.messages.create({
     }
   ]
 });
+
+console.log(response);
 ```
 
-```java Java hidelines={1..5,7..10,-2..}
+```java Java hidelines={1..5,7..8,-1..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -121,126 +114,26 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.ToolTextEditor20250728;
 
-public class TextEditorToolExample {
+void main() {
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-  public static void main(String[] args) {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-    ToolTextEditor20250728 editorTool =
-      ToolTextEditor20250728.builder()
-        .maxCharacters(10000L)
-        .build();
-
-    MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_4_6)
-      .maxTokens(1024)
-      .addTool(editorTool)
-      .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+  ToolTextEditor20250728 editorTool =
+    ToolTextEditor20250728.builder()
+      .maxCharacters(10000L)
       .build();
 
-    Message message = client.messages().create(params);
-  }
+  MessageCreateParams params = MessageCreateParams.builder()
+    .model(Model.CLAUDE_OPUS_4_6)
+    .maxTokens(1024)
+    .addTool(editorTool)
+    .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+    .build();
+
+  Message message = client.messages().create(params);
+  IO.println(message);
 }
 ```
 </CodeGroup>
-</Tab>
-<Tab title="Claude Sonnet 3.7">
-Provide the text editor tool (named `str_replace_editor`) to Claude using the Messages API:
-<CodeGroup>
-
-```bash Shell nocheck
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-3-7-sonnet-20250219",
-    "max_tokens": 1024,
-    "tools": [
-      {
-        "type": "text_editor_20250124",
-        "name": "str_replace_editor"
-      }
-    ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "There'\''s a syntax error in my primes.py file. Can you help me fix it?"
-      }
-    ]
-  }'
-```
-
-```python Python nocheck hidelines={1..2}
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.messages.create(
-    model="claude-3-7-sonnet-20250219",
-    max_tokens=1024,
-    tools=[{"type": "text_editor_20250124", "name": "str_replace_editor"}],
-    messages=[
-        {
-            "role": "user",
-            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
-        }
-    ],
-)
-```
-
-```typescript TypeScript nocheck hidelines={1..2}
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic();
-
-const response = await anthropic.messages.create({
-  model: "claude-3-7-sonnet-20250219",
-  max_tokens: 1024,
-  tools: [
-    {
-      type: "text_editor_20250124",
-      name: "str_replace_editor"
-    }
-  ],
-  messages: [
-    {
-      role: "user",
-      content: "There's a syntax error in my primes.py file. Can you help me fix it?"
-    }
-  ]
-});
-```
-
-```java Java nocheck hidelines={1..5,7..10,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.ToolTextEditor20250124;
-
-public class TextEditorToolExample {
-
-  public static void main(String[] args) {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-    ToolTextEditor20250124 editorTool = ToolTextEditor20250124.builder().build();
-
-    MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_3_7_SONNET_LATEST)
-      .maxTokens(1024)
-      .addTool(editorTool)
-      .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
-      .build();
-
-    Message message = client.messages().create(params);
-  }
-}
-```
-</CodeGroup>
-</Tab>
-</Tabs>
 
 The text editor tool can be used in the following way:
 
@@ -294,7 +187,7 @@ Example for viewing a file:
 {
   "type": "tool_use",
   "id": "toolu_01A09q90qw90lq917835lq9",
-  "name": "str_replace_editor",
+  "name": "str_replace_based_edit_tool",
   "input": {
     "command": "view",
     "path": "primes.py"
@@ -308,7 +201,7 @@ Example for viewing a directory:
 {
   "type": "tool_use",
   "id": "toolu_02B19r91rw91mr917835mr9",
-  "name": "str_replace_editor",
+  "name": "str_replace_based_edit_tool",
   "input": {
     "command": "view",
     "path": "src/"
@@ -334,7 +227,7 @@ Parameters:
 {
   "type": "tool_use",
   "id": "toolu_01A09q90qw90lq917835lq9",
-  "name": "str_replace_editor",
+  "name": "str_replace_based_edit_tool",
   "input": {
     "command": "str_replace",
     "path": "primes.py",
@@ -361,7 +254,7 @@ Parameters:
 {
   "type": "tool_use",
   "id": "toolu_01A09q90qw90lq917835lq9",
-  "name": "str_replace_editor",
+  "name": "str_replace_based_edit_tool",
   "input": {
     "command": "create",
     "path": "test_primes.py",
@@ -388,7 +281,7 @@ Parameters:
 {
   "type": "tool_use",
   "id": "toolu_01A09q90qw90lq917835lq9",
-  "name": "str_replace_editor",
+  "name": "str_replace_based_edit_tool",
   "input": {
     "command": "insert",
     "path": "primes.py",
@@ -400,40 +293,9 @@ Parameters:
 
 </section>
 
-#### undo_edit
-
-The `undo_edit` command allows Claude to revert the last edit made to a file.
-
-<Note>
-This command is only available in Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)). It is not supported in Claude 4 models using the `text_editor_20250728`.
-</Note>
-
-Parameters:
-- `command`: Must be "undo_edit"
-- `path`: The path to the file whose last edit should be undone
-
-<section title="Example undo_edit command">
-
-```json
-{
-  "type": "tool_use",
-  "id": "toolu_01A09q90qw90lq917835lq9",
-  "name": "str_replace_editor",
-  "input": {
-    "command": "undo_edit",
-    "path": "primes.py"
-  }
-}
-```
-
-</section>
-
 ### Example: Fixing a syntax error with the text editor tool
 
-<Tabs>
-<Tab title="Claude 4">
-
-This example demonstrates how Claude 4 models use the text editor tool to fix a syntax error in a Python file.
+This example demonstrates how Claude uses the text editor tool to fix a syntax error in a Python file.
 
 First, your application provides Claude with the text editor tool and a prompt to fix a syntax error:
 
@@ -477,6 +339,8 @@ response = client.messages.create(
         }
     ],
 )
+
+print(response)
 ```
 
 ```typescript TypeScript hidelines={1..2}
@@ -500,9 +364,11 @@ const response = await anthropic.messages.create({
     }
   ]
 });
+
+console.log(response);
 ```
 
-```java Java hidelines={1..5,7..10,-2..}
+```java Java hidelines={1..5,7..8,-1..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -510,23 +376,21 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.ToolTextEditor20250728;
 
-public class TextEditorToolExample {
+void main() {
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-  public static void main(String[] args) {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  ToolTextEditor20250728 editorTool =
+    ToolTextEditor20250728.builder().build();
 
-    ToolTextEditor20250728 editorTool =
-      ToolTextEditor20250728.builder().build();
+  MessageCreateParams params = MessageCreateParams.builder()
+    .model(Model.CLAUDE_OPUS_4_6)
+    .maxTokens(1024)
+    .addTool(editorTool)
+    .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+    .build();
 
-    MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_4_6)
-      .maxTokens(1024)
-      .addTool(editorTool)
-      .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
-      .build();
-
-    Message message = client.messages().create(params);
-  }
+  Message message = client.messages().create(params);
+  IO.println(message);
 }
 ```
 </CodeGroup>
@@ -648,6 +512,8 @@ response = client.messages.create(
         },
     ],
 )
+
+print(response)
 ```
 
 ```typescript TypeScript hidelines={1..2}
@@ -700,6 +566,8 @@ const response = await anthropic.messages.create({
     }
   ]
 });
+
+console.log(response);
 ```
 
 ```java Java hidelines={1..9,11..16,-2..}
@@ -842,6 +710,8 @@ response = client.messages.create(
         },
     ],
 )
+
+print(response)
 ```
 
 ```typescript TypeScript
@@ -888,6 +758,8 @@ const response = await client.messages.create({
     }
   ]
 });
+
+console.log(response);
 ```
 
 ```java Java hidelines={1..9,11..16,-2..}
@@ -980,48 +852,12 @@ Finally, Claude provides a complete explanation of the fix:
   ]
 }
 ```
-</Tab>
-
-<Tab title="Claude Sonnet 3.7">
-This example demonstrates how Claude Sonnet 3.7 uses the text editor tool to fix a syntax error in a Python file.
-
-First, your application provides Claude with the text editor tool and a prompt to fix a syntax error:
-
-```python nocheck hidelines={1..2}
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.messages.create(
-    model="claude-3-7-sonnet-20250219",
-    max_tokens=1024,
-    tools=[{"type": "text_editor_20250124", "name": "str_replace_editor"}],
-    messages=[
-        {
-            "role": "user",
-            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
-        }
-    ],
-)
-
-print(response)
-```
-
-<Note>
-The Claude Sonnet 3.7 examples follow the same format as the Claude 4 examples above, using the same tool calls and responses but with the `text_editor_20250124` tool type and `str_replace_editor` name.
-</Note>
-</Tab>
-</Tabs>
-
-***
 
 ## Implement the text editor tool
 
 The text editor tool is implemented as a schema-less tool. When using this tool, you don't need to provide an input schema as with other tools; the schema is built into Claude's model and can't be modified.
 
-The tool type depends on the model version:
-- **Claude 4:** `type: "text_editor_20250728"`
-- **Claude Sonnet 3.7:** `type: "text_editor_20250124"`
+The tool type is `type: "text_editor_20250728"` for Claude 4 models.
 
 <Steps>
   <Step title="Initialize your editor implementation">
@@ -1029,9 +865,8 @@ The tool type depends on the model version:
   </Step>
   <Step title="Handle editor tool calls">
     Create a function that processes tool calls from Claude based on the command type:
-    
-    ```python nocheck
-    def handle_editor_tool(tool_call, model_version):
+    ```python
+    def handle_editor_tool(tool_call):
         input_params = tool_call.input
         command = input_params.get("command", "")
         file_path = input_params.get("path", "")
@@ -1048,12 +883,6 @@ The tool type depends on the model version:
         elif command == "insert":
             # Insert text at location
             pass
-        elif command == "undo_edit":
-            # Check if it's a Claude 4 model
-            if "str_replace_based_edit_tool" in model_version:
-                return {"error": "undo_edit command is not supported in Claude 4"}
-            # Restore from backup for Claude 3.7
-            pass
     ```
   </Step>
   <Step title="Implement security measures">
@@ -1065,8 +894,22 @@ The tool type depends on the model version:
   </Step>
   <Step title="Process Claude's responses">
     Extract and handle tool calls from Claude's responses:
-    
-    ```python nocheck
+    ```python hidelines={1..15}
+    from types import SimpleNamespace as _SN
+
+    response = _SN(
+        content=[
+            _SN(
+                type="tool_use", name="str_replace_based_edit_tool", input={}, id="toolu_01"
+            )
+        ]
+    )
+
+
+    def handle_editor_tool(tc):
+        return "ok"
+
+
     # Process tool use in Claude's response
     for content in response.content:
         if content.type == "tool_use":
@@ -1202,7 +1045,10 @@ Specify file paths clearly when needed, especially if you're working with multip
 
 Implement a backup system in your application that creates copies of files before allowing Claude to edit them, especially for important or production code.
 
-```python nocheck
+```python hidelines={1}
+import os
+
+
 def backup_file(file_path):
     """Create a backup of a file before editing."""
     backup_path = f"{file_path}.backup"
@@ -1296,7 +1142,7 @@ Here are some ideas for how to use the text editor tool in more convenient and p
 - **Implement file format conversion**: Let Claude help you convert files from one format to another
 - **Automate documentation**: Set up workflows for Claude to automatically document your code
 
-As you build applications with the text editor tool, we're excited to see how you leverage Claude's capabilities to enhance your development workflow and productivity.
+The text editor tool enables Claude to work directly with your codebase, supporting workflows from debugging to automated documentation.
 
 <CardGroup cols={3}>
   <Card

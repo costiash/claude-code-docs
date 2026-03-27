@@ -13,7 +13,7 @@ For complete API reference including request/response schemas and all parameters
 </Note>
 
 <Note>
-This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). Beta features are excluded from ZDR.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ## Quick Links
@@ -472,8 +472,9 @@ for file_id in extract_file_ids(response):
 </Tab>
 <Tab title="TypeScript">
 
-```typescript TypeScript hidelines={1..2}
+```typescript TypeScript hidelines={1..3}
 import Anthropic from "@anthropic-ai/sdk";
+import fs from "node:fs/promises";
 
 const client = new Anthropic();
 
@@ -513,7 +514,6 @@ function extractFileIds(response: any): string[] {
 }
 
 // Step 3: Download the file using Files API
-const fs = require("fs/promises");
 for (const fileId of extractFileIds(response)) {
   const fileMetadata = await client.beta.files.retrieveMetadata(fileId, {
     betas: ["files-api-2025-04-14"]
@@ -4938,6 +4938,12 @@ end
 </CodeGroup>
 
 ---
+
+## Data retention
+
+Agent Skills are not covered by ZDR arrangements. Skill definitions and execution data are retained according to Anthropic's standard data retention policy.
+
+For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
 
 ## Next Steps
 

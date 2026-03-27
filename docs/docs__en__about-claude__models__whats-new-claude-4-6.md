@@ -55,7 +55,7 @@ The following tools are now generally available:
 - [Web fetch](/docs/en/agents-and-tools/tool-use/web-fetch-tool)
 - [Programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling)
 - [Tool search tool](/docs/en/agents-and-tools/tool-use/tool-search-tool)
-- [Tool use examples](/docs/en/agents-and-tools/tool-use/implement-tool-use#providing-tool-use-examples)
+- [Tool use examples](/docs/en/agents-and-tools/tool-use/define-tools#providing-tool-use-examples)
 - [Memory tool](/docs/en/agents-and-tools/tool-use/memory-tool)
 
 ### Compaction API (beta)

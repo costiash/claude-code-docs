@@ -2,6 +2,10 @@
 
 ---
 
+<Note>
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+</Note>
+
 Extended thinking gives Claude enhanced reasoning capabilities for complex tasks, while providing varying levels of transparency into its step-by-step thought process before it delivers its final answer.
 
 <Note>
@@ -3738,7 +3742,7 @@ The billed output token count will **not** match the visible token count in the 
 
 ### Feature compatibility
 
-- Thinking isn't compatible with `temperature` or `top_k` modifications as well as [forced tool use](/docs/en/agents-and-tools/tool-use/implement-tool-use#forcing-tool-use).
+- Thinking isn't compatible with `temperature` or `top_k` modifications as well as [forced tool use](/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use).
 - When thinking is enabled, you can set `top_p` to values between 1 and 0.95.
 - You can't pre-fill responses when thinking is enabled.
 - Changes to the thinking budget invalidate cached prompt prefixes that include messages. However, cached system prompts and tool definitions will continue to work when thinking parameters change.

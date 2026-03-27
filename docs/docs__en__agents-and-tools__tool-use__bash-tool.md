@@ -2,6 +2,10 @@
 
 ---
 
+<Note>
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+</Note>
+
 The bash tool enables Claude to execute shell commands in a persistent bash session, allowing system operations, script execution, and command-line automation. Shell access is a foundational agent capability. On [Terminal-Bench 2.0](https://github.com/terminal-bench/terminal-bench), a benchmark that evaluates real-world terminal tasks using shell-only validation, Claude shows strong performance gains with access to a persistent bash session.
 
 ## Overview
@@ -12,15 +16,7 @@ The bash tool provides Claude with:
 - Access to environment variables and working directory
 - Command chaining and scripting capabilities
 
-## Model compatibility
-
-| Model | Tool Version |
-|-------|--------------|
-| Claude 4 models and Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) | `bash_20250124` |
-
-<Warning>
-Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
-</Warning>
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 ## Use cases
 
@@ -45,6 +41,8 @@ response = client.messages.create(
         {"role": "user", "content": "List all Python files in the current directory."}
     ],
 )
+
+print(response)
 ```
 
 ```bash Shell
@@ -113,26 +111,23 @@ Restart the session:
 
 Claude can chain commands to complete complex tasks:
 
-```python nocheck
-# User request
-"Install the requests library and create a simple Python script that fetches a joke from an API, then run it."
+```text
+User request:
+"Install the requests library and create a simple Python script that
+fetches a joke from an API, then run it."
 
-# Claude's tool uses:
-# 1. Install package
-{"command": "pip install requests"}
+Claude's tool uses:
+1. Install package
+   {"command": "pip install requests"}
 
-# 2. Create script
-{
-    "command": "cat > fetch_joke.py << 'EOF'\nimport requests\nresponse = requests.get('https://official-joke-api.appspot.com/random_joke')\njoke = response.json()\nprint(f\"Setup: {joke['setup']}\")\nprint(f\"Punchline: {joke['punchline']}\")\nEOF"
-}
+2. Create script
+   {"command": "cat > fetch_joke.py << 'EOF'\nimport requests\nresponse = requests.get('https://official-joke-api.appspot.com/random_joke')\njoke = response.json()\nprint(f\"Setup: {joke['setup']}\")\nprint(f\"Punchline: {joke['punchline']}\")\nEOF"}
 
-# 3. Run script
-{"command": "python fetch_joke.py"}
+3. Run script
+   {"command": "python fetch_joke.py"}
 ```
 
 The session maintains state between commands, so files created in step 2 are available in step 3.
-
-***
 
 ## Implement the bash tool
 
@@ -141,8 +136,7 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
 <Steps>
   <Step title="Set up a bash environment">
     Create a persistent bash session that Claude can interact with:
-
-    ```python nocheck
+    ```python hidelines={-2..-1}
     import subprocess
     import threading
     import queue
@@ -161,26 +155,36 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
             self.output_queue = queue.Queue()
             self.error_queue = queue.Queue()
             self._start_readers()
+
+        def _start_readers(self): ...
     ```
   </Step>
   <Step title="Handle command execution">
     Create a function to execute commands and capture output:
+    ```python hidelines={1..2,-1}
+    class BashSession:
+        def _read_output(self, timeout): ...
+        def execute_command(self, command):
+            # Send command to bash
+            self.process.stdin.write(command + "\n")
+            self.process.stdin.flush()
 
-    ```python nocheck
-    def execute_command(self, command):
-        # Send command to bash
-        self.process.stdin.write(command + "\n")
-        self.process.stdin.flush()
+            # Capture output with timeout
+            output = self._read_output(timeout=10)
+            return output
 
-        # Capture output with timeout
-        output = self._read_output(timeout=10)
-        return output
+        process = None
     ```
   </Step>
   <Step title="Process Claude's tool calls">
     Extract and execute commands from Claude's responses:
+    ```python hidelines={1..6}
+    from types import SimpleNamespace as _SN
 
-    ```python nocheck
+    response = _SN(
+        content=[_SN(type="tool_use", name="bash", input={"command": "ls"}, id="toolu_01")]
+    )
+    bash_session = _SN(restart=lambda: None, execute_command=lambda c: "output")
     for content in response.content:
         if content.type == "tool_use" and content.name == "bash":
             if content.input.get("restart"):
@@ -199,18 +203,36 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
     ```
   </Step>
   <Step title="Implement safety measures">
-    Add validation and restrictions:
+    Add validation and restrictions. Use an allowlist rather than a blocklist, since blocklists are easy to bypass. Reject shell operators so chained commands can't slip past the allowlist:
     ```python
-    def validate_command(command):
-        # Block dangerous commands
-        dangerous_patterns = ["rm -rf /", "format", ":(){:|:&};:"]
-        for pattern in dangerous_patterns:
-            if pattern in command:
-                return False, f"Command contains dangerous pattern: {pattern}"
+    import shlex
 
-        # Add more validation as needed
+    ALLOWED_COMMANDS = {"ls", "cat", "echo", "pwd", "grep", "find", "wc", "head", "tail"}
+    SHELL_OPERATORS = {"&&", "||", "|", ";", "&", ">", "<", ">>"}
+
+
+    def validate_command(command):
+        # Allow only commands from an explicit allowlist
+        try:
+            tokens = shlex.split(command)
+        except ValueError:
+            return False, "Could not parse command"
+
+        if not tokens:
+            return False, "Empty command"
+
+        executable = tokens[0]
+        if executable not in ALLOWED_COMMANDS:
+            return False, f"Command '{executable}' is not in the allowlist"
+
+        # Reject shell operators that would chain additional commands
+        for token in tokens[1:]:
+            if token in SHELL_OPERATORS or token.startswith(("$", "`")):
+                return False, f"Shell operator '{token}' is not allowed"
+
         return True, None
     ```
+    This check is a first line of defense. For stronger isolation, run validated commands with `shell=False` and pass `shlex.split(command)` as the argument list, so the shell never interprets the string.
   </Step>
 </Steps>
 
@@ -283,8 +305,10 @@ If there are permission issues:
 <section title="Use command timeouts">
 
 Implement timeouts to prevent hanging commands:
+```python hidelines={1..3}
+import subprocess
 
-```python nocheck
+
 def execute_with_timeout(command, timeout=30):
     try:
         result = subprocess.run(
@@ -414,7 +438,7 @@ Git serves as a structured recovery mechanism in long-running agent workflows, n
 
 - **No interactive commands:** Cannot handle `vim`, `less`, or password prompts
 - **No GUI applications:** Command-line only
-- **Session scope:** Persists within conversation, lost between API calls
+- **Session scope:** Bash session state is client-side. The API is stateless. Your application is responsible for maintaining the shell session between turns.
 - **Output limits:** Large outputs may be truncated
 - **No streaming:** Results returned after completion
 

@@ -13,7 +13,7 @@ Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to sh
 </Note>
 
 <Note>
-This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). Beta features are excluded from ZDR.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## Overview
@@ -27,22 +27,7 @@ Computer use is a beta feature that enables Claude to interact with desktop envi
 
 While computer use can be augmented with other tools like bash and text editor for more comprehensive automation workflows, computer use specifically refers to the computer use tool's capability to see and control desktop environments.
 
-## Model compatibility
-
-Computer use is available for the following Claude models:
-
-| Model | Tool Version | Beta Flag |
-|-------|--------------|-----------|
-| Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5 | `computer_20251124` | `computer-use-2025-11-24` |
-| All other supported models | `computer_20250124` | `computer-use-2025-01-24` |
-
-<Note>
-Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 introduce the `computer_20251124` tool version with new capabilities including the zoom action for detailed screen region inspection. All other models (Sonnet 4.5, Haiku 4.5, Sonnet 4, Opus 4, Opus 4.1, and Sonnet 3.7) use the `computer_20250124` tool version.
-</Note>
-
-<Warning>
-Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
-</Warning>
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 ## Security considerations
 
@@ -76,12 +61,6 @@ Get started quickly with the computer use reference implementation that includes
 **Note:** The implementation has been updated to include new tools for both Claude 4 models and Claude Sonnet 3.7. Be sure to pull the latest version of the repo to access these new features.
 
 </Card>
-
-<Tip>
-  Use [this form](https://forms.gle/BT1hpBrqDPDUrCqo7) to provide
-  feedback on the quality of the model responses, the API itself, or the quality
-  of the documentation.
-</Tip>
 
 ## Quick start
 
@@ -180,48 +159,41 @@ const response = await client.beta.messages.create({
 console.log(response);
 ```
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
+```csharp C#
 using Anthropic;
 using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
 
-class Program
+var client = new AnthropicClient();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
+    Model = Messages::Model.ClaudeOpus4_6,
+    MaxTokens = 1024,
+    Tools = new BetaToolUnion[]
     {
-        var client = new AnthropicClient();
-
-        var parameters = new MessageCreateParams
+        new BetaToolComputerUse20251124
         {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 1024,
-            Tools = new BetaToolUnion[]
-            {
-                new BetaToolComputerUse20251124
-                {
-                    DisplayWidthPx = 1024,
-                    DisplayHeightPx = 768,
-                    DisplayNumber = 1
-                },
-                new BetaToolTextEditor20250728(),
-                new BetaToolBash20250124()
-            },
-            Messages = new[]
-            {
-                new BetaMessageParam
-                {
-                    Role = Role.User,
-                    Content = "Save a picture of a cat to my desktop."
-                }
-            },
-            Betas = new[] { "computer-use-2025-11-24" }
-        };
+            DisplayWidthPx = 1024,
+            DisplayHeightPx = 768,
+            DisplayNumber = 1
+        },
+        new BetaToolTextEditor20250728(),
+        new BetaToolBash20250124()
+    },
+    Messages =
+    [
+        new BetaMessageParam
+        {
+            Role = Role.User,
+            Content = "Save a picture of a cat to my desktop."
+        }
+    ],
+    Betas = ["computer-use-2025-11-24"]
+};
 
-        var response = await client.Beta.Messages.Create(parameters);
-        Console.WriteLine(response);
-    }
-}
+var response = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(response);
 ```
 
 ```go Go nocheck hidelines={1..11,-1}
@@ -447,11 +419,14 @@ A [reference implementation](https://github.com/anthropics/anthropic-quickstarts
 - An [agent loop](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py) that interacts with the Claude API and executes the computer use tools
 - A web interface to interact with the container, agent loop, and tools.
 
-### Understanding the multi-agent loop
+### Understanding the agentic loop
 
 The core of computer use is the "agent loop" - a cycle where Claude requests tool actions, your application executes them, and returns results to Claude. Here's a simplified example:
 
-```python nocheck
+```python hidelines={1}
+from anthropic import Anthropic
+
+
 async def sampling_loop(
     *,
     model: str,
@@ -477,8 +452,11 @@ async def sampling_loop(
         "computer-use-2025-11-24"
         if "20251124" in tool_version
         else "computer-use-2025-01-24"
-        if "20250124" in tool_version
-        else "computer-use-2024-10-22"
+    )
+    text_editor_type = (
+        "text_editor_20250728"
+        if "20251124" in tool_version
+        else f"text_editor_{tool_version}"
     )
 
     # Configure tools - you should already have these initialized elsewhere
@@ -489,8 +467,8 @@ async def sampling_loop(
             "display_width_px": 1024,
             "display_height_px": 768,
         },
-        {"type": f"text_editor_{tool_version}", "name": "str_replace_editor"},
-        {"type": f"bash_{tool_version}", "name": "bash"},
+        {"type": text_editor_type, "name": "str_replace_based_edit_tool"},
+        {"type": "bash_20250124", "name": "bash"},
     ]
 
     # Main agent loop (with iteration limit to prevent runaway API costs)
@@ -567,7 +545,7 @@ Here are some tips on how to get the best quality outputs:
 
 ### System prompts
 
-When one of the Anthropic-defined tools is requested via the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-use-system-prompt) but starts with:
+When one of the Anthropic-schema tools is requested via the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](/docs/en/agents-and-tools/tool-use/define-tools#tool-use-system-prompt) but starts with:
 
 > You have access to a set of functions you can use to answer the user's question. This includes access to a sandboxed computing environment. You do NOT currently have the ability to inspect files or interact with external resources, except by invoking the below functions.
 
@@ -595,7 +573,7 @@ Available in Claude 4 models and Claude Sonnet 3.7:
 - **wait** - Pause between actions
 
 **Enhanced actions (`computer_20251124`)**
-Available in Claude Opus 4.6 and Claude Opus 4.5:
+Available in Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5:
 - All actions from `computer_20250124`
 - **zoom** - View a specific region of the screen at full resolution. Requires `enable_zoom: true` in tool definition. Takes a `region` parameter with coordinates `[x1, y1, x2, y2]` defining top-left and bottom-right corners of the area to inspect.
 
@@ -638,7 +616,7 @@ Scroll down (Claude 4/3.7):
 }
 ```
 
-Zoom to view region in detail (Opus 4.5):
+Zoom to view region in detail (Opus 4.6, Sonnet 4.6, Opus 4.5):
 
 ```json
 {
@@ -703,7 +681,7 @@ The `text` parameter in click/scroll actions accepts modifier keys like `shift`,
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| `type` | Yes | Tool version (`computer_20251124`, `computer_20250124`, or `computer_20241022`) |
+| `type` | Yes | Tool version (`computer_20251124` or `computer_20250124`) |
 | `name` | Yes | Must be "computer" |
 | `display_width_px` | Yes | Display width in pixels |
 | `display_height_px` | Yes | Display height in pixels |
@@ -714,544 +692,20 @@ The `text` parameter in click/scroll actions accepts modifier keys like `shift`,
 **Important:** The computer use tool must be explicitly executed by your application - Claude cannot execute it directly. You are responsible for implementing the screenshot capture, mouse movements, keyboard inputs, and other actions based on Claude's requests.
 </Note>
 
-### Enable thinking capability in Claude 4 models and Claude Sonnet 3.7
+### Combining with extended thinking
 
-Claude Sonnet 3.7 introduced a new "thinking" capability that allows you to see the model's reasoning process as it works through complex tasks. This feature helps you understand how Claude is approaching a problem and can be particularly valuable for debugging or educational purposes.
-
-To enable thinking, add a `thinking` parameter to your API request:
-
-```json hidelines={1,-1}
-{
-  "thinking": {
-    "type": "enabled",
-    "budget_tokens": 1024
-  }
-}
-```
-
-The `budget_tokens` parameter specifies how many tokens Claude can use for thinking. This is subtracted from your overall `max_tokens` budget.
-
-When thinking is enabled, Claude will return its reasoning process as part of the response, which can help you:
-
-1. Understand the model's decision-making process
-2. Identify potential issues or misconceptions
-3. Learn from Claude's approach to problem-solving
-4. Get more visibility into complex multi-step operations
-
-Here's an example of what thinking output might look like:
-
-```text
-[Thinking]
-I need to save a picture of a cat to the desktop. Let me break this down into steps:
-
-1. First, I'll take a screenshot to see what's on the desktop
-2. Then I'll look for a web browser to search for cat images
-3. After finding a suitable image, I'll need to save it to the desktop
-
-Let me start by taking a screenshot to see what's available...
-```
+For combining computer use with extended thinking, see [Extended thinking](/docs/en/build-with-claude/extended-thinking).
 
 ### Augmenting computer use with other tools
 
-The computer use tool can be combined with other tools to create more powerful automation workflows. This is particularly useful when you need to:
-- Execute system commands ([bash tool](/docs/en/agents-and-tools/tool-use/bash-tool))
-- Edit configuration files or scripts ([text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool))
-- Integrate with custom APIs or services (custom tools)
-
-<CodeGroup>
-  ```bash Shell
-  curl https://api.anthropic.com/v1/messages \
-    -H "content-type: application/json" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: computer-use-2025-11-24" \
-    -d '{
-      "model": "claude-opus-4-6",
-      "max_tokens": 2000,
-      "tools": [
-        {
-          "type": "computer_20251124",
-          "name": "computer",
-          "display_width_px": 1024,
-          "display_height_px": 768,
-          "display_number": 1
-        },
-        {
-          "type": "text_editor_20250728",
-          "name": "str_replace_based_edit_tool"
-        },
-        {
-          "type": "bash_20250124",
-          "name": "bash"
-        },
-        {
-          "name": "get_weather",
-          "description": "Get the current weather in a given location",
-          "input_schema": {
-            "type": "object",
-            "properties": {
-              "location": {
-                "type": "string",
-                "description": "The city and state, e.g. San Francisco, CA"
-              },
-              "unit": {
-                "type": "string",
-                "enum": ["celsius", "fahrenheit"],
-                "description": "The unit of temperature, either 'celsius' or 'fahrenheit'"
-              }
-            },
-            "required": ["location"]
-          }
-        }
-      ],
-      "messages": [
-        {
-          "role": "user",
-          "content": "Find flights from San Francisco to a place with warmer weather."
-        }
-      ],
-      "thinking": {
-        "type": "enabled",
-        "budget_tokens": 1024
-      }
-    }'
-  ```
-
-```python Python hidelines={1..2}
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=2000,
-    tools=[
-        {
-            "type": "computer_20251124",
-            "name": "computer",
-            "display_width_px": 1024,
-            "display_height_px": 768,
-            "display_number": 1,
-        },
-        {"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"},
-        {"type": "bash_20250124", "name": "bash"},
-        {
-            "name": "get_weather",
-            "description": "Get the current weather in a given location",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "location": {
-                        "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA",
-                    },
-                    "unit": {
-                        "type": "string",
-                        "enum": ["celsius", "fahrenheit"],
-                        "description": "The unit of temperature, either 'celsius' or 'fahrenheit'",
-                    },
-                },
-                "required": ["location"],
-            },
-        },
-    ],
-    messages=[
-        {
-            "role": "user",
-            "content": "Find flights from San Francisco to a place with warmer weather.",
-        }
-    ],
-    betas=["computer-use-2025-11-24"],
-    thinking={"type": "enabled", "budget_tokens": 1024},
-)
-print(response)
-```
-
-  ```typescript TypeScript hidelines={1..2}
-  import Anthropic from "@anthropic-ai/sdk";
-
-  const anthropic = new Anthropic();
-
-  const message = await anthropic.beta.messages.create({
-    model: "claude-opus-4-6",
-    max_tokens: 4096,
-    tools: [
-      {
-        type: "computer_20251124",
-        name: "computer",
-        display_width_px: 1024,
-        display_height_px: 768,
-        display_number: 1
-      },
-      {
-        type: "text_editor_20250728",
-        name: "str_replace_based_edit_tool"
-      },
-      {
-        type: "bash_20250124",
-        name: "bash"
-      },
-      {
-        name: "get_weather",
-        description: "Get the current weather in a given location",
-        input_schema: {
-          type: "object",
-          properties: {
-            location: {
-              type: "string",
-              description: "The city and state, e.g. San Francisco, CA"
-            },
-            unit: {
-              type: "string",
-              enum: ["celsius", "fahrenheit"],
-              description: "The unit of temperature, either 'celsius' or 'fahrenheit'"
-            }
-          },
-          required: ["location"]
-        }
-      }
-    ],
-    messages: [
-      {
-        role: "user",
-        content: "Find flights from San Francisco to a place with warmer weather."
-      }
-    ],
-    betas: ["computer-use-2025-11-24"],
-    thinking: { type: "enabled", budget_tokens: 1024 }
-  });
-  console.log(message);
-  ```
-
-  
-  ```csharp C# nocheck
-  using System;
-  using System.Collections.Generic;
-  using System.Text.Json;
-  using System.Threading.Tasks;
-  using Anthropic;
-  using Anthropic.Models.Beta.Messages;
-
-  public class Program
-  {
-      public static async Task Main(string[] args)
-      {
-          AnthropicClient client = new()
-          {
-              ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
-          };
-
-          var parameters = new MessageCreateParams
-          {
-              Model = Model.ClaudeOpus4_6,
-              MaxTokens = 2000,
-              Tools = new BetaToolUnion[]
-              {
-                  new BetaToolComputerUse20251124
-                  {
-                      DisplayWidthPx = 1024,
-                      DisplayHeightPx = 768,
-                      DisplayNumber = 1
-                  },
-                  new BetaToolTextEditor20250728(),
-                  new BetaToolBash20250124(),
-                  new BetaTool
-                  {
-                      Name = "get_weather",
-                      Description = "Get the current weather in a given location",
-                      InputSchema = new InputSchema
-                      {
-                          Properties = new Dictionary<string, JsonElement>
-                          {
-                              ["location"] = JsonSerializer.SerializeToElement(new
-                              {
-                                  type = "string",
-                                  description = "The city and state, e.g. San Francisco, CA"
-                              }),
-                              ["unit"] = JsonSerializer.SerializeToElement(new
-                              {
-                                  type = "string",
-                                  @enum = new[] { "celsius", "fahrenheit" },
-                                  description = "The unit of temperature, either 'celsius' or 'fahrenheit'"
-                              })
-                          },
-                          Required = ["location"]
-                      }
-                  }
-              },
-              Messages = new BetaMessageParam[]
-              {
-                  new()
-                  {
-                      Role = Role.User,
-                      Content = "Find flights from San Francisco to a place with warmer weather."
-                  }
-              },
-              Betas = ["computer-use-2025-11-24"],
-              Thinking = new BetaThinkingConfigParam(new BetaThinkingConfigEnabled(1024))
-          };
-
-          var message = await client.Beta.Messages.Create(parameters);
-          Console.WriteLine(message);
-      }
-  }
-  ```
-
-  
-  ```go Go nocheck hidelines={1..11,-1}
-  package main
-
-  import (
-  	"context"
-  	"fmt"
-  	"log"
-
-  	"github.com/anthropics/anthropic-sdk-go"
-  )
-
-  func main() {
-  	client := anthropic.NewClient()
-
-  	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus4_6,
-  		MaxTokens: 16384,
-  		Tools: []anthropic.BetaToolUnionParam{
-  			{OfComputerUseTool20251124: &anthropic.BetaToolComputerUse20251124Param{
-  				DisplayWidthPx:  1024,
-  				DisplayHeightPx: 768,
-  				DisplayNumber:   anthropic.Int(1),
-  			}},
-  			{OfTextEditor20250728: &anthropic.BetaToolTextEditor20250728Param{}},
-  			{OfBashTool20250124: &anthropic.BetaToolBash20250124Param{}},
-  			{OfTool: &anthropic.BetaToolParam{
-  				Name:        "get_weather",
-  				Description: anthropic.String("Get the current weather in a given location"),
-  				InputSchema: anthropic.BetaToolInputSchemaParam{
-  					Properties: map[string]any{
-  						"location": map[string]any{
-  							"type":        "string",
-  							"description": "The city and state, e.g. San Francisco, CA",
-  						},
-  						"unit": map[string]any{
-  							"type":        "string",
-  							"enum":        []string{"celsius", "fahrenheit"},
-  							"description": "The unit of temperature, either 'celsius' or 'fahrenheit'",
-  						},
-  					},
-  					Required: []string{"location"},
-  				},
-  			}},
-  		},
-  		Messages: []anthropic.BetaMessageParam{
-  			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Find flights from San Francisco to a place with warmer weather.")),
-  		},
-  		Thinking: anthropic.BetaThinkingConfigParamOfEnabled(1024),
-  		Betas:    []anthropic.AnthropicBeta{anthropic.AnthropicBetaComputerUse2025_11_24},
-  	})
-  	if err != nil {
-  		log.Fatal(err)
-  	}
-  	fmt.Println(response)
-  }
-  ```
-
-```java Java hidelines={1..5,9..15,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.core.JsonValue;
-import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaTool;
-import com.anthropic.models.beta.messages.BetaToolBash20250124;
-import com.anthropic.models.beta.messages.BetaToolComputerUse20251124;
-import com.anthropic.models.beta.messages.BetaToolTextEditor20250728;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import java.util.List;
-import java.util.Map;
-
-public class MultipleToolsExample {
-
-  public static void main(String[] args) {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-    MessageCreateParams params = MessageCreateParams.builder()
-      .model("claude-opus-4-6")
-      .maxTokens(16384L)
-      .addTool(
-        BetaToolComputerUse20251124.builder()
-          .displayWidthPx(1024L)
-          .displayHeightPx(768L)
-          .displayNumber(1L)
-          .build()
-      )
-      .addTool(BetaToolTextEditor20250728.builder().build())
-      .addTool(BetaToolBash20250124.builder().build())
-      .addTool(
-        BetaTool.builder()
-          .name("get_weather")
-          .description("Get the current weather in a given location")
-          .inputSchema(
-            BetaTool.InputSchema.builder()
-              .properties(
-                BetaTool.InputSchema.Properties.builder()
-                  .putAdditionalProperty(
-                    "location",
-                    JsonValue.from(
-                      Map.of(
-                        "type", "string",
-                        "description", "The city and state, e.g. San Francisco, CA"
-                      )
-                    )
-                  )
-                  .putAdditionalProperty(
-                    "unit",
-                    JsonValue.from(
-                      Map.of(
-                        "type", "string",
-                        "enum", List.of("celsius", "fahrenheit"),
-                        "description", "The unit of temperature, either 'celsius' or 'fahrenheit'"
-                      )
-                    )
-                  )
-                  .build()
-              )
-              .build()
-          )
-          .build()
-      )
-      .enabledThinking(1024L)
-      .addUserMessage("Find flights from San Francisco to a place with warmer weather.")
-      .addBeta("computer-use-2025-11-24")
-      .build();
-
-    BetaMessage message = client.beta().messages().create(params);
-    System.out.println(message);
-  }
-}
-```
-
-  
-  ```php PHP hidelines={1..4} nocheck
-  <?php
-
-  use Anthropic\Client;
-
-  $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-  $message = $client->beta->messages->create(
-      maxTokens: 2000,
-      messages: [
-          ['role' => 'user', 'content' => 'Find flights from San Francisco to a place with warmer weather.'],
-      ],
-      model: 'claude-opus-4-6',
-      tools: [
-          [
-              'type' => 'computer_20251124',
-              'name' => 'computer',
-              'display_width_px' => 1024,
-              'display_height_px' => 768,
-              'display_number' => 1,
-          ],
-          [
-              'type' => 'text_editor_20250728',
-              'name' => 'str_replace_based_edit_tool',
-          ],
-          [
-              'type' => 'bash_20250124',
-              'name' => 'bash',
-          ],
-          [
-              'name' => 'get_weather',
-              'description' => 'Get the current weather in a given location',
-              'input_schema' => [
-                  'type' => 'object',
-                  'properties' => [
-                      'location' => [
-                          'type' => 'string',
-                          'description' => 'The city and state, e.g. San Francisco, CA',
-                      ],
-                      'unit' => [
-                          'type' => 'string',
-                          'enum' => ['celsius', 'fahrenheit'],
-                          'description' => 'The unit of temperature, either \'celsius\' or \'fahrenheit\'',
-                      ],
-                  ],
-                  'required' => ['location'],
-              ],
-          ],
-      ],
-      betas: ['computer-use-2025-11-24'],
-      thinking: ['type' => 'enabled', 'budget_tokens' => 1024],
-  );
-
-  echo $message;
-  ```
-
-  ```ruby Ruby hidelines={1..2}
-    require "anthropic"
-
-    client = Anthropic::Client.new
-
-    message = client.beta.messages.create(
-      model: "claude-opus-4-6",
-      max_tokens: 2000,
-      tools: [
-        {
-          type: "computer_20251124",
-          name: "computer",
-          display_width_px: 1024,
-          display_height_px: 768,
-          display_number: 1
-        },
-        {
-          type: "text_editor_20250728",
-          name: "str_replace_based_edit_tool"
-        },
-        {
-          type: "bash_20250124",
-          name: "bash"
-        },
-        {
-          name: "get_weather",
-          description: "Get the current weather in a given location",
-          input_schema: {
-            type: "object",
-            properties: {
-              location: {
-                type: "string",
-                description: "The city and state, e.g. San Francisco, CA"
-              },
-              unit: {
-                type: "string",
-                enum: ["celsius", "fahrenheit"],
-                description: "The unit of temperature, either 'celsius' or 'fahrenheit'"
-              }
-            },
-            required: ["location"]
-          }
-        }
-      ],
-      messages: [
-        {
-          role: "user",
-          content: "Find flights from San Francisco to a place with warmer weather."
-        }
-      ],
-      betas: ["computer-use-2025-11-24"],
-      thinking: {
-        type: "enabled",
-        budget_tokens: 1024
-      }
-    )
-    puts message
-  ```
-</CodeGroup>
+To add other tools alongside computer use, include them in the same `tools` array. The quick start above shows this pattern with the [bash tool](/docs/en/agents-and-tools/tool-use/bash-tool) and [text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool). You can add your own [custom tool definitions](/docs/en/agents-and-tools/tool-use/define-tools) the same way.
 
 ### Build a custom computer use environment
 
 The [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is meant to help you get started with computer use. It includes all of the components needed to have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You'll need:
 
 - A virtualized or containerized environment suitable for computer use with Claude
-- An implementation of at least one of the Anthropic-defined computer use tools
+- An implementation of at least one of the Anthropic-schema computer use tools
 - An agent loop that interacts with the Claude API and executes the `tool_use` results using your tool implementations
 - An API or UI that allows user input to start the agent loop
 
@@ -1265,8 +719,10 @@ The computer use tool is implemented as a schema-less tool. When using this tool
   </Step>
   <Step title="Implement action handlers">
     Create functions to handle each action type that Claude might request:
-    
-    ```python nocheck
+    ```python hidelines={1..3}
+    def capture_screenshot(): ...
+    def click_at(x, y): ...
+    def type_text(text): ...
     def handle_computer_action(action_type, params):
         if action_type == "screenshot":
             return capture_screenshot()
@@ -1280,8 +736,18 @@ The computer use tool is implemented as a schema-less tool. When using this tool
   </Step>
   <Step title="Process Claude's tool calls">
     Extract and execute tool calls from Claude's responses:
-    
-    ```python nocheck
+    ```python hidelines={1..11}
+    from types import SimpleNamespace as _SN
+
+    response = _SN(
+        content=[_SN(type="tool_use", input={"action": "screenshot"}, id="toolu_01")]
+    )
+
+
+    def handle_computer_action(a, p):
+        return "ok"
+
+
     for content in response.content:
         if content.type == "tool_use":
             action = content.input["action"]
@@ -1297,10 +763,33 @@ The computer use tool is implemented as a schema-less tool. When using this tool
   </Step>
   <Step title="Implement the agent loop">
     Create a loop that continues until Claude completes the task:
-    
-    ```python nocheck
+    ```python hidelines={1..18}
+    import anthropic
+
+    client = anthropic.Anthropic()
+    messages = [{"role": "user", "content": "Take a screenshot"}]
+    tools = [
+        {
+            "type": "computer_20251124",
+            "name": "computer",
+            "display_width_px": 1024,
+            "display_height_px": 768,
+        }
+    ]
+
+
+    def process_tool_calls(r):
+        return []
+
+
     while True:
-        response = client.beta.messages.create(...)
+        response = client.beta.messages.create(
+            model="claude-opus-4-6",
+            max_tokens=4096,
+            messages=messages,
+            tools=tools,
+            betas=["computer-use-2025-11-24"],
+        )
 
         # Check if Claude used any tools
         tool_results = process_tool_calls(response)
@@ -1388,8 +877,14 @@ This can cause Claude's click coordinates to miss their targets unless you handl
 To fix this, resize screenshots yourself and scale Claude's coordinates back up:
 
 <CodeGroup>
+```python Python hidelines={1..7}
+screen_width, screen_height = 1512, 982
 
-```python Python nocheck
+
+def capture_and_resize(w, h): ...
+def perform_click(x, y): ...
+
+
 import math
 
 
@@ -1420,7 +915,13 @@ def execute_click(x, y):
     perform_click(screen_x, screen_y)
 ```
 
-```typescript TypeScript nocheck
+```typescript TypeScript hidelines={1..6}
+const screenWidth = 1512;
+const screenHeight = 982;
+function captureAndResize(w: number, h: number): string {
+  return "";
+}
+function performClick(x: number, y: number): void {}
 const MAX_LONG_EDGE = 1568;
 const MAX_PIXELS = 1_150_000;
 
@@ -1475,8 +976,11 @@ When returning screenshots to Claude:
 <section title="Add action delays">
 
 Some applications need time to respond to actions:
+```python hidelines={1..4}
+import time
 
-```python nocheck
+
+def click_at(x, y): ...
 def click_and_wait(x, y, wait_time=0.5):
     click_at(x, y)
     time.sleep(wait_time)  # Allow UI to update
@@ -1487,8 +991,10 @@ def click_and_wait(x, y, wait_time=0.5):
 <section title="Validate actions before execution">
 
 Check that requested actions are safe and valid:
+```python hidelines={1}
+display_width, display_height = 1024, 768
 
-```python nocheck
+
 def validate_action(action_type, params):
     if action_type == "left_click":
         x, y = params.get("coordinate", (0, 0))
@@ -1502,8 +1008,7 @@ def validate_action(action_type, params):
 <section title="Log actions for debugging">
 
 Keep a log of all actions for troubleshooting:
-
-```python nocheck
+```python
 import logging
 
 
@@ -1533,7 +1038,11 @@ The computer use functionality is in beta. While Claude's capabilities are cutti
 
 Always carefully review and verify Claude's computer use actions and logs. Do not use Claude for tasks requiring perfect precision or sensitive user information without human oversight.
 
----
+## Data retention
+
+Computer use is a client-side tool. All screenshots, mouse actions, keyboard inputs, and any files involved in a session are captured and stored in your environment, not by Anthropic. Anthropic processes the screenshot images and action requests in real time as part of the API call but does not retain them after the response is returned.
+
+Because your application controls where and how computer use data is stored, computer use is ZDR eligible. For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
 
 ## Pricing
 

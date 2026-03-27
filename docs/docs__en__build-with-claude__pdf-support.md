@@ -4,6 +4,10 @@ Process PDFs with Claude. Extract text, analyze charts, and understand visual co
 
 ---
 
+<Note>
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+</Note>
+
 You can ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:
 - Analyzing financial reports and understanding charts/tables
 - Extracting key information from legal documents

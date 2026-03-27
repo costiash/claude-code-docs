@@ -152,6 +152,229 @@ if response.stop_reason == "max_tokens":
     # Consider making another request to continue
 ```
 
+#### Incomplete tool use blocks
+
+If Claude's response is cut off due to hitting the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
+
+<CodeGroup>
+
+```python Python nocheck hidelines={1..8}
+import anthropic
+
+client = anthropic.Anthropic()
+tools: list[dict] = []
+messages: list[dict] = []
+response = client.messages.create(
+    model="claude-opus-4-6", max_tokens=1024, tools=tools, messages=messages
+)
+# Check if response was truncated during tool use
+if response.stop_reason == "max_tokens":
+    # Check if the last content block is an incomplete tool_use
+    last_block = response.content[-1]
+    if last_block.type == "tool_use":
+        # Send the request with higher max_tokens
+        response = client.messages.create(
+            model="claude-opus-4-6",
+            max_tokens=4096,  # Increased limit
+            messages=messages,
+            tools=tools,
+        )
+```
+
+```typescript TypeScript nocheck
+// Check if response was truncated during tool use
+if (response.stop_reason === "max_tokens") {
+  // Check if the last content block is an incomplete tool_use
+  const lastBlock = response.content[response.content.length - 1];
+  if (lastBlock.type === "tool_use") {
+    // Send the request with higher max_tokens
+    response = await client.messages.create({
+      model: "claude-opus-4-6",
+      max_tokens: 4096, // Increased limit
+      messages: messages,
+      tools: tools
+    });
+  }
+}
+```
+
+```csharp C# nocheck
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeOpus4_6,
+            MaxTokens = 1024,
+            Messages = messages,
+            Tools = tools
+        };
+
+        var response = await client.Messages.Create(parameters);
+
+        if (response.StopReason == "max_tokens")
+        {
+            var lastBlock = response.Content.Last();
+            if (lastBlock.Type == "tool_use")
+            {
+                parameters.MaxTokens = 4096;
+                response = await client.Messages.Create(parameters);
+            }
+        }
+    }
+}
+```
+
+```go Go hidelines={1..15,-3..-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	tools := []anthropic.ToolUnionParam{}
+	messages := []anthropic.MessageParam{anthropic.NewUserMessage(anthropic.NewTextBlock("test"))}
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_6,
+		MaxTokens: 1024,
+		Messages:  messages,
+		Tools:     tools,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if response.StopReason == "max_tokens" {
+		lastBlock := response.Content[len(response.Content)-1]
+		switch lastBlock.AsAny().(type) {
+		case anthropic.ToolUseBlock:
+			response, err = client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+				Model:     anthropic.ModelClaudeOpus4_6,
+				MaxTokens: 4096,
+				Messages:  messages,
+				Tools:     tools,
+			})
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+	}
+
+	fmt.Println(response)
+}
+```
+
+```java Java nocheck hidelines={1..13}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.Tool;
+import com.anthropic.models.messages.ContentBlock;
+import java.util.List;
+import com.anthropic.models.messages.StopReason;
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+List<MessageCreateParams.Message> messages = List.of();
+List<Tool> tools = List.of();
+Message response = client.messages().create(MessageCreateParams.builder().model(Model.CLAUDE_OPUS_4_6).maxTokens(1024L).addUserMessage("test").build());
+// Check if response was truncated during tool use
+if (response.stopReason().isPresent() && response.stopReason().get().equals(StopReason.MAX_TOKENS)) {
+    ContentBlock lastBlock = response.content().get(response.content().size() - 1);
+    if (lastBlock.toolUse().isPresent()) {
+        // Send the request with higher max_tokens
+        response = client.messages().create(
+            MessageCreateParams.builder()
+                .model(Model.CLAUDE_OPUS_4_6)
+                .maxTokens(4096L) // Increased limit
+                .messages(messages)
+                .tools(tools)
+                .build()
+        );
+    }
+}
+```
+
+```php PHP hidelines={1..6} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$response = $client->messages->create(
+    maxTokens: 1024,
+    messages: $messages,
+    model: 'claude-opus-4-6',
+    tools: $tools,
+);
+
+if ($response->stopReason === 'max_tokens') {
+    $lastBlock = end($response->content);
+    if ($lastBlock->type === 'tool_use') {
+        $response = $client->messages->create(
+            maxTokens: 4096,
+            messages: $messages,
+            model: 'claude-opus-4-6',
+            tools: $tools,
+        );
+    }
+}
+```
+
+```ruby Ruby hidelines={1..15}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+tools = [
+  {
+    name: "get_weather",
+    description: "Get the current weather in a given location",
+    input_schema: { type: "object", properties: { location: { type: "string" } }, required: ["location"] }
+  }
+]
+messages = [
+  { role: "user", content: "What's the weather in San Francisco?" }
+]
+
+response = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: messages,
+  tools: tools
+)
+
+if response.stop_reason == :max_tokens
+  last_block = response.content.last
+  if last_block.type == :tool_use
+    response = client.messages.create(
+      model: "claude-opus-4-6",
+      max_tokens: 4096,
+      messages: messages,
+      tools: tools
+    )
+  end
+end
+```
+</CodeGroup>
+
 ### stop_sequence
 Claude encountered one of your custom stop sequences.
 
@@ -171,7 +394,7 @@ if response.stop_reason == "stop_sequence":
 Claude is calling a tool and expects you to execute it.
 
 <Note>
-For most tool use implementations, we recommend using the [tool runner](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta) which automatically handles tool execution, result formatting, and conversation management.
+For most tool use implementations, we recommend using the [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner) which automatically handles tool execution, result formatting, and conversation management.
 </Note>
 
 ```python nocheck
@@ -212,7 +435,7 @@ if response.stop_reason == "tool_use":
 ```
 
 ### pause_turn
-Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](/docs/en/agents-and-tools/tool-use/overview#server-tools) like web search or web fetch. The default limit is 10 iterations per request.
+Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](/docs/en/agents-and-tools/tool-use/server-tools) like web search or web fetch. The default limit is 10 iterations per request.
 
 When this happens, the response may contain a `server_tool_use` block without a corresponding `server_tool_result`. To let Claude finish processing, continue the conversation by sending the response back as-is.
 
@@ -340,7 +563,7 @@ def handle_truncated_response(response):
 
 ### 3. Implement retry logic for pause_turn
 
-When using [server tools](/docs/en/agents-and-tools/tool-use/overview#server-tools), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
+When using [server tools](/docs/en/agents-and-tools/tool-use/server-tools), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
 ```python nocheck
 def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
@@ -440,7 +663,7 @@ with client.messages.stream(
 ### Handling tool use workflows
 
 <Tip>
-**Simpler with tool runner**: The example below shows manual tool handling. For most use cases, the [tool runner](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta) automatically handles tool execution with much less code.
+**Simpler with tool runner**: The example below shows manual tool handling. For most use cases, the [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner) automatically handles tool execution with much less code.
 </Tip>
 
 ```python nocheck

@@ -20,7 +20,7 @@ Share feedback on this feature through the [feedback form](https://forms.gle/Mhc
 </Note>
 
 <Note>
-Server-side tool search is **not** covered by [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention) arrangements. Data is retained according to the feature's standard retention policy. [Custom client-side tool search implementations](#custom-tool-search-implementation) use the standard Messages API and are ZDR-eligible.
+This feature qualifies for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention) with limited technical retention. See the [Data retention](#data-retention) section for details on what is retained and why.
 </Note>
 
 <Warning>
@@ -214,7 +214,7 @@ async function main() {
 main();
 ```
 
-```csharp C# nocheck
+```csharp C#
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -238,7 +238,10 @@ class Program
                 }
             ],
             Tools = [
-                new ToolUnion(new ToolSearchToolRegex20251119()),
+                new ToolUnion(new ToolSearchToolRegex20251119
+                {
+                    Type = ToolSearchToolRegex20251119Type.ToolSearchToolRegex20251119
+                }),
                 new ToolUnion(new Tool()
                 {
                     Name = "get_weather",
@@ -584,6 +587,8 @@ Mark tools for on-demand loading by adding `defer_loading: true`:
 
 Both tool search variants (`regex` and `bm25`) search tool names, descriptions, argument names, and argument descriptions.
 
+**How deferral works internally:** Deferred tools are not included in the system-prompt prefix. When the model discovers a deferred tool through tool search, the tool definition is appended inline as a `tool_reference` block in the conversation. The prefix is untouched, so prompt caching is preserved. The grammar for strict mode builds from the full toolset, so `defer_loading` and strict mode compose without grammar recompilation.
+
 ## Response format
 
 When Claude uses the tool search tool, the response includes new block types:
@@ -638,377 +643,7 @@ The `tool_reference` blocks are automatically expanded into full tool definition
 
 ## MCP integration
 
-The tool search tool works with [MCP servers](/docs/en/agents-and-tools/mcp-connector). Add the `"mcp-client-2025-11-20"` [beta header](/docs/en/api/beta-headers) to your API request, and then use `mcp_toolset` with `default_config` to defer loading MCP tools:
-
-<CodeGroup>
-
-```bash Shell nocheck
-curl https://api.anthropic.com/v1/messages \
-  --header "x-api-key: $ANTHROPIC_API_KEY" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "anthropic-beta: mcp-client-2025-11-20" \
-  --header "content-type: application/json" \
-  --data '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 2048,
-    "mcp_servers": [
-      {
-        "type": "url",
-        "name": "database-server",
-        "url": "https://mcp-db.example.com"
-      }
-    ],
-    "tools": [
-      {
-        "type": "tool_search_tool_regex_20251119",
-        "name": "tool_search_tool_regex"
-      },
-      {
-        "type": "mcp_toolset",
-        "mcp_server_name": "database-server",
-        "default_config": {
-          "defer_loading": true
-        },
-        "configs": {
-          "search_events": {
-            "defer_loading": false
-          }
-        }
-      }
-    ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "What events are in my database?"
-      }
-    ]
-  }'
-```
-
-```python Python nocheck hidelines={1..2}
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    betas=["mcp-client-2025-11-20"],
-    max_tokens=2048,
-    mcp_servers=[
-        {"type": "url", "name": "database-server", "url": "https://mcp-db.example.com"}
-    ],
-    tools=[
-        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
-        {
-            "type": "mcp_toolset",
-            "mcp_server_name": "database-server",
-            "default_config": {"defer_loading": True},
-            "configs": {"search_events": {"defer_loading": False}},
-        },
-    ],
-    messages=[{"role": "user", "content": "What events are in my database?"}],
-)
-
-print(response)
-```
-
-```typescript TypeScript nocheck hidelines={1..5,-3..-1}
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
-async function main() {
-  const response = await client.beta.messages.create({
-    model: "claude-opus-4-6",
-    betas: ["mcp-client-2025-11-20"],
-    max_tokens: 2048,
-    mcp_servers: [
-      {
-        type: "url",
-        name: "database-server",
-        url: "https://mcp-db.example.com"
-      }
-    ],
-    tools: [
-      {
-        type: "tool_search_tool_regex_20251119",
-        name: "tool_search_tool_regex"
-      },
-      {
-        type: "mcp_toolset",
-        mcp_server_name: "database-server",
-        default_config: {
-          defer_loading: true
-        },
-        configs: {
-          search_events: {
-            defer_loading: false
-          }
-        }
-      }
-    ],
-    messages: [
-      {
-        role: "user",
-        content: "What events are in my database?"
-      }
-    ]
-  });
-
-  console.log(JSON.stringify(response, null, 2));
-}
-
-main();
-```
-
-```csharp C# nocheck
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Anthropic;
-using Anthropic.Models.Beta.Messages;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = "claude-opus-4-6",
-            Betas = new List<string> { "mcp-client-2025-11-20" },
-            MaxTokens = 2048,
-            McpServers = new List<BetaRequestMcpServerUrlDefinition>
-            {
-                new()
-                {
-                    Name = "database-server",
-                    Url = "https://mcp-db.example.com"
-                }
-            },
-            Tools = new List<BetaToolUnion>
-            {
-                new BetaToolSearchToolRegex20251119(),
-                new BetaMcpToolset
-                {
-                    McpServerName = "database-server",
-                    DefaultConfig = new BetaMcpToolDefaultConfig
-                    {
-                        DeferLoading = true
-                    },
-                    Configs = new Dictionary<string, BetaMcpToolConfig>
-                    {
-                        {
-                            "search_events", new BetaMcpToolConfig
-                            {
-                                DeferLoading = false
-                            }
-                        }
-                    }
-                }
-            },
-            Messages = new List<BetaMessageParam>
-            {
-                new() { Role = Role.User, Content = "What events are in my database?" }
-            }
-        };
-
-        var response = await client.Beta.Messages.Create(parameters);
-        Console.WriteLine(response);
-    }
-}
-```
-
-```go Go nocheck hidelines={1..11,-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
-	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
-		MaxTokens: 2048,
-		MCPServers: []anthropic.BetaRequestMCPServerURLDefinitionParam{
-			{
-				Name: "database-server",
-				URL:  "https://mcp-db.example.com",
-			},
-		},
-		Tools: []anthropic.BetaToolUnionParam{
-			{OfToolSearchToolRegex20251119: &anthropic.BetaToolSearchToolRegex20251119Param{
-				Type: anthropic.BetaToolSearchToolRegex20251119TypeToolSearchToolRegex20251119,
-			}},
-			{OfMCPToolset: &anthropic.BetaMCPToolsetParam{
-				MCPServerName: "database-server",
-				DefaultConfig: anthropic.BetaMCPToolDefaultConfigParam{
-					DeferLoading: anthropic.Bool(true),
-				},
-				Configs: map[string]anthropic.BetaMCPToolConfigParam{
-					"search_events": {
-						DeferLoading: anthropic.Bool(false),
-					},
-				},
-			}},
-		},
-		Messages: []anthropic.BetaMessageParam{
-			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("What events are in my database?")),
-		},
-		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaMCPClient2025_11_20},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
-
-```java Java nocheck hidelines={1..4,9..14,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaRequestMcpServerUrlDefinition;
-import com.anthropic.models.beta.messages.BetaMcpToolset;
-import com.anthropic.models.beta.messages.BetaMcpToolDefaultConfig;
-import com.anthropic.models.beta.messages.BetaToolSearchToolRegex20251119;
-import com.anthropic.core.JsonValue;
-import java.util.List;
-import java.util.Map;
-
-public class McpClientExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model("claude-opus-4-6")
-            .addBeta("mcp-client-2025-11-20")
-            .maxTokens(2048L)
-            .addMcpServer(BetaRequestMcpServerUrlDefinition.builder()
-                .name("database-server")
-                .url("https://mcp-db.example.com")
-                .build())
-            .tools(List.of(
-                BetaToolSearchToolRegex20251119.builder().build(),
-                BetaMcpToolset.builder()
-                    .type(BetaMcpToolset.Type.MCP_TOOLSET)
-                    .mcpServerName("database-server")
-                    .defaultConfig(BetaMcpToolDefaultConfig.builder()
-                        .deferLoading(true)
-                        .build())
-                    .configs(BetaMcpToolset.Configs.builder()
-                        .putAdditionalProperty(
-                            "search_events",
-                            JsonValue.from(Map.of("defer_loading", false)))
-                        .build())
-                    .build()
-            ))
-            .addUserMessage("What events are in my database?")
-            .build();
-
-        BetaMessage response = client.beta().messages().create(params);
-        System.out.println(response);
-    }
-}
-```
-
-```php PHP hidelines={1..4} nocheck
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-$response = $client->beta->messages->create(
-    maxTokens: 2048,
-    messages: [
-        ['role' => 'user', 'content' => 'What events are in my database?'],
-    ],
-    model: 'claude-opus-4-6',
-    betas: ['mcp-client-2025-11-20'],
-    mcpServers: [
-        [
-            'type' => 'url',
-            'name' => 'database-server',
-            'url' => 'https://mcp-db.example.com',
-        ],
-    ],
-    tools: [
-        [
-            'type' => 'tool_search_tool_regex_20251119',
-            'name' => 'tool_search_tool_regex',
-        ],
-        [
-            'type' => 'mcp_toolset',
-            'mcp_server_name' => 'database-server',
-            'default_config' => ['defer_loading' => true],
-            'configs' => [
-                'search_events' => ['defer_loading' => false],
-            ],
-        ],
-    ],
-);
-
-echo $response;
-```
-
-```ruby Ruby nocheck hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-response = client.beta.messages.create(
-  model: "claude-opus-4-6",
-  betas: ["mcp-client-2025-11-20"],
-  max_tokens: 2048,
-  mcp_servers: [
-    {
-      type: "url",
-      name: "database-server",
-      url: "https://mcp-db.example.com"
-    }
-  ],
-  tools: [
-    {
-      type: "tool_search_tool_regex_20251119",
-      name: "tool_search_tool_regex"
-    },
-    {
-      type: "mcp_toolset",
-      mcp_server_name: "database-server",
-      default_config: {
-        defer_loading: true
-      },
-      configs: {
-        search_events: {
-          defer_loading: false
-        }
-      }
-    }
-  ],
-  messages: [
-    { role: "user", content: "What events are in my database?" }
-  ]
-)
-
-puts response
-```
-
-</CodeGroup>
-
-**MCP configuration options:**
-
-- `default_config.defer_loading`: Set default for all tools from the MCP server
-- `configs`: Override defaults for specific tools by name
-- Combine multiple MCP servers with tool search for massive tool libraries
+For configuring `mcp_toolset` with `defer_loading`, see [MCP connector](/docs/en/agents-and-tools/mcp-connector).
 
 ## Custom tool search implementation
 
@@ -1028,13 +663,13 @@ Every tool referenced must have a corresponding tool definition in the top-level
 The `tool_search_tool_result` format shown in the [Response format](#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown above.
 </Note>
 
-For a complete example using embeddings, see our [tool search with embeddings cookbook](https://platform.claude.com/cookbooks).
+For a complete example using embeddings, see the [tool search with embeddings cookbook](https://platform.claude.com/cookbooks/tool_use).
 
 ## Error handling
 
 <Note>
   The tool search tool is not compatible with [tool use
-  examples](/docs/en/agents-and-tools/tool-use/implement-tool-use#providing-tool-use-examples).
+  examples](/docs/en/agents-and-tools/tool-use/define-tools#providing-tool-use-examples).
   If you need to provide examples of tool usage, use standard tool calling
   without tool search.
 </Note>
@@ -1142,482 +777,9 @@ Errors during tool execution return a 200 response with error information in the
 
 ## Prompt caching
 
-Tool search works with [prompt caching](/docs/en/build-with-claude/prompt-caching). Add `cache_control` breakpoints to optimize multi-turn conversations:
+For how `defer_loading` preserves prompt caching, see [Tool use with prompt caching](/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching).
 
-<CodeGroup>
-
-```python Python nocheck hidelines={1..2}
-import anthropic
-
-client = anthropic.Anthropic()
-
-# First request with tool search
-messages = [{"role": "user", "content": "What's the weather in Seattle?"}]
-
-response1 = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=2048,
-    messages=messages,
-    tools=[
-        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
-        {
-            "name": "get_weather",
-            "description": "Get weather for a location",
-            "input_schema": {
-                "type": "object",
-                "properties": {"location": {"type": "string"}},
-                "required": ["location"],
-            },
-            "defer_loading": True,
-        },
-    ],
-)
-
-# Add Claude's response to conversation
-messages.append({"role": "assistant", "content": response1.content})
-
-# Second request with cache breakpoint
-messages.append(
-    {
-        "role": "user",
-        "content": [
-            {
-                "type": "text",
-                "text": "What about New York?",
-                "cache_control": {"type": "ephemeral"},
-            }
-        ],
-    }
-)
-
-response2 = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=2048,
-    messages=messages,
-    tools=[
-        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
-        {
-            "name": "get_weather",
-            "description": "Get weather for a location",
-            "input_schema": {
-                "type": "object",
-                "properties": {"location": {"type": "string"}},
-                "required": ["location"],
-            },
-            "defer_loading": True,
-        },
-    ],
-)
-
-print(f"Cache read tokens: {response2.usage.cache_read_input_tokens or 0}")
-```
-
-```typescript TypeScript nocheck hidelines={1..5,-3..-1}
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
-async function main() {
-  const tools: Anthropic.Messages.ToolUnion[] = [
-    {
-      type: "tool_search_tool_regex_20251119",
-      name: "tool_search_tool_regex"
-    },
-    {
-      name: "get_weather",
-      description: "Get weather for a location",
-      input_schema: {
-        type: "object" as const,
-        properties: { location: { type: "string" } },
-        required: ["location"]
-      },
-      defer_loading: true
-    }
-  ];
-
-  const messages: Anthropic.Messages.MessageParam[] = [
-    { role: "user", content: "What's the weather in Seattle?" }
-  ];
-
-  const response1 = await client.messages.create({
-    model: "claude-opus-4-6",
-    max_tokens: 2048,
-    messages,
-    tools
-  });
-
-  messages.push({ role: "assistant", content: response1.content });
-  messages.push({
-    role: "user",
-    content: "What about New York?",
-    cache_control: { type: "ephemeral" }
-  });
-
-  const response2 = await client.messages.create({
-    model: "claude-opus-4-6",
-    max_tokens: 2048,
-    messages,
-    tools
-  });
-
-  console.log(`Cache read tokens: ${response2.usage.cache_read_input_tokens || 0}`);
-}
-
-main().catch(console.error);
-```
-
-```csharp C# nocheck
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Anthropic;
-using Anthropic.Models.Messages;
-
-public class Program
-{
-    public static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var tools = new List<ToolUnion>
-        {
-            new ToolUnion(new ToolSearchToolRegex20251119()),
-            new ToolUnion(new Tool()
-            {
-                Name = "get_weather",
-                Description = "Get weather for a location",
-                InputSchema = new InputSchema()
-                {
-                    Properties = new Dictionary<string, JsonElement>
-                    {
-                        ["location"] = JsonSerializer.SerializeToElement(new { type = "string" }),
-                    },
-                    Required = ["location"],
-                },
-                DeferLoading = true,
-            }),
-        };
-
-        var parameters1 = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 2048,
-            Messages = [new() { Role = Role.User, Content = "What's the weather in Seattle?" }],
-            Tools = tools
-        };
-
-        var response1 = await client.Messages.Create(parameters1);
-
-        var parameters2 = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 2048,
-            Messages = [
-                new() { Role = Role.User, Content = "What's the weather in Seattle?" },
-                new() { Role = Role.Assistant, Content = response1.Content },
-                new()
-                {
-                    Role = Role.User,
-                    Content = new MessageParamContent(new List<ContentBlockParam>
-                    {
-                        new ContentBlockParam(new TextBlockParam("What about New York?")
-                        {
-                            CacheControl = new CacheControlEphemeral(),
-                        }),
-                    }),
-                },
-            ],
-            Tools = tools
-        };
-
-        var response2 = await client.Messages.Create(parameters2);
-
-        Console.WriteLine($"Cache read tokens: {response2.Usage.CacheReadInputTokens ?? 0}");
-    }
-}
-```
-
-```go Go nocheck hidelines={1..11,-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
-	tools := []anthropic.ToolUnionParam{
-		{OfToolSearchToolRegex20251119: &anthropic.ToolSearchToolRegex20251119Param{
-			Type: anthropic.ToolSearchToolRegex20251119TypeToolSearchToolRegex20251119,
-		}},
-		{OfTool: &anthropic.ToolParam{
-			Name:        "get_weather",
-			Description: anthropic.String("Get weather for a location"),
-			InputSchema: anthropic.ToolInputSchemaParam{
-				Properties: map[string]any{
-					"location": map[string]any{"type": "string"},
-				},
-				Required: []string{"location"},
-			},
-			DeferLoading: anthropic.Bool(true),
-		}},
-	}
-
-	messages := []anthropic.MessageParam{
-		anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather in Seattle?")),
-	}
-
-	response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
-		MaxTokens: 2048,
-		Messages:  messages,
-		Tools:     tools,
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Convert response to param for multi-turn
-	messages = append(messages, response1.ToParam())
-	messages = append(messages, anthropic.MessageParam{
-		Role: anthropic.MessageParamRoleUser,
-		Content: []anthropic.ContentBlockParamUnion{
-			{OfText: &anthropic.TextBlockParam{
-				Text:         "What about New York?",
-				CacheControl: anthropic.NewCacheControlEphemeralParam(),
-			}},
-		},
-	})
-
-	response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
-		MaxTokens: 2048,
-		Messages:  messages,
-		Tools:     tools,
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Printf("Cache read tokens: %d\n", response2.Usage.CacheReadInputTokens)
-}
-```
-
-```java Java nocheck hidelines={1..3,5..12,14..19,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.core.JsonValue;
-import com.anthropic.models.messages.CacheControlEphemeral;
-import com.anthropic.models.messages.ContentBlockParam;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.MessageParam;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.TextBlockParam;
-import com.anthropic.models.messages.Tool;
-import com.anthropic.models.messages.Tool.InputSchema;
-import com.anthropic.models.messages.ToolSearchToolRegex20251119;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-public class ToolSearchCaching {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        InputSchema weatherSchema = InputSchema.builder()
-            .properties(JsonValue.from(Map.of(
-                "location", Map.of("type", "string")
-            )))
-            .putAdditionalProperty("required", JsonValue.from(List.of("location")))
-            .build();
-
-        List<MessageParam> messages = new ArrayList<>();
-        messages.add(MessageParam.builder()
-            .role(MessageParam.Role.USER)
-            .content("What's the weather in Seattle?")
-            .build());
-
-        // First request
-        Message response1 = client.messages().create(
-            MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_6)
-                .maxTokens(2048L)
-                .messages(messages)
-                .addTool(ToolSearchToolRegex20251119.builder()
-                    .type(ToolSearchToolRegex20251119.Type.TOOL_SEARCH_TOOL_REGEX_20251119)
-                    .build())
-                .addTool(Tool.builder()
-                    .name("get_weather")
-                    .description("Get weather for a location")
-                    .inputSchema(weatherSchema)
-                    .deferLoading(true)
-                    .build())
-                .build());
-
-        // Add Claude's response to conversation
-        messages.add(response1.toParam());
-
-        // Second request with conversation history and cache control
-        messages.add(MessageParam.builder()
-            .role(MessageParam.Role.USER)
-            .contentOfBlockParams(List.of(
-                ContentBlockParam.ofText(
-                    TextBlockParam.builder()
-                        .text("What about New York?")
-                        .cacheControl(CacheControlEphemeral.builder().build())
-                        .build())
-            ))
-            .build());
-
-        Message response2 = client.messages().create(
-            MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_6)
-                .maxTokens(2048L)
-                .messages(messages)
-                .addTool(ToolSearchToolRegex20251119.builder()
-                    .type(ToolSearchToolRegex20251119.Type.TOOL_SEARCH_TOOL_REGEX_20251119)
-                    .build())
-                .addTool(Tool.builder()
-                    .name("get_weather")
-                    .description("Get weather for a location")
-                    .inputSchema(weatherSchema)
-                    .deferLoading(true)
-                    .build())
-                .build());
-
-        System.out.println("Cache read tokens: " + response2.usage().cacheReadInputTokens().orElse(0L));
-    }
-}
-```
-
-```php PHP hidelines={1..4} nocheck
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-$messages = [
-    ['role' => 'user', 'content' => "What's the weather in Seattle?"]
-];
-
-$response1 = $client->messages->create(
-    maxTokens: 2048,
-    messages: $messages,
-    model: 'claude-opus-4-6',
-    tools: [
-        ['type' => 'tool_search_tool_regex_20251119', 'name' => 'tool_search_tool_regex'],
-        [
-            'name' => 'get_weather',
-            'description' => 'Get weather for a location',
-            'input_schema' => [
-                'type' => 'object',
-                'properties' => ['location' => ['type' => 'string']],
-                'required' => ['location'],
-            ],
-            'defer_loading' => true,
-        ],
-    ],
-);
-
-$messages[] = ['role' => 'assistant', 'content' => $response1->content];
-$messages[] = [
-    'role' => 'user',
-    'content' => [[
-        'type' => 'text',
-        'text' => 'What about New York?',
-        'cache_control' => ['type' => 'ephemeral'],
-    ]],
-];
-
-$response2 = $client->messages->create(
-    maxTokens: 2048,
-    messages: $messages,
-    model: 'claude-opus-4-6',
-    tools: [
-        ['type' => 'tool_search_tool_regex_20251119', 'name' => 'tool_search_tool_regex'],
-        [
-            'name' => 'get_weather',
-            'description' => 'Get weather for a location',
-            'input_schema' => [
-                'type' => 'object',
-                'properties' => ['location' => ['type' => 'string']],
-                'required' => ['location'],
-            ],
-            'defer_loading' => true,
-        ],
-    ],
-);
-
-echo "Cache read tokens: " . ($response2->usage->cacheReadInputTokens ?? 0) . "\n";
-```
-
-```ruby Ruby nocheck hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-tools = [
-  { type: "tool_search_tool_regex_20251119", name: "tool_search_tool_regex" },
-  {
-    name: "get_weather",
-    description: "Get weather for a location",
-    input_schema: {
-      type: "object",
-      properties: { location: { type: "string" } },
-      required: ["location"]
-    },
-    defer_loading: true
-  }
-]
-
-messages = [
-  { role: "user", content: "What's the weather in Seattle?" }
-]
-
-response1 = client.messages.create(
-  model: "claude-opus-4-6",
-  max_tokens: 2048,
-  messages: messages,
-  tools: tools
-)
-
-# Add assistant response and handle any tool use
-messages << { role: "assistant", content: response1.content }
-
-# Extract tool_use blocks and provide tool_results
-tool_uses = response1.content.select { |b| b.type == :tool_use }
-tool_results = tool_uses.map do |tu|
-  result = case tu.name
-  when "get_weather" then '{"temperature": "55\u00b0F", "conditions": "rainy"}'
-  else "Unknown tool"
-  end
-  { type: "tool_result", tool_use_id: tu.id, content: result }
-end
-
-messages << { role: "user", content: tool_results + [
-  { type: "text", text: "What about New York?", cache_control: { type: "ephemeral" } }
-] }
-
-response2 = client.messages.create(
-  model: "claude-opus-4-6",
-  max_tokens: 2048,
-  messages: messages,
-  tools: tools
-)
-
-puts "Cache read tokens: #{response2.usage.cache_read_input_tokens || 0}"
-```
-</CodeGroup>
-
-The system automatically expands tool_reference blocks throughout the entire conversation history, so Claude can reuse discovered tools in subsequent turns without re-searching.
+The system automatically expands `tool_reference` blocks throughout the entire conversation history, so Claude can reuse discovered tools in subsequent turns without re-searching.
 
 ## Streaming
 
@@ -1643,6 +805,12 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "too
 ## Batch requests
 
 You can include the tool search tool in the [Messages Batches API](/docs/en/build-with-claude/batch-processing). Tool search operations through the Messages Batches API are priced the same as those in regular Messages API requests.
+
+## Data retention
+
+Server-side tool search (`tool_search` tool) indexes and stores tool catalog data (tool names, descriptions, and argument metadata) beyond the immediate API response; this catalog data is retained according to Anthropic's standard retention policy. Custom client-side tool search implementations that use the standard Messages API are fully ZDR-eligible.
+
+For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
 
 ## Limits and best practices
 
@@ -1693,3 +861,20 @@ Tool search tool usage is tracked in the response usage object:
   }
 }
 ```
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Tool reference" icon="list" href="/docs/en/agents-and-tools/tool-use/tool-reference">
+    Full tool catalog with model compatibility and parameters.
+  </Card>
+  <Card title="MCP connector" icon="plug" href="/docs/en/agents-and-tools/mcp-connector">
+    Configure MCP toolsets with deferred loading.
+  </Card>
+  <Card title="Prompt caching" icon="bolt" href="/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching">
+    Combine tool search with cached tool definitions.
+  </Card>
+  <Card title="Define tools" icon="hammer" href="/docs/en/agents-and-tools/tool-use/define-tools">
+    Step-by-step guide for defining tools.
+  </Card>
+</CardGroup>

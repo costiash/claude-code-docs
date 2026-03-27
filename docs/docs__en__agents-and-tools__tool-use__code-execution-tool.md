@@ -1,5 +1,7 @@
 # Code execution tool
 
+Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
+
 ---
 
 Claude can analyze data, create visualizations, perform complex calculations, run system commands, create and edit files, and process uploaded files directly within the API conversation. The code execution tool allows Claude to run Bash commands and manipulate files, including writing code, in a secure, sandboxed environment.
@@ -13,7 +15,7 @@ Reach out through the [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to sh
 </Note>
 
 <Note>
-This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/zero-data-retention). Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ## Model compatibility
@@ -34,7 +36,7 @@ The code execution tool is available on the following models:
 | Claude Haiku 3.5 (`claude-3-5-haiku-latest`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
 
 <Note>
-The current version `code_execution_20250825` supports Bash commands and file operations. A legacy version `code_execution_20250522` (Python only) is also available. See [Upgrade to latest tool version](#upgrade-to-latest-tool-version) for migration details.
+The `code_execution_20250825` version supports Bash commands and file operations. For models that support [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), `code_execution_20260120` adds REPL state persistence and the ability to call tools from within the sandbox. A legacy version `code_execution_20250522` (Python only) is also available; see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.
 </Note>
 
 <Warning>
@@ -295,363 +297,6 @@ This is especially important when combining code execution with [web search](/do
 
 ## How to use the tool
 
-### Execute Bash commands
-
-Ask Claude to check system information and install packages:
-
-<CodeGroup>
-```bash Shell
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [{
-            "role": "user",
-            "content": "Check the Python version and list installed packages"
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
-```
-
-```python Python
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[
-        {
-            "role": "user",
-            "content": "Check the Python version and list installed packages",
-        }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
-```
-
-```typescript TypeScript
-const response = await client.messages.create({
-  model: "claude-opus-4-6",
-  max_tokens: 4096,
-  messages: [
-    {
-      role: "user",
-      content: "Check the Python version and list installed packages"
-    }
-  ],
-  tools: [
-    {
-      type: "code_execution_20250825",
-      name: "code_execution"
-    }
-  ]
-});
-```
-
-```csharp C# hidelines={1..11,-2..}
-using System;
-using System.Threading.Tasks;
-using Anthropic;
-using Anthropic.Models.Messages;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 4096,
-            Messages = [new() { Role = Role.User, Content = "Check the Python version and list installed packages" }],
-            Tools = [new ToolUnion(new CodeExecutionTool20250825())]
-        };
-
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
-```
-
-```go Go hidelines={1..11,-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
-	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
-		MaxTokens: 4096,
-		Messages: []anthropic.BetaMessageParam{
-			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Check the Python version and list installed packages")),
-		},
-		Tools: []anthropic.BetaToolUnionParam{
-			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
-		},
-		Betas: []anthropic.AnthropicBeta{"code-execution-2025-08-25"},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
-
-```java Java hidelines={1..5,7..9,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.CodeExecutionTool20250825;
-
-public class CodeExecution {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(4096L)
-            .addUserMessage("Check the Python version and list installed packages")
-            .addTool(CodeExecutionTool20250825.builder().build())
-            .build();
-
-        Message response = client.messages().create(params);
-        System.out.println(response);
-    }
-}
-```
-
-```php PHP hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-$message = $client->messages->create(
-    maxTokens: 4096,
-    messages: [
-        ['role' => 'user', 'content' => 'Check the Python version and list installed packages']
-    ],
-    model: 'claude-opus-4-6',
-    tools: [
-        ['type' => 'code_execution_20250825', 'name' => 'code_execution']
-    ],
-);
-```
-
-```ruby Ruby hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-message = client.messages.create(
-  model: "claude-opus-4-6",
-  max_tokens: 4096,
-  messages: [
-    { role: "user", content: "Check the Python version and list installed packages" }
-  ],
-  tools: [
-    { type: "code_execution_20250825", name: "code_execution" }
-  ]
-)
-puts message
-```
-</CodeGroup>
-
-### Create and edit files directly
-
-Claude can create, view, and edit files directly in the sandbox using the file manipulation capabilities:
-
-<CodeGroup>
-```bash Shell
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [{
-            "role": "user",
-            "content": "Create a config.yaml file with database settings, then update the port from 5432 to 3306"
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
-```
-
-```python Python
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[
-        {
-            "role": "user",
-            "content": "Create a config.yaml file with database settings, then update the port from 5432 to 3306",
-        }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
-```
-
-```typescript TypeScript
-const response = await client.messages.create({
-  model: "claude-opus-4-6",
-  max_tokens: 4096,
-  messages: [
-    {
-      role: "user",
-      content:
-        "Create a config.yaml file with database settings, then update the port from 5432 to 3306"
-    }
-  ],
-  tools: [
-    {
-      type: "code_execution_20250825",
-      name: "code_execution"
-    }
-  ]
-});
-```
-
-```csharp C# hidelines={1..11,-2..}
-using System;
-using System.Threading.Tasks;
-using Anthropic;
-using Anthropic.Models.Messages;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 4096,
-            Messages = [new() { Role = Role.User, Content = "Create a config.yaml file with database settings, then update the port from 5432 to 3306" }],
-            Tools = [new ToolUnion(new CodeExecutionTool20250825())]
-        };
-
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
-```
-
-```go Go hidelines={1..11,-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
-	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
-		MaxTokens: 4096,
-		Messages: []anthropic.BetaMessageParam{
-			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Create a config.yaml file with database settings, then update the port from 5432 to 3306")),
-		},
-		Tools: []anthropic.BetaToolUnionParam{
-			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
-		},
-		Betas: []anthropic.AnthropicBeta{"code-execution-2025-08-25"},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
-
-```java Java hidelines={1..5,7..9,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.CodeExecutionTool20250825;
-
-public class CodeExecutionExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(4096L)
-            .addUserMessage("Create a config.yaml file with database settings, then update the port from 5432 to 3306")
-            .addTool(CodeExecutionTool20250825.builder().build())
-            .build();
-
-        Message response = client.messages().create(params);
-        System.out.println(response);
-    }
-}
-```
-
-```php PHP hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-$message = $client->messages->create(
-    maxTokens: 4096,
-    messages: [
-        ['role' => 'user', 'content' => 'Create a config.yaml file with database settings, then update the port from 5432 to 3306']
-    ],
-    model: 'claude-opus-4-6',
-    tools: [
-        ['type' => 'code_execution_20250825', 'name' => 'code_execution']
-    ],
-);
-```
-
-```ruby Ruby hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-message = client.messages.create(
-  model: "claude-opus-4-6",
-  max_tokens: 4096,
-  messages: [
-    { role: "user", content: "Create a config.yaml file with database settings, then update the port from 5432 to 3306" }
-  ],
-  tools: [
-    { type: "code_execution_20250825", name: "code_execution" }
-  ]
-)
-puts message
-```
-</CodeGroup>
-
 ### Upload and analyze your own files
 
 To analyze your own data files (CSV, Excel, images, etc.), upload them via the Files API and reference them in your request:
@@ -735,6 +380,8 @@ response = client.beta.messages.create(
     ],
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
+
+print(response)
 ```
 
 ```typescript TypeScript nocheck hidelines={5..6,-3..-1}
@@ -1029,9 +676,9 @@ def extract_file_ids(response):
         if item.type == "bash_code_execution_tool_result":
             content_item = item.content
             if content_item.type == "bash_code_execution_result":
+                # concrete-typed list: List[BashCodeExecutionOutputBlock]
                 for file in content_item.content:
-                    if hasattr(file, "file_id"):
-                        file_ids.append(file.file_id)
+                    file_ids.append(file.file_id)
     return file_ids
 
 
@@ -1074,6 +721,7 @@ async function main() {
     if (item.type === "bash_code_execution_tool_result") {
       const contentItem = item.content;
       if (contentItem.type === "bash_code_execution_result" && contentItem.content) {
+        // concrete-typed list: BashCodeExecutionOutputBlock
         for (const file of contentItem.content) {
           const fileMetadata = await client.beta.files.retrieveMetadata(file.file_id);
           const fileResponse = await client.beta.files.download(file.file_id);
@@ -1141,6 +789,7 @@ public class Program
                 var contentItem = item.Content;
                 if (contentItem.Type == "bash_code_execution_result")
                 {
+                    // concrete-typed list: BetaBashCodeExecutionOutputBlock
                     foreach (var file in contentItem.Content)
                     {
                         if (file.FileId != null)
@@ -1228,6 +877,7 @@ func extractFileIDs(response *anthropic.BetaMessage) []string {
 	for _, item := range response.Content {
 		switch variant := item.AsAny().(type) {
 		case anthropic.BetaBashCodeExecutionToolResultBlock:
+			// concrete-typed list: BashCodeExecutionOutputBlock
 			for _, file := range variant.Content.Content {
 				if file.FileID != "" {
 					fileIDs = append(fileIDs, file.FileID)
@@ -1239,7 +889,7 @@ func extractFileIDs(response *anthropic.BetaMessage) []string {
 }
 ```
 
-```java Java nocheck hidelines={1..6,11..16,40..41,-1}
+```java Java nocheck hidelines={1..6,11..15,39..40}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.http.HttpResponse;
@@ -1254,48 +904,48 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CodeExecutionFiles {
-    public static void main(String[] args) throws Exception {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() throws Exception {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model("claude-opus-4-6")
-            .addBeta("files-api-2025-04-14")
-            .maxTokens(4096L)
-            .addUserMessage("Create a matplotlib visualization and save it as output.png")
-            .addTool(BetaCodeExecutionTool20250825.builder().build())
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model("claude-opus-4-6")
+        .addBeta("files-api-2025-04-14")
+        .maxTokens(4096L)
+        .addUserMessage("Create a matplotlib visualization and save it as output.png")
+        .addTool(BetaCodeExecutionTool20250825.builder().build())
+        .build();
 
-        BetaMessage response = client.beta().messages().create(params);
+    BetaMessage response = client.beta().messages().create(params);
 
-        List<String> fileIds = extractFileIds(response);
+    List<String> fileIds = extractFileIds(response);
 
-        for (String fileId : fileIds) {
-            FileMetadata fileMetadata = client.beta().files().retrieveMetadata(fileId);
-            try (HttpResponse fileContent = client.beta().files().download(fileId)) {
-                try (FileOutputStream fos = new FileOutputStream(fileMetadata.filename())) {
-                    fileContent.body().transferTo(fos);
+    for (String fileId : fileIds) {
+        FileMetadata fileMetadata = client.beta().files().retrieveMetadata(fileId);
+        try (HttpResponse fileContent = client.beta().files().download(fileId)) {
+            try (FileOutputStream fos = new FileOutputStream(fileMetadata.filename())) {
+                fileContent.body().transferTo(fos);
+            }
+        }
+        IO.println("Downloaded: " + fileMetadata.filename());
+    }
+}
+
+List<String> extractFileIds(BetaMessage response) {
+    List<String> fileIds = new ArrayList<>();
+    // .ifPresent() is the discriminator guard (not concrete-typed; scanner can't see lambda guards)
+    for (BetaContentBlock item : response.content()) {
+        item.bashCodeExecutionToolResult().ifPresent(toolResult -> {
+            if (toolResult.content().isBetaBashCodeExecutionResultBlock()) {
+                BetaBashCodeExecutionResultBlock result =
+                    toolResult.content().asBetaBashCodeExecutionResultBlock();
+                // concrete-typed list: BetaBashCodeExecutionOutputBlock
+                for (BetaBashCodeExecutionOutputBlock output : result.content()) {
+                    fileIds.add(output.fileId());
                 }
             }
-            System.out.println("Downloaded: " + fileMetadata.filename());
-        }
+        });
     }
-
-    private static List<String> extractFileIds(BetaMessage response) {
-        List<String> fileIds = new ArrayList<>();
-        for (BetaContentBlock item : response.content()) {
-            item.bashCodeExecutionToolResult().ifPresent(toolResult -> {
-                if (toolResult.content().isBetaBashCodeExecutionResultBlock()) {
-                    BetaBashCodeExecutionResultBlock result =
-                        toolResult.content().asBetaBashCodeExecutionResultBlock();
-                    for (BetaBashCodeExecutionOutputBlock output : result.content()) {
-                        fileIds.add(output.fileId());
-                    }
-                }
-            });
-        }
-        return fileIds;
-    }
+    return fileIds;
 }
 ```
 
@@ -1330,10 +980,9 @@ function extractFileIds($response) {
         if ($item->type === 'bash_code_execution_tool_result') {
             $contentItem = $item->content;
             if ($contentItem->type === 'bash_code_execution_result') {
+                // concrete-typed list: BashCodeExecutionOutputBlock
                 foreach ($contentItem->content as $file) {
-                    if (isset($file->fileID)) {
-                        $fileIds[] = $file->fileID;
-                    }
+                    $fileIds[] = $file->fileID;
                 }
             }
         }
@@ -1379,8 +1028,9 @@ def extract_file_ids(response)
     if item.type == :bash_code_execution_tool_result
       content_item = item.content
       if content_item.type == :bash_code_execution_result
+        # concrete-typed list: BashCodeExecutionOutputBlock
         content_item.content.each do |file|
-          file_ids << file.file_id if file.respond_to?(:file_id)
+          file_ids << file.file_id
         end
       end
     end
@@ -1398,366 +1048,6 @@ extract_file_ids(response).each do |file_id|
 
   puts "Downloaded: #{file_metadata.filename}"
 end
-```
-</CodeGroup>
-
-### Combine operations
-
-A complex workflow using all capabilities:
-
-<CodeGroup>
-```bash Shell hidelines={1..2}
-cd "$(mktemp -d)"
-printf 'name,value\nfoo,1\nbar,2\n' > data.csv
-# First, upload a file
-curl https://api.anthropic.com/v1/files \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: files-api-2025-04-14" \
-    --form 'file=@"data.csv"' \
-    > file_response.json
-
-# Extract file_id (using jq)
-FILE_ID=$(jq -r '.id' file_response.json)
-
-# Then use it with code execution
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: files-api-2025-04-14" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [{
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"
-                },
-                {
-                    "type": "container_upload",
-                    "file_id": "'$FILE_ID'"
-                }
-            ]
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
-```
-
-```python Python nocheck
-# Upload a file
-file_object = client.beta.files.upload(
-    file=open("data.csv", "rb"),
-)
-
-# Use it with code execution
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    betas=["files-api-2025-04-14"],
-    max_tokens=4096,
-    messages=[
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings",
-                },
-                {"type": "container_upload", "file_id": file_object.id},
-            ],
-        }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
-
-# Claude might:
-# 1. Use bash to check file size and preview data
-# 2. Use text_editor to write Python code to analyze the CSV and create visualizations
-# 3. Use bash to run the Python code
-# 4. Use text_editor to create a README.md with findings
-# 5. Use bash to organize files into a report directory
-```
-
-```typescript TypeScript nocheck hidelines={5..6,-3..-1}
-import Anthropic, { toFile } from "@anthropic-ai/sdk";
-import { createReadStream } from "fs";
-
-const client = new Anthropic();
-
-async function main() {
-  // Upload a file
-  const fileObject = await client.beta.files.upload({
-    file: await toFile(createReadStream("data.csv"), undefined, { type: "text/csv" }),
-    betas: ["files-api-2025-04-14"]
-  });
-
-  const response = await client.beta.messages.create({
-    model: "claude-opus-4-6",
-    betas: ["code-execution-2025-08-25", "files-api-2025-04-14"],
-    max_tokens: 4096,
-    messages: [
-      {
-        role: "user",
-        content: [
-          {
-            type: "text",
-            text: "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"
-          },
-          { type: "container_upload", file_id: fileObject.id }
-        ]
-      }
-    ],
-    tools: [
-      {
-        type: "code_execution_20250825",
-        name: "code_execution"
-      }
-    ]
-  });
-
-  console.log(response);
-}
-
-main().catch(console.error);
-```
-
-```csharp C# nocheck
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using Anthropic;
-using Anthropic.Models.Beta.Files;
-using Anthropic.Models.Beta.Messages;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var fileObject = await client.Beta.Files.Upload(new FileUploadParams
-        {
-            File = File.OpenRead("data.csv")
-        });
-
-        var parameters = new MessageCreateParams
-        {
-            Model = "claude-opus-4-6",
-            Betas = ["files-api-2025-04-14"],
-            MaxTokens = 4096,
-            Messages = [
-                new() {
-                    Role = Role.User,
-                    Content = [
-                        new BetaTextBlockParam {
-                            Text = "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"
-                        },
-                        new BetaContainerUploadBlockParam {
-                            FileID = fileObject.Id
-                        }
-                    ]
-                }
-            ],
-            Tools = [
-                new BetaTool {
-                    Type = "code_execution_20250825",
-                    Name = "code_execution"
-                }
-            ]
-        };
-
-        var message = await client.Beta.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
-```
-
-```go Go hidelines={11..15}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-	"os"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func init() {
-	os.WriteFile("data.csv", []byte("name,value\nalpha,1\nbeta,2\ngamma,3\n"), 0644)
-}
-
-func main() {
-	client := anthropic.NewClient()
-
-	file, err := os.Open("data.csv")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-
-	fileObject, err := client.Beta.Files.Upload(context.TODO(), anthropic.BetaFileUploadParams{
-		File:  file,
-		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
-		MaxTokens: 4096,
-		Messages: []anthropic.BetaMessageParam{
-			anthropic.NewBetaUserMessage(
-				anthropic.NewBetaTextBlock("Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"),
-				anthropic.NewBetaContainerUploadBlock(fileObject.ID),
-			),
-		},
-		Tools: []anthropic.BetaToolUnionParam{
-			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
-		},
-		Betas: []anthropic.AnthropicBeta{
-			"code-execution-2025-08-25",
-			anthropic.AnthropicBetaFilesAPI2025_04_14,
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(response)
-}
-```
-
-```java Java nocheck hidelines={1..2,5..6,8..9,11..15,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.files.FileUploadParams;
-import com.anthropic.models.beta.files.FileMetadata;
-import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaCodeExecutionTool20250825;
-import com.anthropic.models.beta.messages.BetaContentBlockParam;
-import com.anthropic.models.beta.messages.BetaTextBlockParam;
-import com.anthropic.models.beta.messages.BetaContainerUploadBlockParam;
-import java.nio.file.Paths;
-import java.util.List;
-
-public class CodeExecutionWithFile {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        FileMetadata fileMetadata = client.beta().files().upload(
-            FileUploadParams.builder()
-                .file(Paths.get("data.csv"))
-                .build()
-        );
-
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model("claude-opus-4-6")
-            .addBeta("files-api-2025-04-14")
-            .maxTokens(4096L)
-            .addUserMessageOfBetaContentBlockParams(List.of(
-                BetaContentBlockParam.ofText(BetaTextBlockParam.builder()
-                    .text("Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings")
-                    .build()),
-                BetaContentBlockParam.ofContainerUpload(BetaContainerUploadBlockParam.builder()
-                    .fileId(fileMetadata.id())
-                    .build())
-            ))
-            .addTool(BetaCodeExecutionTool20250825.builder().build())
-            .build();
-
-        BetaMessage response = client.beta().messages().create(params);
-        System.out.println(response);
-    }
-}
-```
-
-```php PHP hidelines={1..4} nocheck
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-$fileObject = $client->beta->files->upload(
-    file: fopen('data.csv', 'r'),
-);
-
-$message = $client->beta->messages->create(
-    maxTokens: 4096,
-    messages: [
-        [
-            'role' => 'user',
-            'content' => [
-                [
-                    'type' => 'text',
-                    'text' => 'Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings'
-                ],
-                [
-                    'type' => 'container_upload',
-                    'file_id' => $fileObject->id
-                ]
-            ]
-        ]
-    ],
-    model: 'claude-opus-4-6',
-    betas: ['files-api-2025-04-14'],
-    tools: [
-        [
-            'type' => 'code_execution_20250825',
-            'name' => 'code_execution'
-        ]
-    ],
-);
-
-echo $message->content[0]->text;
-```
-
-```ruby Ruby nocheck hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-file_object = client.beta.files.upload(
-  file: File.open("data.csv", "rb")
-)
-
-response = client.beta.messages.create(
-  model: "claude-opus-4-6",
-  betas: ["files-api-2025-04-14"],
-  max_tokens: 4096,
-  messages: [
-    {
-      role: "user",
-      content: [
-        {
-          type: "text",
-          text: "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"
-        },
-        {
-          type: "container_upload",
-          file_id: file_object.id
-        }
-      ]
-    }
-  ],
-  tools: [
-    {
-      type: "code_execution_20250825",
-      name: "code_execution"
-    }
-  ]
-)
-
-puts response
 ```
 </CodeGroup>
 
@@ -2050,6 +1340,8 @@ response2 = client.messages.create(
     ],
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
+
+print(response2)
 ```
 
 ```typescript TypeScript hidelines={1..5,-3..-1}
@@ -2383,259 +1675,13 @@ To upgrade, update the tool type in your API requests:
 
 ## Programmatic tool calling
 
-The code execution tool powers [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), which allows Claude to write code that calls your custom tools programmatically within the execution container. This enables efficient multi-tool workflows, data filtering before reaching Claude's context, and complex conditional logic.
+For running tools inside the code execution container, see [Programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling).
 
-<CodeGroup>
+## Data retention
 
-```python Python nocheck
-# Enable programmatic calling for your tools
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[
-        {"role": "user", "content": "Get weather for 5 cities and find the warmest"}
-    ],
-    tools=[
-        {"type": "code_execution_20250825", "name": "code_execution"},
-        {
-            "name": "get_weather",
-            "description": "Get weather for a city",
-            "input_schema": {...},
-            "allowed_callers": [
-                "code_execution_20250825"
-            ],  # Enable programmatic calling
-        },
-    ],
-)
-```
+Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the [Files API](/docs/en/build-with-claude/files) (retrievable via `client.beta.files.download()`) persist until explicitly deleted.
 
-```typescript TypeScript hidelines={1..5,-3..-1}
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
-async function main() {
-  const response = await client.beta.messages.create({
-    model: "claude-opus-4-6",
-    betas: ["code-execution-2025-08-25"],
-    max_tokens: 4096,
-    messages: [{ role: "user", content: "Get weather for 5 cities and find the warmest" }],
-    tools: [
-      { type: "code_execution_20250825", name: "code_execution" },
-      {
-        name: "get_weather",
-        description: "Get weather for a city",
-        input_schema: {
-          type: "object" as const,
-          properties: {
-            city: { type: "string" }
-          },
-          required: ["city"]
-        },
-        allowed_callers: ["code_execution_20250825"]
-      }
-    ]
-  });
-
-  console.log(response);
-}
-
-main().catch(console.error);
-```
-
-```csharp C# nocheck
-using Anthropic;
-using Anthropic.Models.Messages;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 4096,
-            Messages = [new() { Role = Role.User, Content = "Get weather for 5 cities and find the warmest" }],
-            Tools = new List<Tool>
-            {
-                new() { Type = "code_execution_20250825", Name = "code_execution" },
-                new()
-                {
-                    Name = "get_weather",
-                    Description = "Get weather for a city",
-                    InputSchema = new
-                    {
-                        type = "object",
-                        properties = new
-                        {
-                            city = new { type = "string" }
-                        },
-                        required = new[] { "city" }
-                    },
-                    AllowedCallers = new[] { "code_execution_20250825" }
-                }
-            }
-        };
-
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
-```
-
-```go Go hidelines={1..11,-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
-	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
-		MaxTokens: 4096,
-		Messages: []anthropic.BetaMessageParam{
-			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Get weather for 5 cities and find the warmest")),
-		},
-		Tools: []anthropic.BetaToolUnionParam{
-			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
-			{OfTool: &anthropic.BetaToolParam{
-				Name:        "get_weather",
-				Description: anthropic.String("Get weather for a city"),
-				InputSchema: anthropic.BetaToolInputSchemaParam{
-					Properties: map[string]any{
-						"city": map[string]any{"type": "string"},
-					},
-					Required: []string{"city"},
-				},
-				AllowedCallers: []string{"code_execution_20250825"},
-			}},
-		},
-		Betas: []anthropic.AnthropicBeta{"code-execution-2025-08-25"},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
-
-```java Java hidelines={1..5,7..13,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.Model;
-import com.anthropic.models.messages.CodeExecutionTool20250825;
-import com.anthropic.models.messages.Tool;
-import com.anthropic.core.JsonValue;
-import java.util.Map;
-import java.util.List;
-
-public class Main {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(4096L)
-            .addUserMessage("Get weather for 5 cities and find the warmest")
-            .addTool(CodeExecutionTool20250825.builder().build())
-            .addTool(Tool.builder()
-                .name("get_weather")
-                .description("Get weather for a city")
-                .inputSchema(Tool.InputSchema.builder()
-                    .properties(JsonValue.from(Map.of(
-                        "city", Map.of("type", "string")
-                    )))
-                    .putAdditionalProperty("required", JsonValue.from(List.of("city")))
-                    .build())
-                .allowedCallers(List.of(Tool.AllowedCaller.CODE_EXECUTION_20250825))
-                .build())
-            .build();
-
-        Message response = client.messages().create(params);
-        System.out.println(response);
-    }
-}
-```
-
-```php PHP hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-$message = $client->messages->create(
-    maxTokens: 4096,
-    messages: [
-        ['role' => 'user', 'content' => 'Get weather for 5 cities and find the warmest']
-    ],
-    model: 'claude-opus-4-6',
-    tools: [
-        ['type' => 'code_execution_20250825', 'name' => 'code_execution'],
-        [
-            'name' => 'get_weather',
-            'description' => 'Get weather for a city',
-            'input_schema' => [
-                'type' => 'object',
-                'properties' => [
-                    'city' => ['type' => 'string']
-                ],
-                'required' => ['city']
-            ],
-            'allowed_callers' => ['code_execution_20250825']
-        ]
-    ],
-);
-
-echo $message->content[0]->text;
-```
-
-```ruby Ruby hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-message = client.messages.create(
-  model: "claude-opus-4-6",
-  max_tokens: 4096,
-  messages: [
-    { role: "user", content: "Get weather for 5 cities and find the warmest" }
-  ],
-  tools: [
-    { type: "code_execution_20250825", name: "code_execution" },
-    {
-      name: "get_weather",
-      description: "Get weather for a city",
-      input_schema: {
-        type: "object",
-        properties: {
-          city: { type: "string" }
-        },
-        required: ["city"]
-      },
-      allowed_callers: ["code_execution_20250825"]
-    }
-  ]
-)
-puts message
-```
-</CodeGroup>
-
-Learn more in the [Programmatic tool calling documentation](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling).
+For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
 
 ## Using code execution with Agent Skills
 
