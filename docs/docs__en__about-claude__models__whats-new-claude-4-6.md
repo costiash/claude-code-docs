@@ -92,13 +92,13 @@ Opus 4.6 supports up to 128k output tokens, doubling the previous 64k limit. Thi
 
 ### `type: "enabled"` and `budget_tokens`
 
-`thinking: {type: "enabled", budget_tokens: N}` is **deprecated** on Opus 4.6. It remains functional but will be removed in a future model release. Migrate to `thinking: {type: "adaptive"}` with the [effort parameter](/docs/en/build-with-claude/effort).
+`thinking: {type: "enabled", budget_tokens: N}` is [**deprecated**](/docs/en/build-with-claude/overview#feature-availability) on Opus 4.6 and Sonnet 4.6. It is still functional but no longer recommended and will be removed in a future model release. Migrate to `thinking: {type: "adaptive"}` with the [effort parameter](/docs/en/build-with-claude/effort).
 
 ### `interleaved-thinking-2025-05-14` beta header
 
 The `interleaved-thinking-2025-05-14` beta header is **deprecated** on Opus 4.6. It is safely ignored if included, but is no longer required. [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) automatically enables [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking). Remove `betas=["interleaved-thinking-2025-05-14"]` from your requests when using Opus 4.6.
 
-**Sonnet 4.6** continues to support the `interleaved-thinking-2025-05-14` beta header for use with manual extended thinking (`thinking: {type: "enabled"}`). You can use either interleaved thinking with the beta header or adaptive thinking on Sonnet 4.6.
+On **Sonnet 4.6**, the `interleaved-thinking-2025-05-14` beta header is still functional for use with manual extended thinking (`thinking: {type: "enabled"}`), but manual mode is deprecated. Adaptive thinking is the recommended path and automatically enables interleaved thinking.
 
 ### `output_format`
 

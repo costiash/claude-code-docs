@@ -189,7 +189,7 @@ These are not required but will improve your experience:
 
 3. **Remove fine-grained tool streaming beta header:** Fine-grained tool streaming is now GA. Remove `betas=["fine-grained-tool-streaming-2025-05-14"]` from your requests.
 
-4. **Remove interleaved thinking beta header (Opus 4.6 only):** Adaptive thinking automatically enables interleaved thinking on Opus 4.6. Remove `betas=["interleaved-thinking-2025-05-14"]` from your Opus 4.6 requests. Note: Sonnet 4.6 continues to support this beta header with manual extended thinking.
+4. **Remove interleaved thinking beta header:** Adaptive thinking automatically enables interleaved thinking on both Opus 4.6 and Sonnet 4.6. Remove `betas=["interleaved-thinking-2025-05-14"]` from your requests. The header is still functional on Sonnet 4.6 with manual extended thinking, but manual mode is deprecated.
 
 5. **Migrate to output_config.format:** If using structured outputs, update `output_format={...}` to `output_config={"format": {...}}`. The old parameter remains functional but is deprecated and will be removed in a future model release.
 
@@ -304,7 +304,7 @@ model = "claude-opus-4-6"  # After
 - [ ] Verify tool call JSON parsing uses a standard JSON parser
 - [ ] Remove `effort-2025-11-24` beta header (effort is now GA)
 - [ ] Remove `fine-grained-tool-streaming-2025-05-14` beta header
-- [ ] Remove `interleaved-thinking-2025-05-14` beta header (Opus 4.6 only; Sonnet 4.6 still supports it)
+- [ ] Remove `interleaved-thinking-2025-05-14` beta header (adaptive thinking enables interleaved thinking automatically)
 - [ ] Migrate `output_format` to `output_config.format` (if applicable)
 - [ ] If migrating from Claude 4.1 or earlier: update sampling parameters to use only `temperature` OR `top_p`
 - [ ] If migrating from Claude 4.1 or earlier: update tool versions (`text_editor_20250728`, `code_execution_20250825`)
@@ -578,9 +578,201 @@ puts message.content.first.text
 
 #### If you're using extended thinking
 
-If you're using extended thinking on Sonnet 4.5, it continues to be supported on Sonnet 4.6 with no changes needed to your thinking configuration. Consider keeping a thinking budget around 16k tokens. In practice, most tasks don't use that much, but it provides headroom for harder problems without risk of runaway token usage.
+If you're using extended thinking with `budget_tokens` on Sonnet 4.5, it is still functional on Sonnet 4.6 but is deprecated. Migrate to [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) with the [effort parameter](/docs/en/build-with-claude/effort).
 
-##### Coding and agentic use cases
+##### Migrating to adaptive thinking
+
+[Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) is the recommended replacement for `budget_tokens` on Sonnet 4.6. It is particularly well suited to the following workload patterns:
+
+- **Autonomous multi-step agents:** coding agents that turn requirements into working software, data analysis pipelines, and bug finding where the model runs independently across many steps. Adaptive thinking lets the model calibrate its reasoning per step, staying on path over longer trajectories. For these workloads, start at `high` effort. If latency or token usage is a concern, scale down to `medium`.
+- **Computer use agents:** Sonnet 4.6 achieved best-in-class accuracy on computer use evaluations using adaptive mode.
+- **Bimodal workloads:** a mix of easy and hard tasks where adaptive skips thinking on simple queries and reasons deeply on complex ones.
+
+When using adaptive thinking, evaluate `medium` and `high` effort on your tasks. The right level depends on your workload's tradeoff between quality, latency, and token usage.
+
+<CodeGroup>
+```bash Shell
+curl https://api.anthropic.com/v1/messages \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 64000,
+    "thinking": {
+        "type": "adaptive"
+    },
+    "output_config": {
+        "effort": "medium"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "Your prompt here"
+        }
+    ]
+}'
+```
+
+```python Python nocheck
+response = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=64000,
+    thinking={"type": "adaptive"},
+    output_config={"effort": "medium"},
+    messages=[{"role": "user", "content": "Your prompt here"}],
+)
+```
+
+```typescript TypeScript nocheck
+const response = await client.messages.create({
+  model: "claude-sonnet-4-6",
+  max_tokens: 64000,
+  thinking: { type: "adaptive" },
+  output_config: { effort: "medium" },
+  messages: [{ role: "user", content: "Your prompt here" }]
+});
+```
+
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Messages;
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        AnthropicClient client = new();
+
+        var parameters = new MessageCreateParams
+        {
+            Model = Model.ClaudeSonnet4_6,
+            MaxTokens = 64000,
+            Thinking = new ThinkingConfigAdaptive(),
+            OutputConfig = new OutputConfig { Effort = Effort.Medium },
+            Messages = [new() { Role = Role.User, Content = "Your prompt here" }]
+        };
+
+        var message = await client.Messages.Create(parameters);
+        Console.WriteLine(message);
+    }
+}
+```
+
+```go Go nocheck hidelines={1..11,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     "claude-sonnet-4-6",
+		MaxTokens: 64000,
+		Thinking: anthropic.ThinkingConfigParamUnion{
+			OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
+		},
+		OutputConfig: anthropic.OutputConfigParam{
+			Effort: anthropic.OutputConfigEffortMedium,
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Your prompt here")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java nocheck hidelines={1..4,7..9,-2..}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.OutputConfig;
+import com.anthropic.models.messages.ThinkingConfigAdaptive;
+
+public class Main {
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model("claude-sonnet-4-6")
+            .maxTokens(64000L)
+            .thinking(ThinkingConfigAdaptive.builder().build())
+            .outputConfig(OutputConfig.builder()
+                .effort(OutputConfig.Effort.MEDIUM)
+                .build())
+            .addUserMessage("Your prompt here")
+            .build();
+
+        Message response = client.messages().create(params);
+        System.out.println(response);
+    }
+}
+```
+
+```php PHP hidelines={1..4} nocheck
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$message = $client->messages->create(
+    maxTokens: 64000,
+    messages: [['role' => 'user', 'content' => 'Your prompt here']],
+    model: 'claude-sonnet-4-6',
+    thinking: ['type' => 'adaptive'],
+    outputConfig: ['effort' => 'medium'],
+);
+
+echo $message->content[0]->text;
+```
+
+```ruby Ruby nocheck hidelines={1..2}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 64000,
+  thinking: {
+    type: "adaptive"
+  },
+  output_config: {
+    effort: "medium"
+  },
+  messages: [
+    { role: "user", content: "Your prompt here" }
+  ]
+)
+puts message
+```
+</CodeGroup>
+
+<Note>
+If you see inconsistent behavior or quality regressions with adaptive thinking, try lowering the [effort](/docs/en/build-with-claude/effort) setting or using `max_tokens` as a hard limit first. Extended thinking with `budget_tokens` is still functional on Sonnet 4.6 but is deprecated and no longer recommended.
+</Note>
+
+##### Keeping budget_tokens during migration
+
+If you need to keep `budget_tokens` temporarily while migrating, a budget around 16k tokens provides headroom for harder problems without risk of runaway token usage. This configuration is deprecated and will be removed in a future model release.
+
+###### Coding and agentic use cases
 
 For agentic coding, frontend design, tool-heavy workflows, and complex enterprise workflows, start with `medium` effort. If you find latency is too high, consider reducing effort to `low`. If you need higher intelligence, consider increasing effort to `high` or migrating to Opus 4.6.
 
@@ -772,7 +964,7 @@ puts message
 ```
 </CodeGroup>
 
-##### Chat and non-coding use cases
+###### Chat and non-coding use cases
 
 For chat, content generation, search, classification, and other non-coding tasks, start with `low` effort with extended thinking. If you need more depth, increase effort to `medium`.
 
@@ -964,194 +1156,6 @@ puts message
 ```
 </CodeGroup>
 
-##### When to try adaptive thinking
-
-The migration paths above use extended thinking with `budget_tokens` for predictable token usage. If your workload fits one of the following patterns, consider trying [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) instead:
-
-- **Autonomous multi-step agents:** coding agents that turn requirements into working software, data analysis pipelines, and bug finding where the model runs independently across many steps. Adaptive thinking lets the model calibrate its reasoning per step, staying on path over longer trajectories. For these workloads, start at `high` effort. If latency or token usage is a concern, scale down to `medium`.
-- **Computer use agents:** Sonnet 4.6 achieved best-in-class accuracy on computer use evaluations using adaptive mode.
-- **Bimodal workloads:** a mix of easy and hard tasks where adaptive skips thinking on simple queries and reasons deeply on complex ones.
-
-When using adaptive thinking, evaluate `medium` and `high` effort on your tasks. The right level depends on your workload's tradeoff between quality, latency, and token usage.
-
-<CodeGroup>
-```bash Shell
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-sonnet-4-6",
-    "max_tokens": 64000,
-    "thinking": {
-        "type": "adaptive"
-    },
-    "output_config": {
-        "effort": "medium"
-    },
-    "messages": [
-        {
-            "role": "user",
-            "content": "Your prompt here"
-        }
-    ]
-}'
-```
-
-```python Python nocheck
-response = client.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=64000,
-    thinking={"type": "adaptive"},
-    output_config={"effort": "medium"},
-    messages=[{"role": "user", "content": "Your prompt here"}],
-)
-```
-
-```typescript TypeScript nocheck
-const response = await client.messages.create({
-  model: "claude-sonnet-4-6",
-  max_tokens: 64000,
-  thinking: { type: "adaptive" },
-  output_config: { effort: "medium" },
-  messages: [{ role: "user", content: "Your prompt here" }]
-});
-```
-
-```csharp C# nocheck
-using Anthropic;
-using Anthropic.Models.Messages;
-using System;
-using System.Threading.Tasks;
-
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeSonnet4_6,
-            MaxTokens = 64000,
-            Thinking = new ThinkingConfigAdaptive(),
-            OutputConfig = new OutputConfig { Effort = Effort.Medium },
-            Messages = [new() { Role = Role.User, Content = "Your prompt here" }]
-        };
-
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
-```
-
-```go Go nocheck hidelines={1..11,-1}
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/anthropics/anthropic-sdk-go"
-)
-
-func main() {
-	client := anthropic.NewClient()
-
-	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     "claude-sonnet-4-6",
-		MaxTokens: 64000,
-		Thinking: anthropic.ThinkingConfigParamUnion{
-			OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
-		},
-		OutputConfig: anthropic.OutputConfigParam{
-			Effort: anthropic.OutputConfigEffortMedium,
-		},
-		Messages: []anthropic.MessageParam{
-			anthropic.NewUserMessage(anthropic.NewTextBlock("Your prompt here")),
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(response)
-}
-```
-
-```java Java nocheck hidelines={1..4,7..9,-2..}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.messages.MessageCreateParams;
-import com.anthropic.models.messages.Message;
-import com.anthropic.models.messages.OutputConfig;
-import com.anthropic.models.messages.ThinkingConfigAdaptive;
-
-public class Main {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model("claude-sonnet-4-6")
-            .maxTokens(64000L)
-            .thinking(ThinkingConfigAdaptive.builder().build())
-            .outputConfig(OutputConfig.builder()
-                .effort(OutputConfig.Effort.MEDIUM)
-                .build())
-            .addUserMessage("Your prompt here")
-            .build();
-
-        Message response = client.messages().create(params);
-        System.out.println(response);
-    }
-}
-```
-
-```php PHP hidelines={1..4} nocheck
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-$message = $client->messages->create(
-    maxTokens: 64000,
-    messages: [['role' => 'user', 'content' => 'Your prompt here']],
-    model: 'claude-sonnet-4-6',
-    thinking: ['type' => 'adaptive'],
-    outputConfig: ['effort' => 'medium'],
-);
-
-echo $message->content[0]->text;
-```
-
-```ruby Ruby nocheck hidelines={1..2}
-require "anthropic"
-
-client = Anthropic::Client.new
-
-message = client.messages.create(
-  model: "claude-sonnet-4-6",
-  max_tokens: 64000,
-  thinking: {
-    type: "adaptive"
-  },
-  output_config: {
-    effort: "medium"
-  },
-  messages: [
-    { role: "user", content: "Your prompt here" }
-  ]
-)
-puts message
-```
-</CodeGroup>
-
-<Note>
-If you see inconsistent behavior or quality regressions with adaptive thinking, switch to extended thinking with `budget_tokens`. This provides more predictable results with a cap on thinking costs.
-</Note>
-
 ### Sonnet 4.6 migration checklist
 
 - [ ] Update model ID to `claude-sonnet-4-6`
@@ -1164,7 +1168,7 @@ If you see inconsistent behavior or quality regressions with adaptive thinking, 
 - [ ] Remove `fine-grained-tool-streaming-2025-05-14` beta header (now GA)
 - [ ] Migrate `output_format` to `output_config.format`
 - [ ] Review and update prompts following [prompting best practices](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
-- [ ] Consider enabling extended thinking or adaptive thinking for complex reasoning tasks
+- [ ] **Recommended:** Migrate from `thinking: {type: "enabled", budget_tokens: N}` to `thinking: {type: "adaptive"}` with the [effort parameter](/docs/en/build-with-claude/effort) (`budget_tokens` is deprecated and will be removed in a future release)
 - [ ] Test in development environment before production deployment
 
 ---

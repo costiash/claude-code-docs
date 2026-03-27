@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-27T00:42:52Z",
+  "generated_at": "2026-03-27T04:06:13Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -722,13 +722,13 @@
         "default",
         "counter",
         "session",
-        "file",
         "logs",
         "name",
         "number",
-        "request"
+        "request",
+        "api"
       ],
-      "word_count": 2968,
+      "word_count": 2933,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1326,25 +1326,25 @@
         "claude",
         "update",
         "migrating",
-        "thinking",
-        "breaking",
-        "tool",
         "sonnet",
+        "breaking",
+        "thinking",
+        "tool",
         "models",
         "remove",
-        "warning",
         "effort",
+        "warning",
         "changes",
-        "when",
-        "handle",
-        "versions",
         "using",
-        "stop",
+        "handle",
+        "when",
+        "versions",
         "model",
-        "extended",
-        "beta"
+        "stop",
+        "parameter",
+        "adaptive"
       ],
-      "word_count": 4615,
+      "word_count": 4656,
       "file_path": "docs/docs__en__about-claude__models__migration-guide.md"
     },
     "/docs/en/about-claude/models/overview": {
@@ -1389,18 +1389,18 @@
         "adaptive",
         "effort",
         "card",
+        "mode",
         "parameter",
         "model",
         "output",
-        "mode",
-        "beta",
         "new",
+        "beta",
         "code",
         "api",
         "token",
         "now"
       ],
-      "word_count": 1049,
+      "word_count": 1058,
       "file_path": "docs/docs__en__about-claude__models__whats-new-claude-4-6.md"
     },
     "/docs/en/about-claude/pricing": {
@@ -13260,24 +13260,24 @@
         "claude",
         "adaptive",
         "tokens",
-        "extended",
         "when",
+        "extended",
         "mode",
         "note",
-        "output",
         "models",
+        "output",
         "blocks",
         "opus",
         "sonnet",
         "effort",
         "field",
         "summarized",
-        "using",
+        "see",
         "prompt",
         "full",
         "api"
       ],
-      "word_count": 3539,
+      "word_count": 3525,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/administration-api": {
@@ -13641,7 +13641,7 @@
         "control",
         "tokens"
       ],
-      "word_count": 1478,
+      "word_count": 1481,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -13690,14 +13690,14 @@
         "response",
         "turn",
         "request",
-        "token",
         "models",
+        "token",
+        "sonnet",
         "interleaved",
         "see",
-        "output",
-        "streaming"
+        "output"
       ],
-      "word_count": 13429,
+      "word_count": 13455,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -13910,18 +13910,18 @@
         "section",
         "opus",
         "output",
-        "tool",
         "model",
+        "tool",
         "like",
+        "using",
         "effort",
-        "extended",
         "sonnet",
         "adaptive",
-        "using",
         "instructions",
-        "may"
+        "may",
+        "latest"
       ],
-      "word_count": 6478,
+      "word_count": 6429,
       "file_path": "docs/docs__en__build-with-claude__prompt-engineering__claude-prompting-best-practices.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/overview": {

@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-27T00:36:05.702321Z",
-    "total_paths": 691,
+    "generated_at": "2026-03-27T03:59:24.146441Z",
+    "total_paths": 692,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-03-27T00:36:05.702327Z"
+    "last_regenerated": "2026-03-27T03:59:24.146449Z"
   },
   "categories": {
     "core_documentation": [
@@ -92,6 +92,7 @@
       "/docs/en/channels",
       "/docs/en/channels-reference",
       "/docs/en/chrome",
+      "/docs/en/claude-directory",
       "/docs/en/code-review",
       "/docs/en/commands",
       "/docs/en/context-window",

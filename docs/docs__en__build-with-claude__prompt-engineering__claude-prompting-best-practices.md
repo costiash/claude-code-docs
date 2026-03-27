@@ -370,15 +370,15 @@ In some cases, Claude Opus 4.6 may think extensively, which can inflate thinking
 When you're deciding how to approach a problem, choose an approach and commit to it. Avoid revisiting decisions unless you encounter new information that directly contradicts your reasoning. If you're weighing two approaches, pick one and see it through. You can always course-correct later if the chosen approach fails.
 ```
 
-For Claude Sonnet 4.6 specifically, switching from adaptive to extended thinking with a `budget_tokens` cap provides a hard ceiling on thinking costs while preserving quality.
+If you need a hard ceiling on thinking costs, extended thinking with a `budget_tokens` cap is still functional on Opus 4.6 and Sonnet 4.6 but is deprecated. Prefer lowering the [effort](/docs/en/build-with-claude/effort) setting or using `max_tokens` as a hard limit with [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking).
 
 ### Leverage thinking & interleaved thinking capabilities
 
 Claude's latest models offer thinking capabilities that can be especially helpful for tasks involving reflection after tool use or complex multi-step reasoning. You can guide its initial or interleaved thinking for better results.
 
-Claude Opus 4.6 uses [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`), where Claude dynamically decides when and how much to think. Claude Sonnet 4.6 supports both adaptive thinking and manual extended thinking with [interleaved mode](/docs/en/build-with-claude/extended-thinking#interleaved-thinking). Claude calibrates its thinking based on two factors: the `effort` parameter and query complexity. Higher effort elicits more thinking, and more complex queries do the same. On easier queries that don't require thinking, the model responds directly. In internal evaluations, adaptive thinking reliably drives better performance than extended thinking. Consider moving to adaptive thinking to get the most intelligent responses.
+Claude Opus 4.6 and Claude Sonnet 4.6 use [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`), where Claude dynamically decides when and how much to think. Claude calibrates its thinking based on two factors: the `effort` parameter and query complexity. Higher effort elicits more thinking, and more complex queries do the same. On easier queries that don't require thinking, the model responds directly. In internal evaluations, adaptive thinking reliably drives better performance than extended thinking. Consider moving to adaptive thinking to get the most intelligent responses.
 
-For Sonnet 4.6, consider trying adaptive thinking for workloads that require agentic behavior such as multi-step tool use, complex coding tasks, and long-horizon agent loops. If adaptive thinking doesn't fit your use case, manual extended thinking with interleaved mode remains supported. Older models use manual thinking mode with `budget_tokens`.
+Use adaptive thinking for workloads that require agentic behavior such as multi-step tool use, complex coding tasks, and long-horizon agent loops. Older models use manual thinking mode with `budget_tokens`.
 
 You can guide Claude's thinking behavior:
 
@@ -692,39 +692,11 @@ client.messages.create(
 
 #### If you're using extended thinking
 
-If you're using extended thinking on Claude Sonnet 4.5, it continues to be supported on Claude Sonnet 4.6 with no changes needed to your thinking configuration. Consider keeping a thinking budget around 16k tokens. In practice, most tasks don't use that much, but it provides headroom for harder problems without risk of runaway token usage.
+If you're using extended thinking with `budget_tokens` on Claude Sonnet 4.5, it is still functional on Claude Sonnet 4.6 but is deprecated. Migrate to [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) with the [effort parameter](/docs/en/build-with-claude/effort).
 
-**For coding use cases** (agentic coding, tool-heavy workflows, code generation):
+##### Migrating to adaptive thinking
 
-Start with `medium` effort. If you find latency is too high, consider reducing effort to `low`. If you need higher intelligence, consider increasing effort to `high` or migrating to Opus 4.6.
-
-```python nocheck
-client.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=16384,
-    thinking={"type": "enabled", "budget_tokens": 16384},
-    output_config={"effort": "medium"},
-    messages=[{"role": "user", "content": "..."}],
-)
-```
-
-**For chat and non-coding use cases** (chat, content generation, search, classification):
-
-Start with `low` effort with extended thinking. If you need more depth, increase effort to `medium`.
-
-```python nocheck
-client.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=8192,
-    thinking={"type": "enabled", "budget_tokens": 16384},
-    output_config={"effort": "low"},
-    messages=[{"role": "user", "content": "..."}],
-)
-```
-
-#### When to try adaptive thinking
-
-The extended thinking paths above use `budget_tokens` for predictable token usage. If your workload fits one of the following patterns, consider trying [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) instead:
+Adaptive thinking is particularly well suited to the following workload patterns:
 
 - **Autonomous multi-step agents:** coding agents that turn requirements into working software, data analysis pipelines, and bug finding where the model runs independently across many steps. Adaptive thinking lets the model calibrate its reasoning per step, staying on path over longer trajectories. For these workloads, start at `high` effort. If latency or token usage is a concern, scale down to `medium`.
 - **Computer use agents:** Claude Sonnet 4.6 achieved best-in-class accuracy on computer use evaluations using adaptive mode.
@@ -738,6 +710,34 @@ client.messages.create(
     max_tokens=64000,
     thinking={"type": "adaptive"},
     output_config={"effort": "high"},
+    messages=[{"role": "user", "content": "..."}],
+)
+```
+
+##### Keeping budget_tokens during migration
+
+If you need to keep `budget_tokens` temporarily while migrating, a budget around 16k tokens provides headroom for harder problems without risk of runaway token usage. This configuration is deprecated and will be removed in a future model release.
+
+**For coding use cases** (agentic coding, tool-heavy workflows, code generation), start with `medium` effort:
+
+```python nocheck
+client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=16384,
+    thinking={"type": "enabled", "budget_tokens": 16384},
+    output_config={"effort": "medium"},
+    messages=[{"role": "user", "content": "..."}],
+)
+```
+
+**For chat and non-coding use cases** (chat, content generation, search, classification), start with `low` effort:
+
+```python nocheck
+client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=8192,
+    thinking={"type": "enabled", "budget_tokens": 16384},
+    output_config={"effort": "low"},
     messages=[{"role": "user", "content": "..."}],
 )
 ```
