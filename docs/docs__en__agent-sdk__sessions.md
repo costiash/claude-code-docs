@@ -316,6 +316,8 @@ Session files are local to the machine that created them. To resume a session on
 
 Both SDKs expose functions for enumerating sessions on disk and reading their messages: [`listSessions()`](/docs/en/agent-sdk/typescript#list-sessions) and [`getSessionMessages()`](/docs/en/agent-sdk/typescript#get-session-messages) in TypeScript, [`list_sessions()`](/docs/en/agent-sdk/python#list-sessions) and [`get_session_messages()`](/docs/en/agent-sdk/python#get-session-messages) in Python. Use them to build custom session pickers, cleanup logic, or transcript viewers.
 
+Both SDKs also expose functions for looking up and mutating individual sessions: [`get_session_info()`](/docs/en/agent-sdk/python#get-session-info), [`rename_session()`](/docs/en/agent-sdk/python#rename-session), and [`tag_session()`](/docs/en/agent-sdk/python#tag-session) in Python, and [`getSessionInfo()`](/docs/en/agent-sdk/typescript#get-session-info), [`renameSession()`](/docs/en/agent-sdk/typescript#rename-session), and [`tagSession()`](/docs/en/agent-sdk/typescript#tag-session) in TypeScript. Use them to organize sessions by tag or give them human-readable titles.
+
 ## Related resources
 
 - [How the agent loop works](/docs/en/agent-sdk/agent-loop): Understand turns, messages, and context accumulation within a session

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-27T15:27:34Z",
+  "generated_at": "2026-03-27T18:29:02Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -427,9 +427,9 @@
       "title": "Automate workflows with hooks",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Automate workflows with hooks  > Run shell commands automatically when Claude Code edits files, finishes tasks, or",
       "keywords": [
+        "hook",
         "hooks",
         "claude",
-        "hook",
         "when",
         "code",
         "tool",
@@ -440,15 +440,15 @@
         "command",
         "example",
         "input",
+        "only",
         "exit",
         "session",
+        "run",
         "reference",
         "matcher",
-        "after",
-        "prompt",
-        "run"
+        "permission"
       ],
-      "word_count": 4852,
+      "word_count": 5053,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -469,14 +469,14 @@
         "user",
         "event",
         "control",
-        "decision",
-        "prompt",
-        "session",
+        "only",
         "command",
+        "decision",
         "runs",
-        "only"
+        "prompt",
+        "session"
       ],
-      "word_count": 13513,
+      "word_count": 13899,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -502,9 +502,9 @@
         "text",
         "previous",
         "end",
-        "note"
+        "context"
       ],
-      "word_count": 2626,
+      "word_count": 2612,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -595,8 +595,8 @@
       "title": "Connect Claude Code to tools via MCP",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Connect Claude ...",
       "keywords": [
-        "servers",
         "mcp",
+        "servers",
         "server",
         "claude",
         "code",
@@ -606,8 +606,8 @@
         "url",
         "const",
         "tools",
-        "title",
         "name",
+        "title",
         "tool",
         "add",
         "http",
@@ -616,7 +616,7 @@
         "example",
         "project"
       ],
-      "word_count": 6627,
+      "word_count": 6699,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -728,7 +728,7 @@
         "request",
         "api"
       ],
-      "word_count": 2933,
+      "word_count": 2962,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1000,15 +1000,15 @@
         "file",
         "files",
         "set",
-        "configuration",
         "marketplace",
+        "configuration",
         "hooks",
         "paths",
         "plugins",
         "example",
         "permission"
       ],
-      "word_count": 6736,
+      "word_count": 6756,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1913,26 +1913,26 @@
       "keywords": [
         "tool",
         "type",
-        "input",
         "description",
+        "session",
+        "input",
         "when",
         "hook",
-        "session",
-        "output",
         "field",
+        "output",
         "identifier",
         "claude",
-        "name",
         "message",
-        "optional",
-        "sandbox",
+        "name",
         "sdk",
+        "optional",
+        "example",
+        "sandbox",
         "configuration",
-        "permission",
-        "settings",
-        "subagent"
+        "mcp",
+        "server"
       ],
-      "word_count": 11584,
+      "word_count": 12647,
       "file_path": "docs/docs__en__agent-sdk__python.md"
     },
     "/docs/en/agent-sdk/quickstart": {
@@ -2000,9 +2000,9 @@
         "sdk",
         "python",
         "typescript",
+        "docs",
         "resume",
         "sessions",
-        "docs",
         "call",
         "fork",
         "file",
@@ -2016,7 +2016,7 @@
         "result",
         "full"
       ],
-      "word_count": 2009,
+      "word_count": 2046,
       "file_path": "docs/docs__en__agent-sdk__sessions.md"
     },
     "/docs/en/agent-sdk/skills": {
@@ -2164,8 +2164,8 @@
       "content_preview": "# Subagents in the SDK  Define and invoke subagents to isolate context, run tasks in parallel, and apply specialized instructions in your Claude Agent SDK applications.  ---  Subagents are separate ag...",
       "keywords": [
         "subagent",
-        "subagents",
         "agent",
+        "subagents",
         "claude",
         "tool",
         "prompt",
@@ -2184,7 +2184,7 @@
         "context",
         "conversation"
       ],
-      "word_count": 3133,
+      "word_count": 3187,
       "file_path": "docs/docs__en__agent-sdk__subagents.md"
     },
     "/docs/en/agent-sdk/todo-tracking": {
@@ -2278,25 +2278,25 @@
         "tool",
         "name",
         "type",
+        "session",
         "returns",
         "when",
+        "description",
         "mcp",
         "agent",
-        "description",
         "configuration",
         "sandbox",
         "claude",
-        "session",
         "message",
         "model",
         "sdk",
+        "user",
         "settings",
         "input",
-        "file",
-        "user",
-        "see"
+        "see",
+        "file"
       ],
-      "word_count": 8477,
+      "word_count": 8806,
       "file_path": "docs/docs__en__agent-sdk__typescript.md"
     },
     "/docs/en/agent-sdk/user-input": {
