@@ -59,7 +59,9 @@ reachable=0
 broken=0
 timeout_count=0
 skipped=0
+redirected=0
 broken_list=""
+redirect_list=""
 
 check_url() {
     local fname="$1"
@@ -74,7 +76,11 @@ check_url() {
     local status
     status=$(curl -sI --max-time "$TIMEOUT" -o /dev/null -w "%{http_code}" "$url" 2>/dev/null || echo "000")
 
-    if [ "$status" = "200" ] || [ "$status" = "301" ] || [ "$status" = "302" ] || [ "$status" = "307" ] || [ "$status" = "308" ]; then
+    if [ "$status" = "200" ]; then
+        echo "OK $fname"
+    elif [ "$status" = "301" ] || [ "$status" = "308" ]; then
+        echo "REDIRECT_PERM $fname $status $url"
+    elif [ "$status" = "302" ] || [ "$status" = "307" ]; then
         echo "OK $fname"
     elif [ "$status" = "000" ]; then
         echo "TIMEOUT $fname $url"
@@ -104,6 +110,12 @@ while IFS= read -r line; do
             timeout_count=$((timeout_count + 1))
             broken_list="${broken_list}${line#TIMEOUT } (timeout)\n"
             ;;
+        REDIRECT_PERM*)
+            total=$((total + 1))
+            reachable=$((reachable + 1))
+            redirected=$((redirected + 1))
+            redirect_list="${redirect_list}${line#REDIRECT_PERM }\n"
+            ;;
         SKIP*)
             skipped=$((skipped + 1))
             ;;
@@ -114,9 +126,16 @@ echo ""
 echo "=== Validation Summary ==="
 echo "Total checked: $total"
 echo "Reachable:     $reachable"
+echo "Redirected:    $redirected (permanent — URL may have moved)"
 echo "Broken:        $broken"
 echo "Timeout:       $timeout_count"
 echo "Skipped:       $skipped"
+
+if [ -n "$redirect_list" ]; then
+    echo ""
+    echo "=== Permanent Redirects (URLs may need updating) ==="
+    echo -e "$redirect_list"
+fi
 
 if [ -n "$broken_list" ]; then
     echo ""
