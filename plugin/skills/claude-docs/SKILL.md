@@ -60,7 +60,13 @@ If scoped Glob misses, fall back to content search (step 3).
 
 User says "best practices for extended thinking", "how do I configure streaming".
 
-Extract keywords and run the content search script:
+**Keyword extraction:** Strip filler words and keep domain-specific terms:
+- "how do I configure streaming" → `"streaming"` `"configure"`
+- "best practices for extended thinking" → `"extended"` `"thinking"`
+- "what's the difference between hooks and MCP" → `"hooks"` `"mcp"`
+- "why is my tool use not working" → `"tool-use"` (combine compound concepts with hyphens)
+
+Run the content search script with extracted keywords:
 
 ```bash
 bash ~/.claude-code-docs/plugin/skills/claude-docs/scripts/content-search.sh "<keyword1>" "<keyword2>"
