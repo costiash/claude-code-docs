@@ -121,6 +121,9 @@ check_url "url: claude-code nested"   "claude-code__hooks-guide.md"         "htt
 check_url "url: platform simple"      "docs__en__api__overview.md"          "https://platform.claude.com/en/docs/api/overview"
 check_url "url: platform deep"        "docs__en__api__messages__create.md"  "https://platform.claude.com/en/docs/api/messages/create"
 check_url "url: agent sdk"            "docs__en__agent-sdk__python.md"      "https://platform.claude.com/en/docs/agent-sdk/python"
+check_url "url: build-with-claude"    "docs__en__build-with-claude__vision.md"  "https://platform.claude.com/en/docs/build-with-claude/vision"
+check_url "url: prompt library"       "docs__en__resources__prompt-library__code-clarifier.md"  "https://platform.claude.com/en/docs/resources/prompt-library/code-clarifier"
+check_url "url: unknown prefix"       "random-file.md"                    ""
 
 # === Additional Coverage ===
 check "content: model config"      content-search.sh claude-code__model-config.md                      "model" "config"
