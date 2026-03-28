@@ -71,6 +71,8 @@ check "fuzzy: desktop"             fuzzy-search.sh   claude-code__desktop.md    
 check "content: sandboxing"        content-search.sh claude-code__sandboxing.md                        "sandboxing"
 check "content: context windows"   content-search.sh docs__en__build-with-claude__context-windows.md   "context" "windows"
 check "fuzzy: headless"            fuzzy-search.sh   claude-code__headless.md                          "headless"
+check "fuzzy: tool use"            fuzzy-search.sh   docs__en__agents-and-tools__tool-use              "tool use"
+check "fuzzy: hooks guide"        fuzzy-search.sh   claude-code__hooks-guide.md                       "hooks guide"
 check "content: devcontainer"      content-search.sh claude-code__devcontainer.md                      "devcontainer"
 check "content: jetbrains"         content-search.sh claude-code__jetbrains.md                         "jetbrains"
 
