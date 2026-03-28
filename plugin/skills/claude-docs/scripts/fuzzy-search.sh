@@ -48,9 +48,16 @@ for filepath in "$DOCS_DIR"/*.md; do
         score=$((score + 90))
     fi
 
+    # Also try space form of hyphenated query (e.g., "sub-agents" → "sub agents")
+    query_spaced=$(echo "$query" | tr '-' ' ')
+    if [ "$query_spaced" != "$query" ] && echo "$fname_lower" | grep -q "$query_spaced"; then
+        score=$((score + 90))
+    fi
+
     matched_tokens=0
     for token in "${tokens[@]}"; do
-        if echo "$fname_lower" | grep -q "$token"; then
+        token_spaced=$(echo "$token" | tr '-' ' ')
+        if echo "$fname_lower" | grep -q "$token" || echo "$fname_lower" | grep -q "$token_spaced"; then
             score=$((score + 10))
             matched_tokens=$((matched_tokens + 1))
         fi
