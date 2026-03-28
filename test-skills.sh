@@ -142,6 +142,9 @@ check "fuzzy: output styles"       fuzzy-search.sh   claude-code__output-styles.
 check "fuzzy: checkpointing"       fuzzy-search.sh   claude-code__checkpointing.md                     "checkpointing"
 check "fuzzy: monitoring usage"    fuzzy-search.sh   claude-code__monitoring-usage.md                   "monitoring usage"
 check "fuzzy: interactive"         fuzzy-search.sh   claude-code__interactive-mode.md                   "interactive"
+check "content: data usage"        content-search.sh claude-code__data-usage.md                        "data" "usage"
+check "fuzzy: vs code"             fuzzy-search.sh   claude-code__vs-code.md                           "vs code"
+check "fuzzy: terminal"            fuzzy-search.sh   claude-code__terminal-config.md                   "terminal"
 
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
