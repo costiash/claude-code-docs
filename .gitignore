@@ -90,6 +90,13 @@ claude-docs-helper.sh
 # Upstream reference repository (local development only)
 upstream/
 
+# Source reference projects (local development only)
+codebase-to-course-main/
+
+# Generated HTML artifacts (courses, changelogs — local only)
+*.html
+!index.html
+
 # Archive folder (legacy/orphaned scripts)
 archive/
 
@@ -97,7 +104,6 @@ archive/
 docs/plans/
 
 # Skill evaluation workspace (development artifacts)
-plugin/skills/claude-docs-workspace/
 plugin/skills/claude-docs/evals/
 
 # ============================================================================
@@ -153,5 +159,5 @@ Pipfile.lock
 !docs/
 !scripts/
 !tests/
-!enhancements/
 !.github/
+autoresearch-results.tsv

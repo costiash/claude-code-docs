@@ -245,7 +245,7 @@ class TestSearchIndex:
         assert 'index' in data
 
     def test_search_index_file_count(self, project_root):
-        """Verify search index has correct file count"""
+        """Verify search index covers all markdown files on disk."""
         search_index = project_root / 'docs' / '.search_index.json'
 
         with open(search_index) as f:
@@ -253,10 +253,8 @@ class TestSearchIndex:
 
         indexed_files = data.get('indexed_files', 0)
 
-        # Should match docs_manifest.json — the source of truth for tracked files
-        docs_manifest_path = project_root / 'docs' / 'docs_manifest.json'
-        with open(docs_manifest_path) as f:
-            docs_manifest = json.load(f)
-        expected_count = len(docs_manifest.get('files', {}))
-        assert indexed_files == expected_count, \
-            f"Search index shows {indexed_files} files, expected {expected_count} (from docs_manifest.json)"
+        # Should match actual .md files in docs/ (the index is built from disk, not manifest)
+        docs_dir = project_root / 'docs'
+        actual_md_files = len([f for f in docs_dir.glob('*.md') if f.name != 'docs_manifest.json'])
+        assert indexed_files == actual_md_files, \
+            f"Search index has {indexed_files} files, but {actual_md_files} .md files exist on disk"
