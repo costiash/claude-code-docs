@@ -133,6 +133,9 @@ check "content: data residency"    content-search.sh docs__en__build-with-claude
 check "content: glossary"          content-search.sh docs__en__about-claude__glossary.md                "glossary"
 check "fuzzy: analytics"           fuzzy-search.sh   claude-code__analytics.md                          "analytics"
 check "fuzzy: costs"               fuzzy-search.sh   claude-code__costs.md                              "costs"
+check "content: model overview"    content-search.sh docs__en__about-claude__models__overview.md        "models" "overview"
+check "content: error handling"    content-search.sh docs__en__api__errors.md                           "errors"
+check "fuzzy: output styles"       fuzzy-search.sh   claude-code__output-styles.md                     "output styles"
 
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
