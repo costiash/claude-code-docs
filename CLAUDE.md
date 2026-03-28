@@ -36,10 +36,14 @@ plugin/
 │   │   ├── manifest-reference.md # Category-to-label mapping (single source of truth)
 │   │   ├── examples/             # Worked examples for Claude
 │   │   └── scripts/              # content-search.sh, fuzzy-search.sh
-│   └── claude-docs-validate/     # Validation skill
-│       ├── SKILL.md              # Health check instructions
-│       ├── examples/             # Worked examples
-│       └── scripts/              # validate-paths.sh
+│   ├── claude-docs-validate/     # Validation skill
+│   │   ├── SKILL.md              # Health check instructions
+│   │   ├── examples/             # Worked examples
+│   │   └── scripts/              # validate-paths.sh
+│   └── claude-docs-course/       # Interactive course generator
+│       ├── SKILL.md              # Course generation workflow (Obsidian & Amber theme)
+│       ├── references/           # design-system.md, interactive-elements.md
+│       └── examples/             # Worked examples
 └── hooks/                        # SessionStart auto-sync
 ```
 
@@ -51,6 +55,8 @@ The `/docs` command is handled by the plugin's lean router at `plugin/commands/d
 
 - **`claude-docs` skill** — For all documentation lookups, questions, and searches
 - **`claude-docs-validate` skill** — For freshness checks (`-t`) and health validation
+- **`claude-docs-course` skill** — For interactive course generation (`--course <topic>`)
+- **`claude-docs-changelog` skill** — For HTML changelog reports (`--report`)
 - **Inline git log** — For "what's new" queries
 
 Search intelligence, synthesis rules, and URL generation live in `plugin/skills/claude-docs/SKILL.md`. Category mappings are in `plugin/skills/claude-docs/manifest-reference.md` (single source of truth).
@@ -85,7 +91,9 @@ These require Python 3.9+ and are only executed in GitHub Actions workflows.
 │   ├── commands/docs.md            # /docs slash command (lean router)
 │   ├── skills/
 │   │   ├── claude-docs/            # Search skill + examples + scripts
-│   │   └── claude-docs-validate/   # Validation skill + examples + scripts
+│   │   ├── claude-docs-validate/   # Validation skill + examples + scripts
+│   │   ├── claude-docs-course/     # Interactive course generator + references
+│   │   └── claude-docs-changelog/  # Changelog report generator + examples
 │   └── hooks/                      # SessionStart hook (auto-update docs)
 ├── .claude-plugin/marketplace.json # Marketplace registration
 ├── paths_manifest.json     # Active paths manifest (auto-generated categories)
@@ -112,6 +120,10 @@ When working on this repository, read these files as needed (not auto-loaded to 
 - `plugin/skills/claude-docs/scripts/fuzzy-search.sh` - Fuzzy filename matching
 - `plugin/skills/claude-docs/examples/` - Worked examples for search workflows
 - `plugin/skills/claude-docs-validate/SKILL.md` - Validation skill instructions
+- `plugin/skills/claude-docs-course/SKILL.md` - Interactive course generator (Obsidian & Amber theme)
+- `plugin/skills/claude-docs-course/references/design-system.md` - Course visual design tokens
+- `plugin/skills/claude-docs-course/references/interactive-elements.md` - HTML/CSS/JS patterns for course elements
+- `plugin/skills/claude-docs-changelog/SKILL.md` - Changelog report generator (Obsidian & Amber theme)
 - `plugin/skills/claude-docs-validate/scripts/validate-paths.sh` - HTTP reachability checks
 - `plugin/hooks/hooks.json` + `sync-docs.sh` - SessionStart hook (auto-update docs)
 - `.claude-plugin/marketplace.json` - Marketplace registration

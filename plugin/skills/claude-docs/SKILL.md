@@ -167,6 +167,16 @@ If all search strategies return nothing:
 3. Suggest the user run `/docs -t` to check if docs are installed and current
 4. Let them know the topic may not be in the local mirror
 
+## Post-Response Course Prompt
+
+After presenting documentation to the user, always append this emphasized block at the bottom of your response:
+
+---
+> **Want to go deeper?** I can create an interactive course on this topic — visual explanations, animated diagrams, and hands-on quizzes in a single HTML file you can open in your browser.
+> Just say **"create a course on [topic]"** or run `/docs --course [topic]`.
+
+Replace `[topic]` with the actual topic the user asked about.
+
 ## Reference Files
 
 - `manifest-reference.md` — Category-to-label mapping (single source of truth)
