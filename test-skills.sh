@@ -122,5 +122,10 @@ check_url "url: platform simple"      "docs__en__api__overview.md"          "htt
 check_url "url: platform deep"        "docs__en__api__messages__create.md"  "https://platform.claude.com/en/docs/api/messages/create"
 check_url "url: agent sdk"            "docs__en__agent-sdk__python.md"      "https://platform.claude.com/en/docs/agent-sdk/python"
 
+# === Additional Coverage ===
+check "content: model config"      content-search.sh claude-code__model-config.md                      "model" "config"
+check "fuzzy: security"            fuzzy-search.sh   claude-code__security.md                          "security"
+check "fuzzy: network config"      fuzzy-search.sh   claude-code__network-config.md                    "network config"
+
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
