@@ -110,7 +110,7 @@ Claude recognizes this is a documentation question and automatically reads the r
 
 ## Documentation Coverage
 
-Documentation files across 11 categories, updated every 3 hours:
+Documentation files across multiple categories, updated every 3 hours:
 
 - **API Reference** — Messages API, Admin API, multi-language SDKs (Python, TypeScript, Go, Java, Kotlin, Ruby)
 - **Agent SDK** — Python and TypeScript SDK guides, sessions, hooks, custom tools

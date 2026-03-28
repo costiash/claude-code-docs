@@ -49,7 +49,7 @@ Search intelligence lives in the skills, not in CLAUDE.md. See `plugin/skills/cl
 
 The `/docs` command is handled by the plugin's lean router at `plugin/commands/docs.md`. It delegates to:
 
-- **`claude-docs-search` skill** — For all documentation lookups, questions, and searches
+- **`claude-docs` skill** — For all documentation lookups, questions, and searches
 - **`claude-docs-validate` skill** — For freshness checks (`-t`) and health validation
 - **Inline git log** — For "what's new" queries
 
@@ -88,7 +88,7 @@ These require Python 3.9+ and are only executed in GitHub Actions workflows.
 │   │   └── claude-docs-validate/   # Validation skill + examples + scripts
 │   └── hooks/                      # SessionStart hook (auto-update docs)
 ├── .claude-plugin/marketplace.json # Marketplace registration
-├── paths_manifest.json     # Active paths manifest (6 categories)
+├── paths_manifest.json     # Active paths manifest (auto-generated categories)
 ├── pyproject.toml          # Python project configuration
 ├── CHANGELOG.md            # Version history
 ├── tests/                  # Test suite (CI-only, covers Python scripts)

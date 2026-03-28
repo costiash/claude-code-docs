@@ -14,16 +14,20 @@ class TestManifestCompleteness:
 
     @pytest.mark.integration
     def test_all_categories_present(self, paths_manifest):
-        """Test all expected categories are in manifest."""
-        expected_categories = [
-            'core_documentation',
-            'api_reference',
-            'claude_code',
-            'prompt_library'
-        ]
+        """Test structural categories are in manifest.
 
-        for category in expected_categories:
-            assert category in paths_manifest['categories']
+        api_reference, core_documentation, and claude_code always exist because
+        they map to permanent URL patterns in Anthropic's sitemaps. Other categories
+        (prompt_library, resources, release_notes) depend on what the sitemaps return.
+        """
+        categories = paths_manifest['categories']
+
+        # These 3 are structural — they always exist due to how categorize_path() works
+        for required in ['api_reference', 'core_documentation', 'claude_code']:
+            assert required in categories, f"Missing structural category: {required}"
+
+        # Manifest should have at least these 3, possibly more
+        assert len(categories) >= 3
 
     @pytest.mark.integration
     def test_metadata_complete(self, paths_manifest):
@@ -158,44 +162,31 @@ class TestCategoryCounts:
 
     @pytest.mark.integration
     def test_all_categories_nonempty(self, paths_manifest):
-        """Test main categories are not empty."""
-        main_categories = [
-            'core_documentation',
-            'api_reference',
-            'claude_code',
-            'prompt_library'
-        ]
-
-        for category in main_categories:
-            paths = paths_manifest['categories'].get(category, [])
-            # Should have at least some paths
+        """Test every category in the manifest has at least one path."""
+        for category, paths in paths_manifest['categories'].items():
             assert len(paths) > 0, f"{category} is empty"
 
     @pytest.mark.integration
     def test_category_counts_reasonable(self, paths_manifest):
-        """Test category counts are within reasonable ranges."""
+        """Test structural properties of category distribution.
+
+        Instead of hardcoding count ranges (which break when sitemaps change),
+        validate invariants that hold regardless of Anthropic's doc structure.
+        """
         categories = paths_manifest['categories']
+        total = sum(len(paths) for paths in categories.values())
 
-        # Based on current active documentation (573 total paths):
-        # api_reference: ~377 (65.8%) - includes multi-language SDK docs
-        # core_documentation: ~82 (14.3%)
-        # prompt_library: ~65 (11.3%)
-        # claude_code: ~46 (8%)
-        # release_notes: ~2
-        # resources: ~1
+        # Total paths must exceed the safety threshold used by the fetcher
+        assert total >= 200, f"Total paths {total} below safety threshold (200)"
 
-        # Allow reasonable variance for future updates
-        expected_ranges = {
-            'core_documentation': (60, 200),
-            'api_reference': (200, 600),  # Large due to multi-language SDK docs
-            'claude_code': (30, 100),
-            'prompt_library': (40, 150)
-        }
+        # api_reference is always the largest (multi-language SDK docs dominate)
+        api_count = len(categories.get('api_reference', []))
+        assert api_count > total * 0.50, \
+            f"api_reference ({api_count}) should be >50% of total ({total})"
 
-        for category, (min_count, max_count) in expected_ranges.items():
-            actual_count = len(categories.get(category, []))
-            assert min_count <= actual_count <= max_count, \
-                f"{category}: {actual_count} not in range [{min_count}, {max_count}]"
+        # claude_code should have a reasonable number of CLI pages
+        cc_count = len(categories.get('claude_code', []))
+        assert cc_count >= 20, f"claude_code has only {cc_count} paths (expected >=20)"
 
 
 class TestManifestFormat:
