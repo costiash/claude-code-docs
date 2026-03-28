@@ -78,3 +78,8 @@ source = [
     "*/claude-code-docs/scripts/",
     "*/work/claude-code-docs/claude-code-docs/scripts/",
 ]
+
+[dependency-groups]
+dev = [
+    "shellcheck-py>=0.11.0.1",
+]
