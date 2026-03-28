@@ -6,7 +6,7 @@ set -euo pipefail
 # Tokenizes query, matches against filenames in docs/, scores by match quality.
 # Output: ranked list of filenames (top 10), one per line.
 
-DOCS_DIR="${HOME}/.claude-code-docs/docs"
+DOCS_DIR="${DOCS_DIR:-${HOME}/.claude-code-docs/docs}"
 
 if [ $# -eq 0 ]; then
     echo "Usage: fuzzy-search.sh <query>" >&2

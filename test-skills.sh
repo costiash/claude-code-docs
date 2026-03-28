@@ -53,5 +53,12 @@ check "fuzzy: streaming"   fuzzy-search.sh streaming                   "streamin
 check "fuzzy: skills"      fuzzy-search.sh skills                      "skills"
 check "fuzzy: vision"      fuzzy-search.sh vision                      "vision"
 
+# === Edge Case Tests ===
+check "content: tool use"          content-search.sh docs__en__agents-and-tools__tool-use__overview.md   "tool" "use"
+check "content: batch processing"  content-search.sh docs__en__build-with-claude__batch-processing.md    "batch" "processing"
+check "content: prompt engineering" content-search.sh docs__en__build-with-claude__prompt-engineering     "prompt" "engineering"
+check "fuzzy: tool use overview"   fuzzy-search.sh   docs__en__agents-and-tools__tool-use__overview.md   "tool use overview"
+check "fuzzy: batch"               fuzzy-search.sh   batch                                               "batch"
+
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
