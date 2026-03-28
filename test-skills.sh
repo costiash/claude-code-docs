@@ -126,6 +126,8 @@ check_url "url: agent sdk"            "docs__en__agent-sdk__python.md"      "htt
 check "content: model config"      content-search.sh claude-code__model-config.md                      "model" "config"
 check "fuzzy: security"            fuzzy-search.sh   claude-code__security.md                          "security"
 check "fuzzy: network config"      fuzzy-search.sh   claude-code__network-config.md                    "network config"
+check "content: pricing"           content-search.sh docs__en__about-claude__pricing.md                 "pricing"
+check "fuzzy: troubleshooting"     fuzzy-search.sh   claude-code__troubleshooting.md                    "troubleshooting"
 
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
