@@ -122,12 +122,29 @@ Always include source links in your response:
 - `docs__en__agent-sdk__python.md` → `https://platform.claude.com/en/docs/agent-sdk/python`
 - `docs__en__api__messages__create.md` → `https://platform.claude.com/en/docs/api/messages/create`
 
+## Common Synonyms
+
+When a search returns no results or too few, try these known synonyms:
+
+| User says | Search for |
+|---|---|
+| "function calling" | "tool use", "tool-use" |
+| "system instructions" | "system prompt" |
+| "JSON mode" | "structured outputs" |
+| "thinking" | "extended thinking", "adaptive thinking" |
+| "caching" | "prompt caching", "prompt-caching" |
+| "files API" | "files", "pdf support" |
+| "sub-agents" | "subagents", "sub-agents" |
+| "environment variables" | "settings", "configuration" |
+| "CI/CD" | "github actions", "gitlab" |
+
 ## No Results
 
 If all search strategies return nothing:
-1. Try alternative keywords (synonyms, related terms: "function calling" → "tool use")
-2. Suggest the user run `/docs -t` to check if docs are installed and current
-3. Let them know the topic may not be in the local mirror
+1. Try synonyms from the table above
+2. Try broader or narrower keywords
+3. Suggest the user run `/docs -t` to check if docs are installed and current
+4. Let them know the topic may not be in the local mirror
 
 ## Reference Files
 

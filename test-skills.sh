@@ -76,5 +76,10 @@ check "fuzzy: hooks guide"        fuzzy-search.sh   claude-code__hooks-guide.md 
 check "content: devcontainer"      content-search.sh claude-code__devcontainer.md                      "devcontainer"
 check "content: jetbrains"         content-search.sh claude-code__jetbrains.md                         "jetbrains"
 
+# === Synonym-Adjacent Tests ===
+check "content: structured outputs" content-search.sh docs__en__build-with-claude__structured-outputs.md  "structured" "outputs"
+check "content: github actions"    content-search.sh claude-code__github-actions.md                       "github" "actions"
+check "fuzzy: sub-agents"          fuzzy-search.sh   claude-code__sub-agents.md                           "sub-agents"
+
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
