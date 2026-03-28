@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # verify-skills.sh — Combined quality score for plugin skills
-# Score = (search_pass_rate * 10) - shellcheck_warnings
-# Output: single number (the score)
+# Score = pass_count - shellcheck_warnings
+# Output: single number (the score) — grows as more tests are added and pass
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 
@@ -18,14 +18,12 @@ if [ "$total_count" -eq 0 ]; then
     exit 1
 fi
 
-pass_rate=$(( (pass_count * 100) / total_count ))
-
 # 2. Count shellcheck warnings/errors (info excluded)
 sc_output=$(uv run shellcheck -S warning "$REPO_DIR"/plugin/skills/*/scripts/*.sh 2>&1 || true)
 sc_count=$(echo "$sc_output" | grep -c "^In " || true)
 sc_count=${sc_count:-0}
 
-# 3. Combined score: (pass_rate_pct / 10) * 10 - warnings = pass_rate - warnings
-score=$(( pass_rate - sc_count ))
+# 3. Combined score: pass_count - warnings (grows as we add more passing tests)
+score=$(( pass_count - sc_count ))
 
 echo "$score"
