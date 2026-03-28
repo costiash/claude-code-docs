@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-28T12:20:11Z",
+  "generated_at": "2026-03-28T15:18:07Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -252,7 +252,7 @@
         "sessions",
         "security"
       ],
-      "word_count": 1304,
+      "word_count": 1306,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
