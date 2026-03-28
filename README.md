@@ -205,6 +205,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for architecture overview, development se
 ## Acknowledgments
 
 - **[Eric Buess](https://github.com/ericbuess)** — Creator of the [original claude-code-docs](https://github.com/ericbuess/claude-code-docs)
+- **[zarazhangrui/codebase-to-course](https://github.com/zarazhangrui/codebase-to-course)** — Inspiration for the interactive course generator skill
 - **[Anthropic](https://www.anthropic.com/)** — For Claude Code and the documentation
 
 ## License
