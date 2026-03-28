@@ -139,6 +139,9 @@ check "fuzzy: costs"               fuzzy-search.sh   claude-code__costs.md      
 check "content: model overview"    content-search.sh docs__en__about-claude__models__overview.md        "models" "overview"
 check "content: error handling"    content-search.sh docs__en__api__errors.md                           "errors"
 check "fuzzy: output styles"       fuzzy-search.sh   claude-code__output-styles.md                     "output styles"
+check "fuzzy: checkpointing"       fuzzy-search.sh   claude-code__checkpointing.md                     "checkpointing"
+check "fuzzy: monitoring usage"    fuzzy-search.sh   claude-code__monitoring-usage.md                   "monitoring usage"
+check "fuzzy: interactive"         fuzzy-search.sh   claude-code__interactive-mode.md                   "interactive"
 
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"

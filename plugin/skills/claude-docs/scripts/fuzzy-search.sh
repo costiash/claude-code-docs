@@ -58,7 +58,13 @@ for filepath in "$DOCS_DIR"/*.md; do
     for token in "${tokens[@]}"; do
         token_spaced=$(echo "$token" | tr '-' ' ')
         if echo "$fname_lower" | grep -q "$token" || echo "$fname_lower" | grep -q "$token_spaced"; then
-            score=$((score + 10))
+            # Longer tokens are more specific, weight them higher
+            token_len=${#token}
+            if [ "$token_len" -ge 6 ]; then
+                score=$((score + 15))
+            else
+                score=$((score + 10))
+            fi
             matched_tokens=$((matched_tokens + 1))
         fi
     done
