@@ -5,6 +5,36 @@ All notable changes to the enhanced edition of claude-code-docs will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2026-03-28
+
+### Breaking Changes
+- **Plugin is now the primary (and only recommended) install path** — `install.sh` is now a migration wrapper that guides users to plugin install
+- **Legacy helper scripts no longer user-facing** — `claude-docs-helper.sh` and the Python lookup module are now CI-only; plugin skills handle all user-facing search
+
+### Added
+- **`claude-docs/` search skill**: Enhanced search with 4-tier strategy (direct lookup, scoped search, content search, fuzzy matching)
+  - `scripts/content-search.sh` — Full-text keyword search using `.search_index.json` or grep fallback
+  - `scripts/fuzzy-search.sh` — Token-based fuzzy filename matching
+  - `examples/` — 3 worked examples (direct lookup, semantic search, cross-context disambiguation)
+- **`claude-docs-validate/` health check skill**: Documentation freshness and URL reachability checks
+  - `scripts/validate-paths.sh` — Parallel HTTP HEAD checks with `--quick` mode
+  - `examples/` — Validation workflow example
+- **Zero Python dependency for users** — All plugin features use shell scripts only; Python is CI-only
+
+### Changed
+- **`/docs` command** rewritten as lean router (~40 lines) delegating to skills
+- **`install.sh`** rewritten as migration wrapper (~100 lines) routing to plugin install
+- **`uninstall.sh`** simplified to plugin uninstall instructions
+- **CLAUDE.md** streamlined — removed ~350 lines of search strategy (now lives in skill SKILL.md)
+- **README.md** updated — plugin-first, script install moved to "Legacy" section
+- **UNINSTALL.md** simplified to plugin-only primary path
+- **CONTRIBUTING.md** updated for plugin-first development workflow
+
+### Removed
+- `plugin/skills/claude-docs-workspace/` — Stale Phase 2 eval artifacts (was gitignored, not in repo)
+- User-facing Python search (replaced by shell scripts in plugin skills)
+- Legacy install.sh functionality (779 lines → 100 lines)
+
 ## [0.6.0] - 2026-02-28
 
 ### Added

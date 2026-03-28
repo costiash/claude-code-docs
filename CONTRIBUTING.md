@@ -4,19 +4,19 @@ Thank you for contributing to the Enhanced Claude Code Documentation Mirror!
 
 ## Project Philosophy
 
-This project extends [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs) with optional Python features:
+This project extends [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs) as a native Claude Code plugin:
 
-**Core Principle: Graceful Degradation**
-- Single installation (paths tracked across 6 categories + Python scripts)
-- Python features activate only when Python 3.9+ is available
-- Everything works without Python (basic `/docs` command)
-- No separate "modes" - just feature detection at runtime
+**Core Principle: Plugin-First Architecture**
+- All user-facing features delivered via Claude Code plugin (skills, commands, hooks)
+- Shell scripts in skills provide search capabilities — zero Python dependency for users
+- Python modules in `scripts/` are CI-only (fetching docs, building search index, validation)
+- Single installation path: plugin marketplace
 
 **Design Goals:**
-1. **Honesty**: Accurate claims about what we deliver (paths tracked in manifest, files downloaded)
-2. **Simplicity**: One installation, automatic feature detection
-3. **Compatibility**: Works with upstream, same `/docs` interface
-4. **Testing**: All changes tested (303 tests)
+1. **Zero dependencies**: Plugin works with just Claude Code — no Python, jq, or curl required on user machines
+2. **Skill-based search**: Content search and fuzzy matching via shell scripts in plugin skills
+3. **CI integrity**: Python scripts continue powering GitHub Actions workflows unchanged
+4. **Testing**: CI test suite covers Python modules; plugin skills tested manually
 
 ## Repository URL Strategy
 
@@ -81,36 +81,33 @@ git remote add upstream https://github.com/costiash/claude-code-docs.git
 
 ## Development Workflows
 
-### For Shell Scripts
+### For Plugin Skills
 
-Working on installation, helper scripts, or core functionality:
+Working on search skills, commands, or hooks:
 
 ```bash
-# No Python setup needed
 cd claude-code-docs
 
-# Test installation
-./install.sh
+# Test search scripts manually
+DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/content-search.sh "hooks"
+DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/fuzzy-search.sh "agent sdk"
+DOCS_DIR=./docs ./plugin/skills/claude-docs-validate/scripts/validate-paths.sh --quick
 
-# Test basic commands
-~/.claude-code-docs/claude-docs-helper.sh hooks
-~/.claude-code-docs/claude-docs-helper.sh -t
-~/.claude-code-docs/claude-docs-helper.sh what's new
-
-# Test uninstall
-./uninstall.sh
+# Test the plugin in Claude Code
+# Install from local source:
+/plugin install claude-docs@/path/to/claude-code-docs/plugin
 ```
 
 **Files to work on:**
-- `install.sh` - Installation script
-- `uninstall.sh` - Removal script
-- `scripts/claude-docs-helper.sh` - Main entry point
-- `.github/workflows/` - GitHub Actions
-- `docs/` - Documentation files
+- `plugin/commands/docs.md` — `/docs` command router
+- `plugin/skills/claude-docs/SKILL.md` — Search skill instructions
+- `plugin/skills/claude-docs/scripts/` — Search shell scripts
+- `plugin/skills/claude-docs-validate/` — Validation skill
+- `plugin/hooks/` — SessionStart sync hook
 
-### For Python Features
+### For CI/CD Scripts (Python)
 
-Working on search, validation, or Python tools:
+Working on documentation fetching, search indexing, or CI validation (these run in GitHub Actions, not on user machines):
 
 ```bash
 # Setup Python virtual environment
@@ -386,10 +383,11 @@ Fixes #123
 
 | Feature Type | Documentation Required |
 |-------------|----------------------|
-| Shell scripts | Update README.md |
-| Python features | Update docstrings + README.md |
-| New commands | Update command documentation |
+| Plugin skills | Update SKILL.md, add/update examples |
+| Shell scripts | Update relevant SKILL.md |
+| Python CI scripts | Update docstrings |
 | Architecture changes | Update CLAUDE.md |
+| User-facing changes | Update README.md |
 
 ## Release Process
 

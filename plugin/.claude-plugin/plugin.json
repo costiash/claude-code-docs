@@ -1,6 +1,6 @@
 {
   "name": "claude-docs",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "description": "Searchable local mirror of Claude documentation. Provides the /docs command for instant access to API references, guides, and tutorials. Auto-discovery Skill reads docs automatically when you ask Claude-related questions. Docs auto-update via SessionStart hook.",
   "author": {
     "name": "costiash"

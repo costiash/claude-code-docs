@@ -40,24 +40,18 @@ That's it. On your next session Claude will automatically:
 - **`/docs` command** — Look up any topic: `/docs hooks`, `/docs extended thinking`, `/docs Agent SDK sessions`
 - **Auto-discovery Skill** — Claude proactively searches docs when you ask about Claude Code, the API, SDKs, or prompt engineering. No `/docs` prefix needed.
 - **Session-start auto-updates** — Docs stay fresh automatically. No cron jobs, no manual pulls.
+- **Content search** — Shell-based full-text search and fuzzy filename matching, no Python needed
 - **Zero dependencies** — No Python, no jq, no curl. Just Claude Code with plugin support.
 
-## Alternative: Script Install
+## Legacy: Script Install (Migration)
 
-For environments without plugin support, or if you prefer manual control:
+For environments without plugin support, the install script clones documentation locally:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
 ```
 
-This provides the `/docs` command only (no auto-discovery Skill). Python 3.9+ enables advanced features like full-text content search and path validation.
-
-**CI/CD or non-interactive environments:**
-```bash
-CLAUDE_DOCS_AUTO_INSTALL=yes curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
-```
-
-**Requirements:** macOS 12+ or Linux, git, jq, curl. Python 3.9+ optional.
+If Claude Code is detected, the script will guide you to install the plugin instead. Without Claude Code, it falls back to `git clone` for basic documentation access.
 
 ## Team / Organization Adoption
 
