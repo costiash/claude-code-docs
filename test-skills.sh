@@ -86,5 +86,41 @@ check "content: python sdk"        content-search.sh docs__en__api__sdks__python
 check "fuzzy: typescript sdk"      fuzzy-search.sh   docs__en__api__sdks__typescript.md                "typescript sdk"
 check "fuzzy: go sdk"              fuzzy-search.sh   docs__en__api__sdks__go.md                        "go sdk"
 
+# === URL Conversion Tests (extracted from validate-paths.sh) ===
+_filename_to_url() {
+    local fname="$1"
+    fname="${fname%.md}"
+    if [[ "$fname" == claude-code__* ]]; then
+        local page="${fname#claude-code__}"
+        page=$(echo "$page" | sed 's/__/\//g')
+        echo "https://code.claude.com/docs/en/${page}"
+    elif [[ "$fname" == docs__en__* ]]; then
+        local path="${fname#docs__en__}"
+        path=$(echo "$path" | sed 's/__/\//g')
+        echo "https://platform.claude.com/en/docs/${path}"
+    else
+        echo ""
+    fi
+}
+
+check_url() {
+    local desc="$1" input="$2" expected="$3"
+    total=$((total + 1))
+    local got
+    got=$(_filename_to_url "$input")
+    if [ "$got" = "$expected" ]; then
+        pass=$((pass + 1))
+    else
+        fail=$((fail + 1))
+        echo "FAIL: $desc — expected '$expected', got '$got'" >&2
+    fi
+}
+
+check_url "url: claude-code simple"   "claude-code__hooks.md"               "https://code.claude.com/docs/en/hooks"
+check_url "url: claude-code nested"   "claude-code__hooks-guide.md"         "https://code.claude.com/docs/en/hooks-guide"
+check_url "url: platform simple"      "docs__en__api__overview.md"          "https://platform.claude.com/en/docs/api/overview"
+check_url "url: platform deep"        "docs__en__api__messages__create.md"  "https://platform.claude.com/en/docs/api/messages/create"
+check_url "url: agent sdk"            "docs__en__agent-sdk__python.md"      "https://platform.claude.com/en/docs/agent-sdk/python"
+
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"

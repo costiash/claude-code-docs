@@ -28,7 +28,7 @@ filename_to_url() {
 
     if [[ "$fname" == claude-code__* ]]; then
         local page="${fname#claude-code__}"
-        page=$(echo "$page" | tr '__' '/')
+        page=$(echo "$page" | sed 's/__/\//g')
         echo "https://code.claude.com/docs/en/${page}"
     elif [[ "$fname" == docs__en__* ]]; then
         local path="${fname#docs__en__}"
