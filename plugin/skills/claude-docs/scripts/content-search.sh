@@ -27,6 +27,12 @@ if [ ${#keywords[@]} -eq 0 ]; then
     exit 1
 fi
 
+if [ ! -d "$DOCS_DIR" ]; then
+    echo "Documentation directory not found: $DOCS_DIR" >&2
+    echo "Install docs: /plugin marketplace add costiash/claude-code-docs" >&2
+    exit 1
+fi
+
 # Strategy 1: Use search index if available and jq is installed
 if [ -f "$INDEX_FILE" ] && command -v jq >/dev/null 2>&1; then
     jq_filter='.index | to_entries[] | {file: .value.file_path, title: .value.title, kw: .value.keywords, preview: .value.content_preview} |'
@@ -51,10 +57,6 @@ if [ -f "$INDEX_FILE" ] && command -v jq >/dev/null 2>&1; then
 fi
 
 # Strategy 2: Fallback to grep
-if [ ! -d "$DOCS_DIR" ]; then
-    echo "Documentation directory not found: $DOCS_DIR" >&2
-    exit 1
-fi
 
 declare -A file_scores 2>/dev/null || {
     # Bash 3 (macOS default) doesn't support associative arrays — use temp file

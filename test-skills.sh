@@ -130,6 +130,9 @@ check "content: pricing"           content-search.sh docs__en__about-claude__pri
 check "fuzzy: troubleshooting"     fuzzy-search.sh   claude-code__troubleshooting.md                    "troubleshooting"
 check "content: pdf support"       content-search.sh docs__en__build-with-claude__pdf-support.md        "pdf"
 check "content: data residency"    content-search.sh docs__en__build-with-claude__data-residency.md     "residency"
+check "content: glossary"          content-search.sh docs__en__about-claude__glossary.md                "glossary"
+check "fuzzy: analytics"           fuzzy-search.sh   claude-code__analytics.md                          "analytics"
+check "fuzzy: costs"               fuzzy-search.sh   claude-code__costs.md                              "costs"
 
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
