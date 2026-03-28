@@ -17,12 +17,23 @@ Docs are stored at `~/.claude-code-docs/docs/`. If this directory doesn't exist,
 
 Analyze `$ARGUMENTS` and route:
 
-**Freshness check** (`-t`, `--check`, or user asks about freshness/health/validation):
+**No arguments / help** (empty, `--help`, `-h`, `help`):
+→ Show brief usage:
+> `/docs <topic>` — Look up documentation (e.g., `/docs hooks`, `/docs agent sdk python`)
+> `/docs -t` — Check documentation freshness
+> `/docs what's new` — Show recent documentation changes
+> `/docs <question>` — Ask a question about Claude (e.g., `/docs how do I configure MCP?`)
+
+**Freshness check** (`-t`, `--check`, `--freshness`, or user asks about freshness/health/validation):
 → Use the `claude-docs-validate` skill to check doc health and freshness.
 
-**What's new** (`what's new`, `recent changes`):
-→ Run: `cd ~/.claude-code-docs && git log --oneline -5 -- docs/`
+**What's new** (`what's new`, `recent changes`, `changelog`, `updates`):
+→ Run: `cd ~/.claude-code-docs && git log --oneline -10 -- docs/`
 → Present the recent commits naturally.
+
+**Stats** (`--stats`, `stats`, `count`):
+→ Count docs: `ls ~/.claude-code-docs/docs/*.md | wc -l`
+→ Report total doc count and last update time.
 
 **Uninstall** (`uninstall`):
 → Tell the user: `/plugin uninstall claude-docs@claude-code-docs`
