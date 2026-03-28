@@ -88,6 +88,8 @@ Commit this file to your repository. When a team member trusts the project folde
 
 Or just ask naturally after any docs response — Claude will offer to create a course on whatever you just looked up.
 
+https://github.com/user-attachments/assets/e36ae4c1-2ee6-4932-b0a5-3463cd20e012
+
 **What you get:**
 - **4-7 scroll-based modules** with progressive learning arc
 - **Protocol Conversations** — animated chat-style visualizations showing how Client, API, Claude, and tools actually exchange messages
