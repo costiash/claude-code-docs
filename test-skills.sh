@@ -145,6 +145,8 @@ check "fuzzy: interactive"         fuzzy-search.sh   claude-code__interactive-mo
 check "content: data usage"        content-search.sh claude-code__data-usage.md                        "data" "usage"
 check "fuzzy: vs code"             fuzzy-search.sh   claude-code__vs-code.md                           "vs code"
 check "fuzzy: terminal"            fuzzy-search.sh   claude-code__terminal-config.md                   "terminal"
+check "content: fast mode"         content-search.sh docs__en__build-with-claude__fast-mode.md          "fast" "mode"
+check "fuzzy: legal compliance"    fuzzy-search.sh   claude-code__legal-and-compliance.md               "legal"
 
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
