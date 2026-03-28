@@ -103,6 +103,8 @@ DOCS_DIR=./docs ./plugin/skills/claude-docs-validate/scripts/validate-paths.sh -
 - `plugin/skills/claude-docs/SKILL.md` — Search skill instructions
 - `plugin/skills/claude-docs/scripts/` — Search shell scripts
 - `plugin/skills/claude-docs-validate/` — Validation skill
+- `plugin/skills/claude-docs-course/` — Interactive course generator (Obsidian & Amber theme)
+- `plugin/skills/claude-docs-changelog/` — Changelog report generator
 - `plugin/hooks/` — SessionStart sync hook
 
 ### For CI/CD Scripts (Python)
@@ -379,6 +381,7 @@ Fixes #123
 | Feature Type | Documentation Required |
 |-------------|----------------------|
 | Plugin skills | Update SKILL.md, add/update examples |
+| Course/changelog design | Update `references/design-system.md` or `interactive-elements.md` |
 | Shell scripts | Update relevant SKILL.md |
 | Python CI scripts | Update docstrings |
 | Architecture changes | Update CLAUDE.md |
