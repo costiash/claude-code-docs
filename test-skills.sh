@@ -147,6 +147,12 @@ check "fuzzy: vs code"             fuzzy-search.sh   claude-code__vs-code.md    
 check "fuzzy: terminal"            fuzzy-search.sh   claude-code__terminal-config.md                   "terminal"
 check "content: fast mode"         content-search.sh docs__en__build-with-claude__fast-mode.md          "fast" "mode"
 check "fuzzy: legal compliance"    fuzzy-search.sh   claude-code__legal-and-compliance.md               "legal"
+check "content: compaction"        content-search.sh docs__en__build-with-claude__compaction.md         "compaction"
+check "content: service tiers"     content-search.sh docs__en__api__service-tiers.md                    "service" "tiers"
+check "fuzzy: statusline"          fuzzy-search.sh   claude-code__statusline.md                         "statusline"
+check "fuzzy: amazon bedrock"      fuzzy-search.sh   claude-code__amazon-bedrock.md                     "amazon bedrock"
+check "content: openai sdk compat" content-search.sh docs__en__api__openai-sdk.md                       "openai"
+check_url "url: tool use deep"     "docs__en__agents-and-tools__tool-use__define-tools.md"  "https://platform.claude.com/en/docs/agents-and-tools/tool-use/define-tools"
 
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
