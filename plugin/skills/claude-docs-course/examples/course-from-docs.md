@@ -55,4 +55,4 @@ A single self-contained HTML file (~80-120KB) with:
 - Data flow animation of the hook lifecycle
 - Multiple-choice quizzes testing practical hook configuration
 - Glossary tooltips on terms: matchers, IIFE, ARIA, stdin, SSE, MCP
-- Warm design aesthetic (Bricolage Grotesque + DM Sans + JetBrains Mono)
+- Obsidian & Amber design aesthetic (Instrument Serif + Outfit + JetBrains Mono)

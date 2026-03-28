@@ -481,7 +481,7 @@ window.flowNext = function() {
 **CSS for active actor glow:**
 ```css
 .flow-actor.active {
-  box-shadow: 0 0 0 3px var(--color-accent), 0 0 20px rgba(217, 79, 48, 0.2);
+  box-shadow: 0 0 0 3px var(--color-accent), 0 0 20px var(--color-accent-glow);
   transform: scale(1.05);
   transition: all var(--duration-normal) var(--ease-out);
 }
@@ -630,7 +630,7 @@ Same HTML/CSS/JS pattern as Multiple-Choice Quizzes, but with longer scenario de
 ```
 
 **Variants:**
-- `callout-accent`: vermillion left border, light accent background (for CS insights)
+- `callout-accent`: amber left border, light accent background (for CS insights)
 - `callout-info`: teal left border, light info background (for "good to know")
 - `callout-warning`: red left border, light error background (for common mistakes)
 
@@ -1146,11 +1146,11 @@ A variant of the Group Chat Animation specifically designed for API and system i
 
 | Role | Avatar | Color Variable | Use For |
 |------|--------|---------------|---------|
-| Client App | C | `--color-actor-1` (vermillion) | Your application code making API calls |
+| Client App | C | `--color-actor-1` (amber) | Your application code making API calls |
 | Claude API | A | `--color-actor-2` (teal) | The API gateway — auth, routing, rate limits |
 | Claude (Model) | M | `--color-actor-3` (plum) | Claude's reasoning and responses |
 | Tool Server | T | `--color-actor-4` (golden) | External tools, MCP servers, databases |
-| User | U | `--color-actor-5` (forest) | The end user interacting with the app |
+| User | U | `--color-actor-5` (sky blue) | The end user interacting with the app |
 
 **Additional CSS for protocol variant:**
 ```css
