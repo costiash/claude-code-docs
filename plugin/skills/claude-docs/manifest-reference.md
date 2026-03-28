@@ -40,6 +40,23 @@ When presenting results to users:
 - `release_notes` → "Release Notes"
 - `resources` → "Resources"
 
+## URL Construction
+
+Convert filenames to source URLs:
+
+| Filename | URL |
+|---|---|
+| `claude-code__hooks.md` | `https://code.claude.com/docs/en/hooks` |
+| `claude-code__hooks-guide.md` | `https://code.claude.com/docs/en/hooks-guide` |
+| `docs__en__api__messages__create.md` | `https://platform.claude.com/en/docs/api/messages/create` |
+| `docs__en__agent-sdk__python.md` | `https://platform.claude.com/en/docs/agent-sdk/python` |
+| `docs__en__build-with-claude__vision.md` | `https://platform.claude.com/en/docs/build-with-claude/vision` |
+| `docs__en__resources__prompt-library__code-clarifier.md` | `https://platform.claude.com/en/docs/resources/prompt-library/code-clarifier` |
+
+**Rules:**
+- `claude-code__<page>.md` → `https://code.claude.com/docs/en/<page>`
+- `docs__en__<path>.md` → `https://platform.claude.com/en/docs/<path>` (replace `__` with `/`)
+
 ## Dynamic Discovery
 
 To count available docs:
