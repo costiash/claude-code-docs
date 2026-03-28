@@ -86,7 +86,7 @@ These require Python 3.9+ and are only executed in GitHub Actions workflows.
 │   ├── build_search_index.py       # Index builder
 │   ├── fetcher/                    # Documentation fetching package (8 modules)
 │   └── lookup/                     # Search and validation package (7 modules)
-├── plugin/                 # Claude Code Plugin (v1.0.0)
+├── plugin/                 # Claude Code Plugin (v1.1.0)
 │   ├── .claude-plugin/plugin.json  # Plugin metadata
 │   ├── commands/docs.md            # /docs slash command (lean router)
 │   ├── skills/

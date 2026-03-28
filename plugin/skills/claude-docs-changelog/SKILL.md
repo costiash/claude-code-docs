@@ -116,8 +116,8 @@ Use these exact CSS variables from the course design system:
   --text-muted: #5C5852;
   --accent: #F0A050;
   --accent-dim: rgba(240, 160, 80, 0.08);
-  --blue: #60B0E0;
-  --blue-dim: rgba(96, 176, 224, 0.08);
+  --blue: #60A0E0;
+  --blue-dim: rgba(96, 160, 224, 0.08);
   --green: #50C8A0;
   --green-dim: rgba(80, 200, 160, 0.08);
   --purple: #C080E0;
