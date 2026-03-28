@@ -40,7 +40,7 @@ Analyze `$ARGUMENTS` and route:
 → Optionally clean up: `rm -rf ~/.claude-code-docs`
 
 **Everything else** (topic lookups, questions, searches):
-→ Use the `claude-docs-search` skill to find and present documentation.
+→ Use the `claude-docs` skill to find and present documentation.
 
 ## User's Request
 

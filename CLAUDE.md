@@ -122,7 +122,7 @@ When working on this repository, read these files as needed (not auto-loaded to 
 - `scripts/fetcher/` - Documentation fetching package (8 modules)
 - `scripts/lookup/` - Search & validation package (7 modules)
 - `scripts/build_search_index.py` - Full-text search indexing
-- `paths_manifest.json` - Active paths manifest (6 categories)
+- `paths_manifest.json` - Active paths manifest (auto-generated categories)
 - `tests/` - Test suite (covers CI scripts)
 
 ### Automation
