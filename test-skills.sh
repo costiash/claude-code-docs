@@ -81,5 +81,10 @@ check "content: structured outputs" content-search.sh docs__en__build-with-claud
 check "content: github actions"    content-search.sh claude-code__github-actions.md                       "github" "actions"
 check "fuzzy: sub-agents"          fuzzy-search.sh   claude-code__sub-agents.md                           "sub-agents"
 
+# === SDK Disambiguation Tests ===
+check "content: python sdk"        content-search.sh docs__en__api__sdks__python.md                    "python" "sdk"
+check "fuzzy: typescript sdk"      fuzzy-search.sh   docs__en__api__sdks__typescript.md                "typescript sdk"
+check "fuzzy: go sdk"              fuzzy-search.sh   docs__en__api__sdks__go.md                        "go sdk"
+
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
