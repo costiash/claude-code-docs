@@ -30,3 +30,18 @@ Which are you working with?"
 [After user selects, e.g., "1. Claude Code"]
 
 → Read `claude-code__skills.md`, synthesize, present with source link.
+
+---
+
+## User Query (with SDK context)
+> /docs how do I create messages in Python?
+
+## Skill Reasoning
+- User mentions "Python" → SDK language disambiguation applies
+- Narrow API docs to `docs__en__api__python__*`
+- Topic: "messages" + "create"
+
+## Actions
+1. Glob: `~/.claude-code-docs/docs/docs__en__api__python__messages__create.md` → exact match
+2. Read and present the Python SDK example
+3. Note: "TypeScript equivalent: [Messages Create](https://platform.claude.com/en/docs/api/typescript/messages/create)"
