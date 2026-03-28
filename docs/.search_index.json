@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-28T15:18:07Z",
+  "generated_at": "2026-03-28T18:17:51Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -440,15 +440,15 @@
         "command",
         "example",
         "input",
+        "run",
         "only",
         "exit",
+        "permission",
         "session",
-        "run",
-        "reference",
-        "matcher",
-        "permission"
+        "script",
+        "prompt"
       ],
-      "word_count": 5053,
+      "word_count": 5139,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -568,14 +568,16 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # LLM gateway configuration  > Learn how to configure Claude Code to work with LLM gateway solutions. Covers gateway",
       "keywords": [
         "claude",
-        "litellm",
         "code",
+        "litellm",
         "api",
         "through",
         "model",
         "gateway",
         "endpoint",
         "configuration",
+        "request",
+        "headers",
         "using",
         "key",
         "must",
@@ -584,11 +586,9 @@
         "documentation",
         "llm",
         "authentication",
-        "anthropic",
-        "headers",
-        "configure"
+        "anthropic"
       ],
-      "word_count": 657,
+      "word_count": 710,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
@@ -1053,18 +1053,18 @@
         "arguments",
         "automatically",
         "invoke",
+        "load",
+        "context",
         "session",
         "create",
         "uses",
         "reference",
         "them",
         "invocation",
-        "context",
         "name",
-        "step",
-        "content"
+        "step"
       ],
-      "word_count": 4601,
+      "word_count": 4652,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
