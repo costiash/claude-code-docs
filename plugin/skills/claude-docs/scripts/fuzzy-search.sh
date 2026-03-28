@@ -37,8 +37,15 @@ for filepath in "$DOCS_DIR"/*.md; do
 
     score=0
 
+    # Exact full-query match in filename
     if echo "$fname_lower" | grep -q "$query"; then
         score=$((score + 100))
+    fi
+
+    # Also try hyphenated form (e.g., "tool use" → "tool-use")
+    query_hyphen=$(echo "$query" | tr ' ' '-')
+    if [ "$query_hyphen" != "$query" ] && echo "$fname_lower" | grep -q "$query_hyphen"; then
+        score=$((score + 90))
     fi
 
     matched_tokens=0
