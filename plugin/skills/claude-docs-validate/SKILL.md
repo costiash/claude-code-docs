@@ -62,6 +62,30 @@ bash ~/.claude-code-docs/plugin/skills/claude-docs-validate/scripts/validate-pat
   - If still broken after pull, the upstream page may have moved
   - Report persistent issues at https://github.com/costiash/claude-code-docs/issues
 
+### Step 5: Doc statistics (if user asks for stats/count)
+
+Report documentation coverage:
+```bash
+# Total docs
+ls ~/.claude-code-docs/docs/*.md | wc -l
+
+# By category
+echo "Claude Code:  $(ls ~/.claude-code-docs/docs/claude-code__*.md 2>/dev/null | wc -l)"
+echo "Agent SDK:    $(ls ~/.claude-code-docs/docs/docs__en__agent-sdk__*.md 2>/dev/null | wc -l)"
+echo "API Reference:$(ls ~/.claude-code-docs/docs/docs__en__api__*.md 2>/dev/null | wc -l)"
+echo "Build Guides: $(ls ~/.claude-code-docs/docs/docs__en__build-with-claude__*.md 2>/dev/null | wc -l)"
+echo "Tools:        $(ls ~/.claude-code-docs/docs/docs__en__agents-and-tools__*.md 2>/dev/null | wc -l)"
+```
+
+## Troubleshooting
+
+| Issue | Solution |
+|---|---|
+| "Documentation not found" | Plugin not installed or docs not cloned. Re-run `/plugin install claude-docs@claude-code-docs` |
+| Many broken URLs | Likely a sitemap change. Run `git pull` first, then re-validate |
+| Timeout errors | Network issue or Anthropic site is slow. Try again later |
+| "Permission denied" | Check that `~/.claude-code-docs/` is readable |
+
 ## Reference Files
 
 - `examples/validate-docs.md` — Example validation workflow
