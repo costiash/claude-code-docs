@@ -71,6 +71,8 @@ check "fuzzy: desktop"             fuzzy-search.sh   claude-code__desktop.md    
 check "content: sandboxing"        content-search.sh claude-code__sandboxing.md                        "sandboxing"
 check "content: context windows"   content-search.sh docs__en__build-with-claude__context-windows.md   "context" "windows"
 check "fuzzy: headless"            fuzzy-search.sh   claude-code__headless.md                          "headless"
+check "content: devcontainer"      content-search.sh claude-code__devcontainer.md                      "devcontainer"
+check "content: jetbrains"         content-search.sh claude-code__jetbrains.md                         "jetbrains"
 
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
