@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
+trap '' PIPE
 
 # content-search.sh — Full-text keyword search across Claude documentation
 # Usage: content-search.sh <keyword> [keyword2] [keyword3] ...
