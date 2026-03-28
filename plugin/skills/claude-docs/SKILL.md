@@ -111,6 +111,21 @@ When matches span different products (e.g., CLI + API + Agent SDK):
 
 After selection → read all docs in that context and synthesize.
 
+### SDK Language Disambiguation
+
+When the user specifies a programming language, narrow the API docs to that SDK:
+
+| User mentions | Narrow search to |
+|---|---|
+| "Python", "pip", "anthropic" (Python import) | `docs__en__api__python__*` or `docs__en__agent-sdk__python*` |
+| "TypeScript", "npm", "@anthropic-ai/sdk" | `docs__en__api__typescript__*` or `docs__en__agent-sdk__typescript*` |
+| "Go", "golang" | `docs__en__api__go__*` |
+| "Java", "Maven", "Gradle" | `docs__en__api__java__*` |
+| "Ruby", "gem" | `docs__en__api__ruby__*` |
+| "C#", ".NET", "NuGet" | `docs__en__api__csharp__*` |
+
+If no language is mentioned but the query is about SDK methods, present the **Python** docs first (most common) and note that TypeScript equivalents exist.
+
 ## URL Generation
 
 Always include source links in your response:
