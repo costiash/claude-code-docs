@@ -29,12 +29,12 @@ fi
 
 # Strategy 1: Use search index if available and jq is installed
 if [ -f "$INDEX_FILE" ] && command -v jq >/dev/null 2>&1; then
-    jq_filter='.index | to_entries[] | {file: .value.file_path, title: .value.title, kw: .value.keywords} |'
+    jq_filter='.index | to_entries[] | {file: .value.file_path, title: .value.title, kw: .value.keywords, preview: .value.content_preview} |'
 
     count_parts=()
     for kw in "${keywords[@]}"; do
         escaped=$(echo "$kw" | sed 's/\\/\\\\/g; s/"/\\"/g')
-        count_parts+=("(if (.kw | map(select(contains(\"${escaped}\"))) | length > 0) or (.title | ascii_downcase | contains(\"${escaped}\")) or (.file | ascii_downcase | contains(\"${escaped}\")) then 1 else 0 end)")
+        count_parts+=("(if (.kw | map(select(contains(\"${escaped}\"))) | length > 0) or (.title | ascii_downcase | contains(\"${escaped}\")) or (.file | ascii_downcase | contains(\"${escaped}\")) or (.preview | ascii_downcase | contains(\"${escaped}\")) then 1 else 0 end)")
     done
 
     count_expr=$(IFS='+'; echo "${count_parts[*]}")

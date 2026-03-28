@@ -128,6 +128,8 @@ check "fuzzy: security"            fuzzy-search.sh   claude-code__security.md   
 check "fuzzy: network config"      fuzzy-search.sh   claude-code__network-config.md                    "network config"
 check "content: pricing"           content-search.sh docs__en__about-claude__pricing.md                 "pricing"
 check "fuzzy: troubleshooting"     fuzzy-search.sh   claude-code__troubleshooting.md                    "troubleshooting"
+check "content: pdf support"       content-search.sh docs__en__build-with-claude__pdf-support.md        "pdf"
+check "content: data residency"    content-search.sh docs__en__build-with-claude__data-residency.md     "residency"
 
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
