@@ -4,7 +4,7 @@
     "name": "costiash"
   },
   "metadata": {
-    "description": "Always up-to-date Claude documentation at your fingertips — 574+ docs covering Claude Code CLI, API, Agent SDK, and more"
+    "description": "Always up-to-date Claude documentation at your fingertips. Content search, fuzzy matching, and auto-discovery — 574+ docs covering Claude Code CLI, API, Agent SDK, and more."
   },
   "plugins": [
     {

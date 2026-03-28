@@ -4,19 +4,19 @@ Thank you for contributing to the Enhanced Claude Code Documentation Mirror!
 
 ## Project Philosophy
 
-This project extends [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs) with optional Python features:
+This project extends [ericbuess/claude-code-docs](https://github.com/ericbuess/claude-code-docs) as a native Claude Code plugin:
 
-**Core Principle: Graceful Degradation**
-- Single installation (paths tracked across 6 categories + Python scripts)
-- Python features activate only when Python 3.9+ is available
-- Everything works without Python (basic `/docs` command)
-- No separate "modes" - just feature detection at runtime
+**Core Principle: Plugin-First Architecture**
+- All user-facing features delivered via Claude Code plugin (skills, commands, hooks)
+- Shell scripts in skills provide search capabilities — zero Python dependency for users
+- Python modules in `scripts/` are CI-only (fetching docs, building search index, validation)
+- Single installation path: plugin marketplace
 
 **Design Goals:**
-1. **Honesty**: Accurate claims about what we deliver (paths tracked in manifest, files downloaded)
-2. **Simplicity**: One installation, automatic feature detection
-3. **Compatibility**: Works with upstream, same `/docs` interface
-4. **Testing**: All changes tested (303 tests)
+1. **Zero dependencies**: Plugin works with just Claude Code — no Python, jq, or curl required on user machines
+2. **Skill-based search**: Content search and fuzzy matching via shell scripts in plugin skills
+3. **CI integrity**: Python scripts continue powering GitHub Actions workflows unchanged
+4. **Testing**: CI test suite covers Python modules; plugin skills tested manually
 
 ## Repository URL Strategy
 
@@ -81,36 +81,35 @@ git remote add upstream https://github.com/costiash/claude-code-docs.git
 
 ## Development Workflows
 
-### For Shell Scripts
+### For Plugin Skills
 
-Working on installation, helper scripts, or core functionality:
+Working on search skills, commands, or hooks:
 
 ```bash
-# No Python setup needed
 cd claude-code-docs
 
-# Test installation
-./install.sh
+# Test search scripts manually
+DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/content-search.sh "hooks"
+DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/fuzzy-search.sh "agent sdk"
+DOCS_DIR=./docs ./plugin/skills/claude-docs-validate/scripts/validate-paths.sh --quick
 
-# Test basic commands
-~/.claude-code-docs/claude-docs-helper.sh hooks
-~/.claude-code-docs/claude-docs-helper.sh -t
-~/.claude-code-docs/claude-docs-helper.sh what's new
-
-# Test uninstall
-./uninstall.sh
+# Test the plugin in Claude Code
+# Install from local source:
+/plugin install claude-docs@/path/to/claude-code-docs/plugin
 ```
 
 **Files to work on:**
-- `install.sh` - Installation script
-- `uninstall.sh` - Removal script
-- `scripts/claude-docs-helper.sh` - Main entry point
-- `.github/workflows/` - GitHub Actions
-- `docs/` - Documentation files
+- `plugin/commands/docs.md` — `/docs` command router
+- `plugin/skills/claude-docs/SKILL.md` — Search skill instructions
+- `plugin/skills/claude-docs/scripts/` — Search shell scripts
+- `plugin/skills/claude-docs-validate/` — Validation skill
+- `plugin/skills/claude-docs-course/` — Interactive course generator (Obsidian & Amber theme)
+- `plugin/skills/claude-docs-changelog/` — Changelog report generator
+- `plugin/hooks/` — SessionStart sync hook
 
-### For Python Features
+### For CI/CD Scripts (Python)
 
-Working on search, validation, or Python tools:
+Working on documentation fetching, search indexing, or CI validation (these run in GitHub Actions, not on user machines):
 
 ```bash
 # Setup Python virtual environment
@@ -120,12 +119,8 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 # Install in development mode
 pip install -e ".[dev]"
 
-# Test Python commands
-~/.claude-code-docs/claude-docs-helper.sh --search "mcp"
-~/.claude-code-docs/claude-docs-helper.sh --validate
-
 # Run tests (REQUIRED before submitting PR)
-pytest tests/ -v  # Should see: 303 passed
+pytest tests/ -v  # All tests must pass
 
 # Test specific changes
 python scripts/lookup_paths.py "your test query"
@@ -136,7 +131,7 @@ python scripts/fetch_claude_docs.py --help
 - `scripts/fetch_claude_docs.py` - Documentation fetcher with auto-regeneration
 - `scripts/lookup_paths.py` - Search & validation
 - `scripts/build_search_index.py` - Full-text search indexing
-- `tests/` - Test suite (303 tests)
+- `tests/` - Test suite (run `pytest --collect-only -q` to see current count)
 
 ## Code Standards
 
@@ -231,18 +226,20 @@ All documentation files follow a consistent naming convention:
 ### Format
 
 ```
-en__section__subsection__page.md
-# OR (for Claude Code docs)
-docs__en__page.md
+# Claude Code CLI docs (from code.claude.com)
+claude-code__<page>.md
+
+# Platform docs (from platform.claude.com)
+docs__en__<section>__<page>.md
 ```
 
 ### Examples
 
-| URL Path | Filename |
-|----------|----------|
-| `/en/docs/claude-code/hooks` | `en__docs__claude-code__hooks.md` |
-| `/docs/en/hooks` | `docs__en__hooks.md` |
-| `/en/api/overview` | `en__api__overview.md` |
+| Source URL | Filename |
+|------------|----------|
+| `code.claude.com/docs/en/hooks` | `claude-code__hooks.md` |
+| `platform.claude.com/en/docs/api/messages/create` | `docs__en__api__messages__create.md` |
+| `platform.claude.com/en/docs/agent-sdk/python` | `docs__en__agent-sdk__python.md` |
 
 ### Rules
 
@@ -251,28 +248,26 @@ docs__en__page.md
 3. **No special characters** except alphanumeric, hyphens, underscores
 4. **Keep `.md` extension**
 5. **Place in `docs/` directory**
+6. **`claude-code__` prefix** for CLI docs, **`docs__en__` prefix** for platform docs
 
 ## Testing Requirements
 
-### Manual Testing (Shell Scripts)
+### Manual Testing (Plugin Skills)
 
-Test on both macOS and Linux:
+Test search scripts on both macOS and Linux:
 
 ```bash
-# Installation
-./install.sh
-~/.claude-code-docs/claude-docs-helper.sh --help
+# Content search
+DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/content-search.sh "hooks"
 
-# Core functionality
-~/.claude-code-docs/claude-docs-helper.sh hooks
-~/.claude-code-docs/claude-docs-helper.sh -t
-~/.claude-code-docs/claude-docs-helper.sh what's new
+# Fuzzy search
+DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/fuzzy-search.sh "agent sdk"
 
-# Updates
-cd ~/.claude-code-docs && git pull
+# Validation (quick mode)
+DOCS_DIR=./docs ./plugin/skills/claude-docs-validate/scripts/validate-paths.sh --quick
 
-# Uninstall
-./uninstall.sh
+# Or install the plugin locally and test via /docs command
+/plugin install claude-docs@/path/to/claude-code-docs/plugin
 ```
 
 ### Automated Testing (Python Features)
@@ -285,16 +280,16 @@ cd ~/.claude-code-docs && git pull
 pytest
 
 # Run specific test suites
-pytest tests/unit/              # 82 unit tests
-pytest tests/integration/       # 36 integration tests
-pytest tests/validation/        # 56 validation tests
+pytest tests/unit/
+pytest tests/integration/
+pytest tests/validation/
 
-# Check coverage (target: 78%+)
+# Check coverage
 pytest --cov=scripts --cov-report=html
 pytest --cov=scripts --cov-report=term
 
 # Run specific test file
-pytest tests/unit/test_lookup_paths.py -v
+pytest tests/unit/test_lookup_functions.py -v
 
 # Verbose output
 pytest -v
@@ -330,8 +325,7 @@ def test_search_paths_with_limit():
 ```
 
 **Current test status:**
-- Total: 303 tests
-- Passing: 303 (100%)
+Run `pytest tests/ -v` — all tests must pass before submitting a PR.
 
 ## Pull Request Guidelines
 
@@ -386,10 +380,12 @@ Fixes #123
 
 | Feature Type | Documentation Required |
 |-------------|----------------------|
-| Shell scripts | Update README.md |
-| Python features | Update docstrings + README.md |
-| New commands | Update command documentation |
+| Plugin skills | Update SKILL.md, add/update examples |
+| Course/changelog design | Update `references/design-system.md` or `interactive-elements.md` |
+| Shell scripts | Update relevant SKILL.md |
+| Python CI scripts | Update docstrings |
 | Architecture changes | Update CLAUDE.md |
+| User-facing changes | Update README.md |
 
 ## Release Process
 
@@ -414,7 +410,7 @@ git push origin v0.x.x
 
 **When to release:**
 - New Python features complete
-- All tests passing (303/303)
+- All tests passing (`pytest tests/`)
 - Documentation updated
 
 **Process:**

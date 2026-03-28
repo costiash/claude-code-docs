@@ -39,25 +39,20 @@ That's it. On your next session Claude will automatically:
 
 - **`/docs` command** — Look up any topic: `/docs hooks`, `/docs extended thinking`, `/docs Agent SDK sessions`
 - **Auto-discovery Skill** — Claude proactively searches docs when you ask about Claude Code, the API, SDKs, or prompt engineering. No `/docs` prefix needed.
+- **Interactive Courses** — Turn any Claude topic into a stunning, self-contained HTML course with animated diagrams, protocol conversations, quizzes, and code translations. Just say "create a course on hooks" or run `/docs --course <topic>`.
 - **Session-start auto-updates** — Docs stay fresh automatically. No cron jobs, no manual pulls.
+- **Content search** — Shell-based full-text search and fuzzy filename matching, no Python needed
 - **Zero dependencies** — No Python, no jq, no curl. Just Claude Code with plugin support.
 
-## Alternative: Script Install
+## Legacy: Script Install (Migration)
 
-For environments without plugin support, or if you prefer manual control:
+For environments without plugin support, the install script clones documentation locally:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
 ```
 
-This provides the `/docs` command only (no auto-discovery Skill). Python 3.9+ enables advanced features like full-text content search and path validation.
-
-**CI/CD or non-interactive environments:**
-```bash
-CLAUDE_DOCS_AUTO_INSTALL=yes curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
-```
-
-**Requirements:** macOS 12+ or Linux, git, jq, curl. Python 3.9+ optional.
+If Claude Code is detected, the script will guide you to install the plugin instead. Without Claude Code, it falls back to `git clone` for basic documentation access.
 
 ## Team / Organization Adoption
 
@@ -81,6 +76,42 @@ Auto-prompt every team member to install the plugin by adding this to your proje
 
 Commit this file to your repository. When a team member trusts the project folder, they'll be prompted to install the marketplace and plugin automatically — no manual setup needed.
 
+## Interactive Courses — Learn Claude by Doing
+
+> **This isn't just a docs mirror anymore.** Ask about any Claude topic and get a beautifully crafted, interactive HTML course — complete with animated protocol diagrams, hands-on quizzes, code-with-English translations, and a stunning dark Obsidian & Amber visual theme. One self-contained file, zero setup, opens right in your browser.
+
+```bash
+/docs --course hooks          # Generate a course on Claude Code hooks
+/docs --course tool use       # Deep dive into the Tool Use API
+/docs --course prompt caching # Master caching with visual explanations
+```
+
+Or just ask naturally after any docs response — Claude will offer to create a course on whatever you just looked up.
+
+**What you get:**
+- **4-7 scroll-based modules** with progressive learning arc
+- **Protocol Conversations** — animated chat-style visualizations showing how Client, API, Claude, and tools actually exchange messages
+- **Code translations** — real API examples from the docs with line-by-line plain English explanations
+- **Quizzes that test application** — "What would you use for this scenario?" not "Define this term"
+- **Glossary tooltips** on every Claude-specific term
+- **Obsidian & Amber theme** — dark, atmospheric design with Instrument Serif headings, warm amber accents, grain textures, and glass effects. Not your typical tutorial.
+
+Courses are saved to `~/.claude-code-docs/courses/` so you can revisit or share them with your team.
+
+### Changelog Reports
+
+Stay on top of what's changing in Claude's documentation. Generate a visual HTML report of recent doc updates — grouped by category, with summaries and key highlights:
+
+```bash
+/docs --report          # Last 7 days of changes
+/docs --report 24h      # Last 24 hours
+/docs --report 30d      # Last 30 days
+```
+
+Each entry in the report includes a **"Create Course"** button. Click it to copy a course generation command to your clipboard — paste it into Claude Code to instantly deep-dive into any topic that caught your eye.
+
+---
+
 ## Usage
 
 ### Direct Lookups
@@ -89,6 +120,8 @@ Commit this file to your repository. When a team member trusts the project folde
 /docs hooks              # Claude Code hooks
 /docs mcp                # MCP server configuration
 /docs agent sdk python   # Agent SDK Python guide
+/docs --course hooks     # Generate an interactive course on hooks
+/docs --report           # HTML changelog of recent doc changes
 /docs -t                 # Check freshness and pull updates
 /docs what's new         # Recent documentation changes
 ```
@@ -116,7 +149,7 @@ Claude recognizes this is a documentation question and automatically reads the r
 
 ## Documentation Coverage
 
-Documentation files across 11 categories, updated every 3 hours:
+Documentation files across multiple categories, updated every 3 hours:
 
 - **API Reference** — Messages API, Admin API, multi-language SDKs (Python, TypeScript, Go, Java, Kotlin, Ruby)
 - **Agent SDK** — Python and TypeScript SDK guides, sessions, hooks, custom tools
@@ -172,6 +205,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for architecture overview, development se
 ## Acknowledgments
 
 - **[Eric Buess](https://github.com/ericbuess)** — Creator of the [original claude-code-docs](https://github.com/ericbuess/claude-code-docs)
+- **[zarazhangrui/codebase-to-course](https://github.com/zarazhangrui/codebase-to-course)** — Inspiration for the interactive course generator skill
 - **[Anthropic](https://www.anthropic.com/)** — For Claude Code and the documentation
 
 ## License

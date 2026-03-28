@@ -5,6 +5,62 @@ All notable changes to the enhanced edition of claude-code-docs will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-03-28
+
+### Added
+- **`claude-docs-course/` interactive course skill**: Generates self-contained HTML courses on any Claude documentation topic
+  - 4-phase pipeline: Topic Discovery → Curriculum Design → Build (module by module) → Review & Open
+  - **Obsidian & Amber design theme**: Dark obsidian backgrounds, warm amber accents, Instrument Serif + Outfit typography, grain textures, glass-morphism effects
+  - `references/design-system.md` — Complete CSS design tokens for the Obsidian & Amber theme
+  - `references/interactive-elements.md` — 18 interactive element patterns including Protocol Conversations, code translations, quizzes, data flow animations, glossary tooltips
+  - `examples/course-from-docs.md` — Worked example for hooks course generation
+  - Courses saved to `~/.claude-code-docs/courses/<topic-slug>.html`
+- **`claude-docs-changelog/` report skill**: Generates HTML changelog reports of recent documentation changes
+  - Discovers changes via git history, categorizes by doc type, summarizes key updates
+  - Each entry includes a "Create Course" button that copies `/docs --course <topic>` to clipboard
+  - Obsidian & Amber themed to match courses
+  - `examples/changelog-report.md` — Worked example
+- **Post-response course prompt**: After every docs response, an emphasized prompt invites users to generate an interactive course on the topic
+- **`/docs --course <topic>`** route: Direct course generation via the `/docs` command
+- **`/docs --report`** route: Generate HTML changelog with configurable timeframe (default: 7 days)
+
+### Changed
+- **`/docs` command** expanded: Now routes to 4 skills (search, validate, course, changelog) + inline git log
+- **README.md**: Added "Interactive Courses" and "Changelog Reports" sections with usage examples
+- **CLAUDE.md**: Updated plugin structure, routing table, and key files for new skills
+- **CONTRIBUTING.md**: Updated for 4-skill architecture
+- **`.gitignore`**: Added `codebase-to-course-main/` and generated HTML exclusions
+
+## [1.0.0] - 2026-03-28
+
+### Breaking Changes
+- **Plugin is now the primary (and only recommended) install path** — `install.sh` is now a migration wrapper that guides users to plugin install
+- **Legacy helper scripts no longer user-facing** — `claude-docs-helper.sh` and the Python lookup module are now CI-only; plugin skills handle all user-facing search
+
+### Added
+- **`claude-docs/` search skill**: Enhanced search with 4-tier strategy (direct lookup, scoped search, content search, fuzzy matching)
+  - `scripts/content-search.sh` — Full-text keyword search using `.search_index.json` or grep fallback
+  - `scripts/fuzzy-search.sh` — Token-based fuzzy filename matching
+  - `examples/` — 3 worked examples (direct lookup, semantic search, cross-context disambiguation)
+- **`claude-docs-validate/` health check skill**: Documentation freshness and URL reachability checks
+  - `scripts/validate-paths.sh` — Parallel HTTP HEAD checks with `--quick` mode
+  - `examples/` — Validation workflow example
+- **Zero Python dependency for users** — All plugin features use shell scripts only; Python is CI-only
+
+### Changed
+- **`/docs` command** rewritten as lean router (~40 lines) delegating to skills
+- **`install.sh`** rewritten as migration wrapper (~100 lines) routing to plugin install
+- **`uninstall.sh`** simplified to plugin uninstall instructions
+- **CLAUDE.md** streamlined — removed ~350 lines of search strategy (now lives in skill SKILL.md)
+- **README.md** updated — plugin-first, script install moved to "Legacy" section
+- **UNINSTALL.md** simplified to plugin-only primary path
+- **CONTRIBUTING.md** updated for plugin-first development workflow
+
+### Removed
+- `plugin/skills/claude-docs-workspace/` — Stale Phase 2 eval artifacts (was gitignored, not in repo)
+- User-facing Python search (replaced by shell scripts in plugin skills)
+- Legacy install.sh functionality (779 lines → 100 lines)
+
 ## [0.6.0] - 2026-02-28
 
 ### Added

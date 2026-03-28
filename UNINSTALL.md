@@ -1,95 +1,44 @@
 # Uninstalling Claude Code Documentation Mirror
 
-## Quick Uninstall
+## Plugin Uninstall (Recommended)
 
-### Plugin Install
+If you installed via the Claude Code plugin:
 
-If you installed via `/plugin install`:
 ```bash
 /plugin uninstall claude-docs@claude-code-docs
 ```
 
-### Script Install (v0.3+, installed at ~/.claude-code-docs)
-
-From anywhere, run:
-```bash
-~/.claude-code-docs/uninstall.sh
-```
-
-Or use the docs command:
-```bash
-/docs uninstall
-```
-
-### For v0.2 or older (custom installation locations)
-
-Navigate to your installation directory and run:
-```bash
-./uninstall.sh
-```
-
-## What Gets Removed
-
-The uninstaller will remove:
-
-1. **The /docs command** from `~/.claude/commands/docs.md`
-2. **Any legacy hooks** from `~/.claude/settings.json` (if present from older versions)
-3. **The installation directory**:
-   - v0.3+: `~/.claude-code-docs`
-   - v0.2 or older: wherever you installed it
-
-## Manual Uninstall
-
-If you prefer to uninstall manually:
-
-### 1. Remove the command file:
-```bash
-rm -f ~/.claude/commands/docs.md
-```
-
-### 2. Remove any legacy hooks from Claude settings (if present):
-If you installed an older version (v0.4.1 or earlier), check `~/.claude/settings.json` and remove any PreToolUse hooks that reference claude-code-docs. Current versions (v0.4.2+) do not install hooks.
-
-### 3. Remove the installation directory:
-
-For v0.3+:
+To also remove the local documentation files:
 ```bash
 rm -rf ~/.claude-code-docs
 ```
 
-For older versions:
+## Legacy Script Uninstall
+
+If you have an older script-based installation (v0.6.0 or earlier):
+
 ```bash
-rm -rf /path/to/your/claude-code-docs
+~/.claude-code-docs/uninstall.sh
 ```
 
-## Multiple Installations
+This removes:
+1. Legacy `/docs` command from `~/.claude/commands/docs.md` (if present)
+2. Legacy hooks from `~/.claude/settings.json` (if present)
+3. Optionally, the `~/.claude-code-docs/` directory
 
-If you have multiple installations (e.g., from testing different versions), the uninstaller will notify you about other locations it finds. You'll need to remove each one separately.
+## Manual Cleanup
 
-To find all installations:
 ```bash
-find ~ -name "claude-code-docs" -type d 2>/dev/null | grep -v ".claude-code-docs"
+# Remove legacy command (if present)
+rm -f ~/.claude/commands/docs.md
+
+# Remove local documentation
+rm -rf ~/.claude-code-docs
 ```
-
-## Backup Created
-
-The uninstaller may create a backup of your Claude settings at `~/.claude/settings.json.backup` before removing hooks, just in case.
-
-## Complete Removal
-
-After uninstalling, there should be no traces left except:
-- The backup file `~/.claude/settings.json.backup` (if hooks were removed)
-- Any custom files you added to the installation directory
 
 ## Reinstalling
 
-**Plugin install (recommended):**
 ```bash
 /plugin marketplace add costiash/claude-code-docs
 /plugin install claude-docs@claude-code-docs
-```
-
-**Script install:**
-```bash
-curl -fsSL https://raw.githubusercontent.com/costiash/claude-code-docs/main/install.sh | bash
 ```
