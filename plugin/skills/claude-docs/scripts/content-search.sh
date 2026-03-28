@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-set -uo pipefail
-trap '' PIPE
+set -euo pipefail
 
 # content-search.sh — Full-text keyword search across Claude documentation
 # Usage: content-search.sh <keyword> [keyword2] [keyword3] ...
@@ -34,7 +33,7 @@ if [ -f "$INDEX_FILE" ] && command -v jq >/dev/null 2>&1; then
     count_parts=()
     for kw in "${keywords[@]}"; do
         escaped=$(echo "$kw" | sed 's/\\/\\\\/g; s/"/\\"/g')
-        count_parts+=("(if (.kw | map(select(contains(\"${escaped}\"))) | length > 0) or (.title | ascii_downcase | contains(\"${escaped}\")) or (.file | ascii_downcase | contains(\"${escaped}\")) then 1 else 0 end)")
+        count_parts+=("(if (.kw | map(select(contains(\"${escaped}\"))) | length > 0) or (.title | ascii_downcase | contains(\"${escaped}\")) then 1 else 0 end)")
     done
 
     count_expr=$(IFS='+'; echo "${count_parts[*]}")
