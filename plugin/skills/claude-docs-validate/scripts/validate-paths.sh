@@ -7,7 +7,7 @@ set -euo pipefail
 # Output: summary + list of broken paths
 # Exit: 0 if all reachable, 1 if any broken
 
-DOCS_DIR="${HOME}/.claude-code-docs/docs"
+DOCS_DIR="${DOCS_DIR:-${HOME}/.claude-code-docs/docs}"
 QUICK_SAMPLE=20
 MAX_PARALLEL=5
 TIMEOUT=10

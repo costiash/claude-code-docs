@@ -67,5 +67,10 @@ check "fuzzy: quickstart"          fuzzy-search.sh   claude-code__quickstart.md 
 check "fuzzy: settings"            fuzzy-search.sh   claude-code__settings.md                          "settings"
 check "fuzzy: desktop"             fuzzy-search.sh   claude-code__desktop.md                           "desktop"
 
+# === Additional Search Coverage ===
+check "content: sandboxing"        content-search.sh claude-code__sandboxing.md                        "sandboxing"
+check "content: context windows"   content-search.sh docs__en__build-with-claude__context-windows.md   "context" "windows"
+check "fuzzy: headless"            fuzzy-search.sh   claude-code__headless.md                          "headless"
+
 echo "PASS: $pass/$total"
 echo "FAIL: $fail/$total"
