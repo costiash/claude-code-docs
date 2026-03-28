@@ -152,6 +152,5 @@ Pipfile.lock
 !docs/
 !scripts/
 !tests/
-!enhancements/
 !.github/
 autoresearch-results.tsv
