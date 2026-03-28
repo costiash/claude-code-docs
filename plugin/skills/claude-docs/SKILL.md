@@ -1,5 +1,5 @@
 ---
-name: claude-docs-search
+name: claude-docs
 description: >
   Search and read locally-stored Claude documentation covering Claude Code CLI,
   Claude API (Messages, tool use, vision, streaming, batch), Agent SDK (Python and

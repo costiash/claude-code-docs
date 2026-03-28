@@ -117,12 +117,8 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 # Install in development mode
 pip install -e ".[dev]"
 
-# Test Python commands
-~/.claude-code-docs/claude-docs-helper.sh --search "mcp"
-~/.claude-code-docs/claude-docs-helper.sh --validate
-
 # Run tests (REQUIRED before submitting PR)
-pytest tests/ -v  # Should see: 303 passed
+pytest tests/ -v  # All tests must pass
 
 # Test specific changes
 python scripts/lookup_paths.py "your test query"
@@ -133,7 +129,7 @@ python scripts/fetch_claude_docs.py --help
 - `scripts/fetch_claude_docs.py` - Documentation fetcher with auto-regeneration
 - `scripts/lookup_paths.py` - Search & validation
 - `scripts/build_search_index.py` - Full-text search indexing
-- `tests/` - Test suite (303 tests)
+- `tests/` - Test suite (run `pytest --collect-only -q` to see current count)
 
 ## Code Standards
 
@@ -228,18 +224,20 @@ All documentation files follow a consistent naming convention:
 ### Format
 
 ```
-en__section__subsection__page.md
-# OR (for Claude Code docs)
-docs__en__page.md
+# Claude Code CLI docs (from code.claude.com)
+claude-code__<page>.md
+
+# Platform docs (from platform.claude.com)
+docs__en__<section>__<page>.md
 ```
 
 ### Examples
 
-| URL Path | Filename |
-|----------|----------|
-| `/en/docs/claude-code/hooks` | `en__docs__claude-code__hooks.md` |
-| `/docs/en/hooks` | `docs__en__hooks.md` |
-| `/en/api/overview` | `en__api__overview.md` |
+| Source URL | Filename |
+|------------|----------|
+| `code.claude.com/docs/en/hooks` | `claude-code__hooks.md` |
+| `platform.claude.com/en/docs/api/messages/create` | `docs__en__api__messages__create.md` |
+| `platform.claude.com/en/docs/agent-sdk/python` | `docs__en__agent-sdk__python.md` |
 
 ### Rules
 
@@ -248,28 +246,26 @@ docs__en__page.md
 3. **No special characters** except alphanumeric, hyphens, underscores
 4. **Keep `.md` extension**
 5. **Place in `docs/` directory**
+6. **`claude-code__` prefix** for CLI docs, **`docs__en__` prefix** for platform docs
 
 ## Testing Requirements
 
-### Manual Testing (Shell Scripts)
+### Manual Testing (Plugin Skills)
 
-Test on both macOS and Linux:
+Test search scripts on both macOS and Linux:
 
 ```bash
-# Installation
-./install.sh
-~/.claude-code-docs/claude-docs-helper.sh --help
+# Content search
+DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/content-search.sh "hooks"
 
-# Core functionality
-~/.claude-code-docs/claude-docs-helper.sh hooks
-~/.claude-code-docs/claude-docs-helper.sh -t
-~/.claude-code-docs/claude-docs-helper.sh what's new
+# Fuzzy search
+DOCS_DIR=./docs ./plugin/skills/claude-docs/scripts/fuzzy-search.sh "agent sdk"
 
-# Updates
-cd ~/.claude-code-docs && git pull
+# Validation (quick mode)
+DOCS_DIR=./docs ./plugin/skills/claude-docs-validate/scripts/validate-paths.sh --quick
 
-# Uninstall
-./uninstall.sh
+# Or install the plugin locally and test via /docs command
+/plugin install claude-docs@/path/to/claude-code-docs/plugin
 ```
 
 ### Automated Testing (Python Features)
@@ -282,16 +278,16 @@ cd ~/.claude-code-docs && git pull
 pytest
 
 # Run specific test suites
-pytest tests/unit/              # 82 unit tests
-pytest tests/integration/       # 36 integration tests
-pytest tests/validation/        # 56 validation tests
+pytest tests/unit/
+pytest tests/integration/
+pytest tests/validation/
 
-# Check coverage (target: 78%+)
+# Check coverage
 pytest --cov=scripts --cov-report=html
 pytest --cov=scripts --cov-report=term
 
 # Run specific test file
-pytest tests/unit/test_lookup_paths.py -v
+pytest tests/unit/test_lookup_functions.py -v
 
 # Verbose output
 pytest -v
@@ -327,8 +323,7 @@ def test_search_paths_with_limit():
 ```
 
 **Current test status:**
-- Total: 303 tests
-- Passing: 303 (100%)
+Run `pytest tests/ -v` — all tests must pass before submitting a PR.
 
 ## Pull Request Guidelines
 
@@ -412,7 +407,7 @@ git push origin v0.x.x
 
 **When to release:**
 - New Python features complete
-- All tests passing (303/303)
+- All tests passing (`pytest tests/`)
 - Documentation updated
 
 **Process:**
