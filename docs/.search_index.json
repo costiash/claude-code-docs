@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-29T00:43:51Z",
+  "generated_at": "2026-03-29T04:08:00Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "file",
         "where"
       ],
-      "word_count": 27507,
+      "word_count": 27518,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
