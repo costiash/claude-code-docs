@@ -75,7 +75,7 @@ Prompt caching uses the following pricing multipliers relative to base input tok
 
 Cache write tokens are charged when content is first stored. Cache read tokens are charged when a subsequent request retrieves the cached content. A cache hit costs 10% of the standard input price, which means caching pays off after just one cache read for the 5-minute duration (1.25x write), or after two cache reads for the 1-hour duration (2x write).
 
-These multipliers stack with other pricing modifiers, including the Batch API discount, long context pricing, and data residency.
+These multipliers stack with other pricing modifiers, including the Batch API discount and data residency.
 
 For implementation details, supported models, and code examples, see the [prompt caching documentation](/docs/en/build-with-claude/prompt-caching).
 
@@ -127,44 +127,6 @@ For more information about batch processing, see the [batch processing documenta
 ### Long context pricing
 
 Claude Opus 4.6 and Sonnet 4.6 include the full [1M token context window](/docs/en/build-with-claude/context-windows) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
-
-For Claude Sonnet 4.5 and Sonnet 4, the 1M token context window is in beta for organizations in [usage tier](/docs/en/api/rate-limits) 4 and organizations with custom rate limits. When the `context-1m-2025-08-07` beta header is included, requests that exceed 200k input tokens are automatically charged at premium long context rates:
-
-| Model | ≤ 200k input tokens<br />Input | ≤ 200k input tokens<br />Output | > 200k input tokens<br />Input | > 200k input tokens<br />Output |
-| --- | --- | --- | --- | --- |
-| Claude Sonnet 4.5 / 4 | \$3 / MTok | \$15 / MTok | \$6 / MTok | \$22.50 / MTok |
-
-Long context pricing for Sonnet 4.5 and Sonnet 4 stacks with other pricing modifiers:
-- The [Batch API 50% discount](#batch-processing) applies to long context pricing
-- [Prompt caching multipliers](#model-pricing) apply on top of long context pricing
-
-<Note>
-Even with the beta flag enabled, requests with fewer than 200k input tokens are charged at standard rates. If your request exceeds 200k input tokens, all tokens incur premium pricing.
-
-The 200k threshold is based solely on input tokens (including cache reads/writes). Output token count does not affect pricing tier selection, though output tokens are charged at the higher rate when the input threshold is exceeded.
-</Note>
-
-For Claude Sonnet 4.5 and Sonnet 4, to check if your API request was charged at premium long context rates, examine the `usage` object in the API response:
-
-```json
-{
-  "usage": {
-    "input_tokens": 250000,
-    "cache_creation_input_tokens": 0,
-    "cache_read_input_tokens": 0,
-    "output_tokens": 500
-  }
-}
-```
-
-Calculate the total input tokens by summing:
-- `input_tokens`
-- `cache_creation_input_tokens` (if using prompt caching)
-- `cache_read_input_tokens` (if using prompt caching)
-
-If the total exceeds 200,000 tokens, the entire request was billed at premium long context rates.
-
-For more information about the `usage` object, see the [API response documentation](/docs/en/api/messages#response-usage).
 
 ### Tool use pricing
 

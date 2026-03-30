@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-30T18:30:44Z",
+  "generated_at": "2026-03-30T21:24:59Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -140,7 +140,7 @@
         "note",
         "changes"
       ],
-      "word_count": 4016,
+      "word_count": 4028,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -168,7 +168,7 @@
         "agent",
         "permission"
       ],
-      "word_count": 2009,
+      "word_count": 2005,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -280,7 +280,7 @@
         "mode",
         "files"
       ],
-      "word_count": 7549,
+      "word_count": 7548,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -681,26 +681,26 @@
       "keywords": [
         "model",
         "when",
+        "set",
         "code",
         "opus",
-        "set",
         "claude",
         "environment",
-        "effort",
         "sonnet",
-        "context",
+        "effort",
         "settings",
+        "context",
+        "default",
         "models",
-        "variables",
         "version",
+        "variables",
+        "which",
+        "picker",
         "provider",
         "setting",
-        "name",
-        "uses",
-        "reasoning",
-        "specific"
+        "name"
       ],
-      "word_count": 2598,
+      "word_count": 2701,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -739,24 +739,24 @@
         "code",
         "authentication",
         "proxy",
-        "environment",
         "enterprise",
+        "environment",
         "variables",
         "access",
+        "anthropic",
         "network",
         "configuration",
         "custom",
         "security",
         "through",
         "note",
+        "api",
+        "github",
         "configure",
         "environments",
-        "certificate",
-        "mtls",
-        "api",
-        "urls"
+        "certificate"
       ],
-      "word_count": 491,
+      "word_count": 522,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -834,13 +834,13 @@
         "claude",
         "sources",
         "create",
-        "url",
         "github",
+        "url",
         "users",
         "example",
         "files"
       ],
-      "word_count": 4787,
+      "word_count": 4800,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -1232,7 +1232,7 @@
         "when",
         "install"
       ],
-      "word_count": 4483,
+      "word_count": 4486,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
@@ -1354,25 +1354,25 @@
         "claude",
         "sup",
         "opus",
-        "tooltip",
-        "sonnet",
-        "tokens",
         "mtok",
         "yes",
+        "tooltip",
+        "tokens",
+        "sonnet",
         "models",
         "output",
         "model",
         "haiku",
         "anthropic",
+        "input",
+        "api",
         "tooltipcontent",
         "words",
         "unicode",
         "characters",
-        "input",
-        "api",
         "cutoff"
       ],
-      "word_count": 1252,
+      "word_count": 1186,
       "file_path": "docs/docs__en__about-claude__models__overview.md"
     },
     "/docs/en/about-claude/models/whats-new-claude-4-6": {
@@ -1409,26 +1409,26 @@
       "keywords": [
         "mtok",
         "tokens",
-        "pricing",
         "claude",
-        "input",
+        "pricing",
         "tool",
-        "sonnet",
-        "token",
+        "input",
         "cache",
-        "api",
-        "prompt",
+        "token",
         "opus",
+        "sonnet",
+        "prompt",
+        "api",
         "usage",
         "standard",
-        "output",
-        "caching",
         "see",
-        "context",
         "additional",
-        "request"
+        "caching",
+        "per",
+        "web",
+        "models"
       ],
-      "word_count": 3215,
+      "word_count": 2907,
       "file_path": "docs/docs__en__about-claude__pricing.md"
     },
     "/docs/en/about-claude/use-case-guides/content-moderation": {
@@ -1920,8 +1920,8 @@
         "hook",
         "field",
         "output",
-        "identifier",
         "claude",
+        "identifier",
         "message",
         "name",
         "sdk",
@@ -1932,7 +1932,7 @@
         "mcp",
         "server"
       ],
-      "word_count": 12647,
+      "word_count": 12665,
       "file_path": "docs/docs__en__agent-sdk__python.md"
     },
     "/docs/en/agent-sdk/quickstart": {
@@ -2296,7 +2296,7 @@
         "see",
         "file"
       ],
-      "word_count": 8806,
+      "word_count": 8810,
       "file_path": "docs/docs__en__agent-sdk__typescript.md"
     },
     "/docs/en/agent-sdk/user-input": {
@@ -11925,27 +11925,27 @@
       "content_preview": "# Service tiers  Different tiers of service allow you to balance availability, performance, and predictable costs based on your application's needs.  ---  Anthropic offers three service tiers: - **Pri...",
       "keywords": [
         "tier",
-        "tokens",
         "priority",
+        "tokens",
+        "capacity",
         "claude",
+        "requests",
         "per",
         "token",
-        "requests",
-        "capacity",
-        "input",
-        "sonnet",
         "service",
         "request",
-        "output",
         "opus",
         "tiers",
         "standard",
+        "input",
+        "output",
         "cache",
         "note",
         "other",
-        "minute"
+        "minute",
+        "models"
       ],
-      "word_count": 869,
+      "word_count": 798,
       "file_path": "docs/docs__en__api__service-tiers.md"
     },
     "/docs/en/api/supported-regions": {
@@ -13431,8 +13431,8 @@
         "api",
         "title",
         "resource",
-        "note",
         "deployment",
+        "note",
         "model",
         "microsoft",
         "access",
@@ -13445,7 +13445,7 @@
         "keys",
         "python"
       ],
-      "word_count": 2315,
+      "word_count": 2300,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock": {
@@ -13456,24 +13456,24 @@
         "yes",
         "bedrock",
         "anthropic",
-        "sonnet",
         "aws",
+        "sonnet",
         "tab",
         "codegroup",
         "opus",
         "endpoints",
-        "note",
         "pricing",
+        "models",
         "regional",
         "amazon",
-        "models",
-        "api",
+        "note",
         "title",
         "model",
         "available",
-        "through"
+        "through",
+        "api"
       ],
-      "word_count": 2758,
+      "word_count": 2740,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -13482,26 +13482,26 @@
       "keywords": [
         "claude",
         "vertex",
-        "sonnet",
         "tab",
+        "sonnet",
         "opus",
         "endpoints",
         "anthropic",
-        "note",
+        "models",
         "codegroup",
         "pricing",
-        "models",
         "title",
         "regional",
-        "api",
         "google",
+        "note",
         "model",
         "tooltip",
         "haiku",
         "global",
-        "through"
+        "through",
+        "api"
       ],
-      "word_count": 1861,
+      "word_count": 1844,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -13585,7 +13585,7 @@
         "sonnet",
         "conversation"
       ],
-      "word_count": 1763,
+      "word_count": 1739,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/data-residency": {
@@ -13893,7 +13893,7 @@
         "input",
         "requests"
       ],
-      "word_count": 13375,
+      "word_count": 13372,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {
@@ -14295,25 +14295,25 @@
         "claude",
         "api",
         "tool",
-        "more",
         "beta",
+        "more",
         "launched",
         "now",
+        "sonnet",
         "model",
         "models",
-        "sonnet",
         "learn",
         "our",
         "available",
-        "opus",
         "token",
-        "read",
-        "support",
-        "console",
+        "opus",
         "header",
-        "usage"
+        "support",
+        "context",
+        "read",
+        "console"
       ],
-      "word_count": 4426,
+      "word_count": 4500,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {

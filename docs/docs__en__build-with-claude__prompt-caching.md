@@ -271,7 +271,7 @@ The table above reflects the following pricing multipliers for prompt caching:
 - 1-hour cache write tokens are 2 times the base input tokens price
 - Cache read tokens are 0.1 times the base input tokens price
 
-These multipliers stack with other pricing modifiers such as the Batch API discount, long context pricing, and data residency. See [pricing](/docs/en/about-claude/pricing) for full details.
+These multipliers stack with other pricing modifiers such as the Batch API discount and data residency. See [pricing](/docs/en/about-claude/pricing) for full details.
 </Note>
 
 ---
