@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-30T15:38:42Z",
+  "generated_at": "2026-03-30T18:30:44Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -168,7 +168,7 @@
         "agent",
         "permission"
       ],
-      "word_count": 1984,
+      "word_count": 2009,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -274,13 +274,13 @@
         "remote",
         "cli",
         "click",
-        "available",
         "local",
+        "available",
         "computer",
         "mode",
         "files"
       ],
-      "word_count": 7546,
+      "word_count": 7549,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -304,9 +304,9 @@
         "access",
         "documentation",
         "secure",
+        "dev",
         "rules",
-        "only",
-        "extensions"
+        "only"
       ],
       "word_count": 511,
       "file_path": "docs/claude-code__devcontainer.md"
@@ -952,7 +952,7 @@
         "cannot",
         "system"
       ],
-      "word_count": 2597,
+      "word_count": 2603,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -1008,7 +1008,7 @@
         "example",
         "permission"
       ],
-      "word_count": 6756,
+      "word_count": 6775,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
