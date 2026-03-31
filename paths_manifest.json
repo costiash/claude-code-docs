@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-31T00:35:59.694678Z",
-    "total_paths": 694,
+    "generated_at": "2026-03-31T04:00:04.131959Z",
+    "total_paths": 695,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-03-31T00:35:59.694688Z"
+    "last_regenerated": "2026-03-31T04:00:04.131968Z"
   },
   "categories": {
     "core_documentation": [
@@ -102,6 +102,7 @@
       "/docs/en/env-vars",
       "/docs/en/fast-mode",
       "/docs/en/features-overview",
+      "/docs/en/fullscreen",
       "/docs/en/get-started",
       "/docs/en/github-enterprise-server",
       "/docs/en/how-claude-code-works",
