@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-30T21:24:59Z",
+  "generated_at": "2026-03-31T00:43:41Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -21,14 +21,14 @@
         "instead",
         "being",
         "mode",
+        "commands",
         "command",
         "mcp",
-        "commands",
         "memory",
         "file",
-        "where"
+        "bash"
       ],
-      "word_count": 27518,
+      "word_count": 28139,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -124,23 +124,23 @@
         "com",
         "session",
         "code",
-        "www",
         "web",
+        "www",
         "environment",
         "access",
-        "sessions",
         "github",
+        "sessions",
         "run",
-        "network",
-        "cloud",
         "setup",
+        "cloud",
+        "network",
+        "terminal",
         "default",
         "when",
-        "hooks",
         "note",
-        "changes"
+        "hooks"
       ],
-      "word_count": 4028,
+      "word_count": 4177,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -13341,8 +13341,8 @@
       "content_preview": "# Batch processing  ---  Batch processing is a powerful approach for handling large volumes of requests efficiently. Instead of processing requests one at a time with immediate responses, batch proces...",
       "keywords": [
         "batch",
-        "batches",
         "api",
+        "batches",
         "message",
         "requests",
         "processing",
@@ -13351,17 +13351,17 @@
         "mtok",
         "section",
         "messages",
-        "each",
         "claude",
         "codegroup",
         "large",
-        "when",
         "data",
+        "each",
+        "when",
         "may",
         "workspace",
         "result"
       ],
-      "word_count": 6170,
+      "word_count": 6838,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -13691,13 +13691,13 @@
         "turn",
         "request",
         "models",
-        "token",
         "sonnet",
-        "interleaved",
+        "token",
         "see",
+        "interleaved",
         "output"
       ],
-      "word_count": 13455,
+      "word_count": 13488,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -14305,15 +14305,15 @@
         "learn",
         "our",
         "available",
-        "token",
         "opus",
         "header",
+        "token",
         "support",
         "context",
         "read",
         "console"
       ],
-      "word_count": 4500,
+      "word_count": 4540,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {

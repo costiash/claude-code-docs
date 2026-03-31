@@ -2637,8 +2637,8 @@
     "docs__en__build-with-claude__batch-processing.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/batch-processing",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/batch-processing.md",
-      "hash": "c1b8472b5c2e88f4dc47d6eb2ec0e9f60eeeb100f4ca35c8ed5727c3133f0301",
-      "last_updated": "2026-03-27T00:41:48.075666"
+      "hash": "d7e9f58bcd5e7eec6054017e7ece4d6e184ef4ff69217f0f025ea75566e7f6e0",
+      "last_updated": "2026-03-31T00:42:31.062250"
     },
     "docs__en__build-with-claude__citations.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/citations",
@@ -2709,8 +2709,8 @@
     "docs__en__build-with-claude__extended-thinking.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking.md",
-      "hash": "e98889786369782dd0e2e3289da6fdd58dd7a957d2b14ed07ee8419d91ca1309",
-      "last_updated": "2026-03-27T04:04:49.953572"
+      "hash": "c1e9fa87415a890fcd9c1d49fd29d4e1062b4fb05a83199b2f2e0ee93b9b3160",
+      "last_updated": "2026-03-31T00:42:38.727771"
     },
     "docs__en__build-with-claude__fast-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode",
@@ -2835,8 +2835,8 @@
     "claude-code__claude-code-on-the-web.md": {
       "original_url": "https://platform.claude.com/docs/en/claude-code-on-the-web",
       "original_md_url": "https://platform.claude.com/docs/en/claude-code-on-the-web.md",
-      "hash": "2eb9ad67e5beb82310e9cf16714f3692c177978823e4066f59d8445b0bd333ce",
-      "last_updated": "2026-03-30T21:24:16.095038"
+      "hash": "3443669aeaa86e447bfdeea4c00465cccb4e0dade2a8e6b37529facb26231bfb",
+      "last_updated": "2026-03-31T00:42:59.607627"
     },
     "claude-code__cli-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/cli-reference",
@@ -3021,8 +3021,8 @@
     "docs__en__release-notes__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/release-notes/overview",
       "original_md_url": "https://platform.claude.com/docs/en/release-notes/overview.md",
-      "hash": "6834f47e77a9d4c95c0ce886cb9585e650432aff82ebeaed47cd6b6ef294e346",
-      "last_updated": "2026-03-30T21:24:42.815297"
+      "hash": "84a8e2dcdf8498583a78b8ed57b382051a1198cfb2f204e3749fcc83602fa77c",
+      "last_updated": "2026-03-31T00:43:23.802559"
     },
     "docs__en__release-notes__system-prompts.md": {
       "original_url": "https://platform.claude.com/docs/en/release-notes/system-prompts",
@@ -3147,14 +3147,14 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "5e4309f876c77fd5ecf65aee30b6e9166dbfbc3750c080b3730acad744e54997",
-      "last_updated": "2026-03-29T04:07:58.386299",
+      "hash": "4fbfffa1ee0cadb5af82367e91a8b24ed0af74bfe6d5ec7f946cac8079d6629d",
+      "last_updated": "2026-03-31T00:43:40.175042",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-30T21:24:57.825737",
-    "fetch_duration_seconds": 444.036489,
+    "last_fetch_completed": "2026-03-31T00:43:40.175145",
+    "fetch_duration_seconds": 461.058486,
     "total_pages_discovered": 694,
     "pages_fetched_successfully": 525,
     "pages_failed": 170,
@@ -3335,7 +3335,7 @@
     "total_files": 525,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-30T21:24:57.825761",
+  "last_updated": "2026-03-31T00:43:40.175164",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

@@ -1765,6 +1765,253 @@ message_batch = client.messages.batches.create(
 
 In this example, both requests in the batch include identical system messages and the full text of Pride and Prejudice marked with `cache_control` to increase the likelihood of cache hits.
 
+### Extended output (beta)
+
+The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 4.6 or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard limit (64k to 128k depending on model) in a single turn.
+
+<Note>
+Extended output is available on the Message Batches API only, not the synchronous Messages API. It is supported on the Claude API and is not available on Amazon Bedrock, Vertex AI, or Microsoft Foundry.
+</Note>
+
+Use extended output for long-form generation such as book-length drafts and technical documentation, exhaustive structured data extraction, large code-generation scaffolds, and long reasoning chains.
+
+A single 300k-token generation can take over an hour to complete, so plan your batch submissions with the 24-hour processing window in mind. Standard batch pricing (50% of standard API prices) applies.
+
+<CodeGroup>
+
+```bash Shell
+curl https://api.anthropic.com/v1/messages/batches \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "anthropic-beta: output-300k-2026-03-24" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "requests": [
+        {
+            "custom_id": "long-form-request",
+            "params": {
+                "model": "claude-opus-4-6",
+                "max_tokens": 300000,
+                "messages": [
+                    {"role": "user", "content": "Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices."}
+                ]
+            }
+        }
+    ]
+}'
+```
+
+```python Python hidelines={1}
+import anthropic
+from anthropic.types.beta.message_create_params import MessageCreateParamsNonStreaming
+from anthropic.types.beta.messages.batch_create_params import Request
+
+client = anthropic.Anthropic()
+
+message_batch = client.beta.messages.batches.create(
+    betas=["output-300k-2026-03-24"],
+    requests=[
+        Request(
+            custom_id="long-form-request",
+            params=MessageCreateParamsNonStreaming(
+                model="claude-opus-4-6",
+                max_tokens=300_000,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": "Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices.",
+                    }
+                ],
+            ),
+        ),
+    ],
+)
+
+print(message_batch)
+```
+
+```typescript TypeScript hidelines={1..2}
+import Anthropic from "@anthropic-ai/sdk";
+
+const anthropic = new Anthropic();
+
+const messageBatch = await anthropic.beta.messages.batches.create({
+  betas: ["output-300k-2026-03-24"],
+  requests: [
+    {
+      custom_id: "long-form-request",
+      params: {
+        model: "claude-opus-4-6",
+        max_tokens: 300000,
+        messages: [
+          {
+            role: "user",
+            content:
+              "Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices."
+          }
+        ]
+      }
+    }
+  ]
+});
+
+console.log(messageBatch);
+```
+
+```csharp C#
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+using Anthropic.Models.Beta.Messages.Batches;
+
+AnthropicClient client = new();
+
+var batch = await client.Beta.Messages.Batches.Create(new BatchCreateParams
+{
+    Betas = ["output-300k-2026-03-24"],
+    Requests =
+    [
+        new()
+        {
+            CustomID = "long-form-request",
+            Params = new()
+            {
+                Model = "claude-opus-4-6",
+                MaxTokens = 300_000,
+                Messages =
+                [
+                    new() { Role = Role.User, Content = "Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices." }
+                ]
+            }
+        }
+    ]
+});
+
+Console.WriteLine(batch);
+```
+
+```go Go hidelines={1..10,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	batch, err := client.Beta.Messages.Batches.New(context.Background(),
+		anthropic.BetaMessageBatchNewParams{
+			Betas: []anthropic.AnthropicBeta{"output-300k-2026-03-24"},
+			Requests: []anthropic.BetaMessageBatchNewParamsRequest{
+				{
+					CustomID: "long-form-request",
+					Params: anthropic.BetaMessageBatchNewParamsRequestParams{
+						Model:     anthropic.ModelClaudeOpus4_6,
+						MaxTokens: 300_000,
+						Messages: []anthropic.BetaMessageParam{
+							anthropic.NewBetaUserMessage(
+								anthropic.NewBetaTextBlock("Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices."),
+							),
+						},
+					},
+				},
+			},
+		})
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(batch.ID)
+}
+```
+
+```java Java hidelines={1..3,5..6,-1}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.beta.messages.batches.*;
+
+void main() {
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+  BatchCreateParams params = BatchCreateParams.builder()
+    .addBeta("output-300k-2026-03-24")
+    .addRequest(
+      BatchCreateParams.Request.builder()
+        .customId("long-form-request")
+        .params(
+          BatchCreateParams.Request.Params.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(300_000L)
+            .addUserMessage("Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices.")
+            .build()
+        )
+        .build()
+    )
+    .build();
+
+  BetaMessageBatch messageBatch = client.beta().messages().batches().create(params);
+
+  IO.println(messageBatch);
+}
+```
+
+```php PHP hidelines={1..4}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client();
+
+$batch = $client->beta->messages->batches->create(
+    betas: ['output-300k-2026-03-24'],
+    requests: [
+        [
+            'custom_id' => 'long-form-request',
+            'params' => [
+                'model' => 'claude-opus-4-6',
+                'max_tokens' => 300_000,
+                'messages' => [
+                    ['role' => 'user', 'content' => 'Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices.']
+                ]
+            ]
+        ]
+    ],
+);
+
+print_r($batch);
+```
+
+```ruby Ruby hidelines={1..2}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+batch = client.beta.messages.batches.create(
+  betas: ["output-300k-2026-03-24"],
+  requests: [
+    {
+      custom_id: "long-form-request",
+      params: {
+        model: "claude-opus-4-6",
+        max_tokens: 300_000,
+        messages: [
+          { role: "user", content: "Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices." }
+        ]
+      }
+    }
+  ]
+)
+
+puts batch
+```
+
+</CodeGroup>
+
 ### Best practices for effective batching
 
 To get the most out of the Batches API:
