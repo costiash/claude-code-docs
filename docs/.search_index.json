@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-31T00:43:41Z",
+  "generated_at": "2026-03-31T04:06:26Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -260,10 +260,10 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Use Claude Code...",
       "keywords": [
         "claude",
-        "session",
         "desktop",
-        "code",
         "app",
+        "session",
+        "code",
         "sessions",
         "task",
         "settings",
@@ -280,7 +280,7 @@
         "mode",
         "files"
       ],
-      "word_count": 7548,
+      "word_count": 7611,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -476,7 +476,7 @@
         "prompt",
         "session"
       ],
-      "word_count": 13899,
+      "word_count": 13883,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -1139,16 +1139,16 @@
         "when",
         "file",
         "line",
+        "working",
         "shift",
         "ghostty",
         "kitty",
         "terminals",
         "hooks",
-        "mode",
-        "setup",
-        "works"
+        "long",
+        "mode"
       ],
-      "word_count": 632,
+      "word_count": 679,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
@@ -1354,25 +1354,25 @@
         "claude",
         "sup",
         "opus",
+        "tokens",
+        "sonnet",
         "mtok",
         "yes",
         "tooltip",
-        "tokens",
-        "sonnet",
-        "models",
         "output",
+        "models",
         "model",
         "haiku",
         "anthropic",
-        "input",
         "api",
+        "input",
         "tooltipcontent",
         "words",
         "unicode",
         "characters",
         "cutoff"
       ],
-      "word_count": 1186,
+      "word_count": 1221,
       "file_path": "docs/docs__en__about-claude__models__overview.md"
     },
     "/docs/en/about-claude/models/whats-new-claude-4-6": {
@@ -1389,18 +1389,18 @@
         "adaptive",
         "effort",
         "card",
+        "output",
         "mode",
         "parameter",
         "model",
-        "output",
-        "new",
         "beta",
-        "code",
+        "new",
         "api",
         "token",
+        "code",
         "now"
       ],
-      "word_count": 1058,
+      "word_count": 1082,
       "file_path": "docs/docs__en__about-claude__models__whats-new-claude-4-6.md"
     },
     "/docs/en/about-claude/pricing": {

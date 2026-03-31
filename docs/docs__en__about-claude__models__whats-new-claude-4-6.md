@@ -80,9 +80,11 @@ response = client.beta.messages.create(
 
 [Fine-grained tool streaming](/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming) is now generally available on all models and platforms. No beta header is required.
 
-### 128k output tokens
+### Higher output token limits
 
-Opus 4.6 supports up to 128k output tokens, doubling the previous 64k limit. This enables longer thinking budgets and more comprehensive responses. The SDKs require streaming for requests with large `max_tokens` values to avoid HTTP timeouts. If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` to get the complete response. See [Streaming Messages](/docs/en/build-with-claude/streaming#get-the-final-message-without-handling-events) for details.
+Opus 4.6 supports up to 128k output tokens. This enables longer thinking budgets and more comprehensive responses. The SDKs require streaming for requests with large `max_tokens` values to avoid HTTP timeouts. If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` to get the complete response. See [Streaming Messages](/docs/en/build-with-claude/streaming#get-the-final-message-without-handling-events) for details.
+
+On the Message Batches API, Opus 4.6 and Sonnet 4.6 can generate up to 300k output tokens by using the `output-300k-2026-03-24` beta header. See [Batch processing](/docs/en/build-with-claude/batch-processing#extended-output-beta) for details.
 
 ### Data residency controls
 

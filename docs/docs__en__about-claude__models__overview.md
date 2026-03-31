@@ -43,6 +43,10 @@ _<sup>2 - **Reliable knowledge cutoff** indicates the date through which a model
 You can query model capabilities and token limits programmatically with the [Models API](/docs/en/api/models/list). The response includes `max_input_tokens`, `max_tokens`, and a `capabilities` object for every available model.
 </Tip>
 
+<Note>
+The Max output values above apply to the synchronous Messages API. On the [Message Batches API](/docs/en/build-with-claude/batch-processing#extended-output-beta), Opus 4.6 and Sonnet 4.6 support up to 300k output tokens by using the `output-300k-2026-03-24` beta header.
+</Note>
+
 <section title="Legacy models">
 
 The following models are still available. Consider migrating to current models for improved performance:

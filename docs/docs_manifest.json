@@ -27,14 +27,14 @@
     "docs__en__about-claude__models__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/models/overview",
       "original_md_url": "https://platform.claude.com/docs/en/about-claude/models/overview.md",
-      "hash": "ea9cbb0b3a5a36f0499908f863c0440356f8ec9007b9e40860934f73ec33e73a",
-      "last_updated": "2026-03-30T21:17:37.079062"
+      "hash": "6810d59c341b3aed35ad7dc265e125a2901f412d9752591b1a5fed4ffdb10119",
+      "last_updated": "2026-03-31T04:00:06.782628"
     },
     "docs__en__about-claude__models__whats-new-claude-4-6.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-6",
       "original_md_url": "https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-6.md",
-      "hash": "5a5b4a07d373eb1eb1e5291a737adb4ad4833165936881e954ace602d47009bf",
-      "last_updated": "2026-03-27T03:59:27.382653"
+      "hash": "7a98cfa1cc0875b8983e8811a50d94d61beee0a22ff217d9b70bbca5b8d8b555",
+      "last_updated": "2026-03-31T04:00:07.389096"
     },
     "docs__en__about-claude__pricing.md": {
       "original_url": "https://platform.claude.com/docs/en/about-claude/pricing",
@@ -2865,8 +2865,8 @@
     "claude-code__desktop.md": {
       "original_url": "https://platform.claude.com/docs/en/desktop",
       "original_md_url": "https://platform.claude.com/docs/en/desktop.md",
-      "hash": "a280c81f22db7a7a9ca769c58358429e4d95434fc19a49eb1692f672b4add3db",
-      "last_updated": "2026-03-30T21:24:22.236698"
+      "hash": "c5b4a188827a04834f435441c2e6f497e51350641d5d824bba9d6f5593c30d68",
+      "last_updated": "2026-03-31T04:05:51.519306"
     },
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
@@ -2907,8 +2907,8 @@
     "claude-code__hooks.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks",
       "original_md_url": "https://platform.claude.com/docs/en/hooks.md",
-      "hash": "e2ee871d260dc20f747bd26ad7342bd51e073b78b9c180bae8d9eafb2c0e663a",
-      "last_updated": "2026-03-27T18:28:33.319053"
+      "hash": "778d5ee72959b9473c6fec28e347ae75ab23e74e919d731dcc1fa766d512c5ec",
+      "last_updated": "2026-03-31T04:05:57.467493"
     },
     "claude-code__hooks-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks-guide",
@@ -3075,8 +3075,8 @@
     "claude-code__terminal-config.md": {
       "original_url": "https://platform.claude.com/docs/en/terminal-config",
       "original_md_url": "https://platform.claude.com/docs/en/terminal-config.md",
-      "hash": "d81cbaf363ca69a2763b17ae54a7f49c61e0347d40f24c2798c1211b5a8afc9d",
-      "last_updated": "2026-03-21T21:13:58.685356"
+      "hash": "5027c12cdab90b1b5c4893aba50754b11b727cbef1906c88ae3327a7d792c931",
+      "last_updated": "2026-03-31T04:06:16.602787"
     },
     "docs__en__test-and-evaluate__develop-tests.md": {
       "original_url": "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests",
@@ -3153,11 +3153,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-31T00:43:40.175145",
-    "fetch_duration_seconds": 461.058486,
-    "total_pages_discovered": 694,
+    "last_fetch_completed": "2026-03-31T04:06:25.305831",
+    "fetch_duration_seconds": 381.692331,
+    "total_pages_discovered": 695,
     "pages_fetched_successfully": 525,
-    "pages_failed": 170,
+    "pages_failed": 171,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/agent-teams",
@@ -3314,6 +3314,7 @@
       "/docs/en/env-vars",
       "/docs/en/fast-mode",
       "/docs/en/features-overview",
+      "/docs/en/fullscreen",
       "/docs/en/github-enterprise-server",
       "/docs/en/how-claude-code-works",
       "/docs/en/keybindings",
@@ -3335,7 +3336,7 @@
     "total_files": 525,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-31T00:43:40.175164",
+  "last_updated": "2026-03-31T04:06:25.305857",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
