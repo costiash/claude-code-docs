@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-31T04:06:26Z",
+  "generated_at": "2026-03-31T06:40:58Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -1111,16 +1111,16 @@
         "tools",
         "tool",
         "session",
-        "only",
         "prompt",
-        "specific",
+        "only",
         "model",
+        "specific",
         "step",
         "run",
         "uses",
         "hooks"
       ],
-      "word_count": 6225,
+      "word_count": 6258,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
