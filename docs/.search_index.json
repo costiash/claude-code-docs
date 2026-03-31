@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-31T18:30:32Z",
+  "generated_at": "2026-03-31T21:21:33Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -127,12 +127,12 @@
         "web",
         "www",
         "environment",
-        "access",
         "github",
+        "access",
         "sessions",
         "run",
-        "setup",
         "cloud",
+        "setup",
         "network",
         "terminal",
         "default",
@@ -140,7 +140,7 @@
         "note",
         "hooks"
       ],
-      "word_count": 4177,
+      "word_count": 4237,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -155,9 +155,9 @@
         "see",
         "code",
         "only",
+        "file",
         "print",
         "default",
-        "file",
         "start",
         "json",
         "mcp",
@@ -168,7 +168,7 @@
         "agent",
         "permission"
       ],
-      "word_count": 2005,
+      "word_count": 2020,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -427,8 +427,8 @@
       "title": "Automate workflows with hooks",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Automate workflows with hooks  > Run shell commands automatically when Claude Code edits files, finishes tasks, or",
       "keywords": [
-        "hook",
         "hooks",
+        "hook",
         "claude",
         "when",
         "code",
@@ -438,17 +438,17 @@
         "file",
         "see",
         "command",
+        "permission",
         "example",
         "input",
         "run",
         "only",
         "exit",
-        "permission",
+        "prompt",
         "session",
-        "script",
-        "prompt"
+        "script"
       ],
-      "word_count": 5139,
+      "word_count": 5325,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -504,7 +504,7 @@
         "end",
         "context"
       ],
-      "word_count": 2612,
+      "word_count": 2615,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -999,16 +999,16 @@
         "user",
         "file",
         "files",
+        "configuration",
         "marketplace",
         "set",
-        "configuration",
         "hooks",
         "paths",
         "plugins",
         "example",
         "permission"
       ],
-      "word_count": 6775,
+      "word_count": 6782,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1057,14 +1057,14 @@
         "context",
         "session",
         "create",
+        "commands",
         "uses",
         "reference",
-        "them",
+        "directory",
         "invocation",
-        "name",
-        "step"
+        "name"
       ],
-      "word_count": 4652,
+      "word_count": 4703,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1111,8 +1111,8 @@
         "tools",
         "tool",
         "session",
-        "prompt",
         "only",
+        "prompt",
         "model",
         "specific",
         "step",
@@ -1120,7 +1120,7 @@
         "uses",
         "hooks"
       ],
-      "word_count": 6258,
+      "word_count": 6294,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1137,18 +1137,18 @@
         "notifications",
         "enter",
         "when",
-        "file",
         "line",
+        "file",
+        "works",
         "working",
+        "configuration",
         "shift",
         "ghostty",
         "kitty",
         "terminals",
-        "hooks",
-        "long",
-        "mode"
+        "hooks"
       ],
-      "word_count": 679,
+      "word_count": 696,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
