@@ -147,8 +147,8 @@
     "docs__en__agent-sdk__python.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/python",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/python.md",
-      "hash": "f186f267d864110f6e96618177393d4f9afe1f461bb774e5b4b30beba188ae36",
-      "last_updated": "2026-03-30T21:17:49.935395"
+      "hash": "622afad2d8b8833e5928c6f97391030b28bb6bbff632228ad2fc7842f9f47008",
+      "last_updated": "2026-03-31T18:24:09.036886"
     },
     "docs__en__agent-sdk__quickstart.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/quickstart",
@@ -219,8 +219,8 @@
     "docs__en__agent-sdk__typescript.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript",
       "original_md_url": "https://platform.claude.com/docs/en/agent-sdk/typescript.md",
-      "hash": "981eff3fa0e0549966c259b4154d436d1223de20800866bf039290c1b1c97463",
-      "last_updated": "2026-03-30T21:17:57.428544"
+      "hash": "0bba33891bcc6fadd2dc1eb59282377641c343835a6fea53f7aa865f7b90d381",
+      "last_updated": "2026-03-31T18:24:17.188418"
     },
     "docs__en__agent-sdk__typescript-v2-preview.md": {
       "original_url": "https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview",
@@ -3021,8 +3021,8 @@
     "docs__en__release-notes__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/release-notes/overview",
       "original_md_url": "https://platform.claude.com/docs/en/release-notes/overview.md",
-      "hash": "84a8e2dcdf8498583a78b8ed57b382051a1198cfb2f204e3749fcc83602fa77c",
-      "last_updated": "2026-03-31T00:43:23.802559"
+      "hash": "15c3d439915aee763a5478fc92411803adeb5cb42f7e80469f32af1476706d39",
+      "last_updated": "2026-03-31T18:30:15.668550"
     },
     "docs__en__release-notes__system-prompts.md": {
       "original_url": "https://platform.claude.com/docs/en/release-notes/system-prompts",
@@ -3153,8 +3153,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-03-31T15:36:43.327064",
-    "fetch_duration_seconds": 386.368895,
+    "last_fetch_completed": "2026-03-31T18:30:30.915904",
+    "fetch_duration_seconds": 398.840412,
     "total_pages_discovered": 695,
     "pages_fetched_successfully": 525,
     "pages_failed": 171,
@@ -3336,7 +3336,7 @@
     "total_files": 525,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-03-31T15:36:43.327082",
+  "last_updated": "2026-03-31T18:30:30.915928",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

@@ -1193,7 +1193,7 @@ SdkBeta = Literal["context-1m-2025-08-07"]
 Use with the `betas` field in `ClaudeAgentOptions` to enable beta features.
 
 <Warning>
-The `context-1m-2025-08-07` beta is retired as of April 30, 2026. Requests using this header with Claude Sonnet 4.5 or Sonnet 4 will return a 400 error. To use a 1M-token context window, migrate to [Claude Sonnet 4.6 or Claude Opus 4.6](/docs/en/about-claude/models/overview), which include 1M context at standard pricing with no beta header required.
+The `context-1m-2025-08-07` beta is retired as of April 30, 2026. Passing this header with Claude Sonnet 4.5 or Sonnet 4 has no effect, and requests that exceed the standard 200k-token context window return an error. To use a 1M-token context window, migrate to [Claude Sonnet 4.6 or Claude Opus 4.6](/docs/en/about-claude/models/overview), which include 1M context at standard pricing with no beta header required.
 </Warning>
 
 ### `McpSdkServerConfig`

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-31T15:36:44Z",
+  "generated_at": "2026-03-31T18:30:32Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -1932,7 +1932,7 @@
         "mcp",
         "server"
       ],
-      "word_count": 12665,
+      "word_count": 12674,
       "file_path": "docs/docs__en__agent-sdk__python.md"
     },
     "/docs/en/agent-sdk/quickstart": {
@@ -2296,7 +2296,7 @@
         "see",
         "file"
       ],
-      "word_count": 8810,
+      "word_count": 8819,
       "file_path": "docs/docs__en__agent-sdk__typescript.md"
     },
     "/docs/en/agent-sdk/user-input": {
@@ -14306,14 +14306,14 @@
         "our",
         "available",
         "opus",
-        "header",
         "token",
-        "support",
+        "header",
         "context",
+        "support",
         "read",
         "console"
       ],
-      "word_count": 4540,
+      "word_count": 4549,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {
