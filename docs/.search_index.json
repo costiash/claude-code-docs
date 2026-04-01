@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-01T00:46:40Z",
+  "generated_at": "2026-04-01T04:12:08Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -14,21 +14,21 @@
         "improved",
         "now",
         "code",
-        "sessions",
         "tool",
+        "sessions",
+        "instead",
         "after",
         "session",
-        "instead",
         "being",
         "mode",
+        "commands",
         "command",
         "mcp",
-        "commands",
         "memory",
         "file",
-        "where"
+        "bash"
       ],
-      "word_count": 27518,
+      "word_count": 28423,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -39,24 +39,24 @@
         "claude",
         "code",
         "model",
-        "inference",
         "aws",
+        "inference",
         "credentials",
-        "variables",
-        "settings",
-        "configuration",
         "when",
+        "settings",
         "environment",
+        "variables",
+        "configuration",
+        "sso",
         "profile",
+        "region",
+        "file",
         "versions",
         "see",
         "these",
-        "region",
-        "file",
-        "amazon",
-        "iam"
+        "amazon"
       ],
-      "word_count": 1215,
+      "word_count": 1297,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
