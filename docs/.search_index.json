@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-01T15:39:04Z",
+  "generated_at": "2026-04-01T18:29:38Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -812,7 +812,7 @@
         "web",
         "commands"
       ],
-      "word_count": 1562,
+      "word_count": 1594,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -828,19 +828,19 @@
         "see",
         "add",
         "code",
-        "directory",
-        "paths",
         "repository",
+        "directory",
         "claude",
+        "paths",
         "sources",
         "create",
         "github",
         "url",
         "users",
-        "example",
-        "files"
+        "path",
+        "example"
       ],
-      "word_count": 4800,
+      "word_count": 4860,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -912,9 +912,9 @@
         "button",
         "label",
         "span",
+        "cmd",
         "install",
         "alt",
-        "cmd",
         "vid",
         "size",
         "team",
@@ -924,7 +924,7 @@
         "step",
         "return"
       ],
-      "word_count": 3802,
+      "word_count": 3834,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1022,21 +1022,21 @@
         "installation",
         "install",
         "title",
+        "powershell",
         "version",
         "updates",
-        "powershell",
         "tabs",
         "native",
         "wsl",
-        "npm",
         "see",
+        "npm",
         "update",
         "auto",
         "run",
         "macos",
         "settings"
       ],
-      "word_count": 1566,
+      "word_count": 1598,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
