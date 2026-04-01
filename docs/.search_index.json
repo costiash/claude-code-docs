@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-03-31T21:21:33Z",
+  "generated_at": "2026-04-01T00:46:40Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -56,7 +56,7 @@
         "amazon",
         "iam"
       ],
-      "word_count": 1200,
+      "word_count": 1215,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -154,21 +154,21 @@
         "interactive",
         "see",
         "code",
-        "only",
         "file",
+        "only",
         "print",
         "default",
         "start",
         "json",
         "mcp",
+        "agent",
         "flags",
         "name",
         "model",
         "flag",
-        "agent",
         "permission"
       ],
-      "word_count": 2020,
+      "word_count": 2101,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -380,19 +380,19 @@
         "note",
         "cloud",
         "when",
+        "environment",
+        "variables",
         "gcp",
         "access",
+        "endpoints",
+        "support",
         "supported",
-        "environment",
+        "see",
         "set",
-        "variables",
         "documentation",
-        "project",
-        "sonnet",
-        "region",
-        "endpoints"
+        "project"
       ],
-      "word_count": 812,
+      "word_count": 846,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -616,7 +616,7 @@
         "example",
         "project"
       ],
-      "word_count": 6699,
+      "word_count": 6695,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -952,7 +952,7 @@
         "cannot",
         "system"
       ],
-      "word_count": 2603,
+      "word_count": 2609,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -1008,7 +1008,7 @@
         "example",
         "permission"
       ],
-      "word_count": 6782,
+      "word_count": 6819,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1105,9 +1105,9 @@
         "when",
         "main",
         "code",
+        "agent",
         "conversation",
         "context",
-        "agent",
         "tools",
         "tool",
         "session",
@@ -1120,7 +1120,7 @@
         "uses",
         "hooks"
       ],
-      "word_count": 6294,
+      "word_count": 6311,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
