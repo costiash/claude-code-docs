@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-01T18:29:38Z",
+  "generated_at": "2026-04-01T21:25:23Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -179,8 +179,8 @@
         "claude",
         "title",
         "code",
-        "tip",
         "when",
+        "tip",
         "session",
         "steps",
         "thinking",
@@ -188,15 +188,15 @@
         "worktree",
         "plan",
         "specific",
+        "default",
         "ask",
         "files",
-        "default",
         "worktrees",
         "branch",
         "sessions",
         "need"
       ],
-      "word_count": 4969,
+      "word_count": 4987,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -431,24 +431,24 @@
         "hook",
         "claude",
         "when",
-        "code",
         "tool",
+        "code",
         "event",
+        "see",
         "json",
         "file",
-        "see",
         "command",
         "permission",
-        "example",
         "input",
+        "example",
+        "call",
         "run",
         "only",
         "exit",
         "prompt",
-        "session",
-        "script"
+        "reference"
       ],
-      "word_count": 5325,
+      "word_count": 5395,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -459,24 +459,24 @@
         "hook",
         "claude",
         "when",
+        "tool",
         "input",
         "field",
         "json",
         "code",
         "fields",
-        "tool",
         "file",
         "user",
+        "only",
         "event",
         "control",
-        "only",
-        "command",
-        "decision",
         "runs",
-        "prompt",
-        "session"
+        "session",
+        "decision",
+        "command",
+        "output"
       ],
-      "word_count": 13883,
+      "word_count": 14787,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -494,17 +494,17 @@
         "background",
         "search",
         "input",
-        "conversation",
         "prompt",
+        "conversation",
+        "text",
         "word",
         "normal",
         "see",
-        "text",
         "previous",
         "end",
         "context"
       ],
-      "word_count": 2615,
+      "word_count": 2634,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -868,7 +868,7 @@
         "language",
         "paths"
       ],
-      "word_count": 4438,
+      "word_count": 4467,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -998,8 +998,8 @@
         "code",
         "user",
         "file",
-        "files",
         "configuration",
+        "files",
         "marketplace",
         "set",
         "hooks",
@@ -1008,7 +1008,7 @@
         "example",
         "permission"
       ],
-      "word_count": 6819,
+      "word_count": 6936,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1120,7 +1120,7 @@
         "uses",
         "hooks"
       ],
-      "word_count": 6311,
+      "word_count": 6331,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
