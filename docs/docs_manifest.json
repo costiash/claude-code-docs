@@ -363,8 +363,8 @@
     "docs__en__agents-and-tools__tool-use__strict-tool-use.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use.md",
-      "hash": "30ae23800afc813df607bc64b0a8813035bedc5aab3cce77b60bd33620250da4",
-      "last_updated": "2026-03-27T00:36:50.504422"
+      "hash": "5562fb8ea40a1dde2afcc748abee540ce27ffd1edbf00bac77069446737a50dd",
+      "last_updated": "2026-04-02T00:34:25.826333"
     },
     "docs__en__agents-and-tools__tool-use__text-editor-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool",
@@ -2631,8 +2631,8 @@
     "docs__en__build-with-claude__api-and-data-retention.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md",
-      "hash": "ba128651a21b7016c711c44f7190cc1f10e8716118b1105ba28c7c15546b9186",
-      "last_updated": "2026-03-27T21:18:39.656524"
+      "hash": "6a8e62cb5e7af89000cc6d4e4e9bbf70e1fa9757d05931860b6c46458887a5b2",
+      "last_updated": "2026-04-02T00:38:55.867223"
     },
     "docs__en__build-with-claude__batch-processing.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/batch-processing",
@@ -2739,8 +2739,8 @@
     "docs__en__build-with-claude__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/overview",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/overview.md",
-      "hash": "f711fae7ae7f25d5da278683a18fe7f8305e3f3921c3ff1af7573e79cb30cd7d",
-      "last_updated": "2026-03-27T00:41:58.805431"
+      "hash": "cd40a1ca5381b4ac6bf45be6837b53bfd6081478824cec5415632079f22111fe",
+      "last_updated": "2026-04-02T00:39:06.782294"
     },
     "docs__en__build-with-claude__pdf-support.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/pdf-support",
@@ -2793,8 +2793,8 @@
     "docs__en__build-with-claude__structured-outputs.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs.md",
-      "hash": "aa2cbae6e0acaba03d00465ac65368cd86cca4d3bc6a88757a65bee07fa492ad",
-      "last_updated": "2026-03-27T00:42:04.486096"
+      "hash": "ef315a75468fc21a58815d0ce8368b775c4f953d4f0d9de622f12a2d9c08c990",
+      "last_updated": "2026-04-02T00:39:12.269037"
     },
     "docs__en__build-with-claude__token-counting.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
@@ -3147,14 +3147,14 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "cf96989c3ea81d7f7415f845ced61e9169551db842905b21a905d247b9db1636",
-      "last_updated": "2026-04-01T04:12:06.794580",
+      "hash": "2f8d379e34baf8f062a512a3f465fd2c5ba7239b25740c1808f78e35e4c6062d",
+      "last_updated": "2026-04-02T00:39:55.081117",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-01T21:25:21.528208",
-    "fetch_duration_seconds": 416.030926,
+    "last_fetch_completed": "2026-04-02T00:39:55.081223",
+    "fetch_duration_seconds": 368.375699,
     "total_pages_discovered": 695,
     "pages_fetched_successfully": 525,
     "pages_failed": 171,
@@ -3336,7 +3336,7 @@
     "total_files": 525,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-01T21:25:21.528232",
+  "last_updated": "2026-04-02T00:39:55.081239",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

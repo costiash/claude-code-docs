@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-01T21:25:23Z",
+  "generated_at": "2026-04-02T00:39:56Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -16,19 +16,19 @@
         "code",
         "tool",
         "sessions",
-        "instead",
         "after",
+        "instead",
         "session",
-        "being",
         "mode",
+        "being",
+        "mcp",
         "commands",
         "command",
-        "mcp",
         "memory",
         "file",
-        "bash"
+        "where"
       ],
-      "word_count": 28423,
+      "word_count": 28746,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -2931,16 +2931,16 @@
         "title",
         "inputs",
         "agents",
+        "see",
         "calls",
         "section",
+        "phi",
         "uses",
         "mode",
-        "see",
         "limitations",
-        "functions",
-        "agentic"
+        "functions"
       ],
-      "word_count": 2977,
+      "word_count": 3105,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__strict-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/text-editor-tool": {
@@ -13310,30 +13310,30 @@
     },
     "/docs/en/build-with-claude/api-and-data-retention": {
       "title": "API and data retention",
-      "content_preview": "# API and data retention  Learn about how Anthropic's APIs and associated features retain data, including information about which APIs and features are eligible for zero data retention (\"ZDR\").  ---  ...",
+      "content_preview": "# API and data retention  Learn about how Anthropic's APIs and associated features retain data, including information about zero data retention (ZDR) and HIPAA-compliant API access.  ---  <Note> Infor...",
       "keywords": [
-        "zdr",
-        "claude",
-        "api",
-        "data",
-        "yes",
-        "tool",
-        "retention",
-        "anthropic",
         "eligible",
+        "api",
+        "claude",
+        "zdr",
+        "hipaa",
+        "yes",
+        "data",
         "features",
-        "code",
+        "compliance",
+        "tool",
         "section",
-        "standard",
-        "see",
-        "messages",
-        "retained",
+        "anthropic",
         "organization",
+        "status",
+        "code",
+        "retention",
+        "see",
+        "title",
         "sup",
-        "uses",
-        "policy"
+        "phi"
       ],
-      "word_count": 1679,
+      "word_count": 2698,
       "file_path": "docs/docs__en__build-with-claude__api-and-data-retention.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -14072,10 +14072,10 @@
         "json",
         "section",
         "outputs",
-        "title",
         "structured",
-        "claude",
+        "title",
         "schemas",
+        "claude",
         "response",
         "tool",
         "strict",
@@ -14087,9 +14087,9 @@
         "field",
         "tools",
         "example",
-        "fields"
+        "responses"
       ],
-      "word_count": 8575,
+      "word_count": 8654,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/token-counting": {
