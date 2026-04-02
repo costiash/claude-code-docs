@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-02T00:39:56Z",
+  "generated_at": "2026-04-02T04:03:45Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -756,7 +756,7 @@
         "environments",
         "certificate"
       ],
-      "word_count": 522,
+      "word_count": 524,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -767,24 +767,24 @@
         "claude",
         "styles",
         "prompt",
-        "code",
         "system",
+        "code",
         "style",
         "default",
+        "custom",
+        "instructions",
         "file",
         "software",
         "engineering",
         "files",
         "tasks",
-        "instructions",
-        "custom",
         "frontmatter",
         "complete",
         "agent",
-        "such",
+        "built",
         "coding"
       ],
-      "word_count": 671,
+      "word_count": 718,
       "file_path": "docs/claude-code__output-styles.md"
     },
     "/claude-code/overview": {
@@ -1019,24 +1019,24 @@
         "code",
         "claude",
         "windows",
-        "installation",
-        "install",
         "title",
+        "installation",
         "powershell",
-        "version",
-        "updates",
+        "install",
         "tabs",
         "native",
         "wsl",
+        "version",
+        "updates",
         "see",
-        "npm",
-        "update",
-        "auto",
+        "linux",
+        "step",
         "run",
+        "npm",
         "macos",
-        "settings"
+        "update"
       ],
-      "word_count": 1598,
+      "word_count": 1907,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
