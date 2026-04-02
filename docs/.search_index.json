@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-02T12:30:55Z",
+  "generated_at": "2026-04-02T15:32:11Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -77,12 +77,12 @@
         "dashboard",
         "adoption",
         "user",
+        "team",
         "daily",
         "sessions",
         "pull",
         "track",
-        "api",
-        "note"
+        "api"
       ],
       "word_count": 1580,
       "file_path": "docs/claude-code__analytics.md"
@@ -502,9 +502,9 @@
         "see",
         "previous",
         "end",
-        "context"
+        "macos"
       ],
-      "word_count": 2634,
+      "word_count": 2638,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -812,7 +812,7 @@
         "web",
         "commands"
       ],
-      "word_count": 1594,
+      "word_count": 1645,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -915,16 +915,16 @@
         "cmd",
         "install",
         "alt",
+        "team",
         "vid",
         "size",
-        "team",
         "provider",
         "href",
         "aria",
         "step",
         "return"
       ],
-      "word_count": 3834,
+      "word_count": 3872,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1036,7 +1036,7 @@
         "macos",
         "update"
       ],
-      "word_count": 1907,
+      "word_count": 1942,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1064,7 +1064,7 @@
         "invocation",
         "name"
       ],
-      "word_count": 4703,
+      "word_count": 4711,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1078,9 +1078,10 @@
         "claude",
         "code",
         "git",
-        "window",
         "session",
+        "window",
         "codegroup",
+        "name",
         "statusline",
         "output",
         "usage",
@@ -1089,10 +1090,9 @@
         "frame",
         "nibzeslajvh",
         "ydoq",
-        "images",
-        "png"
+        "images"
       ],
-      "word_count": 5140,
+      "word_count": 5199,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1204,7 +1204,7 @@
         "powershell",
         "command"
       ],
-      "word_count": 4678,
+      "word_count": 4677,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
