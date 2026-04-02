@@ -68,7 +68,7 @@ The agent connects to the documentation server, searches for information about h
 
 ## Add an MCP server
 
-You can configure MCP servers in code when calling `query()`, or in a `.mcp.json` file that the SDK loads automatically.
+You can configure MCP servers in code when calling `query()`, or in a `.mcp.json` file loaded via [`settingSources`](#from-a-config-file).
 
 ### In code
 
@@ -129,7 +129,7 @@ asyncio.run(main())
 
 ### From a config file
 
-Create a `.mcp.json` file at your project root. The SDK loads this automatically:
+Create a `.mcp.json` file at your project root. The SDK does not load filesystem settings by default, so set `settingSources: ["project"]` (Python: `setting_sources=["project"]`) in your options for the file to be picked up:
 
 ```json
 {

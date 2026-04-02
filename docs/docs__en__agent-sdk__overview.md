@@ -397,7 +397,7 @@ Everything that makes Claude Code powerful is available in the SDK:
     <CodeGroup>
     ```python Python
     import asyncio
-    from claude_agent_sdk import query, ClaudeAgentOptions
+    from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage, ResultMessage
 
 
     async def main():
@@ -408,15 +408,15 @@ Everything that makes Claude Code powerful is available in the SDK:
             prompt="Read the authentication module",
             options=ClaudeAgentOptions(allowed_tools=["Read", "Glob"]),
         ):
-            if hasattr(message, "subtype") and message.subtype == "init":
-                session_id = message.session_id
+            if isinstance(message, SystemMessage) and message.subtype == "init":
+                session_id = message.data["session_id"]
 
         # Resume with full context from the first query
         async for message in query(
             prompt="Now find all places that call it",  # "it" = auth module
             options=ClaudeAgentOptions(resume=session_id),
         ):
-            if hasattr(message, "result"):
+            if isinstance(message, ResultMessage):
                 print(message.result)
 
 

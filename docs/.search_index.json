@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-02T18:28:20Z",
+  "generated_at": "2026-04-02T21:20:32Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -186,17 +186,17 @@
         "thinking",
         "mode",
         "worktree",
+        "files",
         "plan",
+        "worktrees",
         "specific",
         "default",
         "sessions",
         "ask",
-        "files",
-        "worktrees",
         "branch",
         "need"
       ],
-      "word_count": 5024,
+      "word_count": 5088,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -1008,7 +1008,7 @@
         "example",
         "permission"
       ],
-      "word_count": 6937,
+      "word_count": 6951,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1558,17 +1558,17 @@
         "context",
         "calls",
         "only",
+        "typescript",
         "when",
         "session",
+        "python",
         "what",
         "before",
         "result",
         "turns",
-        "python",
-        "typescript",
         "prompt"
       ],
-      "word_count": 3940,
+      "word_count": 3995,
       "file_path": "docs/docs__en__agent-sdk__agent-loop.md"
     },
     "/docs/en/agent-sdk/claude-code-features": {
@@ -1603,28 +1603,28 @@
       "title": "Track cost and usage",
       "content_preview": "# Track cost and usage  Learn how to track token usage, deduplicate parallel tool calls, and calculate costs with the Claude Agent SDK.  ---  The Claude Agent SDK provides detailed token usage informa...",
       "keywords": [
-        "sdk",
         "message",
+        "sdk",
         "usage",
         "cost",
         "step",
         "result",
         "each",
         "token",
-        "typescript",
-        "call",
-        "messages",
-        "python",
         "per",
-        "total",
+        "call",
+        "typescript",
         "agent",
+        "python",
+        "total",
         "assistant",
+        "messages",
+        "model",
         "track",
-        "multiple",
-        "calls",
-        "claude"
+        "same",
+        "multiple"
       ],
-      "word_count": 1407,
+      "word_count": 1423,
       "file_path": "docs/docs__en__agent-sdk__cost-tracking.md"
     },
     "/docs/en/agent-sdk/custom-tools": {
@@ -1680,7 +1680,7 @@
         "example",
         "sdk"
       ],
-      "word_count": 3265,
+      "word_count": 3266,
       "file_path": "docs/docs__en__agent-sdk__file-checkpointing.md"
     },
     "/docs/en/agent-sdk/hooks": {
@@ -1727,16 +1727,16 @@
         "user",
         "hosting",
         "best",
-        "code",
         "running",
         "pattern",
         "when",
         "tasks",
         "network",
         "each",
-        "cli"
+        "code",
+        "long"
       ],
-      "word_count": 898,
+      "word_count": 907,
       "file_path": "docs/docs__en__agent-sdk__hosting.md"
     },
     "/docs/en/agent-sdk/mcp": {
@@ -1764,7 +1764,7 @@
         "example",
         "claude"
       ],
-      "word_count": 2425,
+      "word_count": 2443,
       "file_path": "docs/docs__en__agent-sdk__mcp.md"
     },
     "/docs/en/agent-sdk/migration-guide": {
@@ -1820,7 +1820,7 @@
         "default",
         "only"
       ],
-      "word_count": 1879,
+      "word_count": 1881,
       "file_path": "docs/docs__en__agent-sdk__modifying-system-prompts.md"
     },
     "/docs/en/agent-sdk/overview": {
@@ -1848,35 +1848,35 @@
         "build",
         "note"
       ],
-      "word_count": 2183,
+      "word_count": 2185,
       "file_path": "docs/docs__en__agent-sdk__overview.md"
     },
     "/docs/en/agent-sdk/permissions": {
       "title": "Configure permissions",
       "content_preview": "# Configure permissions  Control how your agent uses tools with permission modes, hooks, and declarative allow/deny rules.  ---  The Claude Agent SDK provides permission controls to manage how Claude ...",
       "keywords": [
-        "permission",
         "mode",
+        "permission",
         "rules",
-        "claude",
         "tool",
-        "tools",
         "deny",
+        "tools",
+        "claude",
         "step",
         "allow",
         "when",
         "modes",
         "approved",
         "hooks",
-        "typescript",
-        "without",
-        "title",
         "approves",
+        "title",
         "operations",
+        "auto",
+        "without",
         "permissions",
         "agent"
       ],
-      "word_count": 1397,
+      "word_count": 1332,
       "file_path": "docs/docs__en__agent-sdk__permissions.md"
     },
     "/docs/en/agent-sdk/plugins": {
@@ -1918,21 +1918,21 @@
         "input",
         "when",
         "hook",
-        "field",
         "output",
+        "field",
         "claude",
         "identifier",
         "message",
+        "model",
         "name",
         "sdk",
         "optional",
         "example",
         "sandbox",
         "configuration",
-        "mcp",
-        "server"
+        "mcp"
       ],
-      "word_count": 12674,
+      "word_count": 12858,
       "file_path": "docs/docs__en__agent-sdk__python.md"
     },
     "/docs/en/agent-sdk/quickstart": {
@@ -1951,16 +1951,16 @@
         "title",
         "codegroup",
         "typescript",
+        "agents",
         "what",
         "set",
         "run",
-        "agents",
         "bugs",
         "step",
         "environment",
         "api"
       ],
-      "word_count": 1477,
+      "word_count": 1496,
       "file_path": "docs/docs__en__agent-sdk__quickstart.md"
     },
     "/docs/en/agent-sdk/secure-deployment": {
@@ -2072,7 +2072,7 @@
         "control",
         "sessions"
       ],
-      "word_count": 1502,
+      "word_count": 1507,
       "file_path": "docs/docs__en__agent-sdk__slash-commands.md"
     },
     "/docs/en/agent-sdk/streaming-output": {
@@ -2082,8 +2082,8 @@
         "text",
         "tool",
         "streaming",
-        "codegroup",
         "message",
+        "codegroup",
         "messages",
         "stream",
         "agent",
@@ -2091,16 +2091,16 @@
         "responses",
         "each",
         "receive",
+        "python",
+        "typescript",
         "when",
         "calls",
         "complete",
-        "python",
-        "typescript",
         "input",
         "events",
         "type"
       ],
-      "word_count": 1634,
+      "word_count": 1646,
       "file_path": "docs/docs__en__agent-sdk__streaming-output.md"
     },
     "/docs/en/agent-sdk/streaming-vs-single-mode": {
@@ -2156,7 +2156,7 @@
         "when",
         "example"
       ],
-      "word_count": 1773,
+      "word_count": 1803,
       "file_path": "docs/docs__en__agent-sdk__structured-outputs.md"
     },
     "/docs/en/agent-sdk/subagents": {
@@ -2268,7 +2268,7 @@
         "feedback",
         "before"
       ],
-      "word_count": 1319,
+      "word_count": 1323,
       "file_path": "docs/docs__en__agent-sdk__typescript-v2-preview.md"
     },
     "/docs/en/agent-sdk/typescript": {
@@ -2296,7 +2296,7 @@
         "see",
         "file"
       ],
-      "word_count": 8819,
+      "word_count": 8833,
       "file_path": "docs/docs__en__agent-sdk__typescript.md"
     },
     "/docs/en/agent-sdk/user-input": {
@@ -13310,7 +13310,7 @@
     },
     "/docs/en/build-with-claude/api-and-data-retention": {
       "title": "API and data retention",
-      "content_preview": "# API and data retention  Learn about how Anthropic's APIs and associated features retain data, including information about zero data retention (ZDR) and HIPAA-compliant API access.  ---  <Note> Infor...",
+      "content_preview": "# API and data retention  Learn about how Anthropic's APIs and associated features retain data, including information about zero data retention (ZDR) and HIPAA-ready API access.  ---  <Note> Informati...",
       "keywords": [
         "eligible",
         "api",
@@ -13320,10 +13320,10 @@
         "yes",
         "data",
         "features",
-        "compliance",
         "tool",
         "section",
         "anthropic",
+        "readiness",
         "organization",
         "status",
         "code",
@@ -13333,7 +13333,7 @@
         "sup",
         "phi"
       ],
-      "word_count": 2698,
+      "word_count": 2696,
       "file_path": "docs/docs__en__build-with-claude__api-and-data-retention.md"
     },
     "/docs/en/build-with-claude/batch-processing": {

@@ -1,6 +1,6 @@
 # API and data retention
 
-Learn about how Anthropic's APIs and associated features retain data, including information about zero data retention (ZDR) and HIPAA-compliant API access.
+Learn about how Anthropic's APIs and associated features retain data, including information about zero data retention (ZDR) and HIPAA-ready API access.
 
 ---
 
@@ -9,7 +9,7 @@ Information about Anthropic's standard retention policies is set out in [Anthrop
 
 Anthropic offers two data handling arrangements for the Claude API:
 - **Zero data retention (ZDR):** Customer data is not stored at rest after the API response is returned, except where needed to comply with law or combat misuse.
-- **HIPAA compliance:** For organizations handling protected health information (PHI), Anthropic offers HIPAA-compliant API access with a signed Business Associate Agreement (BAA). See [HIPAA compliance](#hipaa-compliance).
+- **HIPAA readiness:** For organizations handling protected health information (PHI), Anthropic offers HIPAA-ready API access with a signed Business Associate Agreement (BAA). See [HIPAA readiness](#hipaa-readiness).
 </Note>
 
 ## Anthropic's approach to data retention
@@ -40,26 +40,26 @@ In the [feature eligibility table](#feature-eligibility), some features are mark
 For the most up-to-date information on what products and features are ZDR-eligible, refer to your contract terms or contact your Anthropic account representative.
 </Note>
 
-## HIPAA compliance
+## HIPAA readiness
 
-The Claude API supports HIPAA-compliant integrations for organizations that handle protected health information (PHI). With a signed BAA and a HIPAA-enabled organization, you can use supported API features to process PHI while maintaining full HIPAA compliance.
+The Claude API supports HIPAA-ready integrations for organizations that handle protected health information (PHI). With a signed BAA and a HIPAA-enabled organization, you can use supported API features to process PHI while supporting your organization's HIPAA compliance.
 
-Previously, organizations that required HIPAA compliance for the Claude API needed to enable ZDR. HIPAA-compliant API access removes this requirement and provides a foundation for Anthropic to progressively enable additional features as they are audited for HIPAA compliance.
+Previously, organizations that required HIPAA readiness for the Claude API needed to enable ZDR. HIPAA-ready API access removes this requirement and provides a foundation for Anthropic to progressively enable additional features as they are audited for HIPAA readiness.
 
 <Note>
-This page covers HIPAA compliance for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise, Claude Code, and configuration requirements, see the [Anthropic Trust Center](https://trust.anthropic.com/resources).
+This page covers HIPAA readiness for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise, Claude Code, and configuration requirements, see the [Anthropic Trust Center](https://trust.anthropic.com/resources).
 </Note>
 
 ### Getting started
 
-To set up HIPAA-compliant API access:
+To set up HIPAA-ready API access:
 
 <Steps>
 <Step title="Sign a Business Associate Agreement">
 Contact the [Anthropic sales team](https://claude.com/contact-sales) to sign a BAA that covers API usage.
 </Step>
 <Step title="Provision a HIPAA-enabled organization">
-Anthropic provisions a dedicated organization with HIPAA compliance controls enabled. This organization automatically enforces feature restrictions, blocking API requests that use non-eligible features.
+Anthropic provisions a dedicated organization with HIPAA readiness controls enabled. This organization automatically enforces feature restrictions, blocking API requests that use non-eligible features.
 </Step>
 <Step title="Build with eligible features">
 Use the [feature eligibility table](#feature-eligibility) to confirm which features are supported. Review the [PHI handling guidelines](#phi-handling-guidelines) for features that require specific restrictions on where PHI can appear. For detailed configuration and compliance requirements, refer to the [HIPAA Implementation Guide](https://trust.anthropic.com/resources).
@@ -67,22 +67,22 @@ Use the [feature eligibility table](#feature-eligibility) to confirm which featu
 </Steps>
 
 <Warning>
-HIPAA compliance is enforced at the organization level. If you need both HIPAA-compliant and general-purpose API access, use separate organizations for each.
+HIPAA readiness is enforced at the organization level. If you need both HIPAA-ready and general-purpose API access, use separate organizations for each.
 </Warning>
 
-### HIPAA compliance scope
+### HIPAA readiness scope
 
-**What HIPAA compliance covers**
+**What HIPAA readiness covers**
 
-- **Claude API:** HIPAA compliance applies to the Claude API (`api.anthropic.com`) for eligible features listed in the [feature eligibility table](#feature-eligibility).
+- **Claude API:** HIPAA readiness applies to the Claude API (`api.anthropic.com`) for eligible features listed in the [feature eligibility table](#feature-eligibility).
 
-**What HIPAA compliance does NOT cover**
+**What HIPAA readiness does NOT cover**
 
 - **Claude consumer products:** Claude Free, Pro, or Max plans
 - **Console and Workbench:** Usage through the Claude Console interface
 - **Third-party platforms:** Claude on AWS Bedrock or Google Cloud Vertex AI (refer to those platforms' compliance documentation)
 - **Third-party integrations:** Data processed by external tools or services connected to your application
-- **Claude Code:** Claude Code is not covered under HIPAA compliance
+- **Claude Code:** Claude Code is not covered under HIPAA readiness
 - **Beta features:** Features in beta are generally not covered under the BAA unless explicitly listed as eligible in the [feature eligibility table](#feature-eligibility)
 
 ### PHI handling guidelines
@@ -110,7 +110,7 @@ Patient-specific information should only appear in message content, where it is 
 
 ### HIPAA error handling
 
-Your signed BAA is the official source of truth for which features are covered under HIPAA compliance. The API also enforces these restrictions automatically: when a HIPAA-enabled organization sends a request that includes a non-eligible feature, the API returns a `400` error to prevent accidental use of features not covered by your BAA:
+Your signed BAA is the official source of truth for which features are covered. The API also enforces these restrictions automatically: when a HIPAA-enabled organization sends a request that includes a non-eligible feature, the API returns a `400` error to prevent accidental use of features not covered by your BAA:
 
 ```json
 {
@@ -126,7 +126,7 @@ The error message lists the non-eligible features detected in the request. Remov
 
 ## Feature eligibility
 
-The following table lists which Claude API features are eligible for ZDR and HIPAA compliance arrangements. For HIPAA-enabled organizations, features marked "No" in the HIPAA column are automatically blocked, and requests that include them return a `400` error.
+The following table lists which Claude API features are eligible for ZDR and HIPAA readiness arrangements. For HIPAA-enabled organizations, features marked "No" in the HIPAA column are automatically blocked, and requests that include them return a `400` error.
 
 | Feature | Endpoint | ZDR eligible | HIPAA eligible | Details |
 | ------- | -------- | ------------ | -------------- | ------- |
@@ -204,15 +204,15 @@ Contact your Anthropic account representative to discuss deletion options for no
 
 </section>
 
-<section title="How does HIPAA compliance differ from ZDR?">
+<section title="How does HIPAA readiness differ from ZDR?">
 
-ZDR prevents customer data from being stored at rest after the API response is returned. HIPAA compliance is a broader set of privacy and security safeguards that protect PHI throughout its lifecycle, including encryption, access controls, and audit logging. HIPAA-compliant API access provides a foundation for progressively enabling more features because data can be retained with proper safeguards rather than requiring immediate deletion.
+ZDR prevents customer data from being stored at rest after the API response is returned. HIPAA readiness involves a broader set of privacy and security safeguards that protect PHI throughout its lifecycle, including encryption, access controls, and audit logging. HIPAA-ready API access provides a foundation for progressively enabling more features because data can be retained with proper safeguards rather than requiring immediate deletion.
 
 </section>
 
-<section title="Do I still need ZDR if I have HIPAA compliance?">
+<section title="Do I still need ZDR if I have HIPAA readiness?">
 
-No. HIPAA-compliant API access is designed as an alternative to ZDR for organizations handling PHI. With HIPAA compliance enabled, you get access to supported API features while maintaining the privacy and security protections that HIPAA requires.
+No. HIPAA-ready API access is designed as an alternative to ZDR for organizations handling PHI. With HIPAA readiness enabled, you get access to supported API features while maintaining the privacy and security protections that HIPAA requires.
 
 </section>
 
@@ -224,19 +224,19 @@ The API returns a `400` error with an `invalid_request_error` type. The error me
 
 <section title="Can I use the same organization for HIPAA and non-HIPAA workloads?">
 
-No. HIPAA compliance is enforced at the organization level and automatically blocks all non-eligible features. Use a separate organization for workloads that do not require HIPAA compliance.
+No. HIPAA readiness is enforced at the organization level and automatically blocks all non-eligible features. Use a separate organization for workloads that do not require HIPAA readiness.
 
 </section>
 
-<section title="How do I request HIPAA-compliant API access?">
+<section title="How do I request HIPAA-ready API access?">
 
-Contact the [Anthropic sales team](https://claude.com/contact-sales) to discuss HIPAA-compliant API access and sign a Business Associate Agreement.
+Contact the [Anthropic sales team](https://claude.com/contact-sales) to discuss HIPAA-ready API access and sign a Business Associate Agreement.
 
 </section>
 
 <section title="Does this apply to Claude on AWS Bedrock or Vertex AI?">
 
-No, only the Claude API is eligible for ZDR and HIPAA compliance. For Claude deployments on AWS Bedrock or Vertex AI, refer to those platforms' data retention and compliance policies.
+No, only the Claude API is eligible for ZDR and HIPAA readiness. For Claude deployments on AWS Bedrock or Vertex AI, refer to those platforms' data retention and compliance policies.
 
 </section>
 
