@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-02T04:03:45Z",
+  "generated_at": "2026-04-02T06:37:22Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -148,27 +148,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # CLI reference  ...",
       "keywords": [
         "session",
-        "claude",
         "mode",
-        "prompt",
+        "claude",
         "interactive",
+        "prompt",
         "see",
         "code",
         "file",
         "only",
+        "start",
         "print",
         "default",
-        "start",
         "json",
         "mcp",
-        "agent",
         "flags",
         "name",
+        "output",
         "model",
         "flag",
         "permission"
       ],
-      "word_count": 2101,
+      "word_count": 2099,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -756,7 +756,7 @@
         "environments",
         "certificate"
       ],
-      "word_count": 524,
+      "word_count": 543,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -884,9 +884,9 @@
         "hooks",
         "directory",
         "step",
-        "code",
         "see",
         "when",
+        "code",
         "root",
         "agents",
         "test",
@@ -896,7 +896,7 @@
         "marketplace",
         "note"
       ],
-      "word_count": 2218,
+      "word_count": 2206,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -1107,9 +1107,9 @@
         "code",
         "agent",
         "conversation",
-        "context",
-        "tools",
         "tool",
+        "tools",
+        "context",
         "session",
         "only",
         "prompt",
@@ -1117,10 +1117,10 @@
         "specific",
         "step",
         "run",
-        "uses",
-        "hooks"
+        "task",
+        "uses"
       ],
-      "word_count": 6331,
+      "word_count": 6409,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
