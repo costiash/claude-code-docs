@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-03T00:42:18Z",
+  "generated_at": "2026-04-03T04:04:44Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -35,8 +35,8 @@
       "title": "Claude Code on Amazon Bedrock",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
-        "claude",
         "bedrock",
+        "claude",
         "code",
         "model",
         "aws",
@@ -56,7 +56,7 @@
         "models",
         "versions"
       ],
-      "word_count": 1357,
+      "word_count": 1363,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -274,13 +274,13 @@
         "remote",
         "cli",
         "click",
+        "windows",
         "local",
         "available",
         "computer",
-        "mode",
-        "files"
+        "mode"
       ],
-      "word_count": 7611,
+      "word_count": 7650,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -604,8 +604,8 @@
         "command",
         "when",
         "url",
-        "const",
         "tools",
+        "const",
         "name",
         "title",
         "tool",
@@ -616,7 +616,7 @@
         "example",
         "project"
       ],
-      "word_count": 6695,
+      "word_count": 6805,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -628,23 +628,23 @@
         "instructions",
         "memory",
         "rules",
-        "auto",
         "project",
+        "auto",
         "directory",
         "file",
         "specific",
         "loaded",
-        "code",
         "context",
         "them",
+        "code",
         "settings",
         "session",
-        "managed",
         "when",
+        "managed",
         "into",
-        "every"
+        "across"
       ],
-      "word_count": 3156,
+      "word_count": 3292,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -859,8 +859,8 @@
         "files",
         "file",
         "lsp",
-        "see",
         "commands",
+        "see",
         "configuration",
         "agents",
         "servers",
@@ -868,7 +868,7 @@
         "language",
         "paths"
       ],
-      "word_count": 4467,
+      "word_count": 4516,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -896,7 +896,7 @@
         "marketplace",
         "note"
       ],
-      "word_count": 2206,
+      "word_count": 2225,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -952,7 +952,7 @@
         "cannot",
         "system"
       ],
-      "word_count": 2610,
+      "word_count": 2620,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -1008,7 +1008,7 @@
         "example",
         "permission"
       ],
-      "word_count": 6951,
+      "word_count": 6961,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
