@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-04-03T18:16:02.495755Z",
-    "total_paths": 695,
+    "generated_at": "2026-04-03T21:12:25.167655Z",
+    "total_paths": 697,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-04-03T18:16:02.495764Z"
+    "last_regenerated": "2026-04-03T21:12:25.167662Z"
   },
   "categories": {
     "core_documentation": [
@@ -98,6 +98,7 @@
       "/docs/en/computer-use",
       "/docs/en/context-window",
       "/docs/en/desktop-quickstart",
+      "/docs/en/desktop-scheduled-tasks",
       "/docs/en/discover-plugins",
       "/docs/en/env-vars",
       "/docs/en/fast-mode",
@@ -124,6 +125,7 @@
       "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-latency",
       "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak",
       "/docs/en/tools-reference",
+      "/docs/en/ultraplan",
       "/docs/en/voice-dictation",
       "/docs/en/web-scheduled-tasks",
       "/docs/en/zero-data-retention"
