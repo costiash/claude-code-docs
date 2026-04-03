@@ -2682,7 +2682,7 @@ puts "Latest version: #{skill.latest_version}"
 **Requirements:**
 - Must include a SKILL.md file at the top level
 - All files must specify a common root directory in their paths
-- Total upload size must be under 8&nbsp;MB
+- Total upload size must be under 30&nbsp;MB
 - YAML frontmatter requirements:
   - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words ("anthropic", "claude")
   - `description`: Maximum 1024 characters, non-empty, no XML tags
@@ -4188,7 +4188,7 @@ response = client.beta.messages.create(
 
 ### Request Limits
 - **Maximum Skills per request:** 8
-- **Maximum Skill upload size:** 8&nbsp;MB (all files combined)
+- **Maximum Skill upload size:** 30&nbsp;MB (all files combined)
 - **YAML frontmatter requirements:**
   - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words
   - `description`: Maximum 1024 characters, non-empty, no XML tags

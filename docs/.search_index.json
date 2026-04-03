@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-03T15:24:58Z",
+  "generated_at": "2026-04-03T18:22:15Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -47,16 +47,16 @@
         "environment",
         "variables",
         "configuration",
-        "see",
         "sso",
         "profile",
         "region",
         "file",
         "amazon",
+        "iam",
         "models",
         "versions"
       ],
-      "word_count": 1363,
+      "word_count": 1393,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -140,7 +140,7 @@
         "note",
         "hooks"
       ],
-      "word_count": 4237,
+      "word_count": 4291,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
