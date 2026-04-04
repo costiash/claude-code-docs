@@ -3147,17 +3147,17 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "d40c206382763718744e4afdf74c2ae9ef4dd59847d1195f67eb44a64aa73fce",
-      "last_updated": "2026-04-03T00:42:16.874071",
+      "hash": "defd2daae1cf67abd162dc991a4c095eeca50f9188bc7e5568cea8b57cf60fa7",
+      "last_updated": "2026-04-04T03:56:24.613341",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-04T00:39:44.150884",
-    "fetch_duration_seconds": 375.704323,
-    "total_pages_discovered": 697,
+    "last_fetch_completed": "2026-04-04T03:56:24.613463",
+    "fetch_duration_seconds": 378.848044,
+    "total_pages_discovered": 700,
     "pages_fetched_successfully": 525,
-    "pages_failed": 173,
+    "pages_failed": 176,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/agent-teams",
@@ -3331,6 +3331,9 @@
       "/docs/en/ultraplan",
       "/docs/en/voice-dictation",
       "/docs/en/web-scheduled-tasks",
+      "/docs/en/whats-new",
+      "/docs/en/whats-new/2026-w13",
+      "/docs/en/whats-new/2026-w14",
       "/docs/en/zero-data-retention"
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
@@ -3338,7 +3341,7 @@
     "total_files": 525,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-04T00:39:44.150908",
+  "last_updated": "2026-04-04T03:56:24.613482",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
