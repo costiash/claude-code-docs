@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-04-04T00:33:28.982178Z",
-    "total_paths": 697,
+    "generated_at": "2026-04-04T03:50:06.260018Z",
+    "total_paths": 700,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-04-04T00:33:28.982185Z"
+    "last_regenerated": "2026-04-04T03:50:06.260024Z"
   },
   "categories": {
     "core_documentation": [
@@ -128,6 +128,9 @@
       "/docs/en/ultraplan",
       "/docs/en/voice-dictation",
       "/docs/en/web-scheduled-tasks",
+      "/docs/en/whats-new",
+      "/docs/en/whats-new/2026-w13",
+      "/docs/en/whats-new/2026-w14",
       "/docs/en/zero-data-retention"
     ],
     "api_reference": [
