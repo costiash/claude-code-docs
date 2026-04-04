@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-04T15:16:55Z",
+  "generated_at": "2026-04-04T18:19:23Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -37,26 +37,26 @@
       "keywords": [
         "bedrock",
         "claude",
-        "code",
         "model",
+        "code",
         "aws",
         "inference",
-        "when",
         "credentials",
+        "when",
         "settings",
+        "configuration",
+        "region",
         "environment",
         "variables",
-        "configuration",
+        "amazon",
         "sso",
         "profile",
-        "region",
         "file",
-        "amazon",
         "iam",
         "models",
         "versions"
       ],
-      "word_count": 1393,
+      "word_count": 1473,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -160,15 +160,15 @@
         "print",
         "flag",
         "default",
+        "name",
         "json",
         "mcp",
         "flags",
-        "name",
         "output",
         "model",
         "permission"
       ],
-      "word_count": 2118,
+      "word_count": 2156,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -249,10 +249,10 @@
         "including",
         "opt",
         "set",
-        "sessions",
-        "security"
+        "settings",
+        "sessions"
       ],
-      "word_count": 1306,
+      "word_count": 1307,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -484,9 +484,9 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Interactive mod...",
       "keywords": [
         "claude",
-        "command",
         "commands",
         "code",
+        "command",
         "mode",
         "line",
         "press",
@@ -504,7 +504,7 @@
         "end",
         "macos"
       ],
-      "word_count": 2638,
+      "word_count": 2635,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -616,7 +616,7 @@
         "example",
         "project"
       ],
-      "word_count": 6805,
+      "word_count": 6845,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -988,27 +988,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code set...",
       "keywords": [
         "settings",
+        "source",
+        "json",
         "managed",
-        "claude",
-        "project",
-        "see",
-        "when",
-        "only",
-        "default",
-        "code",
-        "user",
-        "file",
-        "configuration",
-        "files",
-        "marketplace",
-        "set",
-        "hooks",
-        "paths",
         "plugins",
+        "theme",
+        "acme",
+        "claude",
+        "null",
+        "code",
+        "corp",
+        "tools",
+        "see",
+        "project",
+        "github",
+        "repo",
+        "com",
+        "user",
         "example",
-        "permission"
+        "configuration"
       ],
-      "word_count": 6961,
+      "word_count": 7066,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1043,28 +1043,28 @@
       "title": "Extend Claude with skills",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Extend Claude w...",
       "keywords": [
-        "claude",
         "skill",
+        "claude",
         "skills",
         "when",
         "files",
+        "subagent",
+        "name",
+        "content",
+        "yaml",
         "code",
-        "file",
-        "arguments",
-        "automatically",
-        "invoke",
-        "load",
-        "context",
-        "session",
         "create",
-        "commands",
-        "uses",
+        "see",
+        "session",
+        "run",
+        "description",
+        "invoke",
         "reference",
-        "directory",
-        "invocation",
-        "name"
+        "automatically",
+        "agent",
+        "file"
       ],
-      "word_count": 4711,
+      "word_count": 4803,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1138,6 +1138,7 @@
         "enter",
         "when",
         "line",
+        "mode",
         "file",
         "works",
         "working",
@@ -1145,10 +1146,9 @@
         "shift",
         "ghostty",
         "kitty",
-        "terminals",
-        "hooks"
+        "terminals"
       ],
-      "word_count": 696,
+      "word_count": 695,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
@@ -1196,15 +1196,15 @@
         "installation",
         "installer",
         "macos",
+        "settings",
         "file",
         "solutions",
         "may",
         "directory",
-        "settings",
-        "powershell",
-        "command"
+        "command",
+        "binary"
       ],
-      "word_count": 4677,
+      "word_count": 4726,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
