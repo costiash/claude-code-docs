@@ -2937,8 +2937,8 @@
     "claude-code__legal-and-compliance.md": {
       "original_url": "https://platform.claude.com/docs/en/legal-and-compliance",
       "original_md_url": "https://platform.claude.com/docs/en/legal-and-compliance.md",
-      "hash": "1e34536633a1b259f36724aa11bd73e6675c1fe3a5072ce57383558278611cba",
-      "last_updated": "2026-03-14T00:36:01.372742"
+      "hash": "a2a0ff9d93f11130f49db108b11d3f5230ab72d75d47bf68500fbef297cbe33c",
+      "last_updated": "2026-04-04T00:39:20.242665"
     },
     "claude-code__llm-gateway.md": {
       "original_url": "https://platform.claude.com/docs/en/llm-gateway",
@@ -3069,8 +3069,8 @@
     "claude-code__sub-agents.md": {
       "original_url": "https://platform.claude.com/docs/en/sub-agents",
       "original_md_url": "https://platform.claude.com/docs/en/sub-agents.md",
-      "hash": "233ce9e6fbf6e487727e4d6ab7db62478fc3e7227322ad594d19be4bcac47eda",
-      "last_updated": "2026-04-02T18:28:09.469443"
+      "hash": "3a548045d93ff854bd29427de573a09abfdbf930d139c22a1f624745e69a916b",
+      "last_updated": "2026-04-04T00:39:35.086652"
     },
     "claude-code__terminal-config.md": {
       "original_url": "https://platform.claude.com/docs/en/terminal-config",
@@ -3153,8 +3153,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-03T21:18:43.435688",
-    "fetch_duration_seconds": 378.697119,
+    "last_fetch_completed": "2026-04-04T00:39:44.150884",
+    "fetch_duration_seconds": 375.704323,
     "total_pages_discovered": 697,
     "pages_fetched_successfully": 525,
     "pages_failed": 173,
@@ -3338,7 +3338,7 @@
     "total_files": 525,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-03T21:18:43.435714",
+  "last_updated": "2026-04-04T00:39:44.150908",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

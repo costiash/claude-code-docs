@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-03T21:18:45Z",
+  "generated_at": "2026-04-04T00:39:45Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -542,25 +542,25 @@
         "claude",
         "code",
         "anthropic",
-        "through",
         "usage",
         "baa",
         "api",
-        "pro",
-        "max",
+        "through",
         "authentication",
         "compliance",
         "security",
-        "terms",
-        "service",
-        "free",
-        "using",
+        "users",
+        "pro",
+        "max",
         "legal",
         "agreements",
+        "information",
         "subject",
-        "commercial"
+        "commercial",
+        "terms",
+        "free"
       ],
-      "word_count": 446,
+      "word_count": 444,
       "file_path": "docs/claude-code__legal-and-compliance.md"
     },
     "/claude-code/llm-gateway": {
@@ -1103,24 +1103,24 @@
         "subagents",
         "claude",
         "when",
+        "agent",
         "main",
         "code",
-        "agent",
         "conversation",
-        "tools",
         "context",
         "tool",
         "session",
+        "tools",
         "only",
         "prompt",
-        "model",
         "specific",
+        "model",
+        "uses",
         "step",
         "run",
-        "task",
-        "uses"
+        "task"
       ],
-      "word_count": 6415,
+      "word_count": 6437,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
