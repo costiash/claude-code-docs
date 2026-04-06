@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-06T18:30:10Z",
+  "generated_at": "2026-04-06T21:20:58Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -13264,11 +13264,11 @@
         "extended",
         "mode",
         "note",
-        "models",
         "output",
+        "sonnet",
+        "models",
         "blocks",
         "opus",
-        "sonnet",
         "effort",
         "field",
         "summarized",
@@ -13277,7 +13277,7 @@
         "full",
         "api"
       ],
-      "word_count": 3525,
+      "word_count": 3522,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/administration-api": {
@@ -13621,27 +13621,27 @@
       "content_preview": "# Effort  Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.  ---  <Note> This feature is eligible for [Zero...",
       "keywords": [
         "effort",
-        "thinking",
         "claude",
+        "thinking",
         "when",
         "token",
         "parameter",
         "tool",
+        "sonnet",
         "opus",
         "levels",
         "calls",
-        "sonnet",
-        "high",
         "tasks",
+        "high",
+        "capability",
         "note",
         "lower",
-        "capability",
         "speed",
         "where",
         "control",
         "tokens"
       ],
-      "word_count": 1481,
+      "word_count": 1489,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {

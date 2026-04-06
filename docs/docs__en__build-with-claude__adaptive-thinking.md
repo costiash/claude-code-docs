@@ -291,7 +291,7 @@ You can combine adaptive thinking with the [effort parameter](/docs/en/build-wit
 
 | Effort level | Thinking behavior |
 |:-------------|:------------------|
-| `max` | Claude always thinks with no constraints on thinking depth. Opus 4.6 only. Requests using `max` on other models return an error. |
+| `max` | Claude always thinks with no constraints on thinking depth. Available on Claude Opus 4.6 and Claude Sonnet 4.6. |
 | `high` (default) | Claude always thinks. Provides deep reasoning on complex tasks. |
 | `medium` | Claude uses moderate thinking. May skip thinking for very simple queries. |
 | `low` | Claude minimizes thinking. Skips thinking for simple tasks where speed matters most. |
