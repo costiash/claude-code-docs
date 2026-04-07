@@ -579,10 +579,6 @@ If Claude completes tasks directly instead of delegating to your subagent:
 
 Agents defined in `.claude/agents/` are loaded at startup only. If you create a new agent file while Claude Code is running, restart the session to load it.
 
-### Windows: long prompt failures
-
-On Windows, subagents with very long prompts may fail due to command line length limits (8191 chars). Keep prompts concise or use filesystem-based agents for complex instructions.
-
 ## Related documentation
 
 - [Claude Code subagents](https://code.claude.com/docs/en/sub-agents): comprehensive subagent documentation including filesystem-based definitions

@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-07T18:29:59Z",
-  "indexed_files": 631,
+  "generated_at": "2026-04-07T21:26:04Z",
+  "indexed_files": 632,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -16,19 +16,19 @@
         "tool",
         "code",
         "sessions",
+        "instead",
         "after",
         "session",
-        "instead",
         "mode",
         "being",
-        "commands",
         "mcp",
+        "commands",
         "command",
-        "memory",
         "file",
-        "prompt"
+        "memory",
+        "where"
       ],
-      "word_count": 29354,
+      "word_count": 29808,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -461,9 +461,9 @@
         "when",
         "tool",
         "input",
+        "code",
         "field",
         "json",
-        "code",
         "fields",
         "file",
         "user",
@@ -476,7 +476,7 @@
         "command",
         "output"
       ],
-      "word_count": 14787,
+      "word_count": 14852,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -1191,20 +1191,20 @@
         "see",
         "issues",
         "linux",
-        "path",
         "check",
+        "path",
         "installation",
+        "settings",
         "installer",
         "macos",
-        "settings",
         "file",
         "solutions",
         "may",
         "directory",
         "command",
-        "binary"
+        "run"
       ],
-      "word_count": 4726,
+      "word_count": 4893,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
@@ -1232,7 +1232,7 @@
         "when",
         "install"
       ],
-      "word_count": 4479,
+      "word_count": 4482,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
@@ -1558,17 +1558,17 @@
         "context",
         "calls",
         "only",
-        "typescript",
         "when",
         "session",
-        "python",
+        "typescript",
         "what",
         "before",
         "result",
         "turns",
+        "python",
         "prompt"
       ],
-      "word_count": 3995,
+      "word_count": 3996,
       "file_path": "docs/docs__en__agent-sdk__agent-loop.md"
     },
     "/docs/en/agent-sdk/claude-code-features": {
@@ -1634,10 +1634,10 @@
         "tool",
         "claude",
         "tools",
-        "see",
-        "sdk",
         "server",
         "python",
+        "see",
+        "sdk",
         "codegroup",
         "mcp",
         "typescript",
@@ -1648,11 +1648,11 @@
         "them",
         "schema",
         "custom",
+        "error",
         "only",
-        "reference",
-        "docs"
+        "result"
       ],
-      "word_count": 3848,
+      "word_count": 3890,
       "file_path": "docs/docs__en__agent-sdk__custom-tools.md"
     },
     "/docs/en/agent-sdk/file-checkpointing": {
@@ -1857,26 +1857,26 @@
       "keywords": [
         "mode",
         "permission",
+        "tools",
         "rules",
         "tool",
         "deny",
-        "tools",
         "claude",
         "step",
         "allow",
         "when",
         "modes",
+        "approves",
         "approved",
         "hooks",
-        "approves",
         "title",
+        "run",
         "operations",
         "auto",
-        "without",
         "permissions",
         "agent"
       ],
-      "word_count": 1332,
+      "word_count": 1369,
       "file_path": "docs/docs__en__agent-sdk__permissions.md"
     },
     "/docs/en/agent-sdk/plugins": {
@@ -1932,7 +1932,7 @@
         "configuration",
         "mcp"
       ],
-      "word_count": 12858,
+      "word_count": 12859,
       "file_path": "docs/docs__en__agent-sdk__python.md"
     },
     "/docs/en/agent-sdk/quickstart": {
@@ -2044,7 +2044,7 @@
         "relevant",
         "typescript"
       ],
-      "word_count": 1211,
+      "word_count": 1241,
       "file_path": "docs/docs__en__agent-sdk__skills.md"
     },
     "/docs/en/agent-sdk/slash-commands": {
@@ -2123,12 +2123,12 @@
         "claude",
         "sdk",
         "when",
-        "hooks",
         "need",
         "understanding",
-        "two"
+        "two",
+        "modes"
       ],
-      "word_count": 835,
+      "word_count": 830,
       "file_path": "docs/docs__en__agent-sdk__streaming-vs-single-mode.md"
     },
     "/docs/en/agent-sdk/structured-outputs": {
@@ -2174,17 +2174,17 @@
         "example",
         "note",
         "session",
-        "based",
         "tools",
         "codegroup",
         "main",
+        "based",
         "only",
         "parent",
         "sdk",
         "context",
         "conversation"
       ],
-      "word_count": 3187,
+      "word_count": 3155,
       "file_path": "docs/docs__en__agent-sdk__subagents.md"
     },
     "/docs/en/agent-sdk/todo-tracking": {
@@ -2278,17 +2278,17 @@
         "tool",
         "name",
         "type",
+        "when",
         "session",
         "returns",
-        "when",
         "description",
         "mcp",
         "agent",
         "configuration",
         "sandbox",
         "claude",
-        "message",
         "model",
+        "message",
         "sdk",
         "user",
         "settings",
@@ -2296,7 +2296,7 @@
         "see",
         "file"
       ],
-      "word_count": 8833,
+      "word_count": 8842,
       "file_path": "docs/docs__en__agent-sdk__typescript.md"
     },
     "/docs/en/agent-sdk/user-input": {
@@ -14546,6 +14546,34 @@
       "word_count": 1411,
       "file_path": "docs/docs__en__build-with-claude__claude-code-analytics-api.md"
     },
+    "/docs/en/build-with-claude/claude-in-amazon-bedrock": {
+      "title": "Claude in Amazon Bedrock",
+      "content_preview": "# Claude in Amazon Bedrock  Access Claude models through Amazon Bedrock with AWS-native authentication, billing, and security boundaries.  ---  This guide walks you through setting up and making API c...",
+      "keywords": [
+        "bedrock",
+        "aws",
+        "tab",
+        "title",
+        "claude",
+        "amazon",
+        "anthropic",
+        "api",
+        "role",
+        "step",
+        "account",
+        "access",
+        "model",
+        "request",
+        "service",
+        "steps",
+        "token",
+        "data",
+        "research",
+        "preview"
+      ],
+      "word_count": 1304,
+      "file_path": "docs/docs__en__build-with-claude__claude-in-amazon-bedrock.md"
+    },
     "/docs/en/build-with-claude/claude-in-microsoft-foundry": {
       "title": "Claude in Microsoft Foundry",
       "content_preview": "# Claude in Microsoft Foundry  Access Claude models through Microsoft Foundry with Azure-native endpoints and authentication.  ---  This guide walks you through the process of setting up and making AP...",
@@ -14576,7 +14604,7 @@
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock": {
       "title": "Claude on Amazon Bedrock",
-      "content_preview": "# Claude on Amazon Bedrock  Anthropic's Claude models are now generally available through Amazon Bedrock.  ---  Calling Claude through Bedrock slightly differs from how you would call Claude when using Anthropic's client SDKs. This guide walks you through completing an API call to Claude on Bedrock",
+      "content_preview": "# Claude on Amazon Bedrock  Anthropic's Claude models are now generally available through Amazon Bedrock.  ---  <Note> This page covers the legacy Amazon Bedrock integration (the `InvokeModel` API wit...",
       "keywords": [
         "claude",
         "yes",
@@ -14585,21 +14613,21 @@
         "aws",
         "sonnet",
         "tab",
+        "note",
         "codegroup",
+        "amazon",
         "opus",
         "endpoints",
-        "note",
-        "pricing",
-        "amazon",
-        "models",
         "model",
+        "pricing",
+        "models",
+        "api",
         "regional",
         "available",
-        "title",
-        "through",
-        "api"
+        "see",
+        "title"
       ],
-      "word_count": 2764,
+      "word_count": 2804,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -15421,16 +15449,16 @@
         "claude",
         "api",
         "tool",
-        "beta",
         "more",
-        "launched",
+        "beta",
         "now",
+        "launched",
         "sonnet",
         "model",
         "models",
+        "available",
         "learn",
         "our",
-        "available",
         "opus",
         "token",
         "header",
@@ -15439,7 +15467,7 @@
         "read",
         "console"
       ],
-      "word_count": 4578,
+      "word_count": 4638,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {

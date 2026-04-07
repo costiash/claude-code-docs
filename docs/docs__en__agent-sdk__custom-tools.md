@@ -17,7 +17,7 @@ This guide covers how to define tools with input schemas and handlers, bundle th
 | Pre-approve a tool | Add to your allowed tools. See [Configure allowed tools](#configure-allowed-tools). |
 | Remove a built-in tool from Claude's context | Pass a `tools` array listing only the built-ins you want. See [Configure allowed tools](#configure-allowed-tools). |
 | Let Claude call tools in parallel | Set `readOnlyHint: true` on tools with no side effects. See [Add tool annotations](#add-tool-annotations). |
-| Handle errors without stopping the loop | Return `isError: true` instead of throwing. See [Handle errors](#handle-errors). |
+| Control the error message Claude sees | Return `isError: true` instead of throwing. See [Handle errors](#handle-errors). |
 | Return images or files | Use `image` or `resource` blocks in the content array. See [Return images and resources](#return-images-and-resources). |
 | Scale to many tools | Use [tool search](/docs/en/agent-sdk/tool-search) to load tools on demand. |
 
@@ -339,12 +339,12 @@ To limit which built-ins Claude can use, prefer `tools` over disallowed tools. O
 
 ## Handle errors
 
-How your handler reports errors determines whether the agent loop continues or stops:
+In both cases the agent loop continues. An uncaught exception is wrapped by the MCP server and surfaces to Claude as a tool error result, so the loop does not stop. Returning `isError: true` (TypeScript) or `"is_error": True` (Python) is preferred because it lets you control the error message Claude sees:
 
 | What happens | Result |
 |:-------------|:-------|
-| Handler throws an uncaught exception | Agent loop stops. Claude never sees the error, and the `query` call fails. |
-| Handler catches the error and returns `isError: true` (TS) / `"is_error": True` (Python) | Agent loop continues. Claude sees the error as data and can retry, try a different tool, or explain the failure. |
+| Handler throws an uncaught exception | Agent loop continues. Claude sees the exception's stringified message as the tool result. |
+| Handler catches the error and returns `isError: true` (TS) / `"is_error": True` (Python) | Agent loop continues. Claude sees your formatted error message as data and can retry, try a different tool, or explain the failure. |
 
 The example below catches two kinds of failures inside the handler instead of letting them throw. A non-200 HTTP status is caught from the response and returned as an error result. A network error or invalid JSON is caught by the surrounding `try/except` (Python) or `try/catch` (TypeScript) and also returned as an error result. In both cases the handler returns normally and the agent loop continues.
 
@@ -381,8 +381,8 @@ async def fetch_data(args: dict[str, Any]) -> dict[str, Any]:
             data = response.json()
             return {"content": [{"type": "text", "text": json.dumps(data, indent=2)}]}
     except Exception as e:
-        # Catching here keeps the agent loop alive. An uncaught exception
-        # would end the whole query() call.
+        # Catching here lets you control the error message Claude sees instead
+        # of surfacing the raw exception string.
         return {
             "content": [{"type": "text", "text": f"Failed to fetch data: {str(e)}"}],
             "is_error": True,
@@ -424,8 +424,8 @@ tool(
         ]
       };
     } catch (error) {
-      // Catching here keeps the agent loop alive. An uncaught throw
-      // would end the whole query() call.
+      // Catching here lets you control the error message Claude sees instead
+      // of surfacing the raw exception string.
       return {
         content: [
           {
