@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-06T21:20:58Z",
+  "generated_at": "2026-04-07T00:43:53Z",
   "indexed_files": 589,
   "index": {
     "/changelog": {
@@ -14182,26 +14182,26 @@
       "keywords": [
         "api",
         "messages",
-        "claude",
         "codegroup",
+        "claude",
         "see",
         "guide",
-        "response",
         "using",
+        "response",
+        "patterns",
         "examples",
+        "requests",
         "vision",
         "conversational",
         "computer",
-        "patterns",
         "basic",
-        "requests",
+        "prefill",
         "note",
         "feature",
         "data",
-        "zdr",
-        "through"
+        "zdr"
       ],
-      "word_count": 2688,
+      "word_count": 2700,
       "file_path": "docs/docs__en__build-with-claude__working-with-messages.md"
     },
     "/docs/en/build-with-claude/workspaces": {
@@ -16226,8 +16226,8 @@
       "keywords": [
         "name",
         "revenue",
-        "claude",
         "user",
+        "claude",
         "metric",
         "entry",
         "section",
@@ -16245,7 +16245,7 @@
         "item",
         "enterprise"
       ],
-      "word_count": 1507,
+      "word_count": 1502,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__increase-consistency.md"
     },
     "/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks": {
@@ -16357,7 +16357,7 @@
         "processing",
         "key"
       ],
-      "word_count": 427,
+      "word_count": 423,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__reduce-prompt-leak.md"
     }
   }
