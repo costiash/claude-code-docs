@@ -350,7 +350,7 @@ For all currently supported features on Vertex AI, see [API features overview](/
 
 ### Context window
 
-Claude Opus 4.6 and Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4, have a 200k-token context window.
+Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4, have a 200k-token context window.
 
 Vertex AI limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
@@ -711,6 +711,10 @@ message = client.messages.create(
 puts message.content.first.text
 ```
 </CodeGroup>
+
+<Note>
+Claude Mythos Preview is a research preview available to invited customers on Google Vertex AI.  For more information, see [Project Glasswing](https://anthropic.com/glasswing).
+</Note>
 
 ### Additional resources
 

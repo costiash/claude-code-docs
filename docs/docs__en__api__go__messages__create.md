@@ -4385,6 +4385,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `const AssistantAssistant Assistant = "assistant"`
 
+  - `StopDetails RefusalStopDetails`
+
+    Structured information about a refusal.
+
+    - `Category RefusalStopDetailsCategory`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
+
+      - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
+
+    - `Explanation string`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `Type Refusal`
+
+      - `const RefusalRefusal Refusal = "refusal"`
+
   - `StopReason StopReason`
 
     The reason that we stopped.

@@ -14,7 +14,7 @@ Upload File
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -55,6 +55,10 @@ Upload File
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -97,7 +101,7 @@ Upload File
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/files?beta=true \
+curl https://api.anthropic.com/v1/files \
     -H 'Content-Type: multipart/form-data' \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \
@@ -135,7 +139,7 @@ List Files
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -176,6 +180,10 @@ List Files
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -232,7 +240,7 @@ List Files
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/files?beta=true \
+curl https://api.anthropic.com/v1/files \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -258,7 +266,7 @@ Download File
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -300,10 +308,14 @@ Download File
 
     - `"fast-mode-2026-02-01"`
 
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/files/$FILE_ID/content?beta=true \
+curl https://api.anthropic.com/v1/files/$FILE_ID/content \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -329,7 +341,7 @@ Get File Metadata
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -370,6 +382,10 @@ Get File Metadata
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -412,7 +428,7 @@ Get File Metadata
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/files/$FILE_ID?beta=true \
+curl https://api.anthropic.com/v1/files/$FILE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -438,7 +454,7 @@ Delete File
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -480,6 +496,10 @@ Delete File
 
     - `"fast-mode-2026-02-01"`
 
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
 ### Returns
 
 - `DeletedFile = object { id, type }`
@@ -499,7 +519,7 @@ Delete File
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/files/$FILE_ID?beta=true \
+curl https://api.anthropic.com/v1/files/$FILE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \

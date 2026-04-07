@@ -112,18 +112,7 @@ The ratio of input to output tokens you purchase matters. Sizing your Priority T
 
 ### Supported models
 
-Priority Tier is supported by:
-
-- Claude Opus 4.6
-- Claude Opus 4.5
-- Claude Opus 4.1
-- Claude Opus 4
-- Claude Sonnet 4.6
-- Claude Sonnet 4.5
-- Claude Sonnet 4
-- Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
-- Claude Haiku 4.5
-- Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations))
+Priority Tier is supported on all available Claude models except [Claude Mythos Preview](https://anthropic.com/glasswing).
 
 Check the [model overview page](/docs/en/about-claude/models/overview) for more details on available models.
 

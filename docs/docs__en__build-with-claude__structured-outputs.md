@@ -12,7 +12,7 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 These features can be used independently or together in the same request.
 
 <Note>
-Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are in beta on Microsoft Foundry.
+Structured outputs are generally available on the Claude API and Amazon Bedrock for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are in beta on Microsoft Foundry. Structured outputs are not supported on Google Cloud's Vertex AI for Claude Mythos Preview.
 </Note>
 
 <Note>

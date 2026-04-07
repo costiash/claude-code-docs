@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-07T15:39:45Z",
-  "indexed_files": 589,
+  "generated_at": "2026-04-07T18:29:59Z",
+  "indexed_files": 631,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -1372,7 +1372,7 @@
         "characters",
         "cutoff"
       ],
-      "word_count": 1221,
+      "word_count": 1255,
       "file_path": "docs/docs__en__about-claude__models__overview.md"
     },
     "/docs/en/about-claude/models/whats-new-claude-4-6": {
@@ -1428,7 +1428,7 @@
         "web",
         "models"
       ],
-      "word_count": 2907,
+      "word_count": 2909,
       "file_path": "docs/docs__en__about-claude__pricing.md"
     },
     "/docs/en/about-claude/use-case-guides/content-moderation": {
@@ -2234,13 +2234,13 @@
         "servers",
         "than",
         "sdk",
-        "claude",
         "loading",
         "available",
         "they",
-        "later"
+        "custom",
+        "reference"
       ],
-      "word_count": 898,
+      "word_count": 879,
       "file_path": "docs/docs__en__agent-sdk__tool-search.md"
     },
     "/docs/en/agent-sdk/typescript-v2-preview": {
@@ -2586,25 +2586,25 @@
         "execution",
         "code",
         "tool",
-        "claude",
         "files",
         "api",
+        "claude",
         "file",
         "tools",
         "python",
         "container",
         "when",
+        "bash",
         "data",
         "environment",
+        "note",
         "response",
-        "bash",
         "web",
         "request",
-        "note",
         "version",
         "operations"
       ],
-      "word_count": 5178,
+      "word_count": 5138,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -2645,22 +2645,22 @@
         "when",
         "what",
         "examples",
+        "note",
         "example",
         "using",
         "schema",
         "parameter",
         "prompt",
+        "model",
         "complex",
-        "note",
         "description",
         "optional",
         "any",
-        "model",
         "tip",
         "more",
         "must"
       ],
-      "word_count": 2632,
+      "word_count": 2679,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__define-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
@@ -2839,24 +2839,24 @@
         "parallel",
         "calls",
         "claude",
-        "prompting",
         "message",
         "see",
         "user",
         "section",
-        "sonnet",
         "when",
-        "tools",
         "default",
         "results",
-        "opus",
+        "prompting",
         "formatting",
         "format",
         "history",
+        "tools",
         "one",
-        "working"
+        "working",
+        "single",
+        "handle"
       ],
-      "word_count": 3266,
+      "word_count": 3210,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__parallel-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/programmatic-tool-calling": {
@@ -3080,7 +3080,7 @@
         "blocks",
         "format"
       ],
-      "word_count": 2971,
+      "word_count": 2974,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-search-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching": {
@@ -3155,16 +3155,16 @@
         "when",
         "tools",
         "fetched",
+        "only",
         "documents",
         "dynamic",
-        "only",
         "data",
         "results",
         "url",
         "citations",
         "error"
       ],
-      "word_count": 2463,
+      "word_count": 2493,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -3175,24 +3175,24 @@
         "web",
         "tool",
         "claude",
-        "results",
         "api",
+        "results",
         "filtering",
         "tools",
         "response",
+        "note",
         "dynamic",
         "error",
         "citations",
-        "note",
         "content",
         "token",
+        "available",
         "see",
         "server",
         "when",
-        "must",
-        "source"
+        "must"
       ],
-      "word_count": 2165,
+      "word_count": 2194,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -4127,7 +4127,7 @@
     },
     "/docs/en/api/beta": {
       "title": "Beta",
-      "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `AnthropicBeta = string or \"message-batches-2024-09-24\" or \"prompt-caching-2024-07-31\" or \"computer-use-2024-10-22\" or 17 more`    - `UnionMember0 = stri...",
+      "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `AnthropicBeta = string or \"message-batches-2024-09-24\" or \"prompt-caching-2024-07-31\" or \"computer-use-2024-10-22\" or 19 more`    - `UnionMember0 = stri...",
       "keywords": [
         "tool",
         "cache",
@@ -4136,13 +4136,13 @@
         "breakpoint",
         "content",
         "block",
-        "number",
         "create",
+        "number",
         "one",
         "may",
+        "when",
         "time",
         "tokens",
-        "when",
         "defaults",
         "hour",
         "values",
@@ -4150,7 +4150,7 @@
         "used",
         "live"
       ],
-      "word_count": 114558,
+      "word_count": 117424,
       "file_path": "docs/docs__en__api__beta.md"
     },
     "/docs/en/api/beta/files": {
@@ -4178,7 +4178,7 @@
         "deleted",
         "unique"
       ],
-      "word_count": 1087,
+      "word_count": 1107,
       "file_path": "docs/docs__en__api__beta__files.md"
     },
     "/docs/en/api/beta/files/delete": {
@@ -4203,7 +4203,7 @@
         "always",
         "example"
       ],
-      "word_count": 146,
+      "word_count": 150,
       "file_path": "docs/docs__en__api__beta__files__delete.md"
     },
     "/docs/en/api/beta/files/download": {
@@ -4223,7 +4223,7 @@
         "want",
         "example"
       ],
-      "word_count": 109,
+      "word_count": 113,
       "file_path": "docs/docs__en__api__beta__files__download.md"
     },
     "/docs/en/api/beta/files/list": {
@@ -4251,7 +4251,7 @@
         "after",
         "before"
       ],
-      "word_count": 301,
+      "word_count": 305,
       "file_path": "docs/docs__en__api__beta__files__list.md"
     },
     "/docs/en/api/beta/files/retrieve_metadata": {
@@ -4279,7 +4279,7 @@
         "length",
         "ids"
       ],
-      "word_count": 202,
+      "word_count": 206,
       "file_path": "docs/docs__en__api__beta__files__retrieve_metadata.md"
     },
     "/docs/en/api/beta/files/upload": {
@@ -4307,7 +4307,7 @@
         "may",
         "change"
       ],
-      "word_count": 197,
+      "word_count": 201,
       "file_path": "docs/docs__en__api__beta__files__upload.md"
     },
     "/docs/en/api/beta/messages": {
@@ -4326,16 +4326,16 @@
         "one",
         "tokens",
         "may",
+        "when",
         "time",
         "hour",
         "defaults",
-        "when",
         "values",
         "following",
         "live",
         "minutes"
       ],
-      "word_count": 108163,
+      "word_count": 108962,
       "file_path": "docs/docs__en__api__beta__messages.md"
     },
     "/docs/en/api/beta/messages/batches": {
@@ -4358,12 +4358,12 @@
         "one",
         "create",
         "requests",
-        "may",
         "when",
+        "may",
         "processing",
         "block"
       ],
-      "word_count": 28422,
+      "word_count": 28727,
       "file_path": "docs/docs__en__api__beta__messages__batches.md"
     },
     "/docs/en/api/beta/messages/batches/cancel": {
@@ -4391,7 +4391,7 @@
         "once",
         "specified"
       ],
-      "word_count": 591,
+      "word_count": 595,
       "file_path": "docs/docs__en__api__beta__messages__batches__cancel.md"
     },
     "/docs/en/api/beta/messages/batches/create": {
@@ -4407,9 +4407,9 @@
         "block",
         "defaults",
         "may",
+        "when",
         "one",
         "time",
-        "when",
         "values",
         "following",
         "create",
@@ -4419,7 +4419,7 @@
         "true",
         "only"
       ],
-      "word_count": 12854,
+      "word_count": 12883,
       "file_path": "docs/docs__en__api__beta__messages__batches__create.md"
     },
     "/docs/en/api/beta/messages/batches/delete": {
@@ -4447,7 +4447,7 @@
         "more",
         "about"
       ],
-      "word_count": 182,
+      "word_count": 186,
       "file_path": "docs/docs__en__api__beta__messages__batches__delete.md"
     },
     "/docs/en/api/beta/messages/batches/list": {
@@ -4475,7 +4475,7 @@
         "only",
         "ends"
       ],
-      "word_count": 642,
+      "word_count": 646,
       "file_path": "docs/docs__en__api__beta__messages__batches__list.md"
     },
     "/docs/en/api/beta/messages/batches/results": {
@@ -4503,7 +4503,7 @@
         "message",
         "output"
       ],
-      "word_count": 3417,
+      "word_count": 3485,
       "file_path": "docs/docs__en__api__beta__messages__batches__results.md"
     },
     "/docs/en/api/beta/messages/batches/retrieve": {
@@ -4531,7 +4531,7 @@
         "specified",
         "once"
       ],
-      "word_count": 551,
+      "word_count": 555,
       "file_path": "docs/docs__en__api__beta__messages__batches__retrieve.md"
     },
     "/docs/en/api/beta/messages/count_tokens": {
@@ -4559,7 +4559,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 11883,
+      "word_count": 11887,
       "file_path": "docs/docs__en__api__beta__messages__count_tokens.md"
     },
     "/docs/en/api/beta/messages/create": {
@@ -4574,9 +4574,9 @@
         "content",
         "block",
         "one",
+        "when",
         "create",
         "may",
-        "when",
         "defaults",
         "following",
         "hour",
@@ -4587,7 +4587,7 @@
         "true",
         "number"
       ],
-      "word_count": 15293,
+      "word_count": 15386,
       "file_path": "docs/docs__en__api__beta__messages__create.md"
     },
     "/docs/en/api/beta/models": {
@@ -4615,7 +4615,7 @@
         "blocks",
         "api"
       ],
-      "word_count": 2621,
+      "word_count": 2629,
       "file_path": "docs/docs__en__api__beta__models.md"
     },
     "/docs/en/api/beta/models/list": {
@@ -4643,7 +4643,7 @@
         "returns",
         "results"
       ],
-      "word_count": 730,
+      "word_count": 734,
       "file_path": "docs/docs__en__api__beta__models__list.md"
     },
     "/docs/en/api/beta/models/retrieve": {
@@ -4671,7 +4671,7 @@
         "header",
         "context"
       ],
-      "word_count": 619,
+      "word_count": 623,
       "file_path": "docs/docs__en__api__beta__models__retrieve.md"
     },
     "/docs/en/api/beta/skills": {
@@ -4682,10 +4682,8 @@
         "version",
         "identifier",
         "created",
-        "header",
-        "parameters",
-        "may",
         "timestamp",
+        "may",
         "unique",
         "format",
         "length",
@@ -4693,13 +4691,15 @@
         "change",
         "over",
         "time",
-        "skills",
         "iso",
         "when",
         "extracted",
-        "name"
+        "name",
+        "header",
+        "parameters",
+        "object"
       ],
-      "word_count": 2101,
+      "word_count": 3122,
       "file_path": "docs/docs__en__api__beta__skills.md"
     },
     "/docs/en/api/beta/skills/create": {
@@ -4727,7 +4727,7 @@
         "format",
         "length"
       ],
-      "word_count": 237,
+      "word_count": 241,
       "file_path": "docs/docs__en__api__beta__skills__create.md"
     },
     "/docs/en/api/beta/skills/delete": {
@@ -4755,7 +4755,7 @@
         "want",
         "returns"
       ],
-      "word_count": 155,
+      "word_count": 159,
       "file_path": "docs/docs__en__api__beta__skills__delete.md"
     },
     "/docs/en/api/beta/skills/list": {
@@ -4783,7 +4783,7 @@
         "user",
         "anthropic"
       ],
-      "word_count": 388,
+      "word_count": 392,
       "file_path": "docs/docs__en__api__beta__skills__list.md"
     },
     "/docs/en/api/beta/skills/retrieve": {
@@ -4811,7 +4811,7 @@
         "retrieve",
         "path"
       ],
-      "word_count": 255,
+      "word_count": 259,
       "file_path": "docs/docs__en__api__beta__skills__retrieve.md"
     },
     "/docs/en/api/beta/skills/versions": {
@@ -4821,11 +4821,12 @@
         "skill",
         "version",
         "identifier",
-        "parameters",
-        "timestamp",
         "extracted",
         "name",
-        "header",
+        "timestamp",
+        "file",
+        "upload",
+        "directory",
         "versions",
         "unique",
         "format",
@@ -4835,11 +4836,10 @@
         "change",
         "over",
         "time",
-        "file",
-        "upload",
-        "directory"
+        "each",
+        "identified"
       ],
-      "word_count": 1064,
+      "word_count": 1580,
       "file_path": "docs/docs__en__api__beta__skills__versions.md"
     },
     "/docs/en/api/beta/skills/versions/create": {
@@ -4867,7 +4867,7 @@
         "upload",
         "directory"
       ],
-      "word_count": 262,
+      "word_count": 266,
       "file_path": "docs/docs__en__api__beta__skills__versions__create.md"
     },
     "/docs/en/api/beta/skills/versions/delete": {
@@ -4895,7 +4895,7 @@
         "over",
         "time"
       ],
-      "word_count": 177,
+      "word_count": 181,
       "file_path": "docs/docs__en__api__beta__skills__versions__delete.md"
     },
     "/docs/en/api/beta/skills/versions/list": {
@@ -4923,7 +4923,7 @@
         "header",
         "timestamp"
       ],
-      "word_count": 345,
+      "word_count": 349,
       "file_path": "docs/docs__en__api__beta__skills__versions__list.md"
     },
     "/docs/en/api/beta/skills/versions/retrieve": {
@@ -4951,8 +4951,170 @@
         "unix",
         "epoch"
       ],
-      "word_count": 278,
+      "word_count": 282,
       "file_path": "docs/docs__en__api__beta__skills__versions__retrieve.md"
+    },
+    "/docs/en/api/beta/user_profiles": {
+      "title": "User Profiles",
+      "content_preview": "# User Profiles  ## Create  **post** `/v1/user_profiles`  Create User Profile  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`    Optional header to specify the beta versi...",
+      "keywords": [
+        "timestamp",
+        "rfc",
+        "format",
+        "parameters",
+        "header",
+        "user",
+        "beta",
+        "profile",
+        "keys",
+        "optional",
+        "specify",
+        "version",
+        "want",
+        "returns",
+        "example",
+        "create",
+        "characters",
+        "values",
+        "query",
+        "post"
+      ],
+      "word_count": 1014,
+      "file_path": "docs/docs__en__api__beta__user_profiles.md"
+    },
+    "/docs/en/api/beta/user_profiles/create": {
+      "title": "Untitled",
+      "content_preview": "## Create  **post** `/v1/user_profiles`  Create User Profile  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`    Optional header to specify the beta version(s) you want to...",
+      "keywords": [
+        "create",
+        "user",
+        "profile",
+        "header",
+        "parameters",
+        "keys",
+        "characters",
+        "values",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "optional",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "body",
+        "free",
+        "form"
+      ],
+      "word_count": 201,
+      "file_path": "docs/docs__en__api__beta__user_profiles__create.md"
+    },
+    "/docs/en/api/beta/user_profiles/create_enrollment_url": {
+      "title": "Untitled",
+      "content_preview": "## Create Enrollment URL  **post** `/v1/user_profiles/{id}/enrollment_url`  Create Enrollment URL  ### Path Parameters  - `id: string`  ### Header Parameters  - `\"anthropic-beta\": optional array of An...",
+      "keywords": [
+        "create",
+        "enrollment",
+        "url",
+        "parameters",
+        "header",
+        "post",
+        "path",
+        "optional",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "timestamp",
+        "rfc",
+        "format",
+        "example"
+      ],
+      "word_count": 141,
+      "file_path": "docs/docs__en__api__beta__user_profiles__create_enrollment_url.md"
+    },
+    "/docs/en/api/beta/user_profiles/list": {
+      "title": "Untitled",
+      "content_preview": "## List  **get** `/v1/user_profiles`  List User Profiles  ### Query Parameters  - `limit: optional number`    Query parameter for limit  - `order: optional \"asc\" or \"desc\"`    Query parameter for orde...",
+      "keywords": [
+        "query",
+        "parameter",
+        "list",
+        "parameters",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "get",
+        "user",
+        "profiles",
+        "limit",
+        "order",
+        "page",
+        "optional",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns"
+      ],
+      "word_count": 185,
+      "file_path": "docs/docs__en__api__beta__user_profiles__list.md"
+    },
+    "/docs/en/api/beta/user_profiles/retrieve": {
+      "title": "Untitled",
+      "content_preview": "## Retrieve  **get** `/v1/user_profiles/{id}`  Get User Profile  ### Path Parameters  - `id: string`  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`    Optional header to...",
+      "keywords": [
+        "get",
+        "parameters",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "retrieve",
+        "user",
+        "profile",
+        "path",
+        "optional",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "example"
+      ],
+      "word_count": 160,
+      "file_path": "docs/docs__en__api__beta__user_profiles__retrieve.md"
+    },
+    "/docs/en/api/beta/user_profiles/update": {
+      "title": "Untitled",
+      "content_preview": "## Update  **post** `/v1/user_profiles/{id}`  Update User Profile  ### Path Parameters  - `id: string`  ### Header Parameters  - `\"anthropic-beta\": optional array of AnthropicBeta`    Optional header ...",
+      "keywords": [
+        "keys",
+        "parameters",
+        "update",
+        "header",
+        "key",
+        "value",
+        "provided",
+        "values",
+        "characters",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "user",
+        "profile",
+        "path",
+        "optional",
+        "specify",
+        "beta",
+        "version"
+      ],
+      "word_count": 223,
+      "file_path": "docs/docs__en__api__beta__user_profiles__update.md"
     },
     "/docs/en/api/client-sdks": {
       "title": "Client SDKs",
@@ -5007,7 +5169,7 @@
         "completions",
         "text"
       ],
-      "word_count": 1231,
+      "word_count": 1235,
       "file_path": "docs/docs__en__api__completions.md"
     },
     "/docs/en/api/completions/create": {
@@ -5035,7 +5197,7 @@
         "text",
         "complete"
       ],
-      "word_count": 958,
+      "word_count": 962,
       "file_path": "docs/docs__en__api__completions__create.md"
     },
     "/docs/en/api/csharp/beta": {
@@ -5054,16 +5216,16 @@
         "one",
         "may",
         "time",
+        "when",
         "tokens",
         "hour",
-        "when",
         "defaults",
         "values",
         "following",
         "live",
         "minutes"
       ],
-      "word_count": 96399,
+      "word_count": 98206,
       "file_path": "docs/docs__en__api__csharp__beta.md"
     },
     "/docs/en/api/csharp/beta/files": {
@@ -5091,7 +5253,7 @@
         "results",
         "deleted"
       ],
-      "word_count": 1016,
+      "word_count": 1036,
       "file_path": "docs/docs__en__api__csharp__beta__files.md"
     },
     "/docs/en/api/csharp/beta/files/delete": {
@@ -5115,7 +5277,7 @@
         "always",
         "example"
       ],
-      "word_count": 126,
+      "word_count": 130,
       "file_path": "docs/docs__en__api__csharp__beta__files__delete.md"
     },
     "/docs/en/api/csharp/beta/files/download": {
@@ -5134,7 +5296,7 @@
         "want",
         "example"
       ],
-      "word_count": 97,
+      "word_count": 101,
       "file_path": "docs/docs__en__api__csharp__beta__files__download.md"
     },
     "/docs/en/api/csharp/beta/files/list": {
@@ -5162,7 +5324,7 @@
         "parameters",
         "after"
       ],
-      "word_count": 298,
+      "word_count": 302,
       "file_path": "docs/docs__en__api__csharp__beta__files__list.md"
     },
     "/docs/en/api/csharp/beta/files/retrieve_metadata": {
@@ -5190,7 +5352,7 @@
         "ids",
         "may"
       ],
-      "word_count": 185,
+      "word_count": 189,
       "file_path": "docs/docs__en__api__csharp__beta__files__retrieve_metadata.md"
     },
     "/docs/en/api/csharp/beta/files/upload": {
@@ -5218,7 +5380,7 @@
         "length",
         "ids"
       ],
-      "word_count": 188,
+      "word_count": 192,
       "file_path": "docs/docs__en__api__csharp__beta__files__upload.md"
     },
     "/docs/en/api/csharp/beta/messages": {
@@ -5238,15 +5400,15 @@
         "may",
         "time",
         "tokens",
+        "when",
         "hour",
         "defaults",
         "values",
-        "when",
         "following",
         "live",
         "minutes"
       ],
-      "word_count": 90068,
+      "word_count": 90861,
       "file_path": "docs/docs__en__api__csharp__beta__messages.md"
     },
     "/docs/en/api/csharp/beta/messages/batches": {
@@ -5269,12 +5431,12 @@
         "one",
         "create",
         "requests",
-        "may",
         "when",
+        "may",
         "processing",
         "block"
       ],
-      "word_count": 24973,
+      "word_count": 25280,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/cancel": {
@@ -5302,7 +5464,7 @@
         "once",
         "specified"
       ],
-      "word_count": 577,
+      "word_count": 581,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__cancel.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/create": {
@@ -5318,9 +5480,9 @@
         "block",
         "defaults",
         "may",
+        "when",
         "one",
         "time",
-        "when",
         "values",
         "following",
         "create",
@@ -5330,7 +5492,7 @@
         "true",
         "only"
       ],
-      "word_count": 11197,
+      "word_count": 11228,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__create.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/delete": {
@@ -5358,7 +5520,7 @@
         "api",
         "our"
       ],
-      "word_count": 162,
+      "word_count": 166,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__delete.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/list": {
@@ -5386,7 +5548,7 @@
         "param",
         "only"
       ],
-      "word_count": 651,
+      "word_count": 655,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__list.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/results": {
@@ -5414,7 +5576,7 @@
         "message",
         "output"
       ],
-      "word_count": 2971,
+      "word_count": 3039,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__results.md"
     },
     "/docs/en/api/csharp/beta/messages/batches/retrieve": {
@@ -5442,7 +5604,7 @@
         "specified",
         "once"
       ],
-      "word_count": 540,
+      "word_count": 544,
       "file_path": "docs/docs__en__api__csharp__beta__messages__batches__retrieve.md"
     },
     "/docs/en/api/csharp/beta/messages/count_tokens": {
@@ -5470,7 +5632,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 9205,
+      "word_count": 9209,
       "file_path": "docs/docs__en__api__csharp__beta__messages__count_tokens.md"
     },
     "/docs/en/api/csharp/beta/messages/create": {
@@ -5487,10 +5649,10 @@
         "create",
         "one",
         "may",
+        "when",
         "following",
         "hour",
         "values",
-        "when",
         "time",
         "defaults",
         "live",
@@ -5498,7 +5660,7 @@
         "true",
         "number"
       ],
-      "word_count": 12170,
+      "word_count": 12264,
       "file_path": "docs/docs__en__api__csharp__beta__messages__create.md"
     },
     "/docs/en/api/csharp/beta/models": {
@@ -5526,7 +5688,7 @@
         "blocks",
         "api"
       ],
-      "word_count": 2754,
+      "word_count": 2762,
       "file_path": "docs/docs__en__api__csharp__beta__models.md"
     },
     "/docs/en/api/csharp/beta/models/list": {
@@ -5554,7 +5716,7 @@
         "query",
         "when"
       ],
-      "word_count": 776,
+      "word_count": 780,
       "file_path": "docs/docs__en__api__csharp__beta__models__list.md"
     },
     "/docs/en/api/csharp/beta/models/retrieve": {
@@ -5582,7 +5744,7 @@
         "support",
         "available"
       ],
-      "word_count": 645,
+      "word_count": 649,
       "file_path": "docs/docs__en__api__csharp__beta__models__retrieve.md"
     },
     "/docs/en/api/csharp/beta/skills": {
@@ -5610,7 +5772,7 @@
         "when",
         "extracted"
       ],
-      "word_count": 2185,
+      "word_count": 2217,
       "file_path": "docs/docs__en__api__csharp__beta__skills.md"
     },
     "/docs/en/api/csharp/beta/skills/create": {
@@ -5638,7 +5800,7 @@
         "header",
         "identifier"
       ],
-      "word_count": 289,
+      "word_count": 293,
       "file_path": "docs/docs__en__api__csharp__beta__skills__create.md"
     },
     "/docs/en/api/csharp/beta/skills/delete": {
@@ -5666,7 +5828,7 @@
         "returns",
         "deleted"
       ],
-      "word_count": 145,
+      "word_count": 149,
       "file_path": "docs/docs__en__api__csharp__beta__skills__delete.md"
     },
     "/docs/en/api/csharp/beta/skills/list": {
@@ -5694,7 +5856,7 @@
         "pass",
         "user"
       ],
-      "word_count": 387,
+      "word_count": 391,
       "file_path": "docs/docs__en__api__csharp__beta__skills__list.md"
     },
     "/docs/en/api/csharp/beta/skills/retrieve": {
@@ -5722,7 +5884,7 @@
         "optional",
         "header"
       ],
-      "word_count": 253,
+      "word_count": 257,
       "file_path": "docs/docs__en__api__csharp__beta__skills__retrieve.md"
     },
     "/docs/en/api/csharp/beta/skills/versions": {
@@ -5750,7 +5912,7 @@
         "upload",
         "file"
       ],
-      "word_count": 1109,
+      "word_count": 1125,
       "file_path": "docs/docs__en__api__csharp__beta__skills__versions.md"
     },
     "/docs/en/api/csharp/beta/skills/versions/create": {
@@ -5778,7 +5940,7 @@
         "time",
         "must"
       ],
-      "word_count": 294,
+      "word_count": 298,
       "file_path": "docs/docs__en__api__csharp__beta__skills__versions__create.md"
     },
     "/docs/en/api/csharp/beta/skills/versions/delete": {
@@ -5806,7 +5968,7 @@
         "change",
         "over"
       ],
-      "word_count": 177,
+      "word_count": 181,
       "file_path": "docs/docs__en__api__csharp__beta__skills__versions__delete.md"
     },
     "/docs/en/api/csharp/beta/skills/versions/list": {
@@ -5834,7 +5996,7 @@
         "token",
         "header"
       ],
-      "word_count": 349,
+      "word_count": 353,
       "file_path": "docs/docs__en__api__csharp__beta__skills__versions__list.md"
     },
     "/docs/en/api/csharp/beta/skills/versions/retrieve": {
@@ -5862,8 +6024,172 @@
         "identified",
         "unix"
       ],
-      "word_count": 287,
+      "word_count": 291,
       "file_path": "docs/docs__en__api__csharp__beta__skills__versions__retrieve.md"
+    },
+    "/docs/en/api/csharp/beta/user_profiles": {
+      "title": "User Profiles",
+      "content_preview": "# User Profiles  ## Create  `BetaUserProfile Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)`  **post** `/v1/user_profiles`  Create User Prof...",
+      "keywords": [
+        "timestamp",
+        "rfc",
+        "format",
+        "param",
+        "user",
+        "header",
+        "beta",
+        "profile",
+        "keys",
+        "query",
+        "parameter",
+        "parameters",
+        "optional",
+        "specify",
+        "version",
+        "want",
+        "returns",
+        "example",
+        "create",
+        "body"
+      ],
+      "word_count": 954,
+      "file_path": "docs/docs__en__api__csharp__beta__user_profiles.md"
+    },
+    "/docs/en/api/csharp/beta/user_profiles/create": {
+      "title": "Untitled",
+      "content_preview": "## Create  `BetaUserProfile Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)`  **post** `/v1/user_profiles`  Create User Profile  ### Paramete...",
+      "keywords": [
+        "param",
+        "create",
+        "user",
+        "profile",
+        "body",
+        "keys",
+        "characters",
+        "values",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "parameters",
+        "free",
+        "form",
+        "key",
+        "value",
+        "data",
+        "attach"
+      ],
+      "word_count": 181,
+      "file_path": "docs/docs__en__api__csharp__beta__user_profiles__create.md"
+    },
+    "/docs/en/api/csharp/beta/user_profiles/create_enrollment_url": {
+      "title": "Untitled",
+      "content_preview": "## Create Enrollment URL  `BetaUserProfileEnrollmentUrl Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)`  **post** `...",
+      "keywords": [
+        "create",
+        "enrollment",
+        "url",
+        "post",
+        "parameters",
+        "path",
+        "parameter",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "timestamp",
+        "rfc",
+        "format",
+        "example"
+      ],
+      "word_count": 126,
+      "file_path": "docs/docs__en__api__csharp__beta__user_profiles__create_enrollment_url.md"
+    },
+    "/docs/en/api/csharp/beta/user_profiles/list": {
+      "title": "Untitled",
+      "content_preview": "## List  `UserProfileListPageResponse Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)`  **get** `/v1/user_profiles`  List User Profiles  ### Parameters  - `UserProfileListParams parameters`    - `Int limit`      Query param: Query parameter for",
+      "keywords": [
+        "query",
+        "param",
+        "parameter",
+        "list",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "get",
+        "user",
+        "profiles",
+        "parameters",
+        "limit",
+        "order",
+        "page",
+        "optional",
+        "specify",
+        "beta",
+        "version",
+        "want"
+      ],
+      "word_count": 187,
+      "file_path": "docs/docs__en__api__csharp__beta__user_profiles__list.md"
+    },
+    "/docs/en/api/csharp/beta/user_profiles/retrieve": {
+      "title": "Untitled",
+      "content_preview": "## Retrieve  `BetaUserProfile Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)`  **get** `/v1/user_profiles/{id}`  Get User Profile  ### Parameters  - `UserProfileRetrieveParams parameters`    - `required string id`      Path parameter id",
+      "keywords": [
+        "get",
+        "timestamp",
+        "rfc",
+        "format",
+        "retrieve",
+        "user",
+        "profile",
+        "parameters",
+        "path",
+        "parameter",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "example"
+      ],
+      "word_count": 151,
+      "file_path": "docs/docs__en__api__csharp__beta__user_profiles__retrieve.md"
+    },
+    "/docs/en/api/csharp/beta/user_profiles/update": {
+      "title": "Untitled",
+      "content_preview": "## Update  `BetaUserProfile Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)`  **post** `/v1/user_profiles/{id}`  Update User Profile  ### Para...",
+      "keywords": [
+        "param",
+        "keys",
+        "update",
+        "path",
+        "body",
+        "key",
+        "value",
+        "provided",
+        "values",
+        "characters",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "user",
+        "profile",
+        "parameters",
+        "parameter",
+        "pairs"
+      ],
+      "word_count": 211,
+      "file_path": "docs/docs__en__api__csharp__beta__user_profiles__update.md"
     },
     "/docs/en/api/csharp/messages": {
       "title": "Messages",
@@ -5880,17 +6206,17 @@
         "time",
         "may",
         "create",
+        "when",
         "defaults",
         "values",
         "following",
         "hour",
-        "when",
         "live",
         "minutes",
         "invocation",
         "number"
       ],
-      "word_count": 72780,
+      "word_count": 73487,
       "file_path": "docs/docs__en__api__csharp__messages.md"
     },
     "/docs/en/api/csharp/messages/batches": {
@@ -5911,14 +6237,14 @@
         "processing",
         "one",
         "may",
+        "when",
         "request",
         "results",
-        "when",
         "create",
         "invocation",
         "block"
       ],
-      "word_count": 19606,
+      "word_count": 19862,
       "file_path": "docs/docs__en__api__csharp__messages__batches.md"
     },
     "/docs/en/api/csharp/messages/batches/cancel": {
@@ -6058,7 +6384,7 @@
         "result",
         "api"
       ],
-      "word_count": 2153,
+      "word_count": 2217,
       "file_path": "docs/docs__en__api__csharp__messages__batches__results.md"
     },
     "/docs/en/api/csharp/messages/batches/retrieve": {
@@ -6135,14 +6461,14 @@
         "values",
         "time",
         "defaults",
+        "when",
         "hour",
         "live",
         "minutes",
-        "when",
         "true",
         "used"
       ],
-      "word_count": 9704,
+      "word_count": 9768,
       "file_path": "docs/docs__en__api__csharp__messages__create.md"
     },
     "/docs/en/api/csharp/models": {
@@ -6170,7 +6496,7 @@
         "api",
         "object"
       ],
-      "word_count": 2747,
+      "word_count": 2755,
       "file_path": "docs/docs__en__api__csharp__models.md"
     },
     "/docs/en/api/csharp/models/list": {
@@ -6198,7 +6524,7 @@
         "query",
         "when"
       ],
-      "word_count": 776,
+      "word_count": 780,
       "file_path": "docs/docs__en__api__csharp__models__list.md"
     },
     "/docs/en/api/csharp/models/retrieve": {
@@ -6226,7 +6552,7 @@
         "support",
         "available"
       ],
-      "word_count": 645,
+      "word_count": 649,
       "file_path": "docs/docs__en__api__csharp__models__retrieve.md"
     },
     "/docs/en/api/errors": {
@@ -6237,13 +6563,14 @@
         "request",
         "error",
         "errors",
+        "streaming",
         "response",
         "messages",
         "limits",
-        "streaming",
         "value",
         "issue",
         "size",
+        "requests",
         "warning",
         "codegroup",
         "message",
@@ -6251,10 +6578,9 @@
         "may",
         "also",
         "maximum",
-        "when",
-        "these"
+        "using"
       ],
-      "word_count": 815,
+      "word_count": 835,
       "file_path": "docs/docs__en__api__errors.md"
     },
     "/docs/en/api/go/beta": {
@@ -6271,18 +6597,18 @@
         "code",
         "tool",
         "codeexecution",
+        "anthropicbeta",
         "ephemeral",
         "result",
         "betacachecontrolephemeralttlttl",
         "content",
-        "anthropicbeta",
         "text",
         "search",
         "citedtext",
         "location",
         "model"
       ],
-      "word_count": 117489,
+      "word_count": 120123,
       "file_path": "docs/docs__en__api__go__beta.md"
     },
     "/docs/en/api/go/beta/files": {
@@ -6310,7 +6636,7 @@
         "identifier",
         "format"
       ],
-      "word_count": 1514,
+      "word_count": 1574,
       "file_path": "docs/docs__en__api__go__beta__files.md"
     },
     "/docs/en/api/go/beta/files/delete": {
@@ -6334,7 +6660,7 @@
         "always",
         "example"
       ],
-      "word_count": 236,
+      "word_count": 248,
       "file_path": "docs/docs__en__api__go__beta__files__delete.md"
     },
     "/docs/en/api/go/beta/files/download": {
@@ -6354,7 +6680,7 @@
         "returns",
         "example"
       ],
-      "word_count": 209,
+      "word_count": 221,
       "file_path": "docs/docs__en__api__go__beta__files__download.md"
     },
     "/docs/en/api/go/beta/files/list": {
@@ -6382,7 +6708,7 @@
         "after",
         "before"
       ],
-      "word_count": 355,
+      "word_count": 367,
       "file_path": "docs/docs__en__api__go__beta__files__list.md"
     },
     "/docs/en/api/go/beta/files/retrieve_metadata": {
@@ -6410,7 +6736,7 @@
         "ids",
         "may"
       ],
-      "word_count": 292,
+      "word_count": 304,
       "file_path": "docs/docs__en__api__go__beta__files__retrieve_metadata.md"
     },
     "/docs/en/api/go/beta/files/upload": {
@@ -6438,15 +6764,15 @@
         "length",
         "ids"
       ],
-      "word_count": 295,
+      "word_count": 307,
       "file_path": "docs/docs__en__api__go__beta__files__upload.md"
     },
     "/docs/en/api/go/beta/messages": {
       "title": "Messages",
       "content_preview": "# Messages  ## Create  `client.Beta.Messages.New(ctx, params) (*BetaMessage, error)`  **post** `/v1/messages`  Send a structured list of input messages with text and/or image content, and the model wi...",
       "keywords": [
-        "type",
         "const",
+        "type",
         "struct",
         "int",
         "stringtype",
@@ -6466,7 +6792,7 @@
         "url",
         "betabase"
       ],
-      "word_count": 109746,
+      "word_count": 110712,
       "file_path": "docs/docs__en__api__go__beta__messages.md"
     },
     "/docs/en/api/go/beta/messages/batches": {
@@ -6489,12 +6815,12 @@
         "one",
         "create",
         "requests",
-        "may",
         "when",
+        "may",
         "processing",
         "block"
       ],
-      "word_count": 29809,
+      "word_count": 30201,
       "file_path": "docs/docs__en__api__go__beta__messages__batches.md"
     },
     "/docs/en/api/go/beta/messages/batches/cancel": {
@@ -6522,7 +6848,7 @@
         "once",
         "specified"
       ],
-      "word_count": 687,
+      "word_count": 699,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__cancel.md"
     },
     "/docs/en/api/go/beta/messages/batches/create": {
@@ -6538,9 +6864,9 @@
         "block",
         "defaults",
         "may",
+        "when",
         "one",
         "time",
-        "when",
         "values",
         "following",
         "create",
@@ -6550,7 +6876,7 @@
         "true",
         "only"
       ],
-      "word_count": 13213,
+      "word_count": 13249,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__create.md"
     },
     "/docs/en/api/go/beta/messages/batches/delete": {
@@ -6578,7 +6904,7 @@
         "api",
         "our"
       ],
-      "word_count": 273,
+      "word_count": 285,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__delete.md"
     },
     "/docs/en/api/go/beta/messages/batches/list": {
@@ -6606,7 +6932,7 @@
         "ends",
         "zero"
       ],
-      "word_count": 696,
+      "word_count": 708,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__list.md"
     },
     "/docs/en/api/go/beta/messages/batches/results": {
@@ -6634,7 +6960,7 @@
         "message",
         "output"
       ],
-      "word_count": 3664,
+      "word_count": 3750,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__results.md"
     },
     "/docs/en/api/go/beta/messages/batches/retrieve": {
@@ -6662,7 +6988,7 @@
         "specified",
         "once"
       ],
-      "word_count": 650,
+      "word_count": 662,
       "file_path": "docs/docs__en__api__go__beta__messages__batches__retrieve.md"
     },
     "/docs/en/api/go/beta/messages/count_tokens": {
@@ -6690,7 +7016,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 11304,
+      "word_count": 11316,
       "file_path": "docs/docs__en__api__go__beta__messages__count_tokens.md"
     },
     "/docs/en/api/go/beta/messages/create": {
@@ -6718,7 +7044,7 @@
         "allowedcallercodeexecution",
         "time"
       ],
-      "word_count": 14797,
+      "word_count": 14909,
       "file_path": "docs/docs__en__api__go__beta__messages__create.md"
     },
     "/docs/en/api/go/beta/models": {
@@ -6746,7 +7072,7 @@
         "blocks",
         "api"
       ],
-      "word_count": 2732,
+      "word_count": 2756,
       "file_path": "docs/docs__en__api__go__beta__models.md"
     },
     "/docs/en/api/go/beta/models/list": {
@@ -6774,7 +7100,7 @@
         "indicates",
         "list"
       ],
-      "word_count": 780,
+      "word_count": 792,
       "file_path": "docs/docs__en__api__go__beta__models__list.md"
     },
     "/docs/en/api/go/beta/models/retrieve": {
@@ -6802,7 +7128,7 @@
         "support",
         "available"
       ],
-      "word_count": 714,
+      "word_count": 726,
       "file_path": "docs/docs__en__api__go__beta__models__retrieve.md"
     },
     "/docs/en/api/go/beta/skills": {
@@ -6830,7 +7156,7 @@
         "when",
         "extracted"
       ],
-      "word_count": 2857,
+      "word_count": 2953,
       "file_path": "docs/docs__en__api__go__beta__skills.md"
     },
     "/docs/en/api/go/beta/skills/create": {
@@ -6858,7 +7184,7 @@
         "header",
         "identifier"
       ],
-      "word_count": 391,
+      "word_count": 403,
       "file_path": "docs/docs__en__api__go__beta__skills__create.md"
     },
     "/docs/en/api/go/beta/skills/delete": {
@@ -6886,7 +7212,7 @@
         "returns",
         "deleted"
       ],
-      "word_count": 250,
+      "word_count": 262,
       "file_path": "docs/docs__en__api__go__beta__skills__delete.md"
     },
     "/docs/en/api/go/beta/skills/list": {
@@ -6914,7 +7240,7 @@
         "may",
         "iso"
       ],
-      "word_count": 414,
+      "word_count": 426,
       "file_path": "docs/docs__en__api__go__beta__skills__list.md"
     },
     "/docs/en/api/go/beta/skills/retrieve": {
@@ -6942,7 +7268,7 @@
         "optional",
         "header"
       ],
-      "word_count": 353,
+      "word_count": 365,
       "file_path": "docs/docs__en__api__go__beta__skills__retrieve.md"
     },
     "/docs/en/api/go/beta/skills/versions": {
@@ -6970,7 +7296,7 @@
         "file",
         "versions"
       ],
-      "word_count": 1447,
+      "word_count": 1495,
       "file_path": "docs/docs__en__api__go__beta__skills__versions.md"
     },
     "/docs/en/api/go/beta/skills/versions/create": {
@@ -6998,7 +7324,7 @@
         "param",
         "must"
       ],
-      "word_count": 391,
+      "word_count": 403,
       "file_path": "docs/docs__en__api__go__beta__skills__versions__create.md"
     },
     "/docs/en/api/go/beta/skills/versions/delete": {
@@ -7026,7 +7352,7 @@
         "change",
         "over"
       ],
-      "word_count": 278,
+      "word_count": 290,
       "file_path": "docs/docs__en__api__go__beta__skills__versions__delete.md"
     },
     "/docs/en/api/go/beta/skills/versions/list": {
@@ -7054,7 +7380,7 @@
         "timestamp",
         "file"
       ],
-      "word_count": 394,
+      "word_count": 406,
       "file_path": "docs/docs__en__api__go__beta__skills__versions__list.md"
     },
     "/docs/en/api/go/beta/skills/versions/retrieve": {
@@ -7082,8 +7408,168 @@
         "over",
         "time"
       ],
-      "word_count": 382,
+      "word_count": 394,
       "file_path": "docs/docs__en__api__go__beta__skills__versions__retrieve.md"
+    },
+    "/docs/en/api/go/beta/user_profiles": {
+      "title": "User Profiles",
+      "content_preview": "# User Profiles  ## Create  `client.Beta.UserProfiles.New(ctx, params) (*BetaUserProfile, error)`  **post** `/v1/user_profiles`  Create User Profile  ### Parameters  - `params BetaUserProfileNewParams...",
+      "keywords": [
+        "timestamp",
+        "rfc",
+        "format",
+        "param",
+        "user",
+        "header",
+        "beta",
+        "profile",
+        "keys",
+        "query",
+        "parameters",
+        "optional",
+        "specify",
+        "version",
+        "want",
+        "returns",
+        "example",
+        "create",
+        "body",
+        "characters"
+      ],
+      "word_count": 1476,
+      "file_path": "docs/docs__en__api__go__beta__user_profiles.md"
+    },
+    "/docs/en/api/go/beta/user_profiles/create": {
+      "title": "Untitled",
+      "content_preview": "## Create  `client.Beta.UserProfiles.New(ctx, params) (*BetaUserProfile, error)`  **post** `/v1/user_profiles`  Create User Profile  ### Parameters  - `params BetaUserProfileNewParams`    - `ExternalI...",
+      "keywords": [
+        "param",
+        "create",
+        "user",
+        "profile",
+        "body",
+        "keys",
+        "characters",
+        "values",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "parameters",
+        "free",
+        "form",
+        "key",
+        "value",
+        "data",
+        "attach"
+      ],
+      "word_count": 291,
+      "file_path": "docs/docs__en__api__go__beta__user_profiles__create.md"
+    },
+    "/docs/en/api/go/beta/user_profiles/create_enrollment_url": {
+      "title": "Untitled",
+      "content_preview": "## Create Enrollment URL  `client.Beta.UserProfiles.NewEnrollmentURL(ctx, id, body) (*BetaUserProfileEnrollmentURL, error)`  **post** `/v1/user_profiles/{id}/enrollment_url`  Create Enrollment URL  ##...",
+      "keywords": [
+        "create",
+        "enrollment",
+        "url",
+        "post",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "timestamp",
+        "rfc",
+        "format",
+        "example"
+      ],
+      "word_count": 235,
+      "file_path": "docs/docs__en__api__go__beta__user_profiles__create_enrollment_url.md"
+    },
+    "/docs/en/api/go/beta/user_profiles/list": {
+      "title": "Untitled",
+      "content_preview": "## List  `client.Beta.UserProfiles.List(ctx, params) (*PageCursorV2[BetaUserProfile], error)`  **get** `/v1/user_profiles`  List User Profiles  ### Parameters  - `params BetaUserProfileListParams`    ...",
+      "keywords": [
+        "query",
+        "param",
+        "parameter",
+        "list",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "get",
+        "user",
+        "profiles",
+        "parameters",
+        "limit",
+        "order",
+        "page",
+        "optional",
+        "specify",
+        "beta",
+        "version",
+        "want"
+      ],
+      "word_count": 290,
+      "file_path": "docs/docs__en__api__go__beta__user_profiles__list.md"
+    },
+    "/docs/en/api/go/beta/user_profiles/retrieve": {
+      "title": "Untitled",
+      "content_preview": "## Retrieve  `client.Beta.UserProfiles.Get(ctx, id, query) (*BetaUserProfile, error)`  **get** `/v1/user_profiles/{id}`  Get User Profile  ### Parameters  - `id string`  - `query BetaUserProfileGetPar...",
+      "keywords": [
+        "get",
+        "timestamp",
+        "rfc",
+        "format",
+        "retrieve",
+        "user",
+        "profile",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "example"
+      ],
+      "word_count": 256,
+      "file_path": "docs/docs__en__api__go__beta__user_profiles__retrieve.md"
+    },
+    "/docs/en/api/go/beta/user_profiles/update": {
+      "title": "Untitled",
+      "content_preview": "## Update  `client.Beta.UserProfiles.Update(ctx, id, params) (*BetaUserProfile, error)`  **post** `/v1/user_profiles/{id}`  Update User Profile  ### Parameters  - `id string`  - `params BetaUserProfil...",
+      "keywords": [
+        "keys",
+        "param",
+        "update",
+        "body",
+        "key",
+        "value",
+        "provided",
+        "values",
+        "characters",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "user",
+        "profile",
+        "parameters",
+        "pairs",
+        "merge",
+        "into"
+      ],
+      "word_count": 314,
+      "file_path": "docs/docs__en__api__go__beta__user_profiles__update.md"
     },
     "/docs/en/api/go/completions": {
       "title": "Completions",
@@ -7110,7 +7596,7 @@
         "api",
         "models"
       ],
-      "word_count": 1209,
+      "word_count": 1221,
       "file_path": "docs/docs__en__api__go__completions.md"
     },
     "/docs/en/api/go/completions/create": {
@@ -7138,7 +7624,7 @@
         "sequences",
         "field"
       ],
-      "word_count": 888,
+      "word_count": 900,
       "file_path": "docs/docs__en__api__go__completions__create.md"
     },
     "/docs/en/api/go/messages": {
@@ -7166,7 +7652,7 @@
         "location",
         "url"
       ],
-      "word_count": 89921,
+      "word_count": 90740,
       "file_path": "docs/docs__en__api__go__messages.md"
     },
     "/docs/en/api/go/messages/batches": {
@@ -7187,14 +7673,14 @@
         "processing",
         "one",
         "may",
+        "when",
         "request",
         "results",
-        "when",
         "create",
         "invocation",
         "block"
       ],
-      "word_count": 23440,
+      "word_count": 23736,
       "file_path": "docs/docs__en__api__go__messages__batches.md"
     },
     "/docs/en/api/go/messages/batches/cancel": {
@@ -7334,7 +7820,7 @@
         "result",
         "api"
       ],
-      "word_count": 2709,
+      "word_count": 2783,
       "file_path": "docs/docs__en__api__go__messages__batches__results.md"
     },
     "/docs/en/api/go/messages/batches/retrieve": {
@@ -7418,7 +7904,7 @@
         "model",
         "time"
       ],
-      "word_count": 11879,
+      "word_count": 11953,
       "file_path": "docs/docs__en__api__go__messages__create.md"
     },
     "/docs/en/api/go/models": {
@@ -7446,7 +7932,7 @@
         "api",
         "object"
       ],
-      "word_count": 2725,
+      "word_count": 2749,
       "file_path": "docs/docs__en__api__go__models.md"
     },
     "/docs/en/api/go/models/list": {
@@ -7474,7 +7960,7 @@
         "indicates",
         "list"
       ],
-      "word_count": 780,
+      "word_count": 792,
       "file_path": "docs/docs__en__api__go__models__list.md"
     },
     "/docs/en/api/go/models/retrieve": {
@@ -7502,7 +7988,7 @@
         "support",
         "available"
       ],
-      "word_count": 714,
+      "word_count": 726,
       "file_path": "docs/docs__en__api__go__models__retrieve.md"
     },
     "/docs/en/api/ip-addresses": {
@@ -7549,16 +8035,16 @@
         "one",
         "may",
         "time",
+        "when",
         "tokens",
         "hour",
-        "when",
         "defaults",
         "values",
         "following",
         "live",
         "minutes"
       ],
-      "word_count": 95725,
+      "word_count": 97530,
       "file_path": "docs/docs__en__api__java__beta.md"
     },
     "/docs/en/api/java/beta/files": {
@@ -7586,7 +8072,7 @@
         "format",
         "length"
       ],
-      "word_count": 1050,
+      "word_count": 1071,
       "file_path": "docs/docs__en__api__java__beta__files.md"
     },
     "/docs/en/api/java/beta/files/delete": {
@@ -7610,7 +8096,7 @@
         "always",
         "example"
       ],
-      "word_count": 145,
+      "word_count": 149,
       "file_path": "docs/docs__en__api__java__beta__files__delete.md"
     },
     "/docs/en/api/java/beta/files/download": {
@@ -7629,7 +8115,7 @@
         "want",
         "example"
       ],
-      "word_count": 117,
+      "word_count": 121,
       "file_path": "docs/docs__en__api__java__beta__files__download.md"
     },
     "/docs/en/api/java/beta/files/list": {
@@ -7657,7 +8143,7 @@
         "items",
         "return"
       ],
-      "word_count": 261,
+      "word_count": 265,
       "file_path": "docs/docs__en__api__java__beta__files__list.md"
     },
     "/docs/en/api/java/beta/files/retrieve_metadata": {
@@ -7685,7 +8171,7 @@
         "ids",
         "may"
       ],
-      "word_count": 202,
+      "word_count": 206,
       "file_path": "docs/docs__en__api__java__beta__files__retrieve_metadata.md"
     },
     "/docs/en/api/java/beta/files/upload": {
@@ -7713,7 +8199,7 @@
         "may",
         "change"
       ],
-      "word_count": 207,
+      "word_count": 212,
       "file_path": "docs/docs__en__api__java__beta__files__upload.md"
     },
     "/docs/en/api/java/beta/messages": {
@@ -7733,15 +8219,15 @@
         "may",
         "time",
         "tokens",
+        "when",
         "hour",
         "defaults",
         "values",
-        "when",
         "following",
         "live",
         "minutes"
       ],
-      "word_count": 89591,
+      "word_count": 90369,
       "file_path": "docs/docs__en__api__java__beta__messages.md"
     },
     "/docs/en/api/java/beta/messages/batches": {
@@ -7764,12 +8250,12 @@
         "one",
         "create",
         "requests",
-        "may",
         "when",
+        "may",
         "processing",
         "block"
       ],
-      "word_count": 24565,
+      "word_count": 24865,
       "file_path": "docs/docs__en__api__java__beta__messages__batches.md"
     },
     "/docs/en/api/java/beta/messages/batches/cancel": {
@@ -7797,7 +8283,7 @@
         "once",
         "specified"
       ],
-      "word_count": 585,
+      "word_count": 589,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__cancel.md"
     },
     "/docs/en/api/java/beta/messages/batches/create": {
@@ -7813,9 +8299,9 @@
         "block",
         "defaults",
         "may",
+        "when",
         "one",
         "time",
-        "when",
         "values",
         "following",
         "create",
@@ -7825,7 +8311,7 @@
         "true",
         "only"
       ],
-      "word_count": 10998,
+      "word_count": 11026,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__create.md"
     },
     "/docs/en/api/java/beta/messages/batches/delete": {
@@ -7853,7 +8339,7 @@
         "api",
         "our"
       ],
-      "word_count": 183,
+      "word_count": 187,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__delete.md"
     },
     "/docs/en/api/java/beta/messages/batches/list": {
@@ -7881,7 +8367,7 @@
         "zero",
         "until"
       ],
-      "word_count": 590,
+      "word_count": 594,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__list.md"
     },
     "/docs/en/api/java/beta/messages/batches/results": {
@@ -7909,7 +8395,7 @@
         "message",
         "output"
       ],
-      "word_count": 2942,
+      "word_count": 3009,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__results.md"
     },
     "/docs/en/api/java/beta/messages/batches/retrieve": {
@@ -7937,7 +8423,7 @@
         "specified",
         "once"
       ],
-      "word_count": 548,
+      "word_count": 552,
       "file_path": "docs/docs__en__api__java__beta__messages__batches__retrieve.md"
     },
     "/docs/en/api/java/beta/messages/count_tokens": {
@@ -7965,7 +8451,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 9299,
+      "word_count": 9303,
       "file_path": "docs/docs__en__api__java__beta__messages__count_tokens.md"
     },
     "/docs/en/api/java/beta/messages/create": {
@@ -7982,10 +8468,10 @@
         "create",
         "one",
         "may",
+        "when",
         "following",
         "hour",
         "values",
-        "when",
         "time",
         "defaults",
         "live",
@@ -7993,7 +8479,7 @@
         "true",
         "number"
       ],
-      "word_count": 12182,
+      "word_count": 12273,
       "file_path": "docs/docs__en__api__java__beta__messages__create.md"
     },
     "/docs/en/api/java/beta/models": {
@@ -8021,7 +8507,7 @@
         "blocks",
         "api"
       ],
-      "word_count": 2538,
+      "word_count": 2546,
       "file_path": "docs/docs__en__api__java__beta__models.md"
     },
     "/docs/en/api/java/beta/models/list": {
@@ -8049,7 +8535,7 @@
         "which",
         "released"
       ],
-      "word_count": 686,
+      "word_count": 690,
       "file_path": "docs/docs__en__api__java__beta__models__list.md"
     },
     "/docs/en/api/java/beta/models/retrieve": {
@@ -8077,7 +8563,7 @@
         "support",
         "available"
       ],
-      "word_count": 624,
+      "word_count": 628,
       "file_path": "docs/docs__en__api__java__beta__models__retrieve.md"
     },
     "/docs/en/api/java/beta/skills": {
@@ -8105,7 +8591,7 @@
         "name",
         "parameters"
       ],
-      "word_count": 2143,
+      "word_count": 2175,
       "file_path": "docs/docs__en__api__java__beta__skills.md"
     },
     "/docs/en/api/java/beta/skills/create": {
@@ -8133,7 +8619,7 @@
         "iso",
         "timestamp"
       ],
-      "word_count": 302,
+      "word_count": 306,
       "file_path": "docs/docs__en__api__java__beta__skills__create.md"
     },
     "/docs/en/api/java/beta/skills/delete": {
@@ -8161,7 +8647,7 @@
         "returns",
         "deleted"
       ],
-      "word_count": 163,
+      "word_count": 167,
       "file_path": "docs/docs__en__api__java__beta__skills__delete.md"
     },
     "/docs/en/api/java/beta/skills/list": {
@@ -8189,7 +8675,7 @@
         "when",
         "parameters"
       ],
-      "word_count": 323,
+      "word_count": 327,
       "file_path": "docs/docs__en__api__java__beta__skills__list.md"
     },
     "/docs/en/api/java/beta/skills/retrieve": {
@@ -8217,7 +8703,7 @@
         "optional",
         "header"
       ],
-      "word_count": 266,
+      "word_count": 270,
       "file_path": "docs/docs__en__api__java__beta__skills__retrieve.md"
     },
     "/docs/en/api/java/beta/skills/versions": {
@@ -8245,7 +8731,7 @@
         "each",
         "identified"
       ],
-      "word_count": 1087,
+      "word_count": 1103,
       "file_path": "docs/docs__en__api__java__beta__skills__versions.md"
     },
     "/docs/en/api/java/beta/skills/versions/create": {
@@ -8273,7 +8759,7 @@
         "must",
         "top"
       ],
-      "word_count": 300,
+      "word_count": 304,
       "file_path": "docs/docs__en__api__java__beta__skills__versions__create.md"
     },
     "/docs/en/api/java/beta/skills/versions/delete": {
@@ -8301,7 +8787,7 @@
         "optional",
         "header"
       ],
-      "word_count": 190,
+      "word_count": 194,
       "file_path": "docs/docs__en__api__java__beta__skills__versions__delete.md"
     },
     "/docs/en/api/java/beta/skills/versions/list": {
@@ -8329,7 +8815,7 @@
         "directory",
         "get"
       ],
-      "word_count": 301,
+      "word_count": 305,
       "file_path": "docs/docs__en__api__java__beta__skills__versions__list.md"
     },
     "/docs/en/api/java/beta/skills/versions/retrieve": {
@@ -8357,8 +8843,168 @@
         "epoch",
         "file"
       ],
-      "word_count": 294,
+      "word_count": 298,
       "file_path": "docs/docs__en__api__java__beta__skills__versions__retrieve.md"
+    },
+    "/docs/en/api/java/beta/user_profiles": {
+      "title": "User Profiles",
+      "content_preview": "# User Profiles  ## Create  `BetaUserProfile beta().userProfiles().create(UserProfileCreateParamsparams = UserProfileCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`  **post...",
+      "keywords": [
+        "timestamp",
+        "rfc",
+        "format",
+        "user",
+        "beta",
+        "profile",
+        "keys",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "version",
+        "want",
+        "returns",
+        "example",
+        "create",
+        "characters",
+        "values",
+        "post",
+        "key"
+      ],
+      "word_count": 966,
+      "file_path": "docs/docs__en__api__java__beta__user_profiles.md"
+    },
+    "/docs/en/api/java/beta/user_profiles/create": {
+      "title": "Untitled",
+      "content_preview": "## Create  `BetaUserProfile beta().userProfiles().create(UserProfileCreateParamsparams = UserProfileCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`  **post** `/v1/user_prof...",
+      "keywords": [
+        "create",
+        "user",
+        "profile",
+        "keys",
+        "characters",
+        "values",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "free",
+        "form",
+        "key"
+      ],
+      "word_count": 191,
+      "file_path": "docs/docs__en__api__java__beta__user_profiles__create.md"
+    },
+    "/docs/en/api/java/beta/user_profiles/create_enrollment_url": {
+      "title": "Untitled",
+      "content_preview": "## Create Enrollment URL  `BetaUserProfileEnrollmentUrl beta().userProfiles().createEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparams = UserProfileCreateEnrollmentUrlParams.none(), RequestOptio...",
+      "keywords": [
+        "create",
+        "enrollment",
+        "url",
+        "post",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "timestamp",
+        "rfc",
+        "format",
+        "example"
+      ],
+      "word_count": 140,
+      "file_path": "docs/docs__en__api__java__beta__user_profiles__create_enrollment_url.md"
+    },
+    "/docs/en/api/java/beta/user_profiles/list": {
+      "title": "Untitled",
+      "content_preview": "## List  `UserProfileListPage beta().userProfiles().list(UserProfileListParamsparams = UserProfileListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`  **get** `/v1/user_profiles`  List User Profiles  ### Parameters  - `UserProfileListParams params`    - `Optional<Long> limit`",
+      "keywords": [
+        "query",
+        "parameter",
+        "list",
+        "timestamp",
+        "rfc",
+        "format",
+        "get",
+        "user",
+        "profiles",
+        "parameters",
+        "limit",
+        "order",
+        "page",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns"
+      ],
+      "word_count": 181,
+      "file_path": "docs/docs__en__api__java__beta__user_profiles__list.md"
+    },
+    "/docs/en/api/java/beta/user_profiles/retrieve": {
+      "title": "Untitled",
+      "content_preview": "## Retrieve  `BetaUserProfile beta().userProfiles().retrieve(UserProfileRetrieveParamsparams = UserProfileRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`  **get** `/v1/us...",
+      "keywords": [
+        "get",
+        "timestamp",
+        "rfc",
+        "format",
+        "retrieve",
+        "user",
+        "profile",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "example"
+      ],
+      "word_count": 159,
+      "file_path": "docs/docs__en__api__java__beta__user_profiles__retrieve.md"
+    },
+    "/docs/en/api/java/beta/user_profiles/update": {
+      "title": "Untitled",
+      "content_preview": "## Update  `BetaUserProfile beta().userProfiles().update(UserProfileUpdateParamsparams = UserProfileUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`  **post** `/v1/user_prof...",
+      "keywords": [
+        "keys",
+        "update",
+        "key",
+        "value",
+        "provided",
+        "values",
+        "characters",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "user",
+        "profile",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want"
+      ],
+      "word_count": 210,
+      "file_path": "docs/docs__en__api__java__beta__user_profiles__update.md"
     },
     "/docs/en/api/java/completions": {
       "title": "Completions",
@@ -8385,7 +9031,7 @@
         "details",
         "options"
       ],
-      "word_count": 941,
+      "word_count": 945,
       "file_path": "docs/docs__en__api__java__completions.md"
     },
     "/docs/en/api/java/completions/create": {
@@ -8413,7 +9059,7 @@
         "high",
         "complex"
       ],
-      "word_count": 704,
+      "word_count": 708,
       "file_path": "docs/docs__en__api__java__completions__create.md"
     },
     "/docs/en/api/java/messages": {
@@ -8431,17 +9077,17 @@
         "time",
         "may",
         "create",
+        "when",
         "defaults",
         "values",
         "following",
         "hour",
-        "when",
         "live",
         "minutes",
         "invocation",
         "number"
       ],
-      "word_count": 72832,
+      "word_count": 73529,
       "file_path": "docs/docs__en__api__java__messages.md"
     },
     "/docs/en/api/java/messages/batches": {
@@ -8462,14 +9108,14 @@
         "processing",
         "one",
         "may",
+        "when",
         "request",
         "results",
-        "when",
         "create",
         "invocation",
         "block"
       ],
-      "word_count": 19416,
+      "word_count": 19668,
       "file_path": "docs/docs__en__api__java__messages__batches.md"
     },
     "/docs/en/api/java/messages/batches/cancel": {
@@ -8609,7 +9255,7 @@
         "result",
         "api"
       ],
-      "word_count": 2159,
+      "word_count": 2222,
       "file_path": "docs/docs__en__api__java__messages__batches__results.md"
     },
     "/docs/en/api/java/messages/batches/retrieve": {
@@ -8686,14 +9332,14 @@
         "values",
         "time",
         "defaults",
+        "when",
         "hour",
         "live",
         "minutes",
-        "when",
         "true",
         "used"
       ],
-      "word_count": 9775,
+      "word_count": 9838,
       "file_path": "docs/docs__en__api__java__messages__create.md"
     },
     "/docs/en/api/java/models": {
@@ -8721,7 +9367,7 @@
         "api",
         "object"
       ],
-      "word_count": 2531,
+      "word_count": 2539,
       "file_path": "docs/docs__en__api__java__models.md"
     },
     "/docs/en/api/java/models/list": {
@@ -8749,7 +9395,7 @@
         "which",
         "released"
       ],
-      "word_count": 686,
+      "word_count": 690,
       "file_path": "docs/docs__en__api__java__models__list.md"
     },
     "/docs/en/api/java/models/retrieve": {
@@ -8777,7 +9423,7 @@
         "support",
         "available"
       ],
-      "word_count": 624,
+      "word_count": 628,
       "file_path": "docs/docs__en__api__java__models__retrieve.md"
     },
     "/docs/en/api/messages": {
@@ -8796,16 +9442,16 @@
         "may",
         "defaults",
         "create",
+        "when",
         "values",
         "following",
         "hour",
-        "when",
         "live",
         "minutes",
         "invocation",
         "number"
       ],
-      "word_count": 87341,
+      "word_count": 88057,
       "file_path": "docs/docs__en__api__messages.md"
     },
     "/docs/en/api/messages/batches": {
@@ -8826,14 +9472,14 @@
         "processing",
         "one",
         "may",
+        "when",
         "request",
         "results",
-        "when",
         "create",
         "invocation",
         "block"
       ],
-      "word_count": 22276,
+      "word_count": 22532,
       "file_path": "docs/docs__en__api__messages__batches.md"
     },
     "/docs/en/api/messages/batches/cancel": {
@@ -8973,7 +9619,7 @@
         "result",
         "api"
       ],
-      "word_count": 2488,
+      "word_count": 2552,
       "file_path": "docs/docs__en__api__messages__batches__results.md"
     },
     "/docs/en/api/messages/batches/retrieve": {
@@ -9046,10 +9692,10 @@
         "block",
         "may",
         "defaults",
+        "when",
         "create",
         "following",
         "values",
-        "when",
         "time",
         "hour",
         "live",
@@ -9057,7 +9703,7 @@
         "true",
         "used"
       ],
-      "word_count": 12105,
+      "word_count": 12169,
       "file_path": "docs/docs__en__api__messages__create.md"
     },
     "/docs/en/api/models": {
@@ -9085,7 +9731,7 @@
         "api",
         "object"
       ],
-      "word_count": 2614,
+      "word_count": 2622,
       "file_path": "docs/docs__en__api__models.md"
     },
     "/docs/en/api/models/list": {
@@ -9113,7 +9759,7 @@
         "returns",
         "results"
       ],
-      "word_count": 730,
+      "word_count": 734,
       "file_path": "docs/docs__en__api__models__list.md"
     },
     "/docs/en/api/models/retrieve": {
@@ -9141,7 +9787,7 @@
         "header",
         "context"
       ],
-      "word_count": 619,
+      "word_count": 623,
       "file_path": "docs/docs__en__api__models__retrieve.md"
     },
     "/docs/en/api/openai-sdk": {
@@ -9202,7 +9848,7 @@
     },
     "/docs/en/api/python/beta": {
       "title": "Beta",
-      "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `Union[str, Literal[\"message-batches-2024-09-24\", \"prompt-caching-2024-07-31\", \"computer-use-2024-10-22\", 17 more]]`    - `str`    - `Literal[\"message-ba...",
+      "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `Union[str, Literal[\"message-batches-2024-09-24\", \"prompt-caching-2024-07-31\", \"computer-use-2024-10-22\", 19 more]]`    - `str`    - `Literal[\"message-ba...",
       "keywords": [
         "tool",
         "model",
@@ -9211,13 +9857,13 @@
         "breakpoint",
         "content",
         "block",
-        "number",
         "create",
+        "number",
         "one",
         "may",
+        "when",
         "time",
         "tokens",
-        "when",
         "defaults",
         "hour",
         "values",
@@ -9225,7 +9871,7 @@
         "live",
         "minutes"
       ],
-      "word_count": 99844,
+      "word_count": 102580,
       "file_path": "docs/docs__en__api__python__beta.md"
     },
     "/docs/en/api/python/beta/files": {
@@ -9253,7 +9899,7 @@
         "format",
         "length"
       ],
-      "word_count": 1023,
+      "word_count": 1043,
       "file_path": "docs/docs__en__api__python__beta__files.md"
     },
     "/docs/en/api/python/beta/files/delete": {
@@ -9277,7 +9923,7 @@
         "always",
         "example"
       ],
-      "word_count": 140,
+      "word_count": 144,
       "file_path": "docs/docs__en__api__python__beta__files__delete.md"
     },
     "/docs/en/api/python/beta/files/download": {
@@ -9297,7 +9943,7 @@
         "returns",
         "example"
       ],
-      "word_count": 119,
+      "word_count": 123,
       "file_path": "docs/docs__en__api__python__beta__files__download.md"
     },
     "/docs/en/api/python/beta/files/list": {
@@ -9325,7 +9971,7 @@
         "items",
         "return"
       ],
-      "word_count": 255,
+      "word_count": 259,
       "file_path": "docs/docs__en__api__python__beta__files__list.md"
     },
     "/docs/en/api/python/beta/files/retrieve_metadata": {
@@ -9353,7 +9999,7 @@
         "ids",
         "may"
       ],
-      "word_count": 196,
+      "word_count": 200,
       "file_path": "docs/docs__en__api__python__beta__files__retrieve_metadata.md"
     },
     "/docs/en/api/python/beta/files/upload": {
@@ -9381,7 +10027,7 @@
         "may",
         "change"
       ],
-      "word_count": 194,
+      "word_count": 198,
       "file_path": "docs/docs__en__api__python__beta__files__upload.md"
     },
     "/docs/en/api/python/beta/messages": {
@@ -9400,16 +10046,16 @@
         "one",
         "tokens",
         "may",
+        "when",
         "time",
         "hour",
         "defaults",
-        "when",
         "values",
         "following",
         "live",
         "minutes"
       ],
-      "word_count": 93743,
+      "word_count": 94522,
       "file_path": "docs/docs__en__api__python__beta__messages.md"
     },
     "/docs/en/api/python/beta/messages/batches": {
@@ -9432,12 +10078,12 @@
         "one",
         "create",
         "requests",
-        "may",
         "when",
+        "may",
         "processing",
         "block"
       ],
-      "word_count": 25499,
+      "word_count": 25799,
       "file_path": "docs/docs__en__api__python__beta__messages__batches.md"
     },
     "/docs/en/api/python/beta/messages/batches/cancel": {
@@ -9465,7 +10111,7 @@
         "once",
         "specified"
       ],
-      "word_count": 581,
+      "word_count": 585,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__cancel.md"
     },
     "/docs/en/api/python/beta/messages/batches/create": {
@@ -9481,9 +10127,9 @@
         "block",
         "defaults",
         "may",
+        "when",
         "one",
         "time",
-        "when",
         "values",
         "following",
         "create",
@@ -9493,7 +10139,7 @@
         "true",
         "only"
       ],
-      "word_count": 11238,
+      "word_count": 11266,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__create.md"
     },
     "/docs/en/api/python/beta/messages/batches/delete": {
@@ -9521,7 +10167,7 @@
         "api",
         "our"
       ],
-      "word_count": 177,
+      "word_count": 181,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__delete.md"
     },
     "/docs/en/api/python/beta/messages/batches/list": {
@@ -9549,7 +10195,7 @@
         "zero",
         "until"
       ],
-      "word_count": 586,
+      "word_count": 590,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__list.md"
     },
     "/docs/en/api/python/beta/messages/batches/results": {
@@ -9577,7 +10223,7 @@
         "directly",
         "create"
       ],
-      "word_count": 3117,
+      "word_count": 3184,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__results.md"
     },
     "/docs/en/api/python/beta/messages/batches/retrieve": {
@@ -9605,7 +10251,7 @@
         "specified",
         "once"
       ],
-      "word_count": 544,
+      "word_count": 548,
       "file_path": "docs/docs__en__api__python__beta__messages__batches__retrieve.md"
     },
     "/docs/en/api/python/beta/messages/count_tokens": {
@@ -9633,7 +10279,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 10310,
+      "word_count": 10314,
       "file_path": "docs/docs__en__api__python__beta__messages__count_tokens.md"
     },
     "/docs/en/api/python/beta/messages/create": {
@@ -9648,9 +10294,9 @@
         "content",
         "block",
         "one",
+        "when",
         "create",
         "may",
-        "when",
         "defaults",
         "following",
         "hour",
@@ -9661,7 +10307,7 @@
         "true",
         "number"
       ],
-      "word_count": 13447,
+      "word_count": 13538,
       "file_path": "docs/docs__en__api__python__beta__messages__create.md"
     },
     "/docs/en/api/python/beta/models": {
@@ -9689,7 +10335,7 @@
         "blocks",
         "api"
       ],
-      "word_count": 2532,
+      "word_count": 2540,
       "file_path": "docs/docs__en__api__python__beta__models.md"
     },
     "/docs/en/api/python/beta/models/list": {
@@ -9717,7 +10363,7 @@
         "which",
         "released"
       ],
-      "word_count": 680,
+      "word_count": 684,
       "file_path": "docs/docs__en__api__python__beta__models__list.md"
     },
     "/docs/en/api/python/beta/models/retrieve": {
@@ -9745,7 +10391,7 @@
         "support",
         "available"
       ],
-      "word_count": 618,
+      "word_count": 622,
       "file_path": "docs/docs__en__api__python__beta__models__retrieve.md"
     },
     "/docs/en/api/python/beta/skills": {
@@ -9756,8 +10402,8 @@
         "version",
         "identifier",
         "created",
-        "may",
         "timestamp",
+        "may",
         "unique",
         "format",
         "length",
@@ -9765,15 +10411,15 @@
         "change",
         "over",
         "time",
-        "skills",
-        "directory",
         "iso",
         "when",
         "extracted",
         "name",
-        "parameters"
+        "directory",
+        "object",
+        "type"
       ],
-      "word_count": 2095,
+      "word_count": 3066,
       "file_path": "docs/docs__en__api__python__beta__skills.md"
     },
     "/docs/en/api/python/beta/skills/create": {
@@ -9801,7 +10447,7 @@
         "iso",
         "timestamp"
       ],
-      "word_count": 294,
+      "word_count": 298,
       "file_path": "docs/docs__en__api__python__beta__skills__create.md"
     },
     "/docs/en/api/python/beta/skills/delete": {
@@ -9829,7 +10475,7 @@
         "returns",
         "deleted"
       ],
-      "word_count": 158,
+      "word_count": 162,
       "file_path": "docs/docs__en__api__python__beta__skills__delete.md"
     },
     "/docs/en/api/python/beta/skills/list": {
@@ -9857,7 +10503,7 @@
         "when",
         "parameters"
       ],
-      "word_count": 318,
+      "word_count": 322,
       "file_path": "docs/docs__en__api__python__beta__skills__list.md"
     },
     "/docs/en/api/python/beta/skills/retrieve": {
@@ -9885,7 +10531,7 @@
         "optional",
         "header"
       ],
-      "word_count": 261,
+      "word_count": 265,
       "file_path": "docs/docs__en__api__python__beta__skills__retrieve.md"
     },
     "/docs/en/api/python/beta/skills/versions": {
@@ -9895,10 +10541,13 @@
         "skill",
         "version",
         "identifier",
-        "timestamp",
         "extracted",
         "name",
+        "timestamp",
         "directory",
+        "upload",
+        "file",
+        "versions",
         "unique",
         "format",
         "length",
@@ -9907,13 +10556,10 @@
         "change",
         "over",
         "time",
-        "upload",
-        "file",
-        "versions",
         "each",
         "identified"
       ],
-      "word_count": 1062,
+      "word_count": 1553,
       "file_path": "docs/docs__en__api__python__beta__skills__versions.md"
     },
     "/docs/en/api/python/beta/skills/versions/create": {
@@ -9941,7 +10587,7 @@
         "must",
         "top"
       ],
-      "word_count": 295,
+      "word_count": 299,
       "file_path": "docs/docs__en__api__python__beta__skills__versions__create.md"
     },
     "/docs/en/api/python/beta/skills/versions/delete": {
@@ -9969,7 +10615,7 @@
         "optional",
         "header"
       ],
-      "word_count": 181,
+      "word_count": 185,
       "file_path": "docs/docs__en__api__python__beta__skills__versions__delete.md"
     },
     "/docs/en/api/python/beta/skills/versions/list": {
@@ -9997,7 +10643,7 @@
         "directory",
         "get"
       ],
-      "word_count": 299,
+      "word_count": 303,
       "file_path": "docs/docs__en__api__python__beta__skills__versions__list.md"
     },
     "/docs/en/api/python/beta/skills/versions/retrieve": {
@@ -10025,8 +10671,168 @@
         "epoch",
         "file"
       ],
-      "word_count": 285,
+      "word_count": 289,
       "file_path": "docs/docs__en__api__python__beta__skills__versions__retrieve.md"
+    },
+    "/docs/en/api/python/beta/user_profiles": {
+      "title": "User Profiles",
+      "content_preview": "# User Profiles  ## Create  `beta.user_profiles.create(UserProfileCreateParams**kwargs)  -> BetaUserProfile`  **post** `/v1/user_profiles`  Create User Profile  ### Parameters  - `external_id: Optiona...",
+      "keywords": [
+        "timestamp",
+        "rfc",
+        "format",
+        "user",
+        "beta",
+        "profile",
+        "keys",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "version",
+        "want",
+        "returns",
+        "example",
+        "create",
+        "characters",
+        "values",
+        "post",
+        "key"
+      ],
+      "word_count": 954,
+      "file_path": "docs/docs__en__api__python__beta__user_profiles.md"
+    },
+    "/docs/en/api/python/beta/user_profiles/create": {
+      "title": "Untitled",
+      "content_preview": "## Create  `beta.user_profiles.create(UserProfileCreateParams**kwargs)  -> BetaUserProfile`  **post** `/v1/user_profiles`  Create User Profile  ### Parameters  - `external_id: Optional[str]`  - `metad...",
+      "keywords": [
+        "create",
+        "user",
+        "profile",
+        "keys",
+        "characters",
+        "values",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "parameters",
+        "free",
+        "form",
+        "key",
+        "value",
+        "data",
+        "attach",
+        "maximum",
+        "must",
+        "non"
+      ],
+      "word_count": 186,
+      "file_path": "docs/docs__en__api__python__beta__user_profiles__create.md"
+    },
+    "/docs/en/api/python/beta/user_profiles/create_enrollment_url": {
+      "title": "Untitled",
+      "content_preview": "## Create Enrollment URL  `beta.user_profiles.create_enrollment_url(strid, UserProfileCreateEnrollmentURLParams**kwargs)  -> BetaUserProfileEnrollmentURL`  **post** `/v1/user_profiles/{id}/enrollment_...",
+      "keywords": [
+        "create",
+        "enrollment",
+        "url",
+        "post",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "timestamp",
+        "rfc",
+        "format",
+        "example"
+      ],
+      "word_count": 135,
+      "file_path": "docs/docs__en__api__python__beta__user_profiles__create_enrollment_url.md"
+    },
+    "/docs/en/api/python/beta/user_profiles/list": {
+      "title": "Untitled",
+      "content_preview": "## List  `beta.user_profiles.list(UserProfileListParams**kwargs)  -> SyncPageCursorV2[BetaUserProfile]`  **get** `/v1/user_profiles`  List User Profiles  ### Parameters  - `limit: Optional[int]`    Query parameter for limit  - `order: Optional[Literal[\"asc\", \"desc\"]]`    Query parameter for order",
+      "keywords": [
+        "query",
+        "parameter",
+        "list",
+        "timestamp",
+        "rfc",
+        "format",
+        "get",
+        "user",
+        "profiles",
+        "parameters",
+        "limit",
+        "order",
+        "page",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns"
+      ],
+      "word_count": 179,
+      "file_path": "docs/docs__en__api__python__beta__user_profiles__list.md"
+    },
+    "/docs/en/api/python/beta/user_profiles/retrieve": {
+      "title": "Untitled",
+      "content_preview": "## Retrieve  `beta.user_profiles.retrieve(strid, UserProfileRetrieveParams**kwargs)  -> BetaUserProfile`  **get** `/v1/user_profiles/{id}`  Get User Profile  ### Parameters  - `id: str`  - `betas: Optional[List[AnthropicBetaParam]]`    Optional header to specify the beta version(s) you want to use.",
+      "keywords": [
+        "get",
+        "timestamp",
+        "rfc",
+        "format",
+        "retrieve",
+        "user",
+        "profile",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "example"
+      ],
+      "word_count": 156,
+      "file_path": "docs/docs__en__api__python__beta__user_profiles__retrieve.md"
+    },
+    "/docs/en/api/python/beta/user_profiles/update": {
+      "title": "Untitled",
+      "content_preview": "## Update  `beta.user_profiles.update(strid, UserProfileUpdateParams**kwargs)  -> BetaUserProfile`  **post** `/v1/user_profiles/{id}`  Update User Profile  ### Parameters  - `id: str`  - `external_id: Optional[str]`  - `metadata: Optional[Dict[str, str]]`    Key-value pairs to merge into the stored",
+      "keywords": [
+        "keys",
+        "update",
+        "key",
+        "value",
+        "provided",
+        "values",
+        "characters",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "user",
+        "profile",
+        "parameters",
+        "pairs",
+        "merge",
+        "into",
+        "stored",
+        "metadata",
+        "overwrite"
+      ],
+      "word_count": 208,
+      "file_path": "docs/docs__en__api__python__beta__user_profiles__update.md"
     },
     "/docs/en/api/python/completions": {
       "title": "Completions",
@@ -10053,7 +10859,7 @@
         "powerful",
         "extended"
       ],
-      "word_count": 1618,
+      "word_count": 1622,
       "file_path": "docs/docs__en__api__python__completions.md"
     },
     "/docs/en/api/python/completions/create": {
@@ -10081,7 +10887,7 @@
         "specialized",
         "powerful"
       ],
-      "word_count": 1213,
+      "word_count": 1217,
       "file_path": "docs/docs__en__api__python__completions__create.md"
     },
     "/docs/en/api/python/messages": {
@@ -10100,16 +10906,16 @@
         "may",
         "defaults",
         "create",
+        "when",
         "values",
         "following",
         "hour",
-        "when",
         "live",
         "minutes",
         "invocation",
         "number"
       ],
-      "word_count": 76136,
+      "word_count": 76834,
       "file_path": "docs/docs__en__api__python__messages.md"
     },
     "/docs/en/api/python/messages/batches": {
@@ -10130,14 +10936,14 @@
         "processing",
         "one",
         "may",
+        "when",
         "request",
         "results",
-        "when",
         "create",
         "invocation",
         "performance"
       ],
-      "word_count": 20225,
+      "word_count": 20477,
       "file_path": "docs/docs__en__api__python__messages__batches.md"
     },
     "/docs/en/api/python/messages/batches/cancel": {
@@ -10277,7 +11083,7 @@
         "requests",
         "batch"
       ],
-      "word_count": 2311,
+      "word_count": 2374,
       "file_path": "docs/docs__en__api__python__messages__batches__results.md"
     },
     "/docs/en/api/python/messages/batches/retrieve": {
@@ -10350,10 +11156,10 @@
         "block",
         "may",
         "defaults",
+        "when",
         "create",
         "following",
         "values",
-        "when",
         "time",
         "hour",
         "live",
@@ -10361,7 +11167,7 @@
         "true",
         "used"
       ],
-      "word_count": 10725,
+      "word_count": 10788,
       "file_path": "docs/docs__en__api__python__messages__create.md"
     },
     "/docs/en/api/python/models": {
@@ -10389,7 +11195,7 @@
         "api",
         "object"
       ],
-      "word_count": 2525,
+      "word_count": 2533,
       "file_path": "docs/docs__en__api__python__models.md"
     },
     "/docs/en/api/python/models/list": {
@@ -10417,7 +11223,7 @@
         "which",
         "released"
       ],
-      "word_count": 680,
+      "word_count": 684,
       "file_path": "docs/docs__en__api__python__models__list.md"
     },
     "/docs/en/api/python/models/retrieve": {
@@ -10445,7 +11251,7 @@
         "support",
         "available"
       ],
-      "word_count": 618,
+      "word_count": 622,
       "file_path": "docs/docs__en__api__python__models__retrieve.md"
     },
     "/docs/en/api/rate-limits": {
@@ -10478,7 +11284,7 @@
     },
     "/docs/en/api/ruby/beta": {
       "title": "Beta",
-      "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `AnthropicBeta = String | :\"message-batches-2024-09-24\" | :\"prompt-caching-2024-07-31\" | :\"computer-use-2024-10-22\" | 17 more`    - `String`    - `:\"message-batches-2024-09-24\" | :\"prompt-caching-2024-07-31\" | :\"computer-use-2024-10-22\" | 17 more`",
+      "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `AnthropicBeta = String | :\"message-batches-2024-09-24\" | :\"prompt-caching-2024-07-31\" | :\"computer-use-2024-10-22\" | 19 more`    - `String`    - `:\"message-batches-2024-09-24\" | :\"prompt-caching-2024-07-31\" | :\"computer-use-2024-10-22\" | 19 more`",
       "keywords": [
         "tool",
         "cache",
@@ -10487,13 +11293,13 @@
         "breakpoint",
         "content",
         "block",
-        "number",
         "create",
+        "number",
         "one",
         "may",
+        "when",
         "time",
         "tokens",
-        "when",
         "defaults",
         "hour",
         "values",
@@ -10501,7 +11307,7 @@
         "live",
         "minutes"
       ],
-      "word_count": 98239,
+      "word_count": 100908,
       "file_path": "docs/docs__en__api__ruby__beta.md"
     },
     "/docs/en/api/ruby/beta/files": {
@@ -10529,7 +11335,7 @@
         "format",
         "length"
       ],
-      "word_count": 948,
+      "word_count": 968,
       "file_path": "docs/docs__en__api__ruby__beta__files.md"
     },
     "/docs/en/api/ruby/beta/files/delete": {
@@ -10553,7 +11359,7 @@
         "always",
         "example"
       ],
-      "word_count": 126,
+      "word_count": 130,
       "file_path": "docs/docs__en__api__ruby__beta__files__delete.md"
     },
     "/docs/en/api/ruby/beta/files/download": {
@@ -10573,7 +11379,7 @@
         "returns",
         "example"
       ],
-      "word_count": 102,
+      "word_count": 106,
       "file_path": "docs/docs__en__api__ruby__beta__files__download.md"
     },
     "/docs/en/api/ruby/beta/files/list": {
@@ -10601,7 +11407,7 @@
         "items",
         "return"
       ],
-      "word_count": 240,
+      "word_count": 244,
       "file_path": "docs/docs__en__api__ruby__beta__files__list.md"
     },
     "/docs/en/api/ruby/beta/files/retrieve_metadata": {
@@ -10629,7 +11435,7 @@
         "ids",
         "may"
       ],
-      "word_count": 182,
+      "word_count": 186,
       "file_path": "docs/docs__en__api__ruby__beta__files__retrieve_metadata.md"
     },
     "/docs/en/api/ruby/beta/files/upload": {
@@ -10657,7 +11463,7 @@
         "may",
         "change"
       ],
-      "word_count": 181,
+      "word_count": 185,
       "file_path": "docs/docs__en__api__ruby__beta__files__upload.md"
     },
     "/docs/en/api/ruby/beta/messages": {
@@ -10676,16 +11482,16 @@
         "one",
         "tokens",
         "may",
+        "when",
         "time",
         "hour",
         "defaults",
-        "when",
         "values",
         "following",
         "live",
         "minutes"
       ],
-      "word_count": 92371,
+      "word_count": 93162,
       "file_path": "docs/docs__en__api__ruby__beta__messages.md"
     },
     "/docs/en/api/ruby/beta/messages/batches": {
@@ -10708,12 +11514,12 @@
         "one",
         "create",
         "requests",
-        "may",
         "when",
+        "may",
         "processing",
         "block"
       ],
-      "word_count": 24720,
+      "word_count": 25024,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/cancel": {
@@ -10741,7 +11547,7 @@
         "once",
         "specified"
       ],
-      "word_count": 569,
+      "word_count": 573,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__cancel.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/create": {
@@ -10757,9 +11563,9 @@
         "block",
         "defaults",
         "may",
+        "when",
         "one",
         "time",
-        "when",
         "values",
         "following",
         "create",
@@ -10769,7 +11575,7 @@
         "true",
         "only"
       ],
-      "word_count": 11167,
+      "word_count": 11195,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__create.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/delete": {
@@ -10797,7 +11603,7 @@
         "api",
         "our"
       ],
-      "word_count": 163,
+      "word_count": 167,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__delete.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/list": {
@@ -10825,7 +11631,7 @@
         "zero",
         "until"
       ],
-      "word_count": 573,
+      "word_count": 577,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__list.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/results": {
@@ -10853,7 +11659,7 @@
         "message",
         "output"
       ],
-      "word_count": 2940,
+      "word_count": 3008,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__results.md"
     },
     "/docs/en/api/ruby/beta/messages/batches/retrieve": {
@@ -10881,7 +11687,7 @@
         "specified",
         "once"
       ],
-      "word_count": 532,
+      "word_count": 536,
       "file_path": "docs/docs__en__api__ruby__beta__messages__batches__retrieve.md"
     },
     "/docs/en/api/ruby/beta/messages/count_tokens": {
@@ -10909,7 +11715,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 10235,
+      "word_count": 10239,
       "file_path": "docs/docs__en__api__ruby__beta__messages__count_tokens.md"
     },
     "/docs/en/api/ruby/beta/messages/create": {
@@ -10924,9 +11730,9 @@
         "content",
         "block",
         "one",
+        "when",
         "create",
         "may",
-        "when",
         "defaults",
         "following",
         "hour",
@@ -10937,7 +11743,7 @@
         "true",
         "number"
       ],
-      "word_count": 13217,
+      "word_count": 13309,
       "file_path": "docs/docs__en__api__ruby__beta__messages__create.md"
     },
     "/docs/en/api/ruby/beta/models": {
@@ -10965,7 +11771,7 @@
         "blocks",
         "api"
       ],
-      "word_count": 2496,
+      "word_count": 2504,
       "file_path": "docs/docs__en__api__ruby__beta__models.md"
     },
     "/docs/en/api/ruby/beta/models/list": {
@@ -10993,7 +11799,7 @@
         "which",
         "released"
       ],
-      "word_count": 665,
+      "word_count": 669,
       "file_path": "docs/docs__en__api__ruby__beta__models__list.md"
     },
     "/docs/en/api/ruby/beta/models/retrieve": {
@@ -11021,7 +11827,7 @@
         "support",
         "available"
       ],
-      "word_count": 604,
+      "word_count": 608,
       "file_path": "docs/docs__en__api__ruby__beta__models__retrieve.md"
     },
     "/docs/en/api/ruby/beta/skills": {
@@ -11032,8 +11838,8 @@
         "version",
         "identifier",
         "created",
-        "may",
         "timestamp",
+        "may",
         "unique",
         "format",
         "length",
@@ -11041,15 +11847,15 @@
         "change",
         "over",
         "time",
-        "skills",
-        "directory",
         "iso",
         "when",
         "extracted",
         "name",
-        "parameters"
+        "directory",
+        "object",
+        "type"
       ],
-      "word_count": 1983,
+      "word_count": 2946,
       "file_path": "docs/docs__en__api__ruby__beta__skills.md"
     },
     "/docs/en/api/ruby/beta/skills/create": {
@@ -11077,7 +11883,7 @@
         "iso",
         "timestamp"
       ],
-      "word_count": 282,
+      "word_count": 286,
       "file_path": "docs/docs__en__api__ruby__beta__skills__create.md"
     },
     "/docs/en/api/ruby/beta/skills/delete": {
@@ -11105,7 +11911,7 @@
         "returns",
         "deleted"
       ],
-      "word_count": 144,
+      "word_count": 148,
       "file_path": "docs/docs__en__api__ruby__beta__skills__delete.md"
     },
     "/docs/en/api/ruby/beta/skills/list": {
@@ -11133,7 +11939,7 @@
         "when",
         "parameters"
       ],
-      "word_count": 303,
+      "word_count": 307,
       "file_path": "docs/docs__en__api__ruby__beta__skills__list.md"
     },
     "/docs/en/api/ruby/beta/skills/retrieve": {
@@ -11161,7 +11967,7 @@
         "optional",
         "header"
       ],
-      "word_count": 247,
+      "word_count": 251,
       "file_path": "docs/docs__en__api__ruby__beta__skills__retrieve.md"
     },
     "/docs/en/api/ruby/beta/skills/versions": {
@@ -11171,10 +11977,13 @@
         "skill",
         "version",
         "identifier",
-        "timestamp",
         "extracted",
         "name",
+        "timestamp",
         "directory",
+        "upload",
+        "file",
+        "versions",
         "unique",
         "format",
         "length",
@@ -11183,13 +11992,10 @@
         "change",
         "over",
         "time",
-        "upload",
-        "file",
-        "versions",
         "each",
         "identified"
       ],
-      "word_count": 1005,
+      "word_count": 1492,
       "file_path": "docs/docs__en__api__ruby__beta__skills__versions.md"
     },
     "/docs/en/api/ruby/beta/skills/versions/create": {
@@ -11217,7 +12023,7 @@
         "must",
         "top"
       ],
-      "word_count": 281,
+      "word_count": 285,
       "file_path": "docs/docs__en__api__ruby__beta__skills__versions__create.md"
     },
     "/docs/en/api/ruby/beta/skills/versions/delete": {
@@ -11245,7 +12051,7 @@
         "optional",
         "header"
       ],
-      "word_count": 168,
+      "word_count": 172,
       "file_path": "docs/docs__en__api__ruby__beta__skills__versions__delete.md"
     },
     "/docs/en/api/ruby/beta/skills/versions/list": {
@@ -11273,7 +12079,7 @@
         "directory",
         "get"
       ],
-      "word_count": 282,
+      "word_count": 286,
       "file_path": "docs/docs__en__api__ruby__beta__skills__versions__list.md"
     },
     "/docs/en/api/ruby/beta/skills/versions/retrieve": {
@@ -11301,8 +12107,168 @@
         "epoch",
         "file"
       ],
-      "word_count": 272,
+      "word_count": 276,
       "file_path": "docs/docs__en__api__ruby__beta__skills__versions__retrieve.md"
+    },
+    "/docs/en/api/ruby/beta/user_profiles": {
+      "title": "User Profiles",
+      "content_preview": "# User Profiles  ## Create  `beta.user_profiles.create(**kwargs) -> BetaUserProfile`  **post** `/v1/user_profiles`  Create User Profile  ### Parameters  - `external_id: String`  - `metadata: Hash[Symbol, String]`    Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys",
+      "keywords": [
+        "timestamp",
+        "rfc",
+        "format",
+        "user",
+        "beta",
+        "profile",
+        "keys",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "version",
+        "want",
+        "returns",
+        "example",
+        "create",
+        "characters",
+        "values",
+        "post",
+        "key"
+      ],
+      "word_count": 883,
+      "file_path": "docs/docs__en__api__ruby__beta__user_profiles.md"
+    },
+    "/docs/en/api/ruby/beta/user_profiles/create": {
+      "title": "Untitled",
+      "content_preview": "## Create  `beta.user_profiles.create(**kwargs) -> BetaUserProfile`  **post** `/v1/user_profiles`  Create User Profile  ### Parameters  - `external_id: String`  - `metadata: Hash[Symbol, String]`    F...",
+      "keywords": [
+        "create",
+        "user",
+        "profile",
+        "keys",
+        "characters",
+        "values",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "parameters",
+        "free",
+        "form",
+        "key",
+        "value",
+        "data",
+        "attach",
+        "maximum",
+        "must",
+        "non"
+      ],
+      "word_count": 174,
+      "file_path": "docs/docs__en__api__ruby__beta__user_profiles__create.md"
+    },
+    "/docs/en/api/ruby/beta/user_profiles/create_enrollment_url": {
+      "title": "Untitled",
+      "content_preview": "## Create Enrollment URL  `beta.user_profiles.create_enrollment_url(id, **kwargs) -> BetaUserProfileEnrollmentURL`  **post** `/v1/user_profiles/{id}/enrollment_url`  Create Enrollment URL  ### Paramet...",
+      "keywords": [
+        "create",
+        "enrollment",
+        "url",
+        "post",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "timestamp",
+        "rfc",
+        "format",
+        "example"
+      ],
+      "word_count": 121,
+      "file_path": "docs/docs__en__api__ruby__beta__user_profiles__create_enrollment_url.md"
+    },
+    "/docs/en/api/ruby/beta/user_profiles/list": {
+      "title": "Untitled",
+      "content_preview": "## List  `beta.user_profiles.list(**kwargs) -> PageCursorV2<BetaUserProfile>`  **get** `/v1/user_profiles`  List User Profiles  ### Parameters  - `limit: Integer`    Query parameter for limit  - `orde...",
+      "keywords": [
+        "query",
+        "parameter",
+        "list",
+        "timestamp",
+        "rfc",
+        "format",
+        "get",
+        "user",
+        "profiles",
+        "parameters",
+        "limit",
+        "order",
+        "page",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns"
+      ],
+      "word_count": 165,
+      "file_path": "docs/docs__en__api__ruby__beta__user_profiles__list.md"
+    },
+    "/docs/en/api/ruby/beta/user_profiles/retrieve": {
+      "title": "Untitled",
+      "content_preview": "## Retrieve  `beta.user_profiles.retrieve(id, **kwargs) -> BetaUserProfile`  **get** `/v1/user_profiles/{id}`  Get User Profile  ### Parameters  - `id: String`  - `betas: Array[AnthropicBeta]`    Opti...",
+      "keywords": [
+        "get",
+        "timestamp",
+        "rfc",
+        "format",
+        "retrieve",
+        "user",
+        "profile",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "example"
+      ],
+      "word_count": 142,
+      "file_path": "docs/docs__en__api__ruby__beta__user_profiles__retrieve.md"
+    },
+    "/docs/en/api/ruby/beta/user_profiles/update": {
+      "title": "Untitled",
+      "content_preview": "## Update  `beta.user_profiles.update(id, **kwargs) -> BetaUserProfile`  **post** `/v1/user_profiles/{id}`  Update User Profile  ### Parameters  - `id: String`  - `external_id: String`  - `metadata: H...",
+      "keywords": [
+        "keys",
+        "update",
+        "key",
+        "value",
+        "provided",
+        "values",
+        "characters",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "user",
+        "profile",
+        "parameters",
+        "pairs",
+        "merge",
+        "into",
+        "stored",
+        "metadata",
+        "overwrite"
+      ],
+      "word_count": 194,
+      "file_path": "docs/docs__en__api__ruby__beta__user_profiles__update.md"
     },
     "/docs/en/api/ruby/completions": {
       "title": "Completions",
@@ -11329,7 +12295,7 @@
         "completions",
         "text"
       ],
-      "word_count": 1176,
+      "word_count": 1180,
       "file_path": "docs/docs__en__api__ruby__completions.md"
     },
     "/docs/en/api/ruby/completions/create": {
@@ -11357,7 +12323,7 @@
         "text",
         "complete"
       ],
-      "word_count": 915,
+      "word_count": 919,
       "file_path": "docs/docs__en__api__ruby__completions__create.md"
     },
     "/docs/en/api/ruby/messages": {
@@ -11376,16 +12342,16 @@
         "may",
         "defaults",
         "create",
+        "when",
         "values",
         "following",
         "hour",
-        "when",
         "live",
         "minutes",
         "invocation",
         "number"
       ],
-      "word_count": 74466,
+      "word_count": 75176,
       "file_path": "docs/docs__en__api__ruby__messages.md"
     },
     "/docs/en/api/ruby/messages/batches": {
@@ -11406,14 +12372,14 @@
         "processing",
         "one",
         "may",
+        "when",
         "request",
         "results",
-        "when",
         "create",
         "invocation",
         "block"
       ],
-      "word_count": 19384,
+      "word_count": 19640,
       "file_path": "docs/docs__en__api__ruby__messages__batches.md"
     },
     "/docs/en/api/ruby/messages/batches/cancel": {
@@ -11553,7 +12519,7 @@
         "result",
         "api"
       ],
-      "word_count": 2129,
+      "word_count": 2193,
       "file_path": "docs/docs__en__api__ruby__messages__batches__results.md"
     },
     "/docs/en/api/ruby/messages/batches/retrieve": {
@@ -11626,10 +12592,10 @@
         "block",
         "may",
         "defaults",
+        "when",
         "create",
         "following",
         "values",
-        "when",
         "time",
         "hour",
         "live",
@@ -11637,7 +12603,7 @@
         "true",
         "used"
       ],
-      "word_count": 10454,
+      "word_count": 10518,
       "file_path": "docs/docs__en__api__ruby__messages__create.md"
     },
     "/docs/en/api/ruby/models": {
@@ -11665,7 +12631,7 @@
         "api",
         "object"
       ],
-      "word_count": 2489,
+      "word_count": 2497,
       "file_path": "docs/docs__en__api__ruby__models.md"
     },
     "/docs/en/api/ruby/models/list": {
@@ -11693,7 +12659,7 @@
         "which",
         "released"
       ],
-      "word_count": 665,
+      "word_count": 669,
       "file_path": "docs/docs__en__api__ruby__models__list.md"
     },
     "/docs/en/api/ruby/models/retrieve": {
@@ -11721,7 +12687,7 @@
         "support",
         "available"
       ],
-      "word_count": 604,
+      "word_count": 608,
       "file_path": "docs/docs__en__api__ruby__models__retrieve.md"
     },
     "/docs/en/api/sdks/csharp": {
@@ -11928,24 +12894,24 @@
         "priority",
         "tokens",
         "capacity",
-        "claude",
         "requests",
         "per",
         "token",
         "service",
         "request",
-        "opus",
         "tiers",
         "standard",
         "input",
         "output",
         "cache",
+        "models",
         "note",
         "other",
         "minute",
-        "models"
+        "claude",
+        "availability"
       ],
-      "word_count": 798,
+      "word_count": 764,
       "file_path": "docs/docs__en__api__service-tiers.md"
     },
     "/docs/en/api/supported-regions": {
@@ -11978,7 +12944,7 @@
     },
     "/docs/en/api/typescript/beta": {
       "title": "Beta",
-      "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `AnthropicBeta = (string & {}) | \"message-batches-2024-09-24\" | \"prompt-caching-2024-07-31\" | \"computer-use-2024-10-22\" | 17 more`    - `(string & {})`  ...",
+      "content_preview": "# Beta  ## Domain Types  ### Anthropic Beta  - `AnthropicBeta = (string & {}) | \"message-batches-2024-09-24\" | \"prompt-caching-2024-07-31\" | \"computer-use-2024-10-22\" | 19 more`    - `(string & {})`  ...",
       "keywords": [
         "tool",
         "cache",
@@ -11987,13 +12953,13 @@
         "breakpoint",
         "content",
         "block",
-        "number",
         "create",
+        "number",
         "one",
         "may",
+        "when",
         "time",
         "tokens",
-        "when",
         "defaults",
         "hour",
         "values",
@@ -12001,7 +12967,7 @@
         "live",
         "minutes"
       ],
-      "word_count": 100441,
+      "word_count": 103327,
       "file_path": "docs/docs__en__api__typescript__beta.md"
     },
     "/docs/en/api/typescript/beta/files": {
@@ -12029,7 +12995,7 @@
         "identifier",
         "format"
       ],
-      "word_count": 1083,
+      "word_count": 1103,
       "file_path": "docs/docs__en__api__typescript__beta__files.md"
     },
     "/docs/en/api/typescript/beta/files/delete": {
@@ -12053,7 +13019,7 @@
         "always",
         "example"
       ],
-      "word_count": 147,
+      "word_count": 151,
       "file_path": "docs/docs__en__api__typescript__beta__files__delete.md"
     },
     "/docs/en/api/typescript/beta/files/download": {
@@ -12073,7 +13039,7 @@
         "returns",
         "example"
       ],
-      "word_count": 132,
+      "word_count": 136,
       "file_path": "docs/docs__en__api__typescript__beta__files__download.md"
     },
     "/docs/en/api/typescript/beta/files/list": {
@@ -12101,7 +13067,7 @@
         "after",
         "before"
       ],
-      "word_count": 279,
+      "word_count": 283,
       "file_path": "docs/docs__en__api__typescript__beta__files__list.md"
     },
     "/docs/en/api/typescript/beta/files/retrieve_metadata": {
@@ -12129,7 +13095,7 @@
         "ids",
         "may"
       ],
-      "word_count": 203,
+      "word_count": 207,
       "file_path": "docs/docs__en__api__typescript__beta__files__retrieve_metadata.md"
     },
     "/docs/en/api/typescript/beta/files/upload": {
@@ -12157,7 +13123,7 @@
         "length",
         "ids"
       ],
-      "word_count": 207,
+      "word_count": 211,
       "file_path": "docs/docs__en__api__typescript__beta__files__upload.md"
     },
     "/docs/en/api/typescript/beta/messages": {
@@ -12176,16 +13142,16 @@
         "one",
         "tokens",
         "may",
+        "when",
         "time",
         "hour",
         "defaults",
-        "when",
         "values",
         "following",
         "live",
         "minutes"
       ],
-      "word_count": 94109,
+      "word_count": 94967,
       "file_path": "docs/docs__en__api__typescript__beta__messages.md"
     },
     "/docs/en/api/typescript/beta/messages/batches": {
@@ -12208,12 +13174,12 @@
         "one",
         "create",
         "requests",
-        "may",
         "when",
+        "may",
         "processing",
         "block"
       ],
-      "word_count": 25170,
+      "word_count": 25500,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/cancel": {
@@ -12241,7 +13207,7 @@
         "once",
         "specified"
       ],
-      "word_count": 598,
+      "word_count": 602,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__cancel.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/create": {
@@ -12257,9 +13223,9 @@
         "block",
         "defaults",
         "may",
+        "when",
         "one",
         "time",
-        "when",
         "values",
         "following",
         "create",
@@ -12269,7 +13235,7 @@
         "true",
         "only"
       ],
-      "word_count": 11398,
+      "word_count": 11428,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__create.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/delete": {
@@ -12297,7 +13263,7 @@
         "api",
         "our"
       ],
-      "word_count": 184,
+      "word_count": 188,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__delete.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/list": {
@@ -12325,7 +13291,7 @@
         "ends",
         "zero"
       ],
-      "word_count": 620,
+      "word_count": 624,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__list.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/results": {
@@ -12353,7 +13319,7 @@
         "message",
         "output"
       ],
-      "word_count": 2981,
+      "word_count": 3055,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__results.md"
     },
     "/docs/en/api/typescript/beta/messages/batches/retrieve": {
@@ -12381,7 +13347,7 @@
         "specified",
         "once"
       ],
-      "word_count": 561,
+      "word_count": 565,
       "file_path": "docs/docs__en__api__typescript__beta__messages__batches__retrieve.md"
     },
     "/docs/en/api/typescript/beta/messages/count_tokens": {
@@ -12409,7 +13375,7 @@
         "true",
         "blocks"
       ],
-      "word_count": 10478,
+      "word_count": 10482,
       "file_path": "docs/docs__en__api__typescript__beta__messages__count_tokens.md"
     },
     "/docs/en/api/typescript/beta/messages/create": {
@@ -12424,9 +13390,9 @@
         "content",
         "block",
         "one",
+        "when",
         "create",
         "may",
-        "when",
         "defaults",
         "following",
         "hour",
@@ -12437,7 +13403,7 @@
         "true",
         "number"
       ],
-      "word_count": 13571,
+      "word_count": 13673,
       "file_path": "docs/docs__en__api__typescript__beta__messages__create.md"
     },
     "/docs/en/api/typescript/beta/models": {
@@ -12465,7 +13431,7 @@
         "blocks",
         "api"
       ],
-      "word_count": 2597,
+      "word_count": 2605,
       "file_path": "docs/docs__en__api__typescript__beta__models.md"
     },
     "/docs/en/api/typescript/beta/models/list": {
@@ -12493,7 +13459,7 @@
         "indicates",
         "list"
       ],
-      "word_count": 716,
+      "word_count": 720,
       "file_path": "docs/docs__en__api__typescript__beta__models__list.md"
     },
     "/docs/en/api/typescript/beta/models/retrieve": {
@@ -12521,7 +13487,7 @@
         "support",
         "available"
       ],
-      "word_count": 637,
+      "word_count": 641,
       "file_path": "docs/docs__en__api__typescript__beta__models__retrieve.md"
     },
     "/docs/en/api/typescript/beta/skills": {
@@ -12532,10 +13498,8 @@
         "version",
         "identifier",
         "created",
-        "param",
-        "may",
         "timestamp",
-        "header",
+        "may",
         "unique",
         "format",
         "length",
@@ -12543,13 +13507,15 @@
         "change",
         "over",
         "time",
-        "skills",
-        "directory",
         "iso",
         "when",
-        "extracted"
+        "extracted",
+        "name",
+        "param",
+        "directory",
+        "object"
       ],
-      "word_count": 2233,
+      "word_count": 3200,
       "file_path": "docs/docs__en__api__typescript__beta__skills.md"
     },
     "/docs/en/api/typescript/beta/skills/create": {
@@ -12577,7 +13543,7 @@
         "header",
         "identifier"
       ],
-      "word_count": 317,
+      "word_count": 321,
       "file_path": "docs/docs__en__api__typescript__beta__skills__create.md"
     },
     "/docs/en/api/typescript/beta/skills/delete": {
@@ -12605,7 +13571,7 @@
         "returns",
         "deleted"
       ],
-      "word_count": 165,
+      "word_count": 169,
       "file_path": "docs/docs__en__api__typescript__beta__skills__delete.md"
     },
     "/docs/en/api/typescript/beta/skills/list": {
@@ -12633,7 +13599,7 @@
         "may",
         "iso"
       ],
-      "word_count": 350,
+      "word_count": 354,
       "file_path": "docs/docs__en__api__typescript__beta__skills__list.md"
     },
     "/docs/en/api/typescript/beta/skills/retrieve": {
@@ -12661,7 +13627,7 @@
         "optional",
         "header"
       ],
-      "word_count": 272,
+      "word_count": 276,
       "file_path": "docs/docs__en__api__typescript__beta__skills__retrieve.md"
     },
     "/docs/en/api/typescript/beta/skills/versions": {
@@ -12671,12 +13637,13 @@
         "skill",
         "version",
         "identifier",
-        "param",
-        "timestamp",
         "extracted",
         "name",
+        "timestamp",
         "directory",
-        "header",
+        "upload",
+        "file",
+        "versions",
         "unique",
         "format",
         "length",
@@ -12685,11 +13652,10 @@
         "change",
         "over",
         "time",
-        "upload",
-        "file",
-        "versions"
+        "each",
+        "identified"
       ],
-      "word_count": 1127,
+      "word_count": 1610,
       "file_path": "docs/docs__en__api__typescript__beta__skills__versions.md"
     },
     "/docs/en/api/typescript/beta/skills/versions/create": {
@@ -12717,7 +13683,7 @@
         "param",
         "must"
       ],
-      "word_count": 308,
+      "word_count": 312,
       "file_path": "docs/docs__en__api__typescript__beta__skills__versions__create.md"
     },
     "/docs/en/api/typescript/beta/skills/versions/delete": {
@@ -12745,7 +13711,7 @@
         "change",
         "over"
       ],
-      "word_count": 195,
+      "word_count": 199,
       "file_path": "docs/docs__en__api__typescript__beta__skills__versions__delete.md"
     },
     "/docs/en/api/typescript/beta/skills/versions/list": {
@@ -12773,7 +13739,7 @@
         "timestamp",
         "file"
       ],
-      "word_count": 323,
+      "word_count": 327,
       "file_path": "docs/docs__en__api__typescript__beta__skills__versions__list.md"
     },
     "/docs/en/api/typescript/beta/skills/versions/retrieve": {
@@ -12801,8 +13767,168 @@
         "over",
         "time"
       ],
-      "word_count": 299,
+      "word_count": 303,
       "file_path": "docs/docs__en__api__typescript__beta__skills__versions__retrieve.md"
+    },
+    "/docs/en/api/typescript/beta/user_profiles": {
+      "title": "User Profiles",
+      "content_preview": "# User Profiles  ## Create  `client.beta.userProfiles.create(UserProfileCreateParamsparams, RequestOptionsoptions?): BetaUserProfile`  **post** `/v1/user_profiles`  Create User Profile  ### Parameters...",
+      "keywords": [
+        "timestamp",
+        "rfc",
+        "format",
+        "param",
+        "user",
+        "header",
+        "beta",
+        "profile",
+        "keys",
+        "query",
+        "parameters",
+        "optional",
+        "specify",
+        "version",
+        "want",
+        "returns",
+        "example",
+        "create",
+        "body",
+        "characters"
+      ],
+      "word_count": 1029,
+      "file_path": "docs/docs__en__api__typescript__beta__user_profiles.md"
+    },
+    "/docs/en/api/typescript/beta/user_profiles/create": {
+      "title": "Untitled",
+      "content_preview": "## Create  `client.beta.userProfiles.create(UserProfileCreateParamsparams, RequestOptionsoptions?): BetaUserProfile`  **post** `/v1/user_profiles`  Create User Profile  ### Parameters  - `params: User...",
+      "keywords": [
+        "param",
+        "create",
+        "user",
+        "profile",
+        "body",
+        "keys",
+        "characters",
+        "values",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "parameters",
+        "free",
+        "form",
+        "key",
+        "value",
+        "data",
+        "attach"
+      ],
+      "word_count": 205,
+      "file_path": "docs/docs__en__api__typescript__beta__user_profiles__create.md"
+    },
+    "/docs/en/api/typescript/beta/user_profiles/create_enrollment_url": {
+      "title": "Untitled",
+      "content_preview": "## Create Enrollment URL  `client.beta.userProfiles.createEnrollmentURL(stringid, UserProfileCreateEnrollmentURLParamsparams?, RequestOptionsoptions?): BetaUserProfileEnrollmentURL`  **post** `/v1/use...",
+      "keywords": [
+        "create",
+        "enrollment",
+        "url",
+        "post",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "timestamp",
+        "rfc",
+        "format",
+        "example"
+      ],
+      "word_count": 142,
+      "file_path": "docs/docs__en__api__typescript__beta__user_profiles__create_enrollment_url.md"
+    },
+    "/docs/en/api/typescript/beta/user_profiles/list": {
+      "title": "Untitled",
+      "content_preview": "## List  `client.beta.userProfiles.list(UserProfileListParamsparams?, RequestOptionsoptions?): PageCursorV2<BetaUserProfile>`  **get** `/v1/user_profiles`  List User Profiles  ### Parameters  - `param...",
+      "keywords": [
+        "query",
+        "param",
+        "parameter",
+        "list",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "get",
+        "user",
+        "profiles",
+        "parameters",
+        "limit",
+        "order",
+        "page",
+        "optional",
+        "specify",
+        "beta",
+        "version",
+        "want"
+      ],
+      "word_count": 206,
+      "file_path": "docs/docs__en__api__typescript__beta__user_profiles__list.md"
+    },
+    "/docs/en/api/typescript/beta/user_profiles/retrieve": {
+      "title": "Untitled",
+      "content_preview": "## Retrieve  `client.beta.userProfiles.retrieve(stringid, UserProfileRetrieveParamsparams?, RequestOptionsoptions?): BetaUserProfile`  **get** `/v1/user_profiles/{id}`  Get User Profile  ### Parameter...",
+      "keywords": [
+        "get",
+        "timestamp",
+        "rfc",
+        "format",
+        "retrieve",
+        "user",
+        "profile",
+        "parameters",
+        "optional",
+        "header",
+        "specify",
+        "beta",
+        "version",
+        "want",
+        "returns",
+        "example"
+      ],
+      "word_count": 165,
+      "file_path": "docs/docs__en__api__typescript__beta__user_profiles__retrieve.md"
+    },
+    "/docs/en/api/typescript/beta/user_profiles/update": {
+      "title": "Untitled",
+      "content_preview": "## Update  `client.beta.userProfiles.update(stringid, UserProfileUpdateParamsparams, RequestOptionsoptions?): BetaUserProfile`  **post** `/v1/user_profiles/{id}`  Update User Profile  ### Parameters  ...",
+      "keywords": [
+        "keys",
+        "param",
+        "update",
+        "body",
+        "key",
+        "value",
+        "provided",
+        "values",
+        "characters",
+        "header",
+        "timestamp",
+        "rfc",
+        "format",
+        "post",
+        "user",
+        "profile",
+        "parameters",
+        "pairs",
+        "merge",
+        "into"
+      ],
+      "word_count": 225,
+      "file_path": "docs/docs__en__api__typescript__beta__user_profiles__update.md"
     },
     "/docs/en/api/typescript/completions": {
       "title": "Completions",
@@ -12829,7 +13955,7 @@
         "models",
         "only"
       ],
-      "word_count": 1243,
+      "word_count": 1247,
       "file_path": "docs/docs__en__api__typescript__completions.md"
     },
     "/docs/en/api/typescript/completions/create": {
@@ -12857,7 +13983,7 @@
         "using",
         "models"
       ],
-      "word_count": 993,
+      "word_count": 997,
       "file_path": "docs/docs__en__api__typescript__completions__create.md"
     },
     "/docs/en/api/typescript/messages": {
@@ -12876,16 +14002,16 @@
         "may",
         "defaults",
         "create",
+        "when",
         "values",
         "following",
         "hour",
-        "when",
         "live",
         "minutes",
         "invocation",
         "number"
       ],
-      "word_count": 75778,
+      "word_count": 76549,
       "file_path": "docs/docs__en__api__typescript__messages.md"
     },
     "/docs/en/api/typescript/messages/batches": {
@@ -12906,14 +14032,14 @@
         "processing",
         "one",
         "may",
+        "when",
         "request",
         "results",
-        "when",
         "create",
         "invocation",
         "block"
       ],
-      "word_count": 19678,
+      "word_count": 19958,
       "file_path": "docs/docs__en__api__typescript__messages__batches.md"
     },
     "/docs/en/api/typescript/messages/batches/cancel": {
@@ -13053,7 +14179,7 @@
         "result",
         "api"
       ],
-      "word_count": 2143,
+      "word_count": 2213,
       "file_path": "docs/docs__en__api__typescript__messages__batches__results.md"
     },
     "/docs/en/api/typescript/messages/batches/retrieve": {
@@ -13126,10 +14252,10 @@
         "block",
         "may",
         "defaults",
+        "when",
         "create",
         "following",
         "values",
-        "when",
         "time",
         "hour",
         "live",
@@ -13137,7 +14263,7 @@
         "true",
         "used"
       ],
-      "word_count": 10698,
+      "word_count": 10768,
       "file_path": "docs/docs__en__api__typescript__messages__create.md"
     },
     "/docs/en/api/typescript/models": {
@@ -13165,7 +14291,7 @@
         "api",
         "object"
       ],
-      "word_count": 2590,
+      "word_count": 2598,
       "file_path": "docs/docs__en__api__typescript__models.md"
     },
     "/docs/en/api/typescript/models/list": {
@@ -13193,7 +14319,7 @@
         "indicates",
         "list"
       ],
-      "word_count": 716,
+      "word_count": 720,
       "file_path": "docs/docs__en__api__typescript__models__list.md"
     },
     "/docs/en/api/typescript/models/retrieve": {
@@ -13221,7 +14347,7 @@
         "support",
         "available"
       ],
-      "word_count": 637,
+      "word_count": 641,
       "file_path": "docs/docs__en__api__typescript__models__retrieve.md"
     },
     "/docs/en/api/versioning": {
@@ -13263,21 +14389,21 @@
         "when",
         "extended",
         "mode",
+        "models",
+        "blocks",
         "note",
         "output",
         "sonnet",
-        "models",
-        "blocks",
         "opus",
         "effort",
-        "field",
+        "mythos",
+        "preview",
         "summarized",
-        "see",
-        "prompt",
-        "full",
-        "api"
+        "field",
+        "default",
+        "see"
       ],
-      "word_count": 3522,
+      "word_count": 3653,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/administration-api": {
@@ -13445,7 +14571,7 @@
         "keys",
         "python"
       ],
-      "word_count": 2300,
+      "word_count": 2323,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock": {
@@ -13462,18 +14588,18 @@
         "codegroup",
         "opus",
         "endpoints",
-        "pricing",
-        "models",
-        "regional",
-        "amazon",
         "note",
-        "title",
+        "pricing",
+        "amazon",
+        "models",
         "model",
+        "regional",
         "available",
+        "title",
         "through",
         "api"
       ],
-      "word_count": 2740,
+      "word_count": 2764,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -13488,12 +14614,12 @@
         "endpoints",
         "anthropic",
         "models",
+        "note",
         "codegroup",
         "pricing",
+        "google",
         "title",
         "regional",
-        "google",
-        "note",
         "model",
         "tooltip",
         "haiku",
@@ -13501,7 +14627,7 @@
         "through",
         "api"
       ],
-      "word_count": 1844,
+      "word_count": 1868,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -13521,15 +14647,15 @@
         "conversation",
         "response",
         "token",
+        "claude",
         "messages",
         "blocks",
         "cache",
         "iteration",
         "after",
-        "claude",
         "trigger"
       ],
-      "word_count": 8247,
+      "word_count": 8252,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -13541,12 +14667,12 @@
         "tool",
         "side",
         "when",
-        "claude",
         "sdk",
         "tab",
         "thinking",
         "note",
         "clearing",
+        "claude",
         "server",
         "summary",
         "conversation",
@@ -13557,7 +14683,7 @@
         "title",
         "results"
       ],
-      "word_count": 7022,
+      "word_count": 6986,
       "file_path": "docs/docs__en__build-with-claude__context-editing.md"
     },
     "/docs/en/build-with-claude/context-windows": {
@@ -13566,8 +14692,8 @@
       "keywords": [
         "context",
         "thinking",
-        "window",
         "claude",
+        "window",
         "extended",
         "tool",
         "token",
@@ -13585,7 +14711,7 @@
         "sonnet",
         "conversation"
       ],
-      "word_count": 1739,
+      "word_count": 1743,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/data-residency": {
@@ -13627,8 +14753,8 @@
         "token",
         "parameter",
         "tool",
-        "sonnet",
         "opus",
+        "sonnet",
         "levels",
         "calls",
         "tasks",
@@ -13641,7 +14767,7 @@
         "control",
         "tokens"
       ],
-      "word_count": 1489,
+      "word_count": 1527,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -13686,18 +14812,18 @@
         "tokens",
         "api",
         "context",
-        "opus",
-        "response",
-        "turn",
-        "request",
         "models",
-        "sonnet",
+        "turn",
+        "response",
+        "request",
+        "opus",
         "token",
-        "see",
+        "model",
+        "content",
         "interleaved",
-        "output"
+        "see"
       ],
-      "word_count": 13488,
+      "word_count": 13868,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -13880,7 +15006,6 @@
         "block",
         "cached",
         "breakpoint",
-        "claude",
         "content",
         "request",
         "blocks",
@@ -13888,12 +15013,13 @@
         "system",
         "when",
         "user",
+        "claude",
         "tool",
         "breakpoints",
         "input",
         "requests"
       ],
-      "word_count": 13372,
+      "word_count": 13298,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {
@@ -13921,7 +15047,7 @@
         "may",
         "latest"
       ],
-      "word_count": 6429,
+      "word_count": 6445,
       "file_path": "docs/docs__en__build-with-claude__prompt-engineering__claude-prompting-best-practices.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/overview": {
@@ -14074,8 +15200,8 @@
         "outputs",
         "structured",
         "title",
-        "schemas",
         "claude",
+        "schemas",
         "response",
         "tool",
         "strict",
@@ -14089,7 +15215,7 @@
         "example",
         "responses"
       ],
-      "word_count": 8654,
+      "word_count": 8671,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/token-counting": {
@@ -14182,8 +15308,8 @@
       "keywords": [
         "api",
         "messages",
-        "codegroup",
         "claude",
+        "codegroup",
         "see",
         "guide",
         "using",
@@ -14201,7 +15327,7 @@
         "data",
         "zdr"
       ],
-      "word_count": 2700,
+      "word_count": 2703,
       "file_path": "docs/docs__en__build-with-claude__working-with-messages.md"
     },
     "/docs/en/build-with-claude/workspaces": {
@@ -14313,7 +15439,7 @@
         "read",
         "console"
       ],
-      "word_count": 4549,
+      "word_count": 4578,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {
@@ -16226,8 +17352,8 @@
       "keywords": [
         "name",
         "revenue",
-        "user",
         "claude",
+        "user",
         "metric",
         "entry",
         "section",
@@ -16245,7 +17371,7 @@
         "item",
         "enterprise"
       ],
-      "word_count": 1502,
+      "word_count": 1505,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__increase-consistency.md"
     },
     "/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks": {
@@ -16357,7 +17483,7 @@
         "processing",
         "key"
       ],
-      "word_count": 423,
+      "word_count": 426,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__reduce-prompt-leak.md"
     }
   }

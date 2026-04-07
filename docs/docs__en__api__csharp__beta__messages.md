@@ -3843,6 +3843,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+  - `string? userProfileID`
+
+    Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -3886,6 +3890,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"skills-2025-10-02"Skills2025_10_02`
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -4747,6 +4755,28 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     Conversational role of the generated message.
 
     This will always be `"assistant"`.
+
+  - `required BetaRefusalStopDetails? StopDetails`
+
+    Structured information about a refusal.
+
+    - `required Category? Category`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `"cyber"Cyber`
+
+      - `"bio"Bio`
+
+    - `required string? Explanation`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `JsonElement Type "refusal"constant`
 
   - `required BetaStopReason? StopReason`
 
@@ -8763,6 +8793,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `"skills-2025-10-02"Skills2025_10_02`
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -14994,6 +15028,28 @@ Console.WriteLine(betaMessageTokensCount);
 
     This will always be `"assistant"`.
 
+  - `required BetaRefusalStopDetails? StopDetails`
+
+    Structured information about a refusal.
+
+    - `required Category? Category`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `"cyber"Cyber`
+
+      - `"bio"Bio`
+
+    - `required string? Explanation`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `JsonElement Type "refusal"constant`
+
   - `required BetaStopReason? StopReason`
 
     The reason that we stopped.
@@ -18595,6 +18651,28 @@ Console.WriteLine(betaMessageTokensCount);
 
           Skill version or 'latest' for most recent version
 
+    - `required BetaRefusalStopDetails? StopDetails`
+
+      Structured information about a refusal.
+
+      - `required Category? Category`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"Cyber`
+
+        - `"bio"Bio`
+
+      - `required string? Explanation`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `JsonElement Type "refusal"constant`
+
     - `required BetaStopReason? StopReason`
 
       - `"end_turn"EndTurn`
@@ -19601,6 +19679,28 @@ Console.WriteLine(betaMessageTokensCount);
       Conversational role of the generated message.
 
       This will always be `"assistant"`.
+
+    - `required BetaRefusalStopDetails? StopDetails`
+
+      Structured information about a refusal.
+
+      - `required Category? Category`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"Cyber`
+
+        - `"bio"Bio`
+
+      - `required string? Explanation`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `JsonElement Type "refusal"constant`
 
     - `required BetaStopReason? StopReason`
 
@@ -20674,6 +20774,28 @@ Console.WriteLine(betaMessageTokensCount);
 
         This will always be `"assistant"`.
 
+      - `required BetaRefusalStopDetails? StopDetails`
+
+        Structured information about a refusal.
+
+        - `required Category? Category`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"Cyber`
+
+          - `"bio"Bio`
+
+        - `required string? Explanation`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `JsonElement Type "refusal"constant`
+
       - `required BetaStopReason? StopReason`
 
         The reason that we stopped.
@@ -20946,6 +21068,28 @@ Console.WriteLine(betaMessageTokensCount);
           - `required string Version`
 
             Skill version or 'latest' for most recent version
+
+      - `required BetaRefusalStopDetails? StopDetails`
+
+        Structured information about a refusal.
+
+        - `required Category? Category`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"Cyber`
+
+          - `"bio"Bio`
+
+        - `required string? Explanation`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `JsonElement Type "refusal"constant`
 
       - `required BetaStopReason? StopReason`
 
@@ -21926,6 +22070,30 @@ Console.WriteLine(betaMessageTokensCount);
   - `required string Data`
 
   - `JsonElement Type "redacted_thinking"constant`
+
+### Beta Refusal Stop Details
+
+- `class BetaRefusalStopDetails:`
+
+  Structured information about a refusal.
+
+  - `required Category? Category`
+
+    The policy category that triggered the refusal.
+
+    `null` when the refusal doesn't map to a named category.
+
+    - `"cyber"Cyber`
+
+    - `"bio"Bio`
+
+  - `required string? Explanation`
+
+    Human-readable explanation of the refusal.
+
+    This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `JsonElement Type "refusal"constant`
 
 ### Beta Request Document Block
 
@@ -32227,6 +32395,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+      - `string? UserProfileID`
+
+        The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -32270,6 +32442,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"skills-2025-10-02"Skills2025_10_02`
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -32527,6 +32703,7 @@ BatchCreateParams parameters = new()
                 ],
                 TopK = 5,
                 TopP = 0.7,
+                UserProfileID = "user_profile_id",
             },
         },
     ],
@@ -32598,6 +32775,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"skills-2025-10-02"Skills2025_10_02`
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -32768,6 +32949,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"skills-2025-10-02"Skills2025_10_02`
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -32947,6 +33132,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -33109,6 +33298,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -33196,6 +33389,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"skills-2025-10-02"Skills2025_10_02`
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -34075,6 +34272,28 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           Conversational role of the generated message.
 
           This will always be `"assistant"`.
+
+        - `required BetaRefusalStopDetails? StopDetails`
+
+          Structured information about a refusal.
+
+          - `required Category? Category`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `"cyber"Cyber`
+
+            - `"bio"Bio`
+
+          - `required string? Explanation`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `JsonElement Type "refusal"constant`
 
         - `required BetaStopReason? StopReason`
 
@@ -35425,6 +35644,28 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           This will always be `"assistant"`.
 
+        - `required BetaRefusalStopDetails? StopDetails`
+
+          Structured information about a refusal.
+
+          - `required Category? Category`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `"cyber"Cyber`
+
+            - `"bio"Bio`
+
+          - `required string? Explanation`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `JsonElement Type "refusal"constant`
+
         - `required BetaStopReason? StopReason`
 
           The reason that we stopped.
@@ -36601,6 +36842,28 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         This will always be `"assistant"`.
 
+      - `required BetaRefusalStopDetails? StopDetails`
+
+        Structured information about a refusal.
+
+        - `required Category? Category`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"Cyber`
+
+          - `"bio"Bio`
+
+        - `required string? Explanation`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `JsonElement Type "refusal"constant`
+
       - `required BetaStopReason? StopReason`
 
         The reason that we stopped.
@@ -37738,6 +38001,28 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
       Conversational role of the generated message.
 
       This will always be `"assistant"`.
+
+    - `required BetaRefusalStopDetails? StopDetails`
+
+      Structured information about a refusal.
+
+      - `required Category? Category`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"Cyber`
+
+        - `"bio"Bio`
+
+      - `required string? Explanation`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `JsonElement Type "refusal"constant`
 
     - `required BetaStopReason? StopReason`
 

@@ -50,6 +50,10 @@
 
     - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Beta API Error
 
 - `type BetaAPIError struct{…}`
@@ -378,6 +382,10 @@ The Models API response can be used to determine which models are available for 
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type BetaModelInfo struct{…}`
@@ -654,6 +662,10 @@ The Models API response can be used to determine information about a specific mo
       - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -5681,6 +5693,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+  - `UserProfileID param.Field[string]`
+
+    Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
   - `Betas param.Field[[]AnthropicBeta]`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -5728,6 +5744,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -6727,6 +6747,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     This will always be `"assistant"`.
 
     - `const AssistantAssistant Assistant = "assistant"`
+
+  - `StopDetails BetaRefusalStopDetails`
+
+    Structured information about a refusal.
+
+    - `Category BetaRefusalStopDetailsCategory`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"`
+
+      - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
+
+    - `Explanation string`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `Type Refusal`
+
+      - `const RefusalRefusal Refusal = "refusal"`
 
   - `StopReason BetaStopReason`
 
@@ -11255,6 +11299,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -18566,6 +18614,30 @@ func main() {
 
     - `const AssistantAssistant Assistant = "assistant"`
 
+  - `StopDetails BetaRefusalStopDetails`
+
+    Structured information about a refusal.
+
+    - `Category BetaRefusalStopDetailsCategory`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"`
+
+      - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
+
+    - `Explanation string`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `Type Refusal`
+
+      - `const RefusalRefusal Refusal = "refusal"`
+
   - `StopReason BetaStopReason`
 
     The reason that we stopped.
@@ -22707,6 +22779,30 @@ func main() {
 
           Skill version or 'latest' for most recent version
 
+    - `StopDetails BetaRefusalStopDetails`
+
+      Structured information about a refusal.
+
+      - `Category BetaRefusalStopDetailsCategory`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"`
+
+        - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
+
+      - `Explanation string`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `Type Refusal`
+
+        - `const RefusalRefusal Refusal = "refusal"`
+
     - `StopReason BetaStopReason`
 
       - `const BetaStopReasonEndTurn BetaStopReason = "end_turn"`
@@ -23857,6 +23953,30 @@ func main() {
       This will always be `"assistant"`.
 
       - `const AssistantAssistant Assistant = "assistant"`
+
+    - `StopDetails BetaRefusalStopDetails`
+
+      Structured information about a refusal.
+
+      - `Category BetaRefusalStopDetailsCategory`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"`
+
+        - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
+
+      - `Explanation string`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `Type Refusal`
+
+        - `const RefusalRefusal Refusal = "refusal"`
 
     - `StopReason BetaStopReason`
 
@@ -25078,6 +25198,30 @@ func main() {
 
         - `const AssistantAssistant Assistant = "assistant"`
 
+      - `StopDetails BetaRefusalStopDetails`
+
+        Structured information about a refusal.
+
+        - `Category BetaRefusalStopDetailsCategory`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"`
+
+          - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
+
+        - `Explanation string`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `Type Refusal`
+
+          - `const RefusalRefusal Refusal = "refusal"`
+
       - `StopReason BetaStopReason`
 
         The reason that we stopped.
@@ -25362,6 +25506,30 @@ func main() {
           - `Version string`
 
             Skill version or 'latest' for most recent version
+
+      - `StopDetails BetaRefusalStopDetails`
+
+        Structured information about a refusal.
+
+        - `Category BetaRefusalStopDetailsCategory`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"`
+
+          - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
+
+        - `Explanation string`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `Type Refusal`
+
+          - `const RefusalRefusal Refusal = "refusal"`
 
       - `StopReason BetaStopReason`
 
@@ -26506,6 +26674,32 @@ func main() {
   - `Type RedactedThinking`
 
     - `const RedactedThinkingRedactedThinking RedactedThinking = "redacted_thinking"`
+
+### Beta Refusal Stop Details
+
+- `type BetaRefusalStopDetails struct{…}`
+
+  Structured information about a refusal.
+
+  - `Category BetaRefusalStopDetailsCategory`
+
+    The policy category that triggered the refusal.
+
+    `null` when the refusal doesn't map to a named category.
+
+    - `const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"`
+
+    - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
+
+  - `Explanation string`
+
+    Human-readable explanation of the refusal.
+
+    This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `Type Refusal`
+
+    - `const RefusalRefusal Refusal = "refusal"`
 
 ### Beta Request Document Block
 
@@ -38139,6 +38333,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+      - `UserProfileID string`
+
+        The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
   - `Betas param.Field[[]AnthropicBeta]`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -38186,6 +38384,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -38384,6 +38586,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type BetaMessageBatch struct{…}`
@@ -38581,6 +38787,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type BetaMessageBatch struct{…}`
@@ -38765,6 +38975,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -38955,6 +39169,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type BetaDeletedMessageBatch struct{…}`
@@ -39069,6 +39287,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -40086,6 +40308,30 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           This will always be `"assistant"`.
 
           - `const AssistantAssistant Assistant = "assistant"`
+
+        - `StopDetails BetaRefusalStopDetails`
+
+          Structured information about a refusal.
+
+          - `Category BetaRefusalStopDetailsCategory`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"`
+
+            - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
+
+          - `Explanation string`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `Type Refusal`
+
+            - `const RefusalRefusal Refusal = "refusal"`
 
         - `StopReason BetaStopReason`
 
@@ -41661,6 +41907,30 @@ func main() {
 
           - `const AssistantAssistant Assistant = "assistant"`
 
+        - `StopDetails BetaRefusalStopDetails`
+
+          Structured information about a refusal.
+
+          - `Category BetaRefusalStopDetailsCategory`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"`
+
+            - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
+
+          - `Explanation string`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `Type Refusal`
+
+            - `const RefusalRefusal Refusal = "refusal"`
+
         - `StopReason BetaStopReason`
 
           The reason that we stopped.
@@ -43009,6 +43279,30 @@ func main() {
 
         - `const AssistantAssistant Assistant = "assistant"`
 
+      - `StopDetails BetaRefusalStopDetails`
+
+        Structured information about a refusal.
+
+        - `Category BetaRefusalStopDetailsCategory`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"`
+
+          - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
+
+        - `Explanation string`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `Type Refusal`
+
+          - `const RefusalRefusal Refusal = "refusal"`
+
       - `StopReason BetaStopReason`
 
         The reason that we stopped.
@@ -44319,6 +44613,30 @@ func main() {
 
       - `const AssistantAssistant Assistant = "assistant"`
 
+    - `StopDetails BetaRefusalStopDetails`
+
+      Structured information about a refusal.
+
+      - `Category BetaRefusalStopDetailsCategory`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"`
+
+        - `const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"`
+
+      - `Explanation string`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `Type Refusal`
+
+        - `const RefusalRefusal Refusal = "refusal"`
+
     - `StopReason BetaStopReason`
 
       The reason that we stopped.
@@ -44594,6 +44912,10 @@ Upload File
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type FileMetadata struct{…}`
@@ -44735,6 +45057,10 @@ List Files
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type FileMetadata struct{…}`
@@ -44864,6 +45190,10 @@ Download File
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type BetaFileDownloadResponse interface{…}`
@@ -44962,6 +45292,10 @@ Get File Metadata
       - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45095,6 +45429,10 @@ Delete File
       - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45273,6 +45611,10 @@ Create Skill
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type BetaSkillNewResponse struct{…}`
@@ -45426,6 +45768,10 @@ List Skills
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type BetaSkillListResponse struct{…}`
@@ -45563,6 +45909,10 @@ Get Skill
       - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45706,6 +46056,10 @@ Delete Skill
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type BetaSkillDeleteResponse struct{…}`
@@ -45826,6 +46180,10 @@ Create Skill Version
       - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45982,6 +46340,10 @@ List Skill Versions
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type BetaSkillVersionListResponse struct{…}`
@@ -46132,6 +46494,10 @@ Get Skill Version
       - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -46284,6 +46650,10 @@ Delete Skill Version
 
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
 ### Returns
 
 - `type BetaSkillVersionDeleteResponse struct{…}`
@@ -46330,3 +46700,662 @@ func main() {
   fmt.Printf("%+v\n", version.ID)
 }
 ```
+
+# User Profiles
+
+## Create
+
+`client.Beta.UserProfiles.New(ctx, params) (*BetaUserProfile, error)`
+
+**post** `/v1/user_profiles`
+
+Create User Profile
+
+### Parameters
+
+- `params BetaUserProfileNewParams`
+
+  - `ExternalID param.Field[string]`
+
+    Body param
+
+  - `Metadata param.Field[map[string, string]]`
+
+    Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
+
+  - `Betas param.Field[[]AnthropicBeta]`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `string`
+
+    - `type AnthropicBeta string`
+
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+### Returns
+
+- `type BetaUserProfile struct{…}`
+
+  - `ID string`
+
+  - `CreatedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Metadata map[string, string]`
+
+  - `TrustGrants map[string, BetaUserProfileTrustGrant]`
+
+    - `Status string`
+
+  - `Type string`
+
+  - `UpdatedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `ExternalID string`
+
+### Example
+
+```go
+package main
+
+import (
+  "context"
+  "fmt"
+
+  "github.com/anthropics/anthropic-sdk-go"
+  "github.com/anthropics/anthropic-sdk-go/option"
+)
+
+func main() {
+  client := anthropic.NewClient(
+    option.WithAPIKey("my-anthropic-api-key"),
+  )
+  betaUserProfile, err := client.Beta.UserProfiles.New(context.TODO(), anthropic.BetaUserProfileNewParams{
+
+  })
+  if err != nil {
+    panic(err.Error())
+  }
+  fmt.Printf("%+v\n", betaUserProfile.ID)
+}
+```
+
+## List
+
+`client.Beta.UserProfiles.List(ctx, params) (*PageCursorV2[BetaUserProfile], error)`
+
+**get** `/v1/user_profiles`
+
+List User Profiles
+
+### Parameters
+
+- `params BetaUserProfileListParams`
+
+  - `Limit param.Field[int64]`
+
+    Query param: Query parameter for limit
+
+  - `Order param.Field[BetaUserProfileListParamsOrder]`
+
+    Query param: Query parameter for order
+
+    - `const BetaUserProfileListParamsOrderAsc BetaUserProfileListParamsOrder = "asc"`
+
+    - `const BetaUserProfileListParamsOrderDesc BetaUserProfileListParamsOrder = "desc"`
+
+  - `Page param.Field[string]`
+
+    Query param: Query parameter for page
+
+  - `Betas param.Field[[]AnthropicBeta]`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `string`
+
+    - `type AnthropicBeta string`
+
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+### Returns
+
+- `type BetaUserProfile struct{…}`
+
+  - `ID string`
+
+  - `CreatedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Metadata map[string, string]`
+
+  - `TrustGrants map[string, BetaUserProfileTrustGrant]`
+
+    - `Status string`
+
+  - `Type string`
+
+  - `UpdatedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `ExternalID string`
+
+### Example
+
+```go
+package main
+
+import (
+  "context"
+  "fmt"
+
+  "github.com/anthropics/anthropic-sdk-go"
+  "github.com/anthropics/anthropic-sdk-go/option"
+)
+
+func main() {
+  client := anthropic.NewClient(
+    option.WithAPIKey("my-anthropic-api-key"),
+  )
+  page, err := client.Beta.UserProfiles.List(context.TODO(), anthropic.BetaUserProfileListParams{
+
+  })
+  if err != nil {
+    panic(err.Error())
+  }
+  fmt.Printf("%+v\n", page)
+}
+```
+
+## Retrieve
+
+`client.Beta.UserProfiles.Get(ctx, id, query) (*BetaUserProfile, error)`
+
+**get** `/v1/user_profiles/{id}`
+
+Get User Profile
+
+### Parameters
+
+- `id string`
+
+- `query BetaUserProfileGetParams`
+
+  - `Betas param.Field[[]AnthropicBeta]`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `string`
+
+    - `type AnthropicBeta string`
+
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+### Returns
+
+- `type BetaUserProfile struct{…}`
+
+  - `ID string`
+
+  - `CreatedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Metadata map[string, string]`
+
+  - `TrustGrants map[string, BetaUserProfileTrustGrant]`
+
+    - `Status string`
+
+  - `Type string`
+
+  - `UpdatedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `ExternalID string`
+
+### Example
+
+```go
+package main
+
+import (
+  "context"
+  "fmt"
+
+  "github.com/anthropics/anthropic-sdk-go"
+  "github.com/anthropics/anthropic-sdk-go/option"
+)
+
+func main() {
+  client := anthropic.NewClient(
+    option.WithAPIKey("my-anthropic-api-key"),
+  )
+  betaUserProfile, err := client.Beta.UserProfiles.Get(
+    context.TODO(),
+    "id",
+    anthropic.BetaUserProfileGetParams{
+
+    },
+  )
+  if err != nil {
+    panic(err.Error())
+  }
+  fmt.Printf("%+v\n", betaUserProfile.ID)
+}
+```
+
+## Update
+
+`client.Beta.UserProfiles.Update(ctx, id, params) (*BetaUserProfile, error)`
+
+**post** `/v1/user_profiles/{id}`
+
+Update User Profile
+
+### Parameters
+
+- `id string`
+
+- `params BetaUserProfileUpdateParams`
+
+  - `ExternalID param.Field[string]`
+
+    Body param
+
+  - `Metadata param.Field[map[string, string]]`
+
+    Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+
+  - `Betas param.Field[[]AnthropicBeta]`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `string`
+
+    - `type AnthropicBeta string`
+
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+### Returns
+
+- `type BetaUserProfile struct{…}`
+
+  - `ID string`
+
+  - `CreatedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Metadata map[string, string]`
+
+  - `TrustGrants map[string, BetaUserProfileTrustGrant]`
+
+    - `Status string`
+
+  - `Type string`
+
+  - `UpdatedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `ExternalID string`
+
+### Example
+
+```go
+package main
+
+import (
+  "context"
+  "fmt"
+
+  "github.com/anthropics/anthropic-sdk-go"
+  "github.com/anthropics/anthropic-sdk-go/option"
+)
+
+func main() {
+  client := anthropic.NewClient(
+    option.WithAPIKey("my-anthropic-api-key"),
+  )
+  betaUserProfile, err := client.Beta.UserProfiles.Update(
+    context.TODO(),
+    "id",
+    anthropic.BetaUserProfileUpdateParams{
+
+    },
+  )
+  if err != nil {
+    panic(err.Error())
+  }
+  fmt.Printf("%+v\n", betaUserProfile.ID)
+}
+```
+
+## Create Enrollment URL
+
+`client.Beta.UserProfiles.NewEnrollmentURL(ctx, id, body) (*BetaUserProfileEnrollmentURL, error)`
+
+**post** `/v1/user_profiles/{id}/enrollment_url`
+
+Create Enrollment URL
+
+### Parameters
+
+- `id string`
+
+- `body BetaUserProfileNewEnrollmentURLParams`
+
+  - `Betas param.Field[[]AnthropicBeta]`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `string`
+
+    - `type AnthropicBeta string`
+
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+### Returns
+
+- `type BetaUserProfileEnrollmentURL struct{…}`
+
+  - `ExpiresAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Type string`
+
+  - `URL string`
+
+### Example
+
+```go
+package main
+
+import (
+  "context"
+  "fmt"
+
+  "github.com/anthropics/anthropic-sdk-go"
+  "github.com/anthropics/anthropic-sdk-go/option"
+)
+
+func main() {
+  client := anthropic.NewClient(
+    option.WithAPIKey("my-anthropic-api-key"),
+  )
+  betaUserProfileEnrollmentURL, err := client.Beta.UserProfiles.NewEnrollmentURL(
+    context.TODO(),
+    "id",
+    anthropic.BetaUserProfileNewEnrollmentURLParams{
+
+    },
+  )
+  if err != nil {
+    panic(err.Error())
+  }
+  fmt.Printf("%+v\n", betaUserProfileEnrollmentURL.ExpiresAt)
+}
+```
+
+## Domain Types
+
+### Beta User Profile
+
+- `type BetaUserProfile struct{…}`
+
+  - `ID string`
+
+  - `CreatedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Metadata map[string, string]`
+
+  - `TrustGrants map[string, BetaUserProfileTrustGrant]`
+
+    - `Status string`
+
+  - `Type string`
+
+  - `UpdatedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `ExternalID string`
+
+### Beta User Profile Enrollment URL
+
+- `type BetaUserProfileEnrollmentURL struct{…}`
+
+  - `ExpiresAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Type string`
+
+  - `URL string`
+
+### Beta User Profile Trust Grant
+
+- `type BetaUserProfileTrustGrant struct{…}`
+
+  - `Status string`

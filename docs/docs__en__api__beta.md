@@ -4,11 +4,11 @@
 
 ### Anthropic Beta
 
-- `AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+- `AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -49,6 +49,10 @@
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Beta API Error
 
@@ -334,7 +338,7 @@ The Models API response can be used to determine which models are available for 
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -375,6 +379,10 @@ The Models API response can be used to determine which models are available for 
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -575,7 +583,7 @@ The Models API response can be used to determine which models are available for 
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/models?beta=true \
+curl https://api.anthropic.com/v1/models \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
@@ -602,7 +610,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -643,6 +651,10 @@ The Models API response can be used to determine information about a specific mo
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -831,7 +843,7 @@ The Models API response can be used to determine information about a specific mo
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/models/$MODEL_ID?beta=true \
+curl https://api.anthropic.com/v1/models/$MODEL_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
@@ -1334,7 +1346,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1375,6 +1387,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Body Parameters
 
@@ -6040,9 +6056,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+- `user_profile_id: optional string`
+
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 ### Returns
 
-- `BetaMessage = object { id, container, content, 7 more }`
+- `BetaMessage = object { id, container, content, 8 more }`
 
   - `id: string`
 
@@ -7039,6 +7059,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `"assistant"`
 
+  - `stop_details: BetaRefusalStopDetails`
+
+    Structured information about a refusal.
+
+    - `category: "cyber" or "bio"`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `"cyber"`
+
+      - `"bio"`
+
+    - `explanation: string`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: "refusal"`
+
+      - `"refusal"`
+
   - `stop_reason: BetaStopReason`
 
     The reason that we stopped.
@@ -7247,7 +7291,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/messages?beta=true \
+curl https://api.anthropic.com/v1/messages \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
@@ -7282,7 +7326,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -7323,6 +7367,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Body Parameters
 
@@ -11903,7 +11951,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
+curl https://api.anthropic.com/v1/messages/count_tokens \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
@@ -18182,7 +18230,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
 ### Beta Message
 
-- `BetaMessage = object { id, container, content, 7 more }`
+- `BetaMessage = object { id, container, content, 8 more }`
 
   - `id: string`
 
@@ -19178,6 +19226,30 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
     This will always be `"assistant"`.
 
     - `"assistant"`
+
+  - `stop_details: BetaRefusalStopDetails`
+
+    Structured information about a refusal.
+
+    - `category: "cyber" or "bio"`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `"cyber"`
+
+      - `"bio"`
+
+    - `explanation: string`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: "refusal"`
+
+      - `"refusal"`
 
   - `stop_reason: BetaStopReason`
 
@@ -23290,7 +23362,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
           - `"clear_thinking_20251015"`
 
-  - `delta: object { container, stop_reason, stop_sequence }`
+  - `delta: object { container, stop_details, stop_reason, stop_sequence }`
 
     - `container: BetaContainer`
 
@@ -23323,6 +23395,30 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
         - `version: string`
 
           Skill version or 'latest' for most recent version
+
+    - `stop_details: BetaRefusalStopDetails`
+
+      Structured information about a refusal.
+
+      - `category: "cyber" or "bio"`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"`
+
+        - `"bio"`
+
+      - `explanation: string`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: "refusal"`
+
+        - `"refusal"`
 
     - `stop_reason: BetaStopReason`
 
@@ -24474,6 +24570,30 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
       This will always be `"assistant"`.
 
       - `"assistant"`
+
+    - `stop_details: BetaRefusalStopDetails`
+
+      Structured information about a refusal.
+
+      - `category: "cyber" or "bio"`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"`
+
+        - `"bio"`
+
+      - `explanation: string`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: "refusal"`
+
+        - `"refusal"`
 
     - `stop_reason: BetaStopReason`
 
@@ -25695,6 +25815,30 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
         - `"assistant"`
 
+      - `stop_details: BetaRefusalStopDetails`
+
+        Structured information about a refusal.
+
+        - `category: "cyber" or "bio"`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"`
+
+          - `"bio"`
+
+        - `explanation: string`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: "refusal"`
+
+          - `"refusal"`
+
       - `stop_reason: BetaStopReason`
 
         The reason that we stopped.
@@ -25946,7 +26090,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
 
             - `"clear_thinking_20251015"`
 
-    - `delta: object { container, stop_reason, stop_sequence }`
+    - `delta: object { container, stop_details, stop_reason, stop_sequence }`
 
       - `container: BetaContainer`
 
@@ -25979,6 +26123,30 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
           - `version: string`
 
             Skill version or 'latest' for most recent version
+
+      - `stop_details: BetaRefusalStopDetails`
+
+        Structured information about a refusal.
+
+        - `category: "cyber" or "bio"`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"`
+
+          - `"bio"`
+
+        - `explanation: string`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: "refusal"`
+
+          - `"refusal"`
 
       - `stop_reason: BetaStopReason`
 
@@ -27123,6 +27291,32 @@ curl https://api.anthropic.com/v1/messages/count_tokens?beta=true \
   - `type: "redacted_thinking"`
 
     - `"redacted_thinking"`
+
+### Beta Refusal Stop Details
+
+- `BetaRefusalStopDetails = object { category, explanation, type }`
+
+  Structured information about a refusal.
+
+  - `category: "cyber" or "bio"`
+
+    The policy category that triggered the refusal.
+
+    `null` when the refusal doesn't map to a named category.
+
+    - `"cyber"`
+
+    - `"bio"`
+
+  - `explanation: string`
+
+    Human-readable explanation of the refusal.
+
+    This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `type: "refusal"`
+
+    - `"refusal"`
 
 ### Beta Request Document Block
 
@@ -34088,7 +34282,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -34130,6 +34324,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"fast-mode-2026-02-01"`
 
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
 ### Body Parameters
 
 - `requests: array of object { custom_id, params }`
@@ -34142,7 +34340,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Must be unique for each request within the Message Batch.
 
-  - `params: object { max_tokens, messages, model, 19 more }`
+  - `params: object { max_tokens, messages, model, 20 more }`
 
     Messages API creation parameters for the individual request.
 
@@ -38810,6 +39008,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+    - `user_profile_id: optional string`
+
+      The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 ### Returns
 
 - `BetaMessageBatch = object { id, archived_at, cancel_initiated_at, 7 more }`
@@ -38903,7 +39105,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/messages/batches?beta=true \
+curl https://api.anthropic.com/v1/messages/batches \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: message-batches-2024-09-24' \
@@ -38949,7 +39151,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -38990,6 +39192,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -39084,7 +39290,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID?beta=true \
+curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -39122,7 +39328,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -39163,6 +39369,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -39269,7 +39479,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/messages/batches?beta=true \
+curl https://api.anthropic.com/v1/messages/batches \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -39299,7 +39509,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -39340,6 +39550,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -39434,7 +39648,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel?beta=true \
+curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: message-batches-2024-09-24' \
@@ -39465,7 +39679,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -39507,6 +39721,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"fast-mode-2026-02-01"`
 
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
 ### Returns
 
 - `BetaDeletedMessageBatch = object { id, type }`
@@ -39526,7 +39744,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID?beta=true \
+curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: message-batches-2024-09-24' \
@@ -39557,7 +39775,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -39598,6 +39816,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -40616,6 +40838,30 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"assistant"`
 
+        - `stop_details: BetaRefusalStopDetails`
+
+          Structured information about a refusal.
+
+          - `category: "cyber" or "bio"`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `"cyber"`
+
+            - `"bio"`
+
+          - `explanation: string`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `type: "refusal"`
+
+            - `"refusal"`
+
         - `stop_reason: BetaStopReason`
 
           The reason that we stopped.
@@ -40928,7 +41174,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results?beta=true \
+curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -42164,6 +42410,30 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results?bet
           This will always be `"assistant"`.
 
           - `"assistant"`
+
+        - `stop_details: BetaRefusalStopDetails`
+
+          Structured information about a refusal.
+
+          - `category: "cyber" or "bio"`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `"cyber"`
+
+            - `"bio"`
+
+          - `explanation: string`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `type: "refusal"`
+
+            - `"refusal"`
 
         - `stop_reason: BetaStopReason`
 
@@ -43513,6 +43783,30 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results?bet
 
         - `"assistant"`
 
+      - `stop_details: BetaRefusalStopDetails`
+
+        Structured information about a refusal.
+
+        - `category: "cyber" or "bio"`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"`
+
+          - `"bio"`
+
+        - `explanation: string`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: "refusal"`
+
+          - `"refusal"`
+
       - `stop_reason: BetaStopReason`
 
         The reason that we stopped.
@@ -44823,6 +45117,30 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results?bet
 
       - `"assistant"`
 
+    - `stop_details: BetaRefusalStopDetails`
+
+      Structured information about a refusal.
+
+      - `category: "cyber" or "bio"`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"`
+
+        - `"bio"`
+
+      - `explanation: string`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: "refusal"`
+
+        - `"refusal"`
+
     - `stop_reason: BetaStopReason`
 
       The reason that we stopped.
@@ -45048,7 +45366,7 @@ Upload File
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -45089,6 +45407,10 @@ Upload File
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45131,7 +45453,7 @@ Upload File
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/files?beta=true \
+curl https://api.anthropic.com/v1/files \
     -H 'Content-Type: multipart/form-data' \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \
@@ -45169,7 +45491,7 @@ List Files
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -45210,6 +45532,10 @@ List Files
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45266,7 +45592,7 @@ List Files
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/files?beta=true \
+curl https://api.anthropic.com/v1/files \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -45292,7 +45618,7 @@ Download File
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -45334,10 +45660,14 @@ Download File
 
     - `"fast-mode-2026-02-01"`
 
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/files/$FILE_ID/content?beta=true \
+curl https://api.anthropic.com/v1/files/$FILE_ID/content \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -45363,7 +45693,7 @@ Get File Metadata
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -45404,6 +45734,10 @@ Get File Metadata
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45446,7 +45780,7 @@ Get File Metadata
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/files/$FILE_ID?beta=true \
+curl https://api.anthropic.com/v1/files/$FILE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -45472,7 +45806,7 @@ Delete File
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -45514,6 +45848,10 @@ Delete File
 
     - `"fast-mode-2026-02-01"`
 
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
 ### Returns
 
 - `DeletedFile = object { id, type }`
@@ -45533,7 +45871,7 @@ Delete File
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/files/$FILE_ID?beta=true \
+curl https://api.anthropic.com/v1/files/$FILE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \
@@ -45612,7 +45950,7 @@ Create Skill
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -45653,6 +45991,10 @@ Create Skill
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45700,7 +46042,7 @@ Create Skill
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/skills?beta=true \
+curl https://api.anthropic.com/v1/skills \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
@@ -45744,7 +46086,7 @@ List Skills
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -45785,6 +46127,10 @@ List Skills
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45848,7 +46194,7 @@ List Skills
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/skills?beta=true \
+curl https://api.anthropic.com/v1/skills \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -45876,7 +46222,7 @@ Get Skill
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -45917,6 +46263,10 @@ Get Skill
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45964,7 +46314,7 @@ Get Skill
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/skills/$SKILL_ID?beta=true \
+curl https://api.anthropic.com/v1/skills/$SKILL_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -45992,7 +46342,7 @@ Delete Skill
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -46034,6 +46384,10 @@ Delete Skill
 
     - `"fast-mode-2026-02-01"`
 
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
 ### Returns
 
 - `id: string`
@@ -46051,12 +46405,165 @@ Delete Skill
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/skills/$SKILL_ID?beta=true \
+curl https://api.anthropic.com/v1/skills/$SKILL_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
+
+## Domain Types
+
+### Skill Create Response
+
+- `SkillCreateResponse = object { id, created_at, display_title, 4 more }`
+
+  - `id: string`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: string`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `display_title: string`
+
+    Display title for the skill.
+
+    This is a human-readable label that is not included in the prompt sent to the model.
+
+  - `latest_version: string`
+
+    The latest version identifier for the skill.
+
+    This represents the most recent version of the skill that has been created.
+
+  - `source: string`
+
+    Source of the skill.
+
+    This may be one of the following values:
+
+    * `"custom"`: the skill was created by a user
+    * `"anthropic"`: the skill was created by Anthropic
+
+  - `type: string`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `updated_at: string`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+### Skill List Response
+
+- `SkillListResponse = object { id, created_at, display_title, 4 more }`
+
+  - `id: string`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: string`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `display_title: string`
+
+    Display title for the skill.
+
+    This is a human-readable label that is not included in the prompt sent to the model.
+
+  - `latest_version: string`
+
+    The latest version identifier for the skill.
+
+    This represents the most recent version of the skill that has been created.
+
+  - `source: string`
+
+    Source of the skill.
+
+    This may be one of the following values:
+
+    * `"custom"`: the skill was created by a user
+    * `"anthropic"`: the skill was created by Anthropic
+
+  - `type: string`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `updated_at: string`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+### Skill Retrieve Response
+
+- `SkillRetrieveResponse = object { id, created_at, display_title, 4 more }`
+
+  - `id: string`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: string`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `display_title: string`
+
+    Display title for the skill.
+
+    This is a human-readable label that is not included in the prompt sent to the model.
+
+  - `latest_version: string`
+
+    The latest version identifier for the skill.
+
+    This represents the most recent version of the skill that has been created.
+
+  - `source: string`
+
+    Source of the skill.
+
+    This may be one of the following values:
+
+    * `"custom"`: the skill was created by a user
+    * `"anthropic"`: the skill was created by Anthropic
+
+  - `type: string`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `updated_at: string`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+### Skill Delete Response
+
+- `SkillDeleteResponse = object { id, type }`
+
+  - `id: string`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `type: string`
+
+    Deleted object type.
+
+    For Skills, this is always `"skill_deleted"`.
 
 # Versions
 
@@ -46082,7 +46589,7 @@ Create Skill Version
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -46123,6 +46630,10 @@ Create Skill Version
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -46173,7 +46684,7 @@ Create Skill Version
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions?beta=true \
+curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
@@ -46214,7 +46725,7 @@ List Skill Versions
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -46255,6 +46766,10 @@ List Skill Versions
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -46317,7 +46832,7 @@ List Skill Versions
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions?beta=true \
+curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -46351,7 +46866,7 @@ Get Skill Version
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -46392,6 +46907,10 @@ Get Skill Version
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -46442,7 +46961,7 @@ Get Skill Version
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION?beta=true \
+curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -46476,7 +46995,7 @@ Delete Skill Version
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -46518,6 +47037,10 @@ Delete Skill Version
 
     - `"fast-mode-2026-02-01"`
 
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
 ### Returns
 
 - `id: string`
@@ -46535,9 +47058,723 @@ Delete Skill Version
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION?beta=true \
+curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
+
+## Domain Types
+
+### Version Create Response
+
+- `VersionCreateResponse = object { id, created_at, description, 5 more }`
+
+  - `id: string`
+
+    Unique identifier for the skill version.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: string`
+
+    ISO 8601 timestamp of when the skill version was created.
+
+  - `description: string`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `directory: string`
+
+    Directory name of the skill version.
+
+    This is the top-level directory name that was extracted from the uploaded files.
+
+  - `name: string`
+
+    Human-readable name of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `skill_id: string`
+
+    Identifier for the skill that this version belongs to.
+
+  - `type: string`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+  - `version: string`
+
+    Version identifier for the skill.
+
+    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+### Version List Response
+
+- `VersionListResponse = object { id, created_at, description, 5 more }`
+
+  - `id: string`
+
+    Unique identifier for the skill version.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: string`
+
+    ISO 8601 timestamp of when the skill version was created.
+
+  - `description: string`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `directory: string`
+
+    Directory name of the skill version.
+
+    This is the top-level directory name that was extracted from the uploaded files.
+
+  - `name: string`
+
+    Human-readable name of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `skill_id: string`
+
+    Identifier for the skill that this version belongs to.
+
+  - `type: string`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+  - `version: string`
+
+    Version identifier for the skill.
+
+    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+### Version Retrieve Response
+
+- `VersionRetrieveResponse = object { id, created_at, description, 5 more }`
+
+  - `id: string`
+
+    Unique identifier for the skill version.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: string`
+
+    ISO 8601 timestamp of when the skill version was created.
+
+  - `description: string`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `directory: string`
+
+    Directory name of the skill version.
+
+    This is the top-level directory name that was extracted from the uploaded files.
+
+  - `name: string`
+
+    Human-readable name of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `skill_id: string`
+
+    Identifier for the skill that this version belongs to.
+
+  - `type: string`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+  - `version: string`
+
+    Version identifier for the skill.
+
+    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+### Version Delete Response
+
+- `VersionDeleteResponse = object { id, type }`
+
+  - `id: string`
+
+    Version identifier for the skill.
+
+    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+  - `type: string`
+
+    Deleted object type.
+
+    For Skill Versions, this is always `"skill_version_deleted"`.
+
+# User Profiles
+
+## Create
+
+**post** `/v1/user_profiles`
+
+Create User Profile
+
+### Header Parameters
+
+- `"anthropic-beta": optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `UnionMember0 = string`
+
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+### Body Parameters
+
+- `external_id: optional string`
+
+- `metadata: optional map[string]`
+
+  Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
+
+### Returns
+
+- `BetaUserProfile = object { id, created_at, metadata, 4 more }`
+
+  - `id: string`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `metadata: map[string]`
+
+  - `trust_grants: map[BetaUserProfileTrustGrant]`
+
+    - `status: string`
+
+  - `type: string`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `external_id: optional string`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/user_profiles \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: user-profiles-2026-03-24' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -d '{}'
+```
+
+## List
+
+**get** `/v1/user_profiles`
+
+List User Profiles
+
+### Query Parameters
+
+- `limit: optional number`
+
+  Query parameter for limit
+
+- `order: optional "asc" or "desc"`
+
+  Query parameter for order
+
+  - `"asc"`
+
+  - `"desc"`
+
+- `page: optional string`
+
+  Query parameter for page
+
+### Header Parameters
+
+- `"anthropic-beta": optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `UnionMember0 = string`
+
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+### Returns
+
+- `data: array of BetaUserProfile`
+
+  - `id: string`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `metadata: map[string]`
+
+  - `trust_grants: map[BetaUserProfileTrustGrant]`
+
+    - `status: string`
+
+  - `type: string`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `external_id: optional string`
+
+- `next_page: optional string`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/user_profiles \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: user-profiles-2026-03-24' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+## Retrieve
+
+**get** `/v1/user_profiles/{id}`
+
+Get User Profile
+
+### Path Parameters
+
+- `id: string`
+
+### Header Parameters
+
+- `"anthropic-beta": optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `UnionMember0 = string`
+
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+### Returns
+
+- `BetaUserProfile = object { id, created_at, metadata, 4 more }`
+
+  - `id: string`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `metadata: map[string]`
+
+  - `trust_grants: map[BetaUserProfileTrustGrant]`
+
+    - `status: string`
+
+  - `type: string`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `external_id: optional string`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/user_profiles/$ID \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: user-profiles-2026-03-24' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+## Update
+
+**post** `/v1/user_profiles/{id}`
+
+Update User Profile
+
+### Path Parameters
+
+- `id: string`
+
+### Header Parameters
+
+- `"anthropic-beta": optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `UnionMember0 = string`
+
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+### Body Parameters
+
+- `external_id: optional string`
+
+- `metadata: optional map[string]`
+
+  Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+
+### Returns
+
+- `BetaUserProfile = object { id, created_at, metadata, 4 more }`
+
+  - `id: string`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `metadata: map[string]`
+
+  - `trust_grants: map[BetaUserProfileTrustGrant]`
+
+    - `status: string`
+
+  - `type: string`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `external_id: optional string`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/user_profiles/$ID \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: user-profiles-2026-03-24' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -d '{}'
+```
+
+## Create Enrollment URL
+
+**post** `/v1/user_profiles/{id}/enrollment_url`
+
+Create Enrollment URL
+
+### Path Parameters
+
+- `id: string`
+
+### Header Parameters
+
+- `"anthropic-beta": optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `UnionMember0 = string`
+
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+### Returns
+
+- `BetaUserProfileEnrollmentURL = object { expires_at, type, url }`
+
+  - `expires_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `type: string`
+
+  - `url: string`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/user_profiles/$ID/enrollment_url \
+    -X POST \
+    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-beta: user-profiles-2026-03-24' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+## Domain Types
+
+### Beta User Profile
+
+- `BetaUserProfile = object { id, created_at, metadata, 4 more }`
+
+  - `id: string`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `metadata: map[string]`
+
+  - `trust_grants: map[BetaUserProfileTrustGrant]`
+
+    - `status: string`
+
+  - `type: string`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `external_id: optional string`
+
+### Beta User Profile Enrollment URL
+
+- `BetaUserProfileEnrollmentURL = object { expires_at, type, url }`
+
+  - `expires_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `type: string`
+
+  - `url: string`
+
+### Beta User Profile Trust Grant
+
+- `BetaUserProfileTrustGrant = object { status }`
+
+  - `status: string`

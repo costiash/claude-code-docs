@@ -2970,7 +2970,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `"fast"`
 
-    - `stop_sequences: Optional[SequenceNotStr[str]]`
+    - `stop_sequences: Optional[Sequence[str]]`
 
       Custom text sequences that will cause the model to stop generating.
 
@@ -4706,13 +4706,17 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+    - `user_profile_id: Optional[str]`
+
+      The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 - `betas: Optional[List[AnthropicBetaParam]]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4753,6 +4757,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Returns
 

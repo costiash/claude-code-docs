@@ -4674,13 +4674,17 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+- `user_profile_id: String`
+
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 - `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -4721,6 +4725,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -5720,6 +5728,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     This will always be `"assistant"`.
 
     - `:assistant`
+
+  - `stop_details: BetaRefusalStopDetails`
+
+    Structured information about a refusal.
+
+    - `category: :cyber | :bio`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `:cyber`
+
+      - `:bio`
+
+    - `explanation: String`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: :refusal`
+
+      - `:refusal`
 
   - `stop_reason: BetaStopReason`
 

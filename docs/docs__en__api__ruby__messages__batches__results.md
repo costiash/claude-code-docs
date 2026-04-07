@@ -823,6 +823,30 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `:assistant`
 
+        - `stop_details: RefusalStopDetails`
+
+          Structured information about a refusal.
+
+          - `category: :cyber | :bio`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `:cyber`
+
+            - `:bio`
+
+          - `explanation: String`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `type: :refusal`
+
+            - `:refusal`
+
         - `stop_reason: StopReason`
 
           The reason that we stopped.

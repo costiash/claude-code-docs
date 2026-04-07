@@ -3817,7 +3817,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
 ### Returns
 
-- `Message = object { id, container, content, 6 more }`
+- `Message = object { id, container, content, 7 more }`
 
   - `id: string`
 
@@ -4603,6 +4603,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     This will always be `"assistant"`.
 
     - `"assistant"`
+
+  - `stop_details: RefusalStopDetails`
+
+    Structured information about a refusal.
+
+    - `category: "cyber" or "bio"`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `"cyber"`
+
+      - `"bio"`
+
+    - `explanation: string`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: "refusal"`
+
+      - `"refusal"`
 
   - `stop_reason: StopReason`
 

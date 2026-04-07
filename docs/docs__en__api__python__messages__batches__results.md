@@ -839,6 +839,30 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"assistant"`
 
+        - `stop_details: Optional[RefusalStopDetails]`
+
+          Structured information about a refusal.
+
+          - `category: Optional[Literal["cyber", "bio"]]`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `"cyber"`
+
+            - `"bio"`
+
+          - `explanation: Optional[str]`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `type: Literal["refusal"]`
+
+            - `"refusal"`
+
         - `stop_reason: Optional[StopReason]`
 
           The reason that we stopped.

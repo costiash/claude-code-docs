@@ -4626,6 +4626,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `"assistant"`
 
+  - `stop_details: RefusalStopDetails | null`
+
+    Structured information about a refusal.
+
+    - `category: "cyber" | "bio" | null`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `"cyber"`
+
+      - `"bio"`
+
+    - `explanation: string | null`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: "refusal"`
+
+      - `"refusal"`
+
   - `stop_reason: StopReason | null`
 
     The reason that we stopped.
@@ -14281,6 +14305,30 @@ console.log(messageTokensCount.input_tokens);
 
     - `"assistant"`
 
+  - `stop_details: RefusalStopDetails | null`
+
+    Structured information about a refusal.
+
+    - `category: "cyber" | "bio" | null`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `"cyber"`
+
+      - `"bio"`
+
+    - `explanation: string | null`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: "refusal"`
+
+      - `"refusal"`
+
   - `stop_reason: StopReason | null`
 
     The reason that we stopped.
@@ -18790,6 +18838,30 @@ console.log(messageTokensCount.input_tokens);
 
         The time at which the container will expire.
 
+    - `stop_details: RefusalStopDetails | null`
+
+      Structured information about a refusal.
+
+      - `category: "cyber" | "bio" | null`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"`
+
+        - `"bio"`
+
+      - `explanation: string | null`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: "refusal"`
+
+        - `"refusal"`
+
     - `stop_reason: StopReason | null`
 
       - `"end_turn"`
@@ -19636,6 +19708,30 @@ console.log(messageTokensCount.input_tokens);
       This will always be `"assistant"`.
 
       - `"assistant"`
+
+    - `stop_details: RefusalStopDetails | null`
+
+      Structured information about a refusal.
+
+      - `category: "cyber" | "bio" | null`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"`
+
+        - `"bio"`
+
+      - `explanation: string | null`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: "refusal"`
+
+        - `"refusal"`
 
     - `stop_reason: StopReason | null`
 
@@ -20545,6 +20641,30 @@ console.log(messageTokensCount.input_tokens);
 
         - `"assistant"`
 
+      - `stop_details: RefusalStopDetails | null`
+
+        Structured information about a refusal.
+
+        - `category: "cyber" | "bio" | null`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"`
+
+          - `"bio"`
+
+        - `explanation: string | null`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: "refusal"`
+
+          - `"refusal"`
+
       - `stop_reason: StopReason | null`
 
         The reason that we stopped.
@@ -20671,6 +20791,30 @@ console.log(messageTokensCount.input_tokens);
         - `expires_at: string`
 
           The time at which the container will expire.
+
+      - `stop_details: RefusalStopDetails | null`
+
+        Structured information about a refusal.
+
+        - `category: "cyber" | "bio" | null`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"`
+
+          - `"bio"`
+
+        - `explanation: string | null`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: "refusal"`
+
+          - `"refusal"`
 
       - `stop_reason: StopReason | null`
 
@@ -21569,6 +21713,32 @@ console.log(messageTokensCount.input_tokens);
   - `type: "redacted_thinking"`
 
     - `"redacted_thinking"`
+
+### Refusal Stop Details
+
+- `RefusalStopDetails`
+
+  Structured information about a refusal.
+
+  - `category: "cyber" | "bio" | null`
+
+    The policy category that triggered the refusal.
+
+    `null` when the refusal doesn't map to a named category.
+
+    - `"cyber"`
+
+    - `"bio"`
+
+  - `explanation: string | null`
+
+    Human-readable explanation of the refusal.
+
+    This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `type: "refusal"`
+
+    - `"refusal"`
 
 ### Search Result Block Param
 
@@ -32361,6 +32531,30 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"assistant"`
 
+        - `stop_details: RefusalStopDetails | null`
+
+          Structured information about a refusal.
+
+          - `category: "cyber" | "bio" | null`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `"cyber"`
+
+            - `"bio"`
+
+          - `explanation: string | null`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `type: "refusal"`
+
+            - `"refusal"`
+
         - `stop_reason: StopReason | null`
 
           The reason that we stopped.
@@ -33603,6 +33797,30 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           - `"assistant"`
 
+        - `stop_details: RefusalStopDetails | null`
+
+          Structured information about a refusal.
+
+          - `category: "cyber" | "bio" | null`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `"cyber"`
+
+            - `"bio"`
+
+          - `explanation: string | null`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `type: "refusal"`
+
+            - `"refusal"`
+
         - `stop_reason: StopReason | null`
 
           The reason that we stopped.
@@ -34639,6 +34857,30 @@ console.log(messageBatchIndividualResponse.custom_id);
 
         - `"assistant"`
 
+      - `stop_details: RefusalStopDetails | null`
+
+        Structured information about a refusal.
+
+        - `category: "cyber" | "bio" | null`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"`
+
+          - `"bio"`
+
+        - `explanation: string | null`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: "refusal"`
+
+          - `"refusal"`
+
       - `stop_reason: StopReason | null`
 
         The reason that we stopped.
@@ -35636,6 +35878,30 @@ console.log(messageBatchIndividualResponse.custom_id);
       This will always be `"assistant"`.
 
       - `"assistant"`
+
+    - `stop_details: RefusalStopDetails | null`
+
+      Structured information about a refusal.
+
+      - `category: "cyber" | "bio" | null`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"`
+
+        - `"bio"`
+
+      - `explanation: string | null`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: "refusal"`
+
+        - `"refusal"`
 
     - `stop_reason: StopReason | null`
 

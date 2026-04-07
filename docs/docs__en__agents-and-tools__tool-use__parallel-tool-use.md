@@ -925,12 +925,6 @@ print(f"Average tools per message: {avg_tools_per_message}")
 # Should be > 1.0 if parallel calls are working
 ```
 
-**4. Model-specific behavior**
-
-- Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, Opus 4.5, Opus 4.1, and Sonnet 4: Excel at parallel tool use with minimal prompting
-- Claude Sonnet 3.7: May need stronger prompting or the `token-efficient-tools-2025-02-19` [beta header](/docs/en/api/beta-headers). Consider [upgrading to Claude 4](/docs/en/about-claude/models/migration-guide).
-- Claude Haiku: Less likely to use parallel tools without explicit prompting
-
 ## Next steps
 
 - For the single-tool-call flow and `tool_result` formatting rules, see [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls).

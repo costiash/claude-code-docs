@@ -2466,7 +2466,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `"standard_only"`
 
-- `stop_sequences: Optional[SequenceNotStr[str]]`
+- `stop_sequences: Optional[Sequence[str]]`
 
   Custom text sequences that will cause the model to stop generating.
 
@@ -4639,6 +4639,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     This will always be `"assistant"`.
 
     - `"assistant"`
+
+  - `stop_details: Optional[RefusalStopDetails]`
+
+    Structured information about a refusal.
+
+    - `category: Optional[Literal["cyber", "bio"]]`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `"cyber"`
+
+      - `"bio"`
+
+    - `explanation: Optional[str]`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: Literal["refusal"]`
+
+      - `"refusal"`
 
   - `stop_reason: Optional[StopReason]`
 

@@ -4383,6 +4383,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `ASSISTANT("assistant")`
 
+  - `Optional<RefusalStopDetails> stopDetails`
+
+    Structured information about a refusal.
+
+    - `Optional<Category> category`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `CYBER("cyber")`
+
+      - `BIO("bio")`
+
+    - `Optional<String> explanation`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `JsonValue; type "refusal"constant`
+
+      - `REFUSAL("refusal")`
+
   - `Optional<StopReason> stopReason`
 
     The reason that we stopped.
@@ -13849,6 +13873,30 @@ public final class Main {
 
     - `ASSISTANT("assistant")`
 
+  - `Optional<RefusalStopDetails> stopDetails`
+
+    Structured information about a refusal.
+
+    - `Optional<Category> category`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `CYBER("cyber")`
+
+      - `BIO("bio")`
+
+    - `Optional<String> explanation`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `JsonValue; type "refusal"constant`
+
+      - `REFUSAL("refusal")`
+
   - `Optional<StopReason> stopReason`
 
     The reason that we stopped.
@@ -18286,6 +18334,30 @@ public final class Main {
 
         The time at which the container will expire.
 
+    - `Optional<RefusalStopDetails> stopDetails`
+
+      Structured information about a refusal.
+
+      - `Optional<Category> category`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `CYBER("cyber")`
+
+        - `BIO("bio")`
+
+      - `Optional<String> explanation`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `JsonValue; type "refusal"constant`
+
+        - `REFUSAL("refusal")`
+
     - `Optional<StopReason> stopReason`
 
       - `END_TURN("end_turn")`
@@ -19128,6 +19200,30 @@ public final class Main {
       This will always be `"assistant"`.
 
       - `ASSISTANT("assistant")`
+
+    - `Optional<RefusalStopDetails> stopDetails`
+
+      Structured information about a refusal.
+
+      - `Optional<Category> category`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `CYBER("cyber")`
+
+        - `BIO("bio")`
+
+      - `Optional<String> explanation`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `JsonValue; type "refusal"constant`
+
+        - `REFUSAL("refusal")`
 
     - `Optional<StopReason> stopReason`
 
@@ -20033,6 +20129,30 @@ public final class Main {
 
         - `ASSISTANT("assistant")`
 
+      - `Optional<RefusalStopDetails> stopDetails`
+
+        Structured information about a refusal.
+
+        - `Optional<Category> category`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `CYBER("cyber")`
+
+          - `BIO("bio")`
+
+        - `Optional<String> explanation`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `JsonValue; type "refusal"constant`
+
+          - `REFUSAL("refusal")`
+
       - `Optional<StopReason> stopReason`
 
         The reason that we stopped.
@@ -20159,6 +20279,30 @@ public final class Main {
         - `LocalDateTime expiresAt`
 
           The time at which the container will expire.
+
+      - `Optional<RefusalStopDetails> stopDetails`
+
+        Structured information about a refusal.
+
+        - `Optional<Category> category`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `CYBER("cyber")`
+
+          - `BIO("bio")`
+
+        - `Optional<String> explanation`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `JsonValue; type "refusal"constant`
+
+          - `REFUSAL("refusal")`
 
       - `Optional<StopReason> stopReason`
 
@@ -21057,6 +21201,32 @@ public final class Main {
   - `JsonValue; type "redacted_thinking"constant`
 
     - `REDACTED_THINKING("redacted_thinking")`
+
+### Refusal Stop Details
+
+- `class RefusalStopDetails:`
+
+  Structured information about a refusal.
+
+  - `Optional<Category> category`
+
+    The policy category that triggered the refusal.
+
+    `null` when the refusal doesn't map to a named category.
+
+    - `CYBER("cyber")`
+
+    - `BIO("bio")`
+
+  - `Optional<String> explanation`
+
+    Human-readable explanation of the refusal.
+
+    This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `JsonValue; type "refusal"constant`
+
+    - `REFUSAL("refusal")`
 
 ### Search Result Block Param
 
@@ -31883,6 +32053,30 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `ASSISTANT("assistant")`
 
+        - `Optional<RefusalStopDetails> stopDetails`
+
+          Structured information about a refusal.
+
+          - `Optional<Category> category`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `CYBER("cyber")`
+
+            - `BIO("bio")`
+
+          - `Optional<String> explanation`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `JsonValue; type "refusal"constant`
+
+            - `REFUSAL("refusal")`
+
         - `Optional<StopReason> stopReason`
 
           The reason that we stopped.
@@ -33129,6 +33323,30 @@ public final class Main {
 
           - `ASSISTANT("assistant")`
 
+        - `Optional<RefusalStopDetails> stopDetails`
+
+          Structured information about a refusal.
+
+          - `Optional<Category> category`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `CYBER("cyber")`
+
+            - `BIO("bio")`
+
+          - `Optional<String> explanation`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `JsonValue; type "refusal"constant`
+
+            - `REFUSAL("refusal")`
+
         - `Optional<StopReason> stopReason`
 
           The reason that we stopped.
@@ -34161,6 +34379,30 @@ public final class Main {
 
         - `ASSISTANT("assistant")`
 
+      - `Optional<RefusalStopDetails> stopDetails`
+
+        Structured information about a refusal.
+
+        - `Optional<Category> category`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `CYBER("cyber")`
+
+          - `BIO("bio")`
+
+        - `Optional<String> explanation`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `JsonValue; type "refusal"constant`
+
+          - `REFUSAL("refusal")`
+
       - `Optional<StopReason> stopReason`
 
         The reason that we stopped.
@@ -35154,6 +35396,30 @@ public final class Main {
       This will always be `"assistant"`.
 
       - `ASSISTANT("assistant")`
+
+    - `Optional<RefusalStopDetails> stopDetails`
+
+      Structured information about a refusal.
+
+      - `Optional<Category> category`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `CYBER("cyber")`
+
+        - `BIO("bio")`
+
+      - `Optional<String> explanation`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `JsonValue; type "refusal"constant`
+
+        - `REFUSAL("refusal")`
 
     - `Optional<StopReason> stopReason`
 

@@ -6,7 +6,7 @@ Claude is a family of state-of-the-art large language models developed by Anthro
 
 ## Choosing a model
 
-If you're unsure which model to use, consider starting with **Claude Opus 4.6** for the most complex tasks. It is the latest generation model with exceptional performance in coding and reasoning.
+If you're unsure which model to use, consider starting with **Claude Opus 4.6** for the most complex tasks. It is the most intelligent broadly available model with exceptional performance in coding and reasoning.
 
 All current Claude models support text and image input, text output, multilingual capabilities, and vision. Models are available via the Claude API, AWS Bedrock, and Google Vertex AI.
 
@@ -16,7 +16,7 @@ Once you've picked a model, [learn how to make your first API call](/docs/en/get
 
 | Feature | Claude Opus 4.6 | Claude Sonnet 4.6 | Claude Haiku 4.5 |
 |:--------|:----------------|:------------------|:-----------------|
-| **Description** | The most intelligent model for building agents and coding | The best combination of speed and intelligence | The fastest model with near-frontier intelligence |
+| **Description** | The most intelligent broadly available model for agents and coding | The best combination of speed and intelligence | The fastest model with near-frontier intelligence |
 | **Claude API ID** | claude-opus-4-6 | claude-sonnet-4-6 | claude-haiku-4-5-20251001 |
 | **Claude API alias** | claude-opus-4-6 | claude-sonnet-4-6 | claude-haiku-4-5 |
 | **AWS Bedrock ID** | anthropic.claude-opus-4-6-v1 | anthropic.claude-sonnet-4-6 | anthropic.claude-haiku-4-5-20251001-v1:0 |
@@ -34,6 +34,10 @@ Once you've picked a model, [learn how to make your first API call](/docs/en/get
 _<sup>1 - See the [pricing page](/docs/en/about-claude/pricing) for complete pricing information including batch API discounts, prompt caching rates, extended thinking costs, and vision processing fees.</sup>_
 
 _<sup>2 - **Reliable knowledge cutoff** indicates the date through which a model's knowledge is most extensive and reliable. **Training data cutoff** is the broader date range of training data used. For more information, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).</sup>_
+
+<Info>
+[Claude Mythos Preview](https://anthropic.com/glasswing) is offered separately as a research preview model for defensive cybersecurity workflows as part of [Project Glasswing](https://anthropic.com/glasswing). Access is invitation-only and there is no self-serve sign-up.
+</Info>
 
 <Note>Models with the same snapshot date (e.g., 20240620) are identical across all platforms and do not change. The snapshot date in the model name ensures consistency and allows developers to rely on stable performance across different environments.</Note>
 

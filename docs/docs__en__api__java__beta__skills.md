@@ -56,6 +56,10 @@ Create Skill
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
   - `Optional<String> displayTitle`
 
     Display title for the skill.
@@ -211,6 +215,10 @@ List Skills
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
 ### Returns
 
 - `class SkillListResponse:`
@@ -338,6 +346,10 @@ Get Skill
     - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -467,6 +479,10 @@ Delete Skill
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -567,6 +583,10 @@ Create Skill Version
     - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `Optional<List<String>> files`
 
@@ -715,6 +735,10 @@ List Skill Versions
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
 ### Returns
 
 - `class VersionListResponse:`
@@ -851,6 +875,10 @@ Get Skill Version
     - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -992,6 +1020,10 @@ Delete Skill Version
     - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 

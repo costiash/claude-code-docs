@@ -2468,7 +2468,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `"standard_only"`
 
-- `stop_sequences: Optional[SequenceNotStr[str]]`
+- `stop_sequences: Optional[Sequence[str]]`
 
   Custom text sequences that will cause the model to stop generating.
 
@@ -4641,6 +4641,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     This will always be `"assistant"`.
 
     - `"assistant"`
+
+  - `stop_details: Optional[RefusalStopDetails]`
+
+    Structured information about a refusal.
+
+    - `category: Optional[Literal["cyber", "bio"]]`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `"cyber"`
+
+      - `"bio"`
+
+    - `explanation: Optional[str]`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: Literal["refusal"]`
+
+      - `"refusal"`
 
   - `stop_reason: Optional[StopReason]`
 
@@ -14339,6 +14363,30 @@ print(message_tokens_count.input_tokens)
 
     - `"assistant"`
 
+  - `stop_details: Optional[RefusalStopDetails]`
+
+    Structured information about a refusal.
+
+    - `category: Optional[Literal["cyber", "bio"]]`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `"cyber"`
+
+      - `"bio"`
+
+    - `explanation: Optional[str]`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: Literal["refusal"]`
+
+      - `"refusal"`
+
   - `stop_reason: Optional[StopReason]`
 
     The reason that we stopped.
@@ -18868,6 +18916,30 @@ print(message_tokens_count.input_tokens)
 
         The time at which the container will expire.
 
+    - `stop_details: Optional[RefusalStopDetails]`
+
+      Structured information about a refusal.
+
+      - `category: Optional[Literal["cyber", "bio"]]`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"`
+
+        - `"bio"`
+
+      - `explanation: Optional[str]`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: Literal["refusal"]`
+
+        - `"refusal"`
+
     - `stop_reason: Optional[StopReason]`
 
       - `"end_turn"`
@@ -19734,6 +19806,30 @@ print(message_tokens_count.input_tokens)
       This will always be `"assistant"`.
 
       - `"assistant"`
+
+    - `stop_details: Optional[RefusalStopDetails]`
+
+      Structured information about a refusal.
+
+      - `category: Optional[Literal["cyber", "bio"]]`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"`
+
+        - `"bio"`
+
+      - `explanation: Optional[str]`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: Literal["refusal"]`
+
+        - `"refusal"`
 
     - `stop_reason: Optional[StopReason]`
 
@@ -20663,6 +20759,30 @@ print(message_tokens_count.input_tokens)
 
         - `"assistant"`
 
+      - `stop_details: Optional[RefusalStopDetails]`
+
+        Structured information about a refusal.
+
+        - `category: Optional[Literal["cyber", "bio"]]`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"`
+
+          - `"bio"`
+
+        - `explanation: Optional[str]`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: Literal["refusal"]`
+
+          - `"refusal"`
+
       - `stop_reason: Optional[StopReason]`
 
         The reason that we stopped.
@@ -20789,6 +20909,30 @@ print(message_tokens_count.input_tokens)
         - `expires_at: datetime`
 
           The time at which the container will expire.
+
+      - `stop_details: Optional[RefusalStopDetails]`
+
+        Structured information about a refusal.
+
+        - `category: Optional[Literal["cyber", "bio"]]`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"`
+
+          - `"bio"`
+
+        - `explanation: Optional[str]`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: Literal["refusal"]`
+
+          - `"refusal"`
 
       - `stop_reason: Optional[StopReason]`
 
@@ -21687,6 +21831,32 @@ print(message_tokens_count.input_tokens)
   - `type: Literal["redacted_thinking"]`
 
     - `"redacted_thinking"`
+
+### Refusal Stop Details
+
+- `class RefusalStopDetails: …`
+
+  Structured information about a refusal.
+
+  - `category: Optional[Literal["cyber", "bio"]]`
+
+    The policy category that triggered the refusal.
+
+    `null` when the refusal doesn't map to a named category.
+
+    - `"cyber"`
+
+    - `"bio"`
+
+  - `explanation: Optional[str]`
+
+    Human-readable explanation of the refusal.
+
+    This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `type: Literal["refusal"]`
+
+    - `"refusal"`
 
 ### Search Result Block Param
 
@@ -29771,7 +29941,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `"standard_only"`
 
-    - `stop_sequences: Optional[SequenceNotStr[str]]`
+    - `stop_sequences: Optional[Sequence[str]]`
 
       Custom text sequences that will cause the model to stop generating.
 
@@ -32517,6 +32687,30 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"assistant"`
 
+        - `stop_details: Optional[RefusalStopDetails]`
+
+          Structured information about a refusal.
+
+          - `category: Optional[Literal["cyber", "bio"]]`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `"cyber"`
+
+            - `"bio"`
+
+          - `explanation: Optional[str]`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `type: Literal["refusal"]`
+
+            - `"refusal"`
+
         - `stop_reason: Optional[StopReason]`
 
           The reason that we stopped.
@@ -33780,6 +33974,30 @@ for batch in client.messages.batches.results(
 
           - `"assistant"`
 
+        - `stop_details: Optional[RefusalStopDetails]`
+
+          Structured information about a refusal.
+
+          - `category: Optional[Literal["cyber", "bio"]]`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `"cyber"`
+
+            - `"bio"`
+
+          - `explanation: Optional[str]`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `type: Literal["refusal"]`
+
+            - `"refusal"`
+
         - `stop_reason: Optional[StopReason]`
 
           The reason that we stopped.
@@ -34836,6 +35054,30 @@ for batch in client.messages.batches.results(
 
         - `"assistant"`
 
+      - `stop_details: Optional[RefusalStopDetails]`
+
+        Structured information about a refusal.
+
+        - `category: Optional[Literal["cyber", "bio"]]`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `"cyber"`
+
+          - `"bio"`
+
+        - `explanation: Optional[str]`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: Literal["refusal"]`
+
+          - `"refusal"`
+
       - `stop_reason: Optional[StopReason]`
 
         The reason that we stopped.
@@ -35853,6 +36095,30 @@ for batch in client.messages.batches.results(
       This will always be `"assistant"`.
 
       - `"assistant"`
+
+    - `stop_details: Optional[RefusalStopDetails]`
+
+      Structured information about a refusal.
+
+      - `category: Optional[Literal["cyber", "bio"]]`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `"cyber"`
+
+        - `"bio"`
+
+      - `explanation: Optional[str]`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: Literal["refusal"]`
+
+        - `"refusal"`
 
     - `stop_reason: Optional[StopReason]`
 

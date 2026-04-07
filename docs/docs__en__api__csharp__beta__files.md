@@ -60,6 +60,10 @@ Upload File
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class FileMetadata:`
@@ -178,6 +182,10 @@ List Files
     - `"skills-2025-10-02"Skills2025_10_02`
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -303,6 +311,10 @@ Download File
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Example
 
 ```csharp
@@ -372,6 +384,10 @@ Get File Metadata
     - `"skills-2025-10-02"Skills2025_10_02`
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -478,6 +494,10 @@ Delete File
     - `"skills-2025-10-02"Skills2025_10_02`
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 

@@ -126,7 +126,7 @@ For more information about batch processing, see the [batch processing documenta
 
 ### Long context pricing
 
-Claude Opus 4.6 and Sonnet 4.6 include the full [1M token context window](/docs/en/build-with-claude/context-windows) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
+[Claude Mythos Preview](https://anthropic.com/glasswing), Opus 4.6 and Sonnet 4.6 include the full [1M token context window](/docs/en/build-with-claude/context-windows) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
 
 ### Tool use pricing
 

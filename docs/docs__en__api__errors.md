@@ -14,6 +14,7 @@ The API follows a predictable HTTP error code format:
 * 413 - `request_too_large`: Request exceeds the maximum allowed number of bytes. The maximum request size is 32 MB for standard API endpoints.
 * 429 - `rate_limit_error`: Your account has hit a rate limit.
 * 500 - `api_error`: An unexpected error has occurred internal to Anthropic's systems.
+* 504 - `timeout_error`: The request timed out while processing. Consider using [streaming](/docs/en/build-with-claude/streaming) for long-running requests.
 * 529 - `overloaded_error`: The API is temporarily overloaded.
 
   <Warning>
@@ -135,7 +136,7 @@ See [Streaming Messages](/docs/en/build-with-claude/streaming#get-the-final-mess
 
 ### Prefill not supported
 
-Claude Opus 4.6 does not support prefilling assistant messages. Sending a request with a prefilled last assistant message to this model returns a 400 `invalid_request_error`:
+[Claude Mythos Preview](https://anthropic.com/glasswing) and Claude Opus 4.6 do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to either model returns a 400 `invalid_request_error`:
 
 ```json
 {

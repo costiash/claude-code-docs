@@ -3793,6 +3793,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaMessageTokensCount:`

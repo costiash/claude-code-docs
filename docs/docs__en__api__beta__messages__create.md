@@ -16,7 +16,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -57,6 +57,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"skills-2025-10-02"`
 
     - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
 ### Body Parameters
 
@@ -4722,9 +4726,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+- `user_profile_id: optional string`
+
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 ### Returns
 
-- `BetaMessage = object { id, container, content, 7 more }`
+- `BetaMessage = object { id, container, content, 8 more }`
 
   - `id: string`
 
@@ -5721,6 +5729,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `"assistant"`
 
+  - `stop_details: BetaRefusalStopDetails`
+
+    Structured information about a refusal.
+
+    - `category: "cyber" or "bio"`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `"cyber"`
+
+      - `"bio"`
+
+    - `explanation: string`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: "refusal"`
+
+      - `"refusal"`
+
   - `stop_reason: BetaStopReason`
 
     The reason that we stopped.
@@ -5929,7 +5961,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/messages?beta=true \
+curl https://api.anthropic.com/v1/messages \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \

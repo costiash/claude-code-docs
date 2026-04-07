@@ -640,7 +640,7 @@ For more details on the two document processing modes and their limitations, ref
 
 ### Context window
 
-Claude Opus 4.6 and Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4, have a 200k-token context window.
+Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4, have a 200k-token context window.
 
 Amazon Bedrock limits request payloads to 20 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
@@ -935,6 +935,10 @@ message = client.messages.create(
 )
 ```
 </CodeGroup>
+
+<Note>
+**Claude Mythos Preview** is a research preview model available to invited customers on Amazon Bedrock. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
+</Note>
 
 ### Additional resources
 

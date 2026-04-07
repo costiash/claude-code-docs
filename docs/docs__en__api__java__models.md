@@ -72,6 +72,10 @@ The Models API response can be used to determine which models are available for 
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
 ### Returns
 
 - `class ModelInfo:`
@@ -338,6 +342,10 @@ The Models API response can be used to determine information about a specific mo
     - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 

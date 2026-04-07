@@ -58,6 +58,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
   - `long maxTokens`
 
     The maximum number of tokens to generate before stopping.
@@ -4377,6 +4381,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+  - `Optional<String> userProfileId`
+
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 ### Returns
 
 - `class BetaMessage:`
@@ -5367,6 +5375,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     This will always be `"assistant"`.
 
     - `ASSISTANT("assistant")`
+
+  - `Optional<BetaRefusalStopDetails> stopDetails`
+
+    Structured information about a refusal.
+
+    - `Optional<Category> category`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `CYBER("cyber")`
+
+      - `BIO("bio")`
+
+    - `Optional<String> explanation`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `JsonValue; type "refusal"constant`
+
+      - `REFUSAL("refusal")`
 
   - `Optional<BetaStopReason> stopReason`
 

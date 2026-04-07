@@ -160,7 +160,7 @@ The following table lists which Claude API features are eligible for ZDR and HIP
 | [Agent skills](/docs/en/agents-and-tools/agent-skills/overview) | `/v1/messages` (with `skills`) / `/v1/skills` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Skill data retained per standard policy. See [Agent skills](/docs/en/agents-and-tools/agent-skills/overview#data-retention). |
 | [MCP connector](/docs/en/agents-and-tools/mcp-connector) | `/v1/messages` (with `mcp_servers`) | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Data retained per standard policy. See [MCP connector](/docs/en/agents-and-tools/mcp-connector#data-retention). |
 
-<sup>1</sup> [Dynamic filtering](/docs/en/agents-and-tools/tool-use/web-search-tool#dynamic-filtering-with-opus-4-6-and-sonnet-4-6) is not eligible for ZDR or HIPAA.
+<sup>1</sup> [Dynamic filtering](/docs/en/agents-and-tools/tool-use/web-search-tool#dynamic-filtering) is not eligible for ZDR or HIPAA.
 
 <sup>2</sup> While web fetch is ZDR-eligible, website publishers may retain request data (such as fetched URLs and request metadata) according to their own policies.
 

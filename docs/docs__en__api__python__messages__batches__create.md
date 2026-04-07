@@ -2482,7 +2482,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `"standard_only"`
 
-    - `stop_sequences: Optional[SequenceNotStr[str]]`
+    - `stop_sequences: Optional[Sequence[str]]`
 
       Custom text sequences that will cause the model to stop generating.
 

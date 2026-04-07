@@ -11,7 +11,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
 The effort parameter allows you to control how eager Claude is about spending tokens when responding to requests. This gives you the ability to trade off between response thoroughness and token efficiency, all with a single model. The effort parameter is generally available on all supported models with no beta header required.
 
 <Note>
-  The effort parameter is supported by Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5.
+  The effort parameter is supported by [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5.
 </Note>
 
 <Tip>
@@ -41,7 +41,7 @@ This approach has two major advantages:
 
 | Level    | Description                                                                                                                      | Typical use case                                                                      |
 | -------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `max`    | Absolute maximum capability with no constraints on token spending. Available on Claude Opus 4.6 and Claude Sonnet 4.6. | Tasks requiring the deepest possible reasoning and most thorough analysis |
+| `max`    | Absolute maximum capability with no constraints on token spending. Available on Claude Mythos Preview, Claude Opus 4.6, and Claude Sonnet 4.6. | Tasks requiring the deepest possible reasoning and most thorough analysis |
 | `high`   | High capability. Equivalent to not setting the parameter. | Complex reasoning, difficult coding problems, agentic tasks                           |
 | `medium` | Balanced approach with moderate token savings. | Agentic tasks that require a balance of speed, cost, and performance                                                         |
 | `low`    | Most efficient. Significant token savings with some capability reduction. | Simpler tasks that need the best speed and lowest costs, such as subagents                     |
@@ -256,7 +256,7 @@ puts message.content.first.text
 
 ## When to adjust the effort parameter
 
-- Use **max effort** when you need the absolute highest capability with no constraints: the most thorough reasoning and deepest analysis. Available on Claude Opus 4.6 and Claude Sonnet 4.6.
+- Use **max effort** when you need the absolute highest capability with no constraints: the most thorough reasoning and deepest analysis. Available on Claude Mythos Preview, Claude Opus 4.6, and Claude Sonnet 4.6.
 - Use **high effort** (the default) when you need Claude's best work: complex reasoning, nuanced analysis, difficult coding problems, or any task where quality is the top priority.
 - Use **medium effort** as a balanced option when you want solid performance without the full token expenditure of high effort.
 - Use **low effort** when you're optimizing for speed (because Claude answers with fewer tokens) or cost. For example, simple classification tasks, quick lookups, or high-volume use cases where marginal quality improvements don't justify additional latency or spend.
@@ -281,6 +281,7 @@ Higher effort levels may:
 
 The effort parameter works alongside extended thinking. Its behavior depends on the model:
 
+- **Claude Mythos Preview** uses [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) by default (no `thinking` configuration required). `thinking: {type: "disabled"}` is rejected. Effort controls thinking depth the same way as on Opus 4.6.
 - **Claude Opus 4.6** uses [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (`thinking: {type: "adaptive"}`), where effort is the recommended control for thinking depth. While `budget_tokens` is still accepted on Opus 4.6, it is deprecated and will be removed in a future release. At `high` and `max` effort, Claude almost always thinks deeply. At lower levels, it may skip thinking for simpler problems.
 - **Claude Sonnet 4.6** uses [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) (where effort controls thinking depth). Manual thinking with [interleaved mode](/docs/en/build-with-claude/extended-thinking#interleaved-thinking) (`thinking: {type: "enabled", budget_tokens: N}`) is still functional but deprecated.
 - **Claude Opus 4.5 and other Claude 4 models** use manual thinking (`thinking: {type: "enabled", budget_tokens: N}`), where effort works alongside the thinking token budget. Set the effort level for your task, then set the thinking token budget based on task complexity.

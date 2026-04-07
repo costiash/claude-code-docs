@@ -4,11 +4,11 @@
 
 ### Anthropic Beta
 
-- `AnthropicBeta = String | :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+- `AnthropicBeta = String | :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -49,6 +49,10 @@
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Beta API Error
 
@@ -334,7 +338,7 @@ The Models API response can be used to determine which models are available for 
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -375,6 +379,10 @@ The Models API response can be used to determine which models are available for 
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -594,7 +602,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -635,6 +643,10 @@ The Models API response can be used to determine information about a specific mo
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -5988,13 +6000,17 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+- `user_profile_id: String`
+
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 - `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -6035,6 +6051,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -7034,6 +7054,30 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     This will always be `"assistant"`.
 
     - `:assistant`
+
+  - `stop_details: BetaRefusalStopDetails`
+
+    Structured information about a refusal.
+
+    - `category: :cyber | :bio`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `:cyber`
+
+      - `:bio`
+
+    - `explanation: String`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: :refusal`
+
+      - `:refusal`
 
   - `stop_reason: BetaStopReason`
 
@@ -11834,7 +11878,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -11875,6 +11919,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -19168,6 +19216,30 @@ puts(beta_message_tokens_count)
 
     - `:assistant`
 
+  - `stop_details: BetaRefusalStopDetails`
+
+    Structured information about a refusal.
+
+    - `category: :cyber | :bio`
+
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
+
+      - `:cyber`
+
+      - `:bio`
+
+    - `explanation: String`
+
+      Human-readable explanation of the refusal.
+
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `type: :refusal`
+
+      - `:refusal`
+
   - `stop_reason: BetaStopReason`
 
     The reason that we stopped.
@@ -23279,7 +23351,7 @@ puts(beta_message_tokens_count)
 
           - `:clear_thinking_20251015`
 
-  - `delta: { container, stop_reason, stop_sequence}`
+  - `delta: { container, stop_details, stop_reason, stop_sequence}`
 
     - `container: BetaContainer`
 
@@ -23312,6 +23384,30 @@ puts(beta_message_tokens_count)
         - `version: String`
 
           Skill version or 'latest' for most recent version
+
+    - `stop_details: BetaRefusalStopDetails`
+
+      Structured information about a refusal.
+
+      - `category: :cyber | :bio`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `:cyber`
+
+        - `:bio`
+
+      - `explanation: String`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: :refusal`
+
+        - `:refusal`
 
     - `stop_reason: BetaStopReason`
 
@@ -24463,6 +24559,30 @@ puts(beta_message_tokens_count)
       This will always be `"assistant"`.
 
       - `:assistant`
+
+    - `stop_details: BetaRefusalStopDetails`
+
+      Structured information about a refusal.
+
+      - `category: :cyber | :bio`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `:cyber`
+
+        - `:bio`
+
+      - `explanation: String`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: :refusal`
+
+        - `:refusal`
 
     - `stop_reason: BetaStopReason`
 
@@ -25684,6 +25804,30 @@ puts(beta_message_tokens_count)
 
         - `:assistant`
 
+      - `stop_details: BetaRefusalStopDetails`
+
+        Structured information about a refusal.
+
+        - `category: :cyber | :bio`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `:cyber`
+
+          - `:bio`
+
+        - `explanation: String`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: :refusal`
+
+          - `:refusal`
+
       - `stop_reason: BetaStopReason`
 
         The reason that we stopped.
@@ -25935,7 +26079,7 @@ puts(beta_message_tokens_count)
 
             - `:clear_thinking_20251015`
 
-    - `delta: { container, stop_reason, stop_sequence}`
+    - `delta: { container, stop_details, stop_reason, stop_sequence}`
 
       - `container: BetaContainer`
 
@@ -25968,6 +26112,30 @@ puts(beta_message_tokens_count)
           - `version: String`
 
             Skill version or 'latest' for most recent version
+
+      - `stop_details: BetaRefusalStopDetails`
+
+        Structured information about a refusal.
+
+        - `category: :cyber | :bio`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `:cyber`
+
+          - `:bio`
+
+        - `explanation: String`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: :refusal`
+
+          - `:refusal`
 
       - `stop_reason: BetaStopReason`
 
@@ -27112,6 +27280,32 @@ puts(beta_message_tokens_count)
   - `type: :redacted_thinking`
 
     - `:redacted_thinking`
+
+### Beta Refusal Stop Details
+
+- `class BetaRefusalStopDetails`
+
+  Structured information about a refusal.
+
+  - `category: :cyber | :bio`
+
+    The policy category that triggered the refusal.
+
+    `null` when the refusal doesn't map to a named category.
+
+    - `:cyber`
+
+    - `:bio`
+
+  - `explanation: String`
+
+    Human-readable explanation of the refusal.
+
+    This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `type: :refusal`
+
+    - `:refusal`
 
 ### Beta Request Document Block
 
@@ -34083,7 +34277,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Must be unique for each request within the Message Batch.
 
-  - `params: { max_tokens, messages, model, 19 more}`
+  - `params: { max_tokens, messages, model, 20 more}`
 
     Messages API creation parameters for the individual request.
 
@@ -38751,13 +38945,17 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+    - `user_profile_id: String`
+
+      The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 - `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -38798,6 +38996,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -38930,7 +39132,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -38971,6 +39173,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -39106,7 +39312,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -39147,6 +39353,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -39274,7 +39484,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -39315,6 +39525,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -39442,7 +39656,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -39483,6 +39697,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -39536,7 +39754,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -39577,6 +39795,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -40594,6 +40816,30 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           This will always be `"assistant"`.
 
           - `:assistant`
+
+        - `stop_details: BetaRefusalStopDetails`
+
+          Structured information about a refusal.
+
+          - `category: :cyber | :bio`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `:cyber`
+
+            - `:bio`
+
+          - `explanation: String`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `type: :refusal`
+
+            - `:refusal`
 
         - `stop_reason: BetaStopReason`
 
@@ -42147,6 +42393,30 @@ puts(beta_message_batch_individual_response)
 
           - `:assistant`
 
+        - `stop_details: BetaRefusalStopDetails`
+
+          Structured information about a refusal.
+
+          - `category: :cyber | :bio`
+
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
+
+            - `:cyber`
+
+            - `:bio`
+
+          - `explanation: String`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `type: :refusal`
+
+            - `:refusal`
+
         - `stop_reason: BetaStopReason`
 
           The reason that we stopped.
@@ -43495,6 +43765,30 @@ puts(beta_message_batch_individual_response)
 
         - `:assistant`
 
+      - `stop_details: BetaRefusalStopDetails`
+
+        Structured information about a refusal.
+
+        - `category: :cyber | :bio`
+
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
+
+          - `:cyber`
+
+          - `:bio`
+
+        - `explanation: String`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: :refusal`
+
+          - `:refusal`
+
       - `stop_reason: BetaStopReason`
 
         The reason that we stopped.
@@ -44805,6 +45099,30 @@ puts(beta_message_batch_individual_response)
 
       - `:assistant`
 
+    - `stop_details: BetaRefusalStopDetails`
+
+      Structured information about a refusal.
+
+      - `category: :cyber | :bio`
+
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
+
+        - `:cyber`
+
+        - `:bio`
+
+      - `explanation: String`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: :refusal`
+
+        - `:refusal`
+
     - `stop_reason: BetaStopReason`
 
       The reason that we stopped.
@@ -45036,7 +45354,7 @@ Upload File
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45077,6 +45395,10 @@ Upload File
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45158,7 +45480,7 @@ List Files
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45199,6 +45521,10 @@ List Files
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45270,7 +45596,7 @@ Download File
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45311,6 +45637,10 @@ Download File
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45348,7 +45678,7 @@ Get File Metadata
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45389,6 +45719,10 @@ Get File Metadata
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45460,7 +45794,7 @@ Delete File
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45501,6 +45835,10 @@ Delete File
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45616,7 +45954,7 @@ Create Skill
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45657,6 +45995,10 @@ Create Skill
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45752,7 +46094,7 @@ List Skills
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45793,6 +46135,10 @@ List Skills
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45873,7 +46219,7 @@ Get Skill
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45914,6 +46260,10 @@ Get Skill
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -45994,7 +46344,7 @@ Delete Skill
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -46036,6 +46386,10 @@ Delete Skill
 
     - `:"fast-mode-2026-02-01"`
 
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
 ### Returns
 
 - `class SkillDeleteResponse`
@@ -46063,6 +46417,159 @@ skill = anthropic.beta.skills.delete("skill_id")
 
 puts(skill)
 ```
+
+## Domain Types
+
+### Skill Create Response
+
+- `class SkillCreateResponse`
+
+  - `id: String`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: String`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `display_title: String`
+
+    Display title for the skill.
+
+    This is a human-readable label that is not included in the prompt sent to the model.
+
+  - `latest_version: String`
+
+    The latest version identifier for the skill.
+
+    This represents the most recent version of the skill that has been created.
+
+  - `source: String`
+
+    Source of the skill.
+
+    This may be one of the following values:
+
+    * `"custom"`: the skill was created by a user
+    * `"anthropic"`: the skill was created by Anthropic
+
+  - `type: String`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `updated_at: String`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+### Skill List Response
+
+- `class SkillListResponse`
+
+  - `id: String`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: String`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `display_title: String`
+
+    Display title for the skill.
+
+    This is a human-readable label that is not included in the prompt sent to the model.
+
+  - `latest_version: String`
+
+    The latest version identifier for the skill.
+
+    This represents the most recent version of the skill that has been created.
+
+  - `source: String`
+
+    Source of the skill.
+
+    This may be one of the following values:
+
+    * `"custom"`: the skill was created by a user
+    * `"anthropic"`: the skill was created by Anthropic
+
+  - `type: String`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `updated_at: String`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+### Skill Retrieve Response
+
+- `class SkillRetrieveResponse`
+
+  - `id: String`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: String`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `display_title: String`
+
+    Display title for the skill.
+
+    This is a human-readable label that is not included in the prompt sent to the model.
+
+  - `latest_version: String`
+
+    The latest version identifier for the skill.
+
+    This represents the most recent version of the skill that has been created.
+
+  - `source: String`
+
+    Source of the skill.
+
+    This may be one of the following values:
+
+    * `"custom"`: the skill was created by a user
+    * `"anthropic"`: the skill was created by Anthropic
+
+  - `type: String`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `updated_at: String`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+### Skill Delete Response
+
+- `class SkillDeleteResponse`
+
+  - `id: String`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `type: String`
+
+    Deleted object type.
+
+    For Skills, this is always `"skill_deleted"`.
 
 # Versions
 
@@ -46094,7 +46601,7 @@ Create Skill Version
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -46135,6 +46642,10 @@ Create Skill Version
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -46228,7 +46739,7 @@ List Skill Versions
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -46269,6 +46780,10 @@ List Skill Versions
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -46358,7 +46873,7 @@ Get Skill Version
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -46399,6 +46914,10 @@ Get Skill Version
     - `:"skills-2025-10-02"`
 
     - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -46488,7 +47007,7 @@ Delete Skill Version
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -46530,6 +47049,10 @@ Delete Skill Version
 
     - `:"fast-mode-2026-02-01"`
 
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
 ### Returns
 
 - `class VersionDeleteResponse`
@@ -46557,3 +47080,723 @@ version = anthropic.beta.skills.versions.delete("version", skill_id: "skill_id")
 
 puts(version)
 ```
+
+## Domain Types
+
+### Version Create Response
+
+- `class VersionCreateResponse`
+
+  - `id: String`
+
+    Unique identifier for the skill version.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: String`
+
+    ISO 8601 timestamp of when the skill version was created.
+
+  - `description: String`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `directory: String`
+
+    Directory name of the skill version.
+
+    This is the top-level directory name that was extracted from the uploaded files.
+
+  - `name: String`
+
+    Human-readable name of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `skill_id: String`
+
+    Identifier for the skill that this version belongs to.
+
+  - `type: String`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+  - `version: String`
+
+    Version identifier for the skill.
+
+    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+### Version List Response
+
+- `class VersionListResponse`
+
+  - `id: String`
+
+    Unique identifier for the skill version.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: String`
+
+    ISO 8601 timestamp of when the skill version was created.
+
+  - `description: String`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `directory: String`
+
+    Directory name of the skill version.
+
+    This is the top-level directory name that was extracted from the uploaded files.
+
+  - `name: String`
+
+    Human-readable name of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `skill_id: String`
+
+    Identifier for the skill that this version belongs to.
+
+  - `type: String`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+  - `version: String`
+
+    Version identifier for the skill.
+
+    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+### Version Retrieve Response
+
+- `class VersionRetrieveResponse`
+
+  - `id: String`
+
+    Unique identifier for the skill version.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: String`
+
+    ISO 8601 timestamp of when the skill version was created.
+
+  - `description: String`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `directory: String`
+
+    Directory name of the skill version.
+
+    This is the top-level directory name that was extracted from the uploaded files.
+
+  - `name: String`
+
+    Human-readable name of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `skill_id: String`
+
+    Identifier for the skill that this version belongs to.
+
+  - `type: String`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+  - `version: String`
+
+    Version identifier for the skill.
+
+    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+### Version Delete Response
+
+- `class VersionDeleteResponse`
+
+  - `id: String`
+
+    Version identifier for the skill.
+
+    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+  - `type: String`
+
+    Deleted object type.
+
+    For Skill Versions, this is always `"skill_version_deleted"`.
+
+# User Profiles
+
+## Create
+
+`beta.user_profiles.create(**kwargs) -> BetaUserProfile`
+
+**post** `/v1/user_profiles`
+
+Create User Profile
+
+### Parameters
+
+- `external_id: String`
+
+- `metadata: Hash[Symbol, String]`
+
+  Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String`
+
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+### Returns
+
+- `class BetaUserProfile`
+
+  - `id: String`
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `metadata: Hash[Symbol, String]`
+
+  - `trust_grants: Hash[Symbol, BetaUserProfileTrustGrant]`
+
+    - `status: String`
+
+  - `type: String`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `external_id: String`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_user_profile = anthropic.beta.user_profiles.create
+
+puts(beta_user_profile)
+```
+
+## List
+
+`beta.user_profiles.list(**kwargs) -> PageCursorV2<BetaUserProfile>`
+
+**get** `/v1/user_profiles`
+
+List User Profiles
+
+### Parameters
+
+- `limit: Integer`
+
+  Query parameter for limit
+
+- `order: :asc | :desc`
+
+  Query parameter for order
+
+  - `:asc`
+
+  - `:desc`
+
+- `page: String`
+
+  Query parameter for page
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String`
+
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+### Returns
+
+- `class BetaUserProfile`
+
+  - `id: String`
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `metadata: Hash[Symbol, String]`
+
+  - `trust_grants: Hash[Symbol, BetaUserProfileTrustGrant]`
+
+    - `status: String`
+
+  - `type: String`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `external_id: String`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+page = anthropic.beta.user_profiles.list
+
+puts(page)
+```
+
+## Retrieve
+
+`beta.user_profiles.retrieve(id, **kwargs) -> BetaUserProfile`
+
+**get** `/v1/user_profiles/{id}`
+
+Get User Profile
+
+### Parameters
+
+- `id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String`
+
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+### Returns
+
+- `class BetaUserProfile`
+
+  - `id: String`
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `metadata: Hash[Symbol, String]`
+
+  - `trust_grants: Hash[Symbol, BetaUserProfileTrustGrant]`
+
+    - `status: String`
+
+  - `type: String`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `external_id: String`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_user_profile = anthropic.beta.user_profiles.retrieve("id")
+
+puts(beta_user_profile)
+```
+
+## Update
+
+`beta.user_profiles.update(id, **kwargs) -> BetaUserProfile`
+
+**post** `/v1/user_profiles/{id}`
+
+Update User Profile
+
+### Parameters
+
+- `id: String`
+
+- `external_id: String`
+
+- `metadata: Hash[Symbol, String]`
+
+  Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String`
+
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+### Returns
+
+- `class BetaUserProfile`
+
+  - `id: String`
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `metadata: Hash[Symbol, String]`
+
+  - `trust_grants: Hash[Symbol, BetaUserProfileTrustGrant]`
+
+    - `status: String`
+
+  - `type: String`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `external_id: String`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_user_profile = anthropic.beta.user_profiles.update("id")
+
+puts(beta_user_profile)
+```
+
+## Create Enrollment URL
+
+`beta.user_profiles.create_enrollment_url(id, **kwargs) -> BetaUserProfileEnrollmentURL`
+
+**post** `/v1/user_profiles/{id}/enrollment_url`
+
+Create Enrollment URL
+
+### Parameters
+
+- `id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String`
+
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+### Returns
+
+- `class BetaUserProfileEnrollmentURL`
+
+  - `expires_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `type: String`
+
+  - `url: String`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_user_profile_enrollment_url = anthropic.beta.user_profiles.create_enrollment_url("id")
+
+puts(beta_user_profile_enrollment_url)
+```
+
+## Domain Types
+
+### Beta User Profile
+
+- `class BetaUserProfile`
+
+  - `id: String`
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `metadata: Hash[Symbol, String]`
+
+  - `trust_grants: Hash[Symbol, BetaUserProfileTrustGrant]`
+
+    - `status: String`
+
+  - `type: String`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `external_id: String`
+
+### Beta User Profile Enrollment URL
+
+- `class BetaUserProfileEnrollmentURL`
+
+  - `expires_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `type: String`
+
+  - `url: String`
+
+### Beta User Profile Trust Grant
+
+- `class BetaUserProfileTrustGrant`
+
+  - `status: String`
