@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-08T18:43:52Z",
+  "generated_at": "2026-04-08T21:30:32Z",
   "indexed_files": 1063,
   "index": {
     "/changelog": {
@@ -1064,7 +1064,7 @@
         "agent",
         "file"
       ],
-      "word_count": 4849,
+      "word_count": 5059,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -22752,8 +22752,8 @@
         "tab",
         "title",
         "step",
-        "flags",
         "cli",
+        "flags",
         "command",
         "into",
         "claude",
@@ -22769,7 +22769,7 @@
         "resources",
         "path"
       ],
-      "word_count": 2180,
+      "word_count": 2222,
       "file_path": "docs/docs__en__api__sdks__cli.md"
     },
     "/docs/en/api/sdks/csharp": {
@@ -27241,7 +27241,7 @@
         "claude",
         "streaming"
       ],
-      "word_count": 2279,
+      "word_count": 2320,
       "file_path": "docs/docs__en__managed-agents__quickstart.md"
     },
     "/docs/en/managed-agents/sessions": {

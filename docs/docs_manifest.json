@@ -4389,8 +4389,8 @@
     "docs__en__api__sdks__cli.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/cli",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/cli.md",
-      "hash": "ac77b7ffd116473f867d74e34e0dd1e549f4eefdbf1d81ccff2b67e31424a3f2",
-      "last_updated": "2026-04-08T18:40:09.167419"
+      "hash": "10652b99706389d43cddae143b205ecd99e1efea62cbc3642ed595fc5d77d2dc",
+      "last_updated": "2026-04-08T21:27:37.514361"
     },
     "docs__en__api__sdks__csharp.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/csharp",
@@ -5421,8 +5421,8 @@
     "docs__en__managed-agents__quickstart.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/quickstart",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/quickstart.md",
-      "hash": "7c0ab68a050fcb1b021ab57ff9e9d8fc05d54668ee2283257f66a387b3283a0b",
-      "last_updated": "2026-04-08T18:43:16.913468"
+      "hash": "6ec3a69b8e4cd1eba6a86e33e133a273532e383f2ead716c3c0e8a0a0fae9c48",
+      "last_updated": "2026-04-08T21:30:01.439834"
     },
     "docs__en__managed-agents__sessions.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/sessions",
@@ -5559,14 +5559,14 @@
     "claude-code__skills.md": {
       "original_url": "https://platform.claude.com/docs/en/skills",
       "original_md_url": "https://platform.claude.com/docs/en/skills.md",
-      "hash": "01e693280afe2cd36529793f852e4fc7b5b75fb455a2e224083e10b0e172d995",
-      "last_updated": "2026-04-08T18:43:37.203270"
+      "hash": "9c060f5d4a05a34e9fe79e3fa4a5f61fc89caeefd9c46c27e378c3d778c9b05f",
+      "last_updated": "2026-04-08T21:30:16.590420"
     },
     "claude-code__statusline.md": {
       "original_url": "https://platform.claude.com/docs/en/statusline",
       "original_md_url": "https://platform.claude.com/docs/en/statusline.md",
-      "hash": "fd65974e5587345a845152561043fc3477071672a5a8ea26f7e49f02e54cd037",
-      "last_updated": "2026-04-08T18:43:38.517891"
+      "hash": "effab8d11e4f0046a74ceabc36b222b243f20bb0d24acb69073bbaeb91ccbddd",
+      "last_updated": "2026-04-08T21:30:18.304440"
     },
     "claude-code__sub-agents.md": {
       "original_url": "https://platform.claude.com/docs/en/sub-agents",
@@ -5655,13 +5655,14 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-08T18:43:50.393856",
-    "fetch_duration_seconds": 739.331869,
-    "total_pages_discovered": 1169,
+    "last_fetch_completed": "2026-04-08T21:30:29.733135",
+    "fetch_duration_seconds": 681.670018,
+    "total_pages_discovered": 1170,
     "pages_fetched_successfully": 942,
-    "pages_failed": 228,
+    "pages_failed": 229,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
+      "/docs/en/agent-sdk/observability",
       "/docs/en/agent-teams",
       "/docs/en/api/csharp/completions",
       "/docs/en/api/csharp/completions/create",
@@ -5895,7 +5896,7 @@
     "total_files": 942,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-08T18:43:50.393881",
+  "last_updated": "2026-04-08T21:30:29.733158",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

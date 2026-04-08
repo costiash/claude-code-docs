@@ -23,33 +23,49 @@ This guide walks you through creating an agent, setting up an environment, start
 ## Install the CLI
 
 <Tabs>
-  <Tab title="Homebrew">
-    ```bash
-    brew install anthropics/tap/ant
-    ```
-  </Tab>
-  <Tab title="Go">
-    Requires Go 1.22 or later.
+<Tab title="Homebrew (macOS)">
 
-    ```bash
-    go install github.com/anthropics/anthropic-cli/cmd/ant@latest
-    ```
+```bash
+brew install anthropics/tap/ant
+```
 
-    The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn't already:
+On macOS, unquarantine the binary:
 
-    ```bash
-    export PATH="$PATH:$(go env GOPATH)/bin"
-    ```
-  </Tab>
-  <Tab title="curl">
-    For Linux, environments without Homebrew or Go, or Windows (WSL), download the release binary directly:
+```bash
+xattr -d com.apple.quarantine "$(brew --prefix)/bin/ant"
+```
 
-    ```bash
-    curl -fsSL \
-      "https://github.com/anthropics/anthropic-cli/releases/latest/download/ant_$(uname -s)_$(uname -m).tar.gz" \
-      | tar -xz -C /usr/local/bin ant
-    ```
-  </Tab>
+</Tab>
+<Tab title="curl (Linux/WSL)">
+
+For Linux environments, download the release binary directly.
+
+```bash
+VERSION=1.0.0
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
+curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
+  | sudo tar -xz -C /usr/local/bin ant
+```
+
+You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
+
+</Tab>
+<Tab title="Go">
+
+You may also install the CLI from source using `go install`. Requires Go 1.22 or later.
+
+```bash
+go install github.com/anthropics/anthropic-cli/cmd/ant@latest
+```
+
+The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn't already:
+
+```bash
+export PATH="$PATH:$(go env GOPATH)/bin"
+```
+
+</Tab>
 </Tabs>
 
 Check the installation:

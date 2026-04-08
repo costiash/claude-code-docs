@@ -15,16 +15,37 @@ For endpoint-specific parameters and response schemas, see the [API reference](/
 ## Installation
 
 <Tabs>
-<Tab title="Homebrew">
+<Tab title="Homebrew (macOS)">
 
 ```bash
 brew install anthropics/tap/ant
 ```
 
+On macOS, unquarantine the binary:
+
+```bash
+xattr -d com.apple.quarantine "$(brew --prefix)/bin/ant"
+```
+
+</Tab>
+<Tab title="curl (Linux/WSL)">
+
+For Linux environments, download the release binary directly.
+
+```bash
+VERSION=1.0.0
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
+curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
+  | sudo tar -xz -C /usr/local/bin ant
+```
+
+You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
+
 </Tab>
 <Tab title="Go">
 
-Requires Go 1.22 or later.
+You may also install the CLI from source using `go install`. Requires Go 1.22 or later.
 
 ```bash
 go install github.com/anthropics/anthropic-cli/cmd/ant@latest
@@ -34,16 +55,6 @@ The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn'
 
 ```bash
 export PATH="$PATH:$(go env GOPATH)/bin"
-```
-
-</Tab>
-<Tab title="curl">
-
-For Linux containers or environments without Homebrew or Go, download the release binary directly:
-
-```bash
-curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/latest/download/ant_$(uname -s)_$(uname -m).tar.gz" \
-  | sudo tar -xz -C /usr/local/bin ant
 ```
 
 </Tab>
