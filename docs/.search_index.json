@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-08T12:32:08Z",
+  "generated_at": "2026-04-08T15:41:55Z",
   "indexed_files": 632,
   "index": {
     "/changelog": {
@@ -1036,7 +1036,7 @@
         "macos",
         "update"
       ],
-      "word_count": 1897,
+      "word_count": 1941,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1082,17 +1082,17 @@
         "window",
         "codegroup",
         "name",
+        "json",
         "statusline",
         "output",
         "usage",
-        "json",
         "directory",
         "frame",
         "nibzeslajvh",
         "ydoq",
         "images"
       ],
-      "word_count": 5199,
+      "word_count": 5238,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
