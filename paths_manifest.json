@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-04-08T18:31:31.699940Z",
-    "total_paths": 1169,
+    "generated_at": "2026-04-08T21:19:08.509665Z",
+    "total_paths": 1170,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-04-08T18:31:31.699958Z"
+    "last_regenerated": "2026-04-08T21:19:08.509673Z"
   },
   "categories": {
     "core_documentation": [
@@ -152,6 +152,7 @@
       "/docs/en/agent-sdk/mcp",
       "/docs/en/agent-sdk/migration-guide",
       "/docs/en/agent-sdk/modifying-system-prompts",
+      "/docs/en/agent-sdk/observability",
       "/docs/en/agent-sdk/overview",
       "/docs/en/agent-sdk/permissions",
       "/docs/en/agent-sdk/plugins",
