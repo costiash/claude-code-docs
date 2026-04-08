@@ -1,12 +1,15 @@
 # Client SDKs
 
-Official SDKs for building with the Claude API in Python, TypeScript, Java, Go, Ruby, C#, and PHP.
+Official SDKs for building with the Claude API in Python, TypeScript, Java, Go, Ruby, C#, PHP, and the command line.
 
 ---
 
 Anthropic provides official client SDKs in multiple languages to make it easier to work with the Claude API. Each SDK provides idiomatic interfaces, type safety, and built-in support for features like streaming, retries, and error handling.
 
 <CardGroup cols={3}>
+  <Card title="CLI" href="/docs/en/api/sdks/cli">
+    Shell scripting, typed flags, response transforms
+  </Card>
   <Card title="Python" href="/docs/en/api/sdks/python">
     Sync and async clients, Pydantic models
   </Card>
@@ -33,6 +36,11 @@ Anthropic provides official client SDKs in multiple languages to make it easier 
 ## Quick installation
 
 <Tabs>
+<Tab title="CLI">
+```bash
+brew install anthropics/tap/ant
+```
+</Tab>
 <Tab title="Python">
 ```bash
 pip install anthropic
@@ -56,14 +64,14 @@ go get github.com/anthropics/anthropic-sdk-go
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java:2.18.0")
+implementation("com.anthropic:anthropic-java:2.20.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.18.0</version>
+    <version>2.20.0</version>
 </dependency>
 ```
 </CodeGroup>
@@ -83,6 +91,14 @@ bundler add anthropic
 ## Quick start
 
 <CodeGroup>
+```bash CLI
+ant messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello, Claude"}' \
+  --transform content
+```
+
 ```python Python
 import anthropic
 
@@ -223,6 +239,14 @@ See individual SDK pages for platform-specific setup instructions.
 Access beta features using the `beta` namespace in any SDK:
 
 <CodeGroup>
+
+```bash CLI nocheck
+ant beta:messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello"}' \
+  --beta feature-name
+```
 
 ```python Python nocheck
 message = client.beta.messages.create(

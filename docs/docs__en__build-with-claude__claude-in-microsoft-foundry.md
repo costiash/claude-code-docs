@@ -51,7 +51,7 @@ dotnet add package Anthropic.Foundry
 <Tabs>
 <Tab title="Gradle">
 ```kotlin
-implementation("com.anthropic:anthropic-java-foundry:2.18.0")
+implementation("com.anthropic:anthropic-java-foundry:2.20.0")
 ```
 </Tab>
 <Tab title="Maven">
@@ -59,7 +59,7 @@ implementation("com.anthropic:anthropic-java-foundry:2.18.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-foundry</artifactId>
-    <version>2.18.0</version>
+    <version>2.20.0</version>
 </dependency>
 ```
 </Tab>
@@ -146,6 +146,21 @@ curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
       {"role": "user", "content": "Hello!"}
     ]
   }'
+```
+</Tab>
+
+<Tab title="CLI">
+
+```bash CLI nocheck
+# ant reads ANTHROPIC_API_KEY and sends it as x-api-key, which Foundry accepts
+export ANTHROPIC_API_KEY="YOUR_AZURE_API_KEY"
+
+ant messages create \
+  --base-url https://example-resource.services.ai.azure.com/anthropic \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello!"}' \
+  --transform content
 ```
 </Tab>
 
@@ -481,7 +496,7 @@ Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/
 
 ## API responses
 
-API responses from Claude on Foundry follow the standard [Claude API response format](/docs/en/api/messages). This includes the `usage` object in response bodies, which provides detailed token consumption information for your requests. The `usage` object is consistent across all platforms (first-party API, Foundry, Amazon Bedrock, and Google Vertex AI).
+API responses from Claude on Foundry follow the standard [Claude API response format](/docs/en/api/messages/create). This includes the `usage` object in response bodies, which provides detailed token consumption information for your requests. The `usage` object is consistent across all platforms (first-party API, Foundry, Amazon Bedrock, and Google Vertex AI).
 
 For details on response headers specific to Foundry, see the [correlation request IDs section](#correlation-request-ids).
 

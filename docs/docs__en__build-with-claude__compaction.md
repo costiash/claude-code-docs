@@ -80,6 +80,19 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
+```bash CLI
+ant beta:messages create --beta compact-2026-01-12 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Help me build a website
+context_management:
+  edits:
+    - type: compact_20260112
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -313,6 +326,22 @@ puts response
 Configure when compaction triggers using the `trigger` parameter:
 
 <CodeGroup>
+```bash CLI
+ant beta:messages create --beta compact-2026-01-12 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Hello, Claude
+context_management:
+  edits:
+    - type: compact_20260112
+      trigger:
+        type: input_tokens
+        value: 150000
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -528,6 +557,22 @@ You have written a partial transcript for the initial task above. Please write a
 You can provide custom instructions via the `instructions` parameter to replace this prompt entirely. Custom instructions don't supplement the default; they completely replace it:
 
 <CodeGroup>
+```bash CLI
+ant beta:messages create --beta compact-2026-01-12 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Hello, Claude
+context_management:
+  edits:
+    - type: compact_20260112
+      instructions: >-
+        Focus on preserving code snippets, variable names, and
+        technical decisions.
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -743,6 +788,43 @@ Use `pause_after_compaction` to pause the API after generating the compaction su
 When enabled, the API returns a message with the `compaction` stop reason after generating the compaction block:
 
 <CodeGroup>
+```bash CLI
+ant beta:messages create --beta compact-2026-01-12 \
+  --transform '{stop_reason,content}' --format jsonl <<'YAML' > resp.json
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: "Hello, Claude"
+context_management:
+  edits:
+    - type: compact_20260112
+      pause_after_compaction: true
+YAML
+
+# Check if compaction triggered a pause
+if grep -q '"stop_reason":"compaction"' resp.json; then
+  # Response contains only the compaction block
+  RESP=$(cat resp.json)
+  CONTENT="${RESP#*\"content\":}"
+  printf '%s' "${CONTENT%\}}" > content.json
+
+  # Continue the request
+  ant beta:messages create --beta compact-2026-01-12 <<YAML > /dev/null
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: "Hello, Claude"
+  - role: assistant
+    content: $(cat content.json)
+context_management:
+  edits:
+    - type: compact_20260112
+YAML
+fi
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -1115,7 +1197,7 @@ When compaction is triggered, the API returns a `compaction` block at the start 
 
 A long-running conversation may result in multiple compactions. The last compaction block reflects the final state of the prompt, replacing content prior to it with the generated summary.
 
-```json
+```json Output
 {
   "content": [
     {
@@ -1135,6 +1217,37 @@ A long-running conversation may result in multiple compactions. The last compact
 You must pass the `compaction` block back to the API on subsequent requests to continue the conversation with the shortened prompt. The simplest approach is to append the entire response content to your messages:
 
 <CodeGroup>
+```bash CLI
+ant beta:messages create --beta compact-2026-01-12 \
+  --transform content --format jsonl <<'YAML' > content.json
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Hello, Claude
+context_management:
+  edits:
+    - type: compact_20260112
+YAML
+
+# After receiving a response with a compaction block, append it as the
+# assistant turn and continue the conversation
+ant beta:messages create --beta compact-2026-01-12 <<YAML
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Hello, Claude
+  - role: assistant
+    content: $(cat content.json)
+  - role: user
+    content: Now add error handling
+context_management:
+  edits:
+    - type: compact_20260112
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -1437,6 +1550,20 @@ When the API receives a `compaction` block, all content blocks before it are ign
 When streaming responses with compaction enabled, you'll receive a `content_block_start` event when compaction begins. The compaction block streams differently from text blocks. You'll receive a `content_block_start` event, followed by a single `content_block_delta` with the complete summary content (no intermediate streaming), and then a `content_block_stop` event.
 
 <CodeGroup>
+```bash CLI
+ant beta:messages create --stream --format jsonl \
+  --beta compact-2026-01-12 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Hello, Claude
+context_management:
+  edits:
+    - type: compact_20260112
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -1765,6 +1892,24 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
 - Only the compaction summary needs to be written as a new cache entry
 
 <CodeGroup>
+```bash CLI
+ant beta:messages create --beta compact-2026-01-12 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+system:
+  - type: text
+    text: You are a helpful coding assistant...
+    cache_control:
+      type: ephemeral
+messages:
+  - role: user
+    content: Hello, Claude
+context_management:
+  edits:
+    - type: compact_20260112
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -1988,7 +2133,7 @@ This approach is particularly beneficial for long system prompts, as they remain
 
 Compaction requires an additional sampling step, which contributes to rate limits and billing. The API returns detailed usage information in the response:
 
-```json
+```json Output
 {
   "usage": {
     "input_tokens": 23000,
@@ -2028,6 +2173,30 @@ When using server tools (like web search), the compaction trigger is checked at 
 The token counting endpoint (`/v1/messages/count_tokens`) applies existing `compaction` blocks in your prompt but does not trigger new compactions. Use it to check your effective token count after previous compactions:
 
 <CodeGroup>
+```bash CLI
+cat > request.yaml <<'YAML'
+model: claude-opus-4-6
+messages:
+  - role: user
+    content: Hello, Claude
+context_management:
+  edits:
+    - type: compact_20260112
+YAML
+
+CURRENT=$(ant beta:messages count-tokens \
+  --beta compact-2026-01-12 \
+  --transform input_tokens --format yaml < request.yaml)
+
+ORIGINAL=$(ant beta:messages count-tokens \
+  --beta compact-2026-01-12 \
+  --transform context_management.original_input_tokens \
+  --format yaml < request.yaml)
+
+printf 'Current tokens: %s\n' "$CURRENT"
+printf 'Original tokens: %s\n' "$ORIGINAL"
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -2206,6 +2375,26 @@ puts "Original tokens: #{count_response.context_management.original_input_tokens
 Here's a complete example of a long-running conversation with compaction:
 
 <CodeGroup>
+```bash CLI
+# The CLI handles individual turns; maintain the messages array in the
+# calling script. See the SDK tabs for the full chat() loop. Single-turn
+# request shape:
+ant beta:messages create --beta compact-2026-01-12 \
+  --transform 'content.#(type=="text").text' --format yaml <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Help me build a Python web scraper
+context_management:
+  edits:
+    - type: compact_20260112
+      trigger:
+        type: input_tokens
+        value: 100000
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -2528,6 +2717,27 @@ puts chat(client, messages, "Now add rate limiting and error handling")
 Here's an example that uses `pause_after_compaction` to preserve the prior exchange and the current user message (three messages total) verbatim instead of summarizing them:
 
 <CodeGroup>
+```bash CLI
+# The CLI handles individual turns; maintain the messages array in the
+# calling script. See the SDK tabs for the full chat() loop with
+# pause-and-preserve handling. Single-turn request shape:
+ant beta:messages create --beta compact-2026-01-12 \
+  --transform 'content.#(type=="text").text' --format yaml <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Help me build a Python web scraper
+context_management:
+  edits:
+    - type: compact_20260112
+      trigger:
+        type: input_tokens
+        value: 100000
+      pause_after_compaction: true
+YAML
+```
+
 ```python Python hidelines={1}
 import anthropic
 from typing import Any

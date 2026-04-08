@@ -259,6 +259,15 @@ If you're seeking higher limits for an Enterprise use case, contact sales throug
 </Tab>
 </Tabs>
 
+### Managed Agents
+
+[Claude Managed Agents](/docs/en/managed-agents/overview) endpoints are rate-limited per organization. These limits are separate from the Messages API rate limits above.
+
+| Operation | Limit |
+| --- | --- |
+| Create endpoints (agents, sessions, environments, etc.) | 60 requests per minute |
+| Read endpoints (retrieve, list, stream, etc.) | 600 requests per minute |
+
 ### Fast mode rate limits
 
 When using [fast mode](/docs/en/build-with-claude/fast-mode) (beta: research preview) with `speed: "fast"` on Opus 4.6, dedicated rate limits apply that are separate from standard Opus rate limits. When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header.

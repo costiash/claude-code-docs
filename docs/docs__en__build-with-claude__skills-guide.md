@@ -110,6 +110,26 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
+```bash CLI
+ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: anthropic
+      skill_id: pptx
+      version: latest
+messages:
+  - role: user
+    content: Create a presentation about renewable energy
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
+```
+
 ```python Python nocheck hidelines={1..2}
 import anthropic
 
@@ -414,6 +434,47 @@ curl "https://api.anthropic.com/v1/files/$FILE_ID/content" \
   --output "$FILENAME"
 
 echo "Downloaded: $FILENAME"
+```
+
+</Tab>
+<Tab title="CLI">
+
+```bash CLI hidelines={1}
+cd "$(mktemp -d)"
+# Step 1: Use the xlsx Skill to create a file
+# Step 2: Extract file_id from the response via --transform (GJSON path)
+FILE_ID=$(ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 \
+  --transform 'content.#.content.content.#.file_id|@flatten|0' \
+  --format yaml <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: anthropic
+      skill_id: xlsx
+      version: latest
+messages:
+  - role: user
+    content: Create an Excel file with a simple budget spreadsheet
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
+)
+
+# Step 3: Get the filename from file metadata
+FILENAME=$(ant beta:files retrieve-metadata \
+  --file-id "$FILE_ID" \
+  --transform filename --format yaml)
+
+# Step 4: Download the file using Files API
+ant beta:files download \
+  --file-id "$FILE_ID" \
+  --output "$FILENAME" > /dev/null
+
+printf 'Downloaded: %s\n' "$FILENAME"
 ```
 
 </Tab>
@@ -960,6 +1021,24 @@ curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "anthropic-beta: files-api-2025-04-14"
 ```
 
+```bash CLI
+# Get file metadata
+ant beta:files retrieve-metadata --file-id "$FILE_ID" \
+  --transform '{filename,size_bytes}' --format yaml \
+  | { read -r _ name; read -r _ size
+      printf 'Filename: %s, Size: %s bytes\n' "$name" "$size"; }
+
+# List all files
+ant beta:files list \
+  --transform '{filename,created_at}' --format yaml \
+  | while read -r _ name && read -r _ date; do
+      printf '%s - %s\n' "$name" "${date//\"/}"
+    done
+
+# Delete a file
+ant beta:files delete --file-id "$FILE_ID" >/dev/null
+```
+
 ```python Python nocheck hidelines={1..2}
 import anthropic
 
@@ -1172,6 +1251,45 @@ For complete details on the Files API, see the [Files API documentation](/docs/e
 Reuse the same container across multiple messages by specifying the container ID:
 
 <CodeGroup>
+```bash CLI
+# First request creates container
+CONTAINER_ID=$(ant beta:messages create \
+  --beta code-execution-2025-08-25 --beta skills-2025-10-02 \
+  --transform container.id --format yaml <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - {type: anthropic, skill_id: xlsx, version: latest}
+messages:
+  - role: user
+    content: Analyze this sales data
+tools:
+  - {type: code_execution_20250825, name: code_execution}
+YAML
+)
+
+# Continue conversation with same container
+ant beta:messages create \
+  --beta code-execution-2025-08-25 --beta skills-2025-10-02 <<YAML
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  id: $CONTAINER_ID  # Reuse container
+  skills:
+    - {type: anthropic, skill_id: xlsx, version: latest}
+messages:
+  - role: user
+    content: Analyze this sales data
+  - role: assistant
+    content: []  # content blocks from the first response
+  - role: user
+    content: What was the total revenue?
+tools:
+  - {type: code_execution_20250825, name: code_execution}
+YAML
+```
+
 ```python Python
 # First request creates container
 response1 = client.beta.messages.create(
@@ -1610,6 +1728,58 @@ while [ "$STOP_REASON" = "pause_turn" ]; do
     }")
 
   STOP_REASON=$(echo "$RESPONSE" | jq -r '.stop_reason')
+done
+```
+
+```bash CLI nocheck
+RESP=$(mktemp)
+
+# Initial request: capture the full JSON response to a temp file
+ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 \
+ > "$RESP" <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: custom
+      skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
+      version: latest
+messages:
+  - role: user
+    content: Process this large dataset
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
+
+# Handle pause_turn for long operations (up to 10 iterations)
+for _ in {1..10}; do
+  [[ $(jq -r '.stop_reason' "$RESP") == pause_turn ]] || break
+
+  CONTAINER_ID=$(jq -r '.container.id' "$RESP")
+
+  # Continue in the same container, appending the prior response's
+  # content array to messages as the assistant turn.
+  ant beta:messages create \
+    --beta code-execution-2025-08-25 \
+    --beta skills-2025-10-02 \
+ > "$RESP" <<YAML
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  id: $CONTAINER_ID
+  skills:
+    - type: custom
+      skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
+      version: latest
+messages:
+  # ... conversation history with prior assistant content appended
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
 done
 ```
 
@@ -2071,6 +2241,32 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
+```bash CLI nocheck
+ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: anthropic
+      skill_id: xlsx
+      version: latest
+    - type: anthropic
+      skill_id: pptx
+      version: latest
+    - type: custom
+      skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
+      version: latest
+messages:
+  - role: user
+    content: Analyze sales data and create a presentation
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
+```
+
 ```python Python nocheck
 response = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -2390,7 +2586,7 @@ puts message
 
 Upload your custom Skill to make it available in your workspace. You can upload using either a directory path or individual file objects.
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
 
 ```bash Shell nocheck
 curl -X POST "https://api.anthropic.com/v1/skills" \
@@ -2400,6 +2596,21 @@ curl -X POST "https://api.anthropic.com/v1/skills" \
   -F "display_title=Financial Analysis" \
   -F "files[]=@financial_skill/SKILL.md;filename=financial_skill/SKILL.md" \
   -F "files[]=@financial_skill/analyze.py;filename=financial_skill/analyze.py"
+```
+
+```bash CLI nocheck
+# Option 1: Upload individual files (one --file flag per file)
+ant beta:skills create \
+  --display-title "Financial Analysis" \
+  --file financial_skill/SKILL.md \
+  --file financial_skill/analyze.py \
+  --beta skills-2025-10-02
+
+# Option 2: Upload a zip archive
+ant beta:skills create \
+  --display-title "Financial Analysis" \
+  --file financial_analysis_skill.zip \
+  --beta skills-2025-10-02
 ```
 
 ```python Python nocheck hidelines={1..2}
@@ -2693,7 +2904,7 @@ For complete request/response schemas, see the [Create Skill API reference](/doc
 
 Retrieve all Skills available to your workspace, including both Anthropic pre-built Skills and your custom Skills. Use the `source` parameter to filter by skill type:
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
 ```bash Shell
 # List all Skills
 curl "https://api.anthropic.com/v1/skills" \
@@ -2706,6 +2917,14 @@ curl "https://api.anthropic.com/v1/skills?source=custom" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: skills-2025-10-02"
+```
+
+```bash CLI
+# List all Skills
+ant beta:skills list
+
+# List only custom Skills
+ant beta:skills list --source custom
 ```
 
 ```python Python
@@ -2891,13 +3110,18 @@ See the [List Skills API reference](/docs/en/api/skills/list-skills) for paginat
 
 Get details about a specific Skill:
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
 
 ```bash Shell nocheck
 curl "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: skills-2025-10-02"
+```
+
+```bash CLI nocheck
+ant beta:skills retrieve \
+  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv
 ```
 
 ```python Python nocheck
@@ -3036,7 +3260,7 @@ puts "Created: #{skill.created_at}"
 
 To delete a Skill, you must first delete all its versions:
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
 
 ```bash Shell nocheck
 # Delete all versions first, then delete the Skill
@@ -3044,6 +3268,23 @@ curl -X DELETE "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrSt
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: skills-2025-10-02"
+```
+
+```bash CLI nocheck
+# Step 1: Delete all versions
+ant beta:skills:versions list \
+  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
+  --transform version --format yaml \
+  | tr -d '"' \
+  | while read -r VERSION; do
+      ant beta:skills:versions delete \
+        --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
+        --version "$VERSION" >/dev/null
+    done
+
+# Step 2: Delete the Skill
+ant beta:skills delete \
+  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv >/dev/null
 ```
 
 ```python Python nocheck
@@ -3285,7 +3526,7 @@ Skills support versioning to manage updates safely:
 - Use `"latest"` to always get the most recent version
 - Create new versions when updating Skill files
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
 
 ```bash Shell nocheck
 # Create a new version
@@ -3336,6 +3577,52 @@ curl https://api.anthropic.com/v1/messages \
     "messages": [{"role": "user", "content": "Use latest Skill version"}],
     "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
   }'
+```
+
+```bash CLI nocheck
+# Create a new version
+VERSION_NUMBER=$(ant beta:skills:versions create \
+  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
+  --file updated_skill/SKILL.md \
+  --transform version --format yaml)
+
+# Use specific version
+ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 <<YAML
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: custom
+      skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
+      version: $VERSION_NUMBER
+messages:
+  - role: user
+    content: Use updated Skill
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
+
+# Use latest version
+ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: custom
+      skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
+      version: latest
+messages:
+  - role: user
+    content: Use latest Skill version
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
 ```
 
 ```python Python nocheck
@@ -3889,6 +4176,36 @@ curl https://api.anthropic.com/v1/messages \
   }"
 ```
 
+```bash CLI nocheck
+# Create custom DCF analysis Skill
+DCF_SKILL_ID=$(ant beta:skills create \
+  --display-title "DCF Analysis" \
+  --file dcf_skill/SKILL.md \
+  --transform id --format yaml)
+
+# Use with Excel to create financial model
+ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 <<YAML
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: anthropic
+      skill_id: xlsx
+      version: latest
+    - type: custom
+      skill_id: $DCF_SKILL_ID
+      version: latest
+messages:
+  - role: user
+    content: Build a DCF valuation model for a SaaS company with the attached financials
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
+```
+
 ```python Python nocheck
 # Create custom DCF analysis Skill
 from anthropic.lib import files_from_dir
@@ -4293,6 +4610,51 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
+```bash CLI
+# First request creates cache
+ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 \
+  --beta prompt-caching-2024-07-31 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: anthropic
+      skill_id: xlsx
+      version: latest
+messages:
+  - role: user
+    content: Analyze sales data
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
+
+# Adding/removing Skills breaks cache
+ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 \
+  --beta prompt-caching-2024-07-31 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: anthropic
+      skill_id: xlsx
+      version: latest
+    - type: anthropic
+      skill_id: pptx
+      version: latest
+messages:
+  - role: user
+    content: Create a presentation
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
+```
+
 ```python Python
 # First request creates cache
 response1 = client.beta.messages.create(
@@ -4676,6 +5038,39 @@ For best caching performance, keep your Skills list consistent across requests.
 Handle Skill-related errors gracefully:
 
 <CodeGroup>
+
+```bash CLI nocheck
+if ! RESULT=$(ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 \
+  --transform-error error.message --format-error yaml 2>&1 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: custom
+      skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
+      version: latest
+messages:
+  - role: user
+    content: Process data
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
+); then
+  case "$RESULT" in
+    *skill*)
+      printf 'Skill error: %s\n' "$RESULT"
+      # Handle skill-specific errors
+      ;;
+    *)
+      printf '%s\n' "$RESULT" >&2
+      exit 1
+      ;;
+  esac
+fi
+```
 
 ```python Python nocheck hidelines={1..2}
 import anthropic

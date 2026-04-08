@@ -15,7 +15,7 @@ For API feature documentation with code examples, see the [API reference](/docs/
 <Tabs>
 <Tab title="Gradle">
 ```kotlin
-implementation("com.anthropic:anthropic-java:2.18.0")
+implementation("com.anthropic:anthropic-java:2.20.0")
 ```
 </Tab>
 <Tab title="Maven">
@@ -23,7 +23,7 @@ implementation("com.anthropic:anthropic-java:2.18.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.18.0</version>
+    <version>2.20.0</version>
 </dependency>
 ```
 </Tab>

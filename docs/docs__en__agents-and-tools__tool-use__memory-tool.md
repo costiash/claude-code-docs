@@ -134,6 +134,35 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
+````bash CLI
+ant messages create <<'YAML'
+model: claude-opus-4-6
+max_tokens: 2048
+tools:
+  - type: memory_20250818
+    name: memory
+messages:
+  - role: user
+    content: |
+      I'm working on a Python web scraper that keeps crashing with a
+      timeout error. Here's the problematic function:
+
+      ```python
+      def fetch_page(url, retries=3):
+          for i in range(retries):
+              try:
+                  response = requests.get(url, timeout=5)
+                  return response.text
+              except requests.exceptions.Timeout:
+                  if i == retries - 1:
+                      raise
+                  time.sleep(1)
+      ```
+
+      Please help me debug this.
+YAML
+````
+
 ```python Python hidelines={1..2}
 import anthropic
 

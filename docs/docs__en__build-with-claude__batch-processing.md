@@ -19,7 +19,7 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-
 
 # Message Batches API
 
-The Message Batches API is a powerful, cost-effective way to asynchronously process large volumes of [Messages](/docs/en/api/messages) requests. This approach is well-suited to tasks that do not require immediate responses, with most batches finishing in less than 1 hour while reducing costs by 50% and increasing throughput.
+The Message Batches API is a powerful, cost-effective way to asynchronously process large volumes of [Messages](/docs/en/api/messages/create) requests. This approach is well-suited to tasks that do not require immediate responses, with most batches finishing in less than 1 hour while reducing costs by 50% and increasing throughput.
 
 You can [explore the API reference directly](/docs/en/api/creating-message-batches), in addition to this guide.
 
@@ -91,7 +91,7 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 
 A Message Batch is composed of a list of requests to create a Message. The shape of an individual request is comprised of:
 - A unique `custom_id` for identifying the Messages request
-- A `params` object with the standard [Messages API](/docs/en/api/messages) parameters
+- A `params` object with the standard [Messages API](/docs/en/api/messages/create) parameters
 
 You can [create a batch](/docs/en/api/creating-message-batches) by passing this list into the `requests` parameter:
 
@@ -127,6 +127,26 @@ curl https://api.anthropic.com/v1/messages/batches \
         }
     ]
 }'
+```
+
+```bash CLI
+ant messages:batches create <<'YAML'
+requests:
+  - custom_id: my-first-request
+    params:
+      model: claude-opus-4-6
+      max_tokens: 1024
+      messages:
+        - role: user
+          content: Hello, world
+  - custom_id: my-second-request
+    params:
+      model: claude-opus-4-6
+      max_tokens: 1024
+      messages:
+        - role: user
+          content: Hi again, friend
+YAML
 ```
 
 ```python Python hidelines={1}
@@ -411,12 +431,12 @@ In this example, two separate requests are batched together for asynchronous pro
 <Tip>
   **Test your batch requests with the Messages API**
 
-Validation of the `params` object for each message request is performed asynchronously, and validation errors are returned when processing of the entire batch has ended. You can ensure that you are building your input correctly by verifying your request shape with the [Messages API](/docs/en/api/messages) first.
+Validation of the `params` object for each message request is performed asynchronously, and validation errors are returned when processing of the entire batch has ended. You can ensure that you are building your input correctly by verifying your request shape with the [Messages API](/docs/en/api/messages/create) first.
 </Tip>
 
 When a batch is first created, the response will have a processing status of `in_progress`.
 
-```json JSON
+```json Output
 {
   "id": "msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d",
   "type": "message_batch",
@@ -467,6 +487,32 @@ until [[ $(curl -s "https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH
           --header "anthropic-version: 2023-06-01" \
           | grep -o '"processing_status":[[:space:]]*"[^"]*"' \
           | cut -d'"' -f4) == "ended" ]]; do
+    echo "Batch $MESSAGE_BATCH_ID is still processing..."
+    break
+    sleep 60
+done
+
+echo "Batch $MESSAGE_BATCH_ID has finished processing"
+```
+
+```bash CLI hidelines={2..14,19}
+#!/bin/bash
+MESSAGE_BATCH_ID=$(ant messages:batches create \
+  --transform id --format yaml <<'YAML'
+requests:
+  - custom_id: test-1
+    params:
+      model: claude-opus-4-6
+      max_tokens: 100
+      messages:
+        - role: user
+          content: Hi
+YAML
+)
+
+until [[ $(ant messages:batches retrieve \
+          --message-batch-id "$MESSAGE_BATCH_ID" \
+          --transform processing_status --format yaml) == "ended" ]]; do
     echo "Batch $MESSAGE_BATCH_ID is still processing..."
     break
     sleep 60
@@ -687,6 +733,11 @@ while [ "$has_more" = true ]; do
 done
 ```
 
+```bash CLI
+# Automatically fetches more pages as needed
+ant messages:batches list --limit 20
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -855,7 +906,7 @@ curl "https://api.anthropic.com/v1/messages/batches/msgbatch_01HkcTjaV5uDC8jWR4Z
           echo "Success! $custom_id"
           ;;
         "errored")
-          if [ "$error_type" = "invalid_request" ]; then
+          if [ "$error_type" = "invalid_request_error" ]; then
             # Request body must be fixed before re-sending request
             echo "Validation error: $custom_id"
           else
@@ -872,6 +923,29 @@ curl "https://api.anthropic.com/v1/messages/batches/msgbatch_01HkcTjaV5uDC8jWR4Z
 
 ```
 
+```bash CLI
+ant messages:batches results \
+  --message-batch-id msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d \
+  --transform '{custom_id,"type":result.type,"error":result.error.error.type}' \
+  --format jsonl \
+  | while IFS= read -r line; do
+    custom_id=${line#*'"custom_id":"'}; custom_id=${custom_id%%'"'*}
+    case "$line" in
+      *'"type":"succeeded"'*)
+        printf 'Success! %s\n' "$custom_id" ;;
+      *'"type":"errored"'*)
+        case "$line" in
+          *'"error":"invalid_request_error"'*)
+            printf 'Validation error %s\n' "$custom_id" ;;
+          *)
+            printf 'Server error %s\n' "$custom_id" ;;
+        esac ;;
+      *'"type":"expired"'*)
+        printf 'Request expired %s\n' "$custom_id" ;;
+    esac
+  done
+```
+
 ```python Python nocheck hidelines={1..2}
 import anthropic
 
@@ -885,7 +959,7 @@ for result in client.messages.batches.results(
         case "succeeded":
             print(f"Success! {result.custom_id}")
         case "errored":
-            if result.result.error.type == "invalid_request":
+            if result.result.error.error.type == "invalid_request_error":
                 # Request body must be fixed before re-sending request
                 print(f"Validation error {result.custom_id}")
             else:
@@ -1132,6 +1206,23 @@ curl --request POST https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH
     --header "anthropic-version: 2023-06-01"
 ```
 
+```bash CLI hidelines={2..13}
+#!/bin/bash
+MESSAGE_BATCH_ID=$(ant messages:batches create \
+  --transform id --format yaml <<'YAML'
+requests:
+  - custom_id: test-1
+    params:
+      model: claude-opus-4-6
+      max_tokens: 100
+      messages:
+        - role: user
+          content: Hi
+YAML
+)
+ant messages:batches cancel --message-batch-id "$MESSAGE_BATCH_ID"
+```
+
 ```python Python nocheck hidelines={1..2}
 import anthropic
 
@@ -1242,7 +1333,7 @@ puts message_batch
 
 The response will show the batch in a `canceling` state:
 
-```json JSON
+```json Output
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message_batch",
@@ -1328,6 +1419,46 @@ curl https://api.anthropic.com/v1/messages/batches \
         }
     ]
 }'
+```
+
+```bash CLI
+ant messages:batches create <<'YAML'
+requests:
+  - custom_id: my-first-request
+    params:
+      model: claude-opus-4-6
+      max_tokens: 1024
+      system:
+        - type: text
+          text: >
+            You are an AI assistant tasked with analyzing literary works. Your
+            goal is to provide insightful commentary on themes, characters, and
+            writing style.
+        - type: text
+          text: "<the entire contents of Pride and Prejudice>"
+          cache_control:
+            type: ephemeral
+      messages:
+        - role: user
+          content: Analyze the major themes in Pride and Prejudice.
+  - custom_id: my-second-request
+    params:
+      model: claude-opus-4-6
+      max_tokens: 1024
+      system:
+        - type: text
+          text: >
+            You are an AI assistant tasked with analyzing literary works. Your
+            goal is to provide insightful commentary on themes, characters, and
+            writing style.
+        - type: text
+          text: "<the entire contents of Pride and Prejudice>"
+          cache_control:
+            type: ephemeral
+      messages:
+        - role: user
+          content: Write a summary of Pride and Prejudice.
+YAML
 ```
 
 ```python Python hidelines={1}
@@ -1800,6 +1931,22 @@ curl https://api.anthropic.com/v1/messages/batches \
         }
     ]
 }'
+```
+
+```bash CLI
+ant beta:messages:batches create --beta output-300k-2026-03-24 <<'YAML'
+requests:
+  - custom_id: long-form-request
+    params:
+      model: claude-opus-4-6
+      max_tokens: 300000
+      messages:
+        - role: user
+          content: >-
+            Write a comprehensive technical guide to building distributed
+            systems, covering architecture patterns, consistency models,
+            fault tolerance, and operational best practices.
+YAML
 ```
 
 ```python Python hidelines={1}

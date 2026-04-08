@@ -188,11 +188,4 @@ Maintain Skill source files in Git as the single source of truth. If your organi
   >
     Upload and manage Skills programmatically
   </Card>
-  <Card
-    title="Securely deploying AI agents"
-    icon="shield"
-    href="/docs/en/agent-sdk/secure-deployment"
-  >
-    Security patterns for agent deployment
-  </Card>
 </CardGroup>

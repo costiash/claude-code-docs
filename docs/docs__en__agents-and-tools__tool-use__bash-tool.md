@@ -28,23 +28,6 @@ For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/t
 ## Quick start
 
 <CodeGroup>
-```python Python
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    tools=[{"type": "bash_20250124", "name": "bash"}],
-    messages=[
-        {"role": "user", "content": "List all Python files in the current directory."}
-    ],
-)
-
-print(response)
-```
-
 ```bash Shell
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
@@ -66,6 +49,31 @@ curl https://api.anthropic.com/v1/messages \
       }
     ]
   }'
+```
+
+```bash CLI
+ant messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --tool '{type: bash_20250124, name: bash}' \
+  --message '{role: user, content: List all Python files in the current directory.}'
+```
+
+```python Python
+import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=1024,
+    tools=[{"type": "bash_20250124", "name": "bash"}],
+    messages=[
+        {"role": "user", "content": "List all Python files in the current directory."}
+    ],
+)
+
+print(response)
 ```
 </CodeGroup>
 

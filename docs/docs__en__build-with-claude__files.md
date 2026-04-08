@@ -24,7 +24,7 @@ The Files API provides a simple create-once, use-many-times approach for working
 
 - **Upload files** to Anthropic's secure storage and receive a unique `file_id`
 - **Download files** that are created from skills or the code execution tool
-- **Reference files** in [Messages](/docs/en/api/messages) requests using the `file_id` instead of re-uploading content
+- **Reference files** in [Messages](/docs/en/api/messages/create) requests using the `file_id` instead of re-uploading content
 - **Manage your files** with list, retrieve, and delete operations
 
 ## How to use the Files API
@@ -45,6 +45,12 @@ curl -X POST https://api.anthropic.com/v1/files \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
   -F "file=@/path/to/document.pdf"
+````
+
+````bash
+FILE_ID=$(ant beta:files upload \
+  --file /path/to/document.pdf \
+  --transform id --format yaml)
 ````
 
 ````python
@@ -139,7 +145,7 @@ puts file.id
 
 The response from uploading a file will include:
 
-```json
+```json Output
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "type": "file",
@@ -187,6 +193,22 @@ curl -X POST https://api.anthropic.com/v1/messages \
   ]
 }
 EOF
+````
+
+````bash
+ant beta:messages create --beta files-api-2025-04-14 <<YAML
+model: claude-opus-4-6
+max_tokens: 1024
+messages:
+  - role: user
+    content:
+      - type: text
+        text: Please summarize this document for me.
+      - type: document
+        source:
+          type: file
+          file_id: $FILE_ID
+YAML
 ````
 
 ````python
@@ -410,6 +432,25 @@ curl https://api.anthropic.com/v1/messages \
   ]
 }
 EOF
+```
+
+```bash CLI hidelines={1}
+printf 'This is a test document for upload.\n' > document.txt
+# The "@./path" reference inlines the file contents directly into the field.
+ant messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --transform 'content.0.text' --format yaml <<'YAML'
+messages:
+  - role: user
+    content:
+      - type: text
+        text: "Here's the document content:"
+      - type: text
+        text: "@./document.txt"
+      - type: text
+        text: "Please summarize this document."
+YAML
 ```
 
 ```python Python nocheck hidelines={2..5}
@@ -690,6 +731,10 @@ curl https://api.anthropic.com/v1/files \
   -H "anthropic-beta: files-api-2025-04-14"
 ```
 
+```bash CLI
+ant beta:files list
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -804,6 +849,11 @@ curl "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "anthropic-beta: files-api-2025-04-14"
 ````
 
+````bash
+ant beta:files retrieve-metadata \
+  --file-id "$FILE_ID"
+````
+
 ````python
 file = client.beta.files.retrieve_metadata(file_id)
 ````
@@ -868,6 +918,11 @@ curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "anthropic-beta: files-api-2025-04-14"
 ````
 
+````bash
+ant beta:files delete \
+  --file-id "$FILE_ID"
+````
+
 ````python
 result = client.beta.files.delete(file_id)
 ````
@@ -923,6 +978,12 @@ curl -X GET "https://api.anthropic.com/v1/files/$FILE_ID/content" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
+  --output downloaded_file.txt
+````
+
+````bash
+ant beta:files download \
+  --file-id "$FILE_ID" \
   --output downloaded_file.txt
 ````
 
@@ -1044,7 +1105,7 @@ Common errors when using the Files API include:
 - **File too large (413):** File exceeds the 500 MB limit
 - **Storage limit exceeded (403):** Your organization has reached the 500 GB storage limit
 
-```json
+```json Output
 {
   "type": "error",
   "error": {

@@ -51,6 +51,27 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
+```bash CLI
+ant messages create <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+messages:
+  - role: user
+    content:
+      - type: document
+        source:
+          type: text
+          media_type: text/plain
+          data: The grass is green. The sky is blue.
+        title: My Document
+        context: This is a trustworthy document.
+        citations:
+          enabled: true
+      - type: text
+        text: What color is the grass and sky?
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -237,6 +258,27 @@ curl https://api.anthropic.com/v1/messages \
         }
     ]
 }'
+```
+
+```bash CLI
+ant messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 <<'YAML'
+messages:
+  - role: user
+    content:
+      - type: document
+        source:
+          type: text
+          media_type: text/plain
+          data: This is a very long document with thousands of words...
+        citations:
+          enabled: true
+        cache_control:
+          type: ephemeral
+      - type: text
+        text: What does this document say about API features?
+YAML
 ```
 
 ```python Python hidelines={1..2}

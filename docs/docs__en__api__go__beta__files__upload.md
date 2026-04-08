@@ -64,8 +64,6 @@ Upload File
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
-
 ### Returns
 
 - `type FileMetadata struct{…}`
@@ -103,6 +101,20 @@ Upload File
   - `Downloadable bool`
 
     Whether the file can be downloaded.
+
+  - `Scope BetaFileScope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `ID string`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `Type Session`
+
+      The type of scope (e.g., `"session"`).
+
+      - `const SessionSession Session = "session"`
 
 ### Example
 

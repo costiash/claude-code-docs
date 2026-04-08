@@ -53,7 +53,7 @@ If servicing the request would exceed the rate limits, the request is declined.
 
 You can control which service tiers can be used for a request by setting the `service_tier` parameter:
 
-```python
+```python Python
 message = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,

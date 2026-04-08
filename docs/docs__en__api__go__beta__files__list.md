@@ -24,6 +24,10 @@ List Files
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
+  - `ScopeID param.Field[string]`
+
+    Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+
   - `Betas param.Field[[]AnthropicBeta]`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -74,8 +78,6 @@ List Files
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
-
 ### Returns
 
 - `type FileMetadata struct{…}`
@@ -113,6 +115,20 @@ List Files
   - `Downloadable bool`
 
     Whether the file can be downloaded.
+
+  - `Scope BetaFileScope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `ID string`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `Type Session`
+
+      The type of scope (e.g., `"session"`).
+
+      - `const SessionSession Session = "session"`
 
 ### Example
 

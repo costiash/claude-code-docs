@@ -12,10 +12,10 @@ For API feature documentation with code examples, see the [API reference](/docs/
 
 ## Installation
 
-To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
+Add the gem to your application's `Gemfile` with Bundler:
 
-```ruby
-gem "anthropic", "~> 1.25.0"
+```bash
+bundle add anthropic
 ```
 
 ## Requirements

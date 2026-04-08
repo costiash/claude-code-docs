@@ -4287,8 +4287,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
-
 ### Returns
 
 - `type BetaMessageTokensCount struct{…}`
@@ -4331,7 +4329,7 @@ func main() {
       }},
       Role: anthropic.BetaMessageParamRoleUser,
     }},
-    Model: anthropic.ModelClaudeOpus4_6,
+    Model: anthropic.ModelClaudeMythosPreview,
   })
   if err != nil {
     panic(err.Error())

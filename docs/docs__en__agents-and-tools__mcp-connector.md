@@ -69,6 +69,24 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
+```bash CLI nocheck
+ant beta:messages create --beta mcp-client-2025-11-20 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1000
+messages:
+  - role: user
+    content: What tools do you have available?
+mcp_servers:
+  - type: url
+    url: https://example-server.modelcontextprotocol.io/sse
+    name: example-mcp
+    authorization_token: YOUR_TOKEN
+tools:
+  - type: mcp_toolset
+    mcp_server_name: example-mcp
+YAML
+```
+
 ```python Python nocheck hidelines={1..2}
 import anthropic
 
@@ -618,7 +636,7 @@ If you manage your own MCP client connection (for example, with local stdio serv
   These helpers are currently available in the TypeScript SDK only.
 </Note>
 <Note>
-  Use the [`mcp_servers` API parameter](#using-the-mcp-connector-in-the-messages-api) when you have remote servers accessible via URL and only need tool support. If you're using the [Agent SDK](/docs/en/agent-sdk/mcp), MCP connections are managed automatically. Use the client-side helpers when you need local servers, prompts, resources, or more control over the connection with the base SDK.
+  Use the [`mcp_servers` API parameter](#using-the-mcp-connector-in-the-messages-api) when you have remote servers accessible via URL and only need tool support. Use the client-side helpers when you need local servers, prompts, resources, or more control over the connection with the base SDK.
 </Note>
 
 ### Installation

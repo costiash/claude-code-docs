@@ -3795,8 +3795,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaMessageTokensCount:`
@@ -3826,7 +3824,7 @@ MessageCountTokensParams parameters = new()
             Role = Role.User,
         },
     ],
-    Model = Model.ClaudeOpus4_6,
+    Model = Model.ClaudeMythosPreview,
 };
 
 var betaMessageTokensCount = await client.Beta.Messages.CountTokens(parameters);

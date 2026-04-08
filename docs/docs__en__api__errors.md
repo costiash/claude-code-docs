@@ -62,6 +62,14 @@ Every API response includes a unique `request-id` header. This header contains a
 The official SDKs provide this value as a property on top-level response objects, containing the value of the `request-id` header:
 
 <CodeGroup>
+  ```bash CLI
+  # The request-id header is printed to stderr with --debug:
+  ant --debug messages create \
+    --model claude-opus-4-6 \
+    --max-tokens 1024 \
+    --message '{role: user, content: "Hello, Claude"}'
+  ```
+
   ```python Python hidelines={1..2}
   import anthropic
 

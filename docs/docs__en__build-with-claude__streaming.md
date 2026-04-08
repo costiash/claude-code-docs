@@ -9,6 +9,18 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript) SDKs offer multiple ways of streaming. The [PHP](https://github.com/anthropics/anthropic-sdk-php) SDK provides streaming via `createStream()`. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
 
 <CodeGroup>
+    ```bash CLI
+    ant messages create --stream --format jsonl \
+      --model claude-opus-4-6 \
+      --max-tokens 1024 \
+      --message '{role: user, content: "Hello"}' \
+      | while IFS= read -r event; do
+          [[ $event == *'"text_delta"'* ]] || continue
+          text=${event#*'"text":"'}
+          printf '%b' "${text%\"*}"
+        done
+    ```
+
     ```python Python hidelines={1..2}
     import anthropic
 
@@ -170,6 +182,19 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
 If you don't need to process text as it arrives, the SDKs provide a way to use streaming under the hood while returning the complete `Message` object, identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
 
 <CodeGroup>
+    ```bash CLI
+    # The ant CLI's --stream flag emits one event per line and does not
+    # accumulate into a final Message. For long generations, stream the
+    # raw events:
+    ant messages create --stream --format jsonl <<'YAML'
+    model: claude-opus-4-6
+    max_tokens: 128000
+    messages:
+      - role: user
+        content: Write a detailed analysis...
+    YAML
+    ```
+
     ```python Python hidelines={1..2}
     import anthropic
 
@@ -451,6 +476,13 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
+```bash CLI
+ant messages create --stream --format jsonl \
+  --model claude-opus-4-6 \
+  --max-tokens 256 \
+  --message '{role: user, content: Hello}'
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -681,6 +713,29 @@ This request asks Claude to use a tool to report the weather.
       ],
       "stream": true
     }'
+```
+
+```bash CLI
+ant messages create --stream --format jsonl <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+tools:
+  - name: get_weather
+    description: Get the current weather in a given location
+    input_schema:
+      type: object
+      properties:
+        location:
+          type: string
+          description: The city and state, e.g. San Francisco, CA
+      required:
+        - location
+tool_choice:
+  type: any
+messages:
+  - role: user
+    content: What is the weather like in San Francisco?
+YAML
 ```
 
 ```python Python hidelines={1..2}
@@ -1102,6 +1157,14 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
+```bash CLI
+ant messages create --stream --format jsonl \
+  --model claude-opus-4-6 \
+  --max-tokens 20000 \
+  --thinking '{type: enabled, budget_tokens: 16000}' \
+  --message '{role: user, content: What is the greatest common divisor of 1071 and 462?}'
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -1365,6 +1428,14 @@ curl https://api.anthropic.com/v1/messages \
         }
     ]
 }'
+```
+
+```bash CLI
+ant messages create --stream --format jsonl \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --tool '{type: web_search_20250305, name: web_search, max_uses: 5}' \
+  --message '{role: user, content: What is the weather like in New York City today?}'
 ```
 
 ```python Python hidelines={1..2}

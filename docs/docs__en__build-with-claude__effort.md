@@ -80,6 +80,18 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
+```bash CLI
+ant messages create --transform 'content.0.text' --format yaml <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Analyze the trade-offs between microservices and monolithic architectures
+output_config:
+  effort: medium
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 

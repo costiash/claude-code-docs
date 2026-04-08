@@ -20,7 +20,7 @@ Upload File
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 18 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -64,8 +64,6 @@ Upload File
 
       - `"output-300k-2026-03-24"`
 
-      - `"user-profiles-2026-03-24"`
-
 ### Returns
 
 - `FileMetadata`
@@ -103,6 +101,20 @@ Upload File
   - `downloadable?: boolean`
 
     Whether the file can be downloaded.
+
+  - `scope?: BetaFileScope | null`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `id: string`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `type: "session"`
+
+      The type of scope (e.g., `"session"`).
+
+      - `"session"`
 
 ### Example
 

@@ -20,6 +20,8 @@ Make your first API call to Claude and build a simple web search assistant.
         ```bash
         export ANTHROPIC_API_KEY='your-api-key-here'
         ```
+
+        To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
       </Step>
 
       <Step title="Make your first API call">
@@ -43,7 +45,66 @@ Make your first API call to Claude and build a simple web search assistant.
         ```
 
         **Example output:**
-        ```json
+        ```json Output
+        {
+          "id": "msg_01HCDu5LRGeP2o7s2xGmxyx8",
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Here are some effective search strategies to find the latest renewable energy developments:\n\n## Search Terms to Use:\n- \"renewable energy news 2024\"\n- \"clean energy breakthrough\"\n- \"solar/wind/battery technology advances\"\n- \"green energy innovations\"\n- \"climate tech developments\"\n- \"energy storage solutions\"\n\n## Best Sources to Check:\n\n**News & Industry Sites:**\n- Renewable Energy World\n- GreenTech Media (now Wood Mackenzie)\n- Energy Storage News\n- CleanTechnica\n- PV Magazine (for solar)\n- WindPower Engineering & Development..."
+            }
+          ],
+          "model": "claude-opus-4-6",
+          "stop_reason": "end_turn",
+          "usage": {
+            "input_tokens": 21,
+            "output_tokens": 305
+          }
+        }
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="CLI">
+    <Steps>
+      <Step title="Set your API key">
+        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
+
+        ```bash
+        export ANTHROPIC_API_KEY='your-api-key-here'
+        ```
+
+        To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
+      </Step>
+
+      <Step title="Install the CLI">
+        Install the Anthropic CLI with Homebrew:
+
+        ```bash
+        brew install anthropics/tap/ant
+        ```
+
+        For other installation methods, see [Installation](/docs/en/api/sdks/cli#installation) in the CLI reference.
+      </Step>
+
+      <Step title="Make your first API call">
+        Run this command to create a simple web search assistant:
+
+        ```bash
+        ant messages create \
+          --model claude-opus-4-6 \
+          --max-tokens 1000 \
+          --message '{
+            role: user,
+            content: "What should I search for to find the latest developments in renewable energy?"
+          }'
+        ```
+
+        **Example output:**
+        ```json Output
         {
           "id": "msg_01HCDu5LRGeP2o7s2xGmxyx8",
           "type": "message",
@@ -74,6 +135,8 @@ Make your first API call to Claude and build a simple web search assistant.
         ```bash
         export ANTHROPIC_API_KEY='your-api-key-here'
         ```
+
+        To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
       </Step>
 
       <Step title="Install the SDK">
@@ -112,7 +175,7 @@ Make your first API call to Claude and build a simple web search assistant.
         ```
 
         **Example output:**
-        ```python
+        ```text Output
         [
             TextBlock(
                 text='Here are some effective search strategies for finding the latest renewable energy developments:\n\n**Search Terms to Use:**\n- "renewable energy news 2024"\n- "clean energy breakthroughs"\n- "solar/wind/battery technology advances"\n- "energy storage innovations"\n- "green hydrogen developments"\n- "renewable energy policy updates"\n\n**Reliable Sources to Check:**\n- **News & Analysis:** Reuters Energy, Bloomberg New Energy Finance, Greentech Media, Energy Storage News\n- **Industry Publications:** Renewable Energy World, PV Magazine, Wind Power Engineering\n- **Research Organizations:** International Energy Agency (IEA), National Renewable Energy Laboratory (NREL)\n- **Government Sources:** Department of Energy websites, EPA clean energy updates\n\n**Specific Topics to Explore:**\n- Perovskite and next-gen solar cells\n- Offshore wind expansion\n- Grid-scale battery storage\n- Green hydrogen production\n- Carbon capture technologies\n- Smart grid innovations\n- Energy policy changes and incentives...',
@@ -132,6 +195,8 @@ Make your first API call to Claude and build a simple web search assistant.
         ```bash
         export ANTHROPIC_API_KEY='your-api-key-here'
         ```
+
+        To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
       </Step>
 
       <Step title="Install the SDK">
@@ -175,7 +240,7 @@ main().catch(console.error);
         ```
 
         **Example output:**
-        ```javascript hidelines={1..2}
+        ```javascript Output hidelines={1..2}
         const _ =
           // output
           {
@@ -224,6 +289,8 @@ main().catch(console.error);
         ```bash
         export ANTHROPIC_API_KEY='your-api-key-here'
         ```
+
+        To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
       </Step>
 
       <Step title="Install the SDK">
@@ -231,7 +298,7 @@ main().catch(console.error);
 
         **Gradle:**
         ```groovy
-        implementation("com.anthropic:anthropic-java:2.18.0")
+        implementation("com.anthropic:anthropic-java:2.20.0")
         ```
 
         **Maven:**
@@ -239,7 +306,7 @@ main().catch(console.error);
         <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java</artifactId>
-          <version>2.18.0</version>
+          <version>2.20.0</version>
         </dependency>
         ```
       </Step>
@@ -280,8 +347,7 @@ main().catch(console.error);
         ```
 
         **Example output:**
-        
-        ```java nocheck
+        ```text Output
         [ContentBlock{text=TextBlock{text=Here are some effective search strategies to find the latest renewable energy developments:
 
         ## Search Terms to Use:

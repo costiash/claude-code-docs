@@ -1128,13 +1128,6 @@ Before sharing a Skill, verify:
     Create and manage Skills in Claude Code
   </Card>
   <Card
-    title="Use Skills in the Agent SDK"
-    icon="cube"
-    href="/docs/en/agent-sdk/skills"
-  >
-    Use Skills programmatically in TypeScript and Python
-  </Card>
-  <Card
     title="Use Skills with the API"
     icon="code"
     href="/docs/en/build-with-claude/skills-guide"

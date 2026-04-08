@@ -4,7 +4,7 @@ When making API requests, you must send an `anthropic-version` request header. F
 
 ---
 
-For any given API version, we will preserve:
+For any given version with the Messages API, we will preserve:
 
 * Existing input parameters
 * Existing output parameters

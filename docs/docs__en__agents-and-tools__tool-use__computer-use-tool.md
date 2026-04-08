@@ -102,6 +102,26 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
+```bash CLI
+ant beta:messages create --beta computer-use-2025-11-24 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+tools:
+  - type: computer_20251124
+    name: computer
+    display_width_px: 1024
+    display_height_px: 768
+    display_number: 1
+  - type: text_editor_20250728
+    name: str_replace_based_edit_tool
+  - type: bash_20250124
+    name: bash
+messages:
+  - role: user
+    content: Save a picture of a cat to my desktop.
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 

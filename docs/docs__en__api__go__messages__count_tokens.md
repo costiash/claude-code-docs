@@ -3568,7 +3568,7 @@ func main() {
       }},
       Role: anthropic.MessageParamRoleUser,
     }},
-    Model: anthropic.ModelClaudeOpus4_6,
+    Model: anthropic.ModelClaudeMythosPreview,
   })
   if err != nil {
     panic(err.Error())

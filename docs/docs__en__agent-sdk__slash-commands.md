@@ -32,7 +32,9 @@ from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage
 
 
 async def main():
-    async for message in query(prompt="Hello Claude", options=ClaudeAgentOptions(max_turns=1)):
+    async for message in query(
+        prompt="Hello Claude", options=ClaudeAgentOptions(max_turns=1)
+    ):
         if isinstance(message, SystemMessage) and message.subtype == "init":
             print("Available slash commands:", message.data["slash_commands"])
             # Example output: ["/compact", "/clear", "/help"]
@@ -70,7 +72,9 @@ from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
 
 async def main():
     # Send a slash command
-    async for message in query(prompt="/compact", options=ClaudeAgentOptions(max_turns=1)):
+    async for message in query(
+        prompt="/compact", options=ClaudeAgentOptions(max_turns=1)
+    ):
         if isinstance(message, ResultMessage):
             print("Command executed:", message.result)
 
@@ -109,10 +113,14 @@ from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage
 
 
 async def main():
-    async for message in query(prompt="/compact", options=ClaudeAgentOptions(max_turns=1)):
+    async for message in query(
+        prompt="/compact", options=ClaudeAgentOptions(max_turns=1)
+    ):
         if isinstance(message, SystemMessage) and message.subtype == "compact_boundary":
             print("Compaction completed")
-            print("Pre-compaction tokens:", message.data["compact_metadata"]["pre_tokens"])
+            print(
+                "Pre-compaction tokens:", message.data["compact_metadata"]["pre_tokens"]
+            )
             print("Trigger:", message.data["compact_metadata"]["trigger"])
 
 
@@ -149,7 +157,9 @@ from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage
 
 async def main():
     # Clear conversation and start fresh
-    async for message in query(prompt="/clear", options=ClaudeAgentOptions(max_turns=1)):
+    async for message in query(
+        prompt="/clear", options=ClaudeAgentOptions(max_turns=1)
+    ):
         if isinstance(message, SystemMessage) and message.subtype == "init":
             print("Conversation cleared, new session started")
             print("Session ID:", message.data["session_id"])
@@ -315,7 +325,9 @@ from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
 
 async def main():
     # Pass arguments to custom command
-    async for message in query(prompt="/fix-issue 123 high", options=ClaudeAgentOptions(max_turns=5)):
+    async for message in query(
+        prompt="/fix-issue 123 high", options=ClaudeAgentOptions(max_turns=5)
+    ):
         # Command will process with $1="123" and $2="high"
         if isinstance(message, ResultMessage):
             print("Issue fixed:", message.result)
@@ -464,12 +476,16 @@ from claude_agent_sdk import query, ClaudeAgentOptions
 
 async def main():
     # Run code review
-    async for message in query(prompt="/code-review", options=ClaudeAgentOptions(max_turns=3)):
+    async for message in query(
+        prompt="/code-review", options=ClaudeAgentOptions(max_turns=3)
+    ):
         # Process review feedback
         pass
 
     # Run specific tests
-    async for message in query(prompt="/test auth", options=ClaudeAgentOptions(max_turns=5)):
+    async for message in query(
+        prompt="/test auth", options=ClaudeAgentOptions(max_turns=5)
+    ):
         # Handle test results
         pass
 

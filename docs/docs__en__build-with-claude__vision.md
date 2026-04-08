@@ -307,6 +307,25 @@ Below are examples of how to include images in a Messages API request using base
     }
     EOF
     ```
+    ```bash CLI
+    curl -sSo ./image.jpg \
+      https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg
+
+    ant messages create <<'YAML'
+    model: claude-opus-4-6
+    max_tokens: 1024
+    messages:
+      - role: user
+        content:
+          - type: image
+            source:
+              type: base64
+              media_type: image/jpeg
+              data: "@./image.jpg"
+          - type: text
+            text: Describe this image.
+    YAML
+    ```
     ```python Python hidelines={1..2}
     import anthropic
 
@@ -577,6 +596,21 @@ Below are examples of how to include images in a Messages API request using base
           }
         ]
       }'
+    ```
+    ```bash CLI
+    ant messages create <<'YAML'
+    model: claude-opus-4-6
+    max_tokens: 1024
+    messages:
+      - role: user
+        content:
+          - type: image
+            source:
+              type: url
+              url: https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg
+          - type: text
+            text: Describe this image.
+    YAML
     ```
     ```python Python hidelines={1..2}
     import anthropic
@@ -853,6 +887,34 @@ curl https://api.anthropic.com/v1/messages \
       }
     ]
   }'
+```
+
+```bash CLI hidelines={1}
+cd "$(mktemp -d)"
+curl -sSo image.jpg \
+  https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg
+
+# First, upload your image to the Files API
+FILE_ID=$(ant beta:files upload \
+  --file ./image.jpg \
+  --transform id --format yaml)
+
+# Then use the returned file_id in your message
+ant beta:messages create \
+  --beta files-api-2025-04-14 \
+  --transform content --format yaml <<YAML
+model: claude-opus-4-6
+max_tokens: 1024
+messages:
+  - role: user
+    content:
+      - type: image
+        source:
+          type: file
+          file_id: $FILE_ID
+      - type: text
+        text: Describe this image.
+YAML
 ```
 
 ```python Python nocheck hidelines={1..2}
@@ -1135,7 +1197,7 @@ puts message.content
 ```
 </CodeGroup>
 
-See [Messages API examples](/docs/en/api/messages) for more example code and parameter details.
+See [Messages API examples](/docs/en/api/messages/create) for more example code and parameter details.
 
 <section title="Example: One image">
 
@@ -1392,7 +1454,7 @@ Ask Claude to contrast two images, then ask a follow-up question comparing the f
 | User | Image 1: \[Image 3\] Image 2: \[Image 4\] Are these images similar to the first two? |
 | Assistant | \[Claude's response\] |
 
-When using the API, simply insert new images into the array of Messages in the `user` role as part of any standard [multiturn conversation](/docs/en/api/messages) structure.
+When using the API, simply insert new images into the array of Messages in the `user` role as part of any standard [multiturn conversation](/docs/en/api/messages/create) structure.
 
 </section>
 
@@ -1520,6 +1582,6 @@ Always carefully review and verify Claude's image interpretations, especially fo
 Ready to start building with images using Claude? Here are a few helpful resources:
 
 - [Multimodal cookbook](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision): This cookbook has tips on [getting started with images](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision) and [best practice techniques](https://platform.claude.com/cookbook/multimodal-best-practices-for-vision) to ensure the highest quality performance with images. See how you can effectively prompt Claude with images to carry out tasks such as [interpreting and analyzing charts](https://platform.claude.com/cookbook/multimodal-reading-charts-graphs-powerpoints) or [extracting content from forms](https://platform.claude.com/cookbook/multimodal-how-to-transcribe-text).
-- [API reference](/docs/en/api/messages): Documentation for the Messages API, including example [API calls involving images](/docs/en/build-with-claude/working-with-messages#vision).
+- [API reference](/docs/en/api/messages/create): Documentation for the Messages API, including example [API calls involving images](/docs/en/build-with-claude/working-with-messages#vision).
 
 If you have any other questions, reach out to the [support team](https://support.claude.com/). You can also join the [developer community](https://www.anthropic.com/discord) to connect with other creators and get help from Anthropic experts.

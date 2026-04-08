@@ -4,6 +4,10 @@ Guide for migrating to Claude 4.6 models from previous Claude versions
 
 ---
 
+<Note>
+This guide covers migrating [Messages API](/docs/en/build-with-claude/working-with-messages) code. If you use [Claude Managed Agents](/docs/en/managed-agents/overview), see [Migrating between model versions](/docs/en/managed-agents/migration#migrating-between-model-versions). The Managed Agents runtime handles most of the request-shape changes described here.
+</Note>
+
 ## Migrating to Claude 4.6
 
 Claude Opus 4.6 is a near drop-in replacement for Claude 4.5, with a few breaking changes to be aware of. For a full list of new features, see [What's new in Claude 4.6](/docs/en/about-claude/models/whats-new-claude-4-6).
@@ -48,6 +52,20 @@ These are not required but will improve your experience:
        output_config={"effort": "high"},
        messages=[{"role": "user", "content": "Your prompt here"}],
    )
+   ```
+
+   ```bash CLI
+   ant messages create <<'YAML'
+   model: claude-opus-4-6
+   max_tokens: 16000
+   thinking:
+     type: adaptive
+   output_config:
+     effort: high
+   messages:
+     - role: user
+       content: Your prompt here
+   YAML
    ```
 
    ```typescript TypeScript hidelines={1..2}
@@ -222,7 +240,7 @@ model = "claude-opus-4-6"  # After
    Use only `temperature` OR `top_p`, not both:
 
    
-   ```python nocheck
+   ```python Python nocheck
    # Before - This will error in Claude 4+ models
    response = client.messages.create(
        model="claude-3-7-sonnet-20250219",
@@ -263,7 +281,7 @@ model = "claude-opus-4-6"  # After
    Update your application to [handle `refusal` stop reasons](/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals):
 
    
-   ```python nocheck
+   ```python Python nocheck
    response = client.messages.create(...)
 
    if response.stop_reason == "refusal":
@@ -276,7 +294,7 @@ model = "claude-opus-4-6"  # After
    Claude 4.5+ models return a `model_context_window_exceeded` stop reason when generation stops due to hitting the context window limit, rather than the requested `max_tokens` limit. Update your application to handle this new stop reason:
 
    
-   ```python nocheck
+   ```python Python nocheck
    response = client.messages.create(...)
 
    if response.stop_reason == "model_context_window_exceeded":
@@ -434,6 +452,18 @@ curl https://api.anthropic.com/v1/messages \
         }
     ]
 }'
+```
+
+```bash CLI
+ant messages create <<'YAML'
+model: claude-sonnet-4-6
+max_tokens: 8192
+output_config:
+  effort: low
+messages:
+  - role: user
+    content: Your prompt here
+YAML
 ```
 
 ```python Python
@@ -613,6 +643,20 @@ curl https://api.anthropic.com/v1/messages \
         }
     ]
 }'
+```
+
+```bash CLI nocheck
+ant messages create <<'YAML'
+model: claude-sonnet-4-6
+max_tokens: 64000
+thinking:
+  type: adaptive
+output_config:
+  effort: medium
+messages:
+  - role: user
+    content: Your prompt here
+YAML
 ```
 
 ```python Python nocheck
@@ -801,6 +845,21 @@ curl https://api.anthropic.com/v1/messages \
         }
     ]
 }'
+```
+
+```bash CLI
+ant beta:messages create --beta interleaved-thinking-2025-05-14 <<'YAML'
+model: claude-sonnet-4-6
+max_tokens: 16384
+thinking:
+  type: enabled
+  budget_tokens: 16384
+output_config:
+  effort: medium
+messages:
+  - role: user
+    content: Your prompt here
+YAML
 ```
 
 ```python Python
@@ -993,6 +1052,21 @@ curl https://api.anthropic.com/v1/messages \
         }
     ]
 }'
+```
+
+```bash CLI
+ant beta:messages create --beta interleaved-thinking-2025-05-14 <<'YAML'
+model: claude-sonnet-4-6
+max_tokens: 8192
+thinking:
+  type: enabled
+  budget_tokens: 16384
+output_config:
+  effort: low
+messages:
+  - role: user
+    content: Your prompt here
+YAML
 ```
 
 ```python Python

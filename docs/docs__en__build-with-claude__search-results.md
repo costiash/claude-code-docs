@@ -839,6 +839,42 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
+```bash CLI
+ant messages create <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+messages:
+  - role: user
+    content:
+      - type: search_result
+        source: https://docs.company.com/api-reference
+        title: API Reference - Authentication
+        content:
+          - type: text
+            text: >-
+              All API requests must include an API key in the Authorization
+              header. Keys can be generated from the dashboard. Rate limits:
+              1000 requests per hour for standard tier, 10000 for premium.
+        citations:
+          enabled: true
+      - type: search_result
+        source: https://docs.company.com/quickstart
+        title: Getting Started Guide
+        content:
+          - type: text
+            text: >-
+              To get started: 1) Sign up for an account, 2) Generate an API
+              key from the dashboard, 3) Install our SDK using pip install
+              company-sdk, 4) Initialize the client with your API key.
+        citations:
+          enabled: true
+      - type: text
+        text: >-
+          Based on these search results, how do I authenticate API requests
+          and what are the rate limits?
+YAML
+```
+
 ```python Python hidelines={1}
 from anthropic import Anthropic
 from anthropic.types import MessageParam, TextBlockParam, SearchResultBlockParam

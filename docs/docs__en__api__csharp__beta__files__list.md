@@ -24,6 +24,10 @@ List Files
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
+  - `string scopeID`
+
+    Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -70,8 +74,6 @@ List Files
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class FileListPageResponse:`
@@ -111,6 +113,18 @@ List Files
     - `Boolean Downloadable`
 
       Whether the file can be downloaded.
+
+    - `BetaFileScope? Scope`
+
+      The scope of this file, indicating the context in which it was created (e.g., a session).
+
+      - `required string ID`
+
+        The ID of the scoping resource (e.g., the session ID).
+
+      - `JsonElement Type "session"constant`
+
+        The type of scope (e.g., `"session"`).
 
   - `string? FirstID`
 

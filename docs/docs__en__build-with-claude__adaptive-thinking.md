@@ -62,6 +62,19 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
+```bash CLI
+ant messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 16000 \
+  --thinking '{type: adaptive}' \
+  --message '{role: user, content: Explain why the sum of two even numbers is always even.}' \
+  --transform content --format jsonl |
+  jq -r '
+    if   .type == "thinking" then "\nThinking: \(.thinking)"
+    elif .type == "text"     then "\nResponse: \(.text)"
+    else empty end'
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -322,6 +335,21 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
+```bash CLI
+ant messages create \
+  --transform 'content.0.text' --format yaml <<'YAML'
+model: claude-opus-4-6
+max_tokens: 16000
+thinking:
+  type: adaptive
+output_config:
+  effort: medium
+messages:
+  - role: user
+    content: What is the capital of France?
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -507,6 +535,14 @@ puts message.content.first.text
 Adaptive thinking works seamlessly with [streaming](/docs/en/build-with-claude/streaming). Thinking blocks are streamed via `thinking_delta` events just like manual thinking mode:
 
 <CodeGroup>
+```bash CLI
+ant messages create --stream --format jsonl \
+  --model claude-opus-4-6 \
+  --max-tokens 16000 \
+  --thinking '{type: adaptive}' \
+  --message '{role: user, content: What is the greatest common divisor of 1071 and 462?}'
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 

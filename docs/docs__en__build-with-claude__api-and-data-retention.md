@@ -274,5 +274,4 @@ To request a ZDR arrangement, contact the [Anthropic sales team](https://claude.
 - [Prompt caching](/docs/en/build-with-claude/prompt-caching)
 - [Batch processing](/docs/en/build-with-claude/batch-processing)
 - [Files API](/docs/en/api/files-create)
-- [Agent SDK Sessions](/docs/en/agent-sdk/sessions)
 - [Trust Center](https://trust.anthropic.com/resources)

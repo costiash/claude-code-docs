@@ -58,8 +58,6 @@ Upload File
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
   - `String file`
 
     The file to upload
@@ -101,6 +99,20 @@ Upload File
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
+
+  - `Optional<BetaFileScope> scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `JsonValue; type "session"constant`
+
+      The type of scope (e.g., `"session"`).
+
+      - `SESSION("session")`
 
 ### Example
 
@@ -153,6 +165,10 @@ List Files
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
+  - `Optional<String> scopeId`
+
+    Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+
   - `Optional<List<AnthropicBeta>> betas`
 
     Optional header to specify the beta version(s) you want to use.
@@ -199,8 +215,6 @@ List Files
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class FileMetadata:`
@@ -238,6 +252,20 @@ List Files
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
+
+  - `Optional<BetaFileScope> scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `JsonValue; type "session"constant`
+
+      The type of scope (e.g., `"session"`).
+
+      - `SESSION("session")`
 
 ### Example
 
@@ -322,8 +350,6 @@ Download File
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Example
 
 ```java
@@ -407,8 +433,6 @@ Get File Metadata
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class FileMetadata:`
@@ -446,6 +470,20 @@ Get File Metadata
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
+
+  - `Optional<BetaFileScope> scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `JsonValue; type "session"constant`
+
+      The type of scope (e.g., `"session"`).
+
+      - `SESSION("session")`
 
 ### Example
 
@@ -530,8 +568,6 @@ Delete File
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class DeletedFile:`
@@ -570,6 +606,20 @@ public final class Main {
 ```
 
 ## Domain Types
+
+### Beta File Scope
+
+- `class BetaFileScope:`
+
+  - `String id`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `JsonValue; type "session"constant`
+
+    The type of scope (e.g., `"session"`).
+
+    - `SESSION("session")`
 
 ### Deleted File
 
@@ -624,3 +674,17 @@ public final class Main {
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
+
+  - `Optional<BetaFileScope> scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `JsonValue; type "session"constant`
+
+      The type of scope (e.g., `"session"`).
+
+      - `SESSION("session")`

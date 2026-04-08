@@ -68,6 +68,14 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
+```bash CLI
+ant messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 4096 \
+  --message '{role: user, content: "Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"}' \
+  --tool '{type: code_execution_20250825, name: code_execution}'
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -343,6 +351,31 @@ curl https://api.anthropic.com/v1/messages \
             "name": "code_execution"
         }]
     }'
+```
+
+```bash CLI hidelines={1}
+printf 'name,value\nfoo,1\nbar,2\n' > data.csv
+# Upload a file
+FILE_ID=$(ant beta:files upload \
+  --file ./data.csv \
+  --transform id --format yaml)
+
+# Use the file_id with code execution
+ant beta:messages create \
+  --beta files-api-2025-04-14 <<YAML
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content:
+      - type: text
+        text: Analyze this CSV data
+      - type: container_upload
+        file_id: $FILE_ID
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
 ```
 
 ```python Python nocheck hidelines={1..2}
@@ -638,6 +671,33 @@ puts response
 When Claude creates files during code execution, you can retrieve these files using the Files API:
 
 <CodeGroup>
+
+```bash CLI nocheck
+# Request code execution that creates files; extract file_ids from tool results
+TOOL_RESULT='content.#(type=="bash_code_execution_tool_result")#'
+FILE_IDS=$(ant beta:messages create \
+  --beta files-api-2025-04-14 \
+  --transform "${TOOL_RESULT}.content.content|@flatten|#.file_id" \
+  --format yaml \
+    --model claude-opus-4-6 \
+    --max-tokens 4096 \
+    --message '{role: user, content: Create a matplotlib visualization and save it as output.png}' \
+    --tool '{type: code_execution_20250825, name: code_execution}'
+)
+
+# Download each created file
+while IFS= read -r LINE; do
+  [[ "$LINE" != "- "* ]] && continue
+  FILE_ID="${LINE#- }"
+  FILENAME=$(ant beta:files retrieve-metadata \
+    --file-id "$FILE_ID" \
+    --transform filename --format yaml)
+  ant beta:files download \
+    --file-id "$FILE_ID" \
+    --output "$FILENAME" > /dev/null
+  printf 'Downloaded: %s\n' "$FILENAME"
+done <<< "$FILE_IDS"
+```
 
 ```python Python nocheck hidelines={1..2}
 from anthropic import Anthropic
@@ -1063,7 +1123,7 @@ The code execution tool can return two types of results depending on the operati
 
 ### Bash command response
 
-```json hidelines={1,-1}
+```json Output hidelines={1,-1}
 [
   {
     "type": "server_tool_use",
@@ -1089,7 +1149,7 @@ The code execution tool can return two types of results depending on the operati
 ### File operation responses
 
 **View file:**
-```json hidelines={1,-1}
+```json Output hidelines={1,-1}
 [
   {
     "type": "server_tool_use",
@@ -1116,7 +1176,7 @@ The code execution tool can return two types of results depending on the operati
 ```
 
 **Create file:**
-```json hidelines={1,-1}
+```json Output hidelines={1,-1}
 [
   {
     "type": "server_tool_use",
@@ -1140,7 +1200,7 @@ The code execution tool can return two types of results depending on the operati
 ```
 
 **Edit file (str_replace):**
-```json hidelines={1,-1}
+```json Output hidelines={1,-1}
 [
   {
     "type": "server_tool_use",
@@ -1185,7 +1245,7 @@ Additional fields for file operations:
 Each tool type can return specific errors:
 
 **Common errors (all tools):**
-```json
+```json Output
 {
   "type": "bash_code_execution_tool_result",
   "tool_use_id": "srvtoolu_01VfmxgZ46TiHbmXgy928hQR",
@@ -1294,6 +1354,24 @@ curl https://api.anthropic.com/v1/messages \
             "name": "code_execution"
         }]
     }'
+```
+
+```bash CLI
+# First request: Create a file with a random number
+CONTAINER_ID=$(ant messages create \
+  --transform container.id --format yaml \
+    --model claude-opus-4-6 \
+    --max-tokens 4096 \
+    --message '{role: user, content: Write a file with a random number and save it to "/tmp/number.txt"}' \
+    --tool '{type: code_execution_20250825, name: code_execution}'
+)
+
+# Second request: Reuse the container to read the file
+ant messages create --container "$CONTAINER_ID" \
+  --model claude-opus-4-6 \
+  --max-tokens 4096 \
+  --message '{role: user, content: Read the number from "/tmp/number.txt" and calculate its square}' \
+  --tool '{type: code_execution_20250825, name: code_execution}'
 ```
 
 ```python Python hidelines={1..6}

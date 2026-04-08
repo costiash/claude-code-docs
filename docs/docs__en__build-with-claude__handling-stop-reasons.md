@@ -4,7 +4,7 @@
 
 When you make a request to the Messages API, Claude's response includes a `stop_reason` field that indicates why the model stopped generating its response. Understanding these values is crucial for building robust applications that handle different response types appropriately.
 
-For details about `stop_reason` in the API response, see the [Messages API reference](/docs/en/api/messages).
+For details about `stop_reason` in the API response, see the [Messages API reference](/docs/en/api/messages/create).
 
 ## The stop_reason field
 
@@ -35,7 +35,7 @@ The `stop_reason` field is part of every successful Messages API response. Unlik
 ### end_turn
 The most common stop reason. Indicates Claude finished its response naturally.
 
-```python
+```python Python
 from anthropic import Anthropic
 
 client = Anthropic()
@@ -138,7 +138,7 @@ def handle_empty_response(client, messages):
 ### max_tokens
 Claude stopped because it reached the `max_tokens` limit specified in your request.
 
-```python
+```python Python
 # Request with limited tokens
 response = client.messages.create(
     model="claude-opus-4-6",
@@ -157,6 +157,19 @@ if response.stop_reason == "max_tokens":
 If Claude's response is cut off due to hitting the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
 <CodeGroup>
+
+```bash CLI nocheck
+RESPONSE=$(ant messages create --max-tokens 1024 \
+  --format jsonl < request.yaml)
+
+# Check if the response was truncated mid tool use
+STOP_REASON=$(jq -r '.stop_reason' <<<"$RESPONSE")
+LAST_TYPE=$(jq -r '.content[-1].type' <<<"$RESPONSE")
+if [ "$STOP_REASON" = "max_tokens" ] && [ "$LAST_TYPE" = "tool_use" ]; then
+  # Retry with a higher max_tokens
+  ant messages create --max-tokens 4096 < request.yaml
+fi
+```
 
 ```python Python nocheck hidelines={1..8}
 import anthropic
@@ -378,7 +391,7 @@ end
 ### stop_sequence
 Claude encountered one of your custom stop sequences.
 
-```python
+```python Python
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -397,7 +410,7 @@ Claude is calling a tool and expects you to execute it.
 For most tool use implementations, we recommend using the [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner) which automatically handles tool execution, result formatting, and conversation management.
 </Note>
 
-```python nocheck
+```python Python nocheck
 from anthropic import Anthropic
 
 client = Anthropic()
@@ -439,7 +452,7 @@ Returned when the server-side sampling loop reaches its iteration limit while ex
 
 When this happens, the response may contain a `server_tool_use` block without a corresponding `server_tool_result`. To let Claude finish processing, continue the conversation by sending the response back as-is.
 
-```python nocheck
+```python Python nocheck
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -467,7 +480,7 @@ Your application should handle `pause_turn` in any agent loop that uses server t
 ### refusal
 Claude refused to generate a response due to safety concerns.
 
-```python
+```python Python
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -491,7 +504,7 @@ To learn more about refusals triggered by API safety filters for Claude Sonnet 4
 ### model_context_window_exceeded
 Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
 
-```python nocheck
+```python Python nocheck
 # Request with maximum tokens to get as much as possible
 response = client.messages.create(
     model="claude-opus-4-6",
@@ -609,7 +622,7 @@ It's important to distinguish between `stop_reason` values and actual errors:
 - Indicate request processing failures
 - Response contains error details
 
-```python
+```python Python
 import anthropic
 from anthropic import Anthropic
 
@@ -641,7 +654,7 @@ When using streaming, `stop_reason` is:
 - Provided in the `message_delta` event
 - Not provided in any other events
 
-```python
+```python Python
 from anthropic import Anthropic
 
 client = Anthropic()

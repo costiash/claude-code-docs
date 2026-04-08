@@ -1,0 +1,2637 @@
+# Vaults
+
+## Create
+
+`BetaManagedAgentsVault Beta.Vaults.Create(VaultCreateParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/vaults`
+
+Create Vault
+
+### Parameters
+
+- `VaultCreateParams parameters`
+
+  - `required string displayName`
+
+    Body param: Human-readable name for the vault. 1-255 characters.
+
+  - `IReadOnlyDictionary<string, string> metadata`
+
+    Body param: Arbitrary key-value metadata to attach to the vault.
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class BetaManagedAgentsVault:`
+
+  A vault that stores credentials for use by agents during sessions.
+
+  - `required string ID`
+
+    Unique identifier for the vault.
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string DisplayName`
+
+    Human-readable name for the vault.
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `required Type Type`
+
+    - `"vault"Vault`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```csharp
+VaultCreateParams parameters = new() { DisplayName = "Example vault" };
+
+var betaManagedAgentsVault = await client.Beta.Vaults.Create(parameters);
+
+Console.WriteLine(betaManagedAgentsVault);
+```
+
+## List
+
+`VaultListPageResponse Beta.Vaults.List(VaultListParams?parameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/vaults`
+
+List Vaults
+
+### Parameters
+
+- `VaultListParams parameters`
+
+  - `Boolean includeArchived`
+
+    Query param: Whether to include archived vaults in the results.
+
+  - `Int limit`
+
+    Query param: Maximum number of vaults to return per page. Defaults to 20, maximum 100.
+
+  - `string page`
+
+    Query param: Opaque pagination token from a previous `list_vaults` response.
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class VaultListPageResponse:`
+
+  Response containing a paginated list of vaults.
+
+  - `IReadOnlyList<BetaManagedAgentsVault> Data`
+
+    List of vaults.
+
+    - `required string ID`
+
+      Unique identifier for the vault.
+
+    - `required DateTimeOffset? ArchivedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `required string DisplayName`
+
+      Human-readable name for the vault.
+
+    - `required IReadOnlyDictionary<string, string> Metadata`
+
+      Arbitrary key-value metadata attached to the vault.
+
+    - `required Type Type`
+
+      - `"vault"Vault`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `string? NextPage`
+
+    Pagination token for the next page, or null if no more results.
+
+### Example
+
+```csharp
+VaultListParams parameters = new();
+
+var page = await client.Beta.Vaults.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsVault Beta.Vaults.Retrieve(VaultRetrieveParamsparameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/vaults/{vault_id}`
+
+Get Vault
+
+### Parameters
+
+- `VaultRetrieveParams parameters`
+
+  - `required string vaultID`
+
+    Path parameter vault_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class BetaManagedAgentsVault:`
+
+  A vault that stores credentials for use by agents during sessions.
+
+  - `required string ID`
+
+    Unique identifier for the vault.
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string DisplayName`
+
+    Human-readable name for the vault.
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `required Type Type`
+
+    - `"vault"Vault`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```csharp
+VaultRetrieveParams parameters = new()
+{
+    VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+};
+
+var betaManagedAgentsVault = await client.Beta.Vaults.Retrieve(parameters);
+
+Console.WriteLine(betaManagedAgentsVault);
+```
+
+## Update
+
+`BetaManagedAgentsVault Beta.Vaults.Update(VaultUpdateParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/vaults/{vault_id}`
+
+Update Vault
+
+### Parameters
+
+- `VaultUpdateParams parameters`
+
+  - `required string vaultID`
+
+    Path param: Path parameter vault_id
+
+  - `string? displayName`
+
+    Body param: Updated human-readable name for the vault. 1-255 characters.
+
+  - `IReadOnlyDictionary<string, string>? metadata`
+
+    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class BetaManagedAgentsVault:`
+
+  A vault that stores credentials for use by agents during sessions.
+
+  - `required string ID`
+
+    Unique identifier for the vault.
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string DisplayName`
+
+    Human-readable name for the vault.
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `required Type Type`
+
+    - `"vault"Vault`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```csharp
+VaultUpdateParams parameters = new()
+{
+    VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+};
+
+var betaManagedAgentsVault = await client.Beta.Vaults.Update(parameters);
+
+Console.WriteLine(betaManagedAgentsVault);
+```
+
+## Delete
+
+`BetaManagedAgentsDeletedVault Beta.Vaults.Delete(VaultDeleteParamsparameters, CancellationTokencancellationToken = default)`
+
+**delete** `/v1/vaults/{vault_id}`
+
+Delete Vault
+
+### Parameters
+
+- `VaultDeleteParams parameters`
+
+  - `required string vaultID`
+
+    Path parameter vault_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class BetaManagedAgentsDeletedVault:`
+
+  Confirmation of a deleted vault.
+
+  - `required string ID`
+
+    Unique identifier of the deleted vault.
+
+  - `required Type Type`
+
+    - `"vault_deleted"VaultDeleted`
+
+### Example
+
+```csharp
+VaultDeleteParams parameters = new()
+{
+    VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+};
+
+var betaManagedAgentsDeletedVault = await client.Beta.Vaults.Delete(parameters);
+
+Console.WriteLine(betaManagedAgentsDeletedVault);
+```
+
+## Archive
+
+`BetaManagedAgentsVault Beta.Vaults.Archive(VaultArchiveParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/vaults/{vault_id}/archive`
+
+Archive Vault
+
+### Parameters
+
+- `VaultArchiveParams parameters`
+
+  - `required string vaultID`
+
+    Path parameter vault_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class BetaManagedAgentsVault:`
+
+  A vault that stores credentials for use by agents during sessions.
+
+  - `required string ID`
+
+    Unique identifier for the vault.
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string DisplayName`
+
+    Human-readable name for the vault.
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `required Type Type`
+
+    - `"vault"Vault`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```csharp
+VaultArchiveParams parameters = new()
+{
+    VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+};
+
+var betaManagedAgentsVault = await client.Beta.Vaults.Archive(parameters);
+
+Console.WriteLine(betaManagedAgentsVault);
+```
+
+## Domain Types
+
+### Beta Managed Agents Deleted Vault
+
+- `class BetaManagedAgentsDeletedVault:`
+
+  Confirmation of a deleted vault.
+
+  - `required string ID`
+
+    Unique identifier of the deleted vault.
+
+  - `required Type Type`
+
+    - `"vault_deleted"VaultDeleted`
+
+### Beta Managed Agents Vault
+
+- `class BetaManagedAgentsVault:`
+
+  A vault that stores credentials for use by agents during sessions.
+
+  - `required string ID`
+
+    Unique identifier for the vault.
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string DisplayName`
+
+    Human-readable name for the vault.
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `required Type Type`
+
+    - `"vault"Vault`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+# Credentials
+
+## Create
+
+`BetaManagedAgentsCredential Beta.Vaults.Credentials.Create(CredentialCreateParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/vaults/{vault_id}/credentials`
+
+Create Credential
+
+### Parameters
+
+- `CredentialCreateParams parameters`
+
+  - `required string vaultID`
+
+    Path param: Path parameter vault_id
+
+  - `required Auth auth`
+
+    Body param: Authentication details for creating a credential.
+
+    - `class BetaManagedAgentsMcpOAuthCreateParams:`
+
+      Parameters for creating an MCP OAuth credential.
+
+      - `required string AccessToken`
+
+        OAuth access token.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"mcp_oauth"McpOAuth`
+
+      - `DateTimeOffset? ExpiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `BetaManagedAgentsMcpOAuthRefreshParams? Refresh`
+
+        OAuth refresh token parameters for creating a credential with refresh support.
+
+        - `required string ClientID`
+
+          OAuth client ID.
+
+        - `required string RefreshToken`
+
+          OAuth refresh token.
+
+        - `required string TokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `required TokenEndpointAuth TokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
+
+            Token endpoint requires no client authentication.
+
+            - `required Type Type`
+
+              - `"none"None`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicParam:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `required string ClientSecret`
+
+              OAuth client secret.
+
+            - `required Type Type`
+
+              - `"client_secret_basic"ClientSecretBasic`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `required string ClientSecret`
+
+              OAuth client secret.
+
+            - `required Type Type`
+
+              - `"client_secret_post"ClientSecretPost`
+
+        - `string? Resource`
+
+          OAuth resource indicator.
+
+        - `string? Scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerCreateParams:`
+
+      Parameters for creating a static bearer token credential.
+
+      - `required string Token`
+
+        Static bearer token value.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"static_bearer"StaticBearer`
+
+  - `string? displayName`
+
+    Body param: Human-readable name for the credential. Up to 255 characters.
+
+  - `IReadOnlyDictionary<string, string> metadata`
+
+    Body param: Arbitrary key-value metadata to attach to the credential.
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class BetaManagedAgentsCredential:`
+
+  A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `required string ID`
+
+    Unique identifier for the credential.
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required Auth Auth`
+
+    Authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+      OAuth credential details for an MCP server.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"mcp_oauth"McpOAuth`
+
+      - `DateTimeOffset? ExpiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `BetaManagedAgentsMcpOAuthRefreshResponse? Refresh`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `required string ClientID`
+
+          OAuth client ID.
+
+        - `required string TokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `required TokenEndpointAuth TokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+            Token endpoint requires no client authentication.
+
+            - `required Type Type`
+
+              - `"none"None`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `required Type Type`
+
+              - `"client_secret_basic"ClientSecretBasic`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `required Type Type`
+
+              - `"client_secret_post"ClientSecretPost`
+
+        - `string? Resource`
+
+          OAuth resource indicator.
+
+        - `string? Scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+      Static bearer token credential details for an MCP server.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"static_bearer"StaticBearer`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `required Type Type`
+
+    - `"vault_credential"VaultCredential`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string VaultID`
+
+    Identifier of the vault this credential belongs to.
+
+  - `string? DisplayName`
+
+    Human-readable name for the credential.
+
+### Example
+
+```csharp
+CredentialCreateParams parameters = new()
+{
+    VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+    Auth = new BetaManagedAgentsStaticBearerCreateParams()
+    {
+        Token = "bearer_exampletoken",
+        McpServerUrl = "https://example-server.modelcontextprotocol.io/sse",
+        Type = Type.StaticBearer,
+    },
+};
+
+var betaManagedAgentsCredential = await client.Beta.Vaults.Credentials.Create(parameters);
+
+Console.WriteLine(betaManagedAgentsCredential);
+```
+
+## List
+
+`CredentialListPageResponse Beta.Vaults.Credentials.List(CredentialListParamsparameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/vaults/{vault_id}/credentials`
+
+List Credentials
+
+### Parameters
+
+- `CredentialListParams parameters`
+
+  - `required string vaultID`
+
+    Path param: Path parameter vault_id
+
+  - `Boolean includeArchived`
+
+    Query param: Whether to include archived credentials in the results.
+
+  - `Int limit`
+
+    Query param: Maximum number of credentials to return per page. Defaults to 20, maximum 100.
+
+  - `string page`
+
+    Query param: Opaque pagination token from a previous `list_credentials` response.
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class CredentialListPageResponse:`
+
+  Response containing a paginated list of credentials.
+
+  - `IReadOnlyList<BetaManagedAgentsCredential> Data`
+
+    List of credentials.
+
+    - `required string ID`
+
+      Unique identifier for the credential.
+
+    - `required DateTimeOffset? ArchivedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `required Auth Auth`
+
+      Authentication details for a credential.
+
+      - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+        OAuth credential details for an MCP server.
+
+        - `required string McpServerUrl`
+
+          URL of the MCP server this credential authenticates against.
+
+        - `required Type Type`
+
+          - `"mcp_oauth"McpOAuth`
+
+        - `DateTimeOffset? ExpiresAt`
+
+          A timestamp in RFC 3339 format
+
+        - `BetaManagedAgentsMcpOAuthRefreshResponse? Refresh`
+
+          OAuth refresh token configuration returned in credential responses.
+
+          - `required string ClientID`
+
+            OAuth client ID.
+
+          - `required string TokenEndpoint`
+
+            Token endpoint URL used to refresh the access token.
+
+          - `required TokenEndpointAuth TokenEndpointAuth`
+
+            Token endpoint requires no client authentication.
+
+            - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+              Token endpoint requires no client authentication.
+
+              - `required Type Type`
+
+                - `"none"None`
+
+            - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+              Token endpoint uses HTTP Basic authentication with client credentials.
+
+              - `required Type Type`
+
+                - `"client_secret_basic"ClientSecretBasic`
+
+            - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+              Token endpoint uses POST body authentication with client credentials.
+
+              - `required Type Type`
+
+                - `"client_secret_post"ClientSecretPost`
+
+          - `string? Resource`
+
+            OAuth resource indicator.
+
+          - `string? Scope`
+
+            OAuth scope for the refresh request.
+
+      - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+        Static bearer token credential details for an MCP server.
+
+        - `required string McpServerUrl`
+
+          URL of the MCP server this credential authenticates against.
+
+        - `required Type Type`
+
+          - `"static_bearer"StaticBearer`
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `required IReadOnlyDictionary<string, string> Metadata`
+
+      Arbitrary key-value metadata attached to the credential.
+
+    - `required Type Type`
+
+      - `"vault_credential"VaultCredential`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `required string VaultID`
+
+      Identifier of the vault this credential belongs to.
+
+    - `string? DisplayName`
+
+      Human-readable name for the credential.
+
+  - `string? NextPage`
+
+    Pagination token for the next page, or null if no more results.
+
+### Example
+
+```csharp
+CredentialListParams parameters = new()
+{
+    VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+};
+
+var page = await client.Beta.Vaults.Credentials.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsCredential Beta.Vaults.Credentials.Retrieve(CredentialRetrieveParamsparameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+
+Get Credential
+
+### Parameters
+
+- `CredentialRetrieveParams parameters`
+
+  - `required string vaultID`
+
+    Path param: Path parameter vault_id
+
+  - `required string credentialID`
+
+    Path param: Path parameter credential_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class BetaManagedAgentsCredential:`
+
+  A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `required string ID`
+
+    Unique identifier for the credential.
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required Auth Auth`
+
+    Authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+      OAuth credential details for an MCP server.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"mcp_oauth"McpOAuth`
+
+      - `DateTimeOffset? ExpiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `BetaManagedAgentsMcpOAuthRefreshResponse? Refresh`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `required string ClientID`
+
+          OAuth client ID.
+
+        - `required string TokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `required TokenEndpointAuth TokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+            Token endpoint requires no client authentication.
+
+            - `required Type Type`
+
+              - `"none"None`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `required Type Type`
+
+              - `"client_secret_basic"ClientSecretBasic`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `required Type Type`
+
+              - `"client_secret_post"ClientSecretPost`
+
+        - `string? Resource`
+
+          OAuth resource indicator.
+
+        - `string? Scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+      Static bearer token credential details for an MCP server.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"static_bearer"StaticBearer`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `required Type Type`
+
+    - `"vault_credential"VaultCredential`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string VaultID`
+
+    Identifier of the vault this credential belongs to.
+
+  - `string? DisplayName`
+
+    Human-readable name for the credential.
+
+### Example
+
+```csharp
+CredentialRetrieveParams parameters = new()
+{
+    VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+    CredentialID = "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+};
+
+var betaManagedAgentsCredential = await client.Beta.Vaults.Credentials.Retrieve(parameters);
+
+Console.WriteLine(betaManagedAgentsCredential);
+```
+
+## Update
+
+`BetaManagedAgentsCredential Beta.Vaults.Credentials.Update(CredentialUpdateParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+
+Update Credential
+
+### Parameters
+
+- `CredentialUpdateParams parameters`
+
+  - `required string vaultID`
+
+    Path param: Path parameter vault_id
+
+  - `required string credentialID`
+
+    Path param: Path parameter credential_id
+
+  - `Auth auth`
+
+    Body param: Updated authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthUpdateParams:`
+
+      Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
+
+      - `required Type Type`
+
+        - `"mcp_oauth"McpOAuth`
+
+      - `string? AccessToken`
+
+        Updated OAuth access token.
+
+      - `DateTimeOffset? ExpiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `BetaManagedAgentsMcpOAuthRefreshUpdateParams? Refresh`
+
+        Parameters for updating OAuth refresh token configuration.
+
+        - `string? RefreshToken`
+
+          Updated OAuth refresh token.
+
+        - `string? Scope`
+
+          Updated OAuth scope for the refresh request.
+
+        - `TokenEndpointAuth TokenEndpointAuth`
+
+          Updated HTTP Basic authentication parameters for the token endpoint.
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
+
+            Updated HTTP Basic authentication parameters for the token endpoint.
+
+            - `required Type Type`
+
+              - `"client_secret_basic"ClientSecretBasic`
+
+            - `string? ClientSecret`
+
+              Updated OAuth client secret.
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:`
+
+            Updated POST body authentication parameters for the token endpoint.
+
+            - `required Type Type`
+
+              - `"client_secret_post"ClientSecretPost`
+
+            - `string? ClientSecret`
+
+              Updated OAuth client secret.
+
+    - `class BetaManagedAgentsStaticBearerUpdateParams:`
+
+      Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
+
+      - `required Type Type`
+
+        - `"static_bearer"StaticBearer`
+
+      - `string? Token`
+
+        Updated static bearer token value.
+
+  - `string? displayName`
+
+    Body param: Updated human-readable name for the credential. 1-255 characters.
+
+  - `IReadOnlyDictionary<string, string>? metadata`
+
+    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class BetaManagedAgentsCredential:`
+
+  A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `required string ID`
+
+    Unique identifier for the credential.
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required Auth Auth`
+
+    Authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+      OAuth credential details for an MCP server.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"mcp_oauth"McpOAuth`
+
+      - `DateTimeOffset? ExpiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `BetaManagedAgentsMcpOAuthRefreshResponse? Refresh`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `required string ClientID`
+
+          OAuth client ID.
+
+        - `required string TokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `required TokenEndpointAuth TokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+            Token endpoint requires no client authentication.
+
+            - `required Type Type`
+
+              - `"none"None`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `required Type Type`
+
+              - `"client_secret_basic"ClientSecretBasic`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `required Type Type`
+
+              - `"client_secret_post"ClientSecretPost`
+
+        - `string? Resource`
+
+          OAuth resource indicator.
+
+        - `string? Scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+      Static bearer token credential details for an MCP server.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"static_bearer"StaticBearer`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `required Type Type`
+
+    - `"vault_credential"VaultCredential`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string VaultID`
+
+    Identifier of the vault this credential belongs to.
+
+  - `string? DisplayName`
+
+    Human-readable name for the credential.
+
+### Example
+
+```csharp
+CredentialUpdateParams parameters = new()
+{
+    VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+    CredentialID = "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+};
+
+var betaManagedAgentsCredential = await client.Beta.Vaults.Credentials.Update(parameters);
+
+Console.WriteLine(betaManagedAgentsCredential);
+```
+
+## Delete
+
+`BetaManagedAgentsDeletedCredential Beta.Vaults.Credentials.Delete(CredentialDeleteParamsparameters, CancellationTokencancellationToken = default)`
+
+**delete** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+
+Delete Credential
+
+### Parameters
+
+- `CredentialDeleteParams parameters`
+
+  - `required string vaultID`
+
+    Path param: Path parameter vault_id
+
+  - `required string credentialID`
+
+    Path param: Path parameter credential_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class BetaManagedAgentsDeletedCredential:`
+
+  Confirmation of a deleted credential.
+
+  - `required string ID`
+
+    Unique identifier of the deleted credential.
+
+  - `required Type Type`
+
+    - `"vault_credential_deleted"VaultCredentialDeleted`
+
+### Example
+
+```csharp
+CredentialDeleteParams parameters = new()
+{
+    VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+    CredentialID = "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+};
+
+var betaManagedAgentsDeletedCredential = await client.Beta.Vaults.Credentials.Delete(parameters);
+
+Console.WriteLine(betaManagedAgentsDeletedCredential);
+```
+
+## Archive
+
+`BetaManagedAgentsCredential Beta.Vaults.Credentials.Archive(CredentialArchiveParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
+
+Archive Credential
+
+### Parameters
+
+- `CredentialArchiveParams parameters`
+
+  - `required string vaultID`
+
+    Path param: Path parameter vault_id
+
+  - `required string credentialID`
+
+    Path param: Path parameter credential_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+### Returns
+
+- `class BetaManagedAgentsCredential:`
+
+  A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `required string ID`
+
+    Unique identifier for the credential.
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required Auth Auth`
+
+    Authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+      OAuth credential details for an MCP server.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"mcp_oauth"McpOAuth`
+
+      - `DateTimeOffset? ExpiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `BetaManagedAgentsMcpOAuthRefreshResponse? Refresh`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `required string ClientID`
+
+          OAuth client ID.
+
+        - `required string TokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `required TokenEndpointAuth TokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+            Token endpoint requires no client authentication.
+
+            - `required Type Type`
+
+              - `"none"None`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `required Type Type`
+
+              - `"client_secret_basic"ClientSecretBasic`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `required Type Type`
+
+              - `"client_secret_post"ClientSecretPost`
+
+        - `string? Resource`
+
+          OAuth resource indicator.
+
+        - `string? Scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+      Static bearer token credential details for an MCP server.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"static_bearer"StaticBearer`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `required Type Type`
+
+    - `"vault_credential"VaultCredential`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string VaultID`
+
+    Identifier of the vault this credential belongs to.
+
+  - `string? DisplayName`
+
+    Human-readable name for the credential.
+
+### Example
+
+```csharp
+CredentialArchiveParams parameters = new()
+{
+    VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+    CredentialID = "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+};
+
+var betaManagedAgentsCredential = await client.Beta.Vaults.Credentials.Archive(parameters);
+
+Console.WriteLine(betaManagedAgentsCredential);
+```
+
+## Domain Types
+
+### Beta Managed Agents Credential
+
+- `class BetaManagedAgentsCredential:`
+
+  A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `required string ID`
+
+    Unique identifier for the credential.
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required Auth Auth`
+
+    Authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+      OAuth credential details for an MCP server.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"mcp_oauth"McpOAuth`
+
+      - `DateTimeOffset? ExpiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `BetaManagedAgentsMcpOAuthRefreshResponse? Refresh`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `required string ClientID`
+
+          OAuth client ID.
+
+        - `required string TokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `required TokenEndpointAuth TokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+            Token endpoint requires no client authentication.
+
+            - `required Type Type`
+
+              - `"none"None`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `required Type Type`
+
+              - `"client_secret_basic"ClientSecretBasic`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `required Type Type`
+
+              - `"client_secret_post"ClientSecretPost`
+
+        - `string? Resource`
+
+          OAuth resource indicator.
+
+        - `string? Scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+      Static bearer token credential details for an MCP server.
+
+      - `required string McpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `required Type Type`
+
+        - `"static_bearer"StaticBearer`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `required Type Type`
+
+    - `"vault_credential"VaultCredential`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string VaultID`
+
+    Identifier of the vault this credential belongs to.
+
+  - `string? DisplayName`
+
+    Human-readable name for the credential.
+
+### Beta Managed Agents Deleted Credential
+
+- `class BetaManagedAgentsDeletedCredential:`
+
+  Confirmation of a deleted credential.
+
+  - `required string ID`
+
+    Unique identifier of the deleted credential.
+
+  - `required Type Type`
+
+    - `"vault_credential_deleted"VaultCredentialDeleted`
+
+### Beta Managed Agents MCP OAuth Auth Response
+
+- `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+  OAuth credential details for an MCP server.
+
+  - `required string McpServerUrl`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `required Type Type`
+
+    - `"mcp_oauth"McpOAuth`
+
+  - `DateTimeOffset? ExpiresAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsMcpOAuthRefreshResponse? Refresh`
+
+    OAuth refresh token configuration returned in credential responses.
+
+    - `required string ClientID`
+
+      OAuth client ID.
+
+    - `required string TokenEndpoint`
+
+      Token endpoint URL used to refresh the access token.
+
+    - `required TokenEndpointAuth TokenEndpointAuth`
+
+      Token endpoint requires no client authentication.
+
+      - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+        Token endpoint requires no client authentication.
+
+        - `required Type Type`
+
+          - `"none"None`
+
+      - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+        Token endpoint uses HTTP Basic authentication with client credentials.
+
+        - `required Type Type`
+
+          - `"client_secret_basic"ClientSecretBasic`
+
+      - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+        Token endpoint uses POST body authentication with client credentials.
+
+        - `required Type Type`
+
+          - `"client_secret_post"ClientSecretPost`
+
+    - `string? Resource`
+
+      OAuth resource indicator.
+
+    - `string? Scope`
+
+      OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Create Params
+
+- `class BetaManagedAgentsMcpOAuthCreateParams:`
+
+  Parameters for creating an MCP OAuth credential.
+
+  - `required string AccessToken`
+
+    OAuth access token.
+
+  - `required string McpServerUrl`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `required Type Type`
+
+    - `"mcp_oauth"McpOAuth`
+
+  - `DateTimeOffset? ExpiresAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsMcpOAuthRefreshParams? Refresh`
+
+    OAuth refresh token parameters for creating a credential with refresh support.
+
+    - `required string ClientID`
+
+      OAuth client ID.
+
+    - `required string RefreshToken`
+
+      OAuth refresh token.
+
+    - `required string TokenEndpoint`
+
+      Token endpoint URL used to refresh the access token.
+
+    - `required TokenEndpointAuth TokenEndpointAuth`
+
+      Token endpoint requires no client authentication.
+
+      - `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
+
+        Token endpoint requires no client authentication.
+
+        - `required Type Type`
+
+          - `"none"None`
+
+      - `class BetaManagedAgentsTokenEndpointAuthBasicParam:`
+
+        Token endpoint uses HTTP Basic authentication with client credentials.
+
+        - `required string ClientSecret`
+
+          OAuth client secret.
+
+        - `required Type Type`
+
+          - `"client_secret_basic"ClientSecretBasic`
+
+      - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
+
+        Token endpoint uses POST body authentication with client credentials.
+
+        - `required string ClientSecret`
+
+          OAuth client secret.
+
+        - `required Type Type`
+
+          - `"client_secret_post"ClientSecretPost`
+
+    - `string? Resource`
+
+      OAuth resource indicator.
+
+    - `string? Scope`
+
+      OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Refresh Params
+
+- `class BetaManagedAgentsMcpOAuthRefreshParams:`
+
+  OAuth refresh token parameters for creating a credential with refresh support.
+
+  - `required string ClientID`
+
+    OAuth client ID.
+
+  - `required string RefreshToken`
+
+    OAuth refresh token.
+
+  - `required string TokenEndpoint`
+
+    Token endpoint URL used to refresh the access token.
+
+  - `required TokenEndpointAuth TokenEndpointAuth`
+
+    Token endpoint requires no client authentication.
+
+    - `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
+
+      Token endpoint requires no client authentication.
+
+      - `required Type Type`
+
+        - `"none"None`
+
+    - `class BetaManagedAgentsTokenEndpointAuthBasicParam:`
+
+      Token endpoint uses HTTP Basic authentication with client credentials.
+
+      - `required string ClientSecret`
+
+        OAuth client secret.
+
+      - `required Type Type`
+
+        - `"client_secret_basic"ClientSecretBasic`
+
+    - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
+
+      Token endpoint uses POST body authentication with client credentials.
+
+      - `required string ClientSecret`
+
+        OAuth client secret.
+
+      - `required Type Type`
+
+        - `"client_secret_post"ClientSecretPost`
+
+  - `string? Resource`
+
+    OAuth resource indicator.
+
+  - `string? Scope`
+
+    OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Refresh Response
+
+- `class BetaManagedAgentsMcpOAuthRefreshResponse:`
+
+  OAuth refresh token configuration returned in credential responses.
+
+  - `required string ClientID`
+
+    OAuth client ID.
+
+  - `required string TokenEndpoint`
+
+    Token endpoint URL used to refresh the access token.
+
+  - `required TokenEndpointAuth TokenEndpointAuth`
+
+    Token endpoint requires no client authentication.
+
+    - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+      Token endpoint requires no client authentication.
+
+      - `required Type Type`
+
+        - `"none"None`
+
+    - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+      Token endpoint uses HTTP Basic authentication with client credentials.
+
+      - `required Type Type`
+
+        - `"client_secret_basic"ClientSecretBasic`
+
+    - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+      Token endpoint uses POST body authentication with client credentials.
+
+      - `required Type Type`
+
+        - `"client_secret_post"ClientSecretPost`
+
+  - `string? Resource`
+
+    OAuth resource indicator.
+
+  - `string? Scope`
+
+    OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Refresh Update Params
+
+- `class BetaManagedAgentsMcpOAuthRefreshUpdateParams:`
+
+  Parameters for updating OAuth refresh token configuration.
+
+  - `string? RefreshToken`
+
+    Updated OAuth refresh token.
+
+  - `string? Scope`
+
+    Updated OAuth scope for the refresh request.
+
+  - `TokenEndpointAuth TokenEndpointAuth`
+
+    Updated HTTP Basic authentication parameters for the token endpoint.
+
+    - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
+
+      Updated HTTP Basic authentication parameters for the token endpoint.
+
+      - `required Type Type`
+
+        - `"client_secret_basic"ClientSecretBasic`
+
+      - `string? ClientSecret`
+
+        Updated OAuth client secret.
+
+    - `class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:`
+
+      Updated POST body authentication parameters for the token endpoint.
+
+      - `required Type Type`
+
+        - `"client_secret_post"ClientSecretPost`
+
+      - `string? ClientSecret`
+
+        Updated OAuth client secret.
+
+### Beta Managed Agents MCP OAuth Update Params
+
+- `class BetaManagedAgentsMcpOAuthUpdateParams:`
+
+  Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
+
+  - `required Type Type`
+
+    - `"mcp_oauth"McpOAuth`
+
+  - `string? AccessToken`
+
+    Updated OAuth access token.
+
+  - `DateTimeOffset? ExpiresAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsMcpOAuthRefreshUpdateParams? Refresh`
+
+    Parameters for updating OAuth refresh token configuration.
+
+    - `string? RefreshToken`
+
+      Updated OAuth refresh token.
+
+    - `string? Scope`
+
+      Updated OAuth scope for the refresh request.
+
+    - `TokenEndpointAuth TokenEndpointAuth`
+
+      Updated HTTP Basic authentication parameters for the token endpoint.
+
+      - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
+
+        Updated HTTP Basic authentication parameters for the token endpoint.
+
+        - `required Type Type`
+
+          - `"client_secret_basic"ClientSecretBasic`
+
+        - `string? ClientSecret`
+
+          Updated OAuth client secret.
+
+      - `class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:`
+
+        Updated POST body authentication parameters for the token endpoint.
+
+        - `required Type Type`
+
+          - `"client_secret_post"ClientSecretPost`
+
+        - `string? ClientSecret`
+
+          Updated OAuth client secret.
+
+### Beta Managed Agents Static Bearer Auth Response
+
+- `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+  Static bearer token credential details for an MCP server.
+
+  - `required string McpServerUrl`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `required Type Type`
+
+    - `"static_bearer"StaticBearer`
+
+### Beta Managed Agents Static Bearer Create Params
+
+- `class BetaManagedAgentsStaticBearerCreateParams:`
+
+  Parameters for creating a static bearer token credential.
+
+  - `required string Token`
+
+    Static bearer token value.
+
+  - `required string McpServerUrl`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `required Type Type`
+
+    - `"static_bearer"StaticBearer`
+
+### Beta Managed Agents Static Bearer Update Params
+
+- `class BetaManagedAgentsStaticBearerUpdateParams:`
+
+  Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
+
+  - `required Type Type`
+
+    - `"static_bearer"StaticBearer`
+
+  - `string? Token`
+
+    Updated static bearer token value.
+
+### Beta Managed Agents Token Endpoint Auth Basic Param
+
+- `class BetaManagedAgentsTokenEndpointAuthBasicParam:`
+
+  Token endpoint uses HTTP Basic authentication with client credentials.
+
+  - `required string ClientSecret`
+
+    OAuth client secret.
+
+  - `required Type Type`
+
+    - `"client_secret_basic"ClientSecretBasic`
+
+### Beta Managed Agents Token Endpoint Auth Basic Response
+
+- `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+  Token endpoint uses HTTP Basic authentication with client credentials.
+
+  - `required Type Type`
+
+    - `"client_secret_basic"ClientSecretBasic`
+
+### Beta Managed Agents Token Endpoint Auth Basic Update Param
+
+- `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
+
+  Updated HTTP Basic authentication parameters for the token endpoint.
+
+  - `required Type Type`
+
+    - `"client_secret_basic"ClientSecretBasic`
+
+  - `string? ClientSecret`
+
+    Updated OAuth client secret.
+
+### Beta Managed Agents Token Endpoint Auth None Param
+
+- `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
+
+  Token endpoint requires no client authentication.
+
+  - `required Type Type`
+
+    - `"none"None`
+
+### Beta Managed Agents Token Endpoint Auth None Response
+
+- `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+  Token endpoint requires no client authentication.
+
+  - `required Type Type`
+
+    - `"none"None`
+
+### Beta Managed Agents Token Endpoint Auth Post Param
+
+- `class BetaManagedAgentsTokenEndpointAuthPostParam:`
+
+  Token endpoint uses POST body authentication with client credentials.
+
+  - `required string ClientSecret`
+
+    OAuth client secret.
+
+  - `required Type Type`
+
+    - `"client_secret_post"ClientSecretPost`
+
+### Beta Managed Agents Token Endpoint Auth Post Response
+
+- `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+  Token endpoint uses POST body authentication with client credentials.
+
+  - `required Type Type`
+
+    - `"client_secret_post"ClientSecretPost`
+
+### Beta Managed Agents Token Endpoint Auth Post Update Param
+
+- `class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:`
+
+  Updated POST body authentication parameters for the token endpoint.
+
+  - `required Type Type`
+
+    - `"client_secret_post"ClientSecretPost`
+
+  - `string? ClientSecret`
+
+    Updated OAuth client secret.

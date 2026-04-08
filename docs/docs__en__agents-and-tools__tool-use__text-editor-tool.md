@@ -54,6 +54,14 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
+```bash CLI
+ant messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --tool '{type: text_editor_20250728, name: str_replace_based_edit_tool, max_characters: 10000}' \
+  --message '{role: user, content: There is a syntax error in my primes.py file. Can you help me fix it?}'
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -323,6 +331,14 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
+```bash CLI
+ant messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --tool '{type: text_editor_20250728, name: str_replace_based_edit_tool}' \
+  --message '{role: user, content: There is a syntax error in my primes.py file. Can you help me fix it?}'
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -397,7 +413,7 @@ void main() {
 
 Claude uses the text editor tool first to view the file:
 
-```json
+```json Output
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
   "model": "claude-opus-4-6",
@@ -473,6 +489,69 @@ curl https://api.anthropic.com/v1/messages \
         }
     ]
   }'
+```
+
+```bash CLI
+ant messages create <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+tools:
+  - type: text_editor_20250728
+    name: str_replace_based_edit_tool
+messages:
+  - role: user
+    content: There's a syntax error in my primes.py file. Can you help me fix it?
+  - role: assistant
+    content:
+      - type: text
+        text: >-
+          I'll help you fix the syntax error in your primes.py file. First,
+          let me take a look at the file to identify the issue.
+      - type: tool_use
+        id: toolu_01AbCdEfGhIjKlMnOpQrStU
+        name: str_replace_based_edit_tool
+        input:
+          command: view
+          path: primes.py
+  - role: user
+    content:
+      - type: tool_result
+        tool_use_id: toolu_01AbCdEfGhIjKlMnOpQrStU
+        content: |-
+          1: def is_prime(n):
+          2:     """Check if a number is prime."""
+          3:     if n <= 1:
+          4:         return False
+          5:     if n <= 3:
+          6:         return True
+          7:     if n % 2 == 0 or n % 3 == 0:
+          8:         return False
+          9:     i = 5
+          10:     while i * i <= n:
+          11:         if n % i == 0 or n % (i + 2) == 0:
+          12:             return False
+          13:         i += 6
+          14:     return True
+          15:
+          16: def get_primes(limit):
+          17:     """Generate a list of prime numbers up to the given limit."""
+          18:     primes = []
+          19:     for num in range(2, limit + 1)
+          20:         if is_prime(num):
+          21:             primes.append(num)
+          22:     return primes
+          23:
+          24: def main():
+          25:     """Main function to demonstrate prime number generation."""
+          26:     limit = 100
+          27:     prime_list = get_primes(limit)
+          28:     print(f"Prime numbers up to {limit}:")
+          29:     print(prime_list)
+          30:     print(f"Found {len(prime_list)} prime numbers.")
+          31:
+          32: if __name__ == "__main__":
+          33:     main()
+YAML
 ```
 
 ```python Python
@@ -642,7 +721,7 @@ In the example above, the `view` tool result includes file contents with line nu
 
 Claude identifies the syntax error and uses the `str_replace` command to fix it:
 
-```json
+```json Output
 {
   "id": "msg_01VwXyZAbCdEfGhIjKlMnO",
   "model": "claude-opus-4-6",
@@ -671,6 +750,38 @@ Claude identifies the syntax error and uses the `str_replace` command to fix it:
 Your application should then make the edit and return the result:
 
 <CodeGroup>
+```bash CLI
+ant messages create <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+tools:
+  - type: text_editor_20250728
+    name: str_replace_based_edit_tool
+messages:
+  # Previous messages...
+  - role: assistant
+    content:
+      - type: text
+        text: >-
+          I found the syntax error in your primes.py file. In the `get_primes`
+          function, there is a missing colon (:) at the end of the for loop
+          line. Let me fix that for you.
+      - type: tool_use
+        id: toolu_01PqRsTuVwXyZAbCdEfGh
+        name: str_replace_based_edit_tool
+        input:
+          command: str_replace
+          path: primes.py
+          old_str: "    for num in range(2, limit + 1)"
+          new_str: "    for num in range(2, limit + 1):"
+  - role: user
+    content:
+      - type: tool_result
+        tool_use_id: toolu_01PqRsTuVwXyZAbCdEfGh
+        content: Successfully replaced text at exactly one location.
+YAML
+```
+
 ```python Python
 response = client.messages.create(
     model="claude-opus-4-6",
@@ -838,7 +949,7 @@ public class TextEditorConversationExample {
 
 Finally, Claude provides a complete explanation of the fix:
 
-```json
+```json Output
 {
   "id": "msg_01IjKlMnOpQrStUvWxYzAb",
   "model": "claude-opus-4-6",

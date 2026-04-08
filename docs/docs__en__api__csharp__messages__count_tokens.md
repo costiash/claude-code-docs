@@ -3145,7 +3145,7 @@ MessageCountTokensParams parameters = new()
             Role = Role.User,
         },
     ],
-    Model = Model.ClaudeOpus4_6,
+    Model = Model.ClaudeMythosPreview,
 };
 
 var messageTokensCount = await client.Messages.CountTokens(parameters);

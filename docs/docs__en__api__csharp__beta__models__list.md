@@ -72,8 +72,6 @@ The Models API response can be used to determine which models are available for 
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class ModelListPageResponse:`

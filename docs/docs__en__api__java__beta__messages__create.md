@@ -60,8 +60,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
   - `long maxTokens`
 
     The maximum number of tokens to generate before stopping.
@@ -4381,10 +4379,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Recommended for advanced use cases only. You usually only need to use `temperature`.
 
-  - `Optional<String> userProfileId`
-
-    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
-
 ### Returns
 
 - `class BetaMessage:`
@@ -5308,9 +5302,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Most intelligent model for building agents and coding
+      Frontier intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 

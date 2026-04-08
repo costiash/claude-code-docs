@@ -2,17 +2,17 @@
 
 ---
 
-The Claude API is a RESTful API at `https://api.anthropic.com` that provides programmatic access to Claude models. The primary API is the Messages API (`POST /v1/messages`) for conversational interactions.
+The Claude API is a RESTful API at `https://api.anthropic.com` that provides programmatic access to Claude models and Claude Managed Agents.
 
 <Note>
-**New to Claude?** Start with [Get started](/docs/en/get-started) for prerequisites and your first API call, or see [Working with Messages](/docs/en/build-with-claude/working-with-messages) for request/response patterns and examples.
+**New to Claude?** For direct model access, start with [Get started](/docs/en/get-started) and [Working with Messages](/docs/en/build-with-claude/working-with-messages). For managed agent infrastructure, see the [Claude Managed Agents quickstart](/docs/en/managed-agents/quickstart).
 </Note>
 
 ## Prerequisites
 
 To use the Claude API, you'll need:
 
-- An [Anthropic Console account](https://platform.claude.com)
+- A [Claude Console account](https://platform.claude.com)
 - An [API key](/settings/keys)
 
 For step-by-step setup instructions, see [Get started](/docs/en/get-started).
@@ -22,7 +22,7 @@ For step-by-step setup instructions, see [Get started](/docs/en/get-started).
 The Claude API includes the following APIs:
 
 **General Availability:**
-- **[Messages API](/docs/en/api/messages)**: Send messages to Claude for conversational interactions (`POST /v1/messages`)
+- **[Messages API](/docs/en/api/messages/create)**: Send messages to Claude for conversational interactions (`POST /v1/messages`)
 - **[Message Batches API](/docs/en/api/creating-message-batches)**: Process large volumes of Messages requests asynchronously with 50% cost reduction (`POST /v1/messages/batches`)
 - **[Token Counting API](/docs/en/api/messages-count-tokens)**: Count tokens in a message before sending to manage costs and rate limits (`POST /v1/messages/count_tokens`)
 - **[Models API](/docs/en/api/models-list)**: List available Claude models and their details (`GET /v1/models`)
@@ -30,10 +30,11 @@ The Claude API includes the following APIs:
 **Beta:**
 - **[Files API](/docs/en/api/files-create)**: Upload and manage files for use across multiple API calls (`POST /v1/files`, `GET /v1/files`)
 - **[Skills API](/docs/en/api/skills/create-skill)**: Create and manage custom agent skills (`POST /v1/skills`, `GET /v1/skills`)
+- **[Agents API](/docs/en/api/beta/agents/create)**: Define reusable, versioned agent configurations for Claude Managed Agents (`POST /v1/agents`, `GET /v1/agents`)
+- **[Sessions API](/docs/en/api/beta/sessions/create)**: Run stateful agent sessions in managed cloud containers (`POST /v1/sessions`, `GET /v1/sessions/{id}/stream`)
+- **[Environments API](/docs/en/api/beta/environments/create)**: Configure container templates for agent sessions (`POST /v1/environments`, `GET /v1/environments`)
 
 For the complete API reference with all endpoints, parameters, and response schemas, explore the API reference pages listed in the navigation. To access beta features, see [Beta headers](/docs/en/api/beta-headers).
-
-The Messages API supports an optional `inference_geo` parameter for [data residency controls](/docs/en/build-with-claude/data-residency), allowing you to specify where model inference runs.
 
 ## Authentication
 
@@ -62,23 +63,11 @@ Anthropic provides official SDKs that simplify API integration by handling authe
 - Streaming support
 - Request timeouts and connection management
 
-**Example** (Python):
-```python
-from anthropic import Anthropic
-
-client = Anthropic()  # Reads ANTHROPIC_API_KEY from environment
-message = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Hello, Claude"}],
-)
-```
-
 For a list of client SDKs and their respective installation instructions, see [Client SDKs](/docs/en/api/client-sdks).
 
-## Claude API vs Third-Party Platforms
+## Availability on partner platforms
 
-Claude is available through Anthropic's direct API and through partner platforms. Choose based on your infrastructure, compliance requirements, and pricing preferences.
+Claude is available through the direct Claude API and through partner platforms. Choose based on your infrastructure, compliance requirements, and pricing preferences.
 
 ### Claude API
 
@@ -100,20 +89,19 @@ Access Claude through AWS, Google Cloud, or Microsoft Azure:
 | Azure AI | Microsoft Azure | [Claude on Azure AI](/docs/en/build-with-claude/claude-in-microsoft-foundry) |
 
 <Note>
-For feature availability across platforms, see the [Features overview](/docs/en/build-with-claude/overview).
+Claude Managed Agents is available only through the direct Claude API. For feature availability across platforms, see the [Features overview](/docs/en/build-with-claude/overview).
 </Note>
 
 ## Request and Response Format
 
-### Request Size Limits
+### Request size limits
 
-The API has different maximum request sizes depending on the endpoint:
-
-| Endpoint | Maximum Size |
-|----------|--------------|
-| Standard endpoints (Messages, Token Counting) | 32 MB |
+| Endpoint | Maximum request size |
+| --- | --- |
+| Messages, Token Counting | 32 MB |
 | [Batch API](/docs/en/build-with-claude/batch-processing) | 256 MB |
 | [Files API](/docs/en/build-with-claude/files) | 500 MB |
+| Sessions, Agents, Environments | 32 MB |
 
 If you exceed these limits, you'll receive a 413 `request_too_large` error.
 
@@ -145,66 +133,19 @@ For detailed information about limits, tiers, and the token bucket algorithm use
 
 The Claude API is available in [many countries and regions](/docs/en/api/supported-regions) worldwide. Check the supported regions page to confirm availability in your location.
 
-## Basic Example
-
-Here's a minimal request using the Messages API:
-
-```bash
-curl https://api.anthropic.com/v1/messages \
-  --header "x-api-key: $ANTHROPIC_API_KEY" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "content-type: application/json" \
-  --data '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {"role": "user", "content": "Hello, Claude"}
-    ]
-  }'
-```
-
-**Response:**
-```json
-{
-  "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
-  "type": "message",
-  "role": "assistant",
-  "content": [
-    {
-      "type": "text",
-      "text": "Hello! How can I assist you today?"
-    }
-  ],
-  "model": "claude-opus-4-6",
-  "stop_reason": "end_turn",
-  "usage": {
-    "input_tokens": 12,
-    "output_tokens": 8
-  }
-}
-```
-
-For complete examples and tutorials, see [Get started](/docs/en/get-started) and [Working with Messages](/docs/en/build-with-claude/working-with-messages).
-
 ## Next Steps
 
-<CardGroup cols={3}>
-  <Card title="Get started" icon="rocket" href="/docs/en/get-started">
-    Prerequisites, step-by-step tutorial, and examples in multiple languages
+<CardGroup cols={2}>
+  <Card title="Messages API reference" icon="book" href="/docs/en/api/messages/create">
+    Complete API specification for direct model interactions
   </Card>
-  <Card title="Working with Messages" icon="message" href="/docs/en/build-with-claude/working-with-messages">
-    Request/response patterns, multi-turn conversations, and best practices
-  </Card>
-  <Card title="Messages API Reference" icon="book" href="/docs/en/api/messages">
-    Complete API specification: parameters, responses, and error codes
+  <Card title="Claude Managed Agents reference" icon="brain" href="/docs/en/api/beta/sessions">
+    Agents, Sessions, and Environments endpoints
   </Card>
   <Card title="Client SDKs" icon="code" href="/docs/en/api/client-sdks">
-    Installation guides for Python, TypeScript, Java, Go, C#, Ruby, and PHP
-  </Card>
-  <Card title="Features overview" icon="grid" href="/docs/en/build-with-claude/overview">
-    Explore capabilities: caching, vision, tool use, streaming, and more
+    Python, TypeScript, Java, Go, C#, Ruby, and PHP
   </Card>
   <Card title="Rate limits" icon="gauge" href="/docs/en/api/rate-limits">
-    Usage tiers, spend limits, and rate limiting with token bucket algorithm
+    Usage tiers, spend limits, and token bucket algorithm
   </Card>
 </CardGroup>

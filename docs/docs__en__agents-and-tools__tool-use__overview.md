@@ -9,6 +9,27 @@ Tool use lets Claude call functions you define or that Anthropic provides. Claud
 Here's the simplest example using a server tool, where Anthropic handles execution:
 
 <CodeGroup>
+```bash Shell
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 1024,
+    "tools": [{"type": "web_search_20260209", "name": "web_search"}],
+    "messages": [{"role": "user", "content": "What'\''s the latest on the Mars rover?"}]
+  }'
+```
+
+```bash CLI
+ant messages create --transform content --format yaml \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --tool '{type: web_search_20260209, name: web_search}' \
+  --message '{role: user, content: "What is the latest on the Mars rover?"}'
+```
+
 ```python Python
 import anthropic
 
@@ -33,19 +54,6 @@ const response = await client.messages.create({
   messages: [{ role: "user", content: "What's the latest on the Mars rover?" }]
 });
 console.log(response.content);
-```
-
-```bash Shell
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "tools": [{"type": "web_search_20260209", "name": "web_search"}],
-    "messages": [{"role": "user", "content": "What'\''s the latest on the Mars rover?"}]
-  }'
 ```
 </CodeGroup>
 

@@ -981,8 +981,23 @@ Community projects like [ccstatusline](https://github.com/sirmalloc/ccstatusline
 **OSC 8 links not clickable**
 
 * Verify your terminal supports OSC 8 hyperlinks (iTerm2, Kitty, WezTerm)
+
 * Terminal.app does not support clickable links
+
+* If link text appears but isn't clickable, Claude Code may not have detected hyperlink support in your terminal. This commonly affects Windows Terminal and other emulators not in the auto-detection list. Set the `FORCE_HYPERLINK` environment variable to override detection before launching Claude Code:
+
+  ```bash  theme={null}
+  FORCE_HYPERLINK=1 claude
+  ```
+
+  In PowerShell, set the variable in the current session first:
+
+  ```powershell  theme={null}
+  $env:FORCE_HYPERLINK = "1"; claude
+  ```
+
 * SSH and tmux sessions may strip OSC sequences depending on configuration
+
 * If escape sequences appear as literal text like `\e]8;;`, use `printf '%b'` instead of `echo -e` for more reliable escape handling
 
 **Display glitches with escape sequences**

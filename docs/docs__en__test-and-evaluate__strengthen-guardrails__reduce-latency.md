@@ -29,7 +29,7 @@ One of the most straightforward ways to reduce latency is to select the appropri
 
 For speed-critical applications, **Claude Haiku 4.5** offers the fastest response times while maintaining high intelligence:
 
-```python
+```python Python
 import anthropic
 
 client = anthropic.Anthropic()
@@ -60,7 +60,7 @@ Here are some tips to help you optimize your prompts and outputs:
   <Tip> Due to how LLMs count [tokens](/docs/en/about-claude/glossary#tokens) instead of words, asking for an exact word count or a word count limit is not as effective a strategy as asking for paragraph or sentence count limits.</Tip>
 - **Set appropriate output limits**: Use the `max_tokens` parameter to set a hard limit on the maximum length of the generated response. This prevents Claude from generating overly long outputs.
   > **Note**: When the response reaches `max_tokens` tokens, the response will be cut off, perhaps midsentence or mid-word, so this is a blunt technique that may require post-processing and is usually most appropriate for multiple choice or short answer responses where the answer comes right at the beginning.
-- **Experiment with temperature**: The `temperature` [parameter](/docs/en/api/messages) controls the randomness of the output. Lower values (e.g., 0.2) can sometimes lead to more focused and shorter responses, while higher values (e.g., 0.8) may result in more diverse but potentially longer outputs.
+- **Experiment with temperature**: The `temperature` [parameter](/docs/en/api/messages/create) controls the randomness of the output. Lower values (e.g., 0.2) can sometimes lead to more focused and shorter responses, while higher values (e.g., 0.8) may result in more diverse but potentially longer outputs.
 
 Finding the right balance between prompt clarity, output quality, and token count may require some experimentation.
 

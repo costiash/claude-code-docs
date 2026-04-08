@@ -102,6 +102,22 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
+```bash CLI
+ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Search for recent developments in AI
+tools:
+  - type: web_search_20250305
+    name: web_search
+context_management:
+  edits:
+    - type: clear_tool_uses_20250919
+YAML
+```
+
 ```python Python
 response = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -347,6 +363,37 @@ curl https://api.anthropic.com/v1/messages \
             ]
         }
     }'
+```
+
+```bash CLI
+ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Create a simple command line calculator app using Python
+tools:
+  - type: text_editor_20250728
+    name: str_replace_based_edit_tool
+    max_characters: 10000
+  - type: web_search_20250305
+    name: web_search
+    max_uses: 3
+context_management:
+  edits:
+    - type: clear_tool_uses_20250919
+      trigger:
+        type: input_tokens
+        value: 30000
+      keep:
+        type: tool_uses
+        value: 3
+      clear_at_least:
+        type: input_tokens
+        value: 5000
+      exclude_tools:
+        - web_search
+YAML
 ```
 
 ```python Python
@@ -766,6 +813,25 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
+```bash CLI
+ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 16000
+messages:
+  - role: user
+    content: Hello
+thinking:
+  type: enabled
+  budget_tokens: 10000
+context_management:
+  edits:
+    - type: clear_thinking_20251015
+      keep:
+        type: thinking_turns
+        value: 2
+YAML
+```
+
 ```python Python nocheck
 response = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -1041,6 +1107,35 @@ When using multiple strategies, the `clear_thinking_20251015` strategy must be l
 </Note>
 
 <CodeGroup>
+
+```bash CLI
+ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 16000
+thinking:
+  type: enabled
+  budget_tokens: 10000
+messages:
+  - role: user
+    content: Hello
+tools:
+  - type: web_search_20250305
+    name: web_search
+context_management:
+  edits:
+    - type: clear_thinking_20251015
+      keep:
+        type: thinking_turns
+        value: 2
+    - type: clear_tool_uses_20250919
+      trigger:
+        type: input_tokens
+        value: 50000
+      keep:
+        type: tool_uses
+        value: 5
+YAML
+```
 
 ```python Python nocheck
 response = client.beta.messages.create(
@@ -1364,7 +1459,7 @@ puts response
 
 You can see which context edits were applied to your request using the `context_management` response field, along with helpful statistics about the content and input tokens cleared.
 
-```json Response
+```json Output
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message",
@@ -1451,6 +1546,38 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             ]
         }
     }'
+```
+
+```bash CLI
+cat > request.yaml <<'YAML'
+model: claude-opus-4-6
+messages:
+  - role: user
+    content: Continue our conversation...
+tools: []
+context_management:
+  edits:
+    - type: clear_tool_uses_20250919
+      trigger:
+        type: input_tokens
+        value: 30000
+      keep:
+        type: tool_uses
+        value: 5
+YAML
+
+ORIGINAL=$(ant beta:messages count-tokens \
+  --beta context-management-2025-06-27 \
+  --transform context_management.original_input_tokens \
+  --format yaml < request.yaml)
+
+INPUT_TOKENS=$(ant beta:messages count-tokens \
+  --beta context-management-2025-06-27 \
+  --transform input_tokens --format yaml < request.yaml)
+
+printf 'Original tokens: %s\n' "$ORIGINAL"
+printf 'After clearing: %s\n' "$INPUT_TOKENS"
+printf 'Savings: %s tokens\n' "$((ORIGINAL - INPUT_TOKENS))"
 ```
 
 ```python Python nocheck
@@ -1711,7 +1838,7 @@ puts "Savings: #{response.context_management.original_input_tokens - response.in
 
 </CodeGroup>
 
-```json Response
+```json Output
 {
   "input_tokens": 25000,
   "context_management": {
@@ -1737,6 +1864,22 @@ For example, in a file editing workflow where Claude performs many operations, C
 To use both features together, enable them in your API request:
 
 <CodeGroup>
+
+```bash CLI
+ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Hello
+tools:
+  - type: memory_20250818
+    name: memory
+context_management:
+  edits:
+    - type: clear_tool_uses_20250919
+YAML
+```
 
 ```python Python nocheck
 response = client.beta.messages.create(
@@ -1967,6 +2110,13 @@ When compaction is enabled, the SDK monitors token usage after each model respon
 Add `compaction_control` to your `tool_runner` call to enable automatic summarization when token usage exceeds the threshold.
 
 <Tabs>
+<Tab title="CLI">
+
+<Note>
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+</Note>
+
+</Tab>
 <Tab title="Python">
 
 ```python Python hidelines={1..10}
@@ -2299,7 +2449,7 @@ When using server-side tools, the SDK may incorrectly calculate token usage, cau
 
 For example, after a web search operation, the API response might show:
 
-```json
+```json Output
 {
   "usage": {
     "input_tokens": 63000,

@@ -27,6 +27,29 @@ When using the SDK, you can specify beta headers in the request options:
 
 <CodeGroup>
 
+```bash Shell
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": "Hello, Claude"}
+    ]
+  }'
+```
+
+```bash CLI
+ant beta:messages create \
+  --beta files-api-2025-04-14 \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello, Claude"}'
+```
+
 ```python Python hidelines={1..2}
 from anthropic import Anthropic
 
@@ -53,21 +76,6 @@ const msg = await anthropic.beta.messages.create({
 });
 ```
 
-```bash Shell
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {"role": "user", "content": "Hello, Claude"}
-    ]
-  }'
-```
-
 </CodeGroup>
 
 <Warning>
@@ -86,6 +94,16 @@ To use multiple beta features in a single request, include all feature names in 
 anthropic-beta: feature1,feature2,feature3
 ```
 
+### Endpoint-specific headers
+
+Some beta features are scoped to specific endpoints rather than individual request parameters. [Claude Managed Agents](/docs/en/managed-agents/overview) uses a single beta header for all endpoints:
+
+| Endpoints | Beta header |
+| --- | --- |
+| `/v1/agents`, `/v1/sessions`, `/v1/environments` | `managed-agents-2026-04-01` |
+
+See the [Managed Agents overview](/docs/en/managed-agents/overview) for details.
+
 ### Version naming conventions
 
 Beta feature names typically follow the pattern: `feature-name-YYYY-MM-DD`, where the date indicates when the beta version was released. Always use the exact beta feature name as documented.
@@ -94,7 +112,7 @@ Beta feature names typically follow the pattern: `feature-name-YYYY-MM-DD`, wher
 
 If you use an invalid or unavailable beta header, you'll receive an error response:
 
-```json
+```json Output
 {
   "type": "error",
   "error": {

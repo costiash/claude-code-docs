@@ -26,13 +26,14 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
+  - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `claude-opus-4-6` - Most intelligent model for building agents and coding
+    - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+    - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
     - `claude-sonnet-4-6` - Best combination of speed and intelligence
     - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
     - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
@@ -48,9 +49,13 @@ Future models and features will not be compatible with Text Completions. See our
     - `claude-sonnet-4-20250514` - High-performance model with extended thinking
     - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
+    - `"claude-mythos-preview"`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
     - `"claude-opus-4-6"`
 
-      Most intelligent model for building agents and coding
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"`
 
@@ -186,7 +191,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 18 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -230,8 +235,6 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `"output-300k-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
-
 ### Returns
 
 - `class Completion: …`
@@ -252,13 +255,14 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
+    - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `claude-opus-4-6` - Most intelligent model for building agents and coding
+      - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+      - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
       - `claude-sonnet-4-6` - Best combination of speed and intelligence
       - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
       - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
@@ -274,9 +278,13 @@ Future models and features will not be compatible with Text Completions. See our
       - `claude-sonnet-4-20250514` - High-performance model with extended thinking
       - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
+      - `"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
       - `"claude-opus-4-6"`
 
-        Most intelligent model for building agents and coding
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-6"`
 
@@ -364,7 +372,7 @@ client = Anthropic(
 )
 for completion in client.completions.create(
     max_tokens_to_sample=256,
-    model="claude-opus-4-6",
+    model="claude-mythos-preview",
     prompt="\n\nHuman: Hello, world!\n\nAssistant:",
 ):
   print(completion)
@@ -392,13 +400,14 @@ for completion in client.completions.create(
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]`
+    - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `claude-opus-4-6` - Most intelligent model for building agents and coding
+      - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+      - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
       - `claude-sonnet-4-6` - Best combination of speed and intelligence
       - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
       - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
@@ -414,9 +423,13 @@ for completion in client.completions.create(
       - `claude-sonnet-4-20250514` - High-performance model with extended thinking
       - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
+      - `"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
       - `"claude-opus-4-6"`
 
-        Most intelligent model for building agents and coding
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-6"`
 

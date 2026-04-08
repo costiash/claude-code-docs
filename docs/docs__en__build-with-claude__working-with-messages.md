@@ -4,7 +4,15 @@ Practical patterns and examples for using the Messages API effectively
 
 ---
 
-This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](/docs/en/api/messages).
+Anthropic offers two ways to build with Claude, each suited to different use cases:
+
+| | Messages API | Claude Managed Agents |
+|---|---|---|
+| **What it is** | Direct model prompting access | Pre-built, configurable agent harness that runs in managed infrastructure |
+| **Best for** | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work |
+| **Learn more** | [Messages API docs](/docs/en/build-with-claude/working-with-messages) | [Claude Managed Agents docs](/docs/en/managed-agents/overview) |
+
+This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](/docs/en/api/messages/create).
 
 <Note>
 This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
@@ -27,6 +35,13 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
           {"role": "user", "content": "Hello, Claude"}
       ]
   }'
+  ```
+
+  ```bash CLI
+  ant messages create \
+    --model claude-opus-4-6 \
+    --max-tokens 1024 \
+    --message '{role: user, content: "Hello, Claude"}'
   ```
 
   ```python Python hidelines={1..2}
@@ -159,7 +174,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
   ```
 </CodeGroup>
 
-```json JSON
+```json Output
 {
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
@@ -202,6 +217,15 @@ curl https://api.anthropic.com/v1/messages \
 
     ]
 }'
+```
+
+```bash CLI
+ant messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello, Claude"}' \
+  --message '{role: assistant, content: "Hello!"}' \
+  --message '{role: user, content: "Can you describe LLMs to me?"}'
 ```
 
 ```python Python hidelines={1..2}
@@ -358,7 +382,7 @@ puts message
 ```
 </CodeGroup>
 
-```json JSON
+```json Output
 {
   "id": "msg_018gCsTGsXkYJVqYPxTgDHBU",
   "type": "message",
@@ -398,6 +422,18 @@ You can pre-fill part of Claude's response in the last position of the input mes
           {"role": "assistant", "content": "The answer is ("}
       ]
   }'
+  ```
+
+  ```bash CLI
+  ant messages create <<'YAML'
+  model: claude-sonnet-4-5
+  max_tokens: 1
+  messages:
+    - role: user
+      content: "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"
+    - role: assistant
+      content: "The answer is ("
+  YAML
   ```
 
   ```python Python hidelines={1..2}
@@ -555,7 +591,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
   ```
 </CodeGroup>
 
-```json JSON
+```json Output
 {
   "id": "msg_01Q8Faay6S7QPTvEUUQARt7h",
   "type": "message",
@@ -632,6 +668,44 @@ Claude can read both text and images in requests. Images can be supplied using t
           ]}
       ]
   }'
+  ```
+
+  
+  ```bash CLI nocheck
+  IMAGE_URL="https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+
+  # Option 1: Base64-encoded image (CLI auto-encodes binary @file refs)
+  curl -s "$IMAGE_URL" -o ./ant.jpg
+
+  ant messages create <<'YAML'
+  model: claude-opus-4-6
+  max_tokens: 1024
+  messages:
+    - role: user
+      content:
+        - type: image
+          source:
+            type: base64
+            media_type: image/jpeg
+            data: "@./ant.jpg"
+        - type: text
+          text: What is in the above image?
+  YAML
+
+  # Option 2: URL-referenced image
+  ant messages create <<YAML
+  model: claude-opus-4-6
+  max_tokens: 1024
+  messages:
+    - role: user
+      content:
+        - type: image
+          source:
+            type: url
+            url: $IMAGE_URL
+        - type: text
+          text: What is in the above image?
+  YAML
   ```
 
   
@@ -1107,7 +1181,7 @@ Claude can read both text and images in requests. Images can be supplied using t
   ```
 </CodeGroup>
 
-```json JSON
+```json Output
 {
   "id": "msg_01EcyWo6m4hyW8KHs2y2pei5",
   "type": "message",

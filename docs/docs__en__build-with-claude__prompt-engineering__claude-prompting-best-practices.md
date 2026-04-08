@@ -80,7 +80,7 @@ Best practices:
 
 Setting a role in the system prompt focuses Claude's behavior and tone for your use case. Even a single sentence makes a difference:
 
-```python
+```python Python
 import anthropic
 
 client = anthropic.Anthropic()
@@ -394,7 +394,9 @@ Extended thinking adds latency and should only be used when it will meaningfully
 
 If you are migrating from [extended thinking](/docs/en/build-with-claude/extended-thinking) with `budget_tokens`, replace your thinking configuration and move budget control to `effort`:
 
-```python Before (extended thinking, older models) nocheck
+**Before (extended thinking, older models):**
+
+```python Python nocheck
 client.messages.create(
     model="claude-sonnet-4-5-20250929",
     max_tokens=64000,
@@ -403,7 +405,9 @@ client.messages.create(
 )
 ```
 
-```python After (adaptive thinking) nocheck
+**After (adaptive thinking):**
+
+```python Python nocheck
 client.messages.create(
     model="claude-opus-4-6",
     max_tokens=64000,
@@ -680,7 +684,7 @@ Claude Sonnet 4.6 defaults to an effort level of `high`, in contrast to Claude S
 
 If you're not using extended thinking on Claude Sonnet 4.5, you can continue without it on Claude Sonnet 4.6. You should explicitly set effort to the level appropriate for your use case. At `low` effort with thinking disabled, you can expect similar or better performance relative to Claude Sonnet 4.5 with no extended thinking.
 
-```python
+```python Python
 client.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=8192,
@@ -704,7 +708,7 @@ Adaptive thinking is particularly well suited to the following workload patterns
 
 When using adaptive thinking, evaluate `medium` and `high` effort on your tasks. The right level depends on your workload's tradeoff between quality, latency, and token usage.
 
-```python nocheck
+```python Python nocheck
 client.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=64000,
@@ -720,7 +724,7 @@ If you need to keep `budget_tokens` temporarily while migrating, a budget around
 
 **For coding use cases** (agentic coding, tool-heavy workflows, code generation), start with `medium` effort:
 
-```python nocheck
+```python Python nocheck
 client.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=16384,
@@ -732,7 +736,7 @@ client.messages.create(
 
 **For chat and non-coding use cases** (chat, content generation, search, classification), start with `low` effort:
 
-```python nocheck
+```python Python nocheck
 client.messages.create(
     model="claude-sonnet-4-6",
     max_tokens=8192,

@@ -41,6 +41,15 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
+```bash CLI
+ant messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --inference-geo us \
+  --message '{role: user, content: "Summarize the key points of this document."}' \
+  --transform '{content.0.text,usage.inference_geo}' --format yaml
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -90,7 +99,7 @@ console.log(`Inference geo: ${response.usage.inference_geo}`);
 
 The response `usage` object includes an `inference_geo` field indicating where inference ran:
 
-```json
+```json Output
 {
   "usage": {
     "input_tokens": 25,

@@ -4,7 +4,7 @@ Anthropic's Claude models are now generally available through [Vertex AI](https:
 
 ---
 
-The Vertex API for accessing Claude is nearly-identical to the [Messages API](/docs/en/api/messages) and supports all of the same options, with two key differences:
+The Vertex API for accessing Claude is nearly-identical to the [Messages API](/docs/en/api/messages/create) and supports all of the same options, with two key differences:
 
 * In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
 * In Vertex, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
@@ -45,14 +45,14 @@ go get github.com/anthropics/anthropic-sdk-go
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-vertex:2.18.0")
+implementation("com.anthropic:anthropic-java-vertex:2.20.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-vertex</artifactId>
-    <version>2.18.0</version>
+    <version>2.20.0</version>
 </dependency>
 ```
 
@@ -149,6 +149,10 @@ The following examples show how to generate text from Claude on Vertex AI:
     }],
     "max_tokens": 100,
   }'
+  ```
+
+  ```bash CLI
+  # The ant CLI does not yet support Vertex AI.
   ```
 
   
@@ -396,6 +400,10 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 Set the `region` parameter to `"global"` when initializing the client:
 
 <CodeGroup>
+
+```bash CLI
+# The ant CLI does not yet support Vertex AI.
+```
 
 ```python Python nocheck
 from anthropic import AnthropicVertex
@@ -724,6 +732,10 @@ puts message.content.first.text
 Specify a specific region like `"us-east1"` or `"europe-west1"`:
 
 <CodeGroup>
+
+```bash CLI
+# The ant CLI does not yet support Vertex AI.
+```
 
 ```python Python nocheck
 from anthropic import AnthropicVertex

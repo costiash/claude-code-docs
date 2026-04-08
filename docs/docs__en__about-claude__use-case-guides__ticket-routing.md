@@ -344,7 +344,7 @@ It’s hard to know how well your prompt works without deploying it in a test pr
 
 Let’s build the deployment structure. Start by defining the method signature for wrapping our call to Claude. We'll take the method we’ve already begun to write, which has `ticket_contents` as input, and now return a tuple of `reasoning` and `intent` as output. If you have an existing automation using traditional ML, you'll want to follow that method signature instead.
 
-```python nocheck hidelines={1}
+```python Python nocheck hidelines={1}
 import anthropic
 import re
 
@@ -410,7 +410,7 @@ You may need to assess Claude on other axes depending on what factors that are i
 
 To assess this, we first have to modify the script we wrote and add a function to compare the predicted intent with the actual intent and calculate the percentage of correct predictions. We also have to add in cost calculation and time measurement functionality.
 
-```python nocheck hidelines={1}
+```python Python nocheck hidelines={1}
 import anthropic
 import re
 

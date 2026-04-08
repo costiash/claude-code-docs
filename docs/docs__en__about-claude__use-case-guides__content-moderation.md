@@ -113,7 +113,7 @@ When selecting a model, it’s important to consider the size of your data. If c
 
 In order to use Claude for content moderation, Claude must understand the moderation requirements of your application. Let’s start by writing a prompt that allows you to define your moderation needs:
 
-```python nocheck hidelines={1}
+```python Python nocheck hidelines={1}
 import anthropic
 import json
 
@@ -190,7 +190,7 @@ Content moderation is a classification problem. Thus, you can use the same techn
 
 One additional consideration is that instead of treating content moderation as a binary classification problem, you may instead create multiple categories to represent various risk levels. Creating multiple risk levels allows you to adjust the aggressiveness of your moderation. For example, you might want to automatically block user queries that are deemed high risk, while users with many medium risk queries are flagged for human review.
 
-```python nocheck hidelines={1}
+```python Python nocheck hidelines={1}
 import anthropic
 import json
 
@@ -289,7 +289,7 @@ In complex scenarios, it may be helpful to consider additional strategies to imp
 
 In addition to listing the unsafe categories in the prompt, further improvements can be made by providing definitions and phrases related to each category.
 
-```python nocheck hidelines={1}
+```python Python nocheck hidelines={1}
 import anthropic
 import json
 
@@ -387,7 +387,7 @@ Notably, the definition for the `Specialized Advice` category now specifies the 
 
 To reduce costs in situations where real-time moderation isn't necessary, consider moderating messages in batches. Include multiple messages within the prompt's context, and ask Claude to assess which messages should be moderated.
 
-```python nocheck hidelines={1}
+```python Python nocheck hidelines={1}
 import anthropic
 import json
 
@@ -456,6 +456,7 @@ Violated Categories: {", ".join(violation["categories"])}
 Explanation: {violation["explanation"]}
 """)
 ```
+
 In this example, the `batch_moderate_messages` function handles the moderation of an entire batch of messages with a single Claude API call.
 Inside the function, a prompt is created that includes the list of messages to evaluate, the defined unsafe content categories, and their descriptions. The prompt directs Claude to return a JSON object listing all messages that contain violations. Each message in the response is identified by its id, which corresponds to the message's position in the input list.
 Keep in mind that finding the optimal batch size for your specific needs may require some experimentation. While larger batch sizes can lower costs, they might also lead to a slight decrease in quality. Additionally, you may need to increase the `max_tokens` parameter in the Claude API call to accommodate longer responses. For details on the maximum number of tokens your chosen model can output, refer to the [model comparison page](/docs/en/about-claude/models#model-comparison-table).
