@@ -354,14 +354,15 @@ Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/
 
 Vertex AI limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
-## Global vs regional endpoints
+## Global, multi-region, and regional endpoints
 
-Starting with **Claude Sonnet 4.5 and all future models**, Google Vertex AI offers two endpoint types:
+Google Vertex AI offers three endpoint types:
 
 - **Global endpoints:** Dynamic routing for maximum availability
+- **Multi-region endpoints:** Dynamic routing within a geographic area (for example, the United States) for data residency with high availability
 - **Regional endpoints:** Guaranteed data routing through specific geographic regions
 
-Regional endpoints include a 10% pricing premium over global endpoints.
+Regional and multi-region endpoints include a 10% pricing premium over global endpoints.
 
 <Note>
 This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4, Opus 4, and earlier) maintain their existing pricing structures.
@@ -376,9 +377,15 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 - Best for applications where data residency is flexible
 - Only supports pay-as-you-go traffic (provisioned throughput requires regional endpoints)
 
+**Multi-region endpoints:**
+- Dynamically route requests across regions within a geographic area (currently `us`, with `eu` coming soon)
+- Useful when you need data residency within a broad geography but want higher availability than a single region
+- 10% pricing premium over global endpoints
+- Only supports pay-as-you-go traffic (provisioned throughput requires regional endpoints)
+
 **Regional endpoints:**
 - Route traffic through specific geographic regions
-- Required for data residency and compliance requirements
+- Required for single-region data residency, strict compliance mandates, or provisioned throughput
 - Support both pay-as-you-go and provisioned throughput
 - 10% pricing premium reflects infrastructure costs for dedicated regional capacity
 
@@ -533,6 +540,172 @@ require "anthropic"
 
 client = Anthropic::VertexClient.new(
   region: "global",
+  project_id: "MY_PROJECT_ID"
+)
+
+message = client.messages.create(
+  model: "claude-opus-4-6",
+  max_tokens: 100,
+  messages: [{role: "user", content: "Hey Claude!"}]
+)
+
+puts message.content.first.text
+```
+</CodeGroup>
+
+**Using multi-region endpoints:**
+
+Set the `region` parameter to a multi-region identifier such as `"us"`. The SDK routes requests to the multi-region endpoint (for example, `https://aiplatform.us.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
+
+<CodeGroup>
+
+```python Python nocheck
+from anthropic import AnthropicVertex
+
+project_id = "MY_PROJECT_ID"
+region = "us"  # Multi-region: routes within US regions
+
+client = AnthropicVertex(project_id=project_id, region=region)
+
+message = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=100,
+    messages=[
+        {
+            "role": "user",
+            "content": "Hey Claude!",
+        }
+    ],
+)
+print(message)
+```
+
+```typescript TypeScript nocheck
+import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
+
+const projectId = "MY_PROJECT_ID";
+const region = "us"; // Multi-region: routes within US regions
+
+const client = new AnthropicVertex({
+  projectId,
+  region
+});
+
+const result = await client.messages.create({
+  model: "claude-opus-4-6",
+  max_tokens: 100,
+  messages: [
+    {
+      role: "user",
+      content: "Hey Claude!"
+    }
+  ]
+});
+```
+
+```csharp C# nocheck
+using Anthropic;
+using Anthropic.Models.Messages;
+using Anthropic.Vertex;
+
+var projectId = "MY_PROJECT_ID";
+var region = "us"; // Multi-region: routes within US regions
+
+var client = new AnthropicClient
+{
+    Backend = new VertexBackend(projectId, region)
+};
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_6,
+    MaxTokens = 100,
+    Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
+};
+
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
+```
+
+```go Go nocheck hidelines={1..2,9..10,-1}
+package main
+
+import (
+	"context"
+
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/vertex"
+)
+
+func main() {
+	// Multi-region: routes within US regions
+	client := anthropic.NewClient(
+		vertex.WithGoogleAuth(context.Background(), "us", "MY_PROJECT_ID"),
+	)
+
+	message, _ := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+		Model:     "claude-opus-4-6",
+		MaxTokens: 100,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Hey Claude!")),
+		},
+	})
+	_ = message
+}
+```
+
+```java Java nocheck
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.vertex.backends.VertexBackend;
+
+// Multi-region: routes within US regions
+AnthropicClient client = AnthropicOkHttpClient.builder()
+  .backend(
+    VertexBackend.builder()
+      .region("us")
+      .project("MY_PROJECT_ID")
+      .build()
+  )
+  .build();
+
+var message = client
+  .messages()
+  .create(
+    MessageCreateParams.builder()
+      .model("claude-opus-4-6")
+      .maxTokens(100)
+      .addUserMessage("Hey Claude!")
+      .build()
+  );
+```
+
+```php PHP nocheck
+<?php
+
+use Anthropic\Vertex;
+
+$client = Vertex\Client::fromEnvironment(
+    location: 'us', // Multi-region: routes within US regions
+    projectId: 'MY_PROJECT_ID',
+);
+
+$message = $client->messages->create(
+    maxTokens: 100,
+    messages: [
+        ['role' => 'user', 'content' => 'Hey Claude!']
+    ],
+    model: 'claude-opus-4-6',
+);
+echo $message->content[0]->text;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::VertexClient.new(
+  region: "us", # Multi-region: routes within US regions
   project_id: "MY_PROJECT_ID"
 )
 
