@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-04-09T15:35:50.451066Z",
-    "total_paths": 1170,
+    "generated_at": "2026-04-09T18:24:51.185078Z",
+    "total_paths": 1171,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-04-09T15:35:50.451075Z"
+    "last_regenerated": "2026-04-09T18:24:51.185085Z"
   },
   "categories": {
     "core_documentation": [
@@ -26,6 +26,7 @@
       "/docs/en/agents-and-tools/agent-skills/quickstart",
       "/docs/en/agents-and-tools/mcp-connector",
       "/docs/en/agents-and-tools/remote-mcp-servers",
+      "/docs/en/agents-and-tools/tool-use/advisor-tool",
       "/docs/en/agents-and-tools/tool-use/bash-tool",
       "/docs/en/agents-and-tools/tool-use/code-execution-tool",
       "/docs/en/agents-and-tools/tool-use/computer-use-tool",

@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-09T15:47:00Z",
-  "indexed_files": 1035,
+  "generated_at": "2026-04-09T18:36:50Z",
+  "indexed_files": 1036,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -112,7 +112,7 @@
         "context",
         "history"
       ],
-      "word_count": 679,
+      "word_count": 678,
       "file_path": "docs/claude-code__checkpointing.md"
     },
     "/claude-code/claude-code-on-the-web": {
@@ -148,8 +148,8 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # CLI reference  ...",
       "keywords": [
         "session",
-        "mode",
         "claude",
+        "mode",
         "interactive",
         "prompt",
         "see",
@@ -166,9 +166,9 @@
         "flags",
         "output",
         "model",
-        "permission"
+        "requires"
       ],
-      "word_count": 2156,
+      "word_count": 2191,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -434,10 +434,10 @@
         "tool",
         "code",
         "event",
+        "see",
         "json",
         "file",
         "command",
-        "see",
         "permission",
         "input",
         "example",
@@ -448,7 +448,7 @@
         "exit",
         "prompt"
       ],
-      "word_count": 5456,
+      "word_count": 5465,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "command",
         "exit"
       ],
-      "word_count": 14934,
+      "word_count": 15070,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -484,8 +484,8 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Interactive mod...",
       "keywords": [
         "claude",
-        "commands",
         "code",
+        "commands",
         "mode",
         "command",
         "line",
@@ -499,12 +499,12 @@
         "conversation",
         "normal",
         "word",
-        "see",
         "previous",
         "end",
+        "see",
         "macos"
       ],
-      "word_count": 2654,
+      "word_count": 2659,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -714,21 +714,21 @@
         "code",
         "claude",
         "when",
-        "example",
         "default",
+        "example",
+        "event",
         "user",
         "prompt",
         "standard",
-        "event",
-        "counter",
         "request",
+        "counter",
+        "session",
+        "api",
         "logs",
         "environment",
-        "include",
-        "session",
-        "api"
+        "include"
       ],
-      "word_count": 3340,
+      "word_count": 3459,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1051,20 +1051,20 @@
         "subagent",
         "name",
         "content",
+        "commands",
         "yaml",
-        "code",
         "create",
-        "see",
-        "session",
-        "run",
         "description",
         "invoke",
-        "automatically",
+        "see",
+        "reference",
+        "code",
         "file",
-        "commands",
-        "reference"
+        "bundled",
+        "directory",
+        "frontmatter"
       ],
-      "word_count": 5052,
+      "word_count": 4794,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1217,22 +1217,22 @@
         "extension",
         "new",
         "conversation",
+        "see",
         "tab",
         "panel",
-        "icon",
-        "see",
         "click",
-        "cli",
+        "icon",
         "prompt",
+        "cli",
         "file",
         "editor",
-        "settings",
         "terminal",
+        "settings",
+        "step",
         "windows",
-        "when",
-        "install"
+        "when"
       ],
-      "word_count": 4482,
+      "word_count": 4592,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
@@ -1738,6 +1738,34 @@
       ],
       "word_count": 176,
       "file_path": "docs/docs__en__agents-and-tools__remote-mcp-servers.md"
+    },
+    "/docs/en/agents-and-tools/tool-use/advisor-tool": {
+      "title": "Advisor tool",
+      "content_preview": "# Advisor tool  Pair a faster executor model with a higher-intelligence advisor model that provides strategic guidance mid-generation.  ---  The advisor tool lets a faster, lower-cost **executor model...",
+      "keywords": [
+        "advisor",
+        "executor",
+        "model",
+        "tool",
+        "when",
+        "call",
+        "calls",
+        "cost",
+        "conversation",
+        "prompt",
+        "tokens",
+        "block",
+        "output",
+        "tasks",
+        "level",
+        "side",
+        "caching",
+        "full",
+        "request",
+        "claude"
+      ],
+      "word_count": 3155,
+      "file_path": "docs/docs__en__agents-and-tools__tool-use__advisor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/bash-tool": {
       "title": "Bash tool",
