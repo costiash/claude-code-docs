@@ -52,7 +52,7 @@ JSON
 ````bash
 AGENT_ID=$(ant beta:agents create \
   --name "Code Reviewer" \
-  --model claude-sonnet-4-6 \
+  --model '{id: claude-sonnet-4-6}' \
   --system "You are a code review assistant with access to GitHub." \
   --mcp-server '{type: url, name: github, url: https://api.githubcopilot.com/mcp/}' \
   --tool '{type: agent_toolset_20260401}' \

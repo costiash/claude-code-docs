@@ -208,7 +208,7 @@ To capture a single field as an unquoted string — for example, the ID of a new
 ```bash
 AGENT_ID=$(ant beta:agents create \
   --name "My Agent" \
-  --model claude-sonnet-4-6 \
+  --model '{id: claude-sonnet-4-6}' \
   --transform id --format yaml)
 
 printf '%s\n' "$AGENT_ID"
@@ -242,7 +242,7 @@ Repeatable flags build arrays. Each `--tool` or `--event` appends one element:
 ```bash
 ant beta:agents create \
   --name "Research Agent" \
-  --model claude-opus-4-6 \
+  --model '{id: claude-opus-4-6}' \
   --tool '{type: agent_toolset_20260401}' \
   --tool '{type: custom, name: search_docs, input_schema: {type: object, properties: {query: {type: string}}}}'
 ```
@@ -281,7 +281,7 @@ To inline a file's contents into a string-valued field, prefix the path with `@`
 
 ```bash
 ant beta:agents create \
-  --name "Researcher" --model claude-sonnet-4-6 \
+  --name "Researcher" --model '{id: claude-sonnet-4-6}' \
   --system @./prompts/researcher.txt
 ```
 

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-09T12:38:32Z",
+  "generated_at": "2026-04-09T15:47:00Z",
   "indexed_files": 1035,
   "index": {
     "/changelog": {
@@ -21985,7 +21985,7 @@
         "resources",
         "path"
       ],
-      "word_count": 2222,
+      "word_count": 2225,
       "file_path": "docs/docs__en__api__sdks__cli.md"
     },
     "/docs/en/api/sdks/csharp": {
@@ -25057,7 +25057,7 @@
         "workspace",
         "result"
       ],
-      "word_count": 7237,
+      "word_count": 7253,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -26037,7 +26037,7 @@
         "skills",
         "session"
       ],
-      "word_count": 1459,
+      "word_count": 1460,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-containers": {
@@ -26205,7 +26205,7 @@
         "note",
         "api"
       ],
-      "word_count": 1973,
+      "word_count": 1974,
       "file_path": "docs/docs__en__managed-agents__github.md"
     },
     "/docs/en/managed-agents/mcp-connector": {
@@ -26457,7 +26457,7 @@
         "claude",
         "streaming"
       ],
-      "word_count": 2320,
+      "word_count": 2321,
       "file_path": "docs/docs__en__managed-agents__quickstart.md"
     },
     "/docs/en/managed-agents/sessions": {
