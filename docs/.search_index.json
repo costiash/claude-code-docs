@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-09T00:42:32Z",
+  "generated_at": "2026-04-09T04:09:34Z",
   "indexed_files": 1035,
   "index": {
     "/changelog": {
@@ -280,7 +280,7 @@
         "file",
         "local"
       ],
-      "word_count": 6530,
+      "word_count": 6540,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -417,10 +417,10 @@
         "flag",
         "options",
         "structured",
-        "output",
-        "event"
+        "auto",
+        "output"
       ],
-      "word_count": 1409,
+      "word_count": 1422,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -486,25 +486,25 @@
         "claude",
         "commands",
         "code",
-        "command",
         "mode",
+        "command",
         "line",
         "press",
         "history",
         "background",
-        "input",
         "prompt",
+        "input",
         "search",
         "text",
         "conversation",
-        "word",
         "normal",
+        "word",
         "see",
         "previous",
         "end",
         "macos"
       ],
-      "word_count": 2633,
+      "word_count": 2654,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -602,10 +602,10 @@
         "code",
         "command",
         "step",
+        "tools",
         "when",
         "url",
         "const",
-        "tools",
         "name",
         "title",
         "tool",
@@ -613,10 +613,10 @@
         "http",
         "example",
         "stdio",
-        "configuration",
-        "plugin"
+        "return",
+        "environment"
       ],
-      "word_count": 6860,
+      "word_count": 6923,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -723,12 +723,12 @@
         "counter",
         "request",
         "logs",
+        "environment",
         "include",
         "session",
-        "api",
-        "file"
+        "api"
       ],
-      "word_count": 3291,
+      "word_count": 3340,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -812,7 +812,7 @@
         "web",
         "commands"
       ],
-      "word_count": 1665,
+      "word_count": 1742,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -1008,7 +1008,7 @@
         "example",
         "configuration"
       ],
-      "word_count": 7065,
+      "word_count": 7104,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1080,19 +1080,19 @@
         "git",
         "session",
         "window",
-        "codegroup",
+        "when",
         "name",
+        "codegroup",
+        "directory",
         "json",
         "statusline",
         "output",
         "usage",
-        "directory",
-        "frame",
-        "nibzeslajvh",
-        "ydoq",
-        "images"
+        "only",
+        "current",
+        "frame"
       ],
-      "word_count": 5304,
+      "word_count": 5455,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1120,7 +1120,7 @@
         "run",
         "task"
       ],
-      "word_count": 6437,
+      "word_count": 6445,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
