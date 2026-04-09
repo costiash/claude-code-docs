@@ -1,4 +1,4 @@
-# Using memory
+# Using agent memory
 
 Give your agents persistent memory that survives across sessions using memory stores.
 
@@ -8,7 +8,7 @@ Give your agents persistent memory that survives across sessions using memory st
 Agent Memory is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 </Tip>
 
-Agent API sessions are ephemeral by default. When a session ends, anything the agent learned is gone. Memory stores let the agent carry learnings across sessions: user preferences, project conventions, prior mistakes, and domain context.
+Managed Agents API sessions are ephemeral by default. When a session ends, anything the agent learned is gone. Memory stores let the agent carry learnings across sessions: user preferences, project conventions, prior mistakes, and domain context.
 
 <Note>
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. An additional beta header is needed for research preview features. The SDK sets these beta headers automatically.
@@ -19,7 +19,7 @@ A **memory store** is a workspace-scoped collection of text documents optimized 
 
 Each **memory** in a store can be accessed and edited directly via the API or Console, allowing for tuning, importing, and exporting memories.
 
-Every change to a memory creates an immutable **memory_version** to support auditing and rolling back memory changes.
+Every change to a memory creates an immutable **memory version** to support auditing and rolling back memory changes.
 
 ## Create a memory store
 
@@ -192,7 +192,7 @@ Pre-load a store with reference material before any agent runs:
 Individual memories within the store are capped at 100KB (~25K tokens). Structure memory as many small focused files, not a few large ones.
 </Tip>
 
-## Attach memory to a session
+## Attach a memory store to a session
 
 Memory stores are attached in the session's `resources[]` array.
 
@@ -355,14 +355,14 @@ When memory stores are attached to a session, the agent automatically gains acce
 
 | Tool | Description |
 | --- | --- |
-| `memory_list` | List documents in a store, optionally filtered by path prefix. |
-| `memory_search` | Full-text search across document contents. |
-| `memory_read` | Read a document's contents. |
-| `memory_write` | Create or overwrite a document at a path. |
-| `memory_edit` | Modify an existing document. |
-| `memory_delete` | Remove a document. |
+| `memory_list` | List memories in a store, optionally filtered by path prefix. |
+| `memory_search` | Full-text search across memory contents. |
+| `memory_read` | Read a memory's contents. |
+| `memory_write` | Create or overwrite a memory at a path. |
+| `memory_edit` | Modify an existing memory. |
+| `memory_delete` | Remove a memory. |
 
-## Inspect and correct memory
+## View and edit memories
 
 Memory stores can be managed directly via the API. Use this for building review workflows, correcting bad memories, or seeding stores before any session runs.
 
@@ -451,7 +451,7 @@ List does not return memory content, just object metadata. Use `path_prefix` for
 </CodeGroup>
 
 ### Read a memory
-Fetching an individual memory returns the full document content.
+Fetching an individual memory returns the full content.
 
 <CodeGroup>
   
@@ -517,9 +517,9 @@ Fetching an individual memory returns the full document content.
   ```
 </CodeGroup>
 
-### Write a document
+### Create a memory
 
-Use `memories.write` to upsert a document **by path**. If nothing exists at the path, it is created; if a document already exists there, its content is replaced. To mutate an existing document **by `mem_...` ID** (for example, to rename its path or safely apply a content edit), use `memories.update` instead (see [Update](#update) below).
+Use `memories.write` to upsert a memory **by path**. If nothing exists at the path, it is created; if a memory already exists there, its content is replaced. To mutate an existing memory **by `mem_...` ID** (for example, to rename its path or safely apply a content edit), use `memories.update` instead (see [Update a memory](#update-a-memory) below).
 
 <CodeGroup>
   
@@ -599,9 +599,9 @@ Use `memories.write` to upsert a document **by path**. If nothing exists at the 
   ```
 </CodeGroup>
 
-### Create only if the path is free
+#### Safe writes (optimistic concurrency)
 
-Pass `precondition={"type": "not_exists"}` to `memories.write` to make it a create-only guard. If a document already exists at the path, the write returns `409 memory_precondition_failed` instead of replacing it. Use this when seeding a store and you want to avoid clobbering existing content.
+Pass `precondition={"type": "not_exists"}` to `memories.write` to make it a create-only guard. If a memory already exists at the path, the write returns `409 memory_precondition_failed` instead of replacing it. Use this when seeding a store and you want to avoid clobbering existing content.
 
 <CodeGroup>
   
@@ -698,15 +698,15 @@ Pass `precondition={"type": "not_exists"}` to `memories.write` to make it a crea
   ```
 </CodeGroup>
 
-To safely edit an existing document (read, modify, write back without clobbering a concurrent change), use `memories.update` with a `content_sha256` precondition instead. See [Update](#update) below.
+To safely edit an existing memory (read, modify, write back without clobbering a concurrent change), use `memories.update` with a `content_sha256` precondition instead. See [Update a memory](#update-a-memory) below.
 
-### Update
+### Update a memory
 
-`memories.update()` modifies an existing document by its `mem_...` ID. You can change `content`, `path` (a rename), or both in one call.
+`memories.update()` modifies an existing memory by its `mem_...` ID. You can change `content`, `path` (a rename), or both in one call.
 
 Renaming onto an occupied path returns `409 conflict`. The caller must delete or rename the blocker first, or pass `precondition={"type": "not_exists"}` to make the rename a no-op if anything already exists at the target.
 
-The example below renames a document to an archive path:
+The example below renames a memory to an archive path:
 
 <CodeGroup>
   
@@ -782,7 +782,7 @@ The example below renames a document to an archive path:
 
 #### Safe content edits (optimistic concurrency)
 
-To edit a document's content without clobbering a concurrent write, pass a `content_sha256` precondition. The update only applies if the stored hash still matches the one you read; on mismatch it returns `409 memory_precondition_failed`, at which point you re-read the document and retry against the fresh state.
+To edit a memory's content without clobbering a concurrent write, pass a `content_sha256` precondition. The update only applies if the stored hash still matches the one you read; on mismatch it returns `409 memory_precondition_failed`, at which point you re-read the memory and retry against the fresh state.
 
 <CodeGroup>
   ```bash curl
@@ -872,7 +872,7 @@ To edit a document's content without clobbering a concurrent write, pass a `cont
   ```
 </CodeGroup>
 
-### Delete a document
+### Delete a memory
 
 <CodeGroup>
   
@@ -933,7 +933,7 @@ To edit a document's content without clobbering a concurrent write, pass a `cont
 
 Optionally pass `expected_content_sha256` for a conditional delete.
 
-## Memory versions
+## Audit memory changes
 
 Every mutation to a memory creates an immutable **memory version** (`memver_...`). Versions accumulate for the lifetime of the parent memory and form the audit and rollback surface underneath it. The live `memories.retrieve` call always returns the current head; the version endpoints give you the full history.
 
