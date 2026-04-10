@@ -272,28 +272,28 @@ import com.anthropic.models.messages.StructuredMessage;
 import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 
-class ContactInfo {
+static class ContactInfo {
     public String name;
     public String email;
     public String plan_interest;
     public boolean demo_requested;
 }
 
-public class StructuredOutputQuickStart {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        StructuredMessageCreateParams<ContactInfo> params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(1024)
-            .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.")
-            .outputConfig(ContactInfo.class)
-            .build();
+    StructuredMessageCreateParams<ContactInfo> params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(1024)
+        .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.")
+        .outputConfig(ContactInfo.class)
+        .build();
 
-        StructuredMessage<ContactInfo> response = client.messages().create(params);
-        ContactInfo contact = response.content().get(0).asText().text();
-        System.out.println(contact.name + " (" + contact.email + ")");
-    }
+    StructuredMessage<ContactInfo> response = client.messages().create(params);
+    ContactInfo contact = response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .findFirst().orElseThrow().text();
+    IO.println(contact.name + " (" + contact.email + ")");
 }
 ```
 
@@ -608,7 +608,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..7,14..16,-2..}
+```java Java hidelines={1..7}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -616,32 +616,32 @@ import com.anthropic.models.messages.StructuredMessage;
 import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 
-class ContactInfo {
+static class ContactInfo {
     public String name;
     public String email;
     public String planInterest;
     public boolean demoRequested;
 }
 
-public class NativeSchemaExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(1024)
-            .outputConfig(ContactInfo.class)
-            .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.")
-            .build();
+    StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(1024)
+        .outputConfig(ContactInfo.class)
+        .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.")
+        .build();
 
-        StructuredMessage<ContactInfo> response = client.messages().create(createParams);
-        ContactInfo contact = response.content().get(0).asText().text();
-        System.out.println(contact.name + " (" + contact.email + ")");
-    }
+    StructuredMessage<ContactInfo> response = client.messages().create(createParams);
+    ContactInfo contact = response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .findFirst().orElseThrow().text();
+    IO.println(contact.name + " (" + contact.email + ")");
 }
 ```
 
-```php PHP hidelines={1..3,6}
+```php PHP hidelines={1..3}
 <?php
 
 use Anthropic\Client;
@@ -979,9 +979,15 @@ func main() {
 </Tab>
 <Tab title="Java">
 
+Java examples on this page use [JDK 25 compact source file](https://openjdk.org/jeps/512) syntax; see the [Java SDK requirements](/docs/en/api/sdks/java#requirements) for the substitution on earlier JDKs.
+
 **`outputConfig(Class<T>)` method**
 
-Pass a Java class to `outputConfig()` and the SDK automatically derives a JSON schema, validates it, and returns a `StructuredMessageCreateParams<T>`. Access the parsed result via `response.content().get(0).asText().text()`.
+Pass a Java class to `outputConfig()` and the SDK automatically derives a JSON schema, validates it, and returns a `StructuredMessageCreateParams<T>`. Access the parsed result via `response.content().stream().flatMap(block -> block.text().stream()).findFirst().orElseThrow().text()`.
+
+<Note>
+Declare your schema classes as top-level classes or `static` nested classes. This requirement comes from the Jackson Databind library (`com.fasterxml.jackson.databind`), which the SDK uses to deserialize JSON responses into your class instances and cannot instantiate non-static inner classes.
+</Note>
 
 <section title="Example usage">
 
@@ -993,27 +999,27 @@ import com.anthropic.models.messages.StructuredMessage;
 import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 
-class ContactInfo {
+static class ContactInfo {
     public String name;
     public String email;
     public String planInterest;
 }
 
-public class StructuredOutputExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(1024)
-            .outputConfig(ContactInfo.class)
-            .addUserMessage("Extract contact info: John Smith, john@example.com, interested in the Pro plan")
-            .build();
+    StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(1024)
+        .outputConfig(ContactInfo.class)
+        .addUserMessage("Extract contact info: John Smith, john@example.com, interested in the Pro plan")
+        .build();
 
-        StructuredMessage<ContactInfo> response = client.messages().create(createParams);
-        ContactInfo contact = response.content().get(0).asText().text();
-        System.out.println(contact.name + " (" + contact.email + ")");
-    }
+    StructuredMessage<ContactInfo> response = client.messages().create(createParams);
+    ContactInfo contact = response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .findFirst().orElseThrow().text();
+    IO.println(contact.name + " (" + contact.email + ")");
 }
 ```
 
@@ -1038,29 +1044,23 @@ Key points:
 - **Version compatibility**: Local validation may fail while remote validation succeeds if the SDK version is outdated.
 - **Disabling local validation**: Pass `JsonSchemaLocalValidation.NO` if you encounter compatibility issues:
 
-```java hidelines={1..2,4..15,22..23}
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+```java hidelines={2..4}
 import com.anthropic.core.JsonSchemaLocalValidation;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 
-class BookList {
-    public java.util.List<String> books;
+static class BookList {
+    public List<String> books;
 }
 
-public class LocalValidationExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(2048)
-            .outputConfig(BookList.class, JsonSchemaLocalValidation.NO)
-            .addUserMessage("List some famous late twentieth century novels.")
-            .build();
-    }
+void main() {
+    StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(2048)
+        .outputConfig(BookList.class, JsonSchemaLocalValidation.NO)
+        .addUserMessage("List some famous late twentieth century novels.")
+        .build();
 }
 ```
 
@@ -1070,7 +1070,7 @@ public class LocalValidationExample {
 
 Structured outputs can also be used with streaming. As responses arrive in stream events, you need to accumulate the full response before deserializing the JSON.
 
-Use `BetaMessageAccumulator` to collect the JSON strings from the stream. Once accumulated, call `BetaMessageAccumulator.message(Class<T>)` to convert the accumulated `BetaMessage` into a `StructuredMessage`, which automatically deserializes the JSON into your Java class.
+Use `MessageAccumulator` to collect the JSON strings from the stream. Once accumulated, call `MessageAccumulator.message(Class<T>)` to convert the accumulated `Message` into a `StructuredMessage`, which automatically deserializes the JSON into your Java class.
 
 </section>
 
@@ -1094,17 +1094,115 @@ Each class must define at least one property for the JSON schema. A validation e
 
 </section>
 
+<section title="Composition and inheritance">
+
+Your Java classes can use composition and inheritance to share structure when defining JSON schemas. Each pattern affects the output structure differently.
+
+**Composition** produces nested JSON output. If a schema is derived from class `Composed` that composes `A` and `B`:
+
+```java hidelines={1..7,20..35}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.StructuredMessage;
+import com.anthropic.models.messages.StructuredMessageCreateParams;
+
+static class A {
+    public String a;
+}
+
+static class B {
+    public String b;
+}
+
+static class Composed {
+    public A composedA;
+    public B composedB;
+}
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+    StructuredMessageCreateParams<Composed> params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(1024)
+        .outputConfig(Composed.class)
+        .addUserMessage("Populate field a with 'hello' and field b with 'world'.")
+        .build();
+    StructuredMessage<Composed> response = client.messages().create(params);
+    Composed result = response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .findFirst().orElseThrow().text();
+    IO.println("composedA.a=" + result.composedA.a);
+    IO.println("composedB.b=" + result.composedB.b);
+}
+```
+
+The JSON output has this nested structure:
+
+```json
+{
+  "composedA": { "a": "hello" },
+  "composedB": { "b": "world" }
+}
+```
+
+**Inheritance** produces flat JSON output. If a schema is derived from class `Derived` that extends `Base`:
+
+```java hidelines={1..7,15..30}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.StructuredMessage;
+import com.anthropic.models.messages.StructuredMessageCreateParams;
+
+static class Base {
+    public String a;
+}
+
+static class Derived extends Base {
+    public String b;
+}
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+    StructuredMessageCreateParams<Derived> params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(1024)
+        .outputConfig(Derived.class)
+        .addUserMessage("Populate field a with 'hello' and field b with 'world'.")
+        .build();
+    StructuredMessage<Derived> response = client.messages().create(params);
+    Derived result = response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .findFirst().orElseThrow().text();
+    IO.println("a=" + result.a);
+    IO.println("b=" + result.b);
+}
+```
+
+The JSON output has this flat structure:
+
+```json
+{
+  "a": "hello",
+  "b": "world"
+}
+```
+
+</section>
+
 <section title="Annotations (Jackson and Swagger)">
 
 You can use Jackson Databind annotations to enrich the JSON schema derived from your Java classes:
 
-```java hidelines={4..5,-2..}
+```java hidelines={-2..}
 import com.fasterxml.jackson.annotation.JsonClassDescription;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import java.util.List;
 
-class Person {
+static class Person {
 
   @JsonPropertyDescription("The first name and surname of the person")
   public String name;
@@ -1116,7 +1214,7 @@ class Person {
 }
 
 @JsonClassDescription("The details of one published book")
-class Book {
+static class Book {
 
   public String title;
   public Person author;
@@ -1128,11 +1226,11 @@ class Book {
   public String genre;
 }
 
-class BookList {
+static class BookList {
   public List<Book> books;
 }
 
-public class Example { public static void main(String[] args) {} }
+void main() {}
 ```
 
 Annotation summary:
@@ -1146,12 +1244,11 @@ If you use `@JsonProperty(required = false)`, the `false` value is ignored. Anth
 
 You can also use OpenAPI Swagger 2 `@Schema` and `@ArraySchema` annotations for type-specific constraints:
 
-```java hidelines={3..4,-2..}
+```java hidelines={-2..}
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.List;
 
-class Article {
+static class Article {
 
   @ArraySchema(minItems = 1)
   public List<String> authors;
@@ -1165,12 +1262,61 @@ class Article {
   public int pageCount;
 }
 
-public class Example { public static void main(String[] args) {} }
+void main() {}
 ```
 
 Local validation checks that you haven't used any unsupported constraint keywords, but constraint values aren't validated locally. For example, an unsupported `"format"` value may pass local validation but cause a remote error.
 
 If you use both Jackson and Swagger annotations to set the same schema field, the Jackson annotation takes precedence.
+
+</section>
+
+<section title="Defining schemas without a Java class">
+
+Class-based schema derivation is the most convenient path, but for direct control over the schema structure you can build a `JsonOutputFormat.Schema` manually and wrap it in an `OutputConfig`.
+
+```java hidelines={1..2,5..6}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.messages.JsonOutputFormat;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.OutputConfig;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    JsonOutputFormat.Schema schema = JsonOutputFormat.Schema.builder()
+        .putAdditionalProperty("type", JsonValue.from("object"))
+        .putAdditionalProperty("properties", JsonValue.from(Map.of(
+            "name", Map.of("type", "string"),
+            "email", Map.of("type", "string"),
+            "plan_interest", Map.of("type", "string"))))
+        .putAdditionalProperty("required", JsonValue.from(
+            List.of("name", "email", "plan_interest")))
+        .putAdditionalProperty("additionalProperties", JsonValue.from(false))
+        .build();
+
+    OutputConfig outputConfig = OutputConfig.builder()
+        .format(JsonOutputFormat.builder().schema(schema).build())
+        .build();
+
+    MessageCreateParams createParams = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(1024)
+        .outputConfig(outputConfig)
+        .addUserMessage(
+            "John Smith (john@example.com) is interested in our Enterprise plan.")
+        .build();
+
+    client.messages().create(createParams).content().stream()
+        .flatMap(contentBlock -> contentBlock.text().stream())
+        .forEach(textBlock -> IO.println(textBlock.text()));
+}
+```
+
+For a more extensive example that builds a nested schema with arrays and descriptions, see [`StructuredOutputsRawExample.java`](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/StructuredOutputsRawExample.java) in the SDK repository.
 
 </section>
 
@@ -1183,7 +1329,7 @@ The PHP SDK passes raw JSON schemas as associative arrays via `OutputConfig::wit
 
 <section title="Example usage">
 
-```php hidelines={1..3,6}
+```php hidelines={1..3}
 <?php
 
 use Anthropic\Client;
@@ -1515,7 +1661,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..6,8..10}
+```java Java hidelines={1..6}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -1523,53 +1669,52 @@ import com.anthropic.models.messages.StructuredMessage;
 import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
-import java.util.Map;
 
-public class InvoiceExtraction {
-    static class LineItem {
-        @JsonProperty("description")
-        public String description;
+static class LineItem {
+    @JsonProperty("description")
+    public String description;
 
-        @JsonProperty("quantity")
-        public int quantity;
+    @JsonProperty("quantity")
+    public int quantity;
 
-        @JsonProperty("unit_price")
-        public double unitPrice;
-    }
+    @JsonProperty("unit_price")
+    public double unitPrice;
+}
 
-    static class Invoice {
-        @JsonProperty("invoice_number")
-        public String invoiceNumber;
+static class Invoice {
+    @JsonProperty("invoice_number")
+    public String invoiceNumber;
 
-        @JsonProperty("date")
-        public String date;
+    @JsonProperty("date")
+    public String date;
 
-        @JsonProperty("total_amount")
-        public double totalAmount;
+    @JsonProperty("total_amount")
+    public double totalAmount;
 
-        @JsonProperty("line_items")
-        public List<LineItem> lineItems;
+    @JsonProperty("line_items")
+    public List<LineItem> lineItems;
 
-        @JsonProperty("customer_name")
-        public String customerName;
-    }
+    @JsonProperty("customer_name")
+    public String customerName;
+}
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        String invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
+    String invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
 
-        StructuredMessageCreateParams<Invoice> params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(4096L)
-            .outputConfig(Invoice.class)
-            .addUserMessage("Extract invoice data from: " + invoiceText)
-            .build();
+    StructuredMessageCreateParams<Invoice> params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(4096L)
+        .outputConfig(Invoice.class)
+        .addUserMessage("Extract invoice data from: " + invoiceText)
+        .build();
 
-        StructuredMessage<Invoice> response = client.messages().create(params);
-        System.out.println(response);
-    }
+    StructuredMessage<Invoice> response = client.messages().create(params);
+    Invoice invoice = response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .findFirst().orElseThrow().text();
+    IO.println(invoice.invoiceNumber + ": $" + invoice.totalAmount);
 }
 ```
 
@@ -1841,7 +1986,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..6,8..9}
+```java Java hidelines={1..6}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -1849,39 +1994,38 @@ import com.anthropic.models.messages.StructuredMessage;
 import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
 
-public class ClassificationExample {
-    static class Classification {
-        @JsonProperty("category")
-        public String category;
+static class Classification {
+    @JsonProperty("category")
+    public String category;
 
-        @JsonProperty("confidence")
-        public double confidence;
+    @JsonProperty("confidence")
+    public double confidence;
 
-        @JsonProperty("tags")
-        public List<String> tags;
+    @JsonProperty("tags")
+    public List<String> tags;
 
-        @JsonProperty("sentiment")
-        public String sentiment;
-    }
+    @JsonProperty("sentiment")
+    public String sentiment;
+}
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        String feedbackText = "Great product, fast shipping!";
+    String feedbackText = "Great product, fast shipping!";
 
-        StructuredMessageCreateParams<Classification> params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(1024L)
-            .outputConfig(Classification.class)
-            .addUserMessage("Classify this feedback: " + feedbackText)
-            .build();
+    StructuredMessageCreateParams<Classification> params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(1024L)
+        .outputConfig(Classification.class)
+        .addUserMessage("Classify this feedback: " + feedbackText)
+        .build();
 
-        StructuredMessage<Classification> response = client.messages().create(params);
-        Classification result = response.content().get(0).asText().text();
-        System.out.println(result.category + " (" + result.confidence + ")");
-    }
+    StructuredMessage<Classification> response = client.messages().create(params);
+    Classification result = response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .findFirst().orElseThrow().text();
+    IO.println(result.category + " (" + result.confidence + ")");
 }
 ```
 
@@ -2139,7 +2283,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..6,8..9}
+```java Java hidelines={1..6}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -2147,61 +2291,60 @@ import com.anthropic.models.messages.StructuredMessage;
 import com.anthropic.models.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
 
-public class StructuredOutputExample {
-    static class APIData {
-        @JsonProperty("message")
-        public String message;
+static class APIData {
+    @JsonProperty("message")
+    public String message;
 
-        @JsonProperty("resource_id")
-        public String resourceId;
-    }
+    @JsonProperty("resource_id")
+    public String resourceId;
+}
 
-    static class APIError {
-        @JsonProperty("code")
-        public String code;
+static class APIError {
+    @JsonProperty("code")
+    public String code;
 
-        @JsonProperty("message")
-        public String message;
-    }
+    @JsonProperty("message")
+    public String message;
+}
 
-    static class APIMetadata {
-        @JsonProperty("request_id")
-        public String requestId;
+static class APIMetadata {
+    @JsonProperty("request_id")
+    public String requestId;
 
-        @JsonProperty("timestamp")
-        public String timestamp;
-    }
+    @JsonProperty("timestamp")
+    public String timestamp;
+}
 
-    static class APIResponse {
-        @JsonProperty("status")
-        public String status;
+static class APIResponse {
+    @JsonProperty("status")
+    public String status;
 
-        @JsonProperty("data")
-        public APIData data;
+    @JsonProperty("data")
+    public APIData data;
 
-        @JsonProperty("errors")
-        public List<APIError> errors;
+    @JsonProperty("errors")
+    public List<APIError> errors;
 
-        @JsonProperty("metadata")
-        public APIMetadata metadata;
-    }
+    @JsonProperty("metadata")
+    public APIMetadata metadata;
+}
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        StructuredMessageCreateParams<APIResponse> params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(1024L)
-            .outputConfig(APIResponse.class)
-            .addUserMessage("Process this request: ...")
-            .build();
+    StructuredMessageCreateParams<APIResponse> params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(1024L)
+        .outputConfig(APIResponse.class)
+        .addUserMessage("Process this request: ...")
+        .build();
 
-        StructuredMessage<APIResponse> response = client.messages().create(params);
-        APIResponse result = response.content().get(0).asText().text();
-        System.out.println(result.status);
-    }
+    StructuredMessage<APIResponse> response = client.messages().create(params);
+    APIResponse result = response.content().stream()
+        .flatMap(block -> block.text().stream())
+        .findFirst().orElseThrow().text();
+    IO.println(result.status);
 }
 ```
 
@@ -2542,7 +2685,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..15,-2..}
+```java Java hidelines={1..12,53}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -2553,52 +2696,48 @@ import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.OutputConfig;
 import com.anthropic.models.messages.Tool;
 import com.anthropic.models.messages.Tool.InputSchema;
-import java.util.List;
-import java.util.Map;
 
-public class StructuredOutputExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        // JSON outputs: structured response format
-        JsonOutputFormat.Schema outputSchema = JsonOutputFormat.Schema.builder()
-            .putAdditionalProperty("type", JsonValue.from("object"))
-            .putAdditionalProperty("properties", JsonValue.from(Map.of(
-                "summary", Map.of("type", "string"),
-                "next_steps", Map.of("type", "array", "items", Map.of("type", "string"))
-            )))
-            .putAdditionalProperty("required", JsonValue.from(List.of("summary", "next_steps")))
-            .putAdditionalProperty("additionalProperties", JsonValue.from(false))
-            .build();
+    // JSON outputs: structured response format
+    JsonOutputFormat.Schema outputSchema = JsonOutputFormat.Schema.builder()
+        .putAdditionalProperty("type", JsonValue.from("object"))
+        .putAdditionalProperty("properties", JsonValue.from(Map.of(
+            "summary", Map.of("type", "string"),
+            "next_steps", Map.of("type", "array", "items", Map.of("type", "string"))
+        )))
+        .putAdditionalProperty("required", JsonValue.from(List.of("summary", "next_steps")))
+        .putAdditionalProperty("additionalProperties", JsonValue.from(false))
+        .build();
 
-        // Strict tool use: guaranteed tool parameters
-        InputSchema toolSchema = InputSchema.builder()
-            .properties(JsonValue.from(Map.of(
-                "destination", Map.of("type", "string"),
-                "date", Map.of("type", "string", "format", "date")
-            )))
-            .putAdditionalProperty("required", JsonValue.from(List.of("destination", "date")))
-            .putAdditionalProperty("additionalProperties", JsonValue.from(false))
-            .build();
+    // Strict tool use: guaranteed tool parameters
+    InputSchema toolSchema = InputSchema.builder()
+        .properties(JsonValue.from(Map.of(
+            "destination", Map.of("type", "string"),
+            "date", Map.of("type", "string", "format", "date")
+        )))
+        .putAdditionalProperty("required", JsonValue.from(List.of("destination", "date")))
+        .putAdditionalProperty("additionalProperties", JsonValue.from(false))
+        .build();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
-            .maxTokens(1024L)
-            .addUserMessage("Help me plan a trip to Paris departing May 15, 2026")
-            .outputConfig(OutputConfig.builder()
-                .format(JsonOutputFormat.builder().schema(outputSchema).build())
-                .build())
-            .addTool(Tool.builder()
-                .name("search_flights")
-                .description("Search for available flights to a destination on a specific date")
-                .strict(true)
-                .inputSchema(toolSchema)
-                .build())
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_6)
+        .maxTokens(1024L)
+        .addUserMessage("Help me plan a trip to Paris departing May 15, 2026")
+        .outputConfig(OutputConfig.builder()
+            .format(JsonOutputFormat.builder().schema(outputSchema).build())
+            .build())
+        .addTool(Tool.builder()
+            .name("search_flights")
+            .description("Search for available flights to a destination on a specific date")
+            .strict(true)
+            .inputSchema(toolSchema)
+            .build())
+        .build();
 
-        Message response = client.messages().create(params);
-        System.out.println(response);
-    }
+    Message response = client.messages().create(params);
+    IO.println(response);
 }
 ```
 

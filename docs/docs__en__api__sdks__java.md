@@ -15,7 +15,7 @@ For API feature documentation with code examples, see the [API reference](/docs/
 <Tabs>
 <Tab title="Gradle">
 ```kotlin
-implementation("com.anthropic:anthropic-java:2.20.0")
+implementation("com.anthropic:anthropic-java:2.22.0")
 ```
 </Tab>
 <Tab title="Maven">
@@ -23,7 +23,7 @@ implementation("com.anthropic:anthropic-java:2.20.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.20.0</version>
+    <version>2.22.0</version>
 </dependency>
 ```
 </Tab>
@@ -32,6 +32,10 @@ implementation("com.anthropic:anthropic-java:2.20.0")
 ## Requirements
 
 This library requires Java 8 or later.
+
+<Note>
+The SDK supports Java 8 and later. Code examples in this documentation are written as [JDK 25 compact source files](https://openjdk.org/jeps/512), using a bare `void main()` entry point and `IO.println()` for output. The API calls themselves are identical on every supported JDK; to compile an example on an earlier version, replace `IO.println(...)` with `System.out.println(...)` and place the body inside `public static void main(String[] args)` within a class.
+</Note>
 
 ## Quick start
 
@@ -133,7 +137,6 @@ import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
-import java.util.concurrent.CompletableFuture;
 
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
@@ -154,7 +157,6 @@ import com.anthropic.client.okhttp.AnthropicOkHttpClientAsync;
 import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
-import java.util.concurrent.CompletableFuture;
 
 AnthropicClientAsync client = AnthropicOkHttpClientAsync.fromEnv();
 
@@ -183,9 +185,9 @@ import com.anthropic.models.messages.RawMessageStreamEvent;
 
 try (StreamResponse<RawMessageStreamEvent> streamResponse = client.messages().createStreaming(params)) {
     streamResponse.stream().forEach(chunk -> {
-        System.out.println(chunk);
+        IO.println(chunk);
     });
-    System.out.println("No more chunks!");
+    IO.println("No more chunks!");
 }
 ```
 
@@ -196,26 +198,25 @@ For asynchronous clients, the method returns `AsyncStreamResponse`:
 ```java nocheck
 import com.anthropic.core.http.AsyncStreamResponse;
 import com.anthropic.models.messages.RawMessageStreamEvent;
-import java.util.Optional;
 
 client.async().messages().createStreaming(params).subscribe(chunk -> {
-    System.out.println(chunk);
+    IO.println(chunk);
 });
 
 // If you need to handle errors or completion of the stream
 client.async().messages().createStreaming(params).subscribe(new AsyncStreamResponse.Handler<>() {
     @Override
     public void onNext(RawMessageStreamEvent chunk) {
-        System.out.println(chunk);
+        IO.println(chunk);
     }
 
     @Override
     public void onComplete(Optional<Throwable> error) {
         if (error.isPresent()) {
-            System.out.println("Something went wrong!");
+            IO.println("Something went wrong!");
             throw new RuntimeException(error.get());
         } else {
-            System.out.println("No more chunks!");
+            IO.println("No more chunks!");
         }
     }
 });
@@ -223,15 +224,15 @@ client.async().messages().createStreaming(params).subscribe(new AsyncStreamRespo
 // Or use futures
 client.async().messages().createStreaming(params)
     .subscribe(chunk -> {
-        System.out.println(chunk);
+        IO.println(chunk);
     })
     .onCompleteFuture()
     .whenComplete((unused, error) -> {
         if (error != null) {
-            System.out.println("Something went wrong!");
+            IO.println("Something went wrong!");
             throw new RuntimeException(error);
         } else {
-            System.out.println("No more chunks!");
+            IO.println("No more chunks!");
         }
     });
 ```
@@ -239,12 +240,9 @@ client.async().messages().createStreaming(params)
 Async streaming uses a dedicated per-client cached thread pool `Executor` to stream without blocking the current thread. To use a different `Executor`:
 
 ```java nocheck
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
 Executor executor = Executors.newFixedThreadPool(4);
 client.async().messages().createStreaming(params).subscribe(
-    chunk -> System.out.println(chunk), executor
+    chunk -> IO.println(chunk), executor
 );
 ```
 
@@ -253,7 +251,6 @@ Or configure the client globally using the `streamHandlerExecutor` method:
 ```java nocheck
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import java.util.concurrent.Executors;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
   .fromEnv()
@@ -281,7 +278,7 @@ try (StreamResponse<RawMessageStreamEvent> streamResponse =
             .peek(messageAccumulator::accumulate)
             .flatMap(event -> event.contentBlockDelta().stream())
             .flatMap(deltaEvent -> deltaEvent.delta().text().stream())
-            .forEach(textDelta -> System.out.print(textDelta.text()));
+            .forEach(textDelta -> IO.print(textDelta.text()));
 }
 
 Message message = messageAccumulator.message();
@@ -295,11 +292,11 @@ import com.anthropic.models.messages.Message;
 
 MessageAccumulator messageAccumulator = MessageAccumulator.create();
 
-client.messages()
+client.async().messages()
         .createStreaming(createParams)
         .subscribe(event -> messageAccumulator.accumulate(event).contentBlockDelta().stream()
                 .flatMap(deltaEvent -> deltaEvent.delta().text().stream())
-                .forEach(textDelta -> System.out.print(textDelta.text())))
+                .forEach(textDelta -> IO.print(textDelta.text())))
         .onCompleteFuture()
         .join();
 
@@ -319,6 +316,10 @@ For complete structured outputs documentation including Java examples, see [Stru
 The tool use feature supports a "strict" mode (beta) that guarantees that the JSON output from the AI model will conform to the JSON schema you provide in the input parameters.
 
 The SDK can derive a tool and its parameters automatically from the structure of an arbitrary Java class: the class's name (converted to snake case) provides the tool name, and the class's fields define the tool's parameters.
+
+<Note>
+Declare your tool classes as top-level classes or `static` nested classes. This requirement comes from the Jackson Databind library (`com.fasterxml.jackson.databind`), which the SDK uses to deserialize tool inputs into your class instances and cannot instantiate non-static inner classes.
+</Note>
 
 ### Defining tools with annotations
 
@@ -401,7 +402,6 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.*;
 import com.anthropic.models.messages.Model;
-import java.util.List;
 
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
@@ -430,7 +430,7 @@ client.beta().messages().create(createParamsBuilder.build()).content().stream()
 
 client.beta().messages().create(createParamsBuilder.build()).content().stream()
         .flatMap(contentBlock -> contentBlock.text().stream())
-        .forEach(textBlock -> System.out.println(textBlock.text()));
+        .forEach(textBlock -> IO.println(textBlock.text()));
 
 private static Object callTool(BetaToolUseBlock toolUseBlock) {
   if (!"get_weather".equals(toolUseBlock.name())) {
@@ -474,15 +474,13 @@ The SDK provides support for the [Message Batches API](/docs/en/build-with-claud
 
 ## File uploads
 
-The SDK defines methods that accept files through the `MultipartField` interface:
+The SDK defines methods that accept files through the `MultipartField` class:
 
 ```java nocheck
 import com.anthropic.core.MultipartField;
 import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.beta.files.FileMetadata;
 import com.anthropic.models.beta.files.FileUploadParams;
-import java.io.InputStream;
-import java.nio.file.Paths;
 
 FileUploadParams params = FileUploadParams.builder()
   .file(
@@ -504,8 +502,6 @@ import com.anthropic.core.MultipartField;
 import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.beta.files.FileMetadata;
 import com.anthropic.models.beta.files.FileUploadParams;
-import java.io.InputStream;
-import java.net.URL;
 
 FileUploadParams params = FileUploadParams.builder()
   .file(
@@ -521,7 +517,7 @@ FileUploadParams params = FileUploadParams.builder()
 FileMetadata fileMetadata = client.beta().files().upload(params);
 ```
 
-Or a `byte[]` array:
+Or from in-memory bytes:
 
 ```java nocheck
 import com.anthropic.core.MultipartField;
@@ -531,8 +527,8 @@ import com.anthropic.models.beta.files.FileUploadParams;
 
 FileUploadParams params = FileUploadParams.builder()
   .file(
-    MultipartField.<byte[]>builder()
-      .value("content".getBytes())
+    MultipartField.<InputStream>builder()
+      .value(new ByteArrayInputStream("content".getBytes()))
       .filename("document.txt")
       .contentType("text/plain")
       .build()
@@ -549,7 +545,6 @@ The SDK defines methods that return binary responses for API responses that aren
 
 ```java nocheck
 import com.anthropic.core.http.HttpResponse;
-import com.anthropic.models.beta.files.FileDownloadParams;
 
 HttpResponse response = client.beta().files().download("file_id");
 ```
@@ -558,9 +553,6 @@ To save the response content to a file:
 
 ```java nocheck
 import com.anthropic.core.http.HttpResponse;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 try (HttpResponse response = client.beta().files().download(params)) {
     Files.copy(
@@ -569,7 +561,7 @@ try (HttpResponse response = client.beta().files().download(params)) {
         StandardCopyOption.REPLACE_EXISTING
     );
 } catch (Exception e) {
-    System.out.println("Something went wrong!");
+    IO.println("Something went wrong!");
     throw new RuntimeException(e);
 }
 ```
@@ -578,13 +570,11 @@ Or transfer the response content to any `OutputStream`:
 
 ```java nocheck
 import com.anthropic.core.http.HttpResponse;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 try (HttpResponse response = client.beta().files().download(params)) {
     response.body().transferTo(Files.newOutputStream(Paths.get(path)));
 } catch (Exception e) {
-    System.out.println("Something went wrong!");
+    IO.println("Something went wrong!");
     throw new RuntimeException(e);
 }
 ```
@@ -620,13 +610,13 @@ import com.anthropic.errors.*;
 try {
     Message message = client.messages().create(params);
 } catch (RateLimitException e) {
-    System.out.println("Rate limited, retry after: " + e.headers());
+    IO.println("Rate limited, retry after: " + e.headers());
 } catch (UnauthorizedException e) {
-    System.out.println("Invalid API key");
+    IO.println("Invalid API key");
 } catch (AnthropicServiceException e) {
-    System.out.println("API error: " + e.statusCode());
+    IO.println("API error: " + e.statusCode());
 } catch (AnthropicIoException e) {
-    System.out.println("Network error: " + e.getMessage());
+    IO.println("Network error: " + e.getMessage());
 }
 ```
 
@@ -637,7 +627,6 @@ When using raw responses, you can access the `request-id` response header using 
 ```java nocheck
 import com.anthropic.core.http.HttpResponseFor;
 import com.anthropic.models.messages.Message;
-import java.util.Optional;
 
 HttpResponseFor<Message> message = client.messages().withRawResponse().create(params);
 
@@ -673,7 +662,7 @@ AnthropicClient client = AnthropicOkHttpClient.builder().fromEnv().maxRetries(4)
 
 Requests time out after 10 minutes by default.
 
-However, for methods that accept `maxTokens`, if you specify a large `maxTokens` value and are not streaming, then the default timeout will be calculated dynamically using this formula:
+However, for methods that accept `maxTokens`, if you specify a large `maxTokens` value and are streaming, then the default timeout will be calculated dynamically using this formula:
 
 ```java nocheck
 Duration.ofSeconds(
@@ -688,6 +677,8 @@ Duration.ofSeconds(
 ```
 
 This results in a timeout of up to 60 minutes, scaled by the `maxTokens` parameter, unless overridden.
+
+For non-streaming requests, the dynamic timeout scales from a 30 second minimum up to a 10 minute maximum based on `maxTokens`.
 
 To set a custom timeout per-request:
 
@@ -704,7 +695,6 @@ Or configure the default for all method calls at the client level:
 ```java nocheck
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import java.time.Duration;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
   .fromEnv()
@@ -738,14 +728,14 @@ BatchListPage page = client.messages().batches().list();
 
 // Process as an Iterable
 for (MessageBatch batch : page.autoPager()) {
-    System.out.println(batch);
+    IO.println(batch);
 }
 
 // Process as a Stream
 page.autoPager()
     .stream()
     .limit(50)
-    .forEach(batch -> System.out.println(batch));
+    .forEach(batch -> IO.println(batch));
 ```
 
 When using the asynchronous client, the method returns an `AsyncStreamResponse`:
@@ -754,29 +744,27 @@ When using the asynchronous client, the method returns an `AsyncStreamResponse`:
 import com.anthropic.core.http.AsyncStreamResponse;
 import com.anthropic.models.messages.batches.BatchListPageAsync;
 import com.anthropic.models.messages.batches.MessageBatch;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 CompletableFuture<BatchListPageAsync> pageFuture = client.async().messages().batches().list();
 
 pageFuture.thenAccept(page -> page.autoPager().subscribe(batch -> {
-    System.out.println(batch);
+    IO.println(batch);
 }));
 
 // If you need to handle errors or completion of the stream
 pageFuture.thenAccept(page -> page.autoPager().subscribe(new AsyncStreamResponse.Handler<>() {
     @Override
     public void onNext(MessageBatch batch) {
-        System.out.println(batch);
+        IO.println(batch);
     }
 
     @Override
     public void onComplete(Optional<Throwable> error) {
         if (error.isPresent()) {
-            System.out.println("Something went wrong!");
+            IO.println("Something went wrong!");
             throw new RuntimeException(error.get());
         } else {
-            System.out.println("No more!");
+            IO.println("No more!");
         }
     }
 }));
@@ -784,15 +772,15 @@ pageFuture.thenAccept(page -> page.autoPager().subscribe(new AsyncStreamResponse
 // Or use futures
 pageFuture.thenAccept(page -> page.autoPager()
     .subscribe(batch -> {
-        System.out.println(batch);
+        IO.println(batch);
     })
     .onCompleteFuture()
     .whenComplete((unused, error) -> {
         if (error != null) {
-            System.out.println("Something went wrong!");
+            IO.println("Something went wrong!");
             throw new RuntimeException(error);
         } else {
-            System.out.println("No more!");
+            IO.println("No more!");
         }
     }));
 ```
@@ -808,7 +796,7 @@ import com.anthropic.models.messages.batches.MessageBatch;
 BatchListPage page = client.messages().batches().list();
 while (true) {
     for (MessageBatch batch : page.items()) {
-        System.out.println(batch);
+        IO.println(batch);
     }
 
     if (!page.hasNextPage()) {
@@ -901,8 +889,6 @@ The most straightforward way to create a `JsonValue` is using its `from(...)` me
 
 ```java nocheck
 import com.anthropic.core.JsonValue;
-import java.util.List;
-import java.util.Map;
 
 // Create primitive JSON values
 JsonValue nullValue = JsonValue.from(null);
@@ -946,7 +932,6 @@ To access undocumented response properties, call the `_additionalProperties()` m
 
 ```java nocheck
 import com.anthropic.core.JsonValue;
-import java.util.Map;
 
 Map<String, JsonValue> additionalProperties = client
   .messages()
@@ -981,21 +966,21 @@ To access a property's raw JSON value, call its `_` prefixed method:
 
 ```java nocheck
 import com.anthropic.core.JsonField;
-import java.util.Optional;
+import com.anthropic.models.messages.StopReason;
 
-JsonField<Long> maxTokens = client.messages().create(params)._maxTokens();
+JsonField<StopReason> stopReason = client.messages().create(params)._stopReason();
 
-if (maxTokens.isMissing()) {
+if (stopReason.isMissing()) {
   // The property is absent from the JSON response
-} else if (maxTokens.isNull()) {
+} else if (stopReason.isNull()) {
   // The property was set to literal null
 } else {
   // Check if value was provided as a string
   // Other methods include `asNumber()`, `asBoolean()`, etc.
-  Optional<String> jsonString = maxTokens.asString();
+  Optional<String> jsonString = stopReason.asString();
 
   // Try to deserialize into a custom type
-  MyClass myObject = maxTokens.asUnknown().orElseThrow().convert(MyClass.class);
+  MyClass myObject = stopReason.asUnknown().orElseThrow().convert(MyClass.class);
 }
 ```
 
@@ -1040,7 +1025,6 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
 ```java nocheck
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import java.net.InetSocketAddress;
 import java.net.Proxy;
 
 AnthropicClient client = AnthropicOkHttpClient.builder()
@@ -1202,23 +1186,42 @@ To access undocumented response properties, use the `_additionalProperties()` me
 
 ## Beta features
 
-You can access most beta API features through the `beta()` method on the client. To check the availability of all of Claude's capabilities and tools, see the [build with Claude overview](/docs/en/build-with-claude/overview).
+Beta features are available before general release to get early feedback and test new functionality. You can check the availability of all of Claude's capabilities and tools in the [build with Claude overview](/docs/en/build-with-claude/overview).
 
-For example, to use structured outputs:
+You can access most beta API features through the `beta()` method on the client. To enable a particular beta feature, add the appropriate [beta header](/docs/en/api/beta-headers) with `.addBeta()` when building the message params.
 
-```java nocheck
+For example, to use the [Files API](/docs/en/build-with-claude/files):
+
+```java nocheck hidelines={1..2,9..10}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.AnthropicBeta;
+import com.anthropic.models.beta.messages.BetaContentBlockParam;
+import com.anthropic.models.beta.messages.BetaMessage;
+import com.anthropic.models.beta.messages.BetaRequestDocumentBlock;
+import com.anthropic.models.beta.messages.BetaTextBlockParam;
 import com.anthropic.models.beta.messages.MessageCreateParams;
-import com.anthropic.models.beta.messages.StructuredMessageCreateParams;
 import com.anthropic.models.messages.Model;
 
-StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_6)
-        .maxTokens(2048)
-        .outputFormat(BookList.class)
-        .addUserMessage("List some famous late twentieth century novels.")
-        .build();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-client.beta().messages().create(createParams);
+    BetaMessage message = client.beta().messages().create(
+        MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .addBeta(AnthropicBeta.FILES_API_2025_04_14)
+            .addUserMessageOfBetaContentBlockParams(List.of(
+                BetaContentBlockParam.ofText(
+                    BetaTextBlockParam.builder()
+                        .text("Please summarize this document for me.")
+                        .build()),
+                BetaContentBlockParam.ofDocument(
+                    BetaRequestDocumentBlock.builder()
+                        .fileSource("file_abc123")
+                        .build())))
+            .build());
+}
 ```
 
 ## Frequently asked questions

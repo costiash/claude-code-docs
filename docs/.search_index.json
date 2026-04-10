@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-10T00:47:59Z",
+  "generated_at": "2026-04-10T04:15:07Z",
   "indexed_files": 1039,
   "index": {
     "/changelog": {
@@ -22161,11 +22161,11 @@
       "keywords": [
         "sdk",
         "client",
-        "tool",
         "class",
+        "tool",
         "response",
-        "method",
         "api",
+        "method",
         "using",
         "streaming",
         "java",
@@ -22175,12 +22175,12 @@
         "section",
         "undocumented",
         "json",
+        "classes",
         "access",
-        "call",
         "requests",
-        "when"
+        "call"
       ],
-      "word_count": 4435,
+      "word_count": 4577,
       "file_path": "docs/docs__en__api__sdks__java.md"
     },
     "/docs/en/api/sdks/php": {
@@ -25908,23 +25908,23 @@
         "section",
         "outputs",
         "title",
-        "structured",
         "schemas",
+        "structured",
         "claude",
         "response",
-        "tool",
-        "strict",
-        "tab",
         "output",
         "sdk",
-        "when",
+        "tool",
         "example",
-        "validation",
-        "fields",
-        "field",
-        "tools"
+        "strict",
+        "java",
+        "tab",
+        "when",
+        "class",
+        "responses",
+        "validation"
       ],
-      "word_count": 9235,
+      "word_count": 9634,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/token-counting": {

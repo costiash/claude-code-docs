@@ -4275,8 +4275,8 @@
     "docs__en__api__sdks__java.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/java",
       "original_md_url": "https://platform.claude.com/docs/en/api/sdks/java.md",
-      "hash": "bcb3ce24ec026d3332b106154f744fb98c8ecc72b6a3fd36af3d57fd6cfae2c2",
-      "last_updated": "2026-04-08T18:40:11.040839"
+      "hash": "19eaf1fe30959fd6eb4b2f50964d2ec35e643b147aa34b16e84e922fcea2c913",
+      "last_updated": "2026-04-10T04:11:49.232900"
     },
     "docs__en__api__sdks__php.md": {
       "original_url": "https://platform.claude.com/docs/en/api/sdks/php",
@@ -5043,8 +5043,8 @@
     "docs__en__build-with-claude__structured-outputs.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs.md",
-      "hash": "6645a33caa9a4a27d4c8789be2bddd700ce85f5546ea1001958b5c476a26a65c",
-      "last_updated": "2026-04-08T18:42:10.171942"
+      "hash": "31ff43e0d4b3a5b96712183a034c9cad93a123fabebdb7ea9c197866bc621330",
+      "last_updated": "2026-04-10T04:13:34.886561"
     },
     "docs__en__build-with-claude__token-counting.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
@@ -5523,8 +5523,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-10T00:47:57.352247",
-    "fetch_duration_seconds": 652.720484,
+    "last_fetch_completed": "2026-04-10T04:15:04.636140",
+    "fetch_duration_seconds": 690.665622,
     "total_pages_discovered": 1172,
     "pages_fetched_successfully": 920,
     "pages_failed": 253,
@@ -5788,7 +5788,7 @@
     "total_files": 920,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-10T00:47:57.352267",
+  "last_updated": "2026-04-10T04:15:04.636183",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
