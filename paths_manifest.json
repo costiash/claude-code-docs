@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-04-10T18:21:35.316543Z",
-    "total_paths": 1172,
+    "generated_at": "2026-04-10T21:14:18.028494Z",
+    "total_paths": 1173,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-04-10T18:21:35.316549Z"
+    "last_regenerated": "2026-04-10T21:14:18.028501Z"
   },
   "categories": {
     "core_documentation": [
@@ -48,6 +48,7 @@
       "/docs/en/build-with-claude/batch-processing",
       "/docs/en/build-with-claude/citations",
       "/docs/en/build-with-claude/claude-code-analytics-api",
+      "/docs/en/build-with-claude/claude-in-amazon-bedrock-research-preview",
       "/docs/en/build-with-claude/claude-in-microsoft-foundry",
       "/docs/en/build-with-claude/claude-on-amazon-bedrock",
       "/docs/en/build-with-claude/claude-on-vertex-ai",
