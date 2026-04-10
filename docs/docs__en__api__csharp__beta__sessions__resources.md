@@ -76,6 +76,8 @@ Add Session Resource
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsFileResource:`
@@ -182,6 +184,8 @@ List Session Resources
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -340,6 +344,8 @@ Get Session Resource
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class ResourceRetrieveResponse: A class that can be one of several variants.union`
@@ -492,6 +498,8 @@ Update Session Resource
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class ResourceUpdateResponse: A class that can be one of several variants.union`
@@ -640,6 +648,8 @@ Delete Session Resource
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 

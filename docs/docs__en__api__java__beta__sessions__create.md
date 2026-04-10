@@ -56,6 +56,8 @@ Create Session
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
   - `Agent agent`
 
     Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both id and version specified.
@@ -84,7 +86,7 @@ Create Session
 
   - `Optional<Metadata> metadata`
 
-    Arbitrary key-value metadata attached to the session.
+    Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
   - `Optional<List<Resource>> resources`
 

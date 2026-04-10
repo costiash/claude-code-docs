@@ -34,7 +34,7 @@ The Models API response can be used to determine which models are available for 
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 18 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -77,6 +77,8 @@ The Models API response can be used to determine which models are available for 
       - `"fast-mode-2026-02-01"`
 
       - `"output-300k-2026-03-24"`
+
+      - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -301,7 +303,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 18 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -344,6 +346,8 @@ The Models API response can be used to determine information about a specific mo
       - `"fast-mode-2026-02-01"`
 
       - `"output-300k-2026-03-24"`
+
+      - `"advisor-tool-2026-03-01"`
 
 ### Returns
 

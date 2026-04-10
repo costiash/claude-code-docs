@@ -17334,6 +17334,78 @@ public final class Main {
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
+### Model
+
+- `enum Model:`
+
+  The model that will complete your prompt.
+
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+    New class of intelligence, strongest in coding and cybersecurity
+
+  - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+    Frontier intelligence for long-running agents and coding
+
+  - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+    Best combination of speed and intelligence
+
+  - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+    Fastest model with near-frontier intelligence
+
+  - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+    Fastest model with near-frontier intelligence
+
+  - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+    Premium model combining maximum intelligence with practical performance
+
+  - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+    Premium model combining maximum intelligence with practical performance
+
+  - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+    High-performance model for agents and coding
+
+  - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+    High-performance model for agents and coding
+
+  - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+    Exceptional model for specialized complex tasks
+
+  - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+    Exceptional model for specialized complex tasks
+
+  - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+    Powerful model for complex tasks
+
+  - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+    Powerful model for complex tasks
+
+  - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+    High-performance model with extended thinking
+
+  - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+    High-performance model with extended thinking
+
+  - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+    Fast and cost-effective model
+
 ### Output Config
 
 - `class OutputConfig:`

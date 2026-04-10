@@ -70,6 +70,8 @@ Create Skill Version
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class VersionCreateResponse:`
@@ -201,6 +203,8 @@ List Skill Versions
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -344,6 +348,8 @@ Get Skill Version
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class VersionRetrieveResponse:`
@@ -475,6 +481,8 @@ Delete Skill Version
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 

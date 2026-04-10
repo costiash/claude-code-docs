@@ -58,6 +58,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse:`

@@ -16,7 +16,7 @@ Create Vault
 
   - `metadata?: Record<string, string>`
 
-    Body param: Arbitrary key-value metadata to attach to the vault.
+    Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -24,7 +24,7 @@ Create Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 18 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -67,6 +67,8 @@ Create Vault
       - `"fast-mode-2026-02-01"`
 
       - `"output-300k-2026-03-24"`
+
+      - `"advisor-tool-2026-03-01"`
 
 ### Returns
 

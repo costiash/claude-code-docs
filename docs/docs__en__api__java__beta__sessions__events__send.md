@@ -58,6 +58,8 @@ Send Events
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
   - `List<BetaManagedAgentsEventParams> events`
 
     Events to send to the `session`.

@@ -272,6 +272,8 @@ The Models API response can be used to determine which models are available for 
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class ModelListPageResponse:`
@@ -543,6 +545,8 @@ The Models API response can be used to determine information about a specific mo
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -2462,6 +2466,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `required Name Name`
 
+            - `"advisor"Advisor`
+
             - `"web_search"WebSearch`
 
             - `"web_fetch"WebFetch`
@@ -2919,6 +2925,67 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
               - `required string ToolID`
 
               - `JsonElement Type "code_execution_20260120"constant`
+
+        - `class BetaAdvisorToolResultBlockParam:`
+
+          - `required Content Content`
+
+            - `class BetaAdvisorToolResultErrorParam:`
+
+              - `required ErrorCode ErrorCode`
+
+                - `"max_uses_exceeded"MaxUsesExceeded`
+
+                - `"prompt_too_long"PromptTooLong`
+
+                - `"too_many_requests"TooManyRequests`
+
+                - `"overloaded"Overloaded`
+
+                - `"unavailable"Unavailable`
+
+                - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+              - `JsonElement Type "advisor_tool_result_error"constant`
+
+            - `class BetaAdvisorResultBlockParam:`
+
+              - `required string Text`
+
+              - `JsonElement Type "advisor_result"constant`
+
+            - `class BetaAdvisorRedactedResultBlockParam:`
+
+              - `required string EncryptedContent`
+
+                Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+              - `JsonElement Type "advisor_redacted_result"constant`
+
+          - `required string ToolUseID`
+
+          - `JsonElement Type "advisor_tool_result"constant`
+
+          - `BetaCacheControlEphemeral? CacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+            - `JsonElement Type "ephemeral"constant`
+
+            - `Ttl Ttl`
+
+              The time-to-live for the cache control breakpoint.
+
+              This may be one the following values:
+
+              - `5m`: 5 minutes
+              - `1h`: 1 hour
+
+              Defaults to `5m`.
+
+              - `"5m"Ttl5m`
+
+              - `"1h"Ttl1h`
 
         - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -4889,6 +4956,148 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+    - `class BetaAdvisorTool20260301:`
+
+      - `required Model Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-mythos-preview"ClaudeMythosPreview`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"ClaudeOpus4_6`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"ClaudeOpus4_5`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"ClaudeOpus4_1`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"ClaudeOpus4_0`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+          Fast and cost-effective model
+
+      - `JsonElement Name "advisor"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `JsonElement Type "advisor_20260301"constant`
+
+      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+        - `"direct"Direct`
+
+        - `"code_execution_20250825"CodeExecution20250825`
+
+        - `"code_execution_20260120"CodeExecution20260120`
+
+      - `BetaCacheControlEphemeral? CacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+        - `JsonElement Type "ephemeral"constant`
+
+        - `Ttl Ttl`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+          - `"5m"Ttl5m`
+
+          - `"1h"Ttl1h`
+
+      - `BetaCacheControlEphemeral? Caching`
+
+        Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+        - `JsonElement Type "ephemeral"constant`
+
+        - `Ttl Ttl`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+          - `"5m"Ttl5m`
+
+          - `"1h"Ttl1h`
+
+      - `Boolean DeferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Long? MaxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `Boolean Strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
     - `class BetaToolSearchToolBm25_20251119:`
 
       - `JsonElement Name "tool_search_tool_bm25"constant`
@@ -5102,6 +5311,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -5318,6 +5529,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `required Name Name`
 
+        - `"advisor"Advisor`
+
         - `"web_search"WebSearch`
 
         - `"web_fetch"WebFetch`
@@ -5517,6 +5730,46 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `required string ToolID`
 
           - `JsonElement Type "code_execution_20260120"constant`
+
+    - `class BetaAdvisorToolResultBlock:`
+
+      - `required Content Content`
+
+        - `class BetaAdvisorToolResultError:`
+
+          - `required ErrorCode ErrorCode`
+
+            - `"max_uses_exceeded"MaxUsesExceeded`
+
+            - `"prompt_too_long"PromptTooLong`
+
+            - `"too_many_requests"TooManyRequests`
+
+            - `"overloaded"Overloaded`
+
+            - `"unavailable"Unavailable`
+
+            - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+          - `JsonElement Type "advisor_tool_result_error"constant`
+
+        - `class BetaAdvisorResultBlock:`
+
+          - `required string Text`
+
+          - `JsonElement Type "advisor_result"constant`
+
+        - `class BetaAdvisorRedactedResultBlock:`
+
+          - `required string EncryptedContent`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `JsonElement Type "advisor_redacted_result"constant`
+
+      - `required string ToolUseID`
+
+      - `JsonElement Type "advisor_tool_result"constant`
 
     - `class BetaCodeExecutionToolResultBlock:`
 
@@ -6154,6 +6407,112 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `JsonElement Type "compaction"constant`
 
           Usage for a compaction iteration
+
+      - `class BetaAdvisorMessageIterationUsage:`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `required BetaCacheCreation? CacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+          - `required Long Ephemeral1hInputTokens`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `required Long Ephemeral5mInputTokens`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `required Long CacheCreationInputTokens`
+
+          The number of input tokens used to create the cache entry.
+
+        - `required Long CacheReadInputTokens`
+
+          The number of input tokens read from the cache.
+
+        - `required Long InputTokens`
+
+          The number of input tokens which were used.
+
+        - `required Model Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-mythos-preview"ClaudeMythosPreview`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"ClaudeOpus4_6`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"ClaudeOpus4_5`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"ClaudeOpus4_1`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"ClaudeOpus4_0`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+            Fast and cost-effective model
+
+        - `required Long OutputTokens`
+
+          The number of output tokens which were used.
+
+        - `JsonElement Type "advisor_message"constant`
+
+          Usage for an advisor sub-inference iteration
 
     - `required Long OutputTokens`
 
@@ -7451,6 +7810,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `required Name Name`
 
+            - `"advisor"Advisor`
+
             - `"web_search"WebSearch`
 
             - `"web_fetch"WebFetch`
@@ -7908,6 +8269,67 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `required string ToolID`
 
               - `JsonElement Type "code_execution_20260120"constant`
+
+        - `class BetaAdvisorToolResultBlockParam:`
+
+          - `required Content Content`
+
+            - `class BetaAdvisorToolResultErrorParam:`
+
+              - `required ErrorCode ErrorCode`
+
+                - `"max_uses_exceeded"MaxUsesExceeded`
+
+                - `"prompt_too_long"PromptTooLong`
+
+                - `"too_many_requests"TooManyRequests`
+
+                - `"overloaded"Overloaded`
+
+                - `"unavailable"Unavailable`
+
+                - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+              - `JsonElement Type "advisor_tool_result_error"constant`
+
+            - `class BetaAdvisorResultBlockParam:`
+
+              - `required string Text`
+
+              - `JsonElement Type "advisor_result"constant`
+
+            - `class BetaAdvisorRedactedResultBlockParam:`
+
+              - `required string EncryptedContent`
+
+                Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+              - `JsonElement Type "advisor_redacted_result"constant`
+
+          - `required string ToolUseID`
+
+          - `JsonElement Type "advisor_tool_result"constant`
+
+          - `BetaCacheControlEphemeral? CacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+            - `JsonElement Type "ephemeral"constant`
+
+            - `Ttl Ttl`
+
+              The time-to-live for the cache control breakpoint.
+
+              This may be one the following values:
+
+              - `5m`: 5 minutes
+              - `1h`: 1 hour
+
+              Defaults to `5m`.
+
+              - `"5m"Ttl5m`
+
+              - `"1h"Ttl1h`
 
         - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -9810,6 +10232,148 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+    - `class BetaAdvisorTool20260301:`
+
+      - `required Model Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-mythos-preview"ClaudeMythosPreview`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"ClaudeOpus4_6`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"ClaudeOpus4_5`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"ClaudeOpus4_1`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"ClaudeOpus4_0`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+          Fast and cost-effective model
+
+      - `JsonElement Name "advisor"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `JsonElement Type "advisor_20260301"constant`
+
+      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+        - `"direct"Direct`
+
+        - `"code_execution_20250825"CodeExecution20250825`
+
+        - `"code_execution_20260120"CodeExecution20260120`
+
+      - `BetaCacheControlEphemeral? CacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+        - `JsonElement Type "ephemeral"constant`
+
+        - `Ttl Ttl`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+          - `"5m"Ttl5m`
+
+          - `"1h"Ttl1h`
+
+      - `BetaCacheControlEphemeral? Caching`
+
+        Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+        - `JsonElement Type "ephemeral"constant`
+
+        - `Ttl Ttl`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+          - `"5m"Ttl5m`
+
+          - `"1h"Ttl1h`
+
+      - `Boolean DeferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Long? MaxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `Boolean Strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
     - `class BetaToolSearchToolBm25_20251119:`
 
       - `JsonElement Name "tool_search_tool_bm25"constant`
@@ -10008,6 +10572,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaMessageTokensCount:`
@@ -10046,6 +10612,439 @@ Console.WriteLine(betaMessageTokensCount);
 ```
 
 ## Domain Types
+
+### Beta Advisor Message Iteration Usage
+
+- `class BetaAdvisorMessageIterationUsage:`
+
+  Token usage for an advisor sub-inference iteration.
+
+  - `required BetaCacheCreation? CacheCreation`
+
+    Breakdown of cached tokens by TTL
+
+    - `required Long Ephemeral1hInputTokens`
+
+      The number of input tokens used to create the 1 hour cache entry.
+
+    - `required Long Ephemeral5mInputTokens`
+
+      The number of input tokens used to create the 5 minute cache entry.
+
+  - `required Long CacheCreationInputTokens`
+
+    The number of input tokens used to create the cache entry.
+
+  - `required Long CacheReadInputTokens`
+
+    The number of input tokens read from the cache.
+
+  - `required Long InputTokens`
+
+    The number of input tokens which were used.
+
+  - `required Model Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-mythos-preview"ClaudeMythosPreview`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `"claude-opus-4-6"ClaudeOpus4_6`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+      Best combination of speed and intelligence
+
+    - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-opus-4-5"ClaudeOpus4_5`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+      High-performance model for agents and coding
+
+    - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+      High-performance model for agents and coding
+
+    - `"claude-opus-4-1"ClaudeOpus4_1`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-0"ClaudeOpus4_0`
+
+      Powerful model for complex tasks
+
+    - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+      Powerful model for complex tasks
+
+    - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+      High-performance model with extended thinking
+
+    - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+      High-performance model with extended thinking
+
+    - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+      Fast and cost-effective model
+
+  - `required Long OutputTokens`
+
+    The number of output tokens which were used.
+
+  - `JsonElement Type "advisor_message"constant`
+
+    Usage for an advisor sub-inference iteration
+
+### Beta Advisor Redacted Result Block
+
+- `class BetaAdvisorRedactedResultBlock:`
+
+  - `required string EncryptedContent`
+
+    Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+  - `JsonElement Type "advisor_redacted_result"constant`
+
+### Beta Advisor Redacted Result Block Param
+
+- `class BetaAdvisorRedactedResultBlockParam:`
+
+  - `required string EncryptedContent`
+
+    Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+  - `JsonElement Type "advisor_redacted_result"constant`
+
+### Beta Advisor Result Block
+
+- `class BetaAdvisorResultBlock:`
+
+  - `required string Text`
+
+  - `JsonElement Type "advisor_result"constant`
+
+### Beta Advisor Result Block Param
+
+- `class BetaAdvisorResultBlockParam:`
+
+  - `required string Text`
+
+  - `JsonElement Type "advisor_result"constant`
+
+### Beta Advisor Tool 20260301
+
+- `class BetaAdvisorTool20260301:`
+
+  - `required Model Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-mythos-preview"ClaudeMythosPreview`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `"claude-opus-4-6"ClaudeOpus4_6`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+      Best combination of speed and intelligence
+
+    - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-opus-4-5"ClaudeOpus4_5`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+      High-performance model for agents and coding
+
+    - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+      High-performance model for agents and coding
+
+    - `"claude-opus-4-1"ClaudeOpus4_1`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-0"ClaudeOpus4_0`
+
+      Powerful model for complex tasks
+
+    - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+      Powerful model for complex tasks
+
+    - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+      High-performance model with extended thinking
+
+    - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+      High-performance model with extended thinking
+
+    - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+      Fast and cost-effective model
+
+  - `JsonElement Name "advisor"constant`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `JsonElement Type "advisor_20260301"constant`
+
+  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+    - `"direct"Direct`
+
+    - `"code_execution_20250825"CodeExecution20250825`
+
+    - `"code_execution_20260120"CodeExecution20260120`
+
+  - `BetaCacheControlEphemeral? CacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonElement Type "ephemeral"constant`
+
+    - `Ttl Ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `"5m"Ttl5m`
+
+      - `"1h"Ttl1h`
+
+  - `BetaCacheControlEphemeral? Caching`
+
+    Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+    - `JsonElement Type "ephemeral"constant`
+
+    - `Ttl Ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `"5m"Ttl5m`
+
+      - `"1h"Ttl1h`
+
+  - `Boolean DeferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Long? MaxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `Boolean Strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Advisor Tool Result Block
+
+- `class BetaAdvisorToolResultBlock:`
+
+  - `required Content Content`
+
+    - `class BetaAdvisorToolResultError:`
+
+      - `required ErrorCode ErrorCode`
+
+        - `"max_uses_exceeded"MaxUsesExceeded`
+
+        - `"prompt_too_long"PromptTooLong`
+
+        - `"too_many_requests"TooManyRequests`
+
+        - `"overloaded"Overloaded`
+
+        - `"unavailable"Unavailable`
+
+        - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+      - `JsonElement Type "advisor_tool_result_error"constant`
+
+    - `class BetaAdvisorResultBlock:`
+
+      - `required string Text`
+
+      - `JsonElement Type "advisor_result"constant`
+
+    - `class BetaAdvisorRedactedResultBlock:`
+
+      - `required string EncryptedContent`
+
+        Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+      - `JsonElement Type "advisor_redacted_result"constant`
+
+  - `required string ToolUseID`
+
+  - `JsonElement Type "advisor_tool_result"constant`
+
+### Beta Advisor Tool Result Block Param
+
+- `class BetaAdvisorToolResultBlockParam:`
+
+  - `required Content Content`
+
+    - `class BetaAdvisorToolResultErrorParam:`
+
+      - `required ErrorCode ErrorCode`
+
+        - `"max_uses_exceeded"MaxUsesExceeded`
+
+        - `"prompt_too_long"PromptTooLong`
+
+        - `"too_many_requests"TooManyRequests`
+
+        - `"overloaded"Overloaded`
+
+        - `"unavailable"Unavailable`
+
+        - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+      - `JsonElement Type "advisor_tool_result_error"constant`
+
+    - `class BetaAdvisorResultBlockParam:`
+
+      - `required string Text`
+
+      - `JsonElement Type "advisor_result"constant`
+
+    - `class BetaAdvisorRedactedResultBlockParam:`
+
+      - `required string EncryptedContent`
+
+        Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+      - `JsonElement Type "advisor_redacted_result"constant`
+
+  - `required string ToolUseID`
+
+  - `JsonElement Type "advisor_tool_result"constant`
+
+  - `BetaCacheControlEphemeral? CacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonElement Type "ephemeral"constant`
+
+    - `Ttl Ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `"5m"Ttl5m`
+
+      - `"1h"Ttl1h`
+
+### Beta Advisor Tool Result Error
+
+- `class BetaAdvisorToolResultError:`
+
+  - `required ErrorCode ErrorCode`
+
+    - `"max_uses_exceeded"MaxUsesExceeded`
+
+    - `"prompt_too_long"PromptTooLong`
+
+    - `"too_many_requests"TooManyRequests`
+
+    - `"overloaded"Overloaded`
+
+    - `"unavailable"Unavailable`
+
+    - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+  - `JsonElement Type "advisor_tool_result_error"constant`
+
+### Beta Advisor Tool Result Error Param
+
+- `class BetaAdvisorToolResultErrorParam:`
+
+  - `required ErrorCode ErrorCode`
+
+    - `"max_uses_exceeded"MaxUsesExceeded`
+
+    - `"prompt_too_long"PromptTooLong`
+
+    - `"too_many_requests"TooManyRequests`
+
+    - `"overloaded"Overloaded`
+
+    - `"unavailable"Unavailable`
+
+    - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+  - `JsonElement Type "advisor_tool_result_error"constant`
 
 ### Beta All Thinking Turns
 
@@ -11548,6 +12547,8 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `required Name Name`
 
+      - `"advisor"Advisor`
+
       - `"web_search"WebSearch`
 
       - `"web_fetch"WebFetch`
@@ -11747,6 +12748,46 @@ Console.WriteLine(betaMessageTokensCount);
         - `required string ToolID`
 
         - `JsonElement Type "code_execution_20260120"constant`
+
+  - `class BetaAdvisorToolResultBlock:`
+
+    - `required Content Content`
+
+      - `class BetaAdvisorToolResultError:`
+
+        - `required ErrorCode ErrorCode`
+
+          - `"max_uses_exceeded"MaxUsesExceeded`
+
+          - `"prompt_too_long"PromptTooLong`
+
+          - `"too_many_requests"TooManyRequests`
+
+          - `"overloaded"Overloaded`
+
+          - `"unavailable"Unavailable`
+
+          - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+        - `JsonElement Type "advisor_tool_result_error"constant`
+
+      - `class BetaAdvisorResultBlock:`
+
+        - `required string Text`
+
+        - `JsonElement Type "advisor_result"constant`
+
+      - `class BetaAdvisorRedactedResultBlock:`
+
+        - `required string EncryptedContent`
+
+          Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+        - `JsonElement Type "advisor_redacted_result"constant`
+
+    - `required string ToolUseID`
+
+    - `JsonElement Type "advisor_tool_result"constant`
 
   - `class BetaCodeExecutionToolResultBlock:`
 
@@ -13257,6 +14298,8 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `required Name Name`
 
+      - `"advisor"Advisor`
+
       - `"web_search"WebSearch`
 
       - `"web_fetch"WebFetch`
@@ -13714,6 +14757,67 @@ Console.WriteLine(betaMessageTokensCount);
         - `required string ToolID`
 
         - `JsonElement Type "code_execution_20260120"constant`
+
+  - `class BetaAdvisorToolResultBlockParam:`
+
+    - `required Content Content`
+
+      - `class BetaAdvisorToolResultErrorParam:`
+
+        - `required ErrorCode ErrorCode`
+
+          - `"max_uses_exceeded"MaxUsesExceeded`
+
+          - `"prompt_too_long"PromptTooLong`
+
+          - `"too_many_requests"TooManyRequests`
+
+          - `"overloaded"Overloaded`
+
+          - `"unavailable"Unavailable`
+
+          - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+        - `JsonElement Type "advisor_tool_result_error"constant`
+
+      - `class BetaAdvisorResultBlockParam:`
+
+        - `required string Text`
+
+        - `JsonElement Type "advisor_result"constant`
+
+      - `class BetaAdvisorRedactedResultBlockParam:`
+
+        - `required string EncryptedContent`
+
+          Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+        - `JsonElement Type "advisor_redacted_result"constant`
+
+    - `required string ToolUseID`
+
+    - `JsonElement Type "advisor_tool_result"constant`
+
+    - `BetaCacheControlEphemeral? CacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+      - `JsonElement Type "ephemeral"constant`
+
+      - `Ttl Ttl`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"Ttl5m`
+
+        - `"1h"Ttl1h`
 
   - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -15592,6 +16696,8 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `required Name Name`
 
+        - `"advisor"Advisor`
+
         - `"web_search"WebSearch`
 
         - `"web_fetch"WebFetch`
@@ -15791,6 +16897,46 @@ Console.WriteLine(betaMessageTokensCount);
           - `required string ToolID`
 
           - `JsonElement Type "code_execution_20260120"constant`
+
+    - `class BetaAdvisorToolResultBlock:`
+
+      - `required Content Content`
+
+        - `class BetaAdvisorToolResultError:`
+
+          - `required ErrorCode ErrorCode`
+
+            - `"max_uses_exceeded"MaxUsesExceeded`
+
+            - `"prompt_too_long"PromptTooLong`
+
+            - `"too_many_requests"TooManyRequests`
+
+            - `"overloaded"Overloaded`
+
+            - `"unavailable"Unavailable`
+
+            - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+          - `JsonElement Type "advisor_tool_result_error"constant`
+
+        - `class BetaAdvisorResultBlock:`
+
+          - `required string Text`
+
+          - `JsonElement Type "advisor_result"constant`
+
+        - `class BetaAdvisorRedactedResultBlock:`
+
+          - `required string EncryptedContent`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `JsonElement Type "advisor_redacted_result"constant`
+
+      - `required string ToolUseID`
+
+      - `JsonElement Type "advisor_tool_result"constant`
 
     - `class BetaCodeExecutionToolResultBlock:`
 
@@ -16429,6 +17575,112 @@ Console.WriteLine(betaMessageTokensCount);
 
           Usage for a compaction iteration
 
+      - `class BetaAdvisorMessageIterationUsage:`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `required BetaCacheCreation? CacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+          - `required Long Ephemeral1hInputTokens`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `required Long Ephemeral5mInputTokens`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `required Long CacheCreationInputTokens`
+
+          The number of input tokens used to create the cache entry.
+
+        - `required Long CacheReadInputTokens`
+
+          The number of input tokens read from the cache.
+
+        - `required Long InputTokens`
+
+          The number of input tokens which were used.
+
+        - `required Model Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-mythos-preview"ClaudeMythosPreview`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"ClaudeOpus4_6`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"ClaudeOpus4_5`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"ClaudeOpus4_1`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"ClaudeOpus4_0`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+            Fast and cost-effective model
+
+        - `required Long OutputTokens`
+
+          The number of output tokens which were used.
+
+        - `JsonElement Type "advisor_message"constant`
+
+          Usage for an advisor sub-inference iteration
+
     - `required Long OutputTokens`
 
       The number of output tokens which were used.
@@ -16560,6 +17812,112 @@ Console.WriteLine(betaMessageTokensCount);
       - `JsonElement Type "compaction"constant`
 
         Usage for a compaction iteration
+
+    - `class BetaAdvisorMessageIterationUsage:`
+
+      Token usage for an advisor sub-inference iteration.
+
+      - `required BetaCacheCreation? CacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+        - `required Long Ephemeral1hInputTokens`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+        - `required Long Ephemeral5mInputTokens`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+      - `required Long CacheCreationInputTokens`
+
+        The number of input tokens used to create the cache entry.
+
+      - `required Long CacheReadInputTokens`
+
+        The number of input tokens read from the cache.
+
+      - `required Long InputTokens`
+
+        The number of input tokens which were used.
+
+      - `required Model Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-mythos-preview"ClaudeMythosPreview`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"ClaudeOpus4_6`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"ClaudeOpus4_5`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"ClaudeOpus4_1`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"ClaudeOpus4_0`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+          Fast and cost-effective model
+
+      - `required Long OutputTokens`
+
+        The number of output tokens which were used.
+
+      - `JsonElement Type "advisor_message"constant`
+
+        Usage for an advisor sub-inference iteration
 
   - `required Long OutputTokens`
 
@@ -17792,6 +19150,8 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `required Name Name`
 
+          - `"advisor"Advisor`
+
           - `"web_search"WebSearch`
 
           - `"web_fetch"WebFetch`
@@ -18249,6 +19609,67 @@ Console.WriteLine(betaMessageTokensCount);
             - `required string ToolID`
 
             - `JsonElement Type "code_execution_20260120"constant`
+
+      - `class BetaAdvisorToolResultBlockParam:`
+
+        - `required Content Content`
+
+          - `class BetaAdvisorToolResultErrorParam:`
+
+            - `required ErrorCode ErrorCode`
+
+              - `"max_uses_exceeded"MaxUsesExceeded`
+
+              - `"prompt_too_long"PromptTooLong`
+
+              - `"too_many_requests"TooManyRequests`
+
+              - `"overloaded"Overloaded`
+
+              - `"unavailable"Unavailable`
+
+              - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+            - `JsonElement Type "advisor_tool_result_error"constant`
+
+          - `class BetaAdvisorResultBlockParam:`
+
+            - `required string Text`
+
+            - `JsonElement Type "advisor_result"constant`
+
+          - `class BetaAdvisorRedactedResultBlockParam:`
+
+            - `required string EncryptedContent`
+
+              Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+            - `JsonElement Type "advisor_redacted_result"constant`
+
+        - `required string ToolUseID`
+
+        - `JsonElement Type "advisor_tool_result"constant`
+
+        - `BetaCacheControlEphemeral? CacheControl`
+
+          Create a cache control breakpoint at this content block.
+
+          - `JsonElement Type "ephemeral"constant`
+
+          - `Ttl Ttl`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"Ttl5m`
+
+            - `"1h"Ttl1h`
 
       - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -19243,6 +20664,8 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `required Name Name`
 
+        - `"advisor"Advisor`
+
         - `"web_search"WebSearch`
 
         - `"web_fetch"WebFetch`
@@ -19442,6 +20865,46 @@ Console.WriteLine(betaMessageTokensCount);
           - `required string ToolID`
 
           - `JsonElement Type "code_execution_20260120"constant`
+
+    - `class BetaAdvisorToolResultBlock:`
+
+      - `required Content Content`
+
+        - `class BetaAdvisorToolResultError:`
+
+          - `required ErrorCode ErrorCode`
+
+            - `"max_uses_exceeded"MaxUsesExceeded`
+
+            - `"prompt_too_long"PromptTooLong`
+
+            - `"too_many_requests"TooManyRequests`
+
+            - `"overloaded"Overloaded`
+
+            - `"unavailable"Unavailable`
+
+            - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+          - `JsonElement Type "advisor_tool_result_error"constant`
+
+        - `class BetaAdvisorResultBlock:`
+
+          - `required string Text`
+
+          - `JsonElement Type "advisor_result"constant`
+
+        - `class BetaAdvisorRedactedResultBlock:`
+
+          - `required string EncryptedContent`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `JsonElement Type "advisor_redacted_result"constant`
+
+      - `required string ToolUseID`
+
+      - `JsonElement Type "advisor_tool_result"constant`
 
     - `class BetaCodeExecutionToolResultBlock:`
 
@@ -20015,6 +21478,112 @@ Console.WriteLine(betaMessageTokensCount);
 
           Usage for a compaction iteration
 
+      - `class BetaAdvisorMessageIterationUsage:`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `required BetaCacheCreation? CacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+          - `required Long Ephemeral1hInputTokens`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `required Long Ephemeral5mInputTokens`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `required Long CacheCreationInputTokens`
+
+          The number of input tokens used to create the cache entry.
+
+        - `required Long CacheReadInputTokens`
+
+          The number of input tokens read from the cache.
+
+        - `required Long InputTokens`
+
+          The number of input tokens which were used.
+
+        - `required Model Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-mythos-preview"ClaudeMythosPreview`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"ClaudeOpus4_6`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"ClaudeOpus4_5`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"ClaudeOpus4_1`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"ClaudeOpus4_0`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+            Fast and cost-effective model
+
+        - `required Long OutputTokens`
+
+          The number of output tokens which were used.
+
+        - `JsonElement Type "advisor_message"constant`
+
+          Usage for an advisor sub-inference iteration
+
     - `required Long OutputTokens`
 
       The cumulative number of output tokens which were used.
@@ -20248,6 +21817,8 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `required Name Name`
 
+          - `"advisor"Advisor`
+
           - `"web_search"WebSearch`
 
           - `"web_fetch"WebFetch`
@@ -20447,6 +22018,46 @@ Console.WriteLine(betaMessageTokensCount);
             - `required string ToolID`
 
             - `JsonElement Type "code_execution_20260120"constant`
+
+      - `class BetaAdvisorToolResultBlock:`
+
+        - `required Content Content`
+
+          - `class BetaAdvisorToolResultError:`
+
+            - `required ErrorCode ErrorCode`
+
+              - `"max_uses_exceeded"MaxUsesExceeded`
+
+              - `"prompt_too_long"PromptTooLong`
+
+              - `"too_many_requests"TooManyRequests`
+
+              - `"overloaded"Overloaded`
+
+              - `"unavailable"Unavailable`
+
+              - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+            - `JsonElement Type "advisor_tool_result_error"constant`
+
+          - `class BetaAdvisorResultBlock:`
+
+            - `required string Text`
+
+            - `JsonElement Type "advisor_result"constant`
+
+          - `class BetaAdvisorRedactedResultBlock:`
+
+            - `required string EncryptedContent`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `JsonElement Type "advisor_redacted_result"constant`
+
+        - `required string ToolUseID`
+
+        - `JsonElement Type "advisor_tool_result"constant`
 
       - `class BetaCodeExecutionToolResultBlock:`
 
@@ -21085,6 +22696,112 @@ Console.WriteLine(betaMessageTokensCount);
 
             Usage for a compaction iteration
 
+        - `class BetaAdvisorMessageIterationUsage:`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `required BetaCacheCreation? CacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+            - `required Long Ephemeral1hInputTokens`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `required Long Ephemeral5mInputTokens`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `required Long CacheCreationInputTokens`
+
+            The number of input tokens used to create the cache entry.
+
+          - `required Long CacheReadInputTokens`
+
+            The number of input tokens read from the cache.
+
+          - `required Long InputTokens`
+
+            The number of input tokens which were used.
+
+          - `required Model Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-mythos-preview"ClaudeMythosPreview`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"ClaudeOpus4_6`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"ClaudeOpus4_5`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"ClaudeOpus4_1`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"ClaudeOpus4_0`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+              Fast and cost-effective model
+
+          - `required Long OutputTokens`
+
+            The number of output tokens which were used.
+
+          - `JsonElement Type "advisor_message"constant`
+
+            Usage for an advisor sub-inference iteration
+
       - `required Long OutputTokens`
 
         The number of output tokens which were used.
@@ -21346,6 +23063,8 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `required Name Name`
 
+            - `"advisor"Advisor`
+
             - `"web_search"WebSearch`
 
             - `"web_fetch"WebFetch`
@@ -21545,6 +23264,46 @@ Console.WriteLine(betaMessageTokensCount);
               - `required string ToolID`
 
               - `JsonElement Type "code_execution_20260120"constant`
+
+        - `class BetaAdvisorToolResultBlock:`
+
+          - `required Content Content`
+
+            - `class BetaAdvisorToolResultError:`
+
+              - `required ErrorCode ErrorCode`
+
+                - `"max_uses_exceeded"MaxUsesExceeded`
+
+                - `"prompt_too_long"PromptTooLong`
+
+                - `"too_many_requests"TooManyRequests`
+
+                - `"overloaded"Overloaded`
+
+                - `"unavailable"Unavailable`
+
+                - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+              - `JsonElement Type "advisor_tool_result_error"constant`
+
+            - `class BetaAdvisorResultBlock:`
+
+              - `required string Text`
+
+              - `JsonElement Type "advisor_result"constant`
+
+            - `class BetaAdvisorRedactedResultBlock:`
+
+              - `required string EncryptedContent`
+
+                Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `JsonElement Type "advisor_redacted_result"constant`
+
+          - `required string ToolUseID`
+
+          - `JsonElement Type "advisor_tool_result"constant`
 
         - `class BetaCodeExecutionToolResultBlock:`
 
@@ -22183,6 +23942,112 @@ Console.WriteLine(betaMessageTokensCount);
 
               Usage for a compaction iteration
 
+          - `class BetaAdvisorMessageIterationUsage:`
+
+            Token usage for an advisor sub-inference iteration.
+
+            - `required BetaCacheCreation? CacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+              - `required Long Ephemeral1hInputTokens`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `required Long Ephemeral5mInputTokens`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `required Long CacheCreationInputTokens`
+
+              The number of input tokens used to create the cache entry.
+
+            - `required Long CacheReadInputTokens`
+
+              The number of input tokens read from the cache.
+
+            - `required Long InputTokens`
+
+              The number of input tokens which were used.
+
+            - `required Model Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-mythos-preview"ClaudeMythosPreview`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"ClaudeOpus4_6`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"ClaudeOpus4_5`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"ClaudeOpus4_1`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"ClaudeOpus4_0`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+                Fast and cost-effective model
+
+            - `required Long OutputTokens`
+
+              The number of output tokens which were used.
+
+            - `JsonElement Type "advisor_message"constant`
+
+              Usage for an advisor sub-inference iteration
+
         - `required Long OutputTokens`
 
           The number of output tokens which were used.
@@ -22441,6 +24306,112 @@ Console.WriteLine(betaMessageTokensCount);
 
             Usage for a compaction iteration
 
+        - `class BetaAdvisorMessageIterationUsage:`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `required BetaCacheCreation? CacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+            - `required Long Ephemeral1hInputTokens`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `required Long Ephemeral5mInputTokens`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `required Long CacheCreationInputTokens`
+
+            The number of input tokens used to create the cache entry.
+
+          - `required Long CacheReadInputTokens`
+
+            The number of input tokens read from the cache.
+
+          - `required Long InputTokens`
+
+            The number of input tokens which were used.
+
+          - `required Model Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-mythos-preview"ClaudeMythosPreview`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"ClaudeOpus4_6`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"ClaudeOpus4_5`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"ClaudeOpus4_1`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"ClaudeOpus4_0`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+              Fast and cost-effective model
+
+          - `required Long OutputTokens`
+
+            The number of output tokens which were used.
+
+          - `JsonElement Type "advisor_message"constant`
+
+            Usage for an advisor sub-inference iteration
+
       - `required Long OutputTokens`
 
         The cumulative number of output tokens which were used.
@@ -22610,6 +24581,8 @@ Console.WriteLine(betaMessageTokensCount);
         - `required IReadOnlyDictionary<string, JsonElement> Input`
 
         - `required Name Name`
+
+          - `"advisor"Advisor`
 
           - `"web_search"WebSearch`
 
@@ -22810,6 +24783,46 @@ Console.WriteLine(betaMessageTokensCount);
             - `required string ToolID`
 
             - `JsonElement Type "code_execution_20260120"constant`
+
+      - `class BetaAdvisorToolResultBlock:`
+
+        - `required Content Content`
+
+          - `class BetaAdvisorToolResultError:`
+
+            - `required ErrorCode ErrorCode`
+
+              - `"max_uses_exceeded"MaxUsesExceeded`
+
+              - `"prompt_too_long"PromptTooLong`
+
+              - `"too_many_requests"TooManyRequests`
+
+              - `"overloaded"Overloaded`
+
+              - `"unavailable"Unavailable`
+
+              - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+            - `JsonElement Type "advisor_tool_result_error"constant`
+
+          - `class BetaAdvisorResultBlock:`
+
+            - `required string Text`
+
+            - `JsonElement Type "advisor_result"constant`
+
+          - `class BetaAdvisorRedactedResultBlock:`
+
+            - `required string EncryptedContent`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `JsonElement Type "advisor_redacted_result"constant`
+
+        - `required string ToolUseID`
+
+        - `JsonElement Type "advisor_tool_result"constant`
 
       - `class BetaCodeExecutionToolResultBlock:`
 
@@ -23880,6 +25893,8 @@ Console.WriteLine(betaMessageTokensCount);
 
   - `required Name Name`
 
+    - `"advisor"Advisor`
+
     - `"web_search"WebSearch`
 
     - `"web_fetch"WebFetch`
@@ -23929,6 +25944,8 @@ Console.WriteLine(betaMessageTokensCount);
   - `required IReadOnlyDictionary<string, JsonElement> Input`
 
   - `required Name Name`
+
+    - `"advisor"Advisor`
 
     - `"web_search"WebSearch`
 
@@ -27559,6 +29576,148 @@ Console.WriteLine(betaMessageTokensCount);
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `class BetaAdvisorTool20260301:`
+
+    - `required Model Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-mythos-preview"ClaudeMythosPreview`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `"claude-opus-4-6"ClaudeOpus4_6`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"ClaudeOpus4_5`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+        High-performance model for agents and coding
+
+      - `"claude-opus-4-1"ClaudeOpus4_1`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-0"ClaudeOpus4_0`
+
+        Powerful model for complex tasks
+
+      - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+        Powerful model for complex tasks
+
+      - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+        High-performance model with extended thinking
+
+      - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+        High-performance model with extended thinking
+
+      - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+        Fast and cost-effective model
+
+    - `JsonElement Name "advisor"constant`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `JsonElement Type "advisor_20260301"constant`
+
+    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+      - `"direct"Direct`
+
+      - `"code_execution_20250825"CodeExecution20250825`
+
+      - `"code_execution_20260120"CodeExecution20260120`
+
+    - `BetaCacheControlEphemeral? CacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+      - `JsonElement Type "ephemeral"constant`
+
+      - `Ttl Ttl`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"Ttl5m`
+
+        - `"1h"Ttl1h`
+
+    - `BetaCacheControlEphemeral? Caching`
+
+      Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+      - `JsonElement Type "ephemeral"constant`
+
+      - `Ttl Ttl`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"Ttl5m`
+
+        - `"1h"Ttl1h`
+
+    - `Boolean DeferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Long? MaxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `Boolean Strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
   - `class BetaToolSearchToolBm25_20251119:`
 
     - `JsonElement Name "tool_search_tool_bm25"constant`
@@ -27949,6 +30108,112 @@ Console.WriteLine(betaMessageTokensCount);
       - `JsonElement Type "compaction"constant`
 
         Usage for a compaction iteration
+
+    - `class BetaAdvisorMessageIterationUsage:`
+
+      Token usage for an advisor sub-inference iteration.
+
+      - `required BetaCacheCreation? CacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+        - `required Long Ephemeral1hInputTokens`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+        - `required Long Ephemeral5mInputTokens`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+      - `required Long CacheCreationInputTokens`
+
+        The number of input tokens used to create the cache entry.
+
+      - `required Long CacheReadInputTokens`
+
+        The number of input tokens read from the cache.
+
+      - `required Long InputTokens`
+
+        The number of input tokens which were used.
+
+      - `required Model Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-mythos-preview"ClaudeMythosPreview`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"ClaudeOpus4_6`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"ClaudeOpus4_5`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"ClaudeOpus4_1`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"ClaudeOpus4_0`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+          Fast and cost-effective model
+
+      - `required Long OutputTokens`
+
+        The number of output tokens which were used.
+
+      - `JsonElement Type "advisor_message"constant`
+
+        Usage for an advisor sub-inference iteration
 
   - `required Long OutputTokens`
 
@@ -30729,6 +32994,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `required Name Name`
 
+                - `"advisor"Advisor`
+
                 - `"web_search"WebSearch`
 
                 - `"web_fetch"WebFetch`
@@ -31186,6 +33453,67 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `required string ToolID`
 
                   - `JsonElement Type "code_execution_20260120"constant`
+
+            - `class BetaAdvisorToolResultBlockParam:`
+
+              - `required Content Content`
+
+                - `class BetaAdvisorToolResultErrorParam:`
+
+                  - `required ErrorCode ErrorCode`
+
+                    - `"max_uses_exceeded"MaxUsesExceeded`
+
+                    - `"prompt_too_long"PromptTooLong`
+
+                    - `"too_many_requests"TooManyRequests`
+
+                    - `"overloaded"Overloaded`
+
+                    - `"unavailable"Unavailable`
+
+                    - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+                  - `JsonElement Type "advisor_tool_result_error"constant`
+
+                - `class BetaAdvisorResultBlockParam:`
+
+                  - `required string Text`
+
+                  - `JsonElement Type "advisor_result"constant`
+
+                - `class BetaAdvisorRedactedResultBlockParam:`
+
+                  - `required string EncryptedContent`
+
+                    Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+                  - `JsonElement Type "advisor_redacted_result"constant`
+
+              - `required string ToolUseID`
+
+              - `JsonElement Type "advisor_tool_result"constant`
+
+              - `BetaCacheControlEphemeral? CacheControl`
+
+                Create a cache control breakpoint at this content block.
+
+                - `JsonElement Type "ephemeral"constant`
+
+                - `Ttl Ttl`
+
+                  The time-to-live for the cache control breakpoint.
+
+                  This may be one the following values:
+
+                  - `5m`: 5 minutes
+                  - `1h`: 1 hour
+
+                  Defaults to `5m`.
+
+                  - `"5m"Ttl5m`
+
+                  - `"1h"Ttl1h`
 
             - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -33453,6 +35781,148 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+        - `class BetaAdvisorTool20260301:`
+
+          - `required Model Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-mythos-preview"ClaudeMythosPreview`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"ClaudeOpus4_6`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"ClaudeOpus4_5`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"ClaudeOpus4_1`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"ClaudeOpus4_0`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+              Fast and cost-effective model
+
+          - `JsonElement Name "advisor"constant`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+          - `JsonElement Type "advisor_20260301"constant`
+
+          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+            - `"direct"Direct`
+
+            - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
+
+          - `BetaCacheControlEphemeral? CacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+            - `JsonElement Type "ephemeral"constant`
+
+            - `Ttl Ttl`
+
+              The time-to-live for the cache control breakpoint.
+
+              This may be one the following values:
+
+              - `5m`: 5 minutes
+              - `1h`: 1 hour
+
+              Defaults to `5m`.
+
+              - `"5m"Ttl5m`
+
+              - `"1h"Ttl1h`
+
+          - `BetaCacheControlEphemeral? Caching`
+
+            Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+            - `JsonElement Type "ephemeral"constant`
+
+            - `Ttl Ttl`
+
+              The time-to-live for the cache control breakpoint.
+
+              This may be one the following values:
+
+              - `5m`: 5 minutes
+              - `1h`: 1 hour
+
+              Defaults to `5m`.
+
+              - `"5m"Ttl5m`
+
+              - `"1h"Ttl1h`
+
+          - `Boolean DeferLoading`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Long? MaxUses`
+
+            Maximum number of times the tool can be used in the API request.
+
+          - `Boolean Strict`
+
+            When true, guarantees schema validation on tool names and inputs
+
         - `class BetaToolSearchToolBm25_20251119:`
 
           - `JsonElement Name "tool_search_tool_bm25"constant`
@@ -33666,6 +36136,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -33997,6 +36469,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -34168,6 +36642,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -34349,6 +36825,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -34513,6 +36991,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -34602,6 +37082,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -34836,6 +37318,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `required Name Name`
 
+              - `"advisor"Advisor`
+
               - `"web_search"WebSearch`
 
               - `"web_fetch"WebFetch`
@@ -35035,6 +37519,46 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `required string ToolID`
 
                 - `JsonElement Type "code_execution_20260120"constant`
+
+          - `class BetaAdvisorToolResultBlock:`
+
+            - `required Content Content`
+
+              - `class BetaAdvisorToolResultError:`
+
+                - `required ErrorCode ErrorCode`
+
+                  - `"max_uses_exceeded"MaxUsesExceeded`
+
+                  - `"prompt_too_long"PromptTooLong`
+
+                  - `"too_many_requests"TooManyRequests`
+
+                  - `"overloaded"Overloaded`
+
+                  - `"unavailable"Unavailable`
+
+                  - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+                - `JsonElement Type "advisor_tool_result_error"constant`
+
+              - `class BetaAdvisorResultBlock:`
+
+                - `required string Text`
+
+                - `JsonElement Type "advisor_result"constant`
+
+              - `class BetaAdvisorRedactedResultBlock:`
+
+                - `required string EncryptedContent`
+
+                  Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `JsonElement Type "advisor_redacted_result"constant`
+
+            - `required string ToolUseID`
+
+            - `JsonElement Type "advisor_tool_result"constant`
 
           - `class BetaCodeExecutionToolResultBlock:`
 
@@ -35672,6 +38196,112 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `JsonElement Type "compaction"constant`
 
                 Usage for a compaction iteration
+
+            - `class BetaAdvisorMessageIterationUsage:`
+
+              Token usage for an advisor sub-inference iteration.
+
+              - `required BetaCacheCreation? CacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+                - `required Long Ephemeral1hInputTokens`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `required Long Ephemeral5mInputTokens`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `required Long CacheCreationInputTokens`
+
+                The number of input tokens used to create the cache entry.
+
+              - `required Long CacheReadInputTokens`
+
+                The number of input tokens read from the cache.
+
+              - `required Long InputTokens`
+
+                The number of input tokens which were used.
+
+              - `required Model Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-mythos-preview"ClaudeMythosPreview`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"ClaudeOpus4_6`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"ClaudeOpus4_5`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"ClaudeOpus4_1`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"ClaudeOpus4_0`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+                  Fast and cost-effective model
+
+              - `required Long OutputTokens`
+
+                The number of output tokens which were used.
+
+              - `JsonElement Type "advisor_message"constant`
+
+                Usage for an advisor sub-inference iteration
 
           - `required Long OutputTokens`
 
@@ -36211,6 +38841,8 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `required Name Name`
 
+              - `"advisor"Advisor`
+
               - `"web_search"WebSearch`
 
               - `"web_fetch"WebFetch`
@@ -36410,6 +39042,46 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
                 - `required string ToolID`
 
                 - `JsonElement Type "code_execution_20260120"constant`
+
+          - `class BetaAdvisorToolResultBlock:`
+
+            - `required Content Content`
+
+              - `class BetaAdvisorToolResultError:`
+
+                - `required ErrorCode ErrorCode`
+
+                  - `"max_uses_exceeded"MaxUsesExceeded`
+
+                  - `"prompt_too_long"PromptTooLong`
+
+                  - `"too_many_requests"TooManyRequests`
+
+                  - `"overloaded"Overloaded`
+
+                  - `"unavailable"Unavailable`
+
+                  - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+                - `JsonElement Type "advisor_tool_result_error"constant`
+
+              - `class BetaAdvisorResultBlock:`
+
+                - `required string Text`
+
+                - `JsonElement Type "advisor_result"constant`
+
+              - `class BetaAdvisorRedactedResultBlock:`
+
+                - `required string EncryptedContent`
+
+                  Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `JsonElement Type "advisor_redacted_result"constant`
+
+            - `required string ToolUseID`
+
+            - `JsonElement Type "advisor_tool_result"constant`
 
           - `class BetaCodeExecutionToolResultBlock:`
 
@@ -37048,6 +39720,112 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 Usage for a compaction iteration
 
+            - `class BetaAdvisorMessageIterationUsage:`
+
+              Token usage for an advisor sub-inference iteration.
+
+              - `required BetaCacheCreation? CacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+                - `required Long Ephemeral1hInputTokens`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `required Long Ephemeral5mInputTokens`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `required Long CacheCreationInputTokens`
+
+                The number of input tokens used to create the cache entry.
+
+              - `required Long CacheReadInputTokens`
+
+                The number of input tokens read from the cache.
+
+              - `required Long InputTokens`
+
+                The number of input tokens which were used.
+
+              - `required Model Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-mythos-preview"ClaudeMythosPreview`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"ClaudeOpus4_6`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"ClaudeOpus4_5`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"ClaudeOpus4_1`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"ClaudeOpus4_0`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+                  Fast and cost-effective model
+
+              - `required Long OutputTokens`
+
+                The number of output tokens which were used.
+
+              - `JsonElement Type "advisor_message"constant`
+
+                Usage for an advisor sub-inference iteration
+
           - `required Long OutputTokens`
 
             The number of output tokens which were used.
@@ -37413,6 +40191,8 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `required Name Name`
 
+            - `"advisor"Advisor`
+
             - `"web_search"WebSearch`
 
             - `"web_fetch"WebFetch`
@@ -37612,6 +40392,46 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
               - `required string ToolID`
 
               - `JsonElement Type "code_execution_20260120"constant`
+
+        - `class BetaAdvisorToolResultBlock:`
+
+          - `required Content Content`
+
+            - `class BetaAdvisorToolResultError:`
+
+              - `required ErrorCode ErrorCode`
+
+                - `"max_uses_exceeded"MaxUsesExceeded`
+
+                - `"prompt_too_long"PromptTooLong`
+
+                - `"too_many_requests"TooManyRequests`
+
+                - `"overloaded"Overloaded`
+
+                - `"unavailable"Unavailable`
+
+                - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+              - `JsonElement Type "advisor_tool_result_error"constant`
+
+            - `class BetaAdvisorResultBlock:`
+
+              - `required string Text`
+
+              - `JsonElement Type "advisor_result"constant`
+
+            - `class BetaAdvisorRedactedResultBlock:`
+
+              - `required string EncryptedContent`
+
+                Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `JsonElement Type "advisor_redacted_result"constant`
+
+          - `required string ToolUseID`
+
+          - `JsonElement Type "advisor_tool_result"constant`
 
         - `class BetaCodeExecutionToolResultBlock:`
 
@@ -38250,6 +41070,112 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               Usage for a compaction iteration
 
+          - `class BetaAdvisorMessageIterationUsage:`
+
+            Token usage for an advisor sub-inference iteration.
+
+            - `required BetaCacheCreation? CacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+              - `required Long Ephemeral1hInputTokens`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `required Long Ephemeral5mInputTokens`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `required Long CacheCreationInputTokens`
+
+              The number of input tokens used to create the cache entry.
+
+            - `required Long CacheReadInputTokens`
+
+              The number of input tokens read from the cache.
+
+            - `required Long InputTokens`
+
+              The number of input tokens which were used.
+
+            - `required Model Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-mythos-preview"ClaudeMythosPreview`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"ClaudeOpus4_6`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"ClaudeOpus4_5`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"ClaudeOpus4_1`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"ClaudeOpus4_0`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+                Fast and cost-effective model
+
+            - `required Long OutputTokens`
+
+              The number of output tokens which were used.
+
+            - `JsonElement Type "advisor_message"constant`
+
+              Usage for an advisor sub-inference iteration
+
         - `required Long OutputTokens`
 
           The number of output tokens which were used.
@@ -38577,6 +41503,8 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `required Name Name`
 
+          - `"advisor"Advisor`
+
           - `"web_search"WebSearch`
 
           - `"web_fetch"WebFetch`
@@ -38776,6 +41704,46 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
             - `required string ToolID`
 
             - `JsonElement Type "code_execution_20260120"constant`
+
+      - `class BetaAdvisorToolResultBlock:`
+
+        - `required Content Content`
+
+          - `class BetaAdvisorToolResultError:`
+
+            - `required ErrorCode ErrorCode`
+
+              - `"max_uses_exceeded"MaxUsesExceeded`
+
+              - `"prompt_too_long"PromptTooLong`
+
+              - `"too_many_requests"TooManyRequests`
+
+              - `"overloaded"Overloaded`
+
+              - `"unavailable"Unavailable`
+
+              - `"execution_time_exceeded"ExecutionTimeExceeded`
+
+            - `JsonElement Type "advisor_tool_result_error"constant`
+
+          - `class BetaAdvisorResultBlock:`
+
+            - `required string Text`
+
+            - `JsonElement Type "advisor_result"constant`
+
+          - `class BetaAdvisorRedactedResultBlock:`
+
+            - `required string EncryptedContent`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `JsonElement Type "advisor_redacted_result"constant`
+
+        - `required string ToolUseID`
+
+        - `JsonElement Type "advisor_tool_result"constant`
 
       - `class BetaCodeExecutionToolResultBlock:`
 
@@ -39414,6 +42382,112 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             Usage for a compaction iteration
 
+        - `class BetaAdvisorMessageIterationUsage:`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `required BetaCacheCreation? CacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+            - `required Long Ephemeral1hInputTokens`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `required Long Ephemeral5mInputTokens`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `required Long CacheCreationInputTokens`
+
+            The number of input tokens used to create the cache entry.
+
+          - `required Long CacheReadInputTokens`
+
+            The number of input tokens read from the cache.
+
+          - `required Long InputTokens`
+
+            The number of input tokens which were used.
+
+          - `required Model Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-mythos-preview"ClaudeMythosPreview`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"ClaudeOpus4_6`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"ClaudeOpus4_5`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"ClaudeOpus4_1`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"ClaudeOpus4_0`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"ClaudeSonnet4_0`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
+
+              Fast and cost-effective model
+
+          - `required Long OutputTokens`
+
+            The number of output tokens which were used.
+
+          - `JsonElement Type "advisor_message"constant`
+
+            Usage for an advisor sub-inference iteration
+
       - `required Long OutputTokens`
 
         The number of output tokens which were used.
@@ -39864,6 +42938,8 @@ Create Agent
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -40246,6 +43322,8 @@ List Agents
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class AgentListPageResponse:`
@@ -40621,6 +43699,8 @@ Get Agent
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -41345,6 +44425,8 @@ Update Agent
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -41710,6 +44792,8 @@ Archive Agent
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -43302,6 +46386,8 @@ List Agent Versions
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class VersionListPageResponse:`
@@ -43694,6 +46780,8 @@ Create a new environment with the specified configuration.
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -43885,6 +46973,8 @@ List environments with pagination support.
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -44080,6 +47170,8 @@ Retrieve a specific environment by ID.
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -44287,6 +47379,8 @@ Update an existing environment's configuration.
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -44472,6 +47566,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse:`
@@ -44558,6 +47654,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -45145,7 +48243,7 @@ Create Session
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Arbitrary key-value metadata attached to the session.
+    Body param: Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
   - `IReadOnlyList<Resource> resources`
 
@@ -45264,6 +48362,8 @@ Create Session
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -45803,6 +48903,8 @@ List Sessions
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class SessionListPageResponse:`
@@ -46306,6 +49408,8 @@ Get Session
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -46816,6 +49920,8 @@ Update Session
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -47313,6 +50419,8 @@ Delete Session
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession:`
@@ -47399,6 +50507,8 @@ Archive Session
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -48788,6 +51898,8 @@ List Events
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -50596,6 +53708,8 @@ Send Events
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsSendSessionEvents:`
@@ -51075,6 +54189,8 @@ Stream Events
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -58440,6 +61556,8 @@ Add Session Resource
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsFileResource:`
@@ -58546,6 +61664,8 @@ List Session Resources
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -58704,6 +61824,8 @@ Get Session Resource
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class ResourceRetrieveResponse: A class that can be one of several variants.union`
@@ -58856,6 +61978,8 @@ Update Session Resource
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class ResourceUpdateResponse: A class that can be one of several variants.union`
@@ -59004,6 +62128,8 @@ Delete Session Resource
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -59197,7 +62323,7 @@ Create Vault
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Arbitrary key-value metadata to attach to the vault.
+    Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -59244,6 +62370,8 @@ Create Vault
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -59358,6 +62486,8 @@ List Vaults
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -59474,6 +62604,8 @@ Get Vault
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -59592,6 +62724,8 @@ Update Vault
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -59701,6 +62835,8 @@ Delete Vault
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedVault:`
@@ -59789,6 +62925,8 @@ Archive Vault
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -60011,7 +63149,7 @@ Create Credential
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Arbitrary key-value metadata to attach to the credential.
+    Body param: Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -60058,6 +63196,8 @@ Create Credential
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -60270,6 +63410,8 @@ List Credentials
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class CredentialListPageResponse:`
@@ -60476,6 +63618,8 @@ Get Credential
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -60755,6 +63899,8 @@ Update Credential
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -60953,6 +64099,8 @@ Delete Credential
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedCredential:`
@@ -61046,6 +64194,8 @@ Archive Credential
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -61879,6 +65029,8 @@ Upload File
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class FileMetadata:`
@@ -62015,6 +65167,8 @@ List Files
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -62154,6 +65308,8 @@ Download File
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Example
 
 ```csharp
@@ -62225,6 +65381,8 @@ Get File Metadata
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -62345,6 +65503,8 @@ Delete File
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -62522,6 +65682,8 @@ Create Skill
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class SkillCreateResponse:`
@@ -62655,6 +65817,8 @@ List Skills
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -62793,6 +65957,8 @@ Get Skill
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class SkillRetrieveResponse:`
@@ -62912,6 +66078,8 @@ Delete Skill
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -63009,6 +66177,8 @@ Create Skill Version
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -63141,6 +66311,8 @@ List Skill Versions
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -63284,6 +66456,8 @@ Get Skill Version
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class VersionRetrieveResponse:`
@@ -63415,6 +66589,8 @@ Delete Skill Version
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 

@@ -74,6 +74,8 @@ The Models API response can be used to determine which models are available for 
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class ModelListPageResponse:`
@@ -345,6 +347,8 @@ The Models API response can be used to determine information about a specific mo
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 

@@ -56,6 +56,7 @@ Built-in tools that Claude invokes via `tool_use`. Server-side tools are run by 
 
 | Feature | Description | ZDR | Availability |
 |---------|-----------|----|--------------|
+| [Advisor tool](/docs/en/agents-and-tools/tool-use/advisor-tool) | Pair a faster executor model with a higher-intelligence advisor model that provides strategic guidance mid-generation for long-horizon agentic workloads. | ZDR eligible | <PlatformAvailability claudeApiBeta /> |
 | [Code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool) | Run code in a sandboxed environment for advanced data analysis, calculations, and file processing. Free when used with web search or web fetch. | Not ZDR eligible | <PlatformAvailability claudeApi azureAiBeta /> |
 | [Web fetch](/docs/en/agents-and-tools/tool-use/web-fetch-tool) | Retrieve full content from specified web pages and PDF documents for in-depth analysis. | ZDR eligible* | <PlatformAvailability claudeApi azureAiBeta /> |
 | [Web search](/docs/en/agents-and-tools/tool-use/web-search-tool) | Augment Claude's comprehensive knowledge with current, real-world data from across the web. | ZDR eligible* | <PlatformAvailability claudeApi vertexAi azureAiBeta /> |

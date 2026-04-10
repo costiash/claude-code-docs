@@ -56,13 +56,15 @@ Create Vault
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
   - `String displayName`
 
     Human-readable name for the vault. 1-255 characters.
 
   - `Optional<Metadata> metadata`
 
-    Arbitrary key-value metadata to attach to the vault.
+    Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 ### Returns
 

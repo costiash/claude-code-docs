@@ -80,6 +80,8 @@ List Agents
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
 ### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`

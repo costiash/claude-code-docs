@@ -58,6 +58,8 @@ Create a new environment with the specified configuration.
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
   - `String name`
 
     Human-readable name for the environment
@@ -291,6 +293,8 @@ List environments with pagination support.
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -492,6 +496,8 @@ Retrieve a specific environment by ID.
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -692,6 +698,8 @@ Update an existing environment's configuration.
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `Optional<BetaCloudConfigParams> config`
 
@@ -913,6 +921,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse:`
@@ -1009,6 +1019,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 

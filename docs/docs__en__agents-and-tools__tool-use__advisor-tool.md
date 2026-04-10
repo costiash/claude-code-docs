@@ -71,6 +71,20 @@ curl https://api.anthropic.com/v1/messages \
     }'
 ```
 
+```bash CLI
+ant beta:messages create --beta advisor-tool-2026-03-01 <<'YAML'
+model: claude-sonnet-4-6
+max_tokens: 4096
+tools:
+  - type: advisor_20260301
+    name: advisor
+    model: claude-opus-4-6
+messages:
+  - role: user
+    content: Build a concurrent worker pool in Go with graceful shutdown.
+YAML
+```
+
 ```python Python hidelines={1..2}
 import anthropic
 
@@ -127,6 +141,131 @@ async function main() {
 }
 
 main().catch(console.error);
+```
+
+```csharp C# nocheck hidelines={1}
+using Anthropic;
+using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
+
+var client = new AnthropicClient();
+
+var parameters = new MessageCreateParams
+{
+    Model = Messages::Model.ClaudeSonnet4_6,
+    MaxTokens = 4096,
+    Tools = new BetaToolUnion[]
+    {
+        new BetaAdvisorTool20260301
+        {
+            Model = Messages::Model.ClaudeOpus4_6
+        }
+    },
+    Messages =
+    [
+        new BetaMessageParam
+        {
+            Role = Role.User,
+            Content = "Build a concurrent worker pool in Go with graceful shutdown."
+        }
+    ],
+    Betas = ["advisor-tool-2026-03-01"]
+};
+
+var response = await client.Beta.Messages.Create(parameters);
+Console.WriteLine(response);
+```
+
+```go Go nocheck hidelines={1..11,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+		Model:     anthropic.ModelClaudeSonnet4_6,
+		MaxTokens: 4096,
+		Tools: []anthropic.BetaToolUnionParam{
+			{OfAdvisorTool20260301: &anthropic.BetaAdvisorTool20260301Param{
+				Model: anthropic.ModelClaudeOpus4_6,
+			}},
+		},
+		Messages: []anthropic.BetaMessageParam{
+			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Build a concurrent worker pool in Go with graceful shutdown.")),
+		},
+		Betas: []anthropic.AnthropicBeta{
+			anthropic.AnthropicBetaAdvisorTool2026_03_01,
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```php PHP hidelines={1..4}
+<?php
+
+use Anthropic\Client;
+
+$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+
+$response = $client->beta->messages->create(
+    maxTokens: 4096,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => 'Build a concurrent worker pool in Go with graceful shutdown.',
+        ],
+    ],
+    model: 'claude-sonnet-4-6',
+    tools: [
+        [
+            'type' => 'advisor_20260301',
+            'name' => 'advisor',
+            'model' => 'claude-opus-4-6',
+        ],
+    ],
+    betas: ['advisor-tool-2026-03-01'],
+);
+
+echo $response;
+```
+
+```ruby Ruby hidelines={1..2}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response = client.beta.messages.create(
+  model: "claude-sonnet-4-6",
+  max_tokens: 4096,
+  tools: [
+    {
+      type: "advisor_20260301",
+      name: "advisor",
+      model: "claude-opus-4-6"
+    }
+  ],
+  messages: [
+    {
+      role: "user",
+      content: "Build a concurrent worker pool in Go with graceful shutdown."
+    }
+  ],
+  betas: ["advisor-tool-2026-03-01"]
+)
+
+puts response
 ```
 
 </CodeGroup>

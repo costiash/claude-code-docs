@@ -115,7 +115,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-- `--tool: optional array of BetaTool or BetaToolBash20241022 or BetaToolBash20250124 or 19 more`
+- `--tool: optional array of BetaTool or BetaToolBash20241022 or BetaToolBash20250124 or 20 more`
 
   Body param: Definitions of tools that the model may use.
 

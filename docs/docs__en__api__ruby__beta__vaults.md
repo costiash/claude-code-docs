@@ -16,7 +16,7 @@ Create Vault
 
 - `metadata: Hash[Symbol, String]`
 
-  Arbitrary key-value metadata to attach to the vault.
+  Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 - `betas: Array[AnthropicBeta]`
 
@@ -24,7 +24,7 @@ Create Vault
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -67,6 +67,8 @@ Create Vault
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -142,7 +144,7 @@ List Vaults
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -185,6 +187,8 @@ List Vaults
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -250,7 +254,7 @@ Get Vault
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -293,6 +297,8 @@ Get Vault
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -366,7 +372,7 @@ Update Vault
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -409,6 +415,8 @@ Update Vault
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -474,7 +482,7 @@ Delete Vault
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -517,6 +525,8 @@ Delete Vault
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -562,7 +572,7 @@ Archive Vault
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -605,6 +615,8 @@ Archive Vault
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -822,7 +834,7 @@ Create Credential
 
 - `metadata: Hash[Symbol, String]`
 
-  Arbitrary key-value metadata to attach to the credential.
+  Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 - `betas: Array[AnthropicBeta]`
 
@@ -830,7 +842,7 @@ Create Credential
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -873,6 +885,8 @@ Create Credential
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -1041,7 +1055,7 @@ List Credentials
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1084,6 +1098,8 @@ List Credentials
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -1235,7 +1251,7 @@ Get Credential
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1278,6 +1294,8 @@ Get Credential
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -1512,7 +1530,7 @@ Update Credential
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1555,6 +1573,8 @@ Update Credential
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -1709,7 +1729,7 @@ Delete Credential
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1752,6 +1772,8 @@ Delete Credential
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -1802,7 +1824,7 @@ Archive Credential
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1845,6 +1867,8 @@ Archive Credential
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 

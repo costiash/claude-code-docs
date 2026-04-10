@@ -78,6 +78,8 @@ List Events
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class EventListPageResponse:`
@@ -1885,6 +1887,8 @@ Send Events
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsSendSessionEvents:`
@@ -2364,6 +2368,8 @@ Stream Events
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 

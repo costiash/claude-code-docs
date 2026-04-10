@@ -122,7 +122,7 @@ Create Credential
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Arbitrary key-value metadata to attach to the credential.
+    Body param: Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -169,6 +169,8 @@ Create Credential
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -381,6 +383,8 @@ List Credentials
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class CredentialListPageResponse:`
@@ -587,6 +591,8 @@ Get Credential
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
@@ -866,6 +872,8 @@ Update Credential
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -1064,6 +1072,8 @@ Delete Credential
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedCredential:`
@@ -1157,6 +1167,8 @@ Archive Credential
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 

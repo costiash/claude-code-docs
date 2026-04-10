@@ -34,7 +34,7 @@ List Events
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -77,6 +77,8 @@ List Events
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -1830,7 +1832,7 @@ Send Events
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1873,6 +1875,8 @@ Send Events
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -2297,7 +2301,7 @@ Stream Events
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2340,6 +2344,8 @@ Stream Events
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
 ### Returns
 

@@ -4,11 +4,11 @@
 
 ### Anthropic Beta
 
-- `AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+- `AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -51,6 +51,8 @@
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Beta API Error
 
@@ -336,7 +338,7 @@ The Models API response can be used to determine which models are available for 
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -379,6 +381,8 @@ The Models API response can be used to determine which models are available for 
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -606,7 +610,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -649,6 +653,8 @@ The Models API response can be used to determine information about a specific mo
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -1340,7 +1346,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1383,6 +1389,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -2806,7 +2814,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `input: map[unknown]`
 
-        - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+        - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -3345,6 +3355,77 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `type: "code_execution_20260120"`
 
               - `"code_execution_20260120"`
+
+      - `BetaAdvisorToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+
+        - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
+
+          - `BetaAdvisorToolResultErrorParam = object { error_code, type }`
+
+            - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: "advisor_tool_result_error"`
+
+              - `"advisor_tool_result_error"`
+
+          - `BetaAdvisorResultBlockParam = object { text, type }`
+
+            - `text: string`
+
+            - `type: "advisor_result"`
+
+              - `"advisor_result"`
+
+          - `BetaAdvisorRedactedResultBlockParam = object { encrypted_content, type }`
+
+            - `encrypted_content: string`
+
+              Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+            - `type: "advisor_redacted_result"`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: string`
+
+        - `type: "advisor_tool_result"`
+
+          - `"advisor_tool_result"`
+
+        - `cache_control: optional BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+          - `type: "ephemeral"`
+
+            - `"ephemeral"`
+
+          - `ttl: optional "5m" or "1h"`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"`
+
+            - `"1h"`
 
       - `BetaCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
 
@@ -5872,6 +5953,164 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `BetaAdvisorTool20260301 = object { model, name, type, 6 more }`
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `UnionMember1 = string`
+
+    - `name: "advisor"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `"advisor"`
+
+    - `type: "advisor_20260301"`
+
+      - `"advisor_20260301"`
+
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+
+      - `"direct"`
+
+      - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
+
+    - `cache_control: optional BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: "ephemeral"`
+
+        - `"ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `caching: optional BetaCacheControlEphemeral`
+
+      Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+      - `type: "ephemeral"`
+
+        - `"ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `defer_loading: optional boolean`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `max_uses: optional number`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `strict: optional boolean`
+
+      When true, guarantees schema validation on tool names and inputs
+
   - `BetaToolSearchToolBm25_20251119 = object { name, type, allowed_callers, 3 more }`
 
     - `name: "tool_search_tool_bm25"`
@@ -6289,7 +6528,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `input: map[unknown]`
 
-      - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+      - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+        - `"advisor"`
 
         - `"web_search"`
 
@@ -6532,6 +6773,54 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `type: "code_execution_20260120"`
 
             - `"code_execution_20260120"`
+
+    - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+      - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+        - `BetaAdvisorToolResultError = object { error_code, type }`
+
+          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+            - `"max_uses_exceeded"`
+
+            - `"prompt_too_long"`
+
+            - `"too_many_requests"`
+
+            - `"overloaded"`
+
+            - `"unavailable"`
+
+            - `"execution_time_exceeded"`
+
+          - `type: "advisor_tool_result_error"`
+
+            - `"advisor_tool_result_error"`
+
+        - `BetaAdvisorResultBlock = object { text, type }`
+
+          - `text: string`
+
+          - `type: "advisor_result"`
+
+            - `"advisor_result"`
+
+        - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+          - `encrypted_content: string`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `type: "advisor_redacted_result"`
+
+            - `"advisor_redacted_result"`
+
+      - `tool_use_id: string`
+
+      - `type: "advisor_tool_result"`
+
+        - `"advisor_tool_result"`
 
     - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
 
@@ -7250,6 +7539,122 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `"compaction"`
 
+      - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `cache_creation: BetaCacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: number`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: number`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `UnionMember1 = string`
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+        - `type: "advisor_message"`
+
+          Usage for an advisor sub-inference iteration
+
+          - `"advisor_message"`
+
     - `output_tokens: number`
 
       The number of output tokens which were used.
@@ -7322,7 +7727,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -7365,6 +7770,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -8780,7 +9187,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `input: map[unknown]`
 
-        - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+        - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -9319,6 +9728,77 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
             - `type: "code_execution_20260120"`
 
               - `"code_execution_20260120"`
+
+      - `BetaAdvisorToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+
+        - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
+
+          - `BetaAdvisorToolResultErrorParam = object { error_code, type }`
+
+            - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: "advisor_tool_result_error"`
+
+              - `"advisor_tool_result_error"`
+
+          - `BetaAdvisorResultBlockParam = object { text, type }`
+
+            - `text: string`
+
+            - `type: "advisor_result"`
+
+              - `"advisor_result"`
+
+          - `BetaAdvisorRedactedResultBlockParam = object { encrypted_content, type }`
+
+            - `encrypted_content: string`
+
+              Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+            - `type: "advisor_redacted_result"`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: string`
+
+        - `type: "advisor_tool_result"`
+
+          - `"advisor_tool_result"`
+
+        - `cache_control: optional BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+          - `type: "ephemeral"`
+
+            - `"ephemeral"`
+
+          - `ttl: optional "5m" or "1h"`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"`
+
+            - `"1h"`
 
       - `BetaCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
 
@@ -10461,7 +10941,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `"none"`
 
-- `tools: optional array of BetaTool or BetaToolBash20241022 or BetaToolBash20250124 or 19 more`
+- `tools: optional array of BetaTool or BetaToolBash20241022 or BetaToolBash20250124 or 20 more`
 
   Definitions of tools that the model may use.
 
@@ -11766,6 +12246,164 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `BetaAdvisorTool20260301 = object { model, name, type, 6 more }`
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `UnionMember1 = string`
+
+    - `name: "advisor"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `"advisor"`
+
+    - `type: "advisor_20260301"`
+
+      - `"advisor_20260301"`
+
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+
+      - `"direct"`
+
+      - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
+
+    - `cache_control: optional BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: "ephemeral"`
+
+        - `"ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `caching: optional BetaCacheControlEphemeral`
+
+      Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+      - `type: "ephemeral"`
+
+        - `"ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `defer_loading: optional boolean`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `max_uses: optional number`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `strict: optional boolean`
+
+      When true, guarantees schema validation on tool names and inputs
+
   - `BetaToolSearchToolBm25_20251119 = object { name, type, allowed_callers, 3 more }`
 
     - `name: "tool_search_tool_bm25"`
@@ -11965,6 +12603,495 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ```
 
 ## Domain Types
+
+### Beta Advisor Message Iteration Usage
+
+- `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+  Token usage for an advisor sub-inference iteration.
+
+  - `cache_creation: BetaCacheCreation`
+
+    Breakdown of cached tokens by TTL
+
+    - `ephemeral_1h_input_tokens: number`
+
+      The number of input tokens used to create the 1 hour cache entry.
+
+    - `ephemeral_5m_input_tokens: number`
+
+      The number of input tokens used to create the 5 minute cache entry.
+
+  - `cache_creation_input_tokens: number`
+
+    The number of input tokens used to create the cache entry.
+
+  - `cache_read_input_tokens: number`
+
+    The number of input tokens read from the cache.
+
+  - `input_tokens: number`
+
+    The number of input tokens which were used.
+
+  - `model: Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+    - `UnionMember1 = string`
+
+  - `output_tokens: number`
+
+    The number of output tokens which were used.
+
+  - `type: "advisor_message"`
+
+    Usage for an advisor sub-inference iteration
+
+    - `"advisor_message"`
+
+### Beta Advisor Redacted Result Block
+
+- `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+  - `encrypted_content: string`
+
+    Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+  - `type: "advisor_redacted_result"`
+
+    - `"advisor_redacted_result"`
+
+### Beta Advisor Redacted Result Block Param
+
+- `BetaAdvisorRedactedResultBlockParam = object { encrypted_content, type }`
+
+  - `encrypted_content: string`
+
+    Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+  - `type: "advisor_redacted_result"`
+
+    - `"advisor_redacted_result"`
+
+### Beta Advisor Result Block
+
+- `BetaAdvisorResultBlock = object { text, type }`
+
+  - `text: string`
+
+  - `type: "advisor_result"`
+
+    - `"advisor_result"`
+
+### Beta Advisor Result Block Param
+
+- `BetaAdvisorResultBlockParam = object { text, type }`
+
+  - `text: string`
+
+  - `type: "advisor_result"`
+
+    - `"advisor_result"`
+
+### Beta Advisor Tool 20260301
+
+- `BetaAdvisorTool20260301 = object { model, name, type, 6 more }`
+
+  - `model: Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+    - `UnionMember1 = string`
+
+  - `name: "advisor"`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"advisor"`
+
+  - `type: "advisor_20260301"`
+
+    - `"advisor_20260301"`
+
+  - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+
+    - `"direct"`
+
+    - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
+
+  - `cache_control: optional BetaCacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: "ephemeral"`
+
+      - `"ephemeral"`
+
+    - `ttl: optional "5m" or "1h"`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `"5m"`
+
+      - `"1h"`
+
+  - `caching: optional BetaCacheControlEphemeral`
+
+    Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+    - `type: "ephemeral"`
+
+      - `"ephemeral"`
+
+    - `ttl: optional "5m" or "1h"`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `"5m"`
+
+      - `"1h"`
+
+  - `defer_loading: optional boolean`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `max_uses: optional number`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `strict: optional boolean`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Advisor Tool Result Block
+
+- `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+  - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+    - `BetaAdvisorToolResultError = object { error_code, type }`
+
+      - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+        - `"max_uses_exceeded"`
+
+        - `"prompt_too_long"`
+
+        - `"too_many_requests"`
+
+        - `"overloaded"`
+
+        - `"unavailable"`
+
+        - `"execution_time_exceeded"`
+
+      - `type: "advisor_tool_result_error"`
+
+        - `"advisor_tool_result_error"`
+
+    - `BetaAdvisorResultBlock = object { text, type }`
+
+      - `text: string`
+
+      - `type: "advisor_result"`
+
+        - `"advisor_result"`
+
+    - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+      - `encrypted_content: string`
+
+        Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+      - `type: "advisor_redacted_result"`
+
+        - `"advisor_redacted_result"`
+
+  - `tool_use_id: string`
+
+  - `type: "advisor_tool_result"`
+
+    - `"advisor_tool_result"`
+
+### Beta Advisor Tool Result Block Param
+
+- `BetaAdvisorToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+
+  - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
+
+    - `BetaAdvisorToolResultErrorParam = object { error_code, type }`
+
+      - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+        - `"max_uses_exceeded"`
+
+        - `"prompt_too_long"`
+
+        - `"too_many_requests"`
+
+        - `"overloaded"`
+
+        - `"unavailable"`
+
+        - `"execution_time_exceeded"`
+
+      - `type: "advisor_tool_result_error"`
+
+        - `"advisor_tool_result_error"`
+
+    - `BetaAdvisorResultBlockParam = object { text, type }`
+
+      - `text: string`
+
+      - `type: "advisor_result"`
+
+        - `"advisor_result"`
+
+    - `BetaAdvisorRedactedResultBlockParam = object { encrypted_content, type }`
+
+      - `encrypted_content: string`
+
+        Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+      - `type: "advisor_redacted_result"`
+
+        - `"advisor_redacted_result"`
+
+  - `tool_use_id: string`
+
+  - `type: "advisor_tool_result"`
+
+    - `"advisor_tool_result"`
+
+  - `cache_control: optional BetaCacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: "ephemeral"`
+
+      - `"ephemeral"`
+
+    - `ttl: optional "5m" or "1h"`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `"5m"`
+
+      - `"1h"`
+
+### Beta Advisor Tool Result Error
+
+- `BetaAdvisorToolResultError = object { error_code, type }`
+
+  - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+    - `"max_uses_exceeded"`
+
+    - `"prompt_too_long"`
+
+    - `"too_many_requests"`
+
+    - `"overloaded"`
+
+    - `"unavailable"`
+
+    - `"execution_time_exceeded"`
+
+  - `type: "advisor_tool_result_error"`
+
+    - `"advisor_tool_result_error"`
+
+### Beta Advisor Tool Result Error Param
+
+- `BetaAdvisorToolResultErrorParam = object { error_code, type }`
+
+  - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+    - `"max_uses_exceeded"`
+
+    - `"prompt_too_long"`
+
+    - `"too_many_requests"`
+
+    - `"overloaded"`
+
+    - `"unavailable"`
+
+    - `"execution_time_exceeded"`
+
+  - `type: "advisor_tool_result_error"`
+
+    - `"advisor_tool_result_error"`
 
 ### Beta All Thinking Turns
 
@@ -13517,7 +14644,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Content Block
 
-- `BetaContentBlock = BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 12 more`
+- `BetaContentBlock = BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 13 more`
 
   Response model for a file uploaded to the container.
 
@@ -13687,7 +14814,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `input: map[unknown]`
 
-    - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+    - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+      - `"advisor"`
 
       - `"web_search"`
 
@@ -13930,6 +15059,54 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `type: "code_execution_20260120"`
 
           - `"code_execution_20260120"`
+
+  - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+    - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+      - `BetaAdvisorToolResultError = object { error_code, type }`
+
+        - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+          - `"max_uses_exceeded"`
+
+          - `"prompt_too_long"`
+
+          - `"too_many_requests"`
+
+          - `"overloaded"`
+
+          - `"unavailable"`
+
+          - `"execution_time_exceeded"`
+
+        - `type: "advisor_tool_result_error"`
+
+          - `"advisor_tool_result_error"`
+
+      - `BetaAdvisorResultBlock = object { text, type }`
+
+        - `text: string`
+
+        - `type: "advisor_result"`
+
+          - `"advisor_result"`
+
+      - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+        - `encrypted_content: string`
+
+          Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+        - `type: "advisor_redacted_result"`
+
+          - `"advisor_redacted_result"`
+
+    - `tool_use_id: string`
+
+    - `type: "advisor_tool_result"`
+
+      - `"advisor_tool_result"`
 
   - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
 
@@ -14327,7 +15504,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Content Block Param
 
-- `BetaContentBlockParam = BetaTextBlockParam or BetaImageBlockParam or BetaRequestDocumentBlock or 16 more`
+- `BetaContentBlockParam = BetaTextBlockParam or BetaImageBlockParam or BetaRequestDocumentBlock or 17 more`
 
   Regular text content.
 
@@ -15686,7 +16863,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `input: map[unknown]`
 
-    - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+    - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+      - `"advisor"`
 
       - `"web_search"`
 
@@ -16225,6 +17404,77 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `type: "code_execution_20260120"`
 
           - `"code_execution_20260120"`
+
+  - `BetaAdvisorToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+
+    - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
+
+      - `BetaAdvisorToolResultErrorParam = object { error_code, type }`
+
+        - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+          - `"max_uses_exceeded"`
+
+          - `"prompt_too_long"`
+
+          - `"too_many_requests"`
+
+          - `"overloaded"`
+
+          - `"unavailable"`
+
+          - `"execution_time_exceeded"`
+
+        - `type: "advisor_tool_result_error"`
+
+          - `"advisor_tool_result_error"`
+
+      - `BetaAdvisorResultBlockParam = object { text, type }`
+
+        - `text: string`
+
+        - `type: "advisor_result"`
+
+          - `"advisor_result"`
+
+      - `BetaAdvisorRedactedResultBlockParam = object { encrypted_content, type }`
+
+        - `encrypted_content: string`
+
+          Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+        - `type: "advisor_redacted_result"`
+
+          - `"advisor_redacted_result"`
+
+    - `tool_use_id: string`
+
+    - `type: "advisor_tool_result"`
+
+      - `"advisor_tool_result"`
+
+    - `cache_control: optional BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: "ephemeral"`
+
+        - `"ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
 
   - `BetaCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
 
@@ -17602,7 +18852,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Iterations Usage
 
-- `BetaIterationsUsage = array of BetaMessageIterationUsage or BetaCompactionIterationUsage`
+- `BetaIterationsUsage = array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
 
   Per-iteration token usage breakdown.
 
@@ -17687,6 +18937,122 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Usage for a compaction iteration
 
       - `"compaction"`
+
+  - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+    Token usage for an advisor sub-inference iteration.
+
+    - `cache_creation: BetaCacheCreation`
+
+      Breakdown of cached tokens by TTL
+
+      - `ephemeral_1h_input_tokens: number`
+
+        The number of input tokens used to create the 1 hour cache entry.
+
+      - `ephemeral_5m_input_tokens: number`
+
+        The number of input tokens used to create the 5 minute cache entry.
+
+    - `cache_creation_input_tokens: number`
+
+      The number of input tokens used to create the cache entry.
+
+    - `cache_read_input_tokens: number`
+
+      The number of input tokens read from the cache.
+
+    - `input_tokens: number`
+
+      The number of input tokens which were used.
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `UnionMember1 = string`
+
+    - `output_tokens: number`
+
+      The number of output tokens which were used.
+
+    - `type: "advisor_message"`
+
+      Usage for an advisor sub-inference iteration
+
+      - `"advisor_message"`
 
 ### Beta JSON Output Format
 
@@ -18463,7 +19829,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `input: map[unknown]`
 
-      - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+      - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+        - `"advisor"`
 
         - `"web_search"`
 
@@ -18706,6 +20074,54 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           - `type: "code_execution_20260120"`
 
             - `"code_execution_20260120"`
+
+    - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+      - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+        - `BetaAdvisorToolResultError = object { error_code, type }`
+
+          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+            - `"max_uses_exceeded"`
+
+            - `"prompt_too_long"`
+
+            - `"too_many_requests"`
+
+            - `"overloaded"`
+
+            - `"unavailable"`
+
+            - `"execution_time_exceeded"`
+
+          - `type: "advisor_tool_result_error"`
+
+            - `"advisor_tool_result_error"`
+
+        - `BetaAdvisorResultBlock = object { text, type }`
+
+          - `text: string`
+
+          - `type: "advisor_result"`
+
+            - `"advisor_result"`
+
+        - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+          - `encrypted_content: string`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `type: "advisor_redacted_result"`
+
+            - `"advisor_redacted_result"`
+
+      - `tool_use_id: string`
+
+      - `type: "advisor_tool_result"`
+
+        - `"advisor_tool_result"`
 
     - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
 
@@ -19424,6 +20840,122 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"compaction"`
 
+      - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `cache_creation: BetaCacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: number`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: number`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `UnionMember1 = string`
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+        - `type: "advisor_message"`
+
+          Usage for an advisor sub-inference iteration
+
+          - `"advisor_message"`
+
     - `output_tokens: number`
 
       The number of output tokens which were used.
@@ -19559,6 +21091,122 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         Usage for a compaction iteration
 
         - `"compaction"`
+
+    - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+      Token usage for an advisor sub-inference iteration.
+
+      - `cache_creation: BetaCacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+        - `ephemeral_1h_input_tokens: number`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+        - `ephemeral_5m_input_tokens: number`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+      - `cache_creation_input_tokens: number`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: number`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: number`
+
+        The number of input tokens which were used.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+        - `UnionMember1 = string`
+
+      - `output_tokens: number`
+
+        The number of output tokens which were used.
+
+      - `type: "advisor_message"`
+
+        Usage for an advisor sub-inference iteration
+
+        - `"advisor_message"`
 
   - `output_tokens: number`
 
@@ -20981,7 +22629,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `input: map[unknown]`
 
-        - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+        - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -21520,6 +23170,77 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `type: "code_execution_20260120"`
 
               - `"code_execution_20260120"`
+
+      - `BetaAdvisorToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+
+        - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
+
+          - `BetaAdvisorToolResultErrorParam = object { error_code, type }`
+
+            - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: "advisor_tool_result_error"`
+
+              - `"advisor_tool_result_error"`
+
+          - `BetaAdvisorResultBlockParam = object { text, type }`
+
+            - `text: string`
+
+            - `type: "advisor_result"`
+
+              - `"advisor_result"`
+
+          - `BetaAdvisorRedactedResultBlockParam = object { encrypted_content, type }`
+
+            - `encrypted_content: string`
+
+              Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+            - `type: "advisor_redacted_result"`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: string`
+
+        - `type: "advisor_tool_result"`
+
+          - `"advisor_tool_result"`
+
+        - `cache_control: optional BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+          - `type: "ephemeral"`
+
+            - `"ephemeral"`
+
+          - `ttl: optional "5m" or "1h"`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"`
+
+            - `"1h"`
 
       - `BetaCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
 
@@ -22496,7 +24217,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BetaRawContentBlockStartEvent = object { content_block, index, type }`
 
-  - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 12 more`
+  - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 13 more`
 
     Response model for a file uploaded to the container.
 
@@ -22666,7 +24387,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `input: map[unknown]`
 
-      - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+      - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+        - `"advisor"`
 
         - `"web_search"`
 
@@ -22909,6 +24632,54 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           - `type: "code_execution_20260120"`
 
             - `"code_execution_20260120"`
+
+    - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+      - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+        - `BetaAdvisorToolResultError = object { error_code, type }`
+
+          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+            - `"max_uses_exceeded"`
+
+            - `"prompt_too_long"`
+
+            - `"too_many_requests"`
+
+            - `"overloaded"`
+
+            - `"unavailable"`
+
+            - `"execution_time_exceeded"`
+
+          - `type: "advisor_tool_result_error"`
+
+            - `"advisor_tool_result_error"`
+
+        - `BetaAdvisorResultBlock = object { text, type }`
+
+          - `text: string`
+
+          - `type: "advisor_result"`
+
+            - `"advisor_result"`
+
+        - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+          - `encrypted_content: string`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `type: "advisor_redacted_result"`
+
+            - `"advisor_redacted_result"`
+
+      - `tool_use_id: string`
+
+      - `type: "advisor_tool_result"`
+
+        - `"advisor_tool_result"`
 
     - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
 
@@ -23556,6 +25327,122 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"compaction"`
 
+      - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `cache_creation: BetaCacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: number`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: number`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `UnionMember1 = string`
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+        - `type: "advisor_message"`
+
+          Usage for an advisor sub-inference iteration
+
+          - `"advisor_message"`
+
     - `output_tokens: number`
 
       The cumulative number of output tokens which were used.
@@ -23811,7 +25698,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `input: map[unknown]`
 
-        - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+        - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -24054,6 +25943,54 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `type: "code_execution_20260120"`
 
               - `"code_execution_20260120"`
+
+      - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+        - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+          - `BetaAdvisorToolResultError = object { error_code, type }`
+
+            - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: "advisor_tool_result_error"`
+
+              - `"advisor_tool_result_error"`
+
+          - `BetaAdvisorResultBlock = object { text, type }`
+
+            - `text: string`
+
+            - `type: "advisor_result"`
+
+              - `"advisor_result"`
+
+          - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+            - `encrypted_content: string`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `type: "advisor_redacted_result"`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: string`
+
+        - `type: "advisor_tool_result"`
+
+          - `"advisor_tool_result"`
 
       - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
 
@@ -24772,6 +26709,122 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"compaction"`
 
+        - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `cache_creation: BetaCacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: number`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `ephemeral_5m_input_tokens: number`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `cache_creation_input_tokens: number`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: number`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: number`
+
+            The number of input tokens which were used.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `UnionMember1 = string`
+
+          - `output_tokens: number`
+
+            The number of output tokens which were used.
+
+          - `type: "advisor_message"`
+
+            Usage for an advisor sub-inference iteration
+
+            - `"advisor_message"`
+
       - `output_tokens: number`
 
         The number of output tokens which were used.
@@ -25059,7 +27112,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `input: map[unknown]`
 
-          - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+          - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+            - `"advisor"`
 
             - `"web_search"`
 
@@ -25302,6 +27357,54 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               - `type: "code_execution_20260120"`
 
                 - `"code_execution_20260120"`
+
+        - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+          - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+            - `BetaAdvisorToolResultError = object { error_code, type }`
+
+              - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+                - `"max_uses_exceeded"`
+
+                - `"prompt_too_long"`
+
+                - `"too_many_requests"`
+
+                - `"overloaded"`
+
+                - `"unavailable"`
+
+                - `"execution_time_exceeded"`
+
+              - `type: "advisor_tool_result_error"`
+
+                - `"advisor_tool_result_error"`
+
+            - `BetaAdvisorResultBlock = object { text, type }`
+
+              - `text: string`
+
+              - `type: "advisor_result"`
+
+                - `"advisor_result"`
+
+            - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+              - `encrypted_content: string`
+
+                Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `type: "advisor_redacted_result"`
+
+                - `"advisor_redacted_result"`
+
+          - `tool_use_id: string`
+
+          - `type: "advisor_tool_result"`
+
+            - `"advisor_tool_result"`
 
         - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
 
@@ -26020,6 +28123,122 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"compaction"`
 
+          - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+            Token usage for an advisor sub-inference iteration.
+
+            - `cache_creation: BetaCacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+              - `ephemeral_1h_input_tokens: number`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `ephemeral_5m_input_tokens: number`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `cache_creation_input_tokens: number`
+
+              The number of input tokens used to create the cache entry.
+
+            - `cache_read_input_tokens: number`
+
+              The number of input tokens read from the cache.
+
+            - `input_tokens: number`
+
+              The number of input tokens which were used.
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
+
+              - `UnionMember1 = string`
+
+            - `output_tokens: number`
+
+              The number of output tokens which were used.
+
+            - `type: "advisor_message"`
+
+              Usage for an advisor sub-inference iteration
+
+              - `"advisor_message"`
+
         - `output_tokens: number`
 
           The number of output tokens which were used.
@@ -26292,6 +28511,122 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"compaction"`
 
+        - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `cache_creation: BetaCacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: number`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `ephemeral_5m_input_tokens: number`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `cache_creation_input_tokens: number`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: number`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: number`
+
+            The number of input tokens which were used.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `UnionMember1 = string`
+
+          - `output_tokens: number`
+
+            The number of output tokens which were used.
+
+          - `type: "advisor_message"`
+
+            Usage for an advisor sub-inference iteration
+
+            - `"advisor_message"`
+
       - `output_tokens: number`
 
         The cumulative number of output tokens which were used.
@@ -26316,7 +28651,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `BetaRawContentBlockStartEvent = object { content_block, index, type }`
 
-    - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 12 more`
+    - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 13 more`
 
       Response model for a file uploaded to the container.
 
@@ -26486,7 +28821,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `input: map[unknown]`
 
-        - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+        - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -26729,6 +29066,54 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `type: "code_execution_20260120"`
 
               - `"code_execution_20260120"`
+
+      - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+        - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+          - `BetaAdvisorToolResultError = object { error_code, type }`
+
+            - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: "advisor_tool_result_error"`
+
+              - `"advisor_tool_result_error"`
+
+          - `BetaAdvisorResultBlock = object { text, type }`
+
+            - `text: string`
+
+            - `type: "advisor_result"`
+
+              - `"advisor_result"`
+
+          - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+            - `encrypted_content: string`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `type: "advisor_redacted_result"`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: string`
+
+        - `type: "advisor_tool_result"`
+
+          - `"advisor_tool_result"`
 
       - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
 
@@ -27973,7 +30358,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `input: map[unknown]`
 
-  - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+  - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+    - `"advisor"`
 
     - `"web_search"`
 
@@ -28031,7 +30418,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `input: map[unknown]`
 
-  - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+  - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+    - `"advisor"`
 
     - `"web_search"`
 
@@ -30865,7 +33254,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Tool Union
 
-- `BetaToolUnion = BetaTool or BetaToolBash20241022 or BetaToolBash20250124 or 19 more`
+- `BetaToolUnion = BetaTool or BetaToolBash20241022 or BetaToolBash20250124 or 20 more`
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -32110,6 +34499,164 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `BetaAdvisorTool20260301 = object { model, name, type, 6 more }`
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `UnionMember1 = string`
+
+    - `name: "advisor"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `"advisor"`
+
+    - `type: "advisor_20260301"`
+
+      - `"advisor_20260301"`
+
+    - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+
+      - `"direct"`
+
+      - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
+
+    - `cache_control: optional BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: "ephemeral"`
+
+        - `"ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `caching: optional BetaCacheControlEphemeral`
+
+      Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+      - `type: "ephemeral"`
+
+        - `"ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `defer_loading: optional boolean`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `max_uses: optional number`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `strict: optional boolean`
+
+      When true, guarantees schema validation on tool names and inputs
+
   - `BetaToolSearchToolBm25_20251119 = object { name, type, allowed_callers, 3 more }`
 
     - `name: "tool_search_tool_bm25"`
@@ -32542,6 +35089,122 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         Usage for a compaction iteration
 
         - `"compaction"`
+
+    - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+      Token usage for an advisor sub-inference iteration.
+
+      - `cache_creation: BetaCacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+        - `ephemeral_1h_input_tokens: number`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+        - `ephemeral_5m_input_tokens: number`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+      - `cache_creation_input_tokens: number`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: number`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: number`
+
+        The number of input tokens which were used.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+        - `UnionMember1 = string`
+
+      - `output_tokens: number`
+
+        The number of output tokens which were used.
+
+      - `type: "advisor_message"`
+
+        Usage for an advisor sub-inference iteration
+
+        - `"advisor_message"`
 
   - `output_tokens: number`
 
@@ -34292,7 +36955,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -34335,6 +36998,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -35774,7 +38439,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `input: map[unknown]`
 
-            - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+            - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+              - `"advisor"`
 
               - `"web_search"`
 
@@ -36313,6 +38980,77 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `type: "code_execution_20260120"`
 
                   - `"code_execution_20260120"`
+
+          - `BetaAdvisorToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
+
+            - `content: BetaAdvisorToolResultErrorParam or BetaAdvisorResultBlockParam or BetaAdvisorRedactedResultBlockParam`
+
+              - `BetaAdvisorToolResultErrorParam = object { error_code, type }`
+
+                - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"prompt_too_long"`
+
+                  - `"too_many_requests"`
+
+                  - `"overloaded"`
+
+                  - `"unavailable"`
+
+                  - `"execution_time_exceeded"`
+
+                - `type: "advisor_tool_result_error"`
+
+                  - `"advisor_tool_result_error"`
+
+              - `BetaAdvisorResultBlockParam = object { text, type }`
+
+                - `text: string`
+
+                - `type: "advisor_result"`
+
+                  - `"advisor_result"`
+
+              - `BetaAdvisorRedactedResultBlockParam = object { encrypted_content, type }`
+
+                - `encrypted_content: string`
+
+                  Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+                - `type: "advisor_redacted_result"`
+
+                  - `"advisor_redacted_result"`
+
+            - `tool_use_id: string`
+
+            - `type: "advisor_tool_result"`
+
+              - `"advisor_tool_result"`
+
+            - `cache_control: optional BetaCacheControlEphemeral`
+
+              Create a cache control breakpoint at this content block.
+
+              - `type: "ephemeral"`
+
+                - `"ephemeral"`
+
+              - `ttl: optional "5m" or "1h"`
+
+                The time-to-live for the cache control breakpoint.
+
+                This may be one the following values:
+
+                - `5m`: 5 minutes
+                - `1h`: 1 hour
+
+                Defaults to `5m`.
+
+                - `"5m"`
+
+                - `"1h"`
 
           - `BetaCodeExecutionToolResultBlockParam = object { content, tool_use_id, type, cache_control }`
 
@@ -38840,6 +41578,164 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+      - `BetaAdvisorTool20260301 = object { model, name, type, 6 more }`
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `UnionMember1 = string`
+
+        - `name: "advisor"`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+          - `"advisor"`
+
+        - `type: "advisor_20260301"`
+
+          - `"advisor_20260301"`
+
+        - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120"`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+        - `cache_control: optional BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+          - `type: "ephemeral"`
+
+            - `"ephemeral"`
+
+          - `ttl: optional "5m" or "1h"`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"`
+
+            - `"1h"`
+
+        - `caching: optional BetaCacheControlEphemeral`
+
+          Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+          - `type: "ephemeral"`
+
+            - `"ephemeral"`
+
+          - `ttl: optional "5m" or "1h"`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"`
+
+            - `"1h"`
+
+        - `defer_loading: optional boolean`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_uses: optional number`
+
+          Maximum number of times the tool can be used in the API request.
+
+        - `strict: optional boolean`
+
+          When true, guarantees schema validation on tool names and inputs
+
       - `BetaToolSearchToolBm25_20251119 = object { name, type, allowed_callers, 3 more }`
 
         - `name: "tool_search_tool_bm25"`
@@ -39159,7 +42055,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -39202,6 +42098,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -39334,7 +42232,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -39377,6 +42275,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -39513,7 +42413,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -39556,6 +42456,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -39681,7 +42583,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -39724,6 +42626,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -39775,7 +42679,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -39818,6 +42722,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -40074,7 +42980,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `input: map[unknown]`
 
-            - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+            - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+              - `"advisor"`
 
               - `"web_search"`
 
@@ -40317,6 +43225,54 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `type: "code_execution_20260120"`
 
                   - `"code_execution_20260120"`
+
+          - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+            - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+              - `BetaAdvisorToolResultError = object { error_code, type }`
+
+                - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"prompt_too_long"`
+
+                  - `"too_many_requests"`
+
+                  - `"overloaded"`
+
+                  - `"unavailable"`
+
+                  - `"execution_time_exceeded"`
+
+                - `type: "advisor_tool_result_error"`
+
+                  - `"advisor_tool_result_error"`
+
+              - `BetaAdvisorResultBlock = object { text, type }`
+
+                - `text: string`
+
+                - `type: "advisor_result"`
+
+                  - `"advisor_result"`
+
+              - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+                - `encrypted_content: string`
+
+                  Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `type: "advisor_redacted_result"`
+
+                  - `"advisor_redacted_result"`
+
+            - `tool_use_id: string`
+
+            - `type: "advisor_tool_result"`
+
+              - `"advisor_tool_result"`
 
           - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
 
@@ -41034,6 +43990,122 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 Usage for a compaction iteration
 
                 - `"compaction"`
+
+            - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+              Token usage for an advisor sub-inference iteration.
+
+              - `cache_creation: BetaCacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: number`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: number`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: number`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: number`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: number`
+
+                The number of input tokens which were used.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `"claude-mythos-preview"`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `"claude-opus-4-6"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `"claude-sonnet-4-6"`
+
+                    Best combination of speed and intelligence
+
+                  - `"claude-haiku-4-5"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-haiku-4-5-20251001"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-opus-4-5"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `"claude-opus-4-5-20251101"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `"claude-sonnet-4-5"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-sonnet-4-5-20250929"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-opus-4-1"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `"claude-opus-4-1-20250805"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `"claude-opus-4-0"`
+
+                    Powerful model for complex tasks
+
+                  - `"claude-opus-4-20250514"`
+
+                    Powerful model for complex tasks
+
+                  - `"claude-sonnet-4-0"`
+
+                    High-performance model with extended thinking
+
+                  - `"claude-sonnet-4-20250514"`
+
+                    High-performance model with extended thinking
+
+                  - `"claude-3-haiku-20240307"`
+
+                    Fast and cost-effective model
+
+                - `UnionMember1 = string`
+
+              - `output_tokens: number`
+
+                The number of output tokens which were used.
+
+              - `type: "advisor_message"`
+
+                Usage for an advisor sub-inference iteration
+
+                - `"advisor_message"`
 
           - `output_tokens: number`
 
@@ -41651,7 +44723,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `input: map[unknown]`
 
-            - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+            - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+              - `"advisor"`
 
               - `"web_search"`
 
@@ -41894,6 +44968,54 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
                 - `type: "code_execution_20260120"`
 
                   - `"code_execution_20260120"`
+
+          - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+            - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+              - `BetaAdvisorToolResultError = object { error_code, type }`
+
+                - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"prompt_too_long"`
+
+                  - `"too_many_requests"`
+
+                  - `"overloaded"`
+
+                  - `"unavailable"`
+
+                  - `"execution_time_exceeded"`
+
+                - `type: "advisor_tool_result_error"`
+
+                  - `"advisor_tool_result_error"`
+
+              - `BetaAdvisorResultBlock = object { text, type }`
+
+                - `text: string`
+
+                - `type: "advisor_result"`
+
+                  - `"advisor_result"`
+
+              - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+                - `encrypted_content: string`
+
+                  Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `type: "advisor_redacted_result"`
+
+                  - `"advisor_redacted_result"`
+
+            - `tool_use_id: string`
+
+            - `type: "advisor_tool_result"`
+
+              - `"advisor_tool_result"`
 
           - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
 
@@ -42612,6 +45734,122 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"compaction"`
 
+            - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+              Token usage for an advisor sub-inference iteration.
+
+              - `cache_creation: BetaCacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: number`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: number`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: number`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: number`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: number`
+
+                The number of input tokens which were used.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `"claude-mythos-preview"`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `"claude-opus-4-6"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `"claude-sonnet-4-6"`
+
+                    Best combination of speed and intelligence
+
+                  - `"claude-haiku-4-5"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-haiku-4-5-20251001"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-opus-4-5"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `"claude-opus-4-5-20251101"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `"claude-sonnet-4-5"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-sonnet-4-5-20250929"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-opus-4-1"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `"claude-opus-4-1-20250805"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `"claude-opus-4-0"`
+
+                    Powerful model for complex tasks
+
+                  - `"claude-opus-4-20250514"`
+
+                    Powerful model for complex tasks
+
+                  - `"claude-sonnet-4-0"`
+
+                    High-performance model with extended thinking
+
+                  - `"claude-sonnet-4-20250514"`
+
+                    High-performance model with extended thinking
+
+                  - `"claude-3-haiku-20240307"`
+
+                    Fast and cost-effective model
+
+                - `UnionMember1 = string`
+
+              - `output_tokens: number`
+
+                The number of output tokens which were used.
+
+              - `type: "advisor_message"`
+
+                Usage for an advisor sub-inference iteration
+
+                - `"advisor_message"`
+
           - `output_tokens: number`
 
             The number of output tokens which were used.
@@ -43027,7 +46265,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `input: map[unknown]`
 
-          - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+          - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+            - `"advisor"`
 
             - `"web_search"`
 
@@ -43270,6 +46510,54 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
               - `type: "code_execution_20260120"`
 
                 - `"code_execution_20260120"`
+
+        - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+          - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+            - `BetaAdvisorToolResultError = object { error_code, type }`
+
+              - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+                - `"max_uses_exceeded"`
+
+                - `"prompt_too_long"`
+
+                - `"too_many_requests"`
+
+                - `"overloaded"`
+
+                - `"unavailable"`
+
+                - `"execution_time_exceeded"`
+
+              - `type: "advisor_tool_result_error"`
+
+                - `"advisor_tool_result_error"`
+
+            - `BetaAdvisorResultBlock = object { text, type }`
+
+              - `text: string`
+
+              - `type: "advisor_result"`
+
+                - `"advisor_result"`
+
+            - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+              - `encrypted_content: string`
+
+                Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `type: "advisor_redacted_result"`
+
+                - `"advisor_redacted_result"`
+
+          - `tool_use_id: string`
+
+          - `type: "advisor_tool_result"`
+
+            - `"advisor_tool_result"`
 
         - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
 
@@ -43988,6 +47276,122 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"compaction"`
 
+          - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+            Token usage for an advisor sub-inference iteration.
+
+            - `cache_creation: BetaCacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+              - `ephemeral_1h_input_tokens: number`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `ephemeral_5m_input_tokens: number`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `cache_creation_input_tokens: number`
+
+              The number of input tokens used to create the cache entry.
+
+            - `cache_read_input_tokens: number`
+
+              The number of input tokens read from the cache.
+
+            - `input_tokens: number`
+
+              The number of input tokens which were used.
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
+
+              - `UnionMember1 = string`
+
+            - `output_tokens: number`
+
+              The number of output tokens which were used.
+
+            - `type: "advisor_message"`
+
+              Usage for an advisor sub-inference iteration
+
+              - `"advisor_message"`
+
         - `output_tokens: number`
 
           The number of output tokens which were used.
@@ -44365,7 +47769,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `input: map[unknown]`
 
-        - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+        - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -44608,6 +48014,54 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
             - `type: "code_execution_20260120"`
 
               - `"code_execution_20260120"`
+
+      - `BetaAdvisorToolResultBlock = object { content, tool_use_id, type }`
+
+        - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+
+          - `BetaAdvisorToolResultError = object { error_code, type }`
+
+            - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: "advisor_tool_result_error"`
+
+              - `"advisor_tool_result_error"`
+
+          - `BetaAdvisorResultBlock = object { text, type }`
+
+            - `text: string`
+
+            - `type: "advisor_result"`
+
+              - `"advisor_result"`
+
+          - `BetaAdvisorRedactedResultBlock = object { encrypted_content, type }`
+
+            - `encrypted_content: string`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `type: "advisor_redacted_result"`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: string`
+
+        - `type: "advisor_tool_result"`
+
+          - `"advisor_tool_result"`
 
       - `BetaCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
 
@@ -45326,6 +48780,122 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"compaction"`
 
+        - `BetaAdvisorMessageIterationUsage = object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `cache_creation: BetaCacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: number`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `ephemeral_5m_input_tokens: number`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `cache_creation_input_tokens: number`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: number`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: number`
+
+            The number of input tokens which were used.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `UnionMember1 = string`
+
+          - `output_tokens: number`
+
+            The number of output tokens which were used.
+
+          - `type: "advisor_message"`
+
+            Usage for an advisor sub-inference iteration
+
+            - `"advisor_message"`
+
       - `output_tokens: number`
 
         The number of output tokens which were used.
@@ -45380,7 +48950,7 @@ Create Agent
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -45423,6 +48993,8 @@ Create Agent
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -46144,7 +49716,7 @@ List Agents
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -46187,6 +49759,8 @@ List Agents
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -46523,7 +50097,7 @@ Get Agent
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -46566,6 +50140,8 @@ Get Agent
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -46892,7 +50468,7 @@ Update Agent
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -46935,6 +50511,8 @@ Update Agent
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -47641,7 +51219,7 @@ Archive Agent
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -47684,6 +51262,8 @@ Archive Agent
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -49311,7 +52891,7 @@ List Agent Versions
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -49354,6 +52934,8 @@ List Agent Versions
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -49682,7 +53264,7 @@ Create a new environment with the specified configuration.
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -49726,9 +53308,7 @@ Create a new environment with the specified configuration.
 
     - `"output-300k-2026-03-24"`
 
-### Cookie Parameters
-
-- `sessionKey: optional string`
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -50009,7 +53589,7 @@ List environments with pagination support.
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -50053,9 +53633,7 @@ List environments with pagination support.
 
     - `"output-300k-2026-03-24"`
 
-### Cookie Parameters
-
-- `sessionKey: optional string`
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -50208,7 +53786,7 @@ Retrieve a specific environment by ID.
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -50252,9 +53830,7 @@ Retrieve a specific environment by ID.
 
     - `"output-300k-2026-03-24"`
 
-### Cookie Parameters
-
-- `sessionKey: optional string`
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -50403,7 +53979,7 @@ Update an existing environment's configuration.
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -50447,9 +54023,7 @@ Update an existing environment's configuration.
 
     - `"output-300k-2026-03-24"`
 
-### Cookie Parameters
-
-- `sessionKey: optional string`
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -50719,7 +54293,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -50763,9 +54337,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `"output-300k-2026-03-24"`
 
-### Cookie Parameters
-
-- `sessionKey: optional string`
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -50811,7 +54383,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -50855,9 +54427,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `"output-300k-2026-03-24"`
 
-### Cookie Parameters
-
-- `sessionKey: optional string`
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -51452,7 +55022,7 @@ Create Session
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -51496,6 +55066,8 @@ Create Session
 
     - `"output-300k-2026-03-24"`
 
+    - `"advisor-tool-2026-03-01"`
+
 ### Body Parameters
 
 - `agent: string or BetaManagedAgentsAgentParams`
@@ -51526,7 +55098,7 @@ Create Session
 
 - `metadata: optional map[string]`
 
-  Arbitrary key-value metadata attached to the session.
+  Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 - `resources: optional array of BetaManagedAgentsGitHubRepositoryResourceParams or BetaManagedAgentsFileResourceParams`
 
@@ -52104,7 +55676,7 @@ List Sessions
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -52147,6 +55719,8 @@ List Sessions
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -52609,7 +56183,7 @@ Get Session
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -52652,6 +56226,8 @@ Get Session
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -53110,7 +56686,7 @@ Update Session
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -53153,6 +56729,8 @@ Update Session
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -53627,7 +57205,7 @@ Delete Session
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -53670,6 +57248,8 @@ Delete Session
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -53711,7 +57291,7 @@ Archive Session
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -53754,6 +57334,8 @@ Archive Session
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -55123,7 +58705,7 @@ List Events
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -55166,6 +58748,8 @@ List Events
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -56568,7 +60152,7 @@ Send Events
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -56611,6 +60195,8 @@ Send Events
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -57397,7 +60983,7 @@ Stream Events
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -57440,6 +61026,8 @@ Stream Events
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -64742,7 +68330,7 @@ Add Session Resource
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -64785,6 +68373,8 @@ Add Session Resource
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -64864,7 +68454,7 @@ List Session Resources
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -64907,6 +68497,8 @@ List Session Resources
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -65009,7 +68601,7 @@ Get Session Resource
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -65052,6 +68644,8 @@ Get Session Resource
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -65146,7 +68740,7 @@ Update Session Resource
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -65189,6 +68783,8 @@ Update Session Resource
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -65293,7 +68889,7 @@ Delete Session Resource
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -65336,6 +68932,8 @@ Delete Session Resource
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -65657,7 +69255,7 @@ Create Vault
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -65701,6 +69299,8 @@ Create Vault
 
     - `"output-300k-2026-03-24"`
 
+    - `"advisor-tool-2026-03-01"`
+
 ### Body Parameters
 
 - `display_name: string`
@@ -65709,7 +69309,7 @@ Create Vault
 
 - `metadata: optional map[string]`
 
-  Arbitrary key-value metadata to attach to the vault.
+  Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 ### Returns
 
@@ -65786,7 +69386,7 @@ List Vaults
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -65829,6 +69429,8 @@ List Vaults
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -65895,7 +69497,7 @@ Get Vault
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -65938,6 +69540,8 @@ Get Vault
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -66000,7 +69604,7 @@ Update Vault
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -66043,6 +69647,8 @@ Update Vault
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -66117,7 +69723,7 @@ Delete Vault
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -66160,6 +69766,8 @@ Delete Vault
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -66203,7 +69811,7 @@ Archive Vault
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -66246,6 +69854,8 @@ Archive Vault
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -66361,7 +69971,7 @@ Create Credential
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -66404,6 +70014,8 @@ Create Credential
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -66513,7 +70125,7 @@ Create Credential
 
 - `metadata: optional map[string]`
 
-  Arbitrary key-value metadata to attach to the credential.
+  Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 ### Returns
 
@@ -66682,7 +70294,7 @@ List Credentials
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -66725,6 +70337,8 @@ List Credentials
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -66877,7 +70491,7 @@ Get Credential
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -66920,6 +70534,8 @@ Get Credential
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -67068,7 +70684,7 @@ Update Credential
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -67111,6 +70727,8 @@ Update Credential
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Body Parameters
 
@@ -67343,7 +70961,7 @@ Delete Credential
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -67386,6 +71004,8 @@ Delete Credential
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -67431,7 +71051,7 @@ Archive Credential
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -67474,6 +71094,8 @@ Archive Credential
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -68255,7 +71877,7 @@ Upload File
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68298,6 +71920,8 @@ Upload File
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -68396,7 +72020,7 @@ List Files
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68439,6 +72063,8 @@ List Files
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -68535,7 +72161,7 @@ Download File
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68578,6 +72204,8 @@ Download File
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Example
 
@@ -68608,7 +72236,7 @@ Get File Metadata
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68651,6 +72279,8 @@ Get File Metadata
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -68733,7 +72363,7 @@ Delete File
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68776,6 +72406,8 @@ Delete File
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -68903,7 +72535,7 @@ Create Skill
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68946,6 +72578,8 @@ Create Skill
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -69037,7 +72671,7 @@ List Skills
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -69080,6 +72714,8 @@ List Skills
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -69171,7 +72807,7 @@ Get Skill
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -69214,6 +72850,8 @@ Get Skill
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -69289,7 +72927,7 @@ Delete Skill
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -69332,6 +72970,8 @@ Delete Skill
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -69534,7 +73174,7 @@ Create Skill Version
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -69577,6 +73217,8 @@ Create Skill Version
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -69668,7 +73310,7 @@ List Skill Versions
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -69711,6 +73353,8 @@ List Skill Versions
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -69807,7 +73451,7 @@ Get Skill Version
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -69850,6 +73494,8 @@ Get Skill Version
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -69934,7 +73580,7 @@ Delete Skill Version
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -69977,6 +73623,8 @@ Delete Skill Version
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 

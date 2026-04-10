@@ -16,7 +16,7 @@ Create Vault
 
 - `--metadata: optional map[string]`
 
-  Body param: Arbitrary key-value metadata to attach to the vault.
+  Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -443,7 +443,7 @@ Create Credential
 
 - `--metadata: optional map[string]`
 
-  Body param: Arbitrary key-value metadata to attach to the credential.
+  Body param: Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 - `--beta: optional array of AnthropicBeta`
 

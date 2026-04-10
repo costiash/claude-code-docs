@@ -1434,7 +1434,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `input: Dict[str, object]`
 
-        - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+        - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -1973,6 +1975,77 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `type: Literal["code_execution_20260120"]`
 
               - `"code_execution_20260120"`
+
+      - `class BetaAdvisorToolResultBlockParam: …`
+
+        - `content: Content`
+
+          - `class BetaAdvisorToolResultErrorParam: …`
+
+            - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: Literal["advisor_tool_result_error"]`
+
+              - `"advisor_tool_result_error"`
+
+          - `class BetaAdvisorResultBlockParam: …`
+
+            - `text: str`
+
+            - `type: Literal["advisor_result"]`
+
+              - `"advisor_result"`
+
+          - `class BetaAdvisorRedactedResultBlockParam: …`
+
+            - `encrypted_content: str`
+
+              Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+            - `type: Literal["advisor_redacted_result"]`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: str`
+
+        - `type: Literal["advisor_tool_result"]`
+
+          - `"advisor_tool_result"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+          - `type: Literal["ephemeral"]`
+
+            - `"ephemeral"`
+
+          - `ttl: Optional[Literal["5m", "1h"]]`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"`
+
+            - `"1h"`
 
       - `class BetaCodeExecutionToolResultBlockParam: …`
 
@@ -4519,6 +4592,181 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `class BetaAdvisorTool20260301: …`
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+        - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+        - `claude-sonnet-4-6` - Best combination of speed and intelligence
+        - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+        - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+        - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+        - `claude-sonnet-4-5` - High-performance model for agents and coding
+        - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+        - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-0` - Powerful model for complex tasks
+        - `claude-opus-4-20250514` - Powerful model for complex tasks
+        - `claude-sonnet-4-0` - High-performance model with extended thinking
+        - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+        - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `str`
+
+    - `name: Literal["advisor"]`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `"advisor"`
+
+    - `type: Literal["advisor_20260301"]`
+
+      - `"advisor_20260301"`
+
+    - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+
+      - `"direct"`
+
+      - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
+
+    - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: Literal["ephemeral"]`
+
+        - `"ephemeral"`
+
+      - `ttl: Optional[Literal["5m", "1h"]]`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `caching: Optional[BetaCacheControlEphemeral]`
+
+      Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+      - `type: Literal["ephemeral"]`
+
+        - `"ephemeral"`
+
+      - `ttl: Optional[Literal["5m", "1h"]]`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `defer_loading: Optional[bool]`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `max_uses: Optional[int]`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `strict: Optional[bool]`
+
+      When true, guarantees schema validation on tool names and inputs
+
   - `class BetaToolSearchToolBm25_20251119: …`
 
     - `name: Literal["tool_search_tool_bm25"]`
@@ -4705,7 +4953,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 18 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4748,6 +4996,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -4986,7 +5236,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `input: Dict[str, object]`
 
-      - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+      - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+        - `"advisor"`
 
         - `"web_search"`
 
@@ -5229,6 +5481,54 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `type: Literal["code_execution_20260120"]`
 
             - `"code_execution_20260120"`
+
+    - `class BetaAdvisorToolResultBlock: …`
+
+      - `content: Content`
+
+        - `class BetaAdvisorToolResultError: …`
+
+          - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+            - `"max_uses_exceeded"`
+
+            - `"prompt_too_long"`
+
+            - `"too_many_requests"`
+
+            - `"overloaded"`
+
+            - `"unavailable"`
+
+            - `"execution_time_exceeded"`
+
+          - `type: Literal["advisor_tool_result_error"]`
+
+            - `"advisor_tool_result_error"`
+
+        - `class BetaAdvisorResultBlock: …`
+
+          - `text: str`
+
+          - `type: Literal["advisor_result"]`
+
+            - `"advisor_result"`
+
+        - `class BetaAdvisorRedactedResultBlock: …`
+
+          - `encrypted_content: str`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `type: Literal["advisor_redacted_result"]`
+
+            - `"advisor_redacted_result"`
+
+      - `tool_use_id: str`
+
+      - `type: Literal["advisor_tool_result"]`
+
+        - `"advisor_tool_result"`
 
     - `class BetaCodeExecutionToolResultBlock: …`
 
@@ -5963,6 +6263,139 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           Usage for a compaction iteration
 
           - `"compaction"`
+
+      - `class BetaAdvisorMessageIterationUsage: …`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `cache_creation: Optional[BetaCacheCreation]`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: int`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: int`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: int`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: int`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: int`
+
+          The number of input tokens which were used.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+            - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+            - `claude-sonnet-4-6` - Best combination of speed and intelligence
+            - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+            - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+            - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+            - `claude-sonnet-4-5` - High-performance model for agents and coding
+            - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+            - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-0` - Powerful model for complex tasks
+            - `claude-opus-4-20250514` - Powerful model for complex tasks
+            - `claude-sonnet-4-0` - High-performance model with extended thinking
+            - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+            - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `str`
+
+        - `output_tokens: int`
+
+          The number of output tokens which were used.
+
+        - `type: Literal["advisor_message"]`
+
+          Usage for an advisor sub-inference iteration
+
+          - `"advisor_message"`
 
     - `output_tokens: int`
 
@@ -7444,7 +7877,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         - `input: Dict[str, object]`
 
-        - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+        - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -7983,6 +8418,77 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
             - `type: Literal["code_execution_20260120"]`
 
               - `"code_execution_20260120"`
+
+      - `class BetaAdvisorToolResultBlockParam: …`
+
+        - `content: Content`
+
+          - `class BetaAdvisorToolResultErrorParam: …`
+
+            - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: Literal["advisor_tool_result_error"]`
+
+              - `"advisor_tool_result_error"`
+
+          - `class BetaAdvisorResultBlockParam: …`
+
+            - `text: str`
+
+            - `type: Literal["advisor_result"]`
+
+              - `"advisor_result"`
+
+          - `class BetaAdvisorRedactedResultBlockParam: …`
+
+            - `encrypted_content: str`
+
+              Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+            - `type: Literal["advisor_redacted_result"]`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: str`
+
+        - `type: Literal["advisor_tool_result"]`
+
+          - `"advisor_tool_result"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+          - `type: Literal["ephemeral"]`
+
+            - `"ephemeral"`
+
+          - `ttl: Optional[Literal["5m", "1h"]]`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"`
+
+            - `"1h"`
 
       - `class BetaCodeExecutionToolResultBlockParam: …`
 
@@ -10447,6 +10953,181 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `class BetaAdvisorTool20260301: …`
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+        - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+        - `claude-sonnet-4-6` - Best combination of speed and intelligence
+        - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+        - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+        - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+        - `claude-sonnet-4-5` - High-performance model for agents and coding
+        - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+        - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-0` - Powerful model for complex tasks
+        - `claude-opus-4-20250514` - Powerful model for complex tasks
+        - `claude-sonnet-4-0` - High-performance model with extended thinking
+        - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+        - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `str`
+
+    - `name: Literal["advisor"]`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `"advisor"`
+
+    - `type: Literal["advisor_20260301"]`
+
+      - `"advisor_20260301"`
+
+    - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+
+      - `"direct"`
+
+      - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
+
+    - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: Literal["ephemeral"]`
+
+        - `"ephemeral"`
+
+      - `ttl: Optional[Literal["5m", "1h"]]`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `caching: Optional[BetaCacheControlEphemeral]`
+
+      Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+      - `type: Literal["ephemeral"]`
+
+        - `"ephemeral"`
+
+      - `ttl: Optional[Literal["5m", "1h"]]`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `defer_loading: Optional[bool]`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `max_uses: Optional[int]`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `strict: Optional[bool]`
+
+      When true, guarantees schema validation on tool names and inputs
+
   - `class BetaToolSearchToolBm25_20251119: …`
 
     - `name: Literal["tool_search_tool_bm25"]`
@@ -10617,7 +11298,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 18 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -10661,6 +11342,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `"output-300k-2026-03-24"`
 
+    - `"advisor-tool-2026-03-01"`
+
 ### Returns
 
 - `class BetaMessageTokensCount: …`
@@ -10697,6 +11380,529 @@ print(beta_message_tokens_count.context_management)
 ```
 
 ## Domain Types
+
+### Beta Advisor Message Iteration Usage
+
+- `class BetaAdvisorMessageIterationUsage: …`
+
+  Token usage for an advisor sub-inference iteration.
+
+  - `cache_creation: Optional[BetaCacheCreation]`
+
+    Breakdown of cached tokens by TTL
+
+    - `ephemeral_1h_input_tokens: int`
+
+      The number of input tokens used to create the 1 hour cache entry.
+
+    - `ephemeral_5m_input_tokens: int`
+
+      The number of input tokens used to create the 5 minute cache entry.
+
+  - `cache_creation_input_tokens: int`
+
+    The number of input tokens used to create the cache entry.
+
+  - `cache_read_input_tokens: int`
+
+    The number of input tokens read from the cache.
+
+  - `input_tokens: int`
+
+    The number of input tokens which were used.
+
+  - `model: Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+      - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+      - `claude-sonnet-4-6` - Best combination of speed and intelligence
+      - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+      - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+      - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+      - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+      - `claude-sonnet-4-5` - High-performance model for agents and coding
+      - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+      - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+      - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+      - `claude-opus-4-0` - Powerful model for complex tasks
+      - `claude-opus-4-20250514` - Powerful model for complex tasks
+      - `claude-sonnet-4-0` - High-performance model with extended thinking
+      - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+      - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      - `"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+    - `str`
+
+  - `output_tokens: int`
+
+    The number of output tokens which were used.
+
+  - `type: Literal["advisor_message"]`
+
+    Usage for an advisor sub-inference iteration
+
+    - `"advisor_message"`
+
+### Beta Advisor Redacted Result Block
+
+- `class BetaAdvisorRedactedResultBlock: …`
+
+  - `encrypted_content: str`
+
+    Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+  - `type: Literal["advisor_redacted_result"]`
+
+    - `"advisor_redacted_result"`
+
+### Beta Advisor Redacted Result Block Param
+
+- `class BetaAdvisorRedactedResultBlockParam: …`
+
+  - `encrypted_content: str`
+
+    Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+  - `type: Literal["advisor_redacted_result"]`
+
+    - `"advisor_redacted_result"`
+
+### Beta Advisor Result Block
+
+- `class BetaAdvisorResultBlock: …`
+
+  - `text: str`
+
+  - `type: Literal["advisor_result"]`
+
+    - `"advisor_result"`
+
+### Beta Advisor Result Block Param
+
+- `class BetaAdvisorResultBlockParam: …`
+
+  - `text: str`
+
+  - `type: Literal["advisor_result"]`
+
+    - `"advisor_result"`
+
+### Beta Advisor Tool 20260301
+
+- `class BetaAdvisorTool20260301: …`
+
+  - `model: Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+      - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+      - `claude-sonnet-4-6` - Best combination of speed and intelligence
+      - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+      - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+      - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+      - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+      - `claude-sonnet-4-5` - High-performance model for agents and coding
+      - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+      - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+      - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+      - `claude-opus-4-0` - Powerful model for complex tasks
+      - `claude-opus-4-20250514` - Powerful model for complex tasks
+      - `claude-sonnet-4-0` - High-performance model with extended thinking
+      - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+      - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      - `"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+    - `str`
+
+  - `name: Literal["advisor"]`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"advisor"`
+
+  - `type: Literal["advisor_20260301"]`
+
+    - `"advisor_20260301"`
+
+  - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+
+    - `"direct"`
+
+    - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
+
+  - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: Literal["ephemeral"]`
+
+      - `"ephemeral"`
+
+    - `ttl: Optional[Literal["5m", "1h"]]`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `"5m"`
+
+      - `"1h"`
+
+  - `caching: Optional[BetaCacheControlEphemeral]`
+
+    Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+    - `type: Literal["ephemeral"]`
+
+      - `"ephemeral"`
+
+    - `ttl: Optional[Literal["5m", "1h"]]`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `"5m"`
+
+      - `"1h"`
+
+  - `defer_loading: Optional[bool]`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `max_uses: Optional[int]`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `strict: Optional[bool]`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Advisor Tool Result Block
+
+- `class BetaAdvisorToolResultBlock: …`
+
+  - `content: Content`
+
+    - `class BetaAdvisorToolResultError: …`
+
+      - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+        - `"max_uses_exceeded"`
+
+        - `"prompt_too_long"`
+
+        - `"too_many_requests"`
+
+        - `"overloaded"`
+
+        - `"unavailable"`
+
+        - `"execution_time_exceeded"`
+
+      - `type: Literal["advisor_tool_result_error"]`
+
+        - `"advisor_tool_result_error"`
+
+    - `class BetaAdvisorResultBlock: …`
+
+      - `text: str`
+
+      - `type: Literal["advisor_result"]`
+
+        - `"advisor_result"`
+
+    - `class BetaAdvisorRedactedResultBlock: …`
+
+      - `encrypted_content: str`
+
+        Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+      - `type: Literal["advisor_redacted_result"]`
+
+        - `"advisor_redacted_result"`
+
+  - `tool_use_id: str`
+
+  - `type: Literal["advisor_tool_result"]`
+
+    - `"advisor_tool_result"`
+
+### Beta Advisor Tool Result Block Param
+
+- `class BetaAdvisorToolResultBlockParam: …`
+
+  - `content: Content`
+
+    - `class BetaAdvisorToolResultErrorParam: …`
+
+      - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+        - `"max_uses_exceeded"`
+
+        - `"prompt_too_long"`
+
+        - `"too_many_requests"`
+
+        - `"overloaded"`
+
+        - `"unavailable"`
+
+        - `"execution_time_exceeded"`
+
+      - `type: Literal["advisor_tool_result_error"]`
+
+        - `"advisor_tool_result_error"`
+
+    - `class BetaAdvisorResultBlockParam: …`
+
+      - `text: str`
+
+      - `type: Literal["advisor_result"]`
+
+        - `"advisor_result"`
+
+    - `class BetaAdvisorRedactedResultBlockParam: …`
+
+      - `encrypted_content: str`
+
+        Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+      - `type: Literal["advisor_redacted_result"]`
+
+        - `"advisor_redacted_result"`
+
+  - `tool_use_id: str`
+
+  - `type: Literal["advisor_tool_result"]`
+
+    - `"advisor_tool_result"`
+
+  - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: Literal["ephemeral"]`
+
+      - `"ephemeral"`
+
+    - `ttl: Optional[Literal["5m", "1h"]]`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `"5m"`
+
+      - `"1h"`
+
+### Beta Advisor Tool Result Error
+
+- `class BetaAdvisorToolResultError: …`
+
+  - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+    - `"max_uses_exceeded"`
+
+    - `"prompt_too_long"`
+
+    - `"too_many_requests"`
+
+    - `"overloaded"`
+
+    - `"unavailable"`
+
+    - `"execution_time_exceeded"`
+
+  - `type: Literal["advisor_tool_result_error"]`
+
+    - `"advisor_tool_result_error"`
+
+### Beta Advisor Tool Result Error Param
+
+- `class BetaAdvisorToolResultErrorParam: …`
+
+  - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+    - `"max_uses_exceeded"`
+
+    - `"prompt_too_long"`
+
+    - `"too_many_requests"`
+
+    - `"overloaded"`
+
+    - `"unavailable"`
+
+    - `"execution_time_exceeded"`
+
+  - `type: Literal["advisor_tool_result_error"]`
+
+    - `"advisor_tool_result_error"`
 
 ### Beta All Thinking Turns
 
@@ -12419,7 +13625,9 @@ print(beta_message_tokens_count.context_management)
 
     - `input: Dict[str, object]`
 
-    - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+    - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+      - `"advisor"`
 
       - `"web_search"`
 
@@ -12662,6 +13870,54 @@ print(beta_message_tokens_count.context_management)
         - `type: Literal["code_execution_20260120"]`
 
           - `"code_execution_20260120"`
+
+  - `class BetaAdvisorToolResultBlock: …`
+
+    - `content: Content`
+
+      - `class BetaAdvisorToolResultError: …`
+
+        - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+          - `"max_uses_exceeded"`
+
+          - `"prompt_too_long"`
+
+          - `"too_many_requests"`
+
+          - `"overloaded"`
+
+          - `"unavailable"`
+
+          - `"execution_time_exceeded"`
+
+        - `type: Literal["advisor_tool_result_error"]`
+
+          - `"advisor_tool_result_error"`
+
+      - `class BetaAdvisorResultBlock: …`
+
+        - `text: str`
+
+        - `type: Literal["advisor_result"]`
+
+          - `"advisor_result"`
+
+      - `class BetaAdvisorRedactedResultBlock: …`
+
+        - `encrypted_content: str`
+
+          Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+        - `type: Literal["advisor_redacted_result"]`
+
+          - `"advisor_redacted_result"`
+
+    - `tool_use_id: str`
+
+    - `type: Literal["advisor_tool_result"]`
+
+      - `"advisor_tool_result"`
 
   - `class BetaCodeExecutionToolResultBlock: …`
 
@@ -14418,7 +15674,9 @@ print(beta_message_tokens_count.context_management)
 
     - `input: Dict[str, object]`
 
-    - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+    - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+      - `"advisor"`
 
       - `"web_search"`
 
@@ -14957,6 +16215,77 @@ print(beta_message_tokens_count.context_management)
         - `type: Literal["code_execution_20260120"]`
 
           - `"code_execution_20260120"`
+
+  - `class BetaAdvisorToolResultBlockParam: …`
+
+    - `content: Content`
+
+      - `class BetaAdvisorToolResultErrorParam: …`
+
+        - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+          - `"max_uses_exceeded"`
+
+          - `"prompt_too_long"`
+
+          - `"too_many_requests"`
+
+          - `"overloaded"`
+
+          - `"unavailable"`
+
+          - `"execution_time_exceeded"`
+
+        - `type: Literal["advisor_tool_result_error"]`
+
+          - `"advisor_tool_result_error"`
+
+      - `class BetaAdvisorResultBlockParam: …`
+
+        - `text: str`
+
+        - `type: Literal["advisor_result"]`
+
+          - `"advisor_result"`
+
+      - `class BetaAdvisorRedactedResultBlockParam: …`
+
+        - `encrypted_content: str`
+
+          Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+        - `type: Literal["advisor_redacted_result"]`
+
+          - `"advisor_redacted_result"`
+
+    - `tool_use_id: str`
+
+    - `type: Literal["advisor_tool_result"]`
+
+      - `"advisor_tool_result"`
+
+    - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: Literal["ephemeral"]`
+
+        - `"ephemeral"`
+
+      - `ttl: Optional[Literal["5m", "1h"]]`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
 
   - `class BetaCodeExecutionToolResultBlockParam: …`
 
@@ -16420,6 +17749,139 @@ print(beta_message_tokens_count.context_management)
 
       - `"compaction"`
 
+  - `class BetaAdvisorMessageIterationUsage: …`
+
+    Token usage for an advisor sub-inference iteration.
+
+    - `cache_creation: Optional[BetaCacheCreation]`
+
+      Breakdown of cached tokens by TTL
+
+      - `ephemeral_1h_input_tokens: int`
+
+        The number of input tokens used to create the 1 hour cache entry.
+
+      - `ephemeral_5m_input_tokens: int`
+
+        The number of input tokens used to create the 5 minute cache entry.
+
+    - `cache_creation_input_tokens: int`
+
+      The number of input tokens used to create the cache entry.
+
+    - `cache_read_input_tokens: int`
+
+      The number of input tokens read from the cache.
+
+    - `input_tokens: int`
+
+      The number of input tokens which were used.
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+        - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+        - `claude-sonnet-4-6` - Best combination of speed and intelligence
+        - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+        - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+        - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+        - `claude-sonnet-4-5` - High-performance model for agents and coding
+        - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+        - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-0` - Powerful model for complex tasks
+        - `claude-opus-4-20250514` - Powerful model for complex tasks
+        - `claude-sonnet-4-0` - High-performance model with extended thinking
+        - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+        - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `str`
+
+    - `output_tokens: int`
+
+      The number of output tokens which were used.
+
+    - `type: Literal["advisor_message"]`
+
+      Usage for an advisor sub-inference iteration
+
+      - `"advisor_message"`
+
 ### Beta JSON Output Format
 
 - `class BetaJSONOutputFormat: …`
@@ -17195,7 +18657,9 @@ print(beta_message_tokens_count.context_management)
 
       - `input: Dict[str, object]`
 
-      - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+      - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+        - `"advisor"`
 
         - `"web_search"`
 
@@ -17438,6 +18902,54 @@ print(beta_message_tokens_count.context_management)
           - `type: Literal["code_execution_20260120"]`
 
             - `"code_execution_20260120"`
+
+    - `class BetaAdvisorToolResultBlock: …`
+
+      - `content: Content`
+
+        - `class BetaAdvisorToolResultError: …`
+
+          - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+            - `"max_uses_exceeded"`
+
+            - `"prompt_too_long"`
+
+            - `"too_many_requests"`
+
+            - `"overloaded"`
+
+            - `"unavailable"`
+
+            - `"execution_time_exceeded"`
+
+          - `type: Literal["advisor_tool_result_error"]`
+
+            - `"advisor_tool_result_error"`
+
+        - `class BetaAdvisorResultBlock: …`
+
+          - `text: str`
+
+          - `type: Literal["advisor_result"]`
+
+            - `"advisor_result"`
+
+        - `class BetaAdvisorRedactedResultBlock: …`
+
+          - `encrypted_content: str`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `type: Literal["advisor_redacted_result"]`
+
+            - `"advisor_redacted_result"`
+
+      - `tool_use_id: str`
+
+      - `type: Literal["advisor_tool_result"]`
+
+        - `"advisor_tool_result"`
 
     - `class BetaCodeExecutionToolResultBlock: …`
 
@@ -18173,6 +19685,139 @@ print(beta_message_tokens_count.context_management)
 
           - `"compaction"`
 
+      - `class BetaAdvisorMessageIterationUsage: …`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `cache_creation: Optional[BetaCacheCreation]`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: int`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: int`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: int`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: int`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: int`
+
+          The number of input tokens which were used.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+            - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+            - `claude-sonnet-4-6` - Best combination of speed and intelligence
+            - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+            - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+            - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+            - `claude-sonnet-4-5` - High-performance model for agents and coding
+            - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+            - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-0` - Powerful model for complex tasks
+            - `claude-opus-4-20250514` - Powerful model for complex tasks
+            - `claude-sonnet-4-0` - High-performance model with extended thinking
+            - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+            - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `str`
+
+        - `output_tokens: int`
+
+          The number of output tokens which were used.
+
+        - `type: Literal["advisor_message"]`
+
+          Usage for an advisor sub-inference iteration
+
+          - `"advisor_message"`
+
     - `output_tokens: int`
 
       The number of output tokens which were used.
@@ -18308,6 +19953,139 @@ print(beta_message_tokens_count.context_management)
         Usage for a compaction iteration
 
         - `"compaction"`
+
+    - `class BetaAdvisorMessageIterationUsage: …`
+
+      Token usage for an advisor sub-inference iteration.
+
+      - `cache_creation: Optional[BetaCacheCreation]`
+
+        Breakdown of cached tokens by TTL
+
+        - `ephemeral_1h_input_tokens: int`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+        - `ephemeral_5m_input_tokens: int`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+      - `cache_creation_input_tokens: int`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: int`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: int`
+
+        The number of input tokens which were used.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+          - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+          - `claude-sonnet-4-6` - Best combination of speed and intelligence
+          - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+          - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+          - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+          - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+          - `claude-sonnet-4-5` - High-performance model for agents and coding
+          - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+          - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+          - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+          - `claude-opus-4-0` - Powerful model for complex tasks
+          - `claude-opus-4-20250514` - Powerful model for complex tasks
+          - `claude-sonnet-4-0` - High-performance model with extended thinking
+          - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+          - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+        - `str`
+
+      - `output_tokens: int`
+
+        The number of output tokens which were used.
+
+      - `type: Literal["advisor_message"]`
+
+        Usage for an advisor sub-inference iteration
+
+        - `"advisor_message"`
 
   - `output_tokens: int`
 
@@ -19730,7 +21508,9 @@ print(beta_message_tokens_count.context_management)
 
         - `input: Dict[str, object]`
 
-        - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+        - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -20269,6 +22049,77 @@ print(beta_message_tokens_count.context_management)
             - `type: Literal["code_execution_20260120"]`
 
               - `"code_execution_20260120"`
+
+      - `class BetaAdvisorToolResultBlockParam: …`
+
+        - `content: Content`
+
+          - `class BetaAdvisorToolResultErrorParam: …`
+
+            - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: Literal["advisor_tool_result_error"]`
+
+              - `"advisor_tool_result_error"`
+
+          - `class BetaAdvisorResultBlockParam: …`
+
+            - `text: str`
+
+            - `type: Literal["advisor_result"]`
+
+              - `"advisor_result"`
+
+          - `class BetaAdvisorRedactedResultBlockParam: …`
+
+            - `encrypted_content: str`
+
+              Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+            - `type: Literal["advisor_redacted_result"]`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: str`
+
+        - `type: Literal["advisor_tool_result"]`
+
+          - `"advisor_tool_result"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+          - `type: Literal["ephemeral"]`
+
+            - `"ephemeral"`
+
+          - `ttl: Optional[Literal["5m", "1h"]]`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"`
+
+            - `"1h"`
 
       - `class BetaCodeExecutionToolResultBlockParam: …`
 
@@ -21415,7 +23266,9 @@ print(beta_message_tokens_count.context_management)
 
       - `input: Dict[str, object]`
 
-      - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+      - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+        - `"advisor"`
 
         - `"web_search"`
 
@@ -21658,6 +23511,54 @@ print(beta_message_tokens_count.context_management)
           - `type: Literal["code_execution_20260120"]`
 
             - `"code_execution_20260120"`
+
+    - `class BetaAdvisorToolResultBlock: …`
+
+      - `content: Content`
+
+        - `class BetaAdvisorToolResultError: …`
+
+          - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+            - `"max_uses_exceeded"`
+
+            - `"prompt_too_long"`
+
+            - `"too_many_requests"`
+
+            - `"overloaded"`
+
+            - `"unavailable"`
+
+            - `"execution_time_exceeded"`
+
+          - `type: Literal["advisor_tool_result_error"]`
+
+            - `"advisor_tool_result_error"`
+
+        - `class BetaAdvisorResultBlock: …`
+
+          - `text: str`
+
+          - `type: Literal["advisor_result"]`
+
+            - `"advisor_result"`
+
+        - `class BetaAdvisorRedactedResultBlock: …`
+
+          - `encrypted_content: str`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `type: Literal["advisor_redacted_result"]`
+
+            - `"advisor_redacted_result"`
+
+      - `tool_use_id: str`
+
+      - `type: Literal["advisor_tool_result"]`
+
+        - `"advisor_tool_result"`
 
     - `class BetaCodeExecutionToolResultBlock: …`
 
@@ -22305,6 +24206,139 @@ print(beta_message_tokens_count.context_management)
 
           - `"compaction"`
 
+      - `class BetaAdvisorMessageIterationUsage: …`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `cache_creation: Optional[BetaCacheCreation]`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: int`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: int`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: int`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: int`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: int`
+
+          The number of input tokens which were used.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+            - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+            - `claude-sonnet-4-6` - Best combination of speed and intelligence
+            - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+            - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+            - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+            - `claude-sonnet-4-5` - High-performance model for agents and coding
+            - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+            - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-0` - Powerful model for complex tasks
+            - `claude-opus-4-20250514` - Powerful model for complex tasks
+            - `claude-sonnet-4-0` - High-performance model with extended thinking
+            - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+            - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `str`
+
+        - `output_tokens: int`
+
+          The number of output tokens which were used.
+
+        - `type: Literal["advisor_message"]`
+
+          Usage for an advisor sub-inference iteration
+
+          - `"advisor_message"`
+
     - `output_tokens: int`
 
       The cumulative number of output tokens which were used.
@@ -22560,7 +24594,9 @@ print(beta_message_tokens_count.context_management)
 
         - `input: Dict[str, object]`
 
-        - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+        - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -22803,6 +24839,54 @@ print(beta_message_tokens_count.context_management)
             - `type: Literal["code_execution_20260120"]`
 
               - `"code_execution_20260120"`
+
+      - `class BetaAdvisorToolResultBlock: …`
+
+        - `content: Content`
+
+          - `class BetaAdvisorToolResultError: …`
+
+            - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: Literal["advisor_tool_result_error"]`
+
+              - `"advisor_tool_result_error"`
+
+          - `class BetaAdvisorResultBlock: …`
+
+            - `text: str`
+
+            - `type: Literal["advisor_result"]`
+
+              - `"advisor_result"`
+
+          - `class BetaAdvisorRedactedResultBlock: …`
+
+            - `encrypted_content: str`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `type: Literal["advisor_redacted_result"]`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: str`
+
+        - `type: Literal["advisor_tool_result"]`
+
+          - `"advisor_tool_result"`
 
       - `class BetaCodeExecutionToolResultBlock: …`
 
@@ -23538,6 +25622,139 @@ print(beta_message_tokens_count.context_management)
 
             - `"compaction"`
 
+        - `class BetaAdvisorMessageIterationUsage: …`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `cache_creation: Optional[BetaCacheCreation]`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: int`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `ephemeral_5m_input_tokens: int`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `cache_creation_input_tokens: int`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: int`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: int`
+
+            The number of input tokens which were used.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+              - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+              - `claude-sonnet-4-6` - Best combination of speed and intelligence
+              - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+              - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+              - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+              - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+              - `claude-sonnet-4-5` - High-performance model for agents and coding
+              - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+              - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+              - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+              - `claude-opus-4-0` - Powerful model for complex tasks
+              - `claude-opus-4-20250514` - Powerful model for complex tasks
+              - `claude-sonnet-4-0` - High-performance model with extended thinking
+              - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+              - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `str`
+
+          - `output_tokens: int`
+
+            The number of output tokens which were used.
+
+          - `type: Literal["advisor_message"]`
+
+            Usage for an advisor sub-inference iteration
+
+            - `"advisor_message"`
+
       - `output_tokens: int`
 
         The number of output tokens which were used.
@@ -23825,7 +26042,9 @@ print(beta_message_tokens_count.context_management)
 
           - `input: Dict[str, object]`
 
-          - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+          - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+            - `"advisor"`
 
             - `"web_search"`
 
@@ -24068,6 +26287,54 @@ print(beta_message_tokens_count.context_management)
               - `type: Literal["code_execution_20260120"]`
 
                 - `"code_execution_20260120"`
+
+        - `class BetaAdvisorToolResultBlock: …`
+
+          - `content: Content`
+
+            - `class BetaAdvisorToolResultError: …`
+
+              - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+                - `"max_uses_exceeded"`
+
+                - `"prompt_too_long"`
+
+                - `"too_many_requests"`
+
+                - `"overloaded"`
+
+                - `"unavailable"`
+
+                - `"execution_time_exceeded"`
+
+              - `type: Literal["advisor_tool_result_error"]`
+
+                - `"advisor_tool_result_error"`
+
+            - `class BetaAdvisorResultBlock: …`
+
+              - `text: str`
+
+              - `type: Literal["advisor_result"]`
+
+                - `"advisor_result"`
+
+            - `class BetaAdvisorRedactedResultBlock: …`
+
+              - `encrypted_content: str`
+
+                Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `type: Literal["advisor_redacted_result"]`
+
+                - `"advisor_redacted_result"`
+
+          - `tool_use_id: str`
+
+          - `type: Literal["advisor_tool_result"]`
+
+            - `"advisor_tool_result"`
 
         - `class BetaCodeExecutionToolResultBlock: …`
 
@@ -24803,6 +27070,139 @@ print(beta_message_tokens_count.context_management)
 
               - `"compaction"`
 
+          - `class BetaAdvisorMessageIterationUsage: …`
+
+            Token usage for an advisor sub-inference iteration.
+
+            - `cache_creation: Optional[BetaCacheCreation]`
+
+              Breakdown of cached tokens by TTL
+
+              - `ephemeral_1h_input_tokens: int`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `ephemeral_5m_input_tokens: int`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `cache_creation_input_tokens: int`
+
+              The number of input tokens used to create the cache entry.
+
+            - `cache_read_input_tokens: int`
+
+              The number of input tokens read from the cache.
+
+            - `input_tokens: int`
+
+              The number of input tokens which were used.
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+                - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+                - `claude-sonnet-4-6` - Best combination of speed and intelligence
+                - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+                - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+                - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+                - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+                - `claude-sonnet-4-5` - High-performance model for agents and coding
+                - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+                - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+                - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+                - `claude-opus-4-0` - Powerful model for complex tasks
+                - `claude-opus-4-20250514` - Powerful model for complex tasks
+                - `claude-sonnet-4-0` - High-performance model with extended thinking
+                - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+                - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                - `"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
+
+              - `str`
+
+            - `output_tokens: int`
+
+              The number of output tokens which were used.
+
+            - `type: Literal["advisor_message"]`
+
+              Usage for an advisor sub-inference iteration
+
+              - `"advisor_message"`
+
         - `output_tokens: int`
 
           The number of output tokens which were used.
@@ -25075,6 +27475,139 @@ print(beta_message_tokens_count.context_management)
 
             - `"compaction"`
 
+        - `class BetaAdvisorMessageIterationUsage: …`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `cache_creation: Optional[BetaCacheCreation]`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: int`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `ephemeral_5m_input_tokens: int`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `cache_creation_input_tokens: int`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: int`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: int`
+
+            The number of input tokens which were used.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+              - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+              - `claude-sonnet-4-6` - Best combination of speed and intelligence
+              - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+              - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+              - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+              - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+              - `claude-sonnet-4-5` - High-performance model for agents and coding
+              - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+              - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+              - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+              - `claude-opus-4-0` - Powerful model for complex tasks
+              - `claude-opus-4-20250514` - Powerful model for complex tasks
+              - `claude-sonnet-4-0` - High-performance model with extended thinking
+              - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+              - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `str`
+
+          - `output_tokens: int`
+
+            The number of output tokens which were used.
+
+          - `type: Literal["advisor_message"]`
+
+            Usage for an advisor sub-inference iteration
+
+            - `"advisor_message"`
+
       - `output_tokens: int`
 
         The cumulative number of output tokens which were used.
@@ -25269,7 +27802,9 @@ print(beta_message_tokens_count.context_management)
 
         - `input: Dict[str, object]`
 
-        - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+        - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -25512,6 +28047,54 @@ print(beta_message_tokens_count.context_management)
             - `type: Literal["code_execution_20260120"]`
 
               - `"code_execution_20260120"`
+
+      - `class BetaAdvisorToolResultBlock: …`
+
+        - `content: Content`
+
+          - `class BetaAdvisorToolResultError: …`
+
+            - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: Literal["advisor_tool_result_error"]`
+
+              - `"advisor_tool_result_error"`
+
+          - `class BetaAdvisorResultBlock: …`
+
+            - `text: str`
+
+            - `type: Literal["advisor_result"]`
+
+              - `"advisor_result"`
+
+          - `class BetaAdvisorRedactedResultBlock: …`
+
+            - `encrypted_content: str`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `type: Literal["advisor_redacted_result"]`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: str`
+
+        - `type: Literal["advisor_tool_result"]`
+
+          - `"advisor_tool_result"`
 
       - `class BetaCodeExecutionToolResultBlock: …`
 
@@ -26756,7 +29339,9 @@ print(beta_message_tokens_count.context_management)
 
   - `input: Dict[str, object]`
 
-  - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+  - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+    - `"advisor"`
 
     - `"web_search"`
 
@@ -26814,7 +29399,9 @@ print(beta_message_tokens_count.context_management)
 
   - `input: Dict[str, object]`
 
-  - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+  - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+    - `"advisor"`
 
     - `"web_search"`
 
@@ -30893,6 +33480,181 @@ print(beta_message_tokens_count.context_management)
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `class BetaAdvisorTool20260301: …`
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+        - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+        - `claude-sonnet-4-6` - Best combination of speed and intelligence
+        - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+        - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+        - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+        - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+        - `claude-sonnet-4-5` - High-performance model for agents and coding
+        - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+        - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+        - `claude-opus-4-0` - Powerful model for complex tasks
+        - `claude-opus-4-20250514` - Powerful model for complex tasks
+        - `claude-sonnet-4-0` - High-performance model with extended thinking
+        - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+        - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `str`
+
+    - `name: Literal["advisor"]`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `"advisor"`
+
+    - `type: Literal["advisor_20260301"]`
+
+      - `"advisor_20260301"`
+
+    - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+
+      - `"direct"`
+
+      - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
+
+    - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: Literal["ephemeral"]`
+
+        - `"ephemeral"`
+
+      - `ttl: Optional[Literal["5m", "1h"]]`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `caching: Optional[BetaCacheControlEphemeral]`
+
+      Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+      - `type: Literal["ephemeral"]`
+
+        - `"ephemeral"`
+
+      - `ttl: Optional[Literal["5m", "1h"]]`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `defer_loading: Optional[bool]`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `max_uses: Optional[int]`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `strict: Optional[bool]`
+
+      When true, guarantees schema validation on tool names and inputs
+
   - `class BetaToolSearchToolBm25_20251119: …`
 
     - `name: Literal["tool_search_tool_bm25"]`
@@ -31325,6 +34087,139 @@ print(beta_message_tokens_count.context_management)
         Usage for a compaction iteration
 
         - `"compaction"`
+
+    - `class BetaAdvisorMessageIterationUsage: …`
+
+      Token usage for an advisor sub-inference iteration.
+
+      - `cache_creation: Optional[BetaCacheCreation]`
+
+        Breakdown of cached tokens by TTL
+
+        - `ephemeral_1h_input_tokens: int`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+        - `ephemeral_5m_input_tokens: int`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+      - `cache_creation_input_tokens: int`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: int`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: int`
+
+        The number of input tokens which were used.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+          - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+          - `claude-sonnet-4-6` - Best combination of speed and intelligence
+          - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+          - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+          - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+          - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+          - `claude-sonnet-4-5` - High-performance model for agents and coding
+          - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+          - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+          - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+          - `claude-opus-4-0` - Powerful model for complex tasks
+          - `claude-opus-4-20250514` - Powerful model for complex tasks
+          - `claude-sonnet-4-0` - High-performance model with extended thinking
+          - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+          - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+        - `str`
+
+      - `output_tokens: int`
+
+        The number of output tokens which were used.
+
+      - `type: Literal["advisor_message"]`
+
+        Usage for an advisor sub-inference iteration
+
+        - `"advisor_message"`
 
   - `output_tokens: int`
 
@@ -34507,7 +37402,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `input: Dict[str, object]`
 
-            - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+            - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+              - `"advisor"`
 
               - `"web_search"`
 
@@ -35046,6 +37943,77 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `type: Literal["code_execution_20260120"]`
 
                   - `"code_execution_20260120"`
+
+          - `class BetaAdvisorToolResultBlockParam: …`
+
+            - `content: Content`
+
+              - `class BetaAdvisorToolResultErrorParam: …`
+
+                - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"prompt_too_long"`
+
+                  - `"too_many_requests"`
+
+                  - `"overloaded"`
+
+                  - `"unavailable"`
+
+                  - `"execution_time_exceeded"`
+
+                - `type: Literal["advisor_tool_result_error"]`
+
+                  - `"advisor_tool_result_error"`
+
+              - `class BetaAdvisorResultBlockParam: …`
+
+                - `text: str`
+
+                - `type: Literal["advisor_result"]`
+
+                  - `"advisor_result"`
+
+              - `class BetaAdvisorRedactedResultBlockParam: …`
+
+                - `encrypted_content: str`
+
+                  Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+                - `type: Literal["advisor_redacted_result"]`
+
+                  - `"advisor_redacted_result"`
+
+            - `tool_use_id: str`
+
+            - `type: Literal["advisor_tool_result"]`
+
+              - `"advisor_tool_result"`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+              - `type: Literal["ephemeral"]`
+
+                - `"ephemeral"`
+
+              - `ttl: Optional[Literal["5m", "1h"]]`
+
+                The time-to-live for the cache control breakpoint.
+
+                This may be one the following values:
+
+                - `5m`: 5 minutes
+                - `1h`: 1 hour
+
+                Defaults to `5m`.
+
+                - `"5m"`
+
+                - `"1h"`
 
           - `class BetaCodeExecutionToolResultBlockParam: …`
 
@@ -37590,6 +40558,181 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+      - `class BetaAdvisorTool20260301: …`
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+            - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+            - `claude-sonnet-4-6` - Best combination of speed and intelligence
+            - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+            - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+            - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+            - `claude-sonnet-4-5` - High-performance model for agents and coding
+            - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+            - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+            - `claude-opus-4-0` - Powerful model for complex tasks
+            - `claude-opus-4-20250514` - Powerful model for complex tasks
+            - `claude-sonnet-4-0` - High-performance model with extended thinking
+            - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+            - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `str`
+
+        - `name: Literal["advisor"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+          - `"advisor"`
+
+        - `type: Literal["advisor_20260301"]`
+
+          - `"advisor_20260301"`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+          - `type: Literal["ephemeral"]`
+
+            - `"ephemeral"`
+
+          - `ttl: Optional[Literal["5m", "1h"]]`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"`
+
+            - `"1h"`
+
+        - `caching: Optional[BetaCacheControlEphemeral]`
+
+          Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+          - `type: Literal["ephemeral"]`
+
+            - `"ephemeral"`
+
+          - `ttl: Optional[Literal["5m", "1h"]]`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `"5m"`
+
+            - `"1h"`
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_uses: Optional[int]`
+
+          Maximum number of times the tool can be used in the API request.
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
       - `class BetaToolSearchToolBm25_20251119: …`
 
         - `name: Literal["tool_search_tool_bm25"]`
@@ -37776,7 +40919,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 18 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -37819,6 +40962,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -37957,7 +41102,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 18 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -38000,6 +41145,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -38138,7 +41285,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 18 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -38181,6 +41328,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -38310,7 +41459,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 18 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -38353,6 +41502,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -38483,7 +41634,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 18 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -38526,6 +41677,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -38582,7 +41735,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 18 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -38625,6 +41778,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
@@ -38881,7 +42036,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `input: Dict[str, object]`
 
-            - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+            - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+              - `"advisor"`
 
               - `"web_search"`
 
@@ -39124,6 +42281,54 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `type: Literal["code_execution_20260120"]`
 
                   - `"code_execution_20260120"`
+
+          - `class BetaAdvisorToolResultBlock: …`
+
+            - `content: Content`
+
+              - `class BetaAdvisorToolResultError: …`
+
+                - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"prompt_too_long"`
+
+                  - `"too_many_requests"`
+
+                  - `"overloaded"`
+
+                  - `"unavailable"`
+
+                  - `"execution_time_exceeded"`
+
+                - `type: Literal["advisor_tool_result_error"]`
+
+                  - `"advisor_tool_result_error"`
+
+              - `class BetaAdvisorResultBlock: …`
+
+                - `text: str`
+
+                - `type: Literal["advisor_result"]`
+
+                  - `"advisor_result"`
+
+              - `class BetaAdvisorRedactedResultBlock: …`
+
+                - `encrypted_content: str`
+
+                  Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `type: Literal["advisor_redacted_result"]`
+
+                  - `"advisor_redacted_result"`
+
+            - `tool_use_id: str`
+
+            - `type: Literal["advisor_tool_result"]`
+
+              - `"advisor_tool_result"`
 
           - `class BetaCodeExecutionToolResultBlock: …`
 
@@ -39858,6 +43063,139 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 Usage for a compaction iteration
 
                 - `"compaction"`
+
+            - `class BetaAdvisorMessageIterationUsage: …`
+
+              Token usage for an advisor sub-inference iteration.
+
+              - `cache_creation: Optional[BetaCacheCreation]`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: int`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: int`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: int`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: int`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: int`
+
+                The number of input tokens which were used.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+                  - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+                  - `claude-sonnet-4-6` - Best combination of speed and intelligence
+                  - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+                  - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+                  - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+                  - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+                  - `claude-sonnet-4-5` - High-performance model for agents and coding
+                  - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+                  - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+                  - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+                  - `claude-opus-4-0` - Powerful model for complex tasks
+                  - `claude-opus-4-20250514` - Powerful model for complex tasks
+                  - `claude-sonnet-4-0` - High-performance model with extended thinking
+                  - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+                  - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                  - `"claude-mythos-preview"`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `"claude-opus-4-6"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `"claude-sonnet-4-6"`
+
+                    Best combination of speed and intelligence
+
+                  - `"claude-haiku-4-5"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-haiku-4-5-20251001"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-opus-4-5"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `"claude-opus-4-5-20251101"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `"claude-sonnet-4-5"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-sonnet-4-5-20250929"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-opus-4-1"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `"claude-opus-4-1-20250805"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `"claude-opus-4-0"`
+
+                    Powerful model for complex tasks
+
+                  - `"claude-opus-4-20250514"`
+
+                    Powerful model for complex tasks
+
+                  - `"claude-sonnet-4-0"`
+
+                    High-performance model with extended thinking
+
+                  - `"claude-sonnet-4-20250514"`
+
+                    High-performance model with extended thinking
+
+                  - `"claude-3-haiku-20240307"`
+
+                    Fast and cost-effective model
+
+                - `str`
+
+              - `output_tokens: int`
+
+                The number of output tokens which were used.
+
+              - `type: Literal["advisor_message"]`
+
+                Usage for an advisor sub-inference iteration
+
+                - `"advisor_message"`
 
           - `output_tokens: int`
 
@@ -40481,7 +43819,9 @@ for batch in client.beta.messages.batches.results(
 
             - `input: Dict[str, object]`
 
-            - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+            - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+              - `"advisor"`
 
               - `"web_search"`
 
@@ -40724,6 +44064,54 @@ for batch in client.beta.messages.batches.results(
                 - `type: Literal["code_execution_20260120"]`
 
                   - `"code_execution_20260120"`
+
+          - `class BetaAdvisorToolResultBlock: …`
+
+            - `content: Content`
+
+              - `class BetaAdvisorToolResultError: …`
+
+                - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"prompt_too_long"`
+
+                  - `"too_many_requests"`
+
+                  - `"overloaded"`
+
+                  - `"unavailable"`
+
+                  - `"execution_time_exceeded"`
+
+                - `type: Literal["advisor_tool_result_error"]`
+
+                  - `"advisor_tool_result_error"`
+
+              - `class BetaAdvisorResultBlock: …`
+
+                - `text: str`
+
+                - `type: Literal["advisor_result"]`
+
+                  - `"advisor_result"`
+
+              - `class BetaAdvisorRedactedResultBlock: …`
+
+                - `encrypted_content: str`
+
+                  Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `type: Literal["advisor_redacted_result"]`
+
+                  - `"advisor_redacted_result"`
+
+            - `tool_use_id: str`
+
+            - `type: Literal["advisor_tool_result"]`
+
+              - `"advisor_tool_result"`
 
           - `class BetaCodeExecutionToolResultBlock: …`
 
@@ -41459,6 +44847,139 @@ for batch in client.beta.messages.batches.results(
 
                 - `"compaction"`
 
+            - `class BetaAdvisorMessageIterationUsage: …`
+
+              Token usage for an advisor sub-inference iteration.
+
+              - `cache_creation: Optional[BetaCacheCreation]`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: int`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: int`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: int`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: int`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: int`
+
+                The number of input tokens which were used.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+                  - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+                  - `claude-sonnet-4-6` - Best combination of speed and intelligence
+                  - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+                  - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+                  - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+                  - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+                  - `claude-sonnet-4-5` - High-performance model for agents and coding
+                  - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+                  - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+                  - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+                  - `claude-opus-4-0` - Powerful model for complex tasks
+                  - `claude-opus-4-20250514` - Powerful model for complex tasks
+                  - `claude-sonnet-4-0` - High-performance model with extended thinking
+                  - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+                  - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                  - `"claude-mythos-preview"`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `"claude-opus-4-6"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `"claude-sonnet-4-6"`
+
+                    Best combination of speed and intelligence
+
+                  - `"claude-haiku-4-5"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-haiku-4-5-20251001"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-opus-4-5"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `"claude-opus-4-5-20251101"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `"claude-sonnet-4-5"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-sonnet-4-5-20250929"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-opus-4-1"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `"claude-opus-4-1-20250805"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `"claude-opus-4-0"`
+
+                    Powerful model for complex tasks
+
+                  - `"claude-opus-4-20250514"`
+
+                    Powerful model for complex tasks
+
+                  - `"claude-sonnet-4-0"`
+
+                    High-performance model with extended thinking
+
+                  - `"claude-sonnet-4-20250514"`
+
+                    High-performance model with extended thinking
+
+                  - `"claude-3-haiku-20240307"`
+
+                    Fast and cost-effective model
+
+                - `str`
+
+              - `output_tokens: int`
+
+                The number of output tokens which were used.
+
+              - `type: Literal["advisor_message"]`
+
+                Usage for an advisor sub-inference iteration
+
+                - `"advisor_message"`
+
           - `output_tokens: int`
 
             The number of output tokens which were used.
@@ -41874,7 +45395,9 @@ for batch in client.beta.messages.batches.results(
 
           - `input: Dict[str, object]`
 
-          - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+          - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+            - `"advisor"`
 
             - `"web_search"`
 
@@ -42117,6 +45640,54 @@ for batch in client.beta.messages.batches.results(
               - `type: Literal["code_execution_20260120"]`
 
                 - `"code_execution_20260120"`
+
+        - `class BetaAdvisorToolResultBlock: …`
+
+          - `content: Content`
+
+            - `class BetaAdvisorToolResultError: …`
+
+              - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+                - `"max_uses_exceeded"`
+
+                - `"prompt_too_long"`
+
+                - `"too_many_requests"`
+
+                - `"overloaded"`
+
+                - `"unavailable"`
+
+                - `"execution_time_exceeded"`
+
+              - `type: Literal["advisor_tool_result_error"]`
+
+                - `"advisor_tool_result_error"`
+
+            - `class BetaAdvisorResultBlock: …`
+
+              - `text: str`
+
+              - `type: Literal["advisor_result"]`
+
+                - `"advisor_result"`
+
+            - `class BetaAdvisorRedactedResultBlock: …`
+
+              - `encrypted_content: str`
+
+                Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `type: Literal["advisor_redacted_result"]`
+
+                - `"advisor_redacted_result"`
+
+          - `tool_use_id: str`
+
+          - `type: Literal["advisor_tool_result"]`
+
+            - `"advisor_tool_result"`
 
         - `class BetaCodeExecutionToolResultBlock: …`
 
@@ -42852,6 +46423,139 @@ for batch in client.beta.messages.batches.results(
 
               - `"compaction"`
 
+          - `class BetaAdvisorMessageIterationUsage: …`
+
+            Token usage for an advisor sub-inference iteration.
+
+            - `cache_creation: Optional[BetaCacheCreation]`
+
+              Breakdown of cached tokens by TTL
+
+              - `ephemeral_1h_input_tokens: int`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `ephemeral_5m_input_tokens: int`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `cache_creation_input_tokens: int`
+
+              The number of input tokens used to create the cache entry.
+
+            - `cache_read_input_tokens: int`
+
+              The number of input tokens read from the cache.
+
+            - `input_tokens: int`
+
+              The number of input tokens which were used.
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+                - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+                - `claude-sonnet-4-6` - Best combination of speed and intelligence
+                - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+                - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+                - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+                - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+                - `claude-sonnet-4-5` - High-performance model for agents and coding
+                - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+                - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+                - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+                - `claude-opus-4-0` - Powerful model for complex tasks
+                - `claude-opus-4-20250514` - Powerful model for complex tasks
+                - `claude-sonnet-4-0` - High-performance model with extended thinking
+                - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+                - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                - `"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
+
+              - `str`
+
+            - `output_tokens: int`
+
+              The number of output tokens which were used.
+
+            - `type: Literal["advisor_message"]`
+
+              Usage for an advisor sub-inference iteration
+
+              - `"advisor_message"`
+
         - `output_tokens: int`
 
           The number of output tokens which were used.
@@ -43229,7 +46933,9 @@ for batch in client.beta.messages.batches.results(
 
         - `input: Dict[str, object]`
 
-        - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
+        - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+          - `"advisor"`
 
           - `"web_search"`
 
@@ -43472,6 +47178,54 @@ for batch in client.beta.messages.batches.results(
             - `type: Literal["code_execution_20260120"]`
 
               - `"code_execution_20260120"`
+
+      - `class BetaAdvisorToolResultBlock: …`
+
+        - `content: Content`
+
+          - `class BetaAdvisorToolResultError: …`
+
+            - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 3 more]`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: Literal["advisor_tool_result_error"]`
+
+              - `"advisor_tool_result_error"`
+
+          - `class BetaAdvisorResultBlock: …`
+
+            - `text: str`
+
+            - `type: Literal["advisor_result"]`
+
+              - `"advisor_result"`
+
+          - `class BetaAdvisorRedactedResultBlock: …`
+
+            - `encrypted_content: str`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `type: Literal["advisor_redacted_result"]`
+
+              - `"advisor_redacted_result"`
+
+        - `tool_use_id: str`
+
+        - `type: Literal["advisor_tool_result"]`
+
+          - `"advisor_tool_result"`
 
       - `class BetaCodeExecutionToolResultBlock: …`
 
@@ -44206,6 +47960,139 @@ for batch in client.beta.messages.batches.results(
             Usage for a compaction iteration
 
             - `"compaction"`
+
+        - `class BetaAdvisorMessageIterationUsage: …`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `cache_creation: Optional[BetaCacheCreation]`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: int`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `ephemeral_5m_input_tokens: int`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `cache_creation_input_tokens: int`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: int`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: int`
+
+            The number of input tokens which were used.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+              - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+              - `claude-sonnet-4-6` - Best combination of speed and intelligence
+              - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+              - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+              - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
+              - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+              - `claude-sonnet-4-5` - High-performance model for agents and coding
+              - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+              - `claude-opus-4-1` - Exceptional model for specialized complex tasks
+              - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
+              - `claude-opus-4-0` - Powerful model for complex tasks
+              - `claude-opus-4-20250514` - Powerful model for complex tasks
+              - `claude-sonnet-4-0` - High-performance model with extended thinking
+              - `claude-sonnet-4-20250514` - High-performance model with extended thinking
+              - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `str`
+
+          - `output_tokens: int`
+
+            The number of output tokens which were used.
+
+          - `type: Literal["advisor_message"]`
+
+            Usage for an advisor sub-inference iteration
+
+            - `"advisor_message"`
 
       - `output_tokens: int`
 

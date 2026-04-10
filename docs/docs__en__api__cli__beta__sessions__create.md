@@ -18,7 +18,7 @@ Create Session
 
 - `--metadata: optional map[string]`
 
-  Body param: Arbitrary key-value metadata attached to the session.
+  Body param: Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 - `--resource: optional array of BetaManagedAgentsGitHubRepositoryResourceParams or BetaManagedAgentsFileResourceParams`
 

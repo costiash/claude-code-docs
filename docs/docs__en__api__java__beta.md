@@ -2,6 +2,54 @@
 
 ## Domain Types
 
+### Anthropic Beta
+
+- `enum AnthropicBeta:`
+
+  - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+  - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+  - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+  - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+  - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+  - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+  - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+  - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+  - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+  - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+  - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+  - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+  - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+  - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+  - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+  - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+  - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+  - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+  - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+  - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+  - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+  - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
 ### Beta API Error
 
 - `class BetaApiError:`
@@ -328,7 +376,7 @@ The Models API response can be used to determine which models are available for 
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -599,7 +647,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -1348,7 +1396,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `long maxTokens`
 
@@ -2772,6 +2820,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `Name name`
 
+            - `ADVISOR("advisor")`
+
             - `WEB_SEARCH("web_search")`
 
             - `WEB_FETCH("web_fetch")`
@@ -3309,6 +3359,77 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
               - `JsonValue; type "code_execution_20260120"constant`
 
                 - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `class BetaAdvisorToolResultBlockParam:`
+
+          - `Content content`
+
+            - `class BetaAdvisorToolResultErrorParam:`
+
+              - `ErrorCode errorCode`
+
+                - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+                - `PROMPT_TOO_LONG("prompt_too_long")`
+
+                - `TOO_MANY_REQUESTS("too_many_requests")`
+
+                - `OVERLOADED("overloaded")`
+
+                - `UNAVAILABLE("unavailable")`
+
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+              - `JsonValue; type "advisor_tool_result_error"constant`
+
+                - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+            - `class BetaAdvisorResultBlockParam:`
+
+              - `String text`
+
+              - `JsonValue; type "advisor_result"constant`
+
+                - `ADVISOR_RESULT("advisor_result")`
+
+            - `class BetaAdvisorRedactedResultBlockParam:`
+
+              - `String encryptedContent`
+
+                Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+              - `JsonValue; type "advisor_redacted_result"constant`
+
+                - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+          - `String toolUseId`
+
+          - `JsonValue; type "advisor_tool_result"constant`
+
+            - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+            - `JsonValue; type "ephemeral"constant`
+
+              - `EPHEMERAL("ephemeral")`
+
+            - `Optional<Ttl> ttl`
+
+              The time-to-live for the cache control breakpoint.
+
+              This may be one the following values:
+
+              - `5m`: 5 minutes
+              - `1h`: 1 hour
+
+              Defaults to `5m`.
+
+              - `TTL_5M("5m")`
+
+              - `TTL_1H("1h")`
 
         - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -5489,6 +5610,156 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+    - `class BetaAdvisorTool20260301:`
+
+      - `Model model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+          Powerful model for complex tasks
+
+        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+          Powerful model for complex tasks
+
+        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+          High-performance model with extended thinking
+
+        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+          High-performance model with extended thinking
+
+        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+          Fast and cost-effective model
+
+      - `JsonValue; name "advisor"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `ADVISOR("advisor")`
+
+      - `JsonValue; type "advisor_20260301"constant`
+
+        - `ADVISOR_20260301("advisor_20260301")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+        - `JsonValue; type "ephemeral"constant`
+
+          - `EPHEMERAL("ephemeral")`
+
+        - `Optional<Ttl> ttl`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+          - `TTL_5M("5m")`
+
+          - `TTL_1H("1h")`
+
+      - `Optional<BetaCacheControlEphemeral> caching`
+
+        Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+        - `JsonValue; type "ephemeral"constant`
+
+          - `EPHEMERAL("ephemeral")`
+
+        - `Optional<Ttl> ttl`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+          - `TTL_5M("5m")`
+
+          - `TTL_1H("1h")`
+
+      - `Optional<Boolean> deferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Optional<Long> maxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `Optional<Boolean> strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
     - `class BetaToolSearchToolBm25_20251119:`
 
       - `JsonValue; name "tool_search_tool_bm25"constant`
@@ -5668,10 +5939,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
 
     Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-  - `Optional<String> userProfileId`
-
-    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 ### Returns
 
@@ -5911,6 +6178,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `Input input`
 
       - `Name name`
+
+        - `ADVISOR("advisor")`
 
         - `WEB_SEARCH("web_search")`
 
@@ -6153,6 +6422,54 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `JsonValue; type "code_execution_20260120"constant`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+    - `class BetaAdvisorToolResultBlock:`
+
+      - `Content content`
+
+        - `class BetaAdvisorToolResultError:`
+
+          - `ErrorCode errorCode`
+
+            - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+            - `PROMPT_TOO_LONG("prompt_too_long")`
+
+            - `TOO_MANY_REQUESTS("too_many_requests")`
+
+            - `OVERLOADED("overloaded")`
+
+            - `UNAVAILABLE("unavailable")`
+
+            - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+          - `JsonValue; type "advisor_tool_result_error"constant`
+
+            - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+        - `class BetaAdvisorResultBlock:`
+
+          - `String text`
+
+          - `JsonValue; type "advisor_result"constant`
+
+            - `ADVISOR_RESULT("advisor_result")`
+
+        - `class BetaAdvisorRedactedResultBlock:`
+
+          - `String encryptedContent`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `JsonValue; type "advisor_redacted_result"constant`
+
+            - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+      - `String toolUseId`
+
+      - `JsonValue; type "advisor_tool_result"constant`
+
+        - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
 
     - `class BetaCodeExecutionToolResultBlock:`
 
@@ -6596,9 +6913,13 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Most intelligent model for building agents and coding
+      Frontier intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -6859,6 +7180,114 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `COMPACTION("compaction")`
 
+      - `class BetaAdvisorMessageIterationUsage:`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `Optional<BetaCacheCreation> cacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+          - `long ephemeral1hInputTokens`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `long ephemeral5mInputTokens`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `long cacheCreationInputTokens`
+
+          The number of input tokens used to create the cache entry.
+
+        - `long cacheReadInputTokens`
+
+          The number of input tokens read from the cache.
+
+        - `long inputTokens`
+
+          The number of input tokens which were used.
+
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+            Best combination of speed and intelligence
+
+          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+            Exceptional model for specialized complex tasks
+
+          - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+            Exceptional model for specialized complex tasks
+
+          - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+            Powerful model for complex tasks
+
+          - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+            Powerful model for complex tasks
+
+          - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+            High-performance model with extended thinking
+
+          - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+            High-performance model with extended thinking
+
+          - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+            Fast and cost-effective model
+
+        - `long outputTokens`
+
+          The number of output tokens which were used.
+
+        - `JsonValue; type "advisor_message"constant`
+
+          Usage for an advisor sub-inference iteration
+
+          - `ADVISOR_MESSAGE("advisor_message")`
+
     - `long outputTokens`
 
       The number of output tokens which were used.
@@ -6982,7 +7411,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `List<BetaMessageParam> messages`
 
@@ -8398,6 +8827,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `Name name`
 
+            - `ADVISOR("advisor")`
+
             - `WEB_SEARCH("web_search")`
 
             - `WEB_FETCH("web_fetch")`
@@ -8935,6 +9366,77 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `JsonValue; type "code_execution_20260120"constant`
 
                 - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `class BetaAdvisorToolResultBlockParam:`
+
+          - `Content content`
+
+            - `class BetaAdvisorToolResultErrorParam:`
+
+              - `ErrorCode errorCode`
+
+                - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+                - `PROMPT_TOO_LONG("prompt_too_long")`
+
+                - `TOO_MANY_REQUESTS("too_many_requests")`
+
+                - `OVERLOADED("overloaded")`
+
+                - `UNAVAILABLE("unavailable")`
+
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+              - `JsonValue; type "advisor_tool_result_error"constant`
+
+                - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+            - `class BetaAdvisorResultBlockParam:`
+
+              - `String text`
+
+              - `JsonValue; type "advisor_result"constant`
+
+                - `ADVISOR_RESULT("advisor_result")`
+
+            - `class BetaAdvisorRedactedResultBlockParam:`
+
+              - `String encryptedContent`
+
+                Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+              - `JsonValue; type "advisor_redacted_result"constant`
+
+                - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+          - `String toolUseId`
+
+          - `JsonValue; type "advisor_tool_result"constant`
+
+            - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+            - `JsonValue; type "ephemeral"constant`
+
+              - `EPHEMERAL("ephemeral")`
+
+            - `Optional<Ttl> ttl`
+
+              The time-to-live for the cache control breakpoint.
+
+              This may be one the following values:
+
+              - `5m`: 5 minutes
+              - `1h`: 1 hour
+
+              Defaults to `5m`.
+
+              - `TTL_5M("5m")`
+
+              - `TTL_1H("1h")`
 
         - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -11047,6 +11549,156 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+    - `class BetaAdvisorTool20260301:`
+
+      - `Model model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+          Powerful model for complex tasks
+
+        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+          Powerful model for complex tasks
+
+        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+          High-performance model with extended thinking
+
+        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+          High-performance model with extended thinking
+
+        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+          Fast and cost-effective model
+
+      - `JsonValue; name "advisor"constant`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `ADVISOR("advisor")`
+
+      - `JsonValue; type "advisor_20260301"constant`
+
+        - `ADVISOR_20260301("advisor_20260301")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+        - `JsonValue; type "ephemeral"constant`
+
+          - `EPHEMERAL("ephemeral")`
+
+        - `Optional<Ttl> ttl`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+          - `TTL_5M("5m")`
+
+          - `TTL_1H("1h")`
+
+      - `Optional<BetaCacheControlEphemeral> caching`
+
+        Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+        - `JsonValue; type "ephemeral"constant`
+
+          - `EPHEMERAL("ephemeral")`
+
+        - `Optional<Ttl> ttl`
+
+          The time-to-live for the cache control breakpoint.
+
+          This may be one the following values:
+
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
+
+          Defaults to `5m`.
+
+          - `TTL_5M("5m")`
+
+          - `TTL_1H("1h")`
+
+      - `Optional<Boolean> deferLoading`
+
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+      - `Optional<Long> maxUses`
+
+        Maximum number of times the tool can be used in the API request.
+
+      - `Optional<Boolean> strict`
+
+        When true, guarantees schema validation on tool names and inputs
+
     - `class BetaToolSearchToolBm25_20251119:`
 
       - `JsonValue; name "tool_search_tool_bm25"constant`
@@ -11254,6 +11906,479 @@ public final class Main {
 ```
 
 ## Domain Types
+
+### Beta Advisor Message Iteration Usage
+
+- `class BetaAdvisorMessageIterationUsage:`
+
+  Token usage for an advisor sub-inference iteration.
+
+  - `Optional<BetaCacheCreation> cacheCreation`
+
+    Breakdown of cached tokens by TTL
+
+    - `long ephemeral1hInputTokens`
+
+      The number of input tokens used to create the 1 hour cache entry.
+
+    - `long ephemeral5mInputTokens`
+
+      The number of input tokens used to create the 5 minute cache entry.
+
+  - `long cacheCreationInputTokens`
+
+    The number of input tokens used to create the cache entry.
+
+  - `long cacheReadInputTokens`
+
+    The number of input tokens read from the cache.
+
+  - `long inputTokens`
+
+    The number of input tokens which were used.
+
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+      Best combination of speed and intelligence
+
+    - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+      Exceptional model for specialized complex tasks
+
+    - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+      Exceptional model for specialized complex tasks
+
+    - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+      Powerful model for complex tasks
+
+    - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+      Powerful model for complex tasks
+
+    - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+      High-performance model with extended thinking
+
+    - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+      High-performance model with extended thinking
+
+    - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+      Fast and cost-effective model
+
+  - `long outputTokens`
+
+    The number of output tokens which were used.
+
+  - `JsonValue; type "advisor_message"constant`
+
+    Usage for an advisor sub-inference iteration
+
+    - `ADVISOR_MESSAGE("advisor_message")`
+
+### Beta Advisor Redacted Result Block
+
+- `class BetaAdvisorRedactedResultBlock:`
+
+  - `String encryptedContent`
+
+    Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+  - `JsonValue; type "advisor_redacted_result"constant`
+
+    - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+### Beta Advisor Redacted Result Block Param
+
+- `class BetaAdvisorRedactedResultBlockParam:`
+
+  - `String encryptedContent`
+
+    Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+  - `JsonValue; type "advisor_redacted_result"constant`
+
+    - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+### Beta Advisor Result Block
+
+- `class BetaAdvisorResultBlock:`
+
+  - `String text`
+
+  - `JsonValue; type "advisor_result"constant`
+
+    - `ADVISOR_RESULT("advisor_result")`
+
+### Beta Advisor Result Block Param
+
+- `class BetaAdvisorResultBlockParam:`
+
+  - `String text`
+
+  - `JsonValue; type "advisor_result"constant`
+
+    - `ADVISOR_RESULT("advisor_result")`
+
+### Beta Advisor Tool 20260301
+
+- `class BetaAdvisorTool20260301:`
+
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+      Best combination of speed and intelligence
+
+    - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+      Exceptional model for specialized complex tasks
+
+    - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+      Exceptional model for specialized complex tasks
+
+    - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+      Powerful model for complex tasks
+
+    - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+      Powerful model for complex tasks
+
+    - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+      High-performance model with extended thinking
+
+    - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+      High-performance model with extended thinking
+
+    - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+      Fast and cost-effective model
+
+  - `JsonValue; name "advisor"constant`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `ADVISOR("advisor")`
+
+  - `JsonValue; type "advisor_20260301"constant`
+
+    - `ADVISOR_20260301("advisor_20260301")`
+
+  - `Optional<List<AllowedCaller>> allowedCallers`
+
+    - `DIRECT("direct")`
+
+    - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+  - `Optional<BetaCacheControlEphemeral> caching`
+
+    Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+  - `Optional<Boolean> deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `Optional<Long> maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `Optional<Boolean> strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Advisor Tool Result Block
+
+- `class BetaAdvisorToolResultBlock:`
+
+  - `Content content`
+
+    - `class BetaAdvisorToolResultError:`
+
+      - `ErrorCode errorCode`
+
+        - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+        - `PROMPT_TOO_LONG("prompt_too_long")`
+
+        - `TOO_MANY_REQUESTS("too_many_requests")`
+
+        - `OVERLOADED("overloaded")`
+
+        - `UNAVAILABLE("unavailable")`
+
+        - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+      - `JsonValue; type "advisor_tool_result_error"constant`
+
+        - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+    - `class BetaAdvisorResultBlock:`
+
+      - `String text`
+
+      - `JsonValue; type "advisor_result"constant`
+
+        - `ADVISOR_RESULT("advisor_result")`
+
+    - `class BetaAdvisorRedactedResultBlock:`
+
+      - `String encryptedContent`
+
+        Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+      - `JsonValue; type "advisor_redacted_result"constant`
+
+        - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+  - `String toolUseId`
+
+  - `JsonValue; type "advisor_tool_result"constant`
+
+    - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
+
+### Beta Advisor Tool Result Block Param
+
+- `class BetaAdvisorToolResultBlockParam:`
+
+  - `Content content`
+
+    - `class BetaAdvisorToolResultErrorParam:`
+
+      - `ErrorCode errorCode`
+
+        - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+        - `PROMPT_TOO_LONG("prompt_too_long")`
+
+        - `TOO_MANY_REQUESTS("too_many_requests")`
+
+        - `OVERLOADED("overloaded")`
+
+        - `UNAVAILABLE("unavailable")`
+
+        - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+      - `JsonValue; type "advisor_tool_result_error"constant`
+
+        - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+    - `class BetaAdvisorResultBlockParam:`
+
+      - `String text`
+
+      - `JsonValue; type "advisor_result"constant`
+
+        - `ADVISOR_RESULT("advisor_result")`
+
+    - `class BetaAdvisorRedactedResultBlockParam:`
+
+      - `String encryptedContent`
+
+        Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+      - `JsonValue; type "advisor_redacted_result"constant`
+
+        - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+  - `String toolUseId`
+
+  - `JsonValue; type "advisor_tool_result"constant`
+
+    - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
+
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+### Beta Advisor Tool Result Error
+
+- `class BetaAdvisorToolResultError:`
+
+  - `ErrorCode errorCode`
+
+    - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+    - `PROMPT_TOO_LONG("prompt_too_long")`
+
+    - `TOO_MANY_REQUESTS("too_many_requests")`
+
+    - `OVERLOADED("overloaded")`
+
+    - `UNAVAILABLE("unavailable")`
+
+    - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+  - `JsonValue; type "advisor_tool_result_error"constant`
+
+    - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+### Beta Advisor Tool Result Error Param
+
+- `class BetaAdvisorToolResultErrorParam:`
+
+  - `ErrorCode errorCode`
+
+    - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+    - `PROMPT_TOO_LONG("prompt_too_long")`
+
+    - `TOO_MANY_REQUESTS("too_many_requests")`
+
+    - `OVERLOADED("overloaded")`
+
+    - `UNAVAILABLE("unavailable")`
+
+    - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+  - `JsonValue; type "advisor_tool_result_error"constant`
+
+    - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
 
 ### Beta All Thinking Turns
 
@@ -12978,6 +14103,8 @@ public final class Main {
 
     - `Name name`
 
+      - `ADVISOR("advisor")`
+
       - `WEB_SEARCH("web_search")`
 
       - `WEB_FETCH("web_fetch")`
@@ -13219,6 +14346,54 @@ public final class Main {
         - `JsonValue; type "code_execution_20260120"constant`
 
           - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+  - `class BetaAdvisorToolResultBlock:`
+
+    - `Content content`
+
+      - `class BetaAdvisorToolResultError:`
+
+        - `ErrorCode errorCode`
+
+          - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+          - `PROMPT_TOO_LONG("prompt_too_long")`
+
+          - `TOO_MANY_REQUESTS("too_many_requests")`
+
+          - `OVERLOADED("overloaded")`
+
+          - `UNAVAILABLE("unavailable")`
+
+          - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+        - `JsonValue; type "advisor_tool_result_error"constant`
+
+          - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+      - `class BetaAdvisorResultBlock:`
+
+        - `String text`
+
+        - `JsonValue; type "advisor_result"constant`
+
+          - `ADVISOR_RESULT("advisor_result")`
+
+      - `class BetaAdvisorRedactedResultBlock:`
+
+        - `String encryptedContent`
+
+          Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+        - `JsonValue; type "advisor_redacted_result"constant`
+
+          - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+    - `String toolUseId`
+
+    - `JsonValue; type "advisor_tool_result"constant`
+
+      - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
 
   - `class BetaCodeExecutionToolResultBlock:`
 
@@ -14977,6 +16152,8 @@ public final class Main {
 
     - `Name name`
 
+      - `ADVISOR("advisor")`
+
       - `WEB_SEARCH("web_search")`
 
       - `WEB_FETCH("web_fetch")`
@@ -15514,6 +16691,77 @@ public final class Main {
         - `JsonValue; type "code_execution_20260120"constant`
 
           - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+  - `class BetaAdvisorToolResultBlockParam:`
+
+    - `Content content`
+
+      - `class BetaAdvisorToolResultErrorParam:`
+
+        - `ErrorCode errorCode`
+
+          - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+          - `PROMPT_TOO_LONG("prompt_too_long")`
+
+          - `TOO_MANY_REQUESTS("too_many_requests")`
+
+          - `OVERLOADED("overloaded")`
+
+          - `UNAVAILABLE("unavailable")`
+
+          - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+        - `JsonValue; type "advisor_tool_result_error"constant`
+
+          - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+      - `class BetaAdvisorResultBlockParam:`
+
+        - `String text`
+
+        - `JsonValue; type "advisor_result"constant`
+
+          - `ADVISOR_RESULT("advisor_result")`
+
+      - `class BetaAdvisorRedactedResultBlockParam:`
+
+        - `String encryptedContent`
+
+          Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+        - `JsonValue; type "advisor_redacted_result"constant`
+
+          - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+    - `String toolUseId`
+
+    - `JsonValue; type "advisor_tool_result"constant`
+
+      - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
+
+    - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+      - `JsonValue; type "ephemeral"constant`
+
+        - `EPHEMERAL("ephemeral")`
+
+      - `Optional<Ttl> ttl`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `TTL_5M("5m")`
+
+        - `TTL_1H("1h")`
 
   - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -17666,6 +18914,8 @@ public final class Main {
 
       - `Name name`
 
+        - `ADVISOR("advisor")`
+
         - `WEB_SEARCH("web_search")`
 
         - `WEB_FETCH("web_fetch")`
@@ -17907,6 +19157,54 @@ public final class Main {
           - `JsonValue; type "code_execution_20260120"constant`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+    - `class BetaAdvisorToolResultBlock:`
+
+      - `Content content`
+
+        - `class BetaAdvisorToolResultError:`
+
+          - `ErrorCode errorCode`
+
+            - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+            - `PROMPT_TOO_LONG("prompt_too_long")`
+
+            - `TOO_MANY_REQUESTS("too_many_requests")`
+
+            - `OVERLOADED("overloaded")`
+
+            - `UNAVAILABLE("unavailable")`
+
+            - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+          - `JsonValue; type "advisor_tool_result_error"constant`
+
+            - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+        - `class BetaAdvisorResultBlock:`
+
+          - `String text`
+
+          - `JsonValue; type "advisor_result"constant`
+
+            - `ADVISOR_RESULT("advisor_result")`
+
+        - `class BetaAdvisorRedactedResultBlock:`
+
+          - `String encryptedContent`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `JsonValue; type "advisor_redacted_result"constant`
+
+            - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+      - `String toolUseId`
+
+      - `JsonValue; type "advisor_tool_result"constant`
+
+        - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
 
     - `class BetaCodeExecutionToolResultBlock:`
 
@@ -18350,9 +19648,13 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Most intelligent model for building agents and coding
+      Frontier intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -18613,6 +19915,114 @@ public final class Main {
 
           - `COMPACTION("compaction")`
 
+      - `class BetaAdvisorMessageIterationUsage:`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `Optional<BetaCacheCreation> cacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+          - `long ephemeral1hInputTokens`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `long ephemeral5mInputTokens`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `long cacheCreationInputTokens`
+
+          The number of input tokens used to create the cache entry.
+
+        - `long cacheReadInputTokens`
+
+          The number of input tokens read from the cache.
+
+        - `long inputTokens`
+
+          The number of input tokens which were used.
+
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+            Best combination of speed and intelligence
+
+          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+            Exceptional model for specialized complex tasks
+
+          - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+            Exceptional model for specialized complex tasks
+
+          - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+            Powerful model for complex tasks
+
+          - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+            Powerful model for complex tasks
+
+          - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+            High-performance model with extended thinking
+
+          - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+            High-performance model with extended thinking
+
+          - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+            Fast and cost-effective model
+
+        - `long outputTokens`
+
+          The number of output tokens which were used.
+
+        - `JsonValue; type "advisor_message"constant`
+
+          Usage for an advisor sub-inference iteration
+
+          - `ADVISOR_MESSAGE("advisor_message")`
+
     - `long outputTokens`
 
       The number of output tokens which were used.
@@ -18748,6 +20158,114 @@ public final class Main {
         Usage for a compaction iteration
 
         - `COMPACTION("compaction")`
+
+    - `class BetaAdvisorMessageIterationUsage:`
+
+      Token usage for an advisor sub-inference iteration.
+
+      - `Optional<BetaCacheCreation> cacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+        - `long ephemeral1hInputTokens`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+        - `long ephemeral5mInputTokens`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+      - `long cacheCreationInputTokens`
+
+        The number of input tokens used to create the cache entry.
+
+      - `long cacheReadInputTokens`
+
+        The number of input tokens read from the cache.
+
+      - `long inputTokens`
+
+        The number of input tokens which were used.
+
+      - `Model model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+          Powerful model for complex tasks
+
+        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+          Powerful model for complex tasks
+
+        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+          High-performance model with extended thinking
+
+        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+          High-performance model with extended thinking
+
+        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+          Fast and cost-effective model
+
+      - `long outputTokens`
+
+        The number of output tokens which were used.
+
+      - `JsonValue; type "advisor_message"constant`
+
+        Usage for an advisor sub-inference iteration
+
+        - `ADVISOR_MESSAGE("advisor_message")`
 
   - `long outputTokens`
 
@@ -20172,6 +21690,8 @@ public final class Main {
 
         - `Name name`
 
+          - `ADVISOR("advisor")`
+
           - `WEB_SEARCH("web_search")`
 
           - `WEB_FETCH("web_fetch")`
@@ -20709,6 +22229,77 @@ public final class Main {
             - `JsonValue; type "code_execution_20260120"constant`
 
               - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `class BetaAdvisorToolResultBlockParam:`
+
+        - `Content content`
+
+          - `class BetaAdvisorToolResultErrorParam:`
+
+            - `ErrorCode errorCode`
+
+              - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+              - `PROMPT_TOO_LONG("prompt_too_long")`
+
+              - `TOO_MANY_REQUESTS("too_many_requests")`
+
+              - `OVERLOADED("overloaded")`
+
+              - `UNAVAILABLE("unavailable")`
+
+              - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+            - `JsonValue; type "advisor_tool_result_error"constant`
+
+              - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+          - `class BetaAdvisorResultBlockParam:`
+
+            - `String text`
+
+            - `JsonValue; type "advisor_result"constant`
+
+              - `ADVISOR_RESULT("advisor_result")`
+
+          - `class BetaAdvisorRedactedResultBlockParam:`
+
+            - `String encryptedContent`
+
+              Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+            - `JsonValue; type "advisor_redacted_result"constant`
+
+              - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+        - `String toolUseId`
+
+        - `JsonValue; type "advisor_tool_result"constant`
+
+          - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
+
+        - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+          Create a cache control breakpoint at this content block.
+
+          - `JsonValue; type "ephemeral"constant`
+
+            - `EPHEMERAL("ephemeral")`
+
+          - `Optional<Ttl> ttl`
+
+            The time-to-live for the cache control breakpoint.
+
+            This may be one the following values:
+
+            - `5m`: 5 minutes
+            - `1h`: 1 hour
+
+            Defaults to `5m`.
+
+            - `TTL_5M("5m")`
+
+            - `TTL_1H("1h")`
 
       - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -21857,6 +23448,8 @@ public final class Main {
 
       - `Name name`
 
+        - `ADVISOR("advisor")`
+
         - `WEB_SEARCH("web_search")`
 
         - `WEB_FETCH("web_fetch")`
@@ -22098,6 +23691,54 @@ public final class Main {
           - `JsonValue; type "code_execution_20260120"constant`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+    - `class BetaAdvisorToolResultBlock:`
+
+      - `Content content`
+
+        - `class BetaAdvisorToolResultError:`
+
+          - `ErrorCode errorCode`
+
+            - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+            - `PROMPT_TOO_LONG("prompt_too_long")`
+
+            - `TOO_MANY_REQUESTS("too_many_requests")`
+
+            - `OVERLOADED("overloaded")`
+
+            - `UNAVAILABLE("unavailable")`
+
+            - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+          - `JsonValue; type "advisor_tool_result_error"constant`
+
+            - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+        - `class BetaAdvisorResultBlock:`
+
+          - `String text`
+
+          - `JsonValue; type "advisor_result"constant`
+
+            - `ADVISOR_RESULT("advisor_result")`
+
+        - `class BetaAdvisorRedactedResultBlock:`
+
+          - `String encryptedContent`
+
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `JsonValue; type "advisor_redacted_result"constant`
+
+            - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+      - `String toolUseId`
+
+      - `JsonValue; type "advisor_tool_result"constant`
+
+        - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
 
     - `class BetaCodeExecutionToolResultBlock:`
 
@@ -22745,6 +24386,114 @@ public final class Main {
 
           - `COMPACTION("compaction")`
 
+      - `class BetaAdvisorMessageIterationUsage:`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `Optional<BetaCacheCreation> cacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+          - `long ephemeral1hInputTokens`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `long ephemeral5mInputTokens`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `long cacheCreationInputTokens`
+
+          The number of input tokens used to create the cache entry.
+
+        - `long cacheReadInputTokens`
+
+          The number of input tokens read from the cache.
+
+        - `long inputTokens`
+
+          The number of input tokens which were used.
+
+        - `Model model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+            Best combination of speed and intelligence
+
+          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+            Exceptional model for specialized complex tasks
+
+          - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+            Exceptional model for specialized complex tasks
+
+          - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+            Powerful model for complex tasks
+
+          - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+            Powerful model for complex tasks
+
+          - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+            High-performance model with extended thinking
+
+          - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+            High-performance model with extended thinking
+
+          - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+            Fast and cost-effective model
+
+        - `long outputTokens`
+
+          The number of output tokens which were used.
+
+        - `JsonValue; type "advisor_message"constant`
+
+          Usage for an advisor sub-inference iteration
+
+          - `ADVISOR_MESSAGE("advisor_message")`
+
     - `long outputTokens`
 
       The cumulative number of output tokens which were used.
@@ -23002,6 +24751,8 @@ public final class Main {
 
         - `Name name`
 
+          - `ADVISOR("advisor")`
+
           - `WEB_SEARCH("web_search")`
 
           - `WEB_FETCH("web_fetch")`
@@ -23243,6 +24994,54 @@ public final class Main {
             - `JsonValue; type "code_execution_20260120"constant`
 
               - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `class BetaAdvisorToolResultBlock:`
+
+        - `Content content`
+
+          - `class BetaAdvisorToolResultError:`
+
+            - `ErrorCode errorCode`
+
+              - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+              - `PROMPT_TOO_LONG("prompt_too_long")`
+
+              - `TOO_MANY_REQUESTS("too_many_requests")`
+
+              - `OVERLOADED("overloaded")`
+
+              - `UNAVAILABLE("unavailable")`
+
+              - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+            - `JsonValue; type "advisor_tool_result_error"constant`
+
+              - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+          - `class BetaAdvisorResultBlock:`
+
+            - `String text`
+
+            - `JsonValue; type "advisor_result"constant`
+
+              - `ADVISOR_RESULT("advisor_result")`
+
+          - `class BetaAdvisorRedactedResultBlock:`
+
+            - `String encryptedContent`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `JsonValue; type "advisor_redacted_result"constant`
+
+              - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+        - `String toolUseId`
+
+        - `JsonValue; type "advisor_tool_result"constant`
+
+          - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
 
       - `class BetaCodeExecutionToolResultBlock:`
 
@@ -23686,9 +25485,13 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Frontier intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -23948,6 +25751,114 @@ public final class Main {
             Usage for a compaction iteration
 
             - `COMPACTION("compaction")`
+
+        - `class BetaAdvisorMessageIterationUsage:`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `Optional<BetaCacheCreation> cacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+            - `long ephemeral1hInputTokens`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `long ephemeral5mInputTokens`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `long cacheCreationInputTokens`
+
+            The number of input tokens used to create the cache entry.
+
+          - `long cacheReadInputTokens`
+
+            The number of input tokens read from the cache.
+
+          - `long inputTokens`
+
+            The number of input tokens which were used.
+
+          - `Model model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+              Exceptional model for specialized complex tasks
+
+            - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+              Exceptional model for specialized complex tasks
+
+            - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+              Powerful model for complex tasks
+
+            - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+              Powerful model for complex tasks
+
+            - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+              High-performance model with extended thinking
+
+            - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+              High-performance model with extended thinking
+
+            - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+              Fast and cost-effective model
+
+          - `long outputTokens`
+
+            The number of output tokens which were used.
+
+          - `JsonValue; type "advisor_message"constant`
+
+            Usage for an advisor sub-inference iteration
+
+            - `ADVISOR_MESSAGE("advisor_message")`
 
       - `long outputTokens`
 
@@ -24238,6 +26149,8 @@ public final class Main {
 
           - `Name name`
 
+            - `ADVISOR("advisor")`
+
             - `WEB_SEARCH("web_search")`
 
             - `WEB_FETCH("web_fetch")`
@@ -24479,6 +26392,54 @@ public final class Main {
               - `JsonValue; type "code_execution_20260120"constant`
 
                 - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `class BetaAdvisorToolResultBlock:`
+
+          - `Content content`
+
+            - `class BetaAdvisorToolResultError:`
+
+              - `ErrorCode errorCode`
+
+                - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+                - `PROMPT_TOO_LONG("prompt_too_long")`
+
+                - `TOO_MANY_REQUESTS("too_many_requests")`
+
+                - `OVERLOADED("overloaded")`
+
+                - `UNAVAILABLE("unavailable")`
+
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+              - `JsonValue; type "advisor_tool_result_error"constant`
+
+                - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+            - `class BetaAdvisorResultBlock:`
+
+              - `String text`
+
+              - `JsonValue; type "advisor_result"constant`
+
+                - `ADVISOR_RESULT("advisor_result")`
+
+            - `class BetaAdvisorRedactedResultBlock:`
+
+              - `String encryptedContent`
+
+                Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `JsonValue; type "advisor_redacted_result"constant`
+
+                - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+          - `String toolUseId`
+
+          - `JsonValue; type "advisor_tool_result"constant`
+
+            - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
 
         - `class BetaCodeExecutionToolResultBlock:`
 
@@ -24922,9 +26883,13 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Frontier intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -25184,6 +27149,114 @@ public final class Main {
               Usage for a compaction iteration
 
               - `COMPACTION("compaction")`
+
+          - `class BetaAdvisorMessageIterationUsage:`
+
+            Token usage for an advisor sub-inference iteration.
+
+            - `Optional<BetaCacheCreation> cacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+              - `long ephemeral1hInputTokens`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `long ephemeral5mInputTokens`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `long cacheCreationInputTokens`
+
+              The number of input tokens used to create the cache entry.
+
+            - `long cacheReadInputTokens`
+
+              The number of input tokens read from the cache.
+
+            - `long inputTokens`
+
+              The number of input tokens which were used.
+
+            - `Model model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+                Best combination of speed and intelligence
+
+              - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+                Exceptional model for specialized complex tasks
+
+              - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+                Exceptional model for specialized complex tasks
+
+              - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+                Powerful model for complex tasks
+
+              - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+                Powerful model for complex tasks
+
+              - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+                High-performance model with extended thinking
+
+              - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+                High-performance model with extended thinking
+
+              - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+                Fast and cost-effective model
+
+            - `long outputTokens`
+
+              The number of output tokens which were used.
+
+            - `JsonValue; type "advisor_message"constant`
+
+              Usage for an advisor sub-inference iteration
+
+              - `ADVISOR_MESSAGE("advisor_message")`
 
         - `long outputTokens`
 
@@ -25457,6 +27530,114 @@ public final class Main {
 
             - `COMPACTION("compaction")`
 
+        - `class BetaAdvisorMessageIterationUsage:`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `Optional<BetaCacheCreation> cacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+            - `long ephemeral1hInputTokens`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `long ephemeral5mInputTokens`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `long cacheCreationInputTokens`
+
+            The number of input tokens used to create the cache entry.
+
+          - `long cacheReadInputTokens`
+
+            The number of input tokens read from the cache.
+
+          - `long inputTokens`
+
+            The number of input tokens which were used.
+
+          - `Model model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+              Exceptional model for specialized complex tasks
+
+            - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+              Exceptional model for specialized complex tasks
+
+            - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+              Powerful model for complex tasks
+
+            - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+              Powerful model for complex tasks
+
+            - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+              High-performance model with extended thinking
+
+            - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+              High-performance model with extended thinking
+
+            - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+              Fast and cost-effective model
+
+          - `long outputTokens`
+
+            The number of output tokens which were used.
+
+          - `JsonValue; type "advisor_message"constant`
+
+            Usage for an advisor sub-inference iteration
+
+            - `ADVISOR_MESSAGE("advisor_message")`
+
       - `long outputTokens`
 
         The cumulative number of output tokens which were used.
@@ -25652,6 +27833,8 @@ public final class Main {
         - `Input input`
 
         - `Name name`
+
+          - `ADVISOR("advisor")`
 
           - `WEB_SEARCH("web_search")`
 
@@ -25894,6 +28077,54 @@ public final class Main {
             - `JsonValue; type "code_execution_20260120"constant`
 
               - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `class BetaAdvisorToolResultBlock:`
+
+        - `Content content`
+
+          - `class BetaAdvisorToolResultError:`
+
+            - `ErrorCode errorCode`
+
+              - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+              - `PROMPT_TOO_LONG("prompt_too_long")`
+
+              - `TOO_MANY_REQUESTS("too_many_requests")`
+
+              - `OVERLOADED("overloaded")`
+
+              - `UNAVAILABLE("unavailable")`
+
+              - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+            - `JsonValue; type "advisor_tool_result_error"constant`
+
+              - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+          - `class BetaAdvisorResultBlock:`
+
+            - `String text`
+
+            - `JsonValue; type "advisor_result"constant`
+
+              - `ADVISOR_RESULT("advisor_result")`
+
+          - `class BetaAdvisorRedactedResultBlock:`
+
+            - `String encryptedContent`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `JsonValue; type "advisor_redacted_result"constant`
+
+              - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+        - `String toolUseId`
+
+        - `JsonValue; type "advisor_tool_result"constant`
+
+          - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
 
       - `class BetaCodeExecutionToolResultBlock:`
 
@@ -27140,6 +29371,8 @@ public final class Main {
 
   - `Name name`
 
+    - `ADVISOR("advisor")`
+
     - `WEB_SEARCH("web_search")`
 
     - `WEB_FETCH("web_fetch")`
@@ -27197,6 +29430,8 @@ public final class Main {
   - `Input input`
 
   - `Name name`
+
+    - `ADVISOR("advisor")`
 
     - `WEB_SEARCH("web_search")`
 
@@ -31275,6 +33510,156 @@ public final class Main {
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+  - `class BetaAdvisorTool20260301:`
+
+    - `Model model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+        Exceptional model for specialized complex tasks
+
+      - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+        Exceptional model for specialized complex tasks
+
+      - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+        Powerful model for complex tasks
+
+      - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+        Powerful model for complex tasks
+
+      - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+        High-performance model with extended thinking
+
+      - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+        High-performance model with extended thinking
+
+      - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+        Fast and cost-effective model
+
+    - `JsonValue; name "advisor"constant`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+      - `ADVISOR("advisor")`
+
+    - `JsonValue; type "advisor_20260301"constant`
+
+      - `ADVISOR_20260301("advisor_20260301")`
+
+    - `Optional<List<AllowedCaller>> allowedCallers`
+
+      - `DIRECT("direct")`
+
+      - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+    - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+      - `JsonValue; type "ephemeral"constant`
+
+        - `EPHEMERAL("ephemeral")`
+
+      - `Optional<Ttl> ttl`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `TTL_5M("5m")`
+
+        - `TTL_1H("1h")`
+
+    - `Optional<BetaCacheControlEphemeral> caching`
+
+      Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+      - `JsonValue; type "ephemeral"constant`
+
+        - `EPHEMERAL("ephemeral")`
+
+      - `Optional<Ttl> ttl`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `TTL_5M("5m")`
+
+        - `TTL_1H("1h")`
+
+    - `Optional<Boolean> deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `Optional<Long> maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `Optional<Boolean> strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
   - `class BetaToolSearchToolBm25_20251119:`
 
     - `JsonValue; name "tool_search_tool_bm25"constant`
@@ -31707,6 +34092,114 @@ public final class Main {
         Usage for a compaction iteration
 
         - `COMPACTION("compaction")`
+
+    - `class BetaAdvisorMessageIterationUsage:`
+
+      Token usage for an advisor sub-inference iteration.
+
+      - `Optional<BetaCacheCreation> cacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+        - `long ephemeral1hInputTokens`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+        - `long ephemeral5mInputTokens`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+      - `long cacheCreationInputTokens`
+
+        The number of input tokens used to create the cache entry.
+
+      - `long cacheReadInputTokens`
+
+        The number of input tokens read from the cache.
+
+      - `long inputTokens`
+
+        The number of input tokens which were used.
+
+      - `Model model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+          Exceptional model for specialized complex tasks
+
+        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+          Powerful model for complex tasks
+
+        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+          Powerful model for complex tasks
+
+        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+          High-performance model with extended thinking
+
+        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+          High-performance model with extended thinking
+
+        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+          Fast and cost-effective model
+
+      - `long outputTokens`
+
+        The number of output tokens which were used.
+
+      - `JsonValue; type "advisor_message"constant`
+
+        Usage for an advisor sub-inference iteration
+
+        - `ADVISOR_MESSAGE("advisor_message")`
 
   - `long outputTokens`
 
@@ -33501,7 +35994,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `List<Request> requests`
 
@@ -34941,6 +37434,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `Name name`
 
+                - `ADVISOR("advisor")`
+
                 - `WEB_SEARCH("web_search")`
 
                 - `WEB_FETCH("web_fetch")`
@@ -35478,6 +37973,77 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `JsonValue; type "code_execution_20260120"constant`
 
                     - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `class BetaAdvisorToolResultBlockParam:`
+
+              - `Content content`
+
+                - `class BetaAdvisorToolResultErrorParam:`
+
+                  - `ErrorCode errorCode`
+
+                    - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+                    - `PROMPT_TOO_LONG("prompt_too_long")`
+
+                    - `TOO_MANY_REQUESTS("too_many_requests")`
+
+                    - `OVERLOADED("overloaded")`
+
+                    - `UNAVAILABLE("unavailable")`
+
+                    - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+                  - `JsonValue; type "advisor_tool_result_error"constant`
+
+                    - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+                - `class BetaAdvisorResultBlockParam:`
+
+                  - `String text`
+
+                  - `JsonValue; type "advisor_result"constant`
+
+                    - `ADVISOR_RESULT("advisor_result")`
+
+                - `class BetaAdvisorRedactedResultBlockParam:`
+
+                  - `String encryptedContent`
+
+                    Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+                  - `JsonValue; type "advisor_redacted_result"constant`
+
+                    - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+              - `String toolUseId`
+
+              - `JsonValue; type "advisor_tool_result"constant`
+
+                - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
+
+              - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                Create a cache control breakpoint at this content block.
+
+                - `JsonValue; type "ephemeral"constant`
+
+                  - `EPHEMERAL("ephemeral")`
+
+                - `Optional<Ttl> ttl`
+
+                  The time-to-live for the cache control breakpoint.
+
+                  This may be one the following values:
+
+                  - `5m`: 5 minutes
+                  - `1h`: 1 hour
+
+                  Defaults to `5m`.
+
+                  - `TTL_5M("5m")`
+
+                  - `TTL_1H("1h")`
 
             - `class BetaCodeExecutionToolResultBlockParam:`
 
@@ -36104,9 +38670,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Frontier intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -37993,6 +40563,156 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+        - `class BetaAdvisorTool20260301:`
+
+          - `Model model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+              Exceptional model for specialized complex tasks
+
+            - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+              Exceptional model for specialized complex tasks
+
+            - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+              Powerful model for complex tasks
+
+            - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+              Powerful model for complex tasks
+
+            - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+              High-performance model with extended thinking
+
+            - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+              High-performance model with extended thinking
+
+            - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+              Fast and cost-effective model
+
+          - `JsonValue; name "advisor"constant`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+            - `ADVISOR("advisor")`
+
+          - `JsonValue; type "advisor_20260301"constant`
+
+            - `ADVISOR_20260301("advisor_20260301")`
+
+          - `Optional<List<AllowedCaller>> allowedCallers`
+
+            - `DIRECT("direct")`
+
+            - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+            - `JsonValue; type "ephemeral"constant`
+
+              - `EPHEMERAL("ephemeral")`
+
+            - `Optional<Ttl> ttl`
+
+              The time-to-live for the cache control breakpoint.
+
+              This may be one the following values:
+
+              - `5m`: 5 minutes
+              - `1h`: 1 hour
+
+              Defaults to `5m`.
+
+              - `TTL_5M("5m")`
+
+              - `TTL_1H("1h")`
+
+          - `Optional<BetaCacheControlEphemeral> caching`
+
+            Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+            - `JsonValue; type "ephemeral"constant`
+
+              - `EPHEMERAL("ephemeral")`
+
+            - `Optional<Ttl> ttl`
+
+              The time-to-live for the cache control breakpoint.
+
+              This may be one the following values:
+
+              - `5m`: 5 minutes
+              - `1h`: 1 hour
+
+              Defaults to `5m`.
+
+              - `TTL_5M("5m")`
+
+              - `TTL_1H("1h")`
+
+          - `Optional<Boolean> deferLoading`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Optional<Long> maxUses`
+
+            Maximum number of times the tool can be used in the API request.
+
+          - `Optional<Boolean> strict`
+
+            When true, guarantees schema validation on tool names and inputs
+
         - `class BetaToolSearchToolBm25_20251119:`
 
           - `JsonValue; name "tool_search_tool_bm25"constant`
@@ -38172,10 +40892,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
 
         Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-      - `Optional<String> userProfileId`
-
-        The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 ### Returns
 
@@ -38363,7 +41079,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -38550,7 +41266,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -38729,7 +41445,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -38908,7 +41624,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -39013,7 +41729,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -39272,6 +41988,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `Name name`
 
+              - `ADVISOR("advisor")`
+
               - `WEB_SEARCH("web_search")`
 
               - `WEB_FETCH("web_fetch")`
@@ -39513,6 +42231,54 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `JsonValue; type "code_execution_20260120"constant`
 
                   - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+          - `class BetaAdvisorToolResultBlock:`
+
+            - `Content content`
+
+              - `class BetaAdvisorToolResultError:`
+
+                - `ErrorCode errorCode`
+
+                  - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+                  - `PROMPT_TOO_LONG("prompt_too_long")`
+
+                  - `TOO_MANY_REQUESTS("too_many_requests")`
+
+                  - `OVERLOADED("overloaded")`
+
+                  - `UNAVAILABLE("unavailable")`
+
+                  - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+                - `JsonValue; type "advisor_tool_result_error"constant`
+
+                  - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+              - `class BetaAdvisorResultBlock:`
+
+                - `String text`
+
+                - `JsonValue; type "advisor_result"constant`
+
+                  - `ADVISOR_RESULT("advisor_result")`
+
+              - `class BetaAdvisorRedactedResultBlock:`
+
+                - `String encryptedContent`
+
+                  Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `JsonValue; type "advisor_redacted_result"constant`
+
+                  - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+            - `String toolUseId`
+
+            - `JsonValue; type "advisor_tool_result"constant`
+
+              - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
 
           - `class BetaCodeExecutionToolResultBlock:`
 
@@ -39956,9 +42722,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Most intelligent model for building agents and coding
+            Frontier intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -40218,6 +42988,114 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 Usage for a compaction iteration
 
                 - `COMPACTION("compaction")`
+
+            - `class BetaAdvisorMessageIterationUsage:`
+
+              Token usage for an advisor sub-inference iteration.
+
+              - `Optional<BetaCacheCreation> cacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+                - `long ephemeral1hInputTokens`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `long ephemeral5mInputTokens`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `long cacheCreationInputTokens`
+
+                The number of input tokens used to create the cache entry.
+
+              - `long cacheReadInputTokens`
+
+                The number of input tokens read from the cache.
+
+              - `long inputTokens`
+
+                The number of input tokens which were used.
+
+              - `Model model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+                  Best combination of speed and intelligence
+
+                - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+                  Fastest model with near-frontier intelligence
+
+                - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+                  Fastest model with near-frontier intelligence
+
+                - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+                  High-performance model for agents and coding
+
+                - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+                  High-performance model for agents and coding
+
+                - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+                  Exceptional model for specialized complex tasks
+
+                - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+                  Exceptional model for specialized complex tasks
+
+                - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+                  Powerful model for complex tasks
+
+                - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+                  Powerful model for complex tasks
+
+                - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+                  High-performance model with extended thinking
+
+                - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+                  High-performance model with extended thinking
+
+                - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+                  Fast and cost-effective model
+
+              - `long outputTokens`
+
+                The number of output tokens which were used.
+
+              - `JsonValue; type "advisor_message"constant`
+
+                Usage for an advisor sub-inference iteration
+
+                - `ADVISOR_MESSAGE("advisor_message")`
 
           - `long outputTokens`
 
@@ -40850,6 +43728,8 @@ public final class Main {
 
             - `Name name`
 
+              - `ADVISOR("advisor")`
+
               - `WEB_SEARCH("web_search")`
 
               - `WEB_FETCH("web_fetch")`
@@ -41091,6 +43971,54 @@ public final class Main {
                 - `JsonValue; type "code_execution_20260120"constant`
 
                   - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+          - `class BetaAdvisorToolResultBlock:`
+
+            - `Content content`
+
+              - `class BetaAdvisorToolResultError:`
+
+                - `ErrorCode errorCode`
+
+                  - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+                  - `PROMPT_TOO_LONG("prompt_too_long")`
+
+                  - `TOO_MANY_REQUESTS("too_many_requests")`
+
+                  - `OVERLOADED("overloaded")`
+
+                  - `UNAVAILABLE("unavailable")`
+
+                  - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+                - `JsonValue; type "advisor_tool_result_error"constant`
+
+                  - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+              - `class BetaAdvisorResultBlock:`
+
+                - `String text`
+
+                - `JsonValue; type "advisor_result"constant`
+
+                  - `ADVISOR_RESULT("advisor_result")`
+
+              - `class BetaAdvisorRedactedResultBlock:`
+
+                - `String encryptedContent`
+
+                  Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `JsonValue; type "advisor_redacted_result"constant`
+
+                  - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+            - `String toolUseId`
+
+            - `JsonValue; type "advisor_tool_result"constant`
+
+              - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
 
           - `class BetaCodeExecutionToolResultBlock:`
 
@@ -41534,9 +44462,13 @@ public final class Main {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Most intelligent model for building agents and coding
+            Frontier intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -41796,6 +44728,114 @@ public final class Main {
                 Usage for a compaction iteration
 
                 - `COMPACTION("compaction")`
+
+            - `class BetaAdvisorMessageIterationUsage:`
+
+              Token usage for an advisor sub-inference iteration.
+
+              - `Optional<BetaCacheCreation> cacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+                - `long ephemeral1hInputTokens`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `long ephemeral5mInputTokens`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `long cacheCreationInputTokens`
+
+                The number of input tokens used to create the cache entry.
+
+              - `long cacheReadInputTokens`
+
+                The number of input tokens read from the cache.
+
+              - `long inputTokens`
+
+                The number of input tokens which were used.
+
+              - `Model model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+                  Best combination of speed and intelligence
+
+                - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+                  Fastest model with near-frontier intelligence
+
+                - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+                  Fastest model with near-frontier intelligence
+
+                - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+                  High-performance model for agents and coding
+
+                - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+                  High-performance model for agents and coding
+
+                - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+                  Exceptional model for specialized complex tasks
+
+                - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+                  Exceptional model for specialized complex tasks
+
+                - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+                  Powerful model for complex tasks
+
+                - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+                  Powerful model for complex tasks
+
+                - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+                  High-performance model with extended thinking
+
+                - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+                  High-performance model with extended thinking
+
+                - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+                  Fast and cost-effective model
+
+              - `long outputTokens`
+
+                The number of output tokens which were used.
+
+              - `JsonValue; type "advisor_message"constant`
+
+                Usage for an advisor sub-inference iteration
+
+                - `ADVISOR_MESSAGE("advisor_message")`
 
           - `long outputTokens`
 
@@ -42214,6 +45254,8 @@ public final class Main {
 
           - `Name name`
 
+            - `ADVISOR("advisor")`
+
             - `WEB_SEARCH("web_search")`
 
             - `WEB_FETCH("web_fetch")`
@@ -42455,6 +45497,54 @@ public final class Main {
               - `JsonValue; type "code_execution_20260120"constant`
 
                 - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `class BetaAdvisorToolResultBlock:`
+
+          - `Content content`
+
+            - `class BetaAdvisorToolResultError:`
+
+              - `ErrorCode errorCode`
+
+                - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+                - `PROMPT_TOO_LONG("prompt_too_long")`
+
+                - `TOO_MANY_REQUESTS("too_many_requests")`
+
+                - `OVERLOADED("overloaded")`
+
+                - `UNAVAILABLE("unavailable")`
+
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+              - `JsonValue; type "advisor_tool_result_error"constant`
+
+                - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+            - `class BetaAdvisorResultBlock:`
+
+              - `String text`
+
+              - `JsonValue; type "advisor_result"constant`
+
+                - `ADVISOR_RESULT("advisor_result")`
+
+            - `class BetaAdvisorRedactedResultBlock:`
+
+              - `String encryptedContent`
+
+                Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `JsonValue; type "advisor_redacted_result"constant`
+
+                - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+          - `String toolUseId`
+
+          - `JsonValue; type "advisor_tool_result"constant`
+
+            - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
 
         - `class BetaCodeExecutionToolResultBlock:`
 
@@ -42898,9 +45988,13 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Frontier intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -43160,6 +46254,114 @@ public final class Main {
               Usage for a compaction iteration
 
               - `COMPACTION("compaction")`
+
+          - `class BetaAdvisorMessageIterationUsage:`
+
+            Token usage for an advisor sub-inference iteration.
+
+            - `Optional<BetaCacheCreation> cacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+              - `long ephemeral1hInputTokens`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `long ephemeral5mInputTokens`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `long cacheCreationInputTokens`
+
+              The number of input tokens used to create the cache entry.
+
+            - `long cacheReadInputTokens`
+
+              The number of input tokens read from the cache.
+
+            - `long inputTokens`
+
+              The number of input tokens which were used.
+
+            - `Model model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+                Best combination of speed and intelligence
+
+              - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+                Fastest model with near-frontier intelligence
+
+              - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+                High-performance model for agents and coding
+
+              - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+                Exceptional model for specialized complex tasks
+
+              - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+                Exceptional model for specialized complex tasks
+
+              - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+                Powerful model for complex tasks
+
+              - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+                Powerful model for complex tasks
+
+              - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+                High-performance model with extended thinking
+
+              - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+                High-performance model with extended thinking
+
+              - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+                Fast and cost-effective model
+
+            - `long outputTokens`
+
+              The number of output tokens which were used.
+
+            - `JsonValue; type "advisor_message"constant`
+
+              Usage for an advisor sub-inference iteration
+
+              - `ADVISOR_MESSAGE("advisor_message")`
 
         - `long outputTokens`
 
@@ -43540,6 +46742,8 @@ public final class Main {
 
         - `Name name`
 
+          - `ADVISOR("advisor")`
+
           - `WEB_SEARCH("web_search")`
 
           - `WEB_FETCH("web_fetch")`
@@ -43781,6 +46985,54 @@ public final class Main {
             - `JsonValue; type "code_execution_20260120"constant`
 
               - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `class BetaAdvisorToolResultBlock:`
+
+        - `Content content`
+
+          - `class BetaAdvisorToolResultError:`
+
+            - `ErrorCode errorCode`
+
+              - `MAX_USES_EXCEEDED("max_uses_exceeded")`
+
+              - `PROMPT_TOO_LONG("prompt_too_long")`
+
+              - `TOO_MANY_REQUESTS("too_many_requests")`
+
+              - `OVERLOADED("overloaded")`
+
+              - `UNAVAILABLE("unavailable")`
+
+              - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
+
+            - `JsonValue; type "advisor_tool_result_error"constant`
+
+              - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+
+          - `class BetaAdvisorResultBlock:`
+
+            - `String text`
+
+            - `JsonValue; type "advisor_result"constant`
+
+              - `ADVISOR_RESULT("advisor_result")`
+
+          - `class BetaAdvisorRedactedResultBlock:`
+
+            - `String encryptedContent`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `JsonValue; type "advisor_redacted_result"constant`
+
+              - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+
+        - `String toolUseId`
+
+        - `JsonValue; type "advisor_tool_result"constant`
+
+          - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
 
       - `class BetaCodeExecutionToolResultBlock:`
 
@@ -44224,9 +47476,13 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Frontier intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -44487,6 +47743,114 @@ public final class Main {
 
             - `COMPACTION("compaction")`
 
+        - `class BetaAdvisorMessageIterationUsage:`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `Optional<BetaCacheCreation> cacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+            - `long ephemeral1hInputTokens`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `long ephemeral5mInputTokens`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `long cacheCreationInputTokens`
+
+            The number of input tokens used to create the cache entry.
+
+          - `long cacheReadInputTokens`
+
+            The number of input tokens read from the cache.
+
+          - `long inputTokens`
+
+            The number of input tokens which were used.
+
+          - `Model model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+              Exceptional model for specialized complex tasks
+
+            - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+              Exceptional model for specialized complex tasks
+
+            - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
+
+              Powerful model for complex tasks
+
+            - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
+
+              Powerful model for complex tasks
+
+            - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
+
+              High-performance model with extended thinking
+
+            - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
+
+              High-performance model with extended thinking
+
+            - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
+
+              Fast and cost-effective model
+
+          - `long outputTokens`
+
+            The number of output tokens which were used.
+
+          - `JsonValue; type "advisor_message"constant`
+
+            Usage for an advisor sub-inference iteration
+
+            - `ADVISOR_MESSAGE("advisor_message")`
+
       - `long outputTokens`
 
         The number of output tokens which were used.
@@ -44524,6 +47888,22757 @@ public final class Main {
   - `JsonValue; type "succeeded"constant`
 
     - `SUCCEEDED("succeeded")`
+
+# Agents
+
+## Create
+
+`BetaManagedAgentsAgent beta().agents().create(AgentCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/agents`
+
+Create Agent
+
+### Parameters
+
+- `AgentCreateParams params`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `Model model`
+
+    Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
+
+    - `enum BetaManagedAgentsModel:`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `class BetaManagedAgentsModelConfigParams:`
+
+      An object that defines additional configuration control over model use
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+  - `String name`
+
+    Human-readable name for the agent. 1-256 characters.
+
+  - `Optional<String> description`
+
+    Description of what the agent does. Up to 2048 characters.
+
+  - `Optional<List<BetaManagedAgentsUrlMcpServerParams>> mcpServers`
+
+    MCP servers this agent connects to. Maximum 20. Names must be unique within the array.
+
+    - `String name`
+
+      Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+      Endpoint URL for the MCP server.
+
+  - `Optional<Metadata> metadata`
+
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Optional<List<BetaManagedAgentsSkillParams>> skills`
+
+    Skills available to the agent. Maximum 20.
+
+    - `class BetaManagedAgentsAnthropicSkillParams:`
+
+      An Anthropic-managed skill.
+
+      - `String skillId`
+
+        Identifier of the Anthropic skill (e.g., "xlsx").
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `Optional<String> version`
+
+        Version to pin. Defaults to latest if omitted.
+
+    - `class BetaManagedAgentsCustomSkillParams:`
+
+      A user-created custom skill.
+
+      - `String skillId`
+
+        Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `Optional<String> version`
+
+        Version to pin. Defaults to latest if omitted.
+
+  - `Optional<String> system`
+
+    System prompt for the agent. Up to 100,000 characters.
+
+  - `Optional<List<Tool>> tools`
+
+    Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
+
+    - `class BetaManagedAgentsAgentToolset20260401Params:`
+
+      Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `Optional<List<BetaManagedAgentsAgentToolConfigParams>> configs`
+
+        Per-tool configuration overrides.
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `Optional<Boolean> enabled`
+
+          Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Optional<BetaManagedAgentsAgentToolsetDefaultConfigParams> defaultConfig`
+
+        Default configuration for all tools in a toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+    - `class BetaManagedAgentsMcpToolsetParams:`
+
+      Configuration for tools from an MCP server defined in `mcp_servers`.
+
+      - `String mcpServerName`
+
+        Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+      - `Optional<List<BetaManagedAgentsMcpToolConfigParams>> configs`
+
+        Per-tool configuration overrides.
+
+        - `String name`
+
+          Name of the MCP tool to configure. 1-128 characters.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this tool is enabled. Overrides the `default_config` setting.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Optional<BetaManagedAgentsMcpToolsetDefaultConfigParams> defaultConfig`
+
+        Default configuration for all tools from an MCP server.
+
+        - `Optional<Boolean> enabled`
+
+          Whether tools are enabled by default. Defaults to true if not specified.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+    - `class BetaManagedAgentsCustomToolParams:`
+
+      A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+      - `String description`
+
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+        Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+### Returns
+
+- `class BetaManagedAgentsAgent:`
+
+  A Managed Agents `agent`.
+
+  - `String id`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+    - `String name`
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+  - `Metadata metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+    - `BetaManagedAgentsModel id`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+  - `String name`
+
+  - `List<Skill> skills`
+
+    - `class BetaManagedAgentsAnthropicSkill:`
+
+      A resolved Anthropic-managed skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `String version`
+
+    - `class BetaManagedAgentsCustomSkill:`
+
+      A resolved user-created custom skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `String version`
+
+  - `Optional<String> system`
+
+  - `List<Tool> tools`
+
+    - `class BetaManagedAgentsAgentToolset20260401:`
+
+      - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+    - `class BetaManagedAgentsMcpToolset:`
+
+      - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `String name`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `String mcpServerName`
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+    - `class BetaManagedAgentsCustomTool:`
+
+      A custom tool as returned in API responses.
+
+      - `String description`
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `long version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.agents.AgentCreateParams;
+import com.anthropic.models.beta.agents.BetaManagedAgentsAgent;
+import com.anthropic.models.beta.agents.BetaManagedAgentsModel;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        AgentCreateParams params = AgentCreateParams.builder()
+            .model(BetaManagedAgentsModel.CLAUDE_SONNET_4_6)
+            .name("My First Agent")
+            .build();
+        BetaManagedAgentsAgent betaManagedAgentsAgent = client.beta().agents().create(params);
+    }
+}
+```
+
+## List
+
+`AgentListPage beta().agents().list(AgentListParamsparams = AgentListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/agents`
+
+List Agents
+
+### Parameters
+
+- `AgentListParams params`
+
+  - `Optional<LocalDateTime> createdAtGte`
+
+    Return agents created at or after this time (inclusive).
+
+  - `Optional<LocalDateTime> createdAtLte`
+
+    Return agents created at or before this time (inclusive).
+
+  - `Optional<Boolean> includeArchived`
+
+    Include archived agents in results. Defaults to false.
+
+  - `Optional<Long> limit`
+
+    Maximum results per page. Default 20, maximum 100.
+
+  - `Optional<String> page`
+
+    Opaque pagination cursor from a previous response.
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsAgent:`
+
+  A Managed Agents `agent`.
+
+  - `String id`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+    - `String name`
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+  - `Metadata metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+    - `BetaManagedAgentsModel id`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+  - `String name`
+
+  - `List<Skill> skills`
+
+    - `class BetaManagedAgentsAnthropicSkill:`
+
+      A resolved Anthropic-managed skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `String version`
+
+    - `class BetaManagedAgentsCustomSkill:`
+
+      A resolved user-created custom skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `String version`
+
+  - `Optional<String> system`
+
+  - `List<Tool> tools`
+
+    - `class BetaManagedAgentsAgentToolset20260401:`
+
+      - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+    - `class BetaManagedAgentsMcpToolset:`
+
+      - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `String name`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `String mcpServerName`
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+    - `class BetaManagedAgentsCustomTool:`
+
+      A custom tool as returned in API responses.
+
+      - `String description`
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `long version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.agents.AgentListPage;
+import com.anthropic.models.beta.agents.AgentListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        AgentListPage page = client.beta().agents().list();
+    }
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsAgent beta().agents().retrieve(AgentRetrieveParamsparams = AgentRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/agents/{agent_id}`
+
+Get Agent
+
+### Parameters
+
+- `AgentRetrieveParams params`
+
+  - `Optional<String> agentId`
+
+  - `Optional<Long> version`
+
+    Agent version. Omit for the most recent version. Must be at least 1 if specified.
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsAgent:`
+
+  A Managed Agents `agent`.
+
+  - `String id`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+    - `String name`
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+  - `Metadata metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+    - `BetaManagedAgentsModel id`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+  - `String name`
+
+  - `List<Skill> skills`
+
+    - `class BetaManagedAgentsAnthropicSkill:`
+
+      A resolved Anthropic-managed skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `String version`
+
+    - `class BetaManagedAgentsCustomSkill:`
+
+      A resolved user-created custom skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `String version`
+
+  - `Optional<String> system`
+
+  - `List<Tool> tools`
+
+    - `class BetaManagedAgentsAgentToolset20260401:`
+
+      - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+    - `class BetaManagedAgentsMcpToolset:`
+
+      - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `String name`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `String mcpServerName`
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+    - `class BetaManagedAgentsCustomTool:`
+
+      A custom tool as returned in API responses.
+
+      - `String description`
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `long version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.agents.AgentRetrieveParams;
+import com.anthropic.models.beta.agents.BetaManagedAgentsAgent;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsAgent betaManagedAgentsAgent = client.beta().agents().retrieve("agent_011CZkYpogX7uDKUyvBTophP");
+    }
+}
+```
+
+## Update
+
+`BetaManagedAgentsAgent beta().agents().update(AgentUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/agents/{agent_id}`
+
+Update Agent
+
+### Parameters
+
+- `AgentUpdateParams params`
+
+  - `Optional<String> agentId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `long version`
+
+    The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. The request fails if this does not match the server's current version.
+
+  - `Optional<String> description`
+
+    Description. Up to 2048 characters. Omit to preserve; send empty string or null to clear.
+
+  - `Optional<List<BetaManagedAgentsUrlMcpServerParams>> mcpServers`
+
+    MCP servers. Full replacement. Omit to preserve; send empty array or null to clear. Names must be unique. Maximum 20.
+
+    - `String name`
+
+      Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+      Endpoint URL for the MCP server.
+
+  - `Optional<Metadata> metadata`
+
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+
+  - `Optional<Model> model`
+
+    Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+
+    - `enum BetaManagedAgentsModel:`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `class BetaManagedAgentsModelConfigParams:`
+
+      An object that defines additional configuration control over model use
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+  - `Optional<String> name`
+
+    Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+
+  - `Optional<List<BetaManagedAgentsSkillParams>> skills`
+
+    Skills. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 20.
+
+    - `class BetaManagedAgentsAnthropicSkillParams:`
+
+      An Anthropic-managed skill.
+
+      - `String skillId`
+
+        Identifier of the Anthropic skill (e.g., "xlsx").
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `Optional<String> version`
+
+        Version to pin. Defaults to latest if omitted.
+
+    - `class BetaManagedAgentsCustomSkillParams:`
+
+      A user-created custom skill.
+
+      - `String skillId`
+
+        Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `Optional<String> version`
+
+        Version to pin. Defaults to latest if omitted.
+
+  - `Optional<String> system`
+
+    System prompt. Up to 100,000 characters. Omit to preserve; send empty string or null to clear.
+
+  - `Optional<List<Tool>> tools`
+
+    Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 128 tools across all toolsets allowed.
+
+    - `class BetaManagedAgentsAgentToolset20260401Params:`
+
+      Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `Optional<List<BetaManagedAgentsAgentToolConfigParams>> configs`
+
+        Per-tool configuration overrides.
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `Optional<Boolean> enabled`
+
+          Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Optional<BetaManagedAgentsAgentToolsetDefaultConfigParams> defaultConfig`
+
+        Default configuration for all tools in a toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+    - `class BetaManagedAgentsMcpToolsetParams:`
+
+      Configuration for tools from an MCP server defined in `mcp_servers`.
+
+      - `String mcpServerName`
+
+        Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+      - `Optional<List<BetaManagedAgentsMcpToolConfigParams>> configs`
+
+        Per-tool configuration overrides.
+
+        - `String name`
+
+          Name of the MCP tool to configure. 1-128 characters.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this tool is enabled. Overrides the `default_config` setting.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Optional<BetaManagedAgentsMcpToolsetDefaultConfigParams> defaultConfig`
+
+        Default configuration for all tools from an MCP server.
+
+        - `Optional<Boolean> enabled`
+
+          Whether tools are enabled by default. Defaults to true if not specified.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+    - `class BetaManagedAgentsCustomToolParams:`
+
+      A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+      - `String description`
+
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+        Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+### Returns
+
+- `class BetaManagedAgentsAgent:`
+
+  A Managed Agents `agent`.
+
+  - `String id`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+    - `String name`
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+  - `Metadata metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+    - `BetaManagedAgentsModel id`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+  - `String name`
+
+  - `List<Skill> skills`
+
+    - `class BetaManagedAgentsAnthropicSkill:`
+
+      A resolved Anthropic-managed skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `String version`
+
+    - `class BetaManagedAgentsCustomSkill:`
+
+      A resolved user-created custom skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `String version`
+
+  - `Optional<String> system`
+
+  - `List<Tool> tools`
+
+    - `class BetaManagedAgentsAgentToolset20260401:`
+
+      - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+    - `class BetaManagedAgentsMcpToolset:`
+
+      - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `String name`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `String mcpServerName`
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+    - `class BetaManagedAgentsCustomTool:`
+
+      A custom tool as returned in API responses.
+
+      - `String description`
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `long version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.agents.AgentUpdateParams;
+import com.anthropic.models.beta.agents.BetaManagedAgentsAgent;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        AgentUpdateParams params = AgentUpdateParams.builder()
+            .agentId("agent_011CZkYpogX7uDKUyvBTophP")
+            .version(1)
+            .build();
+        BetaManagedAgentsAgent betaManagedAgentsAgent = client.beta().agents().update(params);
+    }
+}
+```
+
+## Archive
+
+`BetaManagedAgentsAgent beta().agents().archive(AgentArchiveParamsparams = AgentArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/agents/{agent_id}/archive`
+
+Archive Agent
+
+### Parameters
+
+- `AgentArchiveParams params`
+
+  - `Optional<String> agentId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsAgent:`
+
+  A Managed Agents `agent`.
+
+  - `String id`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+    - `String name`
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+  - `Metadata metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+    - `BetaManagedAgentsModel id`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+  - `String name`
+
+  - `List<Skill> skills`
+
+    - `class BetaManagedAgentsAnthropicSkill:`
+
+      A resolved Anthropic-managed skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `String version`
+
+    - `class BetaManagedAgentsCustomSkill:`
+
+      A resolved user-created custom skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `String version`
+
+  - `Optional<String> system`
+
+  - `List<Tool> tools`
+
+    - `class BetaManagedAgentsAgentToolset20260401:`
+
+      - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+    - `class BetaManagedAgentsMcpToolset:`
+
+      - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `String name`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `String mcpServerName`
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+    - `class BetaManagedAgentsCustomTool:`
+
+      A custom tool as returned in API responses.
+
+      - `String description`
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `long version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.agents.AgentArchiveParams;
+import com.anthropic.models.beta.agents.BetaManagedAgentsAgent;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsAgent betaManagedAgentsAgent = client.beta().agents().archive("agent_011CZkYpogX7uDKUyvBTophP");
+    }
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Agent
+
+- `class BetaManagedAgentsAgent:`
+
+  A Managed Agents `agent`.
+
+  - `String id`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+    - `String name`
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+  - `Metadata metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+    - `BetaManagedAgentsModel id`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+  - `String name`
+
+  - `List<Skill> skills`
+
+    - `class BetaManagedAgentsAnthropicSkill:`
+
+      A resolved Anthropic-managed skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `String version`
+
+    - `class BetaManagedAgentsCustomSkill:`
+
+      A resolved user-created custom skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `String version`
+
+  - `Optional<String> system`
+
+  - `List<Tool> tools`
+
+    - `class BetaManagedAgentsAgentToolset20260401:`
+
+      - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+    - `class BetaManagedAgentsMcpToolset:`
+
+      - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `String name`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `String mcpServerName`
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+    - `class BetaManagedAgentsCustomTool:`
+
+      A custom tool as returned in API responses.
+
+      - `String description`
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `long version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Beta Managed Agents Agent Tool Config
+
+- `class BetaManagedAgentsAgentToolConfig:`
+
+  Configuration for a specific agent tool.
+
+  - `boolean enabled`
+
+  - `Name name`
+
+    Built-in agent tool identifier.
+
+    - `BASH("bash")`
+
+    - `EDIT("edit")`
+
+    - `READ("read")`
+
+    - `WRITE("write")`
+
+    - `GLOB("glob")`
+
+    - `GREP("grep")`
+
+    - `WEB_FETCH("web_fetch")`
+
+    - `WEB_SEARCH("web_search")`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `Type type`
+
+        - `ALWAYS_ALLOW("always_allow")`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `Type type`
+
+        - `ALWAYS_ASK("always_ask")`
+
+### Beta Managed Agents Agent Tool Config Params
+
+- `class BetaManagedAgentsAgentToolConfigParams:`
+
+  Configuration override for a specific tool within a toolset.
+
+  - `Name name`
+
+    Built-in agent tool identifier.
+
+    - `BASH("bash")`
+
+    - `EDIT("edit")`
+
+    - `READ("read")`
+
+    - `WRITE("write")`
+
+    - `GLOB("glob")`
+
+    - `GREP("grep")`
+
+    - `WEB_FETCH("web_fetch")`
+
+    - `WEB_SEARCH("web_search")`
+
+  - `Optional<Boolean> enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `Optional<PermissionPolicy> permissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `Type type`
+
+        - `ALWAYS_ALLOW("always_allow")`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `Type type`
+
+        - `ALWAYS_ASK("always_ask")`
+
+### Beta Managed Agents Agent Toolset Default Config
+
+- `class BetaManagedAgentsAgentToolsetDefaultConfig:`
+
+  Resolved default configuration for agent tools.
+
+  - `boolean enabled`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `Type type`
+
+        - `ALWAYS_ALLOW("always_allow")`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `Type type`
+
+        - `ALWAYS_ASK("always_ask")`
+
+### Beta Managed Agents Agent Toolset Default Config Params
+
+- `class BetaManagedAgentsAgentToolsetDefaultConfigParams:`
+
+  Default configuration for all tools in a toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+  - `Optional<PermissionPolicy> permissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `Type type`
+
+        - `ALWAYS_ALLOW("always_allow")`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `Type type`
+
+        - `ALWAYS_ASK("always_ask")`
+
+### Beta Managed Agents Agent Toolset20260401
+
+- `class BetaManagedAgentsAgentToolset20260401:`
+
+  - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+    - `boolean enabled`
+
+    - `Name name`
+
+      Built-in agent tool identifier.
+
+      - `BASH("bash")`
+
+      - `EDIT("edit")`
+
+      - `READ("read")`
+
+      - `WRITE("write")`
+
+      - `GLOB("glob")`
+
+      - `GREP("grep")`
+
+      - `WEB_FETCH("web_fetch")`
+
+      - `WEB_SEARCH("web_search")`
+
+    - `PermissionPolicy permissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+        - `Type type`
+
+          - `ALWAYS_ALLOW("always_allow")`
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+        - `Type type`
+
+          - `ALWAYS_ASK("always_ask")`
+
+  - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+    Resolved default configuration for agent tools.
+
+    - `boolean enabled`
+
+    - `PermissionPolicy permissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+        - `Type type`
+
+          - `ALWAYS_ALLOW("always_allow")`
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+        - `Type type`
+
+          - `ALWAYS_ASK("always_ask")`
+
+  - `Type type`
+
+    - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+### Beta Managed Agents Agent Toolset20260401 Params
+
+- `class BetaManagedAgentsAgentToolset20260401Params:`
+
+  Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+  - `Type type`
+
+    - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+  - `Optional<List<BetaManagedAgentsAgentToolConfigParams>> configs`
+
+    Per-tool configuration overrides.
+
+    - `Name name`
+
+      Built-in agent tool identifier.
+
+      - `BASH("bash")`
+
+      - `EDIT("edit")`
+
+      - `READ("read")`
+
+      - `WRITE("write")`
+
+      - `GLOB("glob")`
+
+      - `GREP("grep")`
+
+      - `WEB_FETCH("web_fetch")`
+
+      - `WEB_SEARCH("web_search")`
+
+    - `Optional<Boolean> enabled`
+
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+    - `Optional<PermissionPolicy> permissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+        - `Type type`
+
+          - `ALWAYS_ALLOW("always_allow")`
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+        - `Type type`
+
+          - `ALWAYS_ASK("always_ask")`
+
+  - `Optional<BetaManagedAgentsAgentToolsetDefaultConfigParams> defaultConfig`
+
+    Default configuration for all tools in a toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+    - `Optional<PermissionPolicy> permissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+        - `Type type`
+
+          - `ALWAYS_ALLOW("always_allow")`
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+        - `Type type`
+
+          - `ALWAYS_ASK("always_ask")`
+
+### Beta Managed Agents Always Allow Policy
+
+- `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+  Tool calls are automatically approved without user confirmation.
+
+  - `Type type`
+
+    - `ALWAYS_ALLOW("always_allow")`
+
+### Beta Managed Agents Always Ask Policy
+
+- `class BetaManagedAgentsAlwaysAskPolicy:`
+
+  Tool calls require user confirmation before execution.
+
+  - `Type type`
+
+    - `ALWAYS_ASK("always_ask")`
+
+### Beta Managed Agents Anthropic Skill
+
+- `class BetaManagedAgentsAnthropicSkill:`
+
+  A resolved Anthropic-managed skill.
+
+  - `String skillId`
+
+  - `Type type`
+
+    - `ANTHROPIC("anthropic")`
+
+  - `String version`
+
+### Beta Managed Agents Anthropic Skill Params
+
+- `class BetaManagedAgentsAnthropicSkillParams:`
+
+  An Anthropic-managed skill.
+
+  - `String skillId`
+
+    Identifier of the Anthropic skill (e.g., "xlsx").
+
+  - `Type type`
+
+    - `ANTHROPIC("anthropic")`
+
+  - `Optional<String> version`
+
+    Version to pin. Defaults to latest if omitted.
+
+### Beta Managed Agents Custom Skill
+
+- `class BetaManagedAgentsCustomSkill:`
+
+  A resolved user-created custom skill.
+
+  - `String skillId`
+
+  - `Type type`
+
+    - `CUSTOM("custom")`
+
+  - `String version`
+
+### Beta Managed Agents Custom Skill Params
+
+- `class BetaManagedAgentsCustomSkillParams:`
+
+  A user-created custom skill.
+
+  - `String skillId`
+
+    Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+  - `Type type`
+
+    - `CUSTOM("custom")`
+
+  - `Optional<String> version`
+
+    Version to pin. Defaults to latest if omitted.
+
+### Beta Managed Agents Custom Tool
+
+- `class BetaManagedAgentsCustomTool:`
+
+  A custom tool as returned in API responses.
+
+  - `String description`
+
+  - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+    JSON Schema for custom tool input parameters.
+
+    - `Optional<Properties> properties`
+
+      JSON Schema properties defining the tool's input parameters.
+
+    - `Optional<List<String>> required`
+
+      List of required property names.
+
+    - `Optional<Type> type`
+
+      Must be 'object' for tool input schemas.
+
+      - `OBJECT("object")`
+
+  - `String name`
+
+  - `Type type`
+
+    - `CUSTOM("custom")`
+
+### Beta Managed Agents Custom Tool Input Schema
+
+- `class BetaManagedAgentsCustomToolInputSchema:`
+
+  JSON Schema for custom tool input parameters.
+
+  - `Optional<Properties> properties`
+
+    JSON Schema properties defining the tool's input parameters.
+
+  - `Optional<List<String>> required`
+
+    List of required property names.
+
+  - `Optional<Type> type`
+
+    Must be 'object' for tool input schemas.
+
+    - `OBJECT("object")`
+
+### Beta Managed Agents Custom Tool Params
+
+- `class BetaManagedAgentsCustomToolParams:`
+
+  A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+  - `String description`
+
+    Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+  - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+    JSON Schema for custom tool input parameters.
+
+    - `Optional<Properties> properties`
+
+      JSON Schema properties defining the tool's input parameters.
+
+    - `Optional<List<String>> required`
+
+      List of required property names.
+
+    - `Optional<Type> type`
+
+      Must be 'object' for tool input schemas.
+
+      - `OBJECT("object")`
+
+  - `String name`
+
+    Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+  - `Type type`
+
+    - `CUSTOM("custom")`
+
+### Beta Managed Agents MCP Server URL Definition
+
+- `class BetaManagedAgentsMcpServerUrlDefinition:`
+
+  URL-based MCP server connection as returned in API responses.
+
+  - `String name`
+
+  - `Type type`
+
+    - `URL("url")`
+
+  - `String url`
+
+### Beta Managed Agents MCP Tool Config
+
+- `class BetaManagedAgentsMcpToolConfig:`
+
+  Resolved configuration for a specific MCP tool.
+
+  - `boolean enabled`
+
+  - `String name`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `Type type`
+
+        - `ALWAYS_ALLOW("always_allow")`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `Type type`
+
+        - `ALWAYS_ASK("always_ask")`
+
+### Beta Managed Agents MCP Tool Config Params
+
+- `class BetaManagedAgentsMcpToolConfigParams:`
+
+  Configuration override for a specific MCP tool.
+
+  - `String name`
+
+    Name of the MCP tool to configure. 1-128 characters.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this tool is enabled. Overrides the `default_config` setting.
+
+  - `Optional<PermissionPolicy> permissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `Type type`
+
+        - `ALWAYS_ALLOW("always_allow")`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `Type type`
+
+        - `ALWAYS_ASK("always_ask")`
+
+### Beta Managed Agents MCP Toolset
+
+- `class BetaManagedAgentsMcpToolset:`
+
+  - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+    - `boolean enabled`
+
+    - `String name`
+
+    - `PermissionPolicy permissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+        - `Type type`
+
+          - `ALWAYS_ALLOW("always_allow")`
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+        - `Type type`
+
+          - `ALWAYS_ASK("always_ask")`
+
+  - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+    Resolved default configuration for all tools from an MCP server.
+
+    - `boolean enabled`
+
+    - `PermissionPolicy permissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+        - `Type type`
+
+          - `ALWAYS_ALLOW("always_allow")`
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+        - `Type type`
+
+          - `ALWAYS_ASK("always_ask")`
+
+  - `String mcpServerName`
+
+  - `Type type`
+
+    - `MCP_TOOLSET("mcp_toolset")`
+
+### Beta Managed Agents MCP Toolset Default Config
+
+- `class BetaManagedAgentsMcpToolsetDefaultConfig:`
+
+  Resolved default configuration for all tools from an MCP server.
+
+  - `boolean enabled`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `Type type`
+
+        - `ALWAYS_ALLOW("always_allow")`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `Type type`
+
+        - `ALWAYS_ASK("always_ask")`
+
+### Beta Managed Agents MCP Toolset Default Config Params
+
+- `class BetaManagedAgentsMcpToolsetDefaultConfigParams:`
+
+  Default configuration for all tools from an MCP server.
+
+  - `Optional<Boolean> enabled`
+
+    Whether tools are enabled by default. Defaults to true if not specified.
+
+  - `Optional<PermissionPolicy> permissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `Type type`
+
+        - `ALWAYS_ALLOW("always_allow")`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `Type type`
+
+        - `ALWAYS_ASK("always_ask")`
+
+### Beta Managed Agents MCP Toolset Params
+
+- `class BetaManagedAgentsMcpToolsetParams:`
+
+  Configuration for tools from an MCP server defined in `mcp_servers`.
+
+  - `String mcpServerName`
+
+    Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
+
+  - `Type type`
+
+    - `MCP_TOOLSET("mcp_toolset")`
+
+  - `Optional<List<BetaManagedAgentsMcpToolConfigParams>> configs`
+
+    Per-tool configuration overrides.
+
+    - `String name`
+
+      Name of the MCP tool to configure. 1-128 characters.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this tool is enabled. Overrides the `default_config` setting.
+
+    - `Optional<PermissionPolicy> permissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+        - `Type type`
+
+          - `ALWAYS_ALLOW("always_allow")`
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+        - `Type type`
+
+          - `ALWAYS_ASK("always_ask")`
+
+  - `Optional<BetaManagedAgentsMcpToolsetDefaultConfigParams> defaultConfig`
+
+    Default configuration for all tools from an MCP server.
+
+    - `Optional<Boolean> enabled`
+
+      Whether tools are enabled by default. Defaults to true if not specified.
+
+    - `Optional<PermissionPolicy> permissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+        - `Type type`
+
+          - `ALWAYS_ALLOW("always_allow")`
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+        - `Type type`
+
+          - `ALWAYS_ASK("always_ask")`
+
+### Beta Managed Agents Model
+
+- `enum BetaManagedAgentsModel:`
+
+  The model that will power your agent.
+
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+    Most intelligent model for building agents and coding
+
+  - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+    Best combination of speed and intelligence
+
+  - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+    Fastest model with near-frontier intelligence
+
+  - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+    Fastest model with near-frontier intelligence
+
+  - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+    Premium model combining maximum intelligence with practical performance
+
+  - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+    Premium model combining maximum intelligence with practical performance
+
+  - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+    High-performance model for agents and coding
+
+  - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+    High-performance model for agents and coding
+
+### Beta Managed Agents Model Config
+
+- `class BetaManagedAgentsModelConfig:`
+
+  Model identifier and configuration.
+
+  - `BetaManagedAgentsModel id`
+
+    The model that will power your agent.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Most intelligent model for building agents and coding
+
+    - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+      Best combination of speed and intelligence
+
+    - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+      High-performance model for agents and coding
+
+  - `Optional<Speed> speed`
+
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+    - `STANDARD("standard")`
+
+    - `FAST("fast")`
+
+### Beta Managed Agents Model Config Params
+
+- `class BetaManagedAgentsModelConfigParams:`
+
+  An object that defines additional configuration control over model use
+
+  - `BetaManagedAgentsModel id`
+
+    The model that will power your agent.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+      Most intelligent model for building agents and coding
+
+    - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+      Best combination of speed and intelligence
+
+    - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+      Fastest model with near-frontier intelligence
+
+    - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+      High-performance model for agents and coding
+
+    - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+      High-performance model for agents and coding
+
+  - `Optional<Speed> speed`
+
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+    - `STANDARD("standard")`
+
+    - `FAST("fast")`
+
+### Beta Managed Agents Skill Params
+
+- `class BetaManagedAgentsSkillParams: A class that can be one of several variants.union`
+
+  Skill to load in the session container.
+
+  - `class BetaManagedAgentsAnthropicSkillParams:`
+
+    An Anthropic-managed skill.
+
+    - `String skillId`
+
+      Identifier of the Anthropic skill (e.g., "xlsx").
+
+    - `Type type`
+
+      - `ANTHROPIC("anthropic")`
+
+    - `Optional<String> version`
+
+      Version to pin. Defaults to latest if omitted.
+
+  - `class BetaManagedAgentsCustomSkillParams:`
+
+    A user-created custom skill.
+
+    - `String skillId`
+
+      Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+    - `Type type`
+
+      - `CUSTOM("custom")`
+
+    - `Optional<String> version`
+
+      Version to pin. Defaults to latest if omitted.
+
+### Beta Managed Agents URL MCP Server Params
+
+- `class BetaManagedAgentsUrlMcpServerParams:`
+
+  URL-based MCP server connection.
+
+  - `String name`
+
+    Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
+
+  - `Type type`
+
+    - `URL("url")`
+
+  - `String url`
+
+    Endpoint URL for the MCP server.
+
+# Versions
+
+## List
+
+`VersionListPage beta().agents().versions().list(VersionListParamsparams = VersionListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/agents/{agent_id}/versions`
+
+List Agent Versions
+
+### Parameters
+
+- `VersionListParams params`
+
+  - `Optional<String> agentId`
+
+  - `Optional<Long> limit`
+
+    Maximum results per page. Default 20, maximum 100.
+
+  - `Optional<String> page`
+
+    Opaque pagination cursor.
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsAgent:`
+
+  A Managed Agents `agent`.
+
+  - `String id`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+    - `String name`
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+  - `Metadata metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+    - `BetaManagedAgentsModel id`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+  - `String name`
+
+  - `List<Skill> skills`
+
+    - `class BetaManagedAgentsAnthropicSkill:`
+
+      A resolved Anthropic-managed skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `String version`
+
+    - `class BetaManagedAgentsCustomSkill:`
+
+      A resolved user-created custom skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `String version`
+
+  - `Optional<String> system`
+
+  - `List<Tool> tools`
+
+    - `class BetaManagedAgentsAgentToolset20260401:`
+
+      - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+    - `class BetaManagedAgentsMcpToolset:`
+
+      - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `String name`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `String mcpServerName`
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+    - `class BetaManagedAgentsCustomTool:`
+
+      A custom tool as returned in API responses.
+
+      - `String description`
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `long version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.agents.versions.VersionListPage;
+import com.anthropic.models.beta.agents.versions.VersionListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        VersionListPage page = client.beta().agents().versions().list("agent_011CZkYpogX7uDKUyvBTophP");
+    }
+}
+```
+
+# Environments
+
+## Create
+
+`BetaEnvironment beta().environments().create(EnvironmentCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/environments`
+
+Create a new environment with the specified configuration.
+
+### Parameters
+
+- `EnvironmentCreateParams params`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `String name`
+
+    Human-readable name for the environment
+
+  - `Optional<BetaCloudConfigParams> config`
+
+    Request params for `cloud` environment configuration.
+
+    Fields default to null; on update, omitted fields preserve the
+    existing value.
+
+  - `Optional<String> description`
+
+    Optional description of the environment
+
+  - `Optional<Metadata> metadata`
+
+    User-provided metadata key-value pairs
+
+### Returns
+
+- `class BetaEnvironment:`
+
+  Unified Environment resource for both cloud and BYOC environments.
+
+  - `String id`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `Optional<String> archivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `BetaCloudConfig config`
+
+    `cloud` environment configuration.
+
+    - `Networking networking`
+
+      Network configuration policy.
+
+      - `class BetaUnrestrictedNetwork:`
+
+        Unrestricted network access.
+
+        - `JsonValue; type "unrestricted"constant`
+
+          Network policy type
+
+          - `UNRESTRICTED("unrestricted")`
+
+      - `class BetaLimitedNetwork:`
+
+        Limited network access.
+
+        - `boolean allowMcpServers`
+
+          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+        - `boolean allowPackageManagers`
+
+          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+        - `List<String> allowedHosts`
+
+          Specifies domains the container can reach.
+
+        - `JsonValue; type "limited"constant`
+
+          Network policy type
+
+          - `LIMITED("limited")`
+
+    - `BetaPackages packages`
+
+      Package manager configuration.
+
+      - `List<String> apt`
+
+        Ubuntu/Debian packages to install
+
+      - `List<String> cargo`
+
+        Rust packages to install
+
+      - `List<String> gem`
+
+        Ruby packages to install
+
+      - `List<String> go`
+
+        Go packages to install
+
+      - `List<String> npm`
+
+        Node.js packages to install
+
+      - `List<String> pip`
+
+        Python packages to install
+
+      - `Optional<Type> type`
+
+        Package configuration type
+
+        - `PACKAGES("packages")`
+
+    - `JsonValue; type "cloud"constant`
+
+      Environment type
+
+      - `CLOUD("cloud")`
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `String description`
+
+    User-provided description for the environment
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs
+
+  - `String name`
+
+    Human-readable name for the environment
+
+  - `JsonValue; type "environment"constant`
+
+    The type of object (always 'environment')
+
+    - `ENVIRONMENT("environment")`
+
+  - `String updatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.BetaEnvironment;
+import com.anthropic.models.beta.environments.EnvironmentCreateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        EnvironmentCreateParams params = EnvironmentCreateParams.builder()
+            .name("python-data-analysis")
+            .build();
+        BetaEnvironment betaEnvironment = client.beta().environments().create(params);
+    }
+}
+```
+
+## List
+
+`EnvironmentListPage beta().environments().list(EnvironmentListParamsparams = EnvironmentListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/environments`
+
+List environments with pagination support.
+
+### Parameters
+
+- `EnvironmentListParams params`
+
+  - `Optional<Boolean> includeArchived`
+
+    Include archived environments in the response
+
+  - `Optional<Long> limit`
+
+    Maximum number of environments to return
+
+  - `Optional<String> page`
+
+    Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaEnvironment:`
+
+  Unified Environment resource for both cloud and BYOC environments.
+
+  - `String id`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `Optional<String> archivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `BetaCloudConfig config`
+
+    `cloud` environment configuration.
+
+    - `Networking networking`
+
+      Network configuration policy.
+
+      - `class BetaUnrestrictedNetwork:`
+
+        Unrestricted network access.
+
+        - `JsonValue; type "unrestricted"constant`
+
+          Network policy type
+
+          - `UNRESTRICTED("unrestricted")`
+
+      - `class BetaLimitedNetwork:`
+
+        Limited network access.
+
+        - `boolean allowMcpServers`
+
+          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+        - `boolean allowPackageManagers`
+
+          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+        - `List<String> allowedHosts`
+
+          Specifies domains the container can reach.
+
+        - `JsonValue; type "limited"constant`
+
+          Network policy type
+
+          - `LIMITED("limited")`
+
+    - `BetaPackages packages`
+
+      Package manager configuration.
+
+      - `List<String> apt`
+
+        Ubuntu/Debian packages to install
+
+      - `List<String> cargo`
+
+        Rust packages to install
+
+      - `List<String> gem`
+
+        Ruby packages to install
+
+      - `List<String> go`
+
+        Go packages to install
+
+      - `List<String> npm`
+
+        Node.js packages to install
+
+      - `List<String> pip`
+
+        Python packages to install
+
+      - `Optional<Type> type`
+
+        Package configuration type
+
+        - `PACKAGES("packages")`
+
+    - `JsonValue; type "cloud"constant`
+
+      Environment type
+
+      - `CLOUD("cloud")`
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `String description`
+
+    User-provided description for the environment
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs
+
+  - `String name`
+
+    Human-readable name for the environment
+
+  - `JsonValue; type "environment"constant`
+
+    The type of object (always 'environment')
+
+    - `ENVIRONMENT("environment")`
+
+  - `String updatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.EnvironmentListPage;
+import com.anthropic.models.beta.environments.EnvironmentListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        EnvironmentListPage page = client.beta().environments().list();
+    }
+}
+```
+
+## Retrieve
+
+`BetaEnvironment beta().environments().retrieve(EnvironmentRetrieveParamsparams = EnvironmentRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/environments/{environment_id}`
+
+Retrieve a specific environment by ID.
+
+### Parameters
+
+- `EnvironmentRetrieveParams params`
+
+  - `Optional<String> environmentId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaEnvironment:`
+
+  Unified Environment resource for both cloud and BYOC environments.
+
+  - `String id`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `Optional<String> archivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `BetaCloudConfig config`
+
+    `cloud` environment configuration.
+
+    - `Networking networking`
+
+      Network configuration policy.
+
+      - `class BetaUnrestrictedNetwork:`
+
+        Unrestricted network access.
+
+        - `JsonValue; type "unrestricted"constant`
+
+          Network policy type
+
+          - `UNRESTRICTED("unrestricted")`
+
+      - `class BetaLimitedNetwork:`
+
+        Limited network access.
+
+        - `boolean allowMcpServers`
+
+          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+        - `boolean allowPackageManagers`
+
+          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+        - `List<String> allowedHosts`
+
+          Specifies domains the container can reach.
+
+        - `JsonValue; type "limited"constant`
+
+          Network policy type
+
+          - `LIMITED("limited")`
+
+    - `BetaPackages packages`
+
+      Package manager configuration.
+
+      - `List<String> apt`
+
+        Ubuntu/Debian packages to install
+
+      - `List<String> cargo`
+
+        Rust packages to install
+
+      - `List<String> gem`
+
+        Ruby packages to install
+
+      - `List<String> go`
+
+        Go packages to install
+
+      - `List<String> npm`
+
+        Node.js packages to install
+
+      - `List<String> pip`
+
+        Python packages to install
+
+      - `Optional<Type> type`
+
+        Package configuration type
+
+        - `PACKAGES("packages")`
+
+    - `JsonValue; type "cloud"constant`
+
+      Environment type
+
+      - `CLOUD("cloud")`
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `String description`
+
+    User-provided description for the environment
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs
+
+  - `String name`
+
+    Human-readable name for the environment
+
+  - `JsonValue; type "environment"constant`
+
+    The type of object (always 'environment')
+
+    - `ENVIRONMENT("environment")`
+
+  - `String updatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.BetaEnvironment;
+import com.anthropic.models.beta.environments.EnvironmentRetrieveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaEnvironment betaEnvironment = client.beta().environments().retrieve("env_011CZkZ9X2dpNyB7HsEFoRfW");
+    }
+}
+```
+
+## Update
+
+`BetaEnvironment beta().environments().update(EnvironmentUpdateParamsparams = EnvironmentUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/environments/{environment_id}`
+
+Update an existing environment's configuration.
+
+### Parameters
+
+- `EnvironmentUpdateParams params`
+
+  - `Optional<String> environmentId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `Optional<BetaCloudConfigParams> config`
+
+    Request params for `cloud` environment configuration.
+
+    Fields default to null; on update, omitted fields preserve the
+    existing value.
+
+  - `Optional<String> description`
+
+    Updated description of the environment
+
+  - `Optional<Metadata> metadata`
+
+    User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
+
+  - `Optional<String> name`
+
+    Updated name for the environment
+
+### Returns
+
+- `class BetaEnvironment:`
+
+  Unified Environment resource for both cloud and BYOC environments.
+
+  - `String id`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `Optional<String> archivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `BetaCloudConfig config`
+
+    `cloud` environment configuration.
+
+    - `Networking networking`
+
+      Network configuration policy.
+
+      - `class BetaUnrestrictedNetwork:`
+
+        Unrestricted network access.
+
+        - `JsonValue; type "unrestricted"constant`
+
+          Network policy type
+
+          - `UNRESTRICTED("unrestricted")`
+
+      - `class BetaLimitedNetwork:`
+
+        Limited network access.
+
+        - `boolean allowMcpServers`
+
+          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+        - `boolean allowPackageManagers`
+
+          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+        - `List<String> allowedHosts`
+
+          Specifies domains the container can reach.
+
+        - `JsonValue; type "limited"constant`
+
+          Network policy type
+
+          - `LIMITED("limited")`
+
+    - `BetaPackages packages`
+
+      Package manager configuration.
+
+      - `List<String> apt`
+
+        Ubuntu/Debian packages to install
+
+      - `List<String> cargo`
+
+        Rust packages to install
+
+      - `List<String> gem`
+
+        Ruby packages to install
+
+      - `List<String> go`
+
+        Go packages to install
+
+      - `List<String> npm`
+
+        Node.js packages to install
+
+      - `List<String> pip`
+
+        Python packages to install
+
+      - `Optional<Type> type`
+
+        Package configuration type
+
+        - `PACKAGES("packages")`
+
+    - `JsonValue; type "cloud"constant`
+
+      Environment type
+
+      - `CLOUD("cloud")`
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `String description`
+
+    User-provided description for the environment
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs
+
+  - `String name`
+
+    Human-readable name for the environment
+
+  - `JsonValue; type "environment"constant`
+
+    The type of object (always 'environment')
+
+    - `ENVIRONMENT("environment")`
+
+  - `String updatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.BetaEnvironment;
+import com.anthropic.models.beta.environments.EnvironmentUpdateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaEnvironment betaEnvironment = client.beta().environments().update("env_011CZkZ9X2dpNyB7HsEFoRfW");
+    }
+}
+```
+
+## Delete
+
+`BetaEnvironmentDeleteResponse beta().environments().delete(EnvironmentDeleteParamsparams = EnvironmentDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**delete** `/v1/environments/{environment_id}`
+
+Delete an environment by ID. Returns a confirmation of the deletion.
+
+### Parameters
+
+- `EnvironmentDeleteParams params`
+
+  - `Optional<String> environmentId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaEnvironmentDeleteResponse:`
+
+  Response after deleting an environment.
+
+  - `String id`
+
+    Environment identifier
+
+  - `JsonValue; type "environment_deleted"constant`
+
+    The type of response
+
+    - `ENVIRONMENT_DELETED("environment_deleted")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.BetaEnvironmentDeleteResponse;
+import com.anthropic.models.beta.environments.EnvironmentDeleteParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaEnvironmentDeleteResponse betaEnvironmentDeleteResponse = client.beta().environments().delete("env_011CZkZ9X2dpNyB7HsEFoRfW");
+    }
+}
+```
+
+## Archive
+
+`BetaEnvironment beta().environments().archive(EnvironmentArchiveParamsparams = EnvironmentArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/environments/{environment_id}/archive`
+
+Archive an environment by ID. Archived environments cannot be used to create new sessions.
+
+### Parameters
+
+- `EnvironmentArchiveParams params`
+
+  - `Optional<String> environmentId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaEnvironment:`
+
+  Unified Environment resource for both cloud and BYOC environments.
+
+  - `String id`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `Optional<String> archivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `BetaCloudConfig config`
+
+    `cloud` environment configuration.
+
+    - `Networking networking`
+
+      Network configuration policy.
+
+      - `class BetaUnrestrictedNetwork:`
+
+        Unrestricted network access.
+
+        - `JsonValue; type "unrestricted"constant`
+
+          Network policy type
+
+          - `UNRESTRICTED("unrestricted")`
+
+      - `class BetaLimitedNetwork:`
+
+        Limited network access.
+
+        - `boolean allowMcpServers`
+
+          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+        - `boolean allowPackageManagers`
+
+          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+        - `List<String> allowedHosts`
+
+          Specifies domains the container can reach.
+
+        - `JsonValue; type "limited"constant`
+
+          Network policy type
+
+          - `LIMITED("limited")`
+
+    - `BetaPackages packages`
+
+      Package manager configuration.
+
+      - `List<String> apt`
+
+        Ubuntu/Debian packages to install
+
+      - `List<String> cargo`
+
+        Rust packages to install
+
+      - `List<String> gem`
+
+        Ruby packages to install
+
+      - `List<String> go`
+
+        Go packages to install
+
+      - `List<String> npm`
+
+        Node.js packages to install
+
+      - `List<String> pip`
+
+        Python packages to install
+
+      - `Optional<Type> type`
+
+        Package configuration type
+
+        - `PACKAGES("packages")`
+
+    - `JsonValue; type "cloud"constant`
+
+      Environment type
+
+      - `CLOUD("cloud")`
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `String description`
+
+    User-provided description for the environment
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs
+
+  - `String name`
+
+    Human-readable name for the environment
+
+  - `JsonValue; type "environment"constant`
+
+    The type of object (always 'environment')
+
+    - `ENVIRONMENT("environment")`
+
+  - `String updatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.BetaEnvironment;
+import com.anthropic.models.beta.environments.EnvironmentArchiveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaEnvironment betaEnvironment = client.beta().environments().archive("env_011CZkZ9X2dpNyB7HsEFoRfW");
+    }
+}
+```
+
+## Domain Types
+
+### Beta Cloud Config
+
+- `class BetaCloudConfig:`
+
+  `cloud` environment configuration.
+
+  - `Networking networking`
+
+    Network configuration policy.
+
+    - `class BetaUnrestrictedNetwork:`
+
+      Unrestricted network access.
+
+      - `JsonValue; type "unrestricted"constant`
+
+        Network policy type
+
+        - `UNRESTRICTED("unrestricted")`
+
+    - `class BetaLimitedNetwork:`
+
+      Limited network access.
+
+      - `boolean allowMcpServers`
+
+        Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+      - `boolean allowPackageManagers`
+
+        Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+      - `List<String> allowedHosts`
+
+        Specifies domains the container can reach.
+
+      - `JsonValue; type "limited"constant`
+
+        Network policy type
+
+        - `LIMITED("limited")`
+
+  - `BetaPackages packages`
+
+    Package manager configuration.
+
+    - `List<String> apt`
+
+      Ubuntu/Debian packages to install
+
+    - `List<String> cargo`
+
+      Rust packages to install
+
+    - `List<String> gem`
+
+      Ruby packages to install
+
+    - `List<String> go`
+
+      Go packages to install
+
+    - `List<String> npm`
+
+      Node.js packages to install
+
+    - `List<String> pip`
+
+      Python packages to install
+
+    - `Optional<Type> type`
+
+      Package configuration type
+
+      - `PACKAGES("packages")`
+
+  - `JsonValue; type "cloud"constant`
+
+    Environment type
+
+    - `CLOUD("cloud")`
+
+### Beta Cloud Config Params
+
+- `class BetaCloudConfigParams:`
+
+  Request params for `cloud` environment configuration.
+
+  Fields default to null; on update, omitted fields preserve the
+  existing value.
+
+  - `JsonValue; type "cloud"constant`
+
+    Environment type
+
+    - `CLOUD("cloud")`
+
+  - `Optional<Networking> networking`
+
+    Network configuration policy. Omit on update to preserve the existing value.
+
+    - `class BetaUnrestrictedNetwork:`
+
+      Unrestricted network access.
+
+      - `JsonValue; type "unrestricted"constant`
+
+        Network policy type
+
+        - `UNRESTRICTED("unrestricted")`
+
+    - `class BetaLimitedNetworkParams:`
+
+      Limited network request params.
+
+      Fields default to null; on update, omitted fields preserve the
+      existing value.
+
+      - `JsonValue; type "limited"constant`
+
+        Network policy type
+
+        - `LIMITED("limited")`
+
+      - `Optional<Boolean> allowMcpServers`
+
+        Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+      - `Optional<Boolean> allowPackageManagers`
+
+        Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+      - `Optional<List<String>> allowedHosts`
+
+        Specifies domains the container can reach.
+
+  - `Optional<BetaPackagesParams> packages`
+
+    Specify packages (and optionally their versions) available in this environment.
+
+    When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+    - `Optional<List<String>> apt`
+
+      Ubuntu/Debian packages to install
+
+    - `Optional<List<String>> cargo`
+
+      Rust packages to install
+
+    - `Optional<List<String>> gem`
+
+      Ruby packages to install
+
+    - `Optional<List<String>> go`
+
+      Go packages to install
+
+    - `Optional<List<String>> npm`
+
+      Node.js packages to install
+
+    - `Optional<List<String>> pip`
+
+      Python packages to install
+
+    - `Optional<Type> type`
+
+      Package configuration type
+
+      - `PACKAGES("packages")`
+
+### Beta Environment
+
+- `class BetaEnvironment:`
+
+  Unified Environment resource for both cloud and BYOC environments.
+
+  - `String id`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `Optional<String> archivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `BetaCloudConfig config`
+
+    `cloud` environment configuration.
+
+    - `Networking networking`
+
+      Network configuration policy.
+
+      - `class BetaUnrestrictedNetwork:`
+
+        Unrestricted network access.
+
+        - `JsonValue; type "unrestricted"constant`
+
+          Network policy type
+
+          - `UNRESTRICTED("unrestricted")`
+
+      - `class BetaLimitedNetwork:`
+
+        Limited network access.
+
+        - `boolean allowMcpServers`
+
+          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+        - `boolean allowPackageManagers`
+
+          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+        - `List<String> allowedHosts`
+
+          Specifies domains the container can reach.
+
+        - `JsonValue; type "limited"constant`
+
+          Network policy type
+
+          - `LIMITED("limited")`
+
+    - `BetaPackages packages`
+
+      Package manager configuration.
+
+      - `List<String> apt`
+
+        Ubuntu/Debian packages to install
+
+      - `List<String> cargo`
+
+        Rust packages to install
+
+      - `List<String> gem`
+
+        Ruby packages to install
+
+      - `List<String> go`
+
+        Go packages to install
+
+      - `List<String> npm`
+
+        Node.js packages to install
+
+      - `List<String> pip`
+
+        Python packages to install
+
+      - `Optional<Type> type`
+
+        Package configuration type
+
+        - `PACKAGES("packages")`
+
+    - `JsonValue; type "cloud"constant`
+
+      Environment type
+
+      - `CLOUD("cloud")`
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `String description`
+
+    User-provided description for the environment
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs
+
+  - `String name`
+
+    Human-readable name for the environment
+
+  - `JsonValue; type "environment"constant`
+
+    The type of object (always 'environment')
+
+    - `ENVIRONMENT("environment")`
+
+  - `String updatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+### Beta Environment Delete Response
+
+- `class BetaEnvironmentDeleteResponse:`
+
+  Response after deleting an environment.
+
+  - `String id`
+
+    Environment identifier
+
+  - `JsonValue; type "environment_deleted"constant`
+
+    The type of response
+
+    - `ENVIRONMENT_DELETED("environment_deleted")`
+
+### Beta Limited Network
+
+- `class BetaLimitedNetwork:`
+
+  Limited network access.
+
+  - `boolean allowMcpServers`
+
+    Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+  - `boolean allowPackageManagers`
+
+    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+  - `List<String> allowedHosts`
+
+    Specifies domains the container can reach.
+
+  - `JsonValue; type "limited"constant`
+
+    Network policy type
+
+    - `LIMITED("limited")`
+
+### Beta Limited Network Params
+
+- `class BetaLimitedNetworkParams:`
+
+  Limited network request params.
+
+  Fields default to null; on update, omitted fields preserve the
+  existing value.
+
+  - `JsonValue; type "limited"constant`
+
+    Network policy type
+
+    - `LIMITED("limited")`
+
+  - `Optional<Boolean> allowMcpServers`
+
+    Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+  - `Optional<Boolean> allowPackageManagers`
+
+    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+  - `Optional<List<String>> allowedHosts`
+
+    Specifies domains the container can reach.
+
+### Beta Packages
+
+- `class BetaPackages:`
+
+  Packages (and their versions) available in this environment.
+
+  - `List<String> apt`
+
+    Ubuntu/Debian packages to install
+
+  - `List<String> cargo`
+
+    Rust packages to install
+
+  - `List<String> gem`
+
+    Ruby packages to install
+
+  - `List<String> go`
+
+    Go packages to install
+
+  - `List<String> npm`
+
+    Node.js packages to install
+
+  - `List<String> pip`
+
+    Python packages to install
+
+  - `Optional<Type> type`
+
+    Package configuration type
+
+    - `PACKAGES("packages")`
+
+### Beta Packages Params
+
+- `class BetaPackagesParams:`
+
+  Specify packages (and optionally their versions) available in this environment.
+
+  When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+  - `Optional<List<String>> apt`
+
+    Ubuntu/Debian packages to install
+
+  - `Optional<List<String>> cargo`
+
+    Rust packages to install
+
+  - `Optional<List<String>> gem`
+
+    Ruby packages to install
+
+  - `Optional<List<String>> go`
+
+    Go packages to install
+
+  - `Optional<List<String>> npm`
+
+    Node.js packages to install
+
+  - `Optional<List<String>> pip`
+
+    Python packages to install
+
+  - `Optional<Type> type`
+
+    Package configuration type
+
+    - `PACKAGES("packages")`
+
+### Beta Unrestricted Network
+
+- `class BetaUnrestrictedNetwork:`
+
+  Unrestricted network access.
+
+  - `JsonValue; type "unrestricted"constant`
+
+    Network policy type
+
+    - `UNRESTRICTED("unrestricted")`
+
+# Sessions
+
+## Create
+
+`BetaManagedAgentsSession beta().sessions().create(SessionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/sessions`
+
+Create Session
+
+### Parameters
+
+- `SessionCreateParams params`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `Agent agent`
+
+    Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both id and version specified.
+
+    - `String`
+
+    - `class BetaManagedAgentsAgentParams:`
+
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+      - `String id`
+
+        The `agent` ID.
+
+      - `Type type`
+
+        - `AGENT("agent")`
+
+      - `Optional<Long> version`
+
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+  - `String environmentId`
+
+    ID of the `environment` defining the container configuration for this session.
+
+  - `Optional<Metadata> metadata`
+
+    Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Optional<List<Resource>> resources`
+
+    Resources (e.g. repositories, files) to mount into the session's container.
+
+    - `class BetaManagedAgentsGitHubRepositoryResourceParams:`
+
+      Mount a GitHub repository into the session's container.
+
+      - `String authorizationToken`
+
+        GitHub authorization token used to clone the repository.
+
+      - `Type type`
+
+        - `GITHUB_REPOSITORY("github_repository")`
+
+      - `String url`
+
+        Github URL of the repository
+
+      - `Optional<Checkout> checkout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `class BetaManagedAgentsBranchCheckout:`
+
+          - `String name`
+
+            Branch name to check out.
+
+          - `Type type`
+
+            - `BRANCH("branch")`
+
+        - `class BetaManagedAgentsCommitCheckout:`
+
+          - `String sha`
+
+            Full commit SHA to check out.
+
+          - `Type type`
+
+            - `COMMIT("commit")`
+
+      - `Optional<String> mountPath`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `class BetaManagedAgentsFileResourceParams:`
+
+      Mount a file uploaded via the Files API into the session.
+
+      - `String fileId`
+
+        ID of a previously uploaded file.
+
+      - `Type type`
+
+        - `FILE("file")`
+
+      - `Optional<String> mountPath`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+  - `Optional<String> title`
+
+    Human-readable session title.
+
+  - `Optional<List<String>> vaultIds`
+
+    Vault IDs for stored credentials the agent can use during the session.
+
+### Returns
+
+- `class BetaManagedAgentsSession:`
+
+  A Managed Agents `session`.
+
+  - `String id`
+
+  - `BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `String id`
+
+    - `Optional<String> description`
+
+    - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+      - `String name`
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+    - `BetaManagedAgentsModelConfig model`
+
+      Model identifier and configuration.
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `String name`
+
+    - `List<Skill> skills`
+
+      - `class BetaManagedAgentsAnthropicSkill:`
+
+        A resolved Anthropic-managed skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `ANTHROPIC("anthropic")`
+
+        - `String version`
+
+      - `class BetaManagedAgentsCustomSkill:`
+
+        A resolved user-created custom skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+        - `String version`
+
+    - `Optional<String> system`
+
+    - `List<Tool> tools`
+
+      - `class BetaManagedAgentsAgentToolset20260401:`
+
+        - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `Name name`
+
+            Built-in agent tool identifier.
+
+            - `BASH("bash")`
+
+            - `EDIT("edit")`
+
+            - `READ("read")`
+
+            - `WRITE("write")`
+
+            - `GLOB("glob")`
+
+            - `GREP("grep")`
+
+            - `WEB_FETCH("web_fetch")`
+
+            - `WEB_SEARCH("web_search")`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `Type type`
+
+          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `class BetaManagedAgentsMcpToolset:`
+
+        - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `String name`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `String mcpServerName`
+
+        - `Type type`
+
+          - `MCP_TOOLSET("mcp_toolset")`
+
+      - `class BetaManagedAgentsCustomTool:`
+
+        A custom tool as returned in API responses.
+
+        - `String description`
+
+        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `Optional<Properties> properties`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `Optional<List<String>> required`
+
+            List of required property names.
+
+          - `Optional<Type> type`
+
+            Must be 'object' for tool input schemas.
+
+            - `OBJECT("object")`
+
+        - `String name`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String environmentId`
+
+  - `Metadata metadata`
+
+  - `List<BetaManagedAgentsSessionResource> resources`
+
+    - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `GITHUB_REPOSITORY("github_repository")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String url`
+
+      - `Optional<Checkout> checkout`
+
+        - `class BetaManagedAgentsBranchCheckout:`
+
+          - `String name`
+
+            Branch name to check out.
+
+          - `Type type`
+
+            - `BRANCH("branch")`
+
+        - `class BetaManagedAgentsCommitCheckout:`
+
+          - `String sha`
+
+            Full commit SHA to check out.
+
+          - `Type type`
+
+            - `COMMIT("commit")`
+
+    - `class BetaManagedAgentsFileResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String fileId`
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `FILE("file")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+    - `Optional<Double> activeSeconds`
+
+      Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+    - `Optional<Double> durationSeconds`
+
+      Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+  - `Status status`
+
+    SessionStatus enum
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `TERMINATED("terminated")`
+
+  - `Optional<String> title`
+
+  - `Type type`
+
+    - `SESSION("session")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `Optional<Long> ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `Optional<Long> ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `Optional<Long> cacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+    - `Optional<Long> inputTokens`
+
+      Total input tokens consumed across all turns.
+
+    - `Optional<Long> outputTokens`
+
+      Total output tokens generated across all turns.
+
+  - `List<String> vaultIds`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.BetaManagedAgentsSession;
+import com.anthropic.models.beta.sessions.SessionCreateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        SessionCreateParams params = SessionCreateParams.builder()
+            .agent("agent_011CZkYpogX7uDKUyvBTophP")
+            .environmentId("env_011CZkZ9X2dpNyB7HsEFoRfW")
+            .build();
+        BetaManagedAgentsSession betaManagedAgentsSession = client.beta().sessions().create(params);
+    }
+}
+```
+
+## List
+
+`SessionListPage beta().sessions().list(SessionListParamsparams = SessionListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/sessions`
+
+List Sessions
+
+### Parameters
+
+- `SessionListParams params`
+
+  - `Optional<String> agentId`
+
+    Filter sessions created with this agent ID.
+
+  - `Optional<Long> agentVersion`
+
+    Filter by agent version. Only applies when agent_id is also set.
+
+  - `Optional<LocalDateTime> createdAtGt`
+
+    Return sessions created after this time (exclusive).
+
+  - `Optional<LocalDateTime> createdAtGte`
+
+    Return sessions created at or after this time (inclusive).
+
+  - `Optional<LocalDateTime> createdAtLt`
+
+    Return sessions created before this time (exclusive).
+
+  - `Optional<LocalDateTime> createdAtLte`
+
+    Return sessions created at or before this time (inclusive).
+
+  - `Optional<Boolean> includeArchived`
+
+    When true, includes archived sessions. Default: false (exclude archived).
+
+  - `Optional<Long> limit`
+
+    Maximum number of results to return.
+
+  - `Optional<Order> order`
+
+    Sort direction for results, ordered by created_at. Defaults to desc (newest first).
+
+    - `ASC("asc")`
+
+    - `DESC("desc")`
+
+  - `Optional<String> page`
+
+    Opaque pagination cursor from a previous response's next_page.
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsSession:`
+
+  A Managed Agents `session`.
+
+  - `String id`
+
+  - `BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `String id`
+
+    - `Optional<String> description`
+
+    - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+      - `String name`
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+    - `BetaManagedAgentsModelConfig model`
+
+      Model identifier and configuration.
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `String name`
+
+    - `List<Skill> skills`
+
+      - `class BetaManagedAgentsAnthropicSkill:`
+
+        A resolved Anthropic-managed skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `ANTHROPIC("anthropic")`
+
+        - `String version`
+
+      - `class BetaManagedAgentsCustomSkill:`
+
+        A resolved user-created custom skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+        - `String version`
+
+    - `Optional<String> system`
+
+    - `List<Tool> tools`
+
+      - `class BetaManagedAgentsAgentToolset20260401:`
+
+        - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `Name name`
+
+            Built-in agent tool identifier.
+
+            - `BASH("bash")`
+
+            - `EDIT("edit")`
+
+            - `READ("read")`
+
+            - `WRITE("write")`
+
+            - `GLOB("glob")`
+
+            - `GREP("grep")`
+
+            - `WEB_FETCH("web_fetch")`
+
+            - `WEB_SEARCH("web_search")`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `Type type`
+
+          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `class BetaManagedAgentsMcpToolset:`
+
+        - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `String name`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `String mcpServerName`
+
+        - `Type type`
+
+          - `MCP_TOOLSET("mcp_toolset")`
+
+      - `class BetaManagedAgentsCustomTool:`
+
+        A custom tool as returned in API responses.
+
+        - `String description`
+
+        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `Optional<Properties> properties`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `Optional<List<String>> required`
+
+            List of required property names.
+
+          - `Optional<Type> type`
+
+            Must be 'object' for tool input schemas.
+
+            - `OBJECT("object")`
+
+        - `String name`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String environmentId`
+
+  - `Metadata metadata`
+
+  - `List<BetaManagedAgentsSessionResource> resources`
+
+    - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `GITHUB_REPOSITORY("github_repository")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String url`
+
+      - `Optional<Checkout> checkout`
+
+        - `class BetaManagedAgentsBranchCheckout:`
+
+          - `String name`
+
+            Branch name to check out.
+
+          - `Type type`
+
+            - `BRANCH("branch")`
+
+        - `class BetaManagedAgentsCommitCheckout:`
+
+          - `String sha`
+
+            Full commit SHA to check out.
+
+          - `Type type`
+
+            - `COMMIT("commit")`
+
+    - `class BetaManagedAgentsFileResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String fileId`
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `FILE("file")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+    - `Optional<Double> activeSeconds`
+
+      Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+    - `Optional<Double> durationSeconds`
+
+      Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+  - `Status status`
+
+    SessionStatus enum
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `TERMINATED("terminated")`
+
+  - `Optional<String> title`
+
+  - `Type type`
+
+    - `SESSION("session")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `Optional<Long> ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `Optional<Long> ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `Optional<Long> cacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+    - `Optional<Long> inputTokens`
+
+      Total input tokens consumed across all turns.
+
+    - `Optional<Long> outputTokens`
+
+      Total output tokens generated across all turns.
+
+  - `List<String> vaultIds`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.SessionListPage;
+import com.anthropic.models.beta.sessions.SessionListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        SessionListPage page = client.beta().sessions().list();
+    }
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsSession beta().sessions().retrieve(SessionRetrieveParamsparams = SessionRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/sessions/{session_id}`
+
+Get Session
+
+### Parameters
+
+- `SessionRetrieveParams params`
+
+  - `Optional<String> sessionId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsSession:`
+
+  A Managed Agents `session`.
+
+  - `String id`
+
+  - `BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `String id`
+
+    - `Optional<String> description`
+
+    - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+      - `String name`
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+    - `BetaManagedAgentsModelConfig model`
+
+      Model identifier and configuration.
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `String name`
+
+    - `List<Skill> skills`
+
+      - `class BetaManagedAgentsAnthropicSkill:`
+
+        A resolved Anthropic-managed skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `ANTHROPIC("anthropic")`
+
+        - `String version`
+
+      - `class BetaManagedAgentsCustomSkill:`
+
+        A resolved user-created custom skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+        - `String version`
+
+    - `Optional<String> system`
+
+    - `List<Tool> tools`
+
+      - `class BetaManagedAgentsAgentToolset20260401:`
+
+        - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `Name name`
+
+            Built-in agent tool identifier.
+
+            - `BASH("bash")`
+
+            - `EDIT("edit")`
+
+            - `READ("read")`
+
+            - `WRITE("write")`
+
+            - `GLOB("glob")`
+
+            - `GREP("grep")`
+
+            - `WEB_FETCH("web_fetch")`
+
+            - `WEB_SEARCH("web_search")`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `Type type`
+
+          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `class BetaManagedAgentsMcpToolset:`
+
+        - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `String name`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `String mcpServerName`
+
+        - `Type type`
+
+          - `MCP_TOOLSET("mcp_toolset")`
+
+      - `class BetaManagedAgentsCustomTool:`
+
+        A custom tool as returned in API responses.
+
+        - `String description`
+
+        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `Optional<Properties> properties`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `Optional<List<String>> required`
+
+            List of required property names.
+
+          - `Optional<Type> type`
+
+            Must be 'object' for tool input schemas.
+
+            - `OBJECT("object")`
+
+        - `String name`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String environmentId`
+
+  - `Metadata metadata`
+
+  - `List<BetaManagedAgentsSessionResource> resources`
+
+    - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `GITHUB_REPOSITORY("github_repository")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String url`
+
+      - `Optional<Checkout> checkout`
+
+        - `class BetaManagedAgentsBranchCheckout:`
+
+          - `String name`
+
+            Branch name to check out.
+
+          - `Type type`
+
+            - `BRANCH("branch")`
+
+        - `class BetaManagedAgentsCommitCheckout:`
+
+          - `String sha`
+
+            Full commit SHA to check out.
+
+          - `Type type`
+
+            - `COMMIT("commit")`
+
+    - `class BetaManagedAgentsFileResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String fileId`
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `FILE("file")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+    - `Optional<Double> activeSeconds`
+
+      Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+    - `Optional<Double> durationSeconds`
+
+      Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+  - `Status status`
+
+    SessionStatus enum
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `TERMINATED("terminated")`
+
+  - `Optional<String> title`
+
+  - `Type type`
+
+    - `SESSION("session")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `Optional<Long> ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `Optional<Long> ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `Optional<Long> cacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+    - `Optional<Long> inputTokens`
+
+      Total input tokens consumed across all turns.
+
+    - `Optional<Long> outputTokens`
+
+      Total output tokens generated across all turns.
+
+  - `List<String> vaultIds`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.BetaManagedAgentsSession;
+import com.anthropic.models.beta.sessions.SessionRetrieveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsSession betaManagedAgentsSession = client.beta().sessions().retrieve("sesn_011CZkZAtmR3yMPDzynEDxu7");
+    }
+}
+```
+
+## Update
+
+`BetaManagedAgentsSession beta().sessions().update(SessionUpdateParamsparams = SessionUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/sessions/{session_id}`
+
+Update Session
+
+### Parameters
+
+- `SessionUpdateParams params`
+
+  - `Optional<String> sessionId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `Optional<Metadata> metadata`
+
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
+
+  - `Optional<String> title`
+
+    Human-readable session title.
+
+  - `Optional<List<String>> vaultIds`
+
+    Vault IDs (`vlt_*`) to attach to the session. Not yet supported; requests setting this field are rejected. Reserved for future use.
+
+### Returns
+
+- `class BetaManagedAgentsSession:`
+
+  A Managed Agents `session`.
+
+  - `String id`
+
+  - `BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `String id`
+
+    - `Optional<String> description`
+
+    - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+      - `String name`
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+    - `BetaManagedAgentsModelConfig model`
+
+      Model identifier and configuration.
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `String name`
+
+    - `List<Skill> skills`
+
+      - `class BetaManagedAgentsAnthropicSkill:`
+
+        A resolved Anthropic-managed skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `ANTHROPIC("anthropic")`
+
+        - `String version`
+
+      - `class BetaManagedAgentsCustomSkill:`
+
+        A resolved user-created custom skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+        - `String version`
+
+    - `Optional<String> system`
+
+    - `List<Tool> tools`
+
+      - `class BetaManagedAgentsAgentToolset20260401:`
+
+        - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `Name name`
+
+            Built-in agent tool identifier.
+
+            - `BASH("bash")`
+
+            - `EDIT("edit")`
+
+            - `READ("read")`
+
+            - `WRITE("write")`
+
+            - `GLOB("glob")`
+
+            - `GREP("grep")`
+
+            - `WEB_FETCH("web_fetch")`
+
+            - `WEB_SEARCH("web_search")`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `Type type`
+
+          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `class BetaManagedAgentsMcpToolset:`
+
+        - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `String name`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `String mcpServerName`
+
+        - `Type type`
+
+          - `MCP_TOOLSET("mcp_toolset")`
+
+      - `class BetaManagedAgentsCustomTool:`
+
+        A custom tool as returned in API responses.
+
+        - `String description`
+
+        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `Optional<Properties> properties`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `Optional<List<String>> required`
+
+            List of required property names.
+
+          - `Optional<Type> type`
+
+            Must be 'object' for tool input schemas.
+
+            - `OBJECT("object")`
+
+        - `String name`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String environmentId`
+
+  - `Metadata metadata`
+
+  - `List<BetaManagedAgentsSessionResource> resources`
+
+    - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `GITHUB_REPOSITORY("github_repository")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String url`
+
+      - `Optional<Checkout> checkout`
+
+        - `class BetaManagedAgentsBranchCheckout:`
+
+          - `String name`
+
+            Branch name to check out.
+
+          - `Type type`
+
+            - `BRANCH("branch")`
+
+        - `class BetaManagedAgentsCommitCheckout:`
+
+          - `String sha`
+
+            Full commit SHA to check out.
+
+          - `Type type`
+
+            - `COMMIT("commit")`
+
+    - `class BetaManagedAgentsFileResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String fileId`
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `FILE("file")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+    - `Optional<Double> activeSeconds`
+
+      Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+    - `Optional<Double> durationSeconds`
+
+      Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+  - `Status status`
+
+    SessionStatus enum
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `TERMINATED("terminated")`
+
+  - `Optional<String> title`
+
+  - `Type type`
+
+    - `SESSION("session")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `Optional<Long> ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `Optional<Long> ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `Optional<Long> cacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+    - `Optional<Long> inputTokens`
+
+      Total input tokens consumed across all turns.
+
+    - `Optional<Long> outputTokens`
+
+      Total output tokens generated across all turns.
+
+  - `List<String> vaultIds`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.BetaManagedAgentsSession;
+import com.anthropic.models.beta.sessions.SessionUpdateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsSession betaManagedAgentsSession = client.beta().sessions().update("sesn_011CZkZAtmR3yMPDzynEDxu7");
+    }
+}
+```
+
+## Delete
+
+`BetaManagedAgentsDeletedSession beta().sessions().delete(SessionDeleteParamsparams = SessionDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**delete** `/v1/sessions/{session_id}`
+
+Delete Session
+
+### Parameters
+
+- `SessionDeleteParams params`
+
+  - `Optional<String> sessionId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsDeletedSession:`
+
+  Confirmation that a `session` has been permanently deleted.
+
+  - `String id`
+
+  - `Type type`
+
+    - `SESSION_DELETED("session_deleted")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.BetaManagedAgentsDeletedSession;
+import com.anthropic.models.beta.sessions.SessionDeleteParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsDeletedSession betaManagedAgentsDeletedSession = client.beta().sessions().delete("sesn_011CZkZAtmR3yMPDzynEDxu7");
+    }
+}
+```
+
+## Archive
+
+`BetaManagedAgentsSession beta().sessions().archive(SessionArchiveParamsparams = SessionArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/sessions/{session_id}/archive`
+
+Archive Session
+
+### Parameters
+
+- `SessionArchiveParams params`
+
+  - `Optional<String> sessionId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsSession:`
+
+  A Managed Agents `session`.
+
+  - `String id`
+
+  - `BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `String id`
+
+    - `Optional<String> description`
+
+    - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+      - `String name`
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+    - `BetaManagedAgentsModelConfig model`
+
+      Model identifier and configuration.
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `String name`
+
+    - `List<Skill> skills`
+
+      - `class BetaManagedAgentsAnthropicSkill:`
+
+        A resolved Anthropic-managed skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `ANTHROPIC("anthropic")`
+
+        - `String version`
+
+      - `class BetaManagedAgentsCustomSkill:`
+
+        A resolved user-created custom skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+        - `String version`
+
+    - `Optional<String> system`
+
+    - `List<Tool> tools`
+
+      - `class BetaManagedAgentsAgentToolset20260401:`
+
+        - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `Name name`
+
+            Built-in agent tool identifier.
+
+            - `BASH("bash")`
+
+            - `EDIT("edit")`
+
+            - `READ("read")`
+
+            - `WRITE("write")`
+
+            - `GLOB("glob")`
+
+            - `GREP("grep")`
+
+            - `WEB_FETCH("web_fetch")`
+
+            - `WEB_SEARCH("web_search")`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `Type type`
+
+          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `class BetaManagedAgentsMcpToolset:`
+
+        - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `String name`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `String mcpServerName`
+
+        - `Type type`
+
+          - `MCP_TOOLSET("mcp_toolset")`
+
+      - `class BetaManagedAgentsCustomTool:`
+
+        A custom tool as returned in API responses.
+
+        - `String description`
+
+        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `Optional<Properties> properties`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `Optional<List<String>> required`
+
+            List of required property names.
+
+          - `Optional<Type> type`
+
+            Must be 'object' for tool input schemas.
+
+            - `OBJECT("object")`
+
+        - `String name`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String environmentId`
+
+  - `Metadata metadata`
+
+  - `List<BetaManagedAgentsSessionResource> resources`
+
+    - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `GITHUB_REPOSITORY("github_repository")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String url`
+
+      - `Optional<Checkout> checkout`
+
+        - `class BetaManagedAgentsBranchCheckout:`
+
+          - `String name`
+
+            Branch name to check out.
+
+          - `Type type`
+
+            - `BRANCH("branch")`
+
+        - `class BetaManagedAgentsCommitCheckout:`
+
+          - `String sha`
+
+            Full commit SHA to check out.
+
+          - `Type type`
+
+            - `COMMIT("commit")`
+
+    - `class BetaManagedAgentsFileResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String fileId`
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `FILE("file")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+    - `Optional<Double> activeSeconds`
+
+      Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+    - `Optional<Double> durationSeconds`
+
+      Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+  - `Status status`
+
+    SessionStatus enum
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `TERMINATED("terminated")`
+
+  - `Optional<String> title`
+
+  - `Type type`
+
+    - `SESSION("session")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `Optional<Long> ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `Optional<Long> ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `Optional<Long> cacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+    - `Optional<Long> inputTokens`
+
+      Total input tokens consumed across all turns.
+
+    - `Optional<Long> outputTokens`
+
+      Total output tokens generated across all turns.
+
+  - `List<String> vaultIds`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.BetaManagedAgentsSession;
+import com.anthropic.models.beta.sessions.SessionArchiveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsSession betaManagedAgentsSession = client.beta().sessions().archive("sesn_011CZkZAtmR3yMPDzynEDxu7");
+    }
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Agent Params
+
+- `class BetaManagedAgentsAgentParams:`
+
+  Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+  - `String id`
+
+    The `agent` ID.
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `Optional<Long> version`
+
+    The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+### Beta Managed Agents Branch Checkout
+
+- `class BetaManagedAgentsBranchCheckout:`
+
+  - `String name`
+
+    Branch name to check out.
+
+  - `Type type`
+
+    - `BRANCH("branch")`
+
+### Beta Managed Agents Cache Creation Usage
+
+- `class BetaManagedAgentsCacheCreationUsage:`
+
+  Prompt-cache creation token usage broken down by cache lifetime.
+
+  - `Optional<Long> ephemeral1hInputTokens`
+
+    Tokens used to create 1-hour ephemeral cache entries.
+
+  - `Optional<Long> ephemeral5mInputTokens`
+
+    Tokens used to create 5-minute ephemeral cache entries.
+
+### Beta Managed Agents Commit Checkout
+
+- `class BetaManagedAgentsCommitCheckout:`
+
+  - `String sha`
+
+    Full commit SHA to check out.
+
+  - `Type type`
+
+    - `COMMIT("commit")`
+
+### Beta Managed Agents Deleted Session
+
+- `class BetaManagedAgentsDeletedSession:`
+
+  Confirmation that a `session` has been permanently deleted.
+
+  - `String id`
+
+  - `Type type`
+
+    - `SESSION_DELETED("session_deleted")`
+
+### Beta Managed Agents File Resource Params
+
+- `class BetaManagedAgentsFileResourceParams:`
+
+  Mount a file uploaded via the Files API into the session.
+
+  - `String fileId`
+
+    ID of a previously uploaded file.
+
+  - `Type type`
+
+    - `FILE("file")`
+
+  - `Optional<String> mountPath`
+
+    Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+### Beta Managed Agents GitHub Repository Resource Params
+
+- `class BetaManagedAgentsGitHubRepositoryResourceParams:`
+
+  Mount a GitHub repository into the session's container.
+
+  - `String authorizationToken`
+
+    GitHub authorization token used to clone the repository.
+
+  - `Type type`
+
+    - `GITHUB_REPOSITORY("github_repository")`
+
+  - `String url`
+
+    Github URL of the repository
+
+  - `Optional<Checkout> checkout`
+
+    Branch or commit to check out. Defaults to the repository's default branch.
+
+    - `class BetaManagedAgentsBranchCheckout:`
+
+      - `String name`
+
+        Branch name to check out.
+
+      - `Type type`
+
+        - `BRANCH("branch")`
+
+    - `class BetaManagedAgentsCommitCheckout:`
+
+      - `String sha`
+
+        Full commit SHA to check out.
+
+      - `Type type`
+
+        - `COMMIT("commit")`
+
+  - `Optional<String> mountPath`
+
+    Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+### Beta Managed Agents Session
+
+- `class BetaManagedAgentsSession:`
+
+  A Managed Agents `session`.
+
+  - `String id`
+
+  - `BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `String id`
+
+    - `Optional<String> description`
+
+    - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+      - `String name`
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+    - `BetaManagedAgentsModelConfig model`
+
+      Model identifier and configuration.
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `String name`
+
+    - `List<Skill> skills`
+
+      - `class BetaManagedAgentsAnthropicSkill:`
+
+        A resolved Anthropic-managed skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `ANTHROPIC("anthropic")`
+
+        - `String version`
+
+      - `class BetaManagedAgentsCustomSkill:`
+
+        A resolved user-created custom skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+        - `String version`
+
+    - `Optional<String> system`
+
+    - `List<Tool> tools`
+
+      - `class BetaManagedAgentsAgentToolset20260401:`
+
+        - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `Name name`
+
+            Built-in agent tool identifier.
+
+            - `BASH("bash")`
+
+            - `EDIT("edit")`
+
+            - `READ("read")`
+
+            - `WRITE("write")`
+
+            - `GLOB("glob")`
+
+            - `GREP("grep")`
+
+            - `WEB_FETCH("web_fetch")`
+
+            - `WEB_SEARCH("web_search")`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `Type type`
+
+          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `class BetaManagedAgentsMcpToolset:`
+
+        - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `String name`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `String mcpServerName`
+
+        - `Type type`
+
+          - `MCP_TOOLSET("mcp_toolset")`
+
+      - `class BetaManagedAgentsCustomTool:`
+
+        A custom tool as returned in API responses.
+
+        - `String description`
+
+        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `Optional<Properties> properties`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `Optional<List<String>> required`
+
+            List of required property names.
+
+          - `Optional<Type> type`
+
+            Must be 'object' for tool input schemas.
+
+            - `OBJECT("object")`
+
+        - `String name`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String environmentId`
+
+  - `Metadata metadata`
+
+  - `List<BetaManagedAgentsSessionResource> resources`
+
+    - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `GITHUB_REPOSITORY("github_repository")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String url`
+
+      - `Optional<Checkout> checkout`
+
+        - `class BetaManagedAgentsBranchCheckout:`
+
+          - `String name`
+
+            Branch name to check out.
+
+          - `Type type`
+
+            - `BRANCH("branch")`
+
+        - `class BetaManagedAgentsCommitCheckout:`
+
+          - `String sha`
+
+            Full commit SHA to check out.
+
+          - `Type type`
+
+            - `COMMIT("commit")`
+
+    - `class BetaManagedAgentsFileResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String fileId`
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `FILE("file")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+    - `Optional<Double> activeSeconds`
+
+      Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+    - `Optional<Double> durationSeconds`
+
+      Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+  - `Status status`
+
+    SessionStatus enum
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `TERMINATED("terminated")`
+
+  - `Optional<String> title`
+
+  - `Type type`
+
+    - `SESSION("session")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `Optional<Long> ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `Optional<Long> ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `Optional<Long> cacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+    - `Optional<Long> inputTokens`
+
+      Total input tokens consumed across all turns.
+
+    - `Optional<Long> outputTokens`
+
+      Total output tokens generated across all turns.
+
+  - `List<String> vaultIds`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+### Beta Managed Agents Session Agent
+
+- `class BetaManagedAgentsSessionAgent:`
+
+  Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+  - `String id`
+
+  - `Optional<String> description`
+
+  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+    - `String name`
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+    - `BetaManagedAgentsModel id`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+  - `String name`
+
+  - `List<Skill> skills`
+
+    - `class BetaManagedAgentsAnthropicSkill:`
+
+      A resolved Anthropic-managed skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `String version`
+
+    - `class BetaManagedAgentsCustomSkill:`
+
+      A resolved user-created custom skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `String version`
+
+  - `Optional<String> system`
+
+  - `List<Tool> tools`
+
+    - `class BetaManagedAgentsAgentToolset20260401:`
+
+      - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+    - `class BetaManagedAgentsMcpToolset:`
+
+      - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `String name`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `String mcpServerName`
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+    - `class BetaManagedAgentsCustomTool:`
+
+      A custom tool as returned in API responses.
+
+      - `String description`
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `long version`
+
+### Beta Managed Agents Session Stats
+
+- `class BetaManagedAgentsSessionStats:`
+
+  Timing statistics for a session.
+
+  - `Optional<Double> activeSeconds`
+
+    Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+  - `Optional<Double> durationSeconds`
+
+    Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+### Beta Managed Agents Session Usage
+
+- `class BetaManagedAgentsSessionUsage:`
+
+  Cumulative token usage for a session across all turns.
+
+  - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+    Prompt-cache creation token usage broken down by cache lifetime.
+
+    - `Optional<Long> ephemeral1hInputTokens`
+
+      Tokens used to create 1-hour ephemeral cache entries.
+
+    - `Optional<Long> ephemeral5mInputTokens`
+
+      Tokens used to create 5-minute ephemeral cache entries.
+
+  - `Optional<Long> cacheReadInputTokens`
+
+    Total tokens read from prompt cache.
+
+  - `Optional<Long> inputTokens`
+
+    Total input tokens consumed across all turns.
+
+  - `Optional<Long> outputTokens`
+
+    Total output tokens generated across all turns.
+
+# Events
+
+## List
+
+`EventListPage beta().sessions().events().list(EventListParamsparams = EventListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/sessions/{session_id}/events`
+
+List Events
+
+### Parameters
+
+- `EventListParams params`
+
+  - `Optional<String> sessionId`
+
+  - `Optional<Long> limit`
+
+    Query parameter for limit
+
+  - `Optional<Order> order`
+
+    Sort direction for results, ordered by created_at. Defaults to asc (chronological).
+
+    - `ASC("asc")`
+
+    - `DESC("desc")`
+
+  - `Optional<String> page`
+
+    Opaque pagination cursor from a previous response's next_page.
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsSessionEvent: A class that can be one of several variants.union`
+
+  Union type for all event types in a session.
+
+  - `class BetaManagedAgentsUserMessageEvent:`
+
+    A user message event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Array of content blocks comprising the user message.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Type type`
+
+      - `USER_MESSAGE("user.message")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserInterruptEvent:`
+
+    An interrupt event that pauses agent execution and returns control to the user.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Type type`
+
+      - `USER_INTERRUPT("user.interrupt")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserToolConfirmationEvent:`
+
+    A tool confirmation event that approves or denies a pending tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+      - `ALLOW("allow")`
+
+      - `DENY("deny")`
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+    - `Optional<String> denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserCustomToolResultEvent:`
+
+    Event sent by the client providing the result of a custom tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String customToolUseId`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsAgentCustomToolUseEvent:`
+
+    Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the custom tool being called.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+  - `class BetaManagedAgentsAgentMessageEvent:`
+
+    An agent response event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<BetaManagedAgentsTextBlock> content`
+
+      Array of text blocks comprising the agent response.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MESSAGE("agent.message")`
+
+  - `class BetaManagedAgentsAgentThinkingEvent:`
+
+    Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THINKING("agent.thinking")`
+
+  - `class BetaManagedAgentsAgentMcpToolUseEvent:`
+
+    Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String mcpServerName`
+
+      Name of the MCP server providing the tool.
+
+    - `String name`
+
+      Name of the MCP tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_USE("agent.mcp_tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+  - `class BetaManagedAgentsAgentMcpToolResultEvent:`
+
+    Event representing the result of an MCP tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String mcpToolUseId`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_RESULT("agent.mcp_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentToolUseEvent:`
+
+    Event emitted when the agent invokes a built-in agent tool.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the agent tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_TOOL_USE("agent.tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+  - `class BetaManagedAgentsAgentToolResultEvent:`
+
+    Event representing the result of an agent tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `Type type`
+
+      - `AGENT_TOOL_RESULT("agent.tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
+
+    Indicates that context compaction (summarization) occurred during the session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+
+  - `class BetaManagedAgentsSessionErrorEvent:`
+
+    An error event indicating a problem occurred during session execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Error error`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+      - `class BetaManagedAgentsUnknownError:`
+
+        An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `UNKNOWN_ERROR("unknown_error")`
+
+      - `class BetaManagedAgentsModelOverloadedError:`
+
+        The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
+
+      - `class BetaManagedAgentsModelRateLimitedError:`
+
+        The model request was rate-limited.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
+
+      - `class BetaManagedAgentsModelRequestFailedError:`
+
+        A model request failed for a reason other than overload or rate-limiting.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
+
+      - `class BetaManagedAgentsMcpConnectionFailedError:`
+
+        Failed to connect to an MCP server.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed to connect.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
+
+      - `class BetaManagedAgentsMcpAuthenticationFailedError:`
+
+        Authentication to an MCP server failed.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed authentication.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
+
+      - `class BetaManagedAgentsBillingError:`
+
+        The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `BILLING_ERROR("billing_error")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_ERROR("session.error")`
+
+  - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
+
+    Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+  - `class BetaManagedAgentsSessionStatusRunningEvent:`
+
+    Indicates the session is actively running and the agent is working.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RUNNING("session.status_running")`
+
+  - `class BetaManagedAgentsSessionStatusIdleEvent:`
+
+    Indicates the agent has paused and is awaiting user input.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_STATUS_IDLE("session.status_idle")`
+
+  - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
+
+    Indicates the session has terminated, either due to an error or completion.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+  - `class BetaManagedAgentsSpanModelRequestStartEvent:`
+
+    Emitted when a model request is initiated by the agent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_START("span.model_request_start")`
+
+  - `class BetaManagedAgentsSpanModelRequestEndEvent:`
+
+    Emitted when a model request completes.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Optional<Boolean> isError`
+
+      Whether the model request resulted in an error.
+
+    - `String modelRequestStartId`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `BetaManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
+
+  - `class BetaManagedAgentsSessionDeletedEvent:`
+
+    Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_DELETED("session.deleted")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.events.EventListPage;
+import com.anthropic.models.beta.sessions.events.EventListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        EventListPage page = client.beta().sessions().events().list("sesn_011CZkZAtmR3yMPDzynEDxu7");
+    }
+}
+```
+
+## Send
+
+`BetaManagedAgentsSendSessionEvents beta().sessions().events().send(EventSendParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/sessions/{session_id}/events`
+
+Send Events
+
+### Parameters
+
+- `EventSendParams params`
+
+  - `Optional<String> sessionId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `List<BetaManagedAgentsEventParams> events`
+
+    Events to send to the `session`.
+
+    - `class BetaManagedAgentsUserMessageEventParams:`
+
+      Parameters for sending a user message to the session.
+
+      - `List<Content> content`
+
+        Array of content blocks for the user message.
+
+        - `class BetaManagedAgentsTextBlock:`
+
+          Regular text content.
+
+          - `String text`
+
+            The text content.
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsImageBlock:`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource:`
+
+              Base64-encoded image data.
+
+              - `String data`
+
+                Base64-encoded image data.
+
+              - `String mediaType`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsUrlImageSource:`
+
+              Image referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource:`
+
+              Image referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `IMAGE("image")`
+
+        - `class BetaManagedAgentsDocumentBlock:`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource:`
+
+              Base64-encoded document data.
+
+              - `String data`
+
+                Base64-encoded document data.
+
+              - `String mediaType`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+              Plain text document content.
+
+              - `String data`
+
+                The plain text content.
+
+              - `MediaType mediaType`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `TEXT_PLAIN("text/plain")`
+
+              - `Type type`
+
+                - `TEXT("text")`
+
+            - `class BetaManagedAgentsUrlDocumentSource:`
+
+              Document referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource:`
+
+              Document referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `DOCUMENT("document")`
+
+          - `Optional<String> context`
+
+            Additional context about the document for the model.
+
+          - `Optional<String> title`
+
+            The title of the document.
+
+      - `Type type`
+
+        - `USER_MESSAGE("user.message")`
+
+    - `class BetaManagedAgentsUserInterruptEventParams:`
+
+      Parameters for sending an interrupt to pause the agent.
+
+      - `Type type`
+
+        - `USER_INTERRUPT("user.interrupt")`
+
+    - `class BetaManagedAgentsUserToolConfirmationEventParams:`
+
+      Parameters for confirming or denying a tool execution request.
+
+      - `Result result`
+
+        UserToolConfirmationResult enum
+
+        - `ALLOW("allow")`
+
+        - `DENY("deny")`
+
+      - `String toolUseId`
+
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+      - `Type type`
+
+        - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+      - `Optional<String> denyMessage`
+
+        Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `class BetaManagedAgentsUserCustomToolResultEventParams:`
+
+      Parameters for providing the result of a custom tool execution.
+
+      - `String customToolUseId`
+
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+      - `Type type`
+
+        - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+      - `Optional<List<Content>> content`
+
+        The result content returned by the tool.
+
+        - `class BetaManagedAgentsTextBlock:`
+
+          Regular text content.
+
+          - `String text`
+
+            The text content.
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsImageBlock:`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource:`
+
+              Base64-encoded image data.
+
+              - `String data`
+
+                Base64-encoded image data.
+
+              - `String mediaType`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsUrlImageSource:`
+
+              Image referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource:`
+
+              Image referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `IMAGE("image")`
+
+        - `class BetaManagedAgentsDocumentBlock:`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource:`
+
+              Base64-encoded document data.
+
+              - `String data`
+
+                Base64-encoded document data.
+
+              - `String mediaType`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+              Plain text document content.
+
+              - `String data`
+
+                The plain text content.
+
+              - `MediaType mediaType`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `TEXT_PLAIN("text/plain")`
+
+              - `Type type`
+
+                - `TEXT("text")`
+
+            - `class BetaManagedAgentsUrlDocumentSource:`
+
+              Document referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource:`
+
+              Document referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `DOCUMENT("document")`
+
+          - `Optional<String> context`
+
+            Additional context about the document for the model.
+
+          - `Optional<String> title`
+
+            The title of the document.
+
+      - `Optional<Boolean> isError`
+
+        Whether the tool execution resulted in an error.
+
+### Returns
+
+- `class BetaManagedAgentsSendSessionEvents:`
+
+  Events that were successfully sent to the session.
+
+  - `Optional<List<Data>> data`
+
+    Sent events
+
+    - `class BetaManagedAgentsUserMessageEvent:`
+
+      A user message event in the session conversation.
+
+      - `String id`
+
+        Unique identifier for this event.
+
+      - `List<Content> content`
+
+        Array of content blocks comprising the user message.
+
+        - `class BetaManagedAgentsTextBlock:`
+
+          Regular text content.
+
+          - `String text`
+
+            The text content.
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsImageBlock:`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource:`
+
+              Base64-encoded image data.
+
+              - `String data`
+
+                Base64-encoded image data.
+
+              - `String mediaType`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsUrlImageSource:`
+
+              Image referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource:`
+
+              Image referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `IMAGE("image")`
+
+        - `class BetaManagedAgentsDocumentBlock:`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource:`
+
+              Base64-encoded document data.
+
+              - `String data`
+
+                Base64-encoded document data.
+
+              - `String mediaType`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+              Plain text document content.
+
+              - `String data`
+
+                The plain text content.
+
+              - `MediaType mediaType`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `TEXT_PLAIN("text/plain")`
+
+              - `Type type`
+
+                - `TEXT("text")`
+
+            - `class BetaManagedAgentsUrlDocumentSource:`
+
+              Document referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource:`
+
+              Document referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `DOCUMENT("document")`
+
+          - `Optional<String> context`
+
+            Additional context about the document for the model.
+
+          - `Optional<String> title`
+
+            The title of the document.
+
+      - `Type type`
+
+        - `USER_MESSAGE("user.message")`
+
+      - `Optional<LocalDateTime> processedAt`
+
+        A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsUserInterruptEvent:`
+
+      An interrupt event that pauses agent execution and returns control to the user.
+
+      - `String id`
+
+        Unique identifier for this event.
+
+      - `Type type`
+
+        - `USER_INTERRUPT("user.interrupt")`
+
+      - `Optional<LocalDateTime> processedAt`
+
+        A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsUserToolConfirmationEvent:`
+
+      A tool confirmation event that approves or denies a pending tool execution.
+
+      - `String id`
+
+        Unique identifier for this event.
+
+      - `Result result`
+
+        UserToolConfirmationResult enum
+
+        - `ALLOW("allow")`
+
+        - `DENY("deny")`
+
+      - `String toolUseId`
+
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+      - `Type type`
+
+        - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+      - `Optional<String> denyMessage`
+
+        Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+      - `Optional<LocalDateTime> processedAt`
+
+        A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsUserCustomToolResultEvent:`
+
+      Event sent by the client providing the result of a custom tool execution.
+
+      - `String id`
+
+        Unique identifier for this event.
+
+      - `String customToolUseId`
+
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+      - `Type type`
+
+        - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+      - `Optional<List<Content>> content`
+
+        The result content returned by the tool.
+
+        - `class BetaManagedAgentsTextBlock:`
+
+          Regular text content.
+
+          - `String text`
+
+            The text content.
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsImageBlock:`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource:`
+
+              Base64-encoded image data.
+
+              - `String data`
+
+                Base64-encoded image data.
+
+              - `String mediaType`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsUrlImageSource:`
+
+              Image referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource:`
+
+              Image referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `IMAGE("image")`
+
+        - `class BetaManagedAgentsDocumentBlock:`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource:`
+
+              Base64-encoded document data.
+
+              - `String data`
+
+                Base64-encoded document data.
+
+              - `String mediaType`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+              Plain text document content.
+
+              - `String data`
+
+                The plain text content.
+
+              - `MediaType mediaType`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `TEXT_PLAIN("text/plain")`
+
+              - `Type type`
+
+                - `TEXT("text")`
+
+            - `class BetaManagedAgentsUrlDocumentSource:`
+
+              Document referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource:`
+
+              Document referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `DOCUMENT("document")`
+
+          - `Optional<String> context`
+
+            Additional context about the document for the model.
+
+          - `Optional<String> title`
+
+            The title of the document.
+
+      - `Optional<Boolean> isError`
+
+        Whether the tool execution resulted in an error.
+
+      - `Optional<LocalDateTime> processedAt`
+
+        A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.events.BetaManagedAgentsSendSessionEvents;
+import com.anthropic.models.beta.sessions.events.BetaManagedAgentsTextBlock;
+import com.anthropic.models.beta.sessions.events.BetaManagedAgentsUserMessageEventParams;
+import com.anthropic.models.beta.sessions.events.EventSendParams;
+import java.util.List;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        EventSendParams params = EventSendParams.builder()
+            .sessionId("sesn_011CZkZAtmR3yMPDzynEDxu7")
+            .addUserMessageEvent(List.of(BetaManagedAgentsUserMessageEventParams.Content.ofText(BetaManagedAgentsTextBlock.builder()
+                .text("Where is my order #1234?")
+                .type(BetaManagedAgentsTextBlock.Type.TEXT)
+                .build())))
+            .build();
+        BetaManagedAgentsSendSessionEvents betaManagedAgentsSendSessionEvents = client.beta().sessions().events().send(params);
+    }
+}
+```
+
+## Stream
+
+`BetaManagedAgentsStreamSessionEvents beta().sessions().events().streamStreaming(EventStreamParamsparams = EventStreamParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/sessions/{session_id}/events/stream`
+
+Stream Events
+
+### Parameters
+
+- `EventStreamParams params`
+
+  - `Optional<String> sessionId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsStreamSessionEvents: A class that can be one of several variants.union`
+
+  Server-sent event in the session stream.
+
+  - `class BetaManagedAgentsUserMessageEvent:`
+
+    A user message event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Array of content blocks comprising the user message.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Type type`
+
+      - `USER_MESSAGE("user.message")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserInterruptEvent:`
+
+    An interrupt event that pauses agent execution and returns control to the user.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Type type`
+
+      - `USER_INTERRUPT("user.interrupt")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserToolConfirmationEvent:`
+
+    A tool confirmation event that approves or denies a pending tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+      - `ALLOW("allow")`
+
+      - `DENY("deny")`
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+    - `Optional<String> denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserCustomToolResultEvent:`
+
+    Event sent by the client providing the result of a custom tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String customToolUseId`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsAgentCustomToolUseEvent:`
+
+    Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the custom tool being called.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+  - `class BetaManagedAgentsAgentMessageEvent:`
+
+    An agent response event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<BetaManagedAgentsTextBlock> content`
+
+      Array of text blocks comprising the agent response.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MESSAGE("agent.message")`
+
+  - `class BetaManagedAgentsAgentThinkingEvent:`
+
+    Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THINKING("agent.thinking")`
+
+  - `class BetaManagedAgentsAgentMcpToolUseEvent:`
+
+    Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String mcpServerName`
+
+      Name of the MCP server providing the tool.
+
+    - `String name`
+
+      Name of the MCP tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_USE("agent.mcp_tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+  - `class BetaManagedAgentsAgentMcpToolResultEvent:`
+
+    Event representing the result of an MCP tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String mcpToolUseId`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_RESULT("agent.mcp_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentToolUseEvent:`
+
+    Event emitted when the agent invokes a built-in agent tool.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the agent tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_TOOL_USE("agent.tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+  - `class BetaManagedAgentsAgentToolResultEvent:`
+
+    Event representing the result of an agent tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `Type type`
+
+      - `AGENT_TOOL_RESULT("agent.tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
+
+    Indicates that context compaction (summarization) occurred during the session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+
+  - `class BetaManagedAgentsSessionErrorEvent:`
+
+    An error event indicating a problem occurred during session execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Error error`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+      - `class BetaManagedAgentsUnknownError:`
+
+        An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `UNKNOWN_ERROR("unknown_error")`
+
+      - `class BetaManagedAgentsModelOverloadedError:`
+
+        The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
+
+      - `class BetaManagedAgentsModelRateLimitedError:`
+
+        The model request was rate-limited.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
+
+      - `class BetaManagedAgentsModelRequestFailedError:`
+
+        A model request failed for a reason other than overload or rate-limiting.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
+
+      - `class BetaManagedAgentsMcpConnectionFailedError:`
+
+        Failed to connect to an MCP server.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed to connect.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
+
+      - `class BetaManagedAgentsMcpAuthenticationFailedError:`
+
+        Authentication to an MCP server failed.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed authentication.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
+
+      - `class BetaManagedAgentsBillingError:`
+
+        The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `BILLING_ERROR("billing_error")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_ERROR("session.error")`
+
+  - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
+
+    Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+  - `class BetaManagedAgentsSessionStatusRunningEvent:`
+
+    Indicates the session is actively running and the agent is working.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RUNNING("session.status_running")`
+
+  - `class BetaManagedAgentsSessionStatusIdleEvent:`
+
+    Indicates the agent has paused and is awaiting user input.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_STATUS_IDLE("session.status_idle")`
+
+  - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
+
+    Indicates the session has terminated, either due to an error or completion.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+  - `class BetaManagedAgentsSpanModelRequestStartEvent:`
+
+    Emitted when a model request is initiated by the agent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_START("span.model_request_start")`
+
+  - `class BetaManagedAgentsSpanModelRequestEndEvent:`
+
+    Emitted when a model request completes.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Optional<Boolean> isError`
+
+      Whether the model request resulted in an error.
+
+    - `String modelRequestStartId`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `BetaManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
+
+  - `class BetaManagedAgentsSessionDeletedEvent:`
+
+    Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_DELETED("session.deleted")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.http.StreamResponse;
+import com.anthropic.models.beta.sessions.events.BetaManagedAgentsStreamSessionEvents;
+import com.anthropic.models.beta.sessions.events.EventStreamParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        StreamResponse<BetaManagedAgentsStreamSessionEvents> betaManagedAgentsStreamSessionEvents = client.beta().sessions().events().streamStreaming("sesn_011CZkZAtmR3yMPDzynEDxu7");
+    }
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Agent Custom Tool Use Event
+
+- `class BetaManagedAgentsAgentCustomToolUseEvent:`
+
+  Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `Input input`
+
+    Input parameters for the tool call.
+
+  - `String name`
+
+    Name of the custom tool being called.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+### Beta Managed Agents Agent MCP Tool Result Event
+
+- `class BetaManagedAgentsAgentMcpToolResultEvent:`
+
+  Event representing the result of an MCP tool execution.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `String mcpToolUseId`
+
+    The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `AGENT_MCP_TOOL_RESULT("agent.mcp_tool_result")`
+
+  - `Optional<List<Content>> content`
+
+    The result content returned by the tool.
+
+    - `class BetaManagedAgentsTextBlock:`
+
+      Regular text content.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `class BetaManagedAgentsImageBlock:`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for image source variants.
+
+        - `class BetaManagedAgentsBase64ImageSource:`
+
+          Base64-encoded image data.
+
+          - `String data`
+
+            Base64-encoded image data.
+
+          - `String mediaType`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsUrlImageSource:`
+
+          Image referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the image to fetch.
+
+        - `class BetaManagedAgentsFileImageSource:`
+
+          Image referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `IMAGE("image")`
+
+    - `class BetaManagedAgentsDocumentBlock:`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for document source variants.
+
+        - `class BetaManagedAgentsBase64DocumentSource:`
+
+          Base64-encoded document data.
+
+          - `String data`
+
+            Base64-encoded document data.
+
+          - `String mediaType`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+          Plain text document content.
+
+          - `String data`
+
+            The plain text content.
+
+          - `MediaType mediaType`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `TEXT_PLAIN("text/plain")`
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsUrlDocumentSource:`
+
+          Document referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the document to fetch.
+
+        - `class BetaManagedAgentsFileDocumentSource:`
+
+          Document referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `DOCUMENT("document")`
+
+      - `Optional<String> context`
+
+        Additional context about the document for the model.
+
+      - `Optional<String> title`
+
+        The title of the document.
+
+  - `Optional<Boolean> isError`
+
+    Whether the tool execution resulted in an error.
+
+### Beta Managed Agents Agent MCP Tool Use Event
+
+- `class BetaManagedAgentsAgentMcpToolUseEvent:`
+
+  Event emitted when the agent invokes a tool provided by an MCP server.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `Input input`
+
+    Input parameters for the tool call.
+
+  - `String mcpServerName`
+
+    Name of the MCP server providing the tool.
+
+  - `String name`
+
+    Name of the MCP tool being used.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `AGENT_MCP_TOOL_USE("agent.mcp_tool_use")`
+
+  - `Optional<EvaluatedPermission> evaluatedPermission`
+
+    AgentEvaluatedPermission enum
+
+    - `ALLOW("allow")`
+
+    - `ASK("ask")`
+
+    - `DENY("deny")`
+
+### Beta Managed Agents Agent Message Event
+
+- `class BetaManagedAgentsAgentMessageEvent:`
+
+  An agent response event in the session conversation.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `List<BetaManagedAgentsTextBlock> content`
+
+    Array of text blocks comprising the agent response.
+
+    - `String text`
+
+      The text content.
+
+    - `Type type`
+
+      - `TEXT("text")`
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `AGENT_MESSAGE("agent.message")`
+
+### Beta Managed Agents Agent Thinking Event
+
+- `class BetaManagedAgentsAgentThinkingEvent:`
+
+  Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `AGENT_THINKING("agent.thinking")`
+
+### Beta Managed Agents Agent Thread Context Compacted Event
+
+- `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
+
+  Indicates that context compaction (summarization) occurred during the session.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+
+### Beta Managed Agents Agent Tool Result Event
+
+- `class BetaManagedAgentsAgentToolResultEvent:`
+
+  Event representing the result of an agent tool execution.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String toolUseId`
+
+    The id of the `agent.tool_use` event this result corresponds to.
+
+  - `Type type`
+
+    - `AGENT_TOOL_RESULT("agent.tool_result")`
+
+  - `Optional<List<Content>> content`
+
+    The result content returned by the tool.
+
+    - `class BetaManagedAgentsTextBlock:`
+
+      Regular text content.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `class BetaManagedAgentsImageBlock:`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for image source variants.
+
+        - `class BetaManagedAgentsBase64ImageSource:`
+
+          Base64-encoded image data.
+
+          - `String data`
+
+            Base64-encoded image data.
+
+          - `String mediaType`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsUrlImageSource:`
+
+          Image referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the image to fetch.
+
+        - `class BetaManagedAgentsFileImageSource:`
+
+          Image referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `IMAGE("image")`
+
+    - `class BetaManagedAgentsDocumentBlock:`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for document source variants.
+
+        - `class BetaManagedAgentsBase64DocumentSource:`
+
+          Base64-encoded document data.
+
+          - `String data`
+
+            Base64-encoded document data.
+
+          - `String mediaType`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+          Plain text document content.
+
+          - `String data`
+
+            The plain text content.
+
+          - `MediaType mediaType`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `TEXT_PLAIN("text/plain")`
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsUrlDocumentSource:`
+
+          Document referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the document to fetch.
+
+        - `class BetaManagedAgentsFileDocumentSource:`
+
+          Document referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `DOCUMENT("document")`
+
+      - `Optional<String> context`
+
+        Additional context about the document for the model.
+
+      - `Optional<String> title`
+
+        The title of the document.
+
+  - `Optional<Boolean> isError`
+
+    Whether the tool execution resulted in an error.
+
+### Beta Managed Agents Agent Tool Use Event
+
+- `class BetaManagedAgentsAgentToolUseEvent:`
+
+  Event emitted when the agent invokes a built-in agent tool.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `Input input`
+
+    Input parameters for the tool call.
+
+  - `String name`
+
+    Name of the agent tool being used.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `AGENT_TOOL_USE("agent.tool_use")`
+
+  - `Optional<EvaluatedPermission> evaluatedPermission`
+
+    AgentEvaluatedPermission enum
+
+    - `ALLOW("allow")`
+
+    - `ASK("ask")`
+
+    - `DENY("deny")`
+
+### Beta Managed Agents Base64 Document Source
+
+- `class BetaManagedAgentsBase64DocumentSource:`
+
+  Base64-encoded document data.
+
+  - `String data`
+
+    Base64-encoded document data.
+
+  - `String mediaType`
+
+    MIME type of the document (e.g., "application/pdf").
+
+  - `Type type`
+
+    - `BASE64("base64")`
+
+### Beta Managed Agents Base64 Image Source
+
+- `class BetaManagedAgentsBase64ImageSource:`
+
+  Base64-encoded image data.
+
+  - `String data`
+
+    Base64-encoded image data.
+
+  - `String mediaType`
+
+    MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+  - `Type type`
+
+    - `BASE64("base64")`
+
+### Beta Managed Agents Billing Error
+
+- `class BetaManagedAgentsBillingError:`
+
+  The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+  - `String message`
+
+    Human-readable error description.
+
+  - `RetryStatus retryStatus`
+
+    What the client should do next in response to this error.
+
+    - `class BetaManagedAgentsRetryStatusRetrying:`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `Type type`
+
+        - `RETRYING("retrying")`
+
+    - `class BetaManagedAgentsRetryStatusExhausted:`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `Type type`
+
+        - `EXHAUSTED("exhausted")`
+
+    - `class BetaManagedAgentsRetryStatusTerminal:`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `Type type`
+
+        - `TERMINAL("terminal")`
+
+  - `Type type`
+
+    - `BILLING_ERROR("billing_error")`
+
+### Beta Managed Agents Document Block
+
+- `class BetaManagedAgentsDocumentBlock:`
+
+  Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+  - `Source source`
+
+    Union type for document source variants.
+
+    - `class BetaManagedAgentsBase64DocumentSource:`
+
+      Base64-encoded document data.
+
+      - `String data`
+
+        Base64-encoded document data.
+
+      - `String mediaType`
+
+        MIME type of the document (e.g., "application/pdf").
+
+      - `Type type`
+
+        - `BASE64("base64")`
+
+    - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+      Plain text document content.
+
+      - `String data`
+
+        The plain text content.
+
+      - `MediaType mediaType`
+
+        MIME type of the text content. Must be "text/plain".
+
+        - `TEXT_PLAIN("text/plain")`
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `class BetaManagedAgentsUrlDocumentSource:`
+
+      Document referenced by URL.
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+        URL of the document to fetch.
+
+    - `class BetaManagedAgentsFileDocumentSource:`
+
+      Document referenced by file ID.
+
+      - `String fileId`
+
+        ID of a previously uploaded file.
+
+      - `Type type`
+
+        - `FILE("file")`
+
+  - `Type type`
+
+    - `DOCUMENT("document")`
+
+  - `Optional<String> context`
+
+    Additional context about the document for the model.
+
+  - `Optional<String> title`
+
+    The title of the document.
+
+### Beta Managed Agents Event Params
+
+- `class BetaManagedAgentsEventParams: A class that can be one of several variants.union`
+
+  Union type for event parameters that can be sent to a session.
+
+  - `class BetaManagedAgentsUserMessageEventParams:`
+
+    Parameters for sending a user message to the session.
+
+    - `List<Content> content`
+
+      Array of content blocks for the user message.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Type type`
+
+      - `USER_MESSAGE("user.message")`
+
+  - `class BetaManagedAgentsUserInterruptEventParams:`
+
+    Parameters for sending an interrupt to pause the agent.
+
+    - `Type type`
+
+      - `USER_INTERRUPT("user.interrupt")`
+
+  - `class BetaManagedAgentsUserToolConfirmationEventParams:`
+
+    Parameters for confirming or denying a tool execution request.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+      - `ALLOW("allow")`
+
+      - `DENY("deny")`
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+    - `Optional<String> denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+  - `class BetaManagedAgentsUserCustomToolResultEventParams:`
+
+    Parameters for providing the result of a custom tool execution.
+
+    - `String customToolUseId`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+### Beta Managed Agents File Document Source
+
+- `class BetaManagedAgentsFileDocumentSource:`
+
+  Document referenced by file ID.
+
+  - `String fileId`
+
+    ID of a previously uploaded file.
+
+  - `Type type`
+
+    - `FILE("file")`
+
+### Beta Managed Agents File Image Source
+
+- `class BetaManagedAgentsFileImageSource:`
+
+  Image referenced by file ID.
+
+  - `String fileId`
+
+    ID of a previously uploaded file.
+
+  - `Type type`
+
+    - `FILE("file")`
+
+### Beta Managed Agents Image Block
+
+- `class BetaManagedAgentsImageBlock:`
+
+  Image content specified directly as base64 data or as a reference via a URL.
+
+  - `Source source`
+
+    Union type for image source variants.
+
+    - `class BetaManagedAgentsBase64ImageSource:`
+
+      Base64-encoded image data.
+
+      - `String data`
+
+        Base64-encoded image data.
+
+      - `String mediaType`
+
+        MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+      - `Type type`
+
+        - `BASE64("base64")`
+
+    - `class BetaManagedAgentsUrlImageSource:`
+
+      Image referenced by URL.
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+        URL of the image to fetch.
+
+    - `class BetaManagedAgentsFileImageSource:`
+
+      Image referenced by file ID.
+
+      - `String fileId`
+
+        ID of a previously uploaded file.
+
+      - `Type type`
+
+        - `FILE("file")`
+
+  - `Type type`
+
+    - `IMAGE("image")`
+
+### Beta Managed Agents MCP Authentication Failed Error
+
+- `class BetaManagedAgentsMcpAuthenticationFailedError:`
+
+  Authentication to an MCP server failed.
+
+  - `String mcpServerName`
+
+    Name of the MCP server that failed authentication.
+
+  - `String message`
+
+    Human-readable error description.
+
+  - `RetryStatus retryStatus`
+
+    What the client should do next in response to this error.
+
+    - `class BetaManagedAgentsRetryStatusRetrying:`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `Type type`
+
+        - `RETRYING("retrying")`
+
+    - `class BetaManagedAgentsRetryStatusExhausted:`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `Type type`
+
+        - `EXHAUSTED("exhausted")`
+
+    - `class BetaManagedAgentsRetryStatusTerminal:`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `Type type`
+
+        - `TERMINAL("terminal")`
+
+  - `Type type`
+
+    - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
+
+### Beta Managed Agents MCP Connection Failed Error
+
+- `class BetaManagedAgentsMcpConnectionFailedError:`
+
+  Failed to connect to an MCP server.
+
+  - `String mcpServerName`
+
+    Name of the MCP server that failed to connect.
+
+  - `String message`
+
+    Human-readable error description.
+
+  - `RetryStatus retryStatus`
+
+    What the client should do next in response to this error.
+
+    - `class BetaManagedAgentsRetryStatusRetrying:`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `Type type`
+
+        - `RETRYING("retrying")`
+
+    - `class BetaManagedAgentsRetryStatusExhausted:`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `Type type`
+
+        - `EXHAUSTED("exhausted")`
+
+    - `class BetaManagedAgentsRetryStatusTerminal:`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `Type type`
+
+        - `TERMINAL("terminal")`
+
+  - `Type type`
+
+    - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
+
+### Beta Managed Agents Model Overloaded Error
+
+- `class BetaManagedAgentsModelOverloadedError:`
+
+  The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+  - `String message`
+
+    Human-readable error description.
+
+  - `RetryStatus retryStatus`
+
+    What the client should do next in response to this error.
+
+    - `class BetaManagedAgentsRetryStatusRetrying:`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `Type type`
+
+        - `RETRYING("retrying")`
+
+    - `class BetaManagedAgentsRetryStatusExhausted:`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `Type type`
+
+        - `EXHAUSTED("exhausted")`
+
+    - `class BetaManagedAgentsRetryStatusTerminal:`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `Type type`
+
+        - `TERMINAL("terminal")`
+
+  - `Type type`
+
+    - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
+
+### Beta Managed Agents Model Rate Limited Error
+
+- `class BetaManagedAgentsModelRateLimitedError:`
+
+  The model request was rate-limited.
+
+  - `String message`
+
+    Human-readable error description.
+
+  - `RetryStatus retryStatus`
+
+    What the client should do next in response to this error.
+
+    - `class BetaManagedAgentsRetryStatusRetrying:`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `Type type`
+
+        - `RETRYING("retrying")`
+
+    - `class BetaManagedAgentsRetryStatusExhausted:`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `Type type`
+
+        - `EXHAUSTED("exhausted")`
+
+    - `class BetaManagedAgentsRetryStatusTerminal:`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `Type type`
+
+        - `TERMINAL("terminal")`
+
+  - `Type type`
+
+    - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
+
+### Beta Managed Agents Model Request Failed Error
+
+- `class BetaManagedAgentsModelRequestFailedError:`
+
+  A model request failed for a reason other than overload or rate-limiting.
+
+  - `String message`
+
+    Human-readable error description.
+
+  - `RetryStatus retryStatus`
+
+    What the client should do next in response to this error.
+
+    - `class BetaManagedAgentsRetryStatusRetrying:`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `Type type`
+
+        - `RETRYING("retrying")`
+
+    - `class BetaManagedAgentsRetryStatusExhausted:`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `Type type`
+
+        - `EXHAUSTED("exhausted")`
+
+    - `class BetaManagedAgentsRetryStatusTerminal:`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `Type type`
+
+        - `TERMINAL("terminal")`
+
+  - `Type type`
+
+    - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
+
+### Beta Managed Agents Plain Text Document Source
+
+- `class BetaManagedAgentsPlainTextDocumentSource:`
+
+  Plain text document content.
+
+  - `String data`
+
+    The plain text content.
+
+  - `MediaType mediaType`
+
+    MIME type of the text content. Must be "text/plain".
+
+    - `TEXT_PLAIN("text/plain")`
+
+  - `Type type`
+
+    - `TEXT("text")`
+
+### Beta Managed Agents Retry Status Exhausted
+
+- `class BetaManagedAgentsRetryStatusExhausted:`
+
+  This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+  - `Type type`
+
+    - `EXHAUSTED("exhausted")`
+
+### Beta Managed Agents Retry Status Retrying
+
+- `class BetaManagedAgentsRetryStatusRetrying:`
+
+  The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+  - `Type type`
+
+    - `RETRYING("retrying")`
+
+### Beta Managed Agents Retry Status Terminal
+
+- `class BetaManagedAgentsRetryStatusTerminal:`
+
+  The session encountered a terminal error and will transition to `terminated` state.
+
+  - `Type type`
+
+    - `TERMINAL("terminal")`
+
+### Beta Managed Agents Send Session Events
+
+- `class BetaManagedAgentsSendSessionEvents:`
+
+  Events that were successfully sent to the session.
+
+  - `Optional<List<Data>> data`
+
+    Sent events
+
+    - `class BetaManagedAgentsUserMessageEvent:`
+
+      A user message event in the session conversation.
+
+      - `String id`
+
+        Unique identifier for this event.
+
+      - `List<Content> content`
+
+        Array of content blocks comprising the user message.
+
+        - `class BetaManagedAgentsTextBlock:`
+
+          Regular text content.
+
+          - `String text`
+
+            The text content.
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsImageBlock:`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource:`
+
+              Base64-encoded image data.
+
+              - `String data`
+
+                Base64-encoded image data.
+
+              - `String mediaType`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsUrlImageSource:`
+
+              Image referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource:`
+
+              Image referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `IMAGE("image")`
+
+        - `class BetaManagedAgentsDocumentBlock:`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource:`
+
+              Base64-encoded document data.
+
+              - `String data`
+
+                Base64-encoded document data.
+
+              - `String mediaType`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+              Plain text document content.
+
+              - `String data`
+
+                The plain text content.
+
+              - `MediaType mediaType`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `TEXT_PLAIN("text/plain")`
+
+              - `Type type`
+
+                - `TEXT("text")`
+
+            - `class BetaManagedAgentsUrlDocumentSource:`
+
+              Document referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource:`
+
+              Document referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `DOCUMENT("document")`
+
+          - `Optional<String> context`
+
+            Additional context about the document for the model.
+
+          - `Optional<String> title`
+
+            The title of the document.
+
+      - `Type type`
+
+        - `USER_MESSAGE("user.message")`
+
+      - `Optional<LocalDateTime> processedAt`
+
+        A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsUserInterruptEvent:`
+
+      An interrupt event that pauses agent execution and returns control to the user.
+
+      - `String id`
+
+        Unique identifier for this event.
+
+      - `Type type`
+
+        - `USER_INTERRUPT("user.interrupt")`
+
+      - `Optional<LocalDateTime> processedAt`
+
+        A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsUserToolConfirmationEvent:`
+
+      A tool confirmation event that approves or denies a pending tool execution.
+
+      - `String id`
+
+        Unique identifier for this event.
+
+      - `Result result`
+
+        UserToolConfirmationResult enum
+
+        - `ALLOW("allow")`
+
+        - `DENY("deny")`
+
+      - `String toolUseId`
+
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+      - `Type type`
+
+        - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+      - `Optional<String> denyMessage`
+
+        Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+      - `Optional<LocalDateTime> processedAt`
+
+        A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsUserCustomToolResultEvent:`
+
+      Event sent by the client providing the result of a custom tool execution.
+
+      - `String id`
+
+        Unique identifier for this event.
+
+      - `String customToolUseId`
+
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+      - `Type type`
+
+        - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+      - `Optional<List<Content>> content`
+
+        The result content returned by the tool.
+
+        - `class BetaManagedAgentsTextBlock:`
+
+          Regular text content.
+
+          - `String text`
+
+            The text content.
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsImageBlock:`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource:`
+
+              Base64-encoded image data.
+
+              - `String data`
+
+                Base64-encoded image data.
+
+              - `String mediaType`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsUrlImageSource:`
+
+              Image referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource:`
+
+              Image referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `IMAGE("image")`
+
+        - `class BetaManagedAgentsDocumentBlock:`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Source source`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource:`
+
+              Base64-encoded document data.
+
+              - `String data`
+
+                Base64-encoded document data.
+
+              - `String mediaType`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `Type type`
+
+                - `BASE64("base64")`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+              Plain text document content.
+
+              - `String data`
+
+                The plain text content.
+
+              - `MediaType mediaType`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `TEXT_PLAIN("text/plain")`
+
+              - `Type type`
+
+                - `TEXT("text")`
+
+            - `class BetaManagedAgentsUrlDocumentSource:`
+
+              Document referenced by URL.
+
+              - `Type type`
+
+                - `URL("url")`
+
+              - `String url`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource:`
+
+              Document referenced by file ID.
+
+              - `String fileId`
+
+                ID of a previously uploaded file.
+
+              - `Type type`
+
+                - `FILE("file")`
+
+          - `Type type`
+
+            - `DOCUMENT("document")`
+
+          - `Optional<String> context`
+
+            Additional context about the document for the model.
+
+          - `Optional<String> title`
+
+            The title of the document.
+
+      - `Optional<Boolean> isError`
+
+        Whether the tool execution resulted in an error.
+
+      - `Optional<LocalDateTime> processedAt`
+
+        A timestamp in RFC 3339 format
+
+### Beta Managed Agents Session Deleted Event
+
+- `class BetaManagedAgentsSessionDeletedEvent:`
+
+  Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `SESSION_DELETED("session.deleted")`
+
+### Beta Managed Agents Session End Turn
+
+- `class BetaManagedAgentsSessionEndTurn:`
+
+  The agent completed its turn naturally and is ready for the next user message.
+
+  - `Type type`
+
+    - `END_TURN("end_turn")`
+
+### Beta Managed Agents Session Error Event
+
+- `class BetaManagedAgentsSessionErrorEvent:`
+
+  An error event indicating a problem occurred during session execution.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `Error error`
+
+    An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+    - `class BetaManagedAgentsUnknownError:`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+      - `String message`
+
+        Human-readable error description.
+
+      - `RetryStatus retryStatus`
+
+        What the client should do next in response to this error.
+
+        - `class BetaManagedAgentsRetryStatusRetrying:`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `Type type`
+
+            - `RETRYING("retrying")`
+
+        - `class BetaManagedAgentsRetryStatusExhausted:`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `Type type`
+
+            - `EXHAUSTED("exhausted")`
+
+        - `class BetaManagedAgentsRetryStatusTerminal:`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+          - `Type type`
+
+            - `TERMINAL("terminal")`
+
+      - `Type type`
+
+        - `UNKNOWN_ERROR("unknown_error")`
+
+    - `class BetaManagedAgentsModelOverloadedError:`
+
+      The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+      - `String message`
+
+        Human-readable error description.
+
+      - `RetryStatus retryStatus`
+
+        What the client should do next in response to this error.
+
+        - `class BetaManagedAgentsRetryStatusRetrying:`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `Type type`
+
+            - `RETRYING("retrying")`
+
+        - `class BetaManagedAgentsRetryStatusExhausted:`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `Type type`
+
+            - `EXHAUSTED("exhausted")`
+
+        - `class BetaManagedAgentsRetryStatusTerminal:`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+          - `Type type`
+
+            - `TERMINAL("terminal")`
+
+      - `Type type`
+
+        - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
+
+    - `class BetaManagedAgentsModelRateLimitedError:`
+
+      The model request was rate-limited.
+
+      - `String message`
+
+        Human-readable error description.
+
+      - `RetryStatus retryStatus`
+
+        What the client should do next in response to this error.
+
+        - `class BetaManagedAgentsRetryStatusRetrying:`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `Type type`
+
+            - `RETRYING("retrying")`
+
+        - `class BetaManagedAgentsRetryStatusExhausted:`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `Type type`
+
+            - `EXHAUSTED("exhausted")`
+
+        - `class BetaManagedAgentsRetryStatusTerminal:`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+          - `Type type`
+
+            - `TERMINAL("terminal")`
+
+      - `Type type`
+
+        - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
+
+    - `class BetaManagedAgentsModelRequestFailedError:`
+
+      A model request failed for a reason other than overload or rate-limiting.
+
+      - `String message`
+
+        Human-readable error description.
+
+      - `RetryStatus retryStatus`
+
+        What the client should do next in response to this error.
+
+        - `class BetaManagedAgentsRetryStatusRetrying:`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `Type type`
+
+            - `RETRYING("retrying")`
+
+        - `class BetaManagedAgentsRetryStatusExhausted:`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `Type type`
+
+            - `EXHAUSTED("exhausted")`
+
+        - `class BetaManagedAgentsRetryStatusTerminal:`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+          - `Type type`
+
+            - `TERMINAL("terminal")`
+
+      - `Type type`
+
+        - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
+
+    - `class BetaManagedAgentsMcpConnectionFailedError:`
+
+      Failed to connect to an MCP server.
+
+      - `String mcpServerName`
+
+        Name of the MCP server that failed to connect.
+
+      - `String message`
+
+        Human-readable error description.
+
+      - `RetryStatus retryStatus`
+
+        What the client should do next in response to this error.
+
+        - `class BetaManagedAgentsRetryStatusRetrying:`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `Type type`
+
+            - `RETRYING("retrying")`
+
+        - `class BetaManagedAgentsRetryStatusExhausted:`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `Type type`
+
+            - `EXHAUSTED("exhausted")`
+
+        - `class BetaManagedAgentsRetryStatusTerminal:`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+          - `Type type`
+
+            - `TERMINAL("terminal")`
+
+      - `Type type`
+
+        - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
+
+    - `class BetaManagedAgentsMcpAuthenticationFailedError:`
+
+      Authentication to an MCP server failed.
+
+      - `String mcpServerName`
+
+        Name of the MCP server that failed authentication.
+
+      - `String message`
+
+        Human-readable error description.
+
+      - `RetryStatus retryStatus`
+
+        What the client should do next in response to this error.
+
+        - `class BetaManagedAgentsRetryStatusRetrying:`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `Type type`
+
+            - `RETRYING("retrying")`
+
+        - `class BetaManagedAgentsRetryStatusExhausted:`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `Type type`
+
+            - `EXHAUSTED("exhausted")`
+
+        - `class BetaManagedAgentsRetryStatusTerminal:`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+          - `Type type`
+
+            - `TERMINAL("terminal")`
+
+      - `Type type`
+
+        - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
+
+    - `class BetaManagedAgentsBillingError:`
+
+      The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+      - `String message`
+
+        Human-readable error description.
+
+      - `RetryStatus retryStatus`
+
+        What the client should do next in response to this error.
+
+        - `class BetaManagedAgentsRetryStatusRetrying:`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `Type type`
+
+            - `RETRYING("retrying")`
+
+        - `class BetaManagedAgentsRetryStatusExhausted:`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `Type type`
+
+            - `EXHAUSTED("exhausted")`
+
+        - `class BetaManagedAgentsRetryStatusTerminal:`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+          - `Type type`
+
+            - `TERMINAL("terminal")`
+
+      - `Type type`
+
+        - `BILLING_ERROR("billing_error")`
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `SESSION_ERROR("session.error")`
+
+### Beta Managed Agents Session Event
+
+- `class BetaManagedAgentsSessionEvent: A class that can be one of several variants.union`
+
+  Union type for all event types in a session.
+
+  - `class BetaManagedAgentsUserMessageEvent:`
+
+    A user message event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Array of content blocks comprising the user message.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Type type`
+
+      - `USER_MESSAGE("user.message")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserInterruptEvent:`
+
+    An interrupt event that pauses agent execution and returns control to the user.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Type type`
+
+      - `USER_INTERRUPT("user.interrupt")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserToolConfirmationEvent:`
+
+    A tool confirmation event that approves or denies a pending tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+      - `ALLOW("allow")`
+
+      - `DENY("deny")`
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+    - `Optional<String> denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserCustomToolResultEvent:`
+
+    Event sent by the client providing the result of a custom tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String customToolUseId`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsAgentCustomToolUseEvent:`
+
+    Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the custom tool being called.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+  - `class BetaManagedAgentsAgentMessageEvent:`
+
+    An agent response event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<BetaManagedAgentsTextBlock> content`
+
+      Array of text blocks comprising the agent response.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MESSAGE("agent.message")`
+
+  - `class BetaManagedAgentsAgentThinkingEvent:`
+
+    Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THINKING("agent.thinking")`
+
+  - `class BetaManagedAgentsAgentMcpToolUseEvent:`
+
+    Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String mcpServerName`
+
+      Name of the MCP server providing the tool.
+
+    - `String name`
+
+      Name of the MCP tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_USE("agent.mcp_tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+  - `class BetaManagedAgentsAgentMcpToolResultEvent:`
+
+    Event representing the result of an MCP tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String mcpToolUseId`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_RESULT("agent.mcp_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentToolUseEvent:`
+
+    Event emitted when the agent invokes a built-in agent tool.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the agent tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_TOOL_USE("agent.tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+  - `class BetaManagedAgentsAgentToolResultEvent:`
+
+    Event representing the result of an agent tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `Type type`
+
+      - `AGENT_TOOL_RESULT("agent.tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
+
+    Indicates that context compaction (summarization) occurred during the session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+
+  - `class BetaManagedAgentsSessionErrorEvent:`
+
+    An error event indicating a problem occurred during session execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Error error`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+      - `class BetaManagedAgentsUnknownError:`
+
+        An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `UNKNOWN_ERROR("unknown_error")`
+
+      - `class BetaManagedAgentsModelOverloadedError:`
+
+        The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
+
+      - `class BetaManagedAgentsModelRateLimitedError:`
+
+        The model request was rate-limited.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
+
+      - `class BetaManagedAgentsModelRequestFailedError:`
+
+        A model request failed for a reason other than overload or rate-limiting.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
+
+      - `class BetaManagedAgentsMcpConnectionFailedError:`
+
+        Failed to connect to an MCP server.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed to connect.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
+
+      - `class BetaManagedAgentsMcpAuthenticationFailedError:`
+
+        Authentication to an MCP server failed.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed authentication.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
+
+      - `class BetaManagedAgentsBillingError:`
+
+        The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `BILLING_ERROR("billing_error")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_ERROR("session.error")`
+
+  - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
+
+    Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+  - `class BetaManagedAgentsSessionStatusRunningEvent:`
+
+    Indicates the session is actively running and the agent is working.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RUNNING("session.status_running")`
+
+  - `class BetaManagedAgentsSessionStatusIdleEvent:`
+
+    Indicates the agent has paused and is awaiting user input.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_STATUS_IDLE("session.status_idle")`
+
+  - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
+
+    Indicates the session has terminated, either due to an error or completion.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+  - `class BetaManagedAgentsSpanModelRequestStartEvent:`
+
+    Emitted when a model request is initiated by the agent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_START("span.model_request_start")`
+
+  - `class BetaManagedAgentsSpanModelRequestEndEvent:`
+
+    Emitted when a model request completes.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Optional<Boolean> isError`
+
+      Whether the model request resulted in an error.
+
+    - `String modelRequestStartId`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `BetaManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
+
+  - `class BetaManagedAgentsSessionDeletedEvent:`
+
+    Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_DELETED("session.deleted")`
+
+### Beta Managed Agents Session Requires Action
+
+- `class BetaManagedAgentsSessionRequiresAction:`
+
+  The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+  - `List<String> eventIds`
+
+    The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+  - `Type type`
+
+    - `REQUIRES_ACTION("requires_action")`
+
+### Beta Managed Agents Session Retries Exhausted
+
+- `class BetaManagedAgentsSessionRetriesExhausted:`
+
+  The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+  - `Type type`
+
+    - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+### Beta Managed Agents Session Status Idle Event
+
+- `class BetaManagedAgentsSessionStatusIdleEvent:`
+
+  Indicates the agent has paused and is awaiting user input.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `StopReason stopReason`
+
+    The agent completed its turn naturally and is ready for the next user message.
+
+    - `class BetaManagedAgentsSessionEndTurn:`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `Type type`
+
+        - `END_TURN("end_turn")`
+
+    - `class BetaManagedAgentsSessionRequiresAction:`
+
+      The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+      - `List<String> eventIds`
+
+        The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+      - `Type type`
+
+        - `REQUIRES_ACTION("requires_action")`
+
+    - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+      - `Type type`
+
+        - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+  - `Type type`
+
+    - `SESSION_STATUS_IDLE("session.status_idle")`
+
+### Beta Managed Agents Session Status Rescheduled Event
+
+- `class BetaManagedAgentsSessionStatusRescheduledEvent:`
+
+  Indicates the session is recovering from an error state and is rescheduled for execution.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+### Beta Managed Agents Session Status Running Event
+
+- `class BetaManagedAgentsSessionStatusRunningEvent:`
+
+  Indicates the session is actively running and the agent is working.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `SESSION_STATUS_RUNNING("session.status_running")`
+
+### Beta Managed Agents Session Status Terminated Event
+
+- `class BetaManagedAgentsSessionStatusTerminatedEvent:`
+
+  Indicates the session has terminated, either due to an error or completion.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+### Beta Managed Agents Span Model Request End Event
+
+- `class BetaManagedAgentsSpanModelRequestEndEvent:`
+
+  Emitted when a model request completes.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `Optional<Boolean> isError`
+
+    Whether the model request resulted in an error.
+
+  - `String modelRequestStartId`
+
+    The id of the corresponding `span.model_request_start` event.
+
+  - `BetaManagedAgentsSpanModelUsage modelUsage`
+
+    Token usage for a single model request.
+
+    - `long cacheCreationInputTokens`
+
+      Tokens used to create prompt cache in this request.
+
+    - `long cacheReadInputTokens`
+
+      Tokens read from prompt cache in this request.
+
+    - `long inputTokens`
+
+      Input tokens consumed by this request.
+
+    - `long outputTokens`
+
+      Output tokens generated by this request.
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
+
+### Beta Managed Agents Span Model Request Start Event
+
+- `class BetaManagedAgentsSpanModelRequestStartEvent:`
+
+  Emitted when a model request is initiated by the agent.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `SPAN_MODEL_REQUEST_START("span.model_request_start")`
+
+### Beta Managed Agents Span Model Usage
+
+- `class BetaManagedAgentsSpanModelUsage:`
+
+  Token usage for a single model request.
+
+  - `long cacheCreationInputTokens`
+
+    Tokens used to create prompt cache in this request.
+
+  - `long cacheReadInputTokens`
+
+    Tokens read from prompt cache in this request.
+
+  - `long inputTokens`
+
+    Input tokens consumed by this request.
+
+  - `long outputTokens`
+
+    Output tokens generated by this request.
+
+  - `Optional<Speed> speed`
+
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+    - `STANDARD("standard")`
+
+    - `FAST("fast")`
+
+### Beta Managed Agents Stream Session Events
+
+- `class BetaManagedAgentsStreamSessionEvents: A class that can be one of several variants.union`
+
+  Server-sent event in the session stream.
+
+  - `class BetaManagedAgentsUserMessageEvent:`
+
+    A user message event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Array of content blocks comprising the user message.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Type type`
+
+      - `USER_MESSAGE("user.message")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserInterruptEvent:`
+
+    An interrupt event that pauses agent execution and returns control to the user.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Type type`
+
+      - `USER_INTERRUPT("user.interrupt")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserToolConfirmationEvent:`
+
+    A tool confirmation event that approves or denies a pending tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+      - `ALLOW("allow")`
+
+      - `DENY("deny")`
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+    - `Optional<String> denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserCustomToolResultEvent:`
+
+    Event sent by the client providing the result of a custom tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String customToolUseId`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsAgentCustomToolUseEvent:`
+
+    Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the custom tool being called.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+  - `class BetaManagedAgentsAgentMessageEvent:`
+
+    An agent response event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<BetaManagedAgentsTextBlock> content`
+
+      Array of text blocks comprising the agent response.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MESSAGE("agent.message")`
+
+  - `class BetaManagedAgentsAgentThinkingEvent:`
+
+    Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THINKING("agent.thinking")`
+
+  - `class BetaManagedAgentsAgentMcpToolUseEvent:`
+
+    Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String mcpServerName`
+
+      Name of the MCP server providing the tool.
+
+    - `String name`
+
+      Name of the MCP tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_USE("agent.mcp_tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+  - `class BetaManagedAgentsAgentMcpToolResultEvent:`
+
+    Event representing the result of an MCP tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String mcpToolUseId`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_RESULT("agent.mcp_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentToolUseEvent:`
+
+    Event emitted when the agent invokes a built-in agent tool.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the agent tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_TOOL_USE("agent.tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+  - `class BetaManagedAgentsAgentToolResultEvent:`
+
+    Event representing the result of an agent tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `Type type`
+
+      - `AGENT_TOOL_RESULT("agent.tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
+
+    Indicates that context compaction (summarization) occurred during the session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+
+  - `class BetaManagedAgentsSessionErrorEvent:`
+
+    An error event indicating a problem occurred during session execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Error error`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+      - `class BetaManagedAgentsUnknownError:`
+
+        An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `UNKNOWN_ERROR("unknown_error")`
+
+      - `class BetaManagedAgentsModelOverloadedError:`
+
+        The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
+
+      - `class BetaManagedAgentsModelRateLimitedError:`
+
+        The model request was rate-limited.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
+
+      - `class BetaManagedAgentsModelRequestFailedError:`
+
+        A model request failed for a reason other than overload or rate-limiting.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
+
+      - `class BetaManagedAgentsMcpConnectionFailedError:`
+
+        Failed to connect to an MCP server.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed to connect.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
+
+      - `class BetaManagedAgentsMcpAuthenticationFailedError:`
+
+        Authentication to an MCP server failed.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed authentication.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
+
+      - `class BetaManagedAgentsBillingError:`
+
+        The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `BILLING_ERROR("billing_error")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_ERROR("session.error")`
+
+  - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
+
+    Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+  - `class BetaManagedAgentsSessionStatusRunningEvent:`
+
+    Indicates the session is actively running and the agent is working.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RUNNING("session.status_running")`
+
+  - `class BetaManagedAgentsSessionStatusIdleEvent:`
+
+    Indicates the agent has paused and is awaiting user input.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_STATUS_IDLE("session.status_idle")`
+
+  - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
+
+    Indicates the session has terminated, either due to an error or completion.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+  - `class BetaManagedAgentsSpanModelRequestStartEvent:`
+
+    Emitted when a model request is initiated by the agent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_START("span.model_request_start")`
+
+  - `class BetaManagedAgentsSpanModelRequestEndEvent:`
+
+    Emitted when a model request completes.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Optional<Boolean> isError`
+
+      Whether the model request resulted in an error.
+
+    - `String modelRequestStartId`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `BetaManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
+
+  - `class BetaManagedAgentsSessionDeletedEvent:`
+
+    Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_DELETED("session.deleted")`
+
+### Beta Managed Agents Text Block
+
+- `class BetaManagedAgentsTextBlock:`
+
+  Regular text content.
+
+  - `String text`
+
+    The text content.
+
+  - `Type type`
+
+    - `TEXT("text")`
+
+### Beta Managed Agents Unknown Error
+
+- `class BetaManagedAgentsUnknownError:`
+
+  An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+  - `String message`
+
+    Human-readable error description.
+
+  - `RetryStatus retryStatus`
+
+    What the client should do next in response to this error.
+
+    - `class BetaManagedAgentsRetryStatusRetrying:`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `Type type`
+
+        - `RETRYING("retrying")`
+
+    - `class BetaManagedAgentsRetryStatusExhausted:`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `Type type`
+
+        - `EXHAUSTED("exhausted")`
+
+    - `class BetaManagedAgentsRetryStatusTerminal:`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `Type type`
+
+        - `TERMINAL("terminal")`
+
+  - `Type type`
+
+    - `UNKNOWN_ERROR("unknown_error")`
+
+### Beta Managed Agents URL Document Source
+
+- `class BetaManagedAgentsUrlDocumentSource:`
+
+  Document referenced by URL.
+
+  - `Type type`
+
+    - `URL("url")`
+
+  - `String url`
+
+    URL of the document to fetch.
+
+### Beta Managed Agents URL Image Source
+
+- `class BetaManagedAgentsUrlImageSource:`
+
+  Image referenced by URL.
+
+  - `Type type`
+
+    - `URL("url")`
+
+  - `String url`
+
+    URL of the image to fetch.
+
+### Beta Managed Agents User Custom Tool Result Event
+
+- `class BetaManagedAgentsUserCustomToolResultEvent:`
+
+  Event sent by the client providing the result of a custom tool execution.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `String customToolUseId`
+
+    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+  - `Type type`
+
+    - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+  - `Optional<List<Content>> content`
+
+    The result content returned by the tool.
+
+    - `class BetaManagedAgentsTextBlock:`
+
+      Regular text content.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `class BetaManagedAgentsImageBlock:`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for image source variants.
+
+        - `class BetaManagedAgentsBase64ImageSource:`
+
+          Base64-encoded image data.
+
+          - `String data`
+
+            Base64-encoded image data.
+
+          - `String mediaType`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsUrlImageSource:`
+
+          Image referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the image to fetch.
+
+        - `class BetaManagedAgentsFileImageSource:`
+
+          Image referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `IMAGE("image")`
+
+    - `class BetaManagedAgentsDocumentBlock:`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for document source variants.
+
+        - `class BetaManagedAgentsBase64DocumentSource:`
+
+          Base64-encoded document data.
+
+          - `String data`
+
+            Base64-encoded document data.
+
+          - `String mediaType`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+          Plain text document content.
+
+          - `String data`
+
+            The plain text content.
+
+          - `MediaType mediaType`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `TEXT_PLAIN("text/plain")`
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsUrlDocumentSource:`
+
+          Document referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the document to fetch.
+
+        - `class BetaManagedAgentsFileDocumentSource:`
+
+          Document referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `DOCUMENT("document")`
+
+      - `Optional<String> context`
+
+        Additional context about the document for the model.
+
+      - `Optional<String> title`
+
+        The title of the document.
+
+  - `Optional<Boolean> isError`
+
+    Whether the tool execution resulted in an error.
+
+  - `Optional<LocalDateTime> processedAt`
+
+    A timestamp in RFC 3339 format
+
+### Beta Managed Agents User Custom Tool Result Event Params
+
+- `class BetaManagedAgentsUserCustomToolResultEventParams:`
+
+  Parameters for providing the result of a custom tool execution.
+
+  - `String customToolUseId`
+
+    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+  - `Type type`
+
+    - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+  - `Optional<List<Content>> content`
+
+    The result content returned by the tool.
+
+    - `class BetaManagedAgentsTextBlock:`
+
+      Regular text content.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `class BetaManagedAgentsImageBlock:`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for image source variants.
+
+        - `class BetaManagedAgentsBase64ImageSource:`
+
+          Base64-encoded image data.
+
+          - `String data`
+
+            Base64-encoded image data.
+
+          - `String mediaType`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsUrlImageSource:`
+
+          Image referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the image to fetch.
+
+        - `class BetaManagedAgentsFileImageSource:`
+
+          Image referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `IMAGE("image")`
+
+    - `class BetaManagedAgentsDocumentBlock:`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for document source variants.
+
+        - `class BetaManagedAgentsBase64DocumentSource:`
+
+          Base64-encoded document data.
+
+          - `String data`
+
+            Base64-encoded document data.
+
+          - `String mediaType`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+          Plain text document content.
+
+          - `String data`
+
+            The plain text content.
+
+          - `MediaType mediaType`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `TEXT_PLAIN("text/plain")`
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsUrlDocumentSource:`
+
+          Document referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the document to fetch.
+
+        - `class BetaManagedAgentsFileDocumentSource:`
+
+          Document referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `DOCUMENT("document")`
+
+      - `Optional<String> context`
+
+        Additional context about the document for the model.
+
+      - `Optional<String> title`
+
+        The title of the document.
+
+  - `Optional<Boolean> isError`
+
+    Whether the tool execution resulted in an error.
+
+### Beta Managed Agents User Interrupt Event
+
+- `class BetaManagedAgentsUserInterruptEvent:`
+
+  An interrupt event that pauses agent execution and returns control to the user.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `Type type`
+
+    - `USER_INTERRUPT("user.interrupt")`
+
+  - `Optional<LocalDateTime> processedAt`
+
+    A timestamp in RFC 3339 format
+
+### Beta Managed Agents User Interrupt Event Params
+
+- `class BetaManagedAgentsUserInterruptEventParams:`
+
+  Parameters for sending an interrupt to pause the agent.
+
+  - `Type type`
+
+    - `USER_INTERRUPT("user.interrupt")`
+
+### Beta Managed Agents User Message Event
+
+- `class BetaManagedAgentsUserMessageEvent:`
+
+  A user message event in the session conversation.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `List<Content> content`
+
+    Array of content blocks comprising the user message.
+
+    - `class BetaManagedAgentsTextBlock:`
+
+      Regular text content.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `class BetaManagedAgentsImageBlock:`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for image source variants.
+
+        - `class BetaManagedAgentsBase64ImageSource:`
+
+          Base64-encoded image data.
+
+          - `String data`
+
+            Base64-encoded image data.
+
+          - `String mediaType`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsUrlImageSource:`
+
+          Image referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the image to fetch.
+
+        - `class BetaManagedAgentsFileImageSource:`
+
+          Image referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `IMAGE("image")`
+
+    - `class BetaManagedAgentsDocumentBlock:`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for document source variants.
+
+        - `class BetaManagedAgentsBase64DocumentSource:`
+
+          Base64-encoded document data.
+
+          - `String data`
+
+            Base64-encoded document data.
+
+          - `String mediaType`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+          Plain text document content.
+
+          - `String data`
+
+            The plain text content.
+
+          - `MediaType mediaType`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `TEXT_PLAIN("text/plain")`
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsUrlDocumentSource:`
+
+          Document referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the document to fetch.
+
+        - `class BetaManagedAgentsFileDocumentSource:`
+
+          Document referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `DOCUMENT("document")`
+
+      - `Optional<String> context`
+
+        Additional context about the document for the model.
+
+      - `Optional<String> title`
+
+        The title of the document.
+
+  - `Type type`
+
+    - `USER_MESSAGE("user.message")`
+
+  - `Optional<LocalDateTime> processedAt`
+
+    A timestamp in RFC 3339 format
+
+### Beta Managed Agents User Message Event Params
+
+- `class BetaManagedAgentsUserMessageEventParams:`
+
+  Parameters for sending a user message to the session.
+
+  - `List<Content> content`
+
+    Array of content blocks for the user message.
+
+    - `class BetaManagedAgentsTextBlock:`
+
+      Regular text content.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `class BetaManagedAgentsImageBlock:`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for image source variants.
+
+        - `class BetaManagedAgentsBase64ImageSource:`
+
+          Base64-encoded image data.
+
+          - `String data`
+
+            Base64-encoded image data.
+
+          - `String mediaType`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsUrlImageSource:`
+
+          Image referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the image to fetch.
+
+        - `class BetaManagedAgentsFileImageSource:`
+
+          Image referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `IMAGE("image")`
+
+    - `class BetaManagedAgentsDocumentBlock:`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for document source variants.
+
+        - `class BetaManagedAgentsBase64DocumentSource:`
+
+          Base64-encoded document data.
+
+          - `String data`
+
+            Base64-encoded document data.
+
+          - `String mediaType`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+          Plain text document content.
+
+          - `String data`
+
+            The plain text content.
+
+          - `MediaType mediaType`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `TEXT_PLAIN("text/plain")`
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsUrlDocumentSource:`
+
+          Document referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the document to fetch.
+
+        - `class BetaManagedAgentsFileDocumentSource:`
+
+          Document referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `DOCUMENT("document")`
+
+      - `Optional<String> context`
+
+        Additional context about the document for the model.
+
+      - `Optional<String> title`
+
+        The title of the document.
+
+  - `Type type`
+
+    - `USER_MESSAGE("user.message")`
+
+### Beta Managed Agents User Tool Confirmation Event
+
+- `class BetaManagedAgentsUserToolConfirmationEvent:`
+
+  A tool confirmation event that approves or denies a pending tool execution.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `Result result`
+
+    UserToolConfirmationResult enum
+
+    - `ALLOW("allow")`
+
+    - `DENY("deny")`
+
+  - `String toolUseId`
+
+    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+  - `Type type`
+
+    - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+  - `Optional<String> denyMessage`
+
+    Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+  - `Optional<LocalDateTime> processedAt`
+
+    A timestamp in RFC 3339 format
+
+### Beta Managed Agents User Tool Confirmation Event Params
+
+- `class BetaManagedAgentsUserToolConfirmationEventParams:`
+
+  Parameters for confirming or denying a tool execution request.
+
+  - `Result result`
+
+    UserToolConfirmationResult enum
+
+    - `ALLOW("allow")`
+
+    - `DENY("deny")`
+
+  - `String toolUseId`
+
+    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+  - `Type type`
+
+    - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+  - `Optional<String> denyMessage`
+
+    Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+# Resources
+
+## Add
+
+`BetaManagedAgentsFileResource beta().sessions().resources().add(ResourceAddParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/sessions/{session_id}/resources`
+
+Add Session Resource
+
+### Parameters
+
+- `ResourceAddParams params`
+
+  - `Optional<String> sessionId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
+
+    Mount a file uploaded via the Files API into the session.
+
+### Returns
+
+- `class BetaManagedAgentsFileResource:`
+
+  - `String id`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String fileId`
+
+  - `String mountPath`
+
+  - `Type type`
+
+    - `FILE("file")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.BetaManagedAgentsFileResourceParams;
+import com.anthropic.models.beta.sessions.resources.BetaManagedAgentsFileResource;
+import com.anthropic.models.beta.sessions.resources.ResourceAddParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        ResourceAddParams params = ResourceAddParams.builder()
+            .sessionId("sesn_011CZkZAtmR3yMPDzynEDxu7")
+            .betaManagedAgentsFileResourceParams(BetaManagedAgentsFileResourceParams.builder()
+                .fileId("file_011CNha8iCJcU1wXNR6q4V8w")
+                .type(BetaManagedAgentsFileResourceParams.Type.FILE)
+                .build())
+            .build();
+        BetaManagedAgentsFileResource betaManagedAgentsFileResource = client.beta().sessions().resources().add(params);
+    }
+}
+```
+
+## List
+
+`ResourceListPage beta().sessions().resources().list(ResourceListParamsparams = ResourceListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/sessions/{session_id}/resources`
+
+List Session Resources
+
+### Parameters
+
+- `ResourceListParams params`
+
+  - `Optional<String> sessionId`
+
+  - `Optional<Long> limit`
+
+    Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
+
+  - `Optional<String> page`
+
+    Opaque cursor from a previous response's next_page field.
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsSessionResource: A class that can be one of several variants.union`
+
+  - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `String id`
+
+    - `LocalDateTime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String mountPath`
+
+    - `Type type`
+
+      - `GITHUB_REPOSITORY("github_repository")`
+
+    - `LocalDateTime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String url`
+
+    - `Optional<Checkout> checkout`
+
+      - `class BetaManagedAgentsBranchCheckout:`
+
+        - `String name`
+
+          Branch name to check out.
+
+        - `Type type`
+
+          - `BRANCH("branch")`
+
+      - `class BetaManagedAgentsCommitCheckout:`
+
+        - `String sha`
+
+          Full commit SHA to check out.
+
+        - `Type type`
+
+          - `COMMIT("commit")`
+
+  - `class BetaManagedAgentsFileResource:`
+
+    - `String id`
+
+    - `LocalDateTime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String fileId`
+
+    - `String mountPath`
+
+    - `Type type`
+
+      - `FILE("file")`
+
+    - `LocalDateTime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.resources.ResourceListPage;
+import com.anthropic.models.beta.sessions.resources.ResourceListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        ResourceListPage page = client.beta().sessions().resources().list("sesn_011CZkZAtmR3yMPDzynEDxu7");
+    }
+}
+```
+
+## Retrieve
+
+`ResourceRetrieveResponse beta().sessions().resources().retrieve(ResourceRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/sessions/{session_id}/resources/{resource_id}`
+
+Get Session Resource
+
+### Parameters
+
+- `ResourceRetrieveParams params`
+
+  - `String sessionId`
+
+  - `Optional<String> resourceId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class ResourceRetrieveResponse: A class that can be one of several variants.union`
+
+  The requested session resource.
+
+  - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `String id`
+
+    - `LocalDateTime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String mountPath`
+
+    - `Type type`
+
+      - `GITHUB_REPOSITORY("github_repository")`
+
+    - `LocalDateTime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String url`
+
+    - `Optional<Checkout> checkout`
+
+      - `class BetaManagedAgentsBranchCheckout:`
+
+        - `String name`
+
+          Branch name to check out.
+
+        - `Type type`
+
+          - `BRANCH("branch")`
+
+      - `class BetaManagedAgentsCommitCheckout:`
+
+        - `String sha`
+
+          Full commit SHA to check out.
+
+        - `Type type`
+
+          - `COMMIT("commit")`
+
+  - `class BetaManagedAgentsFileResource:`
+
+    - `String id`
+
+    - `LocalDateTime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String fileId`
+
+    - `String mountPath`
+
+    - `Type type`
+
+      - `FILE("file")`
+
+    - `LocalDateTime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.resources.ResourceRetrieveParams;
+import com.anthropic.models.beta.sessions.resources.ResourceRetrieveResponse;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        ResourceRetrieveParams params = ResourceRetrieveParams.builder()
+            .sessionId("sesn_011CZkZAtmR3yMPDzynEDxu7")
+            .resourceId("sesrsc_011CZkZBJq5dWxk9fVLNcPht")
+            .build();
+        ResourceRetrieveResponse resource = client.beta().sessions().resources().retrieve(params);
+    }
+}
+```
+
+## Update
+
+`ResourceUpdateResponse beta().sessions().resources().update(ResourceUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/sessions/{session_id}/resources/{resource_id}`
+
+Update Session Resource
+
+### Parameters
+
+- `ResourceUpdateParams params`
+
+  - `String sessionId`
+
+  - `Optional<String> resourceId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `String authorizationToken`
+
+    New authorization token for the resource. Currently only `github_repository` resources support token rotation.
+
+### Returns
+
+- `class ResourceUpdateResponse: A class that can be one of several variants.union`
+
+  The updated session resource.
+
+  - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `String id`
+
+    - `LocalDateTime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String mountPath`
+
+    - `Type type`
+
+      - `GITHUB_REPOSITORY("github_repository")`
+
+    - `LocalDateTime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String url`
+
+    - `Optional<Checkout> checkout`
+
+      - `class BetaManagedAgentsBranchCheckout:`
+
+        - `String name`
+
+          Branch name to check out.
+
+        - `Type type`
+
+          - `BRANCH("branch")`
+
+      - `class BetaManagedAgentsCommitCheckout:`
+
+        - `String sha`
+
+          Full commit SHA to check out.
+
+        - `Type type`
+
+          - `COMMIT("commit")`
+
+  - `class BetaManagedAgentsFileResource:`
+
+    - `String id`
+
+    - `LocalDateTime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String fileId`
+
+    - `String mountPath`
+
+    - `Type type`
+
+      - `FILE("file")`
+
+    - `LocalDateTime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.resources.ResourceUpdateParams;
+import com.anthropic.models.beta.sessions.resources.ResourceUpdateResponse;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        ResourceUpdateParams params = ResourceUpdateParams.builder()
+            .sessionId("sesn_011CZkZAtmR3yMPDzynEDxu7")
+            .resourceId("sesrsc_011CZkZBJq5dWxk9fVLNcPht")
+            .authorizationToken("ghp_exampletoken")
+            .build();
+        ResourceUpdateResponse resource = client.beta().sessions().resources().update(params);
+    }
+}
+```
+
+## Delete
+
+`BetaManagedAgentsDeleteSessionResource beta().sessions().resources().delete(ResourceDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**delete** `/v1/sessions/{session_id}/resources/{resource_id}`
+
+Delete Session Resource
+
+### Parameters
+
+- `ResourceDeleteParams params`
+
+  - `String sessionId`
+
+  - `Optional<String> resourceId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsDeleteSessionResource:`
+
+  Confirmation of resource deletion.
+
+  - `String id`
+
+  - `Type type`
+
+    - `SESSION_RESOURCE_DELETED("session_resource_deleted")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.resources.BetaManagedAgentsDeleteSessionResource;
+import com.anthropic.models.beta.sessions.resources.ResourceDeleteParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        ResourceDeleteParams params = ResourceDeleteParams.builder()
+            .sessionId("sesn_011CZkZAtmR3yMPDzynEDxu7")
+            .resourceId("sesrsc_011CZkZBJq5dWxk9fVLNcPht")
+            .build();
+        BetaManagedAgentsDeleteSessionResource betaManagedAgentsDeleteSessionResource = client.beta().sessions().resources().delete(params);
+    }
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Delete Session Resource
+
+- `class BetaManagedAgentsDeleteSessionResource:`
+
+  Confirmation of resource deletion.
+
+  - `String id`
+
+  - `Type type`
+
+    - `SESSION_RESOURCE_DELETED("session_resource_deleted")`
+
+### Beta Managed Agents File Resource
+
+- `class BetaManagedAgentsFileResource:`
+
+  - `String id`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String fileId`
+
+  - `String mountPath`
+
+  - `Type type`
+
+    - `FILE("file")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Beta Managed Agents GitHub Repository Resource
+
+- `class BetaManagedAgentsGitHubRepositoryResource:`
+
+  - `String id`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String mountPath`
+
+  - `Type type`
+
+    - `GITHUB_REPOSITORY("github_repository")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String url`
+
+  - `Optional<Checkout> checkout`
+
+    - `class BetaManagedAgentsBranchCheckout:`
+
+      - `String name`
+
+        Branch name to check out.
+
+      - `Type type`
+
+        - `BRANCH("branch")`
+
+    - `class BetaManagedAgentsCommitCheckout:`
+
+      - `String sha`
+
+        Full commit SHA to check out.
+
+      - `Type type`
+
+        - `COMMIT("commit")`
+
+### Beta Managed Agents Session Resource
+
+- `class BetaManagedAgentsSessionResource: A class that can be one of several variants.union`
+
+  - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `String id`
+
+    - `LocalDateTime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String mountPath`
+
+    - `Type type`
+
+      - `GITHUB_REPOSITORY("github_repository")`
+
+    - `LocalDateTime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String url`
+
+    - `Optional<Checkout> checkout`
+
+      - `class BetaManagedAgentsBranchCheckout:`
+
+        - `String name`
+
+          Branch name to check out.
+
+        - `Type type`
+
+          - `BRANCH("branch")`
+
+      - `class BetaManagedAgentsCommitCheckout:`
+
+        - `String sha`
+
+          Full commit SHA to check out.
+
+        - `Type type`
+
+          - `COMMIT("commit")`
+
+  - `class BetaManagedAgentsFileResource:`
+
+    - `String id`
+
+    - `LocalDateTime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String fileId`
+
+    - `String mountPath`
+
+    - `Type type`
+
+      - `FILE("file")`
+
+    - `LocalDateTime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+# Vaults
+
+## Create
+
+`BetaManagedAgentsVault beta().vaults().create(VaultCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/vaults`
+
+Create Vault
+
+### Parameters
+
+- `VaultCreateParams params`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `String displayName`
+
+    Human-readable name for the vault. 1-255 characters.
+
+  - `Optional<Metadata> metadata`
+
+    Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+### Returns
+
+- `class BetaManagedAgentsVault:`
+
+  A vault that stores credentials for use by agents during sessions.
+
+  - `String id`
+
+    Unique identifier for the vault.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String displayName`
+
+    Human-readable name for the vault.
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `Type type`
+
+    - `VAULT("vault")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.BetaManagedAgentsVault;
+import com.anthropic.models.beta.vaults.VaultCreateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        VaultCreateParams params = VaultCreateParams.builder()
+            .displayName("Example vault")
+            .build();
+        BetaManagedAgentsVault betaManagedAgentsVault = client.beta().vaults().create(params);
+    }
+}
+```
+
+## List
+
+`VaultListPage beta().vaults().list(VaultListParamsparams = VaultListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/vaults`
+
+List Vaults
+
+### Parameters
+
+- `VaultListParams params`
+
+  - `Optional<Boolean> includeArchived`
+
+    Whether to include archived vaults in the results.
+
+  - `Optional<Long> limit`
+
+    Maximum number of vaults to return per page. Defaults to 20, maximum 100.
+
+  - `Optional<String> page`
+
+    Opaque pagination token from a previous `list_vaults` response.
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsVault:`
+
+  A vault that stores credentials for use by agents during sessions.
+
+  - `String id`
+
+    Unique identifier for the vault.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String displayName`
+
+    Human-readable name for the vault.
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `Type type`
+
+    - `VAULT("vault")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.VaultListPage;
+import com.anthropic.models.beta.vaults.VaultListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        VaultListPage page = client.beta().vaults().list();
+    }
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsVault beta().vaults().retrieve(VaultRetrieveParamsparams = VaultRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/vaults/{vault_id}`
+
+Get Vault
+
+### Parameters
+
+- `VaultRetrieveParams params`
+
+  - `Optional<String> vaultId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsVault:`
+
+  A vault that stores credentials for use by agents during sessions.
+
+  - `String id`
+
+    Unique identifier for the vault.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String displayName`
+
+    Human-readable name for the vault.
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `Type type`
+
+    - `VAULT("vault")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.BetaManagedAgentsVault;
+import com.anthropic.models.beta.vaults.VaultRetrieveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsVault betaManagedAgentsVault = client.beta().vaults().retrieve("vlt_011CZkZDLs7fYzm1hXNPeRjv");
+    }
+}
+```
+
+## Update
+
+`BetaManagedAgentsVault beta().vaults().update(VaultUpdateParamsparams = VaultUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/vaults/{vault_id}`
+
+Update Vault
+
+### Parameters
+
+- `VaultUpdateParams params`
+
+  - `Optional<String> vaultId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `Optional<String> displayName`
+
+    Updated human-readable name for the vault. 1-255 characters.
+
+  - `Optional<Metadata> metadata`
+
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
+
+### Returns
+
+- `class BetaManagedAgentsVault:`
+
+  A vault that stores credentials for use by agents during sessions.
+
+  - `String id`
+
+    Unique identifier for the vault.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String displayName`
+
+    Human-readable name for the vault.
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `Type type`
+
+    - `VAULT("vault")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.BetaManagedAgentsVault;
+import com.anthropic.models.beta.vaults.VaultUpdateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsVault betaManagedAgentsVault = client.beta().vaults().update("vlt_011CZkZDLs7fYzm1hXNPeRjv");
+    }
+}
+```
+
+## Delete
+
+`BetaManagedAgentsDeletedVault beta().vaults().delete(VaultDeleteParamsparams = VaultDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**delete** `/v1/vaults/{vault_id}`
+
+Delete Vault
+
+### Parameters
+
+- `VaultDeleteParams params`
+
+  - `Optional<String> vaultId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsDeletedVault:`
+
+  Confirmation of a deleted vault.
+
+  - `String id`
+
+    Unique identifier of the deleted vault.
+
+  - `Type type`
+
+    - `VAULT_DELETED("vault_deleted")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.BetaManagedAgentsDeletedVault;
+import com.anthropic.models.beta.vaults.VaultDeleteParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsDeletedVault betaManagedAgentsDeletedVault = client.beta().vaults().delete("vlt_011CZkZDLs7fYzm1hXNPeRjv");
+    }
+}
+```
+
+## Archive
+
+`BetaManagedAgentsVault beta().vaults().archive(VaultArchiveParamsparams = VaultArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/vaults/{vault_id}/archive`
+
+Archive Vault
+
+### Parameters
+
+- `VaultArchiveParams params`
+
+  - `Optional<String> vaultId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsVault:`
+
+  A vault that stores credentials for use by agents during sessions.
+
+  - `String id`
+
+    Unique identifier for the vault.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String displayName`
+
+    Human-readable name for the vault.
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `Type type`
+
+    - `VAULT("vault")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.BetaManagedAgentsVault;
+import com.anthropic.models.beta.vaults.VaultArchiveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsVault betaManagedAgentsVault = client.beta().vaults().archive("vlt_011CZkZDLs7fYzm1hXNPeRjv");
+    }
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Deleted Vault
+
+- `class BetaManagedAgentsDeletedVault:`
+
+  Confirmation of a deleted vault.
+
+  - `String id`
+
+    Unique identifier of the deleted vault.
+
+  - `Type type`
+
+    - `VAULT_DELETED("vault_deleted")`
+
+### Beta Managed Agents Vault
+
+- `class BetaManagedAgentsVault:`
+
+  A vault that stores credentials for use by agents during sessions.
+
+  - `String id`
+
+    Unique identifier for the vault.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String displayName`
+
+    Human-readable name for the vault.
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `Type type`
+
+    - `VAULT("vault")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+# Credentials
+
+## Create
+
+`BetaManagedAgentsCredential beta().vaults().credentials().create(CredentialCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/vaults/{vault_id}/credentials`
+
+Create Credential
+
+### Parameters
+
+- `CredentialCreateParams params`
+
+  - `Optional<String> vaultId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `Auth auth`
+
+    Authentication details for creating a credential.
+
+    - `class BetaManagedAgentsMcpOAuthCreateParams:`
+
+      Parameters for creating an MCP OAuth credential.
+
+      - `String accessToken`
+
+        OAuth access token.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `MCP_OAUTH("mcp_oauth")`
+
+      - `Optional<LocalDateTime> expiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `Optional<BetaManagedAgentsMcpOAuthRefreshParams> refresh`
+
+        OAuth refresh token parameters for creating a credential with refresh support.
+
+        - `String clientId`
+
+          OAuth client ID.
+
+        - `String refreshToken`
+
+          OAuth refresh token.
+
+        - `String tokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `TokenEndpointAuth tokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
+
+            Token endpoint requires no client authentication.
+
+            - `Type type`
+
+              - `NONE("none")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicParam:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `String clientSecret`
+
+              OAuth client secret.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `String clientSecret`
+
+              OAuth client secret.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_POST("client_secret_post")`
+
+        - `Optional<String> resource`
+
+          OAuth resource indicator.
+
+        - `Optional<String> scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerCreateParams:`
+
+      Parameters for creating a static bearer token credential.
+
+      - `String token`
+
+        Static bearer token value.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `STATIC_BEARER("static_bearer")`
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the credential. Up to 255 characters.
+
+  - `Optional<Metadata> metadata`
+
+    Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+### Returns
+
+- `class BetaManagedAgentsCredential:`
+
+  A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `String id`
+
+    Unique identifier for the credential.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Auth auth`
+
+    Authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+      OAuth credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `MCP_OAUTH("mcp_oauth")`
+
+      - `Optional<LocalDateTime> expiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `Optional<BetaManagedAgentsMcpOAuthRefreshResponse> refresh`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `String clientId`
+
+          OAuth client ID.
+
+        - `String tokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `TokenEndpointAuth tokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+            Token endpoint requires no client authentication.
+
+            - `Type type`
+
+              - `NONE("none")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_POST("client_secret_post")`
+
+        - `Optional<String> resource`
+
+          OAuth resource indicator.
+
+        - `Optional<String> scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+      Static bearer token credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `STATIC_BEARER("static_bearer")`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `Type type`
+
+    - `VAULT_CREDENTIAL("vault_credential")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String vaultId`
+
+    Identifier of the vault this credential belongs to.
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the credential.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.credentials.BetaManagedAgentsCredential;
+import com.anthropic.models.beta.vaults.credentials.BetaManagedAgentsStaticBearerCreateParams;
+import com.anthropic.models.beta.vaults.credentials.CredentialCreateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        CredentialCreateParams params = CredentialCreateParams.builder()
+            .vaultId("vlt_011CZkZDLs7fYzm1hXNPeRjv")
+            .auth(BetaManagedAgentsStaticBearerCreateParams.builder()
+                .token("bearer_exampletoken")
+                .mcpServerUrl("https://example-server.modelcontextprotocol.io/sse")
+                .type(BetaManagedAgentsStaticBearerCreateParams.Type.STATIC_BEARER)
+                .build())
+            .build();
+        BetaManagedAgentsCredential betaManagedAgentsCredential = client.beta().vaults().credentials().create(params);
+    }
+}
+```
+
+## List
+
+`CredentialListPage beta().vaults().credentials().list(CredentialListParamsparams = CredentialListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/vaults/{vault_id}/credentials`
+
+List Credentials
+
+### Parameters
+
+- `CredentialListParams params`
+
+  - `Optional<String> vaultId`
+
+  - `Optional<Boolean> includeArchived`
+
+    Whether to include archived credentials in the results.
+
+  - `Optional<Long> limit`
+
+    Maximum number of credentials to return per page. Defaults to 20, maximum 100.
+
+  - `Optional<String> page`
+
+    Opaque pagination token from a previous `list_credentials` response.
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsCredential:`
+
+  A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `String id`
+
+    Unique identifier for the credential.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Auth auth`
+
+    Authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+      OAuth credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `MCP_OAUTH("mcp_oauth")`
+
+      - `Optional<LocalDateTime> expiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `Optional<BetaManagedAgentsMcpOAuthRefreshResponse> refresh`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `String clientId`
+
+          OAuth client ID.
+
+        - `String tokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `TokenEndpointAuth tokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+            Token endpoint requires no client authentication.
+
+            - `Type type`
+
+              - `NONE("none")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_POST("client_secret_post")`
+
+        - `Optional<String> resource`
+
+          OAuth resource indicator.
+
+        - `Optional<String> scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+      Static bearer token credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `STATIC_BEARER("static_bearer")`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `Type type`
+
+    - `VAULT_CREDENTIAL("vault_credential")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String vaultId`
+
+    Identifier of the vault this credential belongs to.
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the credential.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.credentials.CredentialListPage;
+import com.anthropic.models.beta.vaults.credentials.CredentialListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        CredentialListPage page = client.beta().vaults().credentials().list("vlt_011CZkZDLs7fYzm1hXNPeRjv");
+    }
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsCredential beta().vaults().credentials().retrieve(CredentialRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+
+Get Credential
+
+### Parameters
+
+- `CredentialRetrieveParams params`
+
+  - `String vaultId`
+
+  - `Optional<String> credentialId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsCredential:`
+
+  A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `String id`
+
+    Unique identifier for the credential.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Auth auth`
+
+    Authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+      OAuth credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `MCP_OAUTH("mcp_oauth")`
+
+      - `Optional<LocalDateTime> expiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `Optional<BetaManagedAgentsMcpOAuthRefreshResponse> refresh`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `String clientId`
+
+          OAuth client ID.
+
+        - `String tokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `TokenEndpointAuth tokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+            Token endpoint requires no client authentication.
+
+            - `Type type`
+
+              - `NONE("none")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_POST("client_secret_post")`
+
+        - `Optional<String> resource`
+
+          OAuth resource indicator.
+
+        - `Optional<String> scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+      Static bearer token credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `STATIC_BEARER("static_bearer")`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `Type type`
+
+    - `VAULT_CREDENTIAL("vault_credential")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String vaultId`
+
+    Identifier of the vault this credential belongs to.
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the credential.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.credentials.BetaManagedAgentsCredential;
+import com.anthropic.models.beta.vaults.credentials.CredentialRetrieveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        CredentialRetrieveParams params = CredentialRetrieveParams.builder()
+            .vaultId("vlt_011CZkZDLs7fYzm1hXNPeRjv")
+            .credentialId("vcrd_011CZkZEMt8gZan2iYOQfSkw")
+            .build();
+        BetaManagedAgentsCredential betaManagedAgentsCredential = client.beta().vaults().credentials().retrieve(params);
+    }
+}
+```
+
+## Update
+
+`BetaManagedAgentsCredential beta().vaults().credentials().update(CredentialUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+
+Update Credential
+
+### Parameters
+
+- `CredentialUpdateParams params`
+
+  - `String vaultId`
+
+  - `Optional<String> credentialId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `Optional<Auth> auth`
+
+    Updated authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthUpdateParams:`
+
+      Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
+
+      - `Type type`
+
+        - `MCP_OAUTH("mcp_oauth")`
+
+      - `Optional<String> accessToken`
+
+        Updated OAuth access token.
+
+      - `Optional<LocalDateTime> expiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `Optional<BetaManagedAgentsMcpOAuthRefreshUpdateParams> refresh`
+
+        Parameters for updating OAuth refresh token configuration.
+
+        - `Optional<String> refreshToken`
+
+          Updated OAuth refresh token.
+
+        - `Optional<String> scope`
+
+          Updated OAuth scope for the refresh request.
+
+        - `Optional<TokenEndpointAuth> tokenEndpointAuth`
+
+          Updated HTTP Basic authentication parameters for the token endpoint.
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
+
+            Updated HTTP Basic authentication parameters for the token endpoint.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+            - `Optional<String> clientSecret`
+
+              Updated OAuth client secret.
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:`
+
+            Updated POST body authentication parameters for the token endpoint.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_POST("client_secret_post")`
+
+            - `Optional<String> clientSecret`
+
+              Updated OAuth client secret.
+
+    - `class BetaManagedAgentsStaticBearerUpdateParams:`
+
+      Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
+
+      - `Type type`
+
+        - `STATIC_BEARER("static_bearer")`
+
+      - `Optional<String> token`
+
+        Updated static bearer token value.
+
+  - `Optional<String> displayName`
+
+    Updated human-readable name for the credential. 1-255 characters.
+
+  - `Optional<Metadata> metadata`
+
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
+
+### Returns
+
+- `class BetaManagedAgentsCredential:`
+
+  A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `String id`
+
+    Unique identifier for the credential.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Auth auth`
+
+    Authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+      OAuth credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `MCP_OAUTH("mcp_oauth")`
+
+      - `Optional<LocalDateTime> expiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `Optional<BetaManagedAgentsMcpOAuthRefreshResponse> refresh`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `String clientId`
+
+          OAuth client ID.
+
+        - `String tokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `TokenEndpointAuth tokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+            Token endpoint requires no client authentication.
+
+            - `Type type`
+
+              - `NONE("none")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_POST("client_secret_post")`
+
+        - `Optional<String> resource`
+
+          OAuth resource indicator.
+
+        - `Optional<String> scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+      Static bearer token credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `STATIC_BEARER("static_bearer")`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `Type type`
+
+    - `VAULT_CREDENTIAL("vault_credential")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String vaultId`
+
+    Identifier of the vault this credential belongs to.
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the credential.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.credentials.BetaManagedAgentsCredential;
+import com.anthropic.models.beta.vaults.credentials.CredentialUpdateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        CredentialUpdateParams params = CredentialUpdateParams.builder()
+            .vaultId("vlt_011CZkZDLs7fYzm1hXNPeRjv")
+            .credentialId("vcrd_011CZkZEMt8gZan2iYOQfSkw")
+            .build();
+        BetaManagedAgentsCredential betaManagedAgentsCredential = client.beta().vaults().credentials().update(params);
+    }
+}
+```
+
+## Delete
+
+`BetaManagedAgentsDeletedCredential beta().vaults().credentials().delete(CredentialDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**delete** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+
+Delete Credential
+
+### Parameters
+
+- `CredentialDeleteParams params`
+
+  - `String vaultId`
+
+  - `Optional<String> credentialId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsDeletedCredential:`
+
+  Confirmation of a deleted credential.
+
+  - `String id`
+
+    Unique identifier of the deleted credential.
+
+  - `Type type`
+
+    - `VAULT_CREDENTIAL_DELETED("vault_credential_deleted")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.credentials.BetaManagedAgentsDeletedCredential;
+import com.anthropic.models.beta.vaults.credentials.CredentialDeleteParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        CredentialDeleteParams params = CredentialDeleteParams.builder()
+            .vaultId("vlt_011CZkZDLs7fYzm1hXNPeRjv")
+            .credentialId("vcrd_011CZkZEMt8gZan2iYOQfSkw")
+            .build();
+        BetaManagedAgentsDeletedCredential betaManagedAgentsDeletedCredential = client.beta().vaults().credentials().delete(params);
+    }
+}
+```
+
+## Archive
+
+`BetaManagedAgentsCredential beta().vaults().credentials().archive(CredentialArchiveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
+
+Archive Credential
+
+### Parameters
+
+- `CredentialArchiveParams params`
+
+  - `String vaultId`
+
+  - `Optional<String> credentialId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsCredential:`
+
+  A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `String id`
+
+    Unique identifier for the credential.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Auth auth`
+
+    Authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+      OAuth credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `MCP_OAUTH("mcp_oauth")`
+
+      - `Optional<LocalDateTime> expiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `Optional<BetaManagedAgentsMcpOAuthRefreshResponse> refresh`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `String clientId`
+
+          OAuth client ID.
+
+        - `String tokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `TokenEndpointAuth tokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+            Token endpoint requires no client authentication.
+
+            - `Type type`
+
+              - `NONE("none")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_POST("client_secret_post")`
+
+        - `Optional<String> resource`
+
+          OAuth resource indicator.
+
+        - `Optional<String> scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+      Static bearer token credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `STATIC_BEARER("static_bearer")`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `Type type`
+
+    - `VAULT_CREDENTIAL("vault_credential")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String vaultId`
+
+    Identifier of the vault this credential belongs to.
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the credential.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.credentials.BetaManagedAgentsCredential;
+import com.anthropic.models.beta.vaults.credentials.CredentialArchiveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        CredentialArchiveParams params = CredentialArchiveParams.builder()
+            .vaultId("vlt_011CZkZDLs7fYzm1hXNPeRjv")
+            .credentialId("vcrd_011CZkZEMt8gZan2iYOQfSkw")
+            .build();
+        BetaManagedAgentsCredential betaManagedAgentsCredential = client.beta().vaults().credentials().archive(params);
+    }
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Credential
+
+- `class BetaManagedAgentsCredential:`
+
+  A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `String id`
+
+    Unique identifier for the credential.
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Auth auth`
+
+    Authentication details for a credential.
+
+    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+      OAuth credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `MCP_OAUTH("mcp_oauth")`
+
+      - `Optional<LocalDateTime> expiresAt`
+
+        A timestamp in RFC 3339 format
+
+      - `Optional<BetaManagedAgentsMcpOAuthRefreshResponse> refresh`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `String clientId`
+
+          OAuth client ID.
+
+        - `String tokenEndpoint`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `TokenEndpointAuth tokenEndpointAuth`
+
+          Token endpoint requires no client authentication.
+
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+            Token endpoint requires no client authentication.
+
+            - `Type type`
+
+              - `NONE("none")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `Type type`
+
+              - `CLIENT_SECRET_POST("client_secret_post")`
+
+        - `Optional<String> resource`
+
+          OAuth resource indicator.
+
+        - `Optional<String> scope`
+
+          OAuth scope for the refresh request.
+
+    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+      Static bearer token credential details for an MCP server.
+
+      - `String mcpServerUrl`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `Type type`
+
+        - `STATIC_BEARER("static_bearer")`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Metadata metadata`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `Type type`
+
+    - `VAULT_CREDENTIAL("vault_credential")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String vaultId`
+
+    Identifier of the vault this credential belongs to.
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the credential.
+
+### Beta Managed Agents Deleted Credential
+
+- `class BetaManagedAgentsDeletedCredential:`
+
+  Confirmation of a deleted credential.
+
+  - `String id`
+
+    Unique identifier of the deleted credential.
+
+  - `Type type`
+
+    - `VAULT_CREDENTIAL_DELETED("vault_credential_deleted")`
+
+### Beta Managed Agents MCP OAuth Auth Response
+
+- `class BetaManagedAgentsMcpOAuthAuthResponse:`
+
+  OAuth credential details for an MCP server.
+
+  - `String mcpServerUrl`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `Type type`
+
+    - `MCP_OAUTH("mcp_oauth")`
+
+  - `Optional<LocalDateTime> expiresAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<BetaManagedAgentsMcpOAuthRefreshResponse> refresh`
+
+    OAuth refresh token configuration returned in credential responses.
+
+    - `String clientId`
+
+      OAuth client ID.
+
+    - `String tokenEndpoint`
+
+      Token endpoint URL used to refresh the access token.
+
+    - `TokenEndpointAuth tokenEndpointAuth`
+
+      Token endpoint requires no client authentication.
+
+      - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+        Token endpoint requires no client authentication.
+
+        - `Type type`
+
+          - `NONE("none")`
+
+      - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+        Token endpoint uses HTTP Basic authentication with client credentials.
+
+        - `Type type`
+
+          - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+      - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+        Token endpoint uses POST body authentication with client credentials.
+
+        - `Type type`
+
+          - `CLIENT_SECRET_POST("client_secret_post")`
+
+    - `Optional<String> resource`
+
+      OAuth resource indicator.
+
+    - `Optional<String> scope`
+
+      OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Create Params
+
+- `class BetaManagedAgentsMcpOAuthCreateParams:`
+
+  Parameters for creating an MCP OAuth credential.
+
+  - `String accessToken`
+
+    OAuth access token.
+
+  - `String mcpServerUrl`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `Type type`
+
+    - `MCP_OAUTH("mcp_oauth")`
+
+  - `Optional<LocalDateTime> expiresAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<BetaManagedAgentsMcpOAuthRefreshParams> refresh`
+
+    OAuth refresh token parameters for creating a credential with refresh support.
+
+    - `String clientId`
+
+      OAuth client ID.
+
+    - `String refreshToken`
+
+      OAuth refresh token.
+
+    - `String tokenEndpoint`
+
+      Token endpoint URL used to refresh the access token.
+
+    - `TokenEndpointAuth tokenEndpointAuth`
+
+      Token endpoint requires no client authentication.
+
+      - `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
+
+        Token endpoint requires no client authentication.
+
+        - `Type type`
+
+          - `NONE("none")`
+
+      - `class BetaManagedAgentsTokenEndpointAuthBasicParam:`
+
+        Token endpoint uses HTTP Basic authentication with client credentials.
+
+        - `String clientSecret`
+
+          OAuth client secret.
+
+        - `Type type`
+
+          - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+      - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
+
+        Token endpoint uses POST body authentication with client credentials.
+
+        - `String clientSecret`
+
+          OAuth client secret.
+
+        - `Type type`
+
+          - `CLIENT_SECRET_POST("client_secret_post")`
+
+    - `Optional<String> resource`
+
+      OAuth resource indicator.
+
+    - `Optional<String> scope`
+
+      OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Refresh Params
+
+- `class BetaManagedAgentsMcpOAuthRefreshParams:`
+
+  OAuth refresh token parameters for creating a credential with refresh support.
+
+  - `String clientId`
+
+    OAuth client ID.
+
+  - `String refreshToken`
+
+    OAuth refresh token.
+
+  - `String tokenEndpoint`
+
+    Token endpoint URL used to refresh the access token.
+
+  - `TokenEndpointAuth tokenEndpointAuth`
+
+    Token endpoint requires no client authentication.
+
+    - `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
+
+      Token endpoint requires no client authentication.
+
+      - `Type type`
+
+        - `NONE("none")`
+
+    - `class BetaManagedAgentsTokenEndpointAuthBasicParam:`
+
+      Token endpoint uses HTTP Basic authentication with client credentials.
+
+      - `String clientSecret`
+
+        OAuth client secret.
+
+      - `Type type`
+
+        - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+    - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
+
+      Token endpoint uses POST body authentication with client credentials.
+
+      - `String clientSecret`
+
+        OAuth client secret.
+
+      - `Type type`
+
+        - `CLIENT_SECRET_POST("client_secret_post")`
+
+  - `Optional<String> resource`
+
+    OAuth resource indicator.
+
+  - `Optional<String> scope`
+
+    OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Refresh Response
+
+- `class BetaManagedAgentsMcpOAuthRefreshResponse:`
+
+  OAuth refresh token configuration returned in credential responses.
+
+  - `String clientId`
+
+    OAuth client ID.
+
+  - `String tokenEndpoint`
+
+    Token endpoint URL used to refresh the access token.
+
+  - `TokenEndpointAuth tokenEndpointAuth`
+
+    Token endpoint requires no client authentication.
+
+    - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+      Token endpoint requires no client authentication.
+
+      - `Type type`
+
+        - `NONE("none")`
+
+    - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+      Token endpoint uses HTTP Basic authentication with client credentials.
+
+      - `Type type`
+
+        - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+    - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+      Token endpoint uses POST body authentication with client credentials.
+
+      - `Type type`
+
+        - `CLIENT_SECRET_POST("client_secret_post")`
+
+  - `Optional<String> resource`
+
+    OAuth resource indicator.
+
+  - `Optional<String> scope`
+
+    OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Refresh Update Params
+
+- `class BetaManagedAgentsMcpOAuthRefreshUpdateParams:`
+
+  Parameters for updating OAuth refresh token configuration.
+
+  - `Optional<String> refreshToken`
+
+    Updated OAuth refresh token.
+
+  - `Optional<String> scope`
+
+    Updated OAuth scope for the refresh request.
+
+  - `Optional<TokenEndpointAuth> tokenEndpointAuth`
+
+    Updated HTTP Basic authentication parameters for the token endpoint.
+
+    - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
+
+      Updated HTTP Basic authentication parameters for the token endpoint.
+
+      - `Type type`
+
+        - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+      - `Optional<String> clientSecret`
+
+        Updated OAuth client secret.
+
+    - `class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:`
+
+      Updated POST body authentication parameters for the token endpoint.
+
+      - `Type type`
+
+        - `CLIENT_SECRET_POST("client_secret_post")`
+
+      - `Optional<String> clientSecret`
+
+        Updated OAuth client secret.
+
+### Beta Managed Agents MCP OAuth Update Params
+
+- `class BetaManagedAgentsMcpOAuthUpdateParams:`
+
+  Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
+
+  - `Type type`
+
+    - `MCP_OAUTH("mcp_oauth")`
+
+  - `Optional<String> accessToken`
+
+    Updated OAuth access token.
+
+  - `Optional<LocalDateTime> expiresAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<BetaManagedAgentsMcpOAuthRefreshUpdateParams> refresh`
+
+    Parameters for updating OAuth refresh token configuration.
+
+    - `Optional<String> refreshToken`
+
+      Updated OAuth refresh token.
+
+    - `Optional<String> scope`
+
+      Updated OAuth scope for the refresh request.
+
+    - `Optional<TokenEndpointAuth> tokenEndpointAuth`
+
+      Updated HTTP Basic authentication parameters for the token endpoint.
+
+      - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
+
+        Updated HTTP Basic authentication parameters for the token endpoint.
+
+        - `Type type`
+
+          - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+        - `Optional<String> clientSecret`
+
+          Updated OAuth client secret.
+
+      - `class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:`
+
+        Updated POST body authentication parameters for the token endpoint.
+
+        - `Type type`
+
+          - `CLIENT_SECRET_POST("client_secret_post")`
+
+        - `Optional<String> clientSecret`
+
+          Updated OAuth client secret.
+
+### Beta Managed Agents Static Bearer Auth Response
+
+- `class BetaManagedAgentsStaticBearerAuthResponse:`
+
+  Static bearer token credential details for an MCP server.
+
+  - `String mcpServerUrl`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `Type type`
+
+    - `STATIC_BEARER("static_bearer")`
+
+### Beta Managed Agents Static Bearer Create Params
+
+- `class BetaManagedAgentsStaticBearerCreateParams:`
+
+  Parameters for creating a static bearer token credential.
+
+  - `String token`
+
+    Static bearer token value.
+
+  - `String mcpServerUrl`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `Type type`
+
+    - `STATIC_BEARER("static_bearer")`
+
+### Beta Managed Agents Static Bearer Update Params
+
+- `class BetaManagedAgentsStaticBearerUpdateParams:`
+
+  Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
+
+  - `Type type`
+
+    - `STATIC_BEARER("static_bearer")`
+
+  - `Optional<String> token`
+
+    Updated static bearer token value.
+
+### Beta Managed Agents Token Endpoint Auth Basic Param
+
+- `class BetaManagedAgentsTokenEndpointAuthBasicParam:`
+
+  Token endpoint uses HTTP Basic authentication with client credentials.
+
+  - `String clientSecret`
+
+    OAuth client secret.
+
+  - `Type type`
+
+    - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+### Beta Managed Agents Token Endpoint Auth Basic Response
+
+- `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+
+  Token endpoint uses HTTP Basic authentication with client credentials.
+
+  - `Type type`
+
+    - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+### Beta Managed Agents Token Endpoint Auth Basic Update Param
+
+- `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
+
+  Updated HTTP Basic authentication parameters for the token endpoint.
+
+  - `Type type`
+
+    - `CLIENT_SECRET_BASIC("client_secret_basic")`
+
+  - `Optional<String> clientSecret`
+
+    Updated OAuth client secret.
+
+### Beta Managed Agents Token Endpoint Auth None Param
+
+- `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
+
+  Token endpoint requires no client authentication.
+
+  - `Type type`
+
+    - `NONE("none")`
+
+### Beta Managed Agents Token Endpoint Auth None Response
+
+- `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+
+  Token endpoint requires no client authentication.
+
+  - `Type type`
+
+    - `NONE("none")`
+
+### Beta Managed Agents Token Endpoint Auth Post Param
+
+- `class BetaManagedAgentsTokenEndpointAuthPostParam:`
+
+  Token endpoint uses POST body authentication with client credentials.
+
+  - `String clientSecret`
+
+    OAuth client secret.
+
+  - `Type type`
+
+    - `CLIENT_SECRET_POST("client_secret_post")`
+
+### Beta Managed Agents Token Endpoint Auth Post Response
+
+- `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+
+  Token endpoint uses POST body authentication with client credentials.
+
+  - `Type type`
+
+    - `CLIENT_SECRET_POST("client_secret_post")`
+
+### Beta Managed Agents Token Endpoint Auth Post Update Param
+
+- `class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:`
+
+  Updated POST body authentication parameters for the token endpoint.
+
+  - `Type type`
+
+    - `CLIENT_SECRET_POST("client_secret_post")`
+
+  - `Optional<String> clientSecret`
+
+    Updated OAuth client secret.
 
 # Files
 
@@ -44585,7 +70700,7 @@ Upload File
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `String file`
 
@@ -44628,6 +70743,20 @@ Upload File
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
+
+  - `Optional<BetaFileScope> scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `JsonValue; type "session"constant`
+
+      The type of scope (e.g., `"session"`).
+
+      - `SESSION("session")`
 
 ### Example
 
@@ -44680,6 +70809,10 @@ List Files
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
+  - `Optional<String> scopeId`
+
+    Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+
   - `Optional<List<AnthropicBeta>> betas`
 
     Optional header to specify the beta version(s) you want to use.
@@ -44726,7 +70859,7 @@ List Files
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -44765,6 +70898,20 @@ List Files
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
+
+  - `Optional<BetaFileScope> scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `JsonValue; type "session"constant`
+
+      The type of scope (e.g., `"session"`).
+
+      - `SESSION("session")`
 
 ### Example
 
@@ -44849,7 +70996,7 @@ Download File
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Example
 
@@ -44934,7 +71081,7 @@ Get File Metadata
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -44973,6 +71120,20 @@ Get File Metadata
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
+
+  - `Optional<BetaFileScope> scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `JsonValue; type "session"constant`
+
+      The type of scope (e.g., `"session"`).
+
+      - `SESSION("session")`
 
 ### Example
 
@@ -45057,7 +71218,7 @@ Delete File
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -45097,6 +71258,20 @@ public final class Main {
 ```
 
 ## Domain Types
+
+### Beta File Scope
+
+- `class BetaFileScope:`
+
+  - `String id`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `JsonValue; type "session"constant`
+
+    The type of scope (e.g., `"session"`).
+
+    - `SESSION("session")`
 
 ### Deleted File
 
@@ -45151,6 +71326,20 @@ public final class Main {
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
+
+  - `Optional<BetaFileScope> scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `JsonValue; type "session"constant`
+
+      The type of scope (e.g., `"session"`).
+
+      - `SESSION("session")`
 
 # Skills
 
@@ -45212,7 +71401,7 @@ Create Skill
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `Optional<String> displayTitle`
 
@@ -45371,7 +71560,7 @@ List Skills
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -45503,7 +71692,7 @@ Get Skill
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -45635,7 +71824,7 @@ Delete Skill
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -45740,7 +71929,7 @@ Create Skill Version
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `Optional<List<String>> files`
 
@@ -45891,7 +72080,7 @@ List Skill Versions
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -46032,7 +72221,7 @@ Get Skill Version
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -46177,7 +72366,7 @@ Delete Skill Version
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
@@ -46219,596 +72408,3 @@ public final class Main {
     }
 }
 ```
-
-# User Profiles
-
-## Create
-
-`BetaUserProfile beta().userProfiles().create(UserProfileCreateParamsparams = UserProfileCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/user_profiles`
-
-Create User Profile
-
-### Parameters
-
-- `UserProfileCreateParams params`
-
-  - `Optional<List<AnthropicBeta>> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
-    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
-
-    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
-
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
-    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
-
-    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
-
-    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
-
-    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
-
-    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
-
-    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
-
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
-    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
-
-    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
-
-    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
-
-    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
-
-    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
-  - `Optional<String> externalId`
-
-  - `Optional<Metadata> metadata`
-
-    Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
-
-### Returns
-
-- `class BetaUserProfile:`
-
-  - `String id`
-
-  - `LocalDateTime createdAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Metadata metadata`
-
-  - `TrustGrants trustGrants`
-
-    - `String status`
-
-  - `String type`
-
-  - `LocalDateTime updatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Optional<String> externalId`
-
-### Example
-
-```java
-package com.anthropic.example;
-
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.userprofiles.BetaUserProfile;
-import com.anthropic.models.beta.userprofiles.UserProfileCreateParams;
-
-public final class Main {
-    private Main() {}
-
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        BetaUserProfile betaUserProfile = client.beta().userProfiles().create();
-    }
-}
-```
-
-## List
-
-`UserProfileListPage beta().userProfiles().list(UserProfileListParamsparams = UserProfileListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/user_profiles`
-
-List User Profiles
-
-### Parameters
-
-- `UserProfileListParams params`
-
-  - `Optional<Long> limit`
-
-    Query parameter for limit
-
-  - `Optional<Order> order`
-
-    Query parameter for order
-
-    - `ASC("asc")`
-
-    - `DESC("desc")`
-
-  - `Optional<String> page`
-
-    Query parameter for page
-
-  - `Optional<List<AnthropicBeta>> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
-    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
-
-    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
-
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
-    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
-
-    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
-
-    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
-
-    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
-
-    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
-
-    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
-
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
-    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
-
-    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
-
-    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
-
-    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
-
-    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
-### Returns
-
-- `class BetaUserProfile:`
-
-  - `String id`
-
-  - `LocalDateTime createdAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Metadata metadata`
-
-  - `TrustGrants trustGrants`
-
-    - `String status`
-
-  - `String type`
-
-  - `LocalDateTime updatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Optional<String> externalId`
-
-### Example
-
-```java
-package com.anthropic.example;
-
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.userprofiles.UserProfileListPage;
-import com.anthropic.models.beta.userprofiles.UserProfileListParams;
-
-public final class Main {
-    private Main() {}
-
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        UserProfileListPage page = client.beta().userProfiles().list();
-    }
-}
-```
-
-## Retrieve
-
-`BetaUserProfile beta().userProfiles().retrieve(UserProfileRetrieveParamsparams = UserProfileRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/user_profiles/{id}`
-
-Get User Profile
-
-### Parameters
-
-- `UserProfileRetrieveParams params`
-
-  - `Optional<String> id`
-
-  - `Optional<List<AnthropicBeta>> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
-    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
-
-    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
-
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
-    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
-
-    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
-
-    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
-
-    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
-
-    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
-
-    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
-
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
-    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
-
-    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
-
-    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
-
-    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
-
-    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
-### Returns
-
-- `class BetaUserProfile:`
-
-  - `String id`
-
-  - `LocalDateTime createdAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Metadata metadata`
-
-  - `TrustGrants trustGrants`
-
-    - `String status`
-
-  - `String type`
-
-  - `LocalDateTime updatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Optional<String> externalId`
-
-### Example
-
-```java
-package com.anthropic.example;
-
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.userprofiles.BetaUserProfile;
-import com.anthropic.models.beta.userprofiles.UserProfileRetrieveParams;
-
-public final class Main {
-    private Main() {}
-
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        BetaUserProfile betaUserProfile = client.beta().userProfiles().retrieve("id");
-    }
-}
-```
-
-## Update
-
-`BetaUserProfile beta().userProfiles().update(UserProfileUpdateParamsparams = UserProfileUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/user_profiles/{id}`
-
-Update User Profile
-
-### Parameters
-
-- `UserProfileUpdateParams params`
-
-  - `Optional<String> id`
-
-  - `Optional<List<AnthropicBeta>> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
-    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
-
-    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
-
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
-    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
-
-    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
-
-    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
-
-    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
-
-    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
-
-    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
-
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
-    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
-
-    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
-
-    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
-
-    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
-
-    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
-  - `Optional<String> externalId`
-
-  - `Optional<Metadata> metadata`
-
-    Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
-
-### Returns
-
-- `class BetaUserProfile:`
-
-  - `String id`
-
-  - `LocalDateTime createdAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Metadata metadata`
-
-  - `TrustGrants trustGrants`
-
-    - `String status`
-
-  - `String type`
-
-  - `LocalDateTime updatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Optional<String> externalId`
-
-### Example
-
-```java
-package com.anthropic.example;
-
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.userprofiles.BetaUserProfile;
-import com.anthropic.models.beta.userprofiles.UserProfileUpdateParams;
-
-public final class Main {
-    private Main() {}
-
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        BetaUserProfile betaUserProfile = client.beta().userProfiles().update("id");
-    }
-}
-```
-
-## Create Enrollment URL
-
-`BetaUserProfileEnrollmentUrl beta().userProfiles().createEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparams = UserProfileCreateEnrollmentUrlParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/user_profiles/{id}/enrollment_url`
-
-Create Enrollment URL
-
-### Parameters
-
-- `UserProfileCreateEnrollmentUrlParams params`
-
-  - `Optional<String> id`
-
-  - `Optional<List<AnthropicBeta>> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
-    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
-
-    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
-
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
-    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
-
-    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
-
-    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
-
-    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
-
-    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
-
-    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
-
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
-    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
-
-    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
-
-    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
-
-    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
-
-    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
-### Returns
-
-- `class BetaUserProfileEnrollmentUrl:`
-
-  - `LocalDateTime expiresAt`
-
-    A timestamp in RFC 3339 format
-
-  - `String type`
-
-  - `String url`
-
-### Example
-
-```java
-package com.anthropic.example;
-
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.userprofiles.BetaUserProfileEnrollmentUrl;
-import com.anthropic.models.beta.userprofiles.UserProfileCreateEnrollmentUrlParams;
-
-public final class Main {
-    private Main() {}
-
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        BetaUserProfileEnrollmentUrl betaUserProfileEnrollmentUrl = client.beta().userProfiles().createEnrollmentUrl("id");
-    }
-}
-```
-
-## Domain Types
-
-### Beta User Profile
-
-- `class BetaUserProfile:`
-
-  - `String id`
-
-  - `LocalDateTime createdAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Metadata metadata`
-
-  - `TrustGrants trustGrants`
-
-    - `String status`
-
-  - `String type`
-
-  - `LocalDateTime updatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Optional<String> externalId`
-
-### Beta User Profile Enrollment URL
-
-- `class BetaUserProfileEnrollmentUrl:`
-
-  - `LocalDateTime expiresAt`
-
-    A timestamp in RFC 3339 format
-
-  - `String type`
-
-  - `String url`
-
-### Beta User Profile Trust Grant
-
-- `class BetaUserProfileTrustGrant:`
-
-  - `String status`

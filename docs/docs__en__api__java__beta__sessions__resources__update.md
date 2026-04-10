@@ -60,6 +60,8 @@ Update Session Resource
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
   - `String authorizationToken`
 
     New authorization token for the resource. Currently only `github_repository` resources support token rotation.
