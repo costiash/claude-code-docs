@@ -117,8 +117,8 @@
     "docs__en__agents-and-tools__tool-use__code-execution-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool.md",
-      "hash": "8d0dfbe0ae0185b2d0a6b75560d48bde836ff34aeaec8f2d5bbf206b484b09a6",
-      "last_updated": "2026-04-08T18:32:03.726184"
+      "hash": "210a2df437a22b83d5cd29a67f46946034178954ab471e0a629222d732c6534b",
+      "last_updated": "2026-04-10T18:21:59.949920"
     },
     "docs__en__agents-and-tools__tool-use__computer-use-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
@@ -153,8 +153,8 @@
     "docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling.md",
-      "hash": "bb3dd7c985f8c8e33ebc93e3c4b947a19cceb2821532811692657e1bd76cfa2e",
-      "last_updated": "2026-04-08T18:32:07.637928"
+      "hash": "8292ac109376f71c84cae4be278aab8a69c3e42156f2b5cdb0c5c38caecd8d18",
+      "last_updated": "2026-04-10T18:22:03.977392"
     },
     "docs__en__agents-and-tools__tool-use__text-editor-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool",
@@ -5121,8 +5121,8 @@
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
       "original_md_url": "https://platform.claude.com/docs/en/devcontainer.md",
-      "hash": "5b34f486b053092b0a858a936229865ef7ce64ac3b7aa3a16819b53f62eee585",
-      "last_updated": "2026-04-10T00:47:11.784948"
+      "hash": "38ed6ca20d09624a01215d5fd31a6a13ffe8e2850ddff266459da09d9b31e990",
+      "last_updated": "2026-04-10T18:32:22.672377"
     },
     "docs__en__get-started.md": {
       "original_url": "https://platform.claude.com/docs/en/get-started",
@@ -5163,8 +5163,8 @@
     "claude-code__hooks-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks-guide",
       "original_md_url": "https://platform.claude.com/docs/en/hooks-guide.md",
-      "hash": "1e1d5ea0fd06fb07808f936552a76f6341234a5a6ef578d2b6da2a699ab1d4a9",
-      "last_updated": "2026-04-10T00:47:17.007789"
+      "hash": "441dfe90e1041d49c6e62d41575c3a4c432d83e687a415e1d543b8cb73e9129f",
+      "last_updated": "2026-04-10T18:32:28.305867"
     },
     "claude-code__interactive-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/interactive-mode",
@@ -5505,8 +5505,8 @@
     "claude-code__troubleshooting.md": {
       "original_url": "https://platform.claude.com/docs/en/troubleshooting",
       "original_md_url": "https://platform.claude.com/docs/en/troubleshooting.md",
-      "hash": "2e230d295d4485e4f5ab3243d6ec4c5980cacd6798af6ea934bb00dd339f7b3b",
-      "last_updated": "2026-04-10T06:53:14.713030"
+      "hash": "8a041425b99cd4513a829ec5ed3e2b6641f7b0c1a90e91c60ecafd5d0a712a3d",
+      "last_updated": "2026-04-10T18:33:06.728401"
     },
     "claude-code__vs-code.md": {
       "original_url": "https://platform.claude.com/docs/en/vs-code",
@@ -5523,8 +5523,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-10T15:32:11.493629",
-    "fetch_duration_seconds": 693.924494,
+    "last_fetch_completed": "2026-04-10T18:33:09.871967",
+    "fetch_duration_seconds": 695.034601,
     "total_pages_discovered": 1172,
     "pages_fetched_successfully": 920,
     "pages_failed": 253,
@@ -5788,7 +5788,7 @@
     "total_files": 920,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-10T15:32:11.493657",
+  "last_updated": "2026-04-10T18:33:09.871984",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

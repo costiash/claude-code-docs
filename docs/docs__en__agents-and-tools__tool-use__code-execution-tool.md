@@ -20,10 +20,23 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-
 
 ## Model compatibility
 
-The code execution tool is available on all supported Claude models using tool version `code_execution_20250825`.
+The code execution tool is available on the following models:
+
+| Model | Tool versions |
+|-------|--------------|
+| Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20250825`, `code_execution_20260120` |
+| Claude Sonnet 4.6 (`claude-sonnet-4-6`) | `code_execution_20250825`, `code_execution_20260120` |
+| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825`, `code_execution_20260120` |
+| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825`, `code_execution_20260120` |
+| Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) | `code_execution_20250825` |
+| Claude Opus 4.1 (`claude-opus-4-1-20250805`) | `code_execution_20250825` |
+| Claude Opus 4 (`claude-opus-4-20250514`) | `code_execution_20250825` |
+| Claude Sonnet 4 (`claude-sonnet-4-20250514`) | `code_execution_20250825` |
+| Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
+| Claude Haiku 3.5 (`claude-3-5-haiku-latest`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
 
 <Note>
-The `code_execution_20250825` version supports Bash commands and file operations. For models that support [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), `code_execution_20260120` adds REPL state persistence and the ability to call tools from within the sandbox. A legacy version `code_execution_20250522` (Python only) is also available; see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.
+`code_execution_20250825` supports Bash commands and file operations and is available on every model listed above. `code_execution_20260120` adds REPL state persistence and [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) from within the sandbox, and is available on Opus 4.5+ and Sonnet 4.5+ only. A legacy version `code_execution_20250522` (Python only) is also available on the same models as `code_execution_20250825`; see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.
 </Note>
 
 <Warning>
