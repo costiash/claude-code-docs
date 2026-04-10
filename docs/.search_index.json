@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-10T04:15:07Z",
+  "generated_at": "2026-04-10T06:53:20Z",
   "indexed_files": 1039,
   "index": {
     "/changelog": {
@@ -812,7 +812,7 @@
         "web",
         "feedback"
       ],
-      "word_count": 1810,
+      "word_count": 1706,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -924,7 +924,7 @@
         "step",
         "https"
       ],
-      "word_count": 3890,
+      "word_count": 3936,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1026,17 +1026,17 @@
         "tabs",
         "native",
         "wsl",
+        "run",
         "version",
         "updates",
         "step",
         "see",
         "linux",
-        "run",
+        "channel",
         "npm",
-        "macos",
-        "update"
+        "macos"
       ],
-      "word_count": 2009,
+      "word_count": 2065,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1204,7 +1204,7 @@
         "command",
         "may"
       ],
-      "word_count": 5223,
+      "word_count": 5230,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
