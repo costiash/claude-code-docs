@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-10T18:33:12Z",
-  "indexed_files": 1039,
+  "generated_at": "2026-04-10T21:25:32Z",
+  "indexed_files": 1040,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -18,17 +18,17 @@
         "code",
         "instead",
         "sessions",
-        "after",
         "session",
+        "after",
         "being",
-        "commands",
         "mcp",
+        "commands",
         "command",
         "file",
-        "bash",
-        "memory"
+        "memory",
+        "bash"
       ],
-      "word_count": 31578,
+      "word_count": 32512,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -43,20 +43,20 @@
         "mantle",
         "credentials",
         "when",
+        "const",
         "account",
+        "vid",
+        "environment",
         "settings",
         "inference",
-        "environment",
         "variables",
-        "models",
-        "file",
-        "access",
-        "profile",
         "api",
+        "models",
+        "return",
         "set",
-        "version"
+        "file"
       ],
-      "word_count": 2492,
+      "word_count": 3189,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -206,16 +206,16 @@
         "claude",
         "code",
         "context",
+        "per",
         "when",
         "costs",
         "usage",
-        "per",
         "token",
         "tokens",
         "users",
-        "team",
         "teams",
         "agent",
+        "team",
         "tasks",
         "work",
         "only",
@@ -224,7 +224,7 @@
         "limits",
         "user"
       ],
-      "word_count": 1929,
+      "word_count": 1920,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -285,7 +285,7 @@
     },
     "/claude-code/devcontainer": {
       "title": "Development containers",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Development containers  > Learn about the Claude Code development container for teams that need consistent, secure",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
       "keywords": [
         "code",
         "container",
@@ -293,22 +293,22 @@
         "development",
         "devcontainer",
         "security",
+        "feedback",
         "environments",
         "firewall",
+        "when",
         "network",
         "configuration",
+        "documentation",
+        "only",
         "containers",
         "tools",
-        "when",
         "devcontainers",
         "access",
-        "documentation",
-        "secure",
-        "dev",
-        "rules",
-        "only"
+        "page",
+        "submit"
       ],
-      "word_count": 566,
+      "word_count": 634,
       "file_path": "docs/claude-code__devcontainer.md"
     },
     "/claude-code/github-actions": {
@@ -375,24 +375,24 @@
         "model",
         "vertex",
         "code",
+        "const",
+        "vid",
         "models",
         "project",
         "when",
         "google",
+        "return",
         "environment",
+        "variant",
         "cloud",
         "variables",
-        "gcp",
-        "note",
-        "access",
-        "region",
-        "credentials",
-        "pin",
-        "wizard",
-        "see",
-        "default"
+        "div",
+        "set",
+        "control",
+        "track",
+        "gcp"
       ],
-      "word_count": 1340,
+      "word_count": 2017,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -612,11 +612,11 @@
         "add",
         "http",
         "example",
+        "plugin",
         "any",
-        "only",
-        "stdio"
+        "only"
       ],
-      "word_count": 7031,
+      "word_count": 7032,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -636,15 +636,15 @@
         "loaded",
         "code",
         "when",
-        "context",
         "them",
         "session",
+        "context",
         "settings",
         "into",
         "managed",
         "every"
       ],
-      "word_count": 3518,
+      "word_count": 3507,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -652,27 +652,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
       "keywords": [
         "claude",
-        "microsoft",
         "foundry",
+        "const",
+        "microsoft",
+        "vid",
         "code",
+        "return",
+        "variant",
         "azure",
         "model",
+        "div",
+        "track",
+        "treatment",
         "feedback",
         "when",
-        "create",
-        "documentation",
-        "models",
-        "resource",
-        "authentication",
+        "classname",
         "set",
-        "note",
-        "environment",
-        "page",
-        "submit",
-        "specific",
-        "configuration"
+        "control",
+        "decision",
+        "false"
       ],
-      "word_count": 606,
+      "word_count": 1283,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {
@@ -737,26 +737,26 @@
       "keywords": [
         "claude",
         "code",
-        "authentication",
-        "proxy",
         "enterprise",
+        "authentication",
         "environment",
+        "note",
+        "proxy",
+        "certificate",
+        "store",
         "feedback",
         "variables",
+        "trust",
+        "configuration",
         "access",
         "anthropic",
         "page",
+        "when",
         "network",
-        "configuration",
         "custom",
-        "security",
-        "through",
-        "note",
-        "api",
-        "github",
-        "documentation"
+        "security"
       ],
-      "word_count": 611,
+      "word_count": 765,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -1157,26 +1157,26 @@
       "keywords": [
         "claude",
         "code",
+        "const",
+        "vid",
         "through",
-        "tab",
         "enterprise",
-        "proxy",
         "environment",
+        "tab",
+        "return",
+        "proxy",
         "configuration",
         "gateway",
+        "variant",
+        "track",
         "more",
         "llm",
         "variables",
-        "teams",
-        "corporate",
-        "traffic",
-        "feedback",
-        "learn",
-        "organizations",
-        "team",
-        "configure"
+        "div",
+        "control",
+        "anthropic"
       ],
-      "word_count": 1298,
+      "word_count": 1975,
       "file_path": "docs/claude-code__third-party-integrations.md"
     },
     "/claude-code/troubleshooting": {
@@ -25227,6 +25227,34 @@
       "word_count": 1411,
       "file_path": "docs/docs__en__build-with-claude__claude-code-analytics-api.md"
     },
+    "/docs/en/build-with-claude/claude-in-amazon-bedrock-research-preview": {
+      "title": "Claude in Amazon Bedrock (research preview)",
+      "content_preview": "# Claude in Amazon Bedrock (research preview)  Access Claude models through Amazon Bedrock with AWS-native authentication, billing, and security boundaries.  ---  This guide walks you through setting ...",
+      "keywords": [
+        "tab",
+        "bedrock",
+        "title",
+        "amazon",
+        "aws",
+        "claude",
+        "role",
+        "step",
+        "preview",
+        "api",
+        "anthropic",
+        "research",
+        "model",
+        "access",
+        "account",
+        "service",
+        "steps",
+        "token",
+        "support",
+        "tabs"
+      ],
+      "word_count": 1308,
+      "file_path": "docs/docs__en__build-with-claude__claude-in-amazon-bedrock-research-preview.md"
+    },
     "/docs/en/build-with-claude/claude-in-amazon-bedrock": {
       "title": "Claude in Amazon Bedrock",
       "content_preview": "# Claude in Amazon Bedrock  Access Claude models through Amazon Bedrock with AWS-native authentication, billing, and security boundaries.  ---  This guide walks you through setting up and making API c...",
@@ -25285,7 +25313,7 @@
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock": {
       "title": "Claude on Amazon Bedrock",
-      "content_preview": "# Claude on Amazon Bedrock  Anthropic's Claude models are now generally available through Amazon Bedrock.  ---  <Note> This page covers the legacy Amazon Bedrock integration (the `InvokeModel` API wit...",
+      "content_preview": "# Claude on Amazon Bedrock  Anthropic's Claude models are now generally available through Amazon Bedrock.  ---  <Note> This page covers the Amazon Bedrock integration available today (the `InvokeModel...",
       "keywords": [
         "claude",
         "yes",
@@ -25302,13 +25330,13 @@
         "model",
         "pricing",
         "models",
-        "api",
-        "regional",
         "available",
-        "see",
-        "title"
+        "regional",
+        "api",
+        "title",
+        "through"
       ],
-      "word_count": 2843,
+      "word_count": 2853,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -25364,7 +25392,7 @@
         "after",
         "trigger"
       ],
-      "word_count": 8813,
+      "word_count": 8815,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -25392,7 +25420,7 @@
         "title",
         "results"
       ],
-      "word_count": 7314,
+      "word_count": 7316,
       "file_path": "docs/docs__en__build-with-claude__context-editing.md"
     },
     "/docs/en/build-with-claude/context-windows": {
@@ -25905,26 +25933,26 @@
       "keywords": [
         "schema",
         "json",
-        "section",
         "outputs",
-        "title",
-        "schemas",
+        "section",
         "structured",
+        "schemas",
         "claude",
+        "title",
         "response",
-        "output",
         "sdk",
+        "output",
+        "type",
         "tool",
-        "example",
-        "strict",
         "java",
-        "tab",
-        "when",
         "class",
-        "responses",
-        "validation"
+        "strict",
+        "when",
+        "tab",
+        "constraints",
+        "fields"
       ],
-      "word_count": 9634,
+      "word_count": 10133,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/token-counting": {
@@ -26708,7 +26736,7 @@
         "read",
         "console"
       ],
-      "word_count": 4791,
+      "word_count": 4793,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {

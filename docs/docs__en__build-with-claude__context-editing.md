@@ -1643,7 +1643,9 @@ const response = await anthropic.beta.messages.countTokens({
 console.log(`Original tokens: ${response.context_management?.original_input_tokens}`);
 console.log(`After clearing: ${response.input_tokens}`);
 console.log(
-  `Savings: ${(response.context_management?.original_input_tokens || 0) - response.input_tokens} tokens`
+  `Savings: ${
+    (response.context_management?.original_input_tokens || 0) - response.input_tokens
+  } tokens`
 );
 ```
 

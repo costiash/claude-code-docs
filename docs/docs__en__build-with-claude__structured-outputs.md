@@ -4,12 +4,12 @@ Get validated JSON results from agent workflows
 
 ---
 
-Structured outputs constrain Claude's responses to follow a specific schema, ensuring valid, parseable output for downstream processing. Two complementary features are available:
+Structured outputs constrain Claude's responses to follow a specific schema, ensuring valid, parseable output for downstream processing. Structured outputs provide two complementary features:
 
 - **JSON outputs** (`output_config.format`): Get Claude's response in a specific JSON format
 - **Strict tool use** (`strict: true`): Guarantee schema validation on tool names and inputs
 
-These features can be used independently or together in the same request.
+You can use these features independently or together in the same request.
 
 <Note>
 Structured outputs are generally available on the Claude API and Amazon Bedrock for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are in beta on Microsoft Foundry. Structured outputs are not supported on Google Cloud's Vertex AI for Claude Mythos Preview.
@@ -146,9 +146,7 @@ print(response.content[0].text)
 ```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
-const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY
-});
+const client = new Anthropic();
 
 const response = await client.messages.create({
   model: "claude-opus-4-6",
@@ -177,14 +175,15 @@ const response = await client.messages.create({
     }
   }
 });
-const textBlock = response.content.find((block) => block.type === "text");
-if (textBlock && textBlock.type === "text") {
-  console.log(textBlock.text);
+
+for (const block of response.content) {
+  if (block.type === "text") {
+    console.log(block.text);
+  }
 }
 ```
 
 ```csharp C#
-using System.Collections.Generic;
 using System.Text.Json;
 using Anthropic;
 using Anthropic.Models.Messages;
@@ -245,9 +244,9 @@ func main() {
 			},
 			OutputConfig: anthropic.OutputConfigParam{
 				Format: anthropic.JSONOutputFormatParam{
-					Schema: map[string]interface{}{
+					Schema: map[string]any{
 						"type": "object",
-						"properties": map[string]interface{}{
+						"properties": map[string]any{
 							"name":           map[string]string{"type": "string"},
 							"email":          map[string]string{"type": "string"},
 							"plan_interest":  map[string]string{"type": "string"},
@@ -302,9 +301,7 @@ void main() {
 
 use Anthropic\Client;
 
-$client = new Client(
-    apiKey: getenv("ANTHROPIC_API_KEY")
-);
+$client = new Client();
 
 $response = $client->messages->create(
     maxTokens: 1024,
@@ -403,7 +400,7 @@ puts response.content[0].text
 The SDKs provide helpers that make it easier to work with JSON outputs, including schema transformation, automatic validation, and integration with popular schema libraries.
 
 <Note>
-SDK helper methods (like `.parse()` and Pydantic/Zod integration) still accept `output_format` as a convenience parameter. The SDK handles the translation to `output_config.format` internally. The examples below show the SDK helper syntax.
+The Python SDK's `client.messages.parse()` still accepts `output_format` as a convenience parameter and translates it to `output_config.format` internally. Other SDKs require `output_config` directly. The examples below show the SDK helper syntax.
 </Note>
 
 #### Using native schema definitions
@@ -411,10 +408,11 @@ SDK helper methods (like `.parse()` and Pydantic/Zod integration) still accept `
 Instead of writing raw JSON schemas, you can use familiar schema definition tools in your language:
 
 - **Python**: [Pydantic](https://docs.pydantic.dev/) models with `client.messages.parse()`
-- **TypeScript**: [Zod](https://zod.dev/) schemas with `zodOutputFormat()`
+- **TypeScript**: [Zod](https://zod.dev/) schemas with `zodOutputFormat()` or typed JSON Schema literals with `jsonSchemaOutputFormat()`
 - **Java**: Plain Java classes with automatic schema derivation via `outputConfig(Class<T>)`
 - **Ruby**: `Anthropic::BaseModel` classes with `output_config: {format: Model}`
-- **CLI**, **C#**, **Go**, **PHP**: Raw JSON schemas passed via `output_config`
+- **PHP**: Classes implementing `StructuredOutputModel` with `outputConfig: ['format' => MyClass::class]`
+- **CLI**, **C#**, **Go**: Raw JSON schemas passed via `output_config`
 
 <CodeGroup>
 
@@ -516,7 +514,7 @@ var client = new AnthropicClient();
 
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = "claude-opus-4-6",
+    Model = Model.ClaudeOpus4_6,
     MaxTokens = 1024,
     Messages = [new() {
         Role = Role.User,
@@ -544,10 +542,12 @@ var response = await client.Messages.Create(new MessageCreateParams
     },
 });
 
-var json = (response.Content.First().Value as TextBlock)!.Text;
-// JSON is guaranteed to match the schema
-var contact = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
-Console.WriteLine($"{contact["name"]} ({contact["email"]})");
+if (response.Content[0].TryPickText(out var textBlock))
+{
+    // JSON is guaranteed to match the schema
+    var contact = JsonSerializer.Deserialize<Dictionary<string, object>>(textBlock.Text)!;
+    Console.WriteLine($"{contact["name"]} ({contact["email"]})");
+}
 ```
 
 ```go Go hidelines={1..2,4..7,27..29,-1}
@@ -645,32 +645,34 @@ void main() {
 <?php
 
 use Anthropic\Client;
-use Anthropic\Messages\OutputConfig;
-use Anthropic\Messages\JSONOutputFormat;
+use Anthropic\Lib\Concerns\StructuredOutputModelTrait;
+use Anthropic\Lib\Contracts\StructuredOutputModel;
 
 $client = new Client();
 
-$response = $client->messages->create(
+class ContactInfo implements StructuredOutputModel
+{
+    use StructuredOutputModelTrait;
+
+    public string $name;
+    public string $email;
+    public string $plan_interest;
+    public bool $demo_requested;
+}
+
+$message = $client->messages->create(
     maxTokens: 1024,
     messages: [
         ['role' => 'user', 'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.'],
     ],
     model: 'claude-opus-4-6',
-    outputConfig: OutputConfig::with(format: JSONOutputFormat::with(schema: [
-        'type' => 'object',
-        'properties' => [
-            'name' => ['type' => 'string'],
-            'email' => ['type' => 'string'],
-            'plan_interest' => ['type' => 'string'],
-            'demo_requested' => ['type' => 'boolean'],
-        ],
-        'required' => ['name', 'email', 'plan_interest', 'demo_requested'],
-        'additionalProperties' => false,
-    ])),
+    outputConfig: ['format' => ContactInfo::class],
 );
 
-$data = json_decode($response->content[0]->text, true);
-echo $data['name'] . ' (' . $data['email'] . ')';
+$contact = $message->parsedOutput();
+if ($contact instanceof ContactInfo) {
+    echo "{$contact->name} ({$contact->email})\n";
+}
 ```
 
 ```ruby Ruby hidelines={1..2}
@@ -712,8 +714,6 @@ Each SDK provides helpers that make working with structured outputs easier. See 
 
 The CLI passes raw JSON schemas as a YAML heredoc body. Use the GJSON `@fromstr` modifier with `--transform` to parse the JSON string returned in `content[0].text` and project specific fields.
 
-<section title="Example usage">
-
 ```bash
 ant messages create \
   --transform 'content.0.text|@fromstr|{name,email}' \
@@ -744,16 +744,12 @@ name: John Smith
 email: john@example.com
 ```
 
-</section>
-
 </Tab>
 <Tab title="Python">
 
 **`client.messages.parse()` (Recommended)**
 
 The `parse()` method automatically transforms your Pydantic model, validates the response, and returns a `parsed_output` attribute.
-
-<section title="Example usage">
 
 ```python hidelines={2..4,9..12}
 from pydantic import BaseModel
@@ -785,13 +781,9 @@ contact = response.parsed_output
 print(contact.name, contact.email)
 ```
 
-</section>
-
 **`transform_schema()` helper**
 
 For when you need to manually transform schemas before sending, or when you want to modify a Pydantic-generated schema. Unlike `client.messages.parse()`, which transforms provided schemas automatically, this gives you the transformed schema so you can further customize it.
-
-<section title="Example usage">
 
 ```python nocheck
 from anthropic import transform_schema
@@ -813,16 +805,12 @@ response = client.messages.create(
 )
 ```
 
-</section>
-
 </Tab>
 <Tab title="TypeScript">
 
 **`client.messages.parse()` with `zodOutputFormat()`**
 
 The `parse()` method accepts a Zod schema, validates the response, and returns a `parsed_output` attribute with the inferred TypeScript type matching the schema.
-
-<section title="Example usage">
 
 ```typescript hidelines={1}
 import Anthropic from "@anthropic-ai/sdk";
@@ -853,7 +841,48 @@ const response = await client.messages.parse({
 console.log(response.parsed_output!.email);
 ```
 
-</section>
+**`client.messages.parse()` with `jsonSchemaOutputFormat()`**
+
+The `jsonSchemaOutputFormat()` helper accepts a JSON Schema object and integrates it with `parse()` without requiring Zod. Zod is an optional peer dependency you install separately; `jsonSchemaOutputFormat()` works out of the box because the SDK bundles `json-schema-to-ts` directly.
+
+For **inline schema literals** (declared with `as const` in your source), you also get compile-time type inference: `parsed_output` is typed to match the schema structure. For **imported or generated schemas** (from a JSON file or OpenAPI codegen), the helper still sends the schema and parses the response, but the inferred type is `unknown` because `as const` can only apply to literal expressions.
+
+```typescript hidelines={1}
+import Anthropic from "@anthropic-ai/sdk";
+import { jsonSchemaOutputFormat } from "@anthropic-ai/sdk/helpers/json-schema";
+
+const client = new Anthropic();
+
+const response = await client.messages.parse({
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: "Extract contact info: John Smith, john@example.com, interested in the Pro plan"
+    }
+  ],
+  output_config: {
+    format: jsonSchemaOutputFormat({
+      type: "object",
+      properties: {
+        name: { type: "string" },
+        email: { type: "string" },
+        planInterest: { type: "string" }
+      },
+      required: ["name", "email", "planInterest"],
+      additionalProperties: false
+    } as const)
+  }
+});
+
+// response.parsed_output is typed as { name: string; email: string; planInterest: string } | null
+console.log(response.parsed_output!.email);
+```
+
+**Type inference requires `as const`.** Use a literal object expression with a `const` assertion so TypeScript can narrow the property types. Without `as const`, the inferred type collapses to `unknown`.
+
+**Schema transformation.** By default, the helper transforms the schema the same way `zodOutputFormat()` does: removing unsupported constraints, adding `additionalProperties: false` to objects, and filtering string formats. Pass `jsonSchemaOutputFormat(schema, { transform: false })` to send your schema to the API unchanged. See [How SDK transformation works](#how-sdk-transformation-works).
 
 </Tab>
 <Tab title="C#">
@@ -861,8 +890,6 @@ console.log(response.parsed_output!.email);
 **Raw JSON schemas via `OutputConfig`**
 
 The C# SDK uses raw JSON schemas built programmatically with `JsonSerializer.SerializeToElement`. Deserialize the response JSON with `JsonSerializer.Deserialize`.
-
-<section title="Example usage">
 
 ```csharp
 using System.Text.Json;
@@ -873,7 +900,7 @@ var client = new AnthropicClient();
 
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = "claude-opus-4-6",
+    Model = Model.ClaudeOpus4_6,
     MaxTokens = 1024,
     Messages = [new() {
         Role = Role.User,
@@ -900,13 +927,13 @@ var response = await client.Messages.Create(new MessageCreateParams
     },
 });
 
-var json = (response.Content.First().Value as TextBlock)!.Text;
-// JSON is guaranteed to match the schema
-var contact = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
-Console.WriteLine($"{contact["name"]} ({contact["email"]})");
+if (response.Content[0].TryPickText(out var textBlock))
+{
+    // JSON is guaranteed to match the schema
+    var contact = JsonSerializer.Deserialize<Dictionary<string, object>>(textBlock.Text)!;
+    Console.WriteLine($"{contact["name"]} ({contact["email"]})");
+}
 ```
-
-</section>
 
 </Tab>
 <Tab title="Go">
@@ -914,8 +941,6 @@ Console.WriteLine($"{contact["name"]} ({contact["email"]})");
 **Raw JSON schemas via `OutputConfigParam`**
 
 The Go SDK works with raw JSON schemas. Define a Go struct with json tags, generate the JSON schema (for example, using `invopop/jsonschema`), and unmarshal the response text into your struct.
-
-<section title="Example usage">
 
 ```go hidelines={1..2,4..7,26..28,-1}
 package main
@@ -974,8 +999,6 @@ func main() {
 }
 ```
 
-</section>
-
 </Tab>
 <Tab title="Java">
 
@@ -988,8 +1011,6 @@ Pass a Java class to `outputConfig()` and the SDK automatically derives a JSON s
 <Note>
 Declare your schema classes as top-level classes or `static` nested classes. This requirement comes from the Jackson Databind library (`com.fasterxml.jackson.databind`), which the SDK uses to deserialize JSON responses into your class instances and cannot instantiate non-static inner classes.
 </Note>
-
-<section title="Example usage">
 
 ```java hidelines={1..7}
 import com.anthropic.client.AnthropicClient;
@@ -1023,11 +1044,9 @@ void main() {
 }
 ```
 
-</section>
-
 <section title="Generic type erasure">
 
-Generic type information for fields is retained in the class's metadata, but generic type erasure applies in other scopes. While a JSON schema can be derived from a `BookList.books` field with type `List<Book>`, a valid JSON schema cannot be derived from a local variable of that same type.
+Java retains generic type information for fields in the class's metadata, but generic type erasure applies in other scopes. While a JSON schema can be derived from a `BookList.books` field with type `List<Book>`, a valid JSON schema cannot be derived from a local variable of that same type.
 
 If an error occurs while converting a JSON response to a Java class instance, the error message includes the JSON response to assist in diagnosis. If your JSON response may contain sensitive information, avoid logging it directly, or ensure that you redact any sensitive details from the error message.
 
@@ -1035,7 +1054,7 @@ If an error occurs while converting a JSON response to a Java class instance, th
 
 <section title="Local schema validation">
 
-Structured outputs support a [subset of the JSON Schema language](/docs/en/build-with-claude/structured-outputs#json-schema-limitations). Schemas are generated automatically from classes to align with this subset. The `outputConfig(Class<T>)` method performs a validation check on the schema derived from the specified class.
+Structured outputs support a [subset of the JSON Schema language](/docs/en/build-with-claude/structured-outputs#json-schema-limitations). The SDK generates schemas automatically from classes to align with this subset. The `outputConfig(Class<T>)` method performs a validation check on the schema derived from the specified class.
 
 Key points:
 
@@ -1068,7 +1087,7 @@ void main() {
 
 <section title="Streaming">
 
-Structured outputs can also be used with streaming. As responses arrive in stream events, you need to accumulate the full response before deserializing the JSON.
+Structured outputs also work with streaming. As responses arrive in stream events, you need to accumulate the full response before deserializing the JSON.
 
 Use `MessageAccumulator` to collect the JSON strings from the stream. Once accumulated, call `MessageAccumulator.message(Class<T>)` to convert the accumulated `Message` into a `StructuredMessage`, which automatically deserializes the JSON into your Java class.
 
@@ -1076,14 +1095,14 @@ Use `MessageAccumulator` to collect the JSON strings from the stream. Once accum
 
 <section title="JSON schema properties">
 
-When a JSON schema is derived from your Java classes, all properties represented by `public` fields or `public` getter methods are included by default. Non-`public` fields and getter methods are excluded.
+When the SDK derives a JSON schema from your Java classes, it includes all properties represented by `public` fields or `public` getter methods by default and excludes non-`public` fields and getter methods.
 
 You can control visibility with annotations:
 
 - `@JsonIgnore` excludes a `public` field or getter method
 - `@JsonProperty` includes a non-`public` field or getter method
 
-If you define `private` fields with `public` getter methods, the property name is derived from the getter (e.g., `private` field `myValue` with `public` method `getMyValue()` produces a `"myValue"` property). To use a non-conventional getter name, annotate the method with `@JsonProperty`.
+If you define `private` fields with `public` getter methods, the SDK derives the property name from the getter (e.g., `private` field `myValue` with `public` method `getMyValue()` produces a `"myValue"` property). To use a non-conventional getter name, annotate the method with `@JsonProperty`.
 
 Each class must define at least one property for the JSON schema. A validation error occurs if no fields or getter methods can produce schema properties, such as when:
 
@@ -1098,7 +1117,7 @@ Each class must define at least one property for the JSON schema. A validation e
 
 Your Java classes can use composition and inheritance to share structure when defining JSON schemas. Each pattern affects the output structure differently.
 
-**Composition** produces nested JSON output. If a schema is derived from class `Composed` that composes `A` and `B`:
+**Composition** produces nested JSON output. Deriving a schema from class `Composed` that composes `A` and `B`:
 
 ```java hidelines={1..7,20..35}
 import com.anthropic.client.AnthropicClient;
@@ -1147,7 +1166,7 @@ The JSON output has this nested structure:
 }
 ```
 
-**Inheritance** produces flat JSON output. If a schema is derived from class `Derived` that extends `Base`:
+**Inheritance** produces flat JSON output. Deriving a schema from class `Derived` that extends `Base`:
 
 ```java hidelines={1..7,15..30}
 import com.anthropic.client.AnthropicClient;
@@ -1240,7 +1259,7 @@ Annotation summary:
 - `@JsonIgnore`: Exclude a `public` field or getter from the schema
 - `@JsonProperty`: Include a non-`public` field or getter in the schema
 
-If you use `@JsonProperty(required = false)`, the `false` value is ignored. Anthropic JSON schemas must mark all properties as required.
+If you use `@JsonProperty(required = false)`, the SDK ignores the `false` value. Anthropic JSON schemas must mark all properties as required.
 
 You can also use OpenAPI Swagger 2 `@Schema` and `@ArraySchema` annotations for type-specific constraints:
 
@@ -1323,11 +1342,102 @@ For a more extensive example that builds a nested schema with arrays and descrip
 </Tab>
 <Tab title="PHP">
 
-**Raw JSON schemas via `OutputConfig::with()`**
+**Classes via `StructuredOutputModel` interface**
 
-The PHP SDK passes raw JSON schemas as associative arrays via `OutputConfig::with()`. Decode the response with `json_decode()`.
+Define a PHP class implementing `StructuredOutputModel` (using `StructuredOutputModelTrait`) and pass the class name to `outputConfig: ['format' => MyClass::class]`. The SDK derives a JSON schema from your native PHP 8 property types and returns a typed instance via `$message->parsedOutput()`.
 
-<section title="Example usage">
+`parsedOutput()` returns your model instance on success, or `null` (or an error array) if parsing fails. Use `instanceof` to narrow the type before accessing fields.
+
+```php hidelines={1..3}
+<?php
+
+use Anthropic\Client;
+use Anthropic\Lib\Concerns\StructuredOutputModelTrait;
+use Anthropic\Lib\Contracts\StructuredOutputModel;
+
+$client = new Client();
+
+class ContactInfo implements StructuredOutputModel
+{
+    use StructuredOutputModelTrait;
+
+    public string $name;
+    public string $email;
+    public string $plan_interest;
+}
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.'],
+    ],
+    model: 'claude-opus-4-6',
+    outputConfig: ['format' => ContactInfo::class],
+);
+
+$contact = $message->parsedOutput();
+if ($contact instanceof ContactInfo) {
+    echo "{$contact->name} ({$contact->email})\n";
+}
+```
+
+<section title="Type inference">
+
+The SDK maps native PHP 8 property types to JSON Schema:
+
+| PHP type | JSON Schema |
+|---|---|
+| `string` | `"string"` |
+| `int` | `"integer"` |
+| `float` | `"number"` |
+| `bool` | `"boolean"` |
+| `array` | `"array"` (see below) |
+| `?type` (nullable) | Optional field |
+| Class implementing `StructuredOutputModel` | Nested object |
+
+For `array` properties, the SDK adds an `items` schema only when the element type is a nested `StructuredOutputModel`, declared via `#[Constrained(itemClass: MyModel::class)]` or a `/** @var MyModel[] */` docblock. Arrays of scalars (`string[]`, `int[]`) emit an unconstrained `{"type":"array"}`.
+
+All non-nullable properties become required fields.
+
+</section>
+
+<section title="Constraints via the #[Constrained] attribute">
+
+Add constraints with the `#[Constrained]` attribute:
+
+```php hidelines={..2} highlight={3}
+<?php
+
+use Anthropic\Lib\Attributes\Constrained;
+use Anthropic\Lib\Concerns\StructuredOutputModelTrait;
+use Anthropic\Lib\Contracts\StructuredOutputModel;
+
+class Address implements StructuredOutputModel { use StructuredOutputModelTrait; public string $street; }
+
+class Profile implements StructuredOutputModel
+{
+    use StructuredOutputModelTrait;
+
+    #[Constrained(description: 'Age in years', minimum: 0, maximum: 150)]
+    public int $age;
+
+    #[Constrained(format: 'email')]
+    public string $email;
+
+    #[Constrained(itemClass: Address::class, minItems: 1)]
+    public array $addresses;
+}
+```
+
+**API-enforced constraints** (sent in the schema): `description`, `format`, `const`, `itemClass`, `minItems` (0 or 1 only).
+
+**SDK-validated constraints** (stripped from the wire schema, appended to the description, and validated against the response): `minimum`, `maximum`, `multipleOf`, `minLength`, `maxLength`.
+
+</section>
+
+<section title="Raw JSON schema fallback">
+
+For schemas that PHP type hints can't express, pass a raw associative array via `OutputConfig::with()`. This path skips the `parsedOutput()` helper; decode the response with `json_decode()`:
 
 ```php hidelines={1..3}
 <?php
@@ -1338,7 +1448,7 @@ use Anthropic\Messages\JSONOutputFormat;
 
 $client = new Client();
 
-$response = $client->messages->create(
+$message = $client->messages->create(
     maxTokens: 1024,
     messages: [
         ['role' => 'user', 'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.'],
@@ -1356,8 +1466,8 @@ $response = $client->messages->create(
     ])),
 );
 
-$data = json_decode($response->content[0]->text, true);
-echo $data['name'] . ' (' . $data['email'] . ')';
+$contact = json_decode($message->content[0]->text, associative: true);
+echo "{$contact['name']} ({$contact['email']})\n";
 ```
 
 </section>
@@ -1368,8 +1478,6 @@ echo $data['name'] . ' (' . $data['email'] . ')';
 **`output_config: {format: Model}` with `parsed_output`**
 
 Define a model class extending `Anthropic::BaseModel` and pass it as the format to `messages.create()`. The response includes a `parsed_output` attribute with a typed Ruby object.
-
-<section title="Example usage">
 
 ```ruby hidelines={1..2}
 require "anthropic"
@@ -1398,14 +1506,12 @@ contact = message.parsed_output
 puts "#{contact.name} (#{contact.email})"
 ```
 
-</section>
-
 <section title="Advanced model features">
 
 The Ruby SDK supports additional model definition features for richer schemas:
 
 - **`doc:` keyword:** Add descriptions to fields for more informative schema output
-- **`Anthropic::ArrayOf[T]`:** Typed arrays with `min_length` and `max_length` constraints
+- **`Anthropic::ArrayOf[T]`:** Typed arrays. Pass array-level constraints (`min_items:`, `max_items:`) as keywords on `required`/`optional`, not on `ArrayOf` itself
 - **`Anthropic::EnumOf[:a, :b]`:** Enum fields with constrained values
 - **`Anthropic::UnionOf[T1, T2]`:** Union types mapped to `anyOf`
 
@@ -1416,7 +1522,7 @@ class FamousNumber < Anthropic::BaseModel
 end
 
 class Output < Anthropic::BaseModel
-  required :numbers, Anthropic::ArrayOf[FamousNumber], min_length: 3, max_length: 5
+  required :numbers, Anthropic::ArrayOf[FamousNumber], min_items: 3, max_items: 5
 end
 
 message = client.messages.create(
@@ -1437,7 +1543,7 @@ message.parsed_output
 
 #### How SDK transformation works
 
-The Python and TypeScript SDKs automatically transform schemas with unsupported features:
+The Python, TypeScript, Ruby, and PHP SDKs automatically transform schemas with unsupported features:
 
 1. **Remove unsupported constraints** (e.g., `minimum`, `maximum`, `minLength`, `maxLength`)
 2. **Update descriptions** with constraint info (e.g., "Must be at least 100"), when the constraint is not directly supported with structured outputs
@@ -1447,7 +1553,7 @@ The Python and TypeScript SDKs automatically transform schemas with unsupported 
 
 This means Claude receives a simplified schema, but your code still enforces all constraints through validation.
 
-**Example:** A Pydantic field with `minimum: 100` becomes a plain integer in the sent schema, but the description is updated to "Must be at least 100", and the SDK validates the response against the original constraint.
+**Example:** A Pydantic field with `minimum: 100` becomes a plain integer in the sent schema, but the SDK updates the description to "Must be at least 100" and validates the response against the original constraint.
 
 ### Common use cases
 
@@ -1483,18 +1589,21 @@ output_config:
 YAML
 ```
 
-```python Python nocheck
+```python Python hidelines={1}
+import anthropic
 from pydantic import BaseModel
-from typing import List
 
 
 class Invoice(BaseModel):
     invoice_number: str
     date: str
     total_amount: float
-    line_items: List[dict]
+    line_items: list[dict]
     customer_name: str
 
+
+client = anthropic.Anthropic()
+invoice_text = "Invoice #12345, Date: 2024-01-15, Total: $500.00"
 
 response = client.messages.parse(
     model="claude-opus-4-6",
@@ -1504,6 +1613,8 @@ response = client.messages.parse(
         {"role": "user", "content": f"Extract invoice data from: {invoice_text}"}
     ],
 )
+
+print(response.parsed_output)
 ```
 
 ```typescript TypeScript hidelines={1}
@@ -1528,72 +1639,55 @@ const response = await client.messages.parse({
   output_config: { format: zodOutputFormat(InvoiceSchema) },
   messages: [{ role: "user", content: `Extract invoice data from: ${invoiceText}` }]
 });
+console.log(response.parsed_output);
 ```
 
-```csharp C#
-using System;
-using System.Collections.Generic;
+```csharp C# hidelines={1..4}
 using System.Text.Json;
-using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Messages;
 
-public class InvoiceExtraction
+AnthropicClient client = new();
+
+string invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
+
+var parameters = new MessageCreateParams
 {
-    public class Invoice
+    Model = Model.ClaudeOpus4_6,
+    MaxTokens = 4096,
+    OutputConfig = new OutputConfig
     {
-        public string invoice_number { get; set; }
-        public string date { get; set; }
-        public double total_amount { get; set; }
-        public List<Dictionary<string, object>> line_items { get; set; }
-        public string customer_name { get; set; }
-    }
-
-    static async Task Main()
-    {
-        AnthropicClient client = new();
-
-        string invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
-
-        var parameters = new MessageCreateParams
+        Format = new JsonOutputFormat
         {
-            Model = Model.ClaudeOpus4_6,
-            MaxTokens = 4096,
-            OutputConfig = new OutputConfig
+            Schema = new Dictionary<string, JsonElement>
             {
-                Format = new JsonOutputFormat
+                ["type"] = JsonSerializer.SerializeToElement("object"),
+                ["properties"] = JsonSerializer.SerializeToElement(new
                 {
-                    Schema = new Dictionary<string, JsonElement>
+                    invoice_number = new { type = "string" },
+                    date = new { type = "string" },
+                    total_amount = new { type = "number" },
+                    line_items = new
                     {
-                        ["type"] = JsonSerializer.SerializeToElement("object"),
-                        ["properties"] = JsonSerializer.SerializeToElement(new
+                        type = "array",
+                        items = new
                         {
-                            invoice_number = new { type = "string" },
-                            date = new { type = "string" },
-                            total_amount = new { type = "number" },
-                            line_items = new
-                            {
-                                type = "array",
-                                items = new
-                                {
-                                    type = "object",
-                                    additionalProperties = false,
-                                },
-                            },
-                            customer_name = new { type = "string" },
-                        }),
-                        ["required"] = JsonSerializer.SerializeToElement(new[] { "invoice_number", "date", "total_amount", "line_items", "customer_name" }),
-                        ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
+                            type = "object",
+                            additionalProperties = false,
+                        },
                     },
-                },
+                    customer_name = new { type = "string" },
+                }),
+                ["required"] = JsonSerializer.SerializeToElement(new[] { "invoice_number", "date", "total_amount", "line_items", "customer_name" }),
+                ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
             },
-            Messages = [new() { Role = Role.User, Content = $"Extract invoice data from: {invoiceText}" }]
-        };
+        },
+    },
+    Messages = [new() { Role = Role.User, Content = $"Extract invoice data from: {invoiceText}" }]
+};
 
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -1718,12 +1812,25 @@ void main() {
 }
 ```
 
-```php PHP hidelines={1..4}
+```php PHP hidelines={1..3}
 <?php
 
 use Anthropic\Client;
+use Anthropic\Lib\Concerns\StructuredOutputModelTrait;
+use Anthropic\Lib\Contracts\StructuredOutputModel;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
+
+class Invoice implements StructuredOutputModel
+{
+    use StructuredOutputModelTrait;
+
+    public string $invoice_number;
+    public string $date;
+    public float $total_amount;
+    public array $line_items;
+    public string $customer_name;
+}
 
 $invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
 
@@ -1733,32 +1840,13 @@ $message = $client->messages->create(
         ['role' => 'user', 'content' => "Extract invoice data from: $invoiceText"]
     ],
     model: 'claude-opus-4-6',
-    outputConfig: [
-        'format' => [
-            'type' => 'json_schema',
-            'schema' => [
-                'type' => 'object',
-                'properties' => [
-                    'invoice_number' => ['type' => 'string'],
-                    'date' => ['type' => 'string'],
-                    'total_amount' => ['type' => 'number'],
-                    'line_items' => [
-                        'type' => 'array',
-                        'items' => [
-                            'type' => 'object',
-                            'additionalProperties' => false
-                        ]
-                    ],
-                    'customer_name' => ['type' => 'string']
-                ],
-                'required' => ['invoice_number', 'date', 'total_amount', 'line_items', 'customer_name'],
-                'additionalProperties' => false
-            ]
-        ]
-    ],
+    outputConfig: ['format' => Invoice::class],
 );
 
-echo $message;
+$invoice = $message->parsedOutput();
+if ($invoice instanceof Invoice) {
+    echo "Invoice {$invoice->invoice_number}: \${$invoice->total_amount}\n";
+}
 ```
 
 ```ruby Ruby hidelines={1..2}
@@ -1766,39 +1854,32 @@ require "anthropic"
 
 client = Anthropic::Client.new
 
+class LineItem < Anthropic::BaseModel
+  required :description, String
+  required :amount, Float
+end
+
+class Invoice < Anthropic::BaseModel
+  required :invoice_number, String
+  required :date, String
+  required :total_amount, Float
+  required :line_items, Anthropic::ArrayOf[LineItem]
+  required :customer_name, String
+end
+
 invoice_text = "Invoice #12345, Date: 2024-01-15, Total: $500.00"
 
 message = client.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 4096,
-  output_config: {
-    format: {
-      type: :json_schema,
-      schema: {
-        type: "object",
-        properties: {
-          invoice_number: { type: "string" },
-          date: { type: "string" },
-          total_amount: { type: "number" },
-          line_items: {
-            type: "array",
-            items: {
-              type: "object",
-              additionalProperties: false
-            }
-          },
-          customer_name: { type: "string" }
-        },
-        required: ["invoice_number", "date", "total_amount", "line_items", "customer_name"],
-        additionalProperties: false
-      }
-    }
-  },
+  output_config: {format: Invoice},
   messages: [
-    { role: "user", content: "Extract invoice data from: #{invoice_text}" }
+    {role: "user", content: "Extract invoice data from: #{invoice_text}"}
   ]
 )
-puts message.content.first.text
+
+invoice = message.parsed_output
+puts "Invoice #{invoice.invoice_number}: $#{invoice.total_amount}"
 ```
 
 </CodeGroup>
@@ -1847,7 +1928,6 @@ YAML
 ```python Python hidelines={1}
 from anthropic import Anthropic
 from pydantic import BaseModel
-from typing import List
 
 client = Anthropic()
 
@@ -1855,7 +1935,7 @@ client = Anthropic()
 class Classification(BaseModel):
     category: str
     confidence: float
-    tags: List[str]
+    tags: list[str]
     sentiment: str
 
 
@@ -1866,6 +1946,8 @@ response = client.messages.parse(
     output_format=Classification,
     messages=[{"role": "user", "content": f"Classify this feedback: {feedback_text}"}],
 )
+
+print(response.parsed_output)
 ```
 
 ```typescript TypeScript hidelines={1}
@@ -1889,10 +1971,11 @@ const response = await client.messages.parse({
   output_config: { format: zodOutputFormat(ClassificationSchema) },
   messages: [{ role: "user", content: `Classify this feedback: ${feedbackText}` }]
 });
+
+console.log(response.parsed_output);
 ```
 
-```csharp C# hidelines={1..7}
-using System.Collections.Generic;
+```csharp C# hidelines={1..6}
 using System.Text.Json;
 using Anthropic;
 using Anthropic.Models.Messages;
@@ -2029,12 +2112,24 @@ void main() {
 }
 ```
 
-```php PHP hidelines={1..4}
+```php PHP hidelines={1..3}
 <?php
 
 use Anthropic\Client;
+use Anthropic\Lib\Concerns\StructuredOutputModelTrait;
+use Anthropic\Lib\Contracts\StructuredOutputModel;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
+
+class Classification implements StructuredOutputModel
+{
+    use StructuredOutputModelTrait;
+
+    public string $category;
+    public float $confidence;
+    public array $tags;
+    public string $sentiment;
+}
 
 $feedbackText = "Great product, fast shipping!";
 
@@ -2044,24 +2139,13 @@ $message = $client->messages->create(
         ['role' => 'user', 'content' => "Classify this feedback: {$feedbackText}"]
     ],
     model: 'claude-opus-4-6',
-    outputConfig: [
-        'format' => [
-            'type' => 'json_schema',
-            'schema' => [
-                'type' => 'object',
-                'properties' => [
-                    'category' => ['type' => 'string'],
-                    'confidence' => ['type' => 'number'],
-                    'tags' => ['type' => 'array', 'items' => ['type' => 'string']],
-                    'sentiment' => ['type' => 'string']
-                ],
-                'required' => ['category', 'confidence', 'tags', 'sentiment'],
-                'additionalProperties' => false
-            ]
-        ]
-    ],
+    outputConfig: ['format' => Classification::class],
 );
-echo $message->content[0]->text;
+
+$result = $message->parsedOutput();
+if ($result instanceof Classification) {
+    echo "{$result->category} ({$result->confidence}): {$result->sentiment}\n";
+}
 ```
 
 ```ruby Ruby hidelines={1..2}
@@ -2137,7 +2221,6 @@ YAML
 ```python Python hidelines={1}
 from anthropic import Anthropic
 from pydantic import BaseModel
-from typing import List, Optional
 
 client = Anthropic()
 
@@ -2145,7 +2228,7 @@ client = Anthropic()
 class APIResponse(BaseModel):
     status: str
     data: dict
-    errors: Optional[List[dict]]
+    errors: list[dict] | None
     metadata: dict
 
 
@@ -2155,6 +2238,8 @@ response = client.messages.parse(
     output_format=APIResponse,
     messages=[{"role": "user", "content": "Process this request: ..."}],
 )
+
+print(response.parsed_output)
 ```
 
 ```typescript TypeScript hidelines={1}
@@ -2177,10 +2262,11 @@ const response = await client.messages.parse({
   output_config: { format: zodOutputFormat(APIResponseSchema) },
   messages: [{ role: "user", content: "Process this request..." }]
 });
+
+console.log(response.parsed_output);
 ```
 
-```csharp C# hidelines={1..7}
-using System.Collections.Generic;
+```csharp C# hidelines={1..6}
 using System.Text.Json;
 using Anthropic;
 using Anthropic.Models.Messages;
@@ -2348,12 +2434,32 @@ void main() {
 }
 ```
 
-```php PHP hidelines={1..4}
+```php PHP hidelines={1..3}
 <?php
 
 use Anthropic\Client;
+use Anthropic\Lib\Attributes\Constrained;
+use Anthropic\Lib\Concerns\StructuredOutputModelTrait;
+use Anthropic\Lib\Contracts\StructuredOutputModel;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
+
+class Payload implements StructuredOutputModel { use StructuredOutputModelTrait; public string $message; }
+
+class APIError implements StructuredOutputModel { use StructuredOutputModelTrait; public string $code; public string $detail; }
+
+class Metadata implements StructuredOutputModel { use StructuredOutputModelTrait; public string $request_id; }
+
+class APIResponse implements StructuredOutputModel
+{
+    use StructuredOutputModelTrait;
+
+    public string $status;
+    public Payload $data;
+    #[Constrained(itemClass: APIError::class)]
+    public ?array $errors;
+    public Metadata $metadata;
+}
 
 $message = $client->messages->create(
     maxTokens: 1024,
@@ -2361,28 +2467,13 @@ $message = $client->messages->create(
         ['role' => 'user', 'content' => 'Process this request: ...']
     ],
     model: 'claude-opus-4-6',
-    outputConfig: [
-        'format' => [
-            'type' => 'json_schema',
-            'schema' => [
-                'type' => 'object',
-                'properties' => [
-                    'status' => ['type' => 'string'],
-                    'data' => ['type' => 'object', 'additionalProperties' => false],
-                    'errors' => [
-                        'type' => 'array',
-                        'items' => ['type' => 'object', 'additionalProperties' => false]
-                    ],
-                    'metadata' => ['type' => 'object', 'additionalProperties' => false]
-                ],
-                'required' => ['status', 'data', 'metadata'],
-                'additionalProperties' => false
-            ]
-        ]
-    ],
+    outputConfig: ['format' => APIResponse::class],
 );
 
-echo $message;
+$result = $message->parsedOutput();
+if ($result instanceof APIResponse) {
+    echo "{$result->status}: {$result->data->message}\n";
+}
 ```
 
 ```ruby Ruby hidelines={1..2}
@@ -2390,33 +2481,35 @@ require "anthropic"
 
 client = Anthropic::Client.new
 
+class Payload < Anthropic::BaseModel
+  required :message, String
+end
+
+class APIError < Anthropic::BaseModel
+  required :code, String
+  required :detail, String
+end
+
+class Metadata < Anthropic::BaseModel
+  required :request_id, String
+end
+
+class APIResponse < Anthropic::BaseModel
+  required :status, String
+  required :data, Payload
+  optional :errors, Anthropic::ArrayOf[APIError]
+  required :metadata, Metadata
+end
+
 message = client.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 1024,
-  output_config: {
-    format: {
-      type: :json_schema,
-      schema: {
-        type: "object",
-        properties: {
-          status: { type: "string" },
-          data: { type: "object", additionalProperties: false },
-          errors: {
-            type: "array",
-            items: { type: "object", additionalProperties: false }
-          },
-          metadata: { type: "object", additionalProperties: false }
-        },
-        required: ["status", "data", "metadata"],
-        additionalProperties: false
-      }
-    }
-  },
+  output_config: {format: APIResponse},
   messages: [
-    { role: "user", content: "Process this request: ..." }
+    {role: "user", content: "Process this request: ..."}
   ]
 )
-puts message.content.first.text
+puts message.parsed_output
 ```
 
 </CodeGroup>
@@ -2429,7 +2522,7 @@ For enforcing JSON Schema compliance on tool inputs with grammar-constrained sam
 
 ## Using both features together
 
-JSON outputs and strict tool use solve different problems and can be used together:
+JSON outputs and strict tool use solve different problems and work together:
 
 - **JSON outputs** control Claude's response format (what Claude says)
 - **Strict tool use** validates tool parameters (how Claude calls your functions)
@@ -2519,6 +2612,8 @@ response = client.messages.create(
         }
     ],
 )
+
+print(response)
 ```
 
 ```typescript TypeScript
@@ -2571,8 +2666,7 @@ for (const block of response.content) {
 }
 ```
 
-```csharp C# hidelines={1..7}
-using System.Collections.Generic;
+```csharp C# hidelines={1..6}
 using System.Text.Json;
 using Anthropic;
 using Anthropic.Models.Messages;
@@ -2741,12 +2835,23 @@ void main() {
 }
 ```
 
-```php PHP hidelines={1..4}
+```php PHP hidelines={1..3}
 <?php
 
 use Anthropic\Client;
+use Anthropic\Lib\Concerns\StructuredOutputModelTrait;
+use Anthropic\Lib\Contracts\StructuredOutputModel;
+use Anthropic\Messages\ToolUseBlock;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
+
+class TripPlan implements StructuredOutputModel
+{
+    use StructuredOutputModelTrait;
+
+    public string $summary;
+    public array $next_steps;
+}
 
 $message = $client->messages->create(
     maxTokens: 1024,
@@ -2755,20 +2860,7 @@ $message = $client->messages->create(
     ],
     model: 'claude-opus-4-6',
     // JSON outputs: structured response format
-    outputConfig: [
-        'format' => [
-            'type' => 'json_schema',
-            'schema' => [
-                'type' => 'object',
-                'properties' => [
-                    'summary' => ['type' => 'string'],
-                    'next_steps' => ['type' => 'array', 'items' => ['type' => 'string']]
-                ],
-                'required' => ['summary', 'next_steps'],
-                'additionalProperties' => false
-            ]
-        ]
-    ],
+    outputConfig: ['format' => TripPlan::class],
     // Strict tool use: guaranteed tool parameters
     tools: [
         [
@@ -2786,7 +2878,14 @@ $message = $client->messages->create(
         ]
     ],
 );
-echo $message;
+
+// Claude may call the tool first (tool_use) or respond with JSON (text)
+$plan = $message->parsedOutput();
+if ($plan instanceof TripPlan) {
+    echo $plan->summary, "\n";
+} elseif ($toolUse = array_find($message->content, fn($block) => $block instanceof ToolUseBlock)) {
+    echo "Tool call: {$toolUse->name}(", json_encode($toolUse->input), ")\n";
+}
 ```
 
 ```ruby Ruby hidelines={1..2}
@@ -2909,7 +3008,7 @@ Simple regex patterns work well. Complex patterns may result in 400 errors.
 </section>
 
 <Tip>
-The Python and TypeScript SDKs can automatically transform schemas with unsupported features by removing them and adding constraints to field descriptions. See [SDK-specific methods](#sdk-specific-methods) for details.
+The Python, TypeScript, Ruby, and PHP SDKs can automatically transform schemas with unsupported features by removing them and adding constraints to field descriptions. See [SDK-specific methods](#sdk-specific-methods) for details.
 </Tip>
 
 ### Property ordering
@@ -2950,7 +3049,7 @@ This means the output might look like:
 }
 ```
 
-If property order in the output is important to your application, ensure all properties are marked as required, or account for this reordering in your parsing logic.
+If property order in the output is important to your application, mark all properties as required, or account for this reordering in your parsing logic.
 
 ### Invalid outputs
 

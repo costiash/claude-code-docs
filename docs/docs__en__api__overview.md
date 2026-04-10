@@ -84,7 +84,7 @@ Access Claude through AWS, Google Cloud, or Microsoft Azure:
 
 | Platform | Provider | Documentation |
 |----------|----------|---------------|
-| Amazon Bedrock | AWS | [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) |
+| Amazon Bedrock | AWS | [Claude on Amazon Bedrock](/docs/en/build-with-claude/claude-on-amazon-bedrock) |
 | Vertex AI | Google Cloud | [Claude on Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai) |
 | Azure AI | Microsoft Azure | [Claude on Azure AI](/docs/en/build-with-claude/claude-in-microsoft-foundry) |
 

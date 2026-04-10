@@ -1621,7 +1621,9 @@ for await (const event of stream) {
   } else if (event.type === "content_block_delta") {
     if ((event.delta as { type: string }).type === "compaction_delta") {
       console.log(
-        `Compaction complete: ${(event.delta as unknown as { content: string }).content.length} chars`
+        `Compaction complete: ${
+          (event.delta as unknown as { content: string }).content.length
+        } chars`
       );
     } else if (event.delta.type === "text_delta") {
       process.stdout.write(event.delta.text);

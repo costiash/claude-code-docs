@@ -228,7 +228,7 @@ All SDKs support multiple deployment options:
 | Platform | Description |
 |----------|-------------|
 | Claude API | Connect directly to Claude API endpoints |
-| [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) | Use Claude through AWS |
+| [Amazon Bedrock](/docs/en/build-with-claude/claude-on-amazon-bedrock) | Use Claude through AWS |
 | [Google Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai) | Use Claude through Google Cloud |
 | [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) | Use Claude through Microsoft Azure |
 
