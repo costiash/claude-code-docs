@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-10T21:25:32Z",
+  "generated_at": "2026-04-11T00:46:47Z",
   "indexed_files": 1040,
   "index": {
     "/changelog": {
@@ -476,7 +476,7 @@
         "command",
         "exit"
       ],
-      "word_count": 15168,
+      "word_count": 15188,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -728,7 +728,7 @@
         "environment",
         "include"
       ],
-      "word_count": 3527,
+      "word_count": 3529,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1008,7 +1008,7 @@
         "example",
         "only"
       ],
-      "word_count": 7199,
+      "word_count": 7256,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1092,7 +1092,7 @@
         "current",
         "frame"
       ],
-      "word_count": 5523,
+      "word_count": 5533,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1103,10 +1103,10 @@
         "subagents",
         "claude",
         "when",
-        "code",
-        "agent",
         "main",
         "conversation",
+        "code",
+        "agent",
         "context",
         "tool",
         "session",
@@ -1120,7 +1120,7 @@
         "step",
         "run"
       ],
-      "word_count": 6586,
+      "word_count": 6633,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
