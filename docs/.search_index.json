@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-12T12:28:05Z",
+  "generated_at": "2026-04-12T15:26:30Z",
   "indexed_files": 1040,
   "index": {
     "/changelog": {
@@ -26316,7 +26316,7 @@
         "automatically",
         "path"
       ],
-      "word_count": 1719,
+      "word_count": 1734,
       "file_path": "docs/docs__en__managed-agents__files.md"
     },
     "/docs/en/managed-agents/github": {

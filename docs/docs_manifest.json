@@ -5235,8 +5235,8 @@
     "docs__en__managed-agents__files.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/files",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/files.md",
-      "hash": "43ad1f8588da809c165dc706c9dd4e52cf912e8368dffc65a97bdae565859db6",
-      "last_updated": "2026-04-08T18:43:10.443658"
+      "hash": "b505fffa4ff5b00cf1fa9fa88c95d7fa4e32f928e93394cb1a933e4159cdc29c",
+      "last_updated": "2026-04-12T15:25:56.079686"
     },
     "docs__en__managed-agents__github.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/github",
@@ -5529,8 +5529,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-12T12:28:02.885971",
-    "fetch_duration_seconds": 679.940132,
+    "last_fetch_completed": "2026-04-12T15:26:28.570984",
+    "fetch_duration_seconds": 625.980729,
     "total_pages_discovered": 1173,
     "pages_fetched_successfully": 921,
     "pages_failed": 253,
@@ -5794,7 +5794,7 @@
     "total_files": 921,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-12T12:28:02.885991",
+  "last_updated": "2026-04-12T15:26:28.571009",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
