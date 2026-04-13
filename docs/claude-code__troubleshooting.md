@@ -32,7 +32,8 @@ Find the error message or symptom you're seeing:
 | `Killed` during install on Linux                            | [Add swap space for low-memory servers](#install-killed-on-low-memory-linux-servers)                                    |
 | `TLS connect error` or `SSL/TLS secure channel`             | [Update CA certificates](#tls-or-ssl-connection-errors)                                                                 |
 | `Failed to fetch version` or can't reach download server    | [Check network and proxy settings](#check-network-connectivity)                                                         |
-| `irm is not recognized` or `&& is not valid`                | [Use the right command for your shell](#windows-irm-or--not-recognized)                                                 |
+| `irm is not recognized` or `&& is not valid`                | [Use the right command for your shell](#windows-wrong-install-command)                                                  |
+| `'bash' is not recognized as the name of a cmdlet`          | [Use the Windows installer command](#windows-wrong-install-command)                                                     |
 | `Claude Code on Windows requires git-bash`                  | [Install or configure Git Bash](#windows-claude-code-on-windows-requires-git-bash)                                      |
 | `Error loading shared library`                              | [Wrong binary variant for your system](#linux-wrong-binary-variant-installed-muslglibc-mismatch)                        |
 | `Illegal instruction` on Linux                              | [Architecture mismatch](#illegal-instruction-on-linux)                                                                  |
@@ -375,9 +376,9 @@ The installer couldn't reach the download server. This typically means `storage.
    winget install Anthropic.ClaudeCode
    ```
 
-### Windows: `irm` or `&&` not recognized
+### Windows: wrong install command
 
-If you see `'irm' is not recognized` or `The token '&&' is not valid`, you're running the wrong command for your shell.
+If you see `'irm' is not recognized`, `The token '&&' is not valid`, or `'bash' is not recognized as the name of a cmdlet`, you copied the install command for a different shell or operating system.
 
 * **`irm` not recognized**: you're in CMD, not PowerShell. You have two options:
 
@@ -394,6 +395,11 @@ If you see `'irm' is not recognized` or `The token '&&' is not valid`, you're ru
   ```
 
 * **`&&` not valid**: you're in PowerShell but ran the CMD installer command. Use the PowerShell installer:
+  ```powershell  theme={null}
+  irm https://claude.ai/install.ps1 | iex
+  ```
+
+* **`bash` not recognized**: you ran the macOS/Linux installer on Windows. Use the PowerShell installer instead:
   ```powershell  theme={null}
   irm https://claude.ai/install.ps1 | iex
   ```

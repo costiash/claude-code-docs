@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-13T15:45:10Z",
+  "generated_at": "2026-04-13T18:42:40Z",
   "indexed_files": 1040,
   "index": {
     "/changelog": {
@@ -196,7 +196,7 @@
         "branch",
         "documentation"
       ],
-      "word_count": 5164,
+      "word_count": 5180,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -470,13 +470,13 @@
         "user",
         "event",
         "session",
-        "control",
         "runs",
+        "control",
         "decision",
-        "command",
-        "exit"
+        "exit",
+        "command"
       ],
-      "word_count": 15188,
+      "word_count": 15255,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -616,7 +616,7 @@
         "any",
         "only"
       ],
-      "word_count": 7032,
+      "word_count": 7035,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -700,7 +700,7 @@
         "variables",
         "specific"
       ],
-      "word_count": 2897,
+      "word_count": 2898,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -722,13 +722,13 @@
         "standard",
         "request",
         "counter",
+        "include",
         "session",
         "api",
         "logs",
-        "environment",
-        "include"
+        "environment"
       ],
-      "word_count": 3529,
+      "word_count": 3550,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -756,7 +756,7 @@
         "custom",
         "security"
       ],
-      "word_count": 765,
+      "word_count": 789,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -1008,7 +1008,7 @@
         "example",
         "only"
       ],
-      "word_count": 7256,
+      "word_count": 7279,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1103,24 +1103,24 @@
         "subagents",
         "claude",
         "when",
+        "agent",
         "main",
         "conversation",
         "code",
-        "agent",
-        "context",
         "tool",
         "session",
+        "context",
         "tools",
         "only",
         "prompt",
         "specific",
+        "hooks",
         "model",
         "task",
         "uses",
-        "step",
-        "run"
+        "step"
       ],
-      "word_count": 6633,
+      "word_count": 6678,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1189,22 +1189,22 @@
         "install",
         "wsl",
         "see",
-        "issues",
         "linux",
+        "issues",
         "check",
         "path",
+        "installer",
         "file",
         "installation",
+        "macos",
         "run",
         "settings",
-        "macos",
-        "installer",
+        "command",
         "when",
         "solutions",
-        "command",
         "may"
       ],
-      "word_count": 5233,
+      "word_count": 5286,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {

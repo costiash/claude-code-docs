@@ -573,13 +573,13 @@ Use the [Files API](/docs/en/build-with-claude/files) to list files scoped to a 
 curl -fsSL "https://api.anthropic.com/v1/files?scope_id=sesn_abc123" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01,files-api-2025-04-14"
+  -H "anthropic-beta: managed-agents-2026-04-01"
 
 # Download a file
 curl -fsSL "https://api.anthropic.com/v1/files/$FILE_ID/content" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01,files-api-2025-04-14" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
   -o output.txt
 ```
 
