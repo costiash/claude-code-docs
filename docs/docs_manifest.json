@@ -5511,8 +5511,8 @@
     "claude-code__troubleshooting.md": {
       "original_url": "https://platform.claude.com/docs/en/troubleshooting",
       "original_md_url": "https://platform.claude.com/docs/en/troubleshooting.md",
-      "hash": "a367c4188f8887945d24caeac313f0a8b56a14f78e25203519abe026e24fd33e",
-      "last_updated": "2026-04-13T18:42:35.189887"
+      "hash": "e7b7652ebd6d2144e14e96e093e6435d764457438bb82993e61b4323c0c10eb5",
+      "last_updated": "2026-04-13T21:30:47.640051"
     },
     "claude-code__vs-code.md": {
       "original_url": "https://platform.claude.com/docs/en/vs-code",
@@ -5529,11 +5529,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-13T18:42:38.209407",
-    "fetch_duration_seconds": 679.522408,
-    "total_pages_discovered": 1173,
+    "last_fetch_completed": "2026-04-13T21:30:50.768704",
+    "fetch_duration_seconds": 701.312835,
+    "total_pages_discovered": 1174,
     "pages_fetched_successfully": 921,
-    "pages_failed": 253,
+    "pages_failed": 254,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/agent-sdk/agent-loop",
@@ -5787,6 +5787,7 @@
       "/docs/en/whats-new",
       "/docs/en/whats-new/2026-w13",
       "/docs/en/whats-new/2026-w14",
+      "/docs/en/whats-new/2026-w15",
       "/docs/en/zero-data-retention"
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
@@ -5794,7 +5795,7 @@
     "total_files": 921,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-13T18:42:38.209430",
+  "last_updated": "2026-04-13T21:30:50.768723",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

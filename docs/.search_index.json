@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-13T18:42:40Z",
+  "generated_at": "2026-04-13T21:30:53Z",
   "indexed_files": 1040,
   "index": {
     "/changelog": {
@@ -1193,18 +1193,18 @@
         "issues",
         "check",
         "path",
+        "run",
         "installer",
         "file",
         "installation",
         "macos",
-        "run",
-        "settings",
         "command",
-        "when",
-        "solutions",
-        "may"
+        "settings",
+        "powershell",
+        "system",
+        "when"
       ],
-      "word_count": 5286,
+      "word_count": 5461,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
