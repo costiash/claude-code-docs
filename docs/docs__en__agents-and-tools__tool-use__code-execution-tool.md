@@ -30,8 +30,8 @@ The code execution tool is available on the following models:
 | Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) | `code_execution_20250825` |
 | Claude Opus 4.1 (`claude-opus-4-1-20250805`) | `code_execution_20250825` |
-| Claude Opus 4 (`claude-opus-4-20250514`) | `code_execution_20250825` |
-| Claude Sonnet 4 (`claude-sonnet-4-20250514`) | `code_execution_20250825` |
+| Claude Opus 4 (`claude-opus-4-20250514`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
+| Claude Sonnet 4 (`claude-sonnet-4-20250514`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
 | Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
 | Claude Haiku 3.5 (`claude-3-5-haiku-latest`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
 

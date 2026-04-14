@@ -129,11 +129,11 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 | Claude Opus 4.6 | anthropic.claude-opus-4-6-v1 | Yes | Yes | Yes | Yes | Yes |
 | Claude Sonnet 4.6 | anthropic.claude-sonnet-4-6 | Yes | Yes | Yes | Yes | No |
 | Claude Sonnet 4.5 | anthropic.claude-sonnet-4-5-20250929-v1:0 | Yes | Yes | Yes | Yes | No |
-| Claude Sonnet 4 | anthropic.claude-sonnet-4-20250514-v1:0 | Yes | Yes | Yes | No | Yes |
+| Claude Sonnet 4 <Tooltip tooltipContent="Deprecated as of April 14, 2026. Retiring October 14, 2026.">⚠️</Tooltip> | anthropic.claude-sonnet-4-20250514-v1:0 | Yes | Yes | Yes | No | Yes |
 | Claude Sonnet 3.7 <Tooltip tooltipContent="Retired as of February 19, 2026.">⚠️</Tooltip> | anthropic.claude-3-7-sonnet-20250219-v1:0 | No | Yes | Yes | No | Yes |
 | Claude Opus 4.5 | anthropic.claude-opus-4-5-20251101-v1:0 | Yes | Yes | Yes | No | No |
 | Claude Opus 4.1 | anthropic.claude-opus-4-1-20250805-v1:0 | No | Yes | No | No | No |
-| Claude Opus 4 | anthropic.claude-opus-4-20250514-v1:0 | No | Yes | No | No | No |
+| Claude Opus 4 <Tooltip tooltipContent="Deprecated as of April 14, 2026. Retiring October 14, 2026.">⚠️</Tooltip> | anthropic.claude-opus-4-20250514-v1:0 | No | Yes | No | No | No |
 | Claude Haiku 4.5 | anthropic.claude-haiku-4-5-20251001-v1:0 | Yes | Yes | Yes | No | No |
 | Claude Haiku 3.5 <Tooltip tooltipContent="Retired as of February 19, 2026.">⚠️</Tooltip> | anthropic.claude-3-5-haiku-20241022-v1:0 | No | Yes | No | No | No |
 | Claude Haiku 3 <Tooltip tooltipContent="Deprecated as of February 19, 2026. Retiring April 19, 2026.">⚠️</Tooltip> | anthropic.claude-3-haiku-20240307-v1:0 | No | Yes | Yes | No | Yes |
@@ -648,7 +648,7 @@ For more details on the two document processing modes and their limitations, ref
 
 ### Context window
 
-Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4, have a 200k-token context window.
+Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Amazon Bedrock limits request payloads to 20 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
@@ -662,7 +662,7 @@ Starting with **Claude Sonnet 4.5 and all future models**, Amazon Bedrock offers
 Regional endpoints include a 10% pricing premium over global endpoints.
 
 <Note>
-This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4, Opus 4, and earlier) maintain their existing pricing structures.
+This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4 (deprecated), Opus 4 (deprecated), and earlier) maintain their existing pricing structures.
 </Note>
 
 ### When to use each option
@@ -681,9 +681,9 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 ### Implementation
 
-**Using global endpoints (default for Opus 4.6, Sonnet 4.5, and Sonnet 4):**
+**Using global endpoints (default for Opus 4.6, Sonnet 4.5, and Sonnet 4 (deprecated)):**
 
-The model IDs for Claude Sonnet 4.5 and 4 already include the `global.` prefix:
+The model IDs for Claude Sonnet 4.5 and 4 (deprecated) already include the `global.` prefix:
 
 <CodeGroup>
 ```bash CLI

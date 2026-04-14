@@ -54,8 +54,8 @@ Create and manage workspaces in the [Claude Console](/settings/workspaces).
   <Step title="Open workspace settings">
     In the Claude Console, go to **Settings > Workspaces**.
   </Step>
-  <Step title="Add a new workspace">
-    Click **Add Workspace**.
+  <Step title="Create a workspace">
+    Click **Create workspace**.
   </Step>
   <Step title="Configure the workspace">
     Enter a workspace name and select a color for visual identification.

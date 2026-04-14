@@ -233,7 +233,7 @@ Scalar fields map directly to flags. Structured fields accept a relaxed YAML-lik
 ```bash
 ant beta:sessions create \
   --agent '{type: agent, id: agent_011CYm1BLqPXpQRk5khsSXrs, version: 1}' \
-  --environment env_01595EKxaaTTGwwY3kyXdtbs \
+  --environment-id env_01595EKxaaTTGwwY3kyXdtbs \
   --title "CLI docs test session"
 ```
 
@@ -395,7 +395,7 @@ Paste the agent `id` and environment `id` from the previous outputs into the ses
 ```bash highlight={2..3}
 ant beta:sessions create \
   --agent agent_011CYm1BLqPXpQRk5khsSXrs \
-  --environment env_01595EKxaaTTGwwY3kyXdtbs \
+  --environment-id env_01595EKxaaTTGwwY3kyXdtbs \
   --title "Summarization task"
 ```
 

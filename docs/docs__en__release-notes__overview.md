@@ -10,6 +10,9 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### April 14, 2026
+- We announced the deprecation of the Claude Sonnet 4 model (`claude-sonnet-4-20250514`) and the Claude Opus 4 model (`claude-opus-4-20250514`), with retirement on the Claude API scheduled for June 15, 2026. We recommend migrating to [Claude Sonnet 4.6](/docs/en/about-claude/models/overview#latest-models-comparison) and [Claude Opus 4.6](/docs/en/about-claude/models/overview#latest-models-comparison) respectively. Read more in [model deprecations](/docs/en/about-claude/model-deprecations).
+
 ### April 9, 2026
 - We've launched the [advisor tool](/docs/en/agents-and-tools/tool-use/advisor-tool) in public beta. Pair a faster executor model with a higher-intelligence advisor model that provides strategic guidance mid-generation, so long-horizon agentic workloads get close to advisor-solo quality while the bulk of token generation happens at executor-model rates. Include the beta header `advisor-tool-2026-03-01` in your requests.
 

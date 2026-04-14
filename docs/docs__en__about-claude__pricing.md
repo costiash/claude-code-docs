@@ -47,7 +47,7 @@ Starting with Claude Sonnet 4.5 and Haiku 4.5:
 
 Regional and multi-region endpoints include a 10% premium over global endpoints. The Claude API (1P) is global by default; for 1P data residency options and pricing, see [Data residency pricing](#data-residency-pricing) below.
 
-**Scope:** This pricing structure applies to Claude Sonnet 4.5, Haiku 4.5, and all future models. Earlier models (Claude Sonnet 4, Opus 4, and prior releases) retain their existing pricing.
+**Scope:** This pricing structure applies to Claude Sonnet 4.5, Haiku 4.5, and all future models. Earlier models (Claude Sonnet 4 (deprecated), Opus 4 (deprecated), and prior releases) retain their existing pricing.
 
 For implementation details and code examples:
 - [AWS Bedrock global vs regional endpoints](/docs/en/build-with-claude/claude-on-amazon-bedrock#global-vs-regional-endpoints)

@@ -213,7 +213,7 @@ These are not required but will improve your experience:
 
 ### Migrating from Claude 4.1 or earlier to Claude 4.6
 
-If you're migrating from Opus 4.1, Sonnet 4, or earlier models directly to Claude 4.6, apply the Claude 4.6 breaking changes above plus the additional changes in this section.
+If you're migrating from Opus 4.1, Sonnet 4 (deprecated), or earlier models directly to Claude 4.6, apply the Claude 4.6 breaking changes above plus the additional changes in this section.
 
 ```python
 # From Opus 4.1

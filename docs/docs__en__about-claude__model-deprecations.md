@@ -65,10 +65,10 @@ All publicly released models are listed below with their status:
 | `claude-opus-4-6`             | Active              | N/A               | Not sooner than February 5, 2027 |
 | `claude-opus-4-5-20251101`  | Active              | N/A               | Not sooner than November 24, 2026 |
 | `claude-opus-4-1-20250805`  | Active              | N/A               | Not sooner than August 5, 2026 |
-| `claude-opus-4-20250514`    | Active              | N/A               | Not sooner than May 14, 2026 |
+| `claude-opus-4-20250514`    | Deprecated          | April 14, 2026    | June 15, 2026            |
 | `claude-sonnet-4-6`         | Active              | N/A               | Not sooner than February 17, 2027 |
 | `claude-sonnet-4-5-20250929`| Active              | N/A               | Not sooner than September 29, 2026 |
-| `claude-sonnet-4-20250514`  | Active              | N/A               | Not sooner than May 14, 2026 |
+| `claude-sonnet-4-20250514`  | Deprecated          | April 14, 2026    | June 15, 2026            |
 | `claude-3-7-sonnet-20250219`| Retired             | October 28, 2025  | February 19, 2026          |
 | `claude-haiku-4-5-20251001` | Active              | N/A               | Not sooner than October 15, 2026 |
 | `claude-3-5-haiku-20241022` | Retired             | December 19, 2025 | February 19, 2026          |
@@ -77,6 +77,15 @@ All publicly released models are listed below with their status:
 ## Deprecation history
 
 All deprecations are listed below, with the most recent announcements at the top.
+
+### 2026-04-14: Claude Sonnet 4 and Claude Opus 4 models
+
+On April 14, 2026, Anthropic notified developers using Claude Sonnet 4 and Claude Opus 4 models of their upcoming retirement on the Claude API.
+
+| Retirement Date             | Deprecated Model            | Recommended Replacement         |
+|:----------------------------|:----------------------------|:--------------------------------|
+| June 15, 2026               | `claude-sonnet-4-20250514`  | `claude-sonnet-4-6`             |
+| June 15, 2026               | `claude-opus-4-20250514`    | `claude-opus-4-6`               |
 
 ### 2026-02-19: Claude Haiku 3 model
 

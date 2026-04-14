@@ -14,7 +14,7 @@ Note that Claude is capable in many languages beyond those benchmarked below. Co
 
 Below are the zero-shot chain-of-thought evaluation scores for Claude models across different languages, shown as a percent relative to English performance (100%):
 
-| Language | Claude Opus 4.1<sup>1</sup> | Claude Opus 4<sup>1</sup> | Claude Sonnet 4.5<sup>1</sup> | Claude Sonnet 4<sup>1</sup> | Claude Haiku 4.5<sup>1</sup> |
+| Language | Claude Opus 4.1<sup>1</sup> | Claude Opus 4 (deprecated)<sup>1</sup> | Claude Sonnet 4.5<sup>1</sup> | Claude Sonnet 4 (deprecated)<sup>1</sup> | Claude Haiku 4.5<sup>1</sup> |
 |----------|---------------|---------------|---------------|-----------------|------------------|
 | English (baseline, fixed to 100%) | 100% | 100% | 100% | 100% | 100% |
 | Spanish | 98.1% | 98.0% | 98.2% | 97.5% | 96.4% |

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-14T18:41:13Z",
+  "generated_at": "2026-04-14T21:32:18Z",
   "indexed_files": 1041,
   "index": {
     "/changelog": {
@@ -17,18 +17,18 @@
         "mode",
         "instead",
         "code",
-        "sessions",
         "session",
+        "sessions",
         "after",
         "being",
         "mcp",
         "commands",
         "command",
         "file",
-        "bash",
-        "prompt"
+        "prompt",
+        "bash"
       ],
-      "word_count": 33155,
+      "word_count": 33583,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -260,27 +260,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Use Claude Code...",
       "keywords": [
         "claude",
-        "app",
         "code",
-        "desktop",
-        "sessions",
-        "session",
-        "settings",
-        "see",
-        "when",
-        "windows",
-        "cli",
-        "available",
-        "remote",
-        "environment",
-        "click",
-        "servers",
         "auto",
-        "mode",
         "file",
-        "local"
+        "app",
+        "preview",
+        "sessions",
+        "files",
+        "session",
+        "mode",
+        "changes",
+        "desktop",
+        "diff",
+        "windows",
+        "settings",
+        "server",
+        "review",
+        "open",
+        "terminal",
+        "permission"
       ],
-      "word_count": 6539,
+      "word_count": 7649,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -1008,7 +1008,7 @@
         "example",
         "configuration"
       ],
-      "word_count": 7212,
+      "word_count": 7250,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1271,24 +1271,24 @@
         "models",
         "claude",
         "retirement",
-        "anthropic",
         "deprecated",
+        "anthropic",
         "date",
         "recommended",
-        "active",
-        "note",
         "replacement",
+        "note",
+        "active",
         "retired",
         "february",
-        "than",
-        "november",
         "notified",
         "upcoming",
         "using",
-        "sooner",
-        "api"
+        "november",
+        "api",
+        "sonnet",
+        "developers"
       ],
-      "word_count": 1116,
+      "word_count": 1177,
       "file_path": "docs/docs__en__about-claude__model-deprecations.md"
     },
     "/docs/en/about-claude/models/choosing-a-model": {
@@ -1344,7 +1344,7 @@
         "see",
         "parameter"
       ],
-      "word_count": 4827,
+      "word_count": 4828,
       "file_path": "docs/docs__en__about-claude__models__migration-guide.md"
     },
     "/docs/en/about-claude/models/overview": {
@@ -1354,8 +1354,8 @@
         "claude",
         "sup",
         "opus",
-        "tokens",
         "sonnet",
+        "tokens",
         "mtok",
         "yes",
         "tooltip",
@@ -1372,7 +1372,7 @@
         "characters",
         "cutoff"
       ],
-      "word_count": 1271,
+      "word_count": 1306,
       "file_path": "docs/docs__en__about-claude__models__overview.md"
     },
     "/docs/en/about-claude/models/whats-new-claude-4-6": {
@@ -1428,7 +1428,7 @@
         "see",
         "batch"
       ],
-      "word_count": 3214,
+      "word_count": 3216,
       "file_path": "docs/docs__en__about-claude__pricing.md"
     },
     "/docs/en/about-claude/use-case-guides/content-moderation": {
@@ -1848,7 +1848,7 @@
         "available",
         "operations"
       ],
-      "word_count": 5548,
+      "word_count": 5550,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -25356,15 +25356,15 @@
         "opus",
         "endpoints",
         "model",
+        "tooltip",
         "pricing",
         "models",
         "available",
         "regional",
         "api",
-        "title",
-        "through"
+        "title"
       ],
-      "word_count": 2853,
+      "word_count": 2880,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -25379,6 +25379,7 @@
         "region",
         "codegroup",
         "opus",
+        "tooltip",
         "anthropic",
         "pricing",
         "note",
@@ -25389,10 +25390,9 @@
         "global",
         "multi",
         "model",
-        "availability",
-        "tooltip"
+        "availability"
       ],
-      "word_count": 2352,
+      "word_count": 2377,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -25476,7 +25476,7 @@
         "sonnet",
         "conversation"
       ],
-      "word_count": 1743,
+      "word_count": 1744,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/data-residency": {
@@ -25588,7 +25588,7 @@
         "interleaved",
         "see"
       ],
-      "word_count": 14768,
+      "word_count": 14772,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -25665,12 +25665,12 @@
         "responses",
         "without",
         "limit",
-        "sonnet",
         "reasons",
         "handle",
         "empty",
         "tokens",
-        "after"
+        "after",
+        "server"
       ],
       "word_count": 2587,
       "file_path": "docs/docs__en__build-with-claude__handling-stop-reasons.md"
@@ -25700,7 +25700,7 @@
         "overview",
         "zero"
       ],
-      "word_count": 541,
+      "word_count": 543,
       "file_path": "docs/docs__en__build-with-claude__multilingual-support.md"
     },
     "/docs/en/build-with-claude/overview": {
@@ -25896,7 +25896,7 @@
         "top",
         "level"
       ],
-      "word_count": 4951,
+      "word_count": 4953,
       "file_path": "docs/docs__en__build-with-claude__search-results.md"
     },
     "/docs/en/build-with-claude/skills-guide": {
@@ -26114,13 +26114,13 @@
         "role",
         "note",
         "section",
+        "create",
         "roles",
         "usage",
         "cannot",
-        "create",
         "rate"
       ],
-      "word_count": 1578,
+      "word_count": 1577,
       "file_path": "docs/docs__en__build-with-claude__workspaces.md"
     },
     "/docs/en/get-started": {
@@ -26746,25 +26746,25 @@
         "claude",
         "api",
         "beta",
-        "tool",
         "more",
+        "tool",
         "launched",
-        "now",
         "model",
+        "now",
         "sonnet",
         "models",
         "learn",
         "available",
         "our",
+        "opus",
         "token",
         "header",
-        "opus",
+        "read",
         "context",
         "support",
-        "read",
         "console"
       ],
-      "word_count": 4793,
+      "word_count": 4844,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {
@@ -28648,27 +28648,27 @@
       "content_preview": "# Streaming refusals  ---  Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `\"refusal\"`** when streaming classifiers intervene to handle potential policy vi...",
       "keywords": [
         "refusals",
+        "api",
         "when",
         "refusal",
-        "api",
         "streaming",
         "response",
         "claude",
+        "safety",
         "tip",
         "sonnet",
         "reset",
         "note",
         "responses",
         "handle",
-        "safety",
         "content",
+        "filters",
         "context",
         "types",
         "error",
-        "future",
-        "handling"
+        "future"
       ],
-      "word_count": 1066,
+      "word_count": 1075,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md"
     },
     "/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency": {

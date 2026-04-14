@@ -55,7 +55,7 @@ The Max output values above apply to the synchronous Messages API. On the [Messa
 
 The following models are still available. Consider migrating to current models for improved performance:
 
-| Feature | Claude Sonnet 4.5 | Claude Opus 4.5 | Claude Opus 4.1 | Claude Sonnet 4 | Claude Opus 4 | Claude Haiku 3 (deprecated) |
+| Feature | Claude Sonnet 4.5 | Claude Opus 4.5 | Claude Opus 4.1 | Claude Sonnet 4 (deprecated) | Claude Opus 4 (deprecated) | Claude Haiku 3 (deprecated) |
 |:--------|:------------------|:----------------|:----------------|:----------------|:--------------|:----------------------------|
 | **Claude API ID** | claude-sonnet-4-5-20250929 | claude-opus-4-5-20251101 | claude-opus-4-1-20250805 | claude-sonnet-4-20250514 | claude-opus-4-20250514 | claude-3-haiku-20240307 |
 | **Claude API alias** | claude-sonnet-4-5 | claude-opus-4-5 | claude-opus-4-1 | claude-sonnet-4-0 | claude-opus-4-0 | N/A |
@@ -71,7 +71,11 @@ The following models are still available. Consider migrating to current models f
 | **Training data cutoff** | Jul 2025 | Aug 2025 | Mar 2025 | Mar 2025 | Mar 2025 | Aug 2023 |
 
 <Warning>
-Claude Haiku 3 (`claude-3-haiku-20240307`) is deprecated and will be retired on April 19, 2026. Migrate to [Claude Haiku 4.5](/docs/en/about-claude/models/overview#latest-models-comparison) before the retirement date. See [model deprecations](/docs/en/about-claude/model-deprecations) for details.
+Claude Sonnet 4 (`claude-sonnet-4-20250514`) and Claude Opus 4 (`claude-opus-4-20250514`) are deprecated and will be retired on June 15, 2026. Migrate to [Claude Sonnet 4.6](/docs/en/about-claude/models/overview#latest-models-comparison) and [Claude Opus 4.6](/docs/en/about-claude/models/overview#latest-models-comparison) respectively before the retirement date.
+
+Claude Haiku 3 (`claude-3-haiku-20240307`) is deprecated and will be retired on April 19, 2026. Migrate to [Claude Haiku 4.5](/docs/en/about-claude/models/overview#latest-models-comparison) before the retirement date.
+
+See [model deprecations](/docs/en/about-claude/model-deprecations) for details.
 </Warning>
 
 _<sup>1 - **Reliable knowledge cutoff** indicates the date through which a model's knowledge is most extensive and reliable. **Training data cutoff** is the broader date range of training data used.</sup>_
