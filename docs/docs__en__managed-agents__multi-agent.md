@@ -238,7 +238,7 @@ session=$(curl -fsS https://api.anthropic.com/v1/sessions \
 ```bash CLI
 ant beta:sessions create \
   --agent "$ORCHESTRATOR_ID" \
-  --environment "$ENVIRONMENT_ID"
+  --environment-id "$ENVIRONMENT_ID"
 ```
 
 ```python Python

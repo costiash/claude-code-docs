@@ -258,7 +258,7 @@ session_id=$(jq -r '.id' <<<"$session_response")
 ````bash
 SESSION_ID=$(ant beta:sessions create \
   --agent "$AGENT_ID" \
-  --environment "$ENVIRONMENT_ID" \
+  --environment-id "$ENVIRONMENT_ID" \
   --vault-id "$VAULT_ID" \
   --transform id --format yaml)
 ````

@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-14T15:42:36Z",
-  "indexed_files": 1040,
+  "generated_at": "2026-04-14T18:41:13Z",
+  "indexed_files": 1041,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -196,7 +196,7 @@
         "branch",
         "need"
       ],
-      "word_count": 5112,
+      "word_count": 5124,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -280,7 +280,7 @@
         "file",
         "local"
       ],
-      "word_count": 6540,
+      "word_count": 6539,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -797,8 +797,8 @@
         "accordion",
         "title",
         "run",
-        "tasks",
         "desktop",
+        "tasks",
         "get",
         "terminal",
         "app",
@@ -812,7 +812,7 @@
         "web",
         "commands"
       ],
-      "word_count": 1646,
+      "word_count": 1652,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -884,8 +884,8 @@
         "hooks",
         "directory",
         "step",
-        "see",
         "when",
+        "see",
         "code",
         "root",
         "agents",
@@ -896,7 +896,7 @@
         "marketplace",
         "note"
       ],
-      "word_count": 2232,
+      "word_count": 2236,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -1008,7 +1008,7 @@
         "example",
         "configuration"
       ],
-      "word_count": 7211,
+      "word_count": 7212,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -5629,6 +5629,34 @@
       ],
       "word_count": 238,
       "file_path": "docs/docs__en__api__beta__vaults__update.md"
+    },
+    "/docs/en/api/claude-code/routines-fire": {
+      "title": "Trigger a routine via API",
+      "content_preview": "# Trigger a routine via API  Start a Claude Code routine session on demand by sending an authenticated POST request.  ---  <Warning> This is an experimental API. Request and response shapes, rate limi...",
+      "keywords": [
+        "claude",
+        "routine",
+        "code",
+        "token",
+        "api",
+        "endpoint",
+        "session",
+        "trigger",
+        "request",
+        "usage",
+        "header",
+        "anthropic",
+        "run",
+        "when",
+        "returns",
+        "created",
+        "routines",
+        "string",
+        "new",
+        "web"
+      ],
+      "word_count": 1286,
+      "file_path": "docs/docs__en__api__claude-code__routines-fire.md"
     },
     "/docs/en/api/cli/beta": {
       "title": "Beta",
@@ -26316,7 +26344,7 @@
         "automatically",
         "path"
       ],
-      "word_count": 1734,
+      "word_count": 1791,
       "file_path": "docs/docs__en__managed-agents__files.md"
     },
     "/docs/en/managed-agents/github": {

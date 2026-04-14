@@ -310,7 +310,7 @@ end
 
   session_id=$(ant beta:sessions create \
     --agent "{type: agent, id: $agent_id, version: $agent_version}" \
-    --environment "$environment_id" \
+    --environment-id "$environment_id" \
     --transform id --format yaml)
 
   # Open the stream first, then send the user message

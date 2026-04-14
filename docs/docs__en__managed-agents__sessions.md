@@ -35,7 +35,7 @@ A session requires an `agent` ID and an `environment` ID. Agents are versioned r
   ```bash CLI
   ant beta:sessions create \
     --agent "$AGENT_ID" \
-    --environment "$ENVIRONMENT_ID"
+    --environment-id "$ENVIRONMENT_ID"
   ```
   ```python Python
   session = client.beta.sessions.create(

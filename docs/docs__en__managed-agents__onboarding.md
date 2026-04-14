@@ -50,7 +50,7 @@ session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
 ```bash CLI
 ant beta:sessions create \
   --agent agent_01XXXXXXXXXXXXXXXXXXXXXX \
-  --environment env_01XXXXXXXXXXXXXXXXXXXXXX \
+  --environment-id env_01XXXXXXXXXXXXXXXXXXXXXX \
   --title "My first session"
 ```
 

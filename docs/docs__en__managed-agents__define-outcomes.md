@@ -184,7 +184,7 @@ After creating a session, send a `user.define_outcome` event. The agent begins w
   # Create a session
   SESSION_ID=$(ant beta:sessions create \
     --agent "$AGENT_ID" \
-    --environment "$ENVIRONMENT_ID" \
+    --environment-id "$ENVIRONMENT_ID" \
     --title "Financial analysis on Costco" \
     --transform id --format yaml)
 
