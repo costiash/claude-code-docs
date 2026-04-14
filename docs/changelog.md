@@ -8,6 +8,10 @@
 
 # Changelog
 
+## 2.1.107
+
+- Show thinking hints sooner during long operations
+
 ## 2.1.105
 
 - Added `path` parameter to the `EnterWorktree` tool to switch into an existing worktree of the current repository

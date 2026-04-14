@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-14T04:15:32Z",
+  "generated_at": "2026-04-14T06:53:32Z",
   "indexed_files": 1040,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "bash",
         "prompt"
       ],
-      "word_count": 33145,
+      "word_count": 33155,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -213,8 +213,8 @@
         "token",
         "tokens",
         "users",
-        "teams",
         "team",
+        "teams",
         "tasks",
         "work",
         "workspace",
@@ -224,7 +224,7 @@
         "user",
         "only"
       ],
-      "word_count": 1852,
+      "word_count": 1862,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
