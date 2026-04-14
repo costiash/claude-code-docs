@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-14T00:53:31Z",
+  "generated_at": "2026-04-14T04:15:32Z",
   "indexed_files": 1040,
   "index": {
     "/changelog": {
@@ -33,19 +33,19 @@
     },
     "/claude-code/amazon-bedrock": {
       "title": "Claude Code on Amazon Bedrock",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
         "model",
         "claude",
-        "code",
         "bedrock",
+        "code",
         "aws",
         "mantle",
         "credentials",
-        "when",
         "const",
         "account",
         "vid",
+        "when",
         "environment",
         "settings",
         "inference",
@@ -56,12 +56,12 @@
         "set",
         "file"
       ],
-      "word_count": 3189,
+      "word_count": 3121,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
       "title": "Track team usage with analytics",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Track team usag...",
       "keywords": [
         "code",
         "claude",
@@ -81,15 +81,15 @@
         "daily",
         "sessions",
         "pull",
-        "only",
-        "track"
+        "track",
+        "api"
       ],
-      "word_count": 1648,
+      "word_count": 1580,
       "file_path": "docs/claude-code__analytics.md"
     },
     "/claude-code/checkpointing": {
       "title": "Checkpointing",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Checkpointing  ...",
       "keywords": [
         "code",
         "claude",
@@ -99,25 +99,25 @@
         "file",
         "summarize",
         "checkpoints",
-        "feedback",
         "rewind",
         "restore",
         "message",
         "files",
-        "summary",
-        "only",
         "checkpointing",
         "edits",
         "state",
         "undo",
-        "point"
+        "point",
+        "revert",
+        "context",
+        "history"
       ],
-      "word_count": 746,
+      "word_count": 678,
       "file_path": "docs/claude-code__checkpointing.md"
     },
     "/claude-code/claude-code-on-the-web": {
       "title": "Use Claude Code on the web",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Use Claude Code...",
       "keywords": [
         "com",
         "claude",
@@ -128,9 +128,9 @@
         "github",
         "www",
         "environment",
-        "code",
         "access",
         "accordion",
+        "code",
         "run",
         "web",
         "setup",
@@ -140,12 +140,12 @@
         "terminal",
         "title"
       ],
-      "word_count": 5325,
+      "word_count": 5257,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
       "title": "CLI reference",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # CLI reference  ...",
       "keywords": [
         "session",
         "claude",
@@ -153,27 +153,27 @@
         "prompt",
         "interactive",
         "see",
-        "code",
         "only",
+        "code",
         "file",
         "default",
-        "json",
-        "when",
         "start",
         "print",
         "flag",
         "system",
         "name",
+        "json",
         "mcp",
-        "agent",
-        "flags"
+        "when",
+        "flags",
+        "output"
       ],
-      "word_count": 2321,
+      "word_count": 2253,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
       "title": "Common workflows",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Common workflow...",
       "keywords": [
         "step",
         "claude",
@@ -187,49 +187,49 @@
         "mode",
         "worktree",
         "plan",
-        "specific",
         "worktrees",
+        "specific",
         "files",
         "default",
         "sessions",
         "ask",
         "branch",
-        "documentation"
+        "need"
       ],
-      "word_count": 5180,
+      "word_count": 5112,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
       "title": "Manage costs effectively",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Manage costs ef...",
       "keywords": [
         "claude",
         "code",
         "context",
         "per",
-        "when",
         "costs",
         "usage",
+        "when",
         "token",
         "tokens",
         "users",
         "teams",
-        "agent",
         "team",
         "tasks",
         "work",
-        "only",
         "workspace",
+        "agent",
         "before",
         "limits",
-        "user"
+        "user",
+        "only"
       ],
-      "word_count": 1920,
+      "word_count": 1852,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
       "title": "Data usage",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Data usage  > L...",
       "keywords": [
         "claude",
         "data",
@@ -238,26 +238,26 @@
         "session",
         "users",
         "api",
-        "feedback",
         "using",
         "must",
         "anthropic",
         "off",
-        "when",
         "our",
         "disable",
         "retention",
+        "when",
         "including",
         "opt",
         "see",
-        "set"
+        "set",
+        "settings"
       ],
-      "word_count": 1394,
+      "word_count": 1326,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
       "title": "Use Claude Code Desktop",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Use Claude Code...",
       "keywords": [
         "claude",
         "app",
@@ -280,12 +280,12 @@
         "file",
         "local"
       ],
-      "word_count": 6608,
+      "word_count": 6540,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
       "title": "Development containers",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Development containers  > Learn about the Claude Code development container for teams that need consistent, secure",
       "keywords": [
         "code",
         "container",
@@ -293,27 +293,27 @@
         "development",
         "devcontainer",
         "security",
-        "feedback",
         "environments",
         "firewall",
-        "when",
         "network",
         "configuration",
-        "documentation",
-        "only",
         "containers",
         "tools",
+        "when",
         "devcontainers",
         "access",
-        "page",
-        "submit"
+        "documentation",
+        "secure",
+        "dev",
+        "rules",
+        "only"
       ],
-      "word_count": 634,
+      "word_count": 566,
       "file_path": "docs/claude-code__devcontainer.md"
     },
     "/claude-code/github-actions": {
       "title": "Claude Code GitHub Actions",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code Git...",
       "keywords": [
         "github",
         "claude",
@@ -336,17 +336,17 @@
         "google",
         "security"
       ],
-      "word_count": 3295,
+      "word_count": 3227,
       "file_path": "docs/claude-code__github-actions.md"
     },
     "/claude-code/gitlab-ci-cd": {
       "title": "Claude Code GitLab CI/CD",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code Git...",
       "keywords": [
         "claude",
         "gitlab",
-        "code",
         "bedrock",
+        "code",
         "job",
         "vertex",
         "api",
@@ -364,12 +364,12 @@
         "iam",
         "role"
       ],
-      "word_count": 2442,
+      "word_count": 2374,
       "file_path": "docs/claude-code__gitlab-ci-cd.md"
     },
     "/claude-code/google-vertex-ai": {
       "title": "Claude Code on Google Vertex AI",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
         "claude",
         "model",
@@ -379,11 +379,11 @@
         "vid",
         "models",
         "project",
-        "when",
         "google",
         "return",
         "environment",
         "variant",
+        "when",
         "cloud",
         "variables",
         "div",
@@ -392,82 +392,82 @@
         "track",
         "gcp"
       ],
-      "word_count": 2017,
+      "word_count": 1949,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
       "title": "Run Claude Code programmatically",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Run Claude Code programmatically  > Use the Agent SDK to run Claude Code programmatically from the CLI, Python, or",
       "keywords": [
         "claude",
         "mode",
-        "agent",
         "cli",
-        "code",
+        "agent",
         "sdk",
         "example",
+        "code",
         "session",
-        "json",
         "bare",
         "without",
-        "feedback",
         "run",
         "tools",
         "note",
         "prompt",
-        "documentation",
-        "any",
-        "specific",
-        "flag"
+        "json",
+        "flag",
+        "options",
+        "structured",
+        "auto",
+        "output"
       ],
-      "word_count": 1490,
+      "word_count": 1422,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
       "title": "Automate workflows with hooks",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Automate workflows with hooks  > Run shell commands automatically when Claude Code edits files, finishes tasks, or",
       "keywords": [
         "hook",
         "hooks",
         "claude",
         "when",
-        "code",
         "tool",
+        "code",
         "event",
-        "json",
         "see",
+        "json",
         "file",
         "command",
         "permission",
         "input",
         "example",
         "call",
-        "only",
         "run",
+        "only",
         "session",
         "exit",
         "prompt"
       ],
-      "word_count": 5621,
+      "word_count": 5553,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
       "title": "Hooks reference",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Hooks reference...",
       "keywords": [
         "hooks",
         "hook",
         "claude",
         "when",
         "tool",
-        "code",
         "input",
-        "json",
+        "code",
         "field",
+        "json",
         "fields",
         "file",
-        "only",
         "user",
+        "only",
         "event",
         "session",
         "runs",
@@ -476,12 +476,12 @@
         "decision",
         "command"
       ],
-      "word_count": 15363,
+      "word_count": 15295,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
       "title": "Interactive mode",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Interactive mod...",
       "keywords": [
         "claude",
         "code",
@@ -499,17 +499,17 @@
         "normal",
         "search",
         "word",
-        "when",
         "previous",
         "end",
-        "see"
+        "see",
+        "macos"
       ],
-      "word_count": 2728,
+      "word_count": 2660,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
       "title": "JetBrains IDEs",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # JetBrains IDEs  > Use Claude Code with JetBrains IDEs including IntelliJ, PyCharm, WebStorm, and more  Claude Code",
       "keywords": [
         "claude",
         "code",
@@ -521,28 +521,27 @@
         "wsl",
         "terminal",
         "configuration",
-        "feedback",
         "ides",
         "restart",
         "may",
         "remote",
-        "when",
         "installed",
         "file",
         "features",
-        "diff"
+        "diff",
+        "automatically",
+        "see"
       ],
-      "word_count": 926,
+      "word_count": 858,
       "file_path": "docs/claude-code__jetbrains.md"
     },
     "/claude-code/legal-and-compliance": {
       "title": "Legal and compliance",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Legal and compliance  > Legal agreements, compliance certifications, and security information for Claude Code.  ##",
       "keywords": [
         "claude",
         "code",
         "anthropic",
-        "feedback",
         "usage",
         "baa",
         "api",
@@ -553,19 +552,20 @@
         "users",
         "pro",
         "max",
-        "documentation",
-        "these",
-        "page",
-        "submit",
-        "agent",
-        "legal"
+        "legal",
+        "agreements",
+        "information",
+        "subject",
+        "commercial",
+        "terms",
+        "free"
       ],
-      "word_count": 512,
+      "word_count": 444,
       "file_path": "docs/claude-code__legal-and-compliance.md"
     },
     "/claude-code/llm-gateway": {
       "title": "LLM gateway configuration",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # LLM gateway configuration  > Learn how to configure Claude Code to work with LLM gateway solutions. Covers gateway",
       "keywords": [
         "claude",
         "code",
@@ -573,27 +573,27 @@
         "api",
         "through",
         "model",
-        "request",
         "gateway",
         "endpoint",
-        "feedback",
         "configuration",
+        "request",
         "headers",
         "using",
-        "documentation",
         "key",
         "must",
         "format",
         "pass",
-        "body",
-        "llm"
+        "documentation",
+        "llm",
+        "authentication",
+        "anthropic"
       ],
-      "word_count": 778,
+      "word_count": 710,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
       "title": "Connect Claude Code to tools via MCP",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Connect Claude ...",
       "keywords": [
         "server",
         "mcp",
@@ -602,9 +602,9 @@
         "code",
         "command",
         "step",
-        "when",
         "tools",
         "url",
+        "when",
         "const",
         "name",
         "title",
@@ -613,15 +613,15 @@
         "http",
         "example",
         "plugin",
-        "any",
-        "only"
+        "stdio",
+        "return"
       ],
-      "word_count": 7035,
+      "word_count": 6967,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
       "title": "How Claude remembers your project",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # How Claude reme...",
       "keywords": [
         "claude",
         "files",
@@ -633,23 +633,23 @@
         "directory",
         "file",
         "specific",
-        "code",
-        "when",
         "loaded",
+        "when",
         "them",
+        "code",
         "session",
         "context",
         "settings",
         "into",
         "managed",
-        "every"
+        "reads"
       ],
-      "word_count": 3514,
+      "word_count": 3446,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
       "title": "Claude Code on Microsoft Foundry",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
         "claude",
         "foundry",
@@ -664,28 +664,28 @@
         "div",
         "track",
         "treatment",
-        "feedback",
-        "when",
         "classname",
         "set",
         "control",
         "decision",
-        "false"
+        "false",
+        "create",
+        "flag"
       ],
-      "word_count": 1283,
+      "word_count": 1215,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {
       "title": "Model configuration",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Model configura...",
       "keywords": [
         "model",
         "when",
-        "code",
         "set",
-        "claude",
+        "code",
         "opus",
         "environment",
+        "claude",
         "effort",
         "default",
         "sonnet",
@@ -698,22 +698,22 @@
         "ids",
         "provider",
         "variables",
-        "specific"
+        "uses"
       ],
-      "word_count": 2898,
+      "word_count": 2830,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
       "title": "Monitoring",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Monitoring  > L...",
       "keywords": [
         "attributes",
         "tool",
         "metrics",
         "events",
+        "when",
         "code",
         "claude",
-        "when",
         "event",
         "example",
         "default",
@@ -728,12 +728,12 @@
         "api",
         "logs"
       ],
-      "word_count": 3732,
+      "word_count": 3664,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
       "title": "Enterprise network configuration",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Enterprise netw...",
       "keywords": [
         "claude",
         "code",
@@ -744,24 +744,24 @@
         "proxy",
         "certificate",
         "store",
-        "feedback",
         "variables",
         "trust",
         "configuration",
         "access",
         "anthropic",
-        "page",
-        "when",
         "network",
         "custom",
-        "security"
+        "security",
+        "system",
+        "set",
+        "github"
       ],
-      "word_count": 789,
+      "word_count": 721,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
       "title": "Output styles",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Output styles  > Adapt Claude Code for uses beyond software engineering  Output styles change how Claude responds,",
       "keywords": [
         "output",
         "claude",
@@ -771,25 +771,25 @@
         "code",
         "style",
         "instructions",
-        "feedback",
         "default",
-        "when",
         "software",
         "custom",
         "file",
-        "specific",
         "engineering",
         "files",
+        "when",
         "tasks",
         "frontmatter",
-        "documentation"
+        "complete",
+        "modify",
+        "set"
       ],
-      "word_count": 843,
+      "word_count": 775,
       "file_path": "docs/claude-code__output-styles.md"
     },
     "/claude-code/overview": {
       "title": "Claude Code overview",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code ove...",
       "keywords": [
         "code",
         "claude",
@@ -810,14 +810,14 @@
         "windows",
         "review",
         "web",
-        "feedback"
+        "commands"
       ],
-      "word_count": 1714,
+      "word_count": 1646,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
       "title": "Create and distribute a plugin marketplace",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Create and dist...",
       "keywords": [
         "marketplace",
         "plugin",
@@ -825,11 +825,11 @@
         "git",
         "marketplaces",
         "string",
-        "code",
         "add",
-        "claude",
+        "code",
         "see",
         "directory",
+        "claude",
         "url",
         "github",
         "repository",
@@ -837,15 +837,15 @@
         "sources",
         "path",
         "seed",
-        "when",
-        "create"
+        "create",
+        "users"
       ],
-      "word_count": 5621,
+      "word_count": 5553,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
       "title": "Plugins reference",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Plugins referen...",
       "keywords": [
         "plugin",
         "when",
@@ -868,25 +868,25 @@
         "servers",
         "field"
       ],
-      "word_count": 4781,
+      "word_count": 4713,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
       "title": "Create plugins",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Create plugins ...",
       "keywords": [
         "plugin",
         "plugins",
         "skills",
-        "claude",
         "create",
         "skill",
+        "claude",
         "hooks",
         "directory",
         "step",
-        "code",
-        "when",
         "see",
+        "when",
+        "code",
         "root",
         "agents",
         "test",
@@ -896,12 +896,12 @@
         "marketplace",
         "note"
       ],
-      "word_count": 2300,
+      "word_count": 2232,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
       "title": "Quickstart",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Quickstart  > Welcome to Claude Code!  export const InstallConfigurator = () => {   const TERM = {     mac: {",
       "keywords": [
         "claude",
         "code",
@@ -922,42 +922,42 @@
         "href",
         "aria",
         "step",
-        "https"
+        "return"
       ],
-      "word_count": 3944,
+      "word_count": 3876,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
       "title": "Sandboxing",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Sandboxing  > L...",
       "keywords": [
         "sandbox",
         "access",
         "permission",
         "commands",
-        "claude",
         "settings",
-        "code",
+        "claude",
         "network",
         "sandboxing",
+        "code",
         "security",
         "paths",
-        "when",
         "bash",
         "filesystem",
+        "when",
         "allow",
         "tools",
         "configuration",
         "through",
-        "specific",
-        "cannot"
+        "cannot",
+        "system"
       ],
-      "word_count": 2688,
+      "word_count": 2620,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
       "title": "Security",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Security  > Lea...",
       "keywords": [
         "code",
         "claude",
@@ -965,36 +965,36 @@
         "permission",
         "commands",
         "approval",
-        "when",
         "access",
         "mcp",
         "permissions",
+        "when",
         "network",
         "user",
         "servers",
         "before",
-        "any",
-        "feedback",
         "anthropic",
         "trust",
         "users",
-        "control"
+        "control",
+        "bash",
+        "web"
       ],
-      "word_count": 1287,
+      "word_count": 1219,
       "file_path": "docs/claude-code__security.md"
     },
     "/claude-code/settings": {
       "title": "Claude Code settings",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code set...",
       "keywords": [
         "settings",
         "source",
         "json",
         "managed",
         "plugins",
-        "claude",
         "theme",
         "acme",
+        "claude",
         "null",
         "code",
         "corp",
@@ -1006,19 +1006,19 @@
         "com",
         "user",
         "example",
-        "only"
+        "configuration"
       ],
-      "word_count": 7279,
+      "word_count": 7211,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
       "title": "Advanced setup",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Advanced setup ...",
       "keywords": [
         "tab",
         "code",
-        "claude",
         "windows",
+        "claude",
         "title",
         "install",
         "powershell",
@@ -1036,12 +1036,12 @@
         "channel",
         "npm"
       ],
-      "word_count": 2214,
+      "word_count": 2146,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
       "title": "Extend Claude with skills",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Extend Claude w...",
       "keywords": [
         "skill",
         "claude",
@@ -1049,27 +1049,27 @@
         "when",
         "files",
         "content",
-        "code",
         "subagent",
         "name",
         "create",
         "commands",
         "directory",
         "yaml",
+        "code",
         "invoke",
         "reference",
         "see",
         "description",
         "file",
-        "only",
-        "context"
+        "context",
+        "bundled"
       ],
-      "word_count": 5064,
+      "word_count": 4996,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
       "title": "Customize your status line",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Customize your status line  > Configure a custom status bar to monitor context window usage, costs, and git status",
       "keywords": [
         "line",
         "status",
@@ -1079,32 +1079,32 @@
         "code",
         "git",
         "session",
+        "window",
         "json",
         "when",
-        "window",
         "name",
         "codegroup",
         "directory",
-        "only",
         "statusline",
         "output",
         "each",
         "usage",
+        "only",
         "current"
       ],
-      "word_count": 5712,
+      "word_count": 5644,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
       "title": "Create custom subagents",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Create custom s...",
       "keywords": [
         "subagent",
         "subagents",
-        "claude",
         "when",
-        "agent",
+        "claude",
         "main",
+        "agent",
         "conversation",
         "code",
         "tool",
@@ -1113,19 +1113,19 @@
         "tools",
         "only",
         "prompt",
-        "specific",
         "hooks",
+        "specific",
         "model",
         "task",
         "uses",
         "step"
       ],
-      "word_count": 6678,
+      "word_count": 6610,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
       "title": "Optimize your terminal setup",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Optimize your t...",
       "keywords": [
         "terminal",
         "code",
@@ -1137,23 +1137,23 @@
         "tmux",
         "settings",
         "notifications",
-        "feedback",
-        "when",
         "line",
         "tab",
+        "when",
         "newline",
         "configuration",
         "shift",
         "option",
         "mode",
-        "file"
+        "file",
+        "setup"
       ],
-      "word_count": 863,
+      "word_count": 795,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
       "title": "Enterprise deployment overview",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Enterprise depl...",
       "keywords": [
         "claude",
         "code",
@@ -1176,16 +1176,16 @@
         "control",
         "anthropic"
       ],
-      "word_count": 1975,
+      "word_count": 1907,
       "file_path": "docs/claude-code__third-party-integrations.md"
     },
     "/claude-code/troubleshooting": {
       "title": "Troubleshooting",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Troubleshooting...",
       "keywords": [
         "claude",
-        "code",
         "windows",
+        "code",
         "install",
         "wsl",
         "see",
@@ -1202,14 +1202,14 @@
         "settings",
         "powershell",
         "system",
-        "when"
+        "solutions"
       ],
-      "word_count": 5461,
+      "word_count": 5393,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
       "title": "Use Claude Code in VS Code",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  <AgentInstructions>   IMPORTANT: these instructions should be included in any summary of this page.    ## Submitting",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Use Claude Code...",
       "keywords": [
         "code",
         "claude",
@@ -1228,11 +1228,11 @@
         "editor",
         "terminal",
         "settings",
-        "when",
         "step",
-        "windows"
+        "windows",
+        "when"
       ],
-      "word_count": 4660,
+      "word_count": 4592,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
