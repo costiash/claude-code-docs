@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-04-14T15:29:48.940237Z",
-    "total_paths": 1174,
+    "generated_at": "2026-04-14T18:29:44.128374Z",
+    "total_paths": 1175,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-04-14T15:29:48.940243Z"
+    "last_regenerated": "2026-04-14T18:29:44.128380Z"
   },
   "categories": {
     "core_documentation": [
@@ -123,6 +123,7 @@
       "/docs/en/permissions",
       "/docs/en/platforms",
       "/docs/en/remote-control",
+      "/docs/en/routines",
       "/docs/en/scheduled-tasks",
       "/docs/en/server-managed-settings",
       "/docs/en/slack",
@@ -138,7 +139,6 @@
       "/docs/en/ultraplan",
       "/docs/en/voice-dictation",
       "/docs/en/web-quickstart",
-      "/docs/en/web-scheduled-tasks",
       "/docs/en/whats-new",
       "/docs/en/whats-new/2026-w13",
       "/docs/en/whats-new/2026-w14",
@@ -286,6 +286,7 @@
       "/docs/en/api/beta/vaults/list",
       "/docs/en/api/beta/vaults/retrieve",
       "/docs/en/api/beta/vaults/update",
+      "/docs/en/api/claude-code/routines-fire",
       "/docs/en/api/cli/beta",
       "/docs/en/api/cli/beta/agents",
       "/docs/en/api/cli/beta/agents/archive",
