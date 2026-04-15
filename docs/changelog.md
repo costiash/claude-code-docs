@@ -8,6 +8,10 @@
 
 # Changelog
 
+## 2.1.109
+
+- Improved the extended-thinking indicator with a rotating progress hint
+
 ## 2.1.108
 
 - Added `ENABLE_PROMPT_CACHING_1H` env var to opt into 1-hour prompt cache TTL on API key, Bedrock, Vertex, and Foundry (`ENABLE_PROMPT_CACHING_1H_BEDROCK` is deprecated but still honored), and `FORCE_PROMPT_CACHING_5M` to force 5-minute TTL
