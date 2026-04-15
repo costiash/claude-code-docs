@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-15T15:43:23Z",
+  "generated_at": "2026-04-15T18:42:03Z",
   "indexed_files": 1041,
   "index": {
     "/changelog": {
@@ -121,8 +121,8 @@
       "keywords": [
         "com",
         "claude",
-        "org",
         "session",
+        "org",
         "cloud",
         "sessions",
         "github",
@@ -140,7 +140,7 @@
         "terminal",
         "title"
       ],
-      "word_count": 5257,
+      "word_count": 5334,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -532,7 +532,7 @@
         "automatically",
         "see"
       ],
-      "word_count": 858,
+      "word_count": 868,
       "file_path": "docs/claude-code__jetbrains.md"
     },
     "/claude-code/legal-and-compliance": {
