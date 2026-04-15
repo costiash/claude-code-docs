@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-15T06:53:23Z",
+  "generated_at": "2026-04-15T09:47:05Z",
   "indexed_files": 1041,
   "index": {
     "/changelog": {
@@ -196,7 +196,7 @@
         "branch",
         "need"
       ],
-      "word_count": 5124,
+      "word_count": 5140,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
