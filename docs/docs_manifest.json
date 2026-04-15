@@ -5157,8 +5157,8 @@
     "claude-code__google-vertex-ai.md": {
       "original_url": "https://platform.claude.com/docs/en/google-vertex-ai",
       "original_md_url": "https://platform.claude.com/docs/en/google-vertex-ai.md",
-      "hash": "873f02cbedc85dfc7488fac497f80e664127d6aed11793adc033704a965f8fa3",
-      "last_updated": "2026-04-14T21:31:29.085168"
+      "hash": "ba55d654bd4386b7490a6665e244c16e9ce24683e7170c8ff5dd7c19ac1ab8a1",
+      "last_updated": "2026-04-15T21:31:29.576288"
     },
     "claude-code__headless.md": {
       "original_url": "https://platform.claude.com/docs/en/headless",
@@ -5343,8 +5343,8 @@
     "claude-code__microsoft-foundry.md": {
       "original_url": "https://platform.claude.com/docs/en/microsoft-foundry",
       "original_md_url": "https://platform.claude.com/docs/en/microsoft-foundry.md",
-      "hash": "ba9e5c892453c08746dfeb889e3a674be08044c20fa9f6773265f0fd338977d0",
-      "last_updated": "2026-04-14T21:31:49.506656"
+      "hash": "5578e5c61533a2c1c9d22bff2a48bca0617000ac75d755ce1b473694692dd8ef",
+      "last_updated": "2026-04-15T21:31:49.675371"
     },
     "claude-code__model-config.md": {
       "original_url": "https://platform.claude.com/docs/en/model-config",
@@ -5373,8 +5373,8 @@
     "claude-code__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/overview",
       "original_md_url": "https://platform.claude.com/docs/en/overview.md",
-      "hash": "d91af90657a74a12ce69705a658d7d160752b02f94b55bf5e9a09903ad2e7c0f",
-      "last_updated": "2026-04-15T00:53:20.142786"
+      "hash": "19588070589e8aebab240f5e713e4bc3a75de39166d33be9cd0cf1d95828f8f9",
+      "last_updated": "2026-04-15T21:31:52.564933"
     },
     "claude-code__plugin-marketplaces.md": {
       "original_url": "https://platform.claude.com/docs/en/plugin-marketplaces",
@@ -5397,8 +5397,8 @@
     "claude-code__quickstart.md": {
       "original_url": "https://platform.claude.com/docs/en/quickstart",
       "original_md_url": "https://platform.claude.com/docs/en/quickstart.md",
-      "hash": "44d875f3e3cb5f05592cc64830b8686a71faa121867d1f0e987177a74d9c407b",
-      "last_updated": "2026-04-15T00:53:23.268659"
+      "hash": "fcc5850365187f549ea7ebb269026726b804e73d7e9451f3b817cd08dc0b7971",
+      "last_updated": "2026-04-15T21:31:55.694003"
     },
     "docs__en__release-notes__overview.md": {
       "original_url": "https://platform.claude.com/docs/en/release-notes/overview",
@@ -5511,8 +5511,8 @@
     "claude-code__third-party-integrations.md": {
       "original_url": "https://platform.claude.com/docs/en/third-party-integrations",
       "original_md_url": "https://platform.claude.com/docs/en/third-party-integrations.md",
-      "hash": "e3cfa35c262458c97d03614185cf6da235fee7f58da6c42c5a73641fdd37b944",
-      "last_updated": "2026-04-14T21:32:10.504866"
+      "hash": "3f7b05c3e48cf042c409896b6fc62bfb0626c9c0f85aee085520991eecbf8615",
+      "last_updated": "2026-04-15T21:32:08.957952"
     },
     "claude-code__troubleshooting.md": {
       "original_url": "https://platform.claude.com/docs/en/troubleshooting",
@@ -5535,8 +5535,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-15T18:42:00.856998",
-    "fetch_duration_seconds": 743.911964,
+    "last_fetch_completed": "2026-04-15T21:32:13.227359",
+    "fetch_duration_seconds": 665.579061,
     "total_pages_discovered": 1175,
     "pages_fetched_successfully": 922,
     "pages_failed": 254,
@@ -5801,7 +5801,7 @@
     "total_files": 922,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-15T18:42:00.857023",
+  "last_updated": "2026-04-15T21:32:13.227386",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

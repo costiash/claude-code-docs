@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-15T18:42:03Z",
+  "generated_at": "2026-04-15T21:32:15Z",
   "indexed_files": 1041,
   "index": {
     "/changelog": {
@@ -381,18 +381,18 @@
         "project",
         "google",
         "return",
-        "environment",
         "variant",
+        "environment",
         "when",
+        "control",
         "cloud",
         "variables",
         "div",
+        "treatment",
         "set",
-        "control",
-        "track",
-        "gcp"
+        "track"
       ],
-      "word_count": 1949,
+      "word_count": 1971,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -651,9 +651,9 @@
       "title": "Claude Code on Microsoft Foundry",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
+        "const",
         "claude",
         "foundry",
-        "const",
         "microsoft",
         "vid",
         "code",
@@ -662,17 +662,17 @@
         "azure",
         "model",
         "div",
-        "track",
         "treatment",
-        "classname",
-        "set",
+        "track",
         "control",
+        "classname",
+        "flag",
+        "set",
         "decision",
         "false",
-        "create",
-        "flag"
+        "create"
       ],
-      "word_count": 1215,
+      "word_count": 1237,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {
@@ -793,26 +793,26 @@
       "keywords": [
         "code",
         "claude",
+        "div",
+        "const",
+        "classname",
+        "key",
+        "label",
         "tab",
-        "accordion",
-        "title",
-        "run",
-        "desktop",
-        "tasks",
-        "get",
-        "terminal",
-        "app",
-        "work",
-        "icon",
-        "files",
-        "tools",
+        "cmd",
         "install",
-        "windows",
-        "review",
-        "web",
-        "commands"
+        "button",
+        "alt",
+        "title",
+        "accordion",
+        "desktop",
+        "team",
+        "run",
+        "vid",
+        "size",
+        "terminal"
       ],
-      "word_count": 1673,
+      "word_count": 4247,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -901,30 +901,30 @@
     },
     "/claude-code/quickstart": {
       "title": "Quickstart",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Quickstart  > Welcome to Claude Code!  export const InstallConfigurator = () => {   const TERM = {     mac: {",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Quickstart  > W...",
       "keywords": [
         "claude",
         "code",
-        "const",
         "div",
+        "const",
         "classname",
         "key",
-        "button",
-        "cmd",
         "label",
-        "span",
+        "cmd",
+        "button",
         "install",
         "alt",
         "team",
         "vid",
         "size",
+        "aria",
+        "span",
         "provider",
         "href",
-        "aria",
-        "step",
-        "return"
+        "return",
+        "step"
       ],
-      "word_count": 3897,
+      "word_count": 4023,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1165,18 +1165,18 @@
         "tab",
         "return",
         "proxy",
+        "variant",
         "configuration",
         "gateway",
-        "variant",
+        "control",
         "track",
         "more",
         "llm",
         "variables",
         "div",
-        "control",
-        "anthropic"
+        "treatment"
       ],
-      "word_count": 1907,
+      "word_count": 1929,
       "file_path": "docs/claude-code__third-party-integrations.md"
     },
     "/claude-code/troubleshooting": {
