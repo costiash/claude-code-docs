@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-14T21:32:18Z",
+  "generated_at": "2026-04-15T00:53:42Z",
   "indexed_files": 1041,
   "index": {
     "/changelog": {
@@ -812,7 +812,7 @@
         "web",
         "commands"
       ],
-      "word_count": 1652,
+      "word_count": 1673,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -862,13 +862,13 @@
         "see",
         "skills",
         "configuration",
+        "version",
         "commands",
         "install",
         "agents",
-        "servers",
-        "field"
+        "servers"
       ],
-      "word_count": 4713,
+      "word_count": 4732,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -910,9 +910,9 @@
         "classname",
         "key",
         "button",
+        "cmd",
         "label",
         "span",
-        "cmd",
         "install",
         "alt",
         "team",
@@ -924,7 +924,7 @@
         "step",
         "return"
       ],
-      "word_count": 3876,
+      "word_count": 3897,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1028,15 +1028,15 @@
         "run",
         "tabs",
         "linux",
+        "cmd",
         "step",
         "version",
         "updates",
         "see",
-        "cmd",
         "channel",
         "npm"
       ],
-      "word_count": 2146,
+      "word_count": 2167,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
