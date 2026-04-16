@@ -189,8 +189,8 @@
     "claude-code__amazon-bedrock.md": {
       "original_url": "https://platform.claude.com/docs/en/amazon-bedrock",
       "original_md_url": "https://platform.claude.com/docs/en/amazon-bedrock.md",
-      "hash": "c40c85ec6f69d22fbaf94af6b0fb0ae0f6a6cf0b310dc96425327f18650148ee",
-      "last_updated": "2026-04-14T21:20:45.270780"
+      "hash": "713ede597b31b8964b547019c6d3d81748daf1180a0b7aca18b4da7ba32bdf44",
+      "last_updated": "2026-04-16T00:43:50.885671"
     },
     "claude-code__analytics.md": {
       "original_url": "https://platform.claude.com/docs/en/analytics",
@@ -5115,8 +5115,8 @@
     "claude-code__costs.md": {
       "original_url": "https://platform.claude.com/docs/en/costs",
       "original_md_url": "https://platform.claude.com/docs/en/costs.md",
-      "hash": "40c1221d7d6a6979c952a18c917498e5b141bb7c13a167a1ddfcd10aeef4f713",
-      "last_updated": "2026-04-14T21:31:15.647232"
+      "hash": "99f9561d8614d2f145d087a6abb53b371fc654ae51bc3645b7e8ffd6a364fe76",
+      "last_updated": "2026-04-16T00:54:34.944977"
     },
     "claude-code__data-usage.md": {
       "original_url": "https://platform.claude.com/docs/en/data-usage",
@@ -5445,8 +5445,8 @@
     "claude-code__statusline.md": {
       "original_url": "https://platform.claude.com/docs/en/statusline",
       "original_md_url": "https://platform.claude.com/docs/en/statusline.md",
-      "hash": "e272604e92df9696d3d08bd79db14bff006035b88f14aabf42d5ddecbcb424a0",
-      "last_updated": "2026-04-14T21:32:02.711718"
+      "hash": "93a49a8f14c1afa1a20c2728016425364a50764b1184757ea0d5ae84780ddc9f",
+      "last_updated": "2026-04-16T00:55:11.892885"
     },
     "claude-code__sub-agents.md": {
       "original_url": "https://platform.claude.com/docs/en/sub-agents",
@@ -5529,14 +5529,14 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "c12539d57b4c5013c927136f1193218c6e91c4769c76ca3ae6136712b9de1fd3",
-      "last_updated": "2026-04-15T04:15:08.018435",
+      "hash": "39be3234561e1a89e6a43f02e4db7e9f318ffaa04e809ac432c0390271a4ef20",
+      "last_updated": "2026-04-16T00:55:23.686026",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-15T21:32:13.227359",
-    "fetch_duration_seconds": 665.579061,
+    "last_fetch_completed": "2026-04-16T00:55:23.686183",
+    "fetch_duration_seconds": 742.285017,
     "total_pages_discovered": 1175,
     "pages_fetched_successfully": 922,
     "pages_failed": 254,
@@ -5801,7 +5801,7 @@
     "total_files": 922,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-15T21:32:13.227386",
+  "last_updated": "2026-04-16T00:55:23.686202",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

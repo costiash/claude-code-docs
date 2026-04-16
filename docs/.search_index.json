@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-15T21:32:15Z",
+  "generated_at": "2026-04-16T00:55:26Z",
   "indexed_files": 1041,
   "index": {
     "/changelog": {
@@ -16,11 +16,11 @@
         "tool",
         "mode",
         "instead",
-        "code",
         "session",
         "sessions",
-        "after",
+        "code",
         "being",
+        "after",
         "mcp",
         "commands",
         "command",
@@ -28,7 +28,7 @@
         "prompt",
         "bash"
       ],
-      "word_count": 33595,
+      "word_count": 34142,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -41,8 +41,8 @@
         "code",
         "aws",
         "mantle",
-        "credentials",
         "const",
+        "credentials",
         "account",
         "vid",
         "when",
@@ -56,7 +56,7 @@
         "set",
         "file"
       ],
-      "word_count": 3121,
+      "word_count": 3143,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -207,8 +207,8 @@
         "code",
         "context",
         "per",
-        "costs",
         "usage",
+        "costs",
         "when",
         "token",
         "tokens",
@@ -224,7 +224,7 @@
         "user",
         "only"
       ],
-      "word_count": 1862,
+      "word_count": 1891,
       "file_path": "docs/claude-code__costs.md"
     },
     "/claude-code/data-usage": {
@@ -1092,7 +1092,7 @@
         "only",
         "current"
       ],
-      "word_count": 5644,
+      "word_count": 5653,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
