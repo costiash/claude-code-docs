@@ -22,7 +22,7 @@ For complete pricing and specs, see the [models overview](/docs/en/about-claude/
 
 Claude Opus 4.7 is our first Claude model with high-resolution image support. Maximum image resolution has increased to **2576px / 3.75MP** (increased from our previous limit of 1568px / 1.15MP). This change should unlock performance gains on vision-heavy workloads, and is particularly important for computer use and screenshot/artifact/document understanding workflows.
 
-Additionally, operations like mapping coordinates to images are now simpler — the model's coordinates are 1:1 with actual pixels, so there's no scale-factor math required.
+Additionally, operations like mapping coordinates to images are now simpler — the model's coordinates are 1\:1 with actual pixels, so there's no scale-factor math required.
 
 High-res images use more tokens. If the additional image fidelity is unnecessary, downsample images before sending to Claude to avoid token-usage increases.
 
@@ -156,7 +156,7 @@ For step-by-step migration instructions and the full migration checklist, see [M
     Per-level effort guidance for Claude Opus 4.7.
   </Card>
   <Card title="Images and vision" icon="image" href="/docs/en/build-with-claude/vision">
-    High-resolution image support and 1:1 coordinate mapping.
+    High-resolution image support and 1\:1 coordinate mapping.
   </Card>
   <Card title="Migration guide" icon="arrow-right" href="/docs/en/about-claude/models/migration-guide#migrating-to-claude-opus-4-7">
     Step-by-step upgrade instructions.

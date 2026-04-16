@@ -891,7 +891,7 @@ If an action fails to execute:
 #### Handle coordinate scaling for higher resolutions
 
 <Note>
-Claude Opus 4.7 supports up to 2576 pixels on the long edge, and its coordinates are 1:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance below applies to earlier models.
+Claude Opus 4.7 supports up to 2576 pixels on the long edge, and its coordinates are 1\:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance below applies to earlier models.
 </Note>
 
 The API constrains images to a maximum of 1568 pixels on the longest edge and approximately 1.15 megapixels total (see [image resizing](/docs/en/build-with-claude/vision#evaluate-image-size) for details). For example, a 1512x982 screen gets downsampled to approximately 1330x864. Claude analyzes this smaller image and returns coordinates in that space, but your tool executes clicks in the original screen space.

@@ -55,7 +55,6 @@ This approach is best for:
 | When you need... | Consider starting with... | Example use cases |
 |------------------|-------------------|-------------------|
 | Anthropic's most capable generally available model for complex reasoning and agentic coding, with a step-change jump over Claude Opus 4.6 | Claude Opus 4.7 | Long-horizon agentic coding, large-scale refactoring, complex systems engineering, advanced research, multi-hour autonomous tasks |
-| The previous flagship for coding, enterprise agents, and professional work | Claude Opus 4.6 | Professional software engineering, advanced agents for office tasks, computer and browser use at scale, multi-hour research tasks, step-change vision applications |
 | Frontier intelligence at scale, built for coding, agents, and enterprise workflows | Claude Sonnet 4.6 | Code generation, data analysis, content creation, visual understanding, agentic tool use |
 | Near-frontier performance with lightning-fast speed and extended thinking at the most economical price point | Claude Haiku 4.5 | Real-time applications, high-volume intelligent processing, cost-sensitive deployments needing strong reasoning, sub-agent tasks |
 

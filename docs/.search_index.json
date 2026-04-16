@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-16T18:43:13Z",
+  "generated_at": "2026-04-16T21:31:48Z",
   "indexed_files": 1048,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "prompt",
         "bash"
       ],
-      "word_count": 34820,
+      "word_count": 34831,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -44,19 +44,19 @@
         "const",
         "credentials",
         "account",
-        "vid",
         "when",
+        "vid",
         "environment",
         "settings",
         "inference",
+        "models",
         "variables",
         "set",
         "api",
-        "models",
         "return",
         "file"
       ],
-      "word_count": 3170,
+      "word_count": 3181,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -119,28 +119,28 @@
       "title": "Use Claude Code on the web",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Use Claude Code...",
       "keywords": [
-        "com",
-        "claude",
         "session",
-        "org",
+        "claude",
+        "com",
         "cloud",
+        "org",
         "sessions",
         "github",
-        "www",
         "environment",
+        "www",
         "access",
-        "accordion",
         "code",
         "run",
-        "web",
+        "accordion",
         "setup",
+        "web",
         "repository",
+        "script",
         "repo",
         "network",
-        "terminal",
-        "title"
+        "terminal"
       ],
-      "word_count": 5334,
+      "word_count": 5916,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -148,13 +148,13 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # CLI reference  ...",
       "keywords": [
         "session",
-        "mode",
         "claude",
+        "mode",
         "prompt",
         "interactive",
         "see",
-        "default",
         "code",
+        "default",
         "file",
         "start",
         "only",
@@ -168,7 +168,7 @@
         "when",
         "flags"
       ],
-      "word_count": 2260,
+      "word_count": 2287,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -178,25 +178,25 @@
         "step",
         "claude",
         "title",
-        "code",
         "when",
-        "tip",
         "session",
+        "code",
+        "tip",
         "steps",
         "thinking",
-        "mode",
         "worktree",
-        "plan",
+        "mode",
         "worktrees",
+        "sessions",
+        "plan",
+        "default",
         "specific",
         "files",
-        "default",
-        "sessions",
         "ask",
-        "branch",
-        "need"
+        "name",
+        "branch"
       ],
-      "word_count": 5186,
+      "word_count": 5378,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -264,23 +264,23 @@
         "auto",
         "file",
         "app",
-        "preview",
-        "sessions",
-        "files",
         "session",
+        "preview",
+        "desktop",
+        "sessions",
+        "windows",
+        "files",
         "mode",
         "changes",
-        "desktop",
         "diff",
         "settings",
         "server",
         "review",
         "open",
         "terminal",
-        "windows",
         "permission"
       ],
-      "word_count": 7640,
+      "word_count": 7734,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -376,8 +376,8 @@
         "vertex",
         "code",
         "const",
-        "vid",
         "models",
+        "vid",
         "project",
         "google",
         "return",
@@ -392,7 +392,7 @@
         "treatment",
         "track"
       ],
-      "word_count": 1992,
+      "word_count": 2003,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -404,23 +404,23 @@
         "cli",
         "agent",
         "sdk",
-        "example",
-        "code",
         "session",
+        "event",
+        "code",
+        "example",
+        "tools",
         "bare",
         "without",
+        "string",
         "run",
-        "tools",
         "note",
         "prompt",
+        "message",
         "json",
         "flag",
-        "options",
-        "structured",
-        "auto",
-        "output"
+        "options"
       ],
-      "word_count": 1422,
+      "word_count": 1672,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -445,10 +445,10 @@
         "run",
         "only",
         "session",
-        "exit",
-        "prompt"
+        "settings",
+        "exit"
       ],
-      "word_count": 5553,
+      "word_count": 5588,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "decision",
         "command"
       ],
-      "word_count": 15295,
+      "word_count": 15374,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -485,26 +485,26 @@
       "keywords": [
         "claude",
         "code",
-        "commands",
         "mode",
+        "commands",
         "command",
         "line",
         "press",
-        "history",
         "background",
+        "history",
         "prompt",
-        "input",
-        "text",
         "conversation",
-        "normal",
+        "input",
         "search",
-        "word",
+        "session",
+        "text",
+        "when",
         "previous",
-        "end",
-        "see",
-        "macos"
+        "word",
+        "normal",
+        "terminal"
       ],
-      "word_count": 2660,
+      "word_count": 2860,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -601,22 +601,22 @@
         "claude",
         "code",
         "command",
+        "when",
         "step",
         "tools",
         "url",
-        "when",
         "const",
+        "tool",
         "name",
         "title",
-        "tool",
-        "add",
         "http",
-        "example",
-        "plugin",
+        "add",
+        "set",
         "stdio",
-        "return"
+        "example",
+        "plugin"
       ],
-      "word_count": 6967,
+      "word_count": 7220,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -690,17 +690,17 @@
         "sonnet",
         "environment",
         "default",
-        "models",
+        "context",
         "name",
         "settings",
-        "context",
-        "version",
         "picker",
+        "models",
+        "version",
         "uses",
         "provider",
         "users"
       ],
-      "word_count": 3241,
+      "word_count": 3282,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -709,26 +709,26 @@
       "keywords": [
         "attributes",
         "tool",
-        "metrics",
         "events",
         "when",
-        "code",
+        "metrics",
         "claude",
+        "code",
         "event",
-        "example",
-        "default",
-        "standard",
-        "user",
-        "prompt",
+        "api",
         "request",
+        "default",
+        "example",
+        "standard",
+        "prompt",
+        "user",
         "name",
         "counter",
         "session",
-        "include",
-        "api",
-        "logs"
+        "content",
+        "include"
       ],
-      "word_count": 3664,
+      "word_count": 4130,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -831,16 +831,16 @@
         "directory",
         "claude",
         "url",
+        "paths",
         "github",
         "repository",
-        "paths",
         "sources",
         "path",
         "seed",
         "create",
-        "users"
+        "file"
       ],
-      "word_count": 5553,
+      "word_count": 5576,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -850,8 +850,8 @@
         "plugin",
         "when",
         "directory",
-        "server",
         "claude",
+        "server",
         "plugins",
         "code",
         "mcp",
@@ -860,15 +860,15 @@
         "file",
         "see",
         "lsp",
+        "command",
         "version",
-        "skills",
-        "configuration",
         "commands",
-        "install",
-        "agents",
-        "servers"
+        "field",
+        "path",
+        "skills",
+        "configuration"
       ],
-      "word_count": 4770,
+      "word_count": 5213,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -877,26 +877,26 @@
       "keywords": [
         "plugin",
         "plugins",
+        "claude",
         "skills",
         "create",
         "skill",
-        "claude",
         "hooks",
         "directory",
         "step",
-        "when",
         "see",
+        "when",
         "code",
         "root",
+        "add",
         "agents",
         "test",
         "lsp",
+        "file",
         "servers",
-        "add",
-        "marketplace",
-        "note"
+        "marketplace"
       ],
-      "word_count": 2236,
+      "word_count": 2384,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -1008,7 +1008,7 @@
         "user",
         "example"
       ],
-      "word_count": 7324,
+      "word_count": 7478,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1017,26 +1017,26 @@
       "keywords": [
         "tab",
         "code",
-        "windows",
         "claude",
+        "windows",
         "title",
         "install",
         "powershell",
         "installation",
         "wsl",
         "native",
+        "version",
         "run",
         "tabs",
+        "updates",
         "linux",
         "cmd",
         "step",
-        "version",
-        "updates",
         "see",
         "channel",
-        "npm"
+        "settings"
       ],
-      "word_count": 2167,
+      "word_count": 2344,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1049,10 +1049,10 @@
         "when",
         "files",
         "content",
+        "commands",
         "subagent",
         "name",
         "create",
-        "commands",
         "directory",
         "yaml",
         "code",
@@ -1064,7 +1064,7 @@
         "context",
         "bundled"
       ],
-      "word_count": 5000,
+      "word_count": 5012,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1120,7 +1120,7 @@
         "uses",
         "step"
       ],
-      "word_count": 6614,
+      "word_count": 6616,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1137,18 +1137,18 @@
         "tmux",
         "settings",
         "notifications",
+        "mode",
         "line",
         "tab",
         "when",
         "newline",
         "configuration",
         "shift",
+        "run",
         "option",
-        "mode",
-        "file",
-        "setup"
+        "file"
       ],
-      "word_count": 795,
+      "word_count": 816,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
@@ -1184,18 +1184,18 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Troubleshooting...",
       "keywords": [
         "claude",
-        "windows",
         "code",
+        "windows",
         "install",
         "wsl",
         "see",
         "linux",
         "issues",
         "check",
-        "path",
         "run",
-        "installer",
         "file",
+        "path",
+        "installer",
         "installation",
         "macos",
         "command",
@@ -1204,7 +1204,7 @@
         "system",
         "solutions"
       ],
-      "word_count": 5393,
+      "word_count": 5522,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
@@ -1223,8 +1223,8 @@
         "click",
         "icon",
         "prompt",
-        "cli",
         "file",
+        "cli",
         "editor",
         "terminal",
         "settings",
@@ -1232,7 +1232,7 @@
         "session",
         "windows"
       ],
-      "word_count": 4594,
+      "word_count": 4625,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
@@ -1298,15 +1298,14 @@
         "claude",
         "model",
         "cost",
-        "tasks",
         "models",
         "opus",
-        "applications",
         "start",
+        "applications",
+        "tasks",
         "card",
         "performance",
         "most",
-        "coding",
         "capabilities",
         "speed",
         "specific",
@@ -1314,9 +1313,10 @@
         "consider",
         "need",
         "best",
-        "approach"
+        "approach",
+        "complex"
       ],
-      "word_count": 645,
+      "word_count": 608,
       "file_path": "docs/docs__en__about-claude__models__choosing-a-model.md"
     },
     "/docs/en/about-claude/models/migration-guide": {
@@ -1340,11 +1340,11 @@
         "token",
         "tokens",
         "warning",
-        "more",
         "using",
+        "more",
         "see"
       ],
-      "word_count": 7366,
+      "word_count": 7345,
       "file_path": "docs/docs__en__about-claude__models__migration-guide.md"
     },
     "/docs/en/about-claude/models/overview": {
@@ -25381,12 +25381,12 @@
         "status",
         "code",
         "retention",
-        "see",
         "title",
         "sup",
-        "phi"
+        "phi",
+        "see"
       ],
-      "word_count": 2723,
+      "word_count": 2714,
       "file_path": "docs/docs__en__build-with-claude__api-and-data-retention.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -25940,13 +25940,13 @@
         "availability",
         "web",
         "api",
-        "search",
         "model",
+        "search",
         "features",
         "capabilities",
         "files"
       ],
-      "word_count": 1572,
+      "word_count": 1552,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {

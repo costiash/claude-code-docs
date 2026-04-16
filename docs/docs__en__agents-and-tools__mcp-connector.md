@@ -687,7 +687,7 @@ await mcpClient.connect(transport);
 // List tools and convert them for the Claude API
 const { tools } = await mcpClient.listTools();
 const runner = await anthropic.beta.messages.toolRunner({
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: [{ role: "user", content: "What tools do you have available?" }],
   tools: mcpTools(tools, mcpClient)
@@ -703,7 +703,7 @@ import { mcpMessages } from "@anthropic-ai/sdk/helpers/beta/mcp";
 
 const { messages } = await mcpClient.getPrompt({ name: "my-prompt" });
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: mcpMessages(messages)
 });
@@ -719,7 +719,7 @@ import { mcpResourceToContent, mcpResourceToFile } from "@anthropic-ai/sdk/helpe
 // As a content block in a message
 const resource = await mcpClient.readResource({ uri: "file:///path/to/doc.txt" });
 await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: [
     {

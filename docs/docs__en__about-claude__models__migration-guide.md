@@ -10,7 +10,19 @@ This guide covers migrating [Messages API](/docs/en/build-with-claude/working-wi
 
 ## Migrating to Claude Opus 4.7
 
-Claude Opus 4.7 is our most capable generally available model to date. It is highly autonomous and performs exceptionally well on long-horizon agentic work, knowledge work, vision tasks, and memory tasks. Claude Opus 4.7 should have strong out-of-the-box performance on existing Claude Opus 4.6 prompts and evals at the same `$5 / $25` per MTok pricing, but there are a handful of behavioral and API changes worth knowing about as you migrate. It supports the same set of features as Claude Opus 4.6, including the [1M token context window](/docs/en/build-with-claude/context-windows) at standard API pricing with no long-context premium, 128k max output tokens, [adaptive thinking](/docs/en/build-with-claude/adaptive-thinking), prompt caching, batch processing, the Files API, PDF support, vision, and the full set of server-side and client-side tools (bash, code execution, computer use, text editor, web search, web fetch, MCP connector, memory).
+Claude Opus 4.7 is our most capable generally available model to date. It is highly autonomous and performs exceptionally well on long-horizon agentic work, knowledge work, vision tasks, and memory tasks.
+
+Claude Opus 4.7 should have strong out-of-the-box performance on existing Claude Opus 4.6 prompts and evals at the same `$5 / $25` per MTok pricing, but there are a handful of behavioral and API changes worth knowing about as you migrate. It supports the same set of features as Claude Opus 4.6, including:
+
+- [1M token context window](/docs/en/build-with-claude/context-windows) at standard API pricing with no long-context premium
+- [128k max output tokens](/docs/en/about-claude/models/overview)
+- [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking)
+- [Prompt caching](/docs/en/build-with-claude/prompt-caching)
+- [Batch processing](/docs/en/build-with-claude/batch-processing)
+- [Files API](/docs/en/build-with-claude/files)
+- [PDF support](/docs/en/build-with-claude/pdf-support)
+- [Vision](/docs/en/build-with-claude/vision)
+- The full set of server-side and client-side [tools](/docs/en/agents-and-tools/tool-use/overview) ([bash](/docs/en/agents-and-tools/tool-use/bash-tool), [code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool), [computer use](/docs/en/agents-and-tools/tool-use/computer-use-tool), [text editor](/docs/en/agents-and-tools/tool-use/text-editor-tool), [web search](/docs/en/agents-and-tools/tool-use/web-search-tool), [web fetch](/docs/en/agents-and-tools/tool-use/web-fetch-tool), [MCP connector](/docs/en/agents-and-tools/mcp-connector), [memory](/docs/en/agents-and-tools/tool-use/memory-tool))
 
 <Tip>
   **Automate this migration with the Claude API skill.** In Claude Code, run `/claude-api migrate` to invoke the bundled [Claude API skill](/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model):
@@ -72,7 +84,11 @@ model = "claude-opus-4-7"  # After
 
     The default is `"omitted"` on Claude Opus 4.7. If your product streams reasoning to users, the new default appears as a long pause before output begins; set `display: "summarized"` to restore visible progress during thinking. See [Extended thinking](/docs/en/build-with-claude/extended-thinking#controlling-thinking-display) for details.
 
-4. **Updated token counting:** Claude Opus 4.7 uses a new tokenizer, contributing to its improved performance on a wide range of tasks. This new tokenizer may use roughly 1x to 1.35x as many tokens when processing text compared to previous models (up to ~35% more, varying by content), and [`/v1/messages/count_tokens`](/docs/en/build-with-claude/token-counting) will return a different number of tokens for Claude Opus 4.7 than it did for Claude Opus 4.6. The token efficiency of Claude Opus 4.7 can vary by workload shape. Prompting interventions, `task_budget`, and `effort` can help control costs and ensure appropriate token usage. Keep in mind that these controls may trade off model intelligence. We suggest updating your `max_tokens` parameters to give additional headroom, including compaction triggers. Claude Opus 4.7 provides a 1M context window at standard API pricing with no long-context premium.
+4. **Updated token counting:** Claude Opus 4.7 uses a new tokenizer, contributing to its improved performance on a wide range of tasks. The new tokenizer may use roughly 1x to 1.35x as many tokens when processing text compared to previous models (up to ~35% more, varying by content).
+
+    [`/v1/messages/count_tokens`](/docs/en/build-with-claude/token-counting) will return a different number of tokens for Claude Opus 4.7 than it did for Claude Opus 4.6. Token efficiency can vary by workload shape.
+
+    Prompting interventions, `task_budget`, and `effort` can help control costs and ensure appropriate token usage. These controls may trade off model intelligence. We suggest updating your `max_tokens` parameters to give additional headroom, including compaction triggers. Claude Opus 4.7 provides a 1M context window at standard API pricing with no long-context premium.
 
 5. **Prefill removal (carried over from Opus 4.6):** Prefilling assistant messages returns a 400 error on Claude Opus 4.7. Use [structured outputs](/docs/en/build-with-claude/structured-outputs), system prompt instructions, or `output_config.format` instead.
 
@@ -92,7 +108,11 @@ We expect effort to be more important for this model than for any prior Opus, an
 
 Claude Opus 4.7 has several behavioral differences from Claude Opus 4.6 that are not API breaking changes but may require prompt updates or scaffolding removal.
 
-1. **Response length varies by use case:** Claude Opus 4.7 calibrates response length to how complex it judges the task to be, rather than defaulting to a fixed verbosity. This usually means shorter answers on simple lookups and much longer ones on open-ended analysis. If your product depends on a certain style or verbosity of output, you may need to tune your prompts. As an example, to decrease verbosity, you might add: "Provide concise, focused responses. Skip non-essential context, and keep examples minimal." If you see specific examples of kinds of verbosity (i.e. over-explaining), you can add additional instructions in your prompt to prevent them. Positive examples showing how Claude can communicate with the appropriate level of concision tend to be more effective than negative examples or instructions that tell the model what not to do.
+1. **Response length varies by use case:** Claude Opus 4.7 calibrates response length to how complex it judges the task to be, rather than defaulting to a fixed verbosity. This usually means shorter answers on simple lookups and much longer ones on open-ended analysis.
+
+    If your product depends on a certain style or verbosity of output, you may need to tune your prompts. For example, to decrease verbosity, add: "Provide concise, focused responses. Skip non-essential context, and keep examples minimal." If you see specific kinds of over-explaining, add targeted instructions in your prompt to prevent them.
+
+    Positive examples showing how Claude can communicate with the appropriate level of concision tend to be more effective than negative examples or instructions that tell the model what not to do.
 
 2. **More literal instruction following:** Claude Opus 4.7 interprets prompts more literally and explicitly than Claude Opus 4.6, particularly at lower effort levels. It will not silently generalize an instruction from one item to another, and it will not infer requests you didn't make. The upside of this literalism is precision and less thrash. It generally performs better for API use cases with carefully tuned prompts, structured extraction, and pipelines where you want predictable behavior. A prompt and harness review may be especially helpful for migration to Claude Opus 4.7.
 
@@ -102,13 +122,26 @@ Claude Opus 4.7 has several behavioral differences from Claude Opus 4.6 that are
 
 5. **Fewer subagents spawned by default:** Claude Opus 4.7 tends to spawn fewer subagents by default. However, this behavior is steerable through prompting; give Claude Opus 4.7 explicit guidance around when subagents are desirable.
 
-6. **Stricter effort calibration:** Meaningfully changing from Claude Opus 4.6, Claude Opus 4.7 respects [effort levels](/docs/en/build-with-claude/effort) strictly, especially at the low end. At `low` and `medium`, the model scopes its work to what was asked rather than going above and beyond. This is good for latency and cost, but on moderately complex tasks running at `low` effort there is some risk of under-thinking. If you observe shallow reasoning on complex problems, raise effort to `high` or `xhigh` rather than prompting around it. If you need to keep effort at `low` for latency, add targeted guidance: "This task involves multi-step reasoning. Think carefully through the problem before responding." See [Recommended effort levels for Claude Opus 4.7](/docs/en/build-with-claude/effort#recommended-effort-levels-for-claude-opus-4-7).
+6. **Stricter effort calibration:** Meaningfully changing from Claude Opus 4.6, Claude Opus 4.7 respects [effort levels](/docs/en/build-with-claude/effort) strictly, especially at the low end. At `low` and `medium`, the model scopes its work to what was asked rather than going above and beyond.
 
-7. **Fewer tool calls by default:** Claude Opus 4.7 has a tendency to use tools less often than Claude Opus 4.6 and to use reasoning more. This produces better results in most cases. However, increasing the effort setting is a useful lever to increase the level of tool usage, especially in knowledge work. `high` or `xhigh` effort settings show substantially more tool usage in agentic search and coding. For scenarios where you want more tool use, you can also adjust your prompt to explicitly instruct the model about when and how to properly use its tools.
+    This is good for latency and cost, but on moderately complex tasks running at `low` effort there is some risk of under-thinking. If you observe shallow reasoning on complex problems, raise effort to `high` or `xhigh` rather than prompting around it.
+
+    If you need to keep effort at `low` for latency, add targeted guidance: "This task involves multi-step reasoning. Think carefully through the problem before responding." See [Recommended effort levels for Claude Opus 4.7](/docs/en/build-with-claude/effort#recommended-effort-levels-for-claude-opus-4-7).
+
+7. **Fewer tool calls by default:** Claude Opus 4.7 has a tendency to use tools less often than Claude Opus 4.6 and to use reasoning more. This produces better results in most cases.
+
+    To increase tool usage, raise the effort setting. `high` or `xhigh` effort settings show substantially more tool usage in agentic search and coding. You can also adjust your prompt to explicitly instruct the model about when and how to properly use its tools.
 
 8. **Real-time cybersecurity safeguards:** Newly added in Claude Opus 4.7, requests that involve prohibited or high-risk topics may lead to refusals. For legitimate security work such as penetration testing, vulnerability research, or red-teaming, apply to the [Cyber Verification Program](https://claude.com/form/cyber-use-case) to request reduced restrictions. See [Safeguards, warnings, and appeals](https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals) for background.
 
-9. **High-resolution image support:** Claude Opus 4.7 is the first Claude model with high-resolution image support, with a maximum image resolution of 2576 pixels on the long edge (up from 1568 pixels on prior models). This unlocks gains on vision-heavy workloads and is particularly valuable for computer use, screenshot understanding, and document analysis. High-resolution support is automatic and requires no beta header or client-side opt-in. Full-resolution images can use up to approximately 3x more image tokens than on prior models (up to 4,784 tokens per image, compared to the previous cap of roughly 1,600 tokens per image), so re-budget `max_tokens` and cost expectations for image-heavy workloads, or downsample before sending if you do not need the additional fidelity. Pointing and bounding-box coordinates returned by the model are 1:1 with actual image pixels on Claude Opus 4.7, so no scale-factor conversion is required. See [High-resolution image support on Claude Opus 4.7](/docs/en/build-with-claude/vision#high-resolution-image-support-on-claude-opus-4-7) for details.
+9. **High-resolution image support:** Claude Opus 4.7 is the first Claude model with high-resolution image support. Maximum image resolution is 2576 pixels on the long edge, up from 1568 pixels on prior models. This unlocks gains on vision-heavy workloads and is particularly valuable for computer use, screenshot understanding, and document analysis.
+
+    High-resolution support is automatic and requires no beta header or client-side opt-in. Two things to plan for:
+
+    - Full-resolution images can use up to approximately 3x more image tokens than on prior models (up to 4,784 tokens per image, compared to the previous cap of roughly 1,600 tokens per image). Re-budget `max_tokens` and cost expectations for image-heavy workloads, or downsample before sending if you do not need the additional fidelity.
+    - Pointing and bounding-box coordinates returned by the model are 1\:1 with actual image pixels on Claude Opus 4.7, so no scale-factor conversion is required.
+
+    See [High-resolution image support on Claude Opus 4.7](/docs/en/build-with-claude/vision#high-resolution-image-support-on-claude-opus-4-7) for details.
 
 ### Recommended changes
 
@@ -127,9 +160,16 @@ These are not required but will improve your experience:
     }
     ```
 
-    You may need to experiment with different task budgets for your use case. If the model is given a task budget that is too restrictive for a given task, it may complete the task less thoroughly, referencing its budget as the constraint. For open-ended agentic tasks where quality matters more than speed, do not set a task budget; reserve task budgets for workloads where you need the model to scope its work to a token allowance. The minimum value for a task budget is 20k tokens.
+    You may need to experiment with different task budgets for your use case. If the model is given a task budget that is too restrictive, it may complete the task less thoroughly, referencing its budget as the constraint.
 
-    This is not a hard cap; it's a suggestion that the model is aware of. This is distinct from `max_tokens`, which is a hard per-request cap on generated tokens (`max_tokens` is not passed to the model, and the model is not aware of it), while `task_budget` is an advisory cap across the full agentic loop. Use `task_budget` when you want the model to self-moderate, and `max_tokens` as a hard per-request ceiling to cap usage.
+    For open-ended agentic tasks where quality matters more than speed, do not set a task budget. Reserve task budgets for workloads where you need the model to scope its work to a token allowance. The minimum value for a task budget is 20k tokens.
+
+    A task budget is not a hard cap; it's a suggestion that the model is aware of. It differs from `max_tokens`:
+
+    - **`task_budget`:** an advisory cap across the full agentic loop. The model sees it and uses it to pace itself.
+    - **`max_tokens`:** a hard per-request ceiling on generated tokens. It is not passed to the model, so the model is not aware of it.
+
+    Use `task_budget` when you want the model to self-moderate, and `max_tokens` as a hard ceiling to cap usage.
 
 4. **Set a large `max_tokens` at `max` or `xhigh` effort:** If you are running Claude Opus 4.7 at `max` or `xhigh` effort, set a large max output token budget so the model has room to think and act across its subagents and tool calls. We recommend starting at 64k tokens and tuning from there.
 
@@ -145,7 +185,8 @@ These are not required but will improve your experience:
 - [ ] Re-benchmark end-to-end cost and latency under the updated tokenization.
 - [ ] Re-tune `max_tokens` to account for the updated tokenization.
 - [ ] Re-test any client-side token-count estimations.
-- [ ] If your application sends images, re-budget for [high-resolution image support](/docs/en/build-with-claude/vision#high-resolution-image-support-on-claude-opus-4-7) (up to approximately 3x more image tokens per full-resolution image). Downsample before sending if you do not need the additional fidelity. If you consume pointing or bounding-box coordinates from the model, remove any scale-factor conversion; coordinates are 1:1 with actual image pixels on Claude Opus 4.7.
+- [ ] If your application sends images, re-budget for [high-resolution image support](/docs/en/build-with-claude/vision#high-resolution-image-support-on-claude-opus-4-7) (up to approximately 3x more image tokens per full-resolution image). Downsample before sending if you do not need the additional fidelity.
+- [ ] If you consume pointing or bounding-box coordinates from the model, remove any scale-factor conversion; coordinates are 1\:1 with actual image pixels on Claude Opus 4.7.
 - [ ] Review prompts for the behavior changes above (response length, literalism, tone, progress updates, subagents, effort calibration, tool triggering, cyber safeguards, high-resolution image handling).
 - [ ] Re-baseline response length with existing length-control prompts removed, then tune explicitly.
 - [ ] If using `xhigh` or `max` effort, raise `max_tokens` to at least 64k as a starting point.
