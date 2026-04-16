@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-04-16T15:36:32.561130Z",
-    "total_paths": 1248,
+    "generated_at": "2026-04-16T18:30:00.186301Z",
+    "total_paths": 1249,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-04-16T15:36:32.561136Z"
+    "last_regenerated": "2026-04-16T18:30:00.186306Z"
   },
   "categories": {
     "core_documentation": [
@@ -124,6 +124,7 @@
       "/docs/en/permission-modes",
       "/docs/en/permissions",
       "/docs/en/platforms",
+      "/docs/en/plugin-dependencies",
       "/docs/en/remote-control",
       "/docs/en/routines",
       "/docs/en/scheduled-tasks",

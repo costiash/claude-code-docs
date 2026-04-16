@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-16T15:48:35Z",
+  "generated_at": "2026-04-16T18:43:13Z",
   "indexed_files": 1048,
   "index": {
     "/changelog": {
@@ -196,7 +196,7 @@
         "branch",
         "need"
       ],
-      "word_count": 5181,
+      "word_count": 5186,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -272,15 +272,15 @@
         "changes",
         "desktop",
         "diff",
-        "windows",
         "settings",
         "server",
         "review",
         "open",
         "terminal",
-        "available"
+        "windows",
+        "permission"
       ],
-      "word_count": 7683,
+      "word_count": 7640,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -700,7 +700,7 @@
         "provider",
         "users"
       ],
-      "word_count": 3236,
+      "word_count": 3241,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -858,17 +858,17 @@
         "default",
         "files",
         "file",
-        "lsp",
         "see",
+        "lsp",
+        "version",
         "skills",
         "configuration",
-        "version",
         "commands",
         "install",
         "agents",
         "servers"
       ],
-      "word_count": 4732,
+      "word_count": 4770,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -1004,11 +1004,11 @@
         "github",
         "repo",
         "com",
+        "configuration",
         "user",
-        "example",
-        "configuration"
+        "example"
       ],
-      "word_count": 7289,
+      "word_count": 7324,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1229,10 +1229,10 @@
         "terminal",
         "settings",
         "step",
-        "windows",
-        "when"
+        "session",
+        "windows"
       ],
-      "word_count": 4592,
+      "word_count": 4594,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
@@ -2324,7 +2324,7 @@
         "blocks",
         "format"
       ],
-      "word_count": 3059,
+      "word_count": 3058,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-search-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching": {
@@ -26296,21 +26296,21 @@
         "api",
         "title",
         "request",
+        "per",
         "using",
         "example",
         "tab",
-        "per",
-        "these",
         "text",
+        "tokens",
         "base",
         "examples",
+        "when",
         "before",
-        "limits",
-        "token",
         "size",
-        "tokens"
+        "prompt",
+        "these"
       ],
-      "word_count": 4882,
+      "word_count": 4949,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {

@@ -55,7 +55,7 @@ response=$(curl -N https://api.anthropic.com/v1/messages \
   --header "content-type: application/json" \
   --header "x-api-key: $ANTHROPIC_API_KEY" \
   --data '{
-    "model": "claude-sonnet-4-6",
+    "model": "claude-opus-4-7",
     "messages": [{"role": "user", "content": "Hello"}],
     "max_tokens": 256,
     "stream": true
@@ -86,7 +86,7 @@ try:
     with client.messages.stream(
         max_tokens=1024,
         messages=messages + [{"role": "user", "content": "Hello"}],
-        model="claude-sonnet-4-6",
+        model="claude-opus-4-7",
     ) as stream:
         for event in stream:
             # Check for refusal in message delta
@@ -113,7 +113,7 @@ function resetConversation() {
 try {
   const stream = await client.messages.stream({
     messages: [...messages, { role: "user", content: "Hello" }],
-    model: "claude-sonnet-4-6",
+    model: "claude-opus-4-7",
     max_tokens: 1024
   });
 
@@ -198,7 +198,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.Model("claude-sonnet-4-6"),
+		Model:     anthropic.Model("claude-opus-4-7"),
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello")),
@@ -288,7 +288,7 @@ try {
         messages: [
             ['role' => 'user', 'content' => 'Hello']
         ],
-        model: 'claude-sonnet-4-6',
+        model: 'claude-opus-4-7',
     );
 
     foreach ($stream as $event) {
@@ -317,7 +317,7 @@ end
 
 begin
   stream = client.messages.stream(
-    model: :"claude-sonnet-4-6",
+    model: :"claude-opus-4-7",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello" }]
   )
