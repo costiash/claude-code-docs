@@ -145,7 +145,7 @@ agent=$(
     -d @- <<'EOF'
 {
   "name": "Coding Assistant",
-  "model": "claude-sonnet-4-6",
+  "model": "claude-opus-4-7",
   "system": "You are a helpful coding assistant. Write clean, well-documented code.",
   "tools": [
     {"type": "agent_toolset_20260401"}
@@ -164,7 +164,7 @@ echo "Agent ID: $AGENT_ID, version: $AGENT_VERSION"
 ````bash
 ant beta:agents create \
   --name "Coding Assistant" \
-  --model '{id: claude-sonnet-4-6}' \
+  --model '{id: claude-opus-4-7}' \
   --system "You are a helpful coding assistant. Write clean, well-documented code." \
   --tool '{type: agent_toolset_20260401}'
 ````
@@ -177,7 +177,7 @@ client = Anthropic()
 
 agent = client.beta.agents.create(
     name="Coding Assistant",
-    model="claude-sonnet-4-6",
+    model="claude-opus-4-7",
     system="You are a helpful coding assistant. Write clean, well-documented code.",
     tools=[
         {"type": "agent_toolset_20260401"},
@@ -195,7 +195,7 @@ const client = new Anthropic();
 
 const agent = await client.beta.agents.create({
   name: "Coding Assistant",
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   system: "You are a helpful coding assistant. Write clean, well-documented code.",
   tools: [
     { type: "agent_toolset_20260401" },
@@ -218,7 +218,7 @@ var client = new AnthropicClient();
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Coding Assistant",
-    Model = BetaManagedAgentsModel.ClaudeSonnet4_6,
+    Model = BetaManagedAgentsModel.ClaudeOpus4_7,
     System = "You are a helpful coding assistant. Write clean, well-documented code.",
     Tools =
     [
@@ -250,7 +250,7 @@ func main() {
 	agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 		Name: "Coding Assistant",
 		Model: anthropic.BetaManagedAgentsModelConfigParams{
-			ID:   anthropic.BetaManagedAgentsModelClaudeSonnet4_6,
+			ID:   anthropic.BetaManagedAgentsModelClaudeOpus4_7,
 			Type: anthropic.BetaManagedAgentsModelConfigParamsTypeModelConfig,
 		},
 		System: anthropic.String("You are a helpful coding assistant. Write clean, well-documented code."),
@@ -286,7 +286,7 @@ void main() {
 
     var agent = client.beta().agents().create(AgentCreateParams.builder()
         .name("Coding Assistant")
-        .model(BetaManagedAgentsModel.CLAUDE_SONNET_4_6)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
         .system("You are a helpful coding assistant. Write clean, well-documented code.")
         .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
             .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
@@ -304,7 +304,7 @@ $client = new Client();
 
 $agent = $client->beta->agents->create(
     name: 'Coding Assistant',
-    model: 'claude-sonnet-4-6',
+    model: 'claude-opus-4-7',
     system: 'You are a helpful coding assistant. Write clean, well-documented code.',
     tools: [
         ['type' => 'agent_toolset_20260401'],
@@ -322,7 +322,7 @@ client = Anthropic::Client.new
 
 agent = client.beta.agents.create(
   name: "Coding Assistant",
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   system_: "You are a helpful coding assistant. Write clean, well-documented code.",
   tools: [{type: "agent_toolset_20260401"}]
 )

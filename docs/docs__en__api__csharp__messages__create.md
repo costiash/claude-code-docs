@@ -3793,6 +3793,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-opus-4-7"ClaudeOpus4_7`
+
+      Frontier intelligence for long-running agents and coding
+
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
       New class of intelligence, strongest in coding and cybersecurity

@@ -56,9 +56,13 @@ Create User Profile
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `Optional<String> externalId`
+
+    Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
 
   - `Optional<Metadata> metadata`
 
@@ -70,23 +74,43 @@ Create User Profile
 
   - `String id`
 
+    Unique identifier for this user profile, prefixed `uprof_`.
+
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
   - `Metadata metadata`
 
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
   - `TrustGrants trustGrants`
 
-    - `String status`
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-  - `String type`
+    - `Status status`
+
+      Status of the trust grant.
+
+      - `ACTIVE("active")`
+
+      - `PENDING("pending")`
+
+      - `REJECTED("rejected")`
+
+  - `Type type`
+
+    Object type. Always `user_profile`.
+
+    - `USER_PROFILE("user_profile")`
 
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
   - `Optional<String> externalId`
+
+    Platform's own identifier for this user. Not enforced unique.
 
 ### Example
 

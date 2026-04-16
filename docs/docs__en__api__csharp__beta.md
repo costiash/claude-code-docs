@@ -274,6 +274,8 @@ The Models API response can be used to determine which models are available for 
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class ModelListPageResponse:`
@@ -383,6 +385,14 @@ The Models API response can be used to determine which models are available for 
         - `required Boolean Supported`
 
           Whether this capability is supported by the model.
+
+        - `required BetaCapabilitySupport? Xhigh`
+
+          Indicates whether a capability is supported.
+
+          - `required Boolean Supported`
+
+            Whether this capability is supported by the model.
 
       - `required BetaCapabilitySupport ImageInput`
 
@@ -548,6 +558,8 @@ The Models API response can be used to determine information about a specific mo
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaModelInfo:`
@@ -655,6 +667,14 @@ The Models API response can be used to determine information about a specific mo
       - `required Boolean Supported`
 
         Whether this capability is supported by the model.
+
+      - `required BetaCapabilitySupport? Xhigh`
+
+        Indicates whether a capability is supported.
+
+        - `required Boolean Supported`
+
+          Whether this capability is supported by the model.
 
     - `required BetaCapabilitySupport ImageInput`
 
@@ -828,6 +848,14 @@ Console.WriteLine(betaModelInfo);
 
     Whether this capability is supported by the model.
 
+  - `required BetaCapabilitySupport? Xhigh`
+
+    Indicates whether a capability is supported.
+
+    - `required Boolean Supported`
+
+      Whether this capability is supported by the model.
+
 ### Beta Model Capabilities
 
 - `class BetaModelCapabilities:`
@@ -929,6 +957,14 @@ Console.WriteLine(betaModelInfo);
     - `required Boolean Supported`
 
       Whether this capability is supported by the model.
+
+    - `required BetaCapabilitySupport? Xhigh`
+
+      Indicates whether a capability is supported.
+
+      - `required Boolean Supported`
+
+        Whether this capability is supported by the model.
 
   - `required BetaCapabilitySupport ImageInput`
 
@@ -1089,6 +1125,14 @@ Console.WriteLine(betaModelInfo);
       - `required Boolean Supported`
 
         Whether this capability is supported by the model.
+
+      - `required BetaCapabilitySupport? Xhigh`
+
+        Indicates whether a capability is supported.
+
+        - `required Boolean Supported`
+
+          Whether this capability is supported by the model.
 
     - `required BetaCapabilitySupport ImageInput`
 
@@ -3522,6 +3566,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"1h"Ttl1h`
 
+          - `string? EncryptedContent`
+
+            Opaque metadata from prior compaction, to be round-tripped verbatim
+
     - `required Role Role`
 
       - `"user"User`
@@ -4964,6 +5012,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
+
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
           New class of intelligence, strongest in coding and cybersecurity
@@ -5266,6 +5318,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+  - `string? userProfileID`
+
+    Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -5313,6 +5369,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -6105,6 +6163,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Summary of compacted content, or null if compaction failed
 
+      - `required string? EncryptedContent`
+
+        Opaque metadata from prior compaction, to be round-tripped verbatim
+
       - `JsonElement Type "compaction"constant`
 
   - `required BetaContextManagementResponse? ContextManagement`
@@ -6150,6 +6212,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-7"ClaudeOpus4_7`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -6441,6 +6507,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-7"ClaudeOpus4_7`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -8866,6 +8936,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"1h"Ttl1h`
 
+          - `string? EncryptedContent`
+
+            Opaque metadata from prior compaction, to be round-tripped verbatim
+
     - `required Role Role`
 
       - `"user"User`
@@ -10240,6 +10314,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
+
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
           New class of intelligence, strongest in coding and cybersecurity
@@ -10574,6 +10652,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaMessageTokensCount:`
@@ -10599,11 +10679,11 @@ MessageCountTokensParams parameters = new()
     [
         new()
         {
-            Content = "string",
+            Content = "Hello, world",
             Role = Role.User,
         },
     ],
-    Model = Model.ClaudeMythosPreview,
+    Model = Model.ClaudeOpus4_6,
 };
 
 var betaMessageTokensCount = await client.Beta.Messages.CountTokens(parameters);
@@ -10648,6 +10728,10 @@ Console.WriteLine(betaMessageTokensCount);
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-7"ClaudeOpus4_7`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -10766,6 +10850,10 @@ Console.WriteLine(betaMessageTokensCount);
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-7"ClaudeOpus4_7`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -12204,6 +12292,10 @@ Console.WriteLine(betaMessageTokensCount);
 
     Summary of compacted content, or null if compaction failed
 
+  - `required string? EncryptedContent`
+
+    Opaque metadata from prior compaction, to be round-tripped verbatim
+
   - `JsonElement Type "compaction"constant`
 
 ### Beta Compaction Block Param
@@ -12245,11 +12337,19 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"1h"Ttl1h`
 
+  - `string? EncryptedContent`
+
+    Opaque metadata from prior compaction, to be round-tripped verbatim
+
 ### Beta Compaction Content Block Delta
 
 - `class BetaCompactionContentBlockDelta:`
 
   - `required string? Content`
+
+  - `required string? EncryptedContent`
+
+    Opaque metadata from prior compaction, to be round-tripped verbatim
 
   - `JsonElement Type "compaction_delta"constant`
 
@@ -13122,6 +13222,10 @@ Console.WriteLine(betaMessageTokensCount);
     - `required string? Content`
 
       Summary of compacted content, or null if compaction failed
+
+    - `required string? EncryptedContent`
+
+      Opaque metadata from prior compaction, to be round-tripped verbatim
 
     - `JsonElement Type "compaction"constant`
 
@@ -15354,6 +15458,10 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"1h"Ttl1h`
 
+    - `string? EncryptedContent`
+
+      Opaque metadata from prior compaction, to be round-tripped verbatim
+
 ### Beta Content Block Source
 
 - `class BetaContentBlockSource:`
@@ -17272,6 +17380,10 @@ Console.WriteLine(betaMessageTokensCount);
 
         Summary of compacted content, or null if compaction failed
 
+      - `required string? EncryptedContent`
+
+        Opaque metadata from prior compaction, to be round-tripped verbatim
+
       - `JsonElement Type "compaction"constant`
 
   - `required BetaContextManagementResponse? ContextManagement`
@@ -17317,6 +17429,10 @@ Console.WriteLine(betaMessageTokensCount);
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-7"ClaudeOpus4_7`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -17609,6 +17725,10 @@ Console.WriteLine(betaMessageTokensCount);
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-opus-4-7"ClaudeOpus4_7`
+
+            Frontier intelligence for long-running agents and coding
+
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
             New class of intelligence, strongest in coding and cybersecurity
@@ -17846,6 +17966,10 @@ Console.WriteLine(betaMessageTokensCount);
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -20206,6 +20330,10 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `"1h"Ttl1h`
 
+        - `string? EncryptedContent`
+
+          Opaque metadata from prior compaction, to be round-tripped verbatim
+
   - `required Role Role`
 
     - `"user"User`
@@ -20252,6 +20380,8 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"high"High`
 
+    - `"xhigh"Xhigh`
+
     - `"max"Max`
 
   - `BetaJsonOutputFormat? Format`
@@ -20263,6 +20393,22 @@ Console.WriteLine(betaMessageTokensCount);
       The JSON schema of the format
 
     - `JsonElement Type "json_schema"constant`
+
+  - `BetaTokenTaskBudget? TaskBudget`
+
+    User-configurable total token budget across contexts.
+
+    - `required Long Total`
+
+      Total token budget across all contexts in the session.
+
+    - `JsonElement Type "tokens"constant`
+
+      The budget type. Currently only 'tokens' is supported.
+
+    - `Long? Remaining`
+
+      Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 ### Beta Plain Text Source
 
@@ -20388,6 +20534,10 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `required string? Content`
 
+    - `required string? EncryptedContent`
+
+      Opaque metadata from prior compaction, to be round-tripped verbatim
+
     - `JsonElement Type "compaction_delta"constant`
 
 ### Beta Raw Content Block Delta Event
@@ -20505,6 +20655,10 @@ Console.WriteLine(betaMessageTokensCount);
     - `class BetaCompactionContentBlockDelta:`
 
       - `required string? Content`
+
+      - `required string? EncryptedContent`
+
+        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `JsonElement Type "compaction_delta"constant`
 
@@ -21240,6 +21394,10 @@ Console.WriteLine(betaMessageTokensCount);
 
         Summary of compacted content, or null if compaction failed
 
+      - `required string? EncryptedContent`
+
+        Opaque metadata from prior compaction, to be round-tripped verbatim
+
       - `JsonElement Type "compaction"constant`
 
   - `required Long Index`
@@ -21511,6 +21669,10 @@ Console.WriteLine(betaMessageTokensCount);
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-7"ClaudeOpus4_7`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -22393,6 +22555,10 @@ Console.WriteLine(betaMessageTokensCount);
 
           Summary of compacted content, or null if compaction failed
 
+        - `required string? EncryptedContent`
+
+          Opaque metadata from prior compaction, to be round-tripped verbatim
+
         - `JsonElement Type "compaction"constant`
 
     - `required BetaContextManagementResponse? ContextManagement`
@@ -22438,6 +22604,10 @@ Console.WriteLine(betaMessageTokensCount);
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -22729,6 +22899,10 @@ Console.WriteLine(betaMessageTokensCount);
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-7"ClaudeOpus4_7`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -23639,6 +23813,10 @@ Console.WriteLine(betaMessageTokensCount);
 
             Summary of compacted content, or null if compaction failed
 
+          - `required string? EncryptedContent`
+
+            Opaque metadata from prior compaction, to be round-tripped verbatim
+
           - `JsonElement Type "compaction"constant`
 
       - `required BetaContextManagementResponse? ContextManagement`
@@ -23684,6 +23862,10 @@ Console.WriteLine(betaMessageTokensCount);
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -23975,6 +24157,10 @@ Console.WriteLine(betaMessageTokensCount);
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-opus-4-7"ClaudeOpus4_7`
+
+                Frontier intelligence for long-running agents and coding
 
               - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -24339,6 +24525,10 @@ Console.WriteLine(betaMessageTokensCount);
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-7"ClaudeOpus4_7`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -25158,6 +25348,10 @@ Console.WriteLine(betaMessageTokensCount);
 
           Summary of compacted content, or null if compaction failed
 
+        - `required string? EncryptedContent`
+
+          Opaque metadata from prior compaction, to be round-tripped verbatim
+
         - `JsonElement Type "compaction"constant`
 
     - `required Long Index`
@@ -25277,6 +25471,10 @@ Console.WriteLine(betaMessageTokensCount);
       - `class BetaCompactionContentBlockDelta:`
 
         - `required string? Content`
+
+        - `required string? EncryptedContent`
+
+          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `JsonElement Type "compaction_delta"constant`
 
@@ -26845,6 +27043,24 @@ Console.WriteLine(betaMessageTokensCount);
   - `JsonElement Type "thinking_turns"constant`
 
   - `required Long Value`
+
+### Beta Token Task Budget
+
+- `class BetaTokenTaskBudget:`
+
+  User-configurable total token budget across contexts.
+
+  - `required Long Total`
+
+    Total token budget across all contexts in the session.
+
+  - `JsonElement Type "tokens"constant`
+
+    The budget type. Currently only 'tokens' is supported.
+
+  - `Long? Remaining`
+
+    Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 ### Beta Tool
 
@@ -29584,6 +29800,10 @@ Console.WriteLine(betaMessageTokensCount);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
+
       - `"claude-mythos-preview"ClaudeMythosPreview`
 
         New class of intelligence, strongest in coding and cybersecurity
@@ -30142,6 +30362,10 @@ Console.WriteLine(betaMessageTokensCount);
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -34050,6 +34274,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"1h"Ttl1h`
 
+              - `string? EncryptedContent`
+
+                Opaque metadata from prior compaction, to be round-tripped verbatim
+
         - `required Role Role`
 
           - `"user"User`
@@ -34061,6 +34289,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -34327,6 +34559,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"high"High`
 
+          - `"xhigh"Xhigh`
+
           - `"max"Max`
 
         - `BetaJsonOutputFormat? Format`
@@ -34338,6 +34572,22 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             The JSON schema of the format
 
           - `JsonElement Type "json_schema"constant`
+
+        - `BetaTokenTaskBudget? TaskBudget`
+
+          User-configurable total token budget across contexts.
+
+          - `required Long Total`
+
+            Total token budget across all contexts in the session.
+
+          - `JsonElement Type "tokens"constant`
+
+            The budget type. Currently only 'tokens' is supported.
+
+          - `Long? Remaining`
+
+            Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
       - `BetaJsonOutputFormat? OutputFormat`
 
@@ -35789,6 +36039,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `"claude-opus-4-7"ClaudeOpus4_7`
+
+              Frontier intelligence for long-running agents and coding
+
             - `"claude-mythos-preview"ClaudeMythosPreview`
 
               New class of intelligence, strongest in coding and cybersecurity
@@ -36091,6 +36345,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Recommended for advanced use cases only. You usually only need to use `temperature`.
 
+      - `string? UserProfileID`
+
+        The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -36138,6 +36396,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -36312,6 +36572,11 @@ BatchCreateParams parameters = new()
                             { "foo", JsonSerializer.SerializeToElement("bar") }
                         },
                     },
+                    TaskBudget = new()
+                    {
+                        Total = 1024,
+                        Remaining = 0,
+                    },
                 },
                 OutputFormat = new()
                 {
@@ -36395,6 +36660,7 @@ BatchCreateParams parameters = new()
                 ],
                 TopK = 5,
                 TopP = 0.7,
+                UserProfileID = "user_profile_id",
             },
         },
     ],
@@ -36470,6 +36736,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -36644,6 +36912,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -36827,6 +37097,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -36993,6 +37265,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -37084,6 +37358,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -37894,6 +38170,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Summary of compacted content, or null if compaction failed
 
+            - `required string? EncryptedContent`
+
+              Opaque metadata from prior compaction, to be round-tripped verbatim
+
             - `JsonElement Type "compaction"constant`
 
         - `required BetaContextManagementResponse? ContextManagement`
@@ -37939,6 +38219,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-7"ClaudeOpus4_7`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -38230,6 +38514,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-opus-4-7"ClaudeOpus4_7`
+
+                  Frontier intelligence for long-running agents and coding
 
                 - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -39417,6 +39705,10 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               Summary of compacted content, or null if compaction failed
 
+            - `required string? EncryptedContent`
+
+              Opaque metadata from prior compaction, to be round-tripped verbatim
+
             - `JsonElement Type "compaction"constant`
 
         - `required BetaContextManagementResponse? ContextManagement`
@@ -39462,6 +39754,10 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-7"ClaudeOpus4_7`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -39753,6 +40049,10 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-opus-4-7"ClaudeOpus4_7`
+
+                  Frontier intelligence for long-running agents and coding
 
                 - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -40767,6 +41067,10 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             Summary of compacted content, or null if compaction failed
 
+          - `required string? EncryptedContent`
+
+            Opaque metadata from prior compaction, to be round-tripped verbatim
+
           - `JsonElement Type "compaction"constant`
 
       - `required BetaContextManagementResponse? ContextManagement`
@@ -40812,6 +41116,10 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -41103,6 +41411,10 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-opus-4-7"ClaudeOpus4_7`
+
+                Frontier intelligence for long-running agents and coding
 
               - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -42079,6 +42391,10 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           Summary of compacted content, or null if compaction failed
 
+        - `required string? EncryptedContent`
+
+          Opaque metadata from prior compaction, to be round-tripped verbatim
+
         - `JsonElement Type "compaction"constant`
 
     - `required BetaContextManagementResponse? ContextManagement`
@@ -42124,6 +42440,10 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -42416,6 +42736,10 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `"claude-opus-4-7"ClaudeOpus4_7`
+
+              Frontier intelligence for long-running agents and coding
+
             - `"claude-mythos-preview"ClaudeMythosPreview`
 
               New class of intelligence, strongest in coding and cybersecurity
@@ -42548,6 +42872,10 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
+
       - `"claude-opus-4-6"ClaudeOpus4_6`
 
         Most intelligent model for building agents and coding
@@ -42589,6 +42917,10 @@ Create Agent
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -42940,6 +43272,8 @@ Create Agent
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -42979,6 +43313,10 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -43324,6 +43662,8 @@ List Agents
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class AgentListPageResponse:`
@@ -43367,6 +43707,10 @@ List Agents
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -43702,6 +44046,8 @@ Get Agent
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -43741,6 +44087,10 @@ Get Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -44059,6 +44409,10 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
+
       - `"claude-opus-4-6"ClaudeOpus4_6`
 
         Most intelligent model for building agents and coding
@@ -44100,6 +44454,10 @@ Update Agent
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -44427,6 +44785,8 @@ Update Agent
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -44466,6 +44826,10 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -44795,6 +45159,8 @@ Archive Agent
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -44834,6 +45200,10 @@ Archive Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -45139,6 +45509,10 @@ Console.WriteLine(betaManagedAgentsAgent);
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -46166,6 +46540,10 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-opus-4-7"ClaudeOpus4_7`
+
+      Frontier intelligence for long-running agents and coding
+
     - `"claude-opus-4-6"ClaudeOpus4_6`
 
       Most intelligent model for building agents and coding
@@ -46217,6 +46595,10 @@ Console.WriteLine(betaManagedAgentsAgent);
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-7"ClaudeOpus4_7`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -46388,6 +46770,8 @@ List Agent Versions
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class VersionListPageResponse:`
@@ -46431,6 +46815,10 @@ List Agent Versions
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -46782,6 +47170,8 @@ Create a new environment with the specified configuration.
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -46975,6 +47365,8 @@ List environments with pagination support.
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -47172,6 +47564,8 @@ Retrieve a specific environment by ID.
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -47381,6 +47775,8 @@ Update an existing environment's configuration.
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -47568,6 +47964,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse:`
@@ -47656,6 +48054,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -48365,6 +48765,8 @@ Create Session
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -48400,6 +48802,10 @@ Create Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -48905,6 +49311,8 @@ List Sessions
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class SessionListPageResponse:`
@@ -48944,6 +49352,10 @@ List Sessions
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-7"ClaudeOpus4_7`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -49411,6 +49823,8 @@ Get Session
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -49446,6 +49860,10 @@ Get Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -49922,6 +50340,8 @@ Update Session
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -49957,6 +50377,10 @@ Update Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -50421,6 +50845,8 @@ Delete Session
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession:`
@@ -50510,6 +50936,8 @@ Archive Session
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -50545,6 +50973,10 @@ Archive Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
@@ -51115,6 +51547,10 @@ Console.WriteLine(betaManagedAgentsSession);
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
+
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
           Most intelligent model for building agents and coding
@@ -51531,6 +51967,10 @@ Console.WriteLine(betaManagedAgentsSession);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
+
       - `"claude-opus-4-6"ClaudeOpus4_6`
 
         Most intelligent model for building agents and coding
@@ -51900,6 +52340,8 @@ List Events
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -53710,6 +54152,8 @@ Send Events
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsSendSessionEvents:`
@@ -54191,6 +54635,8 @@ Stream Events
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -61558,6 +62004,8 @@ Add Session Resource
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsFileResource:`
@@ -61666,6 +62114,8 @@ List Session Resources
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -61826,6 +62276,8 @@ Get Session Resource
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class ResourceRetrieveResponse: A class that can be one of several variants.union`
@@ -61980,6 +62432,8 @@ Update Session Resource
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class ResourceUpdateResponse: A class that can be one of several variants.union`
@@ -62130,6 +62584,8 @@ Delete Session Resource
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -62373,6 +62829,8 @@ Create Vault
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -62488,6 +62946,8 @@ List Vaults
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -62606,6 +63066,8 @@ Get Vault
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -62726,6 +63188,8 @@ Update Vault
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -62837,6 +63301,8 @@ Delete Vault
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedVault:`
@@ -62927,6 +63393,8 @@ Archive Vault
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -63199,6 +63667,8 @@ Create Credential
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -63412,6 +63882,8 @@ List Credentials
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class CredentialListPageResponse:`
@@ -63620,6 +64092,8 @@ Get Credential
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -63901,6 +64375,8 @@ Update Credential
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -64101,6 +64577,8 @@ Delete Credential
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedCredential:`
@@ -64196,6 +64674,8 @@ Archive Credential
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -65031,6 +65511,8 @@ Upload File
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class FileMetadata:`
@@ -65169,6 +65651,8 @@ List Files
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -65310,6 +65794,8 @@ Download File
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Example
 
 ```csharp
@@ -65383,6 +65869,8 @@ Get File Metadata
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -65505,6 +65993,8 @@ Delete File
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -65684,6 +66174,8 @@ Create Skill
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class SkillCreateResponse:`
@@ -65819,6 +66311,8 @@ List Skills
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -65959,6 +66453,8 @@ Get Skill
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class SkillRetrieveResponse:`
@@ -66080,6 +66576,8 @@ Delete Skill
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -66179,6 +66677,8 @@ Create Skill Version
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -66313,6 +66813,8 @@ List Skill Versions
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -66458,6 +66960,8 @@ Get Skill Version
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class VersionRetrieveResponse:`
@@ -66592,6 +67096,8 @@ Delete Skill Version
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
 ### Returns
 
 - `class VersionDeleteResponse:`
@@ -66621,3 +67127,700 @@ var version = await client.Beta.Skills.Versions.Delete(parameters);
 
 Console.WriteLine(version);
 ```
+
+# User Profiles
+
+## Create
+
+`BetaUserProfile Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/user_profiles`
+
+Create User Profile
+
+### Parameters
+
+- `UserProfileCreateParams parameters`
+
+  - `string? externalID`
+
+    Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
+
+  - `IReadOnlyDictionary<string, string> metadata`
+
+    Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+### Returns
+
+- `class BetaUserProfile:`
+
+  - `required string ID`
+
+    Unique identifier for this user profile, prefixed `uprof_`.
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
+
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+    - `required Status Status`
+
+      Status of the trust grant.
+
+      - `"active"Active`
+
+      - `"pending"Pending`
+
+      - `"rejected"Rejected`
+
+  - `required Type Type`
+
+    Object type. Always `user_profile`.
+
+    - `"user_profile"UserProfile`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string? ExternalID`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+### Example
+
+```csharp
+UserProfileCreateParams parameters = new();
+
+var betaUserProfile = await client.Beta.UserProfiles.Create(parameters);
+
+Console.WriteLine(betaUserProfile);
+```
+
+## List
+
+`UserProfileListPageResponse Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/user_profiles`
+
+List User Profiles
+
+### Parameters
+
+- `UserProfileListParams parameters`
+
+  - `Int limit`
+
+    Query param: Query parameter for limit
+
+  - `Order order`
+
+    Query param: Query parameter for order
+
+    - `"asc"Asc`
+
+    - `"desc"Desc`
+
+  - `string page`
+
+    Query param: Query parameter for page
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+### Returns
+
+- `class UserProfileListPageResponse:`
+
+  - `required IReadOnlyList<BetaUserProfile> Data`
+
+    User profiles on this page.
+
+    - `required string ID`
+
+      Unique identifier for this user profile, prefixed `uprof_`.
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `required IReadOnlyDictionary<string, string> Metadata`
+
+      Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+    - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
+
+      Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+      - `required Status Status`
+
+        Status of the trust grant.
+
+        - `"active"Active`
+
+        - `"pending"Pending`
+
+        - `"rejected"Rejected`
+
+    - `required Type Type`
+
+      Object type. Always `user_profile`.
+
+      - `"user_profile"UserProfile`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string? ExternalID`
+
+      Platform's own identifier for this user. Not enforced unique.
+
+  - `string? NextPage`
+
+    Cursor for the next page, or `null` when there are no more results.
+
+### Example
+
+```csharp
+UserProfileListParams parameters = new();
+
+var page = await client.Beta.UserProfiles.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```
+
+## Retrieve
+
+`BetaUserProfile Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/user_profiles/{user_profile_id}`
+
+Get User Profile
+
+### Parameters
+
+- `UserProfileRetrieveParams parameters`
+
+  - `required string userProfileID`
+
+    Path parameter user_profile_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+### Returns
+
+- `class BetaUserProfile:`
+
+  - `required string ID`
+
+    Unique identifier for this user profile, prefixed `uprof_`.
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
+
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+    - `required Status Status`
+
+      Status of the trust grant.
+
+      - `"active"Active`
+
+      - `"pending"Pending`
+
+      - `"rejected"Rejected`
+
+  - `required Type Type`
+
+    Object type. Always `user_profile`.
+
+    - `"user_profile"UserProfile`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string? ExternalID`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+### Example
+
+```csharp
+UserProfileRetrieveParams parameters = new()
+{
+    UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
+};
+
+var betaUserProfile = await client.Beta.UserProfiles.Retrieve(parameters);
+
+Console.WriteLine(betaUserProfile);
+```
+
+## Update
+
+`BetaUserProfile Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/user_profiles/{user_profile_id}`
+
+Update User Profile
+
+### Parameters
+
+- `UserProfileUpdateParams parameters`
+
+  - `required string userProfileID`
+
+    Path param: Path parameter user_profile_id
+
+  - `string? externalID`
+
+    Body param: If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
+
+  - `IReadOnlyDictionary<string, string> metadata`
+
+    Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+### Returns
+
+- `class BetaUserProfile:`
+
+  - `required string ID`
+
+    Unique identifier for this user profile, prefixed `uprof_`.
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
+
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+    - `required Status Status`
+
+      Status of the trust grant.
+
+      - `"active"Active`
+
+      - `"pending"Pending`
+
+      - `"rejected"Rejected`
+
+  - `required Type Type`
+
+    Object type. Always `user_profile`.
+
+    - `"user_profile"UserProfile`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string? ExternalID`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+### Example
+
+```csharp
+UserProfileUpdateParams parameters = new()
+{
+    UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
+};
+
+var betaUserProfile = await client.Beta.UserProfiles.Update(parameters);
+
+Console.WriteLine(betaUserProfile);
+```
+
+## Create Enrollment URL
+
+`BetaUserProfileEnrollmentUrl Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
+
+Create Enrollment URL
+
+### Parameters
+
+- `UserProfileCreateEnrollmentUrlParams parameters`
+
+  - `required string userProfileID`
+
+    Path parameter user_profile_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+### Returns
+
+- `class BetaUserProfileEnrollmentUrl:`
+
+  - `required DateTimeOffset ExpiresAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required Type Type`
+
+    Object type. Always `enrollment_url`.
+
+    - `"enrollment_url"EnrollmentUrl`
+
+  - `required string Url`
+
+    Enrollment URL to send to the end user. Valid until `expires_at`.
+
+### Example
+
+```csharp
+UserProfileCreateEnrollmentUrlParams parameters = new()
+{
+    UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
+};
+
+var betaUserProfileEnrollmentUrl = await client.Beta.UserProfiles.CreateEnrollmentUrl(parameters);
+
+Console.WriteLine(betaUserProfileEnrollmentUrl);
+```
+
+## Domain Types
+
+### Beta User Profile
+
+- `class BetaUserProfile:`
+
+  - `required string ID`
+
+    Unique identifier for this user profile, prefixed `uprof_`.
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
+
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+    - `required Status Status`
+
+      Status of the trust grant.
+
+      - `"active"Active`
+
+      - `"pending"Pending`
+
+      - `"rejected"Rejected`
+
+  - `required Type Type`
+
+    Object type. Always `user_profile`.
+
+    - `"user_profile"UserProfile`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string? ExternalID`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+### Beta User Profile Enrollment URL
+
+- `class BetaUserProfileEnrollmentUrl:`
+
+  - `required DateTimeOffset ExpiresAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required Type Type`
+
+    Object type. Always `enrollment_url`.
+
+    - `"enrollment_url"EnrollmentUrl`
+
+  - `required string Url`
+
+    Enrollment URL to send to the end user. Valid until `expires_at`.
+
+### Beta User Profile Trust Grant
+
+- `class BetaUserProfileTrustGrant:`
+
+  - `required Status Status`
+
+    Status of the trust grant.
+
+    - `"active"Active`
+
+    - `"pending"Pending`
+
+    - `"rejected"Rejected`

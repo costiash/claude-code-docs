@@ -18,7 +18,7 @@ Claude Managed Agents provides the harness and infrastructure for running Claude
   <Card title="Quickstart" icon="play" href="/docs/en/managed-agents/quickstart">
     Create your first agent session
   </Card>
-  <Card title="API Reference" icon="code-brackets" href="/docs/en/api/beta/sessions">
+  <Card title="API Reference" icon="code-brackets" href="/docs/en/managed-agents/sessions">
     Full endpoint documentation
   </Card>
 </CardGroup>

@@ -3141,11 +3141,11 @@ MessageCountTokensParams parameters = new()
     [
         new()
         {
-            Content = "string",
+            Content = "Hello, world",
             Role = Role.User,
         },
     ],
-    Model = Model.ClaudeMythosPreview,
+    Model = Model.ClaudeOpus4_6,
 };
 
 var messageTokensCount = await client.Messages.CountTokens(parameters);

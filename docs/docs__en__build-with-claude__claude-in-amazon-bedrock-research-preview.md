@@ -330,6 +330,7 @@ Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Mod
 
 | Model                 | Model ID                          |
 | --------------------- | --------------------------------- |
+| Claude Opus 4.7       | `anthropic.claude-opus-4-7`       |
 | Claude Mythos Preview | `anthropic.claude-mythos-preview` |
 | Claude Haiku 4.5      | `anthropic.claude-haiku-4-5`      |
 

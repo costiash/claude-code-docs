@@ -124,6 +124,13 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 
 #### API model IDs
 
+<Note>
+  Claude Opus 4.7 is available on AWS through
+  [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock-research-preview),
+  currently in research preview. It is not available through the standard
+  Bedrock model catalog documented on this page.
+</Note>
+
 | Model | Base Bedrock model ID | `global` | `us` | `eu` | `jp` | `apac` |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
 | Claude Opus 4.6 | anthropic.claude-opus-4-6-v1 | Yes | Yes | Yes | Yes | Yes |

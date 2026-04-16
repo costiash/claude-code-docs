@@ -8,7 +8,7 @@ Claude is a highly performant, trustworthy, and intelligent AI platform built by
 
 The latest generation of Claude models:
 
-**Claude Opus 4.6** - Our most intelligent model, and the world’s best model for coding, enterprise agents, and professional work. [Learn more](https://www.anthropic.com/news/claude-opus-4-6).
+**Claude Opus 4.7** - Our most capable model for complex reasoning and agentic coding, with a step-change jump over Claude Opus 4.6. [Learn more](https://www.anthropic.com/news/claude-opus-4-7).
 
 **Claude Sonnet 4.6** - Frontier intelligence at scale—built for coding, agents, and enterprise workflows. [Learn more](https://www.anthropic.com/news/claude-sonnet-4-6).
 

@@ -6,7 +6,7 @@ Claude can interact with computer environments through the computer use tool, wh
 
 <Note>
 Computer use is in beta and requires a [beta header](/docs/en/api/beta-headers):
-- `"computer-use-2025-11-24"` for Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5
+- `"computer-use-2025-11-24"` for Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5
 - `"computer-use-2025-01-24"` for Sonnet 4.5, Haiku 4.5, Opus 4.1, Sonnet 4, Opus 4, and Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
 
 Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
@@ -74,7 +74,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: computer-use-2025-11-24" \
   -d '{
-    "model": "claude-opus-4-6",
+    "model": "claude-opus-4-7",
     "max_tokens": 1024,
     "tools": [
       {
@@ -104,7 +104,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta computer-use-2025-11-24 <<'YAML'
-model: claude-opus-4-6
+model: claude-opus-4-7
 max_tokens: 1024
 tools:
   - type: computer_20251124
@@ -128,7 +128,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-4-6",  # or another compatible model
+    model="claude-opus-4-7",  # or another compatible model
     max_tokens=1024,
     tools=[
         {
@@ -153,7 +153,7 @@ import Anthropic from "@anthropic-ai/sdk";
 const client = new Anthropic();
 
 const response = await client.beta.messages.create({
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   tools: [
     {
@@ -188,7 +188,7 @@ var client = new AnthropicClient();
 
 var parameters = new MessageCreateParams
 {
-    Model = Messages::Model.ClaudeOpus4_6,
+    Model = Messages::Model.ClaudeOpus4_7,
     MaxTokens = 1024,
     Tools = new BetaToolUnion[]
     {
@@ -231,7 +231,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
+		Model:     anthropic.ModelClaudeOpus4_7,
 		MaxTokens: 1024,
 		Tools: []anthropic.BetaToolUnionParam{
 			{OfComputerUseTool20251124: &anthropic.BetaToolComputerUse20251124Param{
@@ -270,7 +270,7 @@ public class ComputerUseExample {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         MessageCreateParams params = MessageCreateParams.builder()
-            .model("claude-opus-4-6")
+            .model("claude-opus-4-7")
             .maxTokens(1024L)
             .addTool(BetaToolComputerUse20251124.builder()
                 .displayWidthPx(1024L)
@@ -301,7 +301,7 @@ $response = $client->beta->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Save a picture of a cat to my desktop.'],
     ],
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-7',
     tools: [
         [
             'type' => 'computer_20251124',
@@ -331,7 +331,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   tools: [
     {
@@ -593,7 +593,7 @@ Available in Claude 4 models and Claude Sonnet 3.7:
 - **wait** - Pause between actions
 
 **Enhanced actions (`computer_20251124`)**
-Available in Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5:
+Available in Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5:
 - All actions from `computer_20250124`
 - **zoom** - View a specific region of the screen at full resolution. Requires `enable_zoom: true` in tool definition. Takes a `region` parameter with coordinates `[x1, y1, x2, y2]` defining top-left and bottom-right corners of the area to inspect.
 
@@ -636,7 +636,7 @@ Scroll down (Claude 4/3.7):
 }
 ```
 
-Zoom to view region in detail (Opus 4.6, Sonnet 4.6, Opus 4.5):
+Zoom to view region in detail (Opus 4.7, Opus 4.6, Sonnet 4.6, Opus 4.5):
 
 ```json
 {
@@ -804,7 +804,7 @@ The computer use tool is implemented as a schema-less tool. When using this tool
 
     while True:
         response = client.beta.messages.create(
-            model="claude-opus-4-6",
+            model="claude-opus-4-7",
             max_tokens=4096,
             messages=messages,
             tools=tools,
@@ -889,6 +889,10 @@ If an action fails to execute:
 </section>
 
 #### Handle coordinate scaling for higher resolutions
+
+<Note>
+Claude Opus 4.7 supports up to 2576 pixels on the long edge, and its coordinates are 1:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance below applies to earlier models.
+</Note>
 
 The API constrains images to a maximum of 1568 pixels on the longest edge and approximately 1.15 megapixels total (see [image resizing](/docs/en/build-with-claude/vision#evaluate-image-size) for details). For example, a 1512x982 screen gets downsampled to approximately 1330x864. Claude analyzes this smaller image and returns coordinates in that space, but your tool executes clicks in the original screen space.
 

@@ -1,12 +1,12 @@
 ## Retrieve
 
-**get** `/v1/user_profiles/{id}`
+**get** `/v1/user_profiles/{user_profile_id}`
 
 Get User Profile
 
 ### Path Parameters
 
-- `id: string`
+- `user_profile_id: string`
 
 ### Header Parameters
 
@@ -16,7 +16,7 @@ Get User Profile
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -60,6 +60,8 @@ Get User Profile
 
     - `"output-300k-2026-03-24"`
 
+    - `"advisor-tool-2026-03-01"`
+
     - `"user-profiles-2026-03-24"`
 
 ### Returns
@@ -68,17 +70,35 @@ Get User Profile
 
   - `id: string`
 
+    Unique identifier for this user profile, prefixed `uprof_`.
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
 
   - `metadata: map[string]`
 
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
-    - `status: string`
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-  - `type: string`
+    - `status: "active" or "pending" or "rejected"`
+
+      Status of the trust grant.
+
+      - `"active"`
+
+      - `"pending"`
+
+      - `"rejected"`
+
+  - `type: "user_profile"`
+
+    Object type. Always `user_profile`.
+
+    - `"user_profile"`
 
   - `updated_at: string`
 
@@ -86,10 +106,12 @@ Get User Profile
 
   - `external_id: optional string`
 
+    Platform's own identifier for this user. Not enforced unique.
+
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/user_profiles/$ID \
+curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: user-profiles-2026-03-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"

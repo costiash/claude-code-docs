@@ -62,6 +62,7 @@ All publicly released models are listed below with their status:
 
 | API Model Name              | Current State       | Deprecated        | Tentative Retirement Date |
 |:----------------------------|:--------------------|:------------------|:-------------------------|
+| `claude-opus-4-7`               | Active              | N/A               | Not sooner than April 16, 2027 |
 | `claude-opus-4-6`             | Active              | N/A               | Not sooner than February 5, 2027 |
 | `claude-opus-4-5-20251101`  | Active              | N/A               | Not sooner than November 24, 2026 |
 | `claude-opus-4-1-20250805`  | Active              | N/A               | Not sooner than August 5, 2026 |
@@ -85,7 +86,7 @@ On April 14, 2026, Anthropic notified developers using Claude Sonnet 4 and Claud
 | Retirement Date             | Deprecated Model            | Recommended Replacement         |
 |:----------------------------|:----------------------------|:--------------------------------|
 | June 15, 2026               | `claude-sonnet-4-20250514`  | `claude-sonnet-4-6`             |
-| June 15, 2026               | `claude-opus-4-20250514`    | `claude-opus-4-6`               |
+| June 15, 2026               | `claude-opus-4-20250514`    | `claude-opus-4-7`               |
 
 ### 2026-02-19: Claude Haiku 3 model
 
@@ -117,7 +118,7 @@ On October 28, 2025, Anthropic notified developers using Claude Sonnet 3.7 model
 
 | Retirement Date             | Deprecated Model            | Recommended Replacement         |
 |:----------------------------|:----------------------------|:--------------------------------|
-| February 19, 2026           | `claude-3-7-sonnet-20250219`| `claude-opus-4-6`                 |
+| February 19, 2026           | `claude-3-7-sonnet-20250219`| `claude-sonnet-4-6`               |
 
 ### 2025-08-13: Claude Sonnet 3.5 models
 
@@ -129,8 +130,8 @@ On August 13, 2025, Anthropic notified developers using Claude Sonnet 3.5 models
 
 | Retirement Date             | Deprecated Model            | Recommended Replacement         |
 |:----------------------------|:----------------------------|:--------------------------------|
-| October 28, 2025            | `claude-3-5-sonnet-20240620`| `claude-opus-4-6`                 |
-| October 28, 2025            | `claude-3-5-sonnet-20241022`| `claude-opus-4-6`                 |
+| October 28, 2025            | `claude-3-5-sonnet-20240620`| `claude-sonnet-4-6`               |
+| October 28, 2025            | `claude-3-5-sonnet-20241022`| `claude-sonnet-4-6`               |
 
 ### 2025-06-30: Claude Opus 3 model
 
@@ -142,7 +143,7 @@ On June 30, 2025, Anthropic notified developers using Claude Opus 3 model of its
 
 | Retirement Date             | Deprecated Model            | Recommended Replacement         |
 |:----------------------------|:----------------------------|:--------------------------------|
-| January 5, 2026             | `claude-3-opus-20240229`    | `claude-opus-4-6`      |
+| January 5, 2026             | `claude-3-opus-20240229`    | `claude-opus-4-7`      |
 
 ### 2025-01-21: Claude 2, Claude 2.1, and Claude Sonnet 3 models
 
@@ -154,9 +155,9 @@ On January 21, 2025, Anthropic notified developers using Claude 2, Claude 2.1, a
 
 | Retirement Date             | Deprecated Model            | Recommended Replacement         |
 |:----------------------------|:----------------------------|:--------------------------------|
-| July 21, 2025               | `claude-2.0`                | `claude-opus-4-6`                  |
-| July 21, 2025               | `claude-2.1`                | `claude-opus-4-6`                  |
-| July 21, 2025               | `claude-3-sonnet-20240229`  | `claude-opus-4-6`                  |
+| July 21, 2025               | `claude-2.0`                | `claude-opus-4-7`                  |
+| July 21, 2025               | `claude-2.1`                | `claude-opus-4-7`                  |
+| July 21, 2025               | `claude-3-sonnet-20240229`  | `claude-sonnet-4-6`                |
 
 ### 2024-09-04: Claude 1 and Instant models
 

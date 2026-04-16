@@ -100,7 +100,7 @@ The Models API response can be used to determine which models are available for 
 
           Whether this capability is supported by the model.
 
-      - `effort: object { high, low, max, 2 more }`
+      - `effort: object { high, low, max, 3 more }`
 
         Effort (reasoning_effort) support and available levels.
 
@@ -139,6 +139,14 @@ The Models API response can be used to determine which models are available for 
         - `supported: boolean`
 
           Whether this capability is supported by the model.
+
+        - `xhigh: object { supported }`
+
+          Indicates whether a capability is supported.
+
+          - `supported: boolean`
+
+            Whether this capability is supported by the model.
 
       - `image_input: object { supported }`
 
@@ -321,7 +329,7 @@ The Models API response can be used to determine information about a specific mo
 
         Whether this capability is supported by the model.
 
-    - `effort: object { high, low, max, 2 more }`
+    - `effort: object { high, low, max, 3 more }`
 
       Effort (reasoning_effort) support and available levels.
 
@@ -360,6 +368,14 @@ The Models API response can be used to determine information about a specific mo
       - `supported: boolean`
 
         Whether this capability is supported by the model.
+
+      - `xhigh: object { supported }`
+
+        Indicates whether a capability is supported.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
 
     - `image_input: object { supported }`
 
@@ -491,7 +507,7 @@ ant models retrieve \
 
 ### Effort Capability
 
-- `effort_capability: object { high, low, max, 2 more }`
+- `effort_capability: object { high, low, max, 3 more }`
 
   Effort (reasoning_effort) capability details.
 
@@ -530,6 +546,14 @@ ant models retrieve \
   - `supported: boolean`
 
     Whether this capability is supported by the model.
+
+  - `xhigh: object { supported }`
+
+    Indicates whether a capability is supported.
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
 
 ### Model Capabilities
 
@@ -593,7 +617,7 @@ ant models retrieve \
 
       Whether this capability is supported by the model.
 
-  - `effort: object { high, low, max, 2 more }`
+  - `effort: object { high, low, max, 3 more }`
 
     Effort (reasoning_effort) support and available levels.
 
@@ -632,6 +656,14 @@ ant models retrieve \
     - `supported: boolean`
 
       Whether this capability is supported by the model.
+
+    - `xhigh: object { supported }`
+
+      Indicates whether a capability is supported.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
 
   - `image_input: object { supported }`
 
@@ -753,7 +785,7 @@ ant models retrieve \
 
         Whether this capability is supported by the model.
 
-    - `effort: object { high, low, max, 2 more }`
+    - `effort: object { high, low, max, 3 more }`
 
       Effort (reasoning_effort) support and available levels.
 
@@ -792,6 +824,14 @@ ant models retrieve \
       - `supported: boolean`
 
         Whether this capability is supported by the model.
+
+      - `xhigh: object { supported }`
+
+        Indicates whether a capability is supported.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
 
     - `image_input: object { supported }`
 

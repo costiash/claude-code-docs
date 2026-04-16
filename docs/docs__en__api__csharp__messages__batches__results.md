@@ -643,6 +643,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-opus-4-7"ClaudeOpus4_7`
+
+            Frontier intelligence for long-running agents and coding
+
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
             New class of intelligence, strongest in coding and cybersecurity

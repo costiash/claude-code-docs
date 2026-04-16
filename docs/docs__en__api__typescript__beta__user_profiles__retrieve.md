@@ -1,14 +1,14 @@
 ## Retrieve
 
-`client.beta.userProfiles.retrieve(stringid, UserProfileRetrieveParamsparams?, RequestOptionsoptions?): BetaUserProfile`
+`client.beta.userProfiles.retrieve(stringuserProfileID, UserProfileRetrieveParamsparams?, RequestOptionsoptions?): BetaUserProfile`
 
-**get** `/v1/user_profiles/{id}`
+**get** `/v1/user_profiles/{user_profile_id}`
 
 Get User Profile
 
 ### Parameters
 
-- `id: string`
+- `userProfileID: string`
 
 - `params: UserProfileRetrieveParams`
 
@@ -18,7 +18,7 @@ Get User Profile
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -62,6 +62,8 @@ Get User Profile
 
       - `"output-300k-2026-03-24"`
 
+      - `"advisor-tool-2026-03-01"`
+
       - `"user-profiles-2026-03-24"`
 
 ### Returns
@@ -70,23 +72,43 @@ Get User Profile
 
   - `id: string`
 
+    Unique identifier for this user profile, prefixed `uprof_`.
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
 
   - `metadata: Record<string, string>`
 
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
-    - `status: string`
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-  - `type: string`
+    - `status: "active" | "pending" | "rejected"`
+
+      Status of the trust grant.
+
+      - `"active"`
+
+      - `"pending"`
+
+      - `"rejected"`
+
+  - `type: "user_profile"`
+
+    Object type. Always `user_profile`.
+
+    - `"user_profile"`
 
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
 
   - `external_id?: string | null`
+
+    Platform's own identifier for this user. Not enforced unique.
 
 ### Example
 
@@ -97,7 +119,7 @@ const client = new Anthropic({
   apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
-const betaUserProfile = await client.beta.userProfiles.retrieve('id');
+const betaUserProfile = await client.beta.userProfiles.retrieve('uprof_011CZkZCu8hGbp5mYRQgUmz9');
 
 console.log(betaUserProfile.id);
 ```

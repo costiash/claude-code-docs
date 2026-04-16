@@ -27,7 +27,7 @@ Here's an example of how to use fine-grained tool streaming with the API:
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-4-6",
+      "model": "claude-opus-4-7",
       "max_tokens": 65536,
       "tools": [
         {
@@ -63,7 +63,7 @@ Here's an example of how to use fine-grained tool streaming with the API:
   ```bash CLI
   ant messages create --stream \
     --transform usage <<'YAML'
-  model: claude-opus-4-6
+  model: claude-opus-4-7
   max_tokens: 65536
   tools:
     - name: make_file
@@ -94,7 +94,7 @@ Here's an example of how to use fine-grained tool streaming with the API:
 
   with client.messages.stream(
       max_tokens=65536,
-      model="claude-opus-4-6",
+      model="claude-opus-4-7",
       tools=[
           {
               "name": "make_file",
@@ -136,7 +136,7 @@ Here's an example of how to use fine-grained tool streaming with the API:
   const anthropic = new Anthropic();
 
   const stream = anthropic.messages.stream({
-    model: "claude-opus-4-6",
+    model: "claude-opus-4-7",
     max_tokens: 65536,
     tools: [
       {
@@ -227,7 +227,7 @@ client = anthropic.Anthropic()
 tool_inputs = {}  # index -> accumulated JSON string
 
 with client.messages.stream(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[
         {
@@ -267,7 +267,7 @@ const anthropic = new Anthropic();
 const toolInputs: Record<number, string> = {};
 
 const stream = anthropic.messages.stream({
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   tools: [
     {

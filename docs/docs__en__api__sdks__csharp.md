@@ -50,7 +50,7 @@ MessageCreateParams parameters = new()
             Content = "Hello, Claude",
         },
     ],
-    Model = "claude-opus-4-6",
+    Model = "claude-opus-4-7",
 };
 
 var message = await client.Messages.Create(parameters);
@@ -134,7 +134,7 @@ MessageCreateParams parameters = new()
             Content = "Hello, Claude",
         },
     ],
-    Model = "claude-opus-4-6",
+    Model = "claude-opus-4-7",
 };
 
 await foreach (var message in client.Messages.CreateStreaming(parameters))
@@ -319,7 +319,7 @@ using Microsoft.Extensions.AI;
 using ModelContextProtocol.Client;
 
 // Configured using the ANTHROPIC_API_KEY, ANTHROPIC_AUTH_TOKEN and ANTHROPIC_BASE_URL environment variables
-IChatClient chatClient = client.AsIChatClient("claude-opus-4-6")
+IChatClient chatClient = client.AsIChatClient("claude-opus-4-7")
     .AsBuilder()
     .UseFunctionInvocation()
     .Build();

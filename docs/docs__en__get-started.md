@@ -33,7 +33,7 @@ Make your first API call to Claude and build a simple web search assistant.
           -H "x-api-key: $ANTHROPIC_API_KEY" \
           -H "anthropic-version: 2023-06-01" \
           -d '{
-            "model": "claude-opus-4-6",
+            "model": "claude-opus-4-7",
             "max_tokens": 1000,
             "messages": [
               {
@@ -56,7 +56,7 @@ Make your first API call to Claude and build a simple web search assistant.
               "text": "Here are some effective search strategies to find the latest renewable energy developments:\n\n## Search Terms to Use:\n- \"renewable energy news 2024\"\n- \"clean energy breakthrough\"\n- \"solar/wind/battery technology advances\"\n- \"green energy innovations\"\n- \"climate tech developments\"\n- \"energy storage solutions\"\n\n## Best Sources to Check:\n\n**News & Industry Sites:**\n- Renewable Energy World\n- GreenTech Media (now Wood Mackenzie)\n- Energy Storage News\n- CleanTechnica\n- PV Magazine (for solar)\n- WindPower Engineering & Development..."
             }
           ],
-          "model": "claude-opus-4-6",
+          "model": "claude-opus-4-7",
           "stop_reason": "end_turn",
           "usage": {
             "input_tokens": 21,
@@ -95,7 +95,7 @@ Make your first API call to Claude and build a simple web search assistant.
 
         ```bash
         ant messages create \
-          --model claude-opus-4-6 \
+          --model claude-opus-4-7 \
           --max-tokens 1000 \
           --message '{
             role: user,
@@ -115,7 +115,7 @@ Make your first API call to Claude and build a simple web search assistant.
               "text": "Here are some effective search strategies to find the latest renewable energy developments:\n\n## Search Terms to Use:\n- \"renewable energy news 2024\"\n- \"clean energy breakthrough\"\n- \"solar/wind/battery technology advances\"\n- \"green energy innovations\"\n- \"climate tech developments\"\n- \"energy storage solutions\"\n\n## Best Sources to Check:\n\n**News & Industry Sites:**\n- Renewable Energy World\n- GreenTech Media (now Wood Mackenzie)\n- Energy Storage News\n- CleanTechnica\n- PV Magazine (for solar)\n- WindPower Engineering & Development..."
             }
           ],
-          "model": "claude-opus-4-6",
+          "model": "claude-opus-4-7",
           "stop_reason": "end_turn",
           "usage": {
             "input_tokens": 21,
@@ -156,7 +156,7 @@ Make your first API call to Claude and build a simple web search assistant.
         client = anthropic.Anthropic()
 
         message = client.messages.create(
-            model="claude-opus-4-6",
+            model="claude-opus-4-7",
             max_tokens=1000,
             messages=[
                 {
@@ -217,7 +217,7 @@ async function main() {
   const anthropic = new Anthropic();
 
   const msg = await anthropic.messages.create({
-    model: "claude-opus-4-6",
+    model: "claude-opus-4-7",
     max_tokens: 1000,
     messages: [
       {
@@ -247,7 +247,7 @@ main().catch(console.error);
             id: "msg_01ThFHzad6Bh4TpQ6cHux9t8",
             type: "message",
             role: "assistant",
-            model: "claude-opus-4-6",
+            model: "claude-opus-4-7",
             content: [
               {
                 type: "text",
@@ -326,7 +326,7 @@ main().catch(console.error);
             AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
             MessageCreateParams params = MessageCreateParams.builder()
-              .model("claude-opus-4-6")
+              .model("claude-opus-4-7")
               .maxTokens(1000)
               .addUserMessage(
                 "What should I search for to find the latest developments in renewable energy?"

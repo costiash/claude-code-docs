@@ -3795,6 +3795,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-opus-4-7"ClaudeOpus4_7`
+
+      Frontier intelligence for long-running agents and coding
+
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
       New class of intelligence, strongest in coding and cybersecurity
@@ -7157,11 +7161,11 @@ MessageCountTokensParams parameters = new()
     [
         new()
         {
-            Content = "string",
+            Content = "Hello, world",
             Role = Role.User,
         },
     ],
-    Model = Model.ClaudeMythosPreview,
+    Model = Model.ClaudeOpus4_6,
 };
 
 var messageTokensCount = await client.Messages.CountTokens(parameters);
@@ -12059,6 +12063,10 @@ Console.WriteLine(messageTokensCount);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-opus-4-7"ClaudeOpus4_7`
+
+      Frontier intelligence for long-running agents and coding
+
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
       New class of intelligence, strongest in coding and cybersecurity
@@ -15192,6 +15200,8 @@ Console.WriteLine(messageTokensCount);
 
     - `"high"High`
 
+    - `"xhigh"Xhigh`
+
     - `"max"Max`
 
   - `JsonOutputFormat? Format`
@@ -16717,6 +16727,10 @@ Console.WriteLine(messageTokensCount);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
+
       - `"claude-mythos-preview"ClaudeMythosPreview`
 
         New class of intelligence, strongest in coding and cybersecurity
@@ -17532,6 +17546,10 @@ Console.WriteLine(messageTokensCount);
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -25520,6 +25538,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
+
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
           New class of intelligence, strongest in coding and cybersecurity
@@ -25636,6 +25658,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `"medium"Medium`
 
           - `"high"High`
+
+          - `"xhigh"Xhigh`
 
           - `"max"Max`
 
@@ -28181,6 +28205,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-opus-4-7"ClaudeOpus4_7`
+
+            Frontier intelligence for long-running agents and coding
+
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
             New class of intelligence, strongest in coding and cybersecurity
@@ -29274,6 +29302,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-opus-4-7"ClaudeOpus4_7`
+
+            Frontier intelligence for long-running agents and coding
+
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
             New class of intelligence, strongest in coding and cybersecurity
@@ -30194,6 +30226,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `"claude-opus-4-7"ClaudeOpus4_7`
+
+          Frontier intelligence for long-running agents and coding
+
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
           New class of intelligence, strongest in coding and cybersecurity
@@ -31075,6 +31111,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-mythos-preview"ClaudeMythosPreview`
 

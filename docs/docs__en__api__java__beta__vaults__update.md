@@ -60,6 +60,8 @@ Update Vault
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
   - `Optional<String> displayName`
 
     Updated human-readable name for the vault. 1-255 characters.

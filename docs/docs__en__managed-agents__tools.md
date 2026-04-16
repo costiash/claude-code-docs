@@ -41,7 +41,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
   -d @- <<'EOF'
 {
   "name": "Coding Assistant",
-  "model": "claude-sonnet-4-6",
+  "model": "claude-opus-4-7",
   "tools": [
     {
       "type": "agent_toolset_20260401",
@@ -58,7 +58,7 @@ EOF
 ```bash CLI
 ant beta:agents create <<'YAML'
 name: Coding Assistant
-model: claude-sonnet-4-6
+model: claude-opus-4-7
 tools:
   - type: agent_toolset_20260401
     configs:
@@ -70,7 +70,7 @@ YAML
 ```python Python
 agent = client.beta.agents.create(
     name="Coding Assistant",
-    model="claude-sonnet-4-6",
+    model="claude-opus-4-7",
     tools=[
         {
             "type": "agent_toolset_20260401",
@@ -85,7 +85,7 @@ agent = client.beta.agents.create(
 ```typescript TypeScript
 const agent = await client.beta.agents.create({
   name: "Coding Assistant",
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   tools: [
     {
       type: "agent_toolset_20260401",
@@ -99,7 +99,7 @@ const agent = await client.beta.agents.create({
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Coding Assistant",
-    Model = new("claude-sonnet-4-6"),
+    Model = new("claude-opus-4-7"),
     Tools =
     [
         new BetaManagedAgentsAgentToolset20260401Params
@@ -118,7 +118,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Coding Assistant",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID:   "claude-sonnet-4-6",
+		ID:   "claude-opus-4-7",
 		Type: anthropic.BetaManagedAgentsModelConfigParamsTypeModelConfig,
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
@@ -139,7 +139,7 @@ if err != nil {
 ```java Java
 var agent = client.beta().agents().create(AgentCreateParams.builder()
     .name("Coding Assistant")
-    .model(BetaManagedAgentsModel.CLAUDE_SONNET_4_6)
+    .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
     .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
         .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
         .addConfig(BetaManagedAgentsAgentToolConfigParams.builder()
@@ -154,7 +154,7 @@ var agent = client.beta().agents().create(AgentCreateParams.builder()
 
 $agent = $client->beta->agents->create(
     name: 'Coding Assistant',
-    model: 'claude-sonnet-4-6',
+    model: 'claude-opus-4-7',
     tools: [
         BetaManagedAgentsAgentToolset20260401Params::with(
             type: 'agent_toolset_20260401',
@@ -169,7 +169,7 @@ $agent = $client->beta->agents->create(
 ```ruby Ruby
 agent = client.beta.agents.create(
   name: "Coding Assistant",
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   tools: [
     {
       type: :agent_toolset_20260401,
@@ -228,7 +228,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
   -d @- <<'EOF'
 {
   "name": "Weather Agent",
-  "model": "claude-sonnet-4-6",
+  "model": "claude-opus-4-7",
   "tools": [
     {
       "type": "agent_toolset_20260401"
@@ -254,7 +254,7 @@ EOF
 ```bash CLI
 ant beta:agents create <<'YAML'
 name: Weather Agent
-model: claude-sonnet-4-6
+model: claude-opus-4-7
 tools:
   - type: agent_toolset_20260401
   - type: custom
@@ -274,7 +274,7 @@ YAML
 ```python Python
 agent = client.beta.agents.create(
     name="Weather Agent",
-    model="claude-sonnet-4-6",
+    model="claude-opus-4-7",
     tools=[
         {
             "type": "agent_toolset_20260401",
@@ -298,7 +298,7 @@ agent = client.beta.agents.create(
 ```typescript TypeScript
 const agent = await client.beta.agents.create({
   name: "Weather Agent",
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   tools: [
     { type: "agent_toolset_20260401" },
     {
@@ -320,7 +320,7 @@ const agent = await client.beta.agents.create({
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Weather Agent",
-    Model = new("claude-sonnet-4-6"),
+    Model = new("claude-opus-4-7"),
     Tools =
     [
         new BetaManagedAgentsAgentToolset20260401Params
@@ -352,7 +352,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Weather Agent",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID:   "claude-sonnet-4-6",
+		ID:   "claude-opus-4-7",
 		Type: anthropic.BetaManagedAgentsModelConfigParamsTypeModelConfig,
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
@@ -385,7 +385,7 @@ if err != nil {
 ```java Java
 var agent = client.beta().agents().create(AgentCreateParams.builder()
     .name("Weather Agent")
-    .model(BetaManagedAgentsModel.CLAUDE_SONNET_4_6)
+    .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
     .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
         .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
         .build())
@@ -412,7 +412,7 @@ use Anthropic\Beta\Agents\BetaManagedAgentsCustomToolParams;
 
 $agent = $client->beta->agents->create(
     name: 'Weather Agent',
-    model: 'claude-sonnet-4-6',
+    model: 'claude-opus-4-7',
     tools: [
         BetaManagedAgentsAgentToolset20260401Params::with(
             type: 'agent_toolset_20260401',
@@ -434,7 +434,7 @@ $agent = $client->beta->agents->create(
 ```ruby Ruby
 agent = client.beta.agents.create(
   name: "Weather Agent",
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   tools: [
     {type: :agent_toolset_20260401},
     {

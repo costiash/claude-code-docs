@@ -4315,6 +4315,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
+
+        Frontier intelligence for long-running agents and coding
+
       - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
         New class of intelligence, strongest in coding and cybersecurity

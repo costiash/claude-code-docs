@@ -12,7 +12,7 @@ Create User Profile
 
   - `string? externalID`
 
-    Body param
+    Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
 
   - `IReadOnlyDictionary<string, string> metadata`
 
@@ -64,6 +64,8 @@ Create User Profile
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
@@ -72,23 +74,43 @@ Create User Profile
 
   - `required string ID`
 
+    Unique identifier for this user profile, prefixed `uprof_`.
+
   - `required DateTimeOffset CreatedAt`
 
     A timestamp in RFC 3339 format
 
   - `required IReadOnlyDictionary<string, string> Metadata`
 
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
   - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
-    - `required string Status`
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-  - `required string Type`
+    - `required Status Status`
+
+      Status of the trust grant.
+
+      - `"active"Active`
+
+      - `"pending"Pending`
+
+      - `"rejected"Rejected`
+
+  - `required Type Type`
+
+    Object type. Always `user_profile`.
+
+    - `"user_profile"UserProfile`
 
   - `required DateTimeOffset UpdatedAt`
 
     A timestamp in RFC 3339 format
 
   - `string? ExternalID`
+
+    Platform's own identifier for this user. Not enforced unique.
 
 ### Example
 

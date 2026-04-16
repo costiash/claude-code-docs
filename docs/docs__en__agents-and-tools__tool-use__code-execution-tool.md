@@ -24,6 +24,7 @@ The code execution tool is available on the following models:
 
 | Model | Tool versions |
 |-------|--------------|
+| Claude Opus 4.7 (`claude-opus-4-7`) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Sonnet 4.6 (`claude-sonnet-4-6`) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825`, `code_execution_20260120` |
@@ -66,7 +67,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-version: 2023-06-01" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-opus-4-6",
+        "model": "claude-opus-4-7",
         "max_tokens": 4096,
         "messages": [
             {
@@ -83,7 +84,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-4-6 \
+  --model claude-opus-4-7 \
   --max-tokens 4096 \
   --message '{role: user, content: "Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"}' \
   --tool '{type: code_execution_20250825, name: code_execution}'
@@ -95,7 +96,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=4096,
     messages=[
         {
@@ -116,7 +117,7 @@ const client = new Anthropic();
 
 async function main() {
   const response = await client.messages.create({
-    model: "claude-opus-4-6",
+    model: "claude-opus-4-7",
     max_tokens: 4096,
     messages: [
       {
@@ -152,7 +153,7 @@ class Program
 
         var parameters = new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_6,
+            Model = Model.ClaudeOpus4_7,
             MaxTokens = 4096,
             Messages = [
                 new() {
@@ -184,7 +185,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
+		Model:     anthropic.ModelClaudeOpus4_7,
 		MaxTokens: 4096,
 		Messages: []anthropic.BetaMessageParam{
 			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]")),
@@ -214,7 +215,7 @@ public class CodeExecution {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
+            .model(Model.CLAUDE_OPUS_4_7)
             .maxTokens(4096L)
             .addUserMessage("Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]")
             .addTool(CodeExecutionTool20250825.builder().build())
@@ -241,7 +242,7 @@ $message = $client->messages->create(
             'content' => 'Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]'
         ]
     ],
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-7',
     tools: [
         [
             'type' => 'code_execution_20250825',
@@ -259,7 +260,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 4096,
   messages: [
     {
@@ -350,7 +351,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: files-api-2025-04-14" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-opus-4-6",
+        "model": "claude-opus-4-7",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -376,7 +377,7 @@ FILE_ID=$(ant beta:files upload \
 # Use the file_id with code execution
 ant beta:messages create \
   --beta files-api-2025-04-14 <<YAML
-model: claude-opus-4-6
+model: claude-opus-4-7
 max_tokens: 4096
 messages:
   - role: user
@@ -403,7 +404,7 @@ file_object = client.beta.files.upload(
 
 # Use the file_id with code execution
 response = client.beta.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     betas=["files-api-2025-04-14"],
     max_tokens=4096,
     messages=[
@@ -436,7 +437,7 @@ async function main() {
 
   // Use the file_id with code execution
   const response = await client.beta.messages.create({
-    model: "claude-opus-4-6",
+    model: "claude-opus-4-7",
     betas: ["files-api-2025-04-14"],
     max_tokens: 4096,
     messages: [
@@ -482,7 +483,7 @@ class Program
         // Use the file_id with code execution
         var parameters = new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_6,
+            Model = Model.ClaudeOpus4_7,
             Betas = ["files-api-2025-04-14"],
             MaxTokens = 4096,
             Messages = [
@@ -540,7 +541,7 @@ func main() {
 
 	// Use the file_id with code execution
 	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
+		Model:     anthropic.ModelClaudeOpus4_7,
 		MaxTokens: 4096,
 		Messages: []anthropic.BetaMessageParam{
 			anthropic.NewBetaUserMessage(
@@ -592,7 +593,7 @@ public class CodeExecutionWithFiles {
         // Use the file_id with code execution
         BetaMessage response = client.beta().messages().create(
             MessageCreateParams.builder()
-                .model("claude-opus-4-6")
+                .model("claude-opus-4-7")
                 .addBeta("files-api-2025-04-14")
                 .maxTokens(4096L)
                 .addUserMessageOfBetaContentBlockParams(List.of(
@@ -636,7 +637,7 @@ $response = $client->beta->messages->create(
             ]
         ]
     ],
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-7',
     betas: ['files-api-2025-04-14'],
     tools: [
         ['type' => 'code_execution_20250825', 'name' => 'code_execution']
@@ -658,7 +659,7 @@ file_object = client.beta.files.upload(
 
 # Use the file_id with code execution
 response = client.beta.messages.create(
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   betas: ["files-api-2025-04-14"],
   max_tokens: 4096,
   messages: [
@@ -692,7 +693,7 @@ FILE_IDS=$(ant beta:messages create \
   --beta files-api-2025-04-14 \
   --transform "${TOOL_RESULT}.content.content|@flatten|#.file_id" \
   --format yaml \
-    --model claude-opus-4-6 \
+    --model claude-opus-4-7 \
     --max-tokens 4096 \
     --message '{role: user, content: Create a matplotlib visualization and save it as output.png}' \
     --tool '{type: code_execution_20250825, name: code_execution}'
@@ -720,7 +721,7 @@ client = Anthropic()
 
 # Request code execution that creates files
 response = client.beta.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     betas=["files-api-2025-04-14"],
     max_tokens=4096,
     messages=[
@@ -763,7 +764,7 @@ const client = new Anthropic();
 async function main() {
   // Request code execution that creates files
   const response = await client.beta.messages.create({
-    model: "claude-opus-4-6",
+    model: "claude-opus-4-7",
     betas: ["code-execution-2025-08-25", "files-api-2025-04-14"],
     max_tokens: 4096,
     messages: [
@@ -818,7 +819,7 @@ public class Program
 
         var parameters = new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_6,
+            Model = Model.ClaudeOpus4_7,
             MaxTokens = 4096,
             Messages = [
                 new() {
@@ -886,7 +887,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
+		Model:     anthropic.ModelClaudeOpus4_7,
 		MaxTokens: 4096,
 		Messages: []anthropic.BetaMessageParam{
 			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Create a matplotlib visualization and save it as output.png")),
@@ -972,7 +973,7 @@ void main() throws Exception {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model("claude-opus-4-6")
+        .model("claude-opus-4-7")
         .addBeta("files-api-2025-04-14")
         .maxTokens(4096L)
         .addUserMessage("Create a matplotlib visualization and save it as output.png")
@@ -1028,7 +1029,7 @@ $response = $client->beta->messages->create(
             'content' => 'Create a matplotlib visualization and save it as output.png'
         ]
     ],
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-7',
     betas: ['files-api-2025-04-14'],
     tools: [
         [
@@ -1069,7 +1070,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   betas: ["files-api-2025-04-14"],
   max_tokens: 4096,
   messages: [
@@ -1334,7 +1335,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-version: 2023-06-01" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-opus-4-6",
+        "model": "claude-opus-4-7",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -1356,7 +1357,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --data '{
         "container": "'$CONTAINER_ID'",
-        "model": "claude-opus-4-6",
+        "model": "claude-opus-4-7",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -1373,7 +1374,7 @@ curl https://api.anthropic.com/v1/messages \
 # First request: Create a file with a random number
 CONTAINER_ID=$(ant messages create \
   --transform container.id --format yaml \
-    --model claude-opus-4-6 \
+    --model claude-opus-4-7 \
     --max-tokens 4096 \
     --message '{role: user, content: Write a file with a random number and save it to "/tmp/number.txt"}' \
     --tool '{type: code_execution_20250825, name: code_execution}'
@@ -1381,7 +1382,7 @@ CONTAINER_ID=$(ant messages create \
 
 # Second request: Reuse the container to read the file
 ant messages create --container "$CONTAINER_ID" \
-  --model claude-opus-4-6 \
+  --model claude-opus-4-7 \
   --max-tokens 4096 \
   --message '{role: user, content: Read the number from "/tmp/number.txt" and calculate its square}' \
   --tool '{type: code_execution_20250825, name: code_execution}'
@@ -1396,7 +1397,7 @@ client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 # First request: Create a file with a random number
 response1 = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=4096,
     messages=[
         {
@@ -1413,7 +1414,7 @@ container_id = response1.container.id
 # Second request: Reuse the container to read the file
 response2 = client.messages.create(
     container=container_id,  # Reuse the same container
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=4096,
     messages=[
         {
@@ -1435,7 +1436,7 @@ const client = new Anthropic();
 async function main() {
   // First request: Create a file with a random number
   const response1 = await client.beta.messages.create({
-    model: "claude-opus-4-6",
+    model: "claude-opus-4-7",
     betas: ["code-execution-2025-08-25"],
     max_tokens: 4096,
     messages: [
@@ -1458,7 +1459,7 @@ async function main() {
   // Second request: Reuse the container to read the file
   const response2 = await client.beta.messages.create({
     container: containerId,
-    model: "claude-opus-4-6",
+    model: "claude-opus-4-7",
     betas: ["code-execution-2025-08-25"],
     max_tokens: 4096,
     messages: [
@@ -1495,7 +1496,7 @@ class Program
 
         var parameters1 = new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_6,
+            Model = Model.ClaudeOpus4_7,
             MaxTokens = 4096,
             Messages = [new() { Role = Role.User, Content = "Write a file with a random number and save it to '/tmp/number.txt'" }],
             Tools = [new ToolUnion(new CodeExecutionTool20250825())]
@@ -1507,7 +1508,7 @@ class Program
         var parameters2 = new MessageCreateParams
         {
             Container = containerId,
-            Model = Model.ClaudeOpus4_6,
+            Model = Model.ClaudeOpus4_7,
             MaxTokens = 4096,
             Messages = [new() { Role = Role.User, Content = "Read the number from '/tmp/number.txt' and calculate its square" }],
             Tools = [new ToolUnion(new CodeExecutionTool20250825())]
@@ -1534,7 +1535,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	response1, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_6,
+		Model:     anthropic.ModelClaudeOpus4_7,
 		MaxTokens: 4096,
 		Messages: []anthropic.BetaMessageParam{
 			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Write a file with a random number and save it to '/tmp/number.txt'")),
@@ -1554,7 +1555,7 @@ func main() {
 		Container: anthropic.BetaMessageNewParamsContainerUnion{
 			OfString: anthropic.String(containerID),
 		},
-		Model:     anthropic.ModelClaudeOpus4_6,
+		Model:     anthropic.ModelClaudeOpus4_7,
 		MaxTokens: 4096,
 		Messages: []anthropic.BetaMessageParam{
 			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Read the number from '/tmp/number.txt' and calculate its square")),
@@ -1589,7 +1590,7 @@ public class ContainerReuse {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         MessageCreateParams params1 = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_6)
+            .model(Model.CLAUDE_OPUS_4_7)
             .maxTokens(4096L)
             .addUserMessage("Write a file with a random number and save it to '/tmp/number.txt'")
             .addTool(CodeExecutionTool20250825.builder().build())
@@ -1600,7 +1601,7 @@ public class ContainerReuse {
 
         MessageCreateParams params2 = MessageCreateParams.builder()
             .container(containerId)
-            .model(Model.CLAUDE_OPUS_4_6)
+            .model(Model.CLAUDE_OPUS_4_7)
             .maxTokens(4096L)
             .addUserMessage("Read the number from '/tmp/number.txt' and calculate its square")
             .addTool(CodeExecutionTool20250825.builder().build())
@@ -1624,7 +1625,7 @@ $response1 = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "Write a file with a random number and save it to '/tmp/number.txt'"]
     ],
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-7',
     tools: [
         ['type' => 'code_execution_20250825', 'name' => 'code_execution']
     ],
@@ -1638,7 +1639,7 @@ $response2 = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "Read the number from '/tmp/number.txt' and calculate its square"]
     ],
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-7',
     tools: [
         ['type' => 'code_execution_20250825', 'name' => 'code_execution']
     ],
@@ -1651,7 +1652,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 response1 = client.messages.create(
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 4096,
   messages: [
     { role: "user", content: "Write a file with a random number and save it to '/tmp/number.txt'" }
@@ -1665,7 +1666,7 @@ container_id = response1.container.id
 
 response2 = client.messages.create(
   container: container_id,
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 4096,
   messages: [
     { role: "user", content: "Read the number from '/tmp/number.txt' and calculate its square" }

@@ -1,14 +1,14 @@
 ## Create Enrollment URL
 
-`beta.user_profiles.create_enrollment_url(id, **kwargs) -> BetaUserProfileEnrollmentURL`
+`beta.user_profiles.create_enrollment_url(user_profile_id, **kwargs) -> BetaUserProfileEnrollmentURL`
 
-**post** `/v1/user_profiles/{id}/enrollment_url`
+**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
 ### Parameters
 
-- `id: String`
+- `user_profile_id: String`
 
 - `betas: Array[AnthropicBeta]`
 
@@ -16,7 +16,7 @@ Create Enrollment URL
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -60,6 +60,8 @@ Create Enrollment URL
 
     - `:"output-300k-2026-03-24"`
 
+    - `:"advisor-tool-2026-03-01"`
+
     - `:"user-profiles-2026-03-24"`
 
 ### Returns
@@ -70,9 +72,15 @@ Create Enrollment URL
 
     A timestamp in RFC 3339 format
 
-  - `type: String`
+  - `type: :enrollment_url`
+
+    Object type. Always `enrollment_url`.
+
+    - `:enrollment_url`
 
   - `url: String`
+
+    Enrollment URL to send to the end user. Valid until `expires_at`.
 
 ### Example
 
@@ -81,7 +89,7 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-beta_user_profile_enrollment_url = anthropic.beta.user_profiles.create_enrollment_url("id")
+beta_user_profile_enrollment_url = anthropic.beta.user_profiles.create_enrollment_url("uprof_011CZkZCu8hGbp5mYRQgUmz9")
 
 puts(beta_user_profile_enrollment_url)
 ```

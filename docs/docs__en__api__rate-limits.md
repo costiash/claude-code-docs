@@ -223,7 +223,7 @@ If you're seeking higher limits for an Enterprise use case, contact sales throug
 </Tab>
 </Tabs>
 
-_<sup>* - Opus rate limit is a total limit that applies to combined traffic across Opus 4.6, Opus 4.5, Opus 4.1, and Opus 4.</sup>_
+_<sup>* - Opus rate limit is a total limit that applies to combined traffic across Opus 4.7, Opus 4.6, Opus 4.5, Opus 4.1, and Opus 4.</sup>_
 
 _<sup>** - Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6, Sonnet 4.5, and Sonnet 4.</sup>_
 

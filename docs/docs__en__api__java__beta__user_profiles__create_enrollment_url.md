@@ -2,7 +2,7 @@
 
 `BetaUserProfileEnrollmentUrl beta().userProfiles().createEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparams = UserProfileCreateEnrollmentUrlParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
-**post** `/v1/user_profiles/{id}/enrollment_url`
+**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
@@ -10,7 +10,7 @@ Create Enrollment URL
 
 - `UserProfileCreateEnrollmentUrlParams params`
 
-  - `Optional<String> id`
+  - `Optional<String> userProfileId`
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -58,6 +58,8 @@ Create Enrollment URL
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
@@ -68,9 +70,15 @@ Create Enrollment URL
 
     A timestamp in RFC 3339 format
 
-  - `String type`
+  - `Type type`
+
+    Object type. Always `enrollment_url`.
+
+    - `ENROLLMENT_URL("enrollment_url")`
 
   - `String url`
+
+    Enrollment URL to send to the end user. Valid until `expires_at`.
 
 ### Example
 
@@ -88,7 +96,7 @@ public final class Main {
     public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        BetaUserProfileEnrollmentUrl betaUserProfileEnrollmentUrl = client.beta().userProfiles().createEnrollmentUrl("id");
+        BetaUserProfileEnrollmentUrl betaUserProfileEnrollmentUrl = client.beta().userProfiles().createEnrollmentUrl("uprof_011CZkZCu8hGbp5mYRQgUmz9");
     }
 }
 ```

@@ -15,7 +15,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-4-6",
+    "model": "claude-opus-4-7",
     "max_tokens": 1024,
     "tools": [{"type": "web_search_20260209", "name": "web_search"}],
     "messages": [{"role": "user", "content": "What'\''s the latest on the Mars rover?"}]
@@ -24,7 +24,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create --transform content --format yaml \
-  --model claude-opus-4-6 \
+  --model claude-opus-4-7 \
   --max-tokens 1024 \
   --tool '{type: web_search_20260209, name: web_search}' \
   --message '{role: user, content: "What is the latest on the Mars rover?"}'
@@ -35,7 +35,7 @@ import anthropic
 
 client = anthropic.Anthropic()
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[{"type": "web_search_20260209", "name": "web_search"}],
     messages=[{"role": "user", "content": "What's the latest on the Mars rover?"}],
@@ -48,7 +48,7 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 const response = await client.messages.create({
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   tools: [{ type: "web_search_20260209", name: "web_search" }],
   messages: [{ role: "user", content: "What's the latest on the Mars rover?" }]
@@ -121,6 +121,7 @@ When you use `tools`, we also automatically include a special system prompt for 
 
 | Model                    | Tool choice                                          | Tool use system prompt token count          |
 |--------------------------|------------------------------------------------------|---------------------------------------------|
+| Claude Opus 4.7                | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Opus 4.6              | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Opus 4.5            | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Opus 4.1            | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |

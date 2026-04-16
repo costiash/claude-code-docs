@@ -77,8 +77,6 @@ Span events are observability markers that wrap activity for timing and usage tr
 
 Every event includes a `processed_at` timestamp indicating when the event was recorded server-side. If `processed_at` is null, it means the event has been queued by the harness and will be handled after preceding events finish processing.
 
-See the [session events API reference](/docs/en/api/beta/sessions/events/stream) for the full schema of each event type.
-
 ## Integrating events
 
 <Tabs>

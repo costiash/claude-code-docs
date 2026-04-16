@@ -1,14 +1,14 @@
 ## Create Enrollment URL
 
-`client.beta.userProfiles.createEnrollmentURL(stringid, UserProfileCreateEnrollmentURLParamsparams?, RequestOptionsoptions?): BetaUserProfileEnrollmentURL`
+`client.beta.userProfiles.createEnrollmentURL(stringuserProfileID, UserProfileCreateEnrollmentURLParamsparams?, RequestOptionsoptions?): BetaUserProfileEnrollmentURL`
 
-**post** `/v1/user_profiles/{id}/enrollment_url`
+**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
 ### Parameters
 
-- `id: string`
+- `userProfileID: string`
 
 - `params: UserProfileCreateEnrollmentURLParams`
 
@@ -18,7 +18,7 @@ Create Enrollment URL
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -62,6 +62,8 @@ Create Enrollment URL
 
       - `"output-300k-2026-03-24"`
 
+      - `"advisor-tool-2026-03-01"`
+
       - `"user-profiles-2026-03-24"`
 
 ### Returns
@@ -72,9 +74,15 @@ Create Enrollment URL
 
     A timestamp in RFC 3339 format
 
-  - `type: string`
+  - `type: "enrollment_url"`
+
+    Object type. Always `enrollment_url`.
+
+    - `"enrollment_url"`
 
   - `url: string`
+
+    Enrollment URL to send to the end user. Valid until `expires_at`.
 
 ### Example
 
@@ -85,7 +93,9 @@ const client = new Anthropic({
   apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
-const betaUserProfileEnrollmentURL = await client.beta.userProfiles.createEnrollmentURL('id');
+const betaUserProfileEnrollmentURL = await client.beta.userProfiles.createEnrollmentURL(
+  'uprof_011CZkZCu8hGbp5mYRQgUmz9',
+);
 
 console.log(betaUserProfileEnrollmentURL.expires_at);
 ```

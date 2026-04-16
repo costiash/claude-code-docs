@@ -12,7 +12,7 @@ Create User Profile
 
   - `ExternalID param.Field[string]`
 
-    Body param
+    Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
 
   - `Metadata param.Field[map[string, string]]`
 
@@ -68,6 +68,8 @@ Create User Profile
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
@@ -76,23 +78,43 @@ Create User Profile
 
   - `ID string`
 
+    Unique identifier for this user profile, prefixed `uprof_`.
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
 
   - `Metadata map[string, string]`
 
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
-    - `Status string`
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-  - `Type string`
+    - `Status BetaUserProfileTrustGrantStatus`
+
+      Status of the trust grant.
+
+      - `const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"`
+
+      - `const BetaUserProfileTrustGrantStatusPending BetaUserProfileTrustGrantStatus = "pending"`
+
+      - `const BetaUserProfileTrustGrantStatusRejected BetaUserProfileTrustGrantStatus = "rejected"`
+
+  - `Type BetaUserProfileType`
+
+    Object type. Always `user_profile`.
+
+    - `const BetaUserProfileTypeUserProfile BetaUserProfileType = "user_profile"`
 
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
 
   - `ExternalID string`
+
+    Platform's own identifier for this user. Not enforced unique.
 
 ### Example
 

@@ -38,7 +38,7 @@ This approach allows for quick iteration, lower development costs, and is often 
 
 For complex tasks where intelligence and advanced capabilities are paramount, you may want to start with the most capable model and then consider optimizing to more efficient models down the line:
 
-1. Implement with Claude Opus 4.6
+1. Implement with Claude Opus 4.7
 2. Optimize your prompts for these models
 3. Evaluate if performance meets your requirements
 4. Consider increasing efficiency by downgrading intelligence over time with greater workflow optimization
@@ -54,7 +54,8 @@ This approach is best for:
 
 | When you need... | Consider starting with... | Example use cases |
 |------------------|-------------------|-------------------|
-| The most intelligent model, and the world’s best model for coding, enterprise agents, and professional work. | Claude Opus 4.6 | Professional software engineering, advanced agents for office tasks, computer and browser use at scale, multi-hour research tasks, step-change vision applications |
+| Anthropic's most capable generally available model for complex reasoning and agentic coding, with a step-change jump over Claude Opus 4.6 | Claude Opus 4.7 | Long-horizon agentic coding, large-scale refactoring, complex systems engineering, advanced research, multi-hour autonomous tasks |
+| The previous flagship for coding, enterprise agents, and professional work | Claude Opus 4.6 | Professional software engineering, advanced agents for office tasks, computer and browser use at scale, multi-hour research tasks, step-change vision applications |
 | Frontier intelligence at scale, built for coding, agents, and enterprise workflows | Claude Sonnet 4.6 | Code generation, data analysis, content creation, visual understanding, agentic tool use |
 | Near-frontier performance with lightning-fast speed and extended thinking at the most economical price point | Claude Haiku 4.5 | Real-time applications, high-volume intelligent processing, cost-sensitive deployments needing strong reasoning, sub-agent tasks |
 
@@ -77,8 +78,8 @@ To determine if you need to upgrade or change models, you should:
   <Card title="Model comparison chart" icon="settings" href="/docs/en/about-claude/models/overview">
     See detailed specifications and pricing for the latest Claude models
   </Card>
-  <Card title="What's new in Claude 4.6" icon="sparkle" href="/docs/en/about-claude/models/whats-new-claude-4-6">
-    Explore the latest improvements in Claude 4.6 models
+  <Card title="What's new in Claude Opus 4.7" icon="sparkle" href="/docs/en/about-claude/models/whats-new-claude-4-7">
+    Explore the latest improvements in Claude Opus 4.7
   </Card>
   <Card title="Start building" icon="code" href="/docs/en/get-started">
     Get started with your first API call

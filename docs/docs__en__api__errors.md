@@ -65,7 +65,7 @@ The official SDKs provide this value as a property on top-level response objects
   ```bash CLI
   # The request-id header is printed to stderr with --debug:
   ant --debug messages create \
-    --model claude-opus-4-6 \
+    --model claude-opus-4-7 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello, Claude"}'
   ```
@@ -76,7 +76,7 @@ The official SDKs provide this value as a property on top-level response objects
   client = anthropic.Anthropic()
 
   message = client.messages.create(
-      model="claude-opus-4-6",
+      model="claude-opus-4-7",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude"}],
   )
@@ -89,7 +89,7 @@ The official SDKs provide this value as a property on top-level response objects
   const client = new Anthropic();
 
   const message = await client.messages.create({
-    model: "claude-opus-4-6",
+    model: "claude-opus-4-7",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }]
   });
@@ -123,7 +123,7 @@ If you don't need to process events incrementally, use `.stream()` with `.get_fi
     with client.messages.stream(
         max_tokens=128000,
         messages=[{"role": "user", "content": "Write a detailed analysis..."}],
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
     ) as stream:
         message = stream.get_final_message()
     ```
@@ -132,7 +132,7 @@ If you don't need to process events incrementally, use `.stream()` with `.get_fi
     const stream = client.messages.stream({
       max_tokens: 128000,
       messages: [{ role: "user", content: "Write a detailed analysis..." }],
-      model: "claude-opus-4-6"
+      model: "claude-opus-4-7"
     });
     const message = await stream.finalMessage();
     ```
@@ -144,7 +144,7 @@ See [Streaming Messages](/docs/en/build-with-claude/streaming#get-the-final-mess
 
 ### Prefill not supported
 
-[Claude Mythos Preview](https://anthropic.com/glasswing) and Claude Opus 4.6 do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to either model returns a 400 `invalid_request_error`:
+[Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to any of these models returns a 400 `invalid_request_error`:
 
 ```json
 {

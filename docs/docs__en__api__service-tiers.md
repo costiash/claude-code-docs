@@ -31,17 +31,17 @@ Anthropic counts usage against Priority Tier capacity as follows:
 - Cache reads as 0.1 tokens per token read from the cache
 - Cache writes as 1.25 tokens per token written to the cache with a 5 minute TTL
 - Cache writes as 2.00 tokens per token written to the cache with a 1 hour TTL
-- For [US-only inference](/docs/en/build-with-claude/data-residency) (`inference_geo: "us"`) requests on Claude Opus 4.6 and newer models, input tokens are 1.1 tokens per token
+- For [US-only inference](/docs/en/build-with-claude/data-residency) (`inference_geo: "us"`) requests on Claude Opus 4.7, Claude Opus 4.6, and newer models, input tokens are 1.1 tokens per token
 - All other input tokens are 1 token per token
 
 **Output Tokens**
-- For [US-only inference](/docs/en/build-with-claude/data-residency) (`inference_geo: "us"`) requests on Claude Opus 4.6 and newer models, output tokens are 1.1 tokens per token
+- For [US-only inference](/docs/en/build-with-claude/data-residency) (`inference_geo: "us"`) requests on Claude Opus 4.7, Claude Opus 4.6, and newer models, output tokens are 1.1 tokens per token
 - All other output tokens are 1 token per token
 
 Otherwise, requests proceed at standard tier.
 
 <Note>
-These burndown rates reflect the relative pricing of each token type. For example, US-only inference is priced at 1.1x on Opus 4.6 and newer models, so each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your Priority Tier capacity.
+These burndown rates reflect the relative pricing of each token type. For example, US-only inference is priced at 1.1x on Opus 4.7, Opus 4.6, and newer models, so each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your Priority Tier capacity.
 </Note>
 
 <Note>
@@ -55,7 +55,7 @@ You can control which service tiers can be used for a request by setting the `se
 
 ```python Python
 message = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude!"}],
     service_tier="auto",  # Automatically use Priority Tier when available, fallback to standard
@@ -112,7 +112,7 @@ The ratio of input to output tokens you purchase matters. Sizing your Priority T
 
 ### Supported models
 
-Priority Tier is supported on all available Claude models except [Claude Mythos Preview](https://anthropic.com/glasswing).
+Priority Tier is supported on all available Claude models (including Claude Opus 4.7) except [Claude Mythos Preview](https://anthropic.com/glasswing).
 
 Check the [model overview page](/docs/en/about-claude/models/overview) for more details on available models.
 

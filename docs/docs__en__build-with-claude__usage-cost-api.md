@@ -101,7 +101,7 @@ bucket_width=1d" \
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2025-01-15T00:00:00Z&\
 ending_at=2025-01-15T23:59:59Z&\
-models[]=claude-opus-4-6&\
+models[]=claude-opus-4-7&\
 service_tiers[]=batch&\
 context_window[]=0-200k&\
 bucket_width=1h" \

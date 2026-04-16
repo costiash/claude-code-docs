@@ -30,9 +30,9 @@ The Claude API includes the following APIs:
 **Beta:**
 - **[Files API](/docs/en/api/files-create)**: Upload and manage files for use across multiple API calls (`POST /v1/files`, `GET /v1/files`)
 - **[Skills API](/docs/en/api/skills/create-skill)**: Create and manage custom agent skills (`POST /v1/skills`, `GET /v1/skills`)
-- **[Agents API](/docs/en/api/beta/agents/create)**: Define reusable, versioned agent configurations for Claude Managed Agents (`POST /v1/agents`, `GET /v1/agents`)
-- **[Sessions API](/docs/en/api/beta/sessions/create)**: Run stateful agent sessions in managed cloud containers (`POST /v1/sessions`, `GET /v1/sessions/{id}/stream`)
-- **[Environments API](/docs/en/api/beta/environments/create)**: Configure container templates for agent sessions (`POST /v1/environments`, `GET /v1/environments`)
+- **[Agents API](/docs/en/managed-agents/agent-setup)**: Define reusable, versioned agent configurations for Claude Managed Agents (`POST /v1/agents`, `GET /v1/agents`)
+- **[Sessions API](/docs/en/managed-agents/sessions)**: Run stateful agent sessions in managed cloud containers (`POST /v1/sessions`, `GET /v1/sessions/{id}/stream`)
+- **[Environments API](/docs/en/managed-agents/environments)**: Configure container templates for agent sessions (`POST /v1/environments`, `GET /v1/environments`)
 
 For the complete API reference with all endpoints, parameters, and response schemas, explore the API reference pages listed in the navigation. To access beta features, see [Beta headers](/docs/en/api/beta-headers).
 
@@ -139,7 +139,7 @@ The Claude API is available in [many countries and regions](/docs/en/api/support
   <Card title="Messages API reference" icon="book" href="/docs/en/api/messages/create">
     Complete API specification for direct model interactions
   </Card>
-  <Card title="Claude Managed Agents reference" icon="brain" href="/docs/en/api/beta/sessions">
+  <Card title="Claude Managed Agents reference" icon="brain" href="/docs/en/managed-agents/sessions">
     Agents, Sessions, and Environments endpoints
   </Card>
   <Card title="Client SDKs" icon="code" href="/docs/en/api/client-sdks">

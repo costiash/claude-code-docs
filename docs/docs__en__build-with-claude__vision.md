@@ -34,15 +34,25 @@ Even when using the Files API, requests with many large images can fail before r
 
 ### Evaluate image size
 
-For optimal performance, resize images before uploading if they are too large. If your image's long edge is more than 1568 pixels, or your image is more than ~1,600 tokens, it is first scaled down, preserving aspect ratio, until it's within the size limits.
+To minimize latency without sacrificing output quality, resize images before uploading if they are too large. On Claude Opus 4.6, Claude Sonnet 4.6, and earlier models, if your image's long edge is more than 1568 pixels, or your image is more than ~1,600 tokens, it is first scaled down, preserving aspect ratio, until it's within the size limits.
 
 If your input image is too large and needs to be resized, it increases latency of [time-to-first-token](/docs/en/about-claude/glossary), with no benefit to output quality. Very small images under 200 pixels on any given edge may degrade output quality.
 
 <Tip>
-  To improve [time-to-first-token](/docs/en/about-claude/glossary), consider
+  For models before Claude Opus 4.7, to improve [time-to-first-token](/docs/en/about-claude/glossary), consider
   resizing images to no more than 1.15 megapixels (and within 1568 pixels in
-  both dimensions).
+  both dimensions). For Claude Opus 4.7, see [High-resolution image support](#high-resolution-image-support-on-claude-opus-4-7) below.
 </Tip>
+
+#### High-resolution image support on Claude Opus 4.7
+
+Claude Opus 4.7 is the first Claude model with high-resolution image support. The maximum image resolution is **2576 pixels on the long edge** (up from 1568 px on prior models). This unlocks performance gains on vision-heavy workloads and is particularly valuable for computer use, screenshot understanding, and document analysis.
+
+High-resolution support is **automatic on Claude Opus 4.7** and requires no beta header or client-side opt-in.
+
+**Token cost:** Full-resolution images on Claude Opus 4.7 can use up to approximately 3x more image tokens than on prior models (up to 4784 tokens per image, compared to the previous cap of roughly ~1,600 tokens per image). If you don't need the additional fidelity, downsample images before sending to control token costs.
+
+**Coordinate math:** On Claude Opus 4.7, pointing and bounding-box coordinates returned by the model are 1:1 with actual image pixels, so no scale-factor conversion is required. This simplifies computer use, annotation, and localization workflows.
 
 Here is a table of maximum image sizes accepted by the API that will not be resized for common aspect ratios. With Claude Sonnet 4.6, these images use approximately 1,600 tokens and around $4.80/1k images.
 
@@ -283,7 +293,7 @@ Below are examples of how to include images in a Messages API request using base
       -H "content-type: application/json" \
       -d @- <<EOF
     {
-      "model": "claude-opus-4-6",
+      "model": "claude-opus-4-7",
       "max_tokens": 1024,
       "messages": [
         {
@@ -312,7 +322,7 @@ Below are examples of how to include images in a Messages API request using base
       https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg
 
     ant messages create <<'YAML'
-    model: claude-opus-4-6
+    model: claude-opus-4-7
     max_tokens: 1024
     messages:
       - role: user
@@ -334,7 +344,7 @@ Below are examples of how to include images in a Messages API request using base
 
     client = anthropic.Anthropic()
     message = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
         max_tokens=1024,
         messages=[
             {
@@ -365,7 +375,7 @@ Below are examples of how to include images in a Messages API request using base
 
     async function main() {
       const message = await anthropic.messages.create({
-        model: "claude-opus-4-6",
+        model: "claude-opus-4-7",
         max_tokens: 1024,
         messages: [
           {
@@ -404,7 +414,7 @@ Below are examples of how to include images in a Messages API request using base
 
     var message = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus4_6,
+        Model = Model.ClaudeOpus4_7,
         MaxTokens = 1024,
         Messages =
         [
@@ -445,7 +455,7 @@ Below are examples of how to include images in a Messages API request using base
     	imageData := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
 
     	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-    		Model:     anthropic.ModelClaudeOpus4_6,
+    		Model:     anthropic.ModelClaudeOpus4_7,
     		MaxTokens: 1024,
     		Messages: []anthropic.MessageParam{
     			anthropic.NewUserMessage(
@@ -492,7 +502,7 @@ Below are examples of how to include images in a Messages API request using base
           .messages()
           .create(
             MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_6)
+              .model(Model.CLAUDE_OPUS_4_7)
               .maxTokens(1024)
               .addUserMessageOfBlockParams(contentBlockParams)
               .build()
@@ -529,7 +539,7 @@ Below are examples of how to include images in a Messages API request using base
                 ],
             ],
         ],
-        model: 'claude-opus-4-6',
+        model: 'claude-opus-4-7',
     );
 
     print_r($message);
@@ -542,7 +552,7 @@ Below are examples of how to include images in a Messages API request using base
     image_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
 
     message = client.messages.create(
-      model: "claude-opus-4-6",
+      model: "claude-opus-4-7",
       max_tokens: 1024,
       messages: [
         {
@@ -575,7 +585,7 @@ Below are examples of how to include images in a Messages API request using base
       -H "anthropic-version: 2023-06-01" \
       -H "content-type: application/json" \
       -d '{
-        "model": "claude-opus-4-6",
+        "model": "claude-opus-4-7",
         "max_tokens": 1024,
         "messages": [
           {
@@ -599,7 +609,7 @@ Below are examples of how to include images in a Messages API request using base
     ```
     ```bash CLI
     ant messages create <<'YAML'
-    model: claude-opus-4-6
+    model: claude-opus-4-7
     max_tokens: 1024
     messages:
       - role: user
@@ -617,7 +627,7 @@ Below are examples of how to include images in a Messages API request using base
 
     client = anthropic.Anthropic()
     message = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
         max_tokens=1024,
         messages=[
             {
@@ -646,7 +656,7 @@ Below are examples of how to include images in a Messages API request using base
 
     async function main() {
       const message = await anthropic.messages.create({
-        model: "claude-opus-4-6",
+        model: "claude-opus-4-7",
         max_tokens: 1024,
         messages: [
           {
@@ -682,7 +692,7 @@ Below are examples of how to include images in a Messages API request using base
 
     var message = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus4_6,
+        Model = Model.ClaudeOpus4_7,
         MaxTokens = 1024,
         Messages =
         [
@@ -720,7 +730,7 @@ Below are examples of how to include images in a Messages API request using base
     	client := anthropic.NewClient()
 
     	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-    		Model:     anthropic.ModelClaudeOpus4_6,
+    		Model:     anthropic.ModelClaudeOpus4_7,
     		MaxTokens: 1024,
     		Messages: []anthropic.MessageParam{
     			anthropic.NewUserMessage(
@@ -768,7 +778,7 @@ Below are examples of how to include images in a Messages API request using base
           .messages()
           .create(
             MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_6)
+              .model(Model.CLAUDE_OPUS_4_7)
               .maxTokens(1024)
               .addUserMessageOfBlockParams(contentBlockParams)
               .build()
@@ -801,7 +811,7 @@ Below are examples of how to include images in a Messages API request using base
                 ],
             ],
         ],
-        model: 'claude-opus-4-6',
+        model: 'claude-opus-4-7',
     );
 
     print_r($message);
@@ -812,7 +822,7 @@ Below are examples of how to include images in a Messages API request using base
     client = Anthropic::Client.new
 
     message = client.messages.create(
-      model: "claude-opus-4-6",
+      model: "claude-opus-4-7",
       max_tokens: 1024,
       messages: [
         {
@@ -866,7 +876,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: files-api-2025-04-14" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-4-6",
+    "model": "claude-opus-4-7",
     "max_tokens": 1024,
     "messages": [
       {
@@ -903,7 +913,7 @@ FILE_ID=$(ant beta:files upload \
 ant beta:messages create \
   --beta files-api-2025-04-14 \
   --transform content --format yaml <<YAML
-model: claude-opus-4-6
+model: claude-opus-4-7
 max_tokens: 1024
 messages:
   - role: user
@@ -928,7 +938,7 @@ with open("image.jpg", "rb") as f:
 
 # Use the uploaded file in a message
 message = client.beta.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     betas=["files-api-2025-04-14"],
     messages=[
@@ -963,7 +973,7 @@ async function main() {
 
   // Use the uploaded file in a message
   const response = await anthropic.beta.messages.create({
-    model: "claude-opus-4-6",
+    model: "claude-opus-4-7",
     max_tokens: 1024,
     betas: ["files-api-2025-04-14"],
     messages: [
@@ -1005,7 +1015,7 @@ var fileUpload = await client.Beta.Files.Upload(
 var response = await client.Beta.Messages.Create(
     new MessageCreateParams
     {
-        Model = "claude-opus-4-6",
+        Model = "claude-opus-4-7",
         MaxTokens = 1024,
         Betas = new[] { "files-api-2025-04-14" },
         Messages = new[]
@@ -1063,7 +1073,7 @@ func main() {
 	// Use the uploaded file in a message
 	message, err := client.Beta.Messages.New(context.Background(),
 		anthropic.BetaMessageNewParams{
-			Model:     anthropic.ModelClaudeOpus4_6,
+			Model:     anthropic.ModelClaudeOpus4_7,
 			MaxTokens: 1024,
 			Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
 			Messages: []anthropic.BetaMessageParam{
@@ -1111,7 +1121,7 @@ public class ImageFilesExample {
     ImageBlockParam imageParam = ImageBlockParam.builder().fileSource(file.id()).build();
 
     MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_4_6)
+      .model(Model.CLAUDE_OPUS_4_7)
       .maxTokens(1024)
       .addUserMessageOfBlockParams(
         List.of(
@@ -1157,7 +1167,7 @@ $message = $client->beta->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-7',
     betas: ['files-api-2025-04-14'],
 );
 
@@ -1176,7 +1186,7 @@ file_upload = client.beta.files.upload(
 
 # Use the uploaded file in a message
 message = client.beta.messages.create(
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   betas: ["files-api-2025-04-14"],
   messages: [
@@ -1219,7 +1229,7 @@ Ask Claude to describe one image.
     image1_media_type = "image/png"
 
     message = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
         max_tokens=1024,
         messages=[
             {
@@ -1243,7 +1253,7 @@ Ask Claude to describe one image.
   <Tab title="Using URL">
     ```python Python
     message = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
         max_tokens=1024,
         messages=[
             {
@@ -1287,7 +1297,7 @@ Ask Claude to describe the differences between multiple images.
     image2_media_type = "image/png"
 
     message = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
         max_tokens=1024,
         messages=[
             {
@@ -1321,7 +1331,7 @@ Ask Claude to describe the differences between multiple images.
   <Tab title="Using URL">
     ```python Python
     message = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
         max_tokens=1024,
         messages=[
             {
@@ -1374,7 +1384,7 @@ Ask Claude to describe the differences between multiple images, while giving it 
     image2_media_type = "image/png"
 
     message = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
         max_tokens=1024,
         system="Respond only in Spanish.",
         messages=[
@@ -1409,7 +1419,7 @@ Ask Claude to describe the differences between multiple images, while giving it 
   <Tab title="Using URL">
     ```python Python
     message = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
         max_tokens=1024,
         system="Respond only in Spanish.",
         messages=[

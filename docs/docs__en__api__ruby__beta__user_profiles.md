@@ -12,6 +12,8 @@ Create User Profile
 
 - `external_id: String`
 
+  Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
+
 - `metadata: Hash[Symbol, String]`
 
   Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
@@ -22,7 +24,7 @@ Create User Profile
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -66,6 +68,8 @@ Create User Profile
 
     - `:"output-300k-2026-03-24"`
 
+    - `:"advisor-tool-2026-03-01"`
+
     - `:"user-profiles-2026-03-24"`
 
 ### Returns
@@ -74,23 +78,43 @@ Create User Profile
 
   - `id: String`
 
+    Unique identifier for this user profile, prefixed `uprof_`.
+
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
 
   - `metadata: Hash[Symbol, String]`
 
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
   - `trust_grants: Hash[Symbol, BetaUserProfileTrustGrant]`
 
-    - `status: String`
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-  - `type: String`
+    - `status: :active | :pending | :rejected`
+
+      Status of the trust grant.
+
+      - `:active`
+
+      - `:pending`
+
+      - `:rejected`
+
+  - `type: :user_profile`
+
+    Object type. Always `user_profile`.
+
+    - `:user_profile`
 
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
 
   - `external_id: String`
+
+    Platform's own identifier for this user. Not enforced unique.
 
 ### Example
 
@@ -106,7 +130,7 @@ puts(beta_user_profile)
 
 ## List
 
-`beta.user_profiles.list(**kwargs) -> PageCursorV2<BetaUserProfile>`
+`beta.user_profiles.list(**kwargs) -> PageCursor<BetaUserProfile>`
 
 **get** `/v1/user_profiles`
 
@@ -136,7 +160,7 @@ List User Profiles
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -180,6 +204,8 @@ List User Profiles
 
     - `:"output-300k-2026-03-24"`
 
+    - `:"advisor-tool-2026-03-01"`
+
     - `:"user-profiles-2026-03-24"`
 
 ### Returns
@@ -188,23 +214,43 @@ List User Profiles
 
   - `id: String`
 
+    Unique identifier for this user profile, prefixed `uprof_`.
+
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
 
   - `metadata: Hash[Symbol, String]`
 
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
   - `trust_grants: Hash[Symbol, BetaUserProfileTrustGrant]`
 
-    - `status: String`
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-  - `type: String`
+    - `status: :active | :pending | :rejected`
+
+      Status of the trust grant.
+
+      - `:active`
+
+      - `:pending`
+
+      - `:rejected`
+
+  - `type: :user_profile`
+
+    Object type. Always `user_profile`.
+
+    - `:user_profile`
 
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
 
   - `external_id: String`
+
+    Platform's own identifier for this user. Not enforced unique.
 
 ### Example
 
@@ -220,15 +266,15 @@ puts(page)
 
 ## Retrieve
 
-`beta.user_profiles.retrieve(id, **kwargs) -> BetaUserProfile`
+`beta.user_profiles.retrieve(user_profile_id, **kwargs) -> BetaUserProfile`
 
-**get** `/v1/user_profiles/{id}`
+**get** `/v1/user_profiles/{user_profile_id}`
 
 Get User Profile
 
 ### Parameters
 
-- `id: String`
+- `user_profile_id: String`
 
 - `betas: Array[AnthropicBeta]`
 
@@ -236,7 +282,7 @@ Get User Profile
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -280,6 +326,8 @@ Get User Profile
 
     - `:"output-300k-2026-03-24"`
 
+    - `:"advisor-tool-2026-03-01"`
+
     - `:"user-profiles-2026-03-24"`
 
 ### Returns
@@ -288,23 +336,43 @@ Get User Profile
 
   - `id: String`
 
+    Unique identifier for this user profile, prefixed `uprof_`.
+
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
 
   - `metadata: Hash[Symbol, String]`
 
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
   - `trust_grants: Hash[Symbol, BetaUserProfileTrustGrant]`
 
-    - `status: String`
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-  - `type: String`
+    - `status: :active | :pending | :rejected`
+
+      Status of the trust grant.
+
+      - `:active`
+
+      - `:pending`
+
+      - `:rejected`
+
+  - `type: :user_profile`
+
+    Object type. Always `user_profile`.
+
+    - `:user_profile`
 
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
 
   - `external_id: String`
+
+    Platform's own identifier for this user. Not enforced unique.
 
 ### Example
 
@@ -313,24 +381,26 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-beta_user_profile = anthropic.beta.user_profiles.retrieve("id")
+beta_user_profile = anthropic.beta.user_profiles.retrieve("uprof_011CZkZCu8hGbp5mYRQgUmz9")
 
 puts(beta_user_profile)
 ```
 
 ## Update
 
-`beta.user_profiles.update(id, **kwargs) -> BetaUserProfile`
+`beta.user_profiles.update(user_profile_id, **kwargs) -> BetaUserProfile`
 
-**post** `/v1/user_profiles/{id}`
+**post** `/v1/user_profiles/{user_profile_id}`
 
 Update User Profile
 
 ### Parameters
 
-- `id: String`
+- `user_profile_id: String`
 
 - `external_id: String`
+
+  If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
 
 - `metadata: Hash[Symbol, String]`
 
@@ -342,7 +412,7 @@ Update User Profile
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -385,6 +455,8 @@ Update User Profile
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
     - `:"user-profiles-2026-03-24"`
 
@@ -394,23 +466,43 @@ Update User Profile
 
   - `id: String`
 
+    Unique identifier for this user profile, prefixed `uprof_`.
+
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
 
   - `metadata: Hash[Symbol, String]`
 
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
   - `trust_grants: Hash[Symbol, BetaUserProfileTrustGrant]`
 
-    - `status: String`
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-  - `type: String`
+    - `status: :active | :pending | :rejected`
+
+      Status of the trust grant.
+
+      - `:active`
+
+      - `:pending`
+
+      - `:rejected`
+
+  - `type: :user_profile`
+
+    Object type. Always `user_profile`.
+
+    - `:user_profile`
 
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
 
   - `external_id: String`
+
+    Platform's own identifier for this user. Not enforced unique.
 
 ### Example
 
@@ -419,22 +511,22 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-beta_user_profile = anthropic.beta.user_profiles.update("id")
+beta_user_profile = anthropic.beta.user_profiles.update("uprof_011CZkZCu8hGbp5mYRQgUmz9")
 
 puts(beta_user_profile)
 ```
 
 ## Create Enrollment URL
 
-`beta.user_profiles.create_enrollment_url(id, **kwargs) -> BetaUserProfileEnrollmentURL`
+`beta.user_profiles.create_enrollment_url(user_profile_id, **kwargs) -> BetaUserProfileEnrollmentURL`
 
-**post** `/v1/user_profiles/{id}/enrollment_url`
+**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
 ### Parameters
 
-- `id: String`
+- `user_profile_id: String`
 
 - `betas: Array[AnthropicBeta]`
 
@@ -442,7 +534,7 @@ Create Enrollment URL
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -485,6 +577,8 @@ Create Enrollment URL
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
 
     - `:"user-profiles-2026-03-24"`
 
@@ -496,9 +590,15 @@ Create Enrollment URL
 
     A timestamp in RFC 3339 format
 
-  - `type: String`
+  - `type: :enrollment_url`
+
+    Object type. Always `enrollment_url`.
+
+    - `:enrollment_url`
 
   - `url: String`
+
+    Enrollment URL to send to the end user. Valid until `expires_at`.
 
 ### Example
 
@@ -507,7 +607,7 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-beta_user_profile_enrollment_url = anthropic.beta.user_profiles.create_enrollment_url("id")
+beta_user_profile_enrollment_url = anthropic.beta.user_profiles.create_enrollment_url("uprof_011CZkZCu8hGbp5mYRQgUmz9")
 
 puts(beta_user_profile_enrollment_url)
 ```
@@ -520,23 +620,43 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
+    Unique identifier for this user profile, prefixed `uprof_`.
+
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
 
   - `metadata: Hash[Symbol, String]`
 
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
   - `trust_grants: Hash[Symbol, BetaUserProfileTrustGrant]`
 
-    - `status: String`
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-  - `type: String`
+    - `status: :active | :pending | :rejected`
+
+      Status of the trust grant.
+
+      - `:active`
+
+      - `:pending`
+
+      - `:rejected`
+
+  - `type: :user_profile`
+
+    Object type. Always `user_profile`.
+
+    - `:user_profile`
 
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
 
   - `external_id: String`
+
+    Platform's own identifier for this user. Not enforced unique.
 
 ### Beta User Profile Enrollment URL
 
@@ -546,12 +666,26 @@ puts(beta_user_profile_enrollment_url)
 
     A timestamp in RFC 3339 format
 
-  - `type: String`
+  - `type: :enrollment_url`
+
+    Object type. Always `enrollment_url`.
+
+    - `:enrollment_url`
 
   - `url: String`
+
+    Enrollment URL to send to the end user. Valid until `expires_at`.
 
 ### Beta User Profile Trust Grant
 
 - `class BetaUserProfileTrustGrant`
 
-  - `status: String`
+  - `status: :active | :pending | :rejected`
+
+    Status of the trust grant.
+
+    - `:active`
+
+    - `:pending`
+
+    - `:rejected`
