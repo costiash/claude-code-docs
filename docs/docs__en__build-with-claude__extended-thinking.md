@@ -779,7 +779,7 @@ For more documentation on streaming via the Messages API, see [Streaming Message
 
 Here's how to handle streaming with thinking:
 
-<CodeGroup>
+<CodeGroup tryInConsole={{ userPrompt: "What is the greatest common divisor of 1071 and 462?", thinkingBudgetTokens: 16000 }}>
 ```bash Shell
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -1150,10 +1150,6 @@ end
 ```
 
 </CodeGroup>
-
-<TryInConsoleButton userPrompt="What is the greatest common divisor of 1071 and 462?" thinkingBudgetTokens={16000}>
-  Try in Console
-</TryInConsoleButton>
 
 Example streaming output:
 ```sse Output

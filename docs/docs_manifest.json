@@ -4971,8 +4971,8 @@
     "docs__en__build-with-claude__extended-thinking.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking.md",
-      "hash": "1b4494fb1264ca1e60f4d477680e5875f24fa838a6107b674dde452ea5bd9ad1",
-      "last_updated": "2026-04-14T21:30:24.447857"
+      "hash": "3cd6d3978c5c8b2782f78912094dda3830b1646e397a2a05a4b8fca74da6da60",
+      "last_updated": "2026-04-16T04:15:18.356020"
     },
     "docs__en__build-with-claude__fast-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode",
@@ -5529,14 +5529,14 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "39be3234561e1a89e6a43f02e4db7e9f318ffaa04e809ac432c0390271a4ef20",
-      "last_updated": "2026-04-16T00:55:23.686026",
+      "hash": "826a1e40f653c199807ee3bbfa6d9fdcac17b9f19db71acba61abcceb4e4b79e",
+      "last_updated": "2026-04-16T04:16:22.415851",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-16T00:55:23.686183",
-    "fetch_duration_seconds": 742.285017,
+    "last_fetch_completed": "2026-04-16T04:16:22.416003",
+    "fetch_duration_seconds": 626.585456,
     "total_pages_discovered": 1175,
     "pages_fetched_successfully": 922,
     "pages_failed": 254,
@@ -5801,7 +5801,7 @@
     "total_files": 922,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-16T00:55:23.686202",
+  "last_updated": "2026-04-16T04:16:22.416019",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

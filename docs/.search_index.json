@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-16T00:55:26Z",
+  "generated_at": "2026-04-16T04:16:24Z",
   "indexed_files": 1041,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "prompt",
         "bash"
       ],
-      "word_count": 34142,
+      "word_count": 34141,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -25588,7 +25588,7 @@
         "interleaved",
         "see"
       ],
-      "word_count": 14772,
+      "word_count": 14771,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
