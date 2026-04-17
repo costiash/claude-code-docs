@@ -30,7 +30,7 @@ Pre-built Agent Skills extend Claude's capabilities with specialized expertise f
 First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills:
 
 <CodeGroup defaultLanguage="CLI">
-```bash Shell
+```bash cURL
 curl "https://api.anthropic.com/v1/skills?source=anthropic" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -79,7 +79,7 @@ This API returns each Skill's metadata: its name and description. Claude loads t
 Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -208,7 +208,7 @@ The presentation was created in the code execution container and saved as a file
 
 <CodeGroup>
 
-```bash Shell nocheck
+```bash cURL nocheck
 # Extract file_id from response (using jq)
 FILE_ID=$(echo "$RESPONSE" | jq -r '.content[] | select(.type=="tool_use" and .name=="code_execution") | .content[] | select(.file_id) | .file_id')
 
@@ -222,7 +222,7 @@ curl "https://api.anthropic.com/v1/files/$FILE_ID/content" \
 echo "Presentation saved to renewable_energy.pptx"
 ```
 
-```bash CLI
+```bash CLI nocheck
 # Extract file_id with --transform on the messages create call
 FILE_ID=$(ant beta:messages create \
   --beta code-execution-2025-08-25 --beta skills-2025-10-02 \
@@ -320,7 +320,7 @@ Now that you've created your first document with Skills, try these variations:
 ### Create a spreadsheet
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -420,7 +420,7 @@ const response = await client.beta.messages.create({
 ### Create a Word document
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -449,7 +449,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:messages create \
   --beta code-execution-2025-08-25 \
   --beta skills-2025-10-02 <<'YAML'
@@ -520,7 +520,7 @@ const response = await client.beta.messages.create({
 ### Generate a PDF
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \

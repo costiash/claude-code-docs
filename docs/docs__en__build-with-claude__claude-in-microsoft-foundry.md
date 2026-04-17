@@ -132,9 +132,9 @@ The `resource` and `base_url` parameters are mutually exclusive. Provide either 
 **Example using API key:**
 
 <Tabs>
-<Tab title="Shell">
+<Tab title="cURL">
 
-```bash nocheck
+```bash cURL nocheck
 curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
   -H "content-type: application/json" \
   -H "api-key: YOUR_AZURE_API_KEY" \
@@ -300,9 +300,9 @@ For enhanced security and centralized access management, you can use Entra ID (f
 **Example using Entra ID:**
 
 <Tabs>
-<Tab title="Shell">
+<Tab title="cURL">
 
-```bash nocheck
+```bash cURL nocheck
 # Get Azure Entra ID token
 ACCESS_TOKEN=$(az account get-access-token --resource https://cognitiveservices.azure.com --query accessToken -o tsv)
 

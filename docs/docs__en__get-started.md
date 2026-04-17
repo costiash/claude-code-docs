@@ -27,7 +27,7 @@ Make your first API call to Claude and build a simple web search assistant.
       <Step title="Make your first API call">
         Run this command to create a simple web search assistant:
 
-        ```bash
+        ```bash cURL
         curl https://api.anthropic.com/v1/messages \
           -H "Content-Type: application/json" \
           -H "x-api-key: $ANTHROPIC_API_KEY" \

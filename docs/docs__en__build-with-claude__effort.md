@@ -81,7 +81,7 @@ When running Claude Opus 4.7 at `xhigh` or `max` effort, set a large `max_tokens
 ## Basic usage
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \

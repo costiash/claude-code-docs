@@ -28,7 +28,7 @@ This API enables you to better monitor, analyze, and optimize your Claude Code a
 
 Get your organization's Claude Code analytics for a specific day:
 
-```bash
+```bash cURL
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08&\
 limit=20" \
@@ -64,7 +64,7 @@ For complete parameter details and response schemas, see the [Claude Code Analyt
 
 #### Get analytics for a specific day
 
-```bash
+```bash cURL
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08" \
   --header "anthropic-version: 2023-06-01" \
@@ -73,7 +73,7 @@ starting_at=2025-09-08" \
 
 #### Get analytics with pagination
 
-```bash
+```bash cURL
 # First request
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08&\

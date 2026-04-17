@@ -41,7 +41,7 @@ EOF
 )
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:agents create <<'YAML'
 name: Financial Analyst
 model: claude-opus-4-7

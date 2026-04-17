@@ -121,7 +121,7 @@ Programmatically manage workspaces using the [Admin API](/docs/en/build-with-cla
 Admin API endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
 </Note>
 
-```bash
+```bash cURL
 # Create a workspace
 curl --request POST "https://api.anthropic.com/v1/organizations/workspaces" \
   --header "anthropic-version: 2023-06-01" \
@@ -145,7 +145,7 @@ For complete parameter details and response schemas, see the [Workspaces API ref
 
 Add, update, or remove members from a workspace:
 
-```bash
+```bash cURL
 # Add a member to a workspace
 curl --request POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members" \
   --header "anthropic-version: 2023-06-01" \
@@ -209,7 +209,7 @@ For detailed information on rate limits and how they work, see [Rate limits](/do
 
 Track usage and costs by workspace using the [Usage and Cost API](/docs/en/build-with-claude/usage-cost-api):
 
-```bash
+```bash cURL
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2025-01-01T00:00:00Z&\
 ending_at=2025-01-08T00:00:00Z&\

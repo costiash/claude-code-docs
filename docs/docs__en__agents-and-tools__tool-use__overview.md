@@ -9,7 +9,7 @@ Tool use lets Claude call functions you define or that Anthropic provides. Claud
 Here's the simplest example using a server tool, where Anthropic handles execution:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \

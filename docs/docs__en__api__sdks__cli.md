@@ -344,7 +344,7 @@ Note the `id` from the response — you'll pass it to the session create command
 <Tip>
 Check `summarizer.agent.yaml` into your repository and keep it in sync with the API in your CI pipeline. The update command needs the agent ID and current version as flags:
 
-```bash CLI
+```bash CLI nocheck
 ant beta:agents update --agent-id agent_011CYm1BLqPXpQRk5khsSXrs --version 1 < summarizer.agent.yaml
 ```
 </Tip>
@@ -382,7 +382,7 @@ Note the `id` from the response — you'll pass it to the session create command
 <Tip>
 Check `summarizer.environment.yaml` into your repository and keep it in sync with the API in your CI pipeline. The update command needs the environment ID as a flag:
 
-```bash CLI
+```bash CLI nocheck
 ant beta:environments update --environment-id env_01595EKxaaTTGwwY3kyXdtbs < summarizer.environment.yaml
 ```
 </Tip>

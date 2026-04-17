@@ -235,7 +235,7 @@ session=$(curl -fsS https://api.anthropic.com/v1/sessions \
   -d '{"agent": "'$ORCHESTRATOR_ID'", "environment_id": "'$ENVIRONMENT_ID'"}')
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:sessions create \
   --agent "$ORCHESTRATOR_ID" \
   --environment-id "$ENVIRONMENT_ID"
@@ -274,7 +274,7 @@ curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads" \
   | jq -r '.data[] | "[\(.agent_name)] \(.status)"'
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:sessions:threads list --session-id "$SESSION_ID"
 ```
 
@@ -348,7 +348,7 @@ curl -fsSN "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID
   done
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:sessions:threads stream \
   --session-id "$SESSION_ID" \
   --thread-id "$THREAD_ID"
@@ -493,7 +493,7 @@ curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/
   | jq -r '.data[] | "[\(.type)] \(.processed_at)"'
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:sessions:threads:events list \
   --session-id "$SESSION_ID" \
   --thread-id "$THREAD_ID"

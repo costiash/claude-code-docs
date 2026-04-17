@@ -49,7 +49,7 @@ There are five organization-level roles. See more details in the [API Console ro
 You can list [organization members](/docs/en/api/admin-api/users/get-user), update member roles, and remove members.
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 # List organization members
 curl "https://api.anthropic.com/v1/organizations/users?limit=10" \
   --header "anthropic-version: 2023-06-01" \
@@ -75,7 +75,7 @@ You can invite users to organizations and manage those [invites](/docs/en/api/ad
 
 <CodeGroup>
 
-```bash Shell
+```bash cURL
 # Create invite
 curl --request POST "https://api.anthropic.com/v1/organizations/invites" \
   --header "anthropic-version: 2023-06-01" \
@@ -108,7 +108,7 @@ Manage [user access to specific workspaces](/docs/en/api/admin-api/workspace_mem
 
 <CodeGroup>
 
-```bash Shell
+```bash cURL
 # Add member to workspace
 curl --request POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members" \
   --header "anthropic-version: 2023-06-01" \
@@ -145,7 +145,7 @@ Monitor and manage [API keys](/docs/en/api/admin-api/apikeys/get-api-key):
 
 <CodeGroup>
 
-```bash Shell
+```bash cURL
 # List API keys
 curl "https://api.anthropic.com/v1/organizations/api_keys?limit=10&status=active&workspace_id=wrkspc_xxx" \
   --header "anthropic-version: 2023-06-01" \
@@ -169,7 +169,7 @@ Get information about your organization programmatically with the `/v1/organizat
 
 For example:
 
-```bash
+```bash cURL
 curl "https://api.anthropic.com/v1/organizations/me" \
   --header "anthropic-version: 2023-06-01" \
   --header "x-api-key: $ADMIN_API_KEY"

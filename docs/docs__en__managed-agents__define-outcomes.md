@@ -74,7 +74,7 @@ Pass the rubric as inline text on `user.define_outcome` (shown in the next secti
   printf 'Uploaded rubric: %s\n' "$rubric_id"
   ```
   
-  ```bash CLI
+  ```bash CLI nocheck
   RUBRIC_ID=$(ant beta:files upload \
     --file /path/to/pr_review_rubric.md \
     --transform id --format yaml)
@@ -180,7 +180,7 @@ After creating a session, send a `user.define_outcome` event. The agent begins w
   # "max_iterations" is optional; default 3, max 20
   ```
   
-  ```bash CLI
+  ```bash CLI nocheck
   # Create a session
   SESSION_ID=$(ant beta:sessions create \
     --agent "$AGENT_ID" \
@@ -468,7 +468,7 @@ You can either listen on the [event stream](/docs/en/managed-agents/events-and-s
   # outc_01a...: satisfied
   ```
   
-  ```bash CLI
+  ```bash CLI nocheck
   ant beta:sessions retrieve --session-id "$SESSION_ID"
   ```
   ```python Python

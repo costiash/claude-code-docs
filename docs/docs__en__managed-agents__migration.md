@@ -301,7 +301,8 @@ end
 
   kill "${stream_pid}" 2>/dev/null || true
   ```
-  ```bash CLI
+  
+  ```bash CLI nocheck
   { read -r _ agent_id; read -r _ agent_version; } < <(ant beta:agents create \
     --name "Task Runner" \
     --model claude-opus-4-7 \
@@ -748,7 +749,7 @@ curl -sS --fail-with-body "https://api.anthropic.com/v1/agents/$AGENT_ID?beta=tr
   --json "$(jq -n --argjson version "$AGENT_VERSION" '{version: $version, model: "claude-opus-4-7"}')"
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:agents update \
   --agent-id "$AGENT_ID" \
   --version "$AGENT_VERSION" \

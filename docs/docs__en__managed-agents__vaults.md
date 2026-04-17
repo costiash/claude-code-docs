@@ -391,7 +391,7 @@ curl -fsSL "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials" \
   }'
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:vaults:credentials create --vault-id "$VAULT_ID" <<'YAML'
 display_name: Linear API key
 auth:

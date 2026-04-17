@@ -788,7 +788,7 @@ You can also provide search results directly in user messages. This is useful fo
 ### Example: Direct search results
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 #!/bin/sh
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \

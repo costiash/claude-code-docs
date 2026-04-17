@@ -47,7 +47,7 @@ session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
   }')
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:sessions create \
   --agent agent_01J8XkN5uT3vHpLqRfWdY2 \
   --environment-id env_01K2mPsT7hNwR4jXuLvCqD8 \

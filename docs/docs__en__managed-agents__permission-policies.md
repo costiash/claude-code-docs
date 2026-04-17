@@ -657,7 +657,7 @@ curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
   }'
 ```
 
-```bash CLI
+```bash CLI nocheck
 # Allow the tool to execute
 ant beta:sessions:events send \
   --session-id "$SESSION_ID" \

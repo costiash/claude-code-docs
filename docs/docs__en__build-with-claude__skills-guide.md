@@ -81,7 +81,7 @@ Skills are specified using the `container` parameter in the Messages API. You ca
 The structure is identical for both Anthropic and custom Skills. Specify the required `type` and `skill_id`, and optionally include `version` to pin to a specific version:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -389,9 +389,9 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 **Example: Creating and downloading an Excel file**
 
 <Tabs>
-<Tab title="Shell">
+<Tab title="cURL">
 
-```bash Shell hidelines={1}
+```bash cURL hidelines={1}
 cd "$(mktemp -d)"
 # Step 1: Use a Skill to create a file
 RESPONSE=$(curl https://api.anthropic.com/v1/messages \
@@ -439,7 +439,7 @@ echo "Downloaded: $FILENAME"
 </Tab>
 <Tab title="CLI">
 
-```bash CLI hidelines={1}
+```bash CLI nocheck hidelines={1}
 cd "$(mktemp -d)"
 # Step 1: Use the xlsx Skill to create a file
 # Step 2: Extract file_id from the response via --transform (GJSON path)
@@ -1001,7 +1001,7 @@ end
 **Additional Files API operations:**
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 # Get file metadata
 curl "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -1021,7 +1021,7 @@ curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "anthropic-beta: files-api-2025-04-14"
 ```
 
-```bash CLI
+```bash CLI nocheck
 # Get file metadata
 ant beta:files retrieve-metadata --file-id "$FILE_ID" \
   --transform '{filename,size_bytes}' --format yaml \
@@ -1669,7 +1669,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
 
 <CodeGroup>
 
-```bash Shell nocheck
+```bash cURL nocheck
 # Initial request
 RESPONSE=$(curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -2202,7 +2202,7 @@ Combine multiple Skills in a single request to handle complex workflows:
 
 <CodeGroup>
 
-```bash Shell nocheck
+```bash cURL nocheck
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -2588,7 +2588,7 @@ Upload your custom Skill to make it available in your workspace. You can upload 
 
 <CodeGroup defaultLanguage="CLI">
 
-```bash Shell nocheck
+```bash cURL nocheck
 curl -X POST "https://api.anthropic.com/v1/skills" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -2905,7 +2905,7 @@ For complete request/response schemas, see the [Create Skill API reference](/doc
 Retrieve all Skills available to your workspace, including both Anthropic pre-built Skills and your custom Skills. Use the `source` parameter to filter by skill type:
 
 <CodeGroup defaultLanguage="CLI">
-```bash Shell
+```bash cURL
 # List all Skills
 curl "https://api.anthropic.com/v1/skills" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -3112,7 +3112,7 @@ Get details about a specific Skill:
 
 <CodeGroup defaultLanguage="CLI">
 
-```bash Shell nocheck
+```bash cURL nocheck
 curl "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -3262,7 +3262,7 @@ To delete a Skill, you must first delete all its versions:
 
 <CodeGroup defaultLanguage="CLI">
 
-```bash Shell nocheck
+```bash cURL nocheck
 # Delete all versions first, then delete the Skill
 curl -X DELETE "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -3528,7 +3528,7 @@ Skills support versioning to manage updates safely:
 
 <CodeGroup defaultLanguage="CLI">
 
-```bash Shell nocheck
+```bash cURL nocheck
 # Create a new version
 NEW_VERSION=$(curl -X POST "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv/versions" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -4131,7 +4131,7 @@ Combine Excel and custom DCF analysis Skills:
 
 <CodeGroup>
 
-```bash Shell nocheck
+```bash cURL nocheck
 # Create custom DCF analysis Skill
 DCF_SKILL=$(curl -X POST "https://api.anthropic.com/v1/skills" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -4571,7 +4571,7 @@ container = {
 When using prompt caching, note that changing the Skills list in your container breaks the cache:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 # First request creates cache
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \

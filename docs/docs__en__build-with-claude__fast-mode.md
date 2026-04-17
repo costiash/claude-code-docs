@@ -31,7 +31,7 @@ Fast mode runs the same model with a faster inference configuration. There is no
 ## Basic usage
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
@@ -254,7 +254,7 @@ For tier-specific rate limits, see the [rate limits page](/docs/en/api/rate-limi
 The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \

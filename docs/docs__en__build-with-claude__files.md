@@ -406,7 +406,7 @@ The Files API supports different file types that correspond to different content
 For file types that are not supported as `document` blocks (.csv, .txt, .md, .docx, .xlsx), convert the files to plain text, and include the content directly in your message:
 
 <CodeGroup>
-```bash Shell hidelines={3..4}
+```bash cURL hidelines={3..4}
 # Example: Reading a text file and sending it as plain text
 # Note: For files with special characters, consider base64 encoding
 TEXT_CONTENT="This is a sample document. It has multiple lines."
@@ -724,14 +724,14 @@ For images, use the `image` content block:
 Retrieve a list of your uploaded files:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/files \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14"
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:files list
 ```
 

@@ -132,7 +132,7 @@ The following examples show how to generate text from Claude on Vertex AI:
 <CodeGroup>
 
   
-  ```bash Shell nocheck
+  ```bash cURL nocheck
   MODEL_ID=claude-opus-4-7
   LOCATION=global
   PROJECT_ID=MY_PROJECT_ID

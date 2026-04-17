@@ -55,7 +55,7 @@ On subsequent requests, append the response to your messages. The API automatica
 Enable compaction by adding the `compact_20260112` strategy to `context_management.edits` in your Messages API request.
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \
@@ -1551,7 +1551,8 @@ When the API receives a `compaction` block, all content blocks before it are ign
 When streaming responses with compaction enabled, you'll receive a `content_block_start` event when compaction begins. The compaction block streams differently from text blocks. You'll receive a `content_block_start` event, followed by a single `content_block_delta` with the complete summary content (no intermediate streaming), and then a `content_block_stop` event.
 
 <CodeGroup>
-```bash CLI
+
+```bash CLI nocheck
 ant beta:messages create --stream --format jsonl \
   --beta compact-2026-01-12 <<'YAML'
 model: claude-opus-4-7

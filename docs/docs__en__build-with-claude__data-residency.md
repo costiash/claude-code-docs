@@ -25,7 +25,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
 ### API usage
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \

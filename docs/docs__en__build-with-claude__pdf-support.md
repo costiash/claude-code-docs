@@ -95,7 +95,7 @@ Let's start with a simple example using the Messages API. You can provide PDFs t
 The simplest approach is to reference a PDF directly from a URL:
 
 <CodeGroup>
-   ```bash Shell
+   ```bash cURL
     curl https://api.anthropic.com/v1/messages \
       -H "content-type: application/json" \
       -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -244,7 +244,7 @@ The simplest approach is to reference a PDF directly from a URL:
 If you need to send PDFs from your local system or when a URL isn't available:
 
 <CodeGroup>
-    ```bash Shell hidelines={1}
+    ```bash cURL hidelines={1}
     cd "$(mktemp -d)"
     # Method 1: Fetch and encode a remote PDF
     curl -s "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
@@ -457,7 +457,7 @@ If you need to send PDFs from your local system or when a URL isn't available:
 For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](/docs/en/build-with-claude/files):
 
 <CodeGroup>
-```bash Shell hidelines={1..2}
+```bash cURL hidelines={1..2}
 cd "$(mktemp -d)"
 curl -sSo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
 # First, upload your PDF to the Files API
@@ -493,7 +493,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```bash CLI hidelines={1..2}
+```bash CLI nocheck hidelines={1..2}
 cd "$(mktemp -d)"
 curl -sSo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
 # First, upload your PDF to the Files API
@@ -700,7 +700,7 @@ For high-volume processing, consider these approaches:
 #### Use prompt caching
 Cache PDFs to improve performance on repeated queries:
 <CodeGroup>
-```bash Shell hidelines={1..2}
+```bash cURL hidelines={1..2}
 cd "$(mktemp -d)"
 curl -s "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
 # Create a JSON request file using the pdf_base64.txt content
@@ -877,7 +877,7 @@ public class MessagesDocumentExample {
 #### Process document batches
 Use the Message Batches API for high-volume workflows:
 <CodeGroup>
-```bash Shell hidelines={1..2}
+```bash cURL hidelines={1..2}
 cd "$(mktemp -d)"
 curl -s "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
 # Create a JSON request file using the pdf_base64.txt content

@@ -49,7 +49,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
 
 <CodeGroup>
 
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -2531,7 +2531,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
 
 <CodeGroup>
 
-```bash CLI
+```bash CLI nocheck
 ant messages create <<'YAML'
 model: claude-opus-4-7
 max_tokens: 1024

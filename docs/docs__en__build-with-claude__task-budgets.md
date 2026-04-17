@@ -29,7 +29,7 @@ Task budgets complement the [effort parameter](/docs/en/build-with-claude/effort
 Add `task_budget` to `output_config` and include the beta header:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \

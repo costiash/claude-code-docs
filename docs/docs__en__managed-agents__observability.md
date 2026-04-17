@@ -40,7 +40,7 @@ curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
 '
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:sessions:events list --session-id "$SESSION_ID"
 ```
 
@@ -231,7 +231,7 @@ curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
 '
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant beta:sessions:events list \
   --session-id "$SESSION_ID" \
   --format jsonl \

@@ -58,7 +58,7 @@ For more information about the response format of extended thinking, see the [Me
 Here is an example of using extended thinking in the Messages API:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \
@@ -379,8 +379,8 @@ On [Claude Mythos Preview](https://anthropic.com/glasswing), `display` defaults 
 Automated pipelines that never surface thinking content to end users can skip the overhead of receiving thinking tokens over the wire. Latency-sensitive applications get the same reasoning quality without waiting for thinking text to stream before the final response begins.
 
 <Tabs>
-<Tab title="Shell">
-```bash Shell
+<Tab title="cURL">
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \
@@ -781,7 +781,7 @@ For more documentation on streaming via the Messages API, see [Streaming Message
 Here's how to handle streaming with thinking:
 
 <CodeGroup tryInConsole={{ userPrompt: "What is the greatest common divisor of 1071 and 462?", thinkingBudgetTokens: 16000 }}>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \

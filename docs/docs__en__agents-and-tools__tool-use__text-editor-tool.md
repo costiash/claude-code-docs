@@ -30,7 +30,7 @@ You can optionally specify a `max_characters` parameter to control truncation wh
 
 <CodeGroup>
 
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -308,7 +308,7 @@ This example demonstrates how Claude uses the text editor tool to fix a syntax e
 First, your application provides Claude with the text editor tool and a prompt to fix a syntax error:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -440,7 +440,7 @@ Claude uses the text editor tool first to view the file:
 Your application should then read the file and return its contents to Claude:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -750,7 +750,8 @@ Claude identifies the syntax error and uses the `str_replace` command to fix it:
 Your application should then make the edit and return the result:
 
 <CodeGroup>
-```bash CLI
+
+```bash CLI nocheck
 ant messages create <<'YAML'
 model: claude-opus-4-7
 max_tokens: 1024

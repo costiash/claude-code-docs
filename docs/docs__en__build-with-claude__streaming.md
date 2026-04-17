@@ -462,7 +462,7 @@ There may be `ping` events dispersed throughout the response as well. See [Event
 ### Basic streaming request
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
      --header "anthropic-version: 2023-06-01" \
      --header "content-type: application/json" \
@@ -680,7 +680,7 @@ Tool use supports [fine-grained streaming](/docs/en/agents-and-tools/tool-use/fi
 This request asks Claude to use a tool to report the weather.
 
 <CodeGroup>
-```bash Shell
+```bash cURL
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -1134,7 +1134,7 @@ data: {"type":"message_stop"}
 This request enables extended thinking with streaming to see Claude's step-by-step reasoning.
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \
@@ -1404,7 +1404,7 @@ data: {"type": "message_stop"}
 This request asks Claude to search the web for current weather information.
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \

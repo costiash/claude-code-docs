@@ -42,7 +42,7 @@ Adaptive thinking also automatically enables [interleaved thinking](/docs/en/bui
 Set `thinking.type` to `"adaptive"` in your API request:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \
@@ -63,7 +63,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant messages create \
   --model claude-opus-4-7 \
   --max-tokens 16000 \
@@ -313,7 +313,7 @@ You can combine adaptive thinking with the [effort parameter](/docs/en/build-wit
 | `low` | Claude minimizes thinking. Skips thinking for simple tasks where speed matters most. |
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \

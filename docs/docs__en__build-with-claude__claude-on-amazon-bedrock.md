@@ -18,7 +18,7 @@ Note that this guide assumes you have already signed up for an [AWS account](htt
 2. Configure your AWS credentials using the AWS configure command (see [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)) or find your credentials by navigating to "Command line or programmatic access" within your AWS dashboard and following the directions in the popup modal.
 3. Verify that your credentials are working:
 
-```bash Shell
+```bash
 aws sts get-caller-identity
 ```
 

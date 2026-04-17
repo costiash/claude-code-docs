@@ -98,7 +98,7 @@ You can [create a batch](/docs/en/api/creating-message-batches) by passing this 
 
 <CodeGroup>
 
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages/batches \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \
@@ -466,7 +466,7 @@ The Message Batch's `processing_status` field indicates the stage of processing 
 To poll a Message Batch, you'll need its `id`, which is provided in the response when creating a batch or by listing batches. You can implement a polling loop that checks the batch status periodically until processing has ended:
 
 <CodeGroup>
-```bash Shell hidelines={2..16,23}
+```bash cURL hidelines={2..16,23}
 #!/bin/sh
 MESSAGE_BATCH_ID=$(curl -s https://api.anthropic.com/v1/messages/batches \
   --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -698,7 +698,7 @@ puts message_batch
 You can list all Message Batches in your Workspace using the [list endpoint](/docs/en/api/listing-message-batches). The API supports pagination, automatically fetching additional pages as needed:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 #!/bin/sh
 
 if ! command -v jq &> /dev/null; then
@@ -884,7 +884,7 @@ Results of the batch are available for download at the `results_url` property on
 
 <CodeGroup>
 
-```bash Shell
+```bash cURL
 #!/bin/sh
 curl "https://api.anthropic.com/v1/messages/batches/msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d" \
   --header "anthropic-version: 2023-06-01" \
@@ -924,7 +924,7 @@ curl "https://api.anthropic.com/v1/messages/batches/msgbatch_01HkcTjaV5uDC8jWR4Z
 
 ```
 
-```bash CLI
+```bash CLI nocheck
 ant messages:batches results \
   --message-batch-id msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d \
   --transform '{custom_id,"type":result.type,"error":result.error.error.type}' \
@@ -1186,7 +1186,7 @@ Batch results can be returned in any order, and may not match the ordering of re
 You can cancel a Message Batch that is currently processing using the [cancel endpoint](/docs/en/api/canceling-message-batches). Immediately after cancellation, a batch's `processing_status` will be `canceling`. You can use the same polling technique described above to wait until cancellation is finalized. Canceled batches end up with a status of `ended` and may contain partial results for requests that were processed before cancellation.
 
 <CodeGroup>
-```bash Shell hidelines={2..15}
+```bash cURL hidelines={2..15}
 #!/bin/sh
 MESSAGE_BATCH_ID=$(curl -s https://api.anthropic.com/v1/messages/batches \
   --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -1368,7 +1368,7 @@ Example of implementing prompt caching in a batch:
 
 <CodeGroup>
 
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages/batches \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \
@@ -1911,7 +1911,7 @@ A single 300k-token generation can take over an hour to complete, so plan your b
 
 <CodeGroup>
 
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages/batches \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \

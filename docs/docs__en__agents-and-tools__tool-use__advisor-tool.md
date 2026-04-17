@@ -49,7 +49,7 @@ The advisor tool is available in beta on the Claude API (Anthropic).
 ## Quick start
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \

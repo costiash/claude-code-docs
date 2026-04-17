@@ -21,7 +21,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
 ## Basic request and response
 
 <CodeGroup>
-  ```bash Shell
+  ```bash cURL
   #!/bin/sh
   curl https://api.anthropic.com/v1/messages \
        --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -200,7 +200,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
 The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don't necessarily need to actually originate from Claude. You can use synthetic `assistant` messages.
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 #!/bin/sh
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -407,7 +407,7 @@ puts message
 You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 <CodeGroup>
-  ```bash Shell
+  ```bash cURL
   #!/bin/sh
   curl https://api.anthropic.com/v1/messages \
        --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -621,7 +621,7 @@ Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/gla
 Claude can read both text and images in requests. Images can be supplied using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](/docs/en/build-with-claude/files). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [vision guide](/docs/en/build-with-claude/vision) for more details.
 
 <CodeGroup>
-  ```bash Shell
+  ```bash cURL
   #!/bin/sh
 
   # Option 1: Base64-encoded image

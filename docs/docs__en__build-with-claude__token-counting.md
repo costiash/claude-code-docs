@@ -30,7 +30,7 @@ All [active models](/docs/en/about-claude/models/overview) support token countin
 
 <CodeGroup>
 
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages/count_tokens \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "content-type: application/json" \
@@ -212,7 +212,7 @@ puts response
 
 <CodeGroup>
 
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages/count_tokens \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "content-type: application/json" \
@@ -533,7 +533,7 @@ puts response
 ### Count tokens in messages with images
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 #!/bin/sh
 
 IMAGE_URL="https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
@@ -894,7 +894,7 @@ See [how the context window is calculated with extended thinking](/docs/en/build
 
 <CodeGroup>
 
-```bash Shell nocheck
+```bash cURL nocheck
 curl https://api.anthropic.com/v1/messages/count_tokens \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "content-type: application/json" \
@@ -1267,7 +1267,7 @@ Token counting supports PDFs with the same [limitations](/docs/en/build-with-cla
 </Note>
 
 <CodeGroup>
-```bash Shell hidelines={1..3}
+```bash cURL hidelines={1..3}
 PDF_URL="https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
 PDF_BASE64=$(curl -s "$PDF_URL" | base64 | tr -d '\n')
 
@@ -1299,7 +1299,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 EOF
 ```
 
-```bash CLI hidelines={1..3}
+```bash CLI nocheck hidelines={1..3}
 PDF_URL="https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
 curl -s "$PDF_URL" -o document.pdf
 

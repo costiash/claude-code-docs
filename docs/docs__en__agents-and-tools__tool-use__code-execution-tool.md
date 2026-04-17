@@ -61,7 +61,7 @@ For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is 
 Here's a simple example that asks Claude to perform a calculation:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
@@ -334,7 +334,7 @@ The Python environment can process various file types uploaded via the Files API
 3. **Include the code execution tool** in your API request
 
 <CodeGroup>
-```bash Shell hidelines={1..2}
+```bash cURL hidelines={1..2}
 cd "$(mktemp -d)"
 printf 'name,value\nfoo,1\nbar,2\n' > data.csv
 # First, upload a file
@@ -1327,7 +1327,7 @@ This allows you to maintain created files between requests.
 ### Example
 
 <CodeGroup>
-```bash Shell hidelines={1}
+```bash cURL hidelines={1}
 cd "$(mktemp -d)"
 # First request: Create a file with a random number
 curl https://api.anthropic.com/v1/messages \

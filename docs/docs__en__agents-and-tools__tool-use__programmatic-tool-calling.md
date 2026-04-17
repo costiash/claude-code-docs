@@ -37,7 +37,7 @@ For the full code execution tool version matrix, see the [code execution tool mo
 Here's a simple example where Claude programmatically queries a database multiple times and aggregates results:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \

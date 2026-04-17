@@ -67,7 +67,7 @@ Get started quickly with the computer use reference implementation that includes
 Here's how to get started with computer use:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \

@@ -28,7 +28,7 @@ For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/t
 ## Quick start
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \

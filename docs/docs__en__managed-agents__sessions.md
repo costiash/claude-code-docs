@@ -32,7 +32,7 @@ A session requires an `agent` ID and an `environment` ID. Agents are versioned r
   SESSION_ID=$(jq -r '.id' <<< "$session")
   ```
   
-  ```bash CLI
+  ```bash CLI nocheck
   ant beta:sessions create \
     --agent "$AGENT_ID" \
     --environment-id "$ENVIRONMENT_ID"
@@ -107,7 +107,7 @@ To pin a session to a specific agent version, pass an object. This lets you cont
   PINNED_SESSION_ID=$(jq -r '.id' <<< "$pinned_session")
   ```
   
-  ```bash CLI
+  ```bash CLI nocheck
   ant beta:sessions create <<YAML
   agent:
     type: agent
@@ -206,7 +206,7 @@ If your agent uses MCP tools that require authentication, pass `vault_ids` at se
   VAULT_SESSION_ID=$(jq -r '.id' <<< "$vault_session")
   ```
   
-  ```bash CLI
+  ```bash CLI nocheck
   ant beta:sessions create <<YAML
   agent: $AGENT_ID
   environment_id: $ENVIRONMENT_ID
@@ -295,7 +295,7 @@ Creating a session provisions the environment and agent but does not start any w
   EOF
   ```
   
-  ```bash CLI
+  ```bash CLI nocheck
   ant beta:sessions:events send \
     --session-id "$SESSION_ID" \
  <<'YAML'
@@ -427,7 +427,7 @@ Sessions progress through these statuses:
   echo "Status: $(jq -r '.status' <<< "$retrieved")"
   ```
   
-  ```bash CLI
+  ```bash CLI nocheck
   ant beta:sessions retrieve --session-id "$SESSION_ID"
   ```
   ```python Python
@@ -532,7 +532,7 @@ Archive a session to prevent new events from being sent while preserving its his
     -H "anthropic-beta: managed-agents-2026-04-01"
   ```
   
-  ```bash CLI
+  ```bash CLI nocheck
   ant beta:sessions archive \
     --session-id "$SESSION_ID"
   ```
@@ -577,7 +577,7 @@ Files, memory stores, environments, and agents are independent resources and are
     -H "anthropic-beta: managed-agents-2026-04-01"
   ```
   
-  ```bash CLI
+  ```bash CLI nocheck
   ant beta:sessions delete \
     --session-id "$SESSION_ID"
   ```

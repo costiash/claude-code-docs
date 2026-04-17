@@ -94,7 +94,7 @@ For more information on the Voyage python package, see [the Voyage documentation
 
 You can also get embeddings by requesting Voyage HTTP API. For example, you can send an HTTP request through the `curl` command in a terminal:
 
-```bash
+```bash cURL
 curl https://api.voyageai.com/v1/embeddings \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $VOYAGE_API_KEY" \

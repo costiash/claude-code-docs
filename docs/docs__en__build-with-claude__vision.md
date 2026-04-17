@@ -120,7 +120,7 @@ The following examples demonstrate how to use Claude's vision capabilities using
 The base64 example prompts use these variables:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
     # For URL-based images, you can use the URL directly in your JSON request
 
     # For base64-encoded images, you need to first encode the image
@@ -295,7 +295,7 @@ Below are examples of how to include images in a Messages API request using base
 ### Base64-encoded image example
 
 <CodeGroup>
-    ```bash Shell hidelines={1..2}
+    ```bash cURL hidelines={1..2}
     BASE64_IMAGE_DATA=$(curl -s "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg" | base64 | tr -d '\n')
 
     curl https://api.anthropic.com/v1/messages \
@@ -590,7 +590,7 @@ Below are examples of how to include images in a Messages API request using base
 ### URL-based image example
 
 <CodeGroup>
-    ```bash Shell
+    ```bash cURL
     curl https://api.anthropic.com/v1/messages \
       -H "x-api-key: $ANTHROPIC_API_KEY" \
       -H "anthropic-version: 2023-06-01" \
@@ -870,7 +870,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
 </Tip>
 
 <CodeGroup>
-```bash Shell hidelines={1..2}
+```bash cURL hidelines={1..2}
 cd "$(mktemp -d)"
 curl -sSo image.jpg https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg
 # First, upload your image to the Files API
@@ -910,7 +910,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-```bash CLI hidelines={1}
+```bash CLI nocheck hidelines={1}
 cd "$(mktemp -d)"
 curl -sSo image.jpg \
   https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg

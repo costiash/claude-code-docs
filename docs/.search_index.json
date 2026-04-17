@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-16T21:31:48Z",
+  "generated_at": "2026-04-17T00:53:39Z",
   "indexed_files": 1048,
   "index": {
     "/changelog": {
@@ -1680,7 +1680,7 @@
         "note",
         "docs"
       ],
-      "word_count": 1785,
+      "word_count": 1787,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__quickstart.md"
     },
     "/docs/en/agents-and-tools/mcp-connector": {
@@ -2212,7 +2212,7 @@
         "contents",
         "line"
       ],
-      "word_count": 5003,
+      "word_count": 5004,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__text-editor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-combinations": {
@@ -2307,24 +2307,24 @@
         "search",
         "tools",
         "claude",
-        "descriptions",
-        "definitions",
-        "note",
-        "api",
         "when",
+        "definitions",
+        "descriptions",
+        "note",
         "deferred",
         "names",
-        "section",
-        "side",
+        "api",
         "regex",
         "prompt",
+        "section",
         "card",
         "loading",
-        "see",
+        "response",
         "blocks",
-        "format"
+        "format",
+        "title"
       ],
-      "word_count": 3058,
+      "word_count": 3002,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-search-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching": {
@@ -22334,7 +22334,7 @@
         "resources",
         "path"
       ],
-      "word_count": 2225,
+      "word_count": 2227,
       "file_path": "docs/docs__en__api__sdks__cli.md"
     },
     "/docs/en/api/sdks/csharp": {
@@ -25330,7 +25330,7 @@
         "default",
         "manual"
       ],
-      "word_count": 3986,
+      "word_count": 3987,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/administration-api": {
@@ -25358,7 +25358,7 @@
         "title",
         "programmatically"
       ],
-      "word_count": 868,
+      "word_count": 869,
       "file_path": "docs/docs__en__build-with-claude__administration-api.md"
     },
     "/docs/en/build-with-claude/api-and-data-retention": {
@@ -25414,7 +25414,7 @@
         "workspace",
         "result"
       ],
-      "word_count": 7269,
+      "word_count": 7270,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -25470,7 +25470,7 @@
         "type",
         "accepted"
       ],
-      "word_count": 1411,
+      "word_count": 1414,
       "file_path": "docs/docs__en__build-with-claude__claude-code-analytics-api.md"
     },
     "/docs/en/build-with-claude/claude-in-amazon-bedrock-research-preview": {
@@ -25554,7 +25554,7 @@
         "keys",
         "python"
       ],
-      "word_count": 2377,
+      "word_count": 2379,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock": {
@@ -25582,7 +25582,7 @@
         "regional",
         "api"
       ],
-      "word_count": 2912,
+      "word_count": 2911,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -25638,7 +25638,7 @@
         "after",
         "trigger"
       ],
-      "word_count": 8820,
+      "word_count": 8821,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -25778,7 +25778,7 @@
         "model",
         "following"
       ],
-      "word_count": 2115,
+      "word_count": 2116,
       "file_path": "docs/docs__en__build-with-claude__embeddings.md"
     },
     "/docs/en/build-with-claude/extended-thinking": {
@@ -25862,7 +25862,7 @@
         "beta",
         "feature"
       ],
-      "word_count": 2815,
+      "word_count": 2816,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -25974,7 +25974,7 @@
         "image",
         "analysis"
       ],
-      "word_count": 3390,
+      "word_count": 3391,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -26142,7 +26142,7 @@
         "file",
         "using"
       ],
-      "word_count": 13233,
+      "word_count": 13235,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
@@ -26198,7 +26198,7 @@
         "constraints",
         "fields"
       ],
-      "word_count": 10172,
+      "word_count": 10173,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -26254,7 +26254,7 @@
         "only",
         "does"
       ],
-      "word_count": 3855,
+      "word_count": 3856,
       "file_path": "docs/docs__en__build-with-claude__token-counting.md"
     },
     "/docs/en/build-with-claude/usage-cost-api": {
@@ -26282,7 +26282,7 @@
         "filter",
         "tip"
       ],
-      "word_count": 1457,
+      "word_count": 1467,
       "file_path": "docs/docs__en__build-with-claude__usage-cost-api.md"
     },
     "/docs/en/build-with-claude/vision": {
@@ -26310,7 +26310,7 @@
         "prompt",
         "these"
       ],
-      "word_count": 4949,
+      "word_count": 4950,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -26366,7 +26366,7 @@
         "cannot",
         "rate"
       ],
-      "word_count": 1577,
+      "word_count": 1580,
       "file_path": "docs/docs__en__build-with-claude__workspaces.md"
     },
     "/docs/en/get-started": {
@@ -26394,7 +26394,7 @@
         "anthropic",
         "environment"
       ],
-      "word_count": 1339,
+      "word_count": 1340,
       "file_path": "docs/docs__en__get-started.md"
     },
     "/docs/en/intro": {
@@ -26506,7 +26506,7 @@
         "new",
         "one"
       ],
-      "word_count": 2170,
+      "word_count": 2173,
       "file_path": "docs/docs__en__managed-agents__define-outcomes.md"
     },
     "/docs/en/managed-agents/environments": {
@@ -26674,7 +26674,7 @@
         "existing",
         "sessions"
       ],
-      "word_count": 3454,
+      "word_count": 3463,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/migration": {
@@ -26702,7 +26702,7 @@
         "client",
         "migration"
       ],
-      "word_count": 2628,
+      "word_count": 2630,
       "file_path": "docs/docs__en__managed-agents__migration.md"
     },
     "/docs/en/managed-agents/multi-agent": {
@@ -26730,7 +26730,7 @@
         "research",
         "one"
       ],
-      "word_count": 2390,
+      "word_count": 2394,
       "file_path": "docs/docs__en__managed-agents__multi-agent.md"
     },
     "/docs/en/managed-agents/observability": {
@@ -26758,7 +26758,7 @@
         "provides",
         "observability"
       ],
-      "word_count": 1225,
+      "word_count": 1227,
       "file_path": "docs/docs__en__managed-agents__observability.md"
     },
     "/docs/en/managed-agents/onboarding": {
@@ -26786,7 +26786,7 @@
         "header",
         "model"
       ],
-      "word_count": 429,
+      "word_count": 430,
       "file_path": "docs/docs__en__managed-agents__onboarding.md"
     },
     "/docs/en/managed-agents/overview": {
@@ -26842,7 +26842,7 @@
         "application",
         "before"
       ],
-      "word_count": 1984,
+      "word_count": 1985,
       "file_path": "docs/docs__en__managed-agents__permission-policies.md"
     },
     "/docs/en/managed-agents/quickstart": {
@@ -26898,7 +26898,7 @@
         "beta",
         "header"
       ],
-      "word_count": 1586,
+      "word_count": 1593,
       "file_path": "docs/docs__en__managed-agents__sessions.md"
     },
     "/docs/en/managed-agents/skills": {
@@ -26926,7 +26926,7 @@
         "workflows",
         "context"
       ],
-      "word_count": 623,
+      "word_count": 624,
       "file_path": "docs/docs__en__managed-agents__skills.md"
     },
     "/docs/en/managed-agents/tools": {
@@ -26982,7 +26982,7 @@
         "them",
         "access"
       ],
-      "word_count": 1912,
+      "word_count": 1913,
       "file_path": "docs/docs__en__managed-agents__vaults.md"
     },
     "/docs/en/release-notes/overview": {

@@ -41,7 +41,7 @@ Dynamic filtering requires the [code execution tool](/docs/en/agents-and-tools/t
 To enable dynamic filtering, use the `web_search_20260209` tool version:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
@@ -256,7 +256,7 @@ Your organization's administrator must enable web search in the [Claude Console]
 Provide the web search tool in your API request:
 
 <CodeGroup>
-```bash Shell
+```bash cURL
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \

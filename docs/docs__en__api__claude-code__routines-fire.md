@@ -46,7 +46,7 @@ Every request must include the `anthropic-beta: experimental-cc-routine-2026-04-
 
 The Claude Code web UI provides the full URL alongside the token when you add an API trigger, so most integrations store both as secrets and call the endpoint directly. The examples below show a shell call and a GitHub Actions step that triggers the routine on CI failure.
 
-```bash Shell
+```bash cURL
 curl -X POST https://api.anthropic.com/v1/claude_code/routines/$ROUTINE_ID/fire \
   -H "Authorization: Bearer $ROUTINE_TOKEN" \
   -H "anthropic-version: 2023-06-01" \

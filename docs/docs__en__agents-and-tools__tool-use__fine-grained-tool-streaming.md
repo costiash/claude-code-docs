@@ -21,7 +21,7 @@ Here's an example of how to use fine-grained tool streaming with the API:
 
 <CodeGroup>
 
-  ```bash Shell
+  ```bash cURL
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
