@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-17T18:33:57Z",
+  "generated_at": "2026-04-17T21:30:17Z",
   "indexed_files": 1048,
   "index": {
     "/changelog": {
@@ -11,8 +11,8 @@
         "when",
         "added",
         "improved",
-        "claude",
         "now",
+        "claude",
         "tool",
         "mode",
         "instead",
@@ -24,11 +24,11 @@
         "mcp",
         "commands",
         "command",
-        "file",
         "prompt",
+        "file",
         "bash"
       ],
-      "word_count": 34831,
+      "word_count": 35435,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -1022,21 +1022,21 @@
         "title",
         "install",
         "powershell",
-        "installation",
         "wsl",
-        "native",
         "version",
-        "run",
+        "step",
         "tabs",
-        "updates",
+        "run",
+        "installation",
+        "see",
         "linux",
         "cmd",
-        "step",
-        "see",
+        "native",
+        "updates",
         "channel",
         "settings"
       ],
-      "word_count": 2344,
+      "word_count": 2338,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1189,10 +1189,11 @@
         "install",
         "wsl",
         "see",
+        "check",
         "linux",
         "issues",
-        "check",
         "run",
+        "binary",
         "file",
         "path",
         "installer",
@@ -1201,10 +1202,9 @@
         "command",
         "settings",
         "powershell",
-        "system",
-        "solutions"
+        "system"
       ],
-      "word_count": 5522,
+      "word_count": 5718,
       "file_path": "docs/claude-code__troubleshooting.md"
     },
     "/claude-code/vs-code": {
