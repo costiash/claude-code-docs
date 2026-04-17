@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-17T15:38:22Z",
+  "generated_at": "2026-04-17T18:33:57Z",
   "indexed_files": 1048,
   "index": {
     "/changelog": {
@@ -689,18 +689,18 @@
         "level",
         "sonnet",
         "environment",
-        "default",
         "context",
+        "default",
         "name",
         "settings",
         "picker",
         "models",
         "version",
+        "setting",
         "uses",
-        "provider",
-        "users"
+        "provider"
       ],
-      "word_count": 3282,
+      "word_count": 3313,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
