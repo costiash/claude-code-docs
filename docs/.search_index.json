@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-17T00:53:39Z",
+  "generated_at": "2026-04-17T04:16:14Z",
   "indexed_files": 1048,
   "index": {
     "/changelog": {
@@ -26847,7 +26847,7 @@
     },
     "/docs/en/managed-agents/quickstart": {
       "title": "Get started with Claude Managed Agents",
-      "content_preview": "# Get started with Claude Managed Agents  Create your first autonomous agent.  ---  This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent r...",
+      "content_preview": "# Get started with Claude Managed Agents  Create your first autonomous agent.  ---  This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.  <Tip> **Prefer an interactive walkthrough?** Run `/claude-api managed-agents-onboard` in",
       "keywords": [
         "agent",
         "tab",
@@ -26863,14 +26863,14 @@
         "step",
         "codegroup",
         "container",
+        "claude",
         "tabs",
         "icon",
         "href",
         "docs",
-        "claude",
         "streaming"
       ],
-      "word_count": 2321,
+      "word_count": 2344,
       "file_path": "docs/docs__en__managed-agents__quickstart.md"
     },
     "/docs/en/managed-agents/sessions": {

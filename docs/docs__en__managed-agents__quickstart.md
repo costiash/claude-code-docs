@@ -6,6 +6,10 @@ Create your first autonomous agent.
 
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
+<Tip>
+**Prefer an interactive walkthrough?** Run `/claude-api managed-agents-onboard` in the latest version of [Claude Code](https://claude.com/product/claude-code) for a guided setup and interactive question-answering.
+</Tip>
+
 ## Core concepts
 
 | Concept | Description |
