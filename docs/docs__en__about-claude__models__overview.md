@@ -35,7 +35,7 @@ _<sup>1 - See the [pricing page](/docs/en/about-claude/pricing) for complete pri
 
 _<sup>2 - **Reliable knowledge cutoff** indicates the date through which a model's knowledge is most extensive and reliable. **Training data cutoff** is the broader date range of training data used. For more information, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).</sup>_
 
-_<sup>3 - Claude Opus 4.7 on AWS is available through [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock-research-preview), currently in research preview.</sup>_
+_<sup>3 - Claude Opus 4.7 on AWS is available through [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) (the Messages-API Bedrock endpoint).</sup>_
 
 <Info>
 [Claude Mythos Preview](https://anthropic.com/glasswing) is offered separately as a research preview model for defensive cybersecurity workflows as part of [Project Glasswing](https://anthropic.com/glasswing). Access is invitation-only and there is no self-serve sign-up.

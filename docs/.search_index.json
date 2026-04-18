@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-17T21:30:17Z",
-  "indexed_files": 1048,
+  "generated_at": "2026-04-18T00:49:53Z",
+  "indexed_files": 1047,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -476,7 +476,7 @@
         "decision",
         "command"
       ],
-      "word_count": 15374,
+      "word_count": 15378,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -1363,9 +1363,9 @@
         "models",
         "model",
         "anthropic",
+        "api",
         "haiku",
         "input",
-        "api",
         "tooltipcontent",
         "words",
         "unicode",
@@ -1421,14 +1421,14 @@
         "sonnet",
         "usage",
         "standard",
+        "models",
         "output",
         "caching",
         "additional",
         "web",
-        "models",
-        "see"
+        "haiku"
       ],
-      "word_count": 3312,
+      "word_count": 3330,
       "file_path": "docs/docs__en__about-claude__pricing.md"
     },
     "/docs/en/about-claude/use-case-guides/content-moderation": {
@@ -22344,8 +22344,8 @@
         "sdk",
         "api",
         "response",
-        "client",
         "using",
+        "client",
         "method",
         "streaming",
         "responses",
@@ -22357,12 +22357,12 @@
         "warning",
         "property",
         "call",
+        "bedrock",
         "anthropic",
         "access",
-        "which",
-        "https"
+        "which"
       ],
-      "word_count": 1718,
+      "word_count": 1754,
       "file_path": "docs/docs__en__api__sdks__csharp.md"
     },
     "/docs/en/api/sdks/go": {
@@ -22372,6 +22372,7 @@
         "anthropic",
         "section",
         "string",
+        "bedrock",
         "sdk",
         "json",
         "library",
@@ -22384,13 +22385,12 @@
         "opt",
         "valid",
         "open",
-        "option",
-        "bedrock",
         "ctx",
         "vertex",
-        "result"
+        "result",
+        "changes"
       ],
-      "word_count": 3188,
+      "word_count": 3235,
       "file_path": "docs/docs__en__api__sdks__go.md"
     },
     "/docs/en/api/sdks/java": {
@@ -22401,10 +22401,10 @@
         "client",
         "class",
         "tool",
-        "response",
         "api",
-        "method",
+        "response",
         "using",
+        "method",
         "streaming",
         "java",
         "default",
@@ -22418,7 +22418,7 @@
         "requests",
         "call"
       ],
-      "word_count": 4577,
+      "word_count": 4605,
       "file_path": "docs/docs__en__api__sdks__java.md"
     },
     "/docs/en/api/sdks/php": {
@@ -22456,15 +22456,15 @@
         "request",
         "client",
         "sdk",
-        "response",
         "api",
+        "response",
         "streaming",
         "requests",
         "default",
         "python",
         "async",
-        "access",
         "using",
+        "access",
         "which",
         "object",
         "methods",
@@ -22472,9 +22472,9 @@
         "note",
         "undocumented",
         "provides",
-        "responses"
+        "bedrock"
       ],
-      "word_count": 2768,
+      "word_count": 2801,
       "file_path": "docs/docs__en__api__sdks__python.md"
     },
     "/docs/en/api/sdks/ruby": {
@@ -22484,25 +22484,25 @@
         "http",
         "sdk",
         "library",
+        "api",
         "ruby",
         "provides",
-        "api",
         "streaming",
         "request",
         "requests",
         "undocumented",
         "connection",
         "parameters",
+        "gem",
         "including",
         "timeout",
         "default",
+        "bedrock",
         "sorbet",
         "helpers",
-        "gem",
-        "documentation",
-        "examples"
+        "documentation"
       ],
-      "word_count": 1567,
+      "word_count": 1598,
       "file_path": "docs/docs__en__api__sdks__ruby.md"
     },
     "/docs/en/api/sdks/typescript": {
@@ -22525,12 +22525,12 @@
         "when",
         "access",
         "support",
+        "using",
         "object",
         "errors",
-        "undocumented",
-        "see"
+        "undocumented"
       ],
-      "word_count": 3663,
+      "word_count": 3688,
       "file_path": "docs/docs__en__api__sdks__typescript.md"
     },
     "/docs/en/api/service-tiers": {
@@ -25473,60 +25473,32 @@
       "word_count": 1414,
       "file_path": "docs/docs__en__build-with-claude__claude-code-analytics-api.md"
     },
-    "/docs/en/build-with-claude/claude-in-amazon-bedrock-research-preview": {
-      "title": "Claude in Amazon Bedrock (research preview)",
-      "content_preview": "# Claude in Amazon Bedrock (research preview)  Access Claude models through Amazon Bedrock with AWS-native authentication, billing, and security boundaries.  ---  This guide walks you through setting ...",
-      "keywords": [
-        "tab",
-        "bedrock",
-        "title",
-        "claude",
-        "amazon",
-        "aws",
-        "role",
-        "step",
-        "preview",
-        "api",
-        "anthropic",
-        "research",
-        "model",
-        "access",
-        "account",
-        "service",
-        "steps",
-        "token",
-        "support",
-        "tabs"
-      ],
-      "word_count": 1315,
-      "file_path": "docs/docs__en__build-with-claude__claude-in-amazon-bedrock-research-preview.md"
-    },
     "/docs/en/build-with-claude/claude-in-amazon-bedrock": {
       "title": "Claude in Amazon Bedrock",
       "content_preview": "# Claude in Amazon Bedrock  Access Claude models through Amazon Bedrock with AWS-native authentication, billing, and security boundaries.  ---  This guide walks you through setting up and making API c...",
       "keywords": [
-        "bedrock",
-        "aws",
         "tab",
-        "title",
+        "global",
+        "bedrock",
         "claude",
+        "title",
         "amazon",
-        "anthropic",
-        "api",
+        "aws",
+        "region",
         "role",
         "step",
-        "account",
+        "only",
+        "api",
         "access",
+        "anthropic",
         "model",
-        "request",
-        "service",
-        "steps",
-        "token",
-        "data",
-        "research",
-        "preview"
+        "asia",
+        "pacific",
+        "available",
+        "europe",
+        "support"
       ],
-      "word_count": 1304,
+      "word_count": 1713,
       "file_path": "docs/docs__en__build-with-claude__claude-in-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-in-microsoft-foundry": {
@@ -25558,8 +25530,8 @@
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock": {
-      "title": "Claude on Amazon Bedrock",
-      "content_preview": "# Claude on Amazon Bedrock  Anthropic's Claude models are now generally available through Amazon Bedrock.  ---  <Note> This page covers the Amazon Bedrock integration available today (the `InvokeModel...",
+      "title": "Claude on Amazon Bedrock (legacy)",
+      "content_preview": "# Claude on Amazon Bedrock (legacy)  The legacy Amazon Bedrock integration for Claude models, using InvokeModel and Converse APIs with ARN-versioned model identifiers.  ---  <Note> This page covers the legacy Amazon Bedrock integration: the `InvokeModel` and `Converse` APIs with ARN-versioned model",
       "keywords": [
         "claude",
         "yes",
@@ -25569,20 +25541,20 @@
         "sonnet",
         "tab",
         "note",
+        "model",
+        "opus",
         "amazon",
         "codegroup",
-        "opus",
-        "available",
-        "model",
         "endpoints",
+        "models",
+        "api",
         "tooltip",
         "pricing",
-        "models",
-        "through",
         "regional",
-        "api"
+        "available",
+        "see"
       ],
-      "word_count": 2911,
+      "word_count": 2944,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -26198,7 +26170,7 @@
         "constraints",
         "fields"
       ],
-      "word_count": 10173,
+      "word_count": 10177,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -27000,8 +26972,8 @@
         "sonnet",
         "models",
         "opus",
-        "learn",
         "available",
+        "learn",
         "our",
         "token",
         "header",
@@ -27010,7 +26982,7 @@
         "context",
         "support"
       ],
-      "word_count": 4911,
+      "word_count": 4952,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {
