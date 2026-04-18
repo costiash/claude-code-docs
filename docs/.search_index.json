@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-18T15:28:43Z",
+  "generated_at": "2026-04-18T18:28:34Z",
   "indexed_files": 1047,
   "index": {
     "/changelog": {
@@ -485,26 +485,26 @@
       "keywords": [
         "claude",
         "code",
-        "mode",
-        "commands",
-        "command",
         "line",
+        "mode",
+        "command",
+        "commands",
+        "history",
+        "input",
         "press",
         "background",
-        "history",
         "prompt",
         "conversation",
-        "input",
-        "search",
-        "session",
+        "cursor",
         "text",
-        "when",
-        "previous",
+        "search",
         "word",
-        "normal",
-        "terminal"
+        "terminal",
+        "session",
+        "previous",
+        "when"
       ],
-      "word_count": 2860,
+      "word_count": 2972,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -943,8 +943,8 @@
         "security",
         "paths",
         "bash",
-        "filesystem",
         "when",
+        "filesystem",
         "allow",
         "tools",
         "configuration",
@@ -952,7 +952,7 @@
         "cannot",
         "system"
       ],
-      "word_count": 2620,
+      "word_count": 2638,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -1000,15 +1000,15 @@
         "corp",
         "tools",
         "see",
-        "project",
         "github",
+        "project",
         "repo",
         "com",
         "configuration",
         "user",
         "example"
       ],
-      "word_count": 7478,
+      "word_count": 7517,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
