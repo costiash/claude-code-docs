@@ -8,6 +8,10 @@
 
 # Changelog
 
+## 2.1.114
+
+- Fixed a crash in the permission dialog when an agent teams teammate requested tool permission
+
 ## 2.1.113
 
 - Changed the CLI to spawn a native Claude Code binary (via a per-platform optional dependency) instead of bundled JavaScript
