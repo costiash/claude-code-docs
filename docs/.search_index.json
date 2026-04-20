@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-20T15:46:35Z",
+  "generated_at": "2026-04-20T18:37:43Z",
   "indexed_files": 1047,
   "index": {
     "/changelog": {
@@ -427,28 +427,28 @@
       "title": "Automate workflows with hooks",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Automate workflows with hooks  > Run shell commands automatically when Claude Code edits files, finishes tasks, or",
       "keywords": [
-        "hook",
         "hooks",
+        "hook",
         "claude",
         "when",
         "tool",
         "code",
         "event",
+        "command",
         "see",
         "json",
         "file",
-        "command",
         "permission",
         "input",
         "example",
-        "call",
         "run",
+        "call",
         "only",
         "session",
         "settings",
-        "exit"
+        "each"
       ],
-      "word_count": 5588,
+      "word_count": 5721,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -469,14 +469,14 @@
         "user",
         "only",
         "event",
-        "session",
         "runs",
+        "session",
+        "command",
         "control",
         "exit",
-        "decision",
-        "command"
+        "decision"
       ],
-      "word_count": 15378,
+      "word_count": 15508,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -1036,7 +1036,7 @@
         "channel",
         "settings"
       ],
-      "word_count": 2338,
+      "word_count": 2323,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
