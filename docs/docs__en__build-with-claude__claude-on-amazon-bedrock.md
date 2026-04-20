@@ -145,7 +145,6 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 | Claude Opus 4 <Tooltip tooltipContent="Deprecated as of April 14, 2026. Retiring October 14, 2026.">⚠️</Tooltip> | anthropic.claude-opus-4-20250514-v1:0 | No | Yes | No | No | No |
 | Claude Haiku 4.5 | anthropic.claude-haiku-4-5-20251001-v1:0 | Yes | Yes | Yes | No | No |
 | Claude Haiku 3.5 <Tooltip tooltipContent="Retired as of February 19, 2026.">⚠️</Tooltip> | anthropic.claude-3-5-haiku-20241022-v1:0 | No | Yes | No | No | No |
-| Claude Haiku 3 <Tooltip tooltipContent="Deprecated as of February 19, 2026. Retiring April 19, 2026.">⚠️</Tooltip> | anthropic.claude-3-haiku-20240307-v1:0 | No | Yes | Yes | No | Yes |
 
 For more information about regional vs global model IDs, see the [Global vs regional endpoints](#global-vs-regional-endpoints) section below.
 

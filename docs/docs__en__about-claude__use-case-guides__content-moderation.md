@@ -84,7 +84,7 @@ ___
 ## How to moderate content using Claude
 
 ### Select the right Claude model
-When selecting a model, it’s important to consider the size of your data. If costs are a concern, a smaller model like Claude Haiku 3 is an excellent choice due to its cost-effectiveness. Below is an estimate of the cost to moderate text for a social media platform that receives one billion posts per month:
+When selecting a model, it’s important to consider the size of your data. If costs are a concern, a smaller model like Claude Haiku 4.5 is an excellent choice due to its cost-effectiveness. Below is an estimate of the cost to moderate text for a social media platform that receives one billion posts per month:
 
 * **Content size**
     * Posts per month: 1bn
@@ -97,10 +97,10 @@ When selecting a model, it’s important to consider the size of your data. If c
     * Output tokens per flagged message: 50
     * Total output tokens: 1.5bn
 
-* **Claude Haiku 3 estimated cost**
-    * Input token cost: 2,860 MTok * \$0.25/MTok = \$715
-    * Output token cost: 1,500 MTok * \$1.25/MTok = \$1,875
-    * Monthly cost: \$715 + \$1,875 = \$2,590
+* **Claude Haiku 4.5 estimated cost**
+    * Input token cost: 2,860 MTok * \$1.00/MTok = \$2,860
+    * Output token cost: 1,500 MTok * \$5.00/MTok = \$7,500
+    * Monthly cost: \$2,860 + \$7,500 = \$10,360
 
 * **Claude Opus 4.7 estimated cost**
     * Input token cost: 2,860 MTok * \$5.00/MTok = \$14,300
@@ -147,7 +147,7 @@ def moderate_message(message, unsafe_categories):
 
     # Send the request to Claude for content moderation
     response = client.messages.create(
-        model="claude-3-haiku-20240307",  # Using the Haiku model for lower costs
+        model="claude-haiku-4-5-20251001",  # Using the Haiku model for lower costs
         max_tokens=200,
         temperature=0,  # Use 0 temperature for increased consistency
         messages=[{"role": "user", "content": assessment_prompt}],
@@ -232,7 +232,7 @@ Respond with ONLY a JSON object, using the format below:
 
     # Send the request to Claude for risk assessment
     response = client.messages.create(
-        model="claude-3-haiku-20240307",  # Using the Haiku model for lower costs
+        model="claude-haiku-4-5-20251001",  # Using the Haiku model for lower costs
         max_tokens=200,
         temperature=0,  # Use 0 temperature for increased consistency
         messages=[{"role": "user", "content": assessment_prompt}],
@@ -346,7 +346,7 @@ Respond with ONLY a JSON object, using the format below:
 
     # Send the request to Claude for content moderation
     response = client.messages.create(
-        model="claude-3-haiku-20240307",  # Using the Haiku model for lower costs
+        model="claude-haiku-4-5-20251001",  # Using the Haiku model for lower costs
         max_tokens=200,
         temperature=0,  # Use 0 temperature for increased consistency
         messages=[{"role": "user", "content": assessment_prompt}],
@@ -435,7 +435,7 @@ Important Notes:
 
     # Send the request to Claude for content moderation
     response = client.messages.create(
-        model="claude-3-haiku-20240307",  # Using the Haiku model for lower costs
+        model="claude-haiku-4-5-20251001",  # Using the Haiku model for lower costs
         max_tokens=2048,  # Increased max token count to handle batches
         temperature=0,  # Use 0 temperature for increased consistency
         messages=[{"role": "user", "content": assessment_prompt}],

@@ -94,10 +94,10 @@ To help estimate these costs, below is a comparison of the cost to summarize 1,0
     * Output token cost: 0.35 MTok * \$25.00/MTok = \$8.75
     * Total cost: \$430.00 + \$8.75 = \$438.75
 
-* **Claude Haiku 3 estimated cost**
-    * Input token cost: 86 MTok * \$0.25/MTok = \$21.50
-    * Output token cost: 0.35 MTok * \$1.25/MTok = \$0.44
-    * Total cost: \$21.50 + \$0.44 = \$21.96
+* **Claude Haiku 4.5 estimated cost**
+    * Input token cost: 86 MTok * \$1.00/MTok = \$86.00
+    * Output token cost: 0.35 MTok * \$5.00/MTok = \$1.75
+    * Total cost: \$86.00 + \$1.75 = \$87.75
 
 <Tip>Actual costs may differ from these estimates. These estimates are based on the example highlighted in the section on [prompting](#build-a-strong-prompt).</Tip>
 

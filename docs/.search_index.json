@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-20T18:37:43Z",
+  "generated_at": "2026-04-20T21:33:02Z",
   "indexed_files": 1047,
   "index": {
     "/changelog": {
@@ -485,26 +485,26 @@
       "keywords": [
         "claude",
         "code",
-        "line",
         "mode",
+        "line",
         "command",
         "commands",
         "history",
         "input",
         "press",
         "background",
+        "terminal",
         "prompt",
-        "conversation",
         "cursor",
+        "conversation",
         "text",
         "search",
         "word",
-        "terminal",
         "session",
         "previous",
         "when"
       ],
-      "word_count": 2972,
+      "word_count": 2987,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -1124,31 +1124,31 @@
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
-      "title": "Optimize your terminal setup",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Optimize your t...",
+      "title": "Configure your terminal for Claude Code",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Configure your terminal for Claude Code  > Fix Shift+Enter for newlines, get a terminal bell when Claude finishes,",
       "keywords": [
         "terminal",
-        "code",
         "claude",
-        "set",
-        "notification",
+        "code",
         "enter",
-        "iterm",
-        "tmux",
-        "settings",
-        "notifications",
-        "mode",
-        "line",
-        "tab",
-        "when",
-        "newline",
-        "configuration",
-        "shift",
-        "run",
         "option",
-        "file"
+        "notification",
+        "mode",
+        "key",
+        "file",
+        "shift",
+        "tmux",
+        "when",
+        "vim",
+        "run",
+        "enable",
+        "instead",
+        "newline",
+        "settings",
+        "prompt",
+        "keybindings"
       ],
-      "word_count": 816,
+      "word_count": 1470,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
@@ -1274,11 +1274,11 @@
         "deprecated",
         "anthropic",
         "date",
+        "note",
         "recommended",
         "replacement",
-        "note",
-        "active",
         "retired",
+        "active",
         "february",
         "notified",
         "upcoming",
@@ -1288,7 +1288,7 @@
         "than",
         "sonnet"
       ],
-      "word_count": 1191,
+      "word_count": 1200,
       "file_path": "docs/docs__en__about-claude__model-deprecations.md"
     },
     "/docs/en/about-claude/models/choosing-a-model": {
@@ -1344,7 +1344,7 @@
         "more",
         "see"
       ],
-      "word_count": 7345,
+      "word_count": 7328,
       "file_path": "docs/docs__en__about-claude__models__migration-guide.md"
     },
     "/docs/en/about-claude/models/overview": {
@@ -1354,25 +1354,25 @@
         "claude",
         "opus",
         "sup",
-        "tokens",
         "sonnet",
+        "yes",
+        "tokens",
         "mtok",
         "tooltip",
-        "yes",
         "output",
         "models",
         "model",
-        "anthropic",
         "api",
-        "haiku",
+        "anthropic",
         "input",
         "tooltipcontent",
         "words",
         "unicode",
         "characters",
-        "cutoff"
+        "cutoff",
+        "note"
       ],
-      "word_count": 1393,
+      "word_count": 1314,
       "file_path": "docs/docs__en__about-claude__models__overview.md"
     },
     "/docs/en/about-claude/models/whats-new-claude-4-7": {
@@ -19611,8 +19611,8 @@
         "tier",
         "per",
         "maximum",
-        "sup",
         "minute",
+        "sup",
         "claude",
         "input",
         "requests",
@@ -19625,7 +19625,7 @@
         "usage",
         "number"
       ],
-      "word_count": 3032,
+      "word_count": 2988,
       "file_path": "docs/docs__en__api__rate-limits.md"
     },
     "/docs/en/api/ruby/beta": {
@@ -25534,10 +25534,10 @@
       "content_preview": "# Claude on Amazon Bedrock (legacy)  The legacy Amazon Bedrock integration for Claude models, using InvokeModel and Converse APIs with ARN-versioned model identifiers.  ---  <Note> This page covers the legacy Amazon Bedrock integration: the `InvokeModel` and `Converse` APIs with ARN-versioned model",
       "keywords": [
         "claude",
-        "yes",
         "bedrock",
-        "anthropic",
+        "yes",
         "aws",
+        "anthropic",
         "sonnet",
         "tab",
         "note",
@@ -25548,13 +25548,13 @@
         "endpoints",
         "models",
         "api",
-        "tooltip",
         "pricing",
         "regional",
         "available",
-        "see"
+        "see",
+        "title"
       ],
-      "word_count": 2944,
+      "word_count": 2916,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -25569,10 +25569,10 @@
         "sonnet",
         "region",
         "codegroup",
-        "tooltip",
         "anthropic",
         "pricing",
         "note",
+        "tooltip",
         "regional",
         "models",
         "google",
@@ -25582,7 +25582,7 @@
         "model",
         "availability"
       ],
-      "word_count": 2387,
+      "word_count": 2369,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -25974,7 +25974,7 @@
         "input",
         "requests"
       ],
-      "word_count": 13960,
+      "word_count": 13956,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {
@@ -26966,8 +26966,8 @@
         "beta",
         "more",
         "tool",
-        "launched",
         "model",
+        "launched",
         "now",
         "sonnet",
         "models",
@@ -26982,7 +26982,7 @@
         "context",
         "support"
       ],
-      "word_count": 4952,
+      "word_count": 4982,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {
