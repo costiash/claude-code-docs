@@ -229,6 +229,14 @@ Get Messages Usage Report
 
     Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/usage_report/messages \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```
+
 ## Retrieve Claude Code
 
 **get** `/v1/organizations/usage_report/claude_code`
@@ -397,6 +405,14 @@ Enables organizations to analyze developer productivity and build custom dashboa
   - `next_page: string`
 
     Opaque cursor token for fetching the next page of results, or null if no more pages are available.
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```
 
 ## Domain Types
 

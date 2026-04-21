@@ -147,6 +147,14 @@ Get Cost Report
 
     Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/cost_report \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```
+
 ## Domain Types
 
 ### Cost Report

@@ -65,3 +65,11 @@ Get Invite
     For Invites, this is always `"invite"`.
 
     - `"invite"`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```

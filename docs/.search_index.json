@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-21T00:54:11Z",
+  "generated_at": "2026-04-21T04:17:11Z",
   "indexed_files": 1047,
   "index": {
     "/changelog": {
@@ -178,9 +178,9 @@
         "step",
         "claude",
         "title",
+        "code",
         "when",
         "session",
-        "code",
         "tip",
         "steps",
         "thinking",
@@ -188,15 +188,15 @@
         "mode",
         "worktrees",
         "sessions",
+        "files",
         "plan",
         "default",
         "specific",
-        "files",
         "ask",
         "name",
         "branch"
       ],
-      "word_count": 5378,
+      "word_count": 5456,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -1085,10 +1085,10 @@
         "name",
         "codegroup",
         "directory",
-        "statusline",
         "output",
         "each",
         "usage",
+        "statusline",
         "only",
         "current"
       ],
@@ -1218,21 +1218,21 @@
         "new",
         "conversation",
         "see",
+        "click",
         "tab",
         "panel",
-        "click",
         "icon",
         "prompt",
         "file",
         "cli",
         "editor",
         "terminal",
+        "session",
         "settings",
         "step",
-        "session",
         "windows"
       ],
-      "word_count": 4625,
+      "word_count": 4653,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/about-claude/glossary": {
@@ -2449,22 +2449,22 @@
         "api",
         "when",
         "code",
+        "type",
         "number",
         "used",
-        "type",
         "key",
         "page",
         "rfc",
         "returns",
         "parameters",
-        "grouping",
         "always",
+        "grouping",
         "usage",
         "claude",
         "list",
         "inference"
       ],
-      "word_count": 6970,
+      "word_count": 7533,
       "file_path": "docs/docs__en__api__admin.md"
     },
     "/docs/en/api/admin/api_keys": {
@@ -2492,7 +2492,7 @@
         "string",
         "indicating"
       ],
-      "word_count": 686,
+      "word_count": 735,
       "file_path": "docs/docs__en__api__admin__api_keys.md"
     },
     "/docs/en/api/admin/api_keys/list": {
@@ -2520,7 +2520,7 @@
         "status",
         "used"
       ],
-      "word_count": 318,
+      "word_count": 332,
       "file_path": "docs/docs__en__api__admin__api_keys__list.md"
     },
     "/docs/en/api/admin/api_keys/retrieve": {
@@ -2548,7 +2548,7 @@
         "partially",
         "redacted"
       ],
-      "word_count": 167,
+      "word_count": 181,
       "file_path": "docs/docs__en__api__admin__api_keys__retrieve.md"
     },
     "/docs/en/api/admin/api_keys/update": {
@@ -2576,7 +2576,7 @@
         "indicating",
         "when"
       ],
-      "word_count": 198,
+      "word_count": 219,
       "file_path": "docs/docs__en__api__admin__api_keys__update.md"
     },
     "/docs/en/api/admin/cost_report": {
@@ -2604,7 +2604,7 @@
         "items",
         "there"
       ],
-      "word_count": 892,
+      "word_count": 906,
       "file_path": "docs/docs__en__api__admin__cost_report.md"
     },
     "/docs/en/api/admin/cost_report/retrieve": {
@@ -2632,7 +2632,7 @@
         "multiple",
         "retrieve"
       ],
-      "word_count": 521,
+      "word_count": 535,
       "file_path": "docs/docs__en__api__admin__cost_report__retrieve.md"
     },
     "/docs/en/api/admin/invites": {
@@ -2643,24 +2643,24 @@
         "user",
         "when",
         "object",
+        "invites",
         "rfc",
         "datetime",
         "string",
         "indicating",
-        "invites",
         "returns",
+        "type",
+        "always",
         "page",
         "email",
         "role",
         "invited",
-        "type",
-        "always",
         "parameters",
         "being",
         "expires",
         "created"
       ],
-      "word_count": 690,
+      "word_count": 794,
       "file_path": "docs/docs__en__api__admin__invites.md"
     },
     "/docs/en/api/admin/invites/create": {
@@ -2688,7 +2688,7 @@
         "expires",
         "created"
       ],
-      "word_count": 159,
+      "word_count": 185,
       "file_path": "docs/docs__en__api__admin__invites__create.md"
     },
     "/docs/en/api/admin/invites/delete": {
@@ -2704,9 +2704,10 @@
         "object",
         "type",
         "invites",
-        "always"
+        "always",
+        "example"
       ],
-      "word_count": 39,
+      "word_count": 56,
       "file_path": "docs/docs__en__api__admin__invites__delete.md"
     },
     "/docs/en/api/admin/invites/list": {
@@ -2734,7 +2735,7 @@
         "get",
         "query"
       ],
-      "word_count": 241,
+      "word_count": 255,
       "file_path": "docs/docs__en__api__admin__invites__list.md"
     },
     "/docs/en/api/admin/invites/retrieve": {
@@ -2762,7 +2763,7 @@
         "role",
         "status"
       ],
-      "word_count": 131,
+      "word_count": 145,
       "file_path": "docs/docs__en__api__admin__invites__retrieve.md"
     },
     "/docs/en/api/admin/organizations": {
@@ -2784,10 +2785,11 @@
         "api",
         "key",
         "returns",
+        "example",
         "domain",
         "types"
       ],
-      "word_count": 96,
+      "word_count": 110,
       "file_path": "docs/docs__en__api__admin__organizations.md"
     },
     "/docs/en/api/admin/organizations/me": {
@@ -2808,9 +2810,10 @@
         "object",
         "type",
         "organizations",
-        "always"
+        "always",
+        "example"
       ],
-      "word_count": 53,
+      "word_count": 67,
       "file_path": "docs/docs__en__api__admin__organizations__me.md"
     },
     "/docs/en/api/admin/usage_report": {
@@ -2838,7 +2841,7 @@
         "more",
         "metrics"
       ],
-      "word_count": 2218,
+      "word_count": 2246,
       "file_path": "docs/docs__en__api__admin__usage_report.md"
     },
     "/docs/en/api/admin/usage_report/retrieve_claude_code": {
@@ -2866,7 +2869,7 @@
         "through",
         "type"
       ],
-      "word_count": 569,
+      "word_count": 583,
       "file_path": "docs/docs__en__api__admin__usage_report__retrieve_claude_code.md"
     },
     "/docs/en/api/admin/usage_report/retrieve_messages": {
@@ -2894,7 +2897,7 @@
         "parameters",
         "buckets"
       ],
-      "word_count": 760,
+      "word_count": 774,
       "file_path": "docs/docs__en__api__admin__usage_report__retrieve_messages.md"
     },
     "/docs/en/api/admin/users": {
@@ -2903,26 +2906,26 @@
       "keywords": [
         "user",
         "object",
-        "organization",
         "users",
+        "organization",
         "returns",
         "when",
+        "type",
+        "always",
         "page",
         "parameters",
         "email",
         "role",
-        "type",
-        "always",
         "rfc",
         "datetime",
         "string",
         "indicating",
         "joined",
         "name",
-        "list",
-        "get"
+        "example",
+        "list"
       ],
-      "word_count": 593,
+      "word_count": 695,
       "file_path": "docs/docs__en__api__admin__users.md"
     },
     "/docs/en/api/admin/users/delete": {
@@ -2939,9 +2942,10 @@
         "object",
         "type",
         "users",
-        "always"
+        "always",
+        "example"
       ],
-      "word_count": 39,
+      "word_count": 56,
       "file_path": "docs/docs__en__api__admin__users__delete.md"
     },
     "/docs/en/api/admin/users/list": {
@@ -2969,7 +2973,7 @@
         "after",
         "before"
       ],
-      "word_count": 222,
+      "word_count": 236,
       "file_path": "docs/docs__en__api__admin__users__list.md"
     },
     "/docs/en/api/admin/users/retrieve": {
@@ -2997,7 +3001,7 @@
         "users",
         "always"
       ],
-      "word_count": 104,
+      "word_count": 118,
       "file_path": "docs/docs__en__api__admin__users__retrieve.md"
     },
     "/docs/en/api/admin/users/update": {
@@ -3025,7 +3029,7 @@
         "email",
         "name"
       ],
-      "word_count": 135,
+      "word_count": 159,
       "file_path": "docs/docs__en__api__admin__users__update.md"
     },
     "/docs/en/api/admin/workspaces": {
@@ -3039,21 +3043,21 @@
         "geo",
         "geos",
         "parameters",
+        "member",
         "returns",
         "data",
-        "member",
-        "page",
-        "string",
-        "archived",
         "type",
         "always",
+        "page",
         "user",
+        "string",
+        "archived",
         "allowed",
         "list",
         "rfc",
         "datetime"
       ],
-      "word_count": 1793,
+      "word_count": 2045,
       "file_path": "docs/docs__en__api__admin__workspaces.md"
     },
     "/docs/en/api/admin/workspaces/archive": {
@@ -3081,7 +3085,7 @@
         "permitted",
         "values"
       ],
-      "word_count": 167,
+      "word_count": 184,
       "file_path": "docs/docs__en__api__admin__workspaces__archive.md"
     },
     "/docs/en/api/admin/workspaces/create": {
@@ -3109,7 +3113,7 @@
         "applied",
         "requests"
       ],
-      "word_count": 283,
+      "word_count": 307,
       "file_path": "docs/docs__en__api__admin__workspaces__create.md"
     },
     "/docs/en/api/admin/workspaces/list": {
@@ -3137,7 +3141,7 @@
         "data",
         "inference"
       ],
-      "word_count": 292,
+      "word_count": 306,
       "file_path": "docs/docs__en__api__admin__workspaces__list.md"
     },
     "/docs/en/api/admin/workspaces/members": {
@@ -3156,16 +3160,16 @@
         "always",
         "page",
         "path",
+        "example",
         "list",
+        "delete",
         "get",
         "results",
-        "delete",
         "create",
         "post",
-        "body",
-        "new"
+        "body"
       ],
-      "word_count": 632,
+      "word_count": 791,
       "file_path": "docs/docs__en__api__admin__workspaces__members.md"
     },
     "/docs/en/api/admin/workspaces/members/create": {
@@ -3188,9 +3192,10 @@
         "object",
         "type",
         "members",
-        "always"
+        "always",
+        "example"
       ],
-      "word_count": 111,
+      "word_count": 144,
       "file_path": "docs/docs__en__api__admin__workspaces__members__create.md"
     },
     "/docs/en/api/admin/workspaces/members/delete": {
@@ -3208,9 +3213,10 @@
         "object",
         "type",
         "members",
-        "always"
+        "always",
+        "example"
       ],
-      "word_count": 55,
+      "word_count": 72,
       "file_path": "docs/docs__en__api__admin__workspaces__members__delete.md"
     },
     "/docs/en/api/admin/workspaces/members/list": {
@@ -3238,7 +3244,7 @@
         "before",
         "number"
       ],
-      "word_count": 200,
+      "word_count": 217,
       "file_path": "docs/docs__en__api__admin__workspaces__members__list.md"
     },
     "/docs/en/api/admin/workspaces/members/retrieve": {
@@ -3257,9 +3263,10 @@
         "type",
         "members",
         "always",
-        "role"
+        "role",
+        "example"
       ],
-      "word_count": 86,
+      "word_count": 103,
       "file_path": "docs/docs__en__api__admin__workspaces__members__retrieve.md"
     },
     "/docs/en/api/admin/workspaces/members/update": {
@@ -3280,9 +3287,10 @@
         "object",
         "type",
         "members",
-        "always"
+        "always",
+        "example"
       ],
-      "word_count": 112,
+      "word_count": 142,
       "file_path": "docs/docs__en__api__admin__workspaces__members__update.md"
     },
     "/docs/en/api/admin/workspaces/retrieve": {
@@ -3310,7 +3318,7 @@
         "permitted",
         "values"
       ],
-      "word_count": 167,
+      "word_count": 181,
       "file_path": "docs/docs__en__api__admin__workspaces__retrieve.md"
     },
     "/docs/en/api/admin/workspaces/update": {
@@ -3338,7 +3346,7 @@
         "omit",
         "parameter"
       ],
-      "word_count": 250,
+      "word_count": 274,
       "file_path": "docs/docs__en__api__admin__workspaces__update.md"
     },
     "/docs/en/api/beta-headers": {
