@@ -1600,6 +1600,34 @@ end
 ```
 </CodeGroup>
 
+### Resuming an idle session
+
+Sessions persist between interactions, and conversation history is persisted unless a session is explicitly deleted. When a session goes idle, its container is checkpointed, preserving the full container state including the filesystem, installed packages, and any files the agent created. This allows you to resume cleanly from inactivity.
+
+<Note>
+While session history is persisted until deleted, checkpoints are only preserved for 30 days after the session's last activity. If your workflow requires the full container state (files, installed tools, and so on) to persist beyond 30 days, send periodic `user.message` events to reset the inactivity timer before the checkpoint expires.
+</Note>
+
+To resume a session, send a `user.message` event to it as usual:
+
+```python
+# Resume a previously created session by ID
+client.beta.sessions.events.send(
+    "sesn_01...",
+    events=[
+        {
+            "type": "user.message",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Now run the tests against the changes you made earlier.",
+                },
+            ],
+        },
+    ],
+)
+```
+
 ### Tracking usage
 
 The session object includes a `usage` field with cumulative token statistics. Fetch the session after it goes idle to read the latest totals, and use them to track costs, enforce budgets, or monitor consumption.
