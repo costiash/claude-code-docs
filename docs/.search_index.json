@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-22T15:43:17Z",
+  "generated_at": "2026-04-22T18:39:33Z",
   "indexed_files": 1047,
   "index": {
     "/changelog": {
@@ -26279,18 +26279,18 @@
         "per",
         "using",
         "example",
-        "tab",
         "text",
-        "tokens",
-        "base",
-        "examples",
+        "tab",
         "when",
         "before",
         "size",
-        "prompt",
-        "these"
+        "tokens",
+        "base",
+        "examples",
+        "multiple",
+        "prompt"
       ],
-      "word_count": 4950,
+      "word_count": 5025,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {

@@ -5373,8 +5373,8 @@
     "docs__en__build-with-claude__vision.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/vision",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/vision.md",
-      "hash": "6151531f867b4534f42b105d982cb8b42d40d0270fd6ef5349f36aa3d9f82bbc",
-      "last_updated": "2026-04-17T00:52:40.905906"
+      "hash": "06d79f8c250acfbc2b7758c04e53fd5b169fd2d82126678836c8bc373ea67f09",
+      "last_updated": "2026-04-22T18:38:02.672074"
     },
     "docs__en__build-with-claude__working-with-messages.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/working-with-messages",
@@ -5835,8 +5835,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-22T15:43:14.761970",
-    "fetch_duration_seconds": 699.421271,
+    "last_fetch_completed": "2026-04-22T18:39:30.722638",
+    "fetch_duration_seconds": 732.562186,
     "total_pages_discovered": 1251,
     "pages_fetched_successfully": 972,
     "pages_failed": 280,
@@ -6127,7 +6127,7 @@
     "total_files": 972,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-22T15:43:14.761988",
+  "last_updated": "2026-04-22T18:39:30.722661",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
