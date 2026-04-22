@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-04-21T21:18:36.725385Z",
-    "total_paths": 1252,
+    "generated_at": "2026-04-22T00:38:54.079974Z",
+    "total_paths": 1251,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-04-21T21:18:36.725392Z"
+    "last_regenerated": "2026-04-22T00:38:54.079980Z"
   },
   "categories": {
     "core_documentation": [
@@ -19,7 +19,6 @@
       "/docs/en/about-claude/use-case-guides/legal-summarization",
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/about-claude/use-case-guides/ticket-routing",
-      "/docs/en/admin-setup",
       "/docs/en/agent-teams",
       "/docs/en/agents-and-tools/agent-skills/best-practices",
       "/docs/en/agents-and-tools/agent-skills/claude-api-skill",
@@ -90,6 +89,7 @@
       "/docs/en/commands",
       "/docs/en/computer-use",
       "/docs/en/context-window",
+      "/docs/en/debug-your-config",
       "/docs/en/desktop-quickstart",
       "/docs/en/desktop-scheduled-tasks",
       "/docs/en/discover-plugins",
@@ -169,7 +169,6 @@
       "/docs/en/agent-sdk/python",
       "/docs/en/agent-sdk/quickstart",
       "/docs/en/agent-sdk/secure-deployment",
-      "/docs/en/agent-sdk/session-storage",
       "/docs/en/agent-sdk/sessions",
       "/docs/en/agent-sdk/skills",
       "/docs/en/agent-sdk/slash-commands",
