@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-22T00:52:18Z",
+  "generated_at": "2026-04-22T04:16:01Z",
   "indexed_files": 1047,
   "index": {
     "/changelog": {
@@ -26542,7 +26542,7 @@
         "tabs",
         "description"
       ],
-      "word_count": 5060,
+      "word_count": 5059,
       "file_path": "docs/docs__en__managed-agents__events-and-streaming.md"
     },
     "/docs/en/managed-agents/files": {

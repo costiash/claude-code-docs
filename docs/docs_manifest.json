@@ -5535,8 +5535,8 @@
     "docs__en__managed-agents__events-and-streaming.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/events-and-streaming",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/events-and-streaming.md",
-      "hash": "1f257c33246dd8f0267d322b3b365eca50ffc33ea3dbca88b33df0a4b05764de",
-      "last_updated": "2026-04-21T21:30:41.854275"
+      "hash": "8c00282409acbb5b96f39091f6f3e7a9b963fe0bb10d97c7866ebeedc5804792",
+      "last_updated": "2026-04-22T04:15:19.858331"
     },
     "docs__en__managed-agents__files.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/files",
@@ -5835,8 +5835,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-22T00:52:15.701948",
-    "fetch_duration_seconds": 802.539544,
+    "last_fetch_completed": "2026-04-22T04:15:58.888584",
+    "fetch_duration_seconds": 720.167862,
     "total_pages_discovered": 1251,
     "pages_fetched_successfully": 972,
     "pages_failed": 280,
@@ -6127,7 +6127,7 @@
     "total_files": 972,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-22T00:52:15.701970",
+  "last_updated": "2026-04-22T04:15:58.888609",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

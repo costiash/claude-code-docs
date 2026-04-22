@@ -36,11 +36,11 @@ Event type strings follow a `{domain}.{action}` naming convention.
 | --- | --- |
 | `agent.message` | Agent response containing text content blocks. |
 | `agent.thinking` | Agent thinking content, emitted separately from messages. |
-| `agent.tool_use` | Agent invoked a pre-built agent tool (bash, file operations, and so on). |
+| `agent.tool_use` | Agent invokes a pre-built agent tool (bash, file operations, and so on). |
 | `agent.tool_result` | Result of a pre-built agent tool execution. |
-| `agent.mcp_tool_use` | Agent invoked an MCP server tool. |
+| `agent.mcp_tool_use` | Agent invokes an MCP server tool. |
 | `agent.mcp_tool_result` | Result of an MCP tool execution. |
-| `agent.custom_tool_use` | Agent invoked one of your custom tools. Respond with a `user.custom_tool_result` event. |
+| `agent.custom_tool_use` | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event. |
 | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window. |
 | `agent.thread_message_sent` | Agent sent a message to another [multiagent](/docs/en/managed-agents/multi-agent) thread. |
 | `agent.thread_message_received` | Agent received a message from another [multiagent](/docs/en/managed-agents/multi-agent) thread. |
@@ -1602,7 +1602,7 @@ end
 
 ### Resuming an idle session
 
-Sessions persist between interactions, and conversation history is persisted unless a session is explicitly deleted. When a session goes idle, its container is checkpointed, preserving the full container state including the filesystem, installed packages, and any files the agent created. This allows you to resume cleanly from inactivity.
+Sessions persist between interactions. Conversation history is preserved unless the session is explicitly deleted. When a session goes idle, its container is checkpointed, preserving the full container state, including the filesystem, installed packages, and any files the agent created. This allows you to resume cleanly from inactivity.
 
 <Note>
 While session history is persisted until deleted, checkpoints are only preserved for 30 days after the session's last activity. If your workflow requires the full container state (files, installed tools, and so on) to persist beyond 30 days, send periodic `user.message` events to reset the inactivity timer before the checkpoint expires.
