@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-21T21:31:20Z",
+  "generated_at": "2026-04-22T00:52:18Z",
   "indexed_files": 1047,
   "index": {
     "/changelog": {
@@ -14,11 +14,11 @@
         "improved",
         "claude",
         "tool",
-        "mode",
         "instead",
+        "mode",
         "session",
-        "code",
         "sessions",
+        "code",
         "after",
         "being",
         "mcp",
@@ -28,7 +28,7 @@
         "bash",
         "file"
       ],
-      "word_count": 35895,
+      "word_count": 36442,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -238,21 +238,21 @@
         "session",
         "users",
         "api",
+        "disable",
+        "settings",
+        "anthropic",
         "using",
         "must",
-        "anthropic",
         "off",
         "our",
-        "disable",
         "retention",
         "when",
-        "including",
         "opt",
-        "see",
         "set",
-        "settings"
+        "webfetch",
+        "check"
       ],
-      "word_count": 1326,
+      "word_count": 1502,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -476,7 +476,7 @@
         "control",
         "decision"
       ],
-      "word_count": 15823,
+      "word_count": 15838,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -504,7 +504,7 @@
         "previous",
         "when"
       ],
-      "word_count": 2987,
+      "word_count": 2976,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -644,7 +644,7 @@
         "managed",
         "reads"
       ],
-      "word_count": 3446,
+      "word_count": 3458,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -747,16 +747,16 @@
         "variables",
         "trust",
         "configuration",
+        "set",
         "access",
         "anthropic",
         "network",
         "custom",
         "security",
         "system",
-        "set",
-        "github"
+        "when"
       ],
-      "word_count": 721,
+      "word_count": 755,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -812,7 +812,7 @@
         "size",
         "terminal"
       ],
-      "word_count": 4247,
+      "word_count": 4239,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -857,18 +857,18 @@
         "mcp",
         "default",
         "files",
+        "field",
         "file",
         "see",
         "lsp",
         "command",
         "version",
         "commands",
-        "field",
+        "configuration",
         "path",
-        "skills",
-        "configuration"
+        "skills"
       ],
-      "word_count": 5233,
+      "word_count": 5383,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -906,25 +906,25 @@
         "claude",
         "code",
         "div",
-        "const",
         "classname",
-        "key",
+        "const",
         "label",
         "cmd",
+        "key",
         "button",
-        "install",
         "alt",
+        "install",
         "team",
-        "vid",
         "size",
         "aria",
         "span",
         "provider",
         "href",
-        "return",
-        "step"
+        "step",
+        "tab",
+        "title"
       ],
-      "word_count": 4023,
+      "word_count": 3602,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1008,7 +1008,7 @@
         "user",
         "example"
       ],
-      "word_count": 7586,
+      "word_count": 7653,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1064,7 +1064,7 @@
         "context",
         "session"
       ],
-      "word_count": 5116,
+      "word_count": 5137,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1101,8 +1101,8 @@
       "keywords": [
         "subagent",
         "subagents",
-        "when",
         "claude",
+        "when",
         "main",
         "agent",
         "conversation",
@@ -1120,7 +1120,7 @@
         "uses",
         "step"
       ],
-      "word_count": 6626,
+      "word_count": 6666,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -25737,28 +25737,28 @@
       "title": "Embeddings",
       "content_preview": "# Embeddings  Text embeddings are numerical representations of text that enable measuring semantic similarity. This guide introduces embeddings, their applications, and how to use embedding models for tasks like search, recommendations, and anomaly detection.  ---  ## Before implementing embeddings",
       "keywords": [
-        "voyage",
         "embedding",
+        "voyage",
         "embeddings",
         "models",
-        "section",
         "retrieval",
+        "see",
+        "section",
+        "blog",
+        "details",
+        "post",
+        "text",
+        "model",
         "query",
         "bit",
         "binary",
-        "text",
-        "see",
+        "default",
         "document",
         "similarity",
         "when",
-        "more",
-        "blog",
-        "details",
-        "example",
-        "model",
-        "following"
+        "more"
       ],
-      "word_count": 2116,
+      "word_count": 2272,
       "file_path": "docs/docs__en__build-with-claude__embeddings.md"
     },
     "/docs/en/build-with-claude/extended-thinking": {

@@ -20,9 +20,20 @@ Voyage AI makes state-of-the-art embedding models and offers customized models f
 
 The rest of this guide is for Voyage AI, but you should assess a variety of embeddings vendors to find the best fit for your specific use case.
 
-## Available Models
+## Available models
 
 Voyage recommends using the following text embedding models:
+
+**Voyage 4 (latest generation)**
+
+| Model | Context Length | Embedding Dimension | Description |
+| --- | --- | --- | --- |
+| `voyage-4-large` | 32,000 | 1024 (default), 256, 512, 2048 | The best general-purpose and multilingual retrieval quality. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+| `voyage-4` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for general-purpose and multilingual retrieval quality. Balances quality and efficiency. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+| `voyage-4-lite` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for latency and cost. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+| `voyage-4-nano` | 32,000 | 1024 (default), 256, 512, 2048 | Open-weight model (Apache 2.0 license) available on Hugging Face. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+
+**Previous generation**
 
 | Model | Context Length | Embedding Dimension | Description |
 | --- | --- | --- | --- |
@@ -37,7 +48,8 @@ Additionally, the following multimodal embedding models are recommended:
 
 | Model | Context Length | Embedding Dimension | Description |
 | --- | --- | --- | --- |
-| `voyage-multimodal-3` | 32000 | 1024 | Rich multimodal embedding model that can vectorize interleaved text and content-rich images, such as screenshots of PDFs, slides, tables, figures, and more. See [blog post](https://blog.voyageai.com/2024/11/12/voyage-multimodal-3/) for details. |
+| `voyage-multimodal-3.5` | 32,000 | 1024 (default), 256, 512, 2048 | Rich multimodal embedding model that can vectorize interleaved text, images, and videos. Includes video support as the first production-grade video embedding model. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-multimodal-3-5/) for details. |
+| `voyage-multimodal-3` | 32,000 | 1024 | Rich multimodal embedding model that can vectorize interleaved text and content-rich images, such as screenshots of PDFs, slides, tables, figures, and more. See [blog post](https://blog.voyageai.com/2024/11/12/voyage-multimodal-3/) for details. |
 
 Need help deciding which text embedding model to use? Check out the [FAQ](https://docs.voyageai.com/docs/faq#what-embedding-models-are-available-and-which-one-should-i-use&ref=anthropic).
 
@@ -74,7 +86,7 @@ vo = voyageai.Client()
 
 texts = ["Sample text 1", "Sample text 2"]
 
-result = vo.embed(texts, model="voyage-3.5", input_type="document")
+result = vo.embed(texts, model="voyage-4", input_type="document")
 print(result.embeddings[0])
 print(result.embeddings[1])
 ```
@@ -100,7 +112,7 @@ curl https://api.voyageai.com/v1/embeddings \
   -H "Authorization: Bearer $VOYAGE_API_KEY" \
   -d '{
     "input": ["Sample text 1", "Sample text 2"],
-    "model": "voyage-3.5"
+    "model": "voyage-4"
   }'
 ```
 
@@ -119,7 +131,7 @@ The response you would get is a JSON object containing the embeddings and the to
       "index": 1
     }
   ],
-  "model": "voyage-3.5",
+  "model": "voyage-4",
   "usage": {
     "total_tokens": 10
   }
@@ -157,7 +169,7 @@ import voyageai
 vo = voyageai.Client()
 
 # Embed the documents
-doc_embds = vo.embed(documents, model="voyage-3.5", input_type="document").embeddings
+doc_embds = vo.embed(documents, model="voyage-4", input_type="document").embeddings
 ```
 
 The embeddings allow you to do semantic search / retrieval in the vector space. Given an example query,
@@ -172,7 +184,7 @@ Next, convert it into an embedding and conduct a nearest neighbor search to find
 import numpy as np
 
 # Embed the query
-query_embd = vo.embed([query], model="voyage-3.5", input_type="query").embeddings[0]
+query_embd = vo.embed([query], model="voyage-4", input_type="query").embeddings[0]
 
 # Compute the similarity
 # Voyage embeddings are normalized to length 1, therefore dot-product
@@ -210,9 +222,9 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
   <section title="What embedding models are available and which should I use?">
 
     For general-purpose embedding, the recommended models are:
-    - `voyage-3-large`: Best quality
-    - `voyage-3.5-lite`: Lowest latency and cost
-    - `voyage-3.5`: Balanced performance with superior retrieval quality at a competitive price point
+    - `voyage-4-large`: Best quality
+    - `voyage-4-lite`: Lowest latency and cost
+    - `voyage-4`: Balanced performance
 
     For retrieval, use the `input_type` parameter to specify whether the text is a query or document type.
 
