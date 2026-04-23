@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-04-23T15:38:50.155067Z",
-    "total_paths": 1252,
+    "generated_at": "2026-04-23T18:29:32.898099Z",
+    "total_paths": 1253,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-04-23T15:38:50.155074Z"
+    "last_regenerated": "2026-04-23T18:29:32.898105Z"
   },
   "categories": {
     "core_documentation": [
@@ -19,6 +19,7 @@
       "/docs/en/about-claude/use-case-guides/legal-summarization",
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/about-claude/use-case-guides/ticket-routing",
+      "/docs/en/admin-setup",
       "/docs/en/agent-teams",
       "/docs/en/agents-and-tools/agent-skills/best-practices",
       "/docs/en/agents-and-tools/agent-skills/claude-api-skill",
