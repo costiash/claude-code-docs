@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-22T21:33:17Z",
+  "generated_at": "2026-04-23T00:55:11Z",
   "indexed_files": 1047,
   "index": {
     "/changelog": {
@@ -14,8 +14,8 @@
         "improved",
         "claude",
         "tool",
-        "instead",
         "mode",
+        "instead",
         "session",
         "sessions",
         "code",
@@ -25,10 +25,10 @@
         "commands",
         "command",
         "prompt",
-        "bash",
-        "file"
+        "file",
+        "bash"
       ],
-      "word_count": 36442,
+      "word_count": 37030,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -470,13 +470,13 @@
         "command",
         "event",
         "runs",
-        "only",
         "session",
+        "only",
         "prompt",
         "control",
         "decision"
       ],
-      "word_count": 15838,
+      "word_count": 15853,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -737,8 +737,8 @@
       "keywords": [
         "claude",
         "code",
-        "enterprise",
         "authentication",
+        "enterprise",
         "environment",
         "note",
         "proxy",
@@ -747,16 +747,16 @@
         "variables",
         "trust",
         "configuration",
+        "native",
         "set",
         "access",
         "anthropic",
         "network",
         "custom",
         "security",
-        "system",
-        "when"
+        "system"
       ],
-      "word_count": 755,
+      "word_count": 735,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
