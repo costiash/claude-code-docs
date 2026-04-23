@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-23T00:55:11Z",
+  "generated_at": "2026-04-23T04:16:30Z",
   "indexed_files": 1047,
   "index": {
     "/changelog": {
@@ -812,7 +812,7 @@
         "size",
         "terminal"
       ],
-      "word_count": 4239,
+      "word_count": 4254,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -912,8 +912,8 @@
         "cmd",
         "key",
         "button",
-        "alt",
         "install",
+        "alt",
         "team",
         "size",
         "aria",
@@ -924,7 +924,7 @@
         "tab",
         "title"
       ],
-      "word_count": 3602,
+      "word_count": 3617,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1018,25 +1018,25 @@
         "tab",
         "code",
         "claude",
-        "windows",
         "title",
+        "windows",
         "install",
         "powershell",
+        "linux",
         "wsl",
-        "version",
-        "step",
         "tabs",
         "run",
-        "installation",
+        "package",
+        "version",
         "see",
-        "linux",
-        "cmd",
         "native",
-        "updates",
+        "step",
         "channel",
-        "settings"
+        "installation",
+        "updates",
+        "cmd"
       ],
-      "word_count": 2323,
+      "word_count": 2711,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
