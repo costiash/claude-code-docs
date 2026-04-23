@@ -335,13 +335,11 @@ client = Anthropic()
 # Upload using a file path
 client.beta.files.upload(
     file=Path("/path/to/file"),
-    betas=["files-api-2025-04-14"],
 )
 
 # Upload using bytes
 client.beta.files.upload(
     file=("file.txt", b"my bytes", "text/plain"),
-    betas=["files-api-2025-04-14"],
 )
 ```
 

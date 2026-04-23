@@ -431,8 +431,7 @@ const client = new Anthropic();
 async function main() {
   // Upload a file
   const fileObject = await client.beta.files.upload({
-    file: await toFile(createReadStream("data.csv"), undefined, { type: "text/csv" }),
-    betas: ["files-api-2025-04-14"]
+    file: await toFile(createReadStream("data.csv"), undefined, { type: "text/csv" })
   });
 
   // Use the file_id with code execution
@@ -532,8 +531,7 @@ func main() {
 	defer file.Close()
 
 	fileObject, err := client.Beta.Files.Upload(context.TODO(), anthropic.BetaFileUploadParams{
-		File:  file,
-		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+		File: file,
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -870,7 +868,7 @@ public class Program
 }
 ```
 
-```go Go nocheck hidelines={1..13,65..66}
+```go Go nocheck hidelines={1..13,61..62}
 package main
 
 import (
@@ -907,16 +905,12 @@ func main() {
 	fileIDs := extractFileIDs(response)
 
 	for _, fileID := range fileIDs {
-		fileMetadata, err := client.Beta.Files.GetMetadata(context.TODO(), fileID, anthropic.BetaFileGetMetadataParams{
-			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
-		})
+		fileMetadata, err := client.Beta.Files.GetMetadata(context.TODO(), fileID, anthropic.BetaFileGetMetadataParams{})
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		fileContent, err := client.Beta.Files.Download(context.TODO(), fileID, anthropic.BetaFileDownloadParams{
-			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
-		})
+		fileContent, err := client.Beta.Files.Download(context.TODO(), fileID, anthropic.BetaFileDownloadParams{})
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -1056,8 +1050,8 @@ function extractFileIds($response) {
 }
 
 foreach (extractFileIds($response) as $fileId) {
-    $fileMetadata = $client->beta->files->retrieveMetadata(fileID: $fileId, betas: ['files-api-2025-04-14']);
-    $fileContent = $client->beta->files->download(fileID: $fileId, betas: ['files-api-2025-04-14']);
+    $fileMetadata = $client->beta->files->retrieveMetadata(fileID: $fileId);
+    $fileContent = $client->beta->files->download(fileID: $fileId);
 
     file_put_contents($fileMetadata->filename, $fileContent);
     echo "Downloaded: {$fileMetadata->filename}\n";

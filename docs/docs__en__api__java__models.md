@@ -76,8 +76,6 @@ The Models API response can be used to determine which models are available for 
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class ModelInfo:`
@@ -185,14 +183,6 @@ The Models API response can be used to determine which models are available for 
       - `boolean supported`
 
         Whether this capability is supported by the model.
-
-      - `Optional<CapabilitySupport> xhigh`
-
-        Indicates whether a capability is supported.
-
-        - `boolean supported`
-
-          Whether this capability is supported by the model.
 
     - `CapabilitySupport imageInput`
 
@@ -357,8 +347,6 @@ The Models API response can be used to determine information about a specific mo
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class ModelInfo:`
@@ -466,14 +454,6 @@ The Models API response can be used to determine information about a specific mo
       - `boolean supported`
 
         Whether this capability is supported by the model.
-
-      - `Optional<CapabilitySupport> xhigh`
-
-        Indicates whether a capability is supported.
-
-        - `boolean supported`
-
-          Whether this capability is supported by the model.
 
     - `CapabilitySupport imageInput`
 
@@ -660,14 +640,6 @@ public final class Main {
 
     Whether this capability is supported by the model.
 
-  - `Optional<CapabilitySupport> xhigh`
-
-    Indicates whether a capability is supported.
-
-    - `boolean supported`
-
-      Whether this capability is supported by the model.
-
 ### Model Capabilities
 
 - `class ModelCapabilities:`
@@ -769,14 +741,6 @@ public final class Main {
     - `boolean supported`
 
       Whether this capability is supported by the model.
-
-    - `Optional<CapabilitySupport> xhigh`
-
-      Indicates whether a capability is supported.
-
-      - `boolean supported`
-
-        Whether this capability is supported by the model.
 
   - `CapabilitySupport imageInput`
 
@@ -937,14 +901,6 @@ public final class Main {
       - `boolean supported`
 
         Whether this capability is supported by the model.
-
-      - `Optional<CapabilitySupport> xhigh`
-
-        Indicates whether a capability is supported.
-
-        - `boolean supported`
-
-          Whether this capability is supported by the model.
 
     - `CapabilitySupport imageInput`
 

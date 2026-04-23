@@ -62,8 +62,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
   - `long maxTokens`
 
     The maximum number of tokens to generate before stopping.
@@ -2710,10 +2708,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `TTL_1H("1h")`
 
-          - `Optional<String> encryptedContent`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
-
     - `Role role`
 
       - `USER("user")`
@@ -4604,19 +4598,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-    Recommended for advanced use cases only. You usually only need to use `temperature`.
+    Recommended for advanced use cases only.
 
   - `Optional<Double> topP`
 
     Use nucleus sampling.
 
-    In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+    In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-    Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-  - `Optional<String> userProfileId`
-
-    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+    Recommended for advanced use cases only.
 
 ### Returns
 
@@ -5538,10 +5528,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `Optional<String> content`
 
         Summary of compacted content, or null if compaction failed
-
-      - `Optional<String> encryptedContent`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `JsonValue; type "compaction"constant`
 

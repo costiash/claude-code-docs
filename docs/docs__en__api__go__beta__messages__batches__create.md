@@ -2672,10 +2672,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
-              - `EncryptedContent string`
-
-                Opaque metadata from prior compaction, to be round-tripped verbatim
-
         - `Role BetaMessageParamRole`
 
           - `const BetaMessageParamRoleUser BetaMessageParamRole = "user"`
@@ -2991,8 +2987,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"`
 
-          - `const BetaOutputConfigEffortXhigh BetaOutputConfigEffort = "xhigh"`
-
           - `const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"`
 
         - `Format BetaJSONOutputFormat`
@@ -3006,24 +3000,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `Type JSONSchema`
 
             - `const JSONSchemaJSONSchema JSONSchema = "json_schema"`
-
-        - `TaskBudget BetaTokenTaskBudget`
-
-          User-configurable total token budget across contexts.
-
-          - `Total int64`
-
-            Total token budget across all contexts in the session.
-
-          - `Type Tokens`
-
-            The budget type. Currently only 'tokens' is supported.
-
-            - `const TokensTokens Tokens = "tokens"`
-
-          - `Remaining int64`
-
-            Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
       - `OutputFormat BetaJSONOutputFormat`
 
@@ -4943,19 +4919,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-        Recommended for advanced use cases only. You usually only need to use `temperature`.
+        Recommended for advanced use cases only.
 
       - `TopP float64`
 
         Use nucleus sampling.
 
-        In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+        In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-        Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-      - `UserProfileID string`
-
-        The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+        Recommended for advanced use cases only.
 
   - `Betas param.Field[[]AnthropicBeta]`
 
@@ -5008,8 +4980,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
-
-      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
 ### Returns
 

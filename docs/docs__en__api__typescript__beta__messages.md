@@ -2664,10 +2664,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `"1h"`
 
-            - `encrypted_content?: string | null`
-
-              Opaque metadata from prior compaction, to be round-tripped verbatim
-
       - `role: "user" | "assistant"`
 
         - `"user"`
@@ -2969,7 +2965,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Body param: Configuration options for the model's output, such as the output format.
 
-      - `effort?: "low" | "medium" | "high" | 2 more | null`
+      - `effort?: "low" | "medium" | "high" | "max" | null`
 
         All possible effort levels.
 
@@ -2978,8 +2974,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `"medium"`
 
         - `"high"`
-
-        - `"xhigh"`
 
         - `"max"`
 
@@ -2994,24 +2988,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `type: "json_schema"`
 
           - `"json_schema"`
-
-      - `task_budget?: BetaTokenTaskBudget | null`
-
-        User-configurable total token budget across contexts.
-
-        - `total: number`
-
-          Total token budget across all contexts in the session.
-
-        - `type: "tokens"`
-
-          The budget type. Currently only 'tokens' is supported.
-
-          - `"tokens"`
-
-        - `remaining?: number | null`
-
-          Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
     - `output_format?: BetaJSONOutputFormat | null`
 
@@ -4931,19 +4907,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-      Recommended for advanced use cases only. You usually only need to use `temperature`.
+      Recommended for advanced use cases only.
 
     - `top_p?: number`
 
       Body param: Use nucleus sampling.
 
-      In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+      In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-      Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-    - `user_profile_id?: string | null`
-
-      Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+      Recommended for advanced use cases only.
 
     - `betas?: Array<AnthropicBeta>`
 
@@ -4951,7 +4923,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `(string & {})`
 
-      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
         - `"message-batches-2024-09-24"`
 
@@ -4996,8 +4968,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `"output-300k-2026-03-24"`
 
         - `"advisor-tool-2026-03-01"`
-
-        - `"user-profiles-2026-03-24"`
 
   - `MessageCreateParamsNonStreaming extends MessageCreateParamsBase`
 
@@ -5939,10 +5909,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `content: string | null`
 
         Summary of compacted content, or null if compaction failed
-
-      - `encrypted_content: string | null`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `type: "compaction"`
 
@@ -9093,10 +9059,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"1h"`
 
-          - `encrypted_content?: string | null`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
-
     - `role: "user" | "assistant"`
 
       - `"user"`
@@ -9350,7 +9312,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     Body param: Configuration options for the model's output, such as the output format.
 
-    - `effort?: "low" | "medium" | "high" | 2 more | null`
+    - `effort?: "low" | "medium" | "high" | "max" | null`
 
       All possible effort levels.
 
@@ -9359,8 +9321,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `"medium"`
 
       - `"high"`
-
-      - `"xhigh"`
 
       - `"max"`
 
@@ -9375,24 +9335,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `type: "json_schema"`
 
         - `"json_schema"`
-
-    - `task_budget?: BetaTokenTaskBudget | null`
-
-      User-configurable total token budget across contexts.
-
-      - `total: number`
-
-        Total token budget across all contexts in the session.
-
-      - `type: "tokens"`
-
-        The budget type. Currently only 'tokens' is supported.
-
-        - `"tokens"`
-
-      - `remaining?: number | null`
-
-        Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
   - `output_format?: BetaJSONOutputFormat | null`
 
@@ -11278,7 +11220,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -11323,8 +11265,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `"output-300k-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
-
-      - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -13190,10 +13130,6 @@ console.log(betaMessageTokensCount.context_management);
 
     Summary of compacted content, or null if compaction failed
 
-  - `encrypted_content: string | null`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
-
   - `type: "compaction"`
 
     - `"compaction"`
@@ -13241,19 +13177,11 @@ console.log(betaMessageTokensCount.context_management);
 
       - `"1h"`
 
-  - `encrypted_content?: string | null`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
-
 ### Beta Compaction Content Block Delta
 
 - `BetaCompactionContentBlockDelta`
 
   - `content: string | null`
-
-  - `encrypted_content: string | null`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
 
   - `type: "compaction_delta"`
 
@@ -14266,10 +14194,6 @@ console.log(betaMessageTokensCount.context_management);
     - `content: string | null`
 
       Summary of compacted content, or null if compaction failed
-
-    - `encrypted_content: string | null`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
 
     - `type: "compaction"`
 
@@ -16862,10 +16786,6 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"1h"`
 
-    - `encrypted_content?: string | null`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
-
 ### Beta Content Block Source
 
 - `BetaContentBlockSource`
@@ -19289,10 +19209,6 @@ console.log(betaMessageTokensCount.context_management);
       - `content: string | null`
 
         Summary of compacted content, or null if compaction failed
-
-      - `encrypted_content: string | null`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `type: "compaction"`
 
@@ -22636,10 +22552,6 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"1h"`
 
-        - `encrypted_content?: string | null`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
-
   - `role: "user" | "assistant"`
 
     - `"user"`
@@ -22676,7 +22588,7 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaOutputConfig`
 
-  - `effort?: "low" | "medium" | "high" | 2 more | null`
+  - `effort?: "low" | "medium" | "high" | "max" | null`
 
     All possible effort levels.
 
@@ -22685,8 +22597,6 @@ console.log(betaMessageTokensCount.context_management);
     - `"medium"`
 
     - `"high"`
-
-    - `"xhigh"`
 
     - `"max"`
 
@@ -22701,24 +22611,6 @@ console.log(betaMessageTokensCount.context_management);
     - `type: "json_schema"`
 
       - `"json_schema"`
-
-  - `task_budget?: BetaTokenTaskBudget | null`
-
-    User-configurable total token budget across contexts.
-
-    - `total: number`
-
-      Total token budget across all contexts in the session.
-
-    - `type: "tokens"`
-
-      The budget type. Currently only 'tokens' is supported.
-
-      - `"tokens"`
-
-    - `remaining?: number | null`
-
-      Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 ### Beta Plain Text Source
 
@@ -22868,10 +22760,6 @@ console.log(betaMessageTokensCount.context_management);
 
     - `content: string | null`
 
-    - `encrypted_content: string | null`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
-
     - `type: "compaction_delta"`
 
       - `"compaction_delta"`
@@ -23011,10 +22899,6 @@ console.log(betaMessageTokensCount.context_management);
     - `BetaCompactionContentBlockDelta`
 
       - `content: string | null`
-
-      - `encrypted_content: string | null`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `type: "compaction_delta"`
 
@@ -23883,10 +23767,6 @@ console.log(betaMessageTokensCount.context_management);
       - `content: string | null`
 
         Summary of compacted content, or null if compaction failed
-
-      - `encrypted_content: string | null`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `type: "compaction"`
 
@@ -25198,10 +25078,6 @@ console.log(betaMessageTokensCount.context_management);
         - `content: string | null`
 
           Summary of compacted content, or null if compaction failed
-
-        - `encrypted_content: string | null`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `type: "compaction"`
 
@@ -26616,10 +26492,6 @@ console.log(betaMessageTokensCount.context_management);
           - `content: string | null`
 
             Summary of compacted content, or null if compaction failed
-
-          - `encrypted_content: string | null`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
 
           - `type: "compaction"`
 
@@ -28330,10 +28202,6 @@ console.log(betaMessageTokensCount.context_management);
 
           Summary of compacted content, or null if compaction failed
 
-        - `encrypted_content: string | null`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
-
         - `type: "compaction"`
 
           - `"compaction"`
@@ -28477,10 +28345,6 @@ console.log(betaMessageTokensCount.context_management);
       - `BetaCompactionContentBlockDelta`
 
         - `content: string | null`
-
-        - `encrypted_content: string | null`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `type: "compaction_delta"`
 
@@ -30271,26 +30135,6 @@ console.log(betaMessageTokensCount.context_management);
     - `"thinking_turns"`
 
   - `value: number`
-
-### Beta Token Task Budget
-
-- `BetaTokenTaskBudget`
-
-  User-configurable total token budget across contexts.
-
-  - `total: number`
-
-    Total token budget across all contexts in the session.
-
-  - `type: "tokens"`
-
-    The budget type. Currently only 'tokens' is supported.
-
-    - `"tokens"`
-
-  - `remaining?: number | null`
-
-    Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 ### Beta Tool
 
@@ -38468,10 +38312,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"1h"`
 
-              - `encrypted_content?: string | null`
-
-                Opaque metadata from prior compaction, to be round-tripped verbatim
-
         - `role: "user" | "assistant"`
 
           - `"user"`
@@ -38773,7 +38613,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Configuration options for the model's output, such as the output format.
 
-        - `effort?: "low" | "medium" | "high" | 2 more | null`
+        - `effort?: "low" | "medium" | "high" | "max" | null`
 
           All possible effort levels.
 
@@ -38782,8 +38622,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `"medium"`
 
           - `"high"`
-
-          - `"xhigh"`
 
           - `"max"`
 
@@ -38798,24 +38636,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `type: "json_schema"`
 
             - `"json_schema"`
-
-        - `task_budget?: BetaTokenTaskBudget | null`
-
-          User-configurable total token budget across contexts.
-
-          - `total: number`
-
-            Total token budget across all contexts in the session.
-
-          - `type: "tokens"`
-
-            The budget type. Currently only 'tokens' is supported.
-
-            - `"tokens"`
-
-          - `remaining?: number | null`
-
-            Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
       - `output_format?: BetaJSONOutputFormat | null`
 
@@ -40733,19 +40553,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-        Recommended for advanced use cases only. You usually only need to use `temperature`.
+        Recommended for advanced use cases only.
 
       - `top_p?: number`
 
         Use nucleus sampling.
 
-        In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+        In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-        Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-      - `user_profile_id?: string | null`
-
-        The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+        Recommended for advanced use cases only.
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -40753,7 +40569,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -40798,8 +40614,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"output-300k-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
-
-      - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -40940,7 +40754,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -40985,8 +40799,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"output-300k-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
-
-      - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -41126,7 +40938,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -41171,8 +40983,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"output-300k-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
-
-      - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -41305,7 +41115,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -41350,8 +41160,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"output-300k-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
-
-      - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -41483,7 +41291,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -41528,8 +41336,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"output-300k-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
-
-      - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -41587,7 +41393,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -41632,8 +41438,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"output-300k-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
-
-      - `"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -42573,10 +42377,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `content: string | null`
 
               Summary of compacted content, or null if compaction failed
-
-            - `encrypted_content: string | null`
-
-              Opaque metadata from prior compaction, to be round-tripped verbatim
 
             - `type: "compaction"`
 
@@ -44328,10 +44128,6 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
               Summary of compacted content, or null if compaction failed
 
-            - `encrypted_content: string | null`
-
-              Opaque metadata from prior compaction, to be round-tripped verbatim
-
             - `type: "compaction"`
 
               - `"compaction"`
@@ -45874,10 +45670,6 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
             Summary of compacted content, or null if compaction failed
 
-          - `encrypted_content: string | null`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
-
           - `type: "compaction"`
 
             - `"compaction"`
@@ -47381,10 +47173,6 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
         - `content: string | null`
 
           Summary of compacted content, or null if compaction failed
-
-        - `encrypted_content: string | null`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `type: "compaction"`
 

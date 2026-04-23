@@ -83,7 +83,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   Body param: MCP servers to be utilized in this request
 
-- `--output-config: optional object { effort, format, task_budget }`
+- `--output-config: optional object { effort, format }`
 
   Body param: Configuration options for the model's output, such as the output format.
 

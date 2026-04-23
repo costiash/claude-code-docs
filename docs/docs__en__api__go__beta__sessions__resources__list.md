@@ -72,11 +72,11 @@ List Session Resources
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
-
 ### Returns
 
 - `type BetaManagedAgentsSessionResourceUnion interface{…}`
+
+  A memory store attached to an agent session.
 
   - `type BetaManagedAgentsGitHubRepositoryResource struct{…}`
 
@@ -139,6 +139,42 @@ List Session Resources
     - `UpdatedAt Time`
 
       A timestamp in RFC 3339 format
+
+  - `type BetaManagedAgentsMemoryStoreResource struct{…}`
+
+    A memory store attached to an agent session.
+
+    - `MemoryStoreID string`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `Type BetaManagedAgentsMemoryStoreResourceType`
+
+      - `const BetaManagedAgentsMemoryStoreResourceTypeMemoryStore BetaManagedAgentsMemoryStoreResourceType = "memory_store"`
+
+    - `Access BetaManagedAgentsMemoryStoreResourceAccess`
+
+      Access mode for an attached memory store.
+
+      - `const BetaManagedAgentsMemoryStoreResourceAccessReadWrite BetaManagedAgentsMemoryStoreResourceAccess = "read_write"`
+
+      - `const BetaManagedAgentsMemoryStoreResourceAccessReadOnly BetaManagedAgentsMemoryStoreResourceAccess = "read_only"`
+
+    - `Description string`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `Instructions string`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `MountPath string`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `Name string`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 ### Example
 

@@ -64,8 +64,6 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
-
 ### Returns
 
 - `type BetaEnvironmentDeleteResponse struct{…}`

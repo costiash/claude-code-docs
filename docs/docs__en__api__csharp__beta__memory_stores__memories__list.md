@@ -1,0 +1,151 @@
+## List
+
+`MemoryListPageResponse Beta.MemoryStores.Memories.List(MemoryListParamsparameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/memory_stores/{memory_store_id}/memories`
+
+ListMemories
+
+### Parameters
+
+- `MemoryListParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path param: Path parameter memory_store_id
+
+  - `Int depth`
+
+    Query param: Query parameter for depth
+
+  - `Int limit`
+
+    Query param: Query parameter for limit
+
+  - `Order order`
+
+    Query param: Query parameter for order
+
+    - `"asc"Asc`
+
+    - `"desc"Desc`
+
+  - `string orderBy`
+
+    Query param: Query parameter for order_by
+
+  - `string page`
+
+    Query param: Query parameter for page
+
+  - `string pathPrefix`
+
+    Query param: Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
+
+  - `BetaManagedAgentsMemoryView view`
+
+    Query param: Query parameter for view
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class MemoryListPageResponse:`
+
+  - `IReadOnlyList<BetaManagedAgentsMemoryListItem> Data`
+
+    - `class BetaManagedAgentsMemory:`
+
+      - `required string ID`
+
+      - `required string ContentSha256`
+
+      - `required Int ContentSizeBytes`
+
+      - `required DateTimeOffset CreatedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `required string MemoryStoreID`
+
+      - `required string MemoryVersionID`
+
+      - `required string Path`
+
+      - `required Type Type`
+
+        - `"memory"Memory`
+
+      - `required DateTimeOffset UpdatedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `string? Content`
+
+    - `class BetaManagedAgentsMemoryPrefix:`
+
+      - `required string Path`
+
+      - `required Type Type`
+
+        - `"memory_prefix"MemoryPrefix`
+
+  - `string? NextPage`
+
+### Example
+
+```csharp
+MemoryListParams parameters = new() { MemoryStoreID = "memory_store_id" };
+
+var page = await client.Beta.MemoryStores.Memories.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```

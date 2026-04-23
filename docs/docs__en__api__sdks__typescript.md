@@ -349,29 +349,24 @@ const client = new Anthropic();
 await client.beta.files.upload({
   file: await toFile(fs.createReadStream("/path/to/file"), undefined, {
     type: "application/json"
-  }),
-  betas: ["files-api-2025-04-14"]
+  })
 });
 
 // Or if you have the web `File` API you can pass a `File` instance:
 await client.beta.files.upload({
-  file: new File(["my bytes"], "file.txt", { type: "text/plain" }),
-  betas: ["files-api-2025-04-14"]
+  file: new File(["my bytes"], "file.txt", { type: "text/plain" })
 });
 // You can also pass a `fetch` `Response`:
 await client.beta.files.upload({
-  file: await fetch("https://somesite/file"),
-  betas: ["files-api-2025-04-14"]
+  file: await fetch("https://somesite/file")
 });
 
 // Or a `Buffer` / `Uint8Array`
 await client.beta.files.upload({
-  file: await toFile(Buffer.from("my bytes"), "file", { type: "text/plain" }),
-  betas: ["files-api-2025-04-14"]
+  file: await toFile(Buffer.from("my bytes"), "file", { type: "text/plain" })
 });
 await client.beta.files.upload({
-  file: await toFile(new Uint8Array([0, 1, 2]), "file", { type: "text/plain" }),
-  betas: ["files-api-2025-04-14"]
+  file: await toFile(new Uint8Array([0, 1, 2]), "file", { type: "text/plain" })
 });
 ```
 

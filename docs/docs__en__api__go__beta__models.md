@@ -80,8 +80,6 @@ The Models API response can be used to determine which models are available for 
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
-
 ### Returns
 
 - `type BetaModelInfo struct{…}`
@@ -189,14 +187,6 @@ The Models API response can be used to determine which models are available for 
       - `Supported bool`
 
         Whether this capability is supported by the model.
-
-      - `Xhigh BetaCapabilitySupport`
-
-        Indicates whether a capability is supported.
-
-        - `Supported bool`
-
-          Whether this capability is supported by the model.
 
     - `ImageInput BetaCapabilitySupport`
 
@@ -371,8 +361,6 @@ The Models API response can be used to determine information about a specific mo
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
-
 ### Returns
 
 - `type BetaModelInfo struct{…}`
@@ -480,14 +468,6 @@ The Models API response can be used to determine information about a specific mo
       - `Supported bool`
 
         Whether this capability is supported by the model.
-
-      - `Xhigh BetaCapabilitySupport`
-
-        Indicates whether a capability is supported.
-
-        - `Supported bool`
-
-          Whether this capability is supported by the model.
 
     - `ImageInput BetaCapabilitySupport`
 
@@ -684,14 +664,6 @@ func main() {
 
     Whether this capability is supported by the model.
 
-  - `Xhigh BetaCapabilitySupport`
-
-    Indicates whether a capability is supported.
-
-    - `Supported bool`
-
-      Whether this capability is supported by the model.
-
 ### Beta Model Capabilities
 
 - `type BetaModelCapabilities struct{…}`
@@ -793,14 +765,6 @@ func main() {
     - `Supported bool`
 
       Whether this capability is supported by the model.
-
-    - `Xhigh BetaCapabilitySupport`
-
-      Indicates whether a capability is supported.
-
-      - `Supported bool`
-
-        Whether this capability is supported by the model.
 
   - `ImageInput BetaCapabilitySupport`
 
@@ -961,14 +925,6 @@ func main() {
       - `Supported bool`
 
         Whether this capability is supported by the model.
-
-      - `Xhigh BetaCapabilitySupport`
-
-        Indicates whether a capability is supported.
-
-        - `Supported bool`
-
-          Whether this capability is supported by the model.
 
     - `ImageInput BetaCapabilitySupport`
 

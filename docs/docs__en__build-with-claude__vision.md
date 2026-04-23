@@ -979,8 +979,7 @@ const anthropic = new Anthropic();
 async function main() {
   // Upload the image file
   const fileUpload = await anthropic.beta.files.upload({
-    file: await toFile(fs.createReadStream("image.jpg"), undefined, { type: "image/jpeg" }),
-    betas: ["files-api-2025-04-14"]
+    file: await toFile(fs.createReadStream("image.jpg"), undefined, { type: "image/jpeg" })
   });
 
   // Use the uploaded file in a message
@@ -1075,8 +1074,7 @@ func main() {
 
 	fileUpload, err := client.Beta.Files.Upload(context.Background(),
 		anthropic.BetaFileUploadParams{
-			File:  file,
-			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+			File: file,
 		})
 	if err != nil {
 		log.Fatal(err)
@@ -1161,7 +1159,6 @@ $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 // Upload the image file
 $fileUpload = $client->beta->files->upload(
     file: fopen('image.jpg', 'r'),
-    betas: ['files-api-2025-04-14'],
 );
 
 // Use the uploaded file in a message

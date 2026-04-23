@@ -2294,10 +2294,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"1h"Ttl1h`
 
-          - `string? EncryptedContent`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
-
     - `required Role Role`
 
       - `"user"User`
@@ -4009,8 +4005,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 

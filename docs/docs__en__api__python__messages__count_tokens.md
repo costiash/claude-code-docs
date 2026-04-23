@@ -2416,7 +2416,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   Configuration options for the model's output, such as the output format.
 
-  - `effort: Optional[Literal["low", "medium", "high", 2 more]]`
+  - `effort: Optional[Literal["low", "medium", "high", "max"]]`
 
     All possible effort levels.
 
@@ -2425,8 +2425,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `"medium"`
 
     - `"high"`
-
-    - `"xhigh"`
 
     - `"max"`
 

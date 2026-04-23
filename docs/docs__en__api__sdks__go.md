@@ -700,14 +700,12 @@ helper, which wraps any `io.Reader` with the appropriate file name and content t
 // A file from the file system
 file, err := os.Open("/path/to/file.json")
 anthropic.BetaFileUploadParams{
-	File:  anthropic.File(file, "custom-name.json", "application/json"),
-	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+	File: anthropic.File(file, "custom-name.json", "application/json"),
 }
 
 // A file from a string
 anthropic.BetaFileUploadParams{
-	File:  anthropic.File(strings.NewReader("my file contents"), "custom-name.json", "application/json"),
-	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+	File: anthropic.File(strings.NewReader("my file contents"), "custom-name.json", "application/json"),
 }
 ```
 

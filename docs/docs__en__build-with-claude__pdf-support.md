@@ -561,8 +561,7 @@ async function main() {
   const fileUpload = await anthropic.beta.files.upload({
     file: await toFile(fs.createReadStream("document.pdf"), undefined, {
       type: "application/pdf"
-    }),
-    betas: ["files-api-2025-04-14"]
+    })
   });
 
   // Use the uploaded file in a message

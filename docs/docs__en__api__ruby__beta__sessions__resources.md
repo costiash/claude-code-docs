@@ -30,7 +30,7 @@ Add Session Resource
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -75,8 +75,6 @@ Add Session Resource
     - `:"output-300k-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
-
-    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -142,7 +140,7 @@ List Session Resources
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -188,11 +186,11 @@ List Session Resources
 
     - `:"advisor-tool-2026-03-01"`
 
-    - `:"user-profiles-2026-03-24"`
-
 ### Returns
 
-- `BetaManagedAgentsSessionResource = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource`
+- `BetaManagedAgentsSessionResource = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
+
+  A memory store attached to an agent session.
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
@@ -256,6 +254,42 @@ List Session Resources
 
       A timestamp in RFC 3339 format
 
+  - `class BetaManagedAgentsMemoryStoreResource`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: String`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: :memory_store`
+
+      - `:memory_store`
+
+    - `access: :read_write | :read_only`
+
+      Access mode for an attached memory store.
+
+      - `:read_write`
+
+      - `:read_only`
+
+    - `description: String`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: String`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `mount_path: String`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: String`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 ### Example
 
 ```ruby
@@ -288,7 +322,7 @@ Get Session Resource
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -334,11 +368,9 @@ Get Session Resource
 
     - `:"advisor-tool-2026-03-01"`
 
-    - `:"user-profiles-2026-03-24"`
-
 ### Returns
 
-- `ResourceRetrieveResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource`
+- `ResourceRetrieveResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
 
   The requested session resource.
 
@@ -404,6 +436,42 @@ Get Session Resource
 
       A timestamp in RFC 3339 format
 
+  - `class BetaManagedAgentsMemoryStoreResource`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: String`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: :memory_store`
+
+      - `:memory_store`
+
+    - `access: :read_write | :read_only`
+
+      Access mode for an attached memory store.
+
+      - `:read_write`
+
+      - `:read_only`
+
+    - `description: String`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: String`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `mount_path: String`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: String`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 ### Example
 
 ```ruby
@@ -443,7 +511,7 @@ Update Session Resource
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -489,11 +557,9 @@ Update Session Resource
 
     - `:"advisor-tool-2026-03-01"`
 
-    - `:"user-profiles-2026-03-24"`
-
 ### Returns
 
-- `ResourceUpdateResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource`
+- `ResourceUpdateResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
 
   The updated session resource.
 
@@ -559,6 +625,42 @@ Update Session Resource
 
       A timestamp in RFC 3339 format
 
+  - `class BetaManagedAgentsMemoryStoreResource`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: String`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: :memory_store`
+
+      - `:memory_store`
+
+    - `access: :read_write | :read_only`
+
+      Access mode for an attached memory store.
+
+      - `:read_write`
+
+      - `:read_only`
+
+    - `description: String`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: String`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `mount_path: String`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: String`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 ### Example
 
 ```ruby
@@ -595,7 +697,7 @@ Delete Session Resource
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -640,8 +742,6 @@ Delete Session Resource
     - `:"output-300k-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
-
-    - `:"user-profiles-2026-03-24"`
 
 ### Returns
 
@@ -750,9 +850,49 @@ puts(beta_managed_agents_delete_session_resource)
 
         - `:commit`
 
+### Beta Managed Agents Memory Store Resource
+
+- `class BetaManagedAgentsMemoryStoreResource`
+
+  A memory store attached to an agent session.
+
+  - `memory_store_id: String`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `type: :memory_store`
+
+    - `:memory_store`
+
+  - `access: :read_write | :read_only`
+
+    Access mode for an attached memory store.
+
+    - `:read_write`
+
+    - `:read_only`
+
+  - `description: String`
+
+    Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+  - `instructions: String`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `mount_path: String`
+
+    Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+  - `name: String`
+
+    Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 ### Beta Managed Agents Session Resource
 
-- `BetaManagedAgentsSessionResource = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource`
+- `BetaManagedAgentsSessionResource = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
+
+  A memory store attached to an agent session.
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
@@ -816,9 +956,45 @@ puts(beta_managed_agents_delete_session_resource)
 
       A timestamp in RFC 3339 format
 
+  - `class BetaManagedAgentsMemoryStoreResource`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: String`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: :memory_store`
+
+      - `:memory_store`
+
+    - `access: :read_write | :read_only`
+
+      Access mode for an attached memory store.
+
+      - `:read_write`
+
+      - `:read_only`
+
+    - `description: String`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: String`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `mount_path: String`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: String`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 ### Resource Retrieve Response
 
-- `ResourceRetrieveResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource`
+- `ResourceRetrieveResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
 
   The requested session resource.
 
@@ -884,9 +1060,45 @@ puts(beta_managed_agents_delete_session_resource)
 
       A timestamp in RFC 3339 format
 
+  - `class BetaManagedAgentsMemoryStoreResource`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: String`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: :memory_store`
+
+      - `:memory_store`
+
+    - `access: :read_write | :read_only`
+
+      Access mode for an attached memory store.
+
+      - `:read_write`
+
+      - `:read_only`
+
+    - `description: String`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: String`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `mount_path: String`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: String`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 ### Resource Update Response
 
-- `ResourceUpdateResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource`
+- `ResourceUpdateResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
 
   The updated session resource.
 
@@ -951,3 +1163,39 @@ puts(beta_managed_agents_delete_session_resource)
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsMemoryStoreResource`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: String`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: :memory_store`
+
+      - `:memory_store`
+
+    - `access: :read_write | :read_only`
+
+      Access mode for an attached memory store.
+
+      - `:read_write`
+
+      - `:read_only`
+
+    - `description: String`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: String`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `mount_path: String`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: String`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
