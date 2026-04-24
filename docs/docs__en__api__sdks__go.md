@@ -21,7 +21,7 @@ import (
 Or to pin the version:
 
 ```bash
-go get -u 'github.com/anthropics/anthropic-sdk-go@v1.27.1'
+go get -u 'github.com/anthropics/anthropic-sdk-go@v1.38.0'
 ```
 
 ## Requirements
