@@ -21,12 +21,6 @@ For endpoint-specific parameters and response schemas, see the [API reference](/
 brew install anthropics/tap/ant
 ```
 
-On macOS, unquarantine the binary:
-
-```bash
-xattr -d com.apple.quarantine "$(brew --prefix)/bin/ant"
-```
-
 </Tab>
 <Tab title="curl (Linux/WSL)">
 

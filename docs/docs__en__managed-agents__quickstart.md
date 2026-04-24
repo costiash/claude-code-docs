@@ -33,12 +33,6 @@ This guide walks you through creating an agent, setting up an environment, start
 brew install anthropics/tap/ant
 ```
 
-On macOS, unquarantine the binary:
-
-```bash
-xattr -d com.apple.quarantine "$(brew --prefix)/bin/ant"
-```
-
 </Tab>
 <Tab title="curl (Linux/WSL)">
 

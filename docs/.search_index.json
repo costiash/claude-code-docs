@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-23T21:31:56Z",
+  "generated_at": "2026-04-24T00:57:05Z",
   "indexed_files": 1135,
   "index": {
     "/changelog": {
@@ -19,8 +19,8 @@
         "session",
         "sessions",
         "code",
-        "after",
         "being",
+        "after",
         "mcp",
         "commands",
         "command",
@@ -28,7 +28,7 @@
         "file",
         "bash"
       ],
-      "word_count": 37030,
+      "word_count": 37795,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -56,7 +56,7 @@
         "return",
         "file"
       ],
-      "word_count": 3181,
+      "word_count": 3210,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -382,17 +382,17 @@
         "region",
         "google",
         "return",
+        "set",
         "variant",
         "environment",
         "when",
-        "set",
         "control",
         "cloud",
         "variables",
         "div",
         "treatment"
       ],
-      "word_count": 2066,
+      "word_count": 2098,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -663,8 +663,8 @@
         "azure",
         "div",
         "treatment",
-        "track",
         "set",
+        "track",
         "control",
         "classname",
         "flag",
@@ -672,7 +672,7 @@
         "false",
         "create"
       ],
-      "word_count": 1260,
+      "word_count": 1297,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {
@@ -1110,17 +1110,17 @@
         "code",
         "tool",
         "context",
+        "prompt",
         "tools",
         "only",
-        "prompt",
+        "same",
         "model",
-        "hooks",
-        "specific",
+        "fork",
         "run",
-        "task",
-        "uses"
+        "hooks",
+        "task"
       ],
-      "word_count": 6728,
+      "word_count": 7387,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -24319,7 +24319,7 @@
         "resources",
         "path"
       ],
-      "word_count": 2227,
+      "word_count": 2215,
       "file_path": "docs/docs__en__api__sdks__cli.md"
     },
     "/docs/en/api/sdks/csharp": {
@@ -28897,27 +28897,27 @@
       "content_preview": "# Using agent memory  Give your agents persistent memory that survives across sessions using memory stores.  ---  Each Managed Agents session starts with a fresh context by default. When a session end...",
       "keywords": [
         "memory",
+        "stores",
         "store",
         "codegroup",
-        "stores",
         "agent",
         "session",
-        "version",
-        "reference",
-        "full",
+        "beta",
         "api",
+        "full",
+        "docs",
         "per",
-        "versions",
+        "memories",
         "list",
         "response",
+        "version",
         "see",
+        "reference",
         "parameters",
         "schema",
-        "content",
-        "memories",
-        "read"
+        "create"
       ],
-      "word_count": 3804,
+      "word_count": 3730,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/migration": {
@@ -29113,7 +29113,7 @@
         "docs",
         "streaming"
       ],
-      "word_count": 2344,
+      "word_count": 2332,
       "file_path": "docs/docs__en__managed-agents__quickstart.md"
     },
     "/docs/en/managed-agents/sessions": {
