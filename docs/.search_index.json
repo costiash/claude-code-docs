@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-24T15:43:50Z",
+  "generated_at": "2026-04-24T18:32:30Z",
   "indexed_files": 1135,
   "index": {
     "/changelog": {
@@ -168,7 +168,7 @@
         "when",
         "flags"
       ],
-      "word_count": 2333,
+      "word_count": 2349,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -380,19 +380,19 @@
         "vid",
         "project",
         "region",
+        "set",
         "google",
         "return",
-        "set",
         "variant",
         "environment",
         "when",
         "control",
         "cloud",
+        "default",
         "variables",
-        "div",
-        "treatment"
+        "div"
       ],
-      "word_count": 2098,
+      "word_count": 2130,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -458,8 +458,8 @@
         "hooks",
         "hook",
         "claude",
-        "when",
         "tool",
+        "when",
         "input",
         "code",
         "field",
@@ -476,7 +476,7 @@
         "decision",
         "control"
       ],
-      "word_count": 16599,
+      "word_count": 16651,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -616,7 +616,7 @@
         "example",
         "plugin"
       ],
-      "word_count": 7256,
+      "word_count": 7201,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -709,8 +709,8 @@
       "keywords": [
         "when",
         "attributes",
-        "event",
         "tool",
+        "event",
         "events",
         "request",
         "code",
@@ -728,7 +728,7 @@
         "error",
         "span"
       ],
-      "word_count": 6303,
+      "word_count": 6357,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -992,9 +992,9 @@
         "json",
         "managed",
         "plugins",
-        "theme",
         "acme",
         "claude",
+        "theme",
         "null",
         "code",
         "corp",
@@ -1008,7 +1008,7 @@
         "user",
         "example"
       ],
-      "word_count": 7858,
+      "word_count": 7923,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1077,22 +1077,22 @@
         "claude",
         "context",
         "code",
-        "git",
         "session",
+        "git",
+        "when",
         "window",
         "json",
-        "when",
         "name",
+        "current",
         "codegroup",
         "directory",
+        "only",
         "output",
         "each",
         "usage",
-        "statusline",
-        "only",
-        "current"
+        "statusline"
       ],
-      "word_count": 5656,
+      "word_count": 5724,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
@@ -1135,8 +1135,8 @@
         "notification",
         "theme",
         "mode",
-        "key",
         "file",
+        "key",
         "shift",
         "when",
         "tmux",
@@ -1148,7 +1148,7 @@
         "newline",
         "run"
       ],
-      "word_count": 1761,
+      "word_count": 1757,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
