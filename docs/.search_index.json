@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-25T00:51:55Z",
+  "generated_at": "2026-04-25T04:13:42Z",
   "indexed_files": 1140,
   "index": {
     "/changelog": {
@@ -19,16 +19,16 @@
         "session",
         "sessions",
         "code",
-        "after",
         "being",
+        "after",
         "mcp",
         "commands",
         "command",
         "prompt",
-        "bash",
-        "file"
+        "file",
+        "bash"
       ],
-      "word_count": 38199,
+      "word_count": 37795,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
