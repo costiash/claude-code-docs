@@ -80,7 +80,7 @@ Anthropic provides developer tools to help you build and scale applications with
 Claude can assist with many tasks that involve text, code, and images.
 
 <CardGroup cols={2}>
-  <Card title="Text and code generation" icon="text-aa" href="/docs/en/build-with-claude/text-generation">
+  <Card title="Text and code generation" icon="text-aa" href="/docs/en/build-with-claude/overview">
     Summarize text, answer questions, extract data, translate text, and explain and generate code.
   </Card>
   <Card title="Vision" icon="image" href="/docs/en/build-with-claude/vision">

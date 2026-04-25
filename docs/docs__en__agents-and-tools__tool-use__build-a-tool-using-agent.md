@@ -20,6 +20,202 @@ The request sends a `tools` array alongside the user message. When Claude decide
 
 <CodeGroup>
   
+````bash
+#!/bin/bash
+# Ring 1: Single tool, single turn.
+# Source for <CodeSource> in build-a-tool-using-agent.mdx.
+
+# Define one tool as a JSON fragment. The input_schema is a JSON Schema
+# object describing the arguments Claude should pass when it calls this
+# tool. This schema includes nested objects (recurrence), arrays
+# (attendees), and optional fields, which is closer to real-world tools
+# than a flat string argument.
+TOOLS='[
+  {
+    "name": "create_calendar_event",
+    "description": "Create a calendar event with attendees and optional recurrence.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "title": {"type": "string"},
+        "start": {"type": "string", "format": "date-time"},
+        "end": {"type": "string", "format": "date-time"},
+        "attendees": {
+          "type": "array",
+          "items": {"type": "string", "format": "email"}
+        },
+        "recurrence": {
+          "type": "object",
+          "properties": {
+            "frequency": {"enum": ["daily", "weekly", "monthly"]},
+            "count": {"type": "integer", "minimum": 1}
+          }
+        }
+      },
+      "required": ["title", "start", "end"]
+    }
+  }
+]'
+
+USER_MSG="Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am."
+
+# Send the user's request along with the tool definition. Claude decides
+# whether to call the tool based on the request and the tool description.
+RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d "$(jq -n \
+    --argjson tools "$TOOLS" \
+    --arg msg "$USER_MSG" \
+    '{
+      model: "claude-opus-4-6",
+      max_tokens: 1024,
+      tools: $tools,
+      tool_choice: {type: "auto", disable_parallel_tool_use: true},
+      messages: [{role: "user", content: $msg}]
+    }')")
+
+# When Claude calls a tool, the response has stop_reason "tool_use"
+# and the content array contains a tool_use block alongside any text.
+echo "stop_reason: $(echo "$RESPONSE" | jq -r '.stop_reason')"
+
+# Find the tool_use block. A response may contain text blocks before the
+# tool_use block, so filter by type rather than assuming position.
+TOOL_USE=$(echo "$RESPONSE" | jq '.content[] | select(.type == "tool_use")')
+TOOL_USE_ID=$(echo "$TOOL_USE" | jq -r '.id')
+echo "Tool: $(echo "$TOOL_USE" | jq -r '.name')"
+echo "Input: $(echo "$TOOL_USE" | jq -c '.input')"
+
+# Execute the tool. In a real system this would call your calendar API.
+# Here the result is hardcoded to keep the example self-contained.
+RESULT='{"event_id": "evt_123", "status": "created"}'
+
+# Send the result back. The tool_result block goes in a user message and
+# its tool_use_id must match the id from the tool_use block above. The
+# assistant's previous response is included so Claude has the full history.
+ASSISTANT_CONTENT=$(echo "$RESPONSE" | jq '.content')
+FOLLOWUP=$(curl -s https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d "$(jq -n \
+    --argjson tools "$TOOLS" \
+    --arg msg "$USER_MSG" \
+    --argjson assistant "$ASSISTANT_CONTENT" \
+    --arg tool_use_id "$TOOL_USE_ID" \
+    --arg result "$RESULT" \
+    '{
+      model: "claude-opus-4-6",
+      max_tokens: 1024,
+      tools: $tools,
+      tool_choice: {type: "auto", disable_parallel_tool_use: true},
+      messages: [
+        {role: "user", content: $msg},
+        {role: "assistant", content: $assistant},
+        {role: "user", content: [
+          {type: "tool_result", tool_use_id: $tool_use_id, content: $result}
+        ]}
+      ]
+    }')")
+
+# With the tool result in hand, Claude produces a final natural-language
+# answer and stop_reason becomes "end_turn".
+echo "stop_reason: $(echo "$FOLLOWUP" | jq -r '.stop_reason')"
+echo "$FOLLOWUP" | jq -r '.content[] | select(.type == "text") | .text'
+````
+
+  
+````bash
+#!/usr/bin/env bash
+# Ring 1: Single tool, single turn.
+# Uses jq for cross-turn message-array state — building an agentic loop in shell
+# requires JSON manipulation beyond ant's single-call --transform scope.
+# Source for <CodeSource> in build-a-tool-using-agent.mdx.
+set -euo pipefail
+
+USER_MSG="Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am."
+MESSAGES=$(jq -n --arg msg "$USER_MSG" '[{role: "user", content: $msg}]')
+
+# Define one tool. The input_schema is a JSON Schema object describing
+# the arguments Claude should pass when it calls this tool. This schema
+# includes nested objects (recurrence), arrays (attendees), and optional
+# fields, which is closer to real-world tools than a flat string argument.
+call_api() {
+  # ant reads the request body as YAML on stdin: no auth headers, no
+  # hand-built JSON envelope. The static keys (model, tools, tool_choice)
+  # live in a quoted heredoc; the growing messages array is appended as
+  # JSON, which YAML accepts as flow syntax.
+  {
+    cat <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+tool_choice: {type: auto, disable_parallel_tool_use: true}
+tools:
+  - name: create_calendar_event
+    description: Create a calendar event with attendees and optional recurrence.
+    input_schema:
+      type: object
+      properties:
+        title: {type: string}
+        start: {type: string, format: date-time}
+        end: {type: string, format: date-time}
+        attendees:
+          type: array
+          items: {type: string, format: email}
+        recurrence:
+          type: object
+          properties:
+            frequency: {enum: [daily, weekly, monthly]}
+            count: {type: integer, minimum: 1}
+      required: [title, start, end]
+YAML
+    printf 'messages: %s\n' "$MESSAGES"
+  } | ant messages create --format json
+}
+
+# Send the user's request along with the tool definition. Claude decides
+# whether to call the tool based on the request and the tool description.
+RESPONSE=$(call_api)
+
+# When Claude calls a tool, the response has stop_reason "tool_use"
+# and the content array contains a tool_use block alongside any text.
+echo "stop_reason: $(jq -r '.stop_reason' <<<"$RESPONSE")"
+
+# Find the tool_use block. A response may contain text blocks before the
+# tool_use block, so filter by type rather than assuming position.
+TOOL_USE=$(jq '.content[] | select(.type == "tool_use")' <<<"$RESPONSE")
+TOOL_USE_ID=$(jq -r '.id' <<<"$TOOL_USE")
+echo "Tool: $(jq -r '.name' <<<"$TOOL_USE")"
+echo "Input: $(jq -c '.input' <<<"$TOOL_USE")"
+
+# Execute the tool. In a real system this would call your calendar API.
+# Here the result is hardcoded to keep the example self-contained.
+RESULT='{"event_id": "evt_123", "status": "created"}'
+
+# Send the result back. The tool_result block goes in a user message and
+# its tool_use_id must match the id from the tool_use block above. The
+# assistant's previous response is included so Claude has the full history.
+MESSAGES=$(jq \
+  --argjson assistant "$(jq '.content' <<<"$RESPONSE")" \
+  --arg tool_use_id "$TOOL_USE_ID" \
+  --arg result "$RESULT" \
+  '. + [
+    {role: "assistant", content: $assistant},
+    {role: "user", content: [
+      {type: "tool_result", tool_use_id: $tool_use_id, content: $result}
+    ]}
+  ]' <<<"$MESSAGES")
+
+FOLLOWUP=$(call_api)
+
+# With the tool result in hand, Claude produces a final natural-language
+# answer and stop_reason becomes "end_turn".
+echo "stop_reason: $(jq -r '.stop_reason' <<<"$FOLLOWUP")"
+jq -r '.content[] | select(.type == "text") | .text' <<<"$FOLLOWUP"
+````
+
+  
 ````python
 # Ring 1: Single tool, single turn.
 # Source for <CodeSource> in build-a-tool-using-agent.mdx.
@@ -237,117 +433,11 @@ for (const block of followup.content) {
 }
 ````
 
-  
-````bash
-#!/bin/bash
-# Ring 1: Single tool, single turn.
-# Source for <CodeSource> in build-a-tool-using-agent.mdx.
-
-# Define one tool as a JSON fragment. The input_schema is a JSON Schema
-# object describing the arguments Claude should pass when it calls this
-# tool. This schema includes nested objects (recurrence), arrays
-# (attendees), and optional fields, which is closer to real-world tools
-# than a flat string argument.
-TOOLS='[
-  {
-    "name": "create_calendar_event",
-    "description": "Create a calendar event with attendees and optional recurrence.",
-    "input_schema": {
-      "type": "object",
-      "properties": {
-        "title": {"type": "string"},
-        "start": {"type": "string", "format": "date-time"},
-        "end": {"type": "string", "format": "date-time"},
-        "attendees": {
-          "type": "array",
-          "items": {"type": "string", "format": "email"}
-        },
-        "recurrence": {
-          "type": "object",
-          "properties": {
-            "frequency": {"enum": ["daily", "weekly", "monthly"]},
-            "count": {"type": "integer", "minimum": 1}
-          }
-        }
-      },
-      "required": ["title", "start", "end"]
-    }
-  }
-]'
-
-USER_MSG="Schedule a 30-minute sync with alice@example.com and bob@example.com next Monday at 10am."
-
-# Send the user's request along with the tool definition. Claude decides
-# whether to call the tool based on the request and the tool description.
-RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d "$(jq -n \
-    --argjson tools "$TOOLS" \
-    --arg msg "$USER_MSG" \
-    '{
-      model: "claude-opus-4-6",
-      max_tokens: 1024,
-      tools: $tools,
-      tool_choice: {type: "auto", disable_parallel_tool_use: true},
-      messages: [{role: "user", content: $msg}]
-    }')")
-
-# When Claude calls a tool, the response has stop_reason "tool_use"
-# and the content array contains a tool_use block alongside any text.
-echo "stop_reason: $(echo "$RESPONSE" | jq -r '.stop_reason')"
-
-# Find the tool_use block. A response may contain text blocks before the
-# tool_use block, so filter by type rather than assuming position.
-TOOL_USE=$(echo "$RESPONSE" | jq '.content[] | select(.type == "tool_use")')
-TOOL_USE_ID=$(echo "$TOOL_USE" | jq -r '.id')
-echo "Tool: $(echo "$TOOL_USE" | jq -r '.name')"
-echo "Input: $(echo "$TOOL_USE" | jq -c '.input')"
-
-# Execute the tool. In a real system this would call your calendar API.
-# Here the result is hardcoded to keep the example self-contained.
-RESULT='{"event_id": "evt_123", "status": "created"}'
-
-# Send the result back. The tool_result block goes in a user message and
-# its tool_use_id must match the id from the tool_use block above. The
-# assistant's previous response is included so Claude has the full history.
-ASSISTANT_CONTENT=$(echo "$RESPONSE" | jq '.content')
-FOLLOWUP=$(curl -s https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d "$(jq -n \
-    --argjson tools "$TOOLS" \
-    --arg msg "$USER_MSG" \
-    --argjson assistant "$ASSISTANT_CONTENT" \
-    --arg tool_use_id "$TOOL_USE_ID" \
-    --arg result "$RESULT" \
-    '{
-      model: "claude-opus-4-6",
-      max_tokens: 1024,
-      tools: $tools,
-      tool_choice: {type: "auto", disable_parallel_tool_use: true},
-      messages: [
-        {role: "user", content: $msg},
-        {role: "assistant", content: $assistant},
-        {role: "user", content: [
-          {type: "tool_result", tool_use_id: $tool_use_id, content: $result}
-        ]}
-      ]
-    }')")
-
-# With the tool result in hand, Claude produces a final natural-language
-# answer and stop_reason becomes "end_turn".
-echo "stop_reason: $(echo "$FOLLOWUP" | jq -r '.stop_reason')"
-echo "$FOLLOWUP" | jq -r '.content[] | select(.type == "text") | .text'
-````
-
 </CodeGroup>
 
 **What to expect**
 
-```text
+```text Output
 stop_reason: tool_use
 Tool: create_calendar_event
 Input: {'title': 'Sync', 'start': '2026-03-30T10:00:00', 'end': '2026-03-30T10:30:00', 'attendees': ['alice@example.com', 'bob@example.com']}
@@ -364,6 +454,171 @@ Ring 1 assumed Claude would call the tool exactly once. Real tasks often need se
 The other change is conversation history. Instead of rebuilding the `messages` array from scratch on each request, keep a running list and append to it. Every turn sees the complete prior context.
 
 <CodeGroup>
+  
+````bash
+#!/bin/bash
+# Ring 2: The agentic loop.
+# Source for <CodeSource> in build-a-tool-using-agent.mdx.
+
+TOOLS='[
+  {
+    "name": "create_calendar_event",
+    "description": "Create a calendar event with attendees and optional recurrence.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "title": {"type": "string"},
+        "start": {"type": "string", "format": "date-time"},
+        "end": {"type": "string", "format": "date-time"},
+        "attendees": {"type": "array", "items": {"type": "string", "format": "email"}},
+        "recurrence": {
+          "type": "object",
+          "properties": {
+            "frequency": {"enum": ["daily", "weekly", "monthly"]},
+            "count": {"type": "integer", "minimum": 1}
+          }
+        }
+      },
+      "required": ["title", "start", "end"]
+    }
+  }
+]'
+
+run_tool() {
+  local name="$1"
+  local input="$2"
+  if [ "$name" = "create_calendar_event" ]; then
+    local title=$(echo "$input" | jq -r '.title')
+    jq -n --arg title "$title" '{event_id: "evt_123", status: "created", title: $title}'
+  else
+    echo "{\"error\": \"Unknown tool: $name\"}"
+  fi
+}
+
+# Keep the full conversation history in a JSON array so each turn sees prior context.
+MESSAGES='[{"role": "user", "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com."}]'
+
+call_api() {
+  curl -s https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d "$(jq -n --argjson tools "$TOOLS" --argjson messages "$MESSAGES" \
+      '{model: "claude-opus-4-6", max_tokens: 1024, tools: $tools, tool_choice: {type: "auto", disable_parallel_tool_use: true}, messages: $messages}')"
+}
+
+RESPONSE=$(call_api)
+
+# Loop until Claude stops asking for tools. Each iteration runs the requested
+# tool, appends the result to history, and asks Claude to continue.
+while [ "$(echo "$RESPONSE" | jq -r '.stop_reason')" = "tool_use" ]; do
+  TOOL_USE=$(echo "$RESPONSE" | jq '.content[] | select(.type == "tool_use")')
+  TOOL_NAME=$(echo "$TOOL_USE" | jq -r '.name')
+  TOOL_INPUT=$(echo "$TOOL_USE" | jq -c '.input')
+  TOOL_USE_ID=$(echo "$TOOL_USE" | jq -r '.id')
+  RESULT=$(run_tool "$TOOL_NAME" "$TOOL_INPUT")
+
+  ASSISTANT_CONTENT=$(echo "$RESPONSE" | jq '.content')
+  MESSAGES=$(echo "$MESSAGES" | jq \
+    --argjson assistant "$ASSISTANT_CONTENT" \
+    --arg tool_use_id "$TOOL_USE_ID" \
+    --arg result "$RESULT" \
+    '. + [
+      {role: "assistant", content: $assistant},
+      {role: "user", content: [{type: "tool_result", tool_use_id: $tool_use_id, content: $result}]}
+    ]')
+
+  RESPONSE=$(call_api)
+done
+
+echo "$RESPONSE" | jq -r '.content[] | select(.type == "text") | .text'
+````
+
+  
+````bash
+#!/usr/bin/env bash
+# Ring 2: The agentic loop.
+# Uses jq for cross-turn message-array state — building an agentic loop in shell
+# requires JSON manipulation beyond ant's single-call --transform scope.
+# Source for <CodeSource> in build-a-tool-using-agent.mdx.
+set -euo pipefail
+
+run_tool() {
+  local name="$1" input="$2"
+  if [ "$name" = "create_calendar_event" ]; then
+    jq -n --arg title "$(jq -r '.title' <<<"$input")" \
+      '{event_id: "evt_123", status: "created", title: $title}'
+  else
+    printf '{"error": "Unknown tool: %s"}' "$name"
+  fi
+}
+
+# Keep the full conversation history in a JSON array so each turn sees
+# prior context.
+MESSAGES='[{"role": "user", "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com."}]'
+
+call_api() {
+  # ant reads the request body as YAML on stdin: no auth headers, no
+  # hand-built JSON envelope. The static keys (model, tools, tool_choice)
+  # live in a quoted heredoc; the growing messages array is appended as
+  # JSON, which YAML accepts as flow syntax.
+  {
+    cat <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+tool_choice: {type: auto, disable_parallel_tool_use: true}
+tools:
+  - name: create_calendar_event
+    description: Create a calendar event with attendees and optional recurrence.
+    input_schema:
+      type: object
+      properties:
+        title: {type: string}
+        start: {type: string, format: date-time}
+        end: {type: string, format: date-time}
+        attendees:
+          type: array
+          items: {type: string, format: email}
+        recurrence:
+          type: object
+          properties:
+            frequency: {enum: [daily, weekly, monthly]}
+            count: {type: integer, minimum: 1}
+      required: [title, start, end]
+YAML
+    printf 'messages: %s\n' "$MESSAGES"
+  } | ant messages create --format json
+}
+
+RESPONSE=$(call_api)
+
+# Loop until Claude stops asking for tools. Each iteration runs the
+# requested tool, appends the result to history, and asks Claude to
+# continue.
+while [ "$(jq -r '.stop_reason' <<<"$RESPONSE")" = "tool_use" ]; do
+  TOOL_USE=$(jq '.content[] | select(.type == "tool_use")' <<<"$RESPONSE")
+  TOOL_NAME=$(jq -r '.name' <<<"$TOOL_USE")
+  TOOL_INPUT=$(jq -c '.input' <<<"$TOOL_USE")
+  TOOL_USE_ID=$(jq -r '.id' <<<"$TOOL_USE")
+  RESULT=$(run_tool "$TOOL_NAME" "$TOOL_INPUT")
+
+  MESSAGES=$(jq \
+    --argjson assistant "$(jq '.content' <<<"$RESPONSE")" \
+    --arg tool_use_id "$TOOL_USE_ID" \
+    --arg result "$RESULT" \
+    '. + [
+      {role: "assistant", content: $assistant},
+      {role: "user", content: [
+        {type: "tool_result", tool_use_id: $tool_use_id, content: $result}
+      ]}
+    ]' <<<"$MESSAGES")
+
+  RESPONSE=$(call_api)
+done
+
+jq -r '.content[] | select(.type == "text") | .text' <<<"$RESPONSE"
+````
+
   
 ````python
 # Ring 2: The agentic loop.
@@ -554,10 +809,27 @@ for (const block of response.content) {
 }
 ````
 
+</CodeGroup>
+
+**What to expect**
+
+```text Output
+I've set up your weekly team standup for the next 4 Mondays at 9am with Alice, Bob, and Carol invited.
+```
+
+The loop may run once or several times depending on how Claude breaks down the task. Your code no longer needs to know in advance.
+
+## Ring 3: Multiple tools, parallel calls
+
+Agents rarely have just one capability. Add a second tool, `list_calendar_events`, so Claude can check the existing schedule before creating something new.
+
+When Claude has multiple independent tool calls to make, it may return several `tool_use` blocks in a single response. Your loop needs to process all of them and send back all results together in one user message. Iterate over every `tool_use` block in `response.content`, not just the first.
+
+<CodeGroup>
   
 ````bash
 #!/bin/bash
-# Ring 2: The agentic loop.
+# Ring 3: Multiple tools, parallel calls.
 # Source for <CodeSource> in build-a-tool-using-agent.mdx.
 
 TOOLS='[
@@ -581,22 +853,30 @@ TOOLS='[
       },
       "required": ["title", "start", "end"]
     }
+  },
+  {
+    "name": "list_calendar_events",
+    "description": "List all calendar events on a given date.",
+    "input_schema": {
+      "type": "object",
+      "properties": {"date": {"type": "string", "format": "date"}},
+      "required": ["date"]
+    }
   }
 ]'
 
 run_tool() {
-  local name="$1"
-  local input="$2"
-  if [ "$name" = "create_calendar_event" ]; then
-    local title=$(echo "$input" | jq -r '.title')
-    jq -n --arg title "$title" '{event_id: "evt_123", status: "created", title: $title}'
-  else
-    echo "{\"error\": \"Unknown tool: $name\"}"
-  fi
+  case "$1" in
+    create_calendar_event)
+      jq -n --arg title "$(echo "$2" | jq -r '.title')" '{event_id: "evt_123", status: "created", title: $title}' ;;
+    list_calendar_events)
+      echo '{"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]}' ;;
+    *)
+      echo "{\"error\": \"Unknown tool: $1\"}" ;;
+  esac
 }
 
-# Keep the full conversation history in a JSON array so each turn sees prior context.
-MESSAGES='[{"role": "user", "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com."}]'
+MESSAGES='[{"role": "user", "content": "Check what I have next Monday, then schedule a planning session that avoids any conflicts."}]'
 
 call_api() {
   curl -s https://api.anthropic.com/v1/messages \
@@ -604,29 +884,28 @@ call_api() {
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d "$(jq -n --argjson tools "$TOOLS" --argjson messages "$MESSAGES" \
-      '{model: "claude-opus-4-6", max_tokens: 1024, tools: $tools, tool_choice: {type: "auto", disable_parallel_tool_use: true}, messages: $messages}')"
+      '{model: "claude-opus-4-6", max_tokens: 1024, tools: $tools, messages: $messages}')"
 }
 
 RESPONSE=$(call_api)
 
-# Loop until Claude stops asking for tools. Each iteration runs the requested
-# tool, appends the result to history, and asks Claude to continue.
 while [ "$(echo "$RESPONSE" | jq -r '.stop_reason')" = "tool_use" ]; do
-  TOOL_USE=$(echo "$RESPONSE" | jq '.content[] | select(.type == "tool_use")')
-  TOOL_NAME=$(echo "$TOOL_USE" | jq -r '.name')
-  TOOL_INPUT=$(echo "$TOOL_USE" | jq -c '.input')
-  TOOL_USE_ID=$(echo "$TOOL_USE" | jq -r '.id')
-  RESULT=$(run_tool "$TOOL_NAME" "$TOOL_INPUT")
+  # A single response can contain multiple tool_use blocks. Process all of
+  # them and return all results together in one user message.
+  TOOL_RESULTS='[]'
+  while read -r block; do
+    NAME=$(echo "$block" | jq -r '.name')
+    INPUT=$(echo "$block" | jq -c '.input')
+    ID=$(echo "$block" | jq -r '.id')
+    RESULT=$(run_tool "$NAME" "$INPUT")
+    TOOL_RESULTS=$(echo "$TOOL_RESULTS" | jq --arg id "$ID" --arg result "$RESULT" \
+      '. + [{type: "tool_result", tool_use_id: $id, content: $result}]')
+  done < <(echo "$RESPONSE" | jq -c '.content[] | select(.type == "tool_use")')
 
-  ASSISTANT_CONTENT=$(echo "$RESPONSE" | jq '.content')
   MESSAGES=$(echo "$MESSAGES" | jq \
-    --argjson assistant "$ASSISTANT_CONTENT" \
-    --arg tool_use_id "$TOOL_USE_ID" \
-    --arg result "$RESULT" \
-    '. + [
-      {role: "assistant", content: $assistant},
-      {role: "user", content: [{type: "tool_result", tool_use_id: $tool_use_id, content: $result}]}
-    ]')
+    --argjson assistant "$(echo "$RESPONSE" | jq '.content')" \
+    --argjson results "$TOOL_RESULTS" \
+    '. + [{role: "assistant", content: $assistant}, {role: "user", content: $results}]')
 
   RESPONSE=$(call_api)
 done
@@ -634,23 +913,98 @@ done
 echo "$RESPONSE" | jq -r '.content[] | select(.type == "text") | .text'
 ````
 
-</CodeGroup>
+  
+````bash
+#!/usr/bin/env bash
+# Ring 3: Multiple tools, parallel calls.
+# Uses jq for cross-turn message-array state — building an agentic loop in shell
+# requires JSON manipulation beyond ant's single-call --transform scope.
+# Source for <CodeSource> in build-a-tool-using-agent.mdx.
+set -euo pipefail
 
-**What to expect**
+run_tool() {
+  case "$1" in
+    create_calendar_event)
+      jq -n --arg title "$(jq -r '.title' <<<"$2")" \
+        '{event_id: "evt_123", status: "created", title: $title}' ;;
+    list_calendar_events)
+      echo '{"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]}' ;;
+    *)
+      printf '{"error": "Unknown tool: %s"}' "$1" ;;
+  esac
+}
 
-```text
-I've set up your weekly team standup for the next 4 Mondays at 9am with Alice, Bob, and Carol invited.
-```
+MESSAGES='[{"role": "user", "content": "Check what I have next Monday, then schedule a planning session that avoids any conflicts."}]'
 
-The loop may run once or several times depending on how Claude breaks down the task. Your code no longer needs to know in advance.
+call_api() {
+  # ant reads the request body as YAML on stdin: no auth headers, no
+  # hand-built JSON envelope. The static keys (model, tools) live in a
+  # quoted heredoc; the growing messages array is appended as JSON,
+  # which YAML accepts as flow syntax.
+  {
+    cat <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+tools:
+  - name: create_calendar_event
+    description: Create a calendar event with attendees and optional recurrence.
+    input_schema:
+      type: object
+      properties:
+        title: {type: string}
+        start: {type: string, format: date-time}
+        end: {type: string, format: date-time}
+        attendees:
+          type: array
+          items: {type: string, format: email}
+        recurrence:
+          type: object
+          properties:
+            frequency: {enum: [daily, weekly, monthly]}
+            count: {type: integer, minimum: 1}
+      required: [title, start, end]
+  - name: list_calendar_events
+    description: List all calendar events on a given date.
+    input_schema:
+      type: object
+      properties:
+        date: {type: string, format: date}
+      required: [date]
+YAML
+    printf 'messages: %s\n' "$MESSAGES"
+  } | ant messages create --format json
+}
 
-## Ring 3: Multiple tools, parallel calls
+RESPONSE=$(call_api)
 
-Agents rarely have just one capability. Add a second tool, `list_calendar_events`, so Claude can check the existing schedule before creating something new.
+while [ "$(jq -r '.stop_reason' <<<"$RESPONSE")" = "tool_use" ]; do
+  # A single response can contain multiple tool_use blocks. Process all
+  # of them and return all results together in one user message.
+  TOOL_RESULTS='[]'
+  while read -r block; do
+    NAME=$(jq -r '.name' <<<"$block")
+    INPUT=$(jq -c '.input' <<<"$block")
+    ID=$(jq -r '.id' <<<"$block")
+    RESULT=$(run_tool "$NAME" "$INPUT")
+    TOOL_RESULTS=$(jq --arg id "$ID" --arg result "$RESULT" \
+      '. + [{type: "tool_result", tool_use_id: $id, content: $result}]' \
+      <<<"$TOOL_RESULTS")
+  done < <(jq -c '.content[] | select(.type == "tool_use")' <<<"$RESPONSE")
 
-When Claude has multiple independent tool calls to make, it may return several `tool_use` blocks in a single response. Your loop needs to process all of them and send back all results together in one user message. Iterate over every `tool_use` block in `response.content`, not just the first.
+  MESSAGES=$(jq \
+    --argjson assistant "$(jq '.content' <<<"$RESPONSE")" \
+    --argjson results "$TOOL_RESULTS" \
+    '. + [
+      {role: "assistant", content: $assistant},
+      {role: "user", content: $results}
+    ]' <<<"$MESSAGES")
 
-<CodeGroup>
+  RESPONSE=$(call_api)
+done
+
+jq -r '.content[] | select(.type == "text") | .text' <<<"$RESPONSE"
+````
+
   
 ````python
 # Ring 3: Multiple tools, parallel calls.
@@ -860,10 +1214,25 @@ for (const block of response.content) {
 }
 ````
 
+</CodeGroup>
+
+**What to expect**
+
+```text Output
+I checked your calendar for next Monday and found an existing meeting from 2pm to 3pm. I've scheduled the planning session for 10am to 11am to avoid the conflict.
+```
+
+For more on concurrent execution and ordering guarantees, see [Parallel tool use](/docs/en/agents-and-tools/tool-use/parallel-tool-use).
+
+## Ring 4: Error handling
+
+Tools fail. A calendar API might reject an event with too many attendees, or a date might be malformed. When a tool raises an error, send the error message back with `is_error: true` instead of crashing. Claude reads the error and can retry with corrected input, ask the user for clarification, or explain the limitation.
+
+<CodeGroup>
   
 ````bash
 #!/bin/bash
-# Ring 3: Multiple tools, parallel calls.
+# Ring 4: Error handling.
 # Source for <CodeSource> in build-a-tool-using-agent.mdx.
 
 TOOLS='[
@@ -902,15 +1271,22 @@ TOOLS='[
 run_tool() {
   case "$1" in
     create_calendar_event)
+      local count=$(echo "$2" | jq '.attendees | length // 0')
+      if [ "$count" -gt 10 ]; then
+        echo "ERROR: Too many attendees (max 10)"
+        return 1
+      fi
       jq -n --arg title "$(echo "$2" | jq -r '.title')" '{event_id: "evt_123", status: "created", title: $title}' ;;
     list_calendar_events)
       echo '{"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]}' ;;
     *)
-      echo "{\"error\": \"Unknown tool: $1\"}" ;;
+      echo "ERROR: Unknown tool: $1"
+      return 1 ;;
   esac
 }
 
-MESSAGES='[{"role": "user", "content": "Check what I have next Monday, then schedule a planning session that avoids any conflicts."}]'
+EMAILS=$(seq 0 14 | sed 's/.*/user&@example.com/' | paste -sd, -)
+MESSAGES="[{\"role\": \"user\", \"content\": \"Schedule an all-hands with everyone: $EMAILS\"}]"
 
 call_api() {
   curl -s https://api.anthropic.com/v1/messages \
@@ -924,16 +1300,19 @@ call_api() {
 RESPONSE=$(call_api)
 
 while [ "$(echo "$RESPONSE" | jq -r '.stop_reason')" = "tool_use" ]; do
-  # A single response can contain multiple tool_use blocks. Process all of
-  # them and return all results together in one user message.
   TOOL_RESULTS='[]'
   while read -r block; do
     NAME=$(echo "$block" | jq -r '.name')
     INPUT=$(echo "$block" | jq -c '.input')
     ID=$(echo "$block" | jq -r '.id')
-    RESULT=$(run_tool "$NAME" "$INPUT")
-    TOOL_RESULTS=$(echo "$TOOL_RESULTS" | jq --arg id "$ID" --arg result "$RESULT" \
-      '. + [{type: "tool_result", tool_use_id: $id, content: $result}]')
+    if OUTPUT=$(run_tool "$NAME" "$INPUT"); then
+      TOOL_RESULTS=$(echo "$TOOL_RESULTS" | jq --arg id "$ID" --arg result "$OUTPUT" \
+        '. + [{type: "tool_result", tool_use_id: $id, content: $result}]')
+    else
+      # Signal failure so Claude can retry or ask for clarification.
+      TOOL_RESULTS=$(echo "$TOOL_RESULTS" | jq --arg id "$ID" --arg result "$OUTPUT" \
+        '. + [{type: "tool_result", tool_use_id: $id, content: $result, is_error: true}]')
+    fi
   done < <(echo "$RESPONSE" | jq -c '.content[] | select(.type == "tool_use")')
 
   MESSAGES=$(echo "$MESSAGES" | jq \
@@ -947,21 +1326,111 @@ done
 echo "$RESPONSE" | jq -r '.content[] | select(.type == "text") | .text'
 ````
 
-</CodeGroup>
+  
+````bash
+#!/usr/bin/env bash
+# Ring 4: Error handling.
+# Uses jq for cross-turn message-array state — building an agentic loop in shell
+# requires JSON manipulation beyond ant's single-call --transform scope.
+# Source for <CodeSource> in build-a-tool-using-agent.mdx.
+set -euo pipefail
 
-**What to expect**
+run_tool() {
+  case "$1" in
+    create_calendar_event)
+      local count
+      count=$(jq '.attendees | length // 0' <<<"$2")
+      if [ "$count" -gt 10 ]; then
+        echo "ERROR: Too many attendees (max 10)"
+        return 1
+      fi
+      jq -n --arg title "$(jq -r '.title' <<<"$2")" \
+        '{event_id: "evt_123", status: "created", title: $title}' ;;
+    list_calendar_events)
+      echo '{"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]}' ;;
+    *)
+      echo "ERROR: Unknown tool: $1"
+      return 1 ;;
+  esac
+}
 
-```text
-I checked your calendar for next Monday and found an existing meeting from 2pm to 3pm. I've scheduled the planning session for 10am to 11am to avoid the conflict.
-```
+EMAILS=$(seq 0 14 | sed 's/.*/user&@example.com/' | paste -sd, -)
+MESSAGES=$(jq -n --arg msg "Schedule an all-hands with everyone: $EMAILS" \
+  '[{role: "user", content: $msg}]')
 
-For more on concurrent execution and ordering guarantees, see [Parallel tool use](/docs/en/agents-and-tools/tool-use/parallel-tool-use).
+call_api() {
+  # ant reads the request body as YAML on stdin: no auth headers, no
+  # hand-built JSON envelope. The static keys (model, tools) live in a
+  # quoted heredoc; the growing messages array is appended as JSON,
+  # which YAML accepts as flow syntax.
+  {
+    cat <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+tools:
+  - name: create_calendar_event
+    description: Create a calendar event with attendees and optional recurrence.
+    input_schema:
+      type: object
+      properties:
+        title: {type: string}
+        start: {type: string, format: date-time}
+        end: {type: string, format: date-time}
+        attendees:
+          type: array
+          items: {type: string, format: email}
+        recurrence:
+          type: object
+          properties:
+            frequency: {enum: [daily, weekly, monthly]}
+            count: {type: integer, minimum: 1}
+      required: [title, start, end]
+  - name: list_calendar_events
+    description: List all calendar events on a given date.
+    input_schema:
+      type: object
+      properties:
+        date: {type: string, format: date}
+      required: [date]
+YAML
+    printf 'messages: %s\n' "$MESSAGES"
+  } | ant messages create --format json
+}
 
-## Ring 4: Error handling
+RESPONSE=$(call_api)
 
-Tools fail. A calendar API might reject an event with too many attendees, or a date might be malformed. When a tool raises an error, send the error message back with `is_error: true` instead of crashing. Claude reads the error and can retry with corrected input, ask the user for clarification, or explain the limitation.
+while [ "$(jq -r '.stop_reason' <<<"$RESPONSE")" = "tool_use" ]; do
+  TOOL_RESULTS='[]'
+  while read -r block; do
+    NAME=$(jq -r '.name' <<<"$block")
+    INPUT=$(jq -c '.input' <<<"$block")
+    ID=$(jq -r '.id' <<<"$block")
+    if OUTPUT=$(run_tool "$NAME" "$INPUT"); then
+      TOOL_RESULTS=$(jq --arg id "$ID" --arg result "$OUTPUT" \
+        '. + [{type: "tool_result", tool_use_id: $id, content: $result}]' \
+        <<<"$TOOL_RESULTS")
+    else
+      # Signal failure so Claude can retry or ask for clarification.
+      TOOL_RESULTS=$(jq --arg id "$ID" --arg result "$OUTPUT" \
+        '. + [{type: "tool_result", tool_use_id: $id, content: $result, is_error: true}]' \
+        <<<"$TOOL_RESULTS")
+    fi
+  done < <(jq -c '.content[] | select(.type == "tool_use")' <<<"$RESPONSE")
 
-<CodeGroup>
+  MESSAGES=$(jq \
+    --argjson assistant "$(jq '.content' <<<"$RESPONSE")" \
+    --argjson results "$TOOL_RESULTS" \
+    '. + [
+      {role: "assistant", content: $assistant},
+      {role: "user", content: $results}
+    ]' <<<"$MESSAGES")
+
+  RESPONSE=$(call_api)
+done
+
+jq -r '.content[] | select(.type == "text") | .text' <<<"$RESPONSE"
+````
+
   
 ````python
 # Ring 4: Error handling.
@@ -1190,108 +1659,11 @@ for (const block of response.content) {
 }
 ````
 
-  
-````bash
-#!/bin/bash
-# Ring 4: Error handling.
-# Source for <CodeSource> in build-a-tool-using-agent.mdx.
-
-TOOLS='[
-  {
-    "name": "create_calendar_event",
-    "description": "Create a calendar event with attendees and optional recurrence.",
-    "input_schema": {
-      "type": "object",
-      "properties": {
-        "title": {"type": "string"},
-        "start": {"type": "string", "format": "date-time"},
-        "end": {"type": "string", "format": "date-time"},
-        "attendees": {"type": "array", "items": {"type": "string", "format": "email"}},
-        "recurrence": {
-          "type": "object",
-          "properties": {
-            "frequency": {"enum": ["daily", "weekly", "monthly"]},
-            "count": {"type": "integer", "minimum": 1}
-          }
-        }
-      },
-      "required": ["title", "start", "end"]
-    }
-  },
-  {
-    "name": "list_calendar_events",
-    "description": "List all calendar events on a given date.",
-    "input_schema": {
-      "type": "object",
-      "properties": {"date": {"type": "string", "format": "date"}},
-      "required": ["date"]
-    }
-  }
-]'
-
-run_tool() {
-  case "$1" in
-    create_calendar_event)
-      local count=$(echo "$2" | jq '.attendees | length // 0')
-      if [ "$count" -gt 10 ]; then
-        echo "ERROR: Too many attendees (max 10)"
-        return 1
-      fi
-      jq -n --arg title "$(echo "$2" | jq -r '.title')" '{event_id: "evt_123", status: "created", title: $title}' ;;
-    list_calendar_events)
-      echo '{"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]}' ;;
-    *)
-      echo "ERROR: Unknown tool: $1"
-      return 1 ;;
-  esac
-}
-
-EMAILS=$(seq 0 14 | sed 's/.*/user&@example.com/' | paste -sd, -)
-MESSAGES="[{\"role\": \"user\", \"content\": \"Schedule an all-hands with everyone: $EMAILS\"}]"
-
-call_api() {
-  curl -s https://api.anthropic.com/v1/messages \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "content-type: application/json" \
-    -d "$(jq -n --argjson tools "$TOOLS" --argjson messages "$MESSAGES" \
-      '{model: "claude-opus-4-6", max_tokens: 1024, tools: $tools, messages: $messages}')"
-}
-
-RESPONSE=$(call_api)
-
-while [ "$(echo "$RESPONSE" | jq -r '.stop_reason')" = "tool_use" ]; do
-  TOOL_RESULTS='[]'
-  while read -r block; do
-    NAME=$(echo "$block" | jq -r '.name')
-    INPUT=$(echo "$block" | jq -c '.input')
-    ID=$(echo "$block" | jq -r '.id')
-    if OUTPUT=$(run_tool "$NAME" "$INPUT"); then
-      TOOL_RESULTS=$(echo "$TOOL_RESULTS" | jq --arg id "$ID" --arg result "$OUTPUT" \
-        '. + [{type: "tool_result", tool_use_id: $id, content: $result}]')
-    else
-      # Signal failure so Claude can retry or ask for clarification.
-      TOOL_RESULTS=$(echo "$TOOL_RESULTS" | jq --arg id "$ID" --arg result "$OUTPUT" \
-        '. + [{type: "tool_result", tool_use_id: $id, content: $result, is_error: true}]')
-    fi
-  done < <(echo "$RESPONSE" | jq -c '.content[] | select(.type == "tool_use")')
-
-  MESSAGES=$(echo "$MESSAGES" | jq \
-    --argjson assistant "$(echo "$RESPONSE" | jq '.content')" \
-    --argjson results "$TOOL_RESULTS" \
-    '. + [{role: "assistant", content: $assistant}, {role: "user", content: $results}]')
-
-  RESPONSE=$(call_api)
-done
-
-echo "$RESPONSE" | jq -r '.content[] | select(.type == "text") | .text'
-````
-
 </CodeGroup>
 
 **What to expect**
 
-```text
+```text Output
 I tried to schedule the all-hands but the calendar only allows 10 attendees per event. I can split this into two sessions, or you can let me know which 10 people to prioritize.
 ```
 
@@ -1304,10 +1676,35 @@ Rings 2 through 4 wrote the same loop by hand: call the API, check `stop_reason`
 The Python SDK uses the `@beta_tool` decorator to infer the schema from type hints and the docstring. The TypeScript SDK uses `betaZodTool` with a Zod schema.
 
 <Note>
-Tool Runner is available in the Python, TypeScript, and Ruby SDKs. The Shell tab shows a note instead of code; keep the Ring 4 loop for curl-based scripts.
+Tool Runner is available in the Python, TypeScript, and Ruby SDKs. The cURL and CLI tabs show a note instead of code; keep the Ring 4 loop for curl- or CLI-based scripts.
 </Note>
 
 <CodeGroup>
+  
+````bash
+#!/bin/bash
+# Ring 5: The Tool Runner SDK abstraction.
+# Source for <CodeSource> in build-a-tool-using-agent.mdx.
+
+# The Tool Runner SDK abstraction is available in the Python, TypeScript,
+# and Ruby SDKs. There is no equivalent for raw curl requests. Switch to
+# the Python or TypeScript tab to see Ring 5, or keep the Ring 4 loop as
+# your shell implementation.
+````
+
+  
+````bash
+#!/usr/bin/env bash
+# Ring 5: The Tool Runner SDK abstraction.
+# Source for <CodeSource> in build-a-tool-using-agent.mdx.
+set -euo pipefail
+
+# The Tool Runner SDK abstraction is available in the Python, TypeScript,
+# and Ruby SDKs. The ant CLI exposes the Messages API directly and has
+# no equivalent helper. Switch to the Python or TypeScript tab to see
+# Ring 5, or keep the Ring 4 loop as your CLI implementation.
+````
+
   
 ````python
 # Ring 5: The Tool Runner SDK abstraction.
@@ -1442,23 +1839,11 @@ for (const block of finalMessage.content) {
 }
 ````
 
-  
-````bash
-#!/bin/bash
-# Ring 5: The Tool Runner SDK abstraction.
-# Source for <CodeSource> in build-a-tool-using-agent.mdx.
-
-# The Tool Runner SDK abstraction is available in the Python, TypeScript,
-# and Ruby SDKs. There is no equivalent for raw curl requests. Switch to
-# the Python or TypeScript tab to see Ring 5, or keep the Ring 4 loop as
-# your shell implementation.
-````
-
 </CodeGroup>
 
 **What to expect**
 
-```text
+```text Output
 I checked your calendar for next Monday and found an existing meeting from 2pm to 3pm. I've scheduled the planning session for 10am to 11am to avoid the conflict.
 ```
 

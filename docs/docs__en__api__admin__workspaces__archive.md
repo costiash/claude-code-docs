@@ -8,8 +8,6 @@ Archive Workspace
 
 - `workspace_id: string`
 
-  ID of the Workspace.
-
 ### Returns
 
 - `Workspace = object { id, archived_at, created_at, 4 more }`

@@ -8,8 +8,6 @@ Update Workspace
 
 - `workspace_id: string`
 
-  ID of the Workspace.
-
 ### Body Parameters
 
 - `name: string`

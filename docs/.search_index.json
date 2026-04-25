@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-24T21:32:36Z",
-  "indexed_files": 1135,
+  "generated_at": "2026-04-25T00:51:55Z",
+  "indexed_files": 1140,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -19,16 +19,16 @@
         "session",
         "sessions",
         "code",
-        "being",
         "after",
+        "being",
         "mcp",
         "commands",
         "command",
         "prompt",
-        "file",
-        "bash"
+        "bash",
+        "file"
       ],
-      "word_count": 37795,
+      "word_count": 38199,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -1802,25 +1802,25 @@
         "tool",
         "ring",
         "loop",
+        "claude",
+        "codegroup",
+        "tools",
+        "call",
         "one",
         "runner",
-        "claude",
-        "tools",
-        "card",
-        "single",
-        "call",
-        "sdk",
-        "note",
-        "code",
-        "codegroup",
         "error",
-        "schema",
-        "message",
+        "single",
+        "code",
         "result",
-        "agents",
-        "rings"
+        "what",
+        "card",
+        "sdk",
+        "schema",
+        "note",
+        "user",
+        "message"
       ],
-      "word_count": 5614,
+      "word_count": 7317,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__build-a-tool-using-agent.md"
     },
     "/docs/en/agents-and-tools/tool-use/code-execution-tool": {
@@ -1881,7 +1881,7 @@
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
       "title": "Define tools",
-      "content_preview": "# Define tools  Specify tool schemas, write effective descriptions, and control when Claude calls your tools.  ---  ## Choosing a model  Use the latest Claude Opus (4.6) model for complex tools and am...",
+      "content_preview": "# Define tools  Specify tool schemas, write effective descriptions, and control when Claude calls your tools.  ---  ## Choosing a model  Use the latest Claude Opus (4.7) model for complex tools and am...",
       "keywords": [
         "tool",
         "tools",
@@ -1904,7 +1904,7 @@
         "more",
         "must"
       ],
-      "word_count": 2679,
+      "word_count": 2768,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__define-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
@@ -2100,7 +2100,7 @@
         "single",
         "handle"
       ],
-      "word_count": 3210,
+      "word_count": 3212,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__parallel-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/programmatic-tool-calling": {
@@ -2184,7 +2184,7 @@
         "limitations",
         "functions"
       ],
-      "word_count": 3105,
+      "word_count": 3338,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__strict-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/text-editor-tool": {
@@ -2445,31 +2445,31 @@
       "keywords": [
         "workspace",
         "user",
-        "object",
+        "type",
         "api",
+        "object",
         "when",
         "code",
-        "type",
-        "number",
-        "used",
         "key",
+        "number",
         "page",
-        "rfc",
+        "used",
         "returns",
-        "parameters",
+        "rfc",
         "always",
-        "grouping",
-        "usage",
-        "claude",
+        "parameters",
         "list",
-        "inference"
+        "organization",
+        "example",
+        "grouping",
+        "usage"
       ],
-      "word_count": 7533,
+      "word_count": 8623,
       "file_path": "docs/docs__en__api__admin.md"
     },
     "/docs/en/api/admin/api_keys": {
       "title": "API Keys",
-      "content_preview": "# API Keys  ## Retrieve  **get** `/v1/organizations/api_keys/{api_key_id}`  Get API Key  ### Path Parameters  - `api_key_id: string`    ID of the API key.  ### Returns  - `APIKey = object { id, created_at, created_by, 5 more }`    - `id: string`      ID of the API key.    - `created_at: string`",
+      "content_preview": "# API Keys  ## Retrieve  **get** `/v1/organizations/api_keys/{api_key_id}`  Get API Key  ### Path Parameters  - `api_key_id: string`    ID of the API key.  ### Returns  - `APIKey = object { id, created_at, created_by, 6 more }`    - `id: string`      ID of the API key.    - `created_at: string`",
       "keywords": [
         "api",
         "key",
@@ -2477,22 +2477,22 @@
         "created",
         "type",
         "actor",
-        "workspace",
-        "page",
-        "keys",
-        "returns",
         "when",
-        "status",
-        "parameters",
-        "name",
-        "list",
-        "get",
+        "workspace",
         "rfc",
         "datetime",
         "string",
-        "indicating"
+        "indicating",
+        "expires",
+        "page",
+        "keys",
+        "returns",
+        "status",
+        "parameters",
+        "name",
+        "list"
       ],
-      "word_count": 735,
+      "word_count": 808,
       "file_path": "docs/docs__en__api__admin__api_keys.md"
     },
     "/docs/en/api/admin/api_keys/list": {
@@ -2518,9 +2518,9 @@
         "provided",
         "immediately",
         "status",
-        "used"
+        "rfc"
       ],
-      "word_count": 332,
+      "word_count": 359,
       "file_path": "docs/docs__en__api__admin__api_keys__list.md"
     },
     "/docs/en/api/admin/api_keys/retrieve": {
@@ -2534,21 +2534,21 @@
         "actor",
         "object",
         "get",
-        "workspace",
-        "retrieve",
-        "path",
-        "parameters",
-        "returns",
         "rfc",
         "datetime",
         "string",
         "indicating",
         "when",
-        "name",
-        "partially",
-        "redacted"
+        "expires",
+        "workspace",
+        "retrieve",
+        "path",
+        "parameters",
+        "returns",
+        "never",
+        "name"
       ],
-      "word_count": 181,
+      "word_count": 204,
       "file_path": "docs/docs__en__api__admin__api_keys__retrieve.md"
     },
     "/docs/en/api/admin/api_keys/update": {
@@ -2565,18 +2565,18 @@
         "parameters",
         "name",
         "status",
-        "workspace",
-        "post",
-        "path",
-        "body",
-        "returns",
         "rfc",
         "datetime",
         "string",
         "indicating",
-        "when"
+        "when",
+        "expires",
+        "workspace",
+        "post",
+        "path",
+        "body"
       ],
-      "word_count": 219,
+      "word_count": 242,
       "file_path": "docs/docs__en__api__admin__api_keys__update.md"
     },
     "/docs/en/api/admin/cost_report": {
@@ -2585,8 +2585,8 @@
       "keywords": [
         "grouping",
         "cost",
-        "token",
         "description",
+        "token",
         "time",
         "used",
         "non",
@@ -2594,50 +2594,50 @@
         "workspace",
         "bucket",
         "rfc",
-        "header",
         "parameters",
         "start",
-        "returned",
-        "beta",
         "multiple",
         "format",
         "items",
-        "there"
+        "there",
+        "more",
+        "amount",
+        "currency"
       ],
-      "word_count": 906,
+      "word_count": 850,
       "file_path": "docs/docs__en__api__admin__cost_report.md"
     },
     "/docs/en/api/admin/cost_report/retrieve": {
       "title": "Untitled",
       "content_preview": "## Retrieve  **get** `/v1/organizations/cost_report`  Get Cost Report  ### Query Parameters  - `starting_at: string`    Time buckets that start on or after this RFC 3339 timestamp will be returned.   ...",
       "keywords": [
-        "grouping",
         "time",
-        "token",
+        "grouping",
         "cost",
+        "token",
         "description",
+        "rfc",
+        "bucket",
         "used",
         "non",
         "costs",
-        "rfc",
-        "bucket",
-        "header",
         "workspace",
         "parameters",
         "buckets",
         "start",
-        "returned",
         "response",
-        "beta",
+        "header",
         "multiple",
-        "retrieve"
+        "retrieve",
+        "get",
+        "timestamp"
       ],
-      "word_count": 535,
+      "word_count": 507,
       "file_path": "docs/docs__en__api__admin__cost_report__retrieve.md"
     },
     "/docs/en/api/admin/invites": {
       "title": "Invites",
-      "content_preview": "# Invites  ## Create  **post** `/v1/organizations/invites`  Create Invite  ### Body Parameters  - `email: string`    Email of the User.  - `role: \"user\" or \"developer\" or \"billing\" or 2 more`    Role ...",
+      "content_preview": "# Invites  ## Create  **post** `/v1/organizations/invites`  Create Invite  ### Body Parameters  - `email: string`    Email of the User.  - `role: \"user\" or \"developer\" or \"billing\" or \"claude_code_use...",
       "keywords": [
         "invite",
         "user",
@@ -2660,12 +2660,12 @@
         "expires",
         "created"
       ],
-      "word_count": 794,
+      "word_count": 783,
       "file_path": "docs/docs__en__api__admin__invites.md"
     },
     "/docs/en/api/admin/invites/create": {
       "title": "Untitled",
-      "content_preview": "## Create  **post** `/v1/organizations/invites`  Create Invite  ### Body Parameters  - `email: string`    Email of the User.  - `role: \"user\" or \"developer\" or \"billing\" or 2 more`    Role for the inv...",
+      "content_preview": "## Create  **post** `/v1/organizations/invites`  Create Invite  ### Body Parameters  - `email: string`    Email of the User.  - `role: \"user\" or \"developer\" or \"billing\" or \"claude_code_user\"`    Role...",
       "keywords": [
         "invite",
         "user",
@@ -2688,7 +2688,7 @@
         "expires",
         "created"
       ],
-      "word_count": 185,
+      "word_count": 180,
       "file_path": "docs/docs__en__api__admin__invites__create.md"
     },
     "/docs/en/api/admin/invites/delete": {
@@ -2735,7 +2735,7 @@
         "get",
         "query"
       ],
-      "word_count": 255,
+      "word_count": 253,
       "file_path": "docs/docs__en__api__admin__invites__list.md"
     },
     "/docs/en/api/admin/invites/retrieve": {
@@ -2763,7 +2763,7 @@
         "role",
         "status"
       ],
-      "word_count": 145,
+      "word_count": 143,
       "file_path": "docs/docs__en__api__admin__invites__retrieve.md"
     },
     "/docs/en/api/admin/organizations": {
@@ -2816,6 +2816,62 @@
       "word_count": 67,
       "file_path": "docs/docs__en__api__admin__organizations__me.md"
     },
+    "/docs/en/api/admin/rate_limits": {
+      "title": "Rate Limits",
+      "content_preview": "# Rate Limits  ## List  **get** `/v1/organizations/rate_limits`  List Messages API rate limits for your organization.  Each entry corresponds to one rate-limit group (either a model family or an API-s...",
+      "keywords": [
+        "rate",
+        "limit",
+        "apply",
+        "group",
+        "limiter",
+        "type",
+        "organization",
+        "entry",
+        "model",
+        "entries",
+        "limits",
+        "api",
+        "values",
+        "list",
+        "one",
+        "family",
+        "surface",
+        "category",
+        "set",
+        "names"
+      ],
+      "word_count": 486,
+      "file_path": "docs/docs__en__api__admin__rate_limits.md"
+    },
+    "/docs/en/api/admin/rate_limits/list": {
+      "title": "Untitled",
+      "content_preview": "## List  **get** `/v1/organizations/rate_limits`  List Messages API rate limits for your organization.  Each entry corresponds to one rate-limit group (either a model family or an API-surface category such as the Files API or Message Batches) and contains the set of limiter values that apply to it.",
+      "keywords": [
+        "rate",
+        "limit",
+        "group",
+        "model",
+        "apply",
+        "api",
+        "organization",
+        "entry",
+        "limiter",
+        "type",
+        "limits",
+        "values",
+        "entries",
+        "list",
+        "one",
+        "family",
+        "surface",
+        "category",
+        "set",
+        "filter"
+      ],
+      "word_count": 302,
+      "file_path": "docs/docs__en__api__admin__rate_limits__list.md"
+    },
     "/docs/en/api/admin/usage_report": {
       "title": "Usage Report",
       "content_preview": "# Usage Report  ## Retrieve Messages  **get** `/v1/organizations/usage_report/messages`  Get Messages Usage Report  ### Query Parameters  - `starting_at: string`    Time buckets that start on or after...",
@@ -2827,21 +2883,21 @@
         "used",
         "model",
         "tokens",
-        "api",
         "grouping",
+        "api",
+        "account",
         "input",
         "cache",
         "time",
         "returned",
-        "token",
-        "tool",
         "specified",
-        "key",
-        "workspace",
-        "more",
-        "metrics"
+        "user",
+        "token",
+        "service",
+        "requests",
+        "tool"
       ],
-      "word_count": 2246,
+      "word_count": 2312,
       "file_path": "docs/docs__en__api__admin__usage_report.md"
     },
     "/docs/en/api/admin/usage_report/retrieve_claude_code": {
@@ -2878,26 +2934,26 @@
       "keywords": [
         "usage",
         "returned",
-        "time",
         "specified",
+        "restrict",
         "grouping",
+        "time",
         "number",
         "used",
-        "restrict",
-        "header",
+        "account",
+        "service",
         "tokens",
-        "beta",
+        "header",
         "default",
         "workspace",
         "input",
         "rfc",
         "bucket",
+        "beta",
         "maximum",
-        "cache",
-        "parameters",
-        "buckets"
+        "requests"
       ],
-      "word_count": 774,
+      "word_count": 825,
       "file_path": "docs/docs__en__api__admin__usage_report__retrieve_messages.md"
     },
     "/docs/en/api/admin/users": {
@@ -2925,7 +2981,7 @@
         "example",
         "list"
       ],
-      "word_count": 695,
+      "word_count": 684,
       "file_path": "docs/docs__en__api__admin__users.md"
     },
     "/docs/en/api/admin/users/delete": {
@@ -2973,7 +3029,7 @@
         "after",
         "before"
       ],
-      "word_count": 236,
+      "word_count": 234,
       "file_path": "docs/docs__en__api__admin__users__list.md"
     },
     "/docs/en/api/admin/users/retrieve": {
@@ -3001,12 +3057,12 @@
         "users",
         "always"
       ],
-      "word_count": 118,
+      "word_count": 116,
       "file_path": "docs/docs__en__api__admin__users__retrieve.md"
     },
     "/docs/en/api/admin/users/update": {
       "title": "Untitled",
-      "content_preview": "## Update  **post** `/v1/organizations/users/{user_id}`  Update User  ### Path Parameters  - `user_id: string`    ID of the User.  ### Body Parameters  - `role: \"user\" or \"developer\" or \"billing\" or 2...",
+      "content_preview": "## Update  **post** `/v1/organizations/users/{user_id}`  Update User  ### Path Parameters  - `user_id: string`    ID of the User.  ### Body Parameters  - `role: \"user\" or \"developer\" or \"billing\" or \"claude_code_user\"`    New role for the User. Cannot be \"admin\".    - `\"user\"`    - `\"developer\"`",
       "keywords": [
         "user",
         "update",
@@ -3029,7 +3085,7 @@
         "email",
         "name"
       ],
-      "word_count": 159,
+      "word_count": 154,
       "file_path": "docs/docs__en__api__admin__users__update.md"
     },
     "/docs/en/api/admin/workspaces": {
@@ -3038,31 +3094,31 @@
       "keywords": [
         "workspace",
         "when",
-        "inference",
+        "type",
         "object",
-        "geo",
-        "geos",
+        "inference",
         "parameters",
-        "member",
+        "geo",
         "returns",
         "data",
-        "type",
+        "geos",
+        "member",
         "always",
         "page",
-        "user",
-        "string",
-        "archived",
-        "allowed",
         "list",
-        "rfc",
-        "datetime"
+        "example",
+        "limiter",
+        "user",
+        "values",
+        "string",
+        "archived"
       ],
-      "word_count": 2045,
+      "word_count": 2588,
       "file_path": "docs/docs__en__api__admin__workspaces.md"
     },
     "/docs/en/api/admin/workspaces/archive": {
       "title": "Untitled",
-      "content_preview": "## Archive  **post** `/v1/organizations/workspaces/{workspace_id}/archive`  Archive Workspace  ### Path Parameters  - `workspace_id: string`    ID of the Workspace.  ### Returns  - `Workspace = object...",
+      "content_preview": "## Archive  **post** `/v1/organizations/workspaces/{workspace_id}/archive`  Archive Workspace  ### Path Parameters  - `workspace_id: string`  ### Returns  - `Workspace = object { id, archived_at, crea...",
       "keywords": [
         "workspace",
         "when",
@@ -3085,7 +3141,7 @@
         "permitted",
         "values"
       ],
-      "word_count": 184,
+      "word_count": 180,
       "file_path": "docs/docs__en__api__admin__workspaces__archive.md"
     },
     "/docs/en/api/admin/workspaces/create": {
@@ -3293,6 +3349,62 @@
       "word_count": 142,
       "file_path": "docs/docs__en__api__admin__workspaces__members__update.md"
     },
+    "/docs/en/api/admin/workspaces/rate_limits": {
+      "title": "Rate Limits",
+      "content_preview": "# Rate Limits  ## List  **get** `/v1/organizations/workspaces/{workspace_id}/rate_limits`  List rate-limit overrides configured for a workspace.  Returns only the groups and limiter types that have a ...",
+      "keywords": [
+        "workspace",
+        "limiter",
+        "type",
+        "limit",
+        "rate",
+        "override",
+        "organization",
+        "group",
+        "entries",
+        "apply",
+        "value",
+        "level",
+        "limits",
+        "types",
+        "one",
+        "entry",
+        "values",
+        "when",
+        "list",
+        "configured"
+      ],
+      "word_count": 551,
+      "file_path": "docs/docs__en__api__admin__workspaces__rate_limits.md"
+    },
+    "/docs/en/api/admin/workspaces/rate_limits/list": {
+      "title": "Untitled",
+      "content_preview": "## List  **get** `/v1/organizations/workspaces/{workspace_id}/rate_limits`  List rate-limit overrides configured for a workspace.  Returns only the groups and limiter types that have a workspace-level...",
+      "keywords": [
+        "workspace",
+        "limiter",
+        "type",
+        "limit",
+        "rate",
+        "override",
+        "organization",
+        "group",
+        "level",
+        "entries",
+        "apply",
+        "value",
+        "list",
+        "overrides",
+        "configured",
+        "returns",
+        "groups",
+        "types",
+        "without",
+        "inherit"
+      ],
+      "word_count": 320,
+      "file_path": "docs/docs__en__api__admin__workspaces__rate_limits__list.md"
+    },
     "/docs/en/api/admin/workspaces/retrieve": {
       "title": "Untitled",
       "content_preview": "## Retrieve  **get** `/v1/organizations/workspaces/{workspace_id}`  Get Workspace  ### Path Parameters  - `workspace_id: string`    ID of the Workspace.  ### Returns  - `Workspace = object { id, archi...",
@@ -3323,7 +3435,7 @@
     },
     "/docs/en/api/admin/workspaces/update": {
       "title": "Untitled",
-      "content_preview": "## Update  **post** `/v1/organizations/workspaces/{workspace_id}`  Update Workspace  ### Path Parameters  - `workspace_id: string`    ID of the Workspace.  ### Body Parameters  - `name: string`    Nam...",
+      "content_preview": "## Update  **post** `/v1/organizations/workspaces/{workspace_id}`  Update Workspace  ### Path Parameters  - `workspace_id: string`  ### Body Parameters  - `name: string`    Name of the Workspace.  - `...",
       "keywords": [
         "workspace",
         "inference",
@@ -3346,7 +3458,7 @@
         "omit",
         "parameter"
       ],
-      "word_count": 274,
+      "word_count": 270,
       "file_path": "docs/docs__en__api__admin__workspaces__update.md"
     },
     "/docs/en/api/beta-headers": {
@@ -21322,24 +21434,24 @@
         "limits",
         "limit",
         "tokens",
-        "tier",
         "per",
+        "tier",
         "maximum",
         "minute",
+        "input",
         "sup",
         "claude",
-        "input",
         "requests",
         "api",
         "spend",
         "tab",
         "output",
-        "batch",
         "organization",
-        "usage",
-        "number"
+        "batch",
+        "set",
+        "usage"
       ],
-      "word_count": 2988,
+      "word_count": 3020,
       "file_path": "docs/docs__en__api__rate-limits.md"
     },
     "/docs/en/api/ruby/beta": {
@@ -27613,9 +27725,9 @@
         "admin",
         "keys",
         "members",
+        "workspaces",
         "section",
         "manage",
-        "workspaces",
         "claude",
         "codegroup",
         "key",
@@ -27629,7 +27741,7 @@
         "title",
         "programmatically"
       ],
-      "word_count": 869,
+      "word_count": 888,
       "file_path": "docs/docs__en__build-with-claude__administration-api.md"
     },
     "/docs/en/build-with-claude/api-and-data-retention": {
@@ -27800,7 +27912,7 @@
       "word_count": 2379,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
-    "/docs/en/build-with-claude/claude-on-amazon-bedrock": {
+    "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
       "title": "Claude on Amazon Bedrock (legacy)",
       "content_preview": "# Claude on Amazon Bedrock (legacy)  The legacy Amazon Bedrock integration for Claude models, using InvokeModel and Converse APIs with ARN-versioned model identifiers.  ---  <Note> This page covers the legacy Amazon Bedrock integration: the `InvokeModel` and `Converse` APIs with ARN-versioned model",
       "keywords": [
@@ -27826,7 +27938,7 @@
         "title"
       ],
       "word_count": 2916,
-      "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock.md"
+      "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
       "title": "Claude on Vertex AI",
@@ -28332,6 +28444,34 @@
       "word_count": 1381,
       "file_path": "docs/docs__en__build-with-claude__prompt-engineering__prompting-tools.md"
     },
+    "/docs/en/build-with-claude/rate-limits-api": {
+      "title": "Rate Limits API",
+      "content_preview": "# Rate Limits API  Programmatically query your organization's API rate limits with the Rate Limits API.  ---  <Tip> **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console \u2192 Settings \u2192 Organization**. </Tip>  The",
+      "keywords": [
+        "limits",
+        "api",
+        "rate",
+        "organization",
+        "workspace",
+        "group",
+        "model",
+        "list",
+        "endpoint",
+        "admin",
+        "limit",
+        "response",
+        "limiter",
+        "configured",
+        "see",
+        "parameter",
+        "query",
+        "console",
+        "claude",
+        "such"
+      ],
+      "word_count": 1018,
+      "file_path": "docs/docs__en__build-with-claude__rate-limits-api.md"
+    },
     "/docs/en/build-with-claude/search-results": {
       "title": "Search results",
       "content_preview": "# Search results  Enable natural citations for RAG applications by providing search results with source attribution  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build...",
@@ -28518,14 +28658,14 @@
         "workspace",
         "buckets",
         "token",
-        "anthropic",
         "tier",
         "key",
         "code",
         "filter",
-        "tip"
+        "tip",
+        "anthropic"
       ],
-      "word_count": 1467,
+      "word_count": 1477,
       "file_path": "docs/docs__en__build-with-claude__usage-cost-api.md"
     },
     "/docs/en/build-with-claude/vision": {
@@ -28589,8 +28729,8 @@
       "content_preview": "# Workspaces  Organize API keys, manage team access, and control costs with workspaces.  ---  Workspaces provide a way to organize your API usage within an organization. Use workspaces to separate dif...",
       "keywords": [
         "workspace",
-        "workspaces",
         "organization",
+        "workspaces",
         "api",
         "limits",
         "access",
@@ -28609,7 +28749,7 @@
         "cannot",
         "rate"
       ],
-      "word_count": 1580,
+      "word_count": 1597,
       "file_path": "docs/docs__en__build-with-claude__workspaces.md"
     },
     "/docs/en/get-started": {
@@ -28652,18 +28792,18 @@
         "more",
         "icon",
         "href",
-        "text",
         "learn",
         "cardgroup",
+        "text",
         "docs",
         "code",
         "anthropic",
         "model",
         "build",
         "messages",
+        "overview",
         "built",
-        "tasks",
-        "coding"
+        "tasks"
       ],
       "word_count": 454,
       "file_path": "docs/docs__en__intro.md"
@@ -28917,7 +29057,7 @@
         "schema",
         "create"
       ],
-      "word_count": 3730,
+      "word_count": 3783,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/migration": {
@@ -29253,7 +29393,7 @@
         "context",
         "support"
       ],
-      "word_count": 5011,
+      "word_count": 5036,
       "file_path": "docs/docs__en__release-notes__overview.md"
     },
     "/docs/en/release-notes/system-prompts": {

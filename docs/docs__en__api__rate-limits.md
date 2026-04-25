@@ -19,7 +19,7 @@ These limits apply to both Standard and Priority Tier usage. For more informatio
 * Limits are defined by **usage tier**, where each tier is associated with a different set of spend and rate limits.
 * Your organization will increase tiers automatically as you reach certain thresholds while using the API.
   Limits are set at the organization level. You can see your organization's limits on the [Limits](/settings/limits) page in the [Claude Console](/).
-* You may hit rate limits over shorter time intervals. For instance, a rate of 60 requests per minute (RPM) may be enforced as 1 request per second. Short bursts of requests can exceed the limit and trigger rate limit errors.
+* You might hit rate limits over shorter time intervals. For instance, a rate of 60 requests per minute (RPM) might be enforced as 1 request per second. Short bursts of requests can exceed the limit and trigger rate limit errors.
 * The limits outlined below are the standard tier limits. If you're seeking higher, custom limits or Priority Tier for enhanced service levels, contact sales on the [Limits](/settings/limits) page.
 * The API uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) to do rate limiting. This means that your capacity is continuously replenished up to your maximum limit, rather than being reset at fixed intervals.
 * All limits described here represent maximum allowed usage, not guaranteed minimums. These limits are intended to reduce unintentional overspend and ensure fair distribution of resources among users.
@@ -167,7 +167,7 @@ With effective caching, you can dramatically increase your actual throughput wit
 OTPM rate limits are evaluated in real time as output tokens are produced, counting only the actual tokens generated. The `max_tokens` parameter does not factor into OTPM rate limit calculations, so there is no rate limit downside to setting a higher `max_tokens` value.
 
 Rate limits are applied separately for each model; therefore you can use different models up to their respective limits simultaneously.
-You can check your current rate limits and behavior in the [Claude Console](/settings/limits).
+You can check your current rate limits and behavior in the [Claude Console](/settings/limits), or read the configured limits programmatically with the [Rate Limits API](/docs/en/build-with-claude/rate-limits-api).
 
 <Note>
 Rate limits are currently shared across all `inference_geo` values. Requests with `inference_geo: "us"` and `inference_geo: "global"` draw from the same rate limit pool.
@@ -290,13 +290,15 @@ For more about workspaces, see [Workspaces](/docs/en/build-with-claude/workspace
 
 In order to protect Workspaces in your Organization from potential overuse, you can set custom spend and rate limits per Workspace.
 
-Example: If your Organization's limit is 40,000 input tokens per minute and 8,000 output tokens per minute, you might limit one Workspace to 30,000 total tokens per minute. This protects other Workspaces from potential overuse and ensures a more equitable distribution of resources across your Organization. The remaining unused tokens per minute (or more, if that Workspace doesn't use the limit) are then available for other Workspaces to use.
+Example: If your Organization's limit is 40,000 input tokens per minute and 8,000 output tokens per minute, you might limit one Workspace to 30,000 input tokens per minute. This protects other Workspaces from potential overuse and ensures a more equitable distribution of resources across your Organization. The remaining unused tokens per minute (or more, if that Workspace doesn't use the limit) are then available for other Workspaces to use.
 
 Note:
 - You can't set limits on the default Workspace.
 - If not set, Workspace limits match the Organization's limit.
+- Workspace limits are set per limiter type (such as requests per minute, input tokens per minute, or output tokens per minute).
 - Organization-wide limits always apply, even if Workspace limits add up to more.
-- Support for input and output token limits will be added to Workspaces in the future.
+
+To read your current organization and workspace rate limits programmatically, use the [Rate Limits API](/docs/en/build-with-claude/rate-limits-api).
 
 ## Response headers
 

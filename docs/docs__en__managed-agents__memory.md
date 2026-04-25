@@ -1034,11 +1034,14 @@ version_id=$(jq -r '.data[1].id' <<< "$versions")
 
   
 ````python
-for v in client.beta.memory_stores.memory_versions.list(
+versions = client.beta.memory_stores.memory_versions.list(
     store.id,
     memory_id=mem.id,
-):
+)
+for v in versions:
     print(f"{v.id}: {v.operation}")
+
+version_id = versions.data[1].id
 ````
 
   
@@ -1049,6 +1052,8 @@ const versions = await client.beta.memoryStores.memoryVersions.list(store.id, {
 for await (const v of versions) {
   console.log(`${v.id}: ${v.operation}`);
 }
+
+const versionId = versions.data[1].id;
 ````
 
   
@@ -1061,50 +1066,69 @@ await foreach (var v in versions.Paginate())
 {
     Console.WriteLine($"{v.ID}: {v.Operation.Raw()}");
 }
+
+var versionId = versions.Data[1].ID;
 ````
 
   
 ````go
-page := client.Beta.MemoryStores.MemoryVersions.ListAutoPaging(ctx, store.ID, anthropic.BetaMemoryStoreMemoryVersionListParams{
+versions := client.Beta.MemoryStores.MemoryVersions.ListAutoPaging(ctx, store.ID, anthropic.BetaMemoryStoreMemoryVersionListParams{
 	MemoryID: anthropic.String(mem.ID),
 })
-for page.Next() {
-	v := page.Current()
+for versions.Next() {
+	v := versions.Current()
 	fmt.Printf("%s: %s\n", v.ID, v.Operation)
 }
-if err := page.Err(); err != nil {
+if err := versions.Err(); err != nil {
 	panic(err)
 }
+
+vpage, err := client.Beta.MemoryStores.MemoryVersions.List(ctx, store.ID, anthropic.BetaMemoryStoreMemoryVersionListParams{
+	MemoryID: anthropic.String(mem.ID),
+})
+if err != nil {
+	panic(err)
+}
+versionID := vpage.Data[1].ID
 ````
 
   
 ````java
-for (var v : client.beta().memoryStores().memoryVersions().list(
+var versions = client.beta().memoryStores().memoryVersions().list(
     store.id(),
     MemoryVersionListParams.builder().memoryId(mem.id()).build()
-).autoPager()) {
+);
+for (var v : versions.autoPager()) {
     IO.println(v.id() + ": " + v.operation());
 }
+
+var versionId = versions.data().get(1).id();
 ````
 
   
 ````php
-foreach ($client->beta->memoryStores->memoryVersions->list(
+$versions = $client->beta->memoryStores->memoryVersions->list(
     $store->id,
     memoryID: $mem->id,
-)->pagingEachItem() as $v) {
+);
+foreach ($versions->pagingEachItem() as $v) {
     echo "{$v->id}: {$v->operation}\n";
 }
+
+$versionId = $versions->data[1]->id;
 ````
 
   
 ````ruby
-client.beta.memory_stores.memory_versions.list(
+versions = client.beta.memory_stores.memory_versions.list(
   store.id,
   memory_id: mem.id
-).auto_paging_each do |v|
+)
+versions.auto_paging_each do |v|
   puts "#{v.id}: #{v.operation}"
 end
+
+version_id = versions.data[1].id
 ````
 
 </CodeGroup>

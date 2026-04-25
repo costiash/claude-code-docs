@@ -57,7 +57,7 @@ Get Cost Report
 
       End of the time bucket (exclusive) in RFC 3339 format.
 
-    - `results: array of object { amount, context_window, cost_type, 8 more }`
+    - `results: array of object { amount, context_window, cost_type, 7 more }`
 
       List of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -73,7 +73,7 @@ Get Cost Report
 
         - `"200k-1M"`
 
-      - `cost_type: "tokens" or "web_search" or "code_execution"`
+      - `cost_type: "tokens" or "web_search" or "code_execution" or "session_usage"`
 
         Type of cost. `null` if not grouping by description.
 
@@ -82,6 +82,8 @@ Get Cost Report
         - `"web_search"`
 
         - `"code_execution"`
+
+        - `"session_usage"`
 
       - `currency: string`
 
@@ -107,15 +109,6 @@ Get Cost Report
         - `"standard"`
 
         - `"batch"`
-
-      - `speed: "standard" or "fast"`
-
-        Speed used (research preview). `null` if not grouping by speed, or for non-token costs.
-        Only returned when the `fast-mode-2026-02-01` beta header is provided.
-
-        - `"standard"`
-
-        - `"fast"`
 
       - `token_type: "uncached_input_tokens" or "output_tokens" or "cache_read_input_tokens" or 2 more`
 
@@ -167,7 +160,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
       End of the time bucket (exclusive) in RFC 3339 format.
 
-    - `results: array of object { amount, context_window, cost_type, 8 more }`
+    - `results: array of object { amount, context_window, cost_type, 7 more }`
 
       List of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -183,7 +176,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
         - `"200k-1M"`
 
-      - `cost_type: "tokens" or "web_search" or "code_execution"`
+      - `cost_type: "tokens" or "web_search" or "code_execution" or "session_usage"`
 
         Type of cost. `null` if not grouping by description.
 
@@ -192,6 +185,8 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
         - `"web_search"`
 
         - `"code_execution"`
+
+        - `"session_usage"`
 
       - `currency: string`
 
@@ -217,15 +212,6 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
         - `"standard"`
 
         - `"batch"`
-
-      - `speed: "standard" or "fast"`
-
-        Speed used (research preview). `null` if not grouping by speed, or for non-token costs.
-        Only returned when the `fast-mode-2026-02-01` beta header is provided.
-
-        - `"standard"`
-
-        - `"fast"`
 
       - `token_type: "uncached_input_tokens" or "output_tokens" or "cache_read_input_tokens" or 2 more`
 

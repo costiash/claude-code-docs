@@ -25,7 +25,7 @@ The response will have a `stop_reason` of `tool_use` and one or more `tool_use` 
 ```json JSON
 {
   "id": "msg_01Aq9w938a90dw8q",
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-7",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
