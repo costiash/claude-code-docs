@@ -6051,8 +6051,8 @@
     "claude-code__desktop.md": {
       "original_url": "https://platform.claude.com/docs/en/desktop",
       "original_md_url": "https://platform.claude.com/docs/en/desktop.md",
-      "hash": "900a508f665a2b28027b00c4e48d20d3fd57f9c78143325c0de744b9a50b38c5",
-      "last_updated": "2026-04-22T21:32:23.693641"
+      "hash": "18b59ad2b5302c047c44fdaff68de93baa8fda83d4edbe27f291412ab3de1148",
+      "last_updated": "2026-04-25T21:26:39.747627"
     },
     "claude-code__devcontainer.md": {
       "original_url": "https://platform.claude.com/docs/en/devcontainer",
@@ -6381,8 +6381,8 @@
     "claude-code__terminal-config.md": {
       "original_url": "https://platform.claude.com/docs/en/terminal-config",
       "original_md_url": "https://platform.claude.com/docs/en/terminal-config.md",
-      "hash": "a5c16d25367e719af5c0e596f19b9f15978eb05fdfc810a8a5ca2052ae0ac92c",
-      "last_updated": "2026-04-24T18:32:17.464892"
+      "hash": "f2b164425e5cdcce580a2e486aa4b9bc8062187f0f65b259dbad1696709cc31d",
+      "last_updated": "2026-04-25T21:27:17.949091"
     },
     "docs__en__test-and-evaluate__develop-tests.md": {
       "original_url": "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests",
@@ -6459,8 +6459,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-25T18:30:45.720881",
-    "fetch_duration_seconds": 776.313509,
+    "last_fetch_completed": "2026-04-25T21:27:28.468035",
+    "fetch_duration_seconds": 779.613517,
     "total_pages_discovered": 1379,
     "pages_fetched_successfully": 1076,
     "pages_failed": 304,
@@ -6775,7 +6775,7 @@
     "total_files": 1076,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-25T18:30:45.720901",
+  "last_updated": "2026-04-25T21:27:28.468072",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
