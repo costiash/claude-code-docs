@@ -1457,15 +1457,4 @@ To permanently remove a store along with all of its memories and versions, use [
 
 ## Limits
 
-The following limits apply while this feature is in beta. [Contact support](https://support.claude.com) if you need higher limits.
-
-| Limit | Value |
-| --- | --- |
-| Memory stores per organization | 1,000 |
-| Memories per store | 2,000 |
-| Total storage per store | 100 MB (104,857,600 bytes) |
-| Versions per store | 250,000 |
-| Size per memory | 100 kB (102,400 bytes) |
-| Version history retention | 30 days |
-| Memory stores per session | 8 |
-| `instructions` field per attachment | 4,096 characters |
+Default capacity and rate limits apply to memory stores while this feature is in beta. [Contact support](https://support.claude.com) if you need higher limits.

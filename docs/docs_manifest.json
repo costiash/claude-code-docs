@@ -6183,8 +6183,8 @@
     "docs__en__managed-agents__memory.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/memory",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/memory.md",
-      "hash": "b05a093281b1801f61165d165e3a05f0245ff12a33e47c0ae93ac006536adcfb",
-      "last_updated": "2026-04-25T00:51:21.288011"
+      "hash": "e08b227feac56c2a2bb676430c7d00c51a5857bb8b732bd28725dacf63e4059d",
+      "last_updated": "2026-04-26T00:56:34.766117"
     },
     "docs__en__managed-agents__migration.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/migration",
@@ -6459,8 +6459,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-25T21:27:28.468035",
-    "fetch_duration_seconds": 779.613517,
+    "last_fetch_completed": "2026-04-26T00:57:07.198329",
+    "fetch_duration_seconds": 783.819162,
     "total_pages_discovered": 1379,
     "pages_fetched_successfully": 1076,
     "pages_failed": 304,
@@ -6775,7 +6775,7 @@
     "total_files": 1076,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-25T21:27:28.468072",
+  "last_updated": "2026-04-26T00:57:07.198349",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

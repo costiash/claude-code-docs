@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-25T21:27:30Z",
+  "generated_at": "2026-04-26T00:57:09Z",
   "indexed_files": 1140,
   "index": {
     "/changelog": {
@@ -29038,26 +29038,26 @@
       "keywords": [
         "memory",
         "stores",
-        "store",
         "codegroup",
+        "store",
         "agent",
         "session",
         "beta",
         "api",
         "full",
         "docs",
-        "per",
-        "memories",
         "list",
         "response",
-        "version",
+        "memories",
         "see",
         "reference",
         "parameters",
         "schema",
-        "create"
+        "version",
+        "create",
+        "agents"
       ],
-      "word_count": 3783,
+      "word_count": 3710,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/migration": {
