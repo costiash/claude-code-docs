@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-27T15:51:36Z",
+  "generated_at": "2026-04-27T18:47:50Z",
   "indexed_files": 1140,
   "index": {
     "/changelog": {
@@ -285,30 +285,30 @@
     },
     "/claude-code/devcontainer": {
       "title": "Development containers",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Development containers  > Learn about the Claude Code development container for teams that need consistent, secure",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Development containers  > Run Claude Code inside a dev container for consistent, isolated environments across your",
       "keywords": [
-        "code",
         "container",
+        "code",
         "claude",
-        "development",
-        "devcontainer",
-        "security",
-        "environments",
-        "firewall",
-        "network",
-        "configuration",
-        "containers",
-        "tools",
-        "when",
-        "devcontainers",
-        "access",
-        "documentation",
-        "secure",
         "dev",
-        "rules",
-        "only"
+        "run",
+        "step",
+        "containers",
+        "inside",
+        "host",
+        "repository",
+        "settings",
+        "codespaces",
+        "see",
+        "devcontainer",
+        "authentication",
+        "when",
+        "directory",
+        "title",
+        "across",
+        "project"
       ],
-      "word_count": 566,
+      "word_count": 2076,
       "file_path": "docs/claude-code__devcontainer.md"
     },
     "/claude-code/github-actions": {
@@ -743,8 +743,8 @@
         "note",
         "proxy",
         "certificate",
-        "store",
         "variables",
+        "store",
         "trust",
         "configuration",
         "native",
@@ -756,7 +756,7 @@
         "security",
         "system"
       ],
-      "word_count": 735,
+      "word_count": 763,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -952,7 +952,7 @@
         "through",
         "cannot"
       ],
-      "word_count": 2657,
+      "word_count": 2658,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -980,7 +980,7 @@
         "bash",
         "web"
       ],
-      "word_count": 1219,
+      "word_count": 1220,
       "file_path": "docs/claude-code__security.md"
     },
     "/claude-code/settings": {
