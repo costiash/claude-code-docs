@@ -6459,11 +6459,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-27T18:47:48.122324",
-    "fetch_duration_seconds": 912.185233,
-    "total_pages_discovered": 1379,
+    "last_fetch_completed": "2026-04-27T21:38:37.538789",
+    "fetch_duration_seconds": 751.886531,
+    "total_pages_discovered": 1381,
     "pages_fetched_successfully": 1076,
-    "pages_failed": 304,
+    "pages_failed": 306,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/admin-setup",
@@ -6768,6 +6768,8 @@
       "/docs/en/whats-new/2026-w13",
       "/docs/en/whats-new/2026-w14",
       "/docs/en/whats-new/2026-w15",
+      "/docs/en/whats-new/2026-w16",
+      "/docs/en/whats-new/2026-w17",
       "/docs/en/zero-data-retention"
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
@@ -6775,7 +6777,7 @@
     "total_files": 1076,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-27T18:47:48.122347",
+  "last_updated": "2026-04-27T21:38:37.538809",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
