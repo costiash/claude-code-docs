@@ -6078,6 +6078,12 @@
       "hash": "9e89b6ae92bcca3909daffba57d1db66598335df276a82b901c141812dc8c48e",
       "last_updated": "2026-04-14T21:31:28.495979"
     },
+    "docs__en__glossary.md": {
+      "original_url": "https://platform.claude.com/docs/en/glossary",
+      "original_md_url": "https://platform.claude.com/docs/en/glossary.md",
+      "hash": "1405208f57672548ba8389fec2db9a8cd4ec5baa99ecb09a08956b7929a1c55b",
+      "last_updated": "2026-04-28T16:04:57.091857"
+    },
     "claude-code__google-vertex-ai.md": {
       "original_url": "https://platform.claude.com/docs/en/google-vertex-ai",
       "original_md_url": "https://platform.claude.com/docs/en/google-vertex-ai.md",
@@ -6459,10 +6465,10 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-28T12:54:34.177464",
-    "fetch_duration_seconds": 771.698409,
-    "total_pages_discovered": 1381,
-    "pages_fetched_successfully": 1076,
+    "last_fetch_completed": "2026-04-28T16:05:49.480137",
+    "fetch_duration_seconds": 860.433151,
+    "total_pages_discovered": 1382,
+    "pages_fetched_successfully": 1077,
     "pages_failed": 306,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
@@ -6774,10 +6780,10 @@
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 1076,
+    "total_files": 1077,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-28T12:54:34.177490",
+  "last_updated": "2026-04-28T16:05:49.480159",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

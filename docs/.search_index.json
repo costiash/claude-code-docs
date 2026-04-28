@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-28T12:54:36Z",
-  "indexed_files": 1140,
+  "generated_at": "2026-04-28T16:05:52Z",
+  "indexed_files": 1141,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -28779,6 +28779,34 @@
       ],
       "word_count": 1340,
       "file_path": "docs/docs__en__get-started.md"
+    },
+    "/docs/en/glossary": {
+      "title": "Glossary",
+      "content_preview": "# Glossary  These concepts are not unique to Anthropic\u2019s language models, but we present a brief summary of key terms below.  ---  ## Context window  The \"context window\" refers to the amount of text ...",
+      "keywords": [
+        "model",
+        "language",
+        "more",
+        "text",
+        "context",
+        "mcp",
+        "models",
+        "when",
+        "data",
+        "fine",
+        "claude",
+        "information",
+        "tuning",
+        "time",
+        "prompt",
+        "tokens",
+        "these",
+        "anthropic",
+        "window",
+        "large"
+      ],
+      "word_count": 1375,
+      "file_path": "docs/docs__en__glossary.md"
     },
     "/docs/en/intro": {
       "title": "Intro to Claude",

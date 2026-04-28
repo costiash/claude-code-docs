@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-04-28T12:41:42.843329Z",
-    "total_paths": 1381,
+    "generated_at": "2026-04-28T15:51:29.692244Z",
+    "total_paths": 1382,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-04-28T12:41:42.843336Z"
+    "last_regenerated": "2026-04-28T15:51:29.692250Z"
   },
   "categories": {
     "core_documentation": [
@@ -114,6 +114,7 @@
       "/docs/en/fullscreen",
       "/docs/en/get-started",
       "/docs/en/github-enterprise-server",
+      "/docs/en/glossary",
       "/docs/en/how-claude-code-works",
       "/docs/en/intro",
       "/docs/en/keybindings",
