@@ -6099,8 +6099,8 @@
     "claude-code__hooks.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks",
       "original_md_url": "https://platform.claude.com/docs/en/hooks.md",
-      "hash": "3ddb08ca095508f2055e9f207028880c09a1957c64bf2080b88895ebb64750ab",
-      "last_updated": "2026-04-28T04:30:51.277929"
+      "hash": "e4f760ec7734b3bd8645e31d9c13b28861b3b90de5e6a377a69bae15d2244f9b",
+      "last_updated": "2026-04-28T18:49:18.443229"
     },
     "claude-code__hooks-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/hooks-guide",
@@ -6135,8 +6135,8 @@
     "claude-code__llm-gateway.md": {
       "original_url": "https://platform.claude.com/docs/en/llm-gateway",
       "original_md_url": "https://platform.claude.com/docs/en/llm-gateway.md",
-      "hash": "c5a367f97d0575ca7ff75d70681ab3318fde97cc1341cd4428fb8c628d99ceb4",
-      "last_updated": "2026-04-14T21:31:34.602621"
+      "hash": "ca7810a9e73b5a62ad4fb79d5e07959e76e600fe23d60e985dc4132900f788e8",
+      "last_updated": "2026-04-28T18:49:22.337791"
     },
     "docs__en__managed-agents__agent-setup.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/agent-setup",
@@ -6315,8 +6315,8 @@
     "claude-code__plugins.md": {
       "original_url": "https://platform.claude.com/docs/en/plugins",
       "original_md_url": "https://platform.claude.com/docs/en/plugins.md",
-      "hash": "47f40108ccea2a470fe949492b973f8d0cf9b29a9fdb51241c8735642da33461",
-      "last_updated": "2026-04-23T18:41:35.298007"
+      "hash": "102220dfe69bf18a901ceb343016ad481737d940efc6cac68fc8db6128181ddb",
+      "last_updated": "2026-04-28T18:49:41.348085"
     },
     "claude-code__plugins-reference.md": {
       "original_url": "https://platform.claude.com/docs/en/plugins-reference",
@@ -6465,11 +6465,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-28T16:05:49.480137",
-    "fetch_duration_seconds": 860.433151,
-    "total_pages_discovered": 1382,
+    "last_fetch_completed": "2026-04-28T18:50:00.446876",
+    "fetch_duration_seconds": 764.049808,
+    "total_pages_discovered": 1384,
     "pages_fetched_successfully": 1077,
-    "pages_failed": 306,
+    "pages_failed": 308,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/admin-setup",
@@ -6734,6 +6734,7 @@
       "/docs/en/authentication",
       "/docs/en/auto-mode-config",
       "/docs/en/best-practices",
+      "/docs/en/champion-kit",
       "/docs/en/changelog",
       "/docs/en/channels",
       "/docs/en/channels-reference",
@@ -6741,6 +6742,7 @@
       "/docs/en/claude-directory",
       "/docs/en/code-review",
       "/docs/en/commands",
+      "/docs/en/communications-kit",
       "/docs/en/computer-use",
       "/docs/en/context-window",
       "/docs/en/debug-your-config",
@@ -6783,7 +6785,7 @@
     "total_files": 1077,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-28T16:05:49.480159",
+  "last_updated": "2026-04-28T18:50:00.446895",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

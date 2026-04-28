@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-28T16:05:52Z",
+  "generated_at": "2026-04-28T18:50:02Z",
   "indexed_files": 1141,
   "index": {
     "/changelog": {
@@ -466,17 +466,17 @@
         "json",
         "fields",
         "file",
-        "user",
-        "output",
-        "command",
         "event",
+        "user",
+        "command",
+        "output",
+        "prompt",
         "runs",
         "session",
         "only",
-        "prompt",
-        "decision"
+        "context"
       ],
-      "word_count": 16845,
+      "word_count": 17261,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -569,26 +569,26 @@
       "keywords": [
         "claude",
         "code",
-        "litellm",
         "api",
+        "litellm",
         "through",
-        "model",
         "gateway",
+        "model",
         "endpoint",
-        "configuration",
         "request",
+        "configuration",
         "headers",
         "using",
         "key",
         "must",
         "format",
+        "anthropic",
         "pass",
         "documentation",
         "llm",
-        "authentication",
-        "anthropic"
+        "authentication"
       ],
-      "word_count": 710,
+      "word_count": 768,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
@@ -890,13 +890,13 @@
         "root",
         "add",
         "agents",
+        "marketplace",
         "test",
         "lsp",
         "file",
-        "servers",
-        "marketplace"
+        "servers"
       ],
-      "word_count": 2428,
+      "word_count": 2443,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
