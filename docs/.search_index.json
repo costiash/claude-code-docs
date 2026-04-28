@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-27T21:38:40Z",
+  "generated_at": "2026-04-28T00:59:08Z",
   "indexed_files": 1140,
   "index": {
     "/changelog": {
@@ -19,16 +19,16 @@
         "session",
         "sessions",
         "code",
-        "being",
         "after",
+        "being",
         "mcp",
         "commands",
         "command",
         "prompt",
-        "file",
-        "bash"
+        "bash",
+        "file"
       ],
-      "word_count": 37795,
+      "word_count": 38830,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -1344,7 +1344,7 @@
         "more",
         "see"
       ],
-      "word_count": 7328,
+      "word_count": 7324,
       "file_path": "docs/docs__en__about-claude__models__migration-guide.md"
     },
     "/docs/en/about-claude/models/overview": {
@@ -1754,17 +1754,17 @@
         "conversation",
         "prompt",
         "tokens",
+        "opus",
         "block",
         "claude",
         "output",
         "tasks",
-        "opus",
         "level",
         "side",
         "caching",
         "full"
       ],
-      "word_count": 3451,
+      "word_count": 3474,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__advisor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/bash-tool": {
@@ -1848,7 +1848,7 @@
         "available",
         "operations"
       ],
-      "word_count": 5545,
+      "word_count": 5553,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -1904,7 +1904,7 @@
         "more",
         "must"
       ],
-      "word_count": 2768,
+      "word_count": 2763,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__define-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
@@ -24487,7 +24487,7 @@
         "result",
         "changes"
       ],
-      "word_count": 3231,
+      "word_count": 3229,
       "file_path": "docs/docs__en__api__sdks__go.md"
     },
     "/docs/en/api/sdks/java": {
@@ -27694,26 +27694,26 @@
       "keywords": [
         "thinking",
         "claude",
-        "adaptive",
         "opus",
+        "adaptive",
         "tokens",
         "mode",
         "extended",
         "when",
-        "note",
-        "blocks",
         "sonnet",
         "models",
+        "blocks",
+        "note",
         "output",
+        "default",
         "mythos",
         "preview",
         "effort",
         "summarized",
         "field",
-        "default",
         "manual"
       ],
-      "word_count": 3987,
+      "word_count": 3969,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/administration-api": {
@@ -27993,7 +27993,7 @@
         "after",
         "trigger"
       ],
-      "word_count": 8821,
+      "word_count": 8749,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -28004,14 +28004,14 @@
         "compaction",
         "tool",
         "side",
-        "when",
         "sdk",
+        "when",
         "tab",
+        "claude",
         "note",
         "thinking",
         "clearing",
         "server",
-        "claude",
         "summary",
         "conversation",
         "codegroup",
@@ -28021,7 +28021,7 @@
         "title",
         "results"
       ],
-      "word_count": 7316,
+      "word_count": 7379,
       "file_path": "docs/docs__en__build-with-claude__context-editing.md"
     },
     "/docs/en/build-with-claude/context-windows": {
@@ -28145,23 +28145,23 @@
         "blocks",
         "when",
         "tool",
-        "extended",
-        "note",
         "opus",
+        "models",
+        "extended",
+        "sonnet",
         "tokens",
         "api",
-        "models",
         "context",
+        "note",
         "turn",
         "response",
-        "request",
-        "token",
-        "interleaved",
-        "sonnet",
         "model",
-        "content"
+        "token",
+        "see",
+        "default",
+        "interleaved"
       ],
-      "word_count": 14898,
+      "word_count": 14732,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -28341,23 +28341,23 @@
         "prompt",
         "mtok",
         "tokens",
-        "block",
         "cached",
+        "block",
         "breakpoint",
         "content",
-        "request",
         "blocks",
+        "request",
         "section",
         "system",
-        "when",
         "user",
+        "when",
         "claude",
-        "tool",
         "breakpoints",
         "input",
+        "tool",
         "requests"
       ],
-      "word_count": 13956,
+      "word_count": 14023,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {

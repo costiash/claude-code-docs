@@ -264,7 +264,7 @@ These changes improve your experience on Opus 4.7. Items marked **(required on O
      thinking: { type: "adaptive" },
      output_config: { effort: "high" },
      messages: [{ role: "user", content: "Your prompt here" }]
-   } as unknown as Anthropic.MessageCreateParamsNonStreaming);
+   });
    ```
 
    ```csharp C#

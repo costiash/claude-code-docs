@@ -378,7 +378,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..12,-1..}
+```java Java hidelines={1..6,9}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -387,8 +387,6 @@ import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.Tool;
 import com.anthropic.models.messages.Tool.InputSchema;
-import java.util.Map;
-import java.util.List;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -411,7 +409,7 @@ void main() {
                         "description", "The unit of temperature"
                     )
                 )))
-                .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+                .required(List.of("location"))
                 .build())
             .putAdditionalProperty("input_examples", JsonValue.from(List.of(
                 Map.of(

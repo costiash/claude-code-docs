@@ -524,8 +524,10 @@ The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more 
   causing advisor-side cache misses. This is a cost degradation only; advice
   quality is unaffected. When extended thinking is enabled without explicit
   `clear_thinking` configuration, the API defaults to
-  `keep: {type: "thinking_turns", value: 1}`, which triggers this behavior.
-  Set `keep: "all"` to preserve advisor cache stability.
+  `keep: {type: "thinking_turns", value: 1}`, which triggers this behavior
+  (the default on earlier Opus/Sonnet models and all Haiku models; on Opus
+  4.5+ and Sonnet 4.6+ the default is to keep all turns). Set `keep: "all"`
+  to preserve advisor cache stability.
 </Warning>
 
 ## Combining with other tools

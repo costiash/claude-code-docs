@@ -611,16 +611,17 @@ public class CodeExecutionWithFiles {
 }
 ```
 
-```php PHP hidelines={1..4} nocheck
+```php PHP hidelines={1..3,5} nocheck
 <?php
 
 use Anthropic\Client;
+use Anthropic\Core\FileParam;
 
 $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 
 // Upload a file
 $fileObject = $client->beta->files->upload(
-    file: fopen('data.csv', 'r'),
+    file: FileParam::fromResource(fopen('data.csv', 'r')),
 );
 
 // Use the file_id with code execution
@@ -631,14 +632,14 @@ $response = $client->beta->messages->create(
             'role' => 'user',
             'content' => [
                 ['type' => 'text', 'text' => 'Analyze this CSV data'],
-                ['type' => 'container_upload', 'file_id' => $fileObject->id]
-            ]
-        ]
+                ['type' => 'container_upload', 'file_id' => $fileObject->id],
+            ],
+        ],
     ],
     model: 'claude-opus-4-7',
     betas: ['files-api-2025-04-14'],
     tools: [
-        ['type' => 'code_execution_20250825', 'name' => 'code_execution']
+        ['type' => 'code_execution_20250825', 'name' => 'code_execution'],
     ],
 );
 
@@ -1008,9 +1009,10 @@ List<String> extractFileIds(BetaMessage response) {
 }
 ```
 
-```php PHP hidelines={1..4} nocheck
+```php PHP hidelines={1..2,4..5} nocheck
 <?php
 
+use Anthropic\Beta\Messages\BetaMessage;
 use Anthropic\Client;
 
 $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
@@ -1020,30 +1022,33 @@ $response = $client->beta->messages->create(
     messages: [
         [
             'role' => 'user',
-            'content' => 'Create a matplotlib visualization and save it as output.png'
-        ]
+            'content' => 'Create a matplotlib visualization and save it as output.png',
+        ],
     ],
     model: 'claude-opus-4-7',
     betas: ['files-api-2025-04-14'],
     tools: [
         [
             'type' => 'code_execution_20250825',
-            'name' => 'code_execution'
-        ]
+            'name' => 'code_execution',
+        ],
     ],
 );
 
-function extractFileIds($response) {
+function extractFileIds(BetaMessage $response): array
+{
     $fileIds = [];
     foreach ($response->content as $item) {
-        if ($item->type === 'bash_code_execution_tool_result') {
-            $contentItem = $item->content;
-            if ($contentItem->type === 'bash_code_execution_result') {
-                // concrete-typed list: BashCodeExecutionOutputBlock
-                foreach ($contentItem->content as $file) {
-                    $fileIds[] = $file->fileID;
-                }
-            }
+        if ($item->type !== 'bash_code_execution_tool_result') {
+            continue;
+        }
+        $contentItem = $item->content;
+        if ($contentItem->type !== 'bash_code_execution_result') {
+            continue;
+        }
+        // concrete-typed list: BashCodeExecutionOutputBlock
+        foreach ($contentItem->content as $file) {
+            $fileIds[] = $file->fileID;
         }
     }
     return $fileIds;
