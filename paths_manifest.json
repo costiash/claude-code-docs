@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-04-28T21:26:56.690752Z",
-    "total_paths": 1384,
+    "generated_at": "2026-04-29T00:47:40.089842Z",
+    "total_paths": 1385,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-04-28T21:26:56.690758Z"
+    "last_regenerated": "2026-04-29T00:47:40.089851Z"
   },
   "categories": {
     "core_documentation": [
@@ -158,6 +158,7 @@
       "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-latency",
       "/docs/en/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak",
       "/docs/en/tools-reference",
+      "/docs/en/troubleshoot-install",
       "/docs/en/ultraplan",
       "/docs/en/ultrareview",
       "/docs/en/voice-dictation",
