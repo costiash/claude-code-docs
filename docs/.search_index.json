@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-29T12:52:14Z",
+  "generated_at": "2026-04-29T15:56:10Z",
   "indexed_files": 1141,
   "index": {
     "/changelog": {
@@ -1049,12 +1049,12 @@
         "when",
         "files",
         "content",
-        "commands",
-        "subagent",
         "name",
+        "commands",
+        "directory",
+        "subagent",
         "yaml",
         "create",
-        "directory",
         "code",
         "invoke",
         "reference",
@@ -1064,7 +1064,7 @@
         "context",
         "session"
       ],
-      "word_count": 5161,
+      "word_count": 5159,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
