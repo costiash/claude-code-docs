@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-29T01:00:35Z",
+  "generated_at": "2026-04-29T04:28:41Z",
   "indexed_files": 1141,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "bash",
         "file"
       ],
-      "word_count": 39152,
+      "word_count": 39168,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -49,14 +49,14 @@
         "inference",
         "environment",
         "settings",
+        "set",
         "models",
         "variables",
-        "set",
         "api",
         "return",
         "profile"
       ],
-      "word_count": 3293,
+      "word_count": 3352,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -179,8 +179,8 @@
         "claude",
         "title",
         "code",
-        "when",
         "session",
+        "when",
         "tip",
         "steps",
         "thinking",
@@ -196,7 +196,7 @@
         "name",
         "branch"
       ],
-      "word_count": 5557,
+      "word_count": 5587,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -600,8 +600,8 @@
         "servers",
         "claude",
         "code",
-        "command",
         "when",
+        "command",
         "step",
         "tools",
         "url",
@@ -616,7 +616,7 @@
         "example",
         "configuration"
       ],
-      "word_count": 7417,
+      "word_count": 7458,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -709,26 +709,26 @@
       "keywords": [
         "when",
         "attributes",
-        "tool",
         "event",
+        "tool",
         "events",
         "request",
         "code",
         "name",
         "metrics",
-        "api",
         "claude",
+        "api",
         "standard",
         "prompt",
         "session",
         "counter",
-        "example",
         "such",
+        "example",
         "default",
         "error",
         "only"
       ],
-      "word_count": 6447,
+      "word_count": 6538,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -812,7 +812,7 @@
         "size",
         "terminal"
       ],
-      "word_count": 4259,
+      "word_count": 4283,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -924,7 +924,7 @@
         "tab",
         "title"
       ],
-      "word_count": 3621,
+      "word_count": 3645,
       "file_path": "docs/claude-code__quickstart.md"
     },
     "/claude-code/sandboxing": {
@@ -1032,11 +1032,11 @@
         "see",
         "updates",
         "native",
+        "git",
         "step",
-        "channel",
-        "cmd"
+        "channel"
       ],
-      "word_count": 2787,
+      "word_count": 2825,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1076,9 +1076,9 @@
         "script",
         "claude",
         "context",
+        "git",
         "code",
         "session",
-        "git",
         "when",
         "window",
         "json",
@@ -1092,7 +1092,7 @@
         "usage",
         "statusline"
       ],
-      "word_count": 5755,
+      "word_count": 5784,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
