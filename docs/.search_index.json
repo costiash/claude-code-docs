@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-29T04:28:41Z",
+  "generated_at": "2026-04-29T07:08:01Z",
   "indexed_files": 1141,
   "index": {
     "/changelog": {
@@ -938,21 +938,21 @@
         "settings",
         "claude",
         "sandboxing",
-        "network",
         "code",
+        "network",
         "paths",
         "security",
         "bash",
         "when",
         "filesystem",
-        "allow",
-        "tools",
         "configuration",
+        "tools",
+        "allow",
         "cannot",
         "system",
-        "through"
+        "sandboxed"
       ],
-      "word_count": 2739,
+      "word_count": 2834,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
