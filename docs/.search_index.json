@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-30T01:00:15Z",
+  "generated_at": "2026-04-30T04:31:20Z",
   "indexed_files": 1141,
   "index": {
     "/changelog": {
@@ -27789,15 +27789,15 @@
         "messages",
         "claude",
         "codegroup",
+        "each",
         "large",
         "data",
-        "each",
         "when",
         "may",
         "workspace",
         "result"
       ],
-      "word_count": 7270,
+      "word_count": 7308,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -28161,7 +28161,7 @@
         "default",
         "interleaved"
       ],
-      "word_count": 14732,
+      "word_count": 14749,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -28339,25 +28339,25 @@
         "cache",
         "caching",
         "prompt",
-        "mtok",
         "tokens",
-        "cached",
+        "mtok",
         "block",
+        "cached",
+        "request",
         "breakpoint",
         "content",
         "blocks",
-        "request",
         "section",
-        "system",
         "user",
+        "system",
         "when",
         "claude",
+        "tool",
         "breakpoints",
         "input",
-        "tool",
         "requests"
       ],
-      "word_count": 14023,
+      "word_count": 15194,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices": {

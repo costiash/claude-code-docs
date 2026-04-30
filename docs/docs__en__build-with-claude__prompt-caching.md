@@ -904,6 +904,352 @@ Here are 3 examples. This depicts the input tokens of 3 requests, each of which 
 ![Mixing TTLs Diagram](/docs/images/prompt-cache-mixed-ttl.svg)
 
 ---
+## Pre-warming the cache
+
+Cache pre-warming lets you load your system prompt or tool definitions into the prompt cache before a user triggers a real request. This eliminates the cache-miss latency penalty on the first user interaction, reducing time-to-first-token (TTFT) for latency-sensitive applications.
+
+### How it works
+
+Set `max_tokens: 0` in your request. The API runs the full prefill phase (reading your prompt into the model and writing the cache at any `cache_control` breakpoint), then returns immediately without generating any output. The response has an empty `content` array, `stop_reason: "max_tokens"`, and a fully populated `usage` block.
+
+Place the `cache_control` breakpoint on the last block that is shared with the follow-up request (typically your system prompt or tool definitions), not on the placeholder user message. Otherwise the cache entry is keyed to the placeholder and the follow-up request won't hit it. This means using an [explicit cache breakpoint](#explicit-cache-breakpoints) rather than [automatic caching](#automatic-caching), since automatic caching places the breakpoint on the last block, which here is the placeholder. The placeholder user message can be any string with non-whitespace content (the examples here use `"warmup"`); its content is read during prefill but never answered.
+
+<Note>
+A pre-warm request incurs a **cache write** charge if the prefix is not already cached, the same as any other request. Check `usage.cache_creation_input_tokens` in the response to confirm a write occurred. Zero output tokens are billed.
+</Note>
+
+<CodeGroup>
+
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-7",
+    "max_tokens": 0,
+    "system": [
+      {
+        "type": "text",
+        "text": "You are an expert software engineer with deep knowledge of distributed systems...",
+        "cache_control": {"type": "ephemeral"}
+      }
+    ],
+    "messages": [{"role": "user", "content": "warmup"}]
+  }'
+```
+
+```bash CLI
+ant messages create \
+  --transform '{stop_reason,content,usage}' --format yaml <<'YAML'
+model: claude-opus-4-7
+max_tokens: 0
+system:
+  - type: text
+    text: >-
+      You are an expert software engineer with deep knowledge of
+      distributed systems...
+    cache_control:
+      type: ephemeral
+messages:
+  - role: user
+    content: warmup
+YAML
+```
+
+```python Python hidelines={1..2}
+import anthropic
+
+client = anthropic.Anthropic()
+
+# Fire this before users arrive to warm the shared system-prompt cache.
+prewarm = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=0,
+    system=[
+        {
+            "type": "text",
+            "text": "You are an expert software engineer with deep knowledge of distributed systems...",
+            "cache_control": {"type": "ephemeral"},
+        }
+    ],
+    messages=[{"role": "user", "content": "warmup"}],
+)
+print(prewarm.stop_reason)  # "max_tokens"
+print(prewarm.content)  # []
+print(prewarm.usage)
+```
+
+```typescript TypeScript hidelines={1..2}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+// Fire this before users arrive to warm the shared system-prompt cache.
+const prewarm = await client.messages.create({
+  model: "claude-opus-4-7",
+  max_tokens: 0,
+  system: [
+    {
+      type: "text",
+      text: "You are an expert software engineer with deep knowledge of distributed systems...",
+      cache_control: { type: "ephemeral" }
+    }
+  ],
+  messages: [{ role: "user", content: "warmup" }]
+});
+console.log(prewarm.stop_reason); // "max_tokens"
+console.log(prewarm.content); // []
+console.log(prewarm.usage);
+```
+
+```csharp C# hidelines={1..3}
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+var prewarm = await client.Messages.Create(
+    new()
+    {
+        Model = Model.ClaudeOpus4_7,
+        MaxTokens = 0,
+        System = new(
+            [
+                new TextBlockParam
+                {
+                    Text = "You are an expert software engineer with deep knowledge of distributed systems...",
+                    CacheControl = new(),
+                },
+            ]
+        ),
+        Messages = [new() { Role = Role.User, Content = "warmup" }],
+    }
+);
+
+Console.WriteLine(prewarm.StopReason?.Raw()); // "max_tokens"
+Console.WriteLine(prewarm.Content.Count); // 0
+Console.WriteLine(prewarm.Usage);
+```
+
+```go Go hidelines={1..10,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	prewarm, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_7,
+		MaxTokens: 0,
+		System: []anthropic.TextBlockParam{
+			{
+				Text:         "You are an expert software engineer with deep knowledge of distributed systems...",
+				CacheControl: anthropic.NewCacheControlEphemeralParam(),
+			},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("warmup")),
+		},
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(prewarm.StopReason) // "max_tokens"
+	fmt.Println(prewarm.Content)    // []
+	fmt.Println(prewarm.Usage.RawJSON())
+}
+```
+
+```java Java hidelines={1..9,-1..}
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.CacheControlEphemeral;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.TextBlockParam;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    Message prewarm = client.messages().create(MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_7)
+            .maxTokens(0)
+            .systemOfTextBlockParams(List.of(TextBlockParam.builder()
+                    .text("You are an expert software engineer with deep knowledge of distributed systems...")
+                    .cacheControl(CacheControlEphemeral.builder().build())
+                    .build()))
+            .addUserMessage("warmup")
+            .build());
+
+    IO.println(prewarm.stopReason()); // Optional[max_tokens]
+    IO.println(prewarm.content());    // []
+    IO.println(prewarm.usage());
+}
+```
+
+```php PHP hidelines={1..5}
+<?php
+
+use Anthropic\Client;
+use Anthropic\Messages\Model;
+
+$client = new Client();
+
+$prewarm = $client->messages->create(
+    model: Model::CLAUDE_OPUS_4_7,
+    maxTokens: 0,
+    system: [
+        [
+            'type' => 'text',
+            'text' => 'You are an expert software engineer with deep knowledge of distributed systems...',
+            'cache_control' => ['type' => 'ephemeral'],
+        ],
+    ],
+    messages: [['role' => 'user', 'content' => 'warmup']],
+);
+
+echo $prewarm['stopReason']->value, PHP_EOL; // "max_tokens"
+echo json_encode($prewarm->content), PHP_EOL; // []
+echo json_encode($prewarm->usage), PHP_EOL;
+```
+
+```ruby Ruby hidelines={1..2}
+require "anthropic"
+
+client = Anthropic::Client.new
+
+prewarm = client.messages.create(
+  model: Anthropic::Model::CLAUDE_OPUS_4_7,
+  max_tokens: 0,
+  system_: [
+    {
+      type: "text",
+      text: "You are an expert software engineer with deep knowledge of distributed systems...",
+      cache_control: {type: "ephemeral"}
+    }
+  ],
+  messages: [{role: "user", content: "warmup"}]
+)
+
+puts prewarm.stop_reason # :max_tokens
+puts prewarm.content # []
+puts prewarm.usage
+```
+
+</CodeGroup>
+
+The API returns an empty `content` array:
+
+```json Output
+{
+  "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
+  "type": "message",
+  "role": "assistant",
+  "content": [],
+  "model": "claude-opus-4-7-20251101",
+  "stop_reason": "max_tokens",
+  "stop_sequence": null,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 5120,
+    "cache_read_input_tokens": 0,
+    "cache_creation": {
+      "ephemeral_5m_input_tokens": 5120,
+      "ephemeral_1h_input_tokens": 0
+    },
+    "iterations": [
+      {
+        "input_tokens": 8,
+        "output_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 5120,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 5120,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "type": "message"
+      }
+    ],
+    "output_tokens": 0,
+    "service_tier": "standard",
+    "inference_geo": "global"
+  }
+}
+```
+
+### Typical usage pattern
+
+Fire a pre-warm request when your application starts (or on a scheduled interval), then send real user requests after the pre-warm completes:
+
+```python Python hidelines={1..2}
+import anthropic
+
+client = anthropic.Anthropic()
+
+SYSTEM_PROMPT = [
+    {
+        "type": "text",
+        "text": "You are an expert software engineer with deep knowledge of distributed systems...",
+        "cache_control": {"type": "ephemeral"},
+    }
+]
+
+
+def prewarm_cache() -> None:
+    """Call this at application startup or on a scheduled interval."""
+    client.messages.create(
+        model="claude-opus-4-7",
+        max_tokens=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": "warmup"}],
+    )
+
+
+def respond(user_message: str) -> anthropic.types.Message:
+    """The real user request; benefits from a warm cache."""
+    return client.messages.create(
+        model="claude-opus-4-7",
+        max_tokens=1024,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": user_message}],
+    )
+
+
+# Warm the cache before any user traffic arrives.
+prewarm_cache()
+
+# Later, when the user submits a message, the system-prompt prefix is already cached.
+response = respond("How do I implement a binary search tree?")
+print(response.content[0].text)
+```
+
+Keep in mind that the cache TTL still applies. For the default 5-minute cache, send a new pre-warm request at least every 5 minutes to keep the cache warm. For longer gaps between user requests, use the [1-hour cache duration](#1-hour-cache-duration) instead.
+
+### Limitations
+
+A `max_tokens: 0` request is rejected with an `invalid_request_error` if any of the following are set, since each implies output that a zero-token budget cannot produce:
+
+- `stream: true`
+- [Extended thinking](/docs/en/build-with-claude/extended-thinking) (`thinking.type: "enabled"`)
+- [Structured outputs](/docs/en/build-with-claude/structured-outputs) (`output_config.format`)
+- `tool_choice` of `{"type": "tool", ...}` or `{"type": "any"}`
+
+`max_tokens: 0` is also rejected inside a [Message Batches](/docs/en/build-with-claude/batch-processing) request. Pre-warming targets time-to-first-token, which does not apply to batch processing, and a cache entry written during batch processing would likely expire before the follow-up request runs.
+
+### Replacing the max_tokens=1 workaround
+
+Before `max_tokens: 0` was available, some applications used `max_tokens: 1` warm-up calls to achieve the same effect. The `max_tokens: 0` approach is preferred: no output is produced, so there is no single-token reply to discard, no output tokens are billed, and the intent of the request is unambiguous.
+
+---
 ## Prompt caching examples
 
 To help you get started with prompt caching, the [prompt caching cookbook](https://platform.claude.com/cookbook/misc-prompt-caching) provides detailed examples and best practices.

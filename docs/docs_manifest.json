@@ -5805,8 +5805,8 @@
     "docs__en__build-with-claude__batch-processing.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/batch-processing",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/batch-processing.md",
-      "hash": "58f98b40649a4a8725125470b6c70111ebf47f07d370a0db92ae69e094cd7789",
-      "last_updated": "2026-04-17T00:52:20.819149"
+      "hash": "1ab5e511651501f90271e82e9d6d86b35be91858d820b95fa2bebf39853297b2",
+      "last_updated": "2026-04-30T04:29:53.881430"
     },
     "docs__en__build-with-claude__citations.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/citations",
@@ -5883,8 +5883,8 @@
     "docs__en__build-with-claude__extended-thinking.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking.md",
-      "hash": "5d5dd52d3584411f5fc61807d49ba5f310d74c970e2d31c8e06a2b6dbe07dfe2",
-      "last_updated": "2026-04-28T00:57:54.770737"
+      "hash": "e0548bf64651cacc151de50979fb042737bd1bd54a2fecada9a3adb2ae9f090f",
+      "last_updated": "2026-04-30T04:30:02.293147"
     },
     "docs__en__build-with-claude__fast-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode",
@@ -5925,8 +5925,8 @@
     "docs__en__build-with-claude__prompt-caching.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
-      "hash": "b45a13992fa80e6e4faafd65bdd8e2f51e35e5fa30f8cea8055ac7e1ba61ccd3",
-      "last_updated": "2026-04-28T00:57:59.014559"
+      "hash": "5af2b7eebbe67ae875a28056843d69562b79c8175fab8298e1dad0386d77a109",
+      "last_updated": "2026-04-30T04:30:07.004148"
     },
     "docs__en__build-with-claude__prompt-engineering__claude-prompting-best-practices.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
@@ -6465,8 +6465,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-04-30T01:00:12.780949",
-    "fetch_duration_seconds": 762.828146,
+    "last_fetch_completed": "2026-04-30T04:31:17.896198",
+    "fetch_duration_seconds": 833.169302,
     "total_pages_discovered": 1385,
     "pages_fetched_successfully": 1077,
     "pages_failed": 309,
@@ -6786,7 +6786,7 @@
     "total_files": 1077,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-04-30T01:00:12.780973",
+  "last_updated": "2026-04-30T04:31:17.896222",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
