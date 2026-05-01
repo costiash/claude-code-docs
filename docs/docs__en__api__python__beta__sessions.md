@@ -142,7 +142,7 @@ Create Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -185,6 +185,8 @@ Create Session
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -726,6 +728,10 @@ List Sessions
 
   Maximum number of results to return.
 
+- `memory_store_id: Optional[str]`
+
+  Filter sessions whose resources contain a memory_store with this memory store ID.
+
 - `order: Optional[Literal["asc", "desc"]]`
 
   Sort direction for results, ordered by created_at. Defaults to desc (newest first).
@@ -744,7 +750,7 @@ List Sessions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -787,6 +793,8 @@ List Sessions
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -1302,7 +1310,7 @@ Get Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1345,6 +1353,8 @@ Get Session
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -1873,7 +1883,7 @@ Update Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1916,6 +1926,8 @@ Update Session
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -2432,7 +2444,7 @@ Delete Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2475,6 +2487,8 @@ Delete Session
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -2523,7 +2537,7 @@ Archive Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2566,6 +2580,8 @@ Archive Session
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -4080,7 +4096,7 @@ List Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4123,6 +4139,8 @@ List Events
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -5882,7 +5900,7 @@ Send Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -5925,6 +5943,8 @@ Send Events
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -6358,7 +6378,7 @@ Stream Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -6401,6 +6421,8 @@ Stream Events
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -13723,7 +13745,7 @@ Add Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -13766,6 +13788,8 @@ Add Session Resource
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -13834,7 +13858,7 @@ List Session Resources
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -13877,6 +13901,8 @@ List Session Resources
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -14020,7 +14046,7 @@ Get Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -14063,6 +14089,8 @@ Get Session Resource
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -14210,7 +14238,7 @@ Update Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -14253,6 +14281,8 @@ Update Session Resource
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -14397,7 +14427,7 @@ Delete Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -14440,6 +14470,8 @@ Delete Session Resource
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 

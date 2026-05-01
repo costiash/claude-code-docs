@@ -551,6 +551,10 @@ List Sessions
 
   Query param: Maximum number of results to return.
 
+- `--memory-store-id: optional string`
+
+  Query param: Filter sessions whose resources contain a memory_store with this memory store ID.
+
 - `--order: optional "asc" or "desc"`
 
   Query param: Sort direction for results, ordered by created_at. Defaults to desc (newest first).

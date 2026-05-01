@@ -4,7 +4,7 @@
 
 **get** `/v1/memory_stores`
 
-ListMemoryStores
+List memory stores
 
 ### Parameters
 
@@ -12,23 +12,23 @@ ListMemoryStores
 
   - `CreatedAtGte param.Field[Time]`
 
-    Query param: Return stores created at or after this time (inclusive).
+    Query param: Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
   - `CreatedAtLte param.Field[Time]`
 
-    Query param: Return stores created at or before this time (inclusive).
+    Query param: Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
   - `IncludeArchived param.Field[bool]`
 
-    Query param: Query parameter for include_archived
+    Query param: When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
   - `Limit param.Field[int64]`
 
-    Query param: Query parameter for limit
+    Query param: Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
   - `Page param.Field[string]`
 
-    Query param: Query parameter for page
+    Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
   - `Betas param.Field[[]AnthropicBeta]`
 
@@ -80,35 +80,47 @@ ListMemoryStores
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `type BetaManagedAgentsMemoryStore struct{…}`
 
+  A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
   - `ID string`
 
-  - `Type BetaManagedAgentsMemoryStoreType`
-
-    - `const BetaManagedAgentsMemoryStoreTypeMemoryStore BetaManagedAgentsMemoryStoreType = "memory_store"`
-
-  - `ArchivedAt Time`
-
-    A timestamp in RFC 3339 format
+    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
 
-  - `Description string`
-
-  - `Metadata map[string, string]`
-
   - `Name string`
+
+    Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+
+  - `Type BetaManagedAgentsMemoryStoreType`
+
+    - `const BetaManagedAgentsMemoryStoreTypeMemoryStore BetaManagedAgentsMemoryStoreType = "memory_store"`
 
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
+
+  - `ArchivedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Description string`
+
+    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+
+  - `Metadata map[string, string]`
+
+    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
 ### Example
 

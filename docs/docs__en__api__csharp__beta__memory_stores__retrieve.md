@@ -4,7 +4,7 @@
 
 **get** `/v1/memory_stores/{memory_store_id}`
 
-GetMemoryStore
+Retrieve a memory store
 
 ### Parameters
 
@@ -60,35 +60,47 @@ GetMemoryStore
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore:`
 
+  A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
   - `required string ID`
+
+    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string Name`
+
+    Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
   - `required Type Type`
 
     - `"memory_store"MemoryStore`
 
-  - `DateTimeOffset? ArchivedAt`
+  - `required DateTimeOffset UpdatedAt`
 
     A timestamp in RFC 3339 format
 
-  - `DateTimeOffset CreatedAt`
+  - `DateTimeOffset? ArchivedAt`
 
     A timestamp in RFC 3339 format
 
   - `string Description`
 
+    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+
   - `IReadOnlyDictionary<string, string> Metadata`
 
-  - `string Name`
-
-  - `DateTimeOffset UpdatedAt`
-
-    A timestamp in RFC 3339 format
+    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
 ### Example
 

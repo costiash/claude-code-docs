@@ -10,6 +10,9 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### April 30, 2026
+- We've retired the 1M token context window beta (`context-1m-2025-08-07`) for Claude Sonnet 4.5 and Claude Sonnet 4. The beta header now has no effect on these models, and requests exceeding the standard 200k-token context window return an error. To use the 1M context window, migrate to [Claude Sonnet 4.6](/docs/en/about-claude/models/overview#latest-models-comparison) or [Claude Opus 4.6](/docs/en/about-claude/models/overview#latest-models-comparison), where it's generally available at standard pricing with no beta header required.
+
 ### April 24, 2026
 - We've released the [Rate Limits API](/docs/en/build-with-claude/rate-limits-api), allowing administrators to programmatically query the rate limits configured for their organization and workspaces.
 

@@ -58,6 +58,8 @@ Create Session
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `Agent agent`
@@ -717,6 +719,10 @@ List Sessions
 
     Maximum number of results to return.
 
+  - `Optional<String> memoryStoreId`
+
+    Filter sessions whose resources contain a memory_store with this memory store ID.
+
   - `Optional<Order> order`
 
     Sort direction for results, ordered by created_at. Defaults to desc (newest first).
@@ -774,6 +780,8 @@ List Sessions
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -1320,6 +1328,8 @@ Get Session
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
@@ -1864,6 +1874,8 @@ Update Session
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -2422,6 +2434,8 @@ Delete Session
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
@@ -2516,6 +2530,8 @@ Archive Session
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -4024,6 +4040,8 @@ List Events
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
@@ -5477,6 +5495,8 @@ Send Events
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `List<BetaManagedAgentsEventParams> events`
@@ -6311,6 +6331,8 @@ Stream Events
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -13670,6 +13692,8 @@ Add Session Resource
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
@@ -13794,6 +13818,8 @@ List Session Resources
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -13983,6 +14009,8 @@ Get Session Resource
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -14176,6 +14204,8 @@ Update Session Resource
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -14374,6 +14404,8 @@ Delete Session Resource
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 

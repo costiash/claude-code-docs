@@ -4,29 +4,29 @@
 
 **get** `/v1/memory_stores`
 
-ListMemoryStores
+List memory stores
 
 ### Parameters
 
 - `created_at_gte: Optional[Union[str, datetime]]`
 
-  Return stores created at or after this time (inclusive).
+  Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
 - `created_at_lte: Optional[Union[str, datetime]]`
 
-  Return stores created at or before this time (inclusive).
+  Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
 - `include_archived: Optional[bool]`
 
-  Query parameter for include_archived
+  When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
 - `limit: Optional[int]`
 
-  Query parameter for limit
+  Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
 - `page: Optional[str]`
 
-  Query parameter for page
+  Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -34,7 +34,7 @@ ListMemoryStores
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -78,35 +78,47 @@ ListMemoryStores
 
     - `"output-300k-2026-03-24"`
 
+    - `"user-profiles-2026-03-24"`
+
     - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore: …`
 
+  A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
   - `id: str`
+
+    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `name: str`
+
+    Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
   - `type: Literal["memory_store"]`
 
     - `"memory_store"`
 
-  - `archived_at: Optional[datetime]`
+  - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
 
-  - `created_at: Optional[datetime]`
+  - `archived_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
 
   - `description: Optional[str]`
 
+    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+
   - `metadata: Optional[Dict[str, str]]`
 
-  - `name: Optional[str]`
-
-  - `updated_at: Optional[datetime]`
-
-    A timestamp in RFC 3339 format
+    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
 ### Example
 

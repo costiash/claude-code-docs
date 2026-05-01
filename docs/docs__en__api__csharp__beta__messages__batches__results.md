@@ -64,6 +64,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
@@ -874,6 +876,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `required string? Content`
 
               Summary of compacted content, or null if compaction failed
+
+            - `required string? EncryptedContent`
+
+              Opaque metadata from prior compaction, to be round-tripped verbatim
 
             - `JsonElement Type "compaction"constant`
 

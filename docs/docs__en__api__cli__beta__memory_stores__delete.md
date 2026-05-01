@@ -4,7 +4,7 @@
 
 **delete** `/v1/memory_stores/{memory_store_id}`
 
-DeleteMemoryStore
+Delete a memory store
 
 ### Parameters
 
@@ -20,7 +20,11 @@ DeleteMemoryStore
 
 - `beta_managed_agents_deleted_memory_store: object { id, type }`
 
+  Confirmation that a `memory_store` was deleted.
+
   - `id: string`
+
+    ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
   - `type: "memory_store_deleted"`
 

@@ -58,13 +58,15 @@ Retrieve a specific environment by ID.
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
 ### Returns
 
 - `class BetaEnvironment:`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `required string ID`
 

@@ -60,6 +60,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `List<Request> requests`
@@ -83,6 +85,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         The maximum number of tokens to generate before stopping.
 
         Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+
+        Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
         Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
@@ -2724,6 +2728,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `TTL_1H("1h")`
 
+              - `Optional<String> encryptedContent`
+
+                Opaque metadata from prior compaction, to be round-tripped verbatim
+
         - `Role role`
 
           - `USER("user")`
@@ -3031,6 +3039,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `HIGH("high")`
 
+          - `XHIGH("xhigh")`
+
           - `MAX("max")`
 
         - `Optional<BetaJsonOutputFormat> format`
@@ -3044,6 +3054,24 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `JsonValue; type "json_schema"constant`
 
             - `JSON_SCHEMA("json_schema")`
+
+        - `Optional<BetaTokenTaskBudget> taskBudget`
+
+          User-configurable total token budget across contexts.
+
+          - `long total`
+
+            Total token budget across all contexts in the session.
+
+          - `JsonValue; type "tokens"constant`
+
+            The budget type. Currently only 'tokens' is supported.
+
+            - `TOKENS("tokens")`
+
+          - `Optional<Long> remaining`
+
+            Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
       - `Optional<BetaJsonOutputFormat> outputFormat`
 
@@ -4966,6 +4994,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
         Recommended for advanced use cases only.
+
+      - `Optional<String> userProfileId`
+
+        The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 ### Returns
 

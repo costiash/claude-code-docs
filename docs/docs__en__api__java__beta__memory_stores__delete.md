@@ -4,7 +4,7 @@
 
 **delete** `/v1/memory_stores/{memory_store_id}`
 
-DeleteMemoryStore
+Delete a memory store
 
 ### Parameters
 
@@ -58,13 +58,19 @@ DeleteMemoryStore
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
 - `class BetaManagedAgentsDeletedMemoryStore:`
 
+  Confirmation that a `memory_store` was deleted.
+
   - `String id`
+
+    ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
   - `Type type`
 

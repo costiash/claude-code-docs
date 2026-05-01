@@ -32,7 +32,7 @@ The Models API response can be used to determine which models are available for 
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -75,6 +75,8 @@ The Models API response can be used to determine which models are available for 
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -185,6 +187,14 @@ The Models API response can be used to determine which models are available for 
       - `supported: boolean`
 
         Whether this capability is supported by the model.
+
+      - `xhigh: BetaCapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
 
     - `image_input: BetaCapabilitySupport`
 
@@ -304,7 +314,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -347,6 +357,8 @@ The Models API response can be used to determine information about a specific mo
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -457,6 +469,14 @@ The Models API response can be used to determine information about a specific mo
       - `supported: boolean`
 
         Whether this capability is supported by the model.
+
+      - `xhigh: BetaCapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
 
     - `image_input: BetaCapabilitySupport`
 
@@ -590,7 +610,7 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
 
 ### Beta Effort Capability
 
-- `BetaEffortCapability = object { high, low, max, 2 more }`
+- `BetaEffortCapability = object { high, low, max, 3 more }`
 
   Effort (reasoning_effort) capability details.
 
@@ -629,6 +649,14 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
   - `supported: boolean`
 
     Whether this capability is supported by the model.
+
+  - `xhigh: BetaCapabilitySupport`
+
+    Indicates whether a capability is supported.
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
 
 ### Beta Model Capabilities
 
@@ -731,6 +759,14 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
     - `supported: boolean`
 
       Whether this capability is supported by the model.
+
+    - `xhigh: BetaCapabilitySupport`
+
+      Indicates whether a capability is supported.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
 
   - `image_input: BetaCapabilitySupport`
 
@@ -891,6 +927,14 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
       - `supported: boolean`
 
         Whether this capability is supported by the model.
+
+      - `xhigh: BetaCapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
 
     - `image_input: BetaCapabilitySupport`
 

@@ -4,7 +4,7 @@
 
 **delete** `/v1/memory_stores/{memory_store_id}`
 
-DeleteMemoryStore
+Delete a memory store
 
 ### Parameters
 
@@ -18,7 +18,7 @@ DeleteMemoryStore
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -62,13 +62,19 @@ DeleteMemoryStore
 
       - `"output-300k-2026-03-24"`
 
+      - `"user-profiles-2026-03-24"`
+
       - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `BetaManagedAgentsDeletedMemoryStore`
 
+  Confirmation that a `memory_store` was deleted.
+
   - `id: string`
+
+    ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
   - `type: "memory_store_deleted"`
 

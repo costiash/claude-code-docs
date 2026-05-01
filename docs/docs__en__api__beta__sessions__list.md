@@ -38,6 +38,10 @@ List Sessions
 
   Maximum number of results to return.
 
+- `memory_store_id: optional string`
+
+  Filter sessions whose resources contain a memory_store with this memory store ID.
+
 - `order: optional "asc" or "desc"`
 
   Sort direction for results, ordered by created_at. Defaults to desc (newest first).
@@ -58,7 +62,7 @@ List Sessions
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -101,6 +105,8 @@ List Sessions
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 

@@ -303,7 +303,6 @@ The following Messages API modifiers do **not** apply to Claude Managed Agents s
 | [Batch API discount](#batch-processing) | Sessions are stateful and interactive. There is no batch mode. |
 | [Fast mode premium](#fast-mode-pricing) | Inference speed is managed by the runtime. |
 | [Data residency multiplier](#data-residency-pricing) | `inference_geo` is a Messages API request field. |
-| [Long context premium](#long-context-pricing) | Context window is managed by the runtime. |
 | [Third-party platform pricing](#third-party-platform-pricing) | Claude Managed Agents is available only through the Claude API directly. |
 
 ### Session runtime

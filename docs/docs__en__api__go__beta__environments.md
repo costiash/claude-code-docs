@@ -81,13 +81,15 @@ Create a new environment with the specified configuration.
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `type BetaEnvironment struct{…}`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `ID string`
 
@@ -304,13 +306,15 @@ List environments with pagination support.
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `type BetaEnvironment struct{…}`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `ID string`
 
@@ -517,13 +521,15 @@ Retrieve a specific environment by ID.
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `type BetaEnvironment struct{…}`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `ID string`
 
@@ -753,13 +759,15 @@ Update an existing environment's configuration.
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `type BetaEnvironment struct{…}`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `ID string`
 
@@ -970,6 +978,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
@@ -1083,13 +1093,15 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `type BetaEnvironment struct{…}`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `ID string`
 
@@ -1414,7 +1426,7 @@ func main() {
 
 - `type BetaEnvironment struct{…}`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `ID string`
 

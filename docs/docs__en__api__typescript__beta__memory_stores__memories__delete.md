@@ -4,7 +4,7 @@
 
 **delete** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-DeleteMemory
+Delete a memory
 
 ### Parameters
 
@@ -26,7 +26,7 @@ DeleteMemory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -70,13 +70,19 @@ DeleteMemory
 
       - `"output-300k-2026-03-24"`
 
+      - `"user-profiles-2026-03-24"`
+
       - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `BetaManagedAgentsDeletedMemory`
 
+  Tombstone returned by [Delete a memory](/docs/en/api/beta/memory_stores/memories/delete). The memory's version history persists and remains listable via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) until the store itself is deleted.
+
   - `id: string`
+
+    ID of the deleted memory (a `mem_...` value).
 
   - `type: "memory_deleted"`
 

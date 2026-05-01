@@ -20,6 +20,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+    Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
     Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
   - `Messages param.Field[[]BetaMessageParamResp]`
@@ -2656,6 +2658,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
+          - `EncryptedContent string`
+
+            Opaque metadata from prior compaction, to be round-tripped verbatim
+
     - `Role BetaMessageParamRole`
 
       - `const BetaMessageParamRoleUser BetaMessageParamRole = "user"`
@@ -4564,6 +4570,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Recommended for advanced use cases only.
 
+  - `UserProfileID param.Field[string]`
+
+    Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
   - `Betas param.Field[[]AnthropicBeta]`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -4613,6 +4623,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -5536,6 +5548,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `Content string`
 
         Summary of compacted content, or null if compaction failed
+
+      - `EncryptedContent string`
+
+        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `Type Compaction`
 

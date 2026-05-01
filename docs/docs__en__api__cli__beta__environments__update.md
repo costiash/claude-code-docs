@@ -39,7 +39,7 @@ Update an existing environment's configuration.
 
 - `beta_environment: object { id, archived_at, config, 6 more }`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `id: string`
 

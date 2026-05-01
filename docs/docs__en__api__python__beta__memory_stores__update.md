@@ -4,7 +4,7 @@
 
 **post** `/v1/memory_stores/{memory_store_id}`
 
-UpdateMemoryStore
+Update a memory store
 
 ### Parameters
 
@@ -12,11 +12,15 @@ UpdateMemoryStore
 
 - `description: Optional[str]`
 
+  New description for the store, up to 1024 characters. Pass an empty string to clear it.
+
 - `metadata: Optional[Dict[str, Optional[str]]]`
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
 - `name: Optional[str]`
+
+  New human-readable name for the store. 1–255 characters; no control characters. Renaming changes the slug used for the store's `mount_path` in sessions created after the update.
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -24,7 +28,7 @@ UpdateMemoryStore
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -68,35 +72,47 @@ UpdateMemoryStore
 
     - `"output-300k-2026-03-24"`
 
+    - `"user-profiles-2026-03-24"`
+
     - `"advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore: …`
 
+  A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
   - `id: str`
+
+    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `name: str`
+
+    Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
   - `type: Literal["memory_store"]`
 
     - `"memory_store"`
 
-  - `archived_at: Optional[datetime]`
+  - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
 
-  - `created_at: Optional[datetime]`
+  - `archived_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
 
   - `description: Optional[str]`
 
+    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+
   - `metadata: Optional[Dict[str, str]]`
 
-  - `name: Optional[str]`
-
-  - `updated_at: Optional[datetime]`
-
-    A timestamp in RFC 3339 format
+    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
 ### Example
 

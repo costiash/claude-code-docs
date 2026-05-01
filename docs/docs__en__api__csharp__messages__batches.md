@@ -38,6 +38,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+        Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
         Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
       - `required IReadOnlyList<MessageParam> Messages`
@@ -2137,6 +2139,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `"medium"Medium`
 
           - `"high"High`
+
+          - `"xhigh"Xhigh`
 
           - `"max"Max`
 

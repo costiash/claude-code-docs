@@ -2650,6 +2650,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             - `"1h"`
 
+        - `encrypted_content: Optional[str]`
+
+          Opaque metadata from prior compaction, to be round-tripped verbatim
+
   - `role: Literal["user", "assistant"]`
 
     - `"user"`
@@ -2925,7 +2929,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   Configuration options for the model's output, such as the output format.
 
-  - `effort: Optional[Literal["low", "medium", "high", "max"]]`
+  - `effort: Optional[Literal["low", "medium", "high", 2 more]]`
 
     All possible effort levels.
 
@@ -2934,6 +2938,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `"medium"`
 
     - `"high"`
+
+    - `"xhigh"`
 
     - `"max"`
 
@@ -2948,6 +2954,24 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `type: Literal["json_schema"]`
 
       - `"json_schema"`
+
+  - `task_budget: Optional[BetaTokenTaskBudget]`
+
+    User-configurable total token budget across contexts.
+
+    - `total: int`
+
+      Total token budget across all contexts in the session.
+
+    - `type: Literal["tokens"]`
+
+      The budget type. Currently only 'tokens' is supported.
+
+      - `"tokens"`
+
+    - `remaining: Optional[int]`
+
+      Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 - `output_format: Optional[BetaJSONOutputFormatParam]`
 
@@ -4855,7 +4879,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4898,6 +4922,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 

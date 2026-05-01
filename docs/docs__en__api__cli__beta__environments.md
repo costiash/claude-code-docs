@@ -37,7 +37,7 @@ Create a new environment with the specified configuration.
 
 - `beta_environment: object { id, archived_at, config, 6 more }`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `id: string`
 
@@ -329,7 +329,7 @@ Retrieve a specific environment by ID.
 
 - `beta_environment: object { id, archived_at, config, 6 more }`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `id: string`
 
@@ -486,7 +486,7 @@ Update an existing environment's configuration.
 
 - `beta_environment: object { id, archived_at, config, 6 more }`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `id: string`
 
@@ -660,7 +660,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 - `beta_environment: object { id, archived_at, config, 6 more }`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `id: string`
 
@@ -942,7 +942,7 @@ ant beta:environments archive \
 
 - `beta_environment: object { id, archived_at, config, 6 more }`
 
-  Unified Environment resource for both cloud and BYOC environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
   - `id: string`
 

@@ -20,6 +20,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+    Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
     Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
   - `required IReadOnlyList<BetaMessageParam> messages`
@@ -2302,6 +2304,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"1h"Ttl1h`
 
+          - `string? EncryptedContent`
+
+            Opaque metadata from prior compaction, to be round-tripped verbatim
+
     - `required Role Role`
 
       - `"user"User`
@@ -4050,6 +4056,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Recommended for advanced use cases only.
 
+  - `string? userProfileID`
+
+    Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -4095,6 +4105,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"fast-mode-2026-02-01"FastMode2026_02_01`
 
     - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -4888,6 +4900,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `required string? Content`
 
         Summary of compacted content, or null if compaction failed
+
+      - `required string? EncryptedContent`
+
+        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `JsonElement Type "compaction"constant`
 

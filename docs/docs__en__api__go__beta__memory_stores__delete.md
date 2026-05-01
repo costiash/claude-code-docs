@@ -4,7 +4,7 @@
 
 **delete** `/v1/memory_stores/{memory_store_id}`
 
-DeleteMemoryStore
+Delete a memory store
 
 ### Parameters
 
@@ -62,13 +62,19 @@ DeleteMemoryStore
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `type BetaManagedAgentsDeletedMemoryStore struct{…}`
 
+  Confirmation that a `memory_store` was deleted.
+
   - `ID string`
+
+    ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
   - `Type BetaManagedAgentsDeletedMemoryStoreType`
 

@@ -4,7 +4,7 @@
 
 **delete** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-DeleteMemory
+Delete a memory
 
 ### Parameters
 
@@ -70,13 +70,19 @@ DeleteMemory
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `type BetaManagedAgentsDeletedMemory struct{…}`
 
+  Tombstone returned by [Delete a memory](/docs/en/api/beta/memory_stores/memories/delete). The memory's version history persists and remains listable via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) until the store itself is deleted.
+
   - `ID string`
+
+    ID of the deleted memory (a `mem_...` value).
 
   - `Type BetaManagedAgentsDeletedMemoryType`
 
