@@ -3648,12 +3648,6 @@
       "hash": "536cc07df79f47ee6f4361dd0d148a2dddc76dd9873b7d26cfc02c0a9a541c3c",
       "last_updated": "2026-05-01T00:57:18.806628"
     },
-    "docs__en__api__java__beta__user_profiles.md": {
-      "original_url": "https://platform.claude.com/docs/en/api/java/beta/user_profiles",
-      "original_md_url": "https://platform.claude.com/docs/en/api/java/beta/user_profiles.md",
-      "hash": "53341b713a4b5cb993719dcbaa6cb48eee416e75031f816f842d2ff5700228d8",
-      "last_updated": "2026-05-01T00:57:19.464561"
-    },
     "docs__en__api__java__beta__user_profiles__create.md": {
       "original_url": "https://platform.claude.com/docs/en/api/java/beta/user_profiles/create",
       "original_md_url": "https://platform.claude.com/docs/en/api/java/beta/user_profiles/create.md",
@@ -6753,11 +6747,11 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-01T12:39:34.162602",
-    "fetch_duration_seconds": 808.141893,
+    "last_fetch_completed": "2026-05-01T15:39:42.904015",
+    "fetch_duration_seconds": 901.381202,
     "total_pages_discovered": 1445,
-    "pages_fetched_successfully": 1125,
-    "pages_failed": 321,
+    "pages_fetched_successfully": 1124,
+    "pages_failed": 322,
     "failed_pages": [
       "/docs/en/about-claude/use-case-guides/overview",
       "/docs/en/admin-setup",
@@ -6798,6 +6792,7 @@
       "/docs/en/api/csharp/completions/create",
       "/docs/en/api/go/beta/agents/delete",
       "/docs/en/api/java/beta/agents/delete",
+      "/docs/en/api/java/beta/user_profiles",
       "/docs/en/api/php/beta",
       "/docs/en/api/php/beta/agents",
       "/docs/en/api/php/beta/agents/archive",
@@ -7083,10 +7078,10 @@
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 1125,
+    "total_files": 1124,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-01T12:39:34.162623",
+  "last_updated": "2026-05-01T15:39:42.904033",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
