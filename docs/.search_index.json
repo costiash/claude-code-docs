@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-01T01:04:31Z",
+  "generated_at": "2026-05-01T04:40:10Z",
   "indexed_files": 1189,
   "index": {
     "/changelog": {
@@ -11,8 +11,8 @@
         "when",
         "added",
         "now",
-        "improved",
         "claude",
+        "improved",
         "tool",
         "mode",
         "instead",
@@ -25,10 +25,10 @@
         "commands",
         "command",
         "prompt",
-        "bash",
-        "file"
+        "file",
+        "bash"
       ],
-      "word_count": 39168,
+      "word_count": 39762,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -80,11 +80,11 @@
         "team",
         "daily",
         "sessions",
+        "per",
         "pull",
-        "track",
-        "api"
+        "track"
       ],
-      "word_count": 1580,
+      "word_count": 1590,
       "file_path": "docs/claude-code__analytics.md"
     },
     "/claude-code/checkpointing": {
@@ -152,23 +152,23 @@
         "mode",
         "prompt",
         "see",
-        "default",
-        "only",
         "code",
         "interactive",
-        "print",
+        "default",
+        "only",
         "file",
+        "print",
         "flag",
         "system",
+        "flags",
         "start",
         "name",
         "json",
         "model",
         "mcp",
-        "when",
-        "flags"
+        "when"
       ],
-      "word_count": 2409,
+      "word_count": 2476,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -244,15 +244,15 @@
         "using",
         "retention",
         "must",
-        "see",
         "off",
+        "see",
         "when",
+        "opt",
         "including",
         "model",
-        "opt",
         "set"
       ],
-      "word_count": 1693,
+      "word_count": 1731,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -420,7 +420,7 @@
         "flag",
         "options"
       ],
-      "word_count": 1672,
+      "word_count": 1673,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -448,7 +448,7 @@
         "session",
         "script"
       ],
-      "word_count": 5926,
+      "word_count": 5927,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "prompt",
         "context"
       ],
-      "word_count": 17705,
+      "word_count": 17707,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -494,17 +494,17 @@
         "input",
         "background",
         "terminal",
-        "prompt",
         "cursor",
-        "text",
+        "prompt",
         "conversation",
+        "session",
+        "text",
         "search",
         "word",
         "normal",
-        "session",
         "previous"
       ],
-      "word_count": 3134,
+      "word_count": 3143,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -571,24 +571,24 @@
         "code",
         "api",
         "litellm",
-        "through",
         "gateway",
+        "through",
         "model",
-        "endpoint",
         "request",
-        "configuration",
-        "headers",
-        "using",
-        "key",
-        "must",
+        "endpoint",
         "format",
         "anthropic",
+        "headers",
+        "configuration",
+        "using",
         "pass",
+        "key",
+        "must",
+        "when",
         "documentation",
-        "llm",
-        "authentication"
+        "llm"
       ],
-      "word_count": 768,
+      "word_count": 944,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
@@ -680,8 +680,8 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Model configura...",
       "keywords": [
         "model",
-        "opus",
         "when",
+        "opus",
         "set",
         "claude",
         "code",
@@ -692,15 +692,15 @@
         "settings",
         "context",
         "default",
-        "name",
         "picker",
+        "name",
         "models",
         "version",
         "variables",
         "setting",
         "uses"
       ],
-      "word_count": 3400,
+      "word_count": 3431,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -728,7 +728,7 @@
         "error",
         "only"
       ],
-      "word_count": 6538,
+      "word_count": 6565,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1008,7 +1008,7 @@
         "user",
         "example"
       ],
-      "word_count": 7926,
+      "word_count": 7986,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1026,17 +1026,17 @@
         "wsl",
         "tabs",
         "run",
-        "version",
-        "package",
         "installation",
+        "version",
         "see",
+        "package",
         "updates",
         "native",
         "git",
         "step",
         "channel"
       ],
-      "word_count": 2825,
+      "word_count": 2855,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1120,7 +1120,7 @@
         "hooks",
         "task"
       ],
-      "word_count": 7397,
+      "word_count": 7416,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1128,27 +1128,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Configure your terminal for Claude Code  > Fix Shift+Enter for newlines, get a terminal bell when Claude finishes,",
       "keywords": [
         "terminal",
-        "claude",
         "code",
+        "claude",
         "mode",
         "enter",
         "option",
         "notification",
         "theme",
         "color",
+        "settings",
         "file",
         "when",
         "tmux",
         "key",
-        "settings",
         "shift",
         "such",
         "background",
         "text",
         "vim",
-        "run"
+        "instead"
       ],
-      "word_count": 2386,
+      "word_count": 2410,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
