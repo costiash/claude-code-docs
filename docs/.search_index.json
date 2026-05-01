@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-01T15:39:45Z",
-  "indexed_files": 1188,
+  "generated_at": "2026-05-01T18:41:32Z",
+  "indexed_files": 1189,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -18026,6 +18026,34 @@
       ],
       "word_count": 300,
       "file_path": "docs/docs__en__api__java__beta__skills__versions__retrieve.md"
+    },
+    "/docs/en/api/java/beta/user_profiles": {
+      "title": "User Profiles",
+      "content_preview": "# User Profiles  ## Create  `BetaUserProfile beta().userProfiles().create(UserProfileCreateParamsparams = UserProfileCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`  **post...",
+      "keywords": [
+        "user",
+        "profile",
+        "grant",
+        "key",
+        "timestamp",
+        "rfc",
+        "format",
+        "trust",
+        "identifier",
+        "unique",
+        "keys",
+        "chars",
+        "maximum",
+        "values",
+        "beta",
+        "value",
+        "object",
+        "type",
+        "always",
+        "platform"
+      ],
+      "word_count": 1391,
+      "file_path": "docs/docs__en__api__java__beta__user_profiles.md"
     },
     "/docs/en/api/java/beta/user_profiles/create": {
       "title": "Untitled",
