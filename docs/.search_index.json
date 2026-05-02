@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-02T15:31:29Z",
+  "generated_at": "2026-05-02T18:35:17Z",
   "indexed_files": 1144,
   "index": {
     "/changelog": {
@@ -179,24 +179,24 @@
         "claude",
         "title",
         "code",
-        "session",
-        "when",
-        "tip",
         "steps",
-        "thinking",
-        "worktree",
-        "mode",
-        "sessions",
-        "worktrees",
-        "files",
-        "plan",
-        "default",
-        "specific",
+        "tip",
+        "documentation",
+        "file",
+        "run",
         "ask",
-        "name",
-        "branch"
+        "files",
+        "image",
+        "tasks",
+        "context",
+        "when",
+        "suppose",
+        "need",
+        "directory",
+        "specific",
+        "tips"
       ],
-      "word_count": 5587,
+      "word_count": 2284,
       "file_path": "docs/claude-code__common-workflows.md"
     },
     "/claude-code/costs": {
@@ -325,7 +325,6 @@
         "bedrock",
         "workflow",
         "permissions",
-        "aws",
         "create",
         "vertex",
         "required",
@@ -334,9 +333,10 @@
         "setup",
         "secrets",
         "google",
-        "security"
+        "security",
+        "tip"
       ],
-      "word_count": 3227,
+      "word_count": 3226,
       "file_path": "docs/claude-code__github-actions.md"
     },
     "/claude-code/gitlab-ci-cd": {
@@ -350,9 +350,9 @@
         "job",
         "vertex",
         "api",
-        "aws",
         "variables",
         "project",
+        "amazon",
         "google",
         "provider",
         "oidc",
@@ -404,23 +404,23 @@
         "cli",
         "agent",
         "sdk",
+        "example",
         "session",
         "event",
         "code",
-        "example",
+        "without",
         "tools",
         "bare",
-        "without",
         "string",
         "run",
         "note",
         "prompt",
         "message",
+        "response",
         "json",
-        "flag",
-        "options"
+        "flag"
       ],
-      "word_count": 1673,
+      "word_count": 1862,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -434,8 +434,8 @@
         "tool",
         "code",
         "event",
-        "command",
         "see",
+        "command",
         "json",
         "file",
         "call",
@@ -443,12 +443,12 @@
         "input",
         "example",
         "run",
-        "exit",
         "only",
-        "session",
-        "script"
+        "exit",
+        "prompt",
+        "session"
       ],
-      "word_count": 5927,
+      "word_count": 6047,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -681,26 +681,26 @@
       "keywords": [
         "model",
         "when",
-        "opus",
         "set",
+        "opus",
         "claude",
         "code",
         "effort",
         "level",
+        "settings",
         "sonnet",
         "environment",
-        "settings",
-        "context",
         "default",
+        "context",
+        "thinking",
         "picker",
-        "name",
         "models",
+        "name",
+        "reasoning",
         "version",
-        "variables",
-        "setting",
-        "uses"
+        "variables"
       ],
-      "word_count": 3431,
+      "word_count": 3638,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -812,7 +812,7 @@
         "size",
         "terminal"
       ],
-      "word_count": 4283,
+      "word_count": 4282,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -1008,7 +1008,7 @@
         "user",
         "example"
       ],
-      "word_count": 7986,
+      "word_count": 7974,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1047,24 +1047,24 @@
         "claude",
         "skills",
         "when",
-        "files",
-        "content",
-        "name",
         "commands",
-        "directory",
-        "subagent",
-        "yaml",
+        "name",
         "create",
-        "code",
-        "invoke",
-        "reference",
-        "see",
+        "subagent",
+        "bundled",
+        "arguments",
+        "theme",
+        "null",
         "description",
-        "file",
-        "context",
-        "session"
+        "tools",
+        "yaml",
+        "content",
+        "reference",
+        "built",
+        "directory",
+        "agent"
       ],
-      "word_count": 5159,
+      "word_count": 5326,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1215,24 +1215,24 @@
         "claude",
         "open",
         "extension",
+        "tab",
         "new",
         "conversation",
         "see",
         "click",
-        "tab",
         "panel",
         "icon",
+        "cli",
         "prompt",
         "file",
-        "cli",
-        "editor",
         "terminal",
         "session",
+        "editor",
         "settings",
         "step",
-        "windows"
+        "title"
       ],
-      "word_count": 4680,
+      "word_count": 4740,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
