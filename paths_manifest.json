@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-02T15:18:48.414836Z",
-    "total_paths": 1398,
+    "generated_at": "2026-05-02T18:22:11.947586Z",
+    "total_paths": 1399,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-02T15:18:48.414842Z"
+    "last_regenerated": "2026-05-02T18:22:11.947592Z"
   },
   "categories": {
     "core_documentation": [
@@ -90,6 +90,7 @@
       "/docs/en/computer-use",
       "/docs/en/context-window",
       "/docs/en/debug-your-config",
+      "/docs/en/deep-links",
       "/docs/en/desktop-quickstart",
       "/docs/en/desktop-scheduled-tasks",
       "/docs/en/discover-plugins",
