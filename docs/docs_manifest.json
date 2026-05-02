@@ -6483,8 +6483,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-02T06:57:21.172991",
-    "fetch_duration_seconds": 778.230936,
+    "last_fetch_completed": "2026-05-02T09:41:23.241892",
+    "fetch_duration_seconds": 774.635548,
     "total_pages_discovered": 1398,
     "pages_fetched_successfully": 1080,
     "pages_failed": 319,
@@ -6814,7 +6814,7 @@
     "total_files": 1080,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-02T06:57:21.173011",
+  "last_updated": "2026-05-02T09:41:23.241917",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
