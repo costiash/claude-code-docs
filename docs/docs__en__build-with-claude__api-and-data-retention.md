@@ -32,6 +32,7 @@ In the [feature eligibility table](#feature-eligibility), some features are mark
 **What ZDR does NOT cover**
 
 - **Console and Workbench:** Any usage on Console or Workbench
+- **Claude Managed Agents:** Claude Managed Agents is a stateful resource. You can delete session transcripts, but there is no automatic deletion.
 - **Claude consumer products:** Claude Free, Pro, or Max plans, including when customers on those plans use Claude's web, desktop, or mobile apps or Claude Code
 - **Claude Teams and Claude Enterprise:** Claude Teams and Claude Enterprise product interfaces are **not ZDR-eligible**, except for Claude Code when used through Claude Enterprise with ZDR enabled for the organization. For other product interfaces, only Commercial organization API keys are eligible for ZDR.
 - **Third-party integrations:** Data processed by third-party websites, tools, or other integrations is **not ZDR-eligible**, though some may have similar offerings. When using external services in conjunction with the Claude API, make sure to review those services' data handling practices.
