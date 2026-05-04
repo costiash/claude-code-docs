@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-04T12:53:20Z",
+  "generated_at": "2026-05-04T15:57:41Z",
   "indexed_files": 1144,
   "index": {
     "/changelog": {
@@ -709,8 +709,8 @@
       "keywords": [
         "when",
         "attributes",
-        "event",
         "tool",
+        "event",
         "events",
         "request",
         "code",
@@ -719,16 +719,16 @@
         "claude",
         "api",
         "standard",
-        "prompt",
         "session",
+        "prompt",
         "counter",
         "such",
         "example",
+        "user",
         "default",
-        "error",
-        "only"
+        "error"
       ],
-      "word_count": 6565,
+      "word_count": 6737,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1128,27 +1128,27 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Configure your terminal for Claude Code  > Fix Shift+Enter for newlines, get a terminal bell when Claude finishes,",
       "keywords": [
         "terminal",
-        "code",
         "claude",
+        "code",
         "mode",
         "enter",
+        "color",
         "option",
         "notification",
         "theme",
-        "color",
+        "background",
+        "when",
         "settings",
         "file",
-        "when",
         "tmux",
         "key",
+        "token",
         "shift",
         "such",
-        "background",
         "text",
-        "vim",
-        "instead"
+        "vim"
       ],
-      "word_count": 2410,
+      "word_count": 2608,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
