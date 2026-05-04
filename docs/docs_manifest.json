@@ -426,6 +426,18 @@
       "hash": "44659e11a9840097ebe2a41b1b8712ff2821d92451939c28c48a84302a3ea7e2",
       "last_updated": "2026-04-25T00:40:19.864436"
     },
+    "docs__en__api__authentication__overview.md": {
+      "original_url": "https://platform.claude.com/docs/en/api/authentication/overview",
+      "original_md_url": "https://platform.claude.com/docs/en/api/authentication/overview.md",
+      "hash": "161e09772f239ab67cd7706421544902ff62c122e2df854fac9c89b35bd5f2ab",
+      "last_updated": "2026-05-04T18:38:38.942640"
+    },
+    "docs__en__api__authentication__wif-reference.md": {
+      "original_url": "https://platform.claude.com/docs/en/api/authentication/wif-reference",
+      "original_md_url": "https://platform.claude.com/docs/en/api/authentication/wif-reference.md",
+      "hash": "81a7380a786ceb2cec20ed90788a48d95c856df8bdd5cc537179dc230d28d863",
+      "last_updated": "2026-05-04T18:38:39.623983"
+    },
     "docs__en__api__beta.md": {
       "original_url": "https://platform.claude.com/docs/en/api/beta",
       "original_md_url": "https://platform.claude.com/docs/en/api/beta.md",
@@ -6084,11 +6096,53 @@
       "hash": "789a5b8cc6b59c48d8e1f1da71c8e8f97ef29e97864da7ff57353c92f18bafa8",
       "last_updated": "2026-04-23T21:30:58.305546"
     },
+    "docs__en__build-with-claude__wif-providers__aws.md": {
+      "original_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/aws",
+      "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/aws.md",
+      "hash": "91ed164a82d672e3140798f262971b6b5c6381355d6ea2720153d9a8446c53ed",
+      "last_updated": "2026-05-04T18:50:38.672773"
+    },
+    "docs__en__build-with-claude__wif-providers__azure.md": {
+      "original_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/azure",
+      "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/azure.md",
+      "hash": "a1b2ce07379b2756d31850b8b356c03aeaa14fe1f3c5c0d1a16a66b905e96e64",
+      "last_updated": "2026-05-04T18:50:39.366320"
+    },
+    "docs__en__build-with-claude__wif-providers__gcp.md": {
+      "original_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/gcp",
+      "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/gcp.md",
+      "hash": "8a8c97abad9ed42487511bb6f44e830d8a7140f9a6d0d45a1293254aa0c10bb5",
+      "last_updated": "2026-05-04T18:50:39.947224"
+    },
+    "docs__en__build-with-claude__wif-providers__github-actions.md": {
+      "original_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/github-actions",
+      "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/github-actions.md",
+      "hash": "a0466578165c55a5daf8e8b8c70a279a3e27a0f64533e753d7a49fd18f559447",
+      "last_updated": "2026-05-04T18:50:40.527841"
+    },
+    "docs__en__build-with-claude__wif-providers__kubernetes.md": {
+      "original_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/kubernetes",
+      "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/kubernetes.md",
+      "hash": "4fabe392877f2c243b976f0e6bd382a75ccdbfe0b6eb4210498212a6ebaac7c9",
+      "last_updated": "2026-05-04T18:50:41.143851"
+    },
+    "docs__en__build-with-claude__wif-providers__okta.md": {
+      "original_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/okta",
+      "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/wif-providers/okta.md",
+      "hash": "32470509b49e76ec687086109402ded93302563792202700df534cc783788026",
+      "last_updated": "2026-05-04T18:50:41.823998"
+    },
     "docs__en__build-with-claude__working-with-messages.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/working-with-messages",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/working-with-messages.md",
       "hash": "c26ad950fce49fcabcda345d44ee8fc1f2cd536be0cf10e1910a020d9d2d7e18",
       "last_updated": "2026-04-17T00:52:41.518415"
+    },
+    "docs__en__build-with-claude__workload-identity-federation.md": {
+      "original_url": "https://platform.claude.com/docs/en/build-with-claude/workload-identity-federation",
+      "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/workload-identity-federation.md",
+      "hash": "784e4dd534639cdd6820ffbf559d82f51b5ac217bf5c73add9cc941c54b29f1f",
+      "last_updated": "2026-05-04T18:50:43.107252"
     },
     "docs__en__build-with-claude__workspaces.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/workspaces",
@@ -6483,10 +6537,10 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-04T15:57:38.985185",
-    "fetch_duration_seconds": 787.598323,
-    "total_pages_discovered": 1399,
-    "pages_fetched_successfully": 1080,
+    "last_fetch_completed": "2026-05-04T18:51:39.113078",
+    "fetch_duration_seconds": 837.4695,
+    "total_pages_discovered": 1408,
+    "pages_fetched_successfully": 1089,
     "pages_failed": 320,
     "failed_pages": [
       "/docs/en/admin-setup",
@@ -6812,10 +6866,10 @@
     ],
     "sitemap_url": "https://platform.claude.com/sitemap.xml",
     "base_url": "https://platform.claude.com",
-    "total_files": 1080,
+    "total_files": 1089,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-04T15:57:38.985210",
+  "last_updated": "2026-05-04T18:51:39.113114",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
