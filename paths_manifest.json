@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-04T15:44:31.686610Z",
-    "total_paths": 1399,
+    "generated_at": "2026-05-04T18:37:42.256004Z",
+    "total_paths": 1408,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-04T15:44:31.686616Z"
+    "last_regenerated": "2026-05-04T18:37:42.256010Z"
   },
   "categories": {
     "core_documentation": [
@@ -76,7 +76,14 @@
       "/docs/en/build-with-claude/token-counting",
       "/docs/en/build-with-claude/usage-cost-api",
       "/docs/en/build-with-claude/vision",
+      "/docs/en/build-with-claude/wif-providers/aws",
+      "/docs/en/build-with-claude/wif-providers/azure",
+      "/docs/en/build-with-claude/wif-providers/gcp",
+      "/docs/en/build-with-claude/wif-providers/github-actions",
+      "/docs/en/build-with-claude/wif-providers/kubernetes",
+      "/docs/en/build-with-claude/wif-providers/okta",
       "/docs/en/build-with-claude/working-with-messages",
+      "/docs/en/build-with-claude/workload-identity-federation",
       "/docs/en/build-with-claude/workspaces",
       "/docs/en/champion-kit",
       "/docs/en/changelog",
@@ -215,6 +222,8 @@
       "/docs/en/api/admin/workspaces/rate_limits/list",
       "/docs/en/api/admin/workspaces/retrieve",
       "/docs/en/api/admin/workspaces/update",
+      "/docs/en/api/authentication/overview",
+      "/docs/en/api/authentication/wif-reference",
       "/docs/en/api/beta",
       "/docs/en/api/beta/agents",
       "/docs/en/api/beta/agents/archive",
