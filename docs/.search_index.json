@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-04T18:51:41Z",
+  "generated_at": "2026-05-04T21:39:59Z",
   "indexed_files": 1153,
   "index": {
     "/changelog": {
@@ -448,7 +448,7 @@
         "prompt",
         "session"
       ],
-      "word_count": 6073,
+      "word_count": 6096,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -467,16 +467,16 @@
         "fields",
         "file",
         "event",
+        "command",
         "only",
         "user",
-        "command",
         "output",
         "session",
         "runs",
         "prompt",
         "context"
       ],
-      "word_count": 17784,
+      "word_count": 17848,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
