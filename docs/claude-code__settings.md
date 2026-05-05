@@ -171,6 +171,7 @@ The published schema is updated periodically and may not include settings added 
 | `apiKeyHelper`                    | Custom script, to be executed in `/bin/sh`, to generate an auth value. This value will be sent as `X-Api-Key` and `Authorization: Bearer` headers for model requests                                                                                                                                                                                                                                                                                                                                                         | `/bin/generate_temp_api_key.sh`                                                                                                |
 | `attribution`                     | Customize attribution for git commits and pull requests. See [Attribution settings](#attribution-settings)                                                                                                                                                                                                                                                                                                                                                                                                                   | `{"commit": "🤖 Generated with Claude Code", "pr": ""}`                                                                        |
 | `autoMemoryDirectory`             | Custom directory for [auto memory](/en/memory#storage-location) storage. Accepts an absolute path or a `~/`-prefixed path. Accepted from policy and user settings, and from the `--settings` flag. Not accepted from project or local settings, since a cloned repository could supply either file to redirect memory writes to sensitive locations                                                                                                                                                                          | `"~/my-memory-dir"`                                                                                                            |
+| `autoMemoryEnabled`               | Enable [auto memory](/en/memory#enable-or-disable-auto-memory). When `false`, Claude does not read from or write to the auto memory directory. Default: `true`. You can also toggle this with `/memory` during a session                                                                                                                                                                                                                                                                                                     | `false`                                                                                                                        |
 | `autoMode`                        | Customize what the [auto mode](/en/permission-modes#eliminate-prompts-with-auto-mode) classifier blocks and allows. Contains `environment`, `allow`, and `soft_deny` arrays of prose rules. Include the literal string `"$defaults"` in an array to inherit the built-in rules at that position. See [Configure auto mode](/en/auto-mode-config). Not read from shared project settings                                                                                                                                      | `{"soft_deny": ["$defaults", "Never run terraform apply"]}`                                                                    |
 | `autoScrollEnabled`               | In [fullscreen rendering](/en/fullscreen), follow new output to the bottom of the conversation. Default: `true`. Appears in `/config` as **Auto-scroll**. Permission prompts still scroll into view when this is off                                                                                                                                                                                                                                                                                                         | `false`                                                                                                                        |
 | `autoUpdatesChannel`              | Release channel to follow for updates. Use `"stable"` for a version that is typically about one week old and skips versions with major regressions, or `"latest"` (default) for the most recent release                                                                                                                                                                                                                                                                                                                      | `"stable"`                                                                                                                     |
@@ -556,8 +557,10 @@ Plugin-related settings in `settings.json`:
   },
   "extraKnownMarketplaces": {
     "acme-tools": {
-      "source": "github",
-      "repo": "acme-corp/claude-plugins"
+      "source": {
+        "source": "github",
+        "repo": "acme-corp/claude-plugins"
+      }
     }
   }
 }
@@ -671,7 +674,7 @@ Use `source: 'settings'` to declare a small set of plugins inline without settin
 * Only available in managed settings (`managed-settings.json`)
 * Cannot be overridden by user or project settings (highest precedence)
 * Enforced BEFORE network/filesystem operations (blocked sources never execute)
-* Uses exact matching for source specifications (including `ref`, `path` for git sources), except `hostPattern`, which uses regex matching
+* Uses exact matching for source specifications (including `ref`, `path` for git sources), except `hostPattern` and `pathPattern`, which use regex matching
 
 **Allowlist behavior**:
 
@@ -681,7 +684,7 @@ Use `source: 'settings'` to declare a small set of plugins inline without settin
 
 **All supported source types**:
 
-The allowlist supports multiple marketplace source types. Most sources use exact matching, while `hostPattern` uses regex matching against the marketplace host.
+The allowlist supports multiple marketplace source types. Most sources use exact matching, while `hostPattern` and `pathPattern` use regex matching against the marketplace host and filesystem path respectively.
 
 1. **GitHub repositories**:
 
@@ -760,6 +763,17 @@ Host extraction by source type:
 * `git`: extracts hostname from the URL (supports both HTTPS and SSH formats)
 * `url`: extracts hostname from the URL
 * `npm`, `file`, `directory`: not supported for host pattern matching
+
+8. **Path pattern matching**:
+
+```json theme={null}
+{ "source": "pathPattern", "pathPattern": "^/opt/approved/" }
+{ "source": "pathPattern", "pathPattern": ".*" }
+```
+
+Fields: `pathPattern` (required: regex pattern matched against the `path` field of `file` and `directory` sources)
+
+Use path pattern matching to allow filesystem-based marketplaces alongside `hostPattern` restrictions for network sources. Set `".*"` to allow all local paths, or a narrower pattern to restrict to specific directories.
 
 **Configuration examples**:
 

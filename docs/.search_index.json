@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-05T18:49:01Z",
+  "generated_at": "2026-05-05T21:38:53Z",
   "indexed_files": 1153,
   "index": {
     "/changelog": {
@@ -125,8 +125,8 @@
         "cloud",
         "org",
         "sessions",
-        "github",
         "environment",
+        "github",
         "www",
         "code",
         "access",
@@ -140,7 +140,7 @@
         "repo",
         "terminal"
       ],
-      "word_count": 5967,
+      "word_count": 6013,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -280,7 +280,7 @@
         "see",
         "terminal"
       ],
-      "word_count": 7995,
+      "word_count": 8063,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -465,8 +465,8 @@
         "field",
         "json",
         "fields",
-        "file",
         "event",
+        "file",
         "command",
         "only",
         "output",
@@ -476,7 +476,7 @@
         "prompt",
         "context"
       ],
-      "word_count": 17851,
+      "word_count": 17855,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -504,7 +504,7 @@
         "normal",
         "previous"
       ],
-      "word_count": 3143,
+      "word_count": 3149,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -738,25 +738,25 @@
         "claude",
         "code",
         "authentication",
-        "enterprise",
         "environment",
-        "note",
+        "enterprise",
         "proxy",
         "certificate",
         "variables",
+        "note",
+        "configuration",
         "store",
         "trust",
-        "configuration",
-        "native",
-        "set",
         "access",
         "anthropic",
         "network",
         "custom",
         "security",
-        "system"
+        "set",
+        "native",
+        "github"
       ],
-      "word_count": 763,
+      "word_count": 744,
       "file_path": "docs/claude-code__network-config.md"
     },
     "/claude-code/output-styles": {
@@ -840,7 +840,7 @@
         "sources",
         "path"
       ],
-      "word_count": 5983,
+      "word_count": 5991,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -962,10 +962,11 @@
         "code",
         "claude",
         "security",
-        "permission",
         "commands",
+        "permission",
         "approval",
         "access",
+        "bash",
         "mcp",
         "permissions",
         "when",
@@ -977,10 +978,9 @@
         "trust",
         "users",
         "control",
-        "bash",
-        "web"
+        "working"
       ],
-      "word_count": 1220,
+      "word_count": 1240,
       "file_path": "docs/claude-code__security.md"
     },
     "/claude-code/settings": {
@@ -993,9 +993,9 @@
         "managed",
         "plugins",
         "claude",
-        "acme",
         "theme",
         "null",
+        "acme",
         "code",
         "corp",
         "tools",
@@ -1008,7 +1008,7 @@
         "user",
         "example"
       ],
-      "word_count": 8128,
+      "word_count": 8238,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
