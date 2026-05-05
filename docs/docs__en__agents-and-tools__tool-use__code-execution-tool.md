@@ -611,7 +611,7 @@ public class CodeExecutionWithFiles {
 }
 ```
 
-```php PHP hidelines={1..3,5} nocheck
+```php PHP hidelines={1..3} nocheck
 <?php
 
 use Anthropic\Client;
@@ -1055,8 +1055,8 @@ function extractFileIds(BetaMessage $response): array
 }
 
 foreach (extractFileIds($response) as $fileId) {
-    $fileMetadata = $client->beta->files->retrieveMetadata(fileID: $fileId);
-    $fileContent = $client->beta->files->download(fileID: $fileId);
+    $fileMetadata = $client->beta->files->retrieveMetadata($fileId);
+    $fileContent = $client->beta->files->download($fileId);
 
     file_put_contents($fileMetadata->filename, $fileContent);
     echo "Downloaded: {$fileMetadata->filename}\n";

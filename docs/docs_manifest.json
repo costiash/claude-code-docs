@@ -57,8 +57,8 @@
     "docs__en__agents-and-tools__tool-use__code-execution-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool",
       "original_md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool.md",
-      "hash": "0ae6f797ee084ea1bbd35cdeed3b58f259d93b5eca088406714f80ba5affed47",
-      "last_updated": "2026-04-28T00:46:50.896080"
+      "hash": "95b02e17bfabbb6d99fb6da54f5347cdb6f438679d2fa756e33c144929a06347",
+      "last_updated": "2026-05-05T18:36:15.539501"
     },
     "docs__en__agents-and-tools__tool-use__computer-use-tool.md": {
       "original_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
@@ -6009,8 +6009,8 @@
     "docs__en__build-with-claude__files.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/files",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/files.md",
-      "hash": "dacd285bb29c6030bd0016975b707994ad0ee2b3378348594e5e0fafd1d40c50",
-      "last_updated": "2026-04-23T21:30:48.507001"
+      "hash": "e982ac8d1e0bc591b5402cc1c5a77de08970ac043cbb1016874deb8933e68b97",
+      "last_updated": "2026-05-05T18:47:51.863463"
     },
     "docs__en__build-with-claude__handling-stop-reasons.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons",
@@ -6057,8 +6057,8 @@
     "docs__en__build-with-claude__skills-guide.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/skills-guide",
       "original_md_url": "https://platform.claude.com/docs/en/build-with-claude/skills-guide.md",
-      "hash": "8feadbbf7dbd7119d7ddc5f201955a7f51baab3be7588d4ed2bab7042716a3cf",
-      "last_updated": "2026-04-23T21:30:54.574230"
+      "hash": "5a7eb965b7770b2f09b604cf02788be803364b10854bfb108465777906b90cc7",
+      "last_updated": "2026-05-05T18:47:56.805621"
     },
     "docs__en__build-with-claude__streaming.md": {
       "original_url": "https://platform.claude.com/docs/en/build-with-claude/streaming",
@@ -6291,8 +6291,8 @@
     "docs__en__managed-agents__define-outcomes.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/define-outcomes",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/define-outcomes.md",
-      "hash": "03fe519bcede880395bfcabce34b55a5be72284da54794f8271be2be806f3e81",
-      "last_updated": "2026-04-17T00:53:00.635512"
+      "hash": "9d331a4614d7d50ab2d64197f6050ad44fd6d2dbe054a34d4c4a7b577dde0b32",
+      "last_updated": "2026-05-05T18:48:28.224831"
     },
     "docs__en__managed-agents__environments.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/environments",
@@ -6309,8 +6309,8 @@
     "docs__en__managed-agents__files.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/files",
       "original_md_url": "https://platform.claude.com/docs/en/managed-agents/files.md",
-      "hash": "5f1ffdd866eeb2f5e05003936a63515850142dd145b48c02dd2ced643eaa69ff",
-      "last_updated": "2026-04-14T18:40:37.793393"
+      "hash": "f1b5079e4b040693b6d63225098a13046a629a54449d843facb867cb07501ca8",
+      "last_updated": "2026-05-05T18:48:30.076278"
     },
     "docs__en__managed-agents__github.md": {
       "original_url": "https://platform.claude.com/docs/en/managed-agents/github",
@@ -6537,8 +6537,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-05T15:54:01.217575",
-    "fetch_duration_seconds": 841.32993,
+    "last_fetch_completed": "2026-05-05T18:48:58.557977",
+    "fetch_duration_seconds": 781.273366,
     "total_pages_discovered": 1408,
     "pages_fetched_successfully": 1089,
     "pages_failed": 320,
@@ -6869,7 +6869,7 @@
     "total_files": 1089,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-05T15:54:01.217592",
+  "last_updated": "2026-05-05T18:48:58.557998",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

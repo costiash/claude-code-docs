@@ -124,8 +124,10 @@ Pass the rubric as inline text on `user.define_outcome` (shown in the next secti
   IO.println("Uploaded rubric: " + rubric.id());
   ```
   ```php PHP
+  use Anthropic\Core\FileParam;
+
   $rubric = $client->beta->files->upload(
-      file: fopen('/path/to/pr_review_rubric.md', 'r'),
+      file: FileParam::fromResource(fopen('/path/to/pr_review_rubric.md', 'r')),
   );
   echo "Uploaded rubric: {$rubric->id}\n";
   ```

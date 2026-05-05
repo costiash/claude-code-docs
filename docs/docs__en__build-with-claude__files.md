@@ -111,21 +111,13 @@ FileMetadata file = client.beta().files().upload(
 System.out.println(file.id());
 ````
 
-```php PHP nocheck hidelines={1..4}
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(
-    apiKey: getenv("ANTHROPIC_API_KEY")
-);
-
+````php
 $file = $client->beta->files->upload(
-    file: fopen('/path/to/document.pdf', 'r'),
+    FileParam::fromResource(fopen('/path/to/document.pdf', 'rb'), contentType: 'application/pdf'),
 );
 
 echo $file->id;
-```
+````
 
 ````ruby
 file = client.beta.files.upload(
@@ -873,9 +865,7 @@ System.out.println(metadata);
 ````
 
 ````php
-$file = $client->beta->files->retrieveMetadata(
-    fileID: $fileId,
-);
+$file = $client->beta->files->retrieveMetadata($fileId);
 echo $file;
 ````
 
@@ -932,9 +922,7 @@ client.beta().files().delete(fileId);
 ````
 
 ````php
-$result = $client->beta->files->delete(
-    fileID: $fileId,
-);
+$result = $client->beta->files->delete($fileId);
 ````
 
 ````ruby
@@ -1014,19 +1002,11 @@ try (HttpResponse response = client.beta().files().download(fileId)) {
 }
 ````
 
-```php PHP hidelines={1..4} nocheck
-<?php
-
-use Anthropic\Client;
-
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
-
-$fileContent = $client->beta->files->download(
-    fileID: 'file_011CNha8iCJcU1wXNR6q4V8w',
-);
+````php
+$fileContent = $client->beta->files->download($fileId);
 
 file_put_contents("downloaded_file.txt", $fileContent);
-```
+````
 
 ````ruby
 file_content = client.beta.files.download(file_id)

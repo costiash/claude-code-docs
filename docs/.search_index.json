@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-05T15:54:03Z",
+  "generated_at": "2026-05-05T18:49:01Z",
   "indexed_files": 1153,
   "index": {
     "/changelog": {
@@ -1512,7 +1512,7 @@
         "available",
         "operations"
       ],
-      "word_count": 5553,
+      "word_count": 5551,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -28927,25 +28927,25 @@
         "files",
         "api",
         "file",
+        "codegroup",
+        "content",
         "note",
         "claude",
-        "models",
-        "messages",
-        "codegroup",
-        "upload",
-        "uploading",
-        "using",
         "code",
         "execution",
         "tool",
+        "images",
         "supported",
+        "models",
+        "types",
+        "text",
+        "upload",
         "download",
-        "calls",
-        "reference",
-        "beta",
-        "feature"
+        "messages",
+        "type",
+        "blocks"
       ],
-      "word_count": 2765,
+      "word_count": 2733,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -29149,16 +29149,14 @@
       "content_preview": "# Using Agent Skills with the API  Learn how to use Agent Skills to extend Claude's capabilities through the API.  ---  Agent Skills extend Claude's capabilities through organized folders of instructi...",
       "keywords": [
         "skills",
-        "api",
         "codegroup",
+        "api",
         "skill",
-        "tab",
-        "title",
         "custom",
-        "note",
         "execution",
         "files",
         "code",
+        "note",
         "agent",
         "card",
         "create",
@@ -29166,10 +29164,12 @@
         "request",
         "data",
         "container",
-        "file",
-        "using"
+        "using",
+        "reference",
+        "anthropic",
+        "when"
       ],
-      "word_count": 12925,
+      "word_count": 12830,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
@@ -29757,7 +29757,7 @@
         "new",
         "one"
       ],
-      "word_count": 2173,
+      "word_count": 2175,
       "file_path": "docs/docs__en__managed-agents__define-outcomes.md"
     },
     "/docs/en/managed-agents/environments": {
@@ -29841,7 +29841,7 @@
         "automatically",
         "path"
       ],
-      "word_count": 1791,
+      "word_count": 1766,
       "file_path": "docs/docs__en__managed-agents__files.md"
     },
     "/docs/en/managed-agents/github": {
