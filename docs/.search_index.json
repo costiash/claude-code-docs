@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-04T21:39:59Z",
+  "generated_at": "2026-05-05T00:57:24Z",
   "indexed_files": 1153,
   "index": {
     "/changelog": {
@@ -19,16 +19,16 @@
         "session",
         "sessions",
         "code",
-        "after",
         "being",
+        "after",
         "mcp",
         "commands",
         "command",
         "prompt",
-        "file",
-        "bash"
+        "bash",
+        "file"
       ],
-      "word_count": 39762,
+      "word_count": 40417,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -476,7 +476,7 @@
         "prompt",
         "context"
       ],
-      "word_count": 17848,
+      "word_count": 17844,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -1115,12 +1115,12 @@
         "only",
         "same",
         "model",
+        "hooks",
         "fork",
         "run",
-        "hooks",
         "task"
       ],
-      "word_count": 7416,
+      "word_count": 7549,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1232,7 +1232,7 @@
         "step",
         "title"
       ],
-      "word_count": 4740,
+      "word_count": 4823,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
