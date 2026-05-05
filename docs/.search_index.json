@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-05T12:44:47Z",
+  "generated_at": "2026-05-05T15:54:03Z",
   "indexed_files": 1153,
   "index": {
     "/changelog": {
@@ -168,7 +168,7 @@
         "mcp",
         "when"
       ],
-      "word_count": 2476,
+      "word_count": 2480,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -236,23 +236,23 @@
         "code",
         "default",
         "session",
-        "api",
         "anthropic",
+        "api",
         "users",
         "disable",
         "settings",
-        "using",
         "retention",
         "must",
         "off",
         "see",
+        "using",
         "when",
         "opt",
         "including",
         "model",
         "set"
       ],
-      "word_count": 1731,
+      "word_count": 1714,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -401,26 +401,26 @@
       "keywords": [
         "claude",
         "mode",
+        "code",
         "cli",
         "agent",
         "sdk",
         "example",
         "session",
         "event",
-        "code",
+        "note",
         "without",
         "tools",
+        "prompt",
         "bare",
         "string",
+        "file",
         "run",
-        "note",
-        "prompt",
         "message",
         "response",
-        "json",
-        "flag"
+        "json"
       ],
-      "word_count": 1862,
+      "word_count": 1924,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -469,14 +469,14 @@
         "event",
         "command",
         "only",
-        "user",
         "output",
+        "user",
         "session",
         "runs",
         "prompt",
         "context"
       ],
-      "word_count": 17844,
+      "word_count": 17851,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -601,9 +601,9 @@
         "claude",
         "code",
         "when",
+        "tools",
         "command",
         "step",
-        "tools",
         "url",
         "tool",
         "const",
@@ -612,11 +612,11 @@
         "http",
         "add",
         "set",
+        "configuration",
         "stdio",
-        "example",
-        "configuration"
+        "example"
       ],
-      "word_count": 7458,
+      "word_count": 7563,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -712,23 +712,23 @@
         "tool",
         "event",
         "events",
-        "request",
         "code",
+        "claude",
+        "request",
         "name",
         "metrics",
-        "claude",
         "api",
         "standard",
         "session",
-        "prompt",
-        "counter",
-        "such",
-        "example",
         "user",
-        "default",
+        "prompt",
+        "such",
+        "only",
+        "counter",
+        "example",
         "error"
       ],
-      "word_count": 6737,
+      "word_count": 7480,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -829,8 +829,8 @@
         "see",
         "add",
         "claude",
-        "directory",
         "url",
+        "directory",
         "paths",
         "github",
         "repository",
@@ -840,7 +840,7 @@
         "sources",
         "path"
       ],
-      "word_count": 5937,
+      "word_count": 5983,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -851,24 +851,24 @@
         "when",
         "claude",
         "directory",
-        "server",
         "plugins",
+        "server",
         "code",
-        "default",
         "mcp",
-        "field",
+        "default",
         "version",
+        "field",
         "see",
-        "files",
         "command",
-        "string",
-        "file",
         "lsp",
+        "files",
+        "file",
         "path",
-        "commands",
-        "installed"
+        "string",
+        "servers",
+        "commands"
       ],
-      "word_count": 6082,
+      "word_count": 6174,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -992,8 +992,8 @@
         "json",
         "managed",
         "plugins",
-        "acme",
         "claude",
+        "acme",
         "theme",
         "null",
         "code",
@@ -1008,7 +1008,7 @@
         "user",
         "example"
       ],
-      "word_count": 7988,
+      "word_count": 8128,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1064,7 +1064,7 @@
         "directory",
         "agent"
       ],
-      "word_count": 5326,
+      "word_count": 5371,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1092,7 +1092,7 @@
         "usage",
         "statusline"
       ],
-      "word_count": 5784,
+      "word_count": 5810,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
