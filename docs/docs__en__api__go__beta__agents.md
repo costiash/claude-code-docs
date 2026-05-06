@@ -106,6 +106,10 @@ Create Agent
 
     Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `Multiagent param.Field[BetaManagedAgentsMultiagentParamsResp]`
+
+    Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
   - `Skills param.Field[[]BetaManagedAgentsSkillParamsUnionResp]`
 
     Body param: Skills available to the agent. Maximum 20.
@@ -394,6 +398,8 @@ Create Agent
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
@@ -485,6 +491,26 @@ Create Agent
       - `const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"`
 
       - `const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"`
+
+  - `Multiagent BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `Agents []BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `ID string`
+
+      - `Type BetaManagedAgentsAgentReferenceType`
+
+        - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
+
+      - `Version int64`
+
+    - `Type BetaManagedAgentsMultiagentType`
+
+      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -812,6 +838,8 @@ List Agents
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
@@ -903,6 +931,26 @@ List Agents
       - `const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"`
 
       - `const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"`
+
+  - `Multiagent BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `Agents []BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `ID string`
+
+      - `Type BetaManagedAgentsAgentReferenceType`
+
+        - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
+
+      - `Version int64`
+
+    - `Type BetaManagedAgentsMultiagentType`
+
+      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -1213,6 +1261,8 @@ Get Agent
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
@@ -1304,6 +1354,26 @@ Get Agent
       - `const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"`
 
       - `const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"`
+
+  - `Multiagent BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `Agents []BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `ID string`
+
+      - `Type BetaManagedAgentsAgentReferenceType`
+
+        - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
+
+      - `Version int64`
+
+    - `Type BetaManagedAgentsMultiagentType`
+
+      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -1654,6 +1724,10 @@ Update Agent
 
         - `const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"`
 
+  - `Multiagent param.Field[BetaManagedAgentsMultiagentParamsResp]`
+
+    Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
   - `Name param.Field[string]`
 
     Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
@@ -1946,6 +2020,8 @@ Update Agent
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
@@ -2037,6 +2113,26 @@ Update Agent
       - `const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"`
 
       - `const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"`
+
+  - `Multiagent BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `Agents []BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `ID string`
+
+      - `Type BetaManagedAgentsAgentReferenceType`
+
+        - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
+
+      - `Version int64`
+
+    - `Type BetaManagedAgentsMultiagentType`
+
+      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -2347,6 +2443,8 @@ Archive Agent
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
@@ -2438,6 +2536,26 @@ Archive Agent
       - `const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"`
 
       - `const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"`
+
+  - `Multiagent BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `Agents []BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `ID string`
+
+      - `Type BetaManagedAgentsAgentReferenceType`
+
+        - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
+
+      - `Version int64`
+
+    - `Type BetaManagedAgentsMultiagentType`
+
+      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -2774,6 +2892,26 @@ func main() {
 
       - `const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"`
 
+  - `Multiagent BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `Agents []BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `ID string`
+
+      - `Type BetaManagedAgentsAgentReferenceType`
+
+        - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
+
+      - `Version int64`
+
+    - `Type BetaManagedAgentsMultiagentType`
+
+      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
+
   - `Name string`
 
   - `Skills []BetaManagedAgentsAgentSkillUnion`
@@ -2983,6 +3121,20 @@ func main() {
   - `Version int64`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Beta Managed Agents Agent Reference
+
+- `type BetaManagedAgentsAgentReference struct{…}`
+
+  A resolved agent reference with a concrete version.
+
+  - `ID string`
+
+  - `Type BetaManagedAgentsAgentReferenceType`
+
+    - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
+
+  - `Version int64`
 
 ### Beta Managed Agents Agent Tool Config
 
@@ -3928,6 +4080,78 @@ func main() {
 
     - `const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"`
 
+### Beta Managed Agents Multiagent Coordinator
+
+- `type BetaManagedAgentsMultiagentCoordinator struct{…}`
+
+  Resolved coordinator topology with a concrete agent roster.
+
+  - `Agents []BetaManagedAgentsAgentReference`
+
+    Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+    - `ID string`
+
+    - `Type BetaManagedAgentsAgentReferenceType`
+
+      - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
+
+    - `Version int64`
+
+  - `Type BetaManagedAgentsMultiagentCoordinatorType`
+
+    - `const BetaManagedAgentsMultiagentCoordinatorTypeCoordinator BetaManagedAgentsMultiagentCoordinatorType = "coordinator"`
+
+### Beta Managed Agents Multiagent Coordinator Params
+
+- `type BetaManagedAgentsMultiagentCoordinatorParamsResp struct{…}`
+
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `Agents []BetaManagedAgentsMultiagentRosterEntryParamsUnionResp`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+    - `string`
+
+    - `type BetaManagedAgentsAgentParamsResp struct{…}`
+
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+      - `ID string`
+
+        The `agent` ID.
+
+      - `Type BetaManagedAgentsAgentParamsType`
+
+        - `const BetaManagedAgentsAgentParamsTypeAgent BetaManagedAgentsAgentParamsType = "agent"`
+
+      - `Version int64`
+
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+    - `type BetaManagedAgentsMultiagentSelfParamsResp struct{…}`
+
+      Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+      - `Type BetaManagedAgentsMultiagentSelfParamsType`
+
+        - `const BetaManagedAgentsMultiagentSelfParamsTypeSelf BetaManagedAgentsMultiagentSelfParamsType = "self"`
+
+  - `Type BetaManagedAgentsMultiagentCoordinatorParamsType`
+
+    - `const BetaManagedAgentsMultiagentCoordinatorParamsTypeCoordinator BetaManagedAgentsMultiagentCoordinatorParamsType = "coordinator"`
+
+### Beta Managed Agents Multiagent Self Params
+
+- `type BetaManagedAgentsMultiagentSelfParamsResp struct{…}`
+
+  Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+  - `Type BetaManagedAgentsMultiagentSelfParamsType`
+
+    - `const BetaManagedAgentsMultiagentSelfParamsTypeSelf BetaManagedAgentsMultiagentSelfParamsType = "self"`
+
 ### Beta Managed Agents Skill Params
 
 - `type BetaManagedAgentsSkillParamsUnionResp interface{…}`
@@ -4062,6 +4286,8 @@ List Agent Versions
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
@@ -4153,6 +4379,26 @@ List Agent Versions
       - `const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"`
 
       - `const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"`
+
+  - `Multiagent BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `Agents []BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `ID string`
+
+      - `Type BetaManagedAgentsAgentReferenceType`
+
+        - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
+
+      - `Version int64`
+
+    - `Type BetaManagedAgentsMultiagentType`
+
+      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 

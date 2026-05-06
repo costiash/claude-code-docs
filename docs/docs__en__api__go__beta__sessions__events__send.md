@@ -178,6 +178,10 @@ Send Events
 
         - `const BetaManagedAgentsUserInterruptEventParamsTypeUserInterrupt BetaManagedAgentsUserInterruptEventParamsType = "user.interrupt"`
 
+      - `SessionThreadID string`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
     - `type BetaManagedAgentsUserToolConfirmationEventParamsResp struct{…}`
 
       Parameters for confirming or denying a tool execution request.
@@ -364,6 +368,50 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
+    - `type BetaManagedAgentsUserDefineOutcomeEventParamsResp struct{…}`
+
+      Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Description string`
+
+        What the agent should produce. This is the task specification.
+
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+
+        Rubric for grading the quality of an outcome.
+
+        - `type BetaManagedAgentsFileRubricParamsResp struct{…}`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `FileID string`
+
+            ID of the rubric file.
+
+          - `Type BetaManagedAgentsFileRubricParamsType`
+
+            - `const BetaManagedAgentsFileRubricParamsTypeFile BetaManagedAgentsFileRubricParamsType = "file"`
+
+        - `type BetaManagedAgentsTextRubricParamsResp struct{…}`
+
+          Rubric content provided inline as text.
+
+          - `Content string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+          - `Type BetaManagedAgentsTextRubricParamsType`
+
+            - `const BetaManagedAgentsTextRubricParamsTypeText BetaManagedAgentsTextRubricParamsType = "text"`
+
+      - `Type BetaManagedAgentsUserDefineOutcomeEventParamsType`
+
+        - `const BetaManagedAgentsUserDefineOutcomeEventParamsTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventParamsType = "user.define_outcome"`
+
+      - `MaxIterations int64`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
   - `Betas param.Field[[]AnthropicBeta]`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -417,6 +465,8 @@ Send Events
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -606,6 +656,10 @@ Send Events
 
         A timestamp in RFC 3339 format
 
+      - `SessionThreadID string`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
     - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
 
       A tool confirmation event that approves or denies a pending tool execution.
@@ -637,6 +691,10 @@ Send Events
       - `ProcessedAt Time`
 
         A timestamp in RFC 3339 format
+
+      - `SessionThreadID string`
+
+        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
     - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -807,6 +865,66 @@ Send Events
       - `ProcessedAt Time`
 
         A timestamp in RFC 3339 format
+
+      - `SessionThreadID string`
+
+        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+    - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+
+      Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `ID string`
+
+        Unique identifier for this event.
+
+      - `Description string`
+
+        What the agent should produce. Copied from the input event.
+
+      - `MaxIterations int64`
+
+        Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+      - `OutcomeID string`
+
+        Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+      - `ProcessedAt Time`
+
+        A timestamp in RFC 3339 format
+
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion`
+
+        Rubric for grading the quality of an outcome.
+
+        - `type BetaManagedAgentsFileRubric struct{…}`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `FileID string`
+
+            ID of the rubric file.
+
+          - `Type BetaManagedAgentsFileRubricType`
+
+            - `const BetaManagedAgentsFileRubricTypeFile BetaManagedAgentsFileRubricType = "file"`
+
+        - `type BetaManagedAgentsTextRubric struct{…}`
+
+          Rubric content provided inline as text.
+
+          - `Content string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `Type BetaManagedAgentsTextRubricType`
+
+            - `const BetaManagedAgentsTextRubricTypeText BetaManagedAgentsTextRubricType = "text"`
+
+      - `Type BetaManagedAgentsUserDefineOutcomeEventType`
+
+        - `const BetaManagedAgentsUserDefineOutcomeEventTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventType = "user.define_outcome"`
 
 ### Example
 

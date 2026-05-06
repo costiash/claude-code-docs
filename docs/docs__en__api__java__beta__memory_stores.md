@@ -62,6 +62,8 @@ Create a memory store
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `String name`
 
     Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
@@ -218,6 +220,8 @@ List memory stores
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore:`
@@ -341,6 +345,8 @@ Retrieve a memory store
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore:`
@@ -463,6 +469,8 @@ Update a memory store
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `Optional<String> description`
 
@@ -599,6 +607,8 @@ Delete a memory store
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedMemoryStore:`
@@ -697,6 +707,8 @@ Archive a memory store
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -881,6 +893,8 @@ Create a memory
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `Optional<String> content`
 
     UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
@@ -1057,6 +1071,8 @@ List memories
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryListItem: A class that can be one of several variants.union`
@@ -1210,6 +1226,8 @@ Retrieve a memory
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -1350,6 +1368,8 @@ Update a memory
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `Optional<String> content`
 
@@ -1503,6 +1523,8 @@ Delete a memory
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -1959,6 +1981,8 @@ List memory versions
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryVersion:`
@@ -2186,6 +2210,8 @@ Retrieve a memory version
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryVersion:`
@@ -2412,6 +2438,8 @@ Redact a memory version
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 

@@ -80,6 +80,8 @@ List User Profiles
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaUserProfile struct{…}`
@@ -95,6 +97,16 @@ List User Profiles
   - `Metadata map[string, string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Relationship BetaUserProfileRelationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
+
+    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
+
+    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
 
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
@@ -123,6 +135,10 @@ List User Profiles
   - `ExternalID string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Name string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 

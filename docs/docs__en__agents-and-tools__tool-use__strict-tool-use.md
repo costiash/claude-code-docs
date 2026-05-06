@@ -1176,4 +1176,4 @@ Strict tool use compiles tool `input_schema` definitions into grammars using the
 
 Strict tool use is HIPAA eligible, but **PHI must not be included in tool schema definitions**. The API caches compiled schemas separately from message content, and these cached schemas do not receive the same PHI protections as prompts and responses. Do not include PHI in `input_schema` property names, `enum` values, `const` values, or `pattern` regular expressions. PHI should only appear in message content (prompts and responses), where it is protected under HIPAA safeguards.
 
-For ZDR and HIPAA eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
+For ZDR and HIPAA eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).

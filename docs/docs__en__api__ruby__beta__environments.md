@@ -116,7 +116,7 @@ Create a new environment with the specified configuration.
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -163,6 +163,8 @@ Create a new environment with the specified configuration.
     - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -324,7 +326,7 @@ List environments with pagination support.
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -371,6 +373,8 @@ List environments with pagination support.
     - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -522,7 +526,7 @@ Retrieve a specific environment by ID.
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -569,6 +573,8 @@ Retrieve a specific environment by ID.
     - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -820,7 +826,7 @@ Update an existing environment's configuration.
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -867,6 +873,8 @@ Update an existing environment's configuration.
     - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -1018,7 +1026,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1065,6 +1073,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
     - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -1112,7 +1122,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1159,6 +1169,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
 
 ### Returns
 

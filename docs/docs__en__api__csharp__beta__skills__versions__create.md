@@ -72,6 +72,8 @@ Create Skill Version
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+
 ### Returns
 
 - `class VersionCreateResponse:`

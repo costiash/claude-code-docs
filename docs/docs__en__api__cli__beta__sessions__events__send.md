@@ -26,7 +26,7 @@ Send Events
 
   Events that were successfully sent to the session.
 
-  - `data: optional array of BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or BetaManagedAgentsUserCustomToolResultEvent`
+  - `data: optional array of BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 2 more`
 
     Sent events
 
@@ -192,7 +192,7 @@ Send Events
 
         A timestamp in RFC 3339 format
 
-    - `beta_managed_agents_user_interrupt_event: object { id, type, processed_at }`
+    - `beta_managed_agents_user_interrupt_event: object { id, type, processed_at, session_thread_id }`
 
       An interrupt event that pauses agent execution and returns control to the user.
 
@@ -208,7 +208,11 @@ Send Events
 
         A timestamp in RFC 3339 format
 
-    - `beta_managed_agents_user_tool_confirmation_event: object { id, result, tool_use_id, 3 more }`
+      - `session_thread_id: optional string`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+    - `beta_managed_agents_user_tool_confirmation_event: object { id, result, tool_use_id, 4 more }`
 
       A tool confirmation event that approves or denies a pending tool execution.
 
@@ -240,7 +244,11 @@ Send Events
 
         A timestamp in RFC 3339 format
 
-    - `beta_managed_agents_user_custom_tool_result_event: object { id, custom_tool_use_id, type, 3 more }`
+      - `session_thread_id: optional string`
+
+        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+    - `beta_managed_agents_user_custom_tool_result_event: object { id, custom_tool_use_id, type, 4 more }`
 
       Event sent by the client providing the result of a custom tool execution.
 
@@ -409,6 +417,66 @@ Send Events
       - `processed_at: optional string`
 
         A timestamp in RFC 3339 format
+
+      - `session_thread_id: optional string`
+
+        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+    - `beta_managed_agents_user_define_outcome_event: object { id, description, max_iterations, 4 more }`
+
+      Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `id: string`
+
+        Unique identifier for this event.
+
+      - `description: string`
+
+        What the agent should produce. Copied from the input event.
+
+      - `max_iterations: number`
+
+        Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+      - `outcome_id: string`
+
+        Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+      - `processed_at: string`
+
+        A timestamp in RFC 3339 format
+
+      - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `beta_managed_agents_file_rubric: object { file_id, type }`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: string`
+
+            ID of the rubric file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+        - `beta_managed_agents_text_rubric: object { content, type }`
+
+          Rubric content provided inline as text.
+
+          - `content: string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: "text"`
+
+            - `"text"`
+
+      - `type: "user.define_outcome"`
+
+        - `"user.define_outcome"`
 
 ### Example
 

@@ -745,7 +745,7 @@ The conversion functions throw `UnsupportedMCPValueError` if an MCP value isn't 
 
 The MCP Connector is not covered by ZDR arrangements. Data exchanged with MCP servers, including tool definitions and execution results, is retained according to Anthropic's standard data retention policy.
 
-For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
+For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
 ## Migration guide
 

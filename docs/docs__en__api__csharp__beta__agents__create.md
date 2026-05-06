@@ -138,6 +138,10 @@ Create Agent
 
     Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `BetaManagedAgentsMultiagentParams? multiagent`
+
+    Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
   - `IReadOnlyList<BetaManagedAgentsSkillParams> skills`
 
     Body param: Skills available to the agent. Maximum 20.
@@ -422,6 +426,8 @@ Create Agent
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -505,6 +511,26 @@ Create Agent
       - `"standard"Standard`
 
       - `"fast"Fast`
+
+  - `required BetaManagedAgentsMultiagent? Multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `required IReadOnlyList<BetaManagedAgentsAgentReference> Agents`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `required string ID`
+
+      - `required Type Type`
+
+        - `"agent"Agent`
+
+      - `required Int Version`
+
+    - `required Type Type`
+
+      - `"coordinator"Coordinator`
 
   - `required string Name`
 

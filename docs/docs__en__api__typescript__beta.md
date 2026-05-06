@@ -4,11 +4,11 @@
 
 ### Anthropic Beta
 
-- `AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+- `AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
   - `(string & {})`
 
-  - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+  - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -55,6 +55,8 @@
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Beta API Error
 
@@ -342,7 +344,7 @@ The Models API response can be used to determine which models are available for 
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -389,6 +391,8 @@ The Models API response can be used to determine which models are available for 
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -621,7 +625,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -668,6 +672,8 @@ The Models API response can be used to determine information about a specific mo
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -1533,13 +1539,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: number`
 
                 - `document_title: string | null`
 
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: "content_block_location"`
 
@@ -1563,13 +1579,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: number`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: string`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: string | null`
 
@@ -1747,13 +1777,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                           - `cited_text: string`
 
+                            The full text of the cited block range, concatenated.
+
+                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                           - `document_index: number`
 
                           - `document_title: string | null`
 
                           - `end_block_index: number`
 
+                            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                           - `start_block_index: number`
+
+                            0-based index of the first cited block in the source's `content` array.
 
                           - `type: "content_block_location"`
 
@@ -1777,13 +1817,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                           - `cited_text: string`
 
+                            The full text of the cited block range, concatenated.
+
+                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                           - `end_block_index: number`
 
+                            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                           - `search_result_index: number`
+
+                            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                            Counted separately from `document_index`; server-side web search results are not included in this count.
 
                           - `source: string`
 
                           - `start_block_index: number`
+
+                            0-based index of the first cited block in the source's `content` array.
 
                           - `title: string | null`
 
@@ -1982,13 +2036,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: number`
 
                   - `document_title: string | null`
 
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: "content_block_location"`
 
@@ -2012,13 +2076,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: number`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: string`
 
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: string | null`
 
@@ -2250,13 +2328,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: number`
 
                       - `document_title: string | null`
 
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: "content_block_location"`
 
@@ -2280,13 +2368,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: number`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: string`
 
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: string | null`
 
@@ -2430,13 +2532,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                         - `cited_text: string`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `document_index: number`
 
                         - `document_title: string | null`
 
                         - `end_block_index: number`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `start_block_index: number`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `type: "content_block_location"`
 
@@ -2460,13 +2572,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                         - `cited_text: string`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `end_block_index: number`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `search_result_index: number`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `source: string`
 
                         - `start_block_index: number`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `title: string | null`
 
@@ -2614,13 +2740,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                                 - `cited_text: string`
 
+                                  The full text of the cited block range, concatenated.
+
+                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                 - `document_index: number`
 
                                 - `document_title: string | null`
 
                                 - `end_block_index: number`
 
+                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                 - `start_block_index: number`
+
+                                  0-based index of the first cited block in the source's `content` array.
 
                                 - `type: "content_block_location"`
 
@@ -2644,13 +2780,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                                 - `cited_text: string`
 
+                                  The full text of the cited block range, concatenated.
+
+                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                 - `end_block_index: number`
 
+                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                 - `search_result_index: number`
+
+                                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                                 - `source: string`
 
                                 - `start_block_index: number`
+
+                                  0-based index of the first cited block in the source's `content` array.
 
                                 - `title: string | null`
 
@@ -3126,13 +3276,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                                 - `cited_text: string`
 
+                                  The full text of the cited block range, concatenated.
+
+                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                 - `document_index: number`
 
                                 - `document_title: string | null`
 
                                 - `end_block_index: number`
 
+                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                 - `start_block_index: number`
+
+                                  0-based index of the first cited block in the source's `content` array.
 
                                 - `type: "content_block_location"`
 
@@ -3156,13 +3316,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                                 - `cited_text: string`
 
+                                  The full text of the cited block range, concatenated.
+
+                                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                 - `end_block_index: number`
 
+                                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                 - `search_result_index: number`
+
+                                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                                 - `source: string`
 
                                 - `start_block_index: number`
+
+                                  0-based index of the first cited block in the source's `content` array.
 
                                 - `title: string | null`
 
@@ -3924,13 +4098,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `document_index: number`
 
                     - `document_title: string | null`
 
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `type: "content_block_location"`
 
@@ -3954,13 +4138,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `search_result_index: number`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `source: string`
 
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `title: string | null`
 
@@ -4519,13 +4717,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: number`
 
             - `document_title: string | null`
 
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: "content_block_location"`
 
@@ -4549,13 +4757,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: number`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: string`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: string | null`
 
@@ -6332,7 +6554,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `(string & {})`
 
-      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
         - `"message-batches-2024-09-24"`
 
@@ -6379,6 +6601,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `"user-profiles-2026-03-24"`
 
         - `"advisor-tool-2026-03-01"`
+
+        - `"managed-agents-2026-04-01"`
 
   - `MessageCreateParamsNonStreaming extends MessageCreateParamsBase`
 
@@ -6519,15 +6743,25 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: number`
 
           - `document_title: string | null`
 
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `file_id: string | null`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: "content_block_location"`
 
@@ -6551,13 +6785,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: number`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: string`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: string | null`
 
@@ -7239,15 +7487,25 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: number`
 
               - `document_title: string | null`
 
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `file_id: string | null`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: "content_block_location"`
 
@@ -7271,13 +7529,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: number`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: string`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: string | null`
 
@@ -7962,13 +8234,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: number`
 
               - `document_title: string | null`
 
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: "content_block_location"`
 
@@ -7992,13 +8274,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: number`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: string`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: string | null`
 
@@ -8176,13 +8472,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                         - `cited_text: string`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `document_index: number`
 
                         - `document_title: string | null`
 
                         - `end_block_index: number`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `start_block_index: number`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `type: "content_block_location"`
 
@@ -8206,13 +8512,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                         - `cited_text: string`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `end_block_index: number`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `search_result_index: number`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `source: string`
 
                         - `start_block_index: number`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `title: string | null`
 
@@ -8411,13 +8731,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: number`
 
                 - `document_title: string | null`
 
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: "content_block_location"`
 
@@ -8441,13 +8771,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: number`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: string`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: string | null`
 
@@ -8679,13 +9023,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `document_index: number`
 
                     - `document_title: string | null`
 
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `type: "content_block_location"`
 
@@ -8709,13 +9063,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `search_result_index: number`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `source: string`
 
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `title: string | null`
 
@@ -8859,13 +9227,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: number`
 
                       - `document_title: string | null`
 
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: "content_block_location"`
 
@@ -8889,13 +9267,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: number`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: string`
 
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: string | null`
 
@@ -9043,13 +9435,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                               - `cited_text: string`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `document_index: number`
 
                               - `document_title: string | null`
 
                               - `end_block_index: number`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `start_block_index: number`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `type: "content_block_location"`
 
@@ -9073,13 +9475,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                               - `cited_text: string`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `end_block_index: number`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `search_result_index: number`
+
+                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                Counted separately from `document_index`; server-side web search results are not included in this count.
 
                               - `source: string`
 
                               - `start_block_index: number`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `title: string | null`
 
@@ -9555,13 +9971,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                               - `cited_text: string`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `document_index: number`
 
                               - `document_title: string | null`
 
                               - `end_block_index: number`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `start_block_index: number`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `type: "content_block_location"`
 
@@ -9585,13 +10011,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                               - `cited_text: string`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `end_block_index: number`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `search_result_index: number`
+
+                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                Counted separately from `document_index`; server-side web search results are not included in this count.
 
                               - `source: string`
 
                               - `start_block_index: number`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `title: string | null`
 
@@ -10353,13 +10793,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: number`
 
                   - `document_title: string | null`
 
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: "content_block_location"`
 
@@ -10383,13 +10833,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: number`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: string`
 
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: string | null`
 
@@ -10874,13 +11338,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: number`
 
           - `document_title: string | null`
 
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: "content_block_location"`
 
@@ -10904,13 +11378,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: number`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: string`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: string | null`
 
@@ -12659,7 +13147,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -12706,6 +13194,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -13585,15 +14075,25 @@ console.log(betaMessageTokensCount.context_management);
 
   - `cited_text: string`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `document_index: number`
 
   - `document_title: string | null`
 
   - `end_block_index: number`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `file_id: string | null`
 
   - `start_block_index: number`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `type: "content_block_location"`
 
@@ -13605,13 +14105,23 @@ console.log(betaMessageTokensCount.context_management);
 
   - `cited_text: string`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `document_index: number`
 
   - `document_title: string | null`
 
   - `end_block_index: number`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `start_block_index: number`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `type: "content_block_location"`
 
@@ -13661,13 +14171,27 @@ console.log(betaMessageTokensCount.context_management);
 
   - `cited_text: string`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `end_block_index: number`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `search_result_index: number`
+
+    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+    Counted separately from `document_index`; server-side web search results are not included in this count.
 
   - `source: string`
 
   - `start_block_index: number`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `title: string | null`
 
@@ -13681,13 +14205,27 @@ console.log(betaMessageTokensCount.context_management);
 
   - `cited_text: string`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `end_block_index: number`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `search_result_index: number`
+
+    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+    Counted separately from `document_index`; server-side web search results are not included in this count.
 
   - `source: string`
 
   - `start_block_index: number`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `title: string | null`
 
@@ -13763,15 +14301,25 @@ console.log(betaMessageTokensCount.context_management);
 
       - `cited_text: string`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `document_index: number`
 
       - `document_title: string | null`
 
       - `end_block_index: number`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `file_id: string | null`
 
       - `start_block_index: number`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `type: "content_block_location"`
 
@@ -13795,13 +14343,27 @@ console.log(betaMessageTokensCount.context_management);
 
       - `cited_text: string`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `end_block_index: number`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `search_result_index: number`
+
+        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+        Counted separately from `document_index`; server-side web search results are not included in this count.
 
       - `source: string`
 
       - `start_block_index: number`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `title: string | null`
 
@@ -14846,15 +15408,25 @@ console.log(betaMessageTokensCount.context_management);
 
         - `cited_text: string`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: number`
 
         - `document_title: string | null`
 
         - `end_block_index: number`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `file_id: string | null`
 
         - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: "content_block_location"`
 
@@ -14878,13 +15450,27 @@ console.log(betaMessageTokensCount.context_management);
 
         - `cited_text: string`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: number`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: number`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: string`
 
         - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: string | null`
 
@@ -15566,15 +16152,25 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: number`
 
             - `document_title: string | null`
 
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `file_id: string | null`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: "content_block_location"`
 
@@ -15598,13 +16194,27 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: number`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: string`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: string | null`
 
@@ -15731,13 +16341,23 @@ console.log(betaMessageTokensCount.context_management);
 
         - `cited_text: string`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: number`
 
         - `document_title: string | null`
 
         - `end_block_index: number`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: "content_block_location"`
 
@@ -15761,13 +16381,27 @@ console.log(betaMessageTokensCount.context_management);
 
         - `cited_text: string`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: number`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: number`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: string`
 
         - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: string | null`
 
@@ -15945,13 +16579,23 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: number`
 
                   - `document_title: string | null`
 
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: "content_block_location"`
 
@@ -15975,13 +16619,27 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: number`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: string`
 
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: string | null`
 
@@ -16180,13 +16838,23 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: number`
 
           - `document_title: string | null`
 
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: "content_block_location"`
 
@@ -16210,13 +16878,27 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: number`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: string`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: string | null`
 
@@ -16448,13 +17130,23 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: number`
 
               - `document_title: string | null`
 
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: "content_block_location"`
 
@@ -16478,13 +17170,27 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: number`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: string`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: string | null`
 
@@ -16628,13 +17334,23 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: number`
 
                 - `document_title: string | null`
 
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: "content_block_location"`
 
@@ -16658,13 +17374,27 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: number`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: string`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: string | null`
 
@@ -16812,13 +17542,23 @@ console.log(betaMessageTokensCount.context_management);
 
                         - `cited_text: string`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `document_index: number`
 
                         - `document_title: string | null`
 
                         - `end_block_index: number`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `start_block_index: number`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `type: "content_block_location"`
 
@@ -16842,13 +17582,27 @@ console.log(betaMessageTokensCount.context_management);
 
                         - `cited_text: string`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `end_block_index: number`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `search_result_index: number`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `source: string`
 
                         - `start_block_index: number`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `title: string | null`
 
@@ -17324,13 +18078,23 @@ console.log(betaMessageTokensCount.context_management);
 
                         - `cited_text: string`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `document_index: number`
 
                         - `document_title: string | null`
 
                         - `end_block_index: number`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `start_block_index: number`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `type: "content_block_location"`
 
@@ -17354,13 +18118,27 @@ console.log(betaMessageTokensCount.context_management);
 
                         - `cited_text: string`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `end_block_index: number`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `search_result_index: number`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `source: string`
 
                         - `start_block_index: number`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `title: string | null`
 
@@ -18122,13 +18900,23 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: number`
 
             - `document_title: string | null`
 
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: "content_block_location"`
 
@@ -18152,13 +18940,27 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: number`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: string`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: string | null`
 
@@ -18326,13 +19128,23 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: number`
 
             - `document_title: string | null`
 
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: "content_block_location"`
 
@@ -18356,13 +19168,27 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: number`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: string`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: string | null`
 
@@ -18512,13 +19338,23 @@ console.log(betaMessageTokensCount.context_management);
 
         - `cited_text: string`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: number`
 
         - `document_title: string | null`
 
         - `end_block_index: number`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: "content_block_location"`
 
@@ -18542,13 +19378,27 @@ console.log(betaMessageTokensCount.context_management);
 
         - `cited_text: string`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: number`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: number`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: string`
 
         - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: string | null`
 
@@ -19300,15 +20150,25 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: number`
 
           - `document_title: string | null`
 
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `file_id: string | null`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: "content_block_location"`
 
@@ -19332,13 +20192,27 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: number`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: string`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: string | null`
 
@@ -19869,15 +20743,25 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: number`
 
           - `document_title: string | null`
 
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `file_id: string | null`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: "content_block_location"`
 
@@ -19901,13 +20785,27 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: number`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: string`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: string | null`
 
@@ -20589,15 +21487,25 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: number`
 
               - `document_title: string | null`
 
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `file_id: string | null`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: "content_block_location"`
 
@@ -20621,13 +21529,27 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: number`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: string`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: string | null`
 
@@ -21505,13 +22427,23 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: number`
 
             - `document_title: string | null`
 
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: "content_block_location"`
 
@@ -21535,13 +22467,27 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: number`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: string`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: string | null`
 
@@ -21719,13 +22665,23 @@ console.log(betaMessageTokensCount.context_management);
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: number`
 
                       - `document_title: string | null`
 
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: "content_block_location"`
 
@@ -21749,13 +22705,27 @@ console.log(betaMessageTokensCount.context_management);
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: number`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: string`
 
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: string | null`
 
@@ -21954,13 +22924,23 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: number`
 
               - `document_title: string | null`
 
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: "content_block_location"`
 
@@ -21984,13 +22964,27 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: number`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: string`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: string | null`
 
@@ -22222,13 +23216,23 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: number`
 
                   - `document_title: string | null`
 
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: "content_block_location"`
 
@@ -22252,13 +23256,27 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: number`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: string`
 
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: string | null`
 
@@ -22402,13 +23420,23 @@ console.log(betaMessageTokensCount.context_management);
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `document_index: number`
 
                     - `document_title: string | null`
 
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `type: "content_block_location"`
 
@@ -22432,13 +23460,27 @@ console.log(betaMessageTokensCount.context_management);
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `search_result_index: number`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `source: string`
 
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `title: string | null`
 
@@ -22586,13 +23628,23 @@ console.log(betaMessageTokensCount.context_management);
 
                             - `cited_text: string`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `document_index: number`
 
                             - `document_title: string | null`
 
                             - `end_block_index: number`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `start_block_index: number`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `type: "content_block_location"`
 
@@ -22616,13 +23668,27 @@ console.log(betaMessageTokensCount.context_management);
 
                             - `cited_text: string`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `end_block_index: number`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `search_result_index: number`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `source: string`
 
                             - `start_block_index: number`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `title: string | null`
 
@@ -23098,13 +24164,23 @@ console.log(betaMessageTokensCount.context_management);
 
                             - `cited_text: string`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `document_index: number`
 
                             - `document_title: string | null`
 
                             - `end_block_index: number`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `start_block_index: number`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `type: "content_block_location"`
 
@@ -23128,13 +24204,27 @@ console.log(betaMessageTokensCount.context_management);
 
                             - `cited_text: string`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `end_block_index: number`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `search_result_index: number`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `source: string`
 
                             - `start_block_index: number`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `title: string | null`
 
@@ -23896,13 +24986,23 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: number`
 
                 - `document_title: string | null`
 
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: "content_block_location"`
 
@@ -23926,13 +25026,27 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: number`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: string`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: string | null`
 
@@ -24179,15 +25293,25 @@ console.log(betaMessageTokensCount.context_management);
 
         - `cited_text: string`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: number`
 
         - `document_title: string | null`
 
         - `end_block_index: number`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `file_id: string | null`
 
         - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: "content_block_location"`
 
@@ -24211,13 +25335,27 @@ console.log(betaMessageTokensCount.context_management);
 
         - `cited_text: string`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: number`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: number`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: string`
 
         - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: string | null`
 
@@ -24323,15 +25461,25 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: number`
 
           - `document_title: string | null`
 
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `file_id: string | null`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: "content_block_location"`
 
@@ -24355,13 +25503,27 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: number`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: string`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: string | null`
 
@@ -24463,15 +25625,25 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: number`
 
           - `document_title: string | null`
 
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `file_id: string | null`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: "content_block_location"`
 
@@ -24495,13 +25667,27 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: number`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: string`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: string | null`
 
@@ -25183,15 +26369,25 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: number`
 
               - `document_title: string | null`
 
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `file_id: string | null`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: "content_block_location"`
 
@@ -25215,13 +26411,27 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: number`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: string`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: string | null`
 
@@ -25778,15 +26988,25 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: number`
 
             - `document_title: string | null`
 
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `file_id: string | null`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: "content_block_location"`
 
@@ -25810,13 +27030,27 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: number`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: string`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: string | null`
 
@@ -26498,15 +27732,25 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: number`
 
                 - `document_title: string | null`
 
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `file_id: string | null`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: "content_block_location"`
 
@@ -26530,13 +27774,27 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: number`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: string`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: string | null`
 
@@ -27196,15 +28454,25 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: number`
 
               - `document_title: string | null`
 
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `file_id: string | null`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: "content_block_location"`
 
@@ -27228,13 +28496,27 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: number`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: string`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: string | null`
 
@@ -27916,15 +29198,25 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: number`
 
                   - `document_title: string | null`
 
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `file_id: string | null`
 
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: "content_block_location"`
 
@@ -27948,13 +29240,27 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: number`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: string`
 
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: string | null`
 
@@ -28909,15 +30215,25 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: number`
 
             - `document_title: string | null`
 
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `file_id: string | null`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: "content_block_location"`
 
@@ -28941,13 +30257,27 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: number`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: string`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: string | null`
 
@@ -29629,15 +30959,25 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: number`
 
                 - `document_title: string | null`
 
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `file_id: string | null`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: "content_block_location"`
 
@@ -29661,13 +31001,27 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: number`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: string`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: string | null`
 
@@ -29789,15 +31143,25 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: number`
 
             - `document_title: string | null`
 
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `file_id: string | null`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: "content_block_location"`
 
@@ -29821,13 +31185,27 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: number`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: string`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: string | null`
 
@@ -30034,13 +31412,23 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: number`
 
                 - `document_title: string | null`
 
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: "content_block_location"`
 
@@ -30064,13 +31452,27 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: number`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: string`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: string | null`
 
@@ -30332,13 +31734,23 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `document_index: number`
 
           - `document_title: string | null`
 
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `type: "content_block_location"`
 
@@ -30362,13 +31774,27 @@ console.log(betaMessageTokensCount.context_management);
 
           - `cited_text: string`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `end_block_index: number`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `search_result_index: number`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `source: string`
 
           - `start_block_index: number`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `title: string | null`
 
@@ -30451,13 +31877,23 @@ console.log(betaMessageTokensCount.context_management);
 
         - `cited_text: string`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `document_index: number`
 
         - `document_title: string | null`
 
         - `end_block_index: number`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `type: "content_block_location"`
 
@@ -30481,13 +31917,27 @@ console.log(betaMessageTokensCount.context_management);
 
         - `cited_text: string`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `end_block_index: number`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `search_result_index: number`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `source: string`
 
         - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `title: string | null`
 
@@ -30831,15 +32281,25 @@ console.log(betaMessageTokensCount.context_management);
 
       - `cited_text: string`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `document_index: number`
 
       - `document_title: string | null`
 
       - `end_block_index: number`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `file_id: string | null`
 
       - `start_block_index: number`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `type: "content_block_location"`
 
@@ -30863,13 +32323,27 @@ console.log(betaMessageTokensCount.context_management);
 
       - `cited_text: string`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `end_block_index: number`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `search_result_index: number`
+
+        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+        Counted separately from `document_index`; server-side web search results are not included in this count.
 
       - `source: string`
 
       - `start_block_index: number`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `title: string | null`
 
@@ -30954,13 +32428,23 @@ console.log(betaMessageTokensCount.context_management);
 
       - `cited_text: string`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `document_index: number`
 
       - `document_title: string | null`
 
       - `end_block_index: number`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `start_block_index: number`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `type: "content_block_location"`
 
@@ -30984,13 +32468,27 @@ console.log(betaMessageTokensCount.context_management);
 
       - `cited_text: string`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `end_block_index: number`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `search_result_index: number`
+
+        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+        Counted separately from `document_index`; server-side web search results are not included in this count.
 
       - `source: string`
 
       - `start_block_index: number`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `title: string | null`
 
@@ -31042,15 +32540,25 @@ console.log(betaMessageTokensCount.context_management);
 
     - `cited_text: string`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `document_index: number`
 
     - `document_title: string | null`
 
     - `end_block_index: number`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `file_id: string | null`
 
     - `start_block_index: number`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `type: "content_block_location"`
 
@@ -31074,13 +32582,27 @@ console.log(betaMessageTokensCount.context_management);
 
     - `cited_text: string`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `end_block_index: number`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `search_result_index: number`
+
+      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+      Counted separately from `document_index`; server-side web search results are not included in this count.
 
     - `source: string`
 
     - `start_block_index: number`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `title: string | null`
 
@@ -31128,13 +32650,23 @@ console.log(betaMessageTokensCount.context_management);
 
     - `cited_text: string`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `document_index: number`
 
     - `document_title: string | null`
 
     - `end_block_index: number`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `start_block_index: number`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `type: "content_block_location"`
 
@@ -31158,13 +32690,27 @@ console.log(betaMessageTokensCount.context_management);
 
     - `cited_text: string`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `end_block_index: number`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `search_result_index: number`
+
+      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+      Counted separately from `document_index`; server-side web search results are not included in this count.
 
     - `source: string`
 
     - `start_block_index: number`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `title: string | null`
 
@@ -32352,13 +33898,23 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: number`
 
             - `document_title: string | null`
 
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: "content_block_location"`
 
@@ -32382,13 +33938,27 @@ console.log(betaMessageTokensCount.context_management);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: number`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: string`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: string | null`
 
@@ -32532,13 +34102,23 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: number`
 
               - `document_title: string | null`
 
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: "content_block_location"`
 
@@ -32562,13 +34142,27 @@ console.log(betaMessageTokensCount.context_management);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: number`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: string`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: string | null`
 
@@ -32716,13 +34310,23 @@ console.log(betaMessageTokensCount.context_management);
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: number`
 
                       - `document_title: string | null`
 
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: "content_block_location"`
 
@@ -32746,13 +34350,27 @@ console.log(betaMessageTokensCount.context_management);
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: number`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: string`
 
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: string | null`
 
@@ -35665,13 +37283,23 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: number`
 
                   - `document_title: string | null`
 
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: "content_block_location"`
 
@@ -35695,13 +37323,27 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: number`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: string`
 
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: string | null`
 
@@ -36337,13 +37979,23 @@ console.log(betaMessageTokensCount.context_management);
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: number`
 
                       - `document_title: string | null`
 
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: "content_block_location"`
 
@@ -36367,13 +38019,27 @@ console.log(betaMessageTokensCount.context_management);
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: number`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: string`
 
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: string | null`
 
@@ -37339,13 +39005,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: number`
 
                   - `document_title: string | null`
 
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: "content_block_location"`
 
@@ -37369,13 +39045,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: number`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: string`
 
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: string | null`
 
@@ -37553,13 +39243,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                             - `cited_text: string`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `document_index: number`
 
                             - `document_title: string | null`
 
                             - `end_block_index: number`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `start_block_index: number`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `type: "content_block_location"`
 
@@ -37583,13 +39283,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                             - `cited_text: string`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `end_block_index: number`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `search_result_index: number`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `source: string`
 
                             - `start_block_index: number`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `title: string | null`
 
@@ -37788,13 +39502,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `document_index: number`
 
                     - `document_title: string | null`
 
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `type: "content_block_location"`
 
@@ -37818,13 +39542,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `search_result_index: number`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `source: string`
 
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `title: string | null`
 
@@ -38056,13 +39794,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                         - `cited_text: string`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `document_index: number`
 
                         - `document_title: string | null`
 
                         - `end_block_index: number`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `start_block_index: number`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `type: "content_block_location"`
 
@@ -38086,13 +39834,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                         - `cited_text: string`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `end_block_index: number`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `search_result_index: number`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `source: string`
 
                         - `start_block_index: number`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `title: string | null`
 
@@ -38236,13 +39998,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                           - `cited_text: string`
 
+                            The full text of the cited block range, concatenated.
+
+                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                           - `document_index: number`
 
                           - `document_title: string | null`
 
                           - `end_block_index: number`
 
+                            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                           - `start_block_index: number`
+
+                            0-based index of the first cited block in the source's `content` array.
 
                           - `type: "content_block_location"`
 
@@ -38266,13 +40038,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                           - `cited_text: string`
 
+                            The full text of the cited block range, concatenated.
+
+                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                           - `end_block_index: number`
 
+                            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                           - `search_result_index: number`
+
+                            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                            Counted separately from `document_index`; server-side web search results are not included in this count.
 
                           - `source: string`
 
                           - `start_block_index: number`
+
+                            0-based index of the first cited block in the source's `content` array.
 
                           - `title: string | null`
 
@@ -38420,13 +40206,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                   - `cited_text: string`
 
+                                    The full text of the cited block range, concatenated.
+
+                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                   - `document_index: number`
 
                                   - `document_title: string | null`
 
                                   - `end_block_index: number`
 
+                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                   - `start_block_index: number`
+
+                                    0-based index of the first cited block in the source's `content` array.
 
                                   - `type: "content_block_location"`
 
@@ -38450,13 +40246,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                   - `cited_text: string`
 
+                                    The full text of the cited block range, concatenated.
+
+                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                   - `end_block_index: number`
 
+                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                   - `search_result_index: number`
+
+                                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                                   - `source: string`
 
                                   - `start_block_index: number`
+
+                                    0-based index of the first cited block in the source's `content` array.
 
                                   - `title: string | null`
 
@@ -38932,13 +40742,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                   - `cited_text: string`
 
+                                    The full text of the cited block range, concatenated.
+
+                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                   - `document_index: number`
 
                                   - `document_title: string | null`
 
                                   - `end_block_index: number`
 
+                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                   - `start_block_index: number`
+
+                                    0-based index of the first cited block in the source's `content` array.
 
                                   - `type: "content_block_location"`
 
@@ -38962,13 +40782,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                   - `cited_text: string`
 
+                                    The full text of the cited block range, concatenated.
+
+                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                   - `end_block_index: number`
 
+                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                   - `search_result_index: number`
+
+                                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                                   - `source: string`
 
                                   - `start_block_index: number`
+
+                                    0-based index of the first cited block in the source's `content` array.
 
                                   - `title: string | null`
 
@@ -39730,13 +41564,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `document_index: number`
 
                       - `document_title: string | null`
 
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `type: "content_block_location"`
 
@@ -39760,13 +41604,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                       - `cited_text: string`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `end_block_index: number`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `search_result_index: number`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `source: string`
 
                       - `start_block_index: number`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `title: string | null`
 
@@ -40323,13 +42181,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: number`
 
               - `document_title: string | null`
 
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: "content_block_location"`
 
@@ -40353,13 +42221,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: number`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: string`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: string | null`
 
@@ -42136,7 +44018,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -42183,6 +44065,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -42323,7 +44207,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -42370,6 +44254,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -42509,7 +44395,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -42556,6 +44442,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -42688,7 +44576,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -42735,6 +44623,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -42866,7 +44756,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -42913,6 +44803,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -42970,7 +44862,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -43017,6 +44909,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -43155,15 +45049,25 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: number`
 
                 - `document_title: string | null`
 
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `file_id: string | null`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: "content_block_location"`
 
@@ -43187,13 +45091,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: number`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: string`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: string | null`
 
@@ -43875,15 +45793,25 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `document_index: number`
 
                     - `document_title: string | null`
 
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `file_id: string | null`
 
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `type: "content_block_location"`
 
@@ -43907,13 +45835,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `search_result_index: number`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `source: string`
 
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `title: string | null`
 
@@ -44909,15 +46851,25 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: number`
 
                 - `document_title: string | null`
 
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `file_id: string | null`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: "content_block_location"`
 
@@ -44941,13 +46893,27 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: number`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: string`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: string | null`
 
@@ -45629,15 +47595,25 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `document_index: number`
 
                     - `document_title: string | null`
 
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `file_id: string | null`
 
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `type: "content_block_location"`
 
@@ -45661,13 +47637,27 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
                     - `cited_text: string`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `end_block_index: number`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `search_result_index: number`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `source: string`
 
                     - `start_block_index: number`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `title: string | null`
 
@@ -46455,15 +48445,25 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `document_index: number`
 
               - `document_title: string | null`
 
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `file_id: string | null`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `type: "content_block_location"`
 
@@ -46487,13 +48487,27 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
               - `cited_text: string`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `end_block_index: number`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `search_result_index: number`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `source: string`
 
               - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `title: string | null`
 
@@ -47175,15 +49189,25 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `document_index: number`
 
                   - `document_title: string | null`
 
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `file_id: string | null`
 
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `type: "content_block_location"`
 
@@ -47207,13 +49231,27 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
                   - `cited_text: string`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `end_block_index: number`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `search_result_index: number`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `source: string`
 
                   - `start_block_index: number`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `title: string | null`
 
@@ -47963,15 +50001,25 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `document_index: number`
 
             - `document_title: string | null`
 
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `file_id: string | null`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `type: "content_block_location"`
 
@@ -47995,13 +50043,27 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
             - `cited_text: string`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `end_block_index: number`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `search_result_index: number`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `source: string`
 
             - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `title: string | null`
 
@@ -48683,15 +50745,25 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `document_index: number`
 
                 - `document_title: string | null`
 
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `file_id: string | null`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `type: "content_block_location"`
 
@@ -48715,13 +50787,27 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
                 - `cited_text: string`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `end_block_index: number`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `search_result_index: number`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `source: string`
 
                 - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `title: string | null`
 
@@ -49400,6 +51486,44 @@ Create Agent
 
     Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `multiagent?: BetaManagedAgentsMultiagentParams | null`
+
+    Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+    - `agents: Array<BetaManagedAgentsMultiagentRosterEntryParams>`
+
+      Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+      - `string`
+
+      - `BetaManagedAgentsAgentParams`
+
+        Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+        - `id: string`
+
+          The `agent` ID.
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version?: number`
+
+          The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+      - `BetaManagedAgentsMultiagentSelfParams`
+
+        Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+        - `type: "self"`
+
+          - `"self"`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
+
   - `skills?: Array<BetaManagedAgentsSkillParams>`
 
     Body param: Skills available to the agent. Maximum 20.
@@ -49640,7 +51764,7 @@ Create Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -49687,6 +51811,8 @@ Create Agent
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -49775,6 +51901,26 @@ Create Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent | null`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: Array<BetaManagedAgentsAgentReference>`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -50041,7 +52187,7 @@ List Agents
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -50088,6 +52234,8 @@ List Agents
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -50176,6 +52324,26 @@ List Agents
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent | null`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: Array<BetaManagedAgentsAgentReference>`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -50426,7 +52594,7 @@ Get Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -50473,6 +52641,8 @@ Get Agent
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -50561,6 +52731,26 @@ Get Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent | null`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: Array<BetaManagedAgentsAgentReference>`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -50936,6 +53126,44 @@ Update Agent
 
         - `"fast"`
 
+  - `multiagent?: BetaManagedAgentsMultiagentParams | null`
+
+    Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+    - `agents: Array<BetaManagedAgentsMultiagentRosterEntryParams>`
+
+      Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+      - `string`
+
+      - `BetaManagedAgentsAgentParams`
+
+        Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+        - `id: string`
+
+          The `agent` ID.
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version?: number`
+
+          The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+      - `BetaManagedAgentsMultiagentSelfParams`
+
+        Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+        - `type: "self"`
+
+          - `"self"`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
+
   - `name?: string`
 
     Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
@@ -51180,7 +53408,7 @@ Update Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -51227,6 +53455,8 @@ Update Agent
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -51315,6 +53545,26 @@ Update Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent | null`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: Array<BetaManagedAgentsAgentReference>`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -51562,7 +53812,7 @@ Archive Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -51609,6 +53859,8 @@ Archive Agent
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -51697,6 +53949,26 @@ Archive Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent | null`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: Array<BetaManagedAgentsAgentReference>`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -52012,6 +54284,26 @@ console.log(betaManagedAgentsAgent.id);
 
       - `"fast"`
 
+  - `multiagent: BetaManagedAgentsMultiagent | null`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: Array<BetaManagedAgentsAgentReference>`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
+
   - `name: string`
 
   - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
@@ -52221,6 +54513,20 @@ console.log(betaManagedAgentsAgent.id);
   - `version: number`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Beta Managed Agents Agent Reference
+
+- `BetaManagedAgentsAgentReference`
+
+  A resolved agent reference with a concrete version.
+
+  - `id: string`
+
+  - `type: "agent"`
+
+    - `"agent"`
+
+  - `version: number`
 
 ### Beta Managed Agents Agent Tool Config
 
@@ -53154,6 +55460,78 @@ console.log(betaManagedAgentsAgent.id);
 
     - `"fast"`
 
+### Beta Managed Agents Multiagent Coordinator
+
+- `BetaManagedAgentsMultiagentCoordinator`
+
+  Resolved coordinator topology with a concrete agent roster.
+
+  - `agents: Array<BetaManagedAgentsAgentReference>`
+
+    Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `type: "coordinator"`
+
+    - `"coordinator"`
+
+### Beta Managed Agents Multiagent Coordinator Params
+
+- `BetaManagedAgentsMultiagentCoordinatorParams`
+
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `agents: Array<BetaManagedAgentsMultiagentRosterEntryParams>`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+    - `string`
+
+    - `BetaManagedAgentsAgentParams`
+
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+      - `id: string`
+
+        The `agent` ID.
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version?: number`
+
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+    - `BetaManagedAgentsMultiagentSelfParams`
+
+      Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+      - `type: "self"`
+
+        - `"self"`
+
+  - `type: "coordinator"`
+
+    - `"coordinator"`
+
+### Beta Managed Agents Multiagent Self Params
+
+- `BetaManagedAgentsMultiagentSelfParams`
+
+  Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+  - `type: "self"`
+
+    - `"self"`
+
 ### Beta Managed Agents Skill Params
 
 - `BetaManagedAgentsSkillParams = BetaManagedAgentsAnthropicSkillParams | BetaManagedAgentsCustomSkillParams`
@@ -53240,7 +55618,7 @@ List Agent Versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -53287,6 +55665,8 @@ List Agent Versions
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -53375,6 +55755,26 @@ List Agent Versions
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent | null`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: Array<BetaManagedAgentsAgentReference>`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -53723,7 +56123,7 @@ Create a new environment with the specified configuration.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -53770,6 +56170,8 @@ Create a new environment with the specified configuration.
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -53935,7 +56337,7 @@ List environments with pagination support.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -53982,6 +56384,8 @@ List environments with pagination support.
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -54138,7 +56542,7 @@ Retrieve a specific environment by ID.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -54185,6 +56589,8 @@ Retrieve a specific environment by ID.
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -54440,7 +56846,7 @@ Update an existing environment's configuration.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -54487,6 +56893,8 @@ Update an existing environment's configuration.
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -54642,7 +57050,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -54689,6 +57097,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -54742,7 +57152,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -54789,6 +57199,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -55517,7 +57929,7 @@ Create Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -55564,6 +57976,8 @@ Create Session
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -55648,6 +58062,294 @@ Create Session
         - `"standard"`
 
         - `"fast"`
+
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator | null`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `agents: Array<BetaManagedAgentsSessionThreadAgent>`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `id: string`
+
+        - `description: string | null`
+
+        - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+          - `name: string`
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+        - `model: BetaManagedAgentsModelConfig`
+
+          Model identifier and configuration.
+
+          - `id: BetaManagedAgentsModel`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-6"`
+
+                Most intelligent model for building agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+            - `(string & {})`
+
+          - `speed?: "standard" | "fast"`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `"standard"`
+
+            - `"fast"`
+
+        - `name: string`
+
+        - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+          - `BetaManagedAgentsAnthropicSkill`
+
+            A resolved Anthropic-managed skill.
+
+            - `skill_id: string`
+
+            - `type: "anthropic"`
+
+              - `"anthropic"`
+
+            - `version: string`
+
+          - `BetaManagedAgentsCustomSkill`
+
+            A resolved user-created custom skill.
+
+            - `skill_id: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+            - `version: string`
+
+        - `system: string | null`
+
+        - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+          - `BetaManagedAgentsAgentToolset20260401`
+
+            - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: "bash" | "edit" | "read" | 5 more`
+
+                Built-in agent tool identifier.
+
+                - `"bash"`
+
+                - `"edit"`
+
+                - `"read"`
+
+                - `"write"`
+
+                - `"glob"`
+
+                - `"grep"`
+
+                - `"web_fetch"`
+
+                - `"web_search"`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `type: "agent_toolset_20260401"`
+
+              - `"agent_toolset_20260401"`
+
+          - `BetaManagedAgentsMCPToolset`
+
+            - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: string`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `mcp_server_name: string`
+
+            - `type: "mcp_toolset"`
+
+              - `"mcp_toolset"`
+
+          - `BetaManagedAgentsCustomTool`
+
+            A custom tool as returned in API responses.
+
+            - `description: string`
+
+            - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `properties?: Record<string, unknown> | null`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `required?: Array<string>`
+
+                List of required property names.
+
+              - `type?: "object"`
+
+                Must be 'object' for tool input schemas.
+
+                - `"object"`
+
+            - `name: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `type: "coordinator"`
+
+        - `"coordinator"`
 
     - `name: string`
 
@@ -55864,6 +58566,38 @@ Create Session
   - `environment_id: string`
 
   - `metadata: Record<string, string>`
+
+  - `outcome_evaluations: Array<BetaManagedAgentsOutcomeEvaluationResource>`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `completed_at: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `description: string`
+
+      What the agent should produce.
+
+    - `explanation: string | null`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `iteration: number`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `outcome_id: string`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `result: string`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `type: "outcome_evaluation"`
+
+      - `"outcome_evaluation"`
 
   - `resources: Array<BetaManagedAgentsSessionResource>`
 
@@ -56108,13 +58842,25 @@ List Sessions
 
     Query param: Opaque pagination cursor from a previous response's next_page.
 
+  - `statuses?: Array<"rescheduling" | "running" | "idle" | "terminated">`
+
+    Query param: Filter by session status. Repeat the parameter to match any of multiple statuses.
+
+    - `"rescheduling"`
+
+    - `"running"`
+
+    - `"idle"`
+
+    - `"terminated"`
+
   - `betas?: Array<AnthropicBeta>`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -56161,6 +58907,8 @@ List Sessions
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -56245,6 +58993,294 @@ List Sessions
         - `"standard"`
 
         - `"fast"`
+
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator | null`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `agents: Array<BetaManagedAgentsSessionThreadAgent>`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `id: string`
+
+        - `description: string | null`
+
+        - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+          - `name: string`
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+        - `model: BetaManagedAgentsModelConfig`
+
+          Model identifier and configuration.
+
+          - `id: BetaManagedAgentsModel`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-6"`
+
+                Most intelligent model for building agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+            - `(string & {})`
+
+          - `speed?: "standard" | "fast"`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `"standard"`
+
+            - `"fast"`
+
+        - `name: string`
+
+        - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+          - `BetaManagedAgentsAnthropicSkill`
+
+            A resolved Anthropic-managed skill.
+
+            - `skill_id: string`
+
+            - `type: "anthropic"`
+
+              - `"anthropic"`
+
+            - `version: string`
+
+          - `BetaManagedAgentsCustomSkill`
+
+            A resolved user-created custom skill.
+
+            - `skill_id: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+            - `version: string`
+
+        - `system: string | null`
+
+        - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+          - `BetaManagedAgentsAgentToolset20260401`
+
+            - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: "bash" | "edit" | "read" | 5 more`
+
+                Built-in agent tool identifier.
+
+                - `"bash"`
+
+                - `"edit"`
+
+                - `"read"`
+
+                - `"write"`
+
+                - `"glob"`
+
+                - `"grep"`
+
+                - `"web_fetch"`
+
+                - `"web_search"`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `type: "agent_toolset_20260401"`
+
+              - `"agent_toolset_20260401"`
+
+          - `BetaManagedAgentsMCPToolset`
+
+            - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: string`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `mcp_server_name: string`
+
+            - `type: "mcp_toolset"`
+
+              - `"mcp_toolset"`
+
+          - `BetaManagedAgentsCustomTool`
+
+            A custom tool as returned in API responses.
+
+            - `description: string`
+
+            - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `properties?: Record<string, unknown> | null`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `required?: Array<string>`
+
+                List of required property names.
+
+              - `type?: "object"`
+
+                Must be 'object' for tool input schemas.
+
+                - `"object"`
+
+            - `name: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `type: "coordinator"`
+
+        - `"coordinator"`
 
     - `name: string`
 
@@ -56461,6 +59497,38 @@ List Sessions
   - `environment_id: string`
 
   - `metadata: Record<string, string>`
+
+  - `outcome_evaluations: Array<BetaManagedAgentsOutcomeEvaluationResource>`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `completed_at: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `description: string`
+
+      What the agent should produce.
+
+    - `explanation: string | null`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `iteration: number`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `outcome_id: string`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `result: string`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `type: "outcome_evaluation"`
+
+      - `"outcome_evaluation"`
 
   - `resources: Array<BetaManagedAgentsSessionResource>`
 
@@ -56663,7 +59731,7 @@ Get Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -56710,6 +59778,8 @@ Get Session
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -56794,6 +59864,294 @@ Get Session
         - `"standard"`
 
         - `"fast"`
+
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator | null`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `agents: Array<BetaManagedAgentsSessionThreadAgent>`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `id: string`
+
+        - `description: string | null`
+
+        - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+          - `name: string`
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+        - `model: BetaManagedAgentsModelConfig`
+
+          Model identifier and configuration.
+
+          - `id: BetaManagedAgentsModel`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-6"`
+
+                Most intelligent model for building agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+            - `(string & {})`
+
+          - `speed?: "standard" | "fast"`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `"standard"`
+
+            - `"fast"`
+
+        - `name: string`
+
+        - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+          - `BetaManagedAgentsAnthropicSkill`
+
+            A resolved Anthropic-managed skill.
+
+            - `skill_id: string`
+
+            - `type: "anthropic"`
+
+              - `"anthropic"`
+
+            - `version: string`
+
+          - `BetaManagedAgentsCustomSkill`
+
+            A resolved user-created custom skill.
+
+            - `skill_id: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+            - `version: string`
+
+        - `system: string | null`
+
+        - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+          - `BetaManagedAgentsAgentToolset20260401`
+
+            - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: "bash" | "edit" | "read" | 5 more`
+
+                Built-in agent tool identifier.
+
+                - `"bash"`
+
+                - `"edit"`
+
+                - `"read"`
+
+                - `"write"`
+
+                - `"glob"`
+
+                - `"grep"`
+
+                - `"web_fetch"`
+
+                - `"web_search"`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `type: "agent_toolset_20260401"`
+
+              - `"agent_toolset_20260401"`
+
+          - `BetaManagedAgentsMCPToolset`
+
+            - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: string`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `mcp_server_name: string`
+
+            - `type: "mcp_toolset"`
+
+              - `"mcp_toolset"`
+
+          - `BetaManagedAgentsCustomTool`
+
+            A custom tool as returned in API responses.
+
+            - `description: string`
+
+            - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `properties?: Record<string, unknown> | null`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `required?: Array<string>`
+
+                List of required property names.
+
+              - `type?: "object"`
+
+                Must be 'object' for tool input schemas.
+
+                - `"object"`
+
+            - `name: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `type: "coordinator"`
+
+        - `"coordinator"`
 
     - `name: string`
 
@@ -57010,6 +60368,38 @@ Get Session
   - `environment_id: string`
 
   - `metadata: Record<string, string>`
+
+  - `outcome_evaluations: Array<BetaManagedAgentsOutcomeEvaluationResource>`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `completed_at: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `description: string`
+
+      What the agent should produce.
+
+    - `explanation: string | null`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `iteration: number`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `outcome_id: string`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `result: string`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `type: "outcome_evaluation"`
+
+      - `"outcome_evaluation"`
 
   - `resources: Array<BetaManagedAgentsSessionResource>`
 
@@ -57225,7 +60615,7 @@ Update Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -57272,6 +60662,8 @@ Update Session
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -57356,6 +60748,294 @@ Update Session
         - `"standard"`
 
         - `"fast"`
+
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator | null`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `agents: Array<BetaManagedAgentsSessionThreadAgent>`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `id: string`
+
+        - `description: string | null`
+
+        - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+          - `name: string`
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+        - `model: BetaManagedAgentsModelConfig`
+
+          Model identifier and configuration.
+
+          - `id: BetaManagedAgentsModel`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-6"`
+
+                Most intelligent model for building agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+            - `(string & {})`
+
+          - `speed?: "standard" | "fast"`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `"standard"`
+
+            - `"fast"`
+
+        - `name: string`
+
+        - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+          - `BetaManagedAgentsAnthropicSkill`
+
+            A resolved Anthropic-managed skill.
+
+            - `skill_id: string`
+
+            - `type: "anthropic"`
+
+              - `"anthropic"`
+
+            - `version: string`
+
+          - `BetaManagedAgentsCustomSkill`
+
+            A resolved user-created custom skill.
+
+            - `skill_id: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+            - `version: string`
+
+        - `system: string | null`
+
+        - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+          - `BetaManagedAgentsAgentToolset20260401`
+
+            - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: "bash" | "edit" | "read" | 5 more`
+
+                Built-in agent tool identifier.
+
+                - `"bash"`
+
+                - `"edit"`
+
+                - `"read"`
+
+                - `"write"`
+
+                - `"glob"`
+
+                - `"grep"`
+
+                - `"web_fetch"`
+
+                - `"web_search"`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `type: "agent_toolset_20260401"`
+
+              - `"agent_toolset_20260401"`
+
+          - `BetaManagedAgentsMCPToolset`
+
+            - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: string`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `mcp_server_name: string`
+
+            - `type: "mcp_toolset"`
+
+              - `"mcp_toolset"`
+
+          - `BetaManagedAgentsCustomTool`
+
+            A custom tool as returned in API responses.
+
+            - `description: string`
+
+            - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `properties?: Record<string, unknown> | null`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `required?: Array<string>`
+
+                List of required property names.
+
+              - `type?: "object"`
+
+                Must be 'object' for tool input schemas.
+
+                - `"object"`
+
+            - `name: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `type: "coordinator"`
+
+        - `"coordinator"`
 
     - `name: string`
 
@@ -57572,6 +61252,38 @@ Update Session
   - `environment_id: string`
 
   - `metadata: Record<string, string>`
+
+  - `outcome_evaluations: Array<BetaManagedAgentsOutcomeEvaluationResource>`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `completed_at: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `description: string`
+
+      What the agent should produce.
+
+    - `explanation: string | null`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `iteration: number`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `outcome_id: string`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `result: string`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `type: "outcome_evaluation"`
+
+      - `"outcome_evaluation"`
 
   - `resources: Array<BetaManagedAgentsSessionResource>`
 
@@ -57773,7 +61485,7 @@ Delete Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -57820,6 +61532,8 @@ Delete Session
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -57869,7 +61583,7 @@ Archive Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -57916,6 +61630,8 @@ Archive Session
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -58000,6 +61716,294 @@ Archive Session
         - `"standard"`
 
         - `"fast"`
+
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator | null`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `agents: Array<BetaManagedAgentsSessionThreadAgent>`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `id: string`
+
+        - `description: string | null`
+
+        - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+          - `name: string`
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+        - `model: BetaManagedAgentsModelConfig`
+
+          Model identifier and configuration.
+
+          - `id: BetaManagedAgentsModel`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-6"`
+
+                Most intelligent model for building agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+            - `(string & {})`
+
+          - `speed?: "standard" | "fast"`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `"standard"`
+
+            - `"fast"`
+
+        - `name: string`
+
+        - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+          - `BetaManagedAgentsAnthropicSkill`
+
+            A resolved Anthropic-managed skill.
+
+            - `skill_id: string`
+
+            - `type: "anthropic"`
+
+              - `"anthropic"`
+
+            - `version: string`
+
+          - `BetaManagedAgentsCustomSkill`
+
+            A resolved user-created custom skill.
+
+            - `skill_id: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+            - `version: string`
+
+        - `system: string | null`
+
+        - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+          - `BetaManagedAgentsAgentToolset20260401`
+
+            - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: "bash" | "edit" | "read" | 5 more`
+
+                Built-in agent tool identifier.
+
+                - `"bash"`
+
+                - `"edit"`
+
+                - `"read"`
+
+                - `"write"`
+
+                - `"glob"`
+
+                - `"grep"`
+
+                - `"web_fetch"`
+
+                - `"web_search"`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `type: "agent_toolset_20260401"`
+
+              - `"agent_toolset_20260401"`
+
+          - `BetaManagedAgentsMCPToolset`
+
+            - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: string`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `mcp_server_name: string`
+
+            - `type: "mcp_toolset"`
+
+              - `"mcp_toolset"`
+
+          - `BetaManagedAgentsCustomTool`
+
+            A custom tool as returned in API responses.
+
+            - `description: string`
+
+            - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `properties?: Record<string, unknown> | null`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `required?: Array<string>`
+
+                List of required property names.
+
+              - `type?: "object"`
+
+                Must be 'object' for tool input schemas.
+
+                - `"object"`
+
+            - `name: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `type: "coordinator"`
+
+        - `"coordinator"`
 
     - `name: string`
 
@@ -58216,6 +62220,38 @@ Archive Session
   - `environment_id: string`
 
   - `metadata: Record<string, string>`
+
+  - `outcome_evaluations: Array<BetaManagedAgentsOutcomeEvaluationResource>`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `completed_at: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `description: string`
+
+      What the agent should produce.
+
+    - `explanation: string | null`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `iteration: number`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `outcome_id: string`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `result: string`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `type: "outcome_evaluation"`
+
+      - `"outcome_evaluation"`
 
   - `resources: Array<BetaManagedAgentsSessionResource>`
 
@@ -58559,6 +62595,134 @@ console.log(betaManagedAgentsSession.id);
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+### Beta Managed Agents Multiagent
+
+- `BetaManagedAgentsMultiagent`
+
+  Resolved coordinator topology with a concrete agent roster.
+
+  - `agents: Array<BetaManagedAgentsAgentReference>`
+
+    Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `type: "coordinator"`
+
+    - `"coordinator"`
+
+### Beta Managed Agents Multiagent Params
+
+- `BetaManagedAgentsMultiagentParams`
+
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `agents: Array<BetaManagedAgentsMultiagentRosterEntryParams>`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+    - `string`
+
+    - `BetaManagedAgentsAgentParams`
+
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+      - `id: string`
+
+        The `agent` ID.
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version?: number`
+
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+    - `BetaManagedAgentsMultiagentSelfParams`
+
+      Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+      - `type: "self"`
+
+        - `"self"`
+
+  - `type: "coordinator"`
+
+    - `"coordinator"`
+
+### Beta Managed Agents Multiagent Roster Entry Params
+
+- `BetaManagedAgentsMultiagentRosterEntryParams = string | BetaManagedAgentsAgentParams | BetaManagedAgentsMultiagentSelfParams`
+
+  An entry in a multiagent roster: an agent ID string, a versioned agent reference, or `self`.
+
+  - `string`
+
+  - `BetaManagedAgentsAgentParams`
+
+    Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+    - `id: string`
+
+      The `agent` ID.
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version?: number`
+
+      The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+  - `BetaManagedAgentsMultiagentSelfParams`
+
+    Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+    - `type: "self"`
+
+      - `"self"`
+
+### Beta Managed Agents Outcome Evaluation Resource
+
+- `BetaManagedAgentsOutcomeEvaluationResource`
+
+  Evaluation state for a single outcome defined via a define_outcome event.
+
+  - `completed_at: string | null`
+
+    A timestamp in RFC 3339 format
+
+  - `description: string`
+
+    What the agent should produce.
+
+  - `explanation: string | null`
+
+    Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+  - `iteration: number`
+
+    0-indexed revision cycle the outcome is currently on.
+
+  - `outcome_id: string`
+
+    Server-generated outc_ ID for this outcome.
+
+  - `result: string`
+
+    Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+  - `type: "outcome_evaluation"`
+
+    - `"outcome_evaluation"`
+
 ### Beta Managed Agents Session
 
 - `BetaManagedAgentsSession`
@@ -58570,6 +62734,1360 @@ console.log(betaManagedAgentsSession.id);
   - `agent: BetaManagedAgentsSessionAgent`
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `id: string`
+
+    - `description: string | null`
+
+    - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+      - `name: string`
+
+      - `type: "url"`
+
+        - `"url"`
+
+      - `url: string`
+
+    - `model: BetaManagedAgentsModelConfig`
+
+      Model identifier and configuration.
+
+      - `id: BetaManagedAgentsModel`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+        - `(string & {})`
+
+      - `speed?: "standard" | "fast"`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator | null`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `agents: Array<BetaManagedAgentsSessionThreadAgent>`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `id: string`
+
+        - `description: string | null`
+
+        - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+          - `name: string`
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+        - `model: BetaManagedAgentsModelConfig`
+
+          Model identifier and configuration.
+
+          - `id: BetaManagedAgentsModel`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-6"`
+
+                Most intelligent model for building agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+            - `(string & {})`
+
+          - `speed?: "standard" | "fast"`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `"standard"`
+
+            - `"fast"`
+
+        - `name: string`
+
+        - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+          - `BetaManagedAgentsAnthropicSkill`
+
+            A resolved Anthropic-managed skill.
+
+            - `skill_id: string`
+
+            - `type: "anthropic"`
+
+              - `"anthropic"`
+
+            - `version: string`
+
+          - `BetaManagedAgentsCustomSkill`
+
+            A resolved user-created custom skill.
+
+            - `skill_id: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+            - `version: string`
+
+        - `system: string | null`
+
+        - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+          - `BetaManagedAgentsAgentToolset20260401`
+
+            - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: "bash" | "edit" | "read" | 5 more`
+
+                Built-in agent tool identifier.
+
+                - `"bash"`
+
+                - `"edit"`
+
+                - `"read"`
+
+                - `"write"`
+
+                - `"glob"`
+
+                - `"grep"`
+
+                - `"web_fetch"`
+
+                - `"web_search"`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `type: "agent_toolset_20260401"`
+
+              - `"agent_toolset_20260401"`
+
+          - `BetaManagedAgentsMCPToolset`
+
+            - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+              - `enabled: boolean`
+
+              - `name: string`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `enabled: boolean`
+
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+                Permission policy for tool execution.
+
+                - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `type: "always_allow"`
+
+                    - `"always_allow"`
+
+                - `BetaManagedAgentsAlwaysAskPolicy`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `type: "always_ask"`
+
+                    - `"always_ask"`
+
+            - `mcp_server_name: string`
+
+            - `type: "mcp_toolset"`
+
+              - `"mcp_toolset"`
+
+          - `BetaManagedAgentsCustomTool`
+
+            A custom tool as returned in API responses.
+
+            - `description: string`
+
+            - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `properties?: Record<string, unknown> | null`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `required?: Array<string>`
+
+                List of required property names.
+
+              - `type?: "object"`
+
+                Must be 'object' for tool input schemas.
+
+                - `"object"`
+
+            - `name: string`
+
+            - `type: "custom"`
+
+              - `"custom"`
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `type: "coordinator"`
+
+        - `"coordinator"`
+
+    - `name: string`
+
+    - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+      - `BetaManagedAgentsAnthropicSkill`
+
+        A resolved Anthropic-managed skill.
+
+        - `skill_id: string`
+
+        - `type: "anthropic"`
+
+          - `"anthropic"`
+
+        - `version: string`
+
+      - `BetaManagedAgentsCustomSkill`
+
+        A resolved user-created custom skill.
+
+        - `skill_id: string`
+
+        - `type: "custom"`
+
+          - `"custom"`
+
+        - `version: string`
+
+    - `system: string | null`
+
+    - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+      - `BetaManagedAgentsAgentToolset20260401`
+
+        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+          - `enabled: boolean`
+
+          - `name: "bash" | "edit" | "read" | 5 more`
+
+            Built-in agent tool identifier.
+
+            - `"bash"`
+
+            - `"edit"`
+
+            - `"read"`
+
+            - `"write"`
+
+            - `"glob"`
+
+            - `"grep"`
+
+            - `"web_fetch"`
+
+            - `"web_search"`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `enabled: boolean`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `type: "agent_toolset_20260401"`
+
+          - `"agent_toolset_20260401"`
+
+      - `BetaManagedAgentsMCPToolset`
+
+        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+          - `enabled: boolean`
+
+          - `name: string`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `enabled: boolean`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `mcp_server_name: string`
+
+        - `type: "mcp_toolset"`
+
+          - `"mcp_toolset"`
+
+      - `BetaManagedAgentsCustomTool`
+
+        A custom tool as returned in API responses.
+
+        - `description: string`
+
+        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `properties?: Record<string, unknown> | null`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `required?: Array<string>`
+
+            List of required property names.
+
+          - `type?: "object"`
+
+            Must be 'object' for tool input schemas.
+
+            - `"object"`
+
+        - `name: string`
+
+        - `type: "custom"`
+
+          - `"custom"`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string | null`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `environment_id: string`
+
+  - `metadata: Record<string, string>`
+
+  - `outcome_evaluations: Array<BetaManagedAgentsOutcomeEvaluationResource>`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `completed_at: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `description: string`
+
+      What the agent should produce.
+
+    - `explanation: string | null`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `iteration: number`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `outcome_id: string`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `result: string`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `type: "outcome_evaluation"`
+
+      - `"outcome_evaluation"`
+
+  - `resources: Array<BetaManagedAgentsSessionResource>`
+
+    - `BetaManagedAgentsGitHubRepositoryResource`
+
+      - `id: string`
+
+      - `created_at: string`
+
+        A timestamp in RFC 3339 format
+
+      - `mount_path: string`
+
+      - `type: "github_repository"`
+
+        - `"github_repository"`
+
+      - `updated_at: string`
+
+        A timestamp in RFC 3339 format
+
+      - `url: string`
+
+      - `checkout?: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout | null`
+
+        - `BetaManagedAgentsBranchCheckout`
+
+          - `name: string`
+
+            Branch name to check out.
+
+          - `type: "branch"`
+
+            - `"branch"`
+
+        - `BetaManagedAgentsCommitCheckout`
+
+          - `sha: string`
+
+            Full commit SHA to check out.
+
+          - `type: "commit"`
+
+            - `"commit"`
+
+    - `BetaManagedAgentsFileResource`
+
+      - `id: string`
+
+      - `created_at: string`
+
+        A timestamp in RFC 3339 format
+
+      - `file_id: string`
+
+      - `mount_path: string`
+
+      - `type: "file"`
+
+        - `"file"`
+
+      - `updated_at: string`
+
+        A timestamp in RFC 3339 format
+
+    - `BetaManagedAgentsMemoryStoreResource`
+
+      A memory store attached to an agent session.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access?: "read_write" | "read_only" | null`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `description?: string`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `instructions?: string | null`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `mount_path?: string | null`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `name?: string | null`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+  - `stats: BetaManagedAgentsSessionStats`
+
+    Timing statistics for a session.
+
+    - `active_seconds?: number`
+
+      Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+    - `duration_seconds?: number`
+
+      Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+  - `status: "rescheduling" | "running" | "idle" | "terminated"`
+
+    SessionStatus enum
+
+    - `"rescheduling"`
+
+    - `"running"`
+
+    - `"idle"`
+
+    - `"terminated"`
+
+  - `title: string | null`
+
+  - `type: "session"`
+
+    - `"session"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `usage: BetaManagedAgentsSessionUsage`
+
+    Cumulative token usage for a session across all turns.
+
+    - `cache_creation?: BetaManagedAgentsCacheCreationUsage`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `ephemeral_1h_input_tokens?: number`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `ephemeral_5m_input_tokens?: number`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `cache_read_input_tokens?: number`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens?: number`
+
+      Total input tokens consumed across all turns.
+
+    - `output_tokens?: number`
+
+      Total output tokens generated across all turns.
+
+  - `vault_ids: Array<string>`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+### Beta Managed Agents Session Agent
+
+- `BetaManagedAgentsSessionAgent`
+
+  Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+  - `id: string`
+
+  - `description: string | null`
+
+  - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+    - `name: string`
+
+    - `type: "url"`
+
+      - `"url"`
+
+    - `url: string`
+
+  - `model: BetaManagedAgentsModelConfig`
+
+    Model identifier and configuration.
+
+    - `id: BetaManagedAgentsModel`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+        - `"claude-opus-4-7"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-opus-4-6"`
+
+          Most intelligent model for building agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+      - `(string & {})`
+
+    - `speed?: "standard" | "fast"`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator | null`
+
+    Resolved coordinator topology with full agent definitions for each roster member.
+
+    - `agents: Array<BetaManagedAgentsSessionThreadAgent>`
+
+      Full `agent` definitions the coordinator may spawn as session threads.
+
+      - `id: string`
+
+      - `description: string | null`
+
+      - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+        - `name: string`
+
+        - `type: "url"`
+
+          - `"url"`
+
+        - `url: string`
+
+      - `model: BetaManagedAgentsModelConfig`
+
+        Model identifier and configuration.
+
+        - `id: BetaManagedAgentsModel`
+
+          The model that will power your agent.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+            - `"claude-opus-4-7"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-opus-4-6"`
+
+              Most intelligent model for building agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+          - `(string & {})`
+
+        - `speed?: "standard" | "fast"`
+
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+          - `"standard"`
+
+          - `"fast"`
+
+      - `name: string`
+
+      - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+        - `BetaManagedAgentsAnthropicSkill`
+
+          A resolved Anthropic-managed skill.
+
+          - `skill_id: string`
+
+          - `type: "anthropic"`
+
+            - `"anthropic"`
+
+          - `version: string`
+
+        - `BetaManagedAgentsCustomSkill`
+
+          A resolved user-created custom skill.
+
+          - `skill_id: string`
+
+          - `type: "custom"`
+
+            - `"custom"`
+
+          - `version: string`
+
+      - `system: string | null`
+
+      - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+        - `BetaManagedAgentsAgentToolset20260401`
+
+          - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+            - `enabled: boolean`
+
+            - `name: "bash" | "edit" | "read" | 5 more`
+
+              Built-in agent tool identifier.
+
+              - `"bash"`
+
+              - `"edit"`
+
+              - `"read"`
+
+              - `"write"`
+
+              - `"glob"`
+
+              - `"grep"`
+
+              - `"web_fetch"`
+
+              - `"web_search"`
+
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+              Permission policy for tool execution.
+
+              - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                Tool calls are automatically approved without user confirmation.
+
+                - `type: "always_allow"`
+
+                  - `"always_allow"`
+
+              - `BetaManagedAgentsAlwaysAskPolicy`
+
+                Tool calls require user confirmation before execution.
+
+                - `type: "always_ask"`
+
+                  - `"always_ask"`
+
+          - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+            Resolved default configuration for agent tools.
+
+            - `enabled: boolean`
+
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+              Permission policy for tool execution.
+
+              - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                Tool calls are automatically approved without user confirmation.
+
+                - `type: "always_allow"`
+
+                  - `"always_allow"`
+
+              - `BetaManagedAgentsAlwaysAskPolicy`
+
+                Tool calls require user confirmation before execution.
+
+                - `type: "always_ask"`
+
+                  - `"always_ask"`
+
+          - `type: "agent_toolset_20260401"`
+
+            - `"agent_toolset_20260401"`
+
+        - `BetaManagedAgentsMCPToolset`
+
+          - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+            - `enabled: boolean`
+
+            - `name: string`
+
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+              Permission policy for tool execution.
+
+              - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                Tool calls are automatically approved without user confirmation.
+
+                - `type: "always_allow"`
+
+                  - `"always_allow"`
+
+              - `BetaManagedAgentsAlwaysAskPolicy`
+
+                Tool calls require user confirmation before execution.
+
+                - `type: "always_ask"`
+
+                  - `"always_ask"`
+
+          - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+            Resolved default configuration for all tools from an MCP server.
+
+            - `enabled: boolean`
+
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+              Permission policy for tool execution.
+
+              - `BetaManagedAgentsAlwaysAllowPolicy`
+
+                Tool calls are automatically approved without user confirmation.
+
+                - `type: "always_allow"`
+
+                  - `"always_allow"`
+
+              - `BetaManagedAgentsAlwaysAskPolicy`
+
+                Tool calls require user confirmation before execution.
+
+                - `type: "always_ask"`
+
+                  - `"always_ask"`
+
+          - `mcp_server_name: string`
+
+          - `type: "mcp_toolset"`
+
+            - `"mcp_toolset"`
+
+        - `BetaManagedAgentsCustomTool`
+
+          A custom tool as returned in API responses.
+
+          - `description: string`
+
+          - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+            JSON Schema for custom tool input parameters.
+
+            - `properties?: Record<string, unknown> | null`
+
+              JSON Schema properties defining the tool's input parameters.
+
+            - `required?: Array<string>`
+
+              List of required property names.
+
+            - `type?: "object"`
+
+              Must be 'object' for tool input schemas.
+
+              - `"object"`
+
+          - `name: string`
+
+          - `type: "custom"`
+
+            - `"custom"`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
+
+  - `name: string`
+
+  - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+    - `BetaManagedAgentsAnthropicSkill`
+
+      A resolved Anthropic-managed skill.
+
+      - `skill_id: string`
+
+      - `type: "anthropic"`
+
+        - `"anthropic"`
+
+      - `version: string`
+
+    - `BetaManagedAgentsCustomSkill`
+
+      A resolved user-created custom skill.
+
+      - `skill_id: string`
+
+      - `type: "custom"`
+
+        - `"custom"`
+
+      - `version: string`
+
+  - `system: string | null`
+
+  - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+    - `BetaManagedAgentsAgentToolset20260401`
+
+      - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+        - `enabled: boolean`
+
+        - `name: "bash" | "edit" | "read" | 5 more`
+
+          Built-in agent tool identifier.
+
+          - `"bash"`
+
+          - `"edit"`
+
+          - `"read"`
+
+          - `"write"`
+
+          - `"glob"`
+
+          - `"grep"`
+
+          - `"web_fetch"`
+
+          - `"web_search"`
+
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+          Permission policy for tool execution.
+
+          - `BetaManagedAgentsAlwaysAllowPolicy`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `type: "always_allow"`
+
+              - `"always_allow"`
+
+          - `BetaManagedAgentsAlwaysAskPolicy`
+
+            Tool calls require user confirmation before execution.
+
+            - `type: "always_ask"`
+
+              - `"always_ask"`
+
+      - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `enabled: boolean`
+
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+          Permission policy for tool execution.
+
+          - `BetaManagedAgentsAlwaysAllowPolicy`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `type: "always_allow"`
+
+              - `"always_allow"`
+
+          - `BetaManagedAgentsAlwaysAskPolicy`
+
+            Tool calls require user confirmation before execution.
+
+            - `type: "always_ask"`
+
+              - `"always_ask"`
+
+      - `type: "agent_toolset_20260401"`
+
+        - `"agent_toolset_20260401"`
+
+    - `BetaManagedAgentsMCPToolset`
+
+      - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+        - `enabled: boolean`
+
+        - `name: string`
+
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+          Permission policy for tool execution.
+
+          - `BetaManagedAgentsAlwaysAllowPolicy`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `type: "always_allow"`
+
+              - `"always_allow"`
+
+          - `BetaManagedAgentsAlwaysAskPolicy`
+
+            Tool calls require user confirmation before execution.
+
+            - `type: "always_ask"`
+
+              - `"always_ask"`
+
+      - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `enabled: boolean`
+
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+          Permission policy for tool execution.
+
+          - `BetaManagedAgentsAlwaysAllowPolicy`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `type: "always_allow"`
+
+              - `"always_allow"`
+
+          - `BetaManagedAgentsAlwaysAskPolicy`
+
+            Tool calls require user confirmation before execution.
+
+            - `type: "always_ask"`
+
+              - `"always_ask"`
+
+      - `mcp_server_name: string`
+
+      - `type: "mcp_toolset"`
+
+        - `"mcp_toolset"`
+
+    - `BetaManagedAgentsCustomTool`
+
+      A custom tool as returned in API responses.
+
+      - `description: string`
+
+      - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `properties?: Record<string, unknown> | null`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `required?: Array<string>`
+
+          List of required property names.
+
+        - `type?: "object"`
+
+          Must be 'object' for tool input schemas.
+
+          - `"object"`
+
+      - `name: string`
+
+      - `type: "custom"`
+
+        - `"custom"`
+
+  - `type: "agent"`
+
+    - `"agent"`
+
+  - `version: number`
+
+### Beta Managed Agents Session Multiagent Coordinator
+
+- `BetaManagedAgentsSessionMultiagentCoordinator`
+
+  Resolved coordinator topology with full agent definitions for each roster member.
+
+  - `agents: Array<BetaManagedAgentsSessionThreadAgent>`
+
+    Full `agent` definitions the coordinator may spawn as session threads.
 
     - `id: string`
 
@@ -58847,465 +64365,9 @@ console.log(betaManagedAgentsSession.id);
 
     - `version: number`
 
-  - `archived_at: string | null`
+  - `type: "coordinator"`
 
-    A timestamp in RFC 3339 format
-
-  - `created_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `environment_id: string`
-
-  - `metadata: Record<string, string>`
-
-  - `resources: Array<BetaManagedAgentsSessionResource>`
-
-    - `BetaManagedAgentsGitHubRepositoryResource`
-
-      - `id: string`
-
-      - `created_at: string`
-
-        A timestamp in RFC 3339 format
-
-      - `mount_path: string`
-
-      - `type: "github_repository"`
-
-        - `"github_repository"`
-
-      - `updated_at: string`
-
-        A timestamp in RFC 3339 format
-
-      - `url: string`
-
-      - `checkout?: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout | null`
-
-        - `BetaManagedAgentsBranchCheckout`
-
-          - `name: string`
-
-            Branch name to check out.
-
-          - `type: "branch"`
-
-            - `"branch"`
-
-        - `BetaManagedAgentsCommitCheckout`
-
-          - `sha: string`
-
-            Full commit SHA to check out.
-
-          - `type: "commit"`
-
-            - `"commit"`
-
-    - `BetaManagedAgentsFileResource`
-
-      - `id: string`
-
-      - `created_at: string`
-
-        A timestamp in RFC 3339 format
-
-      - `file_id: string`
-
-      - `mount_path: string`
-
-      - `type: "file"`
-
-        - `"file"`
-
-      - `updated_at: string`
-
-        A timestamp in RFC 3339 format
-
-    - `BetaManagedAgentsMemoryStoreResource`
-
-      A memory store attached to an agent session.
-
-      - `memory_store_id: string`
-
-        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `type: "memory_store"`
-
-        - `"memory_store"`
-
-      - `access?: "read_write" | "read_only" | null`
-
-        Access mode for an attached memory store.
-
-        - `"read_write"`
-
-        - `"read_only"`
-
-      - `description?: string`
-
-        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
-
-      - `instructions?: string | null`
-
-        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
-
-      - `mount_path?: string | null`
-
-        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
-
-      - `name?: string | null`
-
-        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
-
-  - `stats: BetaManagedAgentsSessionStats`
-
-    Timing statistics for a session.
-
-    - `active_seconds?: number`
-
-      Cumulative time in seconds the session spent in running status. Excludes idle time.
-
-    - `duration_seconds?: number`
-
-      Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
-
-  - `status: "rescheduling" | "running" | "idle" | "terminated"`
-
-    SessionStatus enum
-
-    - `"rescheduling"`
-
-    - `"running"`
-
-    - `"idle"`
-
-    - `"terminated"`
-
-  - `title: string | null`
-
-  - `type: "session"`
-
-    - `"session"`
-
-  - `updated_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `usage: BetaManagedAgentsSessionUsage`
-
-    Cumulative token usage for a session across all turns.
-
-    - `cache_creation?: BetaManagedAgentsCacheCreationUsage`
-
-      Prompt-cache creation token usage broken down by cache lifetime.
-
-      - `ephemeral_1h_input_tokens?: number`
-
-        Tokens used to create 1-hour ephemeral cache entries.
-
-      - `ephemeral_5m_input_tokens?: number`
-
-        Tokens used to create 5-minute ephemeral cache entries.
-
-    - `cache_read_input_tokens?: number`
-
-      Total tokens read from prompt cache.
-
-    - `input_tokens?: number`
-
-      Total input tokens consumed across all turns.
-
-    - `output_tokens?: number`
-
-      Total output tokens generated across all turns.
-
-  - `vault_ids: Array<string>`
-
-    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
-
-### Beta Managed Agents Session Agent
-
-- `BetaManagedAgentsSessionAgent`
-
-  Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
-
-  - `id: string`
-
-  - `description: string | null`
-
-  - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
-
-    - `name: string`
-
-    - `type: "url"`
-
-      - `"url"`
-
-    - `url: string`
-
-  - `model: BetaManagedAgentsModelConfig`
-
-    Model identifier and configuration.
-
-    - `id: BetaManagedAgentsModel`
-
-      The model that will power your agent.
-
-      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-      - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
-
-        - `"claude-opus-4-7"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `"claude-opus-4-6"`
-
-          Most intelligent model for building agents and coding
-
-        - `"claude-sonnet-4-6"`
-
-          Best combination of speed and intelligence
-
-        - `"claude-haiku-4-5"`
-
-          Fastest model with near-frontier intelligence
-
-        - `"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
-
-        - `"claude-opus-4-5"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `"claude-opus-4-5-20251101"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `"claude-sonnet-4-5"`
-
-          High-performance model for agents and coding
-
-        - `"claude-sonnet-4-5-20250929"`
-
-          High-performance model for agents and coding
-
-      - `(string & {})`
-
-    - `speed?: "standard" | "fast"`
-
-      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-      - `"standard"`
-
-      - `"fast"`
-
-  - `name: string`
-
-  - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
-
-    - `BetaManagedAgentsAnthropicSkill`
-
-      A resolved Anthropic-managed skill.
-
-      - `skill_id: string`
-
-      - `type: "anthropic"`
-
-        - `"anthropic"`
-
-      - `version: string`
-
-    - `BetaManagedAgentsCustomSkill`
-
-      A resolved user-created custom skill.
-
-      - `skill_id: string`
-
-      - `type: "custom"`
-
-        - `"custom"`
-
-      - `version: string`
-
-  - `system: string | null`
-
-  - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
-
-    - `BetaManagedAgentsAgentToolset20260401`
-
-      - `configs: Array<BetaManagedAgentsAgentToolConfig>`
-
-        - `enabled: boolean`
-
-        - `name: "bash" | "edit" | "read" | 5 more`
-
-          Built-in agent tool identifier.
-
-          - `"bash"`
-
-          - `"edit"`
-
-          - `"read"`
-
-          - `"write"`
-
-          - `"glob"`
-
-          - `"grep"`
-
-          - `"web_fetch"`
-
-          - `"web_search"`
-
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-          Permission policy for tool execution.
-
-          - `BetaManagedAgentsAlwaysAllowPolicy`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
-          - `BetaManagedAgentsAlwaysAskPolicy`
-
-            Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
-
-      - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
-
-        Resolved default configuration for agent tools.
-
-        - `enabled: boolean`
-
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-          Permission policy for tool execution.
-
-          - `BetaManagedAgentsAlwaysAllowPolicy`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
-          - `BetaManagedAgentsAlwaysAskPolicy`
-
-            Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
-
-      - `type: "agent_toolset_20260401"`
-
-        - `"agent_toolset_20260401"`
-
-    - `BetaManagedAgentsMCPToolset`
-
-      - `configs: Array<BetaManagedAgentsMCPToolConfig>`
-
-        - `enabled: boolean`
-
-        - `name: string`
-
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-          Permission policy for tool execution.
-
-          - `BetaManagedAgentsAlwaysAllowPolicy`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
-          - `BetaManagedAgentsAlwaysAskPolicy`
-
-            Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
-
-      - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
-
-        Resolved default configuration for all tools from an MCP server.
-
-        - `enabled: boolean`
-
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
-
-          Permission policy for tool execution.
-
-          - `BetaManagedAgentsAlwaysAllowPolicy`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
-          - `BetaManagedAgentsAlwaysAskPolicy`
-
-            Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
-
-      - `mcp_server_name: string`
-
-      - `type: "mcp_toolset"`
-
-        - `"mcp_toolset"`
-
-    - `BetaManagedAgentsCustomTool`
-
-      A custom tool as returned in API responses.
-
-      - `description: string`
-
-      - `input_schema: BetaManagedAgentsCustomToolInputSchema`
-
-        JSON Schema for custom tool input parameters.
-
-        - `properties?: Record<string, unknown> | null`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required?: Array<string>`
-
-          List of required property names.
-
-        - `type?: "object"`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"`
-
-      - `name: string`
-
-      - `type: "custom"`
-
-        - `"custom"`
-
-  - `type: "agent"`
-
-    - `"agent"`
-
-  - `version: number`
+    - `"coordinator"`
 
 ### Beta Managed Agents Session Stats
 
@@ -59367,6 +64429,22 @@ List Events
 
 - `params: EventListParams`
 
+  - `"created_at[gt]"?: string`
+
+    Query param: Return events created after this time (exclusive).
+
+  - `"created_at[gte]"?: string`
+
+    Query param: Return events created at or after this time (inclusive).
+
+  - `"created_at[lt]"?: string`
+
+    Query param: Return events created before this time (exclusive).
+
+  - `"created_at[lte]"?: string`
+
+    Query param: Return events created at or before this time (inclusive).
+
   - `limit?: number`
 
     Query param: Query parameter for limit
@@ -59383,13 +64461,17 @@ List Events
 
     Query param: Opaque pagination cursor from a previous response's next_page.
 
+  - `types?: Array<string>`
+
+    Query param: Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
+
   - `betas?: Array<AnthropicBeta>`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -59437,9 +64519,11 @@ List Events
 
       - `"advisor-tool-2026-03-01"`
 
+      - `"managed-agents-2026-04-01"`
+
 ### Returns
 
-- `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 17 more`
+- `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 28 more`
 
   Union type for all event types in a session.
 
@@ -59621,6 +64705,10 @@ List Events
 
       A timestamp in RFC 3339 format
 
+    - `session_thread_id?: string | null`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -59652,6 +64740,10 @@ List Events
     - `processed_at?: string | null`
 
       A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `BetaManagedAgentsUserCustomToolResultEvent`
 
@@ -59823,6 +64915,10 @@ List Events
 
       A timestamp in RFC 3339 format
 
+    - `session_thread_id?: string | null`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -59846,6 +64942,10 @@ List Events
     - `type: "agent.custom_tool_use"`
 
       - `"agent.custom_tool_use"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `BetaManagedAgentsAgentMessageEvent`
 
@@ -59928,6 +65028,10 @@ List Events
       - `"ask"`
 
       - `"deny"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `BetaManagedAgentsAgentMCPToolResultEvent`
 
@@ -60133,6 +65237,10 @@ List Events
 
       - `"deny"`
 
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
@@ -60302,6 +65410,346 @@ List Events
     - `is_error?: boolean | null`
 
       Whether the tool execution resulted in an error.
+
+  - `BetaManagedAgentsAgentThreadMessageReceivedEvent`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `from_session_thread_id: string`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thread_message_received"`
+
+      - `"agent.thread_message_received"`
+
+    - `from_agent_name?: string | null`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `BetaManagedAgentsAgentThreadMessageSentEvent`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `to_session_thread_id: string`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `type: "agent.thread_message_sent"`
+
+      - `"agent.thread_message_sent"`
+
+    - `to_agent_name?: string | null`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `BetaManagedAgentsAgentThreadContextCompactedEvent`
 
@@ -60723,6 +66171,118 @@ List Events
 
       - `"session.status_terminated"`
 
+  - `BetaManagedAgentsSessionThreadCreatedEvent`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the callable agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `type: "session.thread_created"`
+
+      - `"session.thread_created"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_start"`
+
+      - `"span.outcome_evaluation_start"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `explanation: string`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_evaluation_start_id: string`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `result: string`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `type: "span.outcome_evaluation_end"`
+
+      - `"span.outcome_evaluation_end"`
+
+    - `usage: BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `cache_creation_input_tokens: number`
+
+        Tokens used to create prompt cache in this request.
+
+      - `cache_read_input_tokens: number`
+
+        Tokens read from prompt cache in this request.
+
+      - `input_tokens: number`
+
+        Input tokens consumed by this request.
+
+      - `output_tokens: number`
+
+        Output tokens generated by this request.
+
+      - `speed?: "standard" | "fast" | null`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
   - `BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
@@ -60791,6 +66351,86 @@ List Events
 
       - `"span.model_request_end"`
 
+  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_ongoing"`
+
+      - `"span.outcome_evaluation_ongoing"`
+
+  - `BetaManagedAgentsUserDefineOutcomeEvent`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `description: string`
+
+      What the agent should produce. Copied from the input event.
+
+    - `max_iterations: number | null`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `outcome_id: string`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `BetaManagedAgentsFileRubric`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: string`
+
+          ID of the rubric file.
+
+        - `type: "file"`
+
+          - `"file"`
+
+      - `BetaManagedAgentsTextRubric`
+
+        Rubric content provided inline as text.
+
+        - `content: string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `type: "text"`
+
+          - `"text"`
+
+    - `type: "user.define_outcome"`
+
+      - `"user.define_outcome"`
+
   - `BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -60806,6 +66446,134 @@ List Events
     - `type: "session.deleted"`
 
       - `"session.deleted"`
+
+  - `BetaManagedAgentsSessionThreadStatusRunningEvent`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `type: "session.thread_status_running"`
+
+      - `"session.thread_status_running"`
+
+  - `BetaManagedAgentsSessionThreadStatusIdleEvent`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `BetaManagedAgentsSessionEndTurn`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `type: "end_turn"`
+
+          - `"end_turn"`
+
+      - `BetaManagedAgentsSessionRequiresAction`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `event_ids: Array<string>`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `type: "requires_action"`
+
+          - `"requires_action"`
+
+      - `BetaManagedAgentsSessionRetriesExhausted`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `type: "retries_exhausted"`
+
+          - `"retries_exhausted"`
+
+    - `type: "session.thread_status_idle"`
+
+      - `"session.thread_status_idle"`
+
+  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `type: "session.thread_status_terminated"`
+
+      - `"session.thread_status_terminated"`
+
+  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `type: "session.thread_status_rescheduled"`
+
+      - `"session.thread_status_rescheduled"`
 
 ### Example
 
@@ -61004,6 +66772,10 @@ Send Events
 
         - `"user.interrupt"`
 
+      - `session_thread_id?: string | null`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
     - `BetaManagedAgentsUserToolConfirmationEventParams`
 
       Parameters for confirming or denying a tool execution request.
@@ -61190,13 +66962,57 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
+    - `BetaManagedAgentsUserDefineOutcomeEventParams`
+
+      Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: string`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubricParams | BetaManagedAgentsTextRubricParams`
+
+        Rubric for grading the quality of an outcome.
+
+        - `BetaManagedAgentsFileRubricParams`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: string`
+
+            ID of the rubric file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+        - `BetaManagedAgentsTextRubricParams`
+
+          Rubric content provided inline as text.
+
+          - `content: string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+          - `type: "text"`
+
+            - `"text"`
+
+      - `type: "user.define_outcome"`
+
+        - `"user.define_outcome"`
+
+      - `max_iterations?: number | null`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
   - `betas?: Array<AnthropicBeta>`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -61244,13 +67060,15 @@ Send Events
 
       - `"advisor-tool-2026-03-01"`
 
+      - `"managed-agents-2026-04-01"`
+
 ### Returns
 
 - `BetaManagedAgentsSendSessionEvents`
 
   Events that were successfully sent to the session.
 
-  - `data?: Array<BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | BetaManagedAgentsUserCustomToolResultEvent>`
+  - `data?: Array<BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 2 more>`
 
     Sent events
 
@@ -61432,6 +67250,10 @@ Send Events
 
         A timestamp in RFC 3339 format
 
+      - `session_thread_id?: string | null`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
     - `BetaManagedAgentsUserToolConfirmationEvent`
 
       A tool confirmation event that approves or denies a pending tool execution.
@@ -61463,6 +67285,10 @@ Send Events
       - `processed_at?: string | null`
 
         A timestamp in RFC 3339 format
+
+      - `session_thread_id?: string | null`
+
+        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
     - `BetaManagedAgentsUserCustomToolResultEvent`
 
@@ -61634,6 +67460,66 @@ Send Events
 
         A timestamp in RFC 3339 format
 
+      - `session_thread_id?: string | null`
+
+        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+    - `BetaManagedAgentsUserDefineOutcomeEvent`
+
+      Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `id: string`
+
+        Unique identifier for this event.
+
+      - `description: string`
+
+        What the agent should produce. Copied from the input event.
+
+      - `max_iterations: number | null`
+
+        Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+      - `outcome_id: string`
+
+        Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+      - `processed_at: string`
+
+        A timestamp in RFC 3339 format
+
+      - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `BetaManagedAgentsFileRubric`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: string`
+
+            ID of the rubric file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+        - `BetaManagedAgentsTextRubric`
+
+          Rubric content provided inline as text.
+
+          - `content: string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: "text"`
+
+            - `"text"`
+
+      - `type: "user.define_outcome"`
+
+        - `"user.define_outcome"`
+
 ### Example
 
 ```typescript
@@ -61675,7 +67561,7 @@ Stream Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -61723,9 +67609,11 @@ Stream Events
 
       - `"advisor-tool-2026-03-01"`
 
+      - `"managed-agents-2026-04-01"`
+
 ### Returns
 
-- `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 17 more`
+- `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 28 more`
 
   Server-sent event in the session stream.
 
@@ -61907,6 +67795,10 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+    - `session_thread_id?: string | null`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -61938,6 +67830,10 @@ Stream Events
     - `processed_at?: string | null`
 
       A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `BetaManagedAgentsUserCustomToolResultEvent`
 
@@ -62109,6 +68005,10 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+    - `session_thread_id?: string | null`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -62132,6 +68032,10 @@ Stream Events
     - `type: "agent.custom_tool_use"`
 
       - `"agent.custom_tool_use"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `BetaManagedAgentsAgentMessageEvent`
 
@@ -62214,6 +68118,10 @@ Stream Events
       - `"ask"`
 
       - `"deny"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `BetaManagedAgentsAgentMCPToolResultEvent`
 
@@ -62419,6 +68327,10 @@ Stream Events
 
       - `"deny"`
 
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
@@ -62588,6 +68500,346 @@ Stream Events
     - `is_error?: boolean | null`
 
       Whether the tool execution resulted in an error.
+
+  - `BetaManagedAgentsAgentThreadMessageReceivedEvent`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `from_session_thread_id: string`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thread_message_received"`
+
+      - `"agent.thread_message_received"`
+
+    - `from_agent_name?: string | null`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `BetaManagedAgentsAgentThreadMessageSentEvent`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `to_session_thread_id: string`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `type: "agent.thread_message_sent"`
+
+      - `"agent.thread_message_sent"`
+
+    - `to_agent_name?: string | null`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `BetaManagedAgentsAgentThreadContextCompactedEvent`
 
@@ -63009,6 +69261,118 @@ Stream Events
 
       - `"session.status_terminated"`
 
+  - `BetaManagedAgentsSessionThreadCreatedEvent`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the callable agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `type: "session.thread_created"`
+
+      - `"session.thread_created"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_start"`
+
+      - `"span.outcome_evaluation_start"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `explanation: string`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_evaluation_start_id: string`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `result: string`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `type: "span.outcome_evaluation_end"`
+
+      - `"span.outcome_evaluation_end"`
+
+    - `usage: BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `cache_creation_input_tokens: number`
+
+        Tokens used to create prompt cache in this request.
+
+      - `cache_read_input_tokens: number`
+
+        Tokens read from prompt cache in this request.
+
+      - `input_tokens: number`
+
+        Input tokens consumed by this request.
+
+      - `output_tokens: number`
+
+        Output tokens generated by this request.
+
+      - `speed?: "standard" | "fast" | null`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
   - `BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
@@ -63077,6 +69441,86 @@ Stream Events
 
       - `"span.model_request_end"`
 
+  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_ongoing"`
+
+      - `"span.outcome_evaluation_ongoing"`
+
+  - `BetaManagedAgentsUserDefineOutcomeEvent`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `description: string`
+
+      What the agent should produce. Copied from the input event.
+
+    - `max_iterations: number | null`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `outcome_id: string`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `BetaManagedAgentsFileRubric`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: string`
+
+          ID of the rubric file.
+
+        - `type: "file"`
+
+          - `"file"`
+
+      - `BetaManagedAgentsTextRubric`
+
+        Rubric content provided inline as text.
+
+        - `content: string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `type: "text"`
+
+          - `"text"`
+
+    - `type: "user.define_outcome"`
+
+      - `"user.define_outcome"`
+
   - `BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -63092,6 +69536,134 @@ Stream Events
     - `type: "session.deleted"`
 
       - `"session.deleted"`
+
+  - `BetaManagedAgentsSessionThreadStatusRunningEvent`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `type: "session.thread_status_running"`
+
+      - `"session.thread_status_running"`
+
+  - `BetaManagedAgentsSessionThreadStatusIdleEvent`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `BetaManagedAgentsSessionEndTurn`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `type: "end_turn"`
+
+          - `"end_turn"`
+
+      - `BetaManagedAgentsSessionRequiresAction`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `event_ids: Array<string>`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `type: "requires_action"`
+
+          - `"requires_action"`
+
+      - `BetaManagedAgentsSessionRetriesExhausted`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `type: "retries_exhausted"`
+
+          - `"retries_exhausted"`
+
+    - `type: "session.thread_status_idle"`
+
+      - `"session.thread_status_idle"`
+
+  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `type: "session.thread_status_terminated"`
+
+      - `"session.thread_status_terminated"`
+
+  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `type: "session.thread_status_rescheduled"`
+
+      - `"session.thread_status_rescheduled"`
 
 ### Example
 
@@ -63136,6 +69708,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
   - `type: "agent.custom_tool_use"`
 
     - `"agent.custom_tool_use"`
+
+  - `session_thread_id?: string | null`
+
+    When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
 ### Beta Managed Agents Agent MCP Tool Result Event
 
@@ -63349,6 +69925,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
     - `"deny"`
 
+  - `session_thread_id?: string | null`
+
+    When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
 ### Beta Managed Agents Agent Message Event
 
 - `BetaManagedAgentsAgentMessageEvent`
@@ -63414,6 +69994,350 @@ console.log(betaManagedAgentsStreamSessionEvents);
   - `type: "agent.thread_context_compacted"`
 
     - `"agent.thread_context_compacted"`
+
+### Beta Managed Agents Agent Thread Message Received Event
+
+- `BetaManagedAgentsAgentThreadMessageReceivedEvent`
+
+  Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+    Message content blocks.
+
+    - `BetaManagedAgentsTextBlock`
+
+      Regular text content.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `BetaManagedAgentsImageBlock`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+        Union type for image source variants.
+
+        - `BetaManagedAgentsBase64ImageSource`
+
+          Base64-encoded image data.
+
+          - `data: string`
+
+            Base64-encoded image data.
+
+          - `media_type: string`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `type: "base64"`
+
+            - `"base64"`
+
+        - `BetaManagedAgentsURLImageSource`
+
+          Image referenced by URL.
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+            URL of the image to fetch.
+
+        - `BetaManagedAgentsFileImageSource`
+
+          Image referenced by file ID.
+
+          - `file_id: string`
+
+            ID of a previously uploaded file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+      - `type: "image"`
+
+        - `"image"`
+
+    - `BetaManagedAgentsDocumentBlock`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+        Union type for document source variants.
+
+        - `BetaManagedAgentsBase64DocumentSource`
+
+          Base64-encoded document data.
+
+          - `data: string`
+
+            Base64-encoded document data.
+
+          - `media_type: string`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `type: "base64"`
+
+            - `"base64"`
+
+        - `BetaManagedAgentsPlainTextDocumentSource`
+
+          Plain text document content.
+
+          - `data: string`
+
+            The plain text content.
+
+          - `media_type: "text/plain"`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `"text/plain"`
+
+          - `type: "text"`
+
+            - `"text"`
+
+        - `BetaManagedAgentsURLDocumentSource`
+
+          Document referenced by URL.
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+            URL of the document to fetch.
+
+        - `BetaManagedAgentsFileDocumentSource`
+
+          Document referenced by file ID.
+
+          - `file_id: string`
+
+            ID of a previously uploaded file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+      - `type: "document"`
+
+        - `"document"`
+
+      - `context?: string | null`
+
+        Additional context about the document for the model.
+
+      - `title?: string | null`
+
+        The title of the document.
+
+  - `from_session_thread_id: string`
+
+    Public `sthr_` ID of the thread that sent the message.
+
+  - `processed_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `type: "agent.thread_message_received"`
+
+    - `"agent.thread_message_received"`
+
+  - `from_agent_name?: string | null`
+
+    Name of the callable agent this message came from. Absent when received from the primary agent.
+
+### Beta Managed Agents Agent Thread Message Sent Event
+
+- `BetaManagedAgentsAgentThreadMessageSentEvent`
+
+  Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+    Message content blocks.
+
+    - `BetaManagedAgentsTextBlock`
+
+      Regular text content.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `BetaManagedAgentsImageBlock`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+        Union type for image source variants.
+
+        - `BetaManagedAgentsBase64ImageSource`
+
+          Base64-encoded image data.
+
+          - `data: string`
+
+            Base64-encoded image data.
+
+          - `media_type: string`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `type: "base64"`
+
+            - `"base64"`
+
+        - `BetaManagedAgentsURLImageSource`
+
+          Image referenced by URL.
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+            URL of the image to fetch.
+
+        - `BetaManagedAgentsFileImageSource`
+
+          Image referenced by file ID.
+
+          - `file_id: string`
+
+            ID of a previously uploaded file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+      - `type: "image"`
+
+        - `"image"`
+
+    - `BetaManagedAgentsDocumentBlock`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+        Union type for document source variants.
+
+        - `BetaManagedAgentsBase64DocumentSource`
+
+          Base64-encoded document data.
+
+          - `data: string`
+
+            Base64-encoded document data.
+
+          - `media_type: string`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `type: "base64"`
+
+            - `"base64"`
+
+        - `BetaManagedAgentsPlainTextDocumentSource`
+
+          Plain text document content.
+
+          - `data: string`
+
+            The plain text content.
+
+          - `media_type: "text/plain"`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `"text/plain"`
+
+          - `type: "text"`
+
+            - `"text"`
+
+        - `BetaManagedAgentsURLDocumentSource`
+
+          Document referenced by URL.
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+            URL of the document to fetch.
+
+        - `BetaManagedAgentsFileDocumentSource`
+
+          Document referenced by file ID.
+
+          - `file_id: string`
+
+            ID of a previously uploaded file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+      - `type: "document"`
+
+        - `"document"`
+
+      - `context?: string | null`
+
+        Additional context about the document for the model.
+
+      - `title?: string | null`
+
+        The title of the document.
+
+  - `processed_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `to_session_thread_id: string`
+
+    Public `sthr_` ID of the thread the message was sent to.
+
+  - `type: "agent.thread_message_sent"`
+
+    - `"agent.thread_message_sent"`
+
+  - `to_agent_name?: string | null`
+
+    Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
 ### Beta Managed Agents Agent Tool Result Event
 
@@ -63623,6 +70547,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
     - `"deny"`
 
+  - `session_thread_id?: string | null`
+
+    When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
 ### Beta Managed Agents Base64 Document Source
 
 - `BetaManagedAgentsBase64DocumentSource`
@@ -63783,7 +70711,7 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Event Params
 
-- `BetaManagedAgentsEventParams = BetaManagedAgentsUserMessageEventParams | BetaManagedAgentsUserInterruptEventParams | BetaManagedAgentsUserToolConfirmationEventParams | BetaManagedAgentsUserCustomToolResultEventParams`
+- `BetaManagedAgentsEventParams = BetaManagedAgentsUserMessageEventParams | BetaManagedAgentsUserInterruptEventParams | BetaManagedAgentsUserToolConfirmationEventParams | 2 more`
 
   Union type for event parameters that can be sent to a session.
 
@@ -63948,6 +70876,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
     - `type: "user.interrupt"`
 
       - `"user.interrupt"`
+
+    - `session_thread_id?: string | null`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
   - `BetaManagedAgentsUserToolConfirmationEventParams`
 
@@ -64135,6 +71067,50 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       Whether the tool execution resulted in an error.
 
+  - `BetaManagedAgentsUserDefineOutcomeEventParams`
+
+    Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `description: string`
+
+      What the agent should produce. This is the task specification.
+
+    - `rubric: BetaManagedAgentsFileRubricParams | BetaManagedAgentsTextRubricParams`
+
+      Rubric for grading the quality of an outcome.
+
+      - `BetaManagedAgentsFileRubricParams`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: string`
+
+          ID of the rubric file.
+
+        - `type: "file"`
+
+          - `"file"`
+
+      - `BetaManagedAgentsTextRubricParams`
+
+        Rubric content provided inline as text.
+
+        - `content: string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+        - `type: "text"`
+
+          - `"text"`
+
+    - `type: "user.define_outcome"`
+
+      - `"user.define_outcome"`
+
+    - `max_iterations?: number | null`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
 ### Beta Managed Agents File Document Source
 
 - `BetaManagedAgentsFileDocumentSource`
@@ -64158,6 +71134,34 @@ console.log(betaManagedAgentsStreamSessionEvents);
   - `file_id: string`
 
     ID of a previously uploaded file.
+
+  - `type: "file"`
+
+    - `"file"`
+
+### Beta Managed Agents File Rubric
+
+- `BetaManagedAgentsFileRubric`
+
+  Rubric referenced by a file uploaded via the Files API.
+
+  - `file_id: string`
+
+    ID of the rubric file.
+
+  - `type: "file"`
+
+    - `"file"`
+
+### Beta Managed Agents File Rubric Params
+
+- `BetaManagedAgentsFileRubricParams`
+
+  Rubric referenced by a file uploaded via the Files API.
+
+  - `file_id: string`
+
+    ID of the rubric file.
 
   - `type: "file"`
 
@@ -64491,7 +71495,7 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
   Events that were successfully sent to the session.
 
-  - `data?: Array<BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | BetaManagedAgentsUserCustomToolResultEvent>`
+  - `data?: Array<BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 2 more>`
 
     Sent events
 
@@ -64673,6 +71677,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
         A timestamp in RFC 3339 format
 
+      - `session_thread_id?: string | null`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
     - `BetaManagedAgentsUserToolConfirmationEvent`
 
       A tool confirmation event that approves or denies a pending tool execution.
@@ -64704,6 +71712,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
       - `processed_at?: string | null`
 
         A timestamp in RFC 3339 format
+
+      - `session_thread_id?: string | null`
+
+        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
     - `BetaManagedAgentsUserCustomToolResultEvent`
 
@@ -64874,6 +71886,66 @@ console.log(betaManagedAgentsStreamSessionEvents);
       - `processed_at?: string | null`
 
         A timestamp in RFC 3339 format
+
+      - `session_thread_id?: string | null`
+
+        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+    - `BetaManagedAgentsUserDefineOutcomeEvent`
+
+      Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `id: string`
+
+        Unique identifier for this event.
+
+      - `description: string`
+
+        What the agent should produce. Copied from the input event.
+
+      - `max_iterations: number | null`
+
+        Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+      - `outcome_id: string`
+
+        Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+      - `processed_at: string`
+
+        A timestamp in RFC 3339 format
+
+      - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `BetaManagedAgentsFileRubric`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: string`
+
+            ID of the rubric file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+        - `BetaManagedAgentsTextRubric`
+
+          Rubric content provided inline as text.
+
+          - `content: string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: "text"`
+
+            - `"text"`
+
+      - `type: "user.define_outcome"`
+
+        - `"user.define_outcome"`
 
 ### Beta Managed Agents Session Deleted Event
 
@@ -65215,7 +72287,7 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Event
 
-- `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 17 more`
+- `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 28 more`
 
   Union type for all event types in a session.
 
@@ -65397,6 +72469,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
+    - `session_thread_id?: string | null`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -65428,6 +72504,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
     - `processed_at?: string | null`
 
       A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `BetaManagedAgentsUserCustomToolResultEvent`
 
@@ -65599,6 +72679,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
+    - `session_thread_id?: string | null`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -65622,6 +72706,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
     - `type: "agent.custom_tool_use"`
 
       - `"agent.custom_tool_use"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `BetaManagedAgentsAgentMessageEvent`
 
@@ -65704,6 +72792,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
       - `"ask"`
 
       - `"deny"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `BetaManagedAgentsAgentMCPToolResultEvent`
 
@@ -65909,6 +73001,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       - `"deny"`
 
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
@@ -66078,6 +73174,346 @@ console.log(betaManagedAgentsStreamSessionEvents);
     - `is_error?: boolean | null`
 
       Whether the tool execution resulted in an error.
+
+  - `BetaManagedAgentsAgentThreadMessageReceivedEvent`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `from_session_thread_id: string`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thread_message_received"`
+
+      - `"agent.thread_message_received"`
+
+    - `from_agent_name?: string | null`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `BetaManagedAgentsAgentThreadMessageSentEvent`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `to_session_thread_id: string`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `type: "agent.thread_message_sent"`
+
+      - `"agent.thread_message_sent"`
+
+    - `to_agent_name?: string | null`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `BetaManagedAgentsAgentThreadContextCompactedEvent`
 
@@ -66499,6 +73935,118 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       - `"session.status_terminated"`
 
+  - `BetaManagedAgentsSessionThreadCreatedEvent`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the callable agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `type: "session.thread_created"`
+
+      - `"session.thread_created"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_start"`
+
+      - `"span.outcome_evaluation_start"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `explanation: string`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_evaluation_start_id: string`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `result: string`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `type: "span.outcome_evaluation_end"`
+
+      - `"span.outcome_evaluation_end"`
+
+    - `usage: BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `cache_creation_input_tokens: number`
+
+        Tokens used to create prompt cache in this request.
+
+      - `cache_read_input_tokens: number`
+
+        Tokens read from prompt cache in this request.
+
+      - `input_tokens: number`
+
+        Input tokens consumed by this request.
+
+      - `output_tokens: number`
+
+        Output tokens generated by this request.
+
+      - `speed?: "standard" | "fast" | null`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
   - `BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
@@ -66567,6 +74115,86 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       - `"span.model_request_end"`
 
+  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_ongoing"`
+
+      - `"span.outcome_evaluation_ongoing"`
+
+  - `BetaManagedAgentsUserDefineOutcomeEvent`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `description: string`
+
+      What the agent should produce. Copied from the input event.
+
+    - `max_iterations: number | null`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `outcome_id: string`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `BetaManagedAgentsFileRubric`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: string`
+
+          ID of the rubric file.
+
+        - `type: "file"`
+
+          - `"file"`
+
+      - `BetaManagedAgentsTextRubric`
+
+        Rubric content provided inline as text.
+
+        - `content: string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `type: "text"`
+
+          - `"text"`
+
+    - `type: "user.define_outcome"`
+
+      - `"user.define_outcome"`
+
   - `BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -66582,6 +74210,134 @@ console.log(betaManagedAgentsStreamSessionEvents);
     - `type: "session.deleted"`
 
       - `"session.deleted"`
+
+  - `BetaManagedAgentsSessionThreadStatusRunningEvent`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `type: "session.thread_status_running"`
+
+      - `"session.thread_status_running"`
+
+  - `BetaManagedAgentsSessionThreadStatusIdleEvent`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `BetaManagedAgentsSessionEndTurn`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `type: "end_turn"`
+
+          - `"end_turn"`
+
+      - `BetaManagedAgentsSessionRequiresAction`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `event_ids: Array<string>`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `type: "requires_action"`
+
+          - `"requires_action"`
+
+      - `BetaManagedAgentsSessionRetriesExhausted`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `type: "retries_exhausted"`
+
+          - `"retries_exhausted"`
+
+    - `type: "session.thread_status_idle"`
+
+      - `"session.thread_status_idle"`
+
+  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `type: "session.thread_status_terminated"`
+
+      - `"session.thread_status_terminated"`
+
+  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `type: "session.thread_status_rescheduled"`
+
+      - `"session.thread_status_rescheduled"`
 
 ### Beta Managed Agents Session Requires Action
 
@@ -66711,6 +74467,168 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
     - `"session.status_terminated"`
 
+### Beta Managed Agents Session Thread Created Event
+
+- `BetaManagedAgentsSessionThreadCreatedEvent`
+
+  Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `agent_name: string`
+
+    Name of the callable agent the thread runs.
+
+  - `processed_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `session_thread_id: string`
+
+    Public `sthr_` ID of the newly created thread.
+
+  - `type: "session.thread_created"`
+
+    - `"session.thread_created"`
+
+### Beta Managed Agents Session Thread Status Idle Event
+
+- `BetaManagedAgentsSessionThreadStatusIdleEvent`
+
+  A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `agent_name: string`
+
+    Name of the agent the thread runs.
+
+  - `processed_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `session_thread_id: string`
+
+    Public sthr_ ID of the thread that went idle.
+
+  - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted`
+
+    The agent completed its turn naturally and is ready for the next user message.
+
+    - `BetaManagedAgentsSessionEndTurn`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `type: "end_turn"`
+
+        - `"end_turn"`
+
+    - `BetaManagedAgentsSessionRequiresAction`
+
+      The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+      - `event_ids: Array<string>`
+
+        The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+      - `type: "requires_action"`
+
+        - `"requires_action"`
+
+    - `BetaManagedAgentsSessionRetriesExhausted`
+
+      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+      - `type: "retries_exhausted"`
+
+        - `"retries_exhausted"`
+
+  - `type: "session.thread_status_idle"`
+
+    - `"session.thread_status_idle"`
+
+### Beta Managed Agents Session Thread Status Rescheduled Event
+
+- `BetaManagedAgentsSessionThreadStatusRescheduledEvent`
+
+  A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `agent_name: string`
+
+    Name of the agent the thread runs.
+
+  - `processed_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `session_thread_id: string`
+
+    Public sthr_ ID of the thread that is retrying.
+
+  - `type: "session.thread_status_rescheduled"`
+
+    - `"session.thread_status_rescheduled"`
+
+### Beta Managed Agents Session Thread Status Running Event
+
+- `BetaManagedAgentsSessionThreadStatusRunningEvent`
+
+  A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `agent_name: string`
+
+    Name of the agent the thread runs.
+
+  - `processed_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `session_thread_id: string`
+
+    Public sthr_ ID of the thread that started running.
+
+  - `type: "session.thread_status_running"`
+
+    - `"session.thread_status_running"`
+
+### Beta Managed Agents Session Thread Status Terminated Event
+
+- `BetaManagedAgentsSessionThreadStatusTerminatedEvent`
+
+  A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `agent_name: string`
+
+    Name of the agent the thread runs.
+
+  - `processed_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `session_thread_id: string`
+
+    Public sthr_ ID of the thread that terminated.
+
+  - `type: "session.thread_status_terminated"`
+
+    - `"session.thread_status_terminated"`
+
 ### Beta Managed Agents Span Model Request End Event
 
 - `BetaManagedAgentsSpanModelRequestEndEvent`
@@ -66813,9 +74731,127 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
     - `"fast"`
 
+### Beta Managed Agents Span Outcome Evaluation End Event
+
+- `BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+  Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `explanation: string`
+
+    Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+  - `iteration: number`
+
+    0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+  - `outcome_evaluation_start_id: string`
+
+    The id of the corresponding `span.outcome_evaluation_start` event.
+
+  - `outcome_id: string`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `processed_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `result: string`
+
+    Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+  - `type: "span.outcome_evaluation_end"`
+
+    - `"span.outcome_evaluation_end"`
+
+  - `usage: BetaManagedAgentsSpanModelUsage`
+
+    Token usage for a single model request.
+
+    - `cache_creation_input_tokens: number`
+
+      Tokens used to create prompt cache in this request.
+
+    - `cache_read_input_tokens: number`
+
+      Tokens read from prompt cache in this request.
+
+    - `input_tokens: number`
+
+      Input tokens consumed by this request.
+
+    - `output_tokens: number`
+
+      Output tokens generated by this request.
+
+    - `speed?: "standard" | "fast" | null`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+### Beta Managed Agents Span Outcome Evaluation Ongoing Event
+
+- `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+  Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `iteration: number`
+
+    0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+  - `outcome_id: string`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `processed_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `type: "span.outcome_evaluation_ongoing"`
+
+    - `"span.outcome_evaluation_ongoing"`
+
+### Beta Managed Agents Span Outcome Evaluation Start Event
+
+- `BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+  Emitted when an outcome evaluation cycle begins.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `iteration: number`
+
+    0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+  - `outcome_id: string`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `processed_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `type: "span.outcome_evaluation_start"`
+
+    - `"span.outcome_evaluation_start"`
+
 ### Beta Managed Agents Stream Session Events
 
-- `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 17 more`
+- `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 28 more`
 
   Server-sent event in the session stream.
 
@@ -66997,6 +75033,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
+    - `session_thread_id?: string | null`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -67028,6 +75068,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
     - `processed_at?: string | null`
 
       A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `BetaManagedAgentsUserCustomToolResultEvent`
 
@@ -67199,6 +75243,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
+    - `session_thread_id?: string | null`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -67222,6 +75270,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
     - `type: "agent.custom_tool_use"`
 
       - `"agent.custom_tool_use"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `BetaManagedAgentsAgentMessageEvent`
 
@@ -67304,6 +75356,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
       - `"ask"`
 
       - `"deny"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `BetaManagedAgentsAgentMCPToolResultEvent`
 
@@ -67509,6 +75565,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       - `"deny"`
 
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
@@ -67678,6 +75738,346 @@ console.log(betaManagedAgentsStreamSessionEvents);
     - `is_error?: boolean | null`
 
       Whether the tool execution resulted in an error.
+
+  - `BetaManagedAgentsAgentThreadMessageReceivedEvent`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `from_session_thread_id: string`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thread_message_received"`
+
+      - `"agent.thread_message_received"`
+
+    - `from_agent_name?: string | null`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `BetaManagedAgentsAgentThreadMessageSentEvent`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `to_session_thread_id: string`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `type: "agent.thread_message_sent"`
+
+      - `"agent.thread_message_sent"`
+
+    - `to_agent_name?: string | null`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `BetaManagedAgentsAgentThreadContextCompactedEvent`
 
@@ -68099,6 +76499,118 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       - `"session.status_terminated"`
 
+  - `BetaManagedAgentsSessionThreadCreatedEvent`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the callable agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `type: "session.thread_created"`
+
+      - `"session.thread_created"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_start"`
+
+      - `"span.outcome_evaluation_start"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `explanation: string`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_evaluation_start_id: string`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `result: string`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `type: "span.outcome_evaluation_end"`
+
+      - `"span.outcome_evaluation_end"`
+
+    - `usage: BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `cache_creation_input_tokens: number`
+
+        Tokens used to create prompt cache in this request.
+
+      - `cache_read_input_tokens: number`
+
+        Tokens read from prompt cache in this request.
+
+      - `input_tokens: number`
+
+        Input tokens consumed by this request.
+
+      - `output_tokens: number`
+
+        Output tokens generated by this request.
+
+      - `speed?: "standard" | "fast" | null`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
   - `BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
@@ -68167,6 +76679,86 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       - `"span.model_request_end"`
 
+  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_ongoing"`
+
+      - `"span.outcome_evaluation_ongoing"`
+
+  - `BetaManagedAgentsUserDefineOutcomeEvent`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `description: string`
+
+      What the agent should produce. Copied from the input event.
+
+    - `max_iterations: number | null`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `outcome_id: string`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `BetaManagedAgentsFileRubric`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: string`
+
+          ID of the rubric file.
+
+        - `type: "file"`
+
+          - `"file"`
+
+      - `BetaManagedAgentsTextRubric`
+
+        Rubric content provided inline as text.
+
+        - `content: string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `type: "text"`
+
+          - `"text"`
+
+    - `type: "user.define_outcome"`
+
+      - `"user.define_outcome"`
+
   - `BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -68183,6 +76775,134 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
       - `"session.deleted"`
 
+  - `BetaManagedAgentsSessionThreadStatusRunningEvent`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `type: "session.thread_status_running"`
+
+      - `"session.thread_status_running"`
+
+  - `BetaManagedAgentsSessionThreadStatusIdleEvent`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `BetaManagedAgentsSessionEndTurn`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `type: "end_turn"`
+
+          - `"end_turn"`
+
+      - `BetaManagedAgentsSessionRequiresAction`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `event_ids: Array<string>`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `type: "requires_action"`
+
+          - `"requires_action"`
+
+      - `BetaManagedAgentsSessionRetriesExhausted`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `type: "retries_exhausted"`
+
+          - `"retries_exhausted"`
+
+    - `type: "session.thread_status_idle"`
+
+      - `"session.thread_status_idle"`
+
+  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `type: "session.thread_status_terminated"`
+
+      - `"session.thread_status_terminated"`
+
+  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `type: "session.thread_status_rescheduled"`
+
+      - `"session.thread_status_rescheduled"`
+
 ### Beta Managed Agents Text Block
 
 - `BetaManagedAgentsTextBlock`
@@ -68192,6 +76912,34 @@ console.log(betaManagedAgentsStreamSessionEvents);
   - `text: string`
 
     The text content.
+
+  - `type: "text"`
+
+    - `"text"`
+
+### Beta Managed Agents Text Rubric
+
+- `BetaManagedAgentsTextRubric`
+
+  Rubric content provided inline as text.
+
+  - `content: string`
+
+    Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+  - `type: "text"`
+
+    - `"text"`
+
+### Beta Managed Agents Text Rubric Params
+
+- `BetaManagedAgentsTextRubricParams`
+
+  Rubric content provided inline as text.
+
+  - `content: string`
+
+    Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
   - `type: "text"`
 
@@ -68439,6 +77187,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
     A timestamp in RFC 3339 format
 
+  - `session_thread_id?: string | null`
+
+    Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
 ### Beta Managed Agents User Custom Tool Result Event Params
 
 - `BetaManagedAgentsUserCustomToolResultEventParams`
@@ -68603,6 +77355,110 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
     Whether the tool execution resulted in an error.
 
+### Beta Managed Agents User Define Outcome Event
+
+- `BetaManagedAgentsUserDefineOutcomeEvent`
+
+  Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `description: string`
+
+    What the agent should produce. Copied from the input event.
+
+  - `max_iterations: number | null`
+
+    Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+  - `outcome_id: string`
+
+    Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+  - `processed_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+    Rubric for grading the quality of an outcome.
+
+    - `BetaManagedAgentsFileRubric`
+
+      Rubric referenced by a file uploaded via the Files API.
+
+      - `file_id: string`
+
+        ID of the rubric file.
+
+      - `type: "file"`
+
+        - `"file"`
+
+    - `BetaManagedAgentsTextRubric`
+
+      Rubric content provided inline as text.
+
+      - `content: string`
+
+        Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+      - `type: "text"`
+
+        - `"text"`
+
+  - `type: "user.define_outcome"`
+
+    - `"user.define_outcome"`
+
+### Beta Managed Agents User Define Outcome Event Params
+
+- `BetaManagedAgentsUserDefineOutcomeEventParams`
+
+  Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+  - `description: string`
+
+    What the agent should produce. This is the task specification.
+
+  - `rubric: BetaManagedAgentsFileRubricParams | BetaManagedAgentsTextRubricParams`
+
+    Rubric for grading the quality of an outcome.
+
+    - `BetaManagedAgentsFileRubricParams`
+
+      Rubric referenced by a file uploaded via the Files API.
+
+      - `file_id: string`
+
+        ID of the rubric file.
+
+      - `type: "file"`
+
+        - `"file"`
+
+    - `BetaManagedAgentsTextRubricParams`
+
+      Rubric content provided inline as text.
+
+      - `content: string`
+
+        Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+      - `type: "text"`
+
+        - `"text"`
+
+  - `type: "user.define_outcome"`
+
+    - `"user.define_outcome"`
+
+  - `max_iterations?: number | null`
+
+    Eval→revision cycles before giving up. Default 3, max 20.
+
 ### Beta Managed Agents User Interrupt Event
 
 - `BetaManagedAgentsUserInterruptEvent`
@@ -68621,6 +77477,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
     A timestamp in RFC 3339 format
 
+  - `session_thread_id?: string | null`
+
+    If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 ### Beta Managed Agents User Interrupt Event Params
 
 - `BetaManagedAgentsUserInterruptEventParams`
@@ -68630,6 +77490,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
   - `type: "user.interrupt"`
 
     - `"user.interrupt"`
+
+  - `session_thread_id?: string | null`
+
+    If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
 ### Beta Managed Agents User Message Event
 
@@ -68985,6 +77849,10 @@ console.log(betaManagedAgentsStreamSessionEvents);
 
     A timestamp in RFC 3339 format
 
+  - `session_thread_id?: string | null`
+
+    When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
 ### Beta Managed Agents User Tool Confirmation Event Params
 
 - `BetaManagedAgentsUserToolConfirmationEventParams`
@@ -69047,7 +77915,7 @@ Add Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -69094,6 +77962,8 @@ Add Session Resource
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -69162,7 +78032,7 @@ List Session Resources
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -69209,6 +78079,8 @@ List Session Resources
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -69355,7 +78227,7 @@ Get Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -69402,6 +78274,8 @@ Get Session Resource
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -69551,7 +78425,7 @@ Update Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -69598,6 +78472,8 @@ Update Session Resource
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -69744,7 +78620,7 @@ Delete Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -69791,6 +78667,8 @@ Delete Session Resource
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -70251,27 +79129,29 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-# Vaults
+# Threads
 
-## Create
+## List
 
-`client.beta.vaults.create(VaultCreateParamsparams, RequestOptionsoptions?): BetaManagedAgentsVault`
+`client.beta.sessions.threads.list(stringsessionID, ThreadListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsSessionThread>`
 
-**post** `/v1/vaults`
+**get** `/v1/sessions/{session_id}/threads`
 
-Create Vault
+List Session Threads
 
 ### Parameters
 
-- `params: VaultCreateParams`
+- `sessionID: string`
 
-  - `display_name: string`
+- `params: ThreadListParams`
 
-    Body param: Human-readable name for the vault. 1-255 characters.
+  - `limit?: number`
 
-  - `metadata?: Record<string, string>`
+    Query param: Maximum results per page. Defaults to 1000.
 
-    Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+  - `page?: string`
+
+    Query param: Opaque pagination cursor from a previous response's next_page. Forward-only.
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -70279,7 +79159,7 @@ Create Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -70326,6 +79206,8466 @@ Create Vault
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
+
+### Returns
+
+- `BetaManagedAgentsSessionThread`
+
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `id: string`
+
+    Unique identifier for this thread.
+
+  - `agent: BetaManagedAgentsSessionThreadAgent`
+
+    Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+    - `id: string`
+
+    - `description: string | null`
+
+    - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+      - `name: string`
+
+      - `type: "url"`
+
+        - `"url"`
+
+      - `url: string`
+
+    - `model: BetaManagedAgentsModelConfig`
+
+      Model identifier and configuration.
+
+      - `id: BetaManagedAgentsModel`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+        - `(string & {})`
+
+      - `speed?: "standard" | "fast"`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+    - `name: string`
+
+    - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+      - `BetaManagedAgentsAnthropicSkill`
+
+        A resolved Anthropic-managed skill.
+
+        - `skill_id: string`
+
+        - `type: "anthropic"`
+
+          - `"anthropic"`
+
+        - `version: string`
+
+      - `BetaManagedAgentsCustomSkill`
+
+        A resolved user-created custom skill.
+
+        - `skill_id: string`
+
+        - `type: "custom"`
+
+          - `"custom"`
+
+        - `version: string`
+
+    - `system: string | null`
+
+    - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+      - `BetaManagedAgentsAgentToolset20260401`
+
+        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+          - `enabled: boolean`
+
+          - `name: "bash" | "edit" | "read" | 5 more`
+
+            Built-in agent tool identifier.
+
+            - `"bash"`
+
+            - `"edit"`
+
+            - `"read"`
+
+            - `"write"`
+
+            - `"glob"`
+
+            - `"grep"`
+
+            - `"web_fetch"`
+
+            - `"web_search"`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `enabled: boolean`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `type: "agent_toolset_20260401"`
+
+          - `"agent_toolset_20260401"`
+
+      - `BetaManagedAgentsMCPToolset`
+
+        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+          - `enabled: boolean`
+
+          - `name: string`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `enabled: boolean`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `mcp_server_name: string`
+
+        - `type: "mcp_toolset"`
+
+          - `"mcp_toolset"`
+
+      - `BetaManagedAgentsCustomTool`
+
+        A custom tool as returned in API responses.
+
+        - `description: string`
+
+        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `properties?: Record<string, unknown> | null`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `required?: Array<string>`
+
+            List of required property names.
+
+          - `type?: "object"`
+
+            Must be 'object' for tool input schemas.
+
+            - `"object"`
+
+        - `name: string`
+
+        - `type: "custom"`
+
+          - `"custom"`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string | null`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `parent_thread_id: string | null`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `session_id: string`
+
+    The session this thread belongs to.
+
+  - `stats: BetaManagedAgentsSessionThreadStats | null`
+
+    Timing statistics for a session thread.
+
+    - `active_seconds?: number`
+
+      Cumulative time in seconds the thread spent actively running. Excludes idle time.
+
+    - `duration_seconds?: number`
+
+      Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+
+    - `startup_seconds?: number`
+
+      Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+  - `status: BetaManagedAgentsSessionThreadStatus`
+
+    SessionThreadStatus enum
+
+    - `"running"`
+
+    - `"idle"`
+
+    - `"rescheduling"`
+
+    - `"terminated"`
+
+  - `type: "session_thread"`
+
+    - `"session_thread"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `usage: BetaManagedAgentsSessionThreadUsage | null`
+
+    Cumulative token usage for a session thread across all turns.
+
+    - `cache_creation?: BetaManagedAgentsCacheCreationUsage`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `ephemeral_1h_input_tokens?: number`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `ephemeral_5m_input_tokens?: number`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `cache_read_input_tokens?: number`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens?: number`
+
+      Total input tokens consumed across all turns.
+
+    - `output_tokens?: number`
+
+      Total output tokens generated across all turns.
+
+### Example
+
+```typescript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+});
+
+// Automatically fetches more pages as needed.
+for await (const betaManagedAgentsSessionThread of client.beta.sessions.threads.list(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+)) {
+  console.log(betaManagedAgentsSessionThread.id);
+}
+```
+
+## Retrieve
+
+`client.beta.sessions.threads.retrieve(stringthreadID, ThreadRetrieveParamsparams, RequestOptionsoptions?): BetaManagedAgentsSessionThread`
+
+**get** `/v1/sessions/{session_id}/threads/{thread_id}`
+
+Get Session Thread
+
+### Parameters
+
+- `threadID: string`
+
+- `params: ThreadRetrieveParams`
+
+  - `session_id: string`
+
+    Path param: Path parameter session_id
+
+  - `betas?: Array<AnthropicBeta>`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `(string & {})`
+
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
+
+      - `"message-batches-2024-09-24"`
+
+      - `"prompt-caching-2024-07-31"`
+
+      - `"computer-use-2024-10-22"`
+
+      - `"computer-use-2025-01-24"`
+
+      - `"pdfs-2024-09-25"`
+
+      - `"token-counting-2024-11-01"`
+
+      - `"token-efficient-tools-2025-02-19"`
+
+      - `"output-128k-2025-02-19"`
+
+      - `"files-api-2025-04-14"`
+
+      - `"mcp-client-2025-04-04"`
+
+      - `"mcp-client-2025-11-20"`
+
+      - `"dev-full-thinking-2025-05-14"`
+
+      - `"interleaved-thinking-2025-05-14"`
+
+      - `"code-execution-2025-05-22"`
+
+      - `"extended-cache-ttl-2025-04-11"`
+
+      - `"context-1m-2025-08-07"`
+
+      - `"context-management-2025-06-27"`
+
+      - `"model-context-window-exceeded-2025-08-26"`
+
+      - `"skills-2025-10-02"`
+
+      - `"fast-mode-2026-02-01"`
+
+      - `"output-300k-2026-03-24"`
+
+      - `"user-profiles-2026-03-24"`
+
+      - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
+
+### Returns
+
+- `BetaManagedAgentsSessionThread`
+
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `id: string`
+
+    Unique identifier for this thread.
+
+  - `agent: BetaManagedAgentsSessionThreadAgent`
+
+    Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+    - `id: string`
+
+    - `description: string | null`
+
+    - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+      - `name: string`
+
+      - `type: "url"`
+
+        - `"url"`
+
+      - `url: string`
+
+    - `model: BetaManagedAgentsModelConfig`
+
+      Model identifier and configuration.
+
+      - `id: BetaManagedAgentsModel`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+        - `(string & {})`
+
+      - `speed?: "standard" | "fast"`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+    - `name: string`
+
+    - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+      - `BetaManagedAgentsAnthropicSkill`
+
+        A resolved Anthropic-managed skill.
+
+        - `skill_id: string`
+
+        - `type: "anthropic"`
+
+          - `"anthropic"`
+
+        - `version: string`
+
+      - `BetaManagedAgentsCustomSkill`
+
+        A resolved user-created custom skill.
+
+        - `skill_id: string`
+
+        - `type: "custom"`
+
+          - `"custom"`
+
+        - `version: string`
+
+    - `system: string | null`
+
+    - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+      - `BetaManagedAgentsAgentToolset20260401`
+
+        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+          - `enabled: boolean`
+
+          - `name: "bash" | "edit" | "read" | 5 more`
+
+            Built-in agent tool identifier.
+
+            - `"bash"`
+
+            - `"edit"`
+
+            - `"read"`
+
+            - `"write"`
+
+            - `"glob"`
+
+            - `"grep"`
+
+            - `"web_fetch"`
+
+            - `"web_search"`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `enabled: boolean`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `type: "agent_toolset_20260401"`
+
+          - `"agent_toolset_20260401"`
+
+      - `BetaManagedAgentsMCPToolset`
+
+        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+          - `enabled: boolean`
+
+          - `name: string`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `enabled: boolean`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `mcp_server_name: string`
+
+        - `type: "mcp_toolset"`
+
+          - `"mcp_toolset"`
+
+      - `BetaManagedAgentsCustomTool`
+
+        A custom tool as returned in API responses.
+
+        - `description: string`
+
+        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `properties?: Record<string, unknown> | null`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `required?: Array<string>`
+
+            List of required property names.
+
+          - `type?: "object"`
+
+            Must be 'object' for tool input schemas.
+
+            - `"object"`
+
+        - `name: string`
+
+        - `type: "custom"`
+
+          - `"custom"`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string | null`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `parent_thread_id: string | null`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `session_id: string`
+
+    The session this thread belongs to.
+
+  - `stats: BetaManagedAgentsSessionThreadStats | null`
+
+    Timing statistics for a session thread.
+
+    - `active_seconds?: number`
+
+      Cumulative time in seconds the thread spent actively running. Excludes idle time.
+
+    - `duration_seconds?: number`
+
+      Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+
+    - `startup_seconds?: number`
+
+      Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+  - `status: BetaManagedAgentsSessionThreadStatus`
+
+    SessionThreadStatus enum
+
+    - `"running"`
+
+    - `"idle"`
+
+    - `"rescheduling"`
+
+    - `"terminated"`
+
+  - `type: "session_thread"`
+
+    - `"session_thread"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `usage: BetaManagedAgentsSessionThreadUsage | null`
+
+    Cumulative token usage for a session thread across all turns.
+
+    - `cache_creation?: BetaManagedAgentsCacheCreationUsage`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `ephemeral_1h_input_tokens?: number`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `ephemeral_5m_input_tokens?: number`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `cache_read_input_tokens?: number`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens?: number`
+
+      Total input tokens consumed across all turns.
+
+    - `output_tokens?: number`
+
+      Total output tokens generated across all turns.
+
+### Example
+
+```typescript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+});
+
+const betaManagedAgentsSessionThread = await client.beta.sessions.threads.retrieve(
+  'sthr_011CZkZVWa6oIjw0rgXZpnBt',
+  { session_id: 'sesn_011CZkZAtmR3yMPDzynEDxu7' },
+);
+
+console.log(betaManagedAgentsSessionThread.id);
+```
+
+## Archive
+
+`client.beta.sessions.threads.archive(stringthreadID, ThreadArchiveParamsparams, RequestOptionsoptions?): BetaManagedAgentsSessionThread`
+
+**post** `/v1/sessions/{session_id}/threads/{thread_id}/archive`
+
+Archive Session Thread
+
+### Parameters
+
+- `threadID: string`
+
+- `params: ThreadArchiveParams`
+
+  - `session_id: string`
+
+    Path param: Path parameter session_id
+
+  - `betas?: Array<AnthropicBeta>`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `(string & {})`
+
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
+
+      - `"message-batches-2024-09-24"`
+
+      - `"prompt-caching-2024-07-31"`
+
+      - `"computer-use-2024-10-22"`
+
+      - `"computer-use-2025-01-24"`
+
+      - `"pdfs-2024-09-25"`
+
+      - `"token-counting-2024-11-01"`
+
+      - `"token-efficient-tools-2025-02-19"`
+
+      - `"output-128k-2025-02-19"`
+
+      - `"files-api-2025-04-14"`
+
+      - `"mcp-client-2025-04-04"`
+
+      - `"mcp-client-2025-11-20"`
+
+      - `"dev-full-thinking-2025-05-14"`
+
+      - `"interleaved-thinking-2025-05-14"`
+
+      - `"code-execution-2025-05-22"`
+
+      - `"extended-cache-ttl-2025-04-11"`
+
+      - `"context-1m-2025-08-07"`
+
+      - `"context-management-2025-06-27"`
+
+      - `"model-context-window-exceeded-2025-08-26"`
+
+      - `"skills-2025-10-02"`
+
+      - `"fast-mode-2026-02-01"`
+
+      - `"output-300k-2026-03-24"`
+
+      - `"user-profiles-2026-03-24"`
+
+      - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
+
+### Returns
+
+- `BetaManagedAgentsSessionThread`
+
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `id: string`
+
+    Unique identifier for this thread.
+
+  - `agent: BetaManagedAgentsSessionThreadAgent`
+
+    Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+    - `id: string`
+
+    - `description: string | null`
+
+    - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+      - `name: string`
+
+      - `type: "url"`
+
+        - `"url"`
+
+      - `url: string`
+
+    - `model: BetaManagedAgentsModelConfig`
+
+      Model identifier and configuration.
+
+      - `id: BetaManagedAgentsModel`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+        - `(string & {})`
+
+      - `speed?: "standard" | "fast"`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+    - `name: string`
+
+    - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+      - `BetaManagedAgentsAnthropicSkill`
+
+        A resolved Anthropic-managed skill.
+
+        - `skill_id: string`
+
+        - `type: "anthropic"`
+
+          - `"anthropic"`
+
+        - `version: string`
+
+      - `BetaManagedAgentsCustomSkill`
+
+        A resolved user-created custom skill.
+
+        - `skill_id: string`
+
+        - `type: "custom"`
+
+          - `"custom"`
+
+        - `version: string`
+
+    - `system: string | null`
+
+    - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+      - `BetaManagedAgentsAgentToolset20260401`
+
+        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+          - `enabled: boolean`
+
+          - `name: "bash" | "edit" | "read" | 5 more`
+
+            Built-in agent tool identifier.
+
+            - `"bash"`
+
+            - `"edit"`
+
+            - `"read"`
+
+            - `"write"`
+
+            - `"glob"`
+
+            - `"grep"`
+
+            - `"web_fetch"`
+
+            - `"web_search"`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `enabled: boolean`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `type: "agent_toolset_20260401"`
+
+          - `"agent_toolset_20260401"`
+
+      - `BetaManagedAgentsMCPToolset`
+
+        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+          - `enabled: boolean`
+
+          - `name: string`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `enabled: boolean`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `mcp_server_name: string`
+
+        - `type: "mcp_toolset"`
+
+          - `"mcp_toolset"`
+
+      - `BetaManagedAgentsCustomTool`
+
+        A custom tool as returned in API responses.
+
+        - `description: string`
+
+        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `properties?: Record<string, unknown> | null`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `required?: Array<string>`
+
+            List of required property names.
+
+          - `type?: "object"`
+
+            Must be 'object' for tool input schemas.
+
+            - `"object"`
+
+        - `name: string`
+
+        - `type: "custom"`
+
+          - `"custom"`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string | null`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `parent_thread_id: string | null`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `session_id: string`
+
+    The session this thread belongs to.
+
+  - `stats: BetaManagedAgentsSessionThreadStats | null`
+
+    Timing statistics for a session thread.
+
+    - `active_seconds?: number`
+
+      Cumulative time in seconds the thread spent actively running. Excludes idle time.
+
+    - `duration_seconds?: number`
+
+      Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+
+    - `startup_seconds?: number`
+
+      Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+  - `status: BetaManagedAgentsSessionThreadStatus`
+
+    SessionThreadStatus enum
+
+    - `"running"`
+
+    - `"idle"`
+
+    - `"rescheduling"`
+
+    - `"terminated"`
+
+  - `type: "session_thread"`
+
+    - `"session_thread"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `usage: BetaManagedAgentsSessionThreadUsage | null`
+
+    Cumulative token usage for a session thread across all turns.
+
+    - `cache_creation?: BetaManagedAgentsCacheCreationUsage`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `ephemeral_1h_input_tokens?: number`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `ephemeral_5m_input_tokens?: number`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `cache_read_input_tokens?: number`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens?: number`
+
+      Total input tokens consumed across all turns.
+
+    - `output_tokens?: number`
+
+      Total output tokens generated across all turns.
+
+### Example
+
+```typescript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+});
+
+const betaManagedAgentsSessionThread = await client.beta.sessions.threads.archive(
+  'sthr_011CZkZVWa6oIjw0rgXZpnBt',
+  { session_id: 'sesn_011CZkZAtmR3yMPDzynEDxu7' },
+);
+
+console.log(betaManagedAgentsSessionThread.id);
+```
+
+## Domain Types
+
+### Beta Managed Agents Session Thread
+
+- `BetaManagedAgentsSessionThread`
+
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `id: string`
+
+    Unique identifier for this thread.
+
+  - `agent: BetaManagedAgentsSessionThreadAgent`
+
+    Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+    - `id: string`
+
+    - `description: string | null`
+
+    - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+      - `name: string`
+
+      - `type: "url"`
+
+        - `"url"`
+
+      - `url: string`
+
+    - `model: BetaManagedAgentsModelConfig`
+
+      Model identifier and configuration.
+
+      - `id: BetaManagedAgentsModel`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-6"`
+
+            Most intelligent model for building agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+        - `(string & {})`
+
+      - `speed?: "standard" | "fast"`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+    - `name: string`
+
+    - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+      - `BetaManagedAgentsAnthropicSkill`
+
+        A resolved Anthropic-managed skill.
+
+        - `skill_id: string`
+
+        - `type: "anthropic"`
+
+          - `"anthropic"`
+
+        - `version: string`
+
+      - `BetaManagedAgentsCustomSkill`
+
+        A resolved user-created custom skill.
+
+        - `skill_id: string`
+
+        - `type: "custom"`
+
+          - `"custom"`
+
+        - `version: string`
+
+    - `system: string | null`
+
+    - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+      - `BetaManagedAgentsAgentToolset20260401`
+
+        - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+          - `enabled: boolean`
+
+          - `name: "bash" | "edit" | "read" | 5 more`
+
+            Built-in agent tool identifier.
+
+            - `"bash"`
+
+            - `"edit"`
+
+            - `"read"`
+
+            - `"write"`
+
+            - `"glob"`
+
+            - `"grep"`
+
+            - `"web_fetch"`
+
+            - `"web_search"`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `enabled: boolean`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `type: "agent_toolset_20260401"`
+
+          - `"agent_toolset_20260401"`
+
+      - `BetaManagedAgentsMCPToolset`
+
+        - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+          - `enabled: boolean`
+
+          - `name: string`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `enabled: boolean`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `type: "always_allow"`
+
+                - `"always_allow"`
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+              - `type: "always_ask"`
+
+                - `"always_ask"`
+
+        - `mcp_server_name: string`
+
+        - `type: "mcp_toolset"`
+
+          - `"mcp_toolset"`
+
+      - `BetaManagedAgentsCustomTool`
+
+        A custom tool as returned in API responses.
+
+        - `description: string`
+
+        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `properties?: Record<string, unknown> | null`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `required?: Array<string>`
+
+            List of required property names.
+
+          - `type?: "object"`
+
+            Must be 'object' for tool input schemas.
+
+            - `"object"`
+
+        - `name: string`
+
+        - `type: "custom"`
+
+          - `"custom"`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string | null`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `parent_thread_id: string | null`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `session_id: string`
+
+    The session this thread belongs to.
+
+  - `stats: BetaManagedAgentsSessionThreadStats | null`
+
+    Timing statistics for a session thread.
+
+    - `active_seconds?: number`
+
+      Cumulative time in seconds the thread spent actively running. Excludes idle time.
+
+    - `duration_seconds?: number`
+
+      Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+
+    - `startup_seconds?: number`
+
+      Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+  - `status: BetaManagedAgentsSessionThreadStatus`
+
+    SessionThreadStatus enum
+
+    - `"running"`
+
+    - `"idle"`
+
+    - `"rescheduling"`
+
+    - `"terminated"`
+
+  - `type: "session_thread"`
+
+    - `"session_thread"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `usage: BetaManagedAgentsSessionThreadUsage | null`
+
+    Cumulative token usage for a session thread across all turns.
+
+    - `cache_creation?: BetaManagedAgentsCacheCreationUsage`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `ephemeral_1h_input_tokens?: number`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `ephemeral_5m_input_tokens?: number`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `cache_read_input_tokens?: number`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens?: number`
+
+      Total input tokens consumed across all turns.
+
+    - `output_tokens?: number`
+
+      Total output tokens generated across all turns.
+
+### Beta Managed Agents Session Thread Agent
+
+- `BetaManagedAgentsSessionThreadAgent`
+
+  Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+  - `id: string`
+
+  - `description: string | null`
+
+  - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
+
+    - `name: string`
+
+    - `type: "url"`
+
+      - `"url"`
+
+    - `url: string`
+
+  - `model: BetaManagedAgentsModelConfig`
+
+    Model identifier and configuration.
+
+    - `id: BetaManagedAgentsModel`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more`
+
+        - `"claude-opus-4-7"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-opus-4-6"`
+
+          Most intelligent model for building agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+      - `(string & {})`
+
+    - `speed?: "standard" | "fast"`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `name: string`
+
+  - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
+
+    - `BetaManagedAgentsAnthropicSkill`
+
+      A resolved Anthropic-managed skill.
+
+      - `skill_id: string`
+
+      - `type: "anthropic"`
+
+        - `"anthropic"`
+
+      - `version: string`
+
+    - `BetaManagedAgentsCustomSkill`
+
+      A resolved user-created custom skill.
+
+      - `skill_id: string`
+
+      - `type: "custom"`
+
+        - `"custom"`
+
+      - `version: string`
+
+  - `system: string | null`
+
+  - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
+
+    - `BetaManagedAgentsAgentToolset20260401`
+
+      - `configs: Array<BetaManagedAgentsAgentToolConfig>`
+
+        - `enabled: boolean`
+
+        - `name: "bash" | "edit" | "read" | 5 more`
+
+          Built-in agent tool identifier.
+
+          - `"bash"`
+
+          - `"edit"`
+
+          - `"read"`
+
+          - `"write"`
+
+          - `"glob"`
+
+          - `"grep"`
+
+          - `"web_fetch"`
+
+          - `"web_search"`
+
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+          Permission policy for tool execution.
+
+          - `BetaManagedAgentsAlwaysAllowPolicy`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `type: "always_allow"`
+
+              - `"always_allow"`
+
+          - `BetaManagedAgentsAlwaysAskPolicy`
+
+            Tool calls require user confirmation before execution.
+
+            - `type: "always_ask"`
+
+              - `"always_ask"`
+
+      - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `enabled: boolean`
+
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+          Permission policy for tool execution.
+
+          - `BetaManagedAgentsAlwaysAllowPolicy`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `type: "always_allow"`
+
+              - `"always_allow"`
+
+          - `BetaManagedAgentsAlwaysAskPolicy`
+
+            Tool calls require user confirmation before execution.
+
+            - `type: "always_ask"`
+
+              - `"always_ask"`
+
+      - `type: "agent_toolset_20260401"`
+
+        - `"agent_toolset_20260401"`
+
+    - `BetaManagedAgentsMCPToolset`
+
+      - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+        - `enabled: boolean`
+
+        - `name: string`
+
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+          Permission policy for tool execution.
+
+          - `BetaManagedAgentsAlwaysAllowPolicy`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `type: "always_allow"`
+
+              - `"always_allow"`
+
+          - `BetaManagedAgentsAlwaysAskPolicy`
+
+            Tool calls require user confirmation before execution.
+
+            - `type: "always_ask"`
+
+              - `"always_ask"`
+
+      - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `enabled: boolean`
+
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+          Permission policy for tool execution.
+
+          - `BetaManagedAgentsAlwaysAllowPolicy`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `type: "always_allow"`
+
+              - `"always_allow"`
+
+          - `BetaManagedAgentsAlwaysAskPolicy`
+
+            Tool calls require user confirmation before execution.
+
+            - `type: "always_ask"`
+
+              - `"always_ask"`
+
+      - `mcp_server_name: string`
+
+      - `type: "mcp_toolset"`
+
+        - `"mcp_toolset"`
+
+    - `BetaManagedAgentsCustomTool`
+
+      A custom tool as returned in API responses.
+
+      - `description: string`
+
+      - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `properties?: Record<string, unknown> | null`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `required?: Array<string>`
+
+          List of required property names.
+
+        - `type?: "object"`
+
+          Must be 'object' for tool input schemas.
+
+          - `"object"`
+
+      - `name: string`
+
+      - `type: "custom"`
+
+        - `"custom"`
+
+  - `type: "agent"`
+
+    - `"agent"`
+
+  - `version: number`
+
+### Beta Managed Agents Session Thread Stats
+
+- `BetaManagedAgentsSessionThreadStats`
+
+  Timing statistics for a session thread.
+
+  - `active_seconds?: number`
+
+    Cumulative time in seconds the thread spent actively running. Excludes idle time.
+
+  - `duration_seconds?: number`
+
+    Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+
+  - `startup_seconds?: number`
+
+    Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+### Beta Managed Agents Session Thread Status
+
+- `BetaManagedAgentsSessionThreadStatus = "running" | "idle" | "rescheduling" | "terminated"`
+
+  SessionThreadStatus enum
+
+  - `"running"`
+
+  - `"idle"`
+
+  - `"rescheduling"`
+
+  - `"terminated"`
+
+### Beta Managed Agents Session Thread Usage
+
+- `BetaManagedAgentsSessionThreadUsage`
+
+  Cumulative token usage for a session thread across all turns.
+
+  - `cache_creation?: BetaManagedAgentsCacheCreationUsage`
+
+    Prompt-cache creation token usage broken down by cache lifetime.
+
+    - `ephemeral_1h_input_tokens?: number`
+
+      Tokens used to create 1-hour ephemeral cache entries.
+
+    - `ephemeral_5m_input_tokens?: number`
+
+      Tokens used to create 5-minute ephemeral cache entries.
+
+  - `cache_read_input_tokens?: number`
+
+    Total tokens read from prompt cache.
+
+  - `input_tokens?: number`
+
+    Total input tokens consumed across all turns.
+
+  - `output_tokens?: number`
+
+    Total output tokens generated across all turns.
+
+### Beta Managed Agents Stream Session Thread Events
+
+- `BetaManagedAgentsStreamSessionThreadEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 28 more`
+
+  Server-sent event in a single thread's stream.
+
+  - `BetaManagedAgentsUserMessageEvent`
+
+    A user message event in the session conversation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Array of content blocks comprising the user message.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `type: "user.message"`
+
+      - `"user.message"`
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsUserInterruptEvent`
+
+    An interrupt event that pauses agent execution and returns control to the user.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `type: "user.interrupt"`
+
+      - `"user.interrupt"`
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+  - `BetaManagedAgentsUserToolConfirmationEvent`
+
+    A tool confirmation event that approves or denies a pending tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `result: "allow" | "deny"`
+
+      UserToolConfirmationResult enum
+
+      - `"allow"`
+
+      - `"deny"`
+
+    - `tool_use_id: string`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `type: "user.tool_confirmation"`
+
+      - `"user.tool_confirmation"`
+
+    - `deny_message?: string | null`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+  - `BetaManagedAgentsUserCustomToolResultEvent`
+
+    Event sent by the client providing the result of a custom tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `custom_tool_use_id: string`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `type: "user.custom_tool_result"`
+
+      - `"user.custom_tool_result"`
+
+    - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      The result content returned by the tool.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `is_error?: boolean | null`
+
+      Whether the tool execution resulted in an error.
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+  - `BetaManagedAgentsAgentCustomToolUseEvent`
+
+    Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `input: Record<string, unknown>`
+
+      Input parameters for the tool call.
+
+    - `name: string`
+
+      Name of the custom tool being called.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.custom_tool_use"`
+
+      - `"agent.custom_tool_use"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+
+  - `BetaManagedAgentsAgentMessageEvent`
+
+    An agent response event in the session conversation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock>`
+
+      Array of text blocks comprising the agent response.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.message"`
+
+      - `"agent.message"`
+
+  - `BetaManagedAgentsAgentThinkingEvent`
+
+    Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thinking"`
+
+      - `"agent.thinking"`
+
+  - `BetaManagedAgentsAgentMCPToolUseEvent`
+
+    Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `input: Record<string, unknown>`
+
+      Input parameters for the tool call.
+
+    - `mcp_server_name: string`
+
+      Name of the MCP server providing the tool.
+
+    - `name: string`
+
+      Name of the MCP tool being used.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.mcp_tool_use"`
+
+      - `"agent.mcp_tool_use"`
+
+    - `evaluated_permission?: "allow" | "ask" | "deny"`
+
+      AgentEvaluatedPermission enum
+
+      - `"allow"`
+
+      - `"ask"`
+
+      - `"deny"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `BetaManagedAgentsAgentMCPToolResultEvent`
+
+    Event representing the result of an MCP tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `mcp_tool_use_id: string`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.mcp_tool_result"`
+
+      - `"agent.mcp_tool_result"`
+
+    - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      The result content returned by the tool.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `is_error?: boolean | null`
+
+      Whether the tool execution resulted in an error.
+
+  - `BetaManagedAgentsAgentToolUseEvent`
+
+    Event emitted when the agent invokes a built-in agent tool.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `input: Record<string, unknown>`
+
+      Input parameters for the tool call.
+
+    - `name: string`
+
+      Name of the agent tool being used.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.tool_use"`
+
+      - `"agent.tool_use"`
+
+    - `evaluated_permission?: "allow" | "ask" | "deny"`
+
+      AgentEvaluatedPermission enum
+
+      - `"allow"`
+
+      - `"ask"`
+
+      - `"deny"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `BetaManagedAgentsAgentToolResultEvent`
+
+    Event representing the result of an agent tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `tool_use_id: string`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `type: "agent.tool_result"`
+
+      - `"agent.tool_result"`
+
+    - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      The result content returned by the tool.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `is_error?: boolean | null`
+
+      Whether the tool execution resulted in an error.
+
+  - `BetaManagedAgentsAgentThreadMessageReceivedEvent`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `from_session_thread_id: string`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thread_message_received"`
+
+      - `"agent.thread_message_received"`
+
+    - `from_agent_name?: string | null`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `BetaManagedAgentsAgentThreadMessageSentEvent`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `to_session_thread_id: string`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `type: "agent.thread_message_sent"`
+
+      - `"agent.thread_message_sent"`
+
+    - `to_agent_name?: string | null`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+
+  - `BetaManagedAgentsAgentThreadContextCompactedEvent`
+
+    Indicates that context compaction (summarization) occurred during the session.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thread_context_compacted"`
+
+      - `"agent.thread_context_compacted"`
+
+  - `BetaManagedAgentsSessionErrorEvent`
+
+    An error event indicating a problem occurred during session execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+      - `BetaManagedAgentsUnknownError`
+
+        An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "unknown_error"`
+
+          - `"unknown_error"`
+
+      - `BetaManagedAgentsModelOverloadedError`
+
+        The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "model_overloaded_error"`
+
+          - `"model_overloaded_error"`
+
+      - `BetaManagedAgentsModelRateLimitedError`
+
+        The model request was rate-limited.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "model_rate_limited_error"`
+
+          - `"model_rate_limited_error"`
+
+      - `BetaManagedAgentsModelRequestFailedError`
+
+        A model request failed for a reason other than overload or rate-limiting.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "model_request_failed_error"`
+
+          - `"model_request_failed_error"`
+
+      - `BetaManagedAgentsMCPConnectionFailedError`
+
+        Failed to connect to an MCP server.
+
+        - `mcp_server_name: string`
+
+          Name of the MCP server that failed to connect.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "mcp_connection_failed_error"`
+
+          - `"mcp_connection_failed_error"`
+
+      - `BetaManagedAgentsMCPAuthenticationFailedError`
+
+        Authentication to an MCP server failed.
+
+        - `mcp_server_name: string`
+
+          Name of the MCP server that failed authentication.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "mcp_authentication_failed_error"`
+
+          - `"mcp_authentication_failed_error"`
+
+      - `BetaManagedAgentsBillingError`
+
+        The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "billing_error"`
+
+          - `"billing_error"`
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.error"`
+
+      - `"session.error"`
+
+  - `BetaManagedAgentsSessionStatusRescheduledEvent`
+
+    Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.status_rescheduled"`
+
+      - `"session.status_rescheduled"`
+
+  - `BetaManagedAgentsSessionStatusRunningEvent`
+
+    Indicates the session is actively running and the agent is working.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.status_running"`
+
+      - `"session.status_running"`
+
+  - `BetaManagedAgentsSessionStatusIdleEvent`
+
+    Indicates the agent has paused and is awaiting user input.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `BetaManagedAgentsSessionEndTurn`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `type: "end_turn"`
+
+          - `"end_turn"`
+
+      - `BetaManagedAgentsSessionRequiresAction`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `event_ids: Array<string>`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `type: "requires_action"`
+
+          - `"requires_action"`
+
+      - `BetaManagedAgentsSessionRetriesExhausted`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `type: "retries_exhausted"`
+
+          - `"retries_exhausted"`
+
+    - `type: "session.status_idle"`
+
+      - `"session.status_idle"`
+
+  - `BetaManagedAgentsSessionStatusTerminatedEvent`
+
+    Indicates the session has terminated, either due to an error or completion.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.status_terminated"`
+
+      - `"session.status_terminated"`
+
+  - `BetaManagedAgentsSessionThreadCreatedEvent`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the callable agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `type: "session.thread_created"`
+
+      - `"session.thread_created"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_start"`
+
+      - `"span.outcome_evaluation_start"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `explanation: string`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_evaluation_start_id: string`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `result: string`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `type: "span.outcome_evaluation_end"`
+
+      - `"span.outcome_evaluation_end"`
+
+    - `usage: BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `cache_creation_input_tokens: number`
+
+        Tokens used to create prompt cache in this request.
+
+      - `cache_read_input_tokens: number`
+
+        Tokens read from prompt cache in this request.
+
+      - `input_tokens: number`
+
+        Input tokens consumed by this request.
+
+      - `output_tokens: number`
+
+        Output tokens generated by this request.
+
+      - `speed?: "standard" | "fast" | null`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+  - `BetaManagedAgentsSpanModelRequestStartEvent`
+
+    Emitted when a model request is initiated by the agent.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.model_request_start"`
+
+      - `"span.model_request_start"`
+
+  - `BetaManagedAgentsSpanModelRequestEndEvent`
+
+    Emitted when a model request completes.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `is_error: boolean | null`
+
+      Whether the model request resulted in an error.
+
+    - `model_request_start_id: string`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `model_usage: BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `cache_creation_input_tokens: number`
+
+        Tokens used to create prompt cache in this request.
+
+      - `cache_read_input_tokens: number`
+
+        Tokens read from prompt cache in this request.
+
+      - `input_tokens: number`
+
+        Input tokens consumed by this request.
+
+      - `output_tokens: number`
+
+        Output tokens generated by this request.
+
+      - `speed?: "standard" | "fast" | null`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.model_request_end"`
+
+      - `"span.model_request_end"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_ongoing"`
+
+      - `"span.outcome_evaluation_ongoing"`
+
+  - `BetaManagedAgentsUserDefineOutcomeEvent`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `description: string`
+
+      What the agent should produce. Copied from the input event.
+
+    - `max_iterations: number | null`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `outcome_id: string`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `BetaManagedAgentsFileRubric`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: string`
+
+          ID of the rubric file.
+
+        - `type: "file"`
+
+          - `"file"`
+
+      - `BetaManagedAgentsTextRubric`
+
+        Rubric content provided inline as text.
+
+        - `content: string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `type: "text"`
+
+          - `"text"`
+
+    - `type: "user.define_outcome"`
+
+      - `"user.define_outcome"`
+
+  - `BetaManagedAgentsSessionDeletedEvent`
+
+    Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.deleted"`
+
+      - `"session.deleted"`
+
+  - `BetaManagedAgentsSessionThreadStatusRunningEvent`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `type: "session.thread_status_running"`
+
+      - `"session.thread_status_running"`
+
+  - `BetaManagedAgentsSessionThreadStatusIdleEvent`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `BetaManagedAgentsSessionEndTurn`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `type: "end_turn"`
+
+          - `"end_turn"`
+
+      - `BetaManagedAgentsSessionRequiresAction`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `event_ids: Array<string>`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `type: "requires_action"`
+
+          - `"requires_action"`
+
+      - `BetaManagedAgentsSessionRetriesExhausted`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `type: "retries_exhausted"`
+
+          - `"retries_exhausted"`
+
+    - `type: "session.thread_status_idle"`
+
+      - `"session.thread_status_idle"`
+
+  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `type: "session.thread_status_terminated"`
+
+      - `"session.thread_status_terminated"`
+
+  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `type: "session.thread_status_rescheduled"`
+
+      - `"session.thread_status_rescheduled"`
+
+# Events
+
+## List
+
+`client.beta.sessions.threads.events.list(stringthreadID, EventListParamsparams, RequestOptionsoptions?): PageCursor<BetaManagedAgentsSessionEvent>`
+
+**get** `/v1/sessions/{session_id}/threads/{thread_id}/events`
+
+List Session Thread Events
+
+### Parameters
+
+- `threadID: string`
+
+- `params: EventListParams`
+
+  - `session_id: string`
+
+    Path param: Path parameter session_id
+
+  - `limit?: number`
+
+    Query param: Query parameter for limit
+
+  - `page?: string`
+
+    Query param: Query parameter for page
+
+  - `betas?: Array<AnthropicBeta>`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `(string & {})`
+
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
+
+      - `"message-batches-2024-09-24"`
+
+      - `"prompt-caching-2024-07-31"`
+
+      - `"computer-use-2024-10-22"`
+
+      - `"computer-use-2025-01-24"`
+
+      - `"pdfs-2024-09-25"`
+
+      - `"token-counting-2024-11-01"`
+
+      - `"token-efficient-tools-2025-02-19"`
+
+      - `"output-128k-2025-02-19"`
+
+      - `"files-api-2025-04-14"`
+
+      - `"mcp-client-2025-04-04"`
+
+      - `"mcp-client-2025-11-20"`
+
+      - `"dev-full-thinking-2025-05-14"`
+
+      - `"interleaved-thinking-2025-05-14"`
+
+      - `"code-execution-2025-05-22"`
+
+      - `"extended-cache-ttl-2025-04-11"`
+
+      - `"context-1m-2025-08-07"`
+
+      - `"context-management-2025-06-27"`
+
+      - `"model-context-window-exceeded-2025-08-26"`
+
+      - `"skills-2025-10-02"`
+
+      - `"fast-mode-2026-02-01"`
+
+      - `"output-300k-2026-03-24"`
+
+      - `"user-profiles-2026-03-24"`
+
+      - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
+
+### Returns
+
+- `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 28 more`
+
+  Union type for all event types in a session.
+
+  - `BetaManagedAgentsUserMessageEvent`
+
+    A user message event in the session conversation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Array of content blocks comprising the user message.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `type: "user.message"`
+
+      - `"user.message"`
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsUserInterruptEvent`
+
+    An interrupt event that pauses agent execution and returns control to the user.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `type: "user.interrupt"`
+
+      - `"user.interrupt"`
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+  - `BetaManagedAgentsUserToolConfirmationEvent`
+
+    A tool confirmation event that approves or denies a pending tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `result: "allow" | "deny"`
+
+      UserToolConfirmationResult enum
+
+      - `"allow"`
+
+      - `"deny"`
+
+    - `tool_use_id: string`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `type: "user.tool_confirmation"`
+
+      - `"user.tool_confirmation"`
+
+    - `deny_message?: string | null`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+  - `BetaManagedAgentsUserCustomToolResultEvent`
+
+    Event sent by the client providing the result of a custom tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `custom_tool_use_id: string`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `type: "user.custom_tool_result"`
+
+      - `"user.custom_tool_result"`
+
+    - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      The result content returned by the tool.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `is_error?: boolean | null`
+
+      Whether the tool execution resulted in an error.
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+  - `BetaManagedAgentsAgentCustomToolUseEvent`
+
+    Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `input: Record<string, unknown>`
+
+      Input parameters for the tool call.
+
+    - `name: string`
+
+      Name of the custom tool being called.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.custom_tool_use"`
+
+      - `"agent.custom_tool_use"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+
+  - `BetaManagedAgentsAgentMessageEvent`
+
+    An agent response event in the session conversation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock>`
+
+      Array of text blocks comprising the agent response.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.message"`
+
+      - `"agent.message"`
+
+  - `BetaManagedAgentsAgentThinkingEvent`
+
+    Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thinking"`
+
+      - `"agent.thinking"`
+
+  - `BetaManagedAgentsAgentMCPToolUseEvent`
+
+    Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `input: Record<string, unknown>`
+
+      Input parameters for the tool call.
+
+    - `mcp_server_name: string`
+
+      Name of the MCP server providing the tool.
+
+    - `name: string`
+
+      Name of the MCP tool being used.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.mcp_tool_use"`
+
+      - `"agent.mcp_tool_use"`
+
+    - `evaluated_permission?: "allow" | "ask" | "deny"`
+
+      AgentEvaluatedPermission enum
+
+      - `"allow"`
+
+      - `"ask"`
+
+      - `"deny"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `BetaManagedAgentsAgentMCPToolResultEvent`
+
+    Event representing the result of an MCP tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `mcp_tool_use_id: string`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.mcp_tool_result"`
+
+      - `"agent.mcp_tool_result"`
+
+    - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      The result content returned by the tool.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `is_error?: boolean | null`
+
+      Whether the tool execution resulted in an error.
+
+  - `BetaManagedAgentsAgentToolUseEvent`
+
+    Event emitted when the agent invokes a built-in agent tool.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `input: Record<string, unknown>`
+
+      Input parameters for the tool call.
+
+    - `name: string`
+
+      Name of the agent tool being used.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.tool_use"`
+
+      - `"agent.tool_use"`
+
+    - `evaluated_permission?: "allow" | "ask" | "deny"`
+
+      AgentEvaluatedPermission enum
+
+      - `"allow"`
+
+      - `"ask"`
+
+      - `"deny"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `BetaManagedAgentsAgentToolResultEvent`
+
+    Event representing the result of an agent tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `tool_use_id: string`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `type: "agent.tool_result"`
+
+      - `"agent.tool_result"`
+
+    - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      The result content returned by the tool.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `is_error?: boolean | null`
+
+      Whether the tool execution resulted in an error.
+
+  - `BetaManagedAgentsAgentThreadMessageReceivedEvent`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `from_session_thread_id: string`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thread_message_received"`
+
+      - `"agent.thread_message_received"`
+
+    - `from_agent_name?: string | null`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `BetaManagedAgentsAgentThreadMessageSentEvent`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `to_session_thread_id: string`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `type: "agent.thread_message_sent"`
+
+      - `"agent.thread_message_sent"`
+
+    - `to_agent_name?: string | null`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+
+  - `BetaManagedAgentsAgentThreadContextCompactedEvent`
+
+    Indicates that context compaction (summarization) occurred during the session.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thread_context_compacted"`
+
+      - `"agent.thread_context_compacted"`
+
+  - `BetaManagedAgentsSessionErrorEvent`
+
+    An error event indicating a problem occurred during session execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+      - `BetaManagedAgentsUnknownError`
+
+        An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "unknown_error"`
+
+          - `"unknown_error"`
+
+      - `BetaManagedAgentsModelOverloadedError`
+
+        The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "model_overloaded_error"`
+
+          - `"model_overloaded_error"`
+
+      - `BetaManagedAgentsModelRateLimitedError`
+
+        The model request was rate-limited.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "model_rate_limited_error"`
+
+          - `"model_rate_limited_error"`
+
+      - `BetaManagedAgentsModelRequestFailedError`
+
+        A model request failed for a reason other than overload or rate-limiting.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "model_request_failed_error"`
+
+          - `"model_request_failed_error"`
+
+      - `BetaManagedAgentsMCPConnectionFailedError`
+
+        Failed to connect to an MCP server.
+
+        - `mcp_server_name: string`
+
+          Name of the MCP server that failed to connect.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "mcp_connection_failed_error"`
+
+          - `"mcp_connection_failed_error"`
+
+      - `BetaManagedAgentsMCPAuthenticationFailedError`
+
+        Authentication to an MCP server failed.
+
+        - `mcp_server_name: string`
+
+          Name of the MCP server that failed authentication.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "mcp_authentication_failed_error"`
+
+          - `"mcp_authentication_failed_error"`
+
+      - `BetaManagedAgentsBillingError`
+
+        The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "billing_error"`
+
+          - `"billing_error"`
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.error"`
+
+      - `"session.error"`
+
+  - `BetaManagedAgentsSessionStatusRescheduledEvent`
+
+    Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.status_rescheduled"`
+
+      - `"session.status_rescheduled"`
+
+  - `BetaManagedAgentsSessionStatusRunningEvent`
+
+    Indicates the session is actively running and the agent is working.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.status_running"`
+
+      - `"session.status_running"`
+
+  - `BetaManagedAgentsSessionStatusIdleEvent`
+
+    Indicates the agent has paused and is awaiting user input.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `BetaManagedAgentsSessionEndTurn`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `type: "end_turn"`
+
+          - `"end_turn"`
+
+      - `BetaManagedAgentsSessionRequiresAction`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `event_ids: Array<string>`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `type: "requires_action"`
+
+          - `"requires_action"`
+
+      - `BetaManagedAgentsSessionRetriesExhausted`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `type: "retries_exhausted"`
+
+          - `"retries_exhausted"`
+
+    - `type: "session.status_idle"`
+
+      - `"session.status_idle"`
+
+  - `BetaManagedAgentsSessionStatusTerminatedEvent`
+
+    Indicates the session has terminated, either due to an error or completion.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.status_terminated"`
+
+      - `"session.status_terminated"`
+
+  - `BetaManagedAgentsSessionThreadCreatedEvent`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the callable agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `type: "session.thread_created"`
+
+      - `"session.thread_created"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_start"`
+
+      - `"span.outcome_evaluation_start"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `explanation: string`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_evaluation_start_id: string`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `result: string`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `type: "span.outcome_evaluation_end"`
+
+      - `"span.outcome_evaluation_end"`
+
+    - `usage: BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `cache_creation_input_tokens: number`
+
+        Tokens used to create prompt cache in this request.
+
+      - `cache_read_input_tokens: number`
+
+        Tokens read from prompt cache in this request.
+
+      - `input_tokens: number`
+
+        Input tokens consumed by this request.
+
+      - `output_tokens: number`
+
+        Output tokens generated by this request.
+
+      - `speed?: "standard" | "fast" | null`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+  - `BetaManagedAgentsSpanModelRequestStartEvent`
+
+    Emitted when a model request is initiated by the agent.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.model_request_start"`
+
+      - `"span.model_request_start"`
+
+  - `BetaManagedAgentsSpanModelRequestEndEvent`
+
+    Emitted when a model request completes.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `is_error: boolean | null`
+
+      Whether the model request resulted in an error.
+
+    - `model_request_start_id: string`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `model_usage: BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `cache_creation_input_tokens: number`
+
+        Tokens used to create prompt cache in this request.
+
+      - `cache_read_input_tokens: number`
+
+        Tokens read from prompt cache in this request.
+
+      - `input_tokens: number`
+
+        Input tokens consumed by this request.
+
+      - `output_tokens: number`
+
+        Output tokens generated by this request.
+
+      - `speed?: "standard" | "fast" | null`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.model_request_end"`
+
+      - `"span.model_request_end"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_ongoing"`
+
+      - `"span.outcome_evaluation_ongoing"`
+
+  - `BetaManagedAgentsUserDefineOutcomeEvent`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `description: string`
+
+      What the agent should produce. Copied from the input event.
+
+    - `max_iterations: number | null`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `outcome_id: string`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `BetaManagedAgentsFileRubric`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: string`
+
+          ID of the rubric file.
+
+        - `type: "file"`
+
+          - `"file"`
+
+      - `BetaManagedAgentsTextRubric`
+
+        Rubric content provided inline as text.
+
+        - `content: string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `type: "text"`
+
+          - `"text"`
+
+    - `type: "user.define_outcome"`
+
+      - `"user.define_outcome"`
+
+  - `BetaManagedAgentsSessionDeletedEvent`
+
+    Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.deleted"`
+
+      - `"session.deleted"`
+
+  - `BetaManagedAgentsSessionThreadStatusRunningEvent`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `type: "session.thread_status_running"`
+
+      - `"session.thread_status_running"`
+
+  - `BetaManagedAgentsSessionThreadStatusIdleEvent`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `BetaManagedAgentsSessionEndTurn`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `type: "end_turn"`
+
+          - `"end_turn"`
+
+      - `BetaManagedAgentsSessionRequiresAction`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `event_ids: Array<string>`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `type: "requires_action"`
+
+          - `"requires_action"`
+
+      - `BetaManagedAgentsSessionRetriesExhausted`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `type: "retries_exhausted"`
+
+          - `"retries_exhausted"`
+
+    - `type: "session.thread_status_idle"`
+
+      - `"session.thread_status_idle"`
+
+  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `type: "session.thread_status_terminated"`
+
+      - `"session.thread_status_terminated"`
+
+  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `type: "session.thread_status_rescheduled"`
+
+      - `"session.thread_status_rescheduled"`
+
+### Example
+
+```typescript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+});
+
+// Automatically fetches more pages as needed.
+for await (const betaManagedAgentsSessionEvent of client.beta.sessions.threads.events.list(
+  'sthr_011CZkZVWa6oIjw0rgXZpnBt',
+  { session_id: 'sesn_011CZkZAtmR3yMPDzynEDxu7' },
+)) {
+  console.log(betaManagedAgentsSessionEvent);
+}
+```
+
+## Stream
+
+`client.beta.sessions.threads.events.stream(stringthreadID, EventStreamParamsparams, RequestOptionsoptions?): BetaManagedAgentsStreamSessionThreadEvents | Stream<BetaManagedAgentsStreamSessionThreadEvents>`
+
+**get** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
+
+Stream Session Thread Events
+
+### Parameters
+
+- `threadID: string`
+
+- `params: EventStreamParams`
+
+  - `session_id: string`
+
+    Path param: Path parameter session_id
+
+  - `betas?: Array<AnthropicBeta>`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `(string & {})`
+
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
+
+      - `"message-batches-2024-09-24"`
+
+      - `"prompt-caching-2024-07-31"`
+
+      - `"computer-use-2024-10-22"`
+
+      - `"computer-use-2025-01-24"`
+
+      - `"pdfs-2024-09-25"`
+
+      - `"token-counting-2024-11-01"`
+
+      - `"token-efficient-tools-2025-02-19"`
+
+      - `"output-128k-2025-02-19"`
+
+      - `"files-api-2025-04-14"`
+
+      - `"mcp-client-2025-04-04"`
+
+      - `"mcp-client-2025-11-20"`
+
+      - `"dev-full-thinking-2025-05-14"`
+
+      - `"interleaved-thinking-2025-05-14"`
+
+      - `"code-execution-2025-05-22"`
+
+      - `"extended-cache-ttl-2025-04-11"`
+
+      - `"context-1m-2025-08-07"`
+
+      - `"context-management-2025-06-27"`
+
+      - `"model-context-window-exceeded-2025-08-26"`
+
+      - `"skills-2025-10-02"`
+
+      - `"fast-mode-2026-02-01"`
+
+      - `"output-300k-2026-03-24"`
+
+      - `"user-profiles-2026-03-24"`
+
+      - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
+
+### Returns
+
+- `BetaManagedAgentsStreamSessionThreadEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 28 more`
+
+  Server-sent event in a single thread's stream.
+
+  - `BetaManagedAgentsUserMessageEvent`
+
+    A user message event in the session conversation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Array of content blocks comprising the user message.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `type: "user.message"`
+
+      - `"user.message"`
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsUserInterruptEvent`
+
+    An interrupt event that pauses agent execution and returns control to the user.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `type: "user.interrupt"`
+
+      - `"user.interrupt"`
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+  - `BetaManagedAgentsUserToolConfirmationEvent`
+
+    A tool confirmation event that approves or denies a pending tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `result: "allow" | "deny"`
+
+      UserToolConfirmationResult enum
+
+      - `"allow"`
+
+      - `"deny"`
+
+    - `tool_use_id: string`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `type: "user.tool_confirmation"`
+
+      - `"user.tool_confirmation"`
+
+    - `deny_message?: string | null`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+  - `BetaManagedAgentsUserCustomToolResultEvent`
+
+    Event sent by the client providing the result of a custom tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `custom_tool_use_id: string`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `type: "user.custom_tool_result"`
+
+      - `"user.custom_tool_result"`
+
+    - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      The result content returned by the tool.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `is_error?: boolean | null`
+
+      Whether the tool execution resulted in an error.
+
+    - `processed_at?: string | null`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id?: string | null`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+  - `BetaManagedAgentsAgentCustomToolUseEvent`
+
+    Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `input: Record<string, unknown>`
+
+      Input parameters for the tool call.
+
+    - `name: string`
+
+      Name of the custom tool being called.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.custom_tool_use"`
+
+      - `"agent.custom_tool_use"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+
+  - `BetaManagedAgentsAgentMessageEvent`
+
+    An agent response event in the session conversation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock>`
+
+      Array of text blocks comprising the agent response.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.message"`
+
+      - `"agent.message"`
+
+  - `BetaManagedAgentsAgentThinkingEvent`
+
+    Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thinking"`
+
+      - `"agent.thinking"`
+
+  - `BetaManagedAgentsAgentMCPToolUseEvent`
+
+    Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `input: Record<string, unknown>`
+
+      Input parameters for the tool call.
+
+    - `mcp_server_name: string`
+
+      Name of the MCP server providing the tool.
+
+    - `name: string`
+
+      Name of the MCP tool being used.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.mcp_tool_use"`
+
+      - `"agent.mcp_tool_use"`
+
+    - `evaluated_permission?: "allow" | "ask" | "deny"`
+
+      AgentEvaluatedPermission enum
+
+      - `"allow"`
+
+      - `"ask"`
+
+      - `"deny"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `BetaManagedAgentsAgentMCPToolResultEvent`
+
+    Event representing the result of an MCP tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `mcp_tool_use_id: string`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.mcp_tool_result"`
+
+      - `"agent.mcp_tool_result"`
+
+    - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      The result content returned by the tool.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `is_error?: boolean | null`
+
+      Whether the tool execution resulted in an error.
+
+  - `BetaManagedAgentsAgentToolUseEvent`
+
+    Event emitted when the agent invokes a built-in agent tool.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `input: Record<string, unknown>`
+
+      Input parameters for the tool call.
+
+    - `name: string`
+
+      Name of the agent tool being used.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.tool_use"`
+
+      - `"agent.tool_use"`
+
+    - `evaluated_permission?: "allow" | "ask" | "deny"`
+
+      AgentEvaluatedPermission enum
+
+      - `"allow"`
+
+      - `"ask"`
+
+      - `"deny"`
+
+    - `session_thread_id?: string | null`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `BetaManagedAgentsAgentToolResultEvent`
+
+    Event representing the result of an agent tool execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `tool_use_id: string`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `type: "agent.tool_result"`
+
+      - `"agent.tool_result"`
+
+    - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      The result content returned by the tool.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `is_error?: boolean | null`
+
+      Whether the tool execution resulted in an error.
+
+  - `BetaManagedAgentsAgentThreadMessageReceivedEvent`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `from_session_thread_id: string`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thread_message_received"`
+
+      - `"agent.thread_message_received"`
+
+    - `from_agent_name?: string | null`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `BetaManagedAgentsAgentThreadMessageSentEvent`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock>`
+
+      Message content blocks.
+
+      - `BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context?: string | null`
+
+          Additional context about the document for the model.
+
+        - `title?: string | null`
+
+          The title of the document.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `to_session_thread_id: string`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `type: "agent.thread_message_sent"`
+
+      - `"agent.thread_message_sent"`
+
+    - `to_agent_name?: string | null`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+
+  - `BetaManagedAgentsAgentThreadContextCompactedEvent`
+
+    Indicates that context compaction (summarization) occurred during the session.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "agent.thread_context_compacted"`
+
+      - `"agent.thread_context_compacted"`
+
+  - `BetaManagedAgentsSessionErrorEvent`
+
+    An error event indicating a problem occurred during session execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+      - `BetaManagedAgentsUnknownError`
+
+        An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "unknown_error"`
+
+          - `"unknown_error"`
+
+      - `BetaManagedAgentsModelOverloadedError`
+
+        The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "model_overloaded_error"`
+
+          - `"model_overloaded_error"`
+
+      - `BetaManagedAgentsModelRateLimitedError`
+
+        The model request was rate-limited.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "model_rate_limited_error"`
+
+          - `"model_rate_limited_error"`
+
+      - `BetaManagedAgentsModelRequestFailedError`
+
+        A model request failed for a reason other than overload or rate-limiting.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "model_request_failed_error"`
+
+          - `"model_request_failed_error"`
+
+      - `BetaManagedAgentsMCPConnectionFailedError`
+
+        Failed to connect to an MCP server.
+
+        - `mcp_server_name: string`
+
+          Name of the MCP server that failed to connect.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "mcp_connection_failed_error"`
+
+          - `"mcp_connection_failed_error"`
+
+      - `BetaManagedAgentsMCPAuthenticationFailedError`
+
+        Authentication to an MCP server failed.
+
+        - `mcp_server_name: string`
+
+          Name of the MCP server that failed authentication.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "mcp_authentication_failed_error"`
+
+          - `"mcp_authentication_failed_error"`
+
+      - `BetaManagedAgentsBillingError`
+
+        The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `type: "retrying"`
+
+              - `"retrying"`
+
+          - `BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `type: "exhausted"`
+
+              - `"exhausted"`
+
+          - `BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `type: "terminal"`
+
+              - `"terminal"`
+
+        - `type: "billing_error"`
+
+          - `"billing_error"`
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.error"`
+
+      - `"session.error"`
+
+  - `BetaManagedAgentsSessionStatusRescheduledEvent`
+
+    Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.status_rescheduled"`
+
+      - `"session.status_rescheduled"`
+
+  - `BetaManagedAgentsSessionStatusRunningEvent`
+
+    Indicates the session is actively running and the agent is working.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.status_running"`
+
+      - `"session.status_running"`
+
+  - `BetaManagedAgentsSessionStatusIdleEvent`
+
+    Indicates the agent has paused and is awaiting user input.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `BetaManagedAgentsSessionEndTurn`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `type: "end_turn"`
+
+          - `"end_turn"`
+
+      - `BetaManagedAgentsSessionRequiresAction`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `event_ids: Array<string>`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `type: "requires_action"`
+
+          - `"requires_action"`
+
+      - `BetaManagedAgentsSessionRetriesExhausted`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `type: "retries_exhausted"`
+
+          - `"retries_exhausted"`
+
+    - `type: "session.status_idle"`
+
+      - `"session.status_idle"`
+
+  - `BetaManagedAgentsSessionStatusTerminatedEvent`
+
+    Indicates the session has terminated, either due to an error or completion.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.status_terminated"`
+
+      - `"session.status_terminated"`
+
+  - `BetaManagedAgentsSessionThreadCreatedEvent`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the callable agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `type: "session.thread_created"`
+
+      - `"session.thread_created"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_start"`
+
+      - `"span.outcome_evaluation_start"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `explanation: string`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_evaluation_start_id: string`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `result: string`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `type: "span.outcome_evaluation_end"`
+
+      - `"span.outcome_evaluation_end"`
+
+    - `usage: BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `cache_creation_input_tokens: number`
+
+        Tokens used to create prompt cache in this request.
+
+      - `cache_read_input_tokens: number`
+
+        Tokens read from prompt cache in this request.
+
+      - `input_tokens: number`
+
+        Input tokens consumed by this request.
+
+      - `output_tokens: number`
+
+        Output tokens generated by this request.
+
+      - `speed?: "standard" | "fast" | null`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+  - `BetaManagedAgentsSpanModelRequestStartEvent`
+
+    Emitted when a model request is initiated by the agent.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.model_request_start"`
+
+      - `"span.model_request_start"`
+
+  - `BetaManagedAgentsSpanModelRequestEndEvent`
+
+    Emitted when a model request completes.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `is_error: boolean | null`
+
+      Whether the model request resulted in an error.
+
+    - `model_request_start_id: string`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `model_usage: BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `cache_creation_input_tokens: number`
+
+        Tokens used to create prompt cache in this request.
+
+      - `cache_read_input_tokens: number`
+
+        Tokens read from prompt cache in this request.
+
+      - `input_tokens: number`
+
+        Input tokens consumed by this request.
+
+      - `output_tokens: number`
+
+        Output tokens generated by this request.
+
+      - `speed?: "standard" | "fast" | null`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.model_request_end"`
+
+      - `"span.model_request_end"`
+
+  - `BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `iteration: number`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `outcome_id: string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "span.outcome_evaluation_ongoing"`
+
+      - `"span.outcome_evaluation_ongoing"`
+
+  - `BetaManagedAgentsUserDefineOutcomeEvent`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `description: string`
+
+      What the agent should produce. Copied from the input event.
+
+    - `max_iterations: number | null`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `outcome_id: string`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `BetaManagedAgentsFileRubric`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: string`
+
+          ID of the rubric file.
+
+        - `type: "file"`
+
+          - `"file"`
+
+      - `BetaManagedAgentsTextRubric`
+
+        Rubric content provided inline as text.
+
+        - `content: string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `type: "text"`
+
+          - `"text"`
+
+    - `type: "user.define_outcome"`
+
+      - `"user.define_outcome"`
+
+  - `BetaManagedAgentsSessionDeletedEvent`
+
+    Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "session.deleted"`
+
+      - `"session.deleted"`
+
+  - `BetaManagedAgentsSessionThreadStatusRunningEvent`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `type: "session.thread_status_running"`
+
+      - `"session.thread_status_running"`
+
+  - `BetaManagedAgentsSessionThreadStatusIdleEvent`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `BetaManagedAgentsSessionEndTurn`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `type: "end_turn"`
+
+          - `"end_turn"`
+
+      - `BetaManagedAgentsSessionRequiresAction`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `event_ids: Array<string>`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `type: "requires_action"`
+
+          - `"requires_action"`
+
+      - `BetaManagedAgentsSessionRetriesExhausted`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `type: "retries_exhausted"`
+
+          - `"retries_exhausted"`
+
+    - `type: "session.thread_status_idle"`
+
+      - `"session.thread_status_idle"`
+
+  - `BetaManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `type: "session.thread_status_terminated"`
+
+      - `"session.thread_status_terminated"`
+
+  - `BetaManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `agent_name: string`
+
+      Name of the agent the thread runs.
+
+    - `processed_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `session_thread_id: string`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `type: "session.thread_status_rescheduled"`
+
+      - `"session.thread_status_rescheduled"`
+
+### Example
+
+```typescript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+});
+
+const betaManagedAgentsStreamSessionThreadEvents = await client.beta.sessions.threads.events.stream(
+  'sthr_011CZkZVWa6oIjw0rgXZpnBt',
+  { session_id: 'sesn_011CZkZAtmR3yMPDzynEDxu7' },
+);
+
+console.log(betaManagedAgentsStreamSessionThreadEvents);
+```
+
+# Vaults
+
+## Create
+
+`client.beta.vaults.create(VaultCreateParamsparams, RequestOptionsoptions?): BetaManagedAgentsVault`
+
+**post** `/v1/vaults`
+
+Create Vault
+
+### Parameters
+
+- `params: VaultCreateParams`
+
+  - `display_name: string`
+
+    Body param: Human-readable name for the vault. 1-255 characters.
+
+  - `metadata?: Record<string, string>`
+
+    Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `betas?: Array<AnthropicBeta>`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `(string & {})`
+
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
+
+      - `"message-batches-2024-09-24"`
+
+      - `"prompt-caching-2024-07-31"`
+
+      - `"computer-use-2024-10-22"`
+
+      - `"computer-use-2025-01-24"`
+
+      - `"pdfs-2024-09-25"`
+
+      - `"token-counting-2024-11-01"`
+
+      - `"token-efficient-tools-2025-02-19"`
+
+      - `"output-128k-2025-02-19"`
+
+      - `"files-api-2025-04-14"`
+
+      - `"mcp-client-2025-04-04"`
+
+      - `"mcp-client-2025-11-20"`
+
+      - `"dev-full-thinking-2025-05-14"`
+
+      - `"interleaved-thinking-2025-05-14"`
+
+      - `"code-execution-2025-05-22"`
+
+      - `"extended-cache-ttl-2025-04-11"`
+
+      - `"context-1m-2025-08-07"`
+
+      - `"context-management-2025-06-27"`
+
+      - `"model-context-window-exceeded-2025-08-26"`
+
+      - `"skills-2025-10-02"`
+
+      - `"fast-mode-2026-02-01"`
+
+      - `"output-300k-2026-03-24"`
+
+      - `"user-profiles-2026-03-24"`
+
+      - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -70405,7 +87745,7 @@ List Vaults
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -70452,6 +87792,8 @@ List Vaults
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -70522,7 +87864,7 @@ Get Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -70569,6 +87911,8 @@ Get Vault
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -70646,7 +87990,7 @@ Update Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -70693,6 +88037,8 @@ Update Vault
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -70762,7 +88108,7 @@ Delete Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -70809,6 +88155,8 @@ Delete Vault
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -70860,7 +88208,7 @@ Archive Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -70907,6 +88255,8 @@ Archive Vault
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -71136,7 +88486,7 @@ Create Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -71183,6 +88533,8 @@ Create Credential
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -71357,7 +88709,7 @@ List Credentials
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -71404,6 +88756,8 @@ List Credentials
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -71564,7 +88918,7 @@ Get Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -71611,6 +88965,8 @@ Get Credential
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -71851,7 +89207,7 @@ Update Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -71898,6 +89254,8 @@ Update Credential
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -72058,7 +89416,7 @@ Delete Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -72105,6 +89463,8 @@ Delete Credential
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -72161,7 +89521,7 @@ Archive Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -72208,6 +89568,8 @@ Archive Credential
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -72344,6 +89706,197 @@ const betaManagedAgentsCredential = await client.beta.vaults.credentials.archive
 console.log(betaManagedAgentsCredential.id);
 ```
 
+## MCP OAuth Validate
+
+`client.beta.vaults.credentials.mcpOAuthValidate(stringcredentialID, CredentialMCPOAuthValidateParamsparams, RequestOptionsoptions?): BetaManagedAgentsCredentialValidation`
+
+**post** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
+
+Validate Credential
+
+### Parameters
+
+- `credentialID: string`
+
+- `params: CredentialMCPOAuthValidateParams`
+
+  - `vault_id: string`
+
+    Path param: Path parameter vault_id
+
+  - `betas?: Array<AnthropicBeta>`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `(string & {})`
+
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
+
+      - `"message-batches-2024-09-24"`
+
+      - `"prompt-caching-2024-07-31"`
+
+      - `"computer-use-2024-10-22"`
+
+      - `"computer-use-2025-01-24"`
+
+      - `"pdfs-2024-09-25"`
+
+      - `"token-counting-2024-11-01"`
+
+      - `"token-efficient-tools-2025-02-19"`
+
+      - `"output-128k-2025-02-19"`
+
+      - `"files-api-2025-04-14"`
+
+      - `"mcp-client-2025-04-04"`
+
+      - `"mcp-client-2025-11-20"`
+
+      - `"dev-full-thinking-2025-05-14"`
+
+      - `"interleaved-thinking-2025-05-14"`
+
+      - `"code-execution-2025-05-22"`
+
+      - `"extended-cache-ttl-2025-04-11"`
+
+      - `"context-1m-2025-08-07"`
+
+      - `"context-management-2025-06-27"`
+
+      - `"model-context-window-exceeded-2025-08-26"`
+
+      - `"skills-2025-10-02"`
+
+      - `"fast-mode-2026-02-01"`
+
+      - `"output-300k-2026-03-24"`
+
+      - `"user-profiles-2026-03-24"`
+
+      - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
+
+### Returns
+
+- `BetaManagedAgentsCredentialValidation`
+
+  Result of live-probing a credential against its configured MCP server.
+
+  - `credential_id: string`
+
+    Unique identifier of the credential that was validated.
+
+  - `has_refresh_token: boolean`
+
+    Whether the credential has a refresh token configured.
+
+  - `mcp_probe: BetaManagedAgentsMCPProbe | null`
+
+    The failing step of an MCP validation probe.
+
+    - `http_response: BetaManagedAgentsRefreshHTTPResponse | null`
+
+      An HTTP response captured during a credential validation probe.
+
+      - `body: string`
+
+        Response body. May be truncated and has sensitive values scrubbed.
+
+      - `body_truncated: boolean`
+
+        Whether `body` was truncated.
+
+      - `content_type: string`
+
+        Value of the `Content-Type` response header.
+
+      - `status_code: number`
+
+        HTTP status code.
+
+    - `method: string`
+
+      The MCP method that failed (for example `initialize` or `tools/list`).
+
+  - `refresh: BetaManagedAgentsRefreshObject | null`
+
+    Outcome of a refresh-token exchange attempted during credential validation.
+
+    - `http_response: BetaManagedAgentsRefreshHTTPResponse | null`
+
+      An HTTP response captured during a credential validation probe.
+
+      - `body: string`
+
+        Response body. May be truncated and has sensitive values scrubbed.
+
+      - `body_truncated: boolean`
+
+        Whether `body` was truncated.
+
+      - `content_type: string`
+
+        Value of the `Content-Type` response header.
+
+      - `status_code: number`
+
+        HTTP status code.
+
+    - `status: "succeeded" | "failed" | "connect_error" | "no_refresh_token"`
+
+      Outcome of a refresh-token exchange attempted during credential validation.
+
+      - `"succeeded"`
+
+      - `"failed"`
+
+      - `"connect_error"`
+
+      - `"no_refresh_token"`
+
+  - `status: BetaManagedAgentsCredentialValidationStatus`
+
+    Overall verdict of a credential validation probe.
+
+    - `"valid"`
+
+    - `"invalid"`
+
+    - `"unknown"`
+
+  - `type: "vault_credential_validation"`
+
+    - `"vault_credential_validation"`
+
+  - `validated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_id: string`
+
+    Identifier of the vault containing the credential.
+
+### Example
+
+```typescript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+});
+
+const betaManagedAgentsCredentialValidation = await client.beta.vaults.credentials.mcpOAuthValidate(
+  'vcrd_011CZkZEMt8gZan2iYOQfSkw',
+  { vault_id: 'vlt_011CZkZDLs7fYzm1hXNPeRjv' },
+);
+
+console.log(betaManagedAgentsCredentialValidation.credential_id);
+```
+
 ## Domain Types
 
 ### Beta Managed Agents Credential
@@ -72463,6 +90016,118 @@ console.log(betaManagedAgentsCredential.id);
   - `display_name?: string | null`
 
     Human-readable name for the credential.
+
+### Beta Managed Agents Credential Validation
+
+- `BetaManagedAgentsCredentialValidation`
+
+  Result of live-probing a credential against its configured MCP server.
+
+  - `credential_id: string`
+
+    Unique identifier of the credential that was validated.
+
+  - `has_refresh_token: boolean`
+
+    Whether the credential has a refresh token configured.
+
+  - `mcp_probe: BetaManagedAgentsMCPProbe | null`
+
+    The failing step of an MCP validation probe.
+
+    - `http_response: BetaManagedAgentsRefreshHTTPResponse | null`
+
+      An HTTP response captured during a credential validation probe.
+
+      - `body: string`
+
+        Response body. May be truncated and has sensitive values scrubbed.
+
+      - `body_truncated: boolean`
+
+        Whether `body` was truncated.
+
+      - `content_type: string`
+
+        Value of the `Content-Type` response header.
+
+      - `status_code: number`
+
+        HTTP status code.
+
+    - `method: string`
+
+      The MCP method that failed (for example `initialize` or `tools/list`).
+
+  - `refresh: BetaManagedAgentsRefreshObject | null`
+
+    Outcome of a refresh-token exchange attempted during credential validation.
+
+    - `http_response: BetaManagedAgentsRefreshHTTPResponse | null`
+
+      An HTTP response captured during a credential validation probe.
+
+      - `body: string`
+
+        Response body. May be truncated and has sensitive values scrubbed.
+
+      - `body_truncated: boolean`
+
+        Whether `body` was truncated.
+
+      - `content_type: string`
+
+        Value of the `Content-Type` response header.
+
+      - `status_code: number`
+
+        HTTP status code.
+
+    - `status: "succeeded" | "failed" | "connect_error" | "no_refresh_token"`
+
+      Outcome of a refresh-token exchange attempted during credential validation.
+
+      - `"succeeded"`
+
+      - `"failed"`
+
+      - `"connect_error"`
+
+      - `"no_refresh_token"`
+
+  - `status: BetaManagedAgentsCredentialValidationStatus`
+
+    Overall verdict of a credential validation probe.
+
+    - `"valid"`
+
+    - `"invalid"`
+
+    - `"unknown"`
+
+  - `type: "vault_credential_validation"`
+
+    - `"vault_credential_validation"`
+
+  - `validated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_id: string`
+
+    Identifier of the vault containing the credential.
+
+### Beta Managed Agents Credential Validation Status
+
+- `BetaManagedAgentsCredentialValidationStatus = "valid" | "invalid" | "unknown"`
+
+  Overall verdict of a credential validation probe.
+
+  - `"valid"`
+
+  - `"invalid"`
+
+  - `"unknown"`
 
 ### Beta Managed Agents Deleted Credential
 
@@ -72838,6 +90503,96 @@ console.log(betaManagedAgentsCredential.id);
 
           Updated OAuth client secret.
 
+### Beta Managed Agents MCP Probe
+
+- `BetaManagedAgentsMCPProbe`
+
+  The failing step of an MCP validation probe.
+
+  - `http_response: BetaManagedAgentsRefreshHTTPResponse | null`
+
+    An HTTP response captured during a credential validation probe.
+
+    - `body: string`
+
+      Response body. May be truncated and has sensitive values scrubbed.
+
+    - `body_truncated: boolean`
+
+      Whether `body` was truncated.
+
+    - `content_type: string`
+
+      Value of the `Content-Type` response header.
+
+    - `status_code: number`
+
+      HTTP status code.
+
+  - `method: string`
+
+    The MCP method that failed (for example `initialize` or `tools/list`).
+
+### Beta Managed Agents Refresh HTTP Response
+
+- `BetaManagedAgentsRefreshHTTPResponse`
+
+  An HTTP response captured during a credential validation probe.
+
+  - `body: string`
+
+    Response body. May be truncated and has sensitive values scrubbed.
+
+  - `body_truncated: boolean`
+
+    Whether `body` was truncated.
+
+  - `content_type: string`
+
+    Value of the `Content-Type` response header.
+
+  - `status_code: number`
+
+    HTTP status code.
+
+### Beta Managed Agents Refresh Object
+
+- `BetaManagedAgentsRefreshObject`
+
+  Outcome of a refresh-token exchange attempted during credential validation.
+
+  - `http_response: BetaManagedAgentsRefreshHTTPResponse | null`
+
+    An HTTP response captured during a credential validation probe.
+
+    - `body: string`
+
+      Response body. May be truncated and has sensitive values scrubbed.
+
+    - `body_truncated: boolean`
+
+      Whether `body` was truncated.
+
+    - `content_type: string`
+
+      Value of the `Content-Type` response header.
+
+    - `status_code: number`
+
+      HTTP status code.
+
+  - `status: "succeeded" | "failed" | "connect_error" | "no_refresh_token"`
+
+    Outcome of a refresh-token exchange attempted during credential validation.
+
+    - `"succeeded"`
+
+    - `"failed"`
+
+    - `"connect_error"`
+
+    - `"no_refresh_token"`
+
 ### Beta Managed Agents Static Bearer Auth Response
 
 - `BetaManagedAgentsStaticBearerAuthResponse`
@@ -73012,7 +90767,7 @@ Create a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -73059,6 +90814,8 @@ Create a memory store
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -73150,7 +90907,7 @@ List memory stores
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -73197,6 +90954,8 @@ List memory stores
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -73271,7 +91030,7 @@ Retrieve a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -73318,6 +91077,8 @@ Retrieve a memory store
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -73403,7 +91164,7 @@ Update a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -73450,6 +91211,8 @@ Update a memory store
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -73523,7 +91286,7 @@ Delete a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -73570,6 +91333,8 @@ Delete a memory store
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -73621,7 +91386,7 @@ Archive a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -73668,6 +91433,8 @@ Archive a memory store
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -73813,7 +91580,7 @@ Create a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -73860,6 +91627,8 @@ Create a memory
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -73980,7 +91749,7 @@ List memories
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -74027,6 +91796,8 @@ List memories
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -74139,7 +91910,7 @@ Retrieve a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -74186,6 +91957,8 @@ Retrieve a memory
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -74301,7 +92074,7 @@ Update a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -74348,6 +92121,8 @@ Update a memory
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -74439,7 +92214,7 @@ Delete a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -74486,6 +92261,8 @@ Delete a memory
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -74899,7 +92676,7 @@ List memory versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -74946,6 +92723,8 @@ List memory versions
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -75132,7 +92911,7 @@ Retrieve a memory version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -75179,6 +92958,8 @@ Retrieve a memory version
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -75357,7 +93138,7 @@ Redact a memory version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -75404,6 +93185,8 @@ Redact a memory version
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -75816,7 +93599,7 @@ Upload File
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -75863,6 +93646,8 @@ Upload File
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -75967,7 +93752,7 @@ List Files
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -76014,6 +93799,8 @@ List Files
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -76104,7 +93891,7 @@ Download File
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -76151,6 +93938,8 @@ Download File
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -76195,7 +93984,7 @@ Get File Metadata
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -76242,6 +94031,8 @@ Get File Metadata
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -76331,7 +94122,7 @@ Delete File
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -76378,6 +94169,8 @@ Delete File
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -76525,7 +94318,7 @@ Create Skill
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -76572,6 +94365,8 @@ Create Skill
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -76671,7 +94466,7 @@ List Skills
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -76718,6 +94513,8 @@ List Skills
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -76803,7 +94600,7 @@ Get Skill
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -76850,6 +94647,8 @@ Get Skill
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -76934,7 +94733,7 @@ Delete Skill
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -76981,6 +94780,8 @@ Delete Skill
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -77197,7 +94998,7 @@ Create Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -77244,6 +95045,8 @@ Create Skill Version
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -77341,7 +95144,7 @@ List Skill Versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -77388,6 +95191,8 @@ List Skill Versions
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -77482,7 +95287,7 @@ Get Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -77529,6 +95334,8 @@ Get Skill Version
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -77622,7 +95429,7 @@ Delete Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -77669,6 +95476,8 @@ Delete Skill Version
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -77862,6 +95671,1412 @@ console.log(version.id);
 
     For Skill Versions, this is always `"skill_version_deleted"`.
 
+# Webhooks
+
+## Unwrap
+
+`client.beta.webhooks.unwrap(RequestOptionsoptions?): void`
+
+**** ``
+
+### Example
+
+```typescript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+});
+
+await client.beta.webhooks.unwrap();
+```
+
+## Domain Types
+
+### Beta Webhook Event
+
+- `BetaWebhookEvent`
+
+  - `id: string`
+
+    Unique event identifier for idempotency.
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when the event occurred.
+
+  - `data: BetaWebhookEventData`
+
+    - `BetaWebhookSessionCreatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.created"`
+
+        - `"session.created"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionPendingEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.pending"`
+
+        - `"session.pending"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionRunningEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.running"`
+
+        - `"session.running"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionIdledEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.idled"`
+
+        - `"session.idled"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionRequiresActionEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.requires_action"`
+
+        - `"session.requires_action"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionArchivedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.archived"`
+
+        - `"session.archived"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionDeletedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.deleted"`
+
+        - `"session.deleted"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionStatusScheduledEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.status_scheduled"`
+
+        - `"session.status_scheduled"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionStatusRunStartedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.status_run_started"`
+
+        - `"session.status_run_started"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionStatusIdledEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.status_idled"`
+
+        - `"session.status_idled"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionStatusTerminatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.status_terminated"`
+
+        - `"session.status_terminated"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionThreadCreatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.thread_created"`
+
+        - `"session.thread_created"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionThreadIdledEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.thread_idled"`
+
+        - `"session.thread_idled"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionThreadTerminatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.thread_terminated"`
+
+        - `"session.thread_terminated"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.outcome_evaluation_ended"`
+
+        - `"session.outcome_evaluation_ended"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultCreatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault.created"`
+
+        - `"vault.created"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultArchivedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault.archived"`
+
+        - `"vault.archived"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultDeletedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault.deleted"`
+
+        - `"vault.deleted"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultCredentialCreatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault_credential.created"`
+
+        - `"vault_credential.created"`
+
+      - `vault_id: string`
+
+        ID of the vault that owns this credential.
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultCredentialArchivedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault_credential.archived"`
+
+        - `"vault_credential.archived"`
+
+      - `vault_id: string`
+
+        ID of the vault that owns this credential.
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultCredentialDeletedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault_credential.deleted"`
+
+        - `"vault_credential.deleted"`
+
+      - `vault_id: string`
+
+        ID of the vault that owns this credential.
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultCredentialRefreshFailedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault_credential.refresh_failed"`
+
+        - `"vault_credential.refresh_failed"`
+
+      - `vault_id: string`
+
+        ID of the vault that owns this credential.
+
+      - `workspace_id: string`
+
+  - `type: "event"`
+
+    Object type. Always `event` for webhook payloads.
+
+    - `"event"`
+
+### Beta Webhook Event Data
+
+- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 19 more`
+
+  - `BetaWebhookSessionCreatedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.created"`
+
+      - `"session.created"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionPendingEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.pending"`
+
+      - `"session.pending"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionRunningEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.running"`
+
+      - `"session.running"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionIdledEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.idled"`
+
+      - `"session.idled"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionRequiresActionEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.requires_action"`
+
+      - `"session.requires_action"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionArchivedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.archived"`
+
+      - `"session.archived"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionDeletedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.deleted"`
+
+      - `"session.deleted"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionStatusScheduledEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.status_scheduled"`
+
+      - `"session.status_scheduled"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionStatusRunStartedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.status_run_started"`
+
+      - `"session.status_run_started"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionStatusIdledEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.status_idled"`
+
+      - `"session.status_idled"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionStatusTerminatedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.status_terminated"`
+
+      - `"session.status_terminated"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionThreadCreatedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.thread_created"`
+
+      - `"session.thread_created"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionThreadIdledEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.thread_idled"`
+
+      - `"session.thread_idled"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionThreadTerminatedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.thread_terminated"`
+
+      - `"session.thread_terminated"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.outcome_evaluation_ended"`
+
+      - `"session.outcome_evaluation_ended"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookVaultCreatedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "vault.created"`
+
+      - `"vault.created"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookVaultArchivedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "vault.archived"`
+
+      - `"vault.archived"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookVaultDeletedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "vault.deleted"`
+
+      - `"vault.deleted"`
+
+    - `workspace_id: string`
+
+  - `BetaWebhookVaultCredentialCreatedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "vault_credential.created"`
+
+      - `"vault_credential.created"`
+
+    - `vault_id: string`
+
+      ID of the vault that owns this credential.
+
+    - `workspace_id: string`
+
+  - `BetaWebhookVaultCredentialArchivedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "vault_credential.archived"`
+
+      - `"vault_credential.archived"`
+
+    - `vault_id: string`
+
+      ID of the vault that owns this credential.
+
+    - `workspace_id: string`
+
+  - `BetaWebhookVaultCredentialDeletedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "vault_credential.deleted"`
+
+      - `"vault_credential.deleted"`
+
+    - `vault_id: string`
+
+      ID of the vault that owns this credential.
+
+    - `workspace_id: string`
+
+  - `BetaWebhookVaultCredentialRefreshFailedEventData`
+
+    - `id: string`
+
+      ID of the resource that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "vault_credential.refresh_failed"`
+
+      - `"vault_credential.refresh_failed"`
+
+    - `vault_id: string`
+
+      ID of the vault that owns this credential.
+
+    - `workspace_id: string`
+
+### Beta Webhook Session Archived Event Data
+
+- `BetaWebhookSessionArchivedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.archived"`
+
+    - `"session.archived"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Created Event Data
+
+- `BetaWebhookSessionCreatedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.created"`
+
+    - `"session.created"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Deleted Event Data
+
+- `BetaWebhookSessionDeletedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.deleted"`
+
+    - `"session.deleted"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Idled Event Data
+
+- `BetaWebhookSessionIdledEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.idled"`
+
+    - `"session.idled"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Outcome Evaluation Ended Event Data
+
+- `BetaWebhookSessionOutcomeEvaluationEndedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.outcome_evaluation_ended"`
+
+    - `"session.outcome_evaluation_ended"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Pending Event Data
+
+- `BetaWebhookSessionPendingEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.pending"`
+
+    - `"session.pending"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Requires Action Event Data
+
+- `BetaWebhookSessionRequiresActionEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.requires_action"`
+
+    - `"session.requires_action"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Running Event Data
+
+- `BetaWebhookSessionRunningEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.running"`
+
+    - `"session.running"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Status Idled Event Data
+
+- `BetaWebhookSessionStatusIdledEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.status_idled"`
+
+    - `"session.status_idled"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Status Run Started Event Data
+
+- `BetaWebhookSessionStatusRunStartedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.status_run_started"`
+
+    - `"session.status_run_started"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Status Scheduled Event Data
+
+- `BetaWebhookSessionStatusScheduledEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.status_scheduled"`
+
+    - `"session.status_scheduled"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Status Terminated Event Data
+
+- `BetaWebhookSessionStatusTerminatedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.status_terminated"`
+
+    - `"session.status_terminated"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Thread Created Event Data
+
+- `BetaWebhookSessionThreadCreatedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.thread_created"`
+
+    - `"session.thread_created"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Thread Idled Event Data
+
+- `BetaWebhookSessionThreadIdledEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.thread_idled"`
+
+    - `"session.thread_idled"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Thread Terminated Event Data
+
+- `BetaWebhookSessionThreadTerminatedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.thread_terminated"`
+
+    - `"session.thread_terminated"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Vault Archived Event Data
+
+- `BetaWebhookVaultArchivedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "vault.archived"`
+
+    - `"vault.archived"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Vault Created Event Data
+
+- `BetaWebhookVaultCreatedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "vault.created"`
+
+    - `"vault.created"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Vault Credential Archived Event Data
+
+- `BetaWebhookVaultCredentialArchivedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "vault_credential.archived"`
+
+    - `"vault_credential.archived"`
+
+  - `vault_id: string`
+
+    ID of the vault that owns this credential.
+
+  - `workspace_id: string`
+
+### Beta Webhook Vault Credential Created Event Data
+
+- `BetaWebhookVaultCredentialCreatedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "vault_credential.created"`
+
+    - `"vault_credential.created"`
+
+  - `vault_id: string`
+
+    ID of the vault that owns this credential.
+
+  - `workspace_id: string`
+
+### Beta Webhook Vault Credential Deleted Event Data
+
+- `BetaWebhookVaultCredentialDeletedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "vault_credential.deleted"`
+
+    - `"vault_credential.deleted"`
+
+  - `vault_id: string`
+
+    ID of the vault that owns this credential.
+
+  - `workspace_id: string`
+
+### Beta Webhook Vault Credential Refresh Failed Event Data
+
+- `BetaWebhookVaultCredentialRefreshFailedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "vault_credential.refresh_failed"`
+
+    - `"vault_credential.refresh_failed"`
+
+  - `vault_id: string`
+
+    ID of the vault that owns this credential.
+
+  - `workspace_id: string`
+
+### Beta Webhook Vault Deleted Event Data
+
+- `BetaWebhookVaultDeletedEventData`
+
+  - `id: string`
+
+    ID of the resource that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "vault.deleted"`
+
+    - `"vault.deleted"`
+
+  - `workspace_id: string`
+
+### Unwrap Webhook Event
+
+- `UnwrapWebhookEvent`
+
+  - `id: string`
+
+    Unique event identifier for idempotency.
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when the event occurred.
+
+  - `data: BetaWebhookEventData`
+
+    - `BetaWebhookSessionCreatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.created"`
+
+        - `"session.created"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionPendingEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.pending"`
+
+        - `"session.pending"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionRunningEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.running"`
+
+        - `"session.running"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionIdledEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.idled"`
+
+        - `"session.idled"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionRequiresActionEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.requires_action"`
+
+        - `"session.requires_action"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionArchivedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.archived"`
+
+        - `"session.archived"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionDeletedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.deleted"`
+
+        - `"session.deleted"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionStatusScheduledEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.status_scheduled"`
+
+        - `"session.status_scheduled"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionStatusRunStartedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.status_run_started"`
+
+        - `"session.status_run_started"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionStatusIdledEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.status_idled"`
+
+        - `"session.status_idled"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionStatusTerminatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.status_terminated"`
+
+        - `"session.status_terminated"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionThreadCreatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.thread_created"`
+
+        - `"session.thread_created"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionThreadIdledEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.thread_idled"`
+
+        - `"session.thread_idled"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionThreadTerminatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.thread_terminated"`
+
+        - `"session.thread_terminated"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.outcome_evaluation_ended"`
+
+        - `"session.outcome_evaluation_ended"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultCreatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault.created"`
+
+        - `"vault.created"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultArchivedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault.archived"`
+
+        - `"vault.archived"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultDeletedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault.deleted"`
+
+        - `"vault.deleted"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultCredentialCreatedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault_credential.created"`
+
+        - `"vault_credential.created"`
+
+      - `vault_id: string`
+
+        ID of the vault that owns this credential.
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultCredentialArchivedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault_credential.archived"`
+
+        - `"vault_credential.archived"`
+
+      - `vault_id: string`
+
+        ID of the vault that owns this credential.
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultCredentialDeletedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault_credential.deleted"`
+
+        - `"vault_credential.deleted"`
+
+      - `vault_id: string`
+
+        ID of the vault that owns this credential.
+
+      - `workspace_id: string`
+
+    - `BetaWebhookVaultCredentialRefreshFailedEventData`
+
+      - `id: string`
+
+        ID of the resource that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "vault_credential.refresh_failed"`
+
+        - `"vault_credential.refresh_failed"`
+
+      - `vault_id: string`
+
+        ID of the vault that owns this credential.
+
+      - `workspace_id: string`
+
+  - `type: "event"`
+
+    Object type. Always `event` for webhook payloads.
+
+    - `"event"`
+
 # User Profiles
 
 ## Create
@@ -77884,13 +97099,27 @@ Create User Profile
 
     Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
+  - `name?: string | null`
+
+    Body param: Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+
+  - `relationship?: "external" | "resold" | "internal"`
+
+    Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
+
   - `betas?: Array<AnthropicBeta>`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -77938,6 +97167,8 @@ Create User Profile
 
       - `"advisor-tool-2026-03-01"`
 
+      - `"managed-agents-2026-04-01"`
+
 ### Returns
 
 - `BetaUserProfile`
@@ -77953,6 +97184,16 @@ Create User Profile
   - `metadata: Record<string, string>`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" | "resold" | "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
@@ -77981,6 +97222,10 @@ Create User Profile
   - `external_id?: string | null`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name?: string | null`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -78030,7 +97275,7 @@ List User Profiles
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -78078,6 +97323,8 @@ List User Profiles
 
       - `"advisor-tool-2026-03-01"`
 
+      - `"managed-agents-2026-04-01"`
+
 ### Returns
 
 - `BetaUserProfile`
@@ -78093,6 +97340,16 @@ List User Profiles
   - `metadata: Record<string, string>`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" | "resold" | "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
@@ -78121,6 +97378,10 @@ List User Profiles
   - `external_id?: string | null`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name?: string | null`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -78157,7 +97418,7 @@ Get User Profile
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -78205,6 +97466,8 @@ Get User Profile
 
       - `"advisor-tool-2026-03-01"`
 
+      - `"managed-agents-2026-04-01"`
+
 ### Returns
 
 - `BetaUserProfile`
@@ -78220,6 +97483,16 @@ Get User Profile
   - `metadata: Record<string, string>`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" | "resold" | "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
@@ -78248,6 +97521,10 @@ Get User Profile
   - `external_id?: string | null`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name?: string | null`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -78285,13 +97562,27 @@ Update User Profile
 
     Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
 
+  - `name?: string | null`
+
+    Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+  - `relationship?: "external" | "resold" | "internal" | null`
+
+    Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
+
   - `betas?: Array<AnthropicBeta>`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -78339,6 +97630,8 @@ Update User Profile
 
       - `"advisor-tool-2026-03-01"`
 
+      - `"managed-agents-2026-04-01"`
+
 ### Returns
 
 - `BetaUserProfile`
@@ -78354,6 +97647,16 @@ Update User Profile
   - `metadata: Record<string, string>`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" | "resold" | "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
@@ -78382,6 +97685,10 @@ Update User Profile
   - `external_id?: string | null`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name?: string | null`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -78417,7 +97724,7 @@ Create Enrollment URL
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -78464,6 +97771,8 @@ Create Enrollment URL
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -78517,6 +97826,16 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `relationship: "external" | "resold" | "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
+
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -78544,6 +97863,10 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
   - `external_id?: string | null`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name?: string | null`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Beta User Profile Enrollment URL
 

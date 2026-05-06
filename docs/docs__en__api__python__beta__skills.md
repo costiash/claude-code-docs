@@ -28,7 +28,7 @@ Create Skill
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -75,6 +75,8 @@ Create Skill
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -171,7 +173,7 @@ List Skills
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -218,6 +220,8 @@ List Skills
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -300,7 +304,7 @@ Get Skill
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -347,6 +351,8 @@ Get Skill
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -430,7 +436,7 @@ Delete Skill
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -477,6 +483,8 @@ Delete Skill
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -692,7 +700,7 @@ Create Skill Version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -739,6 +747,8 @@ Create Skill Version
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -835,7 +845,7 @@ List Skill Versions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -882,6 +892,8 @@ List Skill Versions
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -975,7 +987,7 @@ Get Skill Version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1022,6 +1034,8 @@ Get Skill Version
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -1115,7 +1129,7 @@ Delete Skill Version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1162,6 +1176,8 @@ Delete Skill Version
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 

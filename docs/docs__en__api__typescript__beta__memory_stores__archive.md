@@ -18,7 +18,7 @@ Archive a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -65,6 +65,8 @@ Archive a memory store
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 

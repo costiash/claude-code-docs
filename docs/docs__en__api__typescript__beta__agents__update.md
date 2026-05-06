@@ -148,6 +148,44 @@ Update Agent
 
         - `"fast"`
 
+  - `multiagent?: BetaManagedAgentsMultiagentParams | null`
+
+    Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+    - `agents: Array<BetaManagedAgentsMultiagentRosterEntryParams>`
+
+      Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+      - `string`
+
+      - `BetaManagedAgentsAgentParams`
+
+        Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+        - `id: string`
+
+          The `agent` ID.
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version?: number`
+
+          The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+      - `BetaManagedAgentsMultiagentSelfParams`
+
+        Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+        - `type: "self"`
+
+          - `"self"`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
+
   - `name?: string`
 
     Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
@@ -392,7 +430,7 @@ Update Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -439,6 +477,8 @@ Update Agent
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -527,6 +567,26 @@ Update Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent | null`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: Array<BetaManagedAgentsAgentReference>`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 

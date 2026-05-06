@@ -66,6 +66,8 @@ Archive a memory store
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryStore struct{…}`

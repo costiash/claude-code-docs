@@ -2194,7 +2194,7 @@ Note that the failure of one request in a batch does not affect the processing o
 
 Batch processing stores request and response data for up to 29 days after batch creation. You can delete a message batch at any time after processing using the `DELETE /v1/messages/batches/{batch_id}` endpoint. To delete an in-progress batch, cancel it first. Asynchronous processing requires server-side storage of both inputs and outputs until batch completion and result retrieval.
 
-For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
+For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
 ## FAQ
 

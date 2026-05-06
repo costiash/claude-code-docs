@@ -14,7 +14,7 @@ Create User Profile
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -62,6 +62,8 @@ Create User Profile
 
     - `"advisor-tool-2026-03-01"`
 
+    - `"managed-agents-2026-04-01"`
+
 ### Body Parameters
 
 - `external_id: optional string`
@@ -72,9 +74,23 @@ Create User Profile
 
   Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
+- `name: optional string`
+
+  Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+
+- `relationship: optional "external" or "resold" or "internal"`
+
+  How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+  - `"external"`
+
+  - `"resold"`
+
+  - `"internal"`
+
 ### Returns
 
-- `BetaUserProfile = object { id, created_at, metadata, 4 more }`
+- `BetaUserProfile = object { id, created_at, metadata, 6 more }`
 
   - `id: string`
 
@@ -87,6 +103,16 @@ Create User Profile
   - `metadata: map[string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" or "resold" or "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
@@ -115,6 +141,10 @@ Create User Profile
   - `external_id: optional string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name: optional string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -159,7 +189,7 @@ List User Profiles
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -207,6 +237,8 @@ List User Profiles
 
     - `"advisor-tool-2026-03-01"`
 
+    - `"managed-agents-2026-04-01"`
+
 ### Returns
 
 - `data: array of BetaUserProfile`
@@ -224,6 +256,16 @@ List User Profiles
   - `metadata: map[string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" or "resold" or "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
@@ -252,6 +294,10 @@ List User Profiles
   - `external_id: optional string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name: optional string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 - `next_page: string`
 
@@ -284,7 +330,7 @@ Get User Profile
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -332,9 +378,11 @@ Get User Profile
 
     - `"advisor-tool-2026-03-01"`
 
+    - `"managed-agents-2026-04-01"`
+
 ### Returns
 
-- `BetaUserProfile = object { id, created_at, metadata, 4 more }`
+- `BetaUserProfile = object { id, created_at, metadata, 6 more }`
 
   - `id: string`
 
@@ -347,6 +395,16 @@ Get User Profile
   - `metadata: map[string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" or "resold" or "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
@@ -375,6 +433,10 @@ Get User Profile
   - `external_id: optional string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name: optional string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -403,7 +465,7 @@ Update User Profile
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -451,6 +513,8 @@ Update User Profile
 
     - `"advisor-tool-2026-03-01"`
 
+    - `"managed-agents-2026-04-01"`
+
 ### Body Parameters
 
 - `external_id: optional string`
@@ -461,9 +525,23 @@ Update User Profile
 
   Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
 
+- `name: optional string`
+
+  If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+- `relationship: optional "external" or "resold" or "internal"`
+
+  How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+  - `"external"`
+
+  - `"resold"`
+
+  - `"internal"`
+
 ### Returns
 
-- `BetaUserProfile = object { id, created_at, metadata, 4 more }`
+- `BetaUserProfile = object { id, created_at, metadata, 6 more }`
 
   - `id: string`
 
@@ -476,6 +554,16 @@ Update User Profile
   - `metadata: map[string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" or "resold" or "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
@@ -504,6 +592,10 @@ Update User Profile
   - `external_id: optional string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name: optional string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -534,7 +626,7 @@ Create Enrollment URL
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -581,6 +673,8 @@ Create Enrollment URL
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -614,7 +708,7 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
 
 ### Beta User Profile
 
-- `BetaUserProfile = object { id, created_at, metadata, 4 more }`
+- `BetaUserProfile = object { id, created_at, metadata, 6 more }`
 
   - `id: string`
 
@@ -627,6 +721,16 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
   - `metadata: map[string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" or "resold" or "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
@@ -655,6 +759,10 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
   - `external_id: optional string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name: optional string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Beta User Profile Enrollment URL
 

@@ -120,6 +120,26 @@ List Agents
 
         - `"fast"`
 
+    - `multiagent: object { agents, type }`
+
+      Resolved coordinator topology with a concrete agent roster.
+
+      - `agents: array of BetaManagedAgentsAgentReference`
+
+        Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+        - `id: string`
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `type: "coordinator"`
+
+        - `"coordinator"`
+
     - `name: string`
 
     - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`

@@ -68,6 +68,8 @@ Update a memory
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `Optional<String> content`
 
     New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to leave the content unchanged (e.g., for a rename-only update).

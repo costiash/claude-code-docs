@@ -20,7 +20,7 @@ Upload File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -67,6 +67,8 @@ Upload File
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -169,7 +171,7 @@ List Files
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -216,6 +218,8 @@ List Files
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -303,7 +307,7 @@ Download File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -350,6 +354,8 @@ Download File
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -392,7 +398,7 @@ Get File Metadata
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -439,6 +445,8 @@ Get File Metadata
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -527,7 +535,7 @@ Delete File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -574,6 +582,8 @@ Delete File
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 

@@ -228,7 +228,7 @@ Fast mode is priced at 6x standard Opus rates across the full context window, in
 Fast mode pricing stacks with other pricing modifiers:
 
 - [Prompt caching multipliers](/docs/en/about-claude/pricing#model-pricing) apply on top of fast mode pricing
-- [Data residency](/docs/en/build-with-claude/data-residency) multipliers apply on top of fast mode pricing
+- [Data residency](/docs/en/manage-claude/data-residency) multipliers apply on top of fast mode pricing
 
 For complete pricing details, see the [pricing page](/docs/en/about-claude/pricing#fast-mode-pricing).
 
@@ -426,7 +426,7 @@ puts(response.usage.speed)  # "fast" or "standard"
 }
 ```
 
-To track fast mode usage and costs across your organization, see the [Usage and Cost API](/docs/en/build-with-claude/usage-cost-api).
+To track fast mode usage and costs across your organization, see the [Usage and Cost API](/docs/en/manage-claude/usage-cost-api).
 
 ## Retries and fallback
 

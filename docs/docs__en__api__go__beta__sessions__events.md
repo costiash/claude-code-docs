@@ -14,6 +14,22 @@ List Events
 
 - `params BetaSessionEventListParams`
 
+  - `CreatedAtGt param.Field[Time]`
+
+    Query param: Return events created after this time (exclusive).
+
+  - `CreatedAtGte param.Field[Time]`
+
+    Query param: Return events created at or after this time (inclusive).
+
+  - `CreatedAtLt param.Field[Time]`
+
+    Query param: Return events created before this time (exclusive).
+
+  - `CreatedAtLte param.Field[Time]`
+
+    Query param: Return events created at or before this time (inclusive).
+
   - `Limit param.Field[int64]`
 
     Query param: Query parameter for limit
@@ -29,6 +45,10 @@ List Events
   - `Page param.Field[string]`
 
     Query param: Opaque pagination cursor from a previous response's next_page.
+
+  - `Types param.Field[[]string]`
+
+    Query param: Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
 
   - `Betas param.Field[[]AnthropicBeta]`
 
@@ -83,6 +103,8 @@ List Events
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -268,6 +290,10 @@ List Events
 
       A timestamp in RFC 3339 format
 
+    - `SessionThreadID string`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -299,6 +325,10 @@ List Events
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -470,6 +500,10 @@ List Events
 
       A timestamp in RFC 3339 format
 
+    - `SessionThreadID string`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -493,6 +527,10 @@ List Events
     - `Type BetaManagedAgentsAgentCustomToolUseEventType`
 
       - `const BetaManagedAgentsAgentCustomToolUseEventTypeAgentCustomToolUse BetaManagedAgentsAgentCustomToolUseEventType = "agent.custom_tool_use"`
+
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `type BetaManagedAgentsAgentMessageEvent struct{…}`
 
@@ -575,6 +613,10 @@ List Events
       - `const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAsk BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "ask"`
 
       - `const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"`
+
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
 
@@ -780,6 +822,10 @@ List Events
 
       - `const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"`
 
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
 
     Event representing the result of an agent tool execution.
@@ -949,6 +995,346 @@ List Events
     - `IsError bool`
 
       Whether the tool execution resulted in an error.
+
+  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent struct{…}`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion`
+
+      Message content blocks.
+
+      - `type BetaManagedAgentsTextBlock struct{…}`
+
+        Regular text content.
+
+        - `Text string`
+
+          The text content.
+
+        - `Type BetaManagedAgentsTextBlockType`
+
+          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+      - `type BetaManagedAgentsImageBlock struct{…}`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source BetaManagedAgentsImageBlockSourceUnion`
+
+          Union type for image source variants.
+
+          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+
+            Base64-encoded image data.
+
+            - `Data string`
+
+              Base64-encoded image data.
+
+            - `MediaType string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type BetaManagedAgentsBase64ImageSourceType`
+
+              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+
+          - `type BetaManagedAgentsURLImageSource struct{…}`
+
+            Image referenced by URL.
+
+            - `Type BetaManagedAgentsURLImageSourceType`
+
+              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
+
+            - `URL string`
+
+              URL of the image to fetch.
+
+          - `type BetaManagedAgentsFileImageSource struct{…}`
+
+            Image referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileImageSourceType`
+
+              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
+
+        - `Type BetaManagedAgentsImageBlockType`
+
+          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
+
+      - `type BetaManagedAgentsDocumentBlock struct{…}`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
+
+          Union type for document source variants.
+
+          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+
+            Base64-encoded document data.
+
+            - `Data string`
+
+              Base64-encoded document data.
+
+            - `MediaType string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type BetaManagedAgentsBase64DocumentSourceType`
+
+              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+
+          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+
+            Plain text document content.
+
+            - `Data string`
+
+              The plain text content.
+
+            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
+
+            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
+
+          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+
+            Document referenced by URL.
+
+            - `Type BetaManagedAgentsURLDocumentSourceType`
+
+              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
+
+            - `URL string`
+
+              URL of the document to fetch.
+
+          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+
+            Document referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileDocumentSourceType`
+
+              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+
+        - `Type BetaManagedAgentsDocumentBlockType`
+
+          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
+
+        - `Context string`
+
+          Additional context about the document for the model.
+
+        - `Title string`
+
+          The title of the document.
+
+    - `FromSessionThreadID string`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsAgentThreadMessageReceivedEventType`
+
+      - `const BetaManagedAgentsAgentThreadMessageReceivedEventTypeAgentThreadMessageReceived BetaManagedAgentsAgentThreadMessageReceivedEventType = "agent.thread_message_received"`
+
+    - `FromAgentName string`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `type BetaManagedAgentsAgentThreadMessageSentEvent struct{…}`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion`
+
+      Message content blocks.
+
+      - `type BetaManagedAgentsTextBlock struct{…}`
+
+        Regular text content.
+
+        - `Text string`
+
+          The text content.
+
+        - `Type BetaManagedAgentsTextBlockType`
+
+          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+      - `type BetaManagedAgentsImageBlock struct{…}`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source BetaManagedAgentsImageBlockSourceUnion`
+
+          Union type for image source variants.
+
+          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+
+            Base64-encoded image data.
+
+            - `Data string`
+
+              Base64-encoded image data.
+
+            - `MediaType string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type BetaManagedAgentsBase64ImageSourceType`
+
+              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+
+          - `type BetaManagedAgentsURLImageSource struct{…}`
+
+            Image referenced by URL.
+
+            - `Type BetaManagedAgentsURLImageSourceType`
+
+              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
+
+            - `URL string`
+
+              URL of the image to fetch.
+
+          - `type BetaManagedAgentsFileImageSource struct{…}`
+
+            Image referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileImageSourceType`
+
+              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
+
+        - `Type BetaManagedAgentsImageBlockType`
+
+          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
+
+      - `type BetaManagedAgentsDocumentBlock struct{…}`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
+
+          Union type for document source variants.
+
+          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+
+            Base64-encoded document data.
+
+            - `Data string`
+
+              Base64-encoded document data.
+
+            - `MediaType string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type BetaManagedAgentsBase64DocumentSourceType`
+
+              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+
+          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+
+            Plain text document content.
+
+            - `Data string`
+
+              The plain text content.
+
+            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
+
+            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
+
+          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+
+            Document referenced by URL.
+
+            - `Type BetaManagedAgentsURLDocumentSourceType`
+
+              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
+
+            - `URL string`
+
+              URL of the document to fetch.
+
+          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+
+            Document referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileDocumentSourceType`
+
+              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+
+        - `Type BetaManagedAgentsDocumentBlockType`
+
+          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
+
+        - `Context string`
+
+          Additional context about the document for the model.
+
+        - `Title string`
+
+          The title of the document.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `ToSessionThreadID string`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type BetaManagedAgentsAgentThreadMessageSentEventType`
+
+      - `const BetaManagedAgentsAgentThreadMessageSentEventTypeAgentThreadMessageSent BetaManagedAgentsAgentThreadMessageSentEventType = "agent.thread_message_sent"`
+
+    - `ToAgentName string`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `type BetaManagedAgentsAgentThreadContextCompactedEvent struct{…}`
 
@@ -1370,6 +1756,118 @@ List Events
 
       - `const BetaManagedAgentsSessionStatusTerminatedEventTypeSessionStatusTerminated BetaManagedAgentsSessionStatusTerminatedEventType = "session.status_terminated"`
 
+  - `type BetaManagedAgentsSessionThreadCreatedEvent struct{…}`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the callable agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type BetaManagedAgentsSessionThreadCreatedEventType`
+
+      - `const BetaManagedAgentsSessionThreadCreatedEventTypeSessionThreadCreated BetaManagedAgentsSessionThreadCreatedEventType = "session.thread_created"`
+
+  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent struct{…}`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationStartEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationStartEventTypeSpanOutcomeEvaluationStart BetaManagedAgentsSpanOutcomeEvaluationStartEventType = "span.outcome_evaluation_start"`
+
+  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent struct{…}`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Explanation string`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `OutcomeEvaluationStartID string`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Result string`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationEndEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationEndEventTypeSpanOutcomeEvaluationEnd BetaManagedAgentsSpanOutcomeEvaluationEndEventType = "span.outcome_evaluation_end"`
+
+    - `Usage BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `CacheCreationInputTokens int64`
+
+        Tokens used to create prompt cache in this request.
+
+      - `CacheReadInputTokens int64`
+
+        Tokens read from prompt cache in this request.
+
+      - `InputTokens int64`
+
+        Input tokens consumed by this request.
+
+      - `OutputTokens int64`
+
+        Output tokens generated by this request.
+
+      - `Speed BetaManagedAgentsSpanModelUsageSpeed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"`
+
+        - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
+
   - `type BetaManagedAgentsSpanModelRequestStartEvent struct{…}`
 
     Emitted when a model request is initiated by the agent.
@@ -1438,6 +1936,86 @@ List Events
 
       - `const BetaManagedAgentsSpanModelRequestEndEventTypeSpanModelRequestEnd BetaManagedAgentsSpanModelRequestEndEventType = "span.model_request_end"`
 
+  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent struct{…}`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationOngoingEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationOngoingEventTypeSpanOutcomeEvaluationOngoing BetaManagedAgentsSpanOutcomeEvaluationOngoingEventType = "span.outcome_evaluation_ongoing"`
+
+  - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Description string`
+
+      What the agent should produce. Copied from the input event.
+
+    - `MaxIterations int64`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `OutcomeID string`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion`
+
+      Rubric for grading the quality of an outcome.
+
+      - `type BetaManagedAgentsFileRubric struct{…}`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `FileID string`
+
+          ID of the rubric file.
+
+        - `Type BetaManagedAgentsFileRubricType`
+
+          - `const BetaManagedAgentsFileRubricTypeFile BetaManagedAgentsFileRubricType = "file"`
+
+      - `type BetaManagedAgentsTextRubric struct{…}`
+
+        Rubric content provided inline as text.
+
+        - `Content string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `Type BetaManagedAgentsTextRubricType`
+
+          - `const BetaManagedAgentsTextRubricTypeText BetaManagedAgentsTextRubricType = "text"`
+
+    - `Type BetaManagedAgentsUserDefineOutcomeEventType`
+
+      - `const BetaManagedAgentsUserDefineOutcomeEventTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventType = "user.define_outcome"`
+
   - `type BetaManagedAgentsSessionDeletedEvent struct{…}`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -1453,6 +2031,134 @@ List Events
     - `Type BetaManagedAgentsSessionDeletedEventType`
 
       - `const BetaManagedAgentsSessionDeletedEventTypeSessionDeleted BetaManagedAgentsSessionDeletedEventType = "session.deleted"`
+
+  - `type BetaManagedAgentsSessionThreadStatusRunningEvent struct{…}`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type BetaManagedAgentsSessionThreadStatusRunningEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusRunningEventTypeSessionThreadStatusRunning BetaManagedAgentsSessionThreadStatusRunningEventType = "session.thread_status_running"`
+
+  - `type BetaManagedAgentsSessionThreadStatusIdleEvent struct{…}`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type BetaManagedAgentsSessionEndTurnType`
+
+          - `const BetaManagedAgentsSessionEndTurnTypeEndTurn BetaManagedAgentsSessionEndTurnType = "end_turn"`
+
+      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `EventIDs []string`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type BetaManagedAgentsSessionRequiresActionType`
+
+          - `const BetaManagedAgentsSessionRequiresActionTypeRequiresAction BetaManagedAgentsSessionRequiresActionType = "requires_action"`
+
+      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type BetaManagedAgentsSessionRetriesExhaustedType`
+
+          - `const BetaManagedAgentsSessionRetriesExhaustedTypeRetriesExhausted BetaManagedAgentsSessionRetriesExhaustedType = "retries_exhausted"`
+
+    - `Type BetaManagedAgentsSessionThreadStatusIdleEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusIdleEventTypeSessionThreadStatusIdle BetaManagedAgentsSessionThreadStatusIdleEventType = "session.thread_status_idle"`
+
+  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent struct{…}`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type BetaManagedAgentsSessionThreadStatusTerminatedEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusTerminatedEventTypeSessionThreadStatusTerminated BetaManagedAgentsSessionThreadStatusTerminatedEventType = "session.thread_status_terminated"`
+
+  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type BetaManagedAgentsSessionThreadStatusRescheduledEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusRescheduledEventTypeSessionThreadStatusRescheduled BetaManagedAgentsSessionThreadStatusRescheduledEventType = "session.thread_status_rescheduled"`
 
 ### Example
 
@@ -1665,6 +2371,10 @@ Send Events
 
         - `const BetaManagedAgentsUserInterruptEventParamsTypeUserInterrupt BetaManagedAgentsUserInterruptEventParamsType = "user.interrupt"`
 
+      - `SessionThreadID string`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
     - `type BetaManagedAgentsUserToolConfirmationEventParamsResp struct{…}`
 
       Parameters for confirming or denying a tool execution request.
@@ -1851,6 +2561,50 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
+    - `type BetaManagedAgentsUserDefineOutcomeEventParamsResp struct{…}`
+
+      Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Description string`
+
+        What the agent should produce. This is the task specification.
+
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+
+        Rubric for grading the quality of an outcome.
+
+        - `type BetaManagedAgentsFileRubricParamsResp struct{…}`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `FileID string`
+
+            ID of the rubric file.
+
+          - `Type BetaManagedAgentsFileRubricParamsType`
+
+            - `const BetaManagedAgentsFileRubricParamsTypeFile BetaManagedAgentsFileRubricParamsType = "file"`
+
+        - `type BetaManagedAgentsTextRubricParamsResp struct{…}`
+
+          Rubric content provided inline as text.
+
+          - `Content string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+          - `Type BetaManagedAgentsTextRubricParamsType`
+
+            - `const BetaManagedAgentsTextRubricParamsTypeText BetaManagedAgentsTextRubricParamsType = "text"`
+
+      - `Type BetaManagedAgentsUserDefineOutcomeEventParamsType`
+
+        - `const BetaManagedAgentsUserDefineOutcomeEventParamsTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventParamsType = "user.define_outcome"`
+
+      - `MaxIterations int64`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
   - `Betas param.Field[[]AnthropicBeta]`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -1904,6 +2658,8 @@ Send Events
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -2093,6 +2849,10 @@ Send Events
 
         A timestamp in RFC 3339 format
 
+      - `SessionThreadID string`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
     - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
 
       A tool confirmation event that approves or denies a pending tool execution.
@@ -2124,6 +2884,10 @@ Send Events
       - `ProcessedAt Time`
 
         A timestamp in RFC 3339 format
+
+      - `SessionThreadID string`
+
+        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
     - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -2295,6 +3059,66 @@ Send Events
 
         A timestamp in RFC 3339 format
 
+      - `SessionThreadID string`
+
+        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+    - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+
+      Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `ID string`
+
+        Unique identifier for this event.
+
+      - `Description string`
+
+        What the agent should produce. Copied from the input event.
+
+      - `MaxIterations int64`
+
+        Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+      - `OutcomeID string`
+
+        Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+      - `ProcessedAt Time`
+
+        A timestamp in RFC 3339 format
+
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion`
+
+        Rubric for grading the quality of an outcome.
+
+        - `type BetaManagedAgentsFileRubric struct{…}`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `FileID string`
+
+            ID of the rubric file.
+
+          - `Type BetaManagedAgentsFileRubricType`
+
+            - `const BetaManagedAgentsFileRubricTypeFile BetaManagedAgentsFileRubricType = "file"`
+
+        - `type BetaManagedAgentsTextRubric struct{…}`
+
+          Rubric content provided inline as text.
+
+          - `Content string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `Type BetaManagedAgentsTextRubricType`
+
+            - `const BetaManagedAgentsTextRubricTypeText BetaManagedAgentsTextRubricType = "text"`
+
+      - `Type BetaManagedAgentsUserDefineOutcomeEventType`
+
+        - `const BetaManagedAgentsUserDefineOutcomeEventTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventType = "user.define_outcome"`
+
 ### Example
 
 ```go
@@ -2403,6 +3227,8 @@ Stream Events
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -2588,6 +3414,10 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+    - `SessionThreadID string`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -2619,6 +3449,10 @@ Stream Events
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -2790,6 +3624,10 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+    - `SessionThreadID string`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -2813,6 +3651,10 @@ Stream Events
     - `Type BetaManagedAgentsAgentCustomToolUseEventType`
 
       - `const BetaManagedAgentsAgentCustomToolUseEventTypeAgentCustomToolUse BetaManagedAgentsAgentCustomToolUseEventType = "agent.custom_tool_use"`
+
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `type BetaManagedAgentsAgentMessageEvent struct{…}`
 
@@ -2895,6 +3737,10 @@ Stream Events
       - `const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAsk BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "ask"`
 
       - `const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"`
+
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
 
@@ -3100,6 +3946,10 @@ Stream Events
 
       - `const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"`
 
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
 
     Event representing the result of an agent tool execution.
@@ -3269,6 +4119,346 @@ Stream Events
     - `IsError bool`
 
       Whether the tool execution resulted in an error.
+
+  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent struct{…}`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion`
+
+      Message content blocks.
+
+      - `type BetaManagedAgentsTextBlock struct{…}`
+
+        Regular text content.
+
+        - `Text string`
+
+          The text content.
+
+        - `Type BetaManagedAgentsTextBlockType`
+
+          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+      - `type BetaManagedAgentsImageBlock struct{…}`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source BetaManagedAgentsImageBlockSourceUnion`
+
+          Union type for image source variants.
+
+          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+
+            Base64-encoded image data.
+
+            - `Data string`
+
+              Base64-encoded image data.
+
+            - `MediaType string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type BetaManagedAgentsBase64ImageSourceType`
+
+              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+
+          - `type BetaManagedAgentsURLImageSource struct{…}`
+
+            Image referenced by URL.
+
+            - `Type BetaManagedAgentsURLImageSourceType`
+
+              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
+
+            - `URL string`
+
+              URL of the image to fetch.
+
+          - `type BetaManagedAgentsFileImageSource struct{…}`
+
+            Image referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileImageSourceType`
+
+              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
+
+        - `Type BetaManagedAgentsImageBlockType`
+
+          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
+
+      - `type BetaManagedAgentsDocumentBlock struct{…}`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
+
+          Union type for document source variants.
+
+          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+
+            Base64-encoded document data.
+
+            - `Data string`
+
+              Base64-encoded document data.
+
+            - `MediaType string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type BetaManagedAgentsBase64DocumentSourceType`
+
+              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+
+          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+
+            Plain text document content.
+
+            - `Data string`
+
+              The plain text content.
+
+            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
+
+            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
+
+          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+
+            Document referenced by URL.
+
+            - `Type BetaManagedAgentsURLDocumentSourceType`
+
+              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
+
+            - `URL string`
+
+              URL of the document to fetch.
+
+          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+
+            Document referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileDocumentSourceType`
+
+              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+
+        - `Type BetaManagedAgentsDocumentBlockType`
+
+          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
+
+        - `Context string`
+
+          Additional context about the document for the model.
+
+        - `Title string`
+
+          The title of the document.
+
+    - `FromSessionThreadID string`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsAgentThreadMessageReceivedEventType`
+
+      - `const BetaManagedAgentsAgentThreadMessageReceivedEventTypeAgentThreadMessageReceived BetaManagedAgentsAgentThreadMessageReceivedEventType = "agent.thread_message_received"`
+
+    - `FromAgentName string`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `type BetaManagedAgentsAgentThreadMessageSentEvent struct{…}`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion`
+
+      Message content blocks.
+
+      - `type BetaManagedAgentsTextBlock struct{…}`
+
+        Regular text content.
+
+        - `Text string`
+
+          The text content.
+
+        - `Type BetaManagedAgentsTextBlockType`
+
+          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+      - `type BetaManagedAgentsImageBlock struct{…}`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source BetaManagedAgentsImageBlockSourceUnion`
+
+          Union type for image source variants.
+
+          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+
+            Base64-encoded image data.
+
+            - `Data string`
+
+              Base64-encoded image data.
+
+            - `MediaType string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type BetaManagedAgentsBase64ImageSourceType`
+
+              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+
+          - `type BetaManagedAgentsURLImageSource struct{…}`
+
+            Image referenced by URL.
+
+            - `Type BetaManagedAgentsURLImageSourceType`
+
+              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
+
+            - `URL string`
+
+              URL of the image to fetch.
+
+          - `type BetaManagedAgentsFileImageSource struct{…}`
+
+            Image referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileImageSourceType`
+
+              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
+
+        - `Type BetaManagedAgentsImageBlockType`
+
+          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
+
+      - `type BetaManagedAgentsDocumentBlock struct{…}`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
+
+          Union type for document source variants.
+
+          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+
+            Base64-encoded document data.
+
+            - `Data string`
+
+              Base64-encoded document data.
+
+            - `MediaType string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type BetaManagedAgentsBase64DocumentSourceType`
+
+              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+
+          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+
+            Plain text document content.
+
+            - `Data string`
+
+              The plain text content.
+
+            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
+
+            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
+
+          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+
+            Document referenced by URL.
+
+            - `Type BetaManagedAgentsURLDocumentSourceType`
+
+              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
+
+            - `URL string`
+
+              URL of the document to fetch.
+
+          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+
+            Document referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileDocumentSourceType`
+
+              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+
+        - `Type BetaManagedAgentsDocumentBlockType`
+
+          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
+
+        - `Context string`
+
+          Additional context about the document for the model.
+
+        - `Title string`
+
+          The title of the document.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `ToSessionThreadID string`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type BetaManagedAgentsAgentThreadMessageSentEventType`
+
+      - `const BetaManagedAgentsAgentThreadMessageSentEventTypeAgentThreadMessageSent BetaManagedAgentsAgentThreadMessageSentEventType = "agent.thread_message_sent"`
+
+    - `ToAgentName string`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `type BetaManagedAgentsAgentThreadContextCompactedEvent struct{…}`
 
@@ -3690,6 +4880,118 @@ Stream Events
 
       - `const BetaManagedAgentsSessionStatusTerminatedEventTypeSessionStatusTerminated BetaManagedAgentsSessionStatusTerminatedEventType = "session.status_terminated"`
 
+  - `type BetaManagedAgentsSessionThreadCreatedEvent struct{…}`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the callable agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type BetaManagedAgentsSessionThreadCreatedEventType`
+
+      - `const BetaManagedAgentsSessionThreadCreatedEventTypeSessionThreadCreated BetaManagedAgentsSessionThreadCreatedEventType = "session.thread_created"`
+
+  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent struct{…}`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationStartEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationStartEventTypeSpanOutcomeEvaluationStart BetaManagedAgentsSpanOutcomeEvaluationStartEventType = "span.outcome_evaluation_start"`
+
+  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent struct{…}`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Explanation string`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `OutcomeEvaluationStartID string`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Result string`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationEndEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationEndEventTypeSpanOutcomeEvaluationEnd BetaManagedAgentsSpanOutcomeEvaluationEndEventType = "span.outcome_evaluation_end"`
+
+    - `Usage BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `CacheCreationInputTokens int64`
+
+        Tokens used to create prompt cache in this request.
+
+      - `CacheReadInputTokens int64`
+
+        Tokens read from prompt cache in this request.
+
+      - `InputTokens int64`
+
+        Input tokens consumed by this request.
+
+      - `OutputTokens int64`
+
+        Output tokens generated by this request.
+
+      - `Speed BetaManagedAgentsSpanModelUsageSpeed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"`
+
+        - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
+
   - `type BetaManagedAgentsSpanModelRequestStartEvent struct{…}`
 
     Emitted when a model request is initiated by the agent.
@@ -3758,6 +5060,86 @@ Stream Events
 
       - `const BetaManagedAgentsSpanModelRequestEndEventTypeSpanModelRequestEnd BetaManagedAgentsSpanModelRequestEndEventType = "span.model_request_end"`
 
+  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent struct{…}`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationOngoingEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationOngoingEventTypeSpanOutcomeEvaluationOngoing BetaManagedAgentsSpanOutcomeEvaluationOngoingEventType = "span.outcome_evaluation_ongoing"`
+
+  - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Description string`
+
+      What the agent should produce. Copied from the input event.
+
+    - `MaxIterations int64`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `OutcomeID string`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion`
+
+      Rubric for grading the quality of an outcome.
+
+      - `type BetaManagedAgentsFileRubric struct{…}`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `FileID string`
+
+          ID of the rubric file.
+
+        - `Type BetaManagedAgentsFileRubricType`
+
+          - `const BetaManagedAgentsFileRubricTypeFile BetaManagedAgentsFileRubricType = "file"`
+
+      - `type BetaManagedAgentsTextRubric struct{…}`
+
+        Rubric content provided inline as text.
+
+        - `Content string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `Type BetaManagedAgentsTextRubricType`
+
+          - `const BetaManagedAgentsTextRubricTypeText BetaManagedAgentsTextRubricType = "text"`
+
+    - `Type BetaManagedAgentsUserDefineOutcomeEventType`
+
+      - `const BetaManagedAgentsUserDefineOutcomeEventTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventType = "user.define_outcome"`
+
   - `type BetaManagedAgentsSessionDeletedEvent struct{…}`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -3773,6 +5155,134 @@ Stream Events
     - `Type BetaManagedAgentsSessionDeletedEventType`
 
       - `const BetaManagedAgentsSessionDeletedEventTypeSessionDeleted BetaManagedAgentsSessionDeletedEventType = "session.deleted"`
+
+  - `type BetaManagedAgentsSessionThreadStatusRunningEvent struct{…}`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type BetaManagedAgentsSessionThreadStatusRunningEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusRunningEventTypeSessionThreadStatusRunning BetaManagedAgentsSessionThreadStatusRunningEventType = "session.thread_status_running"`
+
+  - `type BetaManagedAgentsSessionThreadStatusIdleEvent struct{…}`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type BetaManagedAgentsSessionEndTurnType`
+
+          - `const BetaManagedAgentsSessionEndTurnTypeEndTurn BetaManagedAgentsSessionEndTurnType = "end_turn"`
+
+      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `EventIDs []string`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type BetaManagedAgentsSessionRequiresActionType`
+
+          - `const BetaManagedAgentsSessionRequiresActionTypeRequiresAction BetaManagedAgentsSessionRequiresActionType = "requires_action"`
+
+      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type BetaManagedAgentsSessionRetriesExhaustedType`
+
+          - `const BetaManagedAgentsSessionRetriesExhaustedTypeRetriesExhausted BetaManagedAgentsSessionRetriesExhaustedType = "retries_exhausted"`
+
+    - `Type BetaManagedAgentsSessionThreadStatusIdleEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusIdleEventTypeSessionThreadStatusIdle BetaManagedAgentsSessionThreadStatusIdleEventType = "session.thread_status_idle"`
+
+  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent struct{…}`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type BetaManagedAgentsSessionThreadStatusTerminatedEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusTerminatedEventTypeSessionThreadStatusTerminated BetaManagedAgentsSessionThreadStatusTerminatedEventType = "session.thread_status_terminated"`
+
+  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type BetaManagedAgentsSessionThreadStatusRescheduledEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusRescheduledEventTypeSessionThreadStatusRescheduled BetaManagedAgentsSessionThreadStatusRescheduledEventType = "session.thread_status_rescheduled"`
 
 ### Example
 
@@ -3835,6 +5345,10 @@ func main() {
   - `Type BetaManagedAgentsAgentCustomToolUseEventType`
 
     - `const BetaManagedAgentsAgentCustomToolUseEventTypeAgentCustomToolUse BetaManagedAgentsAgentCustomToolUseEventType = "agent.custom_tool_use"`
+
+  - `SessionThreadID string`
+
+    When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
 ### Beta Managed Agents Agent MCP Tool Result Event
 
@@ -4048,6 +5562,10 @@ func main() {
 
     - `const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"`
 
+  - `SessionThreadID string`
+
+    When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
 ### Beta Managed Agents Agent Message Event
 
 - `type BetaManagedAgentsAgentMessageEvent struct{…}`
@@ -4113,6 +5631,350 @@ func main() {
   - `Type BetaManagedAgentsAgentThreadContextCompactedEventType`
 
     - `const BetaManagedAgentsAgentThreadContextCompactedEventTypeAgentThreadContextCompacted BetaManagedAgentsAgentThreadContextCompactedEventType = "agent.thread_context_compacted"`
+
+### Beta Managed Agents Agent Thread Message Received Event
+
+- `type BetaManagedAgentsAgentThreadMessageReceivedEvent struct{…}`
+
+  Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion`
+
+    Message content blocks.
+
+    - `type BetaManagedAgentsTextBlock struct{…}`
+
+      Regular text content.
+
+      - `Text string`
+
+        The text content.
+
+      - `Type BetaManagedAgentsTextBlockType`
+
+        - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+    - `type BetaManagedAgentsImageBlock struct{…}`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Source BetaManagedAgentsImageBlockSourceUnion`
+
+        Union type for image source variants.
+
+        - `type BetaManagedAgentsBase64ImageSource struct{…}`
+
+          Base64-encoded image data.
+
+          - `Data string`
+
+            Base64-encoded image data.
+
+          - `MediaType string`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `Type BetaManagedAgentsBase64ImageSourceType`
+
+            - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+
+        - `type BetaManagedAgentsURLImageSource struct{…}`
+
+          Image referenced by URL.
+
+          - `Type BetaManagedAgentsURLImageSourceType`
+
+            - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
+
+          - `URL string`
+
+            URL of the image to fetch.
+
+        - `type BetaManagedAgentsFileImageSource struct{…}`
+
+          Image referenced by file ID.
+
+          - `FileID string`
+
+            ID of a previously uploaded file.
+
+          - `Type BetaManagedAgentsFileImageSourceType`
+
+            - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
+
+      - `Type BetaManagedAgentsImageBlockType`
+
+        - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
+
+    - `type BetaManagedAgentsDocumentBlock struct{…}`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Source BetaManagedAgentsDocumentBlockSourceUnion`
+
+        Union type for document source variants.
+
+        - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+
+          Base64-encoded document data.
+
+          - `Data string`
+
+            Base64-encoded document data.
+
+          - `MediaType string`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `Type BetaManagedAgentsBase64DocumentSourceType`
+
+            - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+
+        - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+
+          Plain text document content.
+
+          - `Data string`
+
+            The plain text content.
+
+          - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
+
+          - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+
+            - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
+
+        - `type BetaManagedAgentsURLDocumentSource struct{…}`
+
+          Document referenced by URL.
+
+          - `Type BetaManagedAgentsURLDocumentSourceType`
+
+            - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
+
+          - `URL string`
+
+            URL of the document to fetch.
+
+        - `type BetaManagedAgentsFileDocumentSource struct{…}`
+
+          Document referenced by file ID.
+
+          - `FileID string`
+
+            ID of a previously uploaded file.
+
+          - `Type BetaManagedAgentsFileDocumentSourceType`
+
+            - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+
+      - `Type BetaManagedAgentsDocumentBlockType`
+
+        - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
+
+      - `Context string`
+
+        Additional context about the document for the model.
+
+      - `Title string`
+
+        The title of the document.
+
+  - `FromSessionThreadID string`
+
+    Public `sthr_` ID of the thread that sent the message.
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Type BetaManagedAgentsAgentThreadMessageReceivedEventType`
+
+    - `const BetaManagedAgentsAgentThreadMessageReceivedEventTypeAgentThreadMessageReceived BetaManagedAgentsAgentThreadMessageReceivedEventType = "agent.thread_message_received"`
+
+  - `FromAgentName string`
+
+    Name of the callable agent this message came from. Absent when received from the primary agent.
+
+### Beta Managed Agents Agent Thread Message Sent Event
+
+- `type BetaManagedAgentsAgentThreadMessageSentEvent struct{…}`
+
+  Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion`
+
+    Message content blocks.
+
+    - `type BetaManagedAgentsTextBlock struct{…}`
+
+      Regular text content.
+
+      - `Text string`
+
+        The text content.
+
+      - `Type BetaManagedAgentsTextBlockType`
+
+        - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+    - `type BetaManagedAgentsImageBlock struct{…}`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Source BetaManagedAgentsImageBlockSourceUnion`
+
+        Union type for image source variants.
+
+        - `type BetaManagedAgentsBase64ImageSource struct{…}`
+
+          Base64-encoded image data.
+
+          - `Data string`
+
+            Base64-encoded image data.
+
+          - `MediaType string`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `Type BetaManagedAgentsBase64ImageSourceType`
+
+            - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+
+        - `type BetaManagedAgentsURLImageSource struct{…}`
+
+          Image referenced by URL.
+
+          - `Type BetaManagedAgentsURLImageSourceType`
+
+            - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
+
+          - `URL string`
+
+            URL of the image to fetch.
+
+        - `type BetaManagedAgentsFileImageSource struct{…}`
+
+          Image referenced by file ID.
+
+          - `FileID string`
+
+            ID of a previously uploaded file.
+
+          - `Type BetaManagedAgentsFileImageSourceType`
+
+            - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
+
+      - `Type BetaManagedAgentsImageBlockType`
+
+        - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
+
+    - `type BetaManagedAgentsDocumentBlock struct{…}`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Source BetaManagedAgentsDocumentBlockSourceUnion`
+
+        Union type for document source variants.
+
+        - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+
+          Base64-encoded document data.
+
+          - `Data string`
+
+            Base64-encoded document data.
+
+          - `MediaType string`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `Type BetaManagedAgentsBase64DocumentSourceType`
+
+            - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+
+        - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+
+          Plain text document content.
+
+          - `Data string`
+
+            The plain text content.
+
+          - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
+
+          - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+
+            - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
+
+        - `type BetaManagedAgentsURLDocumentSource struct{…}`
+
+          Document referenced by URL.
+
+          - `Type BetaManagedAgentsURLDocumentSourceType`
+
+            - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
+
+          - `URL string`
+
+            URL of the document to fetch.
+
+        - `type BetaManagedAgentsFileDocumentSource struct{…}`
+
+          Document referenced by file ID.
+
+          - `FileID string`
+
+            ID of a previously uploaded file.
+
+          - `Type BetaManagedAgentsFileDocumentSourceType`
+
+            - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+
+      - `Type BetaManagedAgentsDocumentBlockType`
+
+        - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
+
+      - `Context string`
+
+        Additional context about the document for the model.
+
+      - `Title string`
+
+        The title of the document.
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `ToSessionThreadID string`
+
+    Public `sthr_` ID of the thread the message was sent to.
+
+  - `Type BetaManagedAgentsAgentThreadMessageSentEventType`
+
+    - `const BetaManagedAgentsAgentThreadMessageSentEventTypeAgentThreadMessageSent BetaManagedAgentsAgentThreadMessageSentEventType = "agent.thread_message_sent"`
+
+  - `ToAgentName string`
+
+    Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
 ### Beta Managed Agents Agent Tool Result Event
 
@@ -4321,6 +6183,10 @@ func main() {
     - `const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAsk BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "ask"`
 
     - `const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"`
+
+  - `SessionThreadID string`
+
+    When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
 ### Beta Managed Agents Base64 Document Source
 
@@ -4648,6 +6514,10 @@ func main() {
 
       - `const BetaManagedAgentsUserInterruptEventParamsTypeUserInterrupt BetaManagedAgentsUserInterruptEventParamsType = "user.interrupt"`
 
+    - `SessionThreadID string`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `type BetaManagedAgentsUserToolConfirmationEventParamsResp struct{…}`
 
     Parameters for confirming or denying a tool execution request.
@@ -4834,6 +6704,50 @@ func main() {
 
       Whether the tool execution resulted in an error.
 
+  - `type BetaManagedAgentsUserDefineOutcomeEventParamsResp struct{…}`
+
+    Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `Description string`
+
+      What the agent should produce. This is the task specification.
+
+    - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+
+      Rubric for grading the quality of an outcome.
+
+      - `type BetaManagedAgentsFileRubricParamsResp struct{…}`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `FileID string`
+
+          ID of the rubric file.
+
+        - `Type BetaManagedAgentsFileRubricParamsType`
+
+          - `const BetaManagedAgentsFileRubricParamsTypeFile BetaManagedAgentsFileRubricParamsType = "file"`
+
+      - `type BetaManagedAgentsTextRubricParamsResp struct{…}`
+
+        Rubric content provided inline as text.
+
+        - `Content string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+        - `Type BetaManagedAgentsTextRubricParamsType`
+
+          - `const BetaManagedAgentsTextRubricParamsTypeText BetaManagedAgentsTextRubricParamsType = "text"`
+
+    - `Type BetaManagedAgentsUserDefineOutcomeEventParamsType`
+
+      - `const BetaManagedAgentsUserDefineOutcomeEventParamsTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventParamsType = "user.define_outcome"`
+
+    - `MaxIterations int64`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
 ### Beta Managed Agents File Document Source
 
 - `type BetaManagedAgentsFileDocumentSource struct{…}`
@@ -4861,6 +6775,34 @@ func main() {
   - `Type BetaManagedAgentsFileImageSourceType`
 
     - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
+
+### Beta Managed Agents File Rubric
+
+- `type BetaManagedAgentsFileRubric struct{…}`
+
+  Rubric referenced by a file uploaded via the Files API.
+
+  - `FileID string`
+
+    ID of the rubric file.
+
+  - `Type BetaManagedAgentsFileRubricType`
+
+    - `const BetaManagedAgentsFileRubricTypeFile BetaManagedAgentsFileRubricType = "file"`
+
+### Beta Managed Agents File Rubric Params
+
+- `type BetaManagedAgentsFileRubricParamsResp struct{…}`
+
+  Rubric referenced by a file uploaded via the Files API.
+
+  - `FileID string`
+
+    ID of the rubric file.
+
+  - `Type BetaManagedAgentsFileRubricParamsType`
+
+    - `const BetaManagedAgentsFileRubricParamsTypeFile BetaManagedAgentsFileRubricParamsType = "file"`
 
 ### Beta Managed Agents Image Block
 
@@ -5372,6 +7314,10 @@ func main() {
 
         A timestamp in RFC 3339 format
 
+      - `SessionThreadID string`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
     - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
 
       A tool confirmation event that approves or denies a pending tool execution.
@@ -5403,6 +7349,10 @@ func main() {
       - `ProcessedAt Time`
 
         A timestamp in RFC 3339 format
+
+      - `SessionThreadID string`
+
+        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
     - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -5573,6 +7523,66 @@ func main() {
       - `ProcessedAt Time`
 
         A timestamp in RFC 3339 format
+
+      - `SessionThreadID string`
+
+        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+    - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+
+      Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `ID string`
+
+        Unique identifier for this event.
+
+      - `Description string`
+
+        What the agent should produce. Copied from the input event.
+
+      - `MaxIterations int64`
+
+        Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+      - `OutcomeID string`
+
+        Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+      - `ProcessedAt Time`
+
+        A timestamp in RFC 3339 format
+
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion`
+
+        Rubric for grading the quality of an outcome.
+
+        - `type BetaManagedAgentsFileRubric struct{…}`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `FileID string`
+
+            ID of the rubric file.
+
+          - `Type BetaManagedAgentsFileRubricType`
+
+            - `const BetaManagedAgentsFileRubricTypeFile BetaManagedAgentsFileRubricType = "file"`
+
+        - `type BetaManagedAgentsTextRubric struct{…}`
+
+          Rubric content provided inline as text.
+
+          - `Content string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `Type BetaManagedAgentsTextRubricType`
+
+            - `const BetaManagedAgentsTextRubricTypeText BetaManagedAgentsTextRubricType = "text"`
+
+      - `Type BetaManagedAgentsUserDefineOutcomeEventType`
+
+        - `const BetaManagedAgentsUserDefineOutcomeEventTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventType = "user.define_outcome"`
 
 ### Beta Managed Agents Session Deleted Event
 
@@ -6096,6 +8106,10 @@ func main() {
 
       A timestamp in RFC 3339 format
 
+    - `SessionThreadID string`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -6127,6 +8141,10 @@ func main() {
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -6298,6 +8316,10 @@ func main() {
 
       A timestamp in RFC 3339 format
 
+    - `SessionThreadID string`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -6321,6 +8343,10 @@ func main() {
     - `Type BetaManagedAgentsAgentCustomToolUseEventType`
 
       - `const BetaManagedAgentsAgentCustomToolUseEventTypeAgentCustomToolUse BetaManagedAgentsAgentCustomToolUseEventType = "agent.custom_tool_use"`
+
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `type BetaManagedAgentsAgentMessageEvent struct{…}`
 
@@ -6403,6 +8429,10 @@ func main() {
       - `const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAsk BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "ask"`
 
       - `const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"`
+
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
 
@@ -6608,6 +8638,10 @@ func main() {
 
       - `const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"`
 
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
 
     Event representing the result of an agent tool execution.
@@ -6777,6 +8811,346 @@ func main() {
     - `IsError bool`
 
       Whether the tool execution resulted in an error.
+
+  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent struct{…}`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion`
+
+      Message content blocks.
+
+      - `type BetaManagedAgentsTextBlock struct{…}`
+
+        Regular text content.
+
+        - `Text string`
+
+          The text content.
+
+        - `Type BetaManagedAgentsTextBlockType`
+
+          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+      - `type BetaManagedAgentsImageBlock struct{…}`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source BetaManagedAgentsImageBlockSourceUnion`
+
+          Union type for image source variants.
+
+          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+
+            Base64-encoded image data.
+
+            - `Data string`
+
+              Base64-encoded image data.
+
+            - `MediaType string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type BetaManagedAgentsBase64ImageSourceType`
+
+              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+
+          - `type BetaManagedAgentsURLImageSource struct{…}`
+
+            Image referenced by URL.
+
+            - `Type BetaManagedAgentsURLImageSourceType`
+
+              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
+
+            - `URL string`
+
+              URL of the image to fetch.
+
+          - `type BetaManagedAgentsFileImageSource struct{…}`
+
+            Image referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileImageSourceType`
+
+              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
+
+        - `Type BetaManagedAgentsImageBlockType`
+
+          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
+
+      - `type BetaManagedAgentsDocumentBlock struct{…}`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
+
+          Union type for document source variants.
+
+          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+
+            Base64-encoded document data.
+
+            - `Data string`
+
+              Base64-encoded document data.
+
+            - `MediaType string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type BetaManagedAgentsBase64DocumentSourceType`
+
+              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+
+          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+
+            Plain text document content.
+
+            - `Data string`
+
+              The plain text content.
+
+            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
+
+            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
+
+          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+
+            Document referenced by URL.
+
+            - `Type BetaManagedAgentsURLDocumentSourceType`
+
+              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
+
+            - `URL string`
+
+              URL of the document to fetch.
+
+          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+
+            Document referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileDocumentSourceType`
+
+              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+
+        - `Type BetaManagedAgentsDocumentBlockType`
+
+          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
+
+        - `Context string`
+
+          Additional context about the document for the model.
+
+        - `Title string`
+
+          The title of the document.
+
+    - `FromSessionThreadID string`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsAgentThreadMessageReceivedEventType`
+
+      - `const BetaManagedAgentsAgentThreadMessageReceivedEventTypeAgentThreadMessageReceived BetaManagedAgentsAgentThreadMessageReceivedEventType = "agent.thread_message_received"`
+
+    - `FromAgentName string`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `type BetaManagedAgentsAgentThreadMessageSentEvent struct{…}`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion`
+
+      Message content blocks.
+
+      - `type BetaManagedAgentsTextBlock struct{…}`
+
+        Regular text content.
+
+        - `Text string`
+
+          The text content.
+
+        - `Type BetaManagedAgentsTextBlockType`
+
+          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+      - `type BetaManagedAgentsImageBlock struct{…}`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source BetaManagedAgentsImageBlockSourceUnion`
+
+          Union type for image source variants.
+
+          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+
+            Base64-encoded image data.
+
+            - `Data string`
+
+              Base64-encoded image data.
+
+            - `MediaType string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type BetaManagedAgentsBase64ImageSourceType`
+
+              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+
+          - `type BetaManagedAgentsURLImageSource struct{…}`
+
+            Image referenced by URL.
+
+            - `Type BetaManagedAgentsURLImageSourceType`
+
+              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
+
+            - `URL string`
+
+              URL of the image to fetch.
+
+          - `type BetaManagedAgentsFileImageSource struct{…}`
+
+            Image referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileImageSourceType`
+
+              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
+
+        - `Type BetaManagedAgentsImageBlockType`
+
+          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
+
+      - `type BetaManagedAgentsDocumentBlock struct{…}`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
+
+          Union type for document source variants.
+
+          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+
+            Base64-encoded document data.
+
+            - `Data string`
+
+              Base64-encoded document data.
+
+            - `MediaType string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type BetaManagedAgentsBase64DocumentSourceType`
+
+              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+
+          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+
+            Plain text document content.
+
+            - `Data string`
+
+              The plain text content.
+
+            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
+
+            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
+
+          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+
+            Document referenced by URL.
+
+            - `Type BetaManagedAgentsURLDocumentSourceType`
+
+              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
+
+            - `URL string`
+
+              URL of the document to fetch.
+
+          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+
+            Document referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileDocumentSourceType`
+
+              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+
+        - `Type BetaManagedAgentsDocumentBlockType`
+
+          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
+
+        - `Context string`
+
+          Additional context about the document for the model.
+
+        - `Title string`
+
+          The title of the document.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `ToSessionThreadID string`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type BetaManagedAgentsAgentThreadMessageSentEventType`
+
+      - `const BetaManagedAgentsAgentThreadMessageSentEventTypeAgentThreadMessageSent BetaManagedAgentsAgentThreadMessageSentEventType = "agent.thread_message_sent"`
+
+    - `ToAgentName string`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `type BetaManagedAgentsAgentThreadContextCompactedEvent struct{…}`
 
@@ -7198,6 +9572,118 @@ func main() {
 
       - `const BetaManagedAgentsSessionStatusTerminatedEventTypeSessionStatusTerminated BetaManagedAgentsSessionStatusTerminatedEventType = "session.status_terminated"`
 
+  - `type BetaManagedAgentsSessionThreadCreatedEvent struct{…}`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the callable agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type BetaManagedAgentsSessionThreadCreatedEventType`
+
+      - `const BetaManagedAgentsSessionThreadCreatedEventTypeSessionThreadCreated BetaManagedAgentsSessionThreadCreatedEventType = "session.thread_created"`
+
+  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent struct{…}`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationStartEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationStartEventTypeSpanOutcomeEvaluationStart BetaManagedAgentsSpanOutcomeEvaluationStartEventType = "span.outcome_evaluation_start"`
+
+  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent struct{…}`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Explanation string`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `OutcomeEvaluationStartID string`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Result string`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationEndEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationEndEventTypeSpanOutcomeEvaluationEnd BetaManagedAgentsSpanOutcomeEvaluationEndEventType = "span.outcome_evaluation_end"`
+
+    - `Usage BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `CacheCreationInputTokens int64`
+
+        Tokens used to create prompt cache in this request.
+
+      - `CacheReadInputTokens int64`
+
+        Tokens read from prompt cache in this request.
+
+      - `InputTokens int64`
+
+        Input tokens consumed by this request.
+
+      - `OutputTokens int64`
+
+        Output tokens generated by this request.
+
+      - `Speed BetaManagedAgentsSpanModelUsageSpeed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"`
+
+        - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
+
   - `type BetaManagedAgentsSpanModelRequestStartEvent struct{…}`
 
     Emitted when a model request is initiated by the agent.
@@ -7266,6 +9752,86 @@ func main() {
 
       - `const BetaManagedAgentsSpanModelRequestEndEventTypeSpanModelRequestEnd BetaManagedAgentsSpanModelRequestEndEventType = "span.model_request_end"`
 
+  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent struct{…}`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationOngoingEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationOngoingEventTypeSpanOutcomeEvaluationOngoing BetaManagedAgentsSpanOutcomeEvaluationOngoingEventType = "span.outcome_evaluation_ongoing"`
+
+  - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Description string`
+
+      What the agent should produce. Copied from the input event.
+
+    - `MaxIterations int64`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `OutcomeID string`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion`
+
+      Rubric for grading the quality of an outcome.
+
+      - `type BetaManagedAgentsFileRubric struct{…}`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `FileID string`
+
+          ID of the rubric file.
+
+        - `Type BetaManagedAgentsFileRubricType`
+
+          - `const BetaManagedAgentsFileRubricTypeFile BetaManagedAgentsFileRubricType = "file"`
+
+      - `type BetaManagedAgentsTextRubric struct{…}`
+
+        Rubric content provided inline as text.
+
+        - `Content string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `Type BetaManagedAgentsTextRubricType`
+
+          - `const BetaManagedAgentsTextRubricTypeText BetaManagedAgentsTextRubricType = "text"`
+
+    - `Type BetaManagedAgentsUserDefineOutcomeEventType`
+
+      - `const BetaManagedAgentsUserDefineOutcomeEventTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventType = "user.define_outcome"`
+
   - `type BetaManagedAgentsSessionDeletedEvent struct{…}`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -7281,6 +9847,134 @@ func main() {
     - `Type BetaManagedAgentsSessionDeletedEventType`
 
       - `const BetaManagedAgentsSessionDeletedEventTypeSessionDeleted BetaManagedAgentsSessionDeletedEventType = "session.deleted"`
+
+  - `type BetaManagedAgentsSessionThreadStatusRunningEvent struct{…}`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type BetaManagedAgentsSessionThreadStatusRunningEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusRunningEventTypeSessionThreadStatusRunning BetaManagedAgentsSessionThreadStatusRunningEventType = "session.thread_status_running"`
+
+  - `type BetaManagedAgentsSessionThreadStatusIdleEvent struct{…}`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type BetaManagedAgentsSessionEndTurnType`
+
+          - `const BetaManagedAgentsSessionEndTurnTypeEndTurn BetaManagedAgentsSessionEndTurnType = "end_turn"`
+
+      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `EventIDs []string`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type BetaManagedAgentsSessionRequiresActionType`
+
+          - `const BetaManagedAgentsSessionRequiresActionTypeRequiresAction BetaManagedAgentsSessionRequiresActionType = "requires_action"`
+
+      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type BetaManagedAgentsSessionRetriesExhaustedType`
+
+          - `const BetaManagedAgentsSessionRetriesExhaustedTypeRetriesExhausted BetaManagedAgentsSessionRetriesExhaustedType = "retries_exhausted"`
+
+    - `Type BetaManagedAgentsSessionThreadStatusIdleEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusIdleEventTypeSessionThreadStatusIdle BetaManagedAgentsSessionThreadStatusIdleEventType = "session.thread_status_idle"`
+
+  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent struct{…}`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type BetaManagedAgentsSessionThreadStatusTerminatedEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusTerminatedEventTypeSessionThreadStatusTerminated BetaManagedAgentsSessionThreadStatusTerminatedEventType = "session.thread_status_terminated"`
+
+  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type BetaManagedAgentsSessionThreadStatusRescheduledEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusRescheduledEventTypeSessionThreadStatusRescheduled BetaManagedAgentsSessionThreadStatusRescheduledEventType = "session.thread_status_rescheduled"`
 
 ### Beta Managed Agents Session Requires Action
 
@@ -7410,6 +10104,168 @@ func main() {
 
     - `const BetaManagedAgentsSessionStatusTerminatedEventTypeSessionStatusTerminated BetaManagedAgentsSessionStatusTerminatedEventType = "session.status_terminated"`
 
+### Beta Managed Agents Session Thread Created Event
+
+- `type BetaManagedAgentsSessionThreadCreatedEvent struct{…}`
+
+  Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `AgentName string`
+
+    Name of the callable agent the thread runs.
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `SessionThreadID string`
+
+    Public `sthr_` ID of the newly created thread.
+
+  - `Type BetaManagedAgentsSessionThreadCreatedEventType`
+
+    - `const BetaManagedAgentsSessionThreadCreatedEventTypeSessionThreadCreated BetaManagedAgentsSessionThreadCreatedEventType = "session.thread_created"`
+
+### Beta Managed Agents Session Thread Status Idle Event
+
+- `type BetaManagedAgentsSessionThreadStatusIdleEvent struct{…}`
+
+  A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `AgentName string`
+
+    Name of the agent the thread runs.
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `SessionThreadID string`
+
+    Public sthr_ ID of the thread that went idle.
+
+  - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
+
+    The agent completed its turn naturally and is ready for the next user message.
+
+    - `type BetaManagedAgentsSessionEndTurn struct{…}`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `Type BetaManagedAgentsSessionEndTurnType`
+
+        - `const BetaManagedAgentsSessionEndTurnTypeEndTurn BetaManagedAgentsSessionEndTurnType = "end_turn"`
+
+    - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+
+      The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+      - `EventIDs []string`
+
+        The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+      - `Type BetaManagedAgentsSessionRequiresActionType`
+
+        - `const BetaManagedAgentsSessionRequiresActionTypeRequiresAction BetaManagedAgentsSessionRequiresActionType = "requires_action"`
+
+    - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+
+      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+      - `Type BetaManagedAgentsSessionRetriesExhaustedType`
+
+        - `const BetaManagedAgentsSessionRetriesExhaustedTypeRetriesExhausted BetaManagedAgentsSessionRetriesExhaustedType = "retries_exhausted"`
+
+  - `Type BetaManagedAgentsSessionThreadStatusIdleEventType`
+
+    - `const BetaManagedAgentsSessionThreadStatusIdleEventTypeSessionThreadStatusIdle BetaManagedAgentsSessionThreadStatusIdleEventType = "session.thread_status_idle"`
+
+### Beta Managed Agents Session Thread Status Rescheduled Event
+
+- `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
+
+  A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `AgentName string`
+
+    Name of the agent the thread runs.
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `SessionThreadID string`
+
+    Public sthr_ ID of the thread that is retrying.
+
+  - `Type BetaManagedAgentsSessionThreadStatusRescheduledEventType`
+
+    - `const BetaManagedAgentsSessionThreadStatusRescheduledEventTypeSessionThreadStatusRescheduled BetaManagedAgentsSessionThreadStatusRescheduledEventType = "session.thread_status_rescheduled"`
+
+### Beta Managed Agents Session Thread Status Running Event
+
+- `type BetaManagedAgentsSessionThreadStatusRunningEvent struct{…}`
+
+  A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `AgentName string`
+
+    Name of the agent the thread runs.
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `SessionThreadID string`
+
+    Public sthr_ ID of the thread that started running.
+
+  - `Type BetaManagedAgentsSessionThreadStatusRunningEventType`
+
+    - `const BetaManagedAgentsSessionThreadStatusRunningEventTypeSessionThreadStatusRunning BetaManagedAgentsSessionThreadStatusRunningEventType = "session.thread_status_running"`
+
+### Beta Managed Agents Session Thread Status Terminated Event
+
+- `type BetaManagedAgentsSessionThreadStatusTerminatedEvent struct{…}`
+
+  A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `AgentName string`
+
+    Name of the agent the thread runs.
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `SessionThreadID string`
+
+    Public sthr_ ID of the thread that terminated.
+
+  - `Type BetaManagedAgentsSessionThreadStatusTerminatedEventType`
+
+    - `const BetaManagedAgentsSessionThreadStatusTerminatedEventTypeSessionThreadStatusTerminated BetaManagedAgentsSessionThreadStatusTerminatedEventType = "session.thread_status_terminated"`
+
 ### Beta Managed Agents Span Model Request End Event
 
 - `type BetaManagedAgentsSpanModelRequestEndEvent struct{…}`
@@ -7511,6 +10367,124 @@ func main() {
     - `const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"`
 
     - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
+
+### Beta Managed Agents Span Outcome Evaluation End Event
+
+- `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent struct{…}`
+
+  Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `Explanation string`
+
+    Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+  - `Iteration int64`
+
+    0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+  - `OutcomeEvaluationStartID string`
+
+    The id of the corresponding `span.outcome_evaluation_start` event.
+
+  - `OutcomeID string`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Result string`
+
+    Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+  - `Type BetaManagedAgentsSpanOutcomeEvaluationEndEventType`
+
+    - `const BetaManagedAgentsSpanOutcomeEvaluationEndEventTypeSpanOutcomeEvaluationEnd BetaManagedAgentsSpanOutcomeEvaluationEndEventType = "span.outcome_evaluation_end"`
+
+  - `Usage BetaManagedAgentsSpanModelUsage`
+
+    Token usage for a single model request.
+
+    - `CacheCreationInputTokens int64`
+
+      Tokens used to create prompt cache in this request.
+
+    - `CacheReadInputTokens int64`
+
+      Tokens read from prompt cache in this request.
+
+    - `InputTokens int64`
+
+      Input tokens consumed by this request.
+
+    - `OutputTokens int64`
+
+      Output tokens generated by this request.
+
+    - `Speed BetaManagedAgentsSpanModelUsageSpeed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"`
+
+      - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
+
+### Beta Managed Agents Span Outcome Evaluation Ongoing Event
+
+- `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent struct{…}`
+
+  Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `Iteration int64`
+
+    0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+  - `OutcomeID string`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Type BetaManagedAgentsSpanOutcomeEvaluationOngoingEventType`
+
+    - `const BetaManagedAgentsSpanOutcomeEvaluationOngoingEventTypeSpanOutcomeEvaluationOngoing BetaManagedAgentsSpanOutcomeEvaluationOngoingEventType = "span.outcome_evaluation_ongoing"`
+
+### Beta Managed Agents Span Outcome Evaluation Start Event
+
+- `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent struct{…}`
+
+  Emitted when an outcome evaluation cycle begins.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `Iteration int64`
+
+    0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+  - `OutcomeID string`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Type BetaManagedAgentsSpanOutcomeEvaluationStartEventType`
+
+    - `const BetaManagedAgentsSpanOutcomeEvaluationStartEventTypeSpanOutcomeEvaluationStart BetaManagedAgentsSpanOutcomeEvaluationStartEventType = "span.outcome_evaluation_start"`
 
 ### Beta Managed Agents Stream Session Events
 
@@ -7696,6 +10670,10 @@ func main() {
 
       A timestamp in RFC 3339 format
 
+    - `SessionThreadID string`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -7727,6 +10705,10 @@ func main() {
     - `ProcessedAt Time`
 
       A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -7898,6 +10880,10 @@ func main() {
 
       A timestamp in RFC 3339 format
 
+    - `SessionThreadID string`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -7921,6 +10907,10 @@ func main() {
     - `Type BetaManagedAgentsAgentCustomToolUseEventType`
 
       - `const BetaManagedAgentsAgentCustomToolUseEventTypeAgentCustomToolUse BetaManagedAgentsAgentCustomToolUseEventType = "agent.custom_tool_use"`
+
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `type BetaManagedAgentsAgentMessageEvent struct{…}`
 
@@ -8003,6 +10993,10 @@ func main() {
       - `const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAsk BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "ask"`
 
       - `const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"`
+
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
 
@@ -8208,6 +11202,10 @@ func main() {
 
       - `const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"`
 
+    - `SessionThreadID string`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
 
     Event representing the result of an agent tool execution.
@@ -8377,6 +11375,346 @@ func main() {
     - `IsError bool`
 
       Whether the tool execution resulted in an error.
+
+  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent struct{…}`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion`
+
+      Message content blocks.
+
+      - `type BetaManagedAgentsTextBlock struct{…}`
+
+        Regular text content.
+
+        - `Text string`
+
+          The text content.
+
+        - `Type BetaManagedAgentsTextBlockType`
+
+          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+      - `type BetaManagedAgentsImageBlock struct{…}`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source BetaManagedAgentsImageBlockSourceUnion`
+
+          Union type for image source variants.
+
+          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+
+            Base64-encoded image data.
+
+            - `Data string`
+
+              Base64-encoded image data.
+
+            - `MediaType string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type BetaManagedAgentsBase64ImageSourceType`
+
+              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+
+          - `type BetaManagedAgentsURLImageSource struct{…}`
+
+            Image referenced by URL.
+
+            - `Type BetaManagedAgentsURLImageSourceType`
+
+              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
+
+            - `URL string`
+
+              URL of the image to fetch.
+
+          - `type BetaManagedAgentsFileImageSource struct{…}`
+
+            Image referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileImageSourceType`
+
+              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
+
+        - `Type BetaManagedAgentsImageBlockType`
+
+          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
+
+      - `type BetaManagedAgentsDocumentBlock struct{…}`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
+
+          Union type for document source variants.
+
+          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+
+            Base64-encoded document data.
+
+            - `Data string`
+
+              Base64-encoded document data.
+
+            - `MediaType string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type BetaManagedAgentsBase64DocumentSourceType`
+
+              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+
+          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+
+            Plain text document content.
+
+            - `Data string`
+
+              The plain text content.
+
+            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
+
+            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
+
+          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+
+            Document referenced by URL.
+
+            - `Type BetaManagedAgentsURLDocumentSourceType`
+
+              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
+
+            - `URL string`
+
+              URL of the document to fetch.
+
+          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+
+            Document referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileDocumentSourceType`
+
+              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+
+        - `Type BetaManagedAgentsDocumentBlockType`
+
+          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
+
+        - `Context string`
+
+          Additional context about the document for the model.
+
+        - `Title string`
+
+          The title of the document.
+
+    - `FromSessionThreadID string`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsAgentThreadMessageReceivedEventType`
+
+      - `const BetaManagedAgentsAgentThreadMessageReceivedEventTypeAgentThreadMessageReceived BetaManagedAgentsAgentThreadMessageReceivedEventType = "agent.thread_message_received"`
+
+    - `FromAgentName string`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `type BetaManagedAgentsAgentThreadMessageSentEvent struct{…}`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion`
+
+      Message content blocks.
+
+      - `type BetaManagedAgentsTextBlock struct{…}`
+
+        Regular text content.
+
+        - `Text string`
+
+          The text content.
+
+        - `Type BetaManagedAgentsTextBlockType`
+
+          - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+      - `type BetaManagedAgentsImageBlock struct{…}`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source BetaManagedAgentsImageBlockSourceUnion`
+
+          Union type for image source variants.
+
+          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+
+            Base64-encoded image data.
+
+            - `Data string`
+
+              Base64-encoded image data.
+
+            - `MediaType string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type BetaManagedAgentsBase64ImageSourceType`
+
+              - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+
+          - `type BetaManagedAgentsURLImageSource struct{…}`
+
+            Image referenced by URL.
+
+            - `Type BetaManagedAgentsURLImageSourceType`
+
+              - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
+
+            - `URL string`
+
+              URL of the image to fetch.
+
+          - `type BetaManagedAgentsFileImageSource struct{…}`
+
+            Image referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileImageSourceType`
+
+              - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
+
+        - `Type BetaManagedAgentsImageBlockType`
+
+          - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
+
+      - `type BetaManagedAgentsDocumentBlock struct{…}`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source BetaManagedAgentsDocumentBlockSourceUnion`
+
+          Union type for document source variants.
+
+          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+
+            Base64-encoded document data.
+
+            - `Data string`
+
+              Base64-encoded document data.
+
+            - `MediaType string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type BetaManagedAgentsBase64DocumentSourceType`
+
+              - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+
+          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+
+            Plain text document content.
+
+            - `Data string`
+
+              The plain text content.
+
+            - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
+
+            - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+
+              - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
+
+          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+
+            Document referenced by URL.
+
+            - `Type BetaManagedAgentsURLDocumentSourceType`
+
+              - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
+
+            - `URL string`
+
+              URL of the document to fetch.
+
+          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+
+            Document referenced by file ID.
+
+            - `FileID string`
+
+              ID of a previously uploaded file.
+
+            - `Type BetaManagedAgentsFileDocumentSourceType`
+
+              - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+
+        - `Type BetaManagedAgentsDocumentBlockType`
+
+          - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
+
+        - `Context string`
+
+          Additional context about the document for the model.
+
+        - `Title string`
+
+          The title of the document.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `ToSessionThreadID string`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type BetaManagedAgentsAgentThreadMessageSentEventType`
+
+      - `const BetaManagedAgentsAgentThreadMessageSentEventTypeAgentThreadMessageSent BetaManagedAgentsAgentThreadMessageSentEventType = "agent.thread_message_sent"`
+
+    - `ToAgentName string`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `type BetaManagedAgentsAgentThreadContextCompactedEvent struct{…}`
 
@@ -8798,6 +12136,118 @@ func main() {
 
       - `const BetaManagedAgentsSessionStatusTerminatedEventTypeSessionStatusTerminated BetaManagedAgentsSessionStatusTerminatedEventType = "session.status_terminated"`
 
+  - `type BetaManagedAgentsSessionThreadCreatedEvent struct{…}`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the callable agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type BetaManagedAgentsSessionThreadCreatedEventType`
+
+      - `const BetaManagedAgentsSessionThreadCreatedEventTypeSessionThreadCreated BetaManagedAgentsSessionThreadCreatedEventType = "session.thread_created"`
+
+  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent struct{…}`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationStartEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationStartEventTypeSpanOutcomeEvaluationStart BetaManagedAgentsSpanOutcomeEvaluationStartEventType = "span.outcome_evaluation_start"`
+
+  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent struct{…}`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Explanation string`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `OutcomeEvaluationStartID string`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Result string`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationEndEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationEndEventTypeSpanOutcomeEvaluationEnd BetaManagedAgentsSpanOutcomeEvaluationEndEventType = "span.outcome_evaluation_end"`
+
+    - `Usage BetaManagedAgentsSpanModelUsage`
+
+      Token usage for a single model request.
+
+      - `CacheCreationInputTokens int64`
+
+        Tokens used to create prompt cache in this request.
+
+      - `CacheReadInputTokens int64`
+
+        Tokens read from prompt cache in this request.
+
+      - `InputTokens int64`
+
+        Input tokens consumed by this request.
+
+      - `OutputTokens int64`
+
+        Output tokens generated by this request.
+
+      - `Speed BetaManagedAgentsSpanModelUsageSpeed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"`
+
+        - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
+
   - `type BetaManagedAgentsSpanModelRequestStartEvent struct{…}`
 
     Emitted when a model request is initiated by the agent.
@@ -8866,6 +12316,86 @@ func main() {
 
       - `const BetaManagedAgentsSpanModelRequestEndEventTypeSpanModelRequestEnd BetaManagedAgentsSpanModelRequestEndEventType = "span.model_request_end"`
 
+  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent struct{…}`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Iteration int64`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `OutcomeID string`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Type BetaManagedAgentsSpanOutcomeEvaluationOngoingEventType`
+
+      - `const BetaManagedAgentsSpanOutcomeEvaluationOngoingEventTypeSpanOutcomeEvaluationOngoing BetaManagedAgentsSpanOutcomeEvaluationOngoingEventType = "span.outcome_evaluation_ongoing"`
+
+  - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `Description string`
+
+      What the agent should produce. Copied from the input event.
+
+    - `MaxIterations int64`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `OutcomeID string`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion`
+
+      Rubric for grading the quality of an outcome.
+
+      - `type BetaManagedAgentsFileRubric struct{…}`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `FileID string`
+
+          ID of the rubric file.
+
+        - `Type BetaManagedAgentsFileRubricType`
+
+          - `const BetaManagedAgentsFileRubricTypeFile BetaManagedAgentsFileRubricType = "file"`
+
+      - `type BetaManagedAgentsTextRubric struct{…}`
+
+        Rubric content provided inline as text.
+
+        - `Content string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `Type BetaManagedAgentsTextRubricType`
+
+          - `const BetaManagedAgentsTextRubricTypeText BetaManagedAgentsTextRubricType = "text"`
+
+    - `Type BetaManagedAgentsUserDefineOutcomeEventType`
+
+      - `const BetaManagedAgentsUserDefineOutcomeEventTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventType = "user.define_outcome"`
+
   - `type BetaManagedAgentsSessionDeletedEvent struct{…}`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -8882,6 +12412,134 @@ func main() {
 
       - `const BetaManagedAgentsSessionDeletedEventTypeSessionDeleted BetaManagedAgentsSessionDeletedEventType = "session.deleted"`
 
+  - `type BetaManagedAgentsSessionThreadStatusRunningEvent struct{…}`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type BetaManagedAgentsSessionThreadStatusRunningEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusRunningEventTypeSessionThreadStatusRunning BetaManagedAgentsSessionThreadStatusRunningEventType = "session.thread_status_running"`
+
+  - `type BetaManagedAgentsSessionThreadStatusIdleEvent struct{…}`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type BetaManagedAgentsSessionEndTurnType`
+
+          - `const BetaManagedAgentsSessionEndTurnTypeEndTurn BetaManagedAgentsSessionEndTurnType = "end_turn"`
+
+      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `EventIDs []string`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type BetaManagedAgentsSessionRequiresActionType`
+
+          - `const BetaManagedAgentsSessionRequiresActionTypeRequiresAction BetaManagedAgentsSessionRequiresActionType = "requires_action"`
+
+      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type BetaManagedAgentsSessionRetriesExhaustedType`
+
+          - `const BetaManagedAgentsSessionRetriesExhaustedTypeRetriesExhausted BetaManagedAgentsSessionRetriesExhaustedType = "retries_exhausted"`
+
+    - `Type BetaManagedAgentsSessionThreadStatusIdleEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusIdleEventTypeSessionThreadStatusIdle BetaManagedAgentsSessionThreadStatusIdleEventType = "session.thread_status_idle"`
+
+  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent struct{…}`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type BetaManagedAgentsSessionThreadStatusTerminatedEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusTerminatedEventTypeSessionThreadStatusTerminated BetaManagedAgentsSessionThreadStatusTerminatedEventType = "session.thread_status_terminated"`
+
+  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `ID string`
+
+      Unique identifier for this event.
+
+    - `AgentName string`
+
+      Name of the agent the thread runs.
+
+    - `ProcessedAt Time`
+
+      A timestamp in RFC 3339 format
+
+    - `SessionThreadID string`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type BetaManagedAgentsSessionThreadStatusRescheduledEventType`
+
+      - `const BetaManagedAgentsSessionThreadStatusRescheduledEventTypeSessionThreadStatusRescheduled BetaManagedAgentsSessionThreadStatusRescheduledEventType = "session.thread_status_rescheduled"`
+
 ### Beta Managed Agents Text Block
 
 - `type BetaManagedAgentsTextBlock struct{…}`
@@ -8895,6 +12553,34 @@ func main() {
   - `Type BetaManagedAgentsTextBlockType`
 
     - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+
+### Beta Managed Agents Text Rubric
+
+- `type BetaManagedAgentsTextRubric struct{…}`
+
+  Rubric content provided inline as text.
+
+  - `Content string`
+
+    Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+  - `Type BetaManagedAgentsTextRubricType`
+
+    - `const BetaManagedAgentsTextRubricTypeText BetaManagedAgentsTextRubricType = "text"`
+
+### Beta Managed Agents Text Rubric Params
+
+- `type BetaManagedAgentsTextRubricParamsResp struct{…}`
+
+  Rubric content provided inline as text.
+
+  - `Content string`
+
+    Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+  - `Type BetaManagedAgentsTextRubricParamsType`
+
+    - `const BetaManagedAgentsTextRubricParamsTypeText BetaManagedAgentsTextRubricParamsType = "text"`
 
 ### Beta Managed Agents Unknown Error
 
@@ -9138,6 +12824,10 @@ func main() {
 
     A timestamp in RFC 3339 format
 
+  - `SessionThreadID string`
+
+    Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
 ### Beta Managed Agents User Custom Tool Result Event Params
 
 - `type BetaManagedAgentsUserCustomToolResultEventParamsResp struct{…}`
@@ -9302,6 +12992,110 @@ func main() {
 
     Whether the tool execution resulted in an error.
 
+### Beta Managed Agents User Define Outcome Event
+
+- `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+
+  Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+  - `ID string`
+
+    Unique identifier for this event.
+
+  - `Description string`
+
+    What the agent should produce. Copied from the input event.
+
+  - `MaxIterations int64`
+
+    Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+  - `OutcomeID string`
+
+    Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+  - `ProcessedAt Time`
+
+    A timestamp in RFC 3339 format
+
+  - `Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion`
+
+    Rubric for grading the quality of an outcome.
+
+    - `type BetaManagedAgentsFileRubric struct{…}`
+
+      Rubric referenced by a file uploaded via the Files API.
+
+      - `FileID string`
+
+        ID of the rubric file.
+
+      - `Type BetaManagedAgentsFileRubricType`
+
+        - `const BetaManagedAgentsFileRubricTypeFile BetaManagedAgentsFileRubricType = "file"`
+
+    - `type BetaManagedAgentsTextRubric struct{…}`
+
+      Rubric content provided inline as text.
+
+      - `Content string`
+
+        Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+      - `Type BetaManagedAgentsTextRubricType`
+
+        - `const BetaManagedAgentsTextRubricTypeText BetaManagedAgentsTextRubricType = "text"`
+
+  - `Type BetaManagedAgentsUserDefineOutcomeEventType`
+
+    - `const BetaManagedAgentsUserDefineOutcomeEventTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventType = "user.define_outcome"`
+
+### Beta Managed Agents User Define Outcome Event Params
+
+- `type BetaManagedAgentsUserDefineOutcomeEventParamsResp struct{…}`
+
+  Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+  - `Description string`
+
+    What the agent should produce. This is the task specification.
+
+  - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+
+    Rubric for grading the quality of an outcome.
+
+    - `type BetaManagedAgentsFileRubricParamsResp struct{…}`
+
+      Rubric referenced by a file uploaded via the Files API.
+
+      - `FileID string`
+
+        ID of the rubric file.
+
+      - `Type BetaManagedAgentsFileRubricParamsType`
+
+        - `const BetaManagedAgentsFileRubricParamsTypeFile BetaManagedAgentsFileRubricParamsType = "file"`
+
+    - `type BetaManagedAgentsTextRubricParamsResp struct{…}`
+
+      Rubric content provided inline as text.
+
+      - `Content string`
+
+        Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+      - `Type BetaManagedAgentsTextRubricParamsType`
+
+        - `const BetaManagedAgentsTextRubricParamsTypeText BetaManagedAgentsTextRubricParamsType = "text"`
+
+  - `Type BetaManagedAgentsUserDefineOutcomeEventParamsType`
+
+    - `const BetaManagedAgentsUserDefineOutcomeEventParamsTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventParamsType = "user.define_outcome"`
+
+  - `MaxIterations int64`
+
+    Eval→revision cycles before giving up. Default 3, max 20.
+
 ### Beta Managed Agents User Interrupt Event
 
 - `type BetaManagedAgentsUserInterruptEvent struct{…}`
@@ -9320,6 +13114,10 @@ func main() {
 
     A timestamp in RFC 3339 format
 
+  - `SessionThreadID string`
+
+    If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 ### Beta Managed Agents User Interrupt Event Params
 
 - `type BetaManagedAgentsUserInterruptEventParamsResp struct{…}`
@@ -9329,6 +13127,10 @@ func main() {
   - `Type BetaManagedAgentsUserInterruptEventParamsType`
 
     - `const BetaManagedAgentsUserInterruptEventParamsTypeUserInterrupt BetaManagedAgentsUserInterruptEventParamsType = "user.interrupt"`
+
+  - `SessionThreadID string`
+
+    If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
 ### Beta Managed Agents User Message Event
 
@@ -9683,6 +13485,10 @@ func main() {
   - `ProcessedAt Time`
 
     A timestamp in RFC 3339 format
+
+  - `SessionThreadID string`
+
+    When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
 ### Beta Managed Agents User Tool Confirmation Event Params
 

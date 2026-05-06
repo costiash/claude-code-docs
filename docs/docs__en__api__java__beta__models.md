@@ -78,6 +78,8 @@ The Models API response can be used to determine which models are available for 
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaModelInfo:`
@@ -358,6 +360,8 @@ The Models API response can be used to determine information about a specific mo
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 

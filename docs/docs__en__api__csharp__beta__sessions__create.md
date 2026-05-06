@@ -186,6 +186,8 @@ Create Session
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -265,6 +267,290 @@ Create Session
         - `"standard"Standard`
 
         - `"fast"Fast`
+
+    - `required BetaManagedAgentsSessionMultiagentCoordinator? Multiagent`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgent> Agents`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `required string ID`
+
+        - `required string? Description`
+
+        - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
+
+          - `required string Name`
+
+          - `required Type Type`
+
+            - `"url"Url`
+
+          - `required string Url`
+
+        - `required BetaManagedAgentsModelConfig Model`
+
+          Model identifier and configuration.
+
+          - `required BetaManagedAgentsModel ID`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-7"ClaudeOpus4_7`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-opus-4-6"ClaudeOpus4_6`
+
+              Most intelligent model for building agents and coding
+
+            - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"ClaudeOpus4_5`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+              High-performance model for agents and coding
+
+          - `Speed Speed`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `"standard"Standard`
+
+            - `"fast"Fast`
+
+        - `required string Name`
+
+        - `required IReadOnlyList<Skill> Skills`
+
+          - `class BetaManagedAgentsAnthropicSkill:`
+
+            A resolved Anthropic-managed skill.
+
+            - `required string SkillID`
+
+            - `required Type Type`
+
+              - `"anthropic"Anthropic`
+
+            - `required string Version`
+
+          - `class BetaManagedAgentsCustomSkill:`
+
+            A resolved user-created custom skill.
+
+            - `required string SkillID`
+
+            - `required Type Type`
+
+              - `"custom"Custom`
+
+            - `required string Version`
+
+        - `required string? System`
+
+        - `required IReadOnlyList<Tool> Tools`
+
+          - `class BetaManagedAgentsAgentToolset20260401:`
+
+            - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
+
+              - `required Boolean Enabled`
+
+              - `required Name Name`
+
+                Built-in agent tool identifier.
+
+                - `"bash"Bash`
+
+                - `"edit"Edit`
+
+                - `"read"Read`
+
+                - `"write"Write`
+
+                - `"glob"Glob`
+
+                - `"grep"Grep`
+
+                - `"web_fetch"WebFetch`
+
+                - `"web_search"WebSearch`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `required Type Type`
+
+                    - `"always_allow"AlwaysAllow`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `required Type Type`
+
+                    - `"always_ask"AlwaysAsk`
+
+            - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `required Boolean Enabled`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `required Type Type`
+
+                    - `"always_allow"AlwaysAllow`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `required Type Type`
+
+                    - `"always_ask"AlwaysAsk`
+
+            - `required Type Type`
+
+              - `"agent_toolset_20260401"AgentToolset20260401`
+
+          - `class BetaManagedAgentsMcpToolset:`
+
+            - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
+
+              - `required Boolean Enabled`
+
+              - `required string Name`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `required Type Type`
+
+                    - `"always_allow"AlwaysAllow`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `required Type Type`
+
+                    - `"always_ask"AlwaysAsk`
+
+            - `required BetaManagedAgentsMcpToolsetDefaultConfig DefaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `required Boolean Enabled`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `required Type Type`
+
+                    - `"always_allow"AlwaysAllow`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `required Type Type`
+
+                    - `"always_ask"AlwaysAsk`
+
+            - `required string McpServerName`
+
+            - `required Type Type`
+
+              - `"mcp_toolset"McpToolset`
+
+          - `class BetaManagedAgentsCustomTool:`
+
+            A custom tool as returned in API responses.
+
+            - `required string Description`
+
+            - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `IReadOnlyDictionary<string, JsonElement>? Properties`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `IReadOnlyList<string> Required`
+
+                List of required property names.
+
+              - `Type Type`
+
+                Must be 'object' for tool input schemas.
+
+                - `"object"Object`
+
+            - `required string Name`
+
+            - `required Type Type`
+
+              - `"custom"Custom`
+
+        - `required Type Type`
+
+          - `"agent"Agent`
+
+        - `required Int Version`
+
+      - `required Type Type`
+
+        - `"coordinator"Coordinator`
 
     - `required string Name`
 
@@ -481,6 +767,38 @@ Create Session
   - `required string EnvironmentID`
 
   - `required IReadOnlyDictionary<string, string> Metadata`
+
+  - `required IReadOnlyList<BetaManagedAgentsOutcomeEvaluationResource> OutcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `required DateTimeOffset? CompletedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `required string Description`
+
+      What the agent should produce.
+
+    - `required string? Explanation`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `required Int Iteration`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `required string OutcomeID`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `required string Result`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `required Type Type`
+
+      - `"outcome_evaluation"OutcomeEvaluation`
 
   - `required IReadOnlyList<BetaManagedAgentsSessionResource> Resources`
 

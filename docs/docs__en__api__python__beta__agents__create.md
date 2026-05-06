@@ -168,6 +168,44 @@ Create Agent
 
   Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+- `multiagent: Optional[BetaManagedAgentsMultiagentParams]`
+
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `agents: Sequence[BetaManagedAgentsMultiagentRosterEntryParams]`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+    - `str`
+
+    - `class BetaManagedAgentsAgentParams: …`
+
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+      - `id: str`
+
+        The `agent` ID.
+
+      - `type: Literal["agent"]`
+
+        - `"agent"`
+
+      - `version: Optional[int]`
+
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+    - `class BetaManagedAgentsMultiagentSelfParams: …`
+
+      Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+      - `type: Literal["self"]`
+
+        - `"self"`
+
+  - `type: Literal["coordinator"]`
+
+    - `"coordinator"`
+
 - `skills: Optional[Iterable[BetaManagedAgentsSkillParams]]`
 
   Skills available to the agent. Maximum 20.
@@ -408,7 +446,7 @@ Create Agent
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -455,6 +493,8 @@ Create Agent
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -557,6 +597,26 @@ Create Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: Optional[BetaManagedAgentsMultiagent]`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: List[BetaManagedAgentsAgentReference]`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: str`
+
+      - `type: Literal["agent"]`
+
+        - `"agent"`
+
+      - `version: int`
+
+    - `type: Literal["coordinator"]`
+
+      - `"coordinator"`
 
   - `name: str`
 

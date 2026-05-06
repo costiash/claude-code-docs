@@ -106,6 +106,10 @@ Update Agent
 
         - `const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"`
 
+  - `Multiagent param.Field[BetaManagedAgentsMultiagentParamsResp]`
+
+    Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
   - `Name param.Field[string]`
 
     Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
@@ -398,6 +402,8 @@ Update Agent
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
@@ -489,6 +495,26 @@ Update Agent
       - `const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"`
 
       - `const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"`
+
+  - `Multiagent BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `Agents []BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `ID string`
+
+      - `Type BetaManagedAgentsAgentReferenceType`
+
+        - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
+
+      - `Version int64`
+
+    - `Type BetaManagedAgentsMultiagentType`
+
+      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 

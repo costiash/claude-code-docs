@@ -62,6 +62,8 @@ Update Session
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `Optional<Metadata> metadata`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
@@ -153,6 +155,290 @@ Update Session
         - `STANDARD("standard")`
 
         - `FAST("fast")`
+
+    - `Optional<BetaManagedAgentsSessionMultiagentCoordinator> multiagent`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `List<BetaManagedAgentsSessionThreadAgent> agents`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `String id`
+
+        - `Optional<String> description`
+
+        - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+          - `String name`
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+        - `BetaManagedAgentsModelConfig model`
+
+          Model identifier and configuration.
+
+          - `BetaManagedAgentsModel id`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Most intelligent model for building agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+          - `Optional<Speed> speed`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `STANDARD("standard")`
+
+            - `FAST("fast")`
+
+        - `String name`
+
+        - `List<Skill> skills`
+
+          - `class BetaManagedAgentsAnthropicSkill:`
+
+            A resolved Anthropic-managed skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `ANTHROPIC("anthropic")`
+
+            - `String version`
+
+          - `class BetaManagedAgentsCustomSkill:`
+
+            A resolved user-created custom skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+            - `String version`
+
+        - `Optional<String> system`
+
+        - `List<Tool> tools`
+
+          - `class BetaManagedAgentsAgentToolset20260401:`
+
+            - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `Name name`
+
+                Built-in agent tool identifier.
+
+                - `BASH("bash")`
+
+                - `EDIT("edit")`
+
+                - `READ("read")`
+
+                - `WRITE("write")`
+
+                - `GLOB("glob")`
+
+                - `GREP("grep")`
+
+                - `WEB_FETCH("web_fetch")`
+
+                - `WEB_SEARCH("web_search")`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `Type type`
+
+              - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+          - `class BetaManagedAgentsMcpToolset:`
+
+            - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `String name`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `String mcpServerName`
+
+            - `Type type`
+
+              - `MCP_TOOLSET("mcp_toolset")`
+
+          - `class BetaManagedAgentsCustomTool:`
+
+            A custom tool as returned in API responses.
+
+            - `String description`
+
+            - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `Optional<Properties> properties`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `Optional<List<String>> required`
+
+                List of required property names.
+
+              - `Optional<Type> type`
+
+                Must be 'object' for tool input schemas.
+
+                - `OBJECT("object")`
+
+            - `String name`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+        - `Type type`
+
+          - `AGENT("agent")`
+
+        - `long version`
+
+      - `Type type`
+
+        - `COORDINATOR("coordinator")`
 
     - `String name`
 
@@ -369,6 +655,38 @@ Update Session
   - `String environmentId`
 
   - `Metadata metadata`
+
+  - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `Optional<LocalDateTime> completedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String description`
+
+      What the agent should produce.
+
+    - `Optional<String> explanation`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `long iteration`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `String outcomeId`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `String result`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `Type type`
+
+      - `OUTCOME_EVALUATION("outcome_evaluation")`
 
   - `List<BetaManagedAgentsSessionResource> resources`
 

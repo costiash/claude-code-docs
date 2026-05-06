@@ -62,6 +62,8 @@ Update Vault
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `Optional<String> displayName`
 
     Updated human-readable name for the vault. 1-255 characters.

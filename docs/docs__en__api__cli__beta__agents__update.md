@@ -32,6 +32,10 @@ Update Agent
 
   Body param: Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
+- `--multiagent: optional object { agents, type }`
+
+  Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
 - `--name: optional string`
 
   Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
@@ -54,7 +58,7 @@ Update Agent
 
 ### Returns
 
-- `beta_managed_agents_agent: object { id, archived_at, created_at, 11 more }`
+- `beta_managed_agents_agent: object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -135,6 +139,26 @@ Update Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: object { agents, type }`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 

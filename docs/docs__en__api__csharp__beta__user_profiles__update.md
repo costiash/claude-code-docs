@@ -22,6 +22,20 @@ Update User Profile
 
     Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
 
+  - `string? name`
+
+    Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+  - `Relationship? relationship`
+
+    Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"External`
+
+    - `"resold"Resold`
+
+    - `"internal"Internal`
+
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -72,6 +86,8 @@ Update User Profile
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+
 ### Returns
 
 - `class BetaUserProfile:`
@@ -87,6 +103,16 @@ Update User Profile
   - `required IReadOnlyDictionary<string, string> Metadata`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `required Relationship Relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"External`
+
+    - `"resold"Resold`
+
+    - `"internal"Internal`
 
   - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
@@ -115,6 +141,10 @@ Update User Profile
   - `string? ExternalID`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `string? Name`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 

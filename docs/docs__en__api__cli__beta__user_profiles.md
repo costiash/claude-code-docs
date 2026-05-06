@@ -18,13 +18,21 @@ Create User Profile
 
   Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
+- `--name: optional string`
+
+  Body param: Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+
+- `--relationship: optional "external" or "resold" or "internal"`
+
+  Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
 - `--beta: optional array of AnthropicBeta`
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
 ### Returns
 
-- `beta_user_profile: object { id, created_at, metadata, 4 more }`
+- `beta_user_profile: object { id, created_at, metadata, 6 more }`
 
   - `id: string`
 
@@ -37,6 +45,16 @@ Create User Profile
   - `metadata: map[string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" or "resold" or "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
@@ -65,6 +83,10 @@ Create User Profile
   - `external_id: optional string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name: optional string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -119,6 +141,16 @@ List User Profiles
 
       Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+    - `relationship: "external" or "resold" or "internal"`
+
+      How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+      - `"external"`
+
+      - `"resold"`
+
+      - `"internal"`
+
     - `trust_grants: map[BetaUserProfileTrustGrant]`
 
       Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -146,6 +178,10 @@ List User Profiles
     - `external_id: optional string`
 
       Platform's own identifier for this user. Not enforced unique.
+
+    - `name: optional string`
+
+      Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
   - `next_page: string`
 
@@ -178,7 +214,7 @@ Get User Profile
 
 ### Returns
 
-- `beta_user_profile: object { id, created_at, metadata, 4 more }`
+- `beta_user_profile: object { id, created_at, metadata, 6 more }`
 
   - `id: string`
 
@@ -191,6 +227,16 @@ Get User Profile
   - `metadata: map[string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" or "resold" or "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
@@ -219,6 +265,10 @@ Get User Profile
   - `external_id: optional string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name: optional string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -250,13 +300,21 @@ Update User Profile
 
   Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
 
+- `--name: optional string`
+
+  Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+- `--relationship: optional "external" or "resold" or "internal"`
+
+  Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
 - `--beta: optional array of AnthropicBeta`
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
 ### Returns
 
-- `beta_user_profile: object { id, created_at, metadata, 4 more }`
+- `beta_user_profile: object { id, created_at, metadata, 6 more }`
 
   - `id: string`
 
@@ -269,6 +327,16 @@ Update User Profile
   - `metadata: map[string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" or "resold" or "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
@@ -297,6 +365,10 @@ Update User Profile
   - `external_id: optional string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name: optional string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -354,7 +426,7 @@ ant beta:user-profiles create-enrollment-url \
 
 ### Beta User Profile
 
-- `beta_user_profile: object { id, created_at, metadata, 4 more }`
+- `beta_user_profile: object { id, created_at, metadata, 6 more }`
 
   - `id: string`
 
@@ -367,6 +439,16 @@ ant beta:user-profiles create-enrollment-url \
   - `metadata: map[string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" or "resold" or "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
@@ -395,6 +477,10 @@ ant beta:user-profiles create-enrollment-url \
   - `external_id: optional string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name: optional string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Beta User Profile Enrollment URL
 

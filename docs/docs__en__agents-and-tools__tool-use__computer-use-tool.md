@@ -1066,7 +1066,7 @@ Always carefully review and verify Claude's computer use actions and logs. Do no
 
 Computer use is a client-side tool. All screenshots, mouse actions, keyboard inputs, and any files involved in a session are captured and stored in your environment, not by Anthropic. Anthropic processes the screenshot images and action requests in real time as part of the API call but does not retain them after the response is returned.
 
-Because your application controls where and how computer use data is stored, computer use is ZDR eligible. For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
+Because your application controls where and how computer use data is stored, computer use is ZDR eligible. For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
 ## Pricing
 

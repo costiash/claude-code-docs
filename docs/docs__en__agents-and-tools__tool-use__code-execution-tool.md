@@ -1764,7 +1764,7 @@ For running tools inside the code execution container, see [Programmatic tool ca
 
 Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the [Files API](/docs/en/build-with-claude/files) (retrievable via `client.beta.files.download()`) persist until explicitly deleted.
 
-For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
+For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
 ## Using code execution with Agent Skills
 

@@ -28,6 +28,10 @@ Create Agent
 
   Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+- `--multiagent: optional object { agents, type }`
+
+  Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
 - `--skill: optional array of BetaManagedAgentsSkillParams`
 
   Body param: Skills available to the agent. Maximum 20.
@@ -46,7 +50,7 @@ Create Agent
 
 ### Returns
 
-- `beta_managed_agents_agent: object { id, archived_at, created_at, 11 more }`
+- `beta_managed_agents_agent: object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -127,6 +131,26 @@ Create Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: object { agents, type }`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 

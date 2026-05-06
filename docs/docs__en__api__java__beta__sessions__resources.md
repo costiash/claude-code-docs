@@ -64,6 +64,8 @@ Add Session Resource
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
 
     Mount a file uploaded via the Files API into the session.
@@ -190,6 +192,8 @@ List Session Resources
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -381,6 +385,8 @@ Get Session Resource
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -576,6 +582,8 @@ Update Session Resource
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `String authorizationToken`
 
@@ -776,6 +784,8 @@ Delete Session Resource
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 

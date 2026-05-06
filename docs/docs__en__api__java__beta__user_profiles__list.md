@@ -76,6 +76,8 @@ List User Profiles
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaUserProfile:`
@@ -91,6 +93,16 @@ List User Profiles
   - `Metadata metadata`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Relationship relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `EXTERNAL("external")`
+
+    - `RESOLD("resold")`
+
+    - `INTERNAL("internal")`
 
   - `TrustGrants trustGrants`
 
@@ -119,6 +131,10 @@ List User Profiles
   - `Optional<String> externalId`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Optional<String> name`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 

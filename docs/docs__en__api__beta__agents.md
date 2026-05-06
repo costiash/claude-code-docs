@@ -14,7 +14,7 @@ Create Agent
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -61,6 +61,8 @@ Create Agent
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Body Parameters
 
@@ -207,6 +209,44 @@ Create Agent
 - `metadata: optional map[string]`
 
   Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+- `multiagent: optional BetaManagedAgentsMultiagentParams`
+
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `agents: array of BetaManagedAgentsMultiagentRosterEntryParams`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+    - `UnionMember0 = string`
+
+    - `BetaManagedAgentsAgentParams = object { id, type, version }`
+
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+      - `id: string`
+
+        The `agent` ID.
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: optional number`
+
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+    - `BetaManagedAgentsMultiagentSelfParams = object { type }`
+
+      Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+      - `type: "self"`
+
+        - `"self"`
+
+  - `type: "coordinator"`
+
+    - `"coordinator"`
 
 - `skills: optional array of BetaManagedAgentsSkillParams`
 
@@ -444,7 +484,7 @@ Create Agent
 
 ### Returns
 
-- `BetaManagedAgentsAgent = object { id, archived_at, created_at, 11 more }`
+- `BetaManagedAgentsAgent = object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -533,6 +573,26 @@ Create Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -754,7 +814,16 @@ curl https://api.anthropic.com/v1/agents \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "model": "claude-sonnet-4-6",
-          "name": "My First Agent"
+          "name": "My First Agent",
+          "multiagent": {
+            "agents": [
+              "agent_011CZkYqphY8vELVzwCUpqiQ",
+              {
+                "type": "self"
+              }
+            ],
+            "type": "coordinator"
+          }
         }'
 ```
 
@@ -794,7 +863,7 @@ List Agents
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -841,6 +910,8 @@ List Agents
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -933,6 +1004,26 @@ List Agents
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -1181,7 +1272,7 @@ Get Agent
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1229,9 +1320,11 @@ Get Agent
 
     - `"advisor-tool-2026-03-01"`
 
+    - `"managed-agents-2026-04-01"`
+
 ### Returns
 
-- `BetaManagedAgentsAgent = object { id, archived_at, created_at, 11 more }`
+- `BetaManagedAgentsAgent = object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -1320,6 +1413,26 @@ Get Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -1558,7 +1671,7 @@ Update Agent
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1605,6 +1718,8 @@ Update Agent
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Body Parameters
 
@@ -1751,6 +1866,44 @@ Update Agent
       - `"standard"`
 
       - `"fast"`
+
+- `multiagent: optional BetaManagedAgentsMultiagentParams`
+
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `agents: array of BetaManagedAgentsMultiagentRosterEntryParams`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+    - `UnionMember0 = string`
+
+    - `BetaManagedAgentsAgentParams = object { id, type, version }`
+
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+      - `id: string`
+
+        The `agent` ID.
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: optional number`
+
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+    - `BetaManagedAgentsMultiagentSelfParams = object { type }`
+
+      Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+      - `type: "self"`
+
+        - `"self"`
+
+  - `type: "coordinator"`
+
+    - `"coordinator"`
 
 - `name: optional string`
 
@@ -1992,7 +2145,7 @@ Update Agent
 
 ### Returns
 
-- `BetaManagedAgentsAgent = object { id, archived_at, created_at, 11 more }`
+- `BetaManagedAgentsAgent = object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -2081,6 +2234,26 @@ Update Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -2301,7 +2474,16 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
-          "version": 1
+          "version": 1,
+          "multiagent": {
+            "agents": [
+              "agent_011CZkYqphY8vELVzwCUpqiQ",
+              {
+                "type": "self"
+              }
+            ],
+            "type": "coordinator"
+          }
         }'
 ```
 
@@ -2323,7 +2505,7 @@ Archive Agent
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2371,9 +2553,11 @@ Archive Agent
 
     - `"advisor-tool-2026-03-01"`
 
+    - `"managed-agents-2026-04-01"`
+
 ### Returns
 
-- `BetaManagedAgentsAgent = object { id, archived_at, created_at, 11 more }`
+- `BetaManagedAgentsAgent = object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -2462,6 +2646,26 @@ Archive Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -2687,7 +2891,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
 ### Beta Managed Agents Agent
 
-- `BetaManagedAgentsAgent = object { id, archived_at, created_at, 11 more }`
+- `BetaManagedAgentsAgent = object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -2776,6 +2980,26 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -2986,6 +3210,20 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
   - `version: number`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Beta Managed Agents Agent Reference
+
+- `BetaManagedAgentsAgentReference = object { id, type, version }`
+
+  A resolved agent reference with a concrete version.
+
+  - `id: string`
+
+  - `type: "agent"`
+
+    - `"agent"`
+
+  - `version: number`
 
 ### Beta Managed Agents Agent Tool Config
 
@@ -3931,6 +4169,78 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     - `"fast"`
 
+### Beta Managed Agents Multiagent Coordinator
+
+- `BetaManagedAgentsMultiagentCoordinator = object { agents, type }`
+
+  Resolved coordinator topology with a concrete agent roster.
+
+  - `agents: array of BetaManagedAgentsAgentReference`
+
+    Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `type: "coordinator"`
+
+    - `"coordinator"`
+
+### Beta Managed Agents Multiagent Coordinator Params
+
+- `BetaManagedAgentsMultiagentCoordinatorParams = object { agents, type }`
+
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `agents: array of BetaManagedAgentsMultiagentRosterEntryParams`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+    - `UnionMember0 = string`
+
+    - `BetaManagedAgentsAgentParams = object { id, type, version }`
+
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+      - `id: string`
+
+        The `agent` ID.
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: optional number`
+
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+    - `BetaManagedAgentsMultiagentSelfParams = object { type }`
+
+      Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+      - `type: "self"`
+
+        - `"self"`
+
+  - `type: "coordinator"`
+
+    - `"coordinator"`
+
+### Beta Managed Agents Multiagent Self Params
+
+- `BetaManagedAgentsMultiagentSelfParams = object { type }`
+
+  Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+  - `type: "self"`
+
+    - `"self"`
+
 ### Beta Managed Agents Skill Params
 
 - `BetaManagedAgentsSkillParams = BetaManagedAgentsAnthropicSkillParams or BetaManagedAgentsCustomSkillParams`
@@ -4017,7 +4327,7 @@ List Agent Versions
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -4064,6 +4374,8 @@ List Agent Versions
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -4156,6 +4468,26 @@ List Agent Versions
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 

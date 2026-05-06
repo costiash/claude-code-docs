@@ -1043,7 +1043,7 @@ You can only download files that were created by [skills](/docs/en/build-with-cl
 
 Files uploaded via the Files API are retained until explicitly deleted using the `DELETE /v1/files/{file_id}` endpoint. Files are stored for reuse across multiple API requests.
 
-For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
+For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
 ## Error handling
 
