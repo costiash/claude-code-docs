@@ -160,7 +160,7 @@ credential_id=$(curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$
     "type": "mcp_oauth",
     "mcp_server_url": "https://mcp.slack.com/mcp",
     "access_token": "xoxp-...",
-    "expires_at": "2026-04-15T00:00:00Z",
+    "expires_at": "2099-12-31T23:59:59Z",
     "refresh": {
       "token_endpoint": "https://slack.com/api/oauth.v2.access",
       "client_id": "1234567890.0987654321",
@@ -184,7 +184,7 @@ auth:
   type: mcp_oauth
   mcp_server_url: https://mcp.slack.com/mcp
   access_token: xoxp-...
-  expires_at: "2026-04-15T00:00:00Z"
+  expires_at: "2099-12-31T23:59:59Z"
   refresh:
     token_endpoint: https://slack.com/api/oauth.v2.access
     client_id: "1234567890.0987654321"
@@ -206,7 +206,7 @@ credential = client.beta.vaults.credentials.create(
         "type": "mcp_oauth",
         "mcp_server_url": "https://mcp.slack.com/mcp",
         "access_token": "xoxp-...",
-        "expires_at": "2026-04-15T00:00:00Z",
+        "expires_at": "2099-12-31T23:59:59Z",
         "refresh": {
             "token_endpoint": "https://slack.com/api/oauth.v2.access",
             "client_id": "1234567890.0987654321",
@@ -226,7 +226,7 @@ const credential = await client.beta.vaults.credentials.create(vault.id, {
     type: "mcp_oauth",
     mcp_server_url: "https://mcp.slack.com/mcp",
     access_token: "xoxp-...",
-    expires_at: "2026-04-15T00:00:00Z",
+    expires_at: "2099-12-31T23:59:59Z",
     refresh: {
       token_endpoint: "https://slack.com/api/oauth.v2.access",
       client_id: "1234567890.0987654321",
@@ -251,7 +251,7 @@ var credential = await client.Beta.Vaults.Credentials.Create(vault.ID, new()
         Type = "mcp_oauth",
         McpServerUrl = "https://mcp.slack.com/mcp",
         AccessToken = "xoxp-...",
-        ExpiresAt = DateTimeOffset.Parse("2026-04-15T00:00:00Z"),
+        ExpiresAt = DateTimeOffset.Parse("2099-12-31T23:59:59Z"),
         Refresh = new()
         {
             TokenEndpoint = "https://slack.com/api/oauth.v2.access",
@@ -277,7 +277,7 @@ credential, err := client.Beta.Vaults.Credentials.New(ctx, vault.ID, anthropic.B
 			Type:         anthropic.BetaManagedAgentsMCPOAuthCreateParamsTypeMCPOAuth,
 			MCPServerURL: "https://mcp.slack.com/mcp",
 			AccessToken:  "xoxp-...",
-			ExpiresAt:    anthropic.Time(time.Date(2026, time.April, 15, 0, 0, 0, 0, time.UTC)),
+			ExpiresAt:    anthropic.Time(time.Date(2099, time.December, 31, 23, 59, 59, 0, time.UTC)),
 			Refresh: anthropic.BetaManagedAgentsMCPOAuthRefreshParams{
 				TokenEndpoint: "https://slack.com/api/oauth.v2.access",
 				ClientID:      "1234567890.0987654321",
@@ -307,7 +307,7 @@ var credential = client.beta().vaults().credentials().create(vault.id(),
             .type(BetaManagedAgentsMcpOAuthCreateParams.Type.MCP_OAUTH)
             .mcpServerUrl("https://mcp.slack.com/mcp")
             .accessToken("xoxp-...")
-            .expiresAt(OffsetDateTime.parse("2026-04-15T00:00:00Z"))
+            .expiresAt(OffsetDateTime.parse("2099-12-31T23:59:59Z"))
             .refresh(BetaManagedAgentsMcpOAuthRefreshParams.builder()
                 .tokenEndpoint("https://slack.com/api/oauth.v2.access")
                 .clientId("1234567890.0987654321")
@@ -328,7 +328,7 @@ $credential = $client->beta->vaults->credentials->create(
         'type' => 'mcp_oauth',
         'mcp_server_url' => 'https://mcp.slack.com/mcp',
         'access_token' => 'xoxp-...',
-        'expires_at' => '2026-04-15T00:00:00Z',
+        'expires_at' => '2099-12-31T23:59:59Z',
         'refresh' => [
             'token_endpoint' => 'https://slack.com/api/oauth.v2.access',
             'client_id' => '1234567890.0987654321',
@@ -352,7 +352,7 @@ credential = client.beta.vaults.credentials.create(
     type: "mcp_oauth",
     mcp_server_url: "https://mcp.slack.com/mcp",
     access_token: "xoxp-...",
-    expires_at: "2026-04-15T00:00:00Z",
+    expires_at: "2099-12-31T23:59:59Z",
     refresh: {
       token_endpoint: "https://slack.com/api/oauth.v2.access",
       client_id: "1234567890.0987654321",
@@ -375,8 +375,9 @@ credential = client.beta.vaults.credentials.create(
 Use `static_bearer` when the MCP server accepts a fixed bearer token (API key, personal access token, or similar). No refresh flow is needed.
 
 <CodeGroup defaultLanguage="CLI">
-```bash curl
-curl -fsSL "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials" \
+  
+````bash
+curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$vault_id/credentials" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -389,9 +390,10 @@ curl -fsSL "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials" \
       "token": "lin_api_your_linear_key"
     }
   }'
-```
+````
 
-```bash CLI nocheck
+  
+````bash
 ant beta:vaults:credentials create --vault-id "$VAULT_ID" <<'YAML'
 display_name: Linear API key
 auth:
@@ -399,10 +401,11 @@ auth:
   mcp_server_url: https://mcp.linear.app/mcp
   token: lin_api_your_linear_key
 YAML
-```
+````
 
-```python Python
-credential = client.beta.vaults.credentials.create(
+  
+````python
+bearer_credential = client.beta.vaults.credentials.create(
     vault_id=vault.id,
     display_name="Linear API key",
     auth={
@@ -411,10 +414,11 @@ credential = client.beta.vaults.credentials.create(
         "token": "lin_api_your_linear_key",
     },
 )
-```
+````
 
-```typescript TypeScript
-const credential = await client.beta.vaults.credentials.create(vault.id, {
+  
+````typescript
+const bearerCredential = await client.beta.vaults.credentials.create(vault.id, {
   display_name: "Linear API key",
   auth: {
     type: "static_bearer",
@@ -422,10 +426,11 @@ const credential = await client.beta.vaults.credentials.create(vault.id, {
     token: "lin_api_your_linear_key"
   }
 });
-```
+````
 
-```csharp C#
-var credential = await client.Beta.Vaults.Credentials.Create(vault.ID, new()
+  
+````csharp
+var bearerCredential = await client.Beta.Vaults.Credentials.Create(vault.ID, new()
 {
     DisplayName = "Linear API key",
     Auth = new BetaManagedAgentsStaticBearerCreateParams
@@ -435,10 +440,11 @@ var credential = await client.Beta.Vaults.Credentials.Create(vault.ID, new()
         Token = "lin_api_your_linear_key",
     },
 });
-```
+````
 
-```go Go
-credential, err := client.Beta.Vaults.Credentials.New(ctx, vault.ID, anthropic.BetaVaultCredentialNewParams{
+  
+````go
+bearerCredential, err := client.Beta.Vaults.Credentials.New(ctx, vault.ID, anthropic.BetaVaultCredentialNewParams{
 	DisplayName: anthropic.String("Linear API key"),
 	Auth: anthropic.BetaVaultCredentialNewParamsAuthUnion{
 		OfStaticBearer: &anthropic.BetaManagedAgentsStaticBearerCreateParams{
@@ -451,10 +457,12 @@ credential, err := client.Beta.Vaults.Credentials.New(ctx, vault.ID, anthropic.B
 if err != nil {
 	panic(err)
 }
-```
+_ = bearerCredential
+````
 
-```java Java
-var credential = client.beta().vaults().credentials().create(vault.id(),
+  
+````java
+var bearerCredential = client.beta().vaults().credentials().create(vault.id(),
     CredentialCreateParams.builder()
         .displayName("Linear API key")
         .auth(BetaManagedAgentsStaticBearerCreateParams.builder()
@@ -463,22 +471,24 @@ var credential = client.beta().vaults().credentials().create(vault.id(),
             .token("lin_api_your_linear_key")
             .build())
         .build());
-```
+````
 
-```php PHP
-$credential = $client->beta->vaults->credentials->create(
+  
+````php
+$bearerCredential = $client->beta->vaults->credentials->create(
     vaultID: $vault->id,
-    displayName: 'Notion token',
+    displayName: 'Linear API key',
     auth: [
         'type' => 'static_bearer',
         'mcp_server_url' => 'https://mcp.linear.app/mcp',
         'token' => 'lin_api_your_linear_key',
     ],
 );
-```
+````
 
-```ruby Ruby
-credential = client.beta.vaults.credentials.create(
+  
+````ruby
+bearer_credential = client.beta.vaults.credentials.create(
   vault.id,
   display_name: "Linear API key",
   auth: {
@@ -487,7 +497,8 @@ credential = client.beta.vaults.credentials.create(
     token: "lin_api_your_linear_key"
   }
 )
-```
+````
+
 </CodeGroup>
 
   </Tab>
@@ -504,155 +515,6 @@ Constraints:
 - **One active credential per `mcp_server_url` per vault.** Creating a second credential for the same URL returns a 409.
 - **`mcp_server_url` is immutable.** To point at a different server, archive this credential and create a new one.
 - **Maximum 20 credentials per vault.** This matches the maximum amount of MCP servers per agent.
-
-## Rotate a credential
-
-Only the secret payload and a handful of metadata fields are mutable. `mcp_server_url`, `token_endpoint`, and `client_id` are locked after creation.
-
-<CodeGroup defaultLanguage="CLI">
-  
-````bash
-curl --fail-with-body -sS \
-  "https://api.anthropic.com/v1/vaults/$vault_id/credentials/$credential_id" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  --data @- <<'EOF' > /dev/null
-{
-  "auth": {
-    "type": "mcp_oauth",
-    "access_token": "xoxp-new-...",
-    "expires_at": "2026-05-15T00:00:00Z",
-    "refresh": {"refresh_token": "xoxe-1-new-..."}
-  }
-}
-EOF
-````
-
-  
-````bash
-ant beta:vaults:credentials update \
-  --vault-id "$VAULT_ID" \
-  --credential-id "$CREDENTIAL_ID" <<'EOF'
-auth:
-  type: mcp_oauth
-  access_token: xoxp-new-...
-  expires_at: "2026-05-15T00:00:00Z"
-  refresh:
-    refresh_token: xoxe-1-new-...
-EOF
-````
-
-  
-````python
-client.beta.vaults.credentials.update(
-    credential.id,
-    vault_id=vault.id,
-    auth={
-        "type": "mcp_oauth",
-        "access_token": "xoxp-new-...",
-        "expires_at": "2026-05-15T00:00:00Z",
-        "refresh": {"refresh_token": "xoxe-1-new-..."},
-    },
-)
-````
-
-  
-````typescript
-await client.beta.vaults.credentials.update(credential.id, {
-  vault_id: vault.id,
-  auth: {
-    type: "mcp_oauth",
-    access_token: "xoxp-new-...",
-    expires_at: "2026-05-15T00:00:00Z",
-    refresh: {
-      refresh_token: "xoxe-1-new-...",
-    },
-  },
-});
-````
-
-  
-````csharp
-await client.Beta.Vaults.Credentials.Update(credential.ID, new()
-{
-    VaultID = vault.ID,
-    Auth = new BetaManagedAgentsMcpOAuthUpdateParams
-    {
-        Type = "mcp_oauth",
-        AccessToken = "xoxp-new-...",
-        ExpiresAt = DateTimeOffset.Parse("2026-05-15T00:00:00Z"),
-        Refresh = new() { RefreshToken = "xoxe-1-new-..." },
-    },
-});
-````
-
-  
-````go
-_, err = client.Beta.Vaults.Credentials.Update(ctx, credential.ID, anthropic.BetaVaultCredentialUpdateParams{
-	VaultID: vault.ID,
-	Auth: anthropic.BetaVaultCredentialUpdateParamsAuthUnion{
-		OfMCPOAuth: &anthropic.BetaManagedAgentsMCPOAuthUpdateParams{
-			Type:        anthropic.BetaManagedAgentsMCPOAuthUpdateParamsTypeMCPOAuth,
-			AccessToken: anthropic.String("xoxp-new-..."),
-			ExpiresAt:   anthropic.Time(time.Date(2026, time.May, 15, 0, 0, 0, 0, time.UTC)),
-			Refresh: anthropic.BetaManagedAgentsMCPOAuthRefreshUpdateParams{
-				RefreshToken: anthropic.String("xoxe-1-new-..."),
-			},
-		},
-	},
-})
-if err != nil {
-	panic(err)
-}
-````
-
-  
-````java
-client.beta().vaults().credentials().update(credential.id(),
-    CredentialUpdateParams.builder()
-        .vaultId(vault.id())
-        .auth(BetaManagedAgentsMcpOAuthUpdateParams.builder()
-            .type(BetaManagedAgentsMcpOAuthUpdateParams.Type.MCP_OAUTH)
-            .accessToken("xoxp-new-...")
-            .expiresAt(OffsetDateTime.parse("2026-05-15T00:00:00Z"))
-            .refresh(BetaManagedAgentsMcpOAuthRefreshUpdateParams.builder()
-                .refreshToken("xoxe-1-new-...")
-                .build())
-            .build())
-        .build());
-````
-
-  
-````php
-$client->beta->vaults->credentials->update(
-    $credential->id,
-    vaultID: $vault->id,
-    auth: [
-        'type' => 'mcp_oauth',
-        'access_token' => 'xoxp-new-...',
-        'expires_at' => '2026-05-15T00:00:00Z',
-        'refresh' => ['refresh_token' => 'xoxe-1-new-...'],
-    ],
-);
-````
-
-  
-````ruby
-client.beta.vaults.credentials.update(
-  credential.id,
-  vault_id: vault.id,
-  auth: {
-    type: "mcp_oauth",
-    access_token: "xoxp-new-...",
-    expires_at: "2026-05-15T00:00:00Z",
-    refresh: {refresh_token: "xoxe-1-new-..."}
-  }
-)
-````
-
-</CodeGroup>
 
 ## Reference the vault at session creation
 
@@ -766,10 +628,219 @@ session = client.beta.sessions.create(
 </CodeGroup>
 
 Runtime behavior:
+- When a vault has no credential for the MCP server, the connection is attempted unauthenticated and produces an error if the server requires authentication.
+- When multiple vaults cover the MCP server, the first vault with a match wins.
 
-- Credentials are re-resolved periodically during the session, so a rotation or archive propagates to running sessions without a restart.
-- When a vault has no credential for the MCP server, the connection is attempted unauthenticated and produces an error.
-- When multiple vaults cover the the MCP server, the first vault with a match wins.
+## Credential refresh
+
+Credentials are re-resolved periodically, both during a session and during the vault lifecycle. This ensures that credential rotation, archival, or deletion propagates to running sessions without a restart.
+
+To be notified if a credential is archived, deleted, or fails to refresh you can subscribe to the vault and credential [webhooks](/docs/en/managed-agents/webhooks) associated with those lifecycle changes.
+
+| Event | Trigger |
+| ----- | ------- |
+| `vault.archived` | Vault archived. A `vault_credential.archived` event is also emitted for each underlying credential. |
+| `vault.deleted` | Vault deleted. A `vault_credential.deleted` event is also emitted for each underlying credential. |
+| `vault_credential.archived` | Credential archived, either directly or as a result of vault archival. |
+| `vault_credential.deleted` | Credential deleted, either directly or as a result of vault deletion. |
+| `vault_credential.refresh_failed` | A `mcp_oauth` credential cannot be refreshed (invalid refresh token, or irrecoverable error from the OAuth server). |
+
+<Note>
+This is a non-exhaustive list of webhooks; visit the [webhooks documentation](/docs/en/managed-agents/webhooks) for a complete list.
+</Note>
+
+### Diagnose an OAuth refresh failure
+
+To diagnose why a refresh failed, use the `/mcp_oauth_validate` endpoint. This enables you to determine how to handle the failure, which is distinct by error type.
+
+The top-level `status` tells you what to do next:
+
+- `valid`: the token works; no action needed.
+- `invalid`: the grant is gone or the OAuth server rejected the refresh with a 4xx. Prompt the end user to re-authorize.
+- `unknown`: a transient error (5xx, 429, or network failure). Wait and retry.
+
+````bash
+curl --fail-with-body -sS -X POST \
+  "https://api.anthropic.com/v1/vaults/$vault_id/credentials/$credential_id/mcp_oauth_validate?beta=true" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01"
+````
+
+The response is a `vault_credential_validation` object. `mcp_probe` includes the failed MCP handshake step; `refresh` includes the outcome of the attempted refresh.
+
+```json
+{
+  "type": "vault_credential_validation",
+  "credential_id": "vcrd_01ABC...",
+  "vault_id": "vlt_01XYZ...",
+  "validated_at": "2026-04-29T17:12:00Z",
+  "has_refresh_token": false,
+  "status": "invalid",
+  "mcp_probe": {
+    "method": "initialize",
+    "http_response": {
+      "status_code": 401,
+      "content_type": "application/json",
+      "body": "{\"error\":\"invalid_token\"}",
+      "body_truncated": false
+    }
+  },
+  "refresh": {
+    "status": "no_refresh_token",
+    "http_response": null
+  }
+}
+```
+
+## Rotate a credential
+
+Only the secret payload and a handful of metadata fields are mutable. `mcp_server_url`, `token_endpoint`, and `client_id` are locked after creation.
+
+<CodeGroup defaultLanguage="CLI">
+  
+````bash
+curl --fail-with-body -sS \
+  "https://api.anthropic.com/v1/vaults/$vault_id/credentials/$credential_id" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  --data @- <<'EOF' > /dev/null
+{
+  "auth": {
+    "type": "mcp_oauth",
+    "access_token": "xoxp-new-...",
+    "expires_at": "2099-12-31T23:59:59Z",
+    "refresh": {"refresh_token": "xoxe-1-new-..."}
+  }
+}
+EOF
+````
+
+  
+````bash
+ant beta:vaults:credentials update \
+  --vault-id "$VAULT_ID" \
+  --credential-id "$CREDENTIAL_ID" <<'EOF'
+auth:
+  type: mcp_oauth
+  access_token: xoxp-new-...
+  expires_at: "2099-12-31T23:59:59Z"
+  refresh:
+    refresh_token: xoxe-1-new-...
+EOF
+````
+
+  
+````python
+client.beta.vaults.credentials.update(
+    credential.id,
+    vault_id=vault.id,
+    auth={
+        "type": "mcp_oauth",
+        "access_token": "xoxp-new-...",
+        "expires_at": "2099-12-31T23:59:59Z",
+        "refresh": {"refresh_token": "xoxe-1-new-..."},
+    },
+)
+````
+
+  
+````typescript
+await client.beta.vaults.credentials.update(credential.id, {
+  vault_id: vault.id,
+  auth: {
+    type: "mcp_oauth",
+    access_token: "xoxp-new-...",
+    expires_at: "2099-12-31T23:59:59Z",
+    refresh: {
+      refresh_token: "xoxe-1-new-...",
+    },
+  },
+});
+````
+
+  
+````csharp
+await client.Beta.Vaults.Credentials.Update(credential.ID, new()
+{
+    VaultID = vault.ID,
+    Auth = new BetaManagedAgentsMcpOAuthUpdateParams
+    {
+        Type = "mcp_oauth",
+        AccessToken = "xoxp-new-...",
+        ExpiresAt = DateTimeOffset.Parse("2099-12-31T23:59:59Z"),
+        Refresh = new() { RefreshToken = "xoxe-1-new-..." },
+    },
+});
+````
+
+  
+````go
+_, err = client.Beta.Vaults.Credentials.Update(ctx, credential.ID, anthropic.BetaVaultCredentialUpdateParams{
+	VaultID: vault.ID,
+	Auth: anthropic.BetaVaultCredentialUpdateParamsAuthUnion{
+		OfMCPOAuth: &anthropic.BetaManagedAgentsMCPOAuthUpdateParams{
+			Type:        anthropic.BetaManagedAgentsMCPOAuthUpdateParamsTypeMCPOAuth,
+			AccessToken: anthropic.String("xoxp-new-..."),
+			ExpiresAt:   anthropic.Time(time.Date(2099, time.December, 31, 23, 59, 59, 0, time.UTC)),
+			Refresh: anthropic.BetaManagedAgentsMCPOAuthRefreshUpdateParams{
+				RefreshToken: anthropic.String("xoxe-1-new-..."),
+			},
+		},
+	},
+})
+if err != nil {
+	panic(err)
+}
+````
+
+  
+````java
+client.beta().vaults().credentials().update(credential.id(),
+    CredentialUpdateParams.builder()
+        .vaultId(vault.id())
+        .auth(BetaManagedAgentsMcpOAuthUpdateParams.builder()
+            .type(BetaManagedAgentsMcpOAuthUpdateParams.Type.MCP_OAUTH)
+            .accessToken("xoxp-new-...")
+            .expiresAt(OffsetDateTime.parse("2099-12-31T23:59:59Z"))
+            .refresh(BetaManagedAgentsMcpOAuthRefreshUpdateParams.builder()
+                .refreshToken("xoxe-1-new-...")
+                .build())
+            .build())
+        .build());
+````
+
+  
+````php
+$client->beta->vaults->credentials->update(
+    $credential->id,
+    vaultID: $vault->id,
+    auth: [
+        'type' => 'mcp_oauth',
+        'access_token' => 'xoxp-new-...',
+        'expires_at' => '2099-12-31T23:59:59Z',
+        'refresh' => ['refresh_token' => 'xoxe-1-new-...'],
+    ],
+);
+````
+
+  
+````ruby
+client.beta.vaults.credentials.update(
+  credential.id,
+  vault_id: vault.id,
+  auth: {
+    type: "mcp_oauth",
+    access_token: "xoxp-new-...",
+    expires_at: "2099-12-31T23:59:59Z",
+    refresh: {refresh_token: "xoxe-1-new-..."}
+  }
+)
+````
+
+</CodeGroup>
 
 ## Other operations
 

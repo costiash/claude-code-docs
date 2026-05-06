@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-06T12:57:13Z",
-  "indexed_files": 1230,
+  "generated_at": "2026-05-06T16:02:00Z",
+  "indexed_files": 1220,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -152,11 +152,11 @@
         "mode",
         "prompt",
         "see",
+        "only",
         "code",
+        "file",
         "interactive",
         "default",
-        "only",
-        "file",
         "print",
         "flag",
         "system",
@@ -168,7 +168,7 @@
         "mcp",
         "when"
       ],
-      "word_count": 2480,
+      "word_count": 2532,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -420,7 +420,7 @@
         "response",
         "json"
       ],
-      "word_count": 1924,
+      "word_count": 1925,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -497,14 +497,14 @@
         "cursor",
         "prompt",
         "conversation",
+        "search",
         "session",
         "text",
-        "search",
         "word",
         "normal",
         "previous"
       ],
-      "word_count": 3149,
+      "word_count": 3158,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -572,23 +572,23 @@
         "api",
         "litellm",
         "gateway",
-        "through",
         "model",
+        "through",
         "request",
         "endpoint",
+        "key",
         "format",
         "anthropic",
         "headers",
         "configuration",
         "using",
         "pass",
-        "key",
         "must",
         "when",
-        "documentation",
-        "llm"
+        "set",
+        "documentation"
       ],
-      "word_count": 944,
+      "word_count": 976,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
@@ -700,7 +700,7 @@
         "version",
         "variables"
       ],
-      "word_count": 3638,
+      "word_count": 3645,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -713,8 +713,8 @@
         "event",
         "events",
         "code",
-        "claude",
         "request",
+        "claude",
         "name",
         "metrics",
         "api",
@@ -728,7 +728,7 @@
         "example",
         "error"
       ],
-      "word_count": 7480,
+      "word_count": 7491,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -868,7 +868,7 @@
         "servers",
         "commands"
       ],
-      "word_count": 6174,
+      "word_count": 6235,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -882,21 +882,21 @@
         "create",
         "skill",
         "see",
+        "code",
         "hooks",
         "when",
         "directory",
         "step",
-        "code",
         "root",
         "add",
+        "test",
         "agents",
         "marketplace",
-        "test",
         "lsp",
         "file",
         "servers"
       ],
-      "word_count": 2443,
+      "word_count": 2529,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -1008,7 +1008,7 @@
         "user",
         "example"
       ],
-      "word_count": 8238,
+      "word_count": 8346,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1026,17 +1026,17 @@
         "wsl",
         "tabs",
         "run",
-        "installation",
         "version",
         "see",
         "package",
+        "installation",
         "updates",
         "native",
         "git",
         "step",
         "channel"
       ],
-      "word_count": 2855,
+      "word_count": 2969,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -1046,25 +1046,25 @@
         "skill",
         "claude",
         "skills",
+        "name",
         "when",
         "commands",
-        "name",
         "create",
         "subagent",
+        "description",
         "bundled",
         "arguments",
         "theme",
         "null",
-        "description",
         "tools",
         "yaml",
+        "one",
         "content",
         "reference",
         "built",
-        "directory",
-        "agent"
+        "directory"
       ],
-      "word_count": 5371,
+      "word_count": 5573,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -3139,18 +3139,18 @@
         "when",
         "input",
         "document",
-        "session",
         "image",
         "control",
-        "type",
         "agent",
         "breakpoint",
         "event",
         "cited",
+        "session",
         "create",
-        "user"
+        "user",
+        "type"
       ],
-      "word_count": 266114,
+      "word_count": 262817,
       "file_path": "docs/docs__en__api__beta.md"
     },
     "/docs/en/api/beta/agents": {
@@ -6092,34 +6092,6 @@
       "word_count": 242,
       "file_path": "docs/docs__en__api__beta__vaults__update.md"
     },
-    "/docs/en/api/beta/webhooks": {
-      "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Unwrap  **** ``  ## Domain Types  ### Beta Webhook Event  - `BetaWebhookEvent = object { id, created_at, data, type }`    - `id: string`      Unique event identifier for idempotency.   ...",
-      "keywords": [
-        "workspace",
-        "session",
-        "object",
-        "type",
-        "stringtype",
-        "organization",
-        "stringorganization",
-        "vault",
-        "created",
-        "status",
-        "credential",
-        "idled",
-        "archived",
-        "deleted",
-        "thread",
-        "terminated",
-        "more",
-        "stringworkspace",
-        "pending",
-        "running"
-      ],
-      "word_count": 3297,
-      "file_path": "docs/docs__en__api__beta__webhooks.md"
-    },
     "/docs/en/api/cli/beta": {
       "title": "Beta",
       "content_preview": "# Beta  ## Domain Types  ### Beta API Error  - `beta_api_error: object { message, type }`    - `message: string`    - `type: \"api_error\"`  ### Beta Authentication Error  - `beta_authentication_error: ...",
@@ -6130,22 +6102,22 @@
         "content",
         "text",
         "tokens",
-        "event",
         "document",
         "image",
         "when",
         "input",
         "cache",
         "session",
+        "event",
         "agent",
         "type",
         "user",
         "beta",
         "rfc",
-        "timestamp",
-        "format"
+        "format",
+        "timestamp"
       ],
-      "word_count": 207449,
+      "word_count": 204413,
       "file_path": "docs/docs__en__api__cli__beta.md"
     },
     "/docs/en/api/cli/beta/agents": {
@@ -9092,34 +9064,6 @@
       "word_count": 174,
       "file_path": "docs/docs__en__api__cli__beta__vaults__update.md"
     },
-    "/docs/en/api/cli/beta/webhooks": {
-      "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `beta_webhook_event: object { id, created_at, data, type }`    - `id: string`      Unique event identifier for idempotency.    - `created_at: str...",
-      "keywords": [
-        "event",
-        "resource",
-        "triggered",
-        "webhook",
-        "beta",
-        "vault",
-        "data",
-        "credential",
-        "owns",
-        "session",
-        "created",
-        "status",
-        "archived",
-        "deleted",
-        "idled",
-        "thread",
-        "unique",
-        "identifier",
-        "idempotency",
-        "rfc"
-      ],
-      "word_count": 3036,
-      "file_path": "docs/docs__en__api__cli__beta__webhooks.md"
-    },
     "/docs/en/api/cli/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `$ ant completions create`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https...",
@@ -9609,19 +9553,19 @@
         "tokens",
         "when",
         "input",
-        "event",
         "document",
         "image",
         "control",
         "breakpoint",
         "session",
         "agent",
+        "event",
         "cited",
         "create",
         "user",
         "type"
       ],
-      "word_count": 232919,
+      "word_count": 230075,
       "file_path": "docs/docs__en__api__csharp__beta.md"
     },
     "/docs/en/api/csharp/beta/agents": {
@@ -12567,34 +12511,6 @@
       "word_count": 230,
       "file_path": "docs/docs__en__api__csharp__beta__vaults__update.md"
     },
-    "/docs/en/api/csharp/beta/webhooks": {
-      "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `class BetaWebhookEvent:`    - `required string ID`      Unique event identifier for idempotency.    - `required DateTimeOffset CreatedAt`      R...",
-      "keywords": [
-        "event",
-        "resource",
-        "triggered",
-        "webhook",
-        "beta",
-        "vault",
-        "data",
-        "credential",
-        "owns",
-        "session",
-        "created",
-        "status",
-        "archived",
-        "deleted",
-        "idled",
-        "thread",
-        "unique",
-        "identifier",
-        "idempotency",
-        "rfc"
-      ],
-      "word_count": 2844,
-      "file_path": "docs/docs__en__api__csharp__beta__webhooks.md"
-    },
     "/docs/en/api/csharp/messages": {
       "title": "Messages",
       "content_preview": "# Messages  ## Create  `Message Messages.Create(MessageCreateParamsparameters, CancellationTokencancellationToken = default)`  **post** `/v1/messages`  Send a structured list of input messages with te...",
@@ -12984,7 +12900,7 @@
         "codeexecution",
         "betacachecontrolephemeralttlttl"
       ],
-      "word_count": 273645,
+      "word_count": 270518,
       "file_path": "docs/docs__en__api__go__beta.md"
     },
     "/docs/en/api/go/beta/agents": {
@@ -15926,44 +15842,6 @@
       "word_count": 345,
       "file_path": "docs/docs__en__api__go__beta__vaults__update.md"
     },
-    "/docs/en/api/go/beta/webhooks": {
-      "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Unwrap  `client.Beta.Webhooks.Unwrap(ctx) error`  **** ``  ### Example  ```go package main  import (   \"context\"    \"github.com/anthropics/anthropic-sdk-go\"   \"github.com/anthropics/ant...",
-      "keywords": [
-        "stringtype",
-        "struct",
-        "stringorganizationid",
-        "workspaceid",
-        "session",
-        "vault",
-        "created",
-        "status",
-        "credential",
-        "vaultid",
-        "stringworkspaceid",
-        "idled",
-        "archived",
-        "deleted",
-        "thread",
-        "terminated",
-        "betawebhooksessioncreatedeventdata",
-        "sessioncreatedconst",
-        "sessioncreatedsessioncreated",
-        "sessioncreated"
-      ],
-      "word_count": 3127,
-      "file_path": "docs/docs__en__api__go__beta__webhooks.md"
-    },
-    "/docs/en/api/go/beta/webhooks/unwrap": {
-      "title": "Untitled",
-      "content_preview": "## Unwrap  `client.Beta.Webhooks.Unwrap(ctx) error`  **** ``  ### Example  ```go package main  import (   \"context\"    \"github.com/anthropics/anthropic-sdk-go\"   \"github.com/anthropics/anthropic-sdk-g...",
-      "keywords": [
-        "unwrap",
-        "example"
-      ],
-      "word_count": 37,
-      "file_path": "docs/docs__en__api__go__beta__webhooks__unwrap.md"
-    },
     "/docs/en/api/go/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `client.Completions.New(ctx, params) (*Completion, error)`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommen...",
@@ -16397,19 +16275,19 @@
         "tokens",
         "when",
         "input",
-        "event",
         "document",
         "image",
         "control",
         "breakpoint",
-        "session",
+        "event",
         "agent",
         "cited",
+        "session",
         "create",
         "user",
         "type"
       ],
-      "word_count": 226644,
+      "word_count": 223906,
       "file_path": "docs/docs__en__api__java__beta.md"
     },
     "/docs/en/api/java/beta/agents": {
@@ -19343,34 +19221,6 @@
       "word_count": 230,
       "file_path": "docs/docs__en__api__java__beta__vaults__update.md"
     },
-    "/docs/en/api/java/beta/webhooks": {
-      "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `class BetaWebhookEvent:`    - `String id`      Unique event identifier for idempotency.    - `LocalDateTime createdAt`      RFC 3339 timestamp w...",
-      "keywords": [
-        "event",
-        "resource",
-        "triggered",
-        "webhook",
-        "beta",
-        "vault",
-        "data",
-        "credential",
-        "owns",
-        "session",
-        "created",
-        "status",
-        "archived",
-        "deleted",
-        "idled",
-        "thread",
-        "unique",
-        "identifier",
-        "idempotency",
-        "rfc"
-      ],
-      "word_count": 2738,
-      "file_path": "docs/docs__en__api__java__beta__webhooks.md"
-    },
     "/docs/en/api/java/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `Completion completions().create(CompletionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`  **post** `/v1/complete`  [Legacy] Create a Text Complet...",
@@ -20169,18 +20019,18 @@
         "when",
         "intelligence",
         "input",
-        "session",
         "document",
-        "agents",
         "image",
+        "agents",
         "control",
         "agent",
         "breakpoint",
         "event",
+        "session",
         "cited",
         "create"
       ],
-      "word_count": 244390,
+      "word_count": 241632,
       "file_path": "docs/docs__en__api__python__beta.md"
     },
     "/docs/en/api/python/beta/agents": {
@@ -23115,44 +22965,6 @@
       "word_count": 227,
       "file_path": "docs/docs__en__api__python__beta__vaults__update.md"
     },
-    "/docs/en/api/python/beta/webhooks": {
-      "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Unwrap  `beta.webhooks.unwrap()`  **** ``  ### Example  ```python import os from anthropic import Anthropic  client = Anthropic(     api_key=os.environ.get(\"ANTHROPIC_API_KEY\"),  # This...",
-      "keywords": [
-        "session",
-        "strtype",
-        "literal",
-        "strorganization",
-        "strclass",
-        "workspace",
-        "vault",
-        "created",
-        "status",
-        "credential",
-        "idled",
-        "archived",
-        "deleted",
-        "thread",
-        "terminated",
-        "strworkspace",
-        "pending",
-        "running",
-        "requires",
-        "action"
-      ],
-      "word_count": 2758,
-      "file_path": "docs/docs__en__api__python__beta__webhooks.md"
-    },
-    "/docs/en/api/python/beta/webhooks/unwrap": {
-      "title": "Untitled",
-      "content_preview": "## Unwrap  `beta.webhooks.unwrap()`  **** ``  ### Example  ```python import os from anthropic import Anthropic  client = Anthropic(     api_key=os.environ.get(\"ANTHROPIC_API_KEY\"),  # This is the default and can be omitted ) client.beta.webhooks.unwrap() ```",
-      "keywords": [
-        "unwrap",
-        "example"
-      ],
-      "word_count": 30,
-      "file_path": "docs/docs__en__api__python__beta__webhooks__unwrap.md"
-    },
     "/docs/en/api/python/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `completions.create(CompletionCreateParams**kwargs)  -> Completion`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/messages) going forward.  Future",
@@ -23586,19 +23398,19 @@
         "text",
         "when",
         "input",
-        "session",
         "document",
         "image",
         "control",
         "agent",
         "breakpoint",
         "event",
+        "session",
         "cited",
         "create",
         "user",
         "type"
       ],
-      "word_count": 234397,
+      "word_count": 231729,
       "file_path": "docs/docs__en__api__ruby__beta.md"
     },
     "/docs/en/api/ruby/beta/agents": {
@@ -26533,44 +26345,6 @@
       "word_count": 213,
       "file_path": "docs/docs__en__api__ruby__beta__vaults__update.md"
     },
-    "/docs/en/api/ruby/beta/webhooks": {
-      "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Unwrap  `beta.webhooks.unwrap() -> void`  **** ``  ### Example  ```ruby require \"anthropic\"  anthropic = Anthropic::Client.new(api_key: \"my-anthropic-api-key\")  result = anthropic.beta....",
-      "keywords": [
-        "session",
-        "stringtype",
-        "stringorganization",
-        "stringclass",
-        "workspace",
-        "vault",
-        "created",
-        "status",
-        "credential",
-        "idled",
-        "archived",
-        "deleted",
-        "thread",
-        "terminated",
-        "stringworkspace",
-        "pending",
-        "running",
-        "requires",
-        "action",
-        "scheduled"
-      ],
-      "word_count": 2668,
-      "file_path": "docs/docs__en__api__ruby__beta__webhooks.md"
-    },
-    "/docs/en/api/ruby/beta/webhooks/unwrap": {
-      "title": "Untitled",
-      "content_preview": "## Unwrap  `beta.webhooks.unwrap() -> void`  **** ``  ### Example  ```ruby require \"anthropic\"  anthropic = Anthropic::Client.new(api_key: \"my-anthropic-api-key\")  result = anthropic.beta.webhooks.unwrap  puts(result) ```",
-      "keywords": [
-        "unwrap",
-        "example"
-      ],
-      "word_count": 21,
-      "file_path": "docs/docs__en__api__ruby__beta__webhooks__unwrap.md"
-    },
     "/docs/en/api/ruby/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `completions.create(**kwargs) -> Completion`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [M...",
@@ -27004,19 +26778,19 @@
         "text",
         "when",
         "input",
-        "session",
         "document",
         "image",
         "control",
         "breakpoint",
         "agent",
+        "session",
         "event",
         "cited",
         "create",
-        "type",
-        "user"
+        "user",
+        "type"
       ],
-      "word_count": 237729,
+      "word_count": 235139,
       "file_path": "docs/docs__en__api__typescript__beta.md"
     },
     "/docs/en/api/typescript/beta/agents": {
@@ -29958,44 +29732,6 @@
       "word_count": 248,
       "file_path": "docs/docs__en__api__typescript__beta__vaults__update.md"
     },
-    "/docs/en/api/typescript/beta/webhooks": {
-      "title": "Webhooks",
-      "content_preview": "# Webhooks  ## Unwrap  `client.beta.webhooks.unwrap(RequestOptionsoptions?): void`  **** ``  ### Example  ```typescript import Anthropic from '@anthropic-ai/sdk';  const client = new Anthropic({   api...",
-      "keywords": [
-        "session",
-        "stringtype",
-        "stringorganization",
-        "workspace",
-        "vault",
-        "created",
-        "status",
-        "credential",
-        "idled",
-        "archived",
-        "deleted",
-        "thread",
-        "terminated",
-        "stringworkspace",
-        "pending",
-        "running",
-        "requires",
-        "action",
-        "scheduled",
-        "run"
-      ],
-      "word_count": 2590,
-      "file_path": "docs/docs__en__api__typescript__beta__webhooks.md"
-    },
-    "/docs/en/api/typescript/beta/webhooks/unwrap": {
-      "title": "Untitled",
-      "content_preview": "## Unwrap  `client.beta.webhooks.unwrap(RequestOptionsoptions?): void`  **** ``  ### Example  ```typescript import Anthropic from '@anthropic-ai/sdk';  const client = new Anthropic({   apiKey: process...",
-      "keywords": [
-        "unwrap",
-        "example"
-      ],
-      "word_count": 33,
-      "file_path": "docs/docs__en__api__typescript__beta__webhooks__unwrap.md"
-    },
     "/docs/en/api/typescript/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `client.completions.create(CompletionCreateParamsparams, RequestOptionsoptions?): Completion | Stream<Completion>`  **post** `/v1/complete`  [Legacy] Create a Text Completion...",
@@ -31818,31 +31554,59 @@
     },
     "/docs/en/managed-agents/define-outcomes": {
       "title": "Define outcomes",
-      "content_preview": "# Define outcomes  Tell the agent what 'done' looks like, and let it iterate until it gets there.  ---  <Tip> Outcomes is a Research Preview feature. [Request access](https://claude.com/form/claude-ma...",
+      "content_preview": "# Define outcomes  Tell the agent what 'done' looks like, and let it iterate until it gets there.  ---  The `outcome` elevates a session from *conversation* to *work*. You define what the end result should look like and how to measure quality. The agent works toward that target, self-evaluating and",
       "keywords": [
         "outcome",
-        "session",
         "rubric",
+        "session",
         "agent",
         "grader",
-        "codegroup",
-        "event",
         "evaluation",
-        "work",
+        "event",
+        "define",
         "what",
+        "work",
         "iteration",
-        "after",
         "events",
         "emitted",
-        "define",
         "next",
         "note",
-        "send",
+        "codegroup",
         "new",
-        "one"
+        "after",
+        "one",
+        "until"
       ],
-      "word_count": 2175,
+      "word_count": 2462,
       "file_path": "docs/docs__en__managed-agents__define-outcomes.md"
+    },
+    "/docs/en/managed-agents/dreams": {
+      "title": "Dreams",
+      "content_preview": "# Dreams  Let Claude reflect on past sessions to curate an agent's memory and surface new insights.  ---  <Tip> Dreaming is a Research Preview feature. [Request access](https://claude.com/form/claude-...",
+      "keywords": [
+        "store",
+        "memory",
+        "dream",
+        "sessions",
+        "input",
+        "output",
+        "pipeline",
+        "claude",
+        "session",
+        "codegroup",
+        "archived",
+        "dreams",
+        "new",
+        "dreaming",
+        "past",
+        "insights",
+        "value",
+        "api",
+        "beta",
+        "once"
+      ],
+      "word_count": 2184,
+      "file_path": "docs/docs__en__managed-agents__dreams.md"
     },
     "/docs/en/managed-agents/environments": {
       "title": "Cloud environment setup",
@@ -31884,20 +31648,20 @@
         "tab",
         "codegroup",
         "send",
-        "execution",
         "title",
+        "execution",
+        "multiagent",
+        "includes",
         "token",
         "stream",
-        "back",
+        "user",
         "type",
         "content",
         "call",
-        "when",
-        "outcome",
-        "includes",
-        "user"
+        "result",
+        "back"
       ],
-      "word_count": 5196,
+      "word_count": 5303,
       "file_path": "docs/docs__en__managed-agents__events-and-streaming.md"
     },
     "/docs/en/managed-agents/files": {
@@ -32014,30 +31778,30 @@
     },
     "/docs/en/managed-agents/multi-agent": {
       "title": "Multiagent sessions",
-      "content_preview": "# Multiagent sessions  Coordinate multiple agents within a single session.  ---  <Tip> Multiagent is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try ...",
+      "content_preview": "# Multiagent sessions  Coordinate multiple agents within a single session.  ---  Multi-agent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel wi...",
       "keywords": [
         "agent",
         "thread",
         "session",
+        "coordinator",
         "codegroup",
         "agents",
         "threads",
-        "event",
-        "stream",
-        "coordinator",
-        "when",
-        "multiagent",
-        "own",
-        "tools",
-        "tool",
-        "work",
-        "same",
         "activity",
-        "level",
-        "research",
-        "one"
+        "events",
+        "tool",
+        "primary",
+        "tab",
+        "multiagent",
+        "multiple",
+        "work",
+        "stream",
+        "own",
+        "note",
+        "event",
+        "when"
       ],
-      "word_count": 2394,
+      "word_count": 3032,
       "file_path": "docs/docs__en__managed-agents__multi-agent.md"
     },
     "/docs/en/managed-agents/onboarding": {
@@ -32242,27 +32006,55 @@
       "keywords": [
         "vault",
         "credential",
-        "credentials",
-        "session",
-        "per",
-        "secret",
-        "codegroup",
-        "mcp",
-        "vaults",
         "server",
-        "archive",
+        "credentials",
+        "refresh",
+        "vaults",
         "user",
+        "codegroup",
+        "token",
         "when",
         "sessions",
-        "agent",
-        "api",
-        "warning",
-        "token",
+        "session",
+        "secret",
+        "note",
+        "mcp",
+        "error",
+        "archived",
         "them",
-        "access"
+        "end",
+        "agent"
       ],
-      "word_count": 1913,
+      "word_count": 2224,
       "file_path": "docs/docs__en__managed-agents__vaults.md"
+    },
+    "/docs/en/managed-agents/webhooks": {
+      "title": "Subscribe to webhooks",
+      "content_preview": "# Subscribe to webhooks  Get notified when major events happen without polling.  ---  Sessions are long-running interactions. While most real-time interactions happen through the [SSE event stream](/d...",
+      "keywords": [
+        "event",
+        "endpoint",
+        "events",
+        "vault",
+        "credential",
+        "delivery",
+        "webhook",
+        "every",
+        "tab",
+        "session",
+        "agent",
+        "codegroup",
+        "webhooks",
+        "when",
+        "object",
+        "directly",
+        "retries",
+        "error",
+        "multiagent",
+        "archived"
+      ],
+      "word_count": 1371,
+      "file_path": "docs/docs__en__managed-agents__webhooks.md"
     },
     "/docs/en/resources/prompt-library/adaptive-editor": {
       "title": "Adaptive editor",
