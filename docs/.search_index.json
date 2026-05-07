@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-07T12:57:59Z",
+  "generated_at": "2026-05-07T16:02:46Z",
   "indexed_files": 1228,
   "index": {
     "/changelog": {
@@ -632,8 +632,8 @@
         "directory",
         "auto",
         "file",
-        "context",
         "specific",
+        "context",
         "when",
         "loaded",
         "session",
@@ -642,9 +642,9 @@
         "settings",
         "into",
         "managed",
-        "load"
+        "every"
       ],
-      "word_count": 3563,
+      "word_count": 3609,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
