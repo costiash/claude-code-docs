@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-07T07:20:23Z",
+  "generated_at": "2026-05-07T10:08:08Z",
   "indexed_files": 1228,
   "index": {
     "/changelog": {
@@ -125,8 +125,8 @@
         "cloud",
         "org",
         "sessions",
-        "environment",
         "github",
+        "environment",
         "www",
         "code",
         "access",
@@ -140,7 +140,7 @@
         "repo",
         "terminal"
       ],
-      "word_count": 6013,
+      "word_count": 6030,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -152,6 +152,7 @@
         "mode",
         "prompt",
         "see",
+        "settings",
         "only",
         "code",
         "file",
@@ -159,16 +160,15 @@
         "default",
         "print",
         "flag",
+        "available",
+        "model",
         "system",
         "flags",
         "start",
         "name",
-        "json",
-        "model",
-        "mcp",
-        "when"
+        "json"
       ],
-      "word_count": 2532,
+      "word_count": 2576,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -616,7 +616,7 @@
         "stdio",
         "example"
       ],
-      "word_count": 7563,
+      "word_count": 7593,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -1004,11 +1004,11 @@
         "project",
         "repo",
         "com",
+        "set",
         "configuration",
-        "user",
-        "example"
+        "user"
       ],
-      "word_count": 8354,
+      "word_count": 8451,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
