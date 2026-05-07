@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-07T16:02:46Z",
+  "generated_at": "2026-05-07T18:52:45Z",
   "indexed_files": 1228,
   "index": {
     "/changelog": {
@@ -378,21 +378,21 @@
         "const",
         "models",
         "vid",
-        "project",
         "set",
+        "project",
         "region",
+        "credentials",
+        "default",
         "google",
         "return",
         "variant",
+        "gcp",
         "environment",
-        "default",
         "when",
         "control",
-        "cloud",
-        "variables",
-        "div"
+        "cloud"
       ],
-      "word_count": 2158,
+      "word_count": 2344,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -616,7 +616,7 @@
         "stdio",
         "example"
       ],
-      "word_count": 7593,
+      "word_count": 7605,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -768,23 +768,23 @@
         "styles",
         "prompt",
         "system",
-        "code",
         "style",
+        "code",
         "instructions",
         "default",
         "software",
         "custom",
         "file",
         "engineering",
+        "set",
         "files",
         "when",
         "tasks",
         "frontmatter",
         "complete",
-        "modify",
-        "set"
+        "modify"
       ],
-      "word_count": 775,
+      "word_count": 825,
       "file_path": "docs/claude-code__output-styles.md"
     },
     "/claude-code/overview": {
@@ -1000,15 +1000,15 @@
         "corp",
         "tools",
         "see",
-        "github",
         "project",
+        "github",
         "repo",
         "com",
+        "user",
         "set",
-        "configuration",
-        "user"
+        "when"
       ],
-      "word_count": 8451,
+      "word_count": 8534,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
