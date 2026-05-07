@@ -30,7 +30,7 @@ Patterns that work well:
 
 ## Configure the coordinator
 
-When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent` to declare the list of agents the coordinator can delegate to:
+When [defining your agent](/docs/en/managed-agents/agent-setup), set `multiagent` to declare the roster of agents the coordinator can delegate to:
 
 <CodeGroup defaultLanguage="CLI">
   

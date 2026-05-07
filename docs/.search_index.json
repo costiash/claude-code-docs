@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-07T04:32:04Z",
-  "indexed_files": 1220,
+  "generated_at": "2026-05-07T07:20:23Z",
+  "indexed_files": 1228,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -3138,19 +3138,19 @@
         "text",
         "when",
         "input",
+        "event",
         "document",
         "image",
         "control",
         "agent",
         "breakpoint",
-        "event",
-        "cited",
         "session",
+        "cited",
         "create",
         "user",
         "type"
       ],
-      "word_count": 262817,
+      "word_count": 266110,
       "file_path": "docs/docs__en__api__beta.md"
     },
     "/docs/en/api/beta/agents": {
@@ -6092,6 +6092,34 @@
       "word_count": 242,
       "file_path": "docs/docs__en__api__beta__vaults__update.md"
     },
+    "/docs/en/api/beta/webhooks": {
+      "title": "Webhooks",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `BetaWebhookEvent = object { id, created_at, data, type }`    - `id: string`      Unique event identifier for idempotency.    - `created_at: stri...",
+      "keywords": [
+        "event",
+        "resource",
+        "triggered",
+        "webhook",
+        "beta",
+        "vault",
+        "data",
+        "credential",
+        "owns",
+        "session",
+        "created",
+        "status",
+        "archived",
+        "deleted",
+        "idled",
+        "thread",
+        "unique",
+        "identifier",
+        "idempotency",
+        "rfc"
+      ],
+      "word_count": 3293,
+      "file_path": "docs/docs__en__api__beta__webhooks.md"
+    },
     "/docs/en/api/cli/beta": {
       "title": "Beta",
       "content_preview": "# Beta  ## Domain Types  ### Beta API Error  - `beta_api_error: object { message, type }`    - `message: string`    - `type: \"api_error\"`  ### Beta Authentication Error  - `beta_authentication_error: ...",
@@ -6102,22 +6130,22 @@
         "content",
         "text",
         "tokens",
+        "event",
         "document",
         "image",
         "when",
         "input",
         "cache",
         "session",
-        "event",
         "agent",
         "type",
         "user",
         "beta",
         "rfc",
-        "format",
-        "timestamp"
+        "timestamp",
+        "format"
       ],
-      "word_count": 204413,
+      "word_count": 207449,
       "file_path": "docs/docs__en__api__cli__beta.md"
     },
     "/docs/en/api/cli/beta/agents": {
@@ -9064,6 +9092,34 @@
       "word_count": 174,
       "file_path": "docs/docs__en__api__cli__beta__vaults__update.md"
     },
+    "/docs/en/api/cli/beta/webhooks": {
+      "title": "Webhooks",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `beta_webhook_event: object { id, created_at, data, type }`    - `id: string`      Unique event identifier for idempotency.    - `created_at: str...",
+      "keywords": [
+        "event",
+        "resource",
+        "triggered",
+        "webhook",
+        "beta",
+        "vault",
+        "data",
+        "credential",
+        "owns",
+        "session",
+        "created",
+        "status",
+        "archived",
+        "deleted",
+        "idled",
+        "thread",
+        "unique",
+        "identifier",
+        "idempotency",
+        "rfc"
+      ],
+      "word_count": 3036,
+      "file_path": "docs/docs__en__api__cli__beta__webhooks.md"
+    },
     "/docs/en/api/cli/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `$ ant completions create`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https...",
@@ -9553,19 +9609,19 @@
         "tokens",
         "when",
         "input",
+        "event",
         "document",
         "image",
         "control",
         "breakpoint",
         "session",
         "agent",
-        "event",
         "cited",
         "create",
         "user",
         "type"
       ],
-      "word_count": 230075,
+      "word_count": 232919,
       "file_path": "docs/docs__en__api__csharp__beta.md"
     },
     "/docs/en/api/csharp/beta/agents": {
@@ -12511,6 +12567,34 @@
       "word_count": 230,
       "file_path": "docs/docs__en__api__csharp__beta__vaults__update.md"
     },
+    "/docs/en/api/csharp/beta/webhooks": {
+      "title": "Webhooks",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `class BetaWebhookEvent:`    - `required string ID`      Unique event identifier for idempotency.    - `required DateTimeOffset CreatedAt`      R...",
+      "keywords": [
+        "event",
+        "resource",
+        "triggered",
+        "webhook",
+        "beta",
+        "vault",
+        "data",
+        "credential",
+        "owns",
+        "session",
+        "created",
+        "status",
+        "archived",
+        "deleted",
+        "idled",
+        "thread",
+        "unique",
+        "identifier",
+        "idempotency",
+        "rfc"
+      ],
+      "word_count": 2844,
+      "file_path": "docs/docs__en__api__csharp__beta__webhooks.md"
+    },
     "/docs/en/api/csharp/messages": {
       "title": "Messages",
       "content_preview": "# Messages  ## Create  `Message Messages.Create(MessageCreateParamsparameters, CancellationTokencancellationToken = default)`  **post** `/v1/messages`  Send a structured list of input messages with te...",
@@ -12900,7 +12984,7 @@
         "codeexecution",
         "betacachecontrolephemeralttlttl"
       ],
-      "word_count": 270518,
+      "word_count": 273608,
       "file_path": "docs/docs__en__api__go__beta.md"
     },
     "/docs/en/api/go/beta/agents": {
@@ -15842,6 +15926,34 @@
       "word_count": 345,
       "file_path": "docs/docs__en__api__go__beta__vaults__update.md"
     },
+    "/docs/en/api/go/beta/webhooks": {
+      "title": "Webhooks",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `type BetaWebhookEvent struct{\u2026}`    - `ID string`      Unique event identifier for idempotency.    - `CreatedAt Time`      RFC 3339 timestamp wh...",
+      "keywords": [
+        "event",
+        "resource",
+        "triggered",
+        "webhook",
+        "beta",
+        "vault",
+        "data",
+        "credential",
+        "owns",
+        "session",
+        "created",
+        "status",
+        "archived",
+        "deleted",
+        "idled",
+        "thread",
+        "unique",
+        "identifier",
+        "idempotency",
+        "rfc"
+      ],
+      "word_count": 3090,
+      "file_path": "docs/docs__en__api__go__beta__webhooks.md"
+    },
     "/docs/en/api/go/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `client.Completions.New(ctx, params) (*Completion, error)`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommen...",
@@ -16275,19 +16387,19 @@
         "tokens",
         "when",
         "input",
+        "event",
         "document",
         "image",
         "control",
         "breakpoint",
-        "event",
+        "session",
         "agent",
         "cited",
-        "session",
         "create",
         "user",
         "type"
       ],
-      "word_count": 223906,
+      "word_count": 226644,
       "file_path": "docs/docs__en__api__java__beta.md"
     },
     "/docs/en/api/java/beta/agents": {
@@ -19221,6 +19333,34 @@
       "word_count": 230,
       "file_path": "docs/docs__en__api__java__beta__vaults__update.md"
     },
+    "/docs/en/api/java/beta/webhooks": {
+      "title": "Webhooks",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `class BetaWebhookEvent:`    - `String id`      Unique event identifier for idempotency.    - `LocalDateTime createdAt`      RFC 3339 timestamp w...",
+      "keywords": [
+        "event",
+        "resource",
+        "triggered",
+        "webhook",
+        "beta",
+        "vault",
+        "data",
+        "credential",
+        "owns",
+        "session",
+        "created",
+        "status",
+        "archived",
+        "deleted",
+        "idled",
+        "thread",
+        "unique",
+        "identifier",
+        "idempotency",
+        "rfc"
+      ],
+      "word_count": 2738,
+      "file_path": "docs/docs__en__api__java__beta__webhooks.md"
+    },
     "/docs/en/api/java/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `Completion completions().create(CompletionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`  **post** `/v1/complete`  [Legacy] Create a Text Complet...",
@@ -20019,18 +20159,18 @@
         "when",
         "intelligence",
         "input",
+        "event",
         "document",
         "image",
         "agents",
         "control",
         "agent",
         "breakpoint",
-        "event",
         "session",
         "cited",
         "create"
       ],
-      "word_count": 241632,
+      "word_count": 244360,
       "file_path": "docs/docs__en__api__python__beta.md"
     },
     "/docs/en/api/python/beta/agents": {
@@ -22965,6 +23105,34 @@
       "word_count": 227,
       "file_path": "docs/docs__en__api__python__beta__vaults__update.md"
     },
+    "/docs/en/api/python/beta/webhooks": {
+      "title": "Webhooks",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `class BetaWebhookEvent: \u2026`    - `id: str`      Unique event identifier for idempotency.    - `created_at: datetime`      RFC 3339 timestamp when...",
+      "keywords": [
+        "event",
+        "resource",
+        "triggered",
+        "webhook",
+        "beta",
+        "vault",
+        "data",
+        "credential",
+        "owns",
+        "session",
+        "created",
+        "status",
+        "archived",
+        "deleted",
+        "idled",
+        "thread",
+        "unique",
+        "identifier",
+        "idempotency",
+        "rfc"
+      ],
+      "word_count": 2728,
+      "file_path": "docs/docs__en__api__python__beta__webhooks.md"
+    },
     "/docs/en/api/python/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `completions.create(CompletionCreateParams**kwargs)  -> Completion`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/messages) going forward.  Future",
@@ -23398,19 +23566,19 @@
         "text",
         "when",
         "input",
+        "event",
         "document",
         "image",
         "control",
         "agent",
         "breakpoint",
-        "event",
         "session",
         "cited",
         "create",
-        "user",
-        "type"
+        "type",
+        "user"
       ],
-      "word_count": 231729,
+      "word_count": 234376,
       "file_path": "docs/docs__en__api__ruby__beta.md"
     },
     "/docs/en/api/ruby/beta/agents": {
@@ -26345,6 +26513,34 @@
       "word_count": 213,
       "file_path": "docs/docs__en__api__ruby__beta__vaults__update.md"
     },
+    "/docs/en/api/ruby/beta/webhooks": {
+      "title": "Webhooks",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `class BetaWebhookEvent`    - `id: String`      Unique event identifier for idempotency.    - `created_at: Time`      RFC 3339 timestamp when the...",
+      "keywords": [
+        "event",
+        "resource",
+        "triggered",
+        "webhook",
+        "beta",
+        "vault",
+        "data",
+        "credential",
+        "owns",
+        "session",
+        "created",
+        "status",
+        "archived",
+        "deleted",
+        "idled",
+        "thread",
+        "unique",
+        "identifier",
+        "idempotency",
+        "rfc"
+      ],
+      "word_count": 2647,
+      "file_path": "docs/docs__en__api__ruby__beta__webhooks.md"
+    },
     "/docs/en/api/ruby/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `completions.create(**kwargs) -> Completion`  **post** `/v1/complete`  [Legacy] Create a Text Completion.  The Text Completions API is a legacy API. We recommend using the [M...",
@@ -26778,19 +26974,19 @@
         "text",
         "when",
         "input",
+        "event",
         "document",
         "image",
         "control",
         "breakpoint",
-        "agent",
         "session",
-        "event",
+        "agent",
         "cited",
         "create",
-        "user",
-        "type"
+        "type",
+        "user"
       ],
-      "word_count": 235139,
+      "word_count": 237696,
       "file_path": "docs/docs__en__api__typescript__beta.md"
     },
     "/docs/en/api/typescript/beta/agents": {
@@ -29732,6 +29928,34 @@
       "word_count": 248,
       "file_path": "docs/docs__en__api__typescript__beta__vaults__update.md"
     },
+    "/docs/en/api/typescript/beta/webhooks": {
+      "title": "Webhooks",
+      "content_preview": "# Webhooks  ## Domain Types  ### Beta Webhook Event  - `BetaWebhookEvent`    - `id: string`      Unique event identifier for idempotency.    - `created_at: string`      RFC 3339 timestamp when the event occurred.    - `data: BetaWebhookEventData`      - `BetaWebhookSessionCreatedEventData`        -",
+      "keywords": [
+        "event",
+        "resource",
+        "triggered",
+        "webhook",
+        "beta",
+        "vault",
+        "data",
+        "credential",
+        "owns",
+        "session",
+        "created",
+        "status",
+        "archived",
+        "deleted",
+        "idled",
+        "thread",
+        "unique",
+        "identifier",
+        "idempotency",
+        "rfc"
+      ],
+      "word_count": 2557,
+      "file_path": "docs/docs__en__api__typescript__beta__webhooks.md"
+    },
     "/docs/en/api/typescript/completions": {
       "title": "Completions",
       "content_preview": "# Completions  ## Create  `client.completions.create(CompletionCreateParamsparams, RequestOptionsoptions?): Completion | Stream<Completion>`  **post** `/v1/complete`  [Legacy] Create a Text Completion...",
@@ -31437,7 +31661,7 @@
         "one",
         "environment"
       ],
-      "word_count": 3069,
+      "word_count": 3068,
       "file_path": "docs/docs__en__manage-claude__wif-reference.md"
     },
     "/docs/en/manage-claude/workload-identity-federation": {
@@ -31506,6 +31730,7 @@
         "claude",
         "fields",
         "new",
+        "sessions",
         "codegroup",
         "array",
         "create",
@@ -31518,10 +31743,9 @@
         "system",
         "prompt",
         "mcp",
-        "skills",
-        "session"
+        "skills"
       ],
-      "word_count": 1460,
+      "word_count": 1472,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-containers": {

@@ -22,7 +22,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 | `tools` | The tools available to the agent. Combines [pre-built agent tools](/docs/en/managed-agents/tools), [MCP tools](/docs/en/managed-agents/mcp-connector), and [custom tools](/docs/en/managed-agents/tools#custom-tools). |
 | `mcp_servers` | MCP servers that provide standardized third-party capabilities. |
 | `skills` | [Skills](/docs/en/managed-agents/skills) that supply domain-specific context with progressive disclosure. |
-| `callable_agents` | Other agents this agent can invoke for [multi-agent orchestration](/docs/en/managed-agents/multi-agent). This is a research preview feature; [request access](https://claude.com/form/claude-managed-agents) to try it.|
+| `multiagent` | A coordinator declaration listing the agents this agent can delegate to. See [Multiagent sessions](/docs/en/managed-agents/multi-agent). |
 | `description` | A description of what the agent does. |
 | `metadata` | Arbitrary key-value pairs for your own tracking. |
 
@@ -313,7 +313,9 @@ puts "New version: #{updated_agent.version}"
 
 - **Scalar fields** (`model`, `system`, `name`, etc.) are replaced with the new value. `system` and `description` can be cleared by passing `null`. `model` and `name` are mandatory and cannot be cleared.
 
-- **Array fields** (`tools`, `mcp_servers`, `skills`, `callable_agents`) are fully replaced by the new array. To clear an array field entirely, pass `null` or an empty array.
+- **Array fields** (`tools`, `mcp_servers`, `skills`) are fully replaced by the new array. To clear an array field entirely, pass `null` or an empty array.
+
+- **`multiagent`** is replaced as a whole, including its `agents` roster. Pass `null` to clear it.
 
 - **Metadata** is merged at the key level. Keys you provide are added or updated. Keys you omit are preserved. To delete a specific key, set its value to an empty string.
 
@@ -324,8 +326,8 @@ puts "New version: #{updated_agent.version}"
 | Operation | Behavior |
 | --- | --- |
 | **Update** | Generates a new agent version. |
-| **List versions** | Fetch the full version history to track changes over time. |
-| **Archive** | The agent becomes read-only. New sessions cannot reference it, but existing sessions continue to run. |
+| **List versions** | Returns the full version history so you can track changes over time. |
+| **Archive** | Makes the agent read-only. New sessions cannot reference it, but existing sessions continue to run. |
 
 ### List versions
 

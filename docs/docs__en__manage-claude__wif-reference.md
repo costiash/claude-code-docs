@@ -136,7 +136,7 @@ Anthropic enforces these constraints when you create or update issuers and rules
 | Field | Constraint |
 | :--- | :--- |
 | Issuer, rule, and service account `name` | Must match `^[a-z0-9-]+$`, length 1 to 255 characters. |
-| `workspace_id` | Optional. The workspace (`wrkspc_...`) whose quota, billing, and rate limits apply to tokens minted under this rule. Must be a workspace in the same organization, and the target service account must be a member of that workspace. May be omitted for rules that are configured for only one workspace |
+| `workspace_id` | Optional. The workspace (`wrkspc_...`) whose quota, billing, and rate limits apply to tokens minted under this rule. Must be a workspace in the same organization, and the target service account must be a member of that workspace. May be omitted for rules that are configured for only one workspace. |
 | `token_lifetime_seconds` | Integer between `60` and `86400` (1 minute to 24 hours). Default `3600`. Values outside this range are rejected at request time. See [Token lifetime and refresh](/docs/en/manage-claude/workload-identity-federation#token-lifetime-and-refresh). |
 
 ### URL fields
@@ -202,7 +202,7 @@ CEL conditions are security boundaries. An expression that evaluates to `true` f
 | Status | Error | Cause | Resolution |
 | :--- | :--- | :--- | :--- |
 | 400 | `invalid_request` | `federation_rule_id` is malformed or a required request field is missing. | Verify the `fdrl_` ID and that the request body includes all required fields. |
-| 400 | `invalid_request` | `workspace_id_required`: the federation rule is enabled for more than one non-default workspace and the request omits `workspace_id`. | Set `ANTHROPIC_WORKSPACE_ID` (or the `workspace_id` body field on a raw request) to the `wrkspc_...` ID you want the token scoped to. See [Token exchange request](#token-exchange-request). |
+| 400 | `invalid_request` | `workspace_id_required`: the federation rule is enabled for more than one workspace and the request omits `workspace_id`. | Set `ANTHROPIC_WORKSPACE_ID` (or the `workspace_id` body field on a raw request) to the `wrkspc_...` ID you want the token scoped to. See [Token exchange request](#token-exchange-request). |
 | 400 | `invalid_grant` | The JWT `iss` claim does not equal the registered `issuer_url` exactly. | Compare byte-for-byte, including trailing slashes and scheme: `jq -rR 'split(".")[1] \| gsub("-";"+") \| gsub("_";"/") \| @base64d \| fromjson \| .iss' <<< "$JWT"`. |
 | 400 | `invalid_grant` | JWKS fetch failed, JWKS is stale, or the JWT was signed with a key not in the JWKS. | For `inline` mode, update the issuer with the rotated keys. For `discovery` and `explicit_url`, confirm the JWKS endpoint is reachable on port 443; if the issuer recently rotated its signing key, see [Key rotation and caching](#key-rotation-and-caching). |
 | 400 | `invalid_grant` | The JWT `exp` claim is in the past (beyond the 30-second skew window). | Confirm your identity provider is projecting a fresh token and the SDK is re-reading the token file. |
