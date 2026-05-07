@@ -6537,8 +6537,8 @@
     "claude-code__interactive-mode.md": {
       "original_url": "https://platform.claude.com/docs/en/interactive-mode",
       "original_md_url": "https://platform.claude.com/docs/en/interactive-mode.md",
-      "hash": "cf0de9bd09807b969f8b784c1fead2857294fb3a2f139495b82089058b2d8b70",
-      "last_updated": "2026-05-06T16:01:11.597434"
+      "hash": "a2bbd683aaf279ab456e58e3ac9505b5a1baa1537f8ef5a45ae9bf3245c00a23",
+      "last_updated": "2026-05-07T04:31:17.655299"
     },
     "docs__en__intro.md": {
       "original_url": "https://platform.claude.com/docs/en/intro",
@@ -6807,8 +6807,8 @@
     "claude-code__model-config.md": {
       "original_url": "https://platform.claude.com/docs/en/model-config",
       "original_md_url": "https://platform.claude.com/docs/en/model-config.md",
-      "hash": "7c4a94b767d1f5fd19e15d6e6d8c072943873458b66b87816b8e2a49ca09551a",
-      "last_updated": "2026-05-06T16:01:39.429124"
+      "hash": "d0cb57ac811d8680a8f8211264401831657a3b24095d46531dd86f5d10f4ae3a",
+      "last_updated": "2026-05-07T04:31:44.841513"
     },
     "claude-code__monitoring-usage.md": {
       "original_url": "https://platform.claude.com/docs/en/monitoring-usage",
@@ -6891,8 +6891,8 @@
     "claude-code__statusline.md": {
       "original_url": "https://platform.claude.com/docs/en/statusline",
       "original_md_url": "https://platform.claude.com/docs/en/statusline.md",
-      "hash": "ab6fe139f1428f87b24677ff829150adffd4e7767b1fcb2bcc00971ac5d1f459",
-      "last_updated": "2026-05-05T15:53:52.609535"
+      "hash": "e993ddefc82f2afd3bbed775eb74572aa3b350c0f24aae8019782c0380028904",
+      "last_updated": "2026-05-07T04:31:54.564224"
     },
     "claude-code__sub-agents.md": {
       "original_url": "https://platform.claude.com/docs/en/sub-agents",
@@ -6903,8 +6903,8 @@
     "claude-code__terminal-config.md": {
       "original_url": "https://platform.claude.com/docs/en/terminal-config",
       "original_md_url": "https://platform.claude.com/docs/en/terminal-config.md",
-      "hash": "78a8427e6fc9116c3e3784ba59aa97c762033cb667e05f5cfbce1da696e8e6ae",
-      "last_updated": "2026-05-04T15:57:32.297335"
+      "hash": "512942eca69c7fe569fe475860e7b84594043172f56614590523d3db79f40c34",
+      "last_updated": "2026-05-07T04:31:55.618878"
     },
     "docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md": {
       "original_url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals",
@@ -6939,8 +6939,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-07T01:00:02.640620",
-    "fetch_duration_seconds": 808.730209,
+    "last_fetch_completed": "2026-05-07T04:32:01.691740",
+    "fetch_duration_seconds": 810.711138,
     "total_pages_discovered": 1481,
     "pages_fetched_successfully": 1156,
     "pages_failed": 326,
@@ -7277,7 +7277,7 @@
     "total_files": 1156,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-07T01:00:02.640634",
+  "last_updated": "2026-05-07T04:32:01.691759",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

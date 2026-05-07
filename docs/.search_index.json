@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-07T01:00:05Z",
+  "generated_at": "2026-05-07T04:32:04Z",
   "indexed_files": 1220,
   "index": {
     "/changelog": {
@@ -492,8 +492,8 @@
         "press",
         "history",
         "input",
-        "background",
         "terminal",
+        "background",
         "cursor",
         "prompt",
         "conversation",
@@ -504,7 +504,7 @@
         "normal",
         "previous"
       ],
-      "word_count": 3158,
+      "word_count": 3162,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -700,7 +700,7 @@
         "version",
         "variables"
       ],
-      "word_count": 3645,
+      "word_count": 3638,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -1086,13 +1086,13 @@
         "current",
         "codegroup",
         "directory",
-        "only",
         "output",
+        "api",
+        "only",
         "each",
-        "usage",
-        "statusline"
+        "usage"
       ],
-      "word_count": 5810,
+      "word_count": 5850,
       "file_path": "docs/claude-code__statusline.md"
     },
     "/claude-code/sub-agents": {
