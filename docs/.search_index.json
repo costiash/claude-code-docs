@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-08T04:20:17Z",
+  "generated_at": "2026-05-08T06:55:00Z",
   "indexed_files": 1228,
   "index": {
     "/changelog": {
@@ -280,7 +280,7 @@
         "see",
         "terminal"
       ],
-      "word_count": 8063,
+      "word_count": 8293,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
