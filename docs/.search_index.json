@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-08T01:02:06Z",
+  "generated_at": "2026-05-08T04:20:17Z",
   "indexed_files": 1228,
   "index": {
     "/changelog": {
@@ -168,7 +168,7 @@
         "name",
         "json"
       ],
-      "word_count": 2576,
+      "word_count": 2600,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -476,7 +476,7 @@
         "prompt",
         "context"
       ],
-      "word_count": 17855,
+      "word_count": 17951,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -896,7 +896,7 @@
         "file",
         "servers"
       ],
-      "word_count": 2529,
+      "word_count": 2556,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
@@ -1008,7 +1008,7 @@
         "set",
         "when"
       ],
-      "word_count": 8534,
+      "word_count": 8738,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1105,10 +1105,10 @@
         "claude",
         "main",
         "agent",
-        "conversation",
         "session",
-        "code",
+        "conversation",
         "tool",
+        "code",
         "context",
         "prompt",
         "tools",
@@ -1120,7 +1120,7 @@
         "run",
         "task"
       ],
-      "word_count": 7549,
+      "word_count": 7604,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
