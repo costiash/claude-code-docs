@@ -297,21 +297,6 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
-          "config": {
-            "type": "cloud",
-            "networking": {
-              "type": "limited",
-              "allow_package_managers": true,
-              "allowed_hosts": [
-                "api.example.com"
-              ]
-            },
-            "packages": {
-              "pip": [
-                "pandas",
-                "numpy"
-              ]
-            }
-          }
+          "description": "Python environment with data-analysis packages."
         }'
 ```

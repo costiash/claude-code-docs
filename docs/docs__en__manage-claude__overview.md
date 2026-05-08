@@ -1,4 +1,4 @@
-# Admin API overview
+# Admin API
 
 ---
 
@@ -198,6 +198,10 @@ Monitor developer productivity and Claude Code adoption with the [Claude Code An
 ## Rate limits
 
 Read the rate limits configured for your organization and its workspaces with the [Rate Limits API](/docs/en/manage-claude/rate-limits-api).
+
+## Compliance API
+
+Retrieve audit and activity data for your organization with the [Compliance API](/docs/en/manage-claude/compliance-api). Admin API keys can read the Activity Feed only; for full access, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
 
 ## Best practices
 

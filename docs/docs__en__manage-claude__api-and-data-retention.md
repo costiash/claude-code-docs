@@ -20,6 +20,8 @@ Different APIs and features have different storage and retention needs. Where an
 - Only what is technically necessary for the API and feature to work is retained. Conversation content (your prompts and Claude's outputs) is never retained unless explicitly noted.
 - Data is purged on the shortest practical TTL, and Anthropic aims to give customers control over how long data is retained. What is held, and the retention duration where a specific TTL applies, is documented on each feature's page.
 
+Data accessible through the [Compliance API](/docs/en/manage-claude/compliance-api) follows its own retention model. The [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) retains data for 6 years. Chat, file, and project content from claude.ai follows your organization's retention policy, set in **claude.ai** > **Organization settings** > **Data and privacy**.
+
 In the [feature eligibility table](#feature-eligibility), some features are marked "Yes (qualified)" in the ZDR eligible column. If your organization has a ZDR arrangement, you can use these features with confidence that what Anthropic retains is narrow and is required for optimal performance.
 
 ## Zero data retention (ZDR) scope

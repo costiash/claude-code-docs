@@ -19,7 +19,7 @@ Use this API to:
 <Check>
   **Admin API key required**
 
-  This API is part of the [Admin API](/docs/en/manage-claude/overview). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
+  This API is part of the [Admin API](/docs/en/manage-claude/admin-api). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
 </Check>
 
 ## Quick start
@@ -171,7 +171,7 @@ No. To set workspace rate limits, open the workspace in the [Claude Console](/se
 ## See also
 
 - [Rate limits](/docs/en/api/rate-limits)
-- [Admin API overview](/docs/en/manage-claude/overview)
+- [Admin API](/docs/en/manage-claude/admin-api)
 - [Admin API reference](/docs/en/api/admin)
 - [Workspaces](/docs/en/manage-claude/workspaces)
 - [Usage and Cost API](/docs/en/manage-claude/usage-cost-api)

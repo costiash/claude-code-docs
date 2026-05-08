@@ -996,7 +996,8 @@ curl https://api.anthropic.com/v1/sessions \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "agent": "agent_011CZkYpogX7uDKUyvBTophP",
-          "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW"
+          "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+          "title": "Order #1234 inquiry"
         }'
 ```
 
@@ -3688,7 +3689,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -d '{}'
+    -d '{
+          "title": "Order #1234 inquiry"
+        }'
 ```
 
 ## Delete
@@ -20222,7 +20225,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-          "type": "file"
+          "type": "file",
+          "mount_path": "/uploads/receipt.pdf"
         }'
 ```
 

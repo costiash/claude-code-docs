@@ -117,7 +117,10 @@ curl https://api.anthropic.com/v1/vaults \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
-          "display_name": "Example vault"
+          "display_name": "Example vault",
+          "metadata": {
+            "environment": "production"
+          }
         }'
 ```
 
@@ -477,7 +480,12 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -d '{}'
+    -d '{
+          "display_name": "Example vault",
+          "metadata": {
+            "environment": "production"
+          }
+        }'
 ```
 
 ## Delete
@@ -1045,6 +1053,10 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials \
             "token": "bearer_exampletoken",
             "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
             "type": "static_bearer"
+          },
+          "display_name": "Example credential",
+          "metadata": {
+            "environment": "production"
           }
         }'
 ```
@@ -1737,7 +1749,12 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -d '{}'
+    -d '{
+          "display_name": "Example credential",
+          "metadata": {
+            "environment": "production"
+          }
+        }'
 ```
 
 ## Delete

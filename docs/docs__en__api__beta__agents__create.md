@@ -810,17 +810,18 @@ curl https://api.anthropic.com/v1/agents \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -d '{
-          "model": "claude-sonnet-4-6",
-          "name": "My First Agent",
-          "multiagent": {
-            "agents": [
-              "agent_011CZkYqphY8vELVzwCUpqiQ",
-              {
-                "type": "self"
-              }
-            ],
-            "type": "coordinator"
-          }
-        }'
+    -d "{
+          \"model\": \"claude-sonnet-4-6\",
+          \"name\": \"My First Agent\",
+          \"description\": \"A general-purpose starter agent.\",
+          \"metadata\": {
+            \"foo\": \"bar\"
+          },
+          \"system\": \"You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.\",
+          \"tools\": [
+            {
+              \"type\": \"agent_toolset_20260401\"
+            }
+          ]
+        }"
 ```

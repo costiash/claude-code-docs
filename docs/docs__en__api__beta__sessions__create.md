@@ -994,6 +994,7 @@ curl https://api.anthropic.com/v1/sessions \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "agent": "agent_011CZkYpogX7uDKUyvBTophP",
-          "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW"
+          "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+          "title": "Order #1234 inquiry"
         }'
 ```

@@ -307,6 +307,10 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials \
             "token": "bearer_exampletoken",
             "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
             "type": "static_bearer"
+          },
+          "display_name": "Example credential",
+          "metadata": {
+            "environment": "production"
           }
         }'
 ```

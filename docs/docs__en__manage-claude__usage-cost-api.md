@@ -21,7 +21,7 @@ This API enables you to better monitor, analyze, and optimize your Claude implem
 <Check>
   **Admin API key required**
 
-  This API is part of the [Admin API](/docs/en/manage-claude/overview). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
+  This API is part of the [Admin API](/docs/en/manage-claude/admin-api). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
 </Check>
 
 ## Partner solutions
@@ -299,7 +299,7 @@ Use the [Claude Code Analytics API](/docs/en/manage-claude/claude-code-analytics
 ## See also
 The Usage and Cost APIs can be used to help you deliver a better experience for your users, help you manage costs, and preserve your rate limit. Learn more about some of these other features:
 
-- [Admin API overview](/docs/en/manage-claude/overview)
+- [Admin API](/docs/en/manage-claude/admin-api)
 - [Admin API reference](/docs/en/api/admin)
 - [Pricing](/docs/en/about-claude/pricing)
 - [Prompt caching](/docs/en/build-with-claude/prompt-caching) - Optimize costs with caching

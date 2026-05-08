@@ -114,7 +114,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-          "type": "file"
+          "type": "file",
+          "mount_path": "/uploads/receipt.pdf"
         }'
 ```
 

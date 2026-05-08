@@ -6687,16 +6687,43 @@ curl https://api.anthropic.com/v1/messages \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     --max-time 600 \
-    -d '{
-          "max_tokens": 1024,
-          "messages": [
+    -d "{
+          \"max_tokens\": 1024,
+          \"messages\": [
             {
-              "content": "Hello, world",
-              "role": "user"
+              \"content\": \"Hello, world\",
+              \"role\": \"user\"
             }
           ],
-          "model": "claude-opus-4-6"
-        }'
+          \"model\": \"claude-opus-4-6\",
+          \"system\": [
+            {
+              \"text\": \"Today's date is 2024-06-01.\",
+              \"type\": \"text\"
+            }
+          ],
+          \"temperature\": 1,
+          \"thinking\": {
+            \"type\": \"adaptive\"
+          },
+          \"tools\": [
+            {
+              \"input_schema\": {
+                \"type\": \"object\",
+                \"properties\": {
+                  \"location\": \"bar\",
+                  \"unit\": \"bar\"
+                },
+                \"required\": [
+                  \"location\"
+                ]
+              },
+              \"name\": \"name\"
+            }
+          ],
+          \"top_k\": 5,
+          \"top_p\": 0.7
+        }"
 ```
 
 ## Count Tokens
@@ -11833,15 +11860,39 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -d '{
-          "messages": [
+    -d "{
+          \"messages\": [
             {
-              "content": "Hello, world",
-              "role": "user"
+              \"content\": \"Hello, world\",
+              \"role\": \"user\"
             }
           ],
-          "model": "claude-opus-4-6"
-        }'
+          \"model\": \"claude-opus-4-6\",
+          \"system\": [
+            {
+              \"text\": \"Today's date is 2024-06-01.\",
+              \"type\": \"text\"
+            }
+          ],
+          \"thinking\": {
+            \"type\": \"adaptive\"
+          },
+          \"tools\": [
+            {
+              \"input_schema\": {
+                \"type\": \"object\",
+                \"properties\": {
+                  \"location\": \"bar\",
+                  \"unit\": \"bar\"
+                },
+                \"required\": [
+                  \"location\"
+                ]
+              },
+              \"name\": \"name\"
+            }
+          ]
+        }"
 ```
 
 ## Domain Types

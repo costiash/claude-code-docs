@@ -309,6 +309,7 @@ curl https://api.anthropic.com/v1/environments \
                 "numpy"
               ]
             }
-          }
+          },
+          "description": "Python environment with data-analysis packages."
         }'
 ```

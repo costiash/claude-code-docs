@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-08T18:48:55Z",
+  "generated_at": "2026-05-08T21:39:21Z",
   "indexed_files": 1228,
   "index": {
     "/changelog": {
@@ -476,7 +476,7 @@
         "prompt",
         "context"
       ],
-      "word_count": 17951,
+      "word_count": 17958,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -1022,21 +1022,21 @@
         "title",
         "install",
         "powershell",
+        "run",
         "linux",
         "wsl",
         "tabs",
-        "run",
+        "installation",
         "version",
         "see",
         "package",
-        "installation",
         "updates",
         "native",
         "git",
         "step",
         "channel"
       ],
-      "word_count": 2969,
+      "word_count": 3001,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
@@ -3150,7 +3150,7 @@
         "user",
         "type"
       ],
-      "word_count": 266110,
+      "word_count": 266275,
       "file_path": "docs/docs__en__api__beta.md"
     },
     "/docs/en/api/beta/agents": {
@@ -3178,7 +3178,7 @@
         "require",
         "permission"
       ],
-      "word_count": 11871,
+      "word_count": 11912,
       "file_path": "docs/docs__en__api__beta__agents.md"
     },
     "/docs/en/api/beta/agents/archive": {
@@ -3234,7 +3234,7 @@
         "additional",
         "models"
       ],
-      "word_count": 2202,
+      "word_count": 2231,
       "file_path": "docs/docs__en__api__beta__agents__create.md"
     },
     "/docs/en/api/beta/agents/list": {
@@ -3318,7 +3318,7 @@
         "maximum",
         "frontier"
       ],
-      "word_count": 2310,
+      "word_count": 2322,
       "file_path": "docs/docs__en__api__beta__agents__update.md"
     },
     "/docs/en/api/beta/agents/versions": {
@@ -3402,7 +3402,7 @@
         "timestamp",
         "beta"
       ],
-      "word_count": 4076,
+      "word_count": 4064,
       "file_path": "docs/docs__en__api__beta__environments.md"
     },
     "/docs/en/api/beta/environments/archive": {
@@ -3458,7 +3458,7 @@
         "version",
         "null"
       ],
-      "word_count": 727,
+      "word_count": 733,
       "file_path": "docs/docs__en__api__beta__environments__create.md"
     },
     "/docs/en/api/beta/environments/delete": {
@@ -3569,7 +3569,7 @@
         "listed",
         "array"
       ],
-      "word_count": 741,
+      "word_count": 723,
       "file_path": "docs/docs__en__api__beta__environments__update.md"
     },
     "/docs/en/api/beta/files": {
@@ -4230,7 +4230,7 @@
         "may",
         "used"
       ],
-      "word_count": 137606,
+      "word_count": 137692,
       "file_path": "docs/docs__en__api__beta__messages.md"
     },
     "/docs/en/api/beta/messages/batches": {
@@ -4454,7 +4454,7 @@
         "create",
         "tokens"
       ],
-      "word_count": 14565,
+      "word_count": 14605,
       "file_path": "docs/docs__en__api__beta__messages__count_tokens.md"
     },
     "/docs/en/api/beta/messages/create": {
@@ -4482,7 +4482,7 @@
         "time",
         "live"
       ],
-      "word_count": 18932,
+      "word_count": 18978,
       "file_path": "docs/docs__en__api__beta__messages__create.md"
     },
     "/docs/en/api/beta/models": {
@@ -4594,7 +4594,7 @@
         "user",
         "identifier"
       ],
-      "word_count": 82800,
+      "word_count": 82811,
       "file_path": "docs/docs__en__api__beta__sessions.md"
     },
     "/docs/en/api/beta/sessions/archive": {
@@ -4650,7 +4650,7 @@
         "policy",
         "automatically"
       ],
-      "word_count": 2525,
+      "word_count": 2529,
       "file_path": "docs/docs__en__api__beta__sessions__create.md"
     },
     "/docs/en/api/beta/sessions/delete": {
@@ -4842,7 +4842,7 @@
         "system",
         "prompt"
       ],
-      "word_count": 2957,
+      "word_count": 2959,
       "file_path": "docs/docs__en__api__beta__sessions__resources.md"
     },
     "/docs/en/api/beta/sessions/resources/add": {
@@ -4870,7 +4870,7 @@
         "file",
         "mount"
       ],
-      "word_count": 200,
+      "word_count": 202,
       "file_path": "docs/docs__en__api__beta__sessions__resources__add.md"
     },
     "/docs/en/api/beta/sessions/resources/delete": {
@@ -5229,7 +5229,7 @@
         "automatically",
         "approved"
       ],
-      "word_count": 2161,
+      "word_count": 2166,
       "file_path": "docs/docs__en__api__beta__sessions__update.md"
     },
     "/docs/en/api/beta/skills": {
@@ -5537,7 +5537,7 @@
         "header",
         "chars"
       ],
-      "word_count": 1985,
+      "word_count": 1993,
       "file_path": "docs/docs__en__api__beta__user_profiles.md"
     },
     "/docs/en/api/beta/user_profiles/create": {
@@ -5565,7 +5565,7 @@
         "optional",
         "enforced"
       ],
-      "word_count": 437,
+      "word_count": 442,
       "file_path": "docs/docs__en__api__beta__user_profiles__create.md"
     },
     "/docs/en/api/beta/user_profiles/create_enrollment_url": {
@@ -5677,7 +5677,7 @@
         "header",
         "present"
       ],
-      "word_count": 451,
+      "word_count": 454,
       "file_path": "docs/docs__en__api__beta__user_profiles__update.md"
     },
     "/docs/en/api/beta/vaults": {
@@ -5705,7 +5705,7 @@
         "updated",
         "agents"
       ],
-      "word_count": 6776,
+      "word_count": 6807,
       "file_path": "docs/docs__en__api__beta__vaults.md"
     },
     "/docs/en/api/beta/vaults/archive": {
@@ -5761,7 +5761,7 @@
         "beta",
         "version"
       ],
-      "word_count": 238,
+      "word_count": 243,
       "file_path": "docs/docs__en__api__beta__vaults__create.md"
     },
     "/docs/en/api/beta/vaults/credentials": {
@@ -5789,7 +5789,7 @@
         "response",
         "body"
       ],
-      "word_count": 5399,
+      "word_count": 5416,
       "file_path": "docs/docs__en__api__beta__vaults__credentials.md"
     },
     "/docs/en/api/beta/vaults/credentials/archive": {
@@ -5845,7 +5845,7 @@
         "requires",
         "uses"
       ],
-      "word_count": 721,
+      "word_count": 729,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__create.md"
     },
     "/docs/en/api/beta/vaults/credentials/delete": {
@@ -5981,7 +5981,7 @@
         "http",
         "basic"
       ],
-      "word_count": 662,
+      "word_count": 671,
       "file_path": "docs/docs__en__api__beta__vaults__credentials__update.md"
     },
     "/docs/en/api/beta/vaults/delete": {
@@ -6089,7 +6089,7 @@
         "want",
         "body"
       ],
-      "word_count": 242,
+      "word_count": 251,
       "file_path": "docs/docs__en__api__beta__vaults__update.md"
     },
     "/docs/en/api/beta/webhooks": {
@@ -9565,7 +9565,7 @@
         "complete",
         "long"
       ],
-      "word_count": 1272,
+      "word_count": 1278,
       "file_path": "docs/docs__en__api__completions.md"
     },
     "/docs/en/api/completions/create": {
@@ -9593,7 +9593,7 @@
         "text",
         "complete"
       ],
-      "word_count": 980,
+      "word_count": 986,
       "file_path": "docs/docs__en__api__completions__create.md"
     },
     "/docs/en/api/csharp/beta": {
@@ -19806,7 +19806,7 @@
         "defaults",
         "create"
       ],
-      "word_count": 103302,
+      "word_count": 103388,
       "file_path": "docs/docs__en__api__messages.md"
     },
     "/docs/en/api/messages/batches": {
@@ -20030,7 +20030,7 @@
         "create",
         "tokens"
       ],
-      "word_count": 11382,
+      "word_count": 11422,
       "file_path": "docs/docs__en__api__messages__count_tokens.md"
     },
     "/docs/en/api/messages/create": {
@@ -20058,7 +20058,7 @@
         "live",
         "minutes"
       ],
-      "word_count": 14187,
+      "word_count": 14233,
       "file_path": "docs/docs__en__api__messages__create.md"
     },
     "/docs/en/api/models": {
@@ -30513,7 +30513,7 @@
         "keys",
         "python"
       ],
-      "word_count": 2379,
+      "word_count": 2384,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -30541,7 +30541,7 @@
         "see",
         "title"
       ],
-      "word_count": 2916,
+      "word_count": 2918,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -30866,18 +30866,18 @@
         "bedrock",
         "tool",
         "feature",
+        "api",
         "tools",
         "context",
         "availability",
         "web",
-        "api",
         "model",
         "search",
         "features",
         "capabilities",
         "files"
       ],
-      "word_count": 1553,
+      "word_count": 1570,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
@@ -31167,25 +31167,25 @@
         "step",
         "title",
         "api",
+        "tab",
         "key",
         "claude",
         "steps",
-        "tab",
         "set",
         "shell",
         "card",
-        "install",
         "code",
         "get",
         "console",
+        "tabs",
         "add",
-        "sdk",
-        "first",
+        "create",
+        "install",
         "call",
-        "anthropic",
-        "environment"
+        "environment",
+        "variable"
       ],
-      "word_count": 1340,
+      "word_count": 1440,
       "file_path": "docs/docs__en__get-started.md"
     },
     "/docs/en/glossary": {
@@ -31259,17 +31259,17 @@
         "tool",
         "section",
         "anthropic",
-        "readiness",
         "organization",
+        "readiness",
         "status",
-        "code",
         "retention",
+        "code",
         "title",
         "sup",
         "phi",
         "see"
       ],
-      "word_count": 2736,
+      "word_count": 2777,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
@@ -31325,7 +31325,7 @@
         "type",
         "accepted"
       ],
-      "word_count": 1414,
+      "word_count": 1422,
       "file_path": "docs/docs__en__manage-claude__claude-code-analytics-api.md"
     },
     "/docs/en/manage-claude/data-residency": {
@@ -31357,8 +31357,8 @@
       "file_path": "docs/docs__en__manage-claude__data-residency.md"
     },
     "/docs/en/manage-claude/overview": {
-      "title": "Admin API overview",
-      "content_preview": "# Admin API overview  ---  <Tip> **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console \u2192 Settings \u2192 Organizatio...",
+      "title": "Admin API",
+      "content_preview": "# Admin API  ---  <Tip> **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console \u2192 Settings \u2192 Organization**. </Ti...",
       "keywords": [
         "api",
         "organization",
@@ -31374,14 +31374,14 @@
         "console",
         "roles",
         "invites",
+        "access",
+        "only",
         "user",
         "usage",
         "permissions",
-        "code",
-        "title",
-        "programmatically"
+        "see"
       ],
-      "word_count": 888,
+      "word_count": 921,
       "file_path": "docs/docs__en__manage-claude__overview.md"
     },
     "/docs/en/manage-claude/rate-limits-api": {
@@ -31409,7 +31409,7 @@
         "claude",
         "such"
       ],
-      "word_count": 1018,
+      "word_count": 1017,
       "file_path": "docs/docs__en__manage-claude__rate-limits-api.md"
     },
     "/docs/en/manage-claude/usage-cost-api": {
@@ -31437,7 +31437,7 @@
         "tip",
         "anthropic"
       ],
-      "word_count": 1477,
+      "word_count": 1476,
       "file_path": "docs/docs__en__manage-claude__usage-cost-api.md"
     },
     "/docs/en/manage-claude/wif-providers/aws": {
@@ -31717,7 +31717,7 @@
         "cannot",
         "rate"
       ],
-      "word_count": 1597,
+      "word_count": 1596,
       "file_path": "docs/docs__en__manage-claude__workspaces.md"
     },
     "/docs/en/managed-agents/agent-setup": {
@@ -32137,7 +32137,7 @@
         "docs",
         "streaming"
       ],
-      "word_count": 2332,
+      "word_count": 2333,
       "file_path": "docs/docs__en__managed-agents__quickstart.md"
     },
     "/docs/en/managed-agents/sessions": {

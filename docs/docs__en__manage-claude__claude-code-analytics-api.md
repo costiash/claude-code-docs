@@ -21,7 +21,7 @@ This API enables you to better monitor, analyze, and optimize your Claude Code a
 <Check>
   **Admin API key required**
 
-  This API is part of the [Admin API](/docs/en/manage-claude/overview). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
+  This API is part of the [Admin API](/docs/en/manage-claude/admin-api). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
 </Check>
 
 ## Quick start
@@ -247,9 +247,10 @@ All dates are in UTC. The `starting_at` parameter should be in YYYY-MM-DD format
 
 The Claude Code Analytics API helps you understand and optimize your team's development workflow. Learn more about related features:
 
-- [Admin API overview](/docs/en/manage-claude/overview)
+- [Admin API](/docs/en/manage-claude/admin-api)
 - [Admin API reference](/docs/en/api/admin)
 - [Claude Code Analytics dashboard](/claude-code)
 - [Usage and Cost API](/docs/en/manage-claude/usage-cost-api) - Track API usage across all Anthropic services
+- [Compliance API](/docs/en/manage-claude/compliance-api) - Retrieve audit and activity data
 - [Identity and access management](https://code.claude.com/docs/en/iam)
 - [Monitoring usage with OpenTelemetry](https://code.claude.com/docs/en/monitoring-usage) for custom metrics and alerting

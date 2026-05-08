@@ -118,5 +118,10 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -d '{}'
+    -d '{
+          "display_name": "Example vault",
+          "metadata": {
+            "environment": "production"
+          }
+        }'
 ```
