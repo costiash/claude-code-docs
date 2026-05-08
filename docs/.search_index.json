@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-08T15:50:44Z",
+  "generated_at": "2026-05-08T18:48:55Z",
   "indexed_files": 1228,
   "index": {
     "/changelog": {
@@ -17,18 +17,18 @@
         "mode",
         "instead",
         "session",
-        "sessions",
         "being",
-        "code",
         "after",
+        "sessions",
+        "code",
         "mcp",
-        "commands",
         "command",
+        "commands",
         "prompt",
-        "bash",
-        "file"
+        "file",
+        "bash"
       ],
-      "word_count": 41749,
+      "word_count": 42550,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -718,17 +718,17 @@
         "name",
         "metrics",
         "api",
-        "standard",
         "session",
-        "user",
+        "standard",
         "prompt",
-        "such",
+        "user",
         "only",
+        "such",
         "counter",
         "example",
         "error"
       ],
-      "word_count": 7491,
+      "word_count": 7596,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1148,7 +1148,7 @@
         "text",
         "vim"
       ],
-      "word_count": 2608,
+      "word_count": 2607,
       "file_path": "docs/claude-code__terminal-config.md"
     },
     "/claude-code/third-party-integrations": {
@@ -1230,9 +1230,9 @@
         "session",
         "settings",
         "install",
-        "step"
+        "when"
       ],
-      "word_count": 4872,
+      "word_count": 4900,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
@@ -30877,7 +30877,7 @@
         "capabilities",
         "files"
       ],
-      "word_count": 1552,
+      "word_count": 1553,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
@@ -31026,8 +31026,8 @@
       "keywords": [
         "schema",
         "json",
-        "outputs",
         "claude",
+        "outputs",
         "section",
         "structured",
         "schemas",
@@ -31045,7 +31045,7 @@
         "constraints",
         "fields"
       ],
-      "word_count": 10177,
+      "word_count": 10187,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -31610,30 +31610,30 @@
     },
     "/docs/en/manage-claude/wif-providers/spiffe": {
       "title": "Use WIF with SPIFFE",
-      "content_preview": "# Use WIF with SPIFFE  Authenticate SPIRE-issued workloads to the Claude API using JWT-SVIDs and the SPIFFE OIDC Discovery Provider.  ---  SPIFFE assigns every workload a stable identity URI of the fo...",
+      "content_preview": "# Use WIF with SPIFFE  Authenticate SPIFFE workloads to the Claude API using JWT-SVIDs from SPIRE or any other SPIFFE-conformant issuer.  ---  [SPIFFE](https://spiffe.io/) is the CNCF standard for iss...",
       "keywords": [
-        "spire",
         "spiffe",
+        "spire",
         "workload",
         "jwt",
         "discovery",
         "svid",
         "federation",
-        "provider",
+        "api",
         "anthropic",
         "issuer",
+        "provider",
         "rule",
-        "api",
         "oidc",
-        "helper",
         "url",
+        "server",
         "token",
+        "helper",
         "jwks",
-        "kubernetes",
-        "service",
-        "every"
+        "every",
+        "agent"
       ],
-      "word_count": 2566,
+      "word_count": 3124,
       "file_path": "docs/docs__en__manage-claude__wif-providers__spiffe.md"
     },
     "/docs/en/manage-claude/wif-reference": {
@@ -31646,22 +31646,22 @@
         "must",
         "when",
         "key",
+        "jwks",
         "profile",
         "federation",
-        "sdk",
-        "jwks",
         "string",
+        "sdk",
+        "issuer",
         "workspace",
         "exchange",
-        "issuer",
         "claim",
         "step",
         "request",
         "anthropic",
         "one",
-        "environment"
+        "set"
       ],
-      "word_count": 3068,
+      "word_count": 3197,
       "file_path": "docs/docs__en__manage-claude__wif-reference.md"
     },
     "/docs/en/manage-claude/workload-identity-federation": {
@@ -31689,7 +31689,7 @@
         "wif",
         "workspace"
       ],
-      "word_count": 2619,
+      "word_count": 2620,
       "file_path": "docs/docs__en__manage-claude__workload-identity-federation.md"
     },
     "/docs/en/manage-claude/workspaces": {

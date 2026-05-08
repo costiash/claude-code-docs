@@ -67,8 +67,8 @@ curl "https://api.anthropic.com/v1/organizations/rate_limits" \
       ],
       "limits": [
         { "type": "requests_per_minute", "value": 4000 },
-        { "type": "input_tokens_per_minute", "value": 2000000 },
-        { "type": "output_tokens_per_minute", "value": 400000 }
+        { "type": "input_tokens_per_minute", "value": 10000000 },
+        { "type": "output_tokens_per_minute", "value": 800000 }
       ]
     },
     {
@@ -130,7 +130,7 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
       ],
       "limits": [
         { "type": "requests_per_minute", "value": 1000, "org_limit": 4000 },
-        { "type": "input_tokens_per_minute", "value": 500000, "org_limit": 2000000 }
+        { "type": "input_tokens_per_minute", "value": 500000, "org_limit": 10000000 }
       ]
     }
   ],

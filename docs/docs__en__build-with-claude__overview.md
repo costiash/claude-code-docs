@@ -46,7 +46,7 @@ You can discover which capabilities a model supports programmatically. The [Mode
 | [Extended thinking](/docs/en/build-with-claude/extended-thinking) | Enhanced reasoning capabilities for complex tasks, providing transparency into Claude's step-by-step thought process before delivering its final answer. | ZDR eligible | <PlatformAvailability claudeApi bedrock vertexAi azureAiBeta /> |
 | [PDF support](/docs/en/build-with-claude/pdf-support) | Process and analyze text and visual content from PDF documents. | ZDR eligible | <PlatformAvailability claudeApi bedrock vertexAi azureAiBeta /> |
 | [Search results](/docs/en/build-with-claude/search-results) | Enable natural citations for RAG applications by providing search results with proper source attribution. Achieve web search-quality citations for custom knowledge bases and tools. | ZDR eligible | <PlatformAvailability claudeApi bedrock vertexAi azureAiBeta /> |
-| [Structured outputs](/docs/en/build-with-claude/structured-outputs) | Guarantee schema conformance with two approaches: JSON outputs for structured data responses, and strict tool use for validated tool inputs. | [ZDR eligible (qualified)](/docs/en/build-with-claude/structured-outputs#data-retention)* | <PlatformAvailability claudeApi bedrock azureAiBeta /> |
+| [Structured outputs](/docs/en/build-with-claude/structured-outputs) | Guarantee schema conformance with two approaches: JSON outputs for structured data responses, and strict tool use for validated tool inputs. | [ZDR eligible (qualified)](/docs/en/build-with-claude/structured-outputs#data-retention)* | <PlatformAvailability claudeApi bedrock vertexAi azureAiBeta /> |
 
 ## Tools
 

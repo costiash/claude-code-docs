@@ -350,7 +350,7 @@ Turning on this service does not give Google or Anthropic any access to your con
 </Note>
 
 ## Feature support
-For all currently supported features on Vertex AI, see [API features overview](/docs/en/api/overview).
+For all currently supported features on Vertex AI, see [API features overview](/docs/en/build-with-claude/overview).
 
 ### Context window
 

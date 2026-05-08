@@ -141,7 +141,7 @@ Anthropic enforces these constraints when you create or update issuers and rules
 
 ### URL fields
 
-The `issuer_url`, `discovery_base`, and `jwks_url` fields are validated:
+The `issuer_url`, `jwks.discovery_base`, and `jwks.url` fields are validated:
 
 | Constraint | Detail |
 | :--- | :--- |
@@ -152,7 +152,7 @@ The `issuer_url`, `discovery_base`, and `jwks_url` fields are validated:
 URL validation failures return `400 invalid_request_error` with the field name as a prefix on the error message (for example, `issuer_url: url must use https scheme`).
 
 <Note>
-URL constraints apply only to URLs that Anthropic dials. In `explicit_url` and `inline` JWKS modes the `issuer_url` is compared against the JWT `iss` claim as a string and is never fetched, so it may reference an internal hostname or non-standard port.
+URL constraints apply only to URLs that Anthropic dials. In `explicit_url` and `inline` JWKS modes, and in `discovery` mode when `jwks.discovery_base` is set, the `issuer_url` is compared against the JWT `iss` claim as a string and is never fetched, so it may reference an internal hostname or non-standard port.
 </Note>
 
 ### JWT verification
@@ -160,8 +160,10 @@ URL constraints apply only to URLs that Anthropic dials. In `explicit_url` and `
 | Constraint | Detail |
 | :--- | :--- |
 | Maximum size | The `assertion` JWT must be at most 16 KiB. |
-| Signing algorithm | Only asymmetric algorithms (RSA and ECDSA families: ES256, ES384, RS256, RS384, PS256, PS384) are accepted. HMAC (`HS256`, `HS384`, `HS512`) and `none` are rejected. |
-| Required claims | `sub` must be present. `exp` must be in the future. |
+| Signing algorithm | Only asymmetric algorithms (RSA and ECDSA families: ES256, ES384, ES512, RS256, RS384, RS512, PS256, PS384, PS512) are accepted. HMAC (`HS256`, `HS384`, `HS512`) and `none` are rejected. |
+| Key ID | The JWT header must carry a `kid` that matches a key in the issuer's JWKS. Tokens without `kid` are rejected. |
+| Required claims | `sub` must be present. `iat` must be present and not in the future. `exp` must be present and in the future. |
+| Maximum lifetime | The token's lifetime (`exp` minus `iat`) must not exceed the issuer's configured maximum (1 hour by default, configurable for each issuer in the Claude Console). |
 | Clock skew | A 30-second leeway is applied to `exp`, `nbf`, and `iat`. |
 
 ## Rule matching semantics
@@ -257,7 +259,7 @@ If you still need to debug from the JWT itself, work through these checks in ord
   </Step>
 
   <Step title="Check JWKS reachability">
-    For `discovery` mode, fetch `<issuer_url>/.well-known/openid-configuration` over public HTTPS on port 443 and confirm `jwks_uri` resolves. For `explicit_url`, fetch the JWKS URL directly. For `inline`, confirm the issuer's signing key has not rotated since you registered the keys.
+    For `discovery` mode, fetch `<jwks.discovery_base or issuer_url>/.well-known/openid-configuration` over public HTTPS on port 443 and confirm `jwks_uri` resolves. For `explicit_url`, fetch the JWKS URL directly. For `inline`, confirm the issuer's signing key has not rotated since you registered the keys.
 
     If the issuer rotated its signing key and immediately started signing with it, exchanges can fail for up to a minute while Anthropic's JWKS cache refreshes. See [Key rotation and caching](#key-rotation-and-caching).
   </Step>
@@ -265,15 +267,15 @@ If you still need to debug from the JWT itself, work through these checks in ord
 
 ## JWKS source modes
 
-When you register a federation issuer, the `jwks_source` field controls how Anthropic obtains the public keys used to verify JWT signatures from that issuer.
+When you register a federation issuer, the `jwks` field controls how Anthropic obtains the public keys used to verify JWT signatures from that issuer. It is a discriminated union keyed on `type`:
 
-| Mode | Required fields | Behavior | Use when |
+| `jwks.type` | `jwks` shape | Behavior | Use when |
 | :--- | :--- | :--- | :--- |
-| `discovery` (default) | `issuer_url` (optionally `discovery_base`) | Anthropic fetches `<issuer_url>/.well-known/openid-configuration`, reads `jwks_uri` from the discovery document, and fetches the JWKS from there. | Your IdP serves a standard OIDC discovery document on the public internet. Most managed providers (EKS, GKE, Cloud Run, GitHub Actions, Entra ID) support this. |
-| `explicit_url` | `issuer_url`, `jwks_url` | Anthropic fetches the JWKS directly from `jwks_url`. The `issuer_url` is used only for string comparison against the JWT `iss` claim and is never dialed. | Your IdP does not serve a discovery document, or discovery is internal-only but the JWKS is publicly reachable. |
-| `inline` | `issuer_url`, `jwks_keys` | You supply the array of JWK objects inline (the `keys` array from the JWKS document, not the wrapper object). Anthropic makes no outbound request. The `issuer_url` is used only for `iss` comparison. | Air-gapped environments, self-managed Kubernetes clusters with cluster-internal issuer URLs, or when you want explicit control over key rotation. |
+| `discovery` (default) | `{ "type": "discovery", "discovery_base": "https://..." }` (`discovery_base` is optional; set it when the discovery URL differs from `issuer_url`) | Anthropic fetches `<discovery_base or issuer_url>/.well-known/openid-configuration`, reads `jwks_uri` from the discovery document, and fetches the JWKS from there. | Your IdP serves a standard OIDC discovery document on the public internet. Most managed providers (EKS, GKE, Cloud Run, GitHub Actions, Entra ID) support this. |
+| `explicit_url` | `{ "type": "explicit_url", "url": "https://..." }` | Anthropic fetches the JWKS directly from `url`. The `issuer_url` is used only for string comparison against the JWT `iss` claim and is never dialed. | Your IdP does not serve a discovery document, or discovery is internal-only but the JWKS is publicly reachable. |
+| `inline` | `{ "type": "inline", "keys": [...] }` | You supply the array of JWK objects inline (the `keys` array from the JWKS document, not the wrapper object). Anthropic makes no outbound request. The `issuer_url` is used only for `iss` comparison. | Air-gapped environments, self-managed Kubernetes clusters with cluster-internal issuer URLs, or when you want explicit control over key rotation. |
 
-The companion fields are mutually exclusive: setting `jwks_url` with `jwks_source: "discovery"` is rejected.
+The discriminated union makes the companion fields mutually exclusive by construction. Both `discovery` and `explicit_url` also accept an optional `ca_cert_pem` string for issuers that serve TLS from a private CA.
 
 ### Key rotation and caching
 

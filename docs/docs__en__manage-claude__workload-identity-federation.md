@@ -372,7 +372,7 @@ Each guide covers where the JWT comes from on that platform, what its claims loo
     Self-managed and on-premises clusters using projected service-account tokens.
   </Card>
   <Card title="SPIFFE" icon="fingerprint" href="/docs/en/manage-claude/wif-providers/spiffe">
-    SPIRE-issued workloads using JWT-SVIDs and the OIDC Discovery Provider.
+    Workloads with SPIFFE JWT-SVIDs from SPIRE or another conformant issuer.
   </Card>
   <Card title="Okta" icon="lock" href="/docs/en/manage-claude/wif-providers/okta">
     Okta service applications using client-credentials flow.
