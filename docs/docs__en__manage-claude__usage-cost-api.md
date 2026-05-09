@@ -56,7 +56,7 @@ starting_at=2025-01-08T00:00:00Z&\
 ending_at=2025-01-15T00:00:00Z&\
 bucket_width=1d" \
   --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 <Tip>
@@ -92,7 +92,7 @@ ending_at=2025-01-08T00:00:00Z&\
 group_by[]=model&\
 bucket_width=1d" \
   --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 #### Hourly usage with filtering
@@ -106,7 +106,7 @@ service_tiers[]=batch&\
 context_window[]=0-200k&\
 bucket_width=1h" \
   --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 #### Filter usage by API keys and workspaces
@@ -121,7 +121,7 @@ workspace_ids[]=wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ&\
 workspace_ids[]=wrkspc_01XYZ789ABC123DEF456MNO&\
 bucket_width=1d" \
   --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 <Tip>
@@ -142,7 +142,7 @@ group_by[]=inference_geo&\
 group_by[]=model&\
 bucket_width=1d" \
   --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 You can also filter to a specific geo. Valid values are `global`, `us`, and `not_available`:
@@ -155,7 +155,7 @@ inference_geos[]=us&\
 group_by[]=model&\
 bucket_width=1d" \
   --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 <Note>
@@ -175,7 +175,7 @@ group_by[]=model&\
 bucket_width=1d" \
   --header "anthropic-version: 2023-06-01" \
   --header "anthropic-beta: fast-mode-2026-02-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 You can also filter to a specific speed. Valid values are `standard` and `fast`:
@@ -189,7 +189,7 @@ group_by[]=model&\
 bucket_width=1d" \
   --header "anthropic-version: 2023-06-01" \
   --header "anthropic-beta: fast-mode-2026-02-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 <Note>
@@ -230,7 +230,7 @@ ending_at=2025-01-31T00:00:00Z&\
 group_by[]=workspace_id&\
 group_by[]=description" \
   --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ## Pagination
@@ -248,7 +248,7 @@ starting_at=2025-01-01T00:00:00Z&\
 ending_at=2025-01-31T00:00:00Z&\
 limit=7" \
   --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 
 # Response includes: "has_more": true, "next_page": "page_xyz..."
 
@@ -259,7 +259,7 @@ ending_at=2025-01-31T00:00:00Z&\
 limit=7&\
 page=page_xyz..." \
   --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ## Common use cases

@@ -153,7 +153,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..9,-2..}
+```java Java hidelines={1..8,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.AnthropicBeta;
@@ -161,21 +161,19 @@ import com.anthropic.models.beta.messages.BetaMessage;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 
-public class FastModeExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        BetaMessage response = client.beta().messages().create(
-                MessageCreateParams.builder()
-                        .model(Model.CLAUDE_OPUS_4_6)
-                        .maxTokens(4096L)
-                        .speed(MessageCreateParams.Speed.FAST)
-                        .addBeta(AnthropicBeta.FAST_MODE_2026_02_01)
-                        .addUserMessage("Refactor this module to use dependency injection")
-                        .build());
+    BetaMessage response = client.beta().messages().create(
+            MessageCreateParams.builder()
+                    .model(Model.CLAUDE_OPUS_4_6)
+                    .maxTokens(4096L)
+                    .speed(MessageCreateParams.Speed.FAST)
+                    .addBeta(AnthropicBeta.FAST_MODE_2026_02_01)
+                    .addUserMessage("Refactor this module to use dependency injection")
+                    .build());
 
-        System.out.println(response.content().get(0).text().get().text());
-    }
+    IO.println(response.content().get(0).text().get().text());
 }
 ```
 
@@ -352,7 +350,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..9,-2..}
+```java Java hidelines={1..8,-1}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.AnthropicBeta;
@@ -360,21 +358,19 @@ import com.anthropic.models.beta.messages.BetaMessage;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 
-public class FastModeUsage {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_6)
-                .maxTokens(1024L)
-                .speed(MessageCreateParams.Speed.FAST)
-                .addBeta(AnthropicBeta.FAST_MODE_2026_02_01)
-                .addUserMessage("Hello")
-                .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_6)
+            .maxTokens(1024L)
+            .speed(MessageCreateParams.Speed.FAST)
+            .addBeta(AnthropicBeta.FAST_MODE_2026_02_01)
+            .addUserMessage("Hello")
+            .build();
 
-        BetaMessage response = client.beta().messages().create(params);
-        System.out.println(response.usage().speed());  // "fast" or "standard"
-    }
+    BetaMessage response = client.beta().messages().create(params);
+    IO.println(response.usage().speed());  // "fast" or "standard"
 }
 ```
 
@@ -499,10 +495,11 @@ def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params
             return create_message_with_fast_fallback(**params)
         raise
     except (
-        anthropic.InternalServerError,
-        anthropic.OverloadedError,
+        anthropic.APIStatusError,
         anthropic.APIConnectionError,
-    ):
+    ) as error:
+        if isinstance(error, anthropic.APIStatusError) and error.status_code < 500:
+            raise
         if max_attempts > 1:
             return create_message_with_fast_fallback(
                 max_attempts=max_attempts - 1, **params
@@ -579,7 +576,7 @@ async Task<BetaMessage> CreateMessageWithFastFallback(
     try
     {
         var requestClient = maxRetries is int retries
-            ? client.WithOptions(o => o with { MaxRetries = retries })
+            ? client.WithOptions(options => options with { MaxRetries = retries })
             : client;
         return await requestClient.Beta.Messages.Create(parameters);
     }
@@ -675,7 +672,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..2,5..11,-1}
+```java Java hidelines={1..2,5..10}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.errors.InternalServerException;
@@ -686,42 +683,41 @@ import com.anthropic.models.beta.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import java.util.Optional;
 
-public class FastModeFallback {
-    // Disable SDK auto-retry so the fallback logic below handles it
-    static AnthropicClient client =
-            AnthropicOkHttpClient.builder().fromEnv().maxRetries(0).build();
+// Disable SDK auto-retry so the fallback logic below handles it
+AnthropicClient client =
+        AnthropicOkHttpClient.builder().fromEnv().maxRetries(0).build();
 
-    static BetaMessage createMessageWithFastFallback(
-            MessageCreateParams params, int maxAttempts) {
-        try {
-            return client.beta().messages().create(params);
-        } catch (RateLimitException e) {
-            if (params.speed().isPresent()) {
-                MessageCreateParams retryParams = params.toBuilder()
-                        .speed(Optional.empty())
-                        .build();
-                return createMessageWithFastFallback(retryParams, maxAttempts);
-            }
-            throw e;
-        } catch (InternalServerException e) {
-            if (maxAttempts > 1) {
-                return createMessageWithFastFallback(params, maxAttempts - 1);
-            }
-            throw e;
+BetaMessage createMessageWithFastFallback(
+        MessageCreateParams params, int maxAttempts) {
+    try {
+        return client.beta().messages().create(params);
+    } catch (RateLimitException e) {
+        if (params.speed().isPresent()) {
+            MessageCreateParams retryParams = params.toBuilder()
+                    .speed(Optional.empty())
+                    .build();
+            return createMessageWithFastFallback(retryParams, maxAttempts);
         }
+        throw e;
+    } catch (InternalServerException e) {
+        if (maxAttempts > 1) {
+            return createMessageWithFastFallback(params, maxAttempts - 1);
+        }
+        throw e;
     }
+}
 
-    public static void main(String[] args) {
-        BetaMessage message = createMessageWithFastFallback(
-                MessageCreateParams.builder()
-                        .model(Model.CLAUDE_OPUS_4_6)
-                        .maxTokens(1024L)
-                        .addUserMessage("Hello")
-                        .addBeta(AnthropicBeta.FAST_MODE_2026_02_01)
-                        .speed(MessageCreateParams.Speed.FAST)
-                        .build(),
-                3);
-    }
+void main() {
+    BetaMessage message = createMessageWithFastFallback(
+            MessageCreateParams.builder()
+                    .model(Model.CLAUDE_OPUS_4_6)
+                    .maxTokens(1024L)
+                    .addUserMessage("Hello")
+                    .addBeta(AnthropicBeta.FAST_MODE_2026_02_01)
+                    .speed(MessageCreateParams.Speed.FAST)
+                    .build(),
+            3);
+    IO.println(message.content().get(0).text().get().text());
 }
 ```
 

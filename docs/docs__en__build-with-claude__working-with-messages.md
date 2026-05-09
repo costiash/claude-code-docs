@@ -69,27 +69,19 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
   ```
 
   ```csharp C#
-  using System;
-  using System.Threading.Tasks;
   using Anthropic;
   using Anthropic.Models.Messages;
 
-  class Program
-  {
-      static async Task Main()
-      {
-          AnthropicClient client = new();
+  AnthropicClient client = new();
 
-          var parameters = new MessageCreateParams
-          {
-              Model = Model.ClaudeOpus4_7,
-              MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
-          };
-          var message = await client.Messages.Create(parameters);
-          Console.WriteLine(message);
-      }
-  }
+  var parameters = new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_7,
+      MaxTokens = 1024,
+      Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
+  };
+  var message = await client.Messages.Create(parameters);
+  Console.WriteLine(message);
   ```
 
   ```go Go hidelines={1..11,-1}
@@ -260,33 +252,25 @@ await anthropic.messages.create({
 ```
 
 ```csharp C#
-using System;
-using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 1024,
+    Messages =
+    [
+        new() { Role = Role.User, Content = "Hello, Claude" },
+        new() { Role = Role.Assistant, Content = "Hello!" },
+        new() { Role = Role.User, Content = "Can you describe LLMs to me?" }
+    ]
+};
 
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 1024,
-            Messages =
-            [
-                new() { Role = Role.User, Content = "Hello, Claude" },
-                new() { Role = Role.Assistant, Content = "Hello!" },
-                new() { Role = Role.User, Content = "Can you describe LLMs to me?" }
-            ]
-        };
-
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -406,6 +390,10 @@ puts message
 
 You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
+<Warning>
+Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) or system prompt instructions instead. See the [migration guide](/docs/en/about-claude/models/migration-guide) for migration patterns.
+</Warning>
+
 <CodeGroup>
   ```bash cURL
   #!/bin/sh
@@ -473,31 +461,23 @@ You can pre-fill part of Claude's response in the last position of the input mes
   ```
 
   ```csharp C#
-  using System;
-  using System.Threading.Tasks;
   using Anthropic;
   using Anthropic.Models.Messages;
 
-  class Program
+  AnthropicClient client = new();
+
+  var parameters = new MessageCreateParams
   {
-      static async Task Main(string[] args)
-      {
-          AnthropicClient client = new();
+      Model = Model.ClaudeSonnet4_5,
+      MaxTokens = 1,
+      Messages = [
+          new() { Role = Role.User, Content = "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae" },
+          new() { Role = Role.Assistant, Content = "The answer is (" }
+      ]
+  };
 
-          var parameters = new MessageCreateParams
-          {
-              Model = Model.ClaudeSonnet4_5,
-              MaxTokens = 1,
-              Messages = [
-                  new() { Role = Role.User, Content = "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae" },
-                  new() { Role = Role.Assistant, Content = "The answer is (" }
-              ]
-          };
-
-          var message = await client.Messages.Create(parameters);
-          Console.WriteLine(message);
-      }
-  }
+  var message = await client.Messages.Create(parameters);
+  Console.WriteLine(message);
   ```
 
   ```go Go hidelines={1..11,-1}
@@ -611,10 +591,6 @@ You can pre-fill part of Claude's response in the last position of the input mes
   }
 }
 ```
-
-<Warning>
-Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](/docs/en/build-with-claude/structured-outputs) or system prompt instructions instead. See the [migration guide](/docs/en/about-claude/models/migration-guide) for migration patterns.
-</Warning>
 
 ## Vision
 
@@ -830,81 +806,73 @@ Claude can read both text and images in requests. Images can be supplied using t
 
   
   ```csharp C# nocheck
-  using System;
   using System.Collections.Generic;
   using System.Net.Http;
-  using System.Threading.Tasks;
   using Anthropic;
   using Anthropic.Models.Messages;
 
-  public class Program
+  AnthropicClient client = new();
+
+  // Option 1: Base64-encoded image
+  string imageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+
+  using HttpClient httpClient = new();
+  byte[] imageBytes = await httpClient.GetByteArrayAsync(imageUrl);
+  string imageData = Convert.ToBase64String(imageBytes);
+
+  var parameters = new MessageCreateParams
   {
-      public static async Task Main(string[] args)
-      {
-          AnthropicClient client = new();
-
-          // Option 1: Base64-encoded image
-          string imageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
-
-          using HttpClient httpClient = new();
-          byte[] imageBytes = await httpClient.GetByteArrayAsync(imageUrl);
-          string imageData = Convert.ToBase64String(imageBytes);
-
-          var parameters = new MessageCreateParams
+      Model = Model.ClaudeOpus4_7,
+      MaxTokens = 1024,
+      Messages =
+      [
+          new()
           {
-              Model = Model.ClaudeOpus4_7,
-              MaxTokens = 1024,
-              Messages =
-              [
-                  new()
-                  {
-                      Role = Role.User,
-                      Content = new MessageParamContent(new List<ContentBlockParam>
+              Role = Role.User,
+              Content = new MessageParamContent(new List<ContentBlockParam>
+              {
+                  new ContentBlockParam(new ImageBlockParam(
+                      new ImageBlockParamSource(new Base64ImageSource()
                       {
-                          new ContentBlockParam(new ImageBlockParam(
-                              new ImageBlockParamSource(new Base64ImageSource()
-                              {
-                                  Data = imageData,
-                                  MediaType = MediaType.ImageJpeg,
-                              })
-                          )),
-                          new ContentBlockParam(new TextBlockParam("What is in the above image?")),
-                      }),
-                  }
-              ]
-          };
+                          Data = imageData,
+                          MediaType = MediaType.ImageJpeg,
+                      })
+                  )),
+                  new ContentBlockParam(new TextBlockParam("What is in the above image?")),
+              }),
+          }
+      ]
+  };
 
-          var message = await client.Messages.Create(parameters);
-          Console.WriteLine(message);
+  var message = await client.Messages.Create(parameters);
+  Console.WriteLine(message);
 
-          // Option 2: URL-referenced image
-          var parametersFromUrl = new MessageCreateParams
+  // Option 2: URL-referenced image
+  var parametersFromUrl = new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_7,
+      MaxTokens = 1024,
+      Messages =
+      [
+          new()
           {
-              Model = Model.ClaudeOpus4_7,
-              MaxTokens = 1024,
-              Messages =
-              [
-                  new()
-                  {
-                      Role = Role.User,
-                      Content = new MessageParamContent(new List<ContentBlockParam>
+              Role = Role.User,
+              Content = new MessageParamContent(new List<ContentBlockParam>
+              {
+                  new ContentBlockParam(new ImageBlockParam(
+                      new ImageBlockParamSource(new UrlImageSource()
                       {
-                          new ContentBlockParam(new ImageBlockParam(
-                              new ImageBlockParamSource(new UrlImageSource()
-                              {
-                                  Url = new Uri("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"),
-                              })
-                          )),
-                          new ContentBlockParam(new TextBlockParam("What is in the above image?")),
-                      }),
-                  }
-              ]
-          };
+                          Url = new Uri("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"),
+                      })
+                  )),
+                  new ContentBlockParam(new TextBlockParam("What is in the above image?")),
+              }),
+          }
+      ]
+  };
 
-          var messageFromUrl = await client.Messages.Create(parametersFromUrl);
-          Console.WriteLine(messageFromUrl);
-      }
-  }
+  var messageFromUrl = await client.Messages.Create(parametersFromUrl);
+  Console.WriteLine(messageFromUrl);
   ```
 
   

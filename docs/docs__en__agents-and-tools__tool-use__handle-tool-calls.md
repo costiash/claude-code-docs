@@ -10,7 +10,7 @@ This page covers the tool-call lifecycle: reading `tool_use` blocks from Claude'
 **Simpler with Tool Runner**: The manual tool handling described on this page is automatically managed by [Tool Runner](/docs/en/agents-and-tools/tool-use/tool-runner). Use this page when you need custom control over tool execution.
 </Note>
 
-Claude's response differs based on whether it uses a client or server tool.
+Claude's response differs based on whether it uses a [client or server tool](/docs/en/agents-and-tools/tool-use/overview#how-tool-use-works).
 
 ## Handling results from client tools
 

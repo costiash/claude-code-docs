@@ -141,33 +141,22 @@ async function main() {
 main().catch(console.error);
 ```
 
-```csharp C#
-using System;
-using System.Threading.Tasks;
+```csharp C# hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new()
-        {
-            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
-        };
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 4096,
+    Messages = [new() { Role = Role.User, Content = "Fetch the content at https://example.com/research-paper and extract the key findings." }],
+    Tools = [new ToolUnion(new WebFetchTool20260209())]
+};
 
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 4096,
-            Messages = [new() { Role = Role.User, Content = "Fetch the content at https://example.com/research-paper and extract the key findings." }],
-            Tools = [new ToolUnion(new WebFetchTool20260209())]
-        };
-
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -201,7 +190,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..5,7..9,-2..}
+```java Java hidelines={1..5}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -209,20 +198,18 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.WebFetchTool20260209;
 
-public class WebFetchExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_7)
-            .maxTokens(4096L)
-            .addUserMessage("Fetch the content at https://example.com/research-paper and extract the key findings.")
-            .addTool(WebFetchTool20260209.builder().build())
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_7)
+        .maxTokens(4096L)
+        .addUserMessage("Fetch the content at https://example.com/research-paper and extract the key findings.")
+        .addTool(WebFetchTool20260209.builder().build())
+        .build();
 
-        Message response = client.messages().create(params);
-        System.out.println(response);
-    }
+    Message response = client.messages().create(params);
+    IO.println(response);
 }
 ```
 
@@ -351,33 +338,22 @@ async function main() {
 main().catch(console.error);
 ```
 
-```csharp C#
-using System;
-using System.Threading.Tasks;
+```csharp C# hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new()
-        {
-            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
-        };
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "Please analyze the content at https://example.com/article" }],
+    Tools = [new ToolUnion(new WebFetchTool20250910() { MaxUses = 5 })]
+};
 
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 1024,
-            Messages = [new() { Role = Role.User, Content = "Please analyze the content at https://example.com/article" }],
-            Tools = [new ToolUnion(new WebFetchTool20250910() { MaxUses = 5 })]
-        };
-
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -413,7 +389,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..5,7..9,-2..}
+```java Java hidelines={1..5}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -421,22 +397,20 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.WebFetchTool20250910;
 
-public class WebFetchExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_7)
-            .maxTokens(1024L)
-            .addUserMessage("Please analyze the content at https://example.com/article")
-            .addTool(WebFetchTool20250910.builder()
-                .maxUses(5L)
-                .build())
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_7)
+        .maxTokens(1024L)
+        .addUserMessage("Please analyze the content at https://example.com/article")
+        .addTool(WebFetchTool20250910.builder()
+            .maxUses(5L)
+            .build())
+        .build();
 
-        Message response = client.messages().create(params);
-        System.out.println(response);
-    }
+    Message response = client.messages().create(params);
+    IO.println(response);
 }
 ```
 
@@ -708,6 +682,7 @@ response = client.messages.create(
         },
     ],
 )
+print(response)
 ```
 
 In this workflow, Claude will:

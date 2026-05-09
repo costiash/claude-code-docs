@@ -58,19 +58,19 @@ Claude Managed Agents is built around four concepts:
 
 Claude Managed Agents is best for workloads that need:
 
-- **Long-running execution** - Tasks that run for minutes or hours with multiple tool calls
-- **Cloud infrastructure** - Secure containers with pre-installed packages and network access
-- **Minimal infrastructure** - No need to build your own agent loop, sandbox, or tool execution layer
-- **Stateful sessions** - Persistent file systems and conversation history across multiple interactions
+- **Long-running execution:** Tasks that run for minutes or hours with multiple tool calls
+- **Cloud infrastructure:** Secure containers with pre-installed packages and network access
+- **Minimal infrastructure:** No need to build your own agent loop, sandbox, or tool execution layer
+- **Stateful sessions:** Persistent filesystems and conversation history across multiple interactions
 
 ## Supported tools
 
-Claude Managed Agents gives Claude access to a comprehensive set of built-in tools:
+Claude Managed Agents gives Claude access to a set of built-in tools:
 
-- **Bash** - Run shell commands in the container
-- **File operations** - Read, write, edit, glob, and grep files in the container
-- **Web search and fetch** - Search the web and retrieve content from URLs
-- **MCP servers** - Connect to external tool providers
+- **Bash:** Run shell commands in the container
+- **File operations:** Read, write, edit, glob, and grep files in the container
+- **Web search and fetch:** Search the web and retrieve content from URLs
+- **MCP servers:** Connect to external tool providers
 
 See [Tools](/docs/en/managed-agents/tools) for the full list and configuration options.
 
@@ -82,10 +82,10 @@ Claude Managed Agents is currently in beta. All Managed Agents endpoints require
 To get started, you need:
 
 1. A [Claude API key](/settings/keys)
-2. The beta header above on all requests
+2. The `managed-agents-2026-04-01` beta header on all requests
 3. Access to Claude Managed Agents (enabled by default for all API accounts)
 
-Certain features ([outcomes](/docs/en/managed-agents/define-outcomes) and [multiagent](/docs/en/managed-agents/multi-agent)) are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
+Certain features ([outcomes](/docs/en/managed-agents/define-outcomes) and [multiagent](/docs/en/managed-agents/multi-agent)) are in beta (research preview). [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
 ## Rate limits
 

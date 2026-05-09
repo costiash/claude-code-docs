@@ -40,13 +40,13 @@ There are two tool search variants:
 
 When you enable the tool search tool:
 
-1. You include a tool search tool (e.g., `tool_search_tool_regex_20251119` or `tool_search_tool_bm25_20251119`) in your tools list
-2. You provide all tool definitions with `defer_loading: true` for tools that shouldn't be loaded immediately
-3. Claude sees only the tool search tool and any non-deferred tools initially
-4. When Claude needs additional tools, it searches using a tool search tool
-5. The API returns 3-5 most relevant `tool_reference` blocks
-6. These references are automatically expanded into full tool definitions
-7. Claude selects from the discovered tools and invokes them
+1. You include a tool search tool (for example, `tool_search_tool_regex_20251119` or `tool_search_tool_bm25_20251119`) in your tools list.
+2. You provide all tool definitions with `defer_loading: true` for tools that shouldn't be loaded immediately.
+3. Claude sees only the tool search tool and any non-deferred tools initially.
+4. When Claude needs additional tools, it searches using a tool search tool.
+5. The API returns 3-5 most relevant `tool_reference` blocks.
+6. These references are automatically expanded into full tool definitions.
+7. Claude selects from the discovered tools and calls them.
 
 This keeps your context window efficient while maintaining high tool selection accuracy.
 
@@ -191,132 +191,121 @@ response = client.messages.create(
 print(response)
 ```
 
-```typescript TypeScript hidelines={1..5,-3..-1}
+```typescript TypeScript hidelines={1..4}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
-async function main() {
-  const response = await client.messages.create({
-    model: "claude-opus-4-7",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: "What is the weather in San Francisco?"
-      }
-    ],
-    tools: [
-      {
-        type: "tool_search_tool_regex_20251119",
-        name: "tool_search_tool_regex"
-      },
-      {
-        name: "get_weather",
-        description: "Get the weather at a specific location",
-        input_schema: {
-          type: "object" as const,
-          properties: {
-            location: { type: "string" },
-            unit: {
-              type: "string",
-              enum: ["celsius", "fahrenheit"]
-            }
-          },
-          required: ["location"]
+const response = await client.messages.create({
+  model: "claude-opus-4-7",
+  max_tokens: 2048,
+  messages: [
+    {
+      role: "user",
+      content: "What is the weather in San Francisco?"
+    }
+  ],
+  tools: [
+    {
+      type: "tool_search_tool_regex_20251119",
+      name: "tool_search_tool_regex"
+    },
+    {
+      name: "get_weather",
+      description: "Get the weather at a specific location",
+      input_schema: {
+        type: "object" as const,
+        properties: {
+          location: { type: "string" },
+          unit: {
+            type: "string",
+            enum: ["celsius", "fahrenheit"]
+          }
         },
-        defer_loading: true
+        required: ["location"]
       },
-      {
-        name: "search_files",
-        description: "Search through files in the workspace",
-        input_schema: {
-          type: "object" as const,
-          properties: {
-            query: { type: "string" },
-            file_types: {
-              type: "array",
-              items: { type: "string" }
-            }
-          },
-          required: ["query"]
+      defer_loading: true
+    },
+    {
+      name: "search_files",
+      description: "Search through files in the workspace",
+      input_schema: {
+        type: "object" as const,
+        properties: {
+          query: { type: "string" },
+          file_types: {
+            type: "array",
+            items: { type: "string" }
+          }
         },
-        defer_loading: true
-      }
-    ]
-  });
+        required: ["query"]
+      },
+      defer_loading: true
+    }
+  ]
+});
 
-  console.log(JSON.stringify(response, null, 2));
-}
-
-main();
+console.log(response);
 ```
 
-```csharp C#
+```csharp C# hidelines={1..5}
 using System;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 2048,
+    Messages = [
+        new() {
+            Role = Role.User,
+            Content = "What is the weather in San Francisco?"
+        }
+    ],
+    Tools = [
+        new ToolUnion(new ToolSearchToolRegex20251119
         {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 2048,
-            Messages = [
-                new() {
-                    Role = Role.User,
-                    Content = "What is the weather in San Francisco?"
-                }
-            ],
-            Tools = [
-                new ToolUnion(new ToolSearchToolRegex20251119
+            Type = ToolSearchToolRegex20251119Type.ToolSearchToolRegex20251119
+        }),
+        new ToolUnion(new Tool()
+        {
+            Name = "get_weather",
+            Description = "Get the weather at a specific location",
+            InputSchema = new InputSchema()
+            {
+                Properties = new Dictionary<string, JsonElement>
                 {
-                    Type = ToolSearchToolRegex20251119Type.ToolSearchToolRegex20251119
-                }),
-                new ToolUnion(new Tool()
+                    ["location"] = JsonSerializer.SerializeToElement(new { type = "string" }),
+                    ["unit"] = JsonSerializer.SerializeToElement(new { type = "string", @enum = new[] { "celsius", "fahrenheit" } }),
+                },
+                Required = ["location"],
+            },
+            DeferLoading = true,
+        }),
+        new ToolUnion(new Tool()
+        {
+            Name = "search_files",
+            Description = "Search through files in the workspace",
+            InputSchema = new InputSchema()
+            {
+                Properties = new Dictionary<string, JsonElement>
                 {
-                    Name = "get_weather",
-                    Description = "Get the weather at a specific location",
-                    InputSchema = new InputSchema()
-                    {
-                        Properties = new Dictionary<string, JsonElement>
-                        {
-                            ["location"] = JsonSerializer.SerializeToElement(new { type = "string" }),
-                            ["unit"] = JsonSerializer.SerializeToElement(new { type = "string", @enum = new[] { "celsius", "fahrenheit" } }),
-                        },
-                        Required = ["location"],
-                    },
-                    DeferLoading = true,
-                }),
-                new ToolUnion(new Tool()
-                {
-                    Name = "search_files",
-                    Description = "Search through files in the workspace",
-                    InputSchema = new InputSchema()
-                    {
-                        Properties = new Dictionary<string, JsonElement>
-                        {
-                            ["query"] = JsonSerializer.SerializeToElement(new { type = "string" }),
-                            ["file_types"] = JsonSerializer.SerializeToElement(new { type = "array", items = new { type = "string" } }),
-                        },
-                        Required = ["query"],
-                    },
-                    DeferLoading = true,
-                }),
-            ]
-        };
+                    ["query"] = JsonSerializer.SerializeToElement(new { type = "string" }),
+                    ["file_types"] = JsonSerializer.SerializeToElement(new { type = "array", items = new { type = "string" } }),
+                },
+                Required = ["query"],
+            },
+            DeferLoading = true,
+        }),
+    ]
+};
 
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -379,7 +368,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..8,10..14,-2..}
+```java Java hidelines={1..8}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.core.JsonValue;
@@ -389,59 +378,55 @@ import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.Tool;
 import com.anthropic.models.messages.Tool.InputSchema;
 import com.anthropic.models.messages.ToolSearchToolRegex20251119;
-import java.util.List;
-import java.util.Map;
 
-public class ToolSearchExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        InputSchema weatherSchema = InputSchema.builder()
-            .properties(JsonValue.from(Map.of(
-                "location", Map.of("type", "string"),
-                "unit", Map.of(
-                    "type", "string",
-                    "enum", List.of("celsius", "fahrenheit")
-                )
-            )))
-            .putAdditionalProperty("required", JsonValue.from(List.of("location")))
-            .build();
+    InputSchema weatherSchema = InputSchema.builder()
+        .properties(JsonValue.from(Map.of(
+            "location", Map.of("type", "string"),
+            "unit", Map.of(
+                "type", "string",
+                "enum", List.of("celsius", "fahrenheit")
+            )
+        )))
+        .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+        .build();
 
-        InputSchema searchSchema = InputSchema.builder()
-            .properties(JsonValue.from(Map.of(
-                "query", Map.of("type", "string"),
-                "file_types", Map.of(
-                    "type", "array",
-                    "items", Map.of("type", "string")
-                )
-            )))
-            .putAdditionalProperty("required", JsonValue.from(List.of("query")))
-            .build();
+    InputSchema searchSchema = InputSchema.builder()
+        .properties(JsonValue.from(Map.of(
+            "query", Map.of("type", "string"),
+            "file_types", Map.of(
+                "type", "array",
+                "items", Map.of("type", "string")
+            )
+        )))
+        .putAdditionalProperty("required", JsonValue.from(List.of("query")))
+        .build();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_7)
-            .maxTokens(2048L)
-            .addUserMessage("What is the weather in San Francisco?")
-            .addTool(ToolSearchToolRegex20251119.builder()
-                .type(ToolSearchToolRegex20251119.Type.TOOL_SEARCH_TOOL_REGEX_20251119)
-                .build())
-            .addTool(Tool.builder()
-                .name("get_weather")
-                .description("Get the weather at a specific location")
-                .inputSchema(weatherSchema)
-                .deferLoading(true)
-                .build())
-            .addTool(Tool.builder()
-                .name("search_files")
-                .description("Search through files in the workspace")
-                .inputSchema(searchSchema)
-                .deferLoading(true)
-                .build())
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_7)
+        .maxTokens(2048L)
+        .addUserMessage("What is the weather in San Francisco?")
+        .addTool(ToolSearchToolRegex20251119.builder()
+            .type(ToolSearchToolRegex20251119.Type.TOOL_SEARCH_TOOL_REGEX_20251119)
+            .build())
+        .addTool(Tool.builder()
+            .name("get_weather")
+            .description("Get the weather at a specific location")
+            .inputSchema(weatherSchema)
+            .deferLoading(true)
+            .build())
+        .addTool(Tool.builder()
+            .name("search_files")
+            .description("Search through files in the workspace")
+            .inputSchema(searchSchema)
+            .deferLoading(true)
+            .build())
+        .build();
 
-        Message response = client.messages().create(params);
-        System.out.println(response);
-    }
+    Message response = client.messages().create(params);
+    IO.println(response);
 }
 ```
 
@@ -672,10 +657,10 @@ When Claude uses the tool search tool, the response includes new block types:
 
 ### Understanding the response
 
-- **`server_tool_use`:** Indicates Claude is invoking the tool search tool
+- **`server_tool_use`:** Indicates Claude is calling the tool search tool
 - **`tool_search_tool_result`:** Contains the search results with a nested `tool_search_tool_search_result` object
 - **`tool_references`:** Array of `tool_reference` objects pointing to discovered tools
-- **`tool_use`:** Claude invoking the discovered tool
+- **`tool_use`:** Claude calling the discovered tool
 
 The `tool_reference` blocks are automatically expanded into full tool definitions before being shown to Claude. You don't need to handle this expansion yourself. It happens automatically in the API as long as you provide all matching tool definitions in the `tools` parameter.
 
@@ -685,7 +670,7 @@ For configuring `mcp_toolset` with `defer_loading`, see [MCP connector](/docs/en
 
 ## Custom tool search implementation
 
-You can implement your own tool search logic (e.g., using embeddings or semantic search) by returning `tool_reference` blocks from a custom tool. When Claude calls your custom search tool, return a standard `tool_result` with `tool_reference` blocks in the content array:
+You can implement your own tool search logic (for example, using embeddings or semantic search) by returning `tool_reference` blocks from a custom tool. When Claude calls your custom search tool, return a standard `tool_result` with `tool_reference` blocks in the content array:
 
 ```json JSON
 {
@@ -698,7 +683,7 @@ You can implement your own tool search logic (e.g., using embeddings or semantic
 Every tool referenced must have a corresponding tool definition in the top-level `tools` parameter with `defer_loading: true`. This approach lets you use more sophisticated search algorithms while maintaining compatibility with the tool search system.
 
 <Note>
-The `tool_search_tool_result` format shown in the [Response format](#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown above.
+The `tool_search_tool_result` format shown in the [Response format](#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown in the preceding example.
 </Note>
 
 For a complete example using embeddings, see the [tool search with embeddings cookbook](https://platform.claude.com/cookbooks/tool_use).
@@ -746,7 +731,7 @@ Errors during tool execution return a 200 response with error information in the
 
 ```json JSON
 {
-  "type": "tool_result",
+  "type": "tool_search_tool_result",
   "tool_use_id": "srvtoolu_01ABC123",
   "content": {
     "type": "tool_search_tool_result_error",
@@ -772,7 +757,7 @@ Errors during tool execution return a 200 response with error information in the
 
 ```json
 {
-  "type": "tool_search_tool_regex_20251119", // No defer_loading here
+  "type": "tool_search_tool_regex_20251119",
   "name": "tool_search_tool_regex"
 }
 ```
@@ -790,7 +775,7 @@ Errors during tool execution return a 200 response with error information in the
   "name": "my_tool",
   "description": "Full description here",
   "input_schema": {
-    // complete schema
+    "type": "object"
   },
   "defer_loading": true
 }
@@ -873,7 +858,7 @@ You can include the tool search tool in the [Messages Batches API](/docs/en/buil
 
 - Keep 3-5 most frequently used tools as non-deferred
 - Write clear, descriptive tool names and descriptions
-- Use consistent namespacing in tool names: prefix by service or resource (e.g., `github_`, `slack_`) so that search queries naturally surface the right tool group
+- Use consistent namespacing in tool names: prefix by service or resource (for example, `github_`, `slack_`) so that search queries naturally surface the right tool group
 - Use semantic keywords in descriptions that match how users describe tasks
 - Add a system prompt section describing available tool categories: "You can search for tools to interact with Slack, GitHub, and Jira"
 - Monitor which tools Claude discovers to refine descriptions

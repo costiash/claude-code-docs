@@ -96,55 +96,43 @@ response = client.messages.create(
 print(response)
 ```
 
-```typescript TypeScript nocheck hidelines={1..5,-3..-1}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
-async function main() {
-  const response = await anthropic.messages.create({
-    model: "claude-opus-4-7",
-    max_tokens: 4096,
-    messages: [
-      {
-        role: "user",
-        content:
-          "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio."
-      }
-    ],
-    tools: [{ type: "web_search_20260209", name: "web_search" }]
-  });
+const response = await anthropic.messages.create({
+  model: "claude-opus-4-7",
+  max_tokens: 4096,
+  messages: [
+    {
+      role: "user",
+      content:
+        "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio."
+    }
+  ],
+  tools: [{ type: "web_search_20260209", name: "web_search" }]
+});
 
-  console.log(response);
-}
-
-main().catch(console.error);
+console.log(response);
 ```
 
-```csharp C#
-using System;
-using System.Threading.Tasks;
+```csharp C# hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 4096,
+    Messages = [new() { Role = Role.User, Content = "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio." }],
+    Tools = [new ToolUnion(new WebSearchTool20260209())]
+};
 
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 4096,
-            Messages = [new() { Role = Role.User, Content = "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio." }],
-            Tools = [new ToolUnion(new WebSearchTool20260209())]
-        };
-
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -178,7 +166,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..5,7..9,-2..}
+```java Java hidelines={1..5}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -186,20 +174,18 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.WebSearchTool20260209;
 
-public class WebSearchExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_7)
-            .maxTokens(4096L)
-            .addUserMessage("Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.")
-            .addTool(WebSearchTool20260209.builder().build())
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_7)
+        .maxTokens(4096L)
+        .addUserMessage("Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.")
+        .addTool(WebSearchTool20260209.builder().build())
+        .build();
 
-        Message response = client.messages().create(params);
-        System.out.println(response);
-    }
+    Message response = client.messages().create(params);
+    IO.println(response);
 }
 ```
 
@@ -330,30 +316,22 @@ async function main() {
 main().catch(console.error);
 ```
 
-```csharp C#
-using System;
-using System.Threading.Tasks;
+```csharp C# hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "What's the weather in NYC?" }],
+    Tools = [new ToolUnion(new WebSearchTool20250305() { MaxUses = 5 })]
+};
 
-        var parameters = new MessageCreateParams
-        {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 1024,
-            Messages = [new() { Role = Role.User, Content = "What's the weather in NYC?" }],
-            Tools = [new ToolUnion(new WebSearchTool20250305() { MaxUses = 5 })]
-        };
-
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -389,7 +367,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..5,7..9,-2..}
+```java Java hidelines={1..5}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.Message;
@@ -397,22 +375,20 @@ import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.models.messages.WebSearchTool20250305;
 
-public class WebSearchExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_7)
-            .maxTokens(1024L)
-            .addUserMessage("What's the weather in NYC?")
-            .addTool(WebSearchTool20250305.builder()
-                .maxUses(5L)
-                .build())
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_7)
+        .maxTokens(1024L)
+        .addUserMessage("What's the weather in NYC?")
+        .addTool(WebSearchTool20250305.builder()
+            .maxUses(5L)
+            .build())
+        .build();
 
-        Message response = client.messages().create(params);
-        System.out.println(response);
-    }
+    Message response = client.messages().create(params);
+    IO.println(response);
 }
 ```
 

@@ -390,7 +390,7 @@ $batch = $client->messages->batches->create(
     ],
 );
 
-print_r($batch);
+echo $batch->id;
 ```
 
 ```ruby Ruby hidelines={1..2}
@@ -562,34 +562,26 @@ while (true) {
 console.log(messageBatch);
 ```
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
+```csharp C# nocheck hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages.Batches;
 
-class Program
+AnthropicClient client = new();
+string messageBatchId = Environment.GetEnvironmentVariable("MESSAGE_BATCH_ID");
+
+MessageBatch messageBatch = null;
+while (true)
 {
-    static async Task Main(string[] args)
+    messageBatch = await client.Messages.Batches.Retrieve(messageBatchId);
+    if (messageBatch.ProcessingStatus == "ended")
     {
-        AnthropicClient client = new();
-        string messageBatchId = Environment.GetEnvironmentVariable("MESSAGE_BATCH_ID");
-
-        MessageBatch messageBatch = null;
-        while (true)
-        {
-            messageBatch = await client.Messages.Batches.Retrieve(messageBatchId);
-            if (messageBatch.ProcessingStatus == "ended")
-            {
-                break;
-            }
-
-            Console.WriteLine($"Batch {messageBatchId} is still processing...");
-            await Task.Delay(60000);
-        }
-        Console.WriteLine(messageBatch);
+        break;
     }
+
+    Console.WriteLine($"Batch {messageBatchId} is still processing...");
+    await Task.Delay(60000);
 }
+Console.WriteLine(messageBatch);
 ```
 
 ```go Go nocheck hidelines={1..14,-1}
@@ -1000,40 +992,32 @@ for await (const result of await anthropic.messages.batches.results(
 }
 ```
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
+```csharp C# nocheck hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages.Batches;
 
-public class Program
-{
-    public static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
+AnthropicClient client = new();
 
-        await foreach (var result in client.Messages.Batches.ResultsStreaming("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d"))
-        {
-            switch (result.Result.Type)
+await foreach (var result in client.Messages.Batches.ResultsStreaming("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d"))
+{
+    switch (result.Result.Type)
+    {
+        case "succeeded":
+            Console.WriteLine($"Success! {result.CustomID}");
+            break;
+        case "errored":
+            if (result.Result.Error?.Type == "invalid_request")
             {
-                case "succeeded":
-                    Console.WriteLine($"Success! {result.CustomID}");
-                    break;
-                case "errored":
-                    if (result.Result.Error?.Type == "invalid_request")
-                    {
-                        Console.WriteLine($"Validation error: {result.CustomID}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Server error: {result.CustomID}");
-                    }
-                    break;
-                case "expired":
-                    Console.WriteLine($"Request expired: {result.CustomID}");
-                    break;
+                Console.WriteLine($"Validation error: {result.CustomID}");
             }
-        }
+            else
+            {
+                Console.WriteLine($"Server error: {result.CustomID}");
+            }
+            break;
+        case "expired":
+            Console.WriteLine($"Request expired: {result.CustomID}");
+            break;
     }
 }
 ```
@@ -1247,22 +1231,15 @@ const messageBatch = await anthropic.messages.batches.cancel(MESSAGE_BATCH_ID);
 console.log(messageBatch);
 ```
 
-```csharp C# nocheck
-using System;
-using System.Threading.Tasks;
+```csharp C# nocheck hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages.Batches;
 
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
+AnthropicClient client = new();
+string messageBatchId = Environment.GetEnvironmentVariable("MESSAGE_BATCH_ID");
 
-        var messageBatch = await client.Messages.Batches.Cancel(MESSAGE_BATCH_ID);
-        Console.WriteLine(messageBatch);
-    }
-}
+var messageBatch = await client.Messages.Batches.Cancel(messageBatchId);
+Console.WriteLine(messageBatch);
 ```
 
 ```go Go nocheck hidelines={1..12,-1}
@@ -1576,80 +1553,71 @@ const messageBatch = await anthropic.messages.batches.create({
 ```
 
 ```csharp C#
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Messages;
 using Anthropic.Models.Messages.Batches;
 
-public class Program
+AnthropicClient client = new()
 {
-    public static async Task Main(string[] args)
-    {
-        AnthropicClient client = new()
-        {
-            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
-        };
+    ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+};
 
-        var messageBatch = await client.Messages.Batches.Create(new BatchCreateParams
+var messageBatch = await client.Messages.Batches.Create(new BatchCreateParams
+{
+    Requests =
+    [
+        new()
         {
-            Requests =
-            [
-                new()
+            CustomID = "my-first-request",
+            Params = new()
+            {
+                Model = Model.ClaudeOpus4_7,
+                MaxTokens = 1024,
+                System = new List<TextBlockParam>
                 {
-                    CustomID = "my-first-request",
-                    Params = new()
+                    new()
                     {
-                        Model = Model.ClaudeOpus4_7,
-                        MaxTokens = 1024,
-                        System = new List<TextBlockParam>
-                        {
-                            new()
-                            {
-                                Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
-                            },
-                            new()
-                            {
-                                Text = "<the entire contents of Pride and Prejudice>",
-                                CacheControl = new()
-                            }
-                        },
-                        Messages =
-                        [
-                            new() { Role = Role.User, Content = "Analyze the major themes in Pride and Prejudice." }
-                        ]
+                        Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+                    },
+                    new()
+                    {
+                        Text = "<the entire contents of Pride and Prejudice>",
+                        CacheControl = new()
                     }
                 },
-                new()
+                Messages =
+                [
+                    new() { Role = Role.User, Content = "Analyze the major themes in Pride and Prejudice." }
+                ]
+            }
+        },
+        new()
+        {
+            CustomID = "my-second-request",
+            Params = new()
+            {
+                Model = Model.ClaudeOpus4_7,
+                MaxTokens = 1024,
+                System = new List<TextBlockParam>
                 {
-                    CustomID = "my-second-request",
-                    Params = new()
+                    new()
                     {
-                        Model = Model.ClaudeOpus4_7,
-                        MaxTokens = 1024,
-                        System = new List<TextBlockParam>
-                        {
-                            new()
-                            {
-                                Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
-                            },
-                            new()
-                            {
-                                Text = "<the entire contents of Pride and Prejudice>",
-                                CacheControl = new()
-                            }
-                        },
-                        Messages =
-                        [
-                            new() { Role = Role.User, Content = "Write a summary of Pride and Prejudice." }
-                        ]
+                        Text = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.\n"
+                    },
+                    new()
+                    {
+                        Text = "<the entire contents of Pride and Prejudice>",
+                        CacheControl = new()
                     }
-                }
-            ]
-        });
-    }
-}
+                },
+                Messages =
+                [
+                    new() { Role = Role.User, Content = "Write a summary of Pride and Prejudice." }
+                ]
+            }
+        }
+    ]
+});
 ```
 
 ```go Go hidelines={1..10,-1}
@@ -2132,7 +2100,7 @@ $batch = $client->beta->messages->batches->create(
     ],
 );
 
-print_r($batch);
+echo $batch->id;
 ```
 
 ```ruby Ruby hidelines={1..2}

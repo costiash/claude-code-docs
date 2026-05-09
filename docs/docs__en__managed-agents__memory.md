@@ -216,7 +216,7 @@ client.beta.memory_stores.memories.create(
 </CodeGroup>
 
 <Tip>
-Individual memories within the store are capped at 100KB (~25K tokens). Structure memory as many small focused files, not a few large ones.
+Individual memories within the store are capped at 100 kB (~25k tokens). Structure memory as many small focused files, not a few large ones.
 </Tip>
 
 ## Attach a memory store to a session
@@ -1001,11 +1001,11 @@ See the [Delete a memory reference](/docs/en/api/beta/memory_stores/memories/del
 
 Every mutation to a memory creates an immutable **memory version** (`memver_...`). Use the version endpoints to audit who changed what and when, to inspect or restore a prior snapshot, and to scrub sensitive content out of history with redact.
 
-Versions belong to the store (not the individual memory) and survive even after the memory itself is deleted, so the audit trail stays complete. Versions are retained for 30 days; however, the recent versions are always kept regardless of age, so memories that change infrequently may retain history beyond 30 days. The live `memories.retrieve` call always returns the latest version; the version endpoints give you the retained history.
+Versions belong to the store (not the individual memory) and survive even after the memory itself is deleted, so the audit trail stays complete. Versions are retained for 30 days; however, the recent versions are always kept regardless of age, so memories that change infrequently might retain history beyond 30 days. The live `memories.retrieve` call always returns the latest version; the version endpoints give you the retained history.
 
- There is no dedicated restore endpoint; to roll back, retrieve the version you want and write its `content` back with `memories.update` (or `memories.create` if the parent memory has been deleted, since versions outlive their parent).
+There is no dedicated restore endpoint; to roll back, retrieve the version you want and write its `content` back with `memories.update` (or `memories.create` if the parent memory has been deleted, because versions outlive their parent).
 
-Past memory versions may be deleted after 30 days. If you'd like to preserve memory history for longer, export versions via the API.
+Past memory versions might be deleted after 30 days. To preserve memory history for longer, export versions via the API.
 
 ### List versions
 

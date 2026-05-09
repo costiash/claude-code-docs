@@ -15,7 +15,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 | Policy | Behavior |
 | --- | --- |
 | `always_allow` | The tool executes automatically with no confirmation. |
-| `always_ask` | The session emits a `session.status_idle` event and waits for a `user.tool_confirmation` event before executing. |
+| `always_ask` | The session pauses and waits for your approval before executing. See [Respond to confirmation requests](#respond-to-confirmation-requests) for the event flow. |
 
 ## Set a policy for a toolset
 

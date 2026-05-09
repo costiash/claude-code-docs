@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-09T01:01:02Z",
+  "generated_at": "2026-05-09T04:25:38Z",
   "indexed_files": 1274,
   "index": {
     "/changelog": {
@@ -489,13 +489,13 @@
         "code",
         "command",
         "commands",
+        "input",
         "press",
         "history",
-        "input",
         "terminal",
         "background",
-        "cursor",
         "prompt",
+        "cursor",
         "conversation",
         "search",
         "session",
@@ -504,7 +504,7 @@
         "normal",
         "previous"
       ],
-      "word_count": 3162,
+      "word_count": 3163,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -616,7 +616,7 @@
         "stdio",
         "example"
       ],
-      "word_count": 7605,
+      "word_count": 7647,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -854,21 +854,21 @@
         "plugins",
         "server",
         "code",
-        "mcp",
         "default",
+        "mcp",
         "version",
         "field",
         "see",
         "command",
         "lsp",
         "files",
-        "file",
         "path",
+        "file",
         "string",
         "servers",
         "commands"
       ],
-      "word_count": 6235,
+      "word_count": 6257,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -968,6 +968,7 @@
         "access",
         "bash",
         "mcp",
+        "trust",
         "permissions",
         "when",
         "network",
@@ -975,12 +976,11 @@
         "servers",
         "before",
         "anthropic",
-        "trust",
         "users",
         "control",
         "working"
       ],
-      "word_count": 1240,
+      "word_count": 1255,
       "file_path": "docs/claude-code__security.md"
     },
     "/claude-code/settings": {
@@ -1008,7 +1008,7 @@
         "set",
         "when"
       ],
-      "word_count": 8738,
+      "word_count": 9032,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1372,7 +1372,7 @@
         "version",
         "access"
       ],
-      "word_count": 2793,
+      "word_count": 2785,
       "file_path": "docs/docs__en__agents-and-tools__mcp-connector.md"
     },
     "/docs/en/agents-and-tools/remote-mcp-servers": {
@@ -1764,7 +1764,7 @@
         "single",
         "handle"
       ],
-      "word_count": 3212,
+      "word_count": 3213,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__parallel-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/programmatic-tool-calling": {
@@ -1825,7 +1825,7 @@
     },
     "/docs/en/agents-and-tools/tool-use/strict-tool-use": {
       "title": "Strict tool use",
-      "content_preview": "# Strict tool use  Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.  ---  Setting `strict: true` on a tool definition uses grammar-constrained sampling to guar...",
+      "content_preview": "# Strict tool use  Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.  ---  Setting `strict: true` on a tool definition guarantees Claude's tool inputs match you...",
       "keywords": [
         "tool",
         "schema",
@@ -1843,12 +1843,12 @@
         "calls",
         "section",
         "phi",
-        "uses",
-        "mode",
-        "limitations",
-        "functions"
+        "sampling",
+        "guarantees",
+        "valid",
+        "mode"
       ],
-      "word_count": 3338,
+      "word_count": 3321,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__strict-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/text-editor-tool": {
@@ -1945,9 +1945,9 @@
         "title",
         "claude",
         "tabs",
-        "loop",
         "typescript",
         "tools",
+        "loop",
         "python",
         "ruby",
         "message",
@@ -1960,7 +1960,7 @@
         "sdk",
         "note"
       ],
-      "word_count": 3135,
+      "word_count": 3182,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-runner.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-search-tool": {
@@ -1988,7 +1988,7 @@
         "format",
         "title"
       ],
-      "word_count": 3002,
+      "word_count": 2971,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-search-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching": {
@@ -2072,7 +2072,7 @@
         "citations",
         "error"
       ],
-      "word_count": 2566,
+      "word_count": 2513,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -2100,7 +2100,7 @@
         "when",
         "must"
       ],
-      "word_count": 2272,
+      "word_count": 2221,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -31485,7 +31485,7 @@
         "workspace",
         "result"
       ],
-      "word_count": 7308,
+      "word_count": 7251,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -31550,8 +31550,8 @@
       "keywords": [
         "foundry",
         "tab",
-        "claude",
         "azure",
+        "claude",
         "api",
         "title",
         "resource",
@@ -31569,7 +31569,7 @@
         "keys",
         "python"
       ],
-      "word_count": 2384,
+      "word_count": 2395,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -31618,14 +31618,14 @@
         "tooltip",
         "regional",
         "models",
-        "google",
         "title",
         "global",
         "multi",
+        "google",
         "model",
         "availability"
       ],
-      "word_count": 2369,
+      "word_count": 2378,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -31681,7 +31681,7 @@
         "title",
         "results"
       ],
-      "word_count": 7379,
+      "word_count": 7370,
       "file_path": "docs/docs__en__build-with-claude__context-editing.md"
     },
     "/docs/en/build-with-claude/context-windows": {
@@ -31709,7 +31709,7 @@
         "sonnet",
         "conversation"
       ],
-      "word_count": 1751,
+      "word_count": 1754,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/effort": {
@@ -31778,8 +31778,8 @@
         "when",
         "tool",
         "opus",
-        "models",
         "extended",
+        "models",
         "sonnet",
         "tokens",
         "api",
@@ -31793,7 +31793,7 @@
         "default",
         "interleaved"
       ],
-      "word_count": 14749,
+      "word_count": 14626,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -31821,7 +31821,7 @@
         "card",
         "model"
       ],
-      "word_count": 2394,
+      "word_count": 2378,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -31877,7 +31877,7 @@
         "after",
         "server"
       ],
-      "word_count": 2587,
+      "word_count": 2579,
       "file_path": "docs/docs__en__build-with-claude__handling-stop-reasons.md"
     },
     "/docs/en/build-with-claude/multilingual-support": {
@@ -31961,7 +31961,7 @@
         "image",
         "analysis"
       ],
-      "word_count": 3389,
+      "word_count": 3379,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -32045,12 +32045,12 @@
         "anthropic",
         "when"
       ],
-      "word_count": 12830,
+      "word_count": 12835,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
-      "title": "Streaming Messages",
-      "content_preview": "# Streaming Messages  ---  When creating a Message, you can set `\"stream\": true` to incrementally stream the response using [server-sent events](https://developer.mozilla.org/en-US/Web/API/Server-sent...",
+      "title": "Streaming messages",
+      "content_preview": "# Streaming messages  ---  When creating a Message, you can set `\"stream\": true` to incrementally stream the response using [server-sent events](https://developer.mozilla.org/en-US/Web/API/Server-sent...",
       "keywords": [
         "event",
         "streaming",
@@ -32073,7 +32073,7 @@
         "json",
         "blocks"
       ],
-      "word_count": 4804,
+      "word_count": 4816,
       "file_path": "docs/docs__en__build-with-claude__streaming.md"
     },
     "/docs/en/build-with-claude/structured-outputs": {
@@ -32101,7 +32101,7 @@
         "constraints",
         "fields"
       ],
-      "word_count": 10187,
+      "word_count": 10216,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -32185,7 +32185,7 @@
         "multiple",
         "prompt"
       ],
-      "word_count": 5019,
+      "word_count": 5005,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -32213,7 +32213,7 @@
         "agent",
         "control"
       ],
-      "word_count": 2962,
+      "word_count": 2901,
       "file_path": "docs/docs__en__build-with-claude__working-with-messages.md"
     },
     "/docs/en/get-started": {
@@ -33010,13 +33010,13 @@
         "claude",
         "fields",
         "new",
+        "configuration",
         "sessions",
         "codegroup",
         "array",
         "create",
         "reusable",
         "versioned",
-        "configuration",
         "defines",
         "capabilities",
         "model",
@@ -33025,7 +33025,7 @@
         "mcp",
         "skills"
       ],
-      "word_count": 1472,
+      "word_count": 1480,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-containers": {
@@ -33277,7 +33277,7 @@
         "create",
         "agents"
       ],
-      "word_count": 3710,
+      "word_count": 3708,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/multi-agent": {
@@ -33349,6 +33349,7 @@
         "code",
         "title",
         "tools",
+        "beta",
         "built",
         "infrastructure",
         "running",
@@ -33357,11 +33358,10 @@
         "environment",
         "create",
         "events",
-        "beta",
         "pre",
         "harness"
       ],
-      "word_count": 773,
+      "word_count": 764,
       "file_path": "docs/docs__en__managed-agents__overview.md"
     },
     "/docs/en/managed-agents/permission-policies": {
@@ -33378,18 +33378,18 @@
         "permission",
         "session",
         "tool",
+        "confirmation",
         "policies",
         "when",
         "server",
         "custom",
-        "confirmation",
         "default",
         "execute",
         "automatically",
-        "application",
-        "before"
+        "approval",
+        "application"
       ],
-      "word_count": 1985,
+      "word_count": 1990,
       "file_path": "docs/docs__en__managed-agents__permission-policies.md"
     },
     "/docs/en/managed-agents/quickstart": {
@@ -33445,7 +33445,7 @@
         "beta",
         "header"
       ],
-      "word_count": 1593,
+      "word_count": 1594,
       "file_path": "docs/docs__en__managed-agents__sessions.md"
     },
     "/docs/en/managed-agents/skills": {
@@ -35356,10 +35356,10 @@
       "title": "Streaming refusals",
       "content_preview": "# Streaming refusals  ---  Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `\"refusal\"`** when streaming classifiers intervene to handle potential policy vi...",
       "keywords": [
+        "refusal",
         "refusals",
         "api",
         "when",
-        "refusal",
         "streaming",
         "response",
         "claude",
@@ -35377,7 +35377,7 @@
         "error",
         "future"
       ],
-      "word_count": 1075,
+      "word_count": 1083,
       "file_path": "docs/docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md"
     }
   }

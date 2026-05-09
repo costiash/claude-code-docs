@@ -923,7 +923,7 @@ response = client.messages.create(
     ],
 )
 
-print(response.model_dump_json(indent=2))
+print(response)
 ```
 
 ```typescript TypeScript hidelines={1..2}

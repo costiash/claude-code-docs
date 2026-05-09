@@ -44,7 +44,15 @@ When activated, the API automatically clears the oldest tool results in chronolo
 The `clear_thinking_20251015` strategy manages `thinking` blocks in conversations when extended thinking is enabled. This strategy gives you control over thinking preservation: you can choose to keep more thinking blocks to maintain reasoning continuity, or clear them more aggressively to save context space.
 
 <Tip>
-**Default behavior:** The default varies by model class. **Opus**: Claude Opus 4.5 and later Opus models keep all prior thinking blocks; Claude Opus 4.1 and earlier Opus models keep only the last assistant turn's thinking. **Sonnet**: Claude Sonnet 4.6 and later Sonnet models keep all; Claude Sonnet 4.5 and earlier Sonnet models keep only the last turn. **Haiku**: all Haiku models through Claude Haiku 4.5 keep only the last turn. Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
+**Default behavior:** The default varies by model class.
+
+| Model class | Keep all prior thinking | Keep only the last turn's thinking |
+| --- | --- | --- |
+| Opus | Claude Opus 4.5 and later | Claude Opus 4.1 and earlier |
+| Sonnet | Claude Sonnet 4.6 and later | Claude Sonnet 4.5 and earlier |
+| Haiku | (none) | All models through Claude Haiku 4.5 |
+
+Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
 </Tip>
 
 An assistant conversation turn may include multiple content blocks (e.g. when using tools) and multiple thinking blocks (e.g. with [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking)).
@@ -2147,7 +2155,7 @@ for message in runner:
 </Tab>
 <Tab title="TypeScript">
 
-```typescript TypeScript hidelines={1..15,-3..}
+```typescript TypeScript hidelines={1..14}
 import Anthropic from "@anthropic-ai/sdk";
 import { betaTool } from "@anthropic-ai/sdk/helpers/beta/json-schema";
 
@@ -2162,23 +2170,19 @@ const readFile = betaTool({
   run: async () => "file contents..."
 });
 
-async function main() {
-  const client = new Anthropic();
+const client = new Anthropic();
 
-  const runner = client.beta.messages.toolRunner({
-    model: "claude-opus-4-7",
-    max_tokens: 1024,
-    tools: [readFile],
-    messages: [{ role: "user", content: "What's in config.json?" }],
-    compactionControl: { enabled: true, contextTokenThreshold: 100000 }
-  });
+const runner = client.beta.messages.toolRunner({
+  model: "claude-opus-4-7",
+  max_tokens: 1024,
+  tools: [readFile],
+  messages: [{ role: "user", content: "What's in config.json?" }],
+  compactionControl: { enabled: true, contextTokenThreshold: 100000 }
+});
 
-  for await (const message of runner) {
-    console.log(`Tokens used: ${message.usage.input_tokens}`);
-  }
+for await (const message of runner) {
+  console.log(`Tokens used: ${message.usage.input_tokens}`);
 }
-
-main();
 ```
 
 </Tab>
@@ -2495,7 +2499,7 @@ logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
 
 The TypeScript SDK's `toolRunner` supports compaction but does not log events. Detect compaction by watching `runner.params.messages.length` shrink between turns:
 
-```typescript TypeScript hidelines={1..25,-3..}
+```typescript TypeScript hidelines={1..24}
 import Anthropic from "@anthropic-ai/sdk";
 import { betaTool } from "@anthropic-ai/sdk/helpers/beta/json-schema";
 
@@ -2510,29 +2514,25 @@ const readFile = betaTool({
   run: async () => "file contents..."
 });
 
-async function main() {
-  const client = new Anthropic();
+const client = new Anthropic();
 
-  const runner = client.beta.messages.toolRunner({
-    model: "claude-opus-4-7",
-    max_tokens: 1024,
-    tools: [readFile],
-    messages: [{ role: "user", content: "What's in config.json?" }],
-    compactionControl: { enabled: true, contextTokenThreshold: 100000 }
-  });
+const runner = client.beta.messages.toolRunner({
+  model: "claude-opus-4-7",
+  max_tokens: 1024,
+  tools: [readFile],
+  messages: [{ role: "user", content: "What's in config.json?" }],
+  compactionControl: { enabled: true, contextTokenThreshold: 100000 }
+});
 
-  let prevMsgCount = 0;
-  for await (const message of runner) {
-    const currMsgCount = runner.params.messages.length;
-    if (currMsgCount < prevMsgCount) {
-      console.log(`Compaction occurred: ${prevMsgCount} -> ${currMsgCount} messages`);
-      console.log(`Input tokens after compaction: ${message.usage.input_tokens}`);
-    }
-    prevMsgCount = currMsgCount;
+let prevMsgCount = 0;
+for await (const message of runner) {
+  const currMsgCount = runner.params.messages.length;
+  if (currMsgCount < prevMsgCount) {
+    console.log(`Compaction occurred: ${prevMsgCount} -> ${currMsgCount} messages`);
+    console.log(`Input tokens after compaction: ${message.usage.input_tokens}`);
   }
+  prevMsgCount = currMsgCount;
 }
-
-main();
 ```
 
 </Tab>

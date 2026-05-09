@@ -196,7 +196,7 @@ The response echoes your configuration and adds `id`, `version`, `created_at`, `
 
 ## Update an agent
 
-Updating an agent generates a new version. Pass the current `version` to ensure you're updating from a known state.
+Updating an agent generates a new version when the configuration changes. Pass the current `version` to ensure you're updating from a known state.
 
 <CodeGroup defaultLanguage="CLI">
   
@@ -311,7 +311,7 @@ puts "New version: #{updated_agent.version}"
 
 - **Omitted fields are preserved.** You only need to include the fields you want to change.
 
-- **Scalar fields** (`model`, `system`, `name`, etc.) are replaced with the new value. `system` and `description` can be cleared by passing `null`. `model` and `name` are mandatory and cannot be cleared.
+- **Scalar fields** (`model`, `system`, `name`, `description`) are replaced with the new value. `system` and `description` can be cleared by passing `null`. `model` and `name` are mandatory and cannot be cleared.
 
 - **Array fields** (`tools`, `mcp_servers`, `skills`) are fully replaced by the new array. To clear an array field entirely, pass `null` or an empty array.
 
@@ -325,7 +325,7 @@ puts "New version: #{updated_agent.version}"
 
 | Operation | Behavior |
 | --- | --- |
-| **Update** | Generates a new agent version. |
+| **Update** | Generates a new agent version when the configuration changes. |
 | **List versions** | Returns the full version history so you can track changes over time. |
 | **Archive** | Makes the agent read-only. New sessions cannot reference it, but existing sessions continue to run. |
 

@@ -220,7 +220,7 @@ if (message.Content[0].Value is TextBlock block)
 
 <Tab title="Go">
 
-```go nocheck hidelines={1..2}
+```go nocheck hidelines={1..11,-1}
 package main
 
 import (

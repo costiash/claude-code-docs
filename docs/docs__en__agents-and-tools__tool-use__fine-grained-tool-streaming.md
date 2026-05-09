@@ -299,7 +299,7 @@ for await (const event of stream) {
 </CodeGroup>
 
 <Tip>
-The Python and TypeScript SDKs provide higher-level stream helpers (`stream.get_final_message()`, `stream.finalMessage()`) that perform this accumulation for you. Use the manual pattern above only when you need to react to partial input before the block closes, such as rendering a progress indicator or starting a downstream request early.
+The Python and TypeScript SDKs provide higher-level stream helpers (`stream.get_final_message()`, `stream.finalMessage()`) that perform this accumulation for you. Use the preceding manual pattern only when you need to react to partial input before the block closes, such as rendering a progress indicator or starting a downstream request early.
 </Tip>
 
 ## Handling invalid JSON in tool responses

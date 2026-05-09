@@ -44,7 +44,7 @@ The Workspace Billing role cannot be manually assigned. It's inherited from havi
 Only organization admins can create workspaces. Organization users and developers must be added to workspaces by an admin.
 </Note>
 
-### Via the Console
+### Using the Console
 
 Create and manage workspaces in the [Claude Console](/settings/workspaces).
 
@@ -113,7 +113,7 @@ To archive a workspace, click the ellipsis menu (**...**) and select **Archive**
 Archiving a workspace immediately revokes all API keys in that workspace. This action cannot be undone.
 </Warning>
 
-### Via the Admin API
+### Using the Admin API
 
 Programmatically manage workspaces using the [Admin API](/docs/en/manage-claude/admin-api).
 

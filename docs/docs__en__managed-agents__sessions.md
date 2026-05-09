@@ -133,7 +133,7 @@ To pin a session to a specific agent version, pass an object. This lets you cont
   {
       Agent = new BetaManagedAgentsAgentParams
       {
-          Type = "agent",
+          Type = Anthropic.Models.Beta.Sessions.Type.Agent,
           ID = agent.ID,
           Version = 1,
       },
@@ -180,7 +180,7 @@ To pin a session to a specific agent version, pass an object. This lets you cont
 </CodeGroup>
 
 <Tip>
-The agent defines how Claude behaves within the session, including the model, system prompt, tools, and MCP servers. See [Agent setup](/docs/en/managed-agents/agent-setup) for details.
+The agent defines how Claude behaves within the session, including the model, system prompt, tools, and MCP servers. See [Define your agent](/docs/en/managed-agents/agent-setup) for details.
 </Tip>
 
 ## MCP authentication through vaults
@@ -409,9 +409,9 @@ Sessions progress through these statuses:
 | Status | Description |
 |--------|-------------|
 | `idle` | Agent is waiting for input, including user messages or tool confirmations. Sessions start in `idle`. |
-| `running` | Agent is actively executing |
-| `rescheduling` | Transient error occurred, retrying automatically |
-| `terminated` | Session has ended due to an unrecoverable error |
+| `running` | Agent is actively executing. |
+| `rescheduling` | Transient error occurred, retrying automatically. |
+| `terminated` | Session has ended due to an unrecoverable error. |
 
 ## Other session operations
 

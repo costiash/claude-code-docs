@@ -85,9 +85,9 @@ To provision your resource:
 
 1. Navigate to the [Foundry portal](https://ai.azure.com/)
 2. Create a new Foundry resource or select an existing one
-3. Configure access management using Azure-issued API keys or Entra ID for role-based access control
+3. Configure access management using Azure-issued API keys or Entra ID (formerly Azure Active Directory) for role-based access control
 4. Optionally configure the resource to be part of a private network (Azure Virtual Network) for enhanced security
-5. Note your resource name. You'll use this as `{resource}` in API endpoints (e.g., `https://{resource}.services.ai.azure.com/anthropic/v1/*`)
+5. Note your resource name. You'll use this as `{resource}` in API endpoints (for example, `https://{resource}.services.ai.azure.com/anthropic/v1/*`)
 
 ### Creating Foundry deployments
 
@@ -95,9 +95,9 @@ After creating your resource, deploy a Claude model to make it available for API
 
 1. In the Foundry portal, navigate to your resource
 2. Go to **Models + endpoints** and select **+ Deploy model** > **Deploy base model**
-3. Search for and select a Claude model (e.g., `claude-sonnet-4-6`)
+3. Search for and select a Claude model (for example, `claude-sonnet-4-6`)
 4. Configure deployment settings:
-   - **Deployment name:** Defaults to the model ID, but you can customize it (e.g., `my-claude-deployment`). The deployment name cannot be changed after it has been created.
+   - **Deployment name:** Defaults to the model ID, but you can customize it (for example, `my-claude-deployment`). The deployment name cannot be changed after it has been created.
    - **Deployment type:** Select Global Standard (recommended for Claude)
 5. Select **Deploy** and wait for provisioning to complete
 6. Once deployed, you can find your endpoint URL and keys under **Keys and Endpoint**
@@ -225,8 +225,9 @@ var response = await client.Messages.Create(new MessageCreateParams
 
 Console.WriteLine(
     string.Join("", response.Content
-        .Where(c => c.Value is TextBlock)
-        .Select(c => (c.Value as TextBlock)!.Text)));
+        .Select(block => block.Value)
+        .OfType<TextBlock>()
+        .Select(textBlock => textBlock.Text)));
 ```
 </Tab>
 
@@ -238,20 +239,22 @@ import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.foundry.backends.FoundryBackend;
 import com.anthropic.models.messages.MessageCreateParams;
 
-// Requires env vars: ANTHROPIC_FOUNDRY_API_KEY, ANTHROPIC_FOUNDRY_RESOURCE
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(FoundryBackend.fromEnv())
-  .build();
+void main() {
+    // Requires env vars: ANTHROPIC_FOUNDRY_API_KEY, ANTHROPIC_FOUNDRY_RESOURCE
+    AnthropicClient client = AnthropicOkHttpClient.builder()
+        .backend(FoundryBackend.fromEnv())
+        .build();
 
-MessageCreateParams params = MessageCreateParams.builder()
-  .model("claude-opus-4-7")
-  .maxTokens(1024)
-  .addUserMessage("Hello!")
-  .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model("claude-opus-4-7")
+        .maxTokens(1024)
+        .addUserMessage("Hello!")
+        .build();
 
-client.messages().create(params).content().stream()
-  .flatMap(block -> block.text().stream())
-  .forEach(textBlock -> System.out.println(textBlock.text()));
+    client.messages().create(params).content().stream()
+        .flatMap(block -> block.text().stream())
+        .forEach(textBlock -> System.out.println(textBlock.text()));
+}
 ```
 </Tab>
 
@@ -401,8 +404,9 @@ var response = await client.Messages.Create(new MessageCreateParams
 
 Console.WriteLine(
     string.Join("", response.Content
-        .Where(c => c.Value is TextBlock)
-        .Select(c => (c.Value as TextBlock)!.Text)));
+        .Select(block => block.Value)
+        .OfType<TextBlock>()
+        .Select(textBlock => textBlock.Text)));
 ```
 </Tab>
 
@@ -417,27 +421,29 @@ import com.azure.identity.AuthenticationUtil;
 import com.azure.identity.DefaultAzureCredentialBuilder;
 import java.util.function.Supplier;
 
-Supplier<String> bearerTokenSupplier = AuthenticationUtil.getBearerTokenSupplier(
-    new DefaultAzureCredentialBuilder().build(),
-    "https://cognitiveservices.azure.com/.default"
-);
+void main() {
+    Supplier<String> bearerTokenSupplier = AuthenticationUtil.getBearerTokenSupplier(
+        new DefaultAzureCredentialBuilder().build(),
+        "https://cognitiveservices.azure.com/.default"
+    );
 
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(FoundryBackend.builder()
-    .bearerTokenSupplier(bearerTokenSupplier)
-    .resource("example-resource")
-    .build())
-  .build();
+    AnthropicClient client = AnthropicOkHttpClient.builder()
+        .backend(FoundryBackend.builder()
+            .bearerTokenSupplier(bearerTokenSupplier)
+            .resource("example-resource")
+            .build())
+        .build();
 
-MessageCreateParams params = MessageCreateParams.builder()
-  .model("claude-opus-4-7")
-  .maxTokens(1024)
-  .addUserMessage("Hello!")
-  .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model("claude-opus-4-7")
+        .maxTokens(1024)
+        .addUserMessage("Hello!")
+        .build();
 
-client.messages().create(params).content().stream()
-  .flatMap(block -> block.text().stream())
-  .forEach(textBlock -> System.out.println(textBlock.text()));
+    client.messages().create(params).content().stream()
+        .flatMap(block -> block.text().stream())
+        .forEach(textBlock -> System.out.println(textBlock.text()));
+}
 ```
 </Tab>
 
@@ -542,7 +548,7 @@ Azure's logging services are configured within your Azure subscription. Enabling
 
 **Error:** `403 Forbidden`
 
-- **Solution:** Your Azure account may lack the necessary permissions. Ensure you have the appropriate Azure RBAC role assigned (e.g., "Cognitive Services OpenAI User").
+- **Solution:** Your Azure account may lack the necessary permissions. Ensure you have the appropriate Azure RBAC role assigned (for example, "Cognitive Services OpenAI User").
 
 ### Rate limiting
 
@@ -559,7 +565,7 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 
 **Error:** `Model not found` or `Deployment not found`
 
-- **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (e.g., `claude-sonnet-4-6`).
+- **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (for example, `claude-sonnet-4-6`).
 - **Solution:** Ensure the model/deployment is available in your Azure region.
 
 **Error:** `Invalid model parameter`

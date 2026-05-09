@@ -101,8 +101,8 @@ var agent = await client.Beta.Agents.Create(new()
     System = "You are a financial analysis agent.",
     Skills =
     [
-        new BetaManagedAgentsAnthropicSkillParams { Type = "anthropic", SkillID = "xlsx" },
-        new BetaManagedAgentsCustomSkillParams { Type = "custom", SkillID = "skill_abc123", Version = "latest" },
+        new BetaManagedAgentsAnthropicSkillParams { Type = BetaManagedAgentsAnthropicSkillParamsType.Anthropic, SkillID = "xlsx" },
+        new BetaManagedAgentsCustomSkillParams { Type = BetaManagedAgentsCustomSkillParamsType.Custom, SkillID = "skill_abc123", Version = "latest" },
     ],
 });
 ```

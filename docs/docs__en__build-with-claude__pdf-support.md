@@ -47,7 +47,7 @@ When using PDF support through Amazon Bedrock's Converse API, there are two dist
 **Important:** To access Claude's full visual PDF understanding capabilities in the Converse API, you must enable citations. Without citations enabled, the API falls back to basic text extraction only. Learn more about [working with citations](/docs/en/build-with-claude/citations).
 </Note>
 
-#### Document Processing Modes
+#### Document processing modes
 
 1. **Converse Document Chat** (Original mode - Text extraction only)
    - Provides basic text extraction from PDFs
@@ -165,34 +165,30 @@ The simplest approach is to reference a PDF directly from a URL:
 
     const anthropic = new Anthropic();
 
-    async function main() {
-      const response = await anthropic.messages.create({
-        model: "claude-opus-4-7",
-        max_tokens: 1024,
-        messages: [
-          {
-            role: "user",
-            content: [
-              {
-                type: "document",
-                source: {
-                  type: "url",
-                  url: "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-                }
-              },
-              {
-                type: "text",
-                text: "What are the key findings in this document?"
+    const response = await anthropic.messages.create({
+      model: "claude-opus-4-7",
+      max_tokens: 1024,
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "document",
+              source: {
+                type: "url",
+                url: "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
               }
-            ]
-          }
-        ]
-      });
+            },
+            {
+              type: "text",
+              text: "What are the key findings in this document?"
+            }
+          ]
+        }
+      ]
+    });
 
-      console.log(response);
-    }
-
-    main();
+    console.log(response);
     ```
     ```java Java hidelines={1..8,-2..}
     import com.anthropic.client.AnthropicClient;
@@ -349,8 +345,8 @@ If you need to send PDFs from your local system or when a URL isn't available:
       const pdfBase64 = Buffer.from(arrayBuffer).toString("base64");
 
       // Method 2: Load from a local file
-      // import fs from "fs";
-      // const pdfBase64 = (await fs.readFile('document.pdf')).toString('base64');
+      // import { readFile } from "node:fs/promises";
+      // const pdfBase64 = (await readFile('document.pdf')).toString('base64');
 
       // Send the API request with base64-encoded PDF
       const anthropic = new Anthropic();
@@ -556,43 +552,39 @@ import fs from "fs";
 
 const anthropic = new Anthropic();
 
-async function main() {
-  // Upload the PDF file
-  const fileUpload = await anthropic.beta.files.upload({
-    file: await toFile(fs.createReadStream("document.pdf"), undefined, {
-      type: "application/pdf"
-    })
-  });
+// Upload the PDF file
+const fileUpload = await anthropic.beta.files.upload({
+  file: await toFile(fs.createReadStream("document.pdf"), undefined, {
+    type: "application/pdf"
+  })
+});
 
-  // Use the uploaded file in a message
-  const response = await anthropic.beta.messages.create({
-    model: "claude-opus-4-7",
-    max_tokens: 1024,
-    betas: ["files-api-2025-04-14"],
-    messages: [
-      {
-        role: "user",
-        content: [
-          {
-            type: "document",
-            source: {
-              type: "file",
-              file_id: fileUpload.id
-            }
-          },
-          {
-            type: "text",
-            text: "What are the key findings in this document?"
+// Use the uploaded file in a message
+const response = await anthropic.beta.messages.create({
+  model: "claude-opus-4-7",
+  max_tokens: 1024,
+  betas: ["files-api-2025-04-14"],
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "document",
+          source: {
+            type: "file",
+            file_id: fileUpload.id
           }
-        ]
-      }
-    ]
-  });
+        },
+        {
+          type: "text",
+          text: "What are the key findings in this document?"
+        }
+      ]
+    }
+  ]
+});
 
-  console.log(response);
-}
-
-main();
+console.log(response);
 ```
 
 ```java Java nocheck hidelines={1..3,6,8,10..19,-2..}

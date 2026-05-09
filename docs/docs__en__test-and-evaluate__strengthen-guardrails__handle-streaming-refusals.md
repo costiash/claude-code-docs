@@ -31,7 +31,7 @@ No additional refusal message is included. You must handle the response and prov
 
 ## Reset context after refusal
 
-When you receive **`stop_reason`: `refusal`**, you must reset the conversation context **by removing or updating the turn that was refused** before continuing. Attempting to continue without resetting will result in continued refusals.
+When you receive **`stop_reason`: `refusal`**, you must reset the conversation context before continuing. You can remove or rephrase the turn that triggered the refusal, or clear the conversation history entirely. Attempting to continue without resetting will result in continued refusals.
 
 <Note>
 Usage metrics are still provided in the response for billing purposes, even when the response is refused.
