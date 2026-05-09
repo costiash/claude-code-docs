@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-09T00:47:27.510234Z",
-    "total_paths": 1537,
+    "generated_at": "2026-05-09T04:11:38.311090Z",
+    "total_paths": 1539,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-09T00:47:27.510244Z"
+    "last_regenerated": "2026-05-09T04:11:38.311097Z"
   },
   "categories": {
     "core_documentation": [
@@ -165,6 +165,8 @@
       "/docs/en/whats-new/2026-w15",
       "/docs/en/whats-new/2026-w16",
       "/docs/en/whats-new/2026-w17",
+      "/docs/en/whats-new/2026-w18",
+      "/docs/en/whats-new/2026-w19",
       "/docs/en/zero-data-retention"
     ],
     "api_reference": [
