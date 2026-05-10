@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-10T15:37:22Z",
+  "generated_at": "2026-05-10T18:38:05Z",
   "indexed_files": 1274,
   "index": {
     "/changelog": {
@@ -433,22 +433,22 @@
         "when",
         "tool",
         "code",
+        "command",
         "event",
         "see",
-        "command",
-        "json",
         "file",
+        "json",
         "call",
-        "permission",
-        "input",
         "example",
+        "permission",
         "run",
+        "input",
         "only",
+        "script",
         "exit",
-        "prompt",
         "session"
       ],
-      "word_count": 6096,
+      "word_count": 6258,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
