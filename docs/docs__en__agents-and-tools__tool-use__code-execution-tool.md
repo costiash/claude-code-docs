@@ -373,7 +373,7 @@ printf 'name,value\nfoo,1\nbar,2\n' > data.csv
 # Upload a file
 FILE_ID=$(ant beta:files upload \
   --file ./data.csv \
-  --transform id --format yaml)
+  --transform id --raw-output)
 
 # Use the file_id with code execution
 ant beta:messages create \
@@ -705,7 +705,7 @@ while IFS= read -r LINE; do
   FILE_ID="${LINE#- }"
   FILENAME=$(ant beta:files retrieve-metadata \
     --file-id "$FILE_ID" \
-    --transform filename --format yaml)
+    --transform filename --raw-output)
   ant beta:files download \
     --file-id "$FILE_ID" \
     --output "$FILENAME" > /dev/null
@@ -1373,7 +1373,7 @@ curl https://api.anthropic.com/v1/messages \
 ```bash CLI
 # First request: Create a file with a random number
 CONTAINER_ID=$(ant messages create \
-  --transform container.id --format yaml \
+  --transform container.id --raw-output \
     --model claude-opus-4-7 \
     --max-tokens 4096 \
     --message '{role: user, content: Write a file with a random number and save it to "/tmp/number.txt"}' \

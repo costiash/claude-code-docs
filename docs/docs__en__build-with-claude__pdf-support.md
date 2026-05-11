@@ -493,7 +493,7 @@ curl -sSo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/
 # First, upload your PDF to the Files API
 FILE_ID=$(ant beta:files upload \
   --file ./document.pdf \
-  --transform id --format yaml)
+  --transform id --raw-output)
 
 # Then use the returned file_id in your message
 ant beta:messages create \

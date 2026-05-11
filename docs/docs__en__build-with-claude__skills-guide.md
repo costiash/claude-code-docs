@@ -443,7 +443,7 @@ FILE_ID=$(ant beta:messages create \
   --beta code-execution-2025-08-25 \
   --beta skills-2025-10-02 \
   --transform 'content.#.content.content.#.file_id|@flatten|0' \
-  --format yaml <<'YAML'
+  --raw-output <<'YAML'
 model: claude-opus-4-7
 max_tokens: 4096
 container:
@@ -463,7 +463,7 @@ YAML
 # Step 3: Get the filename from file metadata
 FILENAME=$(ant beta:files retrieve-metadata \
   --file-id "$FILE_ID" \
-  --transform filename --format yaml)
+  --transform filename --raw-output)
 
 # Step 4: Download the file using Files API
 ant beta:files download \
@@ -1152,7 +1152,7 @@ Reuse the same container across multiple messages by specifying the container ID
 # First request creates container
 CONTAINER_ID=$(ant beta:messages create \
   --beta code-execution-2025-08-25 --beta skills-2025-10-02 \
-  --transform container.id --format yaml <<'YAML'
+  --transform container.id --raw-output <<'YAML'
 model: claude-opus-4-7
 max_tokens: 4096
 container:
@@ -3120,8 +3120,7 @@ curl -X DELETE "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrSt
 # Step 1: Delete all versions
 ant beta:skills:versions list \
   --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
-  --transform version --format yaml \
-  | tr -d '"' \
+  --transform version --raw-output \
   | while read -r VERSION; do
       ant beta:skills:versions delete \
         --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
@@ -3384,7 +3383,7 @@ curl https://api.anthropic.com/v1/messages \
 VERSION_NUMBER=$(ant beta:skills:versions create \
   --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
   --file updated_skill/SKILL.md \
-  --transform version --format yaml)
+  --transform version --raw-output)
 
 # Use specific version
 ant beta:messages create \
@@ -3974,7 +3973,7 @@ curl https://api.anthropic.com/v1/messages \
 DCF_SKILL_ID=$(ant beta:skills create \
   --display-title "DCF Analysis" \
   --file dcf_skill/SKILL.md \
-  --transform id --format yaml)
+  --transform id --raw-output)
 
 # Use with Excel to create financial model
 ant beta:messages create \

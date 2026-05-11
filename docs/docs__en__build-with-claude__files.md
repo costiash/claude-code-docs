@@ -50,7 +50,7 @@ curl -X POST https://api.anthropic.com/v1/files \
 ````bash
 FILE_ID=$(ant beta:files upload \
   --file /path/to/document.pdf \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
 ````python
@@ -429,7 +429,7 @@ printf 'This is a test document for upload.\n' > document.txt
 ant messages create \
   --model claude-opus-4-7 \
   --max-tokens 1024 \
-  --transform 'content.0.text' --format yaml <<'YAML'
+  --transform 'content.0.text' --raw-output <<'YAML'
 messages:
   - role: user
     content:

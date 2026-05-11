@@ -2184,7 +2184,7 @@ Generate API-ready responses:
 
 ```bash CLI
 ant messages create \
-  --transform 'content.0.text' --format yaml <<'YAML'
+  --transform 'content.0.text' --raw-output <<'YAML'
 model: claude-opus-4-7
 max_tokens: 1024
 output_config:

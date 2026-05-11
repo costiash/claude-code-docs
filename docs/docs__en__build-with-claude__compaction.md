@@ -2192,12 +2192,12 @@ YAML
 
 CURRENT=$(ant beta:messages count-tokens \
   --beta compact-2026-01-12 \
-  --transform input_tokens --format yaml < request.yaml)
+  --transform input_tokens --raw-output < request.yaml)
 
 ORIGINAL=$(ant beta:messages count-tokens \
   --beta compact-2026-01-12 \
   --transform context_management.original_input_tokens \
-  --format yaml < request.yaml)
+  --raw-output < request.yaml)
 
 printf 'Current tokens: %s\n' "$CURRENT"
 printf 'Original tokens: %s\n' "$ORIGINAL"
@@ -2386,7 +2386,7 @@ Here's a complete example of a long-running conversation with compaction:
 # calling script. See the SDK tabs for the full chat() loop. Single-turn
 # request shape:
 ant beta:messages create --beta compact-2026-01-12 \
-  --transform 'content.#(type=="text").text' --format yaml <<'YAML'
+  --transform 'content.#(type=="text").text' --raw-output <<'YAML'
 model: claude-opus-4-7
 max_tokens: 4096
 messages:
@@ -2728,7 +2728,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
 # calling script. See the SDK tabs for the full chat() loop with
 # pause-and-preserve handling. Single-turn request shape:
 ant beta:messages create --beta compact-2026-01-12 \
-  --transform 'content.#(type=="text").text' --format yaml <<'YAML'
+  --transform 'content.#(type=="text").text' --raw-output <<'YAML'
 model: claude-opus-4-7
 max_tokens: 4096
 messages:

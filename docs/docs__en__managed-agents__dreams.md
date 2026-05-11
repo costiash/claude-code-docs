@@ -54,7 +54,7 @@ echo "$dream_id"  # drm_01...
 
   
 ````bash
-dream_id=$(ant beta:dreams create --transform id --format yaml <<YAML
+dream_id=$(ant beta:dreams create --transform id --raw-output <<YAML
 inputs:
   - type: memory_store
     memory_store_id: $store_id

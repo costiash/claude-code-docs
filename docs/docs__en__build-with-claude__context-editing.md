@@ -1575,11 +1575,11 @@ YAML
 ORIGINAL=$(ant beta:messages count-tokens \
   --beta context-management-2025-06-27 \
   --transform context_management.original_input_tokens \
-  --format yaml < request.yaml)
+  --raw-output < request.yaml)
 
 INPUT_TOKENS=$(ant beta:messages count-tokens \
   --beta context-management-2025-06-27 \
-  --transform input_tokens --format yaml < request.yaml)
+  --transform input_tokens --raw-output < request.yaml)
 
 printf 'Original tokens: %s\n' "$ORIGINAL"
 printf 'After clearing: %s\n' "$INPUT_TOKENS"

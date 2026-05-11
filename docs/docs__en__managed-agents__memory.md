@@ -40,7 +40,7 @@ echo "$store_id"  # memstore_01Hx...
 store_id=$(ant beta:memory-stores create \
   --name "User Preferences" \
   --description "Per-user preferences and project context." \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
   

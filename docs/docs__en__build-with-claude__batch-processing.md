@@ -500,7 +500,7 @@ echo "Batch $MESSAGE_BATCH_ID has finished processing"
 ```bash CLI hidelines={2..14,19}
 #!/bin/bash
 MESSAGE_BATCH_ID=$(ant messages:batches create \
-  --transform id --format yaml <<'YAML'
+  --transform id --raw-output <<'YAML'
 requests:
   - custom_id: test-1
     params:
@@ -514,7 +514,7 @@ YAML
 
 until [[ $(ant messages:batches retrieve \
           --message-batch-id "$MESSAGE_BATCH_ID" \
-          --transform processing_status --format yaml) == "ended" ]]; do
+          --transform processing_status --raw-output) == "ended" ]]; do
     echo "Batch $MESSAGE_BATCH_ID is still processing..."
     break
     sleep 60
@@ -1195,7 +1195,7 @@ curl --request POST https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH
 ```bash CLI hidelines={2..13}
 #!/bin/bash
 MESSAGE_BATCH_ID=$(ant messages:batches create \
-  --transform id --format yaml <<'YAML'
+  --transform id --raw-output <<'YAML'
 requests:
   - custom_id: test-1
     params:

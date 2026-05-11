@@ -28,7 +28,7 @@ printf 'File ID: %s\n' "${file_id}"
 ````bash
 FILE_ID=$(ant beta:files upload \
   --file data.csv \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
   
@@ -129,7 +129,7 @@ session_id=$(jq -er '.id' <<<"${session}")
 SESSION_ID=$(ant beta:sessions create \
   --agent "$AGENT_ID" \
   --environment-id "$ENVIRONMENT_ID" \
-  --transform id --format yaml <<EOF
+  --transform id --raw-output <<EOF
 resources:
   - type: file
     file_id: $FILE_ID
@@ -372,7 +372,7 @@ RESOURCE_ID=$(ant beta:sessions:resources create \
   --session-id "$SESSION_ID" \
   --type file \
   --file-id "$FILE_ID" \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
   

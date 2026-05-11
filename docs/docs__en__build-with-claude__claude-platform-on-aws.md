@@ -80,7 +80,7 @@ Completing setup creates your Anthropic organization and accepts Anthropic's Com
 </Step>
 
 <Step title="Create your workspace and note its ID">
-After you complete setup, the AWS Console prompts you to create a workspace. Each AWS region supports one workspace; creating additional workspaces in the same region is not currently available. See [Workspaces](#workspaces) for details on region binding and IAM resource scoping.
+After you complete setup, the AWS Console prompts you to create a workspace. See [Workspaces](#workspaces) for details on region binding, IAM resource scoping, and creating additional workspaces.
 
 Find the workspace ID under **Workspaces** on the AWS Console **Claude Platform on AWS** service page or in the [Claude Console](#using-the-claude-console). Workspace IDs use the format `wrkspc_` followed by an alphanumeric identifier.
 </Step>
@@ -508,7 +508,7 @@ See the [comparison table](#claude-platform-on-aws-vs-amazon-bedrock) for featur
 
 ### Claude Managed Agents
 
-[Claude Managed Agents](/docs/en/managed-agents/overview) is available on Claude Platform on AWS, including agents, environments, sessions, credential vaults, and memory stores. The [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview) is also supported. Outcomes, multiagent sessions, and webhooks are not currently available.
+[Claude Managed Agents](/docs/en/managed-agents/overview) is available on Claude Platform on AWS, including agents, environments, sessions, credential vaults, and memory stores. The [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview) is also supported.
 
 Session behavior on Claude Platform on AWS differs from first-party Claude Managed Agents in one way:
 
@@ -519,7 +519,6 @@ Session behavior on Claude Platform on AWS differs from first-party Claude Manag
 The following capabilities are not currently available on Claude Platform on AWS:
 
 - **HIPAA readiness:** Anthropic's HIPAA-ready program is not available. See [API and data retention](/docs/en/manage-claude/api-and-data-retention).
-- **Service tiers beyond Standard and Batch:** Priority Tier is not available.
 
 - **Admin API:** Workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`) are available. Other Admin API endpoints (organization members, workspace members, invites, API keys, usage reports, cost reports, and rate limit reports) are not currently available. View usage and cost data in the [Claude Console](#using-the-claude-console) instead. AWS IAM manages organization membership.
 - **Workspace member management:** Adding or removing users from individual workspaces is not available. AWS IAM policies on workspace ARNs control access.
@@ -727,9 +726,9 @@ arn:aws:aws-external-anthropic:us-west-2:123456789012:workspace/wrkspc_01AbCdEf2
 
 See [IAM policies](#iam-policies) for policy examples.
 
-### Additional workspaces
+### Managing workspaces
 
-Each region supports one workspace that you create after sign-up. Creating additional workspaces in the same region is not currently available. Use the [Admin API](/docs/en/manage-claude/admin-api) workspace endpoints or the AWS Console to update or archive a workspace; the Claude Console Workspaces page is read-only.
+Create additional workspaces, rename a workspace, or archive a workspace from the AWS Console **Workspaces** page or with the [Admin API](/docs/en/manage-claude/admin-api) workspace endpoints. A new workspace is bound to the AWS region of the endpoint you call to create it (see [Workspace scoping](#workspace-scoping)). The Claude Console Workspaces page is read-only.
 
 ## Using the Claude Console
 

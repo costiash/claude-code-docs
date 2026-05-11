@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-11T18:56:52Z",
+  "generated_at": "2026-05-11T21:46:39Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -238,12 +238,12 @@
         "session",
         "anthropic",
         "api",
-        "users",
         "disable",
-        "settings",
-        "retention",
+        "users",
         "must",
         "off",
+        "settings",
+        "retention",
         "see",
         "using",
         "when",
@@ -252,7 +252,7 @@
         "model",
         "set"
       ],
-      "word_count": 1714,
+      "word_count": 1761,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -465,18 +465,18 @@
         "field",
         "json",
         "fields",
-        "event",
         "file",
+        "event",
         "command",
         "only",
-        "output",
         "user",
         "session",
-        "runs",
+        "output",
         "prompt",
+        "runs",
         "context"
       ],
-      "word_count": 17990,
+      "word_count": 18289,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -569,13 +569,13 @@
       "keywords": [
         "claude",
         "code",
+        "gateway",
         "api",
         "litellm",
-        "gateway",
-        "model",
         "through",
-        "request",
+        "model",
         "endpoint",
+        "request",
         "key",
         "format",
         "anthropic",
@@ -588,7 +588,7 @@
         "set",
         "documentation"
       ],
-      "word_count": 976,
+      "word_count": 1008,
       "file_path": "docs/claude-code__llm-gateway.md"
     },
     "/claude-code/mcp": {
@@ -700,7 +700,7 @@
         "version",
         "which"
       ],
-      "word_count": 3662,
+      "word_count": 3671,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -1108,14 +1108,14 @@
         "session",
         "conversation",
         "tool",
-        "code",
         "context",
         "prompt",
+        "code",
         "tools",
         "only",
+        "hooks",
         "same",
         "model",
-        "hooks",
         "fork",
         "run",
         "task"
@@ -1158,6 +1158,7 @@
         "claude",
         "code",
         "through",
+        "aws",
         "enterprise",
         "tab",
         "proxy",
@@ -1173,10 +1174,9 @@
         "traffic",
         "learn",
         "organization",
-        "organizations",
-        "team"
+        "organizations"
       ],
-      "word_count": 1511,
+      "word_count": 1554,
       "file_path": "docs/claude-code__third-party-integrations.md"
     },
     "/claude-code/troubleshooting": {
@@ -1344,7 +1344,7 @@
         "note",
         "docs"
       ],
-      "word_count": 1777,
+      "word_count": 1776,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__quickstart.md"
     },
     "/docs/en/agents-and-tools/mcp-connector": {
@@ -1512,7 +1512,7 @@
         "available",
         "operations"
       ],
-      "word_count": 5557,
+      "word_count": 5554,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -31457,7 +31457,7 @@
         "field",
         "manual"
       ],
-      "word_count": 3969,
+      "word_count": 3968,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -31485,7 +31485,7 @@
         "workspace",
         "result"
       ],
-      "word_count": 7256,
+      "word_count": 7253,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -31643,9 +31643,9 @@
         "bedrock",
         "iam",
         "account",
-        "available",
         "through",
         "data",
+        "available",
         "sigv",
         "note",
         "request",
@@ -31653,7 +31653,7 @@
         "authentication",
         "first"
       ],
-      "word_count": 6420,
+      "word_count": 6391,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -31681,7 +31681,7 @@
         "after",
         "trigger"
       ],
-      "word_count": 8825,
+      "word_count": 8821,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
@@ -31709,7 +31709,7 @@
         "title",
         "results"
       ],
-      "word_count": 7382,
+      "word_count": 7380,
       "file_path": "docs/docs__en__build-with-claude__context-editing.md"
     },
     "/docs/en/build-with-claude/context-windows": {
@@ -31765,7 +31765,7 @@
         "capability",
         "speed"
       ],
-      "word_count": 2013,
+      "word_count": 2012,
       "file_path": "docs/docs__en__build-with-claude__effort.md"
     },
     "/docs/en/build-with-claude/embeddings": {
@@ -31849,7 +31849,7 @@
         "card",
         "model"
       ],
-      "word_count": 2393,
+      "word_count": 2391,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -31877,7 +31877,7 @@
         "type",
         "blocks"
       ],
-      "word_count": 2746,
+      "word_count": 2744,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -31989,7 +31989,7 @@
         "image",
         "analysis"
       ],
-      "word_count": 3374,
+      "word_count": 3373,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -32073,7 +32073,7 @@
         "see",
         "when"
       ],
-      "word_count": 12894,
+      "word_count": 12883,
       "file_path": "docs/docs__en__build-with-claude__skills-guide.md"
     },
     "/docs/en/build-with-claude/streaming": {
@@ -32129,7 +32129,7 @@
         "constraints",
         "fields"
       ],
-      "word_count": 10222,
+      "word_count": 10221,
       "file_path": "docs/docs__en__build-with-claude__structured-outputs.md"
     },
     "/docs/en/build-with-claude/task-budgets": {
@@ -32213,7 +32213,7 @@
         "multiple",
         "prompt"
       ],
-      "word_count": 5011,
+      "word_count": 5010,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -33109,7 +33109,7 @@
         "one",
         "until"
       ],
-      "word_count": 2462,
+      "word_count": 2459,
       "file_path": "docs/docs__en__managed-agents__define-outcomes.md"
     },
     "/docs/en/managed-agents/dreams": {
@@ -33137,7 +33137,7 @@
         "beta",
         "once"
       ],
-      "word_count": 2184,
+      "word_count": 2183,
       "file_path": "docs/docs__en__managed-agents__dreams.md"
     },
     "/docs/en/managed-agents/environments": {
@@ -33221,7 +33221,7 @@
         "automatically",
         "path"
       ],
-      "word_count": 1766,
+      "word_count": 1763,
       "file_path": "docs/docs__en__managed-agents__files.md"
     },
     "/docs/en/managed-agents/github": {
@@ -33249,7 +33249,7 @@
         "note",
         "api"
       ],
-      "word_count": 1974,
+      "word_count": 1972,
       "file_path": "docs/docs__en__managed-agents__github.md"
     },
     "/docs/en/managed-agents/mcp-connector": {
@@ -33277,7 +33277,7 @@
         "vault",
         "each"
       ],
-      "word_count": 887,
+      "word_count": 885,
       "file_path": "docs/docs__en__managed-agents__mcp-connector.md"
     },
     "/docs/en/managed-agents/memory": {
@@ -33305,7 +33305,7 @@
         "schema",
         "version"
       ],
-      "word_count": 3723,
+      "word_count": 3722,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/multi-agent": {
@@ -33557,7 +33557,7 @@
         "end",
         "agent"
       ],
-      "word_count": 2224,
+      "word_count": 2221,
       "file_path": "docs/docs__en__managed-agents__vaults.md"
     },
     "/docs/en/managed-agents/webhooks": {

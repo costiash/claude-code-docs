@@ -339,7 +339,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --transform 'content.0.text' --format yaml <<'YAML'
+  --transform 'content.0.text' --raw-output <<'YAML'
 model: claude-opus-4-7
 max_tokens: 16000
 thinking:

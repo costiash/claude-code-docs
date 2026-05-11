@@ -911,7 +911,7 @@ curl -sSo image.jpg \
 # First, upload your image to the Files API
 FILE_ID=$(ant beta:files upload \
   --file ./image.jpg \
-  --transform id --format yaml)
+  --transform id --raw-output)
 
 # Then use the returned file_id in your message
 ant beta:messages create \

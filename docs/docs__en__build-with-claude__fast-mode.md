@@ -51,7 +51,7 @@ curl https://api.anthropic.com/v1/messages \
 ```bash CLI
 ant beta:messages create \
   --beta fast-mode-2026-02-01 \
-  --transform 'content.0.text' --format yaml <<'YAML'
+  --transform 'content.0.text' --raw-output <<'YAML'
 model: claude-opus-4-6
 max_tokens: 4096
 speed: fast
@@ -268,7 +268,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta fast-mode-2026-02-01 \
-  --transform usage.speed --format yaml <<'YAML'
+  --transform usage.speed --raw-output <<'YAML'
 model: claude-opus-4-6
 max_tokens: 1024
 speed: fast

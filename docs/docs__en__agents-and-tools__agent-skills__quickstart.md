@@ -226,7 +226,7 @@ echo "Presentation saved to renewable_energy.pptx"
 FILE_ID=$(ant beta:messages create \
   --beta code-execution-2025-08-25 --beta skills-2025-10-02 \
   --transform 'content.#.content.content.#.file_id|@flatten|0' \
-  --format yaml <<'YAML'
+  --raw-output <<'YAML'
 model: claude-opus-4-7
 max_tokens: 4096
 container:
