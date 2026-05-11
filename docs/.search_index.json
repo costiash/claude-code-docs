@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-10T21:34:10Z",
+  "generated_at": "2026-05-11T01:05:28Z",
   "indexed_files": 1274,
   "index": {
     "/changelog": {
@@ -1008,7 +1008,7 @@
         "set",
         "when"
       ],
-      "word_count": 9032,
+      "word_count": 9179,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1058,13 +1058,13 @@
         "null",
         "tools",
         "yaml",
+        "settings",
+        "available",
         "one",
         "content",
-        "reference",
-        "built",
-        "directory"
+        "reference"
       ],
-      "word_count": 5573,
+      "word_count": 5623,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
