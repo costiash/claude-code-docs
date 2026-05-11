@@ -1871,7 +1871,7 @@ In this example, both requests in the batch include identical system messages an
 The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 4.7, Claude Opus 4.6, or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard limit (64k to 128k depending on model) in a single turn.
 
 <Note>
-Extended output is available on the Message Batches API only, not the synchronous Messages API. It is supported on the Claude API and is not available on Amazon Bedrock, Vertex AI, or Microsoft Foundry.
+Extended output is available on the Message Batches API only, not the synchronous Messages API. It is supported on the Claude API and Claude Platform on AWS, and is not available on Amazon Bedrock, Vertex AI, or Microsoft Foundry.
 </Note>
 
 Use extended output for long-form generation such as book-length drafts and technical documentation, exhaustive structured data extraction, large code-generation scaffolds, and long reasoning chains.

@@ -92,38 +92,30 @@ const response = await client.messages.create({
 console.log(response.usage);
 ```
 
-```csharp C# hidelines={1..9,-2..}
-using System;
-using System.Threading.Tasks;
+```csharp C# hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 1024,
+    CacheControl = new CacheControlEphemeral(),
+    System = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.",
+    Messages =
+    [
+        new()
         {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 1024,
-            CacheControl = new CacheControlEphemeral(),
-            System = "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.",
-            Messages =
-            [
-                new()
-                {
-                    Role = Role.User,
-                    Content = "Analyze the major themes in 'Pride and Prejudice'."
-                }
-            ]
-        };
+            Role = Role.User,
+            Content = "Analyze the major themes in 'Pride and Prejudice'."
+        }
+    ]
+};
 
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message.Usage);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message.Usage);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -383,48 +375,40 @@ const response = await client.messages.create({
 console.log(response.usage);
 ```
 
-```csharp C# hidelines={1..9,-2..}
-using System;
-using System.Threading.Tasks;
+```csharp C# hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 1024,
+    CacheControl = new CacheControlEphemeral(),
+    System = "You are a helpful assistant that remembers our conversation.",
+    Messages =
+    [
+        new()
         {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 1024,
-            CacheControl = new CacheControlEphemeral(),
-            System = "You are a helpful assistant that remembers our conversation.",
-            Messages =
-            [
-                new()
-                {
-                    Role = Role.User,
-                    Content = "My name is Alex. I work on machine learning."
-                },
-                new()
-                {
-                    Role = Role.Assistant,
-                    Content = "Nice to meet you, Alex! How can I help with your ML work today?"
-                },
-                new()
-                {
-                    Role = Role.User,
-                    Content = "What did I say I work on?"
-                }
-            ]
-        };
+            Role = Role.User,
+            Content = "My name is Alex. I work on machine learning."
+        },
+        new()
+        {
+            Role = Role.Assistant,
+            Content = "Nice to meet you, Alex! How can I help with your ML work today?"
+        },
+        new()
+        {
+            Role = Role.User,
+            Content = "What did I say I work on?"
+        }
+    ]
+};
 
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message.Usage);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message.Usage);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -556,7 +540,7 @@ By default, automatic caching uses a 5-minute TTL. You can specify a 1-hour TTL 
 
 Automatic caching is compatible with [explicit cache breakpoints](#explicit-cache-breakpoints). When used together, the automatic cache breakpoint uses one of the 4 available breakpoint slots.
 
-This lets you combine both approaches. For example, use explicit breakpoints to cache your system prompt and tools independently, while automatic caching handles the conversation:
+This lets you combine both approaches. For example, use an explicit breakpoint to cache your system prompt, while automatic caching handles the conversation:
 
 ```json
 {
@@ -586,7 +570,7 @@ Automatic caching uses the same underlying caching infrastructure. Pricing, mini
 - If the last block is not eligible as an automatic cache breakpoint target, the system silently walks backwards to find the nearest eligible block. If none is found, caching is skipped.
 
 <Note>
-Automatic caching is available on the Claude API and Azure AI Foundry (preview). Support for Amazon Bedrock and Google Vertex AI is coming later.
+Automatic caching is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta). Bedrock and Vertex AI do not support automatic caching.
 </Note>
 
 ---
@@ -788,14 +772,14 @@ For more detailed information, see the [extended thinking documentation](/docs/e
 ### Cache storage and sharing
 
 <Warning>
-Starting February 5, 2026, prompt caching will use workspace-level isolation instead of organization-level isolation. Caches will be isolated per workspace, ensuring data separation between workspaces within the same organization. This change applies to the Claude API and Azure AI Foundry (preview); Amazon Bedrock and Google Vertex AI will maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this change.
+As of February 5, 2026, prompt caching uses [workspace](/docs/en/manage-claude/workspaces)-level isolation instead of organization-level isolation. Caches are isolated per workspace, ensuring data separation between workspaces within the same organization. This applies to the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta); Bedrock and Vertex AI maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this difference.
 </Warning>
 
-- **Organization Isolation**: Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts.
+- **Organization and workspace isolation:** Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts. As of February 5, 2026, caches are also isolated per workspace within an organization on the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta); Bedrock and Vertex AI continue to use organization-level isolation only.
 
-- **Exact Matching**: Cache hits require 100% identical prompt segments, including all text and images up to and including the block marked with cache control.
+- **Exact matching:** Cache hits require 100% identical prompt segments, including all text and images up to and including the block marked with cache control.
 
-- **Output Token Generation**: Prompt caching has no effect on output token generation. The response you receive will be identical to what you would get if prompt caching was not used.
+- **Output token generation:** Prompt caching has no effect on output token generation. The response you receive is identical to what you would get if prompt caching were not used.
 
 ### Best practices for effective caching
 
@@ -840,6 +824,10 @@ Changes to `tool_choice` or the presence/absence of images anywhere in the promp
 
 If you find that 5 minutes is too short, Anthropic also offers a 1-hour cache duration [at additional cost](#pricing).
 
+<Note>
+The 1-hour cache duration is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta). Bedrock does not support the 1-hour cache duration.
+</Note>
+
 To use the extended cache, include `ttl` in the `cache_control` definition like this:
 ```json hidelines={1,-1}
 {
@@ -860,7 +848,7 @@ The response will include detailed cache information like the following:
     "output_tokens": 503,
 
     "cache_creation": {
-      "ephemeral_5m_input_tokens": 456,
+      "ephemeral_5m_input_tokens": 148,
       "ephemeral_1h_input_tokens": 100
     }
   }
@@ -1117,7 +1105,7 @@ $prewarm = $client->messages->create(
     messages: [['role' => 'user', 'content' => 'warmup']],
 );
 
-echo $prewarm['stopReason']->value, PHP_EOL; // "max_tokens"
+echo $prewarm->stopReason->value, PHP_EOL; // "max_tokens"
 echo json_encode($prewarm->content), PHP_EOL; // []
 echo json_encode($prewarm->usage), PHP_EOL;
 ```
@@ -1333,7 +1321,7 @@ response = client.messages.create(
         }
     ],
 )
-print(response.model_dump_json())
+print(response.usage.model_dump_json())
 ```
 
 ```typescript TypeScript hidelines={1..2}
@@ -1365,52 +1353,43 @@ const response = await client.messages.create({
 console.log(response);
 ```
 
-```csharp C# hidelines={1..10,-2..}
-using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+```csharp C# hidelines={1..3}
 using Anthropic;
 using Anthropic.Models.Messages;
 
-public class Program
+AnthropicClient client = new()
 {
-    public static async Task Main(string[] args)
+    ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+};
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 1024,
+    System = new MessageCreateParamsSystem(new List<TextBlockParam>
     {
-        AnthropicClient client = new()
+        new TextBlockParam()
         {
-            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
-        };
-
-        var parameters = new MessageCreateParams
+            Text = "You are an AI assistant tasked with analyzing legal documents.",
+        },
+        new TextBlockParam()
         {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 1024,
-            System = new MessageCreateParamsSystem(new List<TextBlockParam>
-            {
-                new TextBlockParam()
-                {
-                    Text = "You are an AI assistant tasked with analyzing legal documents.",
-                },
-                new TextBlockParam()
-                {
-                    Text = "Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]",
-                    CacheControl = new CacheControlEphemeral(),
-                },
-            }),
-            Messages =
-            [
-                new()
-                {
-                    Role = Role.User,
-                    Content = "What are the key terms and conditions in this agreement?"
-                }
-            ]
-        };
+            Text = "Here is the full text of a complex legal agreement: [Insert full text of a 50-page legal agreement here]",
+            CacheControl = new CacheControlEphemeral(),
+        },
+    }),
+    Messages =
+    [
+        new()
+        {
+            Role = Role.User,
+            Content = "What are the key terms and conditions in this agreement?"
+        }
+    ]
+};
 
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -1446,7 +1425,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("%+v\n", response)
+	fmt.Println(response.Usage)
 }
 ```
 
@@ -2437,125 +2416,116 @@ const response = await client.messages.create({
 console.log(response);
 ```
 
-```csharp C# hidelines={1..11,-2..}
-using System;
-using System.Collections.Generic;
+```csharp C# hidelines={1..4}
 using System.Text.Json;
-using System.Threading.Tasks;
 using Anthropic;
 using Anthropic.Models.Messages;
 
-public class Program
+AnthropicClient client = new()
 {
-    public static async Task Main(string[] args)
-    {
-        AnthropicClient client = new()
-        {
-            ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
-        };
+    ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
+};
 
-        var parameters = new MessageCreateParams
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 1024,
+    Tools =
+    [
+        new ToolUnion(new Tool()
         {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 1024,
-            Tools =
-            [
-                new ToolUnion(new Tool()
-                {
-                    Name = "search_documents",
-                    Description = "Search through the knowledge base",
-                    InputSchema = new InputSchema()
-                    {
-                        Properties = new Dictionary<string, JsonElement>
-                        {
-                            ["query"] = JsonSerializer.SerializeToElement(new { type = "string", description = "Search query" }),
-                        },
-                        Required = ["query"],
-                    },
-                }),
-                new ToolUnion(new Tool()
-                {
-                    Name = "get_document",
-                    Description = "Retrieve a specific document by ID",
-                    InputSchema = new InputSchema()
-                    {
-                        Properties = new Dictionary<string, JsonElement>
-                        {
-                            ["doc_id"] = JsonSerializer.SerializeToElement(new { type = "string", description = "Document ID" }),
-                        },
-                        Required = ["doc_id"],
-                    },
-                    CacheControl = new CacheControlEphemeral(),
-                }),
-            ],
-            System = new MessageCreateParamsSystem(new List<TextBlockParam>
+            Name = "search_documents",
+            Description = "Search through the knowledge base",
+            InputSchema = new InputSchema()
             {
-                new TextBlockParam()
+                Properties = new Dictionary<string, JsonElement>
                 {
-                    Text = "You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base",
-                    CacheControl = new CacheControlEphemeral(),
+                    ["query"] = JsonSerializer.SerializeToElement(new { type = "string", description = "Search query" }),
                 },
-                new TextBlockParam()
+                Required = ["query"],
+            },
+        }),
+        new ToolUnion(new Tool()
+        {
+            Name = "get_document",
+            Description = "Retrieve a specific document by ID",
+            InputSchema = new InputSchema()
+            {
+                Properties = new Dictionary<string, JsonElement>
                 {
-                    Text = "# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]",
-                    CacheControl = new CacheControlEphemeral(),
+                    ["doc_id"] = JsonSerializer.SerializeToElement(new { type = "string", description = "Document ID" }),
                 },
+                Required = ["doc_id"],
+            },
+            CacheControl = new CacheControlEphemeral(),
+        }),
+    ],
+    System = new MessageCreateParamsSystem(new List<TextBlockParam>
+    {
+        new TextBlockParam()
+        {
+            Text = "You are a helpful research assistant with access to a document knowledge base.\n\n# Instructions\n- Always search for relevant documents before answering\n- Provide citations for your sources\n- Be objective and accurate in your responses\n- If multiple documents contain relevant information, synthesize them\n- Acknowledge when information is not available in the knowledge base",
+            CacheControl = new CacheControlEphemeral(),
+        },
+        new TextBlockParam()
+        {
+            Text = "# Knowledge Base Context\n\nHere are the relevant documents for this conversation:\n\n## Document 1: Solar System Overview\nThe solar system consists of the Sun and all objects that orbit it...\n\n## Document 2: Planetary Characteristics\nEach planet has unique features. Mercury is the smallest planet...\n\n## Document 3: Mars Exploration\nMars has been a target of exploration for decades...\n\n[Additional documents...]",
+            CacheControl = new CacheControlEphemeral(),
+        },
+    }),
+    Messages =
+    [
+        new() { Role = Role.User, Content = "Can you search for information about Mars rovers?" },
+        new()
+        {
+            Role = Role.Assistant,
+            Content = new MessageParamContent(new List<ContentBlockParam>
+            {
+                new ContentBlockParam(new ToolUseBlockParam()
+                {
+                    ID = "tool_1",
+                    Name = "search_documents",
+                    Input = new Dictionary<string, JsonElement>
+                    {
+                        ["query"] = JsonSerializer.SerializeToElement("Mars rovers"),
+                    },
+                }),
             }),
-            Messages =
-            [
-                new() { Role = Role.User, Content = "Can you search for information about Mars rovers?" },
-                new()
+        },
+        new()
+        {
+            Role = Role.User,
+            Content = new MessageParamContent(new List<ContentBlockParam>
+            {
+                new ContentBlockParam(new ToolResultBlockParam()
                 {
-                    Role = Role.Assistant,
-                    Content = new MessageParamContent(new List<ContentBlockParam>
-                    {
-                        new ContentBlockParam(new ToolUseBlockParam()
-                        {
-                            ID = "tool_1",
-                            Name = "search_documents",
-                            Input = new Dictionary<string, JsonElement>
-                            {
-                                ["query"] = JsonSerializer.SerializeToElement("Mars rovers"),
-                            },
-                        }),
-                    }),
-                },
-                new()
+                    ToolUseID = "tool_1",
+                    Content = "Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)",
+                }),
+            }),
+        },
+        new()
+        {
+            Role = Role.Assistant,
+            Content = "I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document.",
+        },
+        new()
+        {
+            Role = Role.User,
+            Content = new MessageParamContent(new List<ContentBlockParam>
+            {
+                new ContentBlockParam(new TextBlockParam()
                 {
-                    Role = Role.User,
-                    Content = new MessageParamContent(new List<ContentBlockParam>
-                    {
-                        new ContentBlockParam(new ToolResultBlockParam()
-                        {
-                            ToolUseID = "tool_1",
-                            Content = "Found 3 relevant documents: Document 3 (Mars Exploration), Document 7 (Rover Technology), Document 9 (Mission History)",
-                        }),
-                    }),
-                },
-                new()
-                {
-                    Role = Role.Assistant,
-                    Content = "I found 3 relevant documents about Mars rovers. Let me get more details from the Mars Exploration document.",
-                },
-                new()
-                {
-                    Role = Role.User,
-                    Content = new MessageParamContent(new List<ContentBlockParam>
-                    {
-                        new ContentBlockParam(new TextBlockParam()
-                        {
-                            Text = "Yes, please tell me about the Perseverance rover specifically.",
-                            CacheControl = new CacheControlEphemeral(),
-                        }),
-                    }),
-                },
-            ]
-        };
+                    Text = "Yes, please tell me about the Perseverance rover specifically.",
+                    CacheControl = new CacheControlEphemeral(),
+                }),
+            }),
+        },
+    ]
+};
 
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -2878,7 +2848,7 @@ $message = $client->messages->create(
     ],
 );
 
-echo $message;
+echo json_encode($message->usage), PHP_EOL;
 ```
 
 ```ruby Ruby nocheck hidelines={1..2}
@@ -2991,22 +2961,22 @@ This comprehensive example demonstrates how to use all 4 available cache breakpo
 
 3. **RAG context cache** (cache breakpoint 3): The knowledge base documents are cached independently, allowing you to update the RAG documents without invalidating the tools or instructions cache.
 
-4. **Conversation history cache** (cache breakpoint 4): The assistant's response is marked with `cache_control` to enable incremental caching of the conversation as it progresses.
+4. **Conversation history cache** (cache breakpoint 4): The final user message is marked with `cache_control` to enable incremental caching of the conversation as it progresses.
 
 This approach provides maximum flexibility:
-- If you only update the final user message, all four cache segments are reused
+- If you append a new turn to the conversation without changing earlier content, all four cache segments are reused
 - If you update the RAG documents but keep the same tools and instructions, the first two cache segments are reused
 - If you change the conversation but keep the same tools, instructions, and documents, the first three segments are reused
-- Each cache breakpoint can be invalidated independently based on what changes in your application
+- Changes at any breakpoint invalidate that segment and everything after it, while earlier cached segments remain valid
 
 For the first request:
-- `input_tokens`: Tokens in the final user message
+- `input_tokens`: Minimal (tokens after the final cache breakpoint, near 0 in this example)
 - `cache_creation_input_tokens`: Tokens in all cached segments (tools + instructions + RAG documents + conversation history)
 - `cache_read_input_tokens`: 0 (no cache hits)
 
-For subsequent requests with only a new user message:
-- `input_tokens`: Tokens in the new user message only
-- `cache_creation_input_tokens`: Any new tokens added to conversation history
+For subsequent requests with only a new user message (and the fourth breakpoint moved to that new final message, as in the example):
+- `input_tokens`: Minimal (tokens after the final cache breakpoint, near 0 in this example)
+- `cache_creation_input_tokens`: Tokens in the new user message and the previous assistant turn (the new conversation segment being cached)
 - `cache_read_input_tokens`: All previously cached tokens (tools + instructions + RAG documents + previous conversation)
 
 This pattern is especially powerful for:
@@ -3021,7 +2991,7 @@ This pattern is especially powerful for:
 
 Prompt caching (both automatic and explicit) is ZDR eligible. Anthropic does not store the raw text of your prompts or Claude's responses.
 
-KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 60 minutes (extended), after which they are promptly, though not immediately, deleted. Cache entries are isolated between organizations.
+KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 1 hour (extended), after which they are promptly, though not immediately, deleted. Cache entries are isolated between organizations and, on the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta), between workspaces within an organization.
 
 For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
@@ -3122,7 +3092,7 @@ For ZDR eligibility across all features, see [API and data retention](/docs/en/m
 
   <section title="How does prompt caching affect pricing?">
 
-    Prompt caching introduces a new pricing structure where cache writes cost 25% more than base input tokens, while cache hits cost only 10% of the base input token price.
+    Prompt caching introduces a new pricing structure where 5-minute cache writes cost 25% more than base input tokens, 1-hour cache writes cost 2x base input tokens, and cache hits cost only 10% of the base input token price.
   
 </section>
 
@@ -3150,15 +3120,13 @@ Prompt caching is designed with strong privacy and data separation measures:
 
 1. Cache keys are generated using a cryptographic hash of the prompts up to the cache control point. This means only requests with identical prompts can access a specific cache.
 
-2. Caches are organization-specific. Users within the same organization can access the same cache if they use identical prompts, but caches are not shared across different organizations, even for identical prompts.
+2. On the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta), caches are isolated per workspace within an organization. On Bedrock and Vertex AI, caches are isolated per organization. In every case, caches are never shared across organizations, even for identical prompts. See [Cache storage and sharing](#cache-storage-and-sharing) for details.
 
 3. The caching mechanism is designed to maintain the integrity and privacy of each unique conversation or context.
 
 4. It's safe to use `cache_control` anywhere in your prompts. For caching to produce reads, place the breakpoint at the end of a stable prefix: placing it on a block that changes every request (such as a timestamp or the user's arbitrary input) writes a fresh entry each time and never hits.
 
 These measures ensure that prompt caching maintains data privacy and security while offering performance benefits.
-
-Note: Starting February 5, 2026, caches will be isolated per workspace instead of per organization. This change applies to the Claude API and Azure AI Foundry (preview). See [Cache storage and sharing](#cache-storage-and-sharing) for details.
 
   
 </section>
@@ -3168,15 +3136,15 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
 
     The [1-hour cache](#1-hour-cache-duration) can help improve your cache hits. The most cost effective way of using it is the following:
     - Gather a set of message requests that have a shared prefix.
-    - Send a batch request with just a single request that has this shared prefix and a 1-hour cache block. This will get written to the 1-hour cache.
+    - Send a batch request with a single request that has this shared prefix and a 1-hour cache block. This writes the prefix to the 1-hour cache.
     - As soon as this is complete, submit the rest of the requests. You will have to monitor the job to know when it completes.
 
-    This is typically better than using the 5-minute cache simply because it's common for batch requests to take between 5 minutes and 1 hour to complete. Anthropic is considering ways to improve these cache hit rates and making this process more straightforward.
+    This is typically better than using the 5-minute cache because it's common for batch requests to take between 5 minutes and 1 hour to complete.
   
 </section>
   <section title="Why am I seeing the error `AttributeError: 'Beta' object has no attribute 'prompt_caching'` in Python?">
 
-  This error typically appears when you have upgraded your SDK or you are using outdated code examples. Prompt caching is now generally available, so you no longer need the beta prefix. Instead of:
+  This error typically appears when you have upgraded your SDK or you are using outdated code examples. Prompt caching no longer requires the beta prefix. Instead of:
     <CodeGroup>
       
       ```python Python nocheck
@@ -3230,8 +3198,31 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
 
       echo $message->content[0]->text;
       ```
+
+      
+      ```ruby Ruby nocheck hidelines={1..2}
+      require "anthropic"
+
+      client = Anthropic::Client.new
+
+      message = client.beta.prompt_caching.messages.create(
+        model: "claude-opus-4-7",
+        max_tokens: 1024,
+        system: [
+          {
+            type: "text",
+            text: "You are an expert on this large document...",
+            cache_control: { type: "ephemeral" }
+          }
+        ],
+        messages: [
+          { role: "user", content: "Summarize the key points" }
+        ]
+      )
+      puts message.content.first.text
+      ```
     </CodeGroup>
-    Simply use:
+    Use:
     <CodeGroup>
       
       ```python Python nocheck
@@ -3310,7 +3301,7 @@ Note: Starting February 5, 2026, caches will be isolated per workspace instead o
 </section>
   <section title="Why am I seeing 'TypeError: Cannot read properties of undefined (reading 'messages')'?">
 
-  This error typically appears when you have upgraded your SDK or you are using outdated code examples. Prompt caching is now generally available, so you no longer need the beta prefix. Instead of:
+  This error typically appears when you have upgraded your SDK or you are using outdated code examples. Prompt caching no longer requires the beta prefix. Instead of:
 
       ```typescript TypeScript
       client.beta.promptCaching.messages.create(/* ... */);

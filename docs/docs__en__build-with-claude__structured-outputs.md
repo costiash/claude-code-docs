@@ -12,7 +12,7 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 You can use these features independently or together in the same request.
 
 <Note>
-Structured outputs are generally available on the Claude API for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. On Amazon Bedrock, structured outputs are generally available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Opus 4.7 and Claude Mythos Preview are available through [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) (the Messages-API Bedrock endpoint). Structured outputs are in beta on Microsoft Foundry. On [Google Cloud Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai), structured outputs are generally available for Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6.
+Structured outputs are generally available on the Claude API for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. On Amazon Bedrock, structured outputs are generally available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Opus 4.7 and Claude Mythos Preview are available through [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) (the Messages-API Bedrock endpoint). Structured outputs are available on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) and in beta on [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai), structured outputs are generally available for Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6.
 </Note>
 
 <Note>
@@ -20,7 +20,7 @@ This feature qualifies for [Zero Data Retention (ZDR)](/docs/en/build-with-claud
 </Note>
 
 <Tip>
-**Migrating from beta?** The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The old beta header (`structured-outputs-2025-11-13`) and `output_format` parameter will continue working for a transition period. See code examples below for the updated API shape.
+**Migrating from beta?** The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The old beta header (`structured-outputs-2025-11-13`) and `output_format` parameter will continue working for a transition period. See the following code examples for the updated API shape.
 </Tip>
 
 ## Why use structured outputs
@@ -1259,9 +1259,9 @@ Annotation summary:
 - `@JsonIgnore`: Exclude a `public` field or getter from the schema
 - `@JsonProperty`: Include a non-`public` field or getter in the schema
 
-If you use `@JsonProperty(required = false)`, the SDK ignores the `false` value. Anthropic JSON schemas must mark all properties as required.
+If you use `@JsonProperty(required = false)`, the SDK ignores the `false` value. Class-derived schemas always mark all properties as required.
 
-You can also use OpenAPI Swagger 2 `@Schema` and `@ArraySchema` annotations for type-specific constraints:
+You can also use Swagger Core (OpenAPI 3) `@Schema` and `@ArraySchema` annotations for type-specific constraints:
 
 ```java hidelines={-2..}
 import io.swagger.v3.oas.annotations.media.ArraySchema;

@@ -225,7 +225,7 @@ Fast mode is priced at 6x standard Opus rates across the full context window, in
 
 Fast mode pricing stacks with other pricing modifiers:
 
-- [Prompt caching multipliers](/docs/en/about-claude/pricing#model-pricing) apply on top of fast mode pricing
+- [Prompt caching multipliers](/docs/en/about-claude/pricing#prompt-caching) apply on top of fast mode pricing
 - [Data residency](/docs/en/manage-claude/data-residency) multipliers apply on top of fast mode pricing
 
 For complete pricing details, see the [pricing page](/docs/en/about-claude/pricing#fast-mode-pricing).
@@ -393,7 +393,7 @@ echo $response->usage->speed;  // "fast" or "standard"
 ```
 
 ```ruby Ruby nocheck
-response = anthropic.beta.messages.create(
+response = client.beta.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 1024,
   speed: "fast",
@@ -415,8 +415,8 @@ puts(response.usage.speed)  # "fast" or "standard"
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
-    "input_tokens": 523,
-    "output_tokens": 1842,
+    "input_tokens": 8,
+    "output_tokens": 12,
     "speed": "fast"
   }
 }
@@ -807,6 +807,7 @@ message = create_message_with_fast_fallback(
 - **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
 - **Batch API:** Fast mode is not available with the [Batch API](/docs/en/build-with-claude/batch-processing).
 - **Priority Tier:** Fast mode is not available with [Priority Tier](/docs/en/api/service-tiers).
+- **Claude Platform on AWS:** Fast mode is not available on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws).
 
 ## Next steps
 

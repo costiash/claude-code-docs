@@ -24,12 +24,15 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
 </Note>
 
 <Warning>
-  On Amazon Bedrock, server-side tool search is available only via the [invoke
+  On Amazon Bedrock, server-side tool search is available only through the
+  [InvokeModel
   API](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-runtime_example_bedrock-runtime_InvokeModel_AnthropicClaude_section.html),
-  not the converse API.
+  not the Converse API.
 </Warning>
 
-You can also implement [client-side tool search](#custom-tool-search-implementation) by returning `tool_reference` blocks from your own search implementation.
+<Note>
+On [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), server-side tool search works identically to the Claude API. Claude Platform on AWS uses the Anthropic Messages API directly, so there is no InvokeModel or Converse distinction.
+</Note>
 
 ## How tool search works
 
@@ -604,13 +607,13 @@ Mark tools for on-demand loading by adding `defer_loading: true`:
 **Key points:**
 
 - Tools without `defer_loading` are loaded into context immediately
-- Tools with `defer_loading: true` are only loaded when Claude discovers them via search
+- Tools with `defer_loading: true` are only loaded when Claude discovers them through search
 - The tool search tool itself should **never** have `defer_loading: true`
 - Keep your 3-5 most frequently used tools as non-deferred for optimal performance
 
 Both tool search variants (`regex` and `bm25`) search tool names, descriptions, argument names, and argument descriptions.
 
-**How deferral works internally:** Deferred tools are not included in the system-prompt prefix. When the model discovers a deferred tool through tool search, the tool definition is appended inline as a `tool_reference` block in the conversation. The prefix is untouched, so prompt caching is preserved. The grammar for strict mode builds from the full toolset, so `defer_loading` and strict mode compose without grammar recompilation.
+**How deferral works internally:** Deferred tools are not included in the system-prompt prefix. When the model discovers a deferred tool through tool search, the API appends a `tool_reference` block inline in the conversation, then expands it into the full tool definition before passing it to Claude. The prefix is untouched, so prompt caching is preserved. The grammar for [strict mode](/docs/en/agents-and-tools/tool-use/strict-tool-use) (the rules that constrain tool-call output to match your schemas) builds from the full toolset, so `defer_loading` and strict mode compose without grammar recompilation.
 
 ## Response format
 
@@ -785,14 +788,14 @@ Errors during tool execution return a 200 response with error information in the
 
 <section title="Claude doesn't find expected tools">
 
-**Cause:** Tool names or descriptions don't match the regex pattern
+**Cause:** Tool name, description, argument names, or argument descriptions don't match the regex pattern
 
 **Debugging steps:**
 
-1. Check tool name and description. Claude searches BOTH fields
-2. Test your pattern: `import re; re.search(r"your_pattern", "tool_name")`
-3. Remember searches are case-sensitive by default (use `(?i)` for case-insensitive)
-4. Claude uses broad patterns like `".*weather.*"` not exact matches
+1. Check tool name, description, argument names, and argument descriptions. Claude searches all of these fields.
+2. Test your pattern: `import re; re.search(r"your_pattern", "tool_name")`.
+3. Remember searches are case-sensitive by default (use `(?i)` for case-insensitive).
+4. Claude uses broad patterns such as `".*weather.*"` not exact matches.
 
 **Tip:** Add common keywords to tool descriptions to improve discoverability
 

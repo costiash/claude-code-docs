@@ -4,7 +4,7 @@ Create a session to run your agent and begin executing tasks.
 
 ---
 
-A session is a running agent instance within an environment. Each session references an [agent](/docs/en/managed-agents/agent-setup) and an [environment](/docs/en/managed-agents/environments) (both created separately), and maintains conversation history across multiple interactions.
+A session is an agent instance within an environment. Each session references an [agent](/docs/en/managed-agents/agent-setup) and an [environment](/docs/en/managed-agents/environments) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](#creating-a-session) to provision its container, then [send a user event](#starting-the-session) to start work.
 
 <Note>
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
@@ -14,9 +14,9 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 A session requires an `agent` ID and an `environment` ID. Agents are versioned resources; passing in the `agent` ID as a string starts the session with the latest agent version.
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   
-  ```bash curl
+  ```bash curl nocheck
   session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -89,9 +89,9 @@ A session requires an `agent` ID and an `environment` ID. Agents are versioned r
 
 To pin a session to a specific agent version, pass an object. This lets you control exactly which version runs and stage rollouts of new versions independently.
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   
-  ```bash curl
+  ```bash curl nocheck
   pinned_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -187,9 +187,9 @@ The agent defines how Claude behaves within the session, including the model, sy
 
 If your agent uses MCP tools that require authentication, pass `vault_ids` at session creation to reference a vault containing stored OAuth credentials. Anthropic manages token refresh on your behalf. See [Authenticate with vaults](/docs/en/managed-agents/vaults) for how to create vaults and register credentials.
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   
-  ```bash curl
+  ```bash curl nocheck
   vault_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -273,11 +273,11 @@ If your agent uses MCP tools that require authentication, pass `vault_ids` at se
 
 ## Starting the session
 
-Creating a session provisions the environment and agent but does not start any work. To delegate a task, send events to the session using a [user event](/docs/en/managed-agents/events-and-streaming#user-events). The session acts as a state machine that tracks progress while events drive the actual execution.
+Creating a session provisions the environment's container but does not start any work. To delegate a task, send events to the session using a [user event](/docs/en/managed-agents/events-and-streaming#event-types). The session acts as a state machine that tracks progress while events drive the actual execution.
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   
-  ```bash curl
+  ```bash curl nocheck
   curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -297,8 +297,7 @@ Creating a session provisions the environment and agent but does not start any w
   
   ```bash CLI nocheck
   ant beta:sessions:events send \
-    --session-id "$SESSION_ID" \
- <<'YAML'
+    --session-id "$SESSION_ID" <<'YAML'
   events:
     - type: user.message
       content:
@@ -306,7 +305,8 @@ Creating a session provisions the environment and agent but does not start any w
           text: List the files in the working directory.
   YAML
   ```
-  ```python Python
+  
+  ```python Python nocheck
   client.beta.sessions.events.send(
       session.id,
       events=[
@@ -319,7 +319,8 @@ Creating a session provisions the environment and agent but does not start any w
       ],
   )
   ```
-  ```typescript TypeScript
+  
+  ```typescript TypeScript nocheck
   await client.beta.sessions.events.send(session.id, {
     events: [
       {
@@ -329,7 +330,8 @@ Creating a session provisions the environment and agent but does not start any w
     ]
   });
   ```
-  ```csharp C#
+  
+  ```csharp C# nocheck
   await client.Beta.Sessions.Events.Send(session.ID, new()
   {
       Events =
@@ -349,7 +351,8 @@ Creating a session provisions the environment and agent but does not start any w
       ],
   });
   ```
-  ```go Go
+  
+  ```go Go nocheck
   	if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   		Events: []anthropic.SendEventsParamsUnion{{
   			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
@@ -366,7 +369,8 @@ Creating a session provisions the environment and agent but does not start any w
   		panic(err)
   	}
   ```
-  ```java Java
+  
+  ```java Java nocheck
       client.beta().sessions().events().send(
           session.id(),
           EventSendParams.builder()
@@ -376,7 +380,8 @@ Creating a session provisions the environment and agent but does not start any w
                   .build())
               .build());
   ```
-  ```php PHP
+  
+  ```php PHP nocheck
   $client->beta->sessions->events->send(
       $session->id,
       events: [
@@ -387,7 +392,8 @@ Creating a session provisions the environment and agent but does not start any w
       ],
   );
   ```
-  ```ruby Ruby
+  
+  ```ruby Ruby nocheck
   client.beta.sessions.events.send_(
     session.id,
     events: [
@@ -400,7 +406,7 @@ Creating a session provisions the environment and agent but does not start any w
   ```
 </CodeGroup>
 
-See [Events and streaming](/docs/en/managed-agents/events-and-streaming) for how to stream the agent's responses and handle tool confirmations.
+See [Session event stream](/docs/en/managed-agents/events-and-streaming) for how to stream the agent's responses and handle tool confirmations.
 
 ## Session statuses
 
@@ -417,9 +423,9 @@ Sessions progress through these statuses:
 
 ### Retrieving a session
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   
-  ```bash curl
+  ```bash curl nocheck
   retrieved=$(curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -465,7 +471,7 @@ Sessions progress through these statuses:
 
 ### Listing sessions
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   ```bash curl
   curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -523,9 +529,9 @@ Sessions progress through these statuses:
 
 Archive a session to prevent new events from being sent while preserving its history:
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   
-  ```bash curl
+  ```bash curl nocheck
   curl -fsSL -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/archive" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -564,13 +570,13 @@ Archive a session to prevent new events from being sent while preserving its his
 
 ### Deleting a session
 
-Delete a session to permanently remove its record, events, and associated container. A `running` session cannot be deleted; send an [interrupt event](/docs/en/managed-agents/events-and-streaming#user-events) if you need to delete it immediately.
+Delete a session to permanently remove its record, events, and associated container. A `running` session cannot be deleted; send an [interrupt event](/docs/en/managed-agents/events-and-streaming#event-types) if you need to delete it immediately.
 
-Files, memory stores, environments, and agents are independent resources and are not affected by session deletion.
+Files, memory stores, vaults, skills, environments, and agents are independent resources and are not affected by session deletion.
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   
-  ```bash curl
+  ```bash curl nocheck
   curl -fsSL -X DELETE "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \

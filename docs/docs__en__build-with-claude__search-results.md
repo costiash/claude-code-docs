@@ -546,7 +546,6 @@ public class SearchKnowledgeBaseExample {
             MessageCreateParams finalParams = MessageCreateParams.builder()
                 .model(Model.CLAUDE_OPUS_4_7)
                 .maxTokens(1024L)
-                .addTool(knowledgeBaseTool)
                 .addUserMessage("How do I configure the timeout settings?")
                 .addAssistantMessageOfBlockParams(List.of(
                     ContentBlockParam.ofToolUse(ToolUseBlockParam.builder()

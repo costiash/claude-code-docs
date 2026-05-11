@@ -878,7 +878,7 @@ const getWeatherTool = betaZodTool({
 
 const runner = client.beta.messages.toolRunner({
   model: "claude-opus-4-7",
-  max_tokens: 1000,
+  max_tokens: 1024,
   messages: [{ role: "user", content: "What is the weather in San Francisco?" }],
   tools: [getWeatherTool],
   stream: true

@@ -10,8 +10,8 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
 
 Data residency controls let you manage where your data is processed and stored. Two independent settings govern this:
 
-- **Inference geo:** Controls where model inference runs, on a per-request basis. Set via the `inference_geo` API parameter or as a workspace default.
-- **Workspace geo:** Controls where data is stored at rest and where endpoint processing (image transcoding, code execution, etc.) happens. Configured at the workspace level in the [Console](https://platform.claude.com).
+- **Inference geo:** Controls where model inference runs, on a per-request basis. Set through the `inference_geo` API parameter or as a workspace default.
+- **Workspace geo:** Controls where data is stored at rest and where endpoint processing (such as image transcoding and code execution) happens. Configured at the workspace level in the [Claude Console](https://platform.claude.com).
 
 <Note>
 [Claude Managed Agents](/docs/en/managed-agents/overview) does not support the `inference_geo` parameter, but respects the Workspace geo configured in Console.
@@ -115,10 +115,10 @@ The response `usage` object includes an `inference_geo` field indicating where i
 
 ### Model availability
 
-The `inference_geo` parameter is supported on Claude Opus 4.6 and all subsequent models. Older models released before Opus 4.6 do not support the parameter. Requests with `inference_geo` on legacy models return a 400 error.
+The `inference_geo` parameter is supported on Claude Opus 4.6, Claude Sonnet 4.6, and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5, Claude Haiku 4.5, or earlier models return a 400 error.
 
 <Note>
-The `inference_geo` parameter is only available on the Claude API (1P). On third-party platforms (AWS Bedrock, Google Vertex AI), the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. The `inference_geo` parameter is also not available via the [OpenAI SDK compatibility endpoint](/docs/en/api/openai-sdk).
+The `inference_geo` parameter is available on the Claude API (first-party) and [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). On Amazon Bedrock, Vertex AI, and Microsoft Foundry, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](/docs/en/api/openai-sdk).
 </Note>
 
 ### Workspace-level restrictions
@@ -130,6 +130,10 @@ Workspace settings also support restricting which inference geos are available:
 
 These settings can be configured through the Console or the [Admin API](/docs/en/manage-claude/admin-api) under the `data_residency` field.
 
+<Note>
+**Claude Platform on AWS:** Workspace-level inference geography controls (`allowed_inference_geos` and `default_inference_geo`) are not available. Use the per-request `inference_geo` parameter instead.
+</Note>
+
 ## Workspace geo
 
 Workspace geo is set when you create a workspace and can't be changed afterwards. Currently, `"us"` is the only available workspace geo.
@@ -140,15 +144,19 @@ To set workspace geo, create a new workspace in the [Console](https://platform.c
 2. Create a new workspace.
 3. Select the workspace geo.
 
+<Note>
+**Claude Platform on AWS:** Workspace geo is not configurable. Workspaces are provisioned through the AWS Console, and the Claude Console Workspaces page is read-only. Claude Managed Agents sessions on this platform run with an effective Workspace geo of `"us"`, which is currently the only available workspace geo. See [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) for data residency considerations specific to that platform.
+</Note>
+
 ## Pricing
 
 Data residency pricing varies by model generation:
 
-- **Claude Opus 4.6 and newer:** US-only inference (`inference_geo: "us"`) is priced at 1.1x the standard rate across all token pricing categories (input tokens, output tokens, cache writes, and cache reads).
-- **Global routing** (`inference_geo: "global"` or omitted): Standard pricing applies.
-- **Older models:** Existing pricing is unchanged regardless of `inference_geo` settings.
+- **Claude Opus 4.6, Claude Sonnet 4.6, and later:** US-only inference (`inference_geo: "us"`) is priced at 1.1x the standard rate across all token pricing categories (input tokens, output tokens, cache writes, and cache reads).
+- **Global routing** (`inference_geo: "global"`): Standard pricing applies.
+- **Older models:** Don't support `inference_geo` (see [Model availability](#model-availability)); standard pricing applies. Requests that include the parameter return a 400 error.
 
-This pricing applies to the Claude API (1P) only. Third-party platforms (AWS Bedrock, Google Vertex AI) have their own regional pricing. See the [pricing page](/docs/en/about-claude/pricing#data-residency-pricing) for details.
+This pricing applies to the Claude API (first-party) and Claude Platform on AWS. Partner-operated platforms (Bedrock and Vertex AI) have their own regional pricing. See [Data residency pricing](/docs/en/about-claude/pricing#data-residency-pricing) for details.
 
 <Note>
 If you use [Priority Tier](/docs/en/api/service-tiers), the 1.1x multiplier for US-only inference also affects how tokens are counted against your Priority Tier capacity. Each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your committed TPM, consistent with how other pricing multipliers (such as prompt caching) affect burndown rates.
@@ -190,7 +198,7 @@ Legacy models are unaffected by this migration. For current pricing on newer mod
 ## Current limitations
 
 - **Shared rate limits:** Rate limits are shared across all geos.
-- **Inference geo:** Only `"us"` and `"global"` are available at launch. Additional regions will be added over time.
+- **Inference geo:** Only `"us"` and `"global"` are available.
 - **Workspace geo:** Only `"us"` is currently available. Workspace geo can't be changed after workspace creation.
 
 ## Next steps

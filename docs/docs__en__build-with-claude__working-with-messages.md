@@ -240,7 +240,7 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
-await anthropic.messages.create({
+const message = await anthropic.messages.create({
   model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: [
@@ -249,6 +249,7 @@ await anthropic.messages.create({
     { role: "user", content: "Can you describe LLMs to me?" }
   ]
 });
+console.log(message);
 ```
 
 ```csharp C#
@@ -377,6 +378,7 @@ puts message
       "text": "Sure, I'd be happy to provide..."
     }
   ],
+  "model": "claude-opus-4-7",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {

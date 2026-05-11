@@ -196,7 +196,7 @@ public class Program
 
         var parameters = new MessageCreateParams
         {
-            Model = "claude-opus-4-7",
+            Model = Model.ClaudeOpus4_7,
             MaxTokens = 4096,
             Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02" },
             Container = new BetaContainerParams
@@ -2481,7 +2481,9 @@ puts message
 
 ### Creating a Skill
 
-Upload your custom Skill to make it available in your workspace. You can upload using either a directory path or individual file objects.
+A Skill bundle is a directory containing a `SKILL.md` file at the top level with `name` and `description` YAML frontmatter, plus any supporting scripts or resources. See [Get started with Agent Skills in the API](/docs/en/agents-and-tools/agent-skills/quickstart) to author one, and the **Requirements** list following the examples for the full constraints.
+
+Upload your custom Skill to make it available in your workspace. You can upload a zip archive or individual file objects; the Python SDK additionally provides a `files_from_dir` helper that accepts a directory path.
 
 <CodeGroup defaultLanguage="CLI">
 
@@ -3314,7 +3316,7 @@ Attempting to delete a Skill with existing versions returns a 400 error.
 
 Skills support versioning to manage updates safely:
 
-**Anthropic-Managed Skills:**
+**Anthropic Skills:**
 - Versions use date format: `20251013`
 - New versions released as updates are made
 - Specify exact versions for stability
@@ -4025,6 +4027,7 @@ response = client.beta.messages.create(
     ],
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
+print(response)
 ```
 
 ```typescript TypeScript nocheck
@@ -4058,6 +4061,7 @@ const response = await client.beta.messages.create({
   ],
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]
 });
+console.log(response);
 ```
 
 ```csharp C# nocheck hidelines={1..7}
@@ -4085,7 +4089,7 @@ var dcfSkill = await client.Beta.Skills.Create(new SkillCreateParams
 // Use with Excel to create financial model
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-4-7",
+    Model = Model.ClaudeOpus4_7,
     MaxTokens = 4096,
     Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02" },
     Container = new BetaContainerParams
@@ -4142,7 +4146,7 @@ import (
 func main() {
 	client := anthropic.NewClient()
 
-	// Create custom DCF analysis Skill (ID obtained from Skills API)
+	// Custom DCF analysis Skill (ID obtained from Skills API create response)
 	dcfSkillID := "skill_01AbCdEfGhIjKlMnOpQrStUv"
 
 	// Use with Excel to create financial model
@@ -4197,8 +4201,8 @@ public class CustomSkillExample {
     public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        // Create custom DCF analysis Skill (via Skills API)
-        String dcfSkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv"; // From Skills API create response
+        // Custom DCF analysis Skill (ID obtained from Skills API create response)
+        String dcfSkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv";
 
         // Use with Excel Skill to create financial model
         MessageCreateParams params = MessageCreateParams.builder()
@@ -4237,8 +4241,8 @@ use Anthropic\Client;
 
 $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 
-// Create custom DCF analysis Skill
-$dcfSkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv"; // From API response
+// Custom DCF analysis Skill (ID obtained from Skills API create response)
+$dcfSkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv";
 
 // Use with Excel to create financial model
 $message = $client->beta->messages->create(
@@ -4258,7 +4262,7 @@ $message = $client->beta->messages->create(
         ['type' => 'code_execution_20250825', 'name' => 'code_execution']
     ]
 );
-echo $message->content[0]->text;
+echo $message;
 ```
 
 ```ruby Ruby nocheck hidelines={1..2}
@@ -4290,33 +4294,34 @@ response = client.beta.messages.create(
   ],
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]
 )
+puts response
 ```
 </CodeGroup>
 
 ---
 
-## Limits and Constraints
+## Limits and constraints
 
-### Request Limits
+### Request limits
 - **Maximum Skills per request:** 8
 - **Maximum Skill upload size:** 30&nbsp;MB (all files combined)
 - **YAML frontmatter requirements:**
-  - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words
+  - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words ("anthropic", "claude")
   - `description`: Maximum 1024 characters, non-empty, no XML tags
 
-### Environment Constraints
+### Environment constraints
 Skills run in the code execution container with these limitations:
-- **No network access** - Cannot make external API calls
-- **No runtime package installation** - Only pre-installed packages available
-- **Isolated environment** - Each request gets a fresh container
+- **No network access:** Cannot make external API calls
+- **No runtime package installation:** Only pre-installed packages available
+- **Isolated environment:** Containers are isolated; a fresh container is created unless you specify an existing container ID
 
-See the [code execution tool documentation](/docs/en/agents-and-tools/tool-use/code-execution-tool) for available packages.
+See [Code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) for available packages.
 
 ---
 
-## Best Practices
+## Best practices
 
-### When to Use Multiple Skills
+### When to use multiple Skills
 
 Combine Skills when tasks involve multiple document types or domains:
 
@@ -4519,58 +4524,52 @@ const response2 = await client.beta.messages.create({
 });
 ```
 
-```csharp C# nocheck
+```csharp C# nocheck hidelines={1..7}
 using System;
 using System.Threading.Tasks;
 using Anthropic;
-using Anthropic.Models.Messages;
+using Anthropic.Models.Beta.Messages;
 
-public class Program
+var client = new AnthropicClient();
+
+// First request creates cache
+var parameters1 = new MessageCreateParams
 {
-    public static async Task Main(string[] args)
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 4096,
+    Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02", "prompt-caching-2024-07-31" },
+    Container = new BetaContainer
     {
-        AnthropicClient client = new();
-
-        // First request creates cache
-        var parameters1 = new MessageCreateParams
+        Skills = new[]
         {
-            Model = "claude-opus-4-7",
-            MaxTokens = 4096,
-            Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02", "prompt-caching-2024-07-31" },
-            Container = new BetaContainer
-            {
-                Skills = new[]
-                {
-                    new BetaSkill { Type = "anthropic", SkillId = "xlsx", Version = "latest" }
-                }
-            },
-            Messages = new[] { new BetaMessageParam { Role = Role.User, Content = "Analyze sales data" } },
-            Tools = new[] { new BetaTool { Type = "code_execution_20250825", Name = "code_execution" } }
-        };
-        var response1 = await client.Beta.Messages.Create(parameters1);
-        Console.WriteLine(response1);
+            new BetaSkill { Type = "anthropic", SkillId = "xlsx", Version = "latest" }
+        }
+    },
+    Messages = new[] { new BetaMessageParam { Role = Role.User, Content = "Analyze sales data" } },
+    Tools = new[] { new BetaTool { Type = "code_execution_20250825", Name = "code_execution" } }
+};
+var response1 = await client.Beta.Messages.Create(parameters1);
+Console.WriteLine(response1);
 
-        // Adding/removing Skills breaks cache
-        var parameters2 = new MessageCreateParams
+// Adding/removing Skills breaks cache
+var parameters2 = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 4096,
+    Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02", "prompt-caching-2024-07-31" },
+    Container = new BetaContainer
+    {
+        Skills = new[]
         {
-            Model = "claude-opus-4-7",
-            MaxTokens = 4096,
-            Betas = new[] { "code-execution-2025-08-25", "skills-2025-10-02", "prompt-caching-2024-07-31" },
-            Container = new BetaContainer
-            {
-                Skills = new[]
-                {
-                    new BetaSkill { Type = "anthropic", SkillId = "xlsx", Version = "latest" },
-                    new BetaSkill { Type = "anthropic", SkillId = "pptx", Version = "latest" }
-                }
-            },
-            Messages = new[] { new BetaMessageParam { Role = Role.User, Content = "Create a presentation" } },
-            Tools = new[] { new BetaTool { Type = "code_execution_20250825", Name = "code_execution" } }
-        };
-        var response2 = await client.Beta.Messages.Create(parameters2);
-        Console.WriteLine(response2);
-    }
-}
+            new BetaSkill { Type = "anthropic", SkillId = "xlsx", Version = "latest" },
+            new BetaSkill { Type = "anthropic", SkillId = "pptx", Version = "latest" }
+        }
+    },
+    Messages = new[] { new BetaMessageParam { Role = Role.User, Content = "Create a presentation" } },
+    Tools = new[] { new BetaTool { Type = "code_execution_20250825", Name = "code_execution" } }
+};
+var response2 = await client.Beta.Messages.Create(parameters2);
+Console.WriteLine(response2);
 ```
 
 ```go Go hidelines={1..11,-1}

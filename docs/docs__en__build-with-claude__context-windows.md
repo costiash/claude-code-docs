@@ -71,14 +71,14 @@ The diagram below illustrates the context window token management when combining
     - **Token calculation:** All input and output components count toward the context window, and all output components are billed as output tokens.
   </Step>
   <Step title="Tool result handling (turn 2)">
-    - **Input components:** Every block in the first turn as well as the `tool_result`. The extended thinking block **must** be returned with the corresponding tool results. This is the only case wherein you **have to** return thinking blocks.
-    - **Output components:** After tool results have been passed back to Claude, Claude will respond with only text (no additional extended thinking until the next `user` message).
+    - **Input components:** Every block in the first turn and the `tool_result`. The extended thinking block **must** be returned with the corresponding tool results. This is the only case wherein you **have to** return thinking blocks.
+    - **Output components:** After tool results have been passed back to Claude, Claude responds with only text (no additional extended thinking until the next `user` message, unless [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking) is enabled).
     - **Token calculation:** All input and output components count toward the context window, and all output components are billed as output tokens.
   </Step>
-  <Step title="Third Step">
-    - **Input components:** All inputs and the output from the previous turn is carried forward with the exception of the thinking block, which can be dropped now that Claude has completed the entire tool use cycle. The API will automatically strip the thinking block for you if you pass it back, or you can feel free to strip it yourself at this stage. This is also where you would add the next `User` turn.
-    - **Output components:** Since there is a new `User` turn outside of the tool use cycle, Claude generates a new extended thinking block and continues from there.
-    - **Token calculation:** Previous thinking tokens are automatically stripped from context window calculations. All other previous blocks still count as part of the token window, and the thinking block in the current `Assistant` turn counts as part of the context window.
+  <Step title="New user turn (turn 3)">
+    - **Input components:** All inputs and the output from the previous turn are carried forward with the exception of the thinking block, which can be dropped now that Claude has completed the entire tool use cycle. The API will automatically strip the thinking block for you if you pass it back, or you can feel free to strip it yourself at this stage. This is also where you would add the next `user` turn.
+    - **Output components:** Because there is a new `user` turn outside of the tool use cycle, Claude generates a new extended thinking block and continues from there.
+    - **Token calculation:** Previous thinking tokens are automatically stripped from context window calculations. All other previous blocks still count as part of the token window, and the thinking block in the current `assistant` turn counts as part of the context window.
   </Step>
 </Steps>
 
@@ -101,7 +101,7 @@ A single request can include up to 600 images or PDF pages (100 for models with 
 
 ## Context awareness in Claude Sonnet 4.6, Sonnet 4.5, and Haiku 4.5
 
-Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 feature **context awareness**. This capability lets these models track their remaining context window (i.e. "token budget") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work. Claude is trained to use this context precisely, persisting in the task until the very end rather than guessing how many tokens remain. For a model, lacking context awareness is like competing in a cooking show without a clock. Claude 4.5+ models change this by explicitly informing the model about its remaining context, so it can take maximum advantage of the available tokens.
+Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 feature **context awareness**. This capability lets these models track their remaining context window (that is, "token budget") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work. Claude is trained to use this context precisely, persisting in the task until the very end rather than guessing how many tokens remain. For a model, lacking context awareness is like competing in a cooking show without a clock. Context-aware models change this by explicitly receiving information about remaining context, so they can take maximum advantage of the available tokens.
 
 **How it works:**
 

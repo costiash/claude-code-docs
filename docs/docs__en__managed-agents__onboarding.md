@@ -4,7 +4,7 @@ Create and test agents visually in Console without writing API calls.
 
 ---
 
-[Console](https://platform.claude.com/workspaces/default/agent-quickstart/)  provides a visual interface for creating and configuring agents. It produces the same `/v1/agents` and `/v1/sessions` resources as the API but lets you iterate on configuration interactively before writing code.
+[Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
 
 <Note>
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
@@ -29,12 +29,12 @@ Console includes an inline session runner. After configuring your agent, you can
 
 Once your agent works as expected:
 
-1. Copy the agent ID from Console output.
-2. Reference it in your code when [creating sessions](/docs/en/managed-agents/sessions):
+1. Copy the agent ID and [environment ID](/docs/en/managed-agents/environments) from Console.
+2. Reference them in your code when [creating sessions](/docs/en/managed-agents/sessions):
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
 
-```bash curl
+```bash curl nocheck
 session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -54,7 +54,7 @@ ant beta:sessions create \
   --title "My first session"
 ```
 
-```python Python
+```python Python nocheck
 session = client.beta.sessions.create(
     agent="agent_01J8XkN5uT3vHpLqRfWdY2",
     environment_id="env_01K2mPsT7hNwR4jXuLvCqD8",
@@ -62,7 +62,7 @@ session = client.beta.sessions.create(
 )
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 const session = await client.beta.sessions.create({
   agent: "agent_01J8XkN5uT3vHpLqRfWdY2",
   environment_id: "env_01K2mPsT7hNwR4jXuLvCqD8",
@@ -70,7 +70,7 @@ const session = await client.beta.sessions.create({
 });
 ```
 
-```csharp C#
+```csharp C# nocheck
 var session = await client.Beta.Sessions.Create(new()
 {
     Agent = "agent_01J8XkN5uT3vHpLqRfWdY2",
@@ -79,14 +79,10 @@ var session = await client.Beta.Sessions.Create(new()
 });
 ```
 
-```go Go
+```go Go nocheck hidelines={-1}
 session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
 	Agent: anthropic.BetaSessionNewParamsAgentUnion{
-		OfBetaManagedAgentsAgents: &anthropic.BetaManagedAgentsAgentParams{
-			Type:    anthropic.BetaManagedAgentsAgentParamsTypeAgent,
-			ID:      "agent_01J8XkN5uT3vHpLqRfWdY2",
-			Version: anthropic.Int(1),
-		},
+		OfString: anthropic.String("agent_01J8XkN5uT3vHpLqRfWdY2"),
 	},
 	EnvironmentID: "env_01K2mPsT7hNwR4jXuLvCqD8",
 	Title:         anthropic.String("My first session"),
@@ -97,7 +93,7 @@ if err != nil {
 _ = session
 ```
 
-```java Java
+```java Java nocheck
 var session = client.beta().sessions().create(
     SessionCreateParams.builder()
         .agent("agent_01J8XkN5uT3vHpLqRfWdY2")
@@ -107,7 +103,7 @@ var session = client.beta().sessions().create(
 );
 ```
 
-```php PHP
+```php PHP nocheck
 $session = $client->beta->sessions->create(
     agent: 'agent_01J8XkN5uT3vHpLqRfWdY2',
     environmentID: 'env_01K2mPsT7hNwR4jXuLvCqD8',
@@ -115,7 +111,7 @@ $session = $client->beta->sessions->create(
 );
 ```
 
-```ruby Ruby
+```ruby Ruby nocheck
 session = client.beta.sessions.create(
   agent: "agent_01J8XkN5uT3vHpLqRfWdY2",
   environment_id: "env_01K2mPsT7hNwR4jXuLvCqD8",

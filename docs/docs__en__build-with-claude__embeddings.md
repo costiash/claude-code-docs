@@ -195,7 +195,7 @@ retrieved_id = np.argmax(similarities)
 print(documents[retrieved_id])
 ```
 
-Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in the [Voyage Python package section](/docs/en/build-with-claude/embeddings#voyage-python-package).
+Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in [Voyage Python library](/docs/en/build-with-claude/embeddings#voyage-python-library).
 
 The output would be the 5th document, which is indeed the most relevant to the query:
 

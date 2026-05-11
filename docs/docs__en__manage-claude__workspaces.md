@@ -174,12 +174,12 @@ For complete parameter details, see the [Workspace Members API reference](/docs/
 API keys are scoped to a specific workspace. When you create an API key in a workspace, it can only access resources within that workspace.
 
 Resources scoped to workspaces include:
-- **Files** created via the [Files API](/docs/en/build-with-claude/files)
-- **Message Batches** created via the [Batch API](/docs/en/build-with-claude/batch-processing)
-- **Skills** created via the [Skills API](/docs/en/build-with-claude/skills-guide)
+- **Files** created through the [Files API](/docs/en/build-with-claude/files)
+- **Message Batches** created through the [Batch API](/docs/en/build-with-claude/batch-processing)
+- **Skills** created through the [Skills API](/docs/en/build-with-claude/skills-guide)
 
 <Note>
-Starting February 5, 2026, [prompt caches](/docs/en/build-with-claude/prompt-caching) will also be isolated per workspace (applies to the Claude API and Azure only).
+[Prompt caches](/docs/en/build-with-claude/prompt-caching) are also isolated per workspace on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (in beta). On Amazon Bedrock and Vertex AI, prompt caches are isolated per organization.
 </Note>
 
 <Tip>
@@ -217,7 +217,7 @@ workspace_ids[]=wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ&\
 group_by[]=workspace_id&\
 bucket_width=1d" \
   --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 Usage and costs attributed to the Default Workspace have a `null` value for `workspace_id`.
