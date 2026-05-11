@@ -1773,6 +1773,10 @@ Runs when the main Claude Code agent has finished responding. Does not run if
 the stoppage occurred due to a user interrupt. API errors fire
 [StopFailure](#stopfailure) instead.
 
+<Tip>
+  The [`/goal`](/en/goal) command is a built-in shortcut for a session-scoped prompt-based Stop hook. Use it when you want Claude to keep working until a condition holds without writing hook configuration.
+</Tip>
+
 #### Stop input
 
 In addition to the [common input fields](#common-input-fields), Stop hooks receive `stop_hook_active` and `last_assistant_message`. The `stop_hook_active` field is `true` when Claude Code is already continuing as a result of a stop hook. Check this value or process the transcript to prevent Claude Code from running indefinitely. The `last_assistant_message` field contains the text content of Claude's final response, so hooks can access it without parsing the transcript file.
