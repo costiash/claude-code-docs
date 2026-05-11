@@ -1,15 +1,16 @@
 {
   "metadata": {
-    "generated_at": "2026-05-11T18:42:26.291300Z",
-    "total_paths": 1541,
+    "generated_at": "2026-05-11T21:32:28.949060Z",
+    "total_paths": 1545,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-11T18:42:26.291309Z"
+    "last_regenerated": "2026-05-11T21:32:28.949067Z"
   },
   "categories": {
     "core_documentation": [
       "/docs/en/admin-setup",
       "/docs/en/agent-teams",
       "/docs/en/agent-view",
+      "/docs/en/agents",
       "/docs/en/agents-and-tools/agent-skills/best-practices",
       "/docs/en/agents-and-tools/agent-skills/enterprise",
       "/docs/en/agents-and-tools/agent-skills/overview",
@@ -79,6 +80,7 @@
       "/docs/en/channels-reference",
       "/docs/en/chrome",
       "/docs/en/claude-directory",
+      "/docs/en/claude-platform-on-aws",
       "/docs/en/code-review",
       "/docs/en/commands",
       "/docs/en/communications-kit",
@@ -97,6 +99,7 @@
       "/docs/en/get-started",
       "/docs/en/github-enterprise-server",
       "/docs/en/glossary",
+      "/docs/en/goal",
       "/docs/en/how-claude-code-works",
       "/docs/en/intro",
       "/docs/en/keybindings",
@@ -169,6 +172,7 @@
       "/docs/en/whats-new/2026-w17",
       "/docs/en/whats-new/2026-w18",
       "/docs/en/whats-new/2026-w19",
+      "/docs/en/worktrees",
       "/docs/en/zero-data-retention"
     ],
     "api_reference": [
