@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-12T13:00:38Z",
+  "generated_at": "2026-05-12T16:06:41Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -881,11 +881,11 @@
         "skills",
         "create",
         "skill",
-        "see",
         "code",
+        "see",
+        "directory",
         "hooks",
         "when",
-        "directory",
         "step",
         "root",
         "add",
@@ -896,7 +896,7 @@
         "file",
         "servers"
       ],
-      "word_count": 2556,
+      "word_count": 2580,
       "file_path": "docs/claude-code__plugins.md"
     },
     "/claude-code/quickstart": {
