@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-12T16:06:41Z",
+  "generated_at": "2026-05-12T18:55:19Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -153,22 +153,22 @@
         "prompt",
         "see",
         "settings",
+        "default",
         "only",
         "code",
         "file",
         "interactive",
         "print",
-        "default",
-        "flag",
-        "available",
-        "start",
         "output",
+        "flag",
+        "agent",
         "when",
         "model",
-        "system",
-        "flags"
+        "available",
+        "flags",
+        "start"
       ],
-      "word_count": 2743,
+      "word_count": 2863,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -235,8 +235,8 @@
         "data",
         "code",
         "default",
-        "session",
         "anthropic",
+        "session",
         "api",
         "disable",
         "users",
@@ -244,15 +244,15 @@
         "off",
         "settings",
         "retention",
+        "opt",
         "see",
         "using",
         "when",
-        "opt",
+        "set",
         "including",
-        "model",
-        "set"
+        "model"
       ],
-      "word_count": 1761,
+      "word_count": 1811,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -716,19 +716,19 @@
         "name",
         "code",
         "claude",
-        "plugin",
         "session",
+        "plugin",
         "metrics",
         "standard",
         "api",
-        "only",
         "user",
         "prompt",
+        "only",
         "counter",
         "such",
-        "hook"
+        "example"
       ],
-      "word_count": 8211,
+      "word_count": 8345,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -770,21 +770,21 @@
         "system",
         "style",
         "code",
+        "when",
         "instructions",
-        "default",
         "software",
+        "default",
+        "coding",
         "custom",
         "file",
         "engineering",
         "set",
         "files",
-        "when",
-        "tasks",
-        "frontmatter",
-        "complete",
-        "modify"
+        "keep",
+        "project",
+        "tasks"
       ],
-      "word_count": 856,
+      "word_count": 946,
       "file_path": "docs/claude-code__output-styles.md"
     },
     "/claude-code/overview": {
@@ -933,8 +933,8 @@
       "keywords": [
         "sandbox",
         "access",
-        "permission",
         "commands",
+        "permission",
         "settings",
         "claude",
         "sandboxing",
@@ -948,11 +948,11 @@
         "configuration",
         "tools",
         "allow",
+        "isolation",
         "cannot",
-        "system",
-        "sandboxed"
+        "system"
       ],
-      "word_count": 2834,
+      "word_count": 2916,
       "file_path": "docs/claude-code__sandboxing.md"
     },
     "/claude-code/security": {
@@ -31826,20 +31826,20 @@
     },
     "/docs/en/build-with-claude/fast-mode": {
       "title": "Fast mode (beta: research preview)",
-      "content_preview": "# Fast mode (beta: research preview)  Higher output speed for Claude Opus 4.6, delivering significantly faster token generation for latency-sensitive and agentic workflows.  ---  Fast mode provides si...",
+      "content_preview": "# Fast mode (beta: research preview)  Higher output speed for Claude Opus 4.6 and Claude Opus 4.7, delivering significantly faster token generation for latency-sensitive and agentic workflows.  ---  F...",
       "keywords": [
         "fast",
         "mode",
+        "claude",
         "pricing",
         "rate",
+        "opus",
         "output",
         "speed",
         "tokens",
-        "claude",
         "token",
         "api",
         "limit",
-        "opus",
         "standard",
         "limits",
         "per",
@@ -31849,7 +31849,7 @@
         "card",
         "model"
       ],
-      "word_count": 2391,
+      "word_count": 2411,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -33053,7 +33053,7 @@
         "mcp",
         "skills"
       ],
-      "word_count": 1482,
+      "word_count": 1486,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-containers": {
