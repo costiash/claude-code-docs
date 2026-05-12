@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-12T18:55:19Z",
+  "generated_at": "2026-05-12T21:45:54Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "file",
         "bash"
       ],
-      "word_count": 43437,
+      "word_count": 43664,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -601,22 +601,22 @@
         "claude",
         "code",
         "when",
+        "step",
         "tools",
         "command",
-        "step",
-        "url",
         "tool",
-        "const",
-        "name",
         "title",
-        "http",
-        "set",
         "add",
+        "name",
+        "url",
+        "plugin",
         "environment",
         "project",
-        "configuration"
+        "configuration",
+        "any",
+        "example"
       ],
-      "word_count": 7835,
+      "word_count": 7259,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -968,19 +968,19 @@
         "access",
         "bash",
         "mcp",
+        "before",
+        "anthropic",
         "trust",
         "permissions",
         "when",
         "network",
         "user",
-        "servers",
-        "before",
-        "anthropic",
         "users",
         "control",
-        "working"
+        "working",
+        "web"
       ],
-      "word_count": 1255,
+      "word_count": 1269,
       "file_path": "docs/claude-code__security.md"
     },
     "/claude-code/settings": {
@@ -1008,7 +1008,7 @@
         "com",
         "when"
       ],
-      "word_count": 9255,
+      "word_count": 9298,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
