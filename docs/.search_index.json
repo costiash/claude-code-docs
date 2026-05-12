@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-12T01:00:19Z",
+  "generated_at": "2026-05-12T04:33:09Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -443,12 +443,12 @@
         "permission",
         "run",
         "input",
-        "only",
         "script",
+        "only",
         "exit",
         "session"
       ],
-      "word_count": 6287,
+      "word_count": 6308,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "prompt",
         "context"
       ],
-      "word_count": 18917,
+      "word_count": 18940,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -865,10 +865,10 @@
         "servers",
         "lsp",
         "file",
-        "skills",
-        "marketplace"
+        "commands",
+        "skills"
       ],
-      "word_count": 6742,
+      "word_count": 6749,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
