@@ -641,16 +641,23 @@ Adding more `cache_control` breakpoints doesn't increase your costs - you still 
 ## Caching strategies and considerations
 
 ### Cache limitations
-The minimum cacheable prompt length is:
-- 4096 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Opus 4.5
-- 2048 tokens for Claude Sonnet 4.6
-- 1024 tokens for Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4, and Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
-- 4096 tokens for Claude Haiku 4.5
-- 2048 tokens for Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations))
+
+On the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Vertex AI](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta), the minimum cacheable prompt length is:
+
+- 4,096 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Opus 4.5
+- 1,024 tokens for Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4, and Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
+- 4,096 tokens for Claude Haiku 4.5
+- 2,048 tokens for Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations))
+
+Model availability varies by platform.
 
 Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens will be processed without caching, and no error is returned. To verify whether a prompt was cached, check the response usage [fields](/docs/en/build-with-claude/prompt-caching#tracking-cache-performance): if both `cache_creation_input_tokens` and `cache_read_input_tokens` are 0, the prompt was not cached (likely because it did not meet the minimum length requirement).
 
-If your prompt falls just short of the minimum for the model you are using, expanding the cached content to reach the threshold is often worthwhile. Cache reads cost significantly less than uncached input tokens, so reaching the minimum can reduce costs for frequently reused prompts.
+If your prompt falls just short of the minimum for your model and platform, expanding the cached content to reach the threshold is often worthwhile. Cache reads cost significantly less than uncached input tokens, so reaching the minimum can reduce costs for frequently reused prompts.
+
+<Note>
+[Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) is an AWS-operated platform. On Bedrock, see the [Bedrock prompt caching documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html) for the per-model minimums, failure behavior, and usage-field names that apply.
+</Note>
 
 For concurrent requests, note that a cache entry only becomes available after the first response begins. If you need cache hits for parallel requests, wait for the first response before sending subsequent requests.
 
@@ -811,7 +818,7 @@ If experiencing unexpected behavior:
 - Ensure cached sections are identical across calls. For explicit breakpoints, verify that `cache_control` markers are in the same locations
 - Check that calls are made within the cache lifetime (5 minutes by default)
 - Verify that `tool_choice` and image usage remain consistent between calls
-- Validate that you are caching at least the minimum number of tokens for the model you are using (see [Cache limitations](#cache-limitations)). Length-based caching failures are silent: the request succeeds but both `cache_creation_input_tokens` and `cache_read_input_tokens` will be 0
+- Validate that you are caching at least the minimum number of tokens for your model and platform (see [Cache limitations](#cache-limitations))
 - Confirm your breakpoint is on a block that stays identical across requests. Cache writes happen only at the breakpoint, and if that block changes (timestamps, per-request context, the incoming message), the prefix hash never matches. The lookback does not find stable content behind the breakpoint; it only finds entries that earlier requests wrote at their own breakpoints
 - Verify that the keys in your `tool_use` content blocks have stable ordering as some languages (for example, Swift, Go) randomize key order during JSON conversion, breaking caches
 
