@@ -6,8 +6,8 @@ Claude can interact with computer environments through the computer use tool, wh
 
 <Note>
 Computer use is in beta and requires a [beta header](/docs/en/api/beta-headers):
-- `"computer-use-2025-11-24"` for Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5
-- `"computer-use-2025-01-24"` for Sonnet 4.5, Haiku 4.5, Opus 4.1, Sonnet 4, Opus 4, and Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
+- `"computer-use-2025-11-24"` for Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5
+- `"computer-use-2025-01-24"` for Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1, Claude Sonnet 4 ([deprecated](/docs/en/about-claude/model-deprecations)), and Claude Opus 4 ([deprecated](/docs/en/about-claude/model-deprecations))
 
 Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
 </Note>
@@ -57,8 +57,6 @@ Inform end users of relevant risks and obtain their consent prior to enabling co
 >
 
 Get started quickly with the computer use reference implementation that includes a web interface, Docker container, example tool implementations, and an agent loop.
-
-**Note:** The implementation has been updated to include new tools for both Claude 4 models and Claude Sonnet 3.7. Be sure to pull the latest version of the repo to access these new features.
 
 </Card>
 
@@ -454,7 +452,6 @@ async def sampling_loop(
     api_key: str,
     max_tokens: int = 4096,
     tool_version: str,
-    thinking_budget: int | None = None,
     max_iterations: int = 10,  # Add iteration limit to prevent infinite loops
 ):
     """
@@ -473,12 +470,6 @@ async def sampling_loop(
         if "20251124" in tool_version
         else "computer-use-2025-01-24"
     )
-    text_editor_type = (
-        "text_editor_20250728"
-        if "20251124" in tool_version
-        else f"text_editor_{tool_version}"
-    )
-
     # Configure tools - you should already have these initialized elsewhere
     tools = [
         {
@@ -487,7 +478,7 @@ async def sampling_loop(
             "display_width_px": 1024,
             "display_height_px": 768,
         },
-        {"type": text_editor_type, "name": "str_replace_based_edit_tool"},
+        {"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"},
         {"type": "bash_20250124", "name": "bash"},
     ]
 
@@ -495,11 +486,6 @@ async def sampling_loop(
     iterations = 0
     while True and iterations < max_iterations:
         iterations += 1
-        # Set up optional thinking parameter (for Claude Sonnet 3.7)
-        thinking = None
-        if thinking_budget:
-            thinking = {"type": "enabled", "budget_tokens": thinking_budget}
-
         # Call the Claude API
         response = client.beta.messages.create(
             model=model,
@@ -507,7 +493,6 @@ async def sampling_loop(
             messages=messages,
             tools=tools,
             betas=[beta_flag],
-            thinking=thinking,
         )
 
         # Add Claude's response to the conversation history
@@ -583,7 +568,7 @@ The computer use tool supports these actions:
 - **mouse_move** - Move cursor to coordinates
 
 **Enhanced actions (`computer_20250124`)**
-Available in Claude 4 models and Claude Sonnet 3.7:
+Available on all models that support computer use:
 - **scroll** - Scroll in any direction with amount control
 - **left_click_drag** - Click and drag between coordinates
 - **right_click**, **middle_click** - Additional mouse buttons
@@ -625,7 +610,7 @@ Type text:
 }
 ```
 
-Scroll down (Claude 4/3.7):
+Scroll down:
 
 ```json
 {
@@ -1049,10 +1034,10 @@ def log_action(action_type, params, result):
 The computer use functionality is in beta. While Claude's capabilities are cutting edge, developers should be aware of its limitations:
 
 1. **Latency**: the current computer use latency for human-AI interactions may be too slow compared to regular human-directed computer actions. Focus on use cases where speed isn't critical (for example, background information gathering, automated software testing) in trusted environments.
-2. **Computer vision accuracy and reliability**: Claude may make mistakes or hallucinate when outputting specific coordinates while generating actions. Claude Sonnet 3.7 introduces the thinking capability that can help you understand the model's reasoning and identify potential issues.
+2. **Computer vision accuracy and reliability**: Claude may make mistakes or hallucinate when outputting specific coordinates while generating actions. Extended thinking can help you understand the model's reasoning and identify potential issues.
 3. **Tool selection accuracy and reliability**: Claude may make mistakes or hallucinate when selecting tools while generating actions or take unexpected actions to solve problems. Additionally, reliability may be lower when interacting with niche applications or multiple applications at once. Prompt the model carefully when requesting complex tasks.
-4. **Scrolling reliability**: Claude Sonnet 3.7 introduced dedicated scroll actions with direction control that improves reliability. The model can now explicitly scroll in any direction (up/down/left/right) by a specified amount.
-5. **Spreadsheet interaction**: Mouse clicks for spreadsheet interaction have improved in Claude Sonnet 3.7 with the addition of more precise mouse control actions like `left_mouse_down`, `left_mouse_up`, and new modifier key support. Cell selection can be more reliable by using these fine-grained controls and combining modifier keys with clicks.
+4. **Scrolling reliability**: The scroll action supports direction control (up, down, left, right) and a specified amount. In applications where scrolling doesn't take effect, keyboard alternatives such as Page Down can help.
+5. **Spreadsheet interaction**: Use the fine-grained mouse control actions (`left_mouse_down`, `left_mouse_up`) and modifier-key combinations to select individual cells. Complex spreadsheet operations may still require multiple attempts.
 6. **Account creation and content generation on social and communications platforms**: While Claude will visit websites, Claude's ability to create accounts or generate and share content or otherwise engage in human impersonation across social media websites and platforms is limited. This capability may be updated in the future.
 7. **Vulnerabilities**: Vulnerabilities like jailbreaking or prompt injection may persist across frontier AI systems, including the beta computer use API. In some circumstances, Claude will follow commands found in content, sometimes even in conflict with the user's instructions. For example, Claude instructions on webpages or contained in images may override instructions or cause Claude to make mistakes. Consider the following:
    a. Limiting computer use to trusted environments such as virtual machines or containers with minimal privileges
@@ -1078,7 +1063,6 @@ Computer use follows the standard [tool use pricing](/docs/en/agents-and-tools/t
 | Model | Input tokens per tool definition |
 | ----- | -------------------------------- |
 | Claude 4.x models | 735 tokens |
-| Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) | 735 tokens |
 
 **Additional token consumption**:
 - Screenshot images (see [Vision pricing](/docs/en/build-with-claude/vision))

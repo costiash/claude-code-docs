@@ -1225,7 +1225,6 @@ In addition to the base tokens, the following additional input tokens are needed
 | Tool | Additional input tokens |
 | ----------------------------------------- | --------------------------------------- |
 | `text_editor_20250429` (Claude 4.x) | 700 tokens |
-| `text_editor_20250124` (Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))) | 700 tokens |
 
 For more detailed information about tool pricing, see [Tool use pricing](/docs/en/agents-and-tools/tool-use/overview#pricing).
 

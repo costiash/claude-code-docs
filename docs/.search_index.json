@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-13T18:58:33Z",
+  "generated_at": "2026-05-13T21:47:45Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -644,7 +644,7 @@
         "into",
         "every"
       ],
-      "word_count": 3775,
+      "word_count": 3792,
       "file_path": "docs/claude-code__memory.md"
     },
     "/claude-code/microsoft-foundry": {
@@ -765,26 +765,26 @@
       "keywords": [
         "output",
         "claude",
-        "styles",
-        "prompt",
-        "system",
         "style",
-        "code",
-        "when",
+        "prompt",
+        "styles",
+        "system",
         "instructions",
+        "code",
         "software",
-        "default",
-        "coding",
-        "custom",
-        "file",
         "engineering",
+        "file",
         "set",
-        "files",
+        "when",
+        "custom",
+        "built",
+        "without",
+        "frontmatter",
+        "step",
         "keep",
-        "project",
-        "tasks"
+        "want"
       ],
-      "word_count": 946,
+      "word_count": 1068,
       "file_path": "docs/claude-code__output-styles.md"
     },
     "/claude-code/overview": {
@@ -1509,10 +1509,10 @@
         "response",
         "web",
         "request",
-        "available",
-        "operations"
+        "operations",
+        "using"
       ],
-      "word_count": 5554,
+      "word_count": 5530,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
@@ -1524,23 +1524,23 @@
         "tool",
         "actions",
         "title",
-        "tools",
         "section",
         "step",
+        "tools",
         "prompt",
         "click",
         "environment",
-        "mouse",
-        "note",
         "when",
         "api",
-        "model",
         "loop",
-        "implementation",
+        "mouse",
+        "note",
         "opus",
-        "sonnet"
+        "model",
+        "user",
+        "example"
       ],
-      "word_count": 5006,
+      "word_count": 4900,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
@@ -1719,10 +1719,9 @@
         "tokens",
         "claude",
         "tools",
-        "opus",
         "when",
         "see",
-        "sonnet",
+        "opus",
         "anthropic",
         "model",
         "card",
@@ -1732,11 +1731,12 @@
         "server",
         "more",
         "prompt",
+        "sonnet",
         "additional",
         "api",
         "where"
       ],
-      "word_count": 1114,
+      "word_count": 1061,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/parallel-tool-use": {
@@ -1876,7 +1876,7 @@
         "contents",
         "line"
       ],
-      "word_count": 5004,
+      "word_count": 4994,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__text-editor-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-combinations": {
@@ -31444,8 +31444,8 @@
         "mode",
         "extended",
         "when",
-        "sonnet",
         "models",
+        "sonnet",
         "blocks",
         "note",
         "output",
@@ -31457,7 +31457,7 @@
         "field",
         "manual"
       ],
-      "word_count": 3968,
+      "word_count": 3946,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -31473,9 +31473,9 @@
         "request",
         "results",
         "mtok",
-        "claude",
         "section",
         "messages",
+        "claude",
         "codegroup",
         "each",
         "large",
@@ -31485,7 +31485,7 @@
         "workspace",
         "result"
       ],
-      "word_count": 7253,
+      "word_count": 7221,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/citations": {
@@ -31583,12 +31583,12 @@
         "anthropic",
         "sonnet",
         "tab",
+        "model",
         "note",
         "opus",
-        "model",
         "codegroup",
-        "endpoints",
         "amazon",
+        "endpoints",
         "models",
         "api",
         "regional",
@@ -31597,7 +31597,7 @@
         "available",
         "title"
       ],
-      "word_count": 2924,
+      "word_count": 2962,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
@@ -31610,22 +31610,22 @@
         "tab",
         "opus",
         "sonnet",
-        "region",
         "anthropic",
+        "region",
         "codegroup",
+        "model",
         "pricing",
         "models",
         "note",
-        "tooltip",
+        "small",
         "regional",
         "title",
+        "deprecated",
         "global",
         "multi",
-        "model",
-        "availability",
-        "through"
+        "availability"
       ],
-      "word_count": 2395,
+      "word_count": 2434,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/claude-platform-on-aws": {
@@ -31718,26 +31718,26 @@
       "keywords": [
         "context",
         "thinking",
-        "claude",
         "window",
+        "claude",
         "extended",
         "tool",
         "token",
         "output",
         "tokens",
         "turn",
-        "more",
+        "input",
         "block",
         "model",
-        "input",
         "blocks",
-        "when",
+        "api",
+        "more",
         "components",
         "models",
-        "sonnet",
+        "when",
         "conversation"
       ],
-      "word_count": 1757,
+      "word_count": 1748,
       "file_path": "docs/docs__en__build-with-claude__context-windows.md"
     },
     "/docs/en/build-with-claude/effort": {
@@ -31808,20 +31808,20 @@
         "opus",
         "extended",
         "models",
-        "sonnet",
         "tokens",
         "api",
+        "sonnet",
         "context",
         "note",
         "turn",
         "response",
         "model",
-        "token",
+        "default",
         "interleaved",
         "see",
-        "default"
+        "token"
       ],
-      "word_count": 14636,
+      "word_count": 14522,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -31862,22 +31862,22 @@
         "codegroup",
         "content",
         "note",
-        "claude",
         "code",
         "execution",
         "tool",
         "images",
-        "models",
         "types",
         "text",
         "upload",
+        "claude",
         "download",
         "supported",
         "messages",
         "type",
-        "blocks"
+        "blocks",
+        "block"
       ],
-      "word_count": 2744,
+      "word_count": 2735,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -32000,16 +32000,16 @@
         "caching",
         "prompt",
         "tokens",
-        "mtok",
         "cached",
         "block",
         "breakpoint",
         "request",
         "content",
+        "mtok",
         "blocks",
-        "claude",
         "section",
         "system",
+        "claude",
         "user",
         "when",
         "tool",
@@ -32017,7 +32017,7 @@
         "breakpoints",
         "requests"
       ],
-      "word_count": 15292,
+      "word_count": 15226,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/search-results": {
@@ -33137,7 +33137,7 @@
         "beta",
         "once"
       ],
-      "word_count": 2183,
+      "word_count": 2181,
       "file_path": "docs/docs__en__managed-agents__dreams.md"
     },
     "/docs/en/managed-agents/environments": {

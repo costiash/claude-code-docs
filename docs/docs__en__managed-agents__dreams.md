@@ -23,7 +23,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 A **dream** is an asynchronous job that takes:
 
 - a pre-existing **memory store**: the store Claude verifies, deduplicates, and reorganizes, and
-- optionally, up to 100 **sessions**: past transcripts Claude mines for patterns and insights to fold into the output.
+- 1 to 100 **sessions**: past transcripts Claude mines for patterns and insights to fold into the output.
 
 The dream produces another **output memory store**, separate from the input. The output store ID appears in the dream's `outputs[]` once it starts `running`.
 
@@ -174,7 +174,7 @@ puts dream.id # drm_01...
 
 </CodeGroup>
 
-Dreaming inputs include the pre-existing memory store and an optional array of sessions. The model selected will run the dreaming pipeline; during the research preview `claude-opus-4-7` and `claude-sonnet-4-6` are supported. You can also provide additional guidance on dreaming run execution in `instructions`.
+Dreaming inputs include the pre-existing memory store and an array of sessions. The model selected will run the dreaming pipeline; during the research preview `claude-opus-4-7` and `claude-sonnet-4-6` are supported. You can also provide additional guidance on dreaming run execution in `instructions`.
 
 The response is the full `dream` resource with `status: "pending"`:
 
