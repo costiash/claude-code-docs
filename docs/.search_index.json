@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-13T21:47:45Z",
+  "generated_at": "2026-05-14T01:05:45Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -19,16 +19,16 @@
         "session",
         "being",
         "after",
-        "sessions",
         "mcp",
+        "sessions",
         "code",
+        "prompt",
         "command",
         "commands",
-        "prompt",
         "file",
         "bash"
       ],
-      "word_count": 43664,
+      "word_count": 44808,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -439,16 +439,16 @@
         "file",
         "json",
         "call",
+        "run",
         "example",
         "permission",
-        "run",
         "input",
         "script",
         "only",
         "exit",
-        "session"
+        "settings"
       ],
-      "word_count": 6308,
+      "word_count": 6318,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -891,10 +891,10 @@
         "add",
         "test",
         "agents",
-        "marketplace",
         "lsp",
         "file",
-        "servers"
+        "servers",
+        "marketplace"
       ],
       "word_count": 2580,
       "file_path": "docs/claude-code__plugins.md"
@@ -1001,14 +1001,14 @@
         "corp",
         "project",
         "tools",
-        "github",
         "set",
+        "github",
         "user",
         "repo",
         "com",
         "when"
       ],
-      "word_count": 9395,
+      "word_count": 9416,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
