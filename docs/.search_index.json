@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-14T12:58:34Z",
+  "generated_at": "2026-05-14T16:06:19Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -91,28 +91,28 @@
       "title": "Checkpointing",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Checkpointing  ...",
       "keywords": [
+        "conversation",
         "code",
+        "summarize",
         "claude",
         "session",
-        "conversation",
         "changes",
+        "message",
         "file",
-        "summarize",
         "checkpoints",
         "rewind",
-        "restore",
-        "message",
-        "files",
-        "checkpointing",
-        "edits",
-        "state",
-        "undo",
+        "keeping",
+        "here",
+        "summary",
+        "selected",
+        "before",
         "point",
-        "revert",
-        "context",
-        "history"
+        "restore",
+        "while",
+        "compress",
+        "intact"
       ],
-      "word_count": 678,
+      "word_count": 776,
       "file_path": "docs/claude-code__checkpointing.md"
     },
     "/claude-code/claude-code-on-the-web": {
@@ -140,7 +140,7 @@
         "fix",
         "terminal"
       ],
-      "word_count": 6247,
+      "word_count": 6246,
       "file_path": "docs/claude-code__claude-code-on-the-web.md"
     },
     "/claude-code/cli-reference": {
@@ -153,22 +153,22 @@
         "prompt",
         "see",
         "settings",
-        "default",
         "only",
+        "default",
         "code",
         "file",
         "interactive",
         "print",
-        "output",
         "flag",
+        "output",
         "agent",
-        "when",
         "model",
         "available",
         "flags",
-        "start"
+        "start",
+        "sessions"
       ],
-      "word_count": 2863,
+      "word_count": 2866,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -280,7 +280,7 @@
         "see",
         "terminal"
       ],
-      "word_count": 8293,
+      "word_count": 8388,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -327,16 +327,16 @@
         "permissions",
         "create",
         "vertex",
+        "action",
         "required",
         "key",
-        "action",
         "setup",
         "secrets",
         "google",
         "security",
         "tip"
       ],
-      "word_count": 3226,
+      "word_count": 3311,
       "file_path": "docs/claude-code__github-actions.md"
     },
     "/claude-code/gitlab-ci-cd": {
@@ -448,7 +448,7 @@
         "exit",
         "settings"
       ],
-      "word_count": 6318,
+      "word_count": 6336,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -460,23 +460,23 @@
         "claude",
         "when",
         "tool",
-        "input",
-        "code",
         "field",
+        "code",
+        "input",
         "json",
         "fields",
         "file",
         "event",
-        "only",
         "command",
-        "user",
-        "runs",
-        "session",
+        "only",
         "output",
+        "user",
+        "session",
+        "runs",
         "prompt",
         "context"
       ],
-      "word_count": 18940,
+      "word_count": 19474,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -613,10 +613,10 @@
         "environment",
         "project",
         "configuration",
-        "any",
-        "example"
+        "example",
+        "any"
       ],
-      "word_count": 7259,
+      "word_count": 7273,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -1108,19 +1108,19 @@
         "session",
         "conversation",
         "tool",
+        "code",
         "context",
         "prompt",
-        "code",
         "tools",
         "only",
-        "hooks",
         "same",
+        "hooks",
         "model",
+        "plugin",
         "fork",
-        "run",
-        "task"
+        "run"
       ],
-      "word_count": 7614,
+      "word_count": 7727,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
