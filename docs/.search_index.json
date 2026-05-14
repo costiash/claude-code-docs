@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-14T16:06:19Z",
+  "generated_at": "2026-05-14T18:55:50Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -42,10 +42,10 @@
         "aws",
         "mantle",
         "credentials",
-        "account",
         "when",
-        "inference",
+        "account",
         "settings",
+        "inference",
         "models",
         "environment",
         "variables",
@@ -56,7 +56,7 @@
         "amazon",
         "access"
       ],
-      "word_count": 2934,
+      "word_count": 2994,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
