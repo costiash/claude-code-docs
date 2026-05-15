@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-15T16:00:05Z",
+  "generated_at": "2026-05-15T18:52:03Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -42,21 +42,21 @@
         "aws",
         "mantle",
         "credentials",
-        "when",
         "account",
+        "when",
         "settings",
         "inference",
         "models",
         "environment",
         "variables",
         "set",
-        "profile",
         "region",
+        "profile",
         "file",
         "amazon",
         "access"
       ],
-      "word_count": 2994,
+      "word_count": 3062,
       "file_path": "docs/claude-code__amazon-bedrock.md"
     },
     "/claude-code/analytics": {
@@ -371,12 +371,12 @@
       "title": "Claude Code on Google Vertex AI",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
-        "claude",
         "model",
+        "claude",
         "vertex",
         "code",
-        "models",
         "project",
+        "models",
         "set",
         "region",
         "credentials",
@@ -392,7 +392,7 @@
         "div",
         "wizard"
       ],
-      "word_count": 1938,
+      "word_count": 1996,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -654,8 +654,8 @@
         "foundry",
         "claude",
         "microsoft",
-        "code",
         "model",
+        "code",
         "azure",
         "div",
         "set",
@@ -664,15 +664,15 @@
         "when",
         "models",
         "resource",
+        "haiku",
         "authentication",
         "documentation",
         "const",
         "note",
         "environment",
-        "configuration",
-        "size"
+        "deployment"
       ],
-      "word_count": 879,
+      "word_count": 933,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {

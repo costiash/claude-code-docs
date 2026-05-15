@@ -189,8 +189,8 @@
     "claude-code__amazon-bedrock.md": {
       "original_url": "https://platform.claude.com/docs/en/amazon-bedrock",
       "original_md_url": "https://platform.claude.com/docs/en/amazon-bedrock.md",
-      "hash": "829b8c6a0047995ebcc2ae0c36b5c00333e30da92a089e99b2d3dc27a030873e",
-      "last_updated": "2026-05-14T18:41:57.161340"
+      "hash": "dbf18c328c796c32531a8f011478299655f58b05b685f1bebd356c956ff08cd2",
+      "last_updated": "2026-05-15T18:37:59.678861"
     },
     "claude-code__analytics.md": {
       "original_url": "https://platform.claude.com/docs/en/analytics",
@@ -6795,8 +6795,8 @@
     "claude-code__google-vertex-ai.md": {
       "original_url": "https://platform.claude.com/docs/en/google-vertex-ai",
       "original_md_url": "https://platform.claude.com/docs/en/google-vertex-ai.md",
-      "hash": "fa78c40024979190a897586c819ea701f7b974d261046ebf5911a10a4ac2ed91",
-      "last_updated": "2026-05-12T00:59:17.631982"
+      "hash": "7a835fbf5e234624f8e721f85f7122d8969da67022c9fabfd17c446f5a2290dd",
+      "last_updated": "2026-05-15T18:51:08.667221"
     },
     "claude-code__headless.md": {
       "original_url": "https://platform.claude.com/docs/en/headless",
@@ -7131,8 +7131,8 @@
     "claude-code__microsoft-foundry.md": {
       "original_url": "https://platform.claude.com/docs/en/microsoft-foundry",
       "original_md_url": "https://platform.claude.com/docs/en/microsoft-foundry.md",
-      "hash": "0114ad92ec809b3e9e7dbcd5849fe706afc89ec41f171df70515829a1167a758",
-      "last_updated": "2026-05-08T01:01:43.449581"
+      "hash": "a309a54a2e2be46ede40b10df355c636948d17a8b7adb449eb709f38a90a39b1",
+      "last_updated": "2026-05-15T18:51:41.997823"
     },
     "claude-code__model-config.md": {
       "original_url": "https://platform.claude.com/docs/en/model-config",
@@ -7269,8 +7269,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-15T16:00:02.242570",
-    "fetch_duration_seconds": 867.886998,
+    "last_fetch_completed": "2026-05-15T18:52:00.574573",
+    "fetch_duration_seconds": 868.458357,
     "total_pages_discovered": 1546,
     "pages_fetched_successfully": 1211,
     "pages_failed": 336,
@@ -7617,7 +7617,7 @@
     "total_files": 1211,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-15T16:00:02.242593",
+  "last_updated": "2026-05-15T18:52:00.574596",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
