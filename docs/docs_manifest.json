@@ -7203,8 +7203,8 @@
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
       "original_md_url": "https://platform.claude.com/docs/en/settings.md",
-      "hash": "07ebdf801be7ff5ae5fec4c420925270c98fc5efe2e680ab6b96c1bcd1ce92ad",
-      "last_updated": "2026-05-14T01:05:31.880939"
+      "hash": "26dd5c1f0db22f20c753b04203da67cd3989522b90d206461a5537faf136ce80",
+      "last_updated": "2026-05-15T04:38:53.962130"
     },
     "claude-code__setup.md": {
       "original_url": "https://platform.claude.com/docs/en/setup",
@@ -7269,8 +7269,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-15T01:03:12.222770",
-    "fetch_duration_seconds": 832.199475,
+    "last_fetch_completed": "2026-05-15T04:39:04.226924",
+    "fetch_duration_seconds": 831.108073,
     "total_pages_discovered": 1546,
     "pages_fetched_successfully": 1211,
     "pages_failed": 336,
@@ -7617,7 +7617,7 @@
     "total_files": 1211,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-15T01:03:12.222785",
+  "last_updated": "2026-05-15T04:39:04.226949",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",

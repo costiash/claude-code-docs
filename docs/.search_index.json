@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-15T01:03:15Z",
+  "generated_at": "2026-05-15T04:39:07Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -1008,7 +1008,7 @@
         "com",
         "when"
       ],
-      "word_count": 9416,
+      "word_count": 9513,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
