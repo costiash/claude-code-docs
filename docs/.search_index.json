@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-15T12:56:48Z",
+  "generated_at": "2026-05-15T16:00:05Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -32246,30 +32246,30 @@
     },
     "/docs/en/get-started": {
       "title": "Get started with Claude",
-      "content_preview": "# Get started with Claude  Make your first API call to Claude and build a simple web search assistant.  ---  ## Prerequisites  - An Anthropic [Console account](/) - An [API key](/settings/keys)  ## Ca...",
+      "content_preview": "# Get started with Claude  Make your first API call to Claude and build a simple web search assistant.  ---  ## Prerequisites  - An Anthropic [Console account](/)  ## Call the API  <Tabs>   <Tab title...",
       "keywords": [
         "step",
         "title",
-        "api",
         "tab",
-        "key",
+        "api",
         "claude",
+        "key",
         "steps",
         "set",
         "shell",
-        "card",
         "code",
+        "card",
         "get",
-        "console",
         "tabs",
-        "add",
         "create",
         "install",
         "call",
+        "anthropic",
+        "console",
         "environment",
-        "variable"
+        "add"
       ],
-      "word_count": 1440,
+      "word_count": 1473,
       "file_path": "docs/docs__en__get-started.md"
     },
     "/docs/en/glossary": {
