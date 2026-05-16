@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-15T21:41:48Z",
+  "generated_at": "2026-05-16T01:00:28Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -17,9 +17,9 @@
         "mode",
         "instead",
         "session",
+        "sessions",
         "being",
         "after",
-        "sessions",
         "mcp",
         "code",
         "prompt",
@@ -28,7 +28,7 @@
         "file",
         "bash"
       ],
-      "word_count": 45231,
+      "word_count": 45834,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -239,20 +239,20 @@
         "session",
         "api",
         "disable",
-        "users",
         "must",
         "off",
+        "users",
         "settings",
         "retention",
+        "when",
         "opt",
         "see",
         "using",
-        "when",
         "set",
         "including",
         "model"
       ],
-      "word_count": 1811,
+      "word_count": 1910,
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
@@ -371,12 +371,12 @@
       "title": "Claude Code on Google Vertex AI",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code on ...",
       "keywords": [
-        "model",
         "claude",
+        "model",
         "vertex",
         "code",
-        "project",
         "models",
+        "project",
         "set",
         "region",
         "credentials",
@@ -392,7 +392,7 @@
         "div",
         "wizard"
       ],
-      "word_count": 1996,
+      "word_count": 2016,
       "file_path": "docs/claude-code__google-vertex-ai.md"
     },
     "/claude-code/headless": {
@@ -612,11 +612,11 @@
         "plugin",
         "environment",
         "project",
-        "configuration",
         "example",
+        "configuration",
         "any"
       ],
-      "word_count": 7273,
+      "word_count": 7294,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -1748,23 +1748,23 @@
         "calls",
         "claude",
         "message",
-        "call",
-        "one",
         "see",
         "user",
-        "execution",
-        "batch",
         "section",
         "when",
-        "single",
         "default",
-        "each",
-        "other",
         "results",
         "prompting",
-        "system"
+        "formatting",
+        "format",
+        "history",
+        "tools",
+        "one",
+        "working",
+        "single",
+        "handle"
       ],
-      "word_count": 3444,
+      "word_count": 3236,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__parallel-tool-use.md"
     },
     "/docs/en/agents-and-tools/tool-use/programmatic-tool-calling": {
@@ -1943,24 +1943,24 @@
         "tab",
         "runner",
         "title",
-        "message",
-        "sdk",
-        "loop",
         "claude",
-        "results",
-        "each",
-        "result",
-        "when",
         "tabs",
-        "state",
-        "get",
-        "error",
-        "json",
+        "typescript",
         "tools",
-        "calls",
-        "php"
+        "loop",
+        "python",
+        "ruby",
+        "message",
+        "results",
+        "type",
+        "automatically",
+        "when",
+        "result",
+        "get",
+        "sdk",
+        "note"
       ],
-      "word_count": 7463,
+      "word_count": 3182,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__tool-runner.md"
     },
     "/docs/en/agents-and-tools/tool-use/tool-search-tool": {
@@ -32246,30 +32246,30 @@
     },
     "/docs/en/get-started": {
       "title": "Get started with Claude",
-      "content_preview": "# Get started with Claude  Make your first API call to Claude and build a simple web search assistant.  ---  ## Prerequisites  - An Anthropic [Console account](/)  ## Call the API  <Tabs>   <Tab title...",
+      "content_preview": "# Get started with Claude  Make your first API call to Claude and build a simple web search assistant.  ---  ## Prerequisites  - An Anthropic [Console account](/) - An [API key](/settings/keys)  ## Ca...",
       "keywords": [
         "step",
         "title",
-        "tab",
         "api",
-        "claude",
+        "tab",
         "key",
+        "claude",
         "steps",
         "set",
         "shell",
-        "code",
         "card",
+        "code",
         "get",
+        "console",
         "tabs",
+        "add",
         "create",
         "install",
         "call",
-        "anthropic",
-        "console",
         "environment",
-        "add"
+        "variable"
       ],
-      "word_count": 1473,
+      "word_count": 1440,
       "file_path": "docs/docs__en__get-started.md"
     },
     "/docs/en/glossary": {
