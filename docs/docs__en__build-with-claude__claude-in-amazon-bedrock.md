@@ -99,7 +99,7 @@ go get github.com/anthropics/anthropic-sdk-go/bedrock
 <Tabs>
 <Tab title="Gradle">
 ```kotlin
-implementation("com.anthropic:anthropic-java-bedrock:2.30.0")
+implementation("com.anthropic:anthropic-java-bedrock:2.32.0")
 ```
 </Tab>
 <Tab title="Maven">
@@ -107,7 +107,7 @@ implementation("com.anthropic:anthropic-java-bedrock:2.30.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.30.0</version>
+    <version>2.32.0</version>
 </dependency>
 ```
 </Tab>

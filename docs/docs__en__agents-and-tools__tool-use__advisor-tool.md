@@ -44,7 +44,7 @@ If you request an invalid pair, the API returns a `400 invalid_request_error` na
 
 ## Platform availability
 
-The advisor tool is available in beta on the Claude API and on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). It is not currently available on Amazon Bedrock, Vertex AI, or Microsoft Foundry.
+The advisor tool is available in beta on the Claude API and on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). It is not currently available on AWS Bedrock, Vertex AI, or Microsoft Foundry.
 
 ## Quick start
 
@@ -512,7 +512,7 @@ tools = [
 ]
 ```
 
-The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more segment appended, so the prefix is stable across calls. With `caching` enabled, each advisor call writes a cache entry; the next call reads up to that point and pays only for the delta. You'll see `cache_read_input_tokens` become nonzero on the second and later `advisor_message` iterations.
+The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more segment appended, so the prefix is stable across calls. With `caching` enabled, each advisor call writes a cache entry; the next call reads up to that point and pays only for the delta. You'll see `cache_read_input_tokens` become non-zero on the second and later `advisor_message` iterations.
 
 **When to enable it:** The cache write costs more than the reads save when the advisor is called two or fewer times per conversation. Caching breaks even at roughly three advisor calls and improves from there. Enable it for long agent loops; keep it off for short tasks.
 
@@ -608,13 +608,21 @@ If you've already retrieved data pointing one way and the advisor points another
 
 #### Trimming advisor output length
 
-Advisor output is the advisor's largest cost driver. To reduce that cost, prepend a single conciseness instruction to the system prompt before any other sentence that mentions the advisor. In internal testing, the following line cut total advisor output tokens by roughly 35 to 45 percent without changing call frequency:
+Advisor output is the advisor's largest cost driver, and `max_tokens` does not bound it. The advisor sees both your system prompt and your user messages as quoted context about the executor's task, so instructions that address the advisor directly are followed much more reliably than third-person descriptions. The most effective placement Anthropic tested is a line in the user message:
 
 ```text
-The advisor should respond in under 100 words and use enumerated steps, not explanations.
+(Advisor: please keep your guidance under 80 words — I need a focused starting point, not a comprehensive plan.)
 ```
 
-Pair this with the timing block above for the strongest cost-versus-quality tradeoff.
+This line can be prefixed programmatically by your agent framework before sending the request. The limit is a soft constraint; the advisor will occasionally exceed it, so ask for roughly 80 percent of your true ceiling.
+
+<Note>
+  In Anthropic's testing this line also increased how often the executor
+  consults the advisor, but the net effect was still lower total cost
+  (more consults, each shorter).
+</Note>
+
+Pair this approach with the timing guidance in [Suggested system prompt for coding tasks](#suggested-system-prompt-for-coding-tasks) for the strongest cost-versus-quality tradeoff.
 
 ### Pairing with effort settings
 
