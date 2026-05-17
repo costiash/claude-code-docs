@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-16T21:33:10Z",
+  "generated_at": "2026-05-17T01:06:28Z",
   "indexed_files": 1275,
   "index": {
     "/changelog": {
@@ -654,25 +654,25 @@
         "foundry",
         "claude",
         "microsoft",
-        "model",
         "code",
+        "model",
         "azure",
-        "div",
         "set",
+        "div",
+        "environment",
         "classname",
         "create",
+        "resource",
+        "variables",
         "when",
         "models",
-        "resource",
         "haiku",
         "authentication",
         "documentation",
-        "const",
-        "note",
-        "environment",
-        "deployment"
+        "configuration",
+        "const"
       ],
-      "word_count": 933,
+      "word_count": 1001,
       "file_path": "docs/claude-code__microsoft-foundry.md"
     },
     "/claude-code/model-config": {
@@ -700,7 +700,7 @@
         "version",
         "which"
       ],
-      "word_count": 3736,
+      "word_count": 3750,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -1064,7 +1064,7 @@
         "content",
         "reference"
       ],
-      "word_count": 5664,
+      "word_count": 5701,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
