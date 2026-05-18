@@ -5,7 +5,7 @@ Answers to common questions about Compliance API access, scopes, retention, and 
 ---
 
 <Note>
-  The Compliance API is available only on the Claude Enterprise plan and must be enabled before use. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) only. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 ## Access and scopes
@@ -96,9 +96,9 @@ Answers to common questions about Compliance API access, scopes, retention, and 
 
   Set up a Claude Enterprise sandbox organization linked to a Claude Console organization under the same parent. This lets the sandbox exercise both the Activity Feed (through an Admin API key) and the chat, file, and project endpoints (through a Compliance Access Key).
 
-  1. **Provision the Claude Enterprise organization.** Contact your Anthropic representative to set up a Claude Enterprise sandbox organization. On an existing Claude Enterprise organization, the primary owner can enable the Compliance API directly instead.
+  1. **Provision the Claude Enterprise organization.** Contact your Anthropic representative to set up a Claude Enterprise sandbox organization, or to [request Compliance API access](/docs/en/manage-claude/compliance-api-access#request-compliance-api-access) on an existing Claude Enterprise organization.
   2. **Create the Claude Console organization.** Create a Claude Console organization yourself at `platform.claude.com` using the same email address.
-  3. **Link the two organizations.** Sign in as the primary owner of the Claude Enterprise organization, go to **claude.ai** > **Organization settings** > [**Identity and access**](https://claude.ai/admin-settings/identity), and use **Merge Organizations** to link the two under a shared parent.
+  3. **Link the two organizations.** Sign in as the primary owner of the Claude Enterprise organization, go to [claude.ai > Organization settings > Identity and access](https://claude.ai/admin-settings/identity), and use **Merge Organizations** to link the two under a shared parent.
 
   Once linked, follow [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access) to create keys and start querying. Test organizations use the same enablement process as production organizations.
 

@@ -5,7 +5,7 @@ Every Compliance API error message with cause and fix, organized by HTTP status 
 ---
 
 <Note>
-  The Compliance API is available only on the Claude Enterprise plan and must be enabled before use. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) only. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 This page lists the response messages each documented Compliance API endpoint returns, the cause, and the fix.
@@ -32,7 +32,7 @@ The following table tells you at a glance whether to retry. Each section that fo
 | [403 Forbidden](#403-forbidden)                         | No                          | Add the missing scope or use the right key type, then resend.         |
 | [404 Not Found](#404-not-found)                         | No                          | The resource was deleted or never existed; remove it from your queue. |
 | [409 Conflict](#409-conflict)                           | No                          | The request conflicts with the resource's current state; resolve the conflict (such as detaching child resources), then retry. |
-| [429 Too Many Requests](#429-too-many-requests)         | Yes, with backoff           | Back off and retry; do not advance your cursor.                       |
+| [429 Too Many Requests](#429-too-many-requests)         | Yes, after `retry-after`    | Wait the seconds in `retry-after`, then retry; do not advance your cursor. |
 | [500 Internal Server Error](#500-internal-server-error) | Depends on `x-should-retry` | Check the `x-should-retry` response header before retrying.           |
 | [502, 503, 504, 529](#500-internal-server-error)        | Yes, with backoff           | Transient; retry with exponential backoff.                            |
 
@@ -109,7 +109,7 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 **Cause:** A key without `read:compliance_activities` was used to call `GET /v1/compliance/activities`. There are two common paths to this error:
 
 - A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_activities` scope.
-- A Claude Console Admin API key (`sk-ant-admin01-...`) was created before the Compliance API was enabled for the organization. Keys created before enablement do not carry the scope; see [Enable for Claude Console organizations](/docs/en/manage-claude/compliance-api-access#enable-for-claude-console-organizations).
+- A Claude Console Admin API key (`sk-ant-admin01-...`) was created before the Compliance API was enabled for the organization. Keys created before enablement do not carry the scope; see [After enablement: Claude Console organizations](/docs/en/manage-claude/compliance-api-access#after-enablement-claude-console-organizations).
 
 **Fix:** Compliance Access Key scopes are immutable after creation. Create a new key that includes `read:compliance_activities`, or use a Claude Console Admin API key. See [Which key do you need?](/docs/en/manage-claude/compliance-api-access#which-key-do-you-need) for the conditions under which an Admin API key carries this scope.
 
@@ -239,22 +239,41 @@ The "claude_proj_01KGp4eZNug9ri4kE35RSppq" project cannot be deleted as it has c
 
 ## 429 Too Many Requests
 
-Requests to the Compliance API are limited to 600 requests per minute per API key. Contact your Anthropic representative if your integration needs a higher limit. When you exceed the limit, retry with exponential backoff (start at 1 second, double up to 60 seconds).
+Requests to the Compliance API are limited to **600 requests per minute per [parent organization](/docs/en/manage-claude/compliance-api#how-the-compliance-api-works)**. The limit is a single budget shared across every key under the parent (Compliance Access Keys and the Admin API keys of all linked organizations) and across every `/v1/compliance/*` endpoint. Contact your Anthropic representative if your integration needs a higher limit.
+
+Once your API key authenticates, every Compliance API response includes the standard [rate-limit response headers](/docs/en/api/rate-limits#response-headers) so your client can throttle proactively instead of waiting for a 429:
+
+- `anthropic-ratelimit-requests-limit` is your parent organization's per-minute request budget.
+- `anthropic-ratelimit-requests-remaining` is the budget left in the current window.
+- `anthropic-ratelimit-requests-reset` is the RFC 3339 timestamp when the window resets and the full budget is restored.
+
+A 429 response also carries a `retry-after` header with the number of seconds to wait before sending the next request. This value might include a small safety margin beyond `anthropic-ratelimit-requests-reset`; honor `retry-after`.
+
+```http
+HTTP/1.1 429 Too Many Requests
+date: Tue, 21 Apr 2026 14:38:02 GMT
+retry-after: 25
+anthropic-ratelimit-requests-limit: 600
+anthropic-ratelimit-requests-remaining: 0
+anthropic-ratelimit-requests-reset: 2026-04-21T14:38:25Z
+```
 
 ```json
 {
   "error": {
     "type": "rate_limit_error",
-    "message": "Rate limit exceeded. Please wait before retrying."
+    "message": "Compliance API rate limit of 600 requests per minute per parent organization has been exceeded. Retry after the time indicated by the retry-after header. Quote the request-id response header when contacting Anthropic support."
   }
 }
 ```
 
-**Cause:** You sent too many requests in a short window.
+**Cause:** Your parent organization sent more than 600 requests to `/v1/compliance/*` in a 1-minute window, across all of its keys and linked organizations.
 
-**Fix:** Wait and retry with exponential backoff. Do not advance your pagination cursor on a 429: the failed request returned no data, so the cursor from the last successful page is still correct.
+**Fix:** Wait the number of seconds in the `retry-after` header, then retry. If the header is absent (for example, stripped by an intermediary), fall back to exponential backoff (start at 1 second, double up to 60 seconds). Do not advance your pagination cursor on a 429: the failed request returned no data, so the cursor from the last successful page is still correct.
 
-If you poll the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) on a schedule, set your polling interval to stay under the rate limit. See [Design your compliance integration](/docs/en/manage-claude/compliance-integration-patterns) for cadence guidance.
+Requests that fail authentication (a missing or unrecognized key, or a Claude API key rather than a Compliance Access Key or Admin API key) reject before the rate limiter and do not consume quota. A valid key that lacks the endpoint's required scope consumes one quota unit before the 403 is returned.
+
+If you poll the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) on a schedule, budget your aggregate request rate (across all keys, linked organizations, and concurrent workers) below the parent-organization limit. Watch `anthropic-ratelimit-requests-remaining` to slow down before you reach it. See [Design your compliance integration](/docs/en/manage-claude/compliance-integration-patterns#choose-a-feed-consumption-pattern) for choosing between window-polling and cursor-driven ingestion.
 
 ## 500 Internal Server Error
 
@@ -274,7 +293,7 @@ Response exceeds maximum of 1,000 organizations. Contact support for assistance 
 
 **Cause:** A list endpoint without pagination (notably `GET /v1/compliance/organizations`) would have returned more than its hard cap of 1,000 records.
 
-**Fix:** The organizations endpoint returns the full tree in one call, up to 1,000 linked organizations. If your tree exceeds 1,000, contact Anthropic support for assistance with larger organization lists. If you are polling this endpoint to track organization-membership changes, the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) covers removals through the `org_deletion_requested` and `org_deleted_via_bulk` activity types; there is currently no activity type for an organization being created or joining the tree, so detect additions by relisting periodically.
+**Fix:** The organizations endpoint returns the full tree in one call, up to 1,000 linked organizations. If your tree exceeds 1,000, contact Anthropic support for assistance with larger organization lists. If you were polling this endpoint to track organization-membership changes, periodic relisting remains the most reliable approach once the cap is addressed; it catches additions and removals regardless of which side of the parent-child relationship initiated them. The [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) also surfaces membership events through the `org_deletion_requested`, `org_deleted_via_bulk`, `org_parent_join_proposal_created`, and `org_join_proposal_decided` activity types, which you can use to trigger an immediate relist instead of waiting for the next polling interval.
 
 ## Next steps
 

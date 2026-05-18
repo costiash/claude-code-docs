@@ -5,13 +5,13 @@ Programmatic access to your organization's Claude activity, chats, files, projec
 ---
 
 <Note>
-  The Compliance API is available only on the Claude Enterprise plan and must be enabled before use. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) only. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 The Compliance API gives Claude Enterprise customers programmatic access to their organization's Activity Feed, the directory of users, roles, and groups across every linked organization, and, for claude.ai organizations, the underlying chats, files, and projects. Security, legal, and compliance teams use it to audit activity, retrieve or delete content, and feed events into downstream tooling.
 
 <Note>
-  Two key types unlock the Compliance API. A **Compliance Access Key** (created in claude.ai) reaches every endpoint, and an **Admin API key** (created in Claude Console) reaches the Activity Feed only. The following key-type table shows where each is created and what it unlocks.
+  Two key types unlock the Compliance API. A **Compliance Access Key** (created in claude.ai) reaches every endpoint, and an **Admin API key** (created in Claude Console) reaches the Activity Feed only. See [Which key do you need?](/docs/en/manage-claude/compliance-api-access#which-key-do-you-need) for the full key-type comparison.
 </Note>
 
 The following call returns the most recent activity event in your organization. Any key with the `read:compliance_activities` scope can make it. To create a key and grant it that scope, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
@@ -52,18 +52,17 @@ A successful response returns a JSON object containing `data` (an array of `Acti
 }
 ```
 
-Two key types can carry the `read:compliance_activities` scope; they differ in where you create them and which endpoints they unlock. For the full provisioning flow, scopes, and key prefixes, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
-
-| Key type | Created in | Compliance API access |
-| :---- | :---- | :---- |
-| **Compliance Access Key** | claude.ai | Full Compliance API |
-| **Admin API key** | Claude Console | Activity Feed only |
-
 ---
 
 ## How the Compliance API works
 
-Every endpoint lives under `/v1/compliance/*` on `https://api.anthropic.com` and authenticates through the `x-api-key` header. The Activity Feed (`GET /v1/compliance/activities`) is the shared endpoint available to any key that carries the `read:compliance_activities` scope; see [Query the Activity Feed](/docs/en/manage-claude/compliance-activity-feed) for filters, pagination, and the full `Activity` object. The remaining endpoints require a Compliance Access Key carrying the relevant scope. The directory endpoints (organizations, users, roles, and groups) return data from every linked organization under the parent, including Claude Console-linked organizations; the content endpoints (chats, files, projects, and project attachments) serve claude.ai data only. To provision a key, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+Every endpoint lives under `/v1/compliance/*` on `https://api.anthropic.com` and authenticates through the `x-api-key` header. To provision a key, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+
+The Activity Feed (`GET /v1/compliance/activities`) is available to any key that carries the `read:compliance_activities` scope; see [Query the Activity Feed](/docs/en/manage-claude/compliance-activity-feed) for filters, pagination, and the full `Activity` object. The remaining endpoints require a Compliance Access Key carrying the relevant scope.
+
+A Claude Enterprise tenant has one parent organization (the top-level container that centralizes identity) with linked organizations of two kinds: claude.ai organizations, where users chat and store content, and Claude Console organizations, where users manage Claude API workloads. The directory endpoints (organizations, users, roles, and groups) return data from every linked organization of either kind. The content endpoints (chats, files, projects, and project attachments) serve claude.ai data only.
+
+All `/v1/compliance/*` endpoints share a single rate limit of 600 requests per minute per parent organization; see [429 Too Many Requests](/docs/en/manage-claude/compliance-errors#429-too-many-requests) for the response headers and retry contract.
 
 ---
 
@@ -73,11 +72,11 @@ Two adjacent features overlap with the Compliance API; here is how to choose.
 
 ### Export audit logs
 
-The audit log export is a separate feature in **claude.ai** > **Organization settings** > **Data and privacy** that lets owners and primary owners download a CSV of organization events. It's significantly narrower than the Compliance API: a capped lookback window, CSV download only, and no access to chat, file, or project content. Standardize on the Compliance API for ongoing programmatic use.
+The audit log export is a separate feature in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls) that lets owners and primary owners download a CSV of organization events. It's significantly narrower than the Compliance API: a capped lookback window, CSV download only, and no access to chat, file, or project content. Standardize on the Compliance API for ongoing programmatic use.
 
 ### Analytics API
 
-Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and the [Claude Code Analytics API](/docs/en/manage-claude/claude-code-analytics-api). Both return aggregated usage and cost figures for IT, FinOps, and platform teams, while the Compliance API returns per-event records for security, legal, and compliance teams. The two API families answer different questions, use different keys, and are provisioned separately.
+Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and the [Claude Code Analytics API](/docs/en/manage-claude/claude-code-analytics-api). Both return aggregated usage and cost figures for IT, FinOps, and platform teams, whereas the Compliance API returns per-event records for security, legal, and compliance teams. The two API families answer different questions, use different keys, and are provisioned separately.
 
 ---
 
@@ -85,7 +84,7 @@ Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and t
 
 <CardGroup>
   <Card href="/docs/en/manage-claude/compliance-api-access" title="Get access to the Compliance API">
-    Create a Compliance Access Key or Admin API key, choose scopes, and enable the Compliance API for your organization.
+    Request Compliance API access for your organization, then create a Compliance Access Key (with scoped permissions) or an Admin API key, and learn which to use.
   </Card>
   <Card href="/docs/en/manage-claude/compliance-activity-feed" title="Query the Activity Feed">
     Retrieve, filter, and paginate the shared Activity Feed. Supported by both key types.

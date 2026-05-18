@@ -5,7 +5,7 @@ Enumerate organizations under your parent organization, their users, roles, and 
 ---
 
 <Note>
-  The Compliance API is available only on the Claude Enterprise plan and must be enabled before use. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) only. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 <Check>
@@ -52,13 +52,13 @@ The `uuid` field is the canonical identifier for downstream lookups. The followi
 | Field                | Where                                                                                                                                                                                                  | Relationship to `uuid`                       |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
 | `{org_uuid}`         | Path parameter on per-organization endpoints on this page                                                                                                                                              | Same value                                   |
-| `organization_uuid`  | Activity Feed record                                                                                                                                                                                   | Same value; join on these two fields directly |
-| `organization_id`    | Activity Feed record                                                                                                                                                                                   | Same organization, `org_`-prefixed           |
+| `organization_uuid`  | Activity Feed, chat, and project records                                                                                                                                                               | Same value; join on these two fields directly |
+| `organization_id`    | Activity Feed, chat, and project records                                                                                                                                                               | Same organization, `org_`-prefixed. Deprecated on chat and project records; use `organization_uuid` instead. |
 | `organization_ids[]` | Filter on [Query the Activity Feed](/docs/en/manage-claude/compliance-activity-feed) and [Retrieve chats and messages](/docs/en/manage-claude/compliance-content-data#retrieve-chats-and-messages) | Accepts `uuid` or the `org_`-prefixed form   |
 
 Most other Anthropic APIs use the `org_`-prefixed form.
 
-If your tree exceeds the 1,000-organization cap, contact Anthropic support. There is currently no activity type for an organization being created or joining the tree, so relist periodically to detect newly linked organizations. To detect deleted organizations, watch the `org_deletion_requested` and `org_deleted_via_bulk` activity types; see [Query the Activity Feed](/docs/en/manage-claude/compliance-activity-feed).
+If your tree exceeds the 1,000-organization cap, contact Anthropic support. To track organization-membership changes over time, relist this endpoint periodically. The Activity Feed also surfaces membership events through the `org_deletion_requested`, `org_deleted_via_bulk`, `org_parent_join_proposal_created`, and `org_join_proposal_decided` activity types; see [Query the Activity Feed](/docs/en/manage-claude/compliance-activity-feed).
 
 ## List organization users
 
