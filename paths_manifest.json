@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-18T16:10:08.696091Z",
-    "total_paths": 1546,
+    "generated_at": "2026-05-18T18:41:11.824516Z",
+    "total_paths": 1547,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-18T16:10:08.696099Z"
+    "last_regenerated": "2026-05-18T18:41:11.824522Z"
   },
   "categories": {
     "core_documentation": [
@@ -47,6 +47,7 @@
       "/docs/en/best-practices",
       "/docs/en/build-with-claude/adaptive-thinking",
       "/docs/en/build-with-claude/batch-processing",
+      "/docs/en/build-with-claude/cache-diagnostics",
       "/docs/en/build-with-claude/citations",
       "/docs/en/build-with-claude/claude-in-amazon-bedrock",
       "/docs/en/build-with-claude/claude-in-microsoft-foundry",
