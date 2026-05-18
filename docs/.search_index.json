@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-18T18:55:45Z",
+  "generated_at": "2026-05-18T21:45:16Z",
   "indexed_files": 1276,
   "index": {
     "/changelog": {
@@ -256,8 +256,8 @@
       "file_path": "docs/claude-code__data-usage.md"
     },
     "/claude-code/desktop": {
-      "title": "Use Claude Code Desktop",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Use Claude Code...",
+      "title": "Desktop application",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Desktop applica...",
       "keywords": [
         "claude",
         "code",
@@ -280,7 +280,7 @@
         "see",
         "available"
       ],
-      "word_count": 8441,
+      "word_count": 8439,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -532,7 +532,7 @@
         "features",
         "installation"
       ],
-      "word_count": 1070,
+      "word_count": 1079,
       "file_path": "docs/claude-code__jetbrains.md"
     },
     "/claude-code/legal-and-compliance": {
@@ -700,7 +700,7 @@
         "version",
         "which"
       ],
-      "word_count": 3750,
+      "word_count": 3763,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -788,8 +788,8 @@
       "file_path": "docs/claude-code__output-styles.md"
     },
     "/claude-code/overview": {
-      "title": "Claude Code overview",
-      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Claude Code ove...",
+      "title": "Overview",
+      "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Overview  > Cla...",
       "keywords": [
         "code",
         "claude",
@@ -812,7 +812,7 @@
         "web",
         "build"
       ],
-      "word_count": 1723,
+      "word_count": 1721,
       "file_path": "docs/claude-code__overview.md"
     },
     "/claude-code/plugin-marketplaces": {
@@ -1008,7 +1008,7 @@
         "com",
         "when"
       ],
-      "word_count": 9513,
+      "word_count": 9519,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1053,18 +1053,18 @@
         "subagent",
         "description",
         "bundled",
+        "agent",
         "arguments",
         "theme",
         "null",
-        "tools",
-        "yaml",
-        "settings",
-        "available",
-        "one",
         "content",
-        "reference"
+        "built",
+        "tools",
+        "prompt",
+        "yaml",
+        "settings"
       ],
-      "word_count": 5701,
+      "word_count": 5742,
       "file_path": "docs/claude-code__skills.md"
     },
     "/claude-code/statusline": {
@@ -1101,26 +1101,26 @@
       "keywords": [
         "subagent",
         "subagents",
-        "when",
         "claude",
+        "when",
         "main",
         "agent",
-        "session",
         "conversation",
-        "tool",
+        "session",
+        "prompt",
         "code",
         "context",
-        "prompt",
+        "tool",
         "tools",
         "only",
+        "fork",
         "same",
         "hooks",
+        "field",
         "model",
-        "plugin",
-        "fork",
-        "run"
+        "plugin"
       ],
-      "word_count": 7727,
+      "word_count": 8039,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1226,13 +1226,13 @@
         "icon",
         "cli",
         "terminal",
-        "prompt",
         "file",
+        "prompt",
         "when",
         "settings",
         "install"
       ],
-      "word_count": 4974,
+      "word_count": 5050,
       "file_path": "docs/claude-code__vs-code.md"
     },
     "/docs/en/agents-and-tools/agent-skills/best-practices": {
@@ -31698,9 +31698,9 @@
         "block",
         "long",
         "content",
+        "response",
         "claude",
         "conversation",
-        "response",
         "token",
         "messages",
         "blocks",
@@ -31709,7 +31709,7 @@
         "after",
         "trigger"
       ],
-      "word_count": 8821,
+      "word_count": 8917,
       "file_path": "docs/docs__en__build-with-claude__compaction.md"
     },
     "/docs/en/build-with-claude/context-editing": {
