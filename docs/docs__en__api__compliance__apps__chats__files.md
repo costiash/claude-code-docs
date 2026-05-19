@@ -32,6 +32,10 @@ download the bytes.
 
   Display name of the file, if set
 
+- `md5: string`
+
+  Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes; when the two disagree, the header is authoritative.
+
 - `message_ids: array of string`
 
   Chat message IDs this file is attached to. A file can be referenced by multiple messages.
@@ -88,7 +92,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Content
+## Download
 
 **get** `/v1/compliance/apps/chats/files/{claude_file_id}/content`
 
@@ -115,7 +119,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/co
 
 ### File Retrieve Response
 
-- `FileRetrieveResponse = object { id, created_at, filename, 3 more }`
+- `FileRetrieveResponse = object { id, created_at, filename, 4 more }`
 
   File metadata for GET /v1/compliance/apps/chats/files/{claude_file_id}.
 
@@ -133,6 +137,10 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/co
   - `filename: string`
 
     Display name of the file, if set
+
+  - `md5: string`
+
+    Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes; when the two disagree, the header is authoritative.
 
   - `message_ids: array of string`
 
@@ -161,7 +169,3 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/co
     Constant string confirming deletion
 
     - `"claude_file_deleted"`
-
-### File Content Response
-
-- `FileContentResponse = unknown`

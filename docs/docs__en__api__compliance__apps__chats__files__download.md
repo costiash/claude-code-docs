@@ -1,4 +1,4 @@
-## Content
+## Download
 
 **get** `/v1/compliance/apps/chats/files/{claude_file_id}/content`
 

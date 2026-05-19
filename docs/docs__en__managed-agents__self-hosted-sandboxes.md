@@ -26,7 +26,7 @@ Self-hosting controls *where the agent's code executes*. [MCP tunnels](/docs/en/
 ## Environment worker
 
 <Tip>
-The guide below describes how to build a worker with any generic sandboxing platform. Additional, platform-specific guides are available for [Cloudflare](https://developers.cloudflare.com/sandbox/claude-managed-agents/), [Daytona](https://www.daytona.io/docs/en/guides/claude/claude-managed-agents), [Modal](https://github.com/modal-projects/claude-managed-agents-modal-sandbox/blob/main/README.md), and [Vercel](https://vercel.com/kb/guide/run-claude-managed-agent-tools-with-vercel-sandbox).
+The following guide describes how to build a worker with any generic sandboxing platform. Additional, platform-specific guides are available for [Cloudflare](https://developers.cloudflare.com/sandbox/claude-managed-agents/), [Daytona](https://www.daytona.io/docs/en/guides/claude/claude-managed-agents), [Modal](https://github.com/modal-labs/claude-managed-agents-modal-sandbox), and [Vercel](https://vercel.com/kb/guide/run-claude-managed-agent-tools-with-vercel-sandbox).
 </Tip>
 
 An environment worker is a process you run on your own infrastructure that receives tool execution requests from Anthropic and runs them locally. The `self_hosted` environment is a work queue connecting Anthropic's orchestration to your worker: when a [session](/docs/en/managed-agents/sessions) is assigned to an environment, Anthropic enqueues it as a work item. Your worker claims items from that queue, spawns an execution context for each session, downloads the [agent's skills](/docs/en/managed-agents/skills), runs tool calls locally, and posts results back.

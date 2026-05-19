@@ -47,7 +47,7 @@ are sorted chronologically (time ascending) by created_at.
 
 ### Returns
 
-- `data: array of object { id, created_at, is_private, 4 more }`
+- `data: array of object { id, created_at, deleted_at, 6 more }`
 
   List of projects sorted by creation date ascending
 
@@ -58,6 +58,10 @@ are sorted chronologically (time ascending) by created_at.
   - `created_at: string`
 
     Project creation timestamp
+
+  - `deleted_at: string`
+
+    Timestamp when the project was deleted by an end user, or null otherwise
 
   - `is_private: boolean`
 
@@ -70,6 +74,10 @@ are sorted chronologically (time ascending) by created_at.
   - `organization_id: string`
 
     Organization identifier (tagged ID)
+
+  - `organization_uuid: string`
+
+    Organization UUID this project belongs to
 
   - `updated_at: string`
 

@@ -30,6 +30,10 @@ download the bytes.
 
   Display name of the file, if set
 
+- `md5: string`
+
+  Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes; when the two disagree, the header is authoritative.
+
 - `message_ids: array of string`
 
   Chat message IDs this file is attached to. A file can be referenced by multiple messages.

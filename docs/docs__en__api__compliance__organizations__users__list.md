@@ -29,9 +29,9 @@ List of user members with pagination info
 
 ### Returns
 
-- `data: array of object { id, created_at, email, full_name }`
+- `data: array of object { id, created_at, email, 2 more }`
 
-  List of current organization members sorted by account creation date ascending
+  List of current organization members sorted by organization join date ascending
 
   - `id: string`
 
@@ -48,6 +48,28 @@ List of user members with pagination info
   - `full_name: string`
 
     User's current full name
+
+  - `organization_role: "admin" or "billing" or "claude_code_user" or 6 more`
+
+    User's built-in role within the organization. This is distinct from any custom RBAC roles that may also be assigned.
+
+    - `"admin"`
+
+    - `"billing"`
+
+    - `"claude_code_user"`
+
+    - `"developer"`
+
+    - `"managed"`
+
+    - `"membership_admin"`
+
+    - `"owner"`
+
+    - `"primary_owner"`
+
+    - `"user"`
 
 - `has_more: boolean`
 
