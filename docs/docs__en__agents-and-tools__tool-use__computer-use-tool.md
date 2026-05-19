@@ -361,7 +361,7 @@ puts response
 <Note>
 A beta header is only required for the computer use tool.
 
-The example above shows all three tools being used together, which requires the beta header because it includes the computer use tool.
+The preceding example shows all three tools being used together, which requires the beta header because it includes the computer use tool.
 </Note>
 
 ---
@@ -532,7 +532,8 @@ Here are some tips on how to get the best quality outputs:
 2. Claude sometimes assumes outcomes of its actions without explicitly checking their results. To prevent this you can prompt Claude with `After each step, take a screenshot and carefully evaluate if you have achieved the right outcome. Explicitly show your thinking: "I have evaluated step X..." If not correct, try again. Only when you confirm a step was executed correctly should you move on to the next one.`
 3. Some UI elements (like dropdowns and scrollbars) might be tricky for Claude to manipulate using mouse movements. If you experience this, try prompting the model to use keyboard shortcuts.
 4. For repeatable tasks or UI interactions, include example screenshots and tool calls of successful outcomes in your prompt.
-5. If you need the model to log in, provide it with the username and password in your prompt inside xml tags like `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Review the [guide on mitigating prompt injections](/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) before providing the model with login credentials.
+5. If you need the model to log in, provide it with the username and password in your prompt inside XML tags like `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Review the [guide on mitigating prompt injections](/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) before providing the model with login credentials.
+6. When constructing a user turn's `content` array, place the instruction text *before* the screenshot image. Providing the target description before the image is processed improves click accuracy.
 
 <Tip>
   If you repeatedly encounter a clear set of issues or know in advance the tasks
@@ -701,9 +702,16 @@ The `text` parameter in click/scroll actions accepts modifier keys like `shift`,
 
 For combining computer use with extended thinking, see [Extended thinking](/docs/en/build-with-claude/extended-thinking).
 
+<Tip>
+For computer use specifically, internal benchmarking suggests these `effort` settings:
+
+- **Claude Opus 4.7:** use `high` as the default; use `low` for high-throughput or cost-sensitive workloads.
+- **Claude Sonnet 4.6 and Claude Opus 4.6:** use `medium` as the default (best accuracy-to-cost ratio). Avoid `max`, which adds token cost without improving accuracy on UI tasks. On these models, `low` uses *fewer* output tokens than disabling thinking entirely (fewer mistakes mean fewer retries), making it a strong option for cost-sensitive loops.
+</Tip>
+
 ### Augmenting computer use with other tools
 
-To add other tools alongside computer use, include them in the same `tools` array. The quick start above shows this pattern with the [bash tool](/docs/en/agents-and-tools/tool-use/bash-tool) and [text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool). You can add your own [custom tool definitions](/docs/en/agents-and-tools/tool-use/define-tools) the same way.
+To add other tools alongside computer use, include them in the same `tools` array. The [Quick start](#quick-start) section shows this pattern with the [bash tool](/docs/en/agents-and-tools/tool-use/bash-tool) and [text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool). You can add your own [custom tool definitions](/docs/en/agents-and-tools/tool-use/define-tools) the same way.
 
 ### Build a custom computer use environment
 
@@ -876,7 +884,7 @@ If an action fails to execute:
 #### Handle coordinate scaling for higher resolutions
 
 <Note>
-Claude Opus 4.7 supports up to 2576 pixels on the long edge, and its coordinates are 1\:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance below applies to earlier models.
+Claude Opus 4.7 supports up to 2576 pixels on the long edge, and its coordinates are 1\:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance that follows applies to earlier models.
 </Note>
 
 The API constrains images to a maximum of 1568 pixels on the longest edge and approximately 1.15 megapixels total (see [image resizing](/docs/en/build-with-claude/vision#evaluate-image-size) for details). For example, a 1512x982 screen gets downsampled to approximately 1330x864. Claude analyzes this smaller image and returns coordinates in that space, but your tool executes clicks in the original screen space.
@@ -961,6 +969,25 @@ function executeClick(x: number, y: number): void {
 ```
 </CodeGroup>
 
+<Note>
+**macOS Retina displays** capture screenshots at a device pixel ratio of 2, so the image is twice the resolution of the logical screen coordinates. Either downscale the screenshot by 2x before sending, or halve the coordinates Claude returns before issuing the click.
+</Note>
+
+#### Diagnose click issues
+
+If clicks miss their targets, the cause is usually one of the following:
+
+| Symptom | Likely cause | Try |
+|---------|--------------|-----|
+| Clicks consistently offset in one direction | `display_width_px`/`display_height_px` don't match the image dimensions actually sent, or the image exceeds API limits and is silently downscaled | Ensure display dimensions exactly match the resized screenshot; pre-downscale to fit within API limits |
+| Clicks land in the right area but miss the target | Target is very small, detail was lost downscaling a 4K+ source, or aspect ratio was distorted | Set `enable_zoom: true`; capture at lower DPI or crop to the relevant region; preserve aspect ratio when resizing |
+| Claude clicks the wrong element entirely | Ambiguous instruction, or visually similar elements nearby | Use positional prompts ("the blue Submit button in the bottom-right"); break the interaction into smaller steps |
+| Accuracy is consistently poor | Screenshots sent above API limits, or resolution too low | Pre-downscale to fit within limits; try 1280x720 as a baseline |
+
+<Tip>
+**Model choice affects click precision.** Claude Sonnet 4.6 is more mechanically precise at clicking than Claude Opus 4.6 and is more robust when screenshots require heavy downscaling. Claude Opus 4.7 narrows that gap: its click precision is roughly comparable to Sonnet 4.6, and its higher resolution limit means less downscaling is needed.
+</Tip>
+
 #### Follow implementation best practices
 
 <section title="Use appropriate display resolution">
@@ -979,6 +1006,14 @@ When returning screenshots to Claude:
 - Consider compressing large screenshots to improve performance
 - Include relevant metadata like timestamp or display state
 - If using higher resolutions, ensure coordinates are accurately scaled
+
+</section>
+
+<section title="Manage screenshot history for prompt caching">
+
+Long agent loops accumulate screenshots quickly (roughly 1,000–1,800 input tokens each). To keep [prompt caching](/docs/en/build-with-claude/prompt-caching) effective while bounding context:
+- Place one `cache_control` breakpoint after the system prompt and tool definitions, and up to three more on the most recent `tool_result` blocks, advancing them each turn.
+- Prune old screenshots in *batches*, not one each turn. Dropping a screenshot every turn changes the prefix every turn and invalidates the cache. A reasonable default is to keep the last 3 screenshots and prune every 25 turns, so the prefix stays byte-identical between prune events.
 
 </section>
 
@@ -1088,5 +1123,12 @@ If you're also using bash or text editor tools alongside computer use, those too
     href="/docs/en/agents-and-tools/tool-use/overview"
   >
     Learn more about tool use and creating custom tools
+  </Card>
+  <Card
+    title="Best practices in detail"
+    icon="book-open"
+    href="https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude"
+  >
+    Benchmarked recommendations for resolution, thinking effort, and context management
   </Card>
 </CardGroup>

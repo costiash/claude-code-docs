@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-18T21:45:16Z",
+  "generated_at": "2026-05-19T01:08:49Z",
   "indexed_files": 1276,
   "index": {
     "/changelog": {
@@ -13,22 +13,22 @@
         "added",
         "claude",
         "improved",
-        "tool",
-        "mode",
         "instead",
+        "tool",
         "session",
+        "mode",
         "sessions",
-        "being",
         "after",
+        "being",
         "mcp",
         "code",
         "prompt",
         "command",
         "commands",
         "file",
-        "bash"
+        "terminal"
       ],
-      "word_count": 45834,
+      "word_count": 46873,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -153,22 +153,22 @@
         "prompt",
         "see",
         "settings",
-        "only",
         "default",
         "code",
-        "file",
         "interactive",
+        "only",
         "print",
+        "file",
+        "sessions",
         "flag",
         "output",
         "agent",
         "model",
         "available",
         "flags",
-        "start",
-        "sessions"
+        "start"
       ],
-      "word_count": 2866,
+      "word_count": 2952,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -427,8 +427,8 @@
       "title": "Automate workflows with hooks",
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Automate workflows with hooks  > Run shell commands automatically when Claude Code edits files, finishes tasks, or",
       "keywords": [
-        "hooks",
         "hook",
+        "hooks",
         "claude",
         "when",
         "tool",
@@ -448,7 +448,7 @@
         "exit",
         "settings"
       ],
-      "word_count": 6336,
+      "word_count": 6381,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "prompt",
         "context"
       ],
-      "word_count": 19655,
+      "word_count": 19672,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -600,9 +600,9 @@
         "servers",
         "claude",
         "code",
-        "when",
         "step",
         "tools",
+        "when",
         "command",
         "tool",
         "title",
@@ -616,7 +616,7 @@
         "configuration",
         "any"
       ],
-      "word_count": 7294,
+      "word_count": 7352,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -688,19 +688,19 @@
         "effort",
         "level",
         "settings",
-        "sonnet",
         "environment",
-        "default",
+        "sonnet",
         "context",
+        "default",
         "thinking",
         "models",
         "picker",
         "name",
+        "variable",
         "reasoning",
-        "version",
-        "which"
+        "version"
       ],
-      "word_count": 3763,
+      "word_count": 3795,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -824,23 +824,23 @@
         "plugins",
         "git",
         "string",
-        "marketplaces",
         "code",
+        "marketplaces",
         "see",
-        "add",
         "claude",
+        "add",
         "url",
         "directory",
         "paths",
+        "version",
         "github",
         "repository",
-        "version",
         "users",
         "seed",
-        "sources",
-        "path"
+        "when",
+        "sources"
       ],
-      "word_count": 5991,
+      "word_count": 6032,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -852,23 +852,23 @@
         "claude",
         "directory",
         "plugins",
-        "server",
         "code",
+        "server",
         "default",
         "mcp",
         "command",
-        "version",
         "field",
+        "version",
         "see",
         "files",
         "path",
         "servers",
         "lsp",
         "file",
-        "commands",
+        "string",
         "skills"
       ],
-      "word_count": 6819,
+      "word_count": 7000,
       "file_path": "docs/claude-code__plugins-reference.md"
     },
     "/claude-code/plugins": {
@@ -1008,7 +1008,7 @@
         "com",
         "when"
       ],
-      "word_count": 9519,
+      "word_count": 9593,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1113,14 +1113,14 @@
         "tool",
         "tools",
         "only",
-        "fork",
         "same",
+        "fork",
         "hooks",
         "field",
         "model",
         "plugin"
       ],
-      "word_count": 8039,
+      "word_count": 8072,
       "file_path": "docs/claude-code__sub-agents.md"
     },
     "/claude-code/terminal-config": {
@@ -1523,24 +1523,24 @@
         "computer",
         "tool",
         "actions",
+        "click",
         "title",
         "section",
+        "prompt",
         "step",
         "tools",
-        "prompt",
-        "click",
         "environment",
+        "screenshot",
+        "opus",
         "when",
         "api",
-        "loop",
-        "mouse",
+        "screenshots",
         "note",
-        "opus",
+        "coordinates",
         "model",
-        "user",
-        "example"
+        "user"
       ],
-      "word_count": 4900,
+      "word_count": 5403,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
