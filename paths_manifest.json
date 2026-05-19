@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-19T13:12:53.203321Z",
-    "total_paths": 1668,
+    "generated_at": "2026-05-19T16:08:15.999365Z",
+    "total_paths": 1669,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-19T13:12:53.203328Z"
+    "last_regenerated": "2026-05-19T16:08:15.999371Z"
   },
   "categories": {
     "core_documentation": [
@@ -184,6 +184,7 @@
       "/docs/en/whats-new/2026-w17",
       "/docs/en/whats-new/2026-w18",
       "/docs/en/whats-new/2026-w19",
+      "/docs/en/whats-new/2026-w20",
       "/docs/en/worktrees",
       "/docs/en/zero-data-retention"
     ],

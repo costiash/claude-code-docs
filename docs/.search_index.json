@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-19T13:28:49Z",
+  "generated_at": "2026-05-19T16:23:31Z",
   "indexed_files": 1377,
   "index": {
     "/changelog": {
@@ -161,14 +161,14 @@
         "file",
         "sessions",
         "flag",
+        "available",
         "output",
         "agent",
+        "background",
         "model",
-        "available",
-        "flags",
-        "start"
+        "flags"
       ],
-      "word_count": 2952,
+      "word_count": 2976,
       "file_path": "docs/claude-code__cli-reference.md"
     },
     "/claude-code/common-workflows": {
@@ -420,7 +420,7 @@
         "message",
         "response"
       ],
-      "word_count": 1946,
+      "word_count": 1947,
       "file_path": "docs/claude-code__headless.md"
     },
     "/claude-code/hooks-guide": {
@@ -448,7 +448,7 @@
         "exit",
         "settings"
       ],
-      "word_count": 6381,
+      "word_count": 6382,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -476,7 +476,7 @@
         "prompt",
         "context"
       ],
-      "word_count": 19672,
+      "word_count": 19671,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -686,21 +686,21 @@
         "claude",
         "code",
         "effort",
-        "level",
         "settings",
+        "level",
         "environment",
+        "default",
         "sonnet",
         "context",
-        "default",
+        "picker",
         "thinking",
         "models",
-        "picker",
         "name",
         "variable",
-        "reasoning",
-        "version"
+        "session",
+        "which"
       ],
-      "word_count": 3795,
+      "word_count": 3849,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -716,19 +716,19 @@
         "name",
         "code",
         "claude",
-        "session",
         "plugin",
+        "session",
         "metrics",
         "standard",
         "api",
         "user",
-        "prompt",
         "only",
+        "prompt",
         "counter",
         "such",
-        "example"
+        "hook"
       ],
-      "word_count": 8345,
+      "word_count": 8521,
       "file_path": "docs/claude-code__monitoring-usage.md"
     },
     "/claude-code/network-config": {
@@ -1008,7 +1008,7 @@
         "com",
         "when"
       ],
-      "word_count": 9593,
+      "word_count": 9633,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
