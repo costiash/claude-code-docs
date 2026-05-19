@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-19T18:57:00Z",
+  "generated_at": "2026-05-19T21:49:15Z",
   "indexed_files": 1382,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "file",
         "terminal"
       ],
-      "word_count": 46873,
+      "word_count": 47215,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -998,17 +998,17 @@
         "acme",
         "code",
         "see",
-        "corp",
         "project",
+        "corp",
         "tools",
         "set",
         "github",
+        "when",
         "user",
         "repo",
-        "com",
-        "when"
+        "com"
       ],
-      "word_count": 9633,
+      "word_count": 9727,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
