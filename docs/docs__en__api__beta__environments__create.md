@@ -12,7 +12,7 @@ Create a new environment with the specified configuration.
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -62,129 +62,34 @@ Create a new environment with the specified configuration.
 
     - `"managed-agents-2026-04-01"`
 
+    - `"cache-diagnosis-2026-04-07"`
+
 ### Body Parameters
 
 - `name: string`
 
   Human-readable name for the environment
 
-- `config: optional BetaCloudConfigParams`
+- `config: optional BetaCloudConfigParams or BetaSelfHostedConfigParams`
 
-  Request params for `cloud` environment configuration.
+  Environment configuration
 
-  Fields default to null; on update, omitted fields preserve the
-  existing value.
+  - `BetaCloudConfigParams = object { type, networking, packages }`
 
-  - `type: "cloud"`
+    Request params for `cloud` environment configuration.
 
-    Environment type
+    Fields default to null; on update, omitted fields preserve the
+    existing value.
 
-    - `"cloud"`
+    - `type: "cloud"`
 
-  - `networking: optional BetaUnrestrictedNetwork or BetaLimitedNetworkParams`
+      Environment type
 
-    Network configuration policy. Omit on update to preserve the existing value.
+      - `"cloud"`
 
-    - `BetaUnrestrictedNetwork = object { type }`
+    - `networking: optional BetaUnrestrictedNetwork or BetaLimitedNetworkParams`
 
-      Unrestricted network access.
-
-      - `type: "unrestricted"`
-
-        Network policy type
-
-        - `"unrestricted"`
-
-    - `BetaLimitedNetworkParams = object { type, allow_mcp_servers, allow_package_managers, allowed_hosts }`
-
-      Limited network request params.
-
-      Fields default to null; on update, omitted fields preserve the
-      existing value.
-
-      - `type: "limited"`
-
-        Network policy type
-
-        - `"limited"`
-
-      - `allow_mcp_servers: optional boolean`
-
-        Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
-
-      - `allow_package_managers: optional boolean`
-
-        Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
-
-      - `allowed_hosts: optional array of string`
-
-        Specifies domains the container can reach.
-
-  - `packages: optional BetaPackagesParams`
-
-    Specify packages (and optionally their versions) available in this environment.
-
-    When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
-
-    - `apt: optional array of string`
-
-      Ubuntu/Debian packages to install
-
-    - `cargo: optional array of string`
-
-      Rust packages to install
-
-    - `gem: optional array of string`
-
-      Ruby packages to install
-
-    - `go: optional array of string`
-
-      Go packages to install
-
-    - `npm: optional array of string`
-
-      Node.js packages to install
-
-    - `pip: optional array of string`
-
-      Python packages to install
-
-    - `type: optional "packages"`
-
-      Package configuration type
-
-      - `"packages"`
-
-- `description: optional string`
-
-  Optional description of the environment
-
-- `metadata: optional map[string]`
-
-  User-provided metadata key-value pairs
-
-### Returns
-
-- `BetaEnvironment = object { id, archived_at, config, 6 more }`
-
-  Unified Environment resource for both cloud and self-hosted environments.
-
-  - `id: string`
-
-    Environment identifier (e.g., 'env_...')
-
-  - `archived_at: string`
-
-    RFC 3339 timestamp when environment was archived, or null if not archived
-
-  - `config: BetaCloudConfig`
-
-    `cloud` environment configuration.
-
-    - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
-
-      Network configuration policy.
+      Network configuration policy. Omit on update to preserve the existing value.
 
       - `BetaUnrestrictedNetwork = object { type }`
 
@@ -196,21 +101,12 @@ Create a new environment with the specified configuration.
 
           - `"unrestricted"`
 
-      - `BetaLimitedNetwork = object { allow_mcp_servers, allow_package_managers, allowed_hosts, type }`
+      - `BetaLimitedNetworkParams = object { type, allow_mcp_servers, allow_package_managers, allowed_hosts }`
 
-        Limited network access.
+        Limited network request params.
 
-        - `allow_mcp_servers: boolean`
-
-          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
-
-        - `allow_package_managers: boolean`
-
-          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
-
-        - `allowed_hosts: array of string`
-
-          Specifies domains the container can reach.
+        Fields default to null; on update, omitted fields preserve the
+        existing value.
 
         - `type: "limited"`
 
@@ -218,31 +114,45 @@ Create a new environment with the specified configuration.
 
           - `"limited"`
 
-    - `packages: BetaPackages`
+        - `allow_mcp_servers: optional boolean`
 
-      Package manager configuration.
+          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-      - `apt: array of string`
+        - `allow_package_managers: optional boolean`
+
+          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+        - `allowed_hosts: optional array of string`
+
+          Specifies domains the container can reach.
+
+    - `packages: optional BetaPackagesParams`
+
+      Specify packages (and optionally their versions) available in this environment.
+
+      When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+      - `apt: optional array of string`
 
         Ubuntu/Debian packages to install
 
-      - `cargo: array of string`
+      - `cargo: optional array of string`
 
         Rust packages to install
 
-      - `gem: array of string`
+      - `gem: optional array of string`
 
         Ruby packages to install
 
-      - `go: array of string`
+      - `go: optional array of string`
 
         Go packages to install
 
-      - `npm: array of string`
+      - `npm: optional array of string`
 
         Node.js packages to install
 
-      - `pip: array of string`
+      - `pip: optional array of string`
 
         Python packages to install
 
@@ -252,11 +162,139 @@ Create a new environment with the specified configuration.
 
         - `"packages"`
 
-    - `type: "cloud"`
+  - `BetaSelfHostedConfigParams = object { type }`
+
+    Request params for `self_hosted` environment configuration.
+
+    - `type: "self_hosted"`
 
       Environment type
 
-      - `"cloud"`
+      - `"self_hosted"`
+
+- `description: optional string`
+
+  Optional description of the environment
+
+- `metadata: optional map[string]`
+
+  User-provided metadata key-value pairs
+
+- `scope: optional "organization" or "account"`
+
+  The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
+
+  - `"organization"`
+
+  - `"account"`
+
+### Returns
+
+- `BetaEnvironment = object { id, archived_at, config, 7 more }`
+
+  Unified Environment resource for both cloud and self-hosted environments.
+
+  - `id: string`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `archived_at: string`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `config: BetaCloudConfig or BetaSelfHostedConfig`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+    - `BetaCloudConfig = object { networking, packages, type }`
+
+      `cloud` environment configuration.
+
+      - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
+
+        Network configuration policy.
+
+        - `BetaUnrestrictedNetwork = object { type }`
+
+          Unrestricted network access.
+
+          - `type: "unrestricted"`
+
+            Network policy type
+
+            - `"unrestricted"`
+
+        - `BetaLimitedNetwork = object { allow_mcp_servers, allow_package_managers, allowed_hosts, type }`
+
+          Limited network access.
+
+          - `allow_mcp_servers: boolean`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+          - `allow_package_managers: boolean`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `allowed_hosts: array of string`
+
+            Specifies domains the container can reach.
+
+          - `type: "limited"`
+
+            Network policy type
+
+            - `"limited"`
+
+      - `packages: BetaPackages`
+
+        Package manager configuration.
+
+        - `apt: array of string`
+
+          Ubuntu/Debian packages to install
+
+        - `cargo: array of string`
+
+          Rust packages to install
+
+        - `gem: array of string`
+
+          Ruby packages to install
+
+        - `go: array of string`
+
+          Go packages to install
+
+        - `npm: array of string`
+
+          Node.js packages to install
+
+        - `pip: array of string`
+
+          Python packages to install
+
+        - `type: optional "packages"`
+
+          Package configuration type
+
+          - `"packages"`
+
+      - `type: "cloud"`
+
+        Environment type
+
+        - `"cloud"`
+
+    - `BetaSelfHostedConfig = object { type }`
+
+      Configuration for self-hosted environments.
+
+      - `type: "self_hosted"`
+
+        Environment type
+
+        - `"self_hosted"`
 
   - `created_at: string`
 
@@ -283,6 +321,14 @@ Create a new environment with the specified configuration.
   - `updated_at: string`
 
     RFC 3339 timestamp when environment was last updated
+
+  - `scope: optional "organization" or "account"`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `"organization"`
+
+    - `"account"`
 
 ### Example
 

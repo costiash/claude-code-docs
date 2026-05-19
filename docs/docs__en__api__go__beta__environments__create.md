@@ -14,12 +14,107 @@ Create a new environment with the specified configuration.
 
     Body param: Human-readable name for the environment
 
-  - `Config param.Field[BetaCloudConfigParamsResp]`
+  - `Config param.Field[BetaEnvironmentNewParamsConfigUnion]`
 
-    Body param: Request params for `cloud` environment configuration.
+    Body param: Environment configuration
 
-    Fields default to null; on update, omitted fields preserve the
-    existing value.
+    - `type BetaCloudConfigParamsResp struct{…}`
+
+      Request params for `cloud` environment configuration.
+
+      Fields default to null; on update, omitted fields preserve the
+      existing value.
+
+      - `Type Cloud`
+
+        Environment type
+
+        - `const CloudCloud Cloud = "cloud"`
+
+      - `Networking BetaCloudConfigParamsNetworkingUnionResp`
+
+        Network configuration policy. Omit on update to preserve the existing value.
+
+        - `type BetaUnrestrictedNetwork struct{…}`
+
+          Unrestricted network access.
+
+          - `Type Unrestricted`
+
+            Network policy type
+
+            - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
+
+        - `type BetaLimitedNetworkParamsResp struct{…}`
+
+          Limited network request params.
+
+          Fields default to null; on update, omitted fields preserve the
+          existing value.
+
+          - `Type Limited`
+
+            Network policy type
+
+            - `const LimitedLimited Limited = "limited"`
+
+          - `AllowMCPServers bool`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+          - `AllowPackageManagers bool`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+          - `AllowedHosts []string`
+
+            Specifies domains the container can reach.
+
+      - `Packages BetaPackagesParamsResp`
+
+        Specify packages (and optionally their versions) available in this environment.
+
+        When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+        - `Apt []string`
+
+          Ubuntu/Debian packages to install
+
+        - `Cargo []string`
+
+          Rust packages to install
+
+        - `Gem []string`
+
+          Ruby packages to install
+
+        - `Go []string`
+
+          Go packages to install
+
+        - `Npm []string`
+
+          Node.js packages to install
+
+        - `Pip []string`
+
+          Python packages to install
+
+        - `Type BetaPackagesParamsType`
+
+          Package configuration type
+
+          - `const BetaPackagesParamsTypePackages BetaPackagesParamsType = "packages"`
+
+    - `type BetaSelfHostedConfigParamsResp struct{…}`
+
+      Request params for `self_hosted` environment configuration.
+
+      - `Type SelfHosted`
+
+        Environment type
+
+        - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
 
   - `Description param.Field[string]`
 
@@ -28,6 +123,14 @@ Create a new environment with the specified configuration.
   - `Metadata param.Field[map[string, string]]`
 
     Body param: User-provided metadata key-value pairs
+
+  - `Scope param.Field[BetaEnvironmentNewParamsScope]`
+
+    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
+
+    - `const BetaEnvironmentNewParamsScopeOrganization BetaEnvironmentNewParamsScope = "organization"`
+
+    - `const BetaEnvironmentNewParamsScopeAccount BetaEnvironmentNewParamsScope = "account"`
 
   - `Betas param.Field[[]AnthropicBeta]`
 
@@ -85,6 +188,8 @@ Create a new environment with the specified configuration.
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
 ### Returns
 
 - `type BetaEnvironment struct{…}`
@@ -99,85 +204,99 @@ Create a new environment with the specified configuration.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `Config BetaCloudConfig`
+  - `Config BetaEnvironmentConfigUnion`
 
-    `cloud` environment configuration.
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `Networking BetaCloudConfigNetworkingUnion`
+    - `type BetaCloudConfig struct{…}`
 
-      Network configuration policy.
+      `cloud` environment configuration.
 
-      - `type BetaUnrestrictedNetwork struct{…}`
+      - `Networking BetaCloudConfigNetworkingUnion`
 
-        Unrestricted network access.
+        Network configuration policy.
 
-        - `Type Unrestricted`
+        - `type BetaUnrestrictedNetwork struct{…}`
 
-          Network policy type
+          Unrestricted network access.
 
-          - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
+          - `Type Unrestricted`
 
-      - `type BetaLimitedNetwork struct{…}`
+            Network policy type
 
-        Limited network access.
+            - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
 
-        - `AllowMCPServers bool`
+        - `type BetaLimitedNetwork struct{…}`
 
-          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+          Limited network access.
 
-        - `AllowPackageManagers bool`
+          - `AllowMCPServers bool`
 
-          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-        - `AllowedHosts []string`
+          - `AllowPackageManagers bool`
 
-          Specifies domains the container can reach.
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-        - `Type Limited`
+          - `AllowedHosts []string`
 
-          Network policy type
+            Specifies domains the container can reach.
 
-          - `const LimitedLimited Limited = "limited"`
+          - `Type Limited`
 
-    - `Packages BetaPackages`
+            Network policy type
 
-      Package manager configuration.
+            - `const LimitedLimited Limited = "limited"`
 
-      - `Apt []string`
+      - `Packages BetaPackages`
 
-        Ubuntu/Debian packages to install
+        Package manager configuration.
 
-      - `Cargo []string`
+        - `Apt []string`
 
-        Rust packages to install
+          Ubuntu/Debian packages to install
 
-      - `Gem []string`
+        - `Cargo []string`
 
-        Ruby packages to install
+          Rust packages to install
 
-      - `Go []string`
+        - `Gem []string`
 
-        Go packages to install
+          Ruby packages to install
 
-      - `Npm []string`
+        - `Go []string`
 
-        Node.js packages to install
+          Go packages to install
 
-      - `Pip []string`
+        - `Npm []string`
 
-        Python packages to install
+          Node.js packages to install
 
-      - `Type BetaPackagesType`
+        - `Pip []string`
 
-        Package configuration type
+          Python packages to install
 
-        - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
+        - `Type BetaPackagesType`
 
-    - `Type Cloud`
+          Package configuration type
 
-      Environment type
+          - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
 
-      - `const CloudCloud Cloud = "cloud"`
+      - `Type Cloud`
+
+        Environment type
+
+        - `const CloudCloud Cloud = "cloud"`
+
+    - `type BetaSelfHostedConfig struct{…}`
+
+      Configuration for self-hosted environments.
+
+      - `Type SelfHosted`
+
+        Environment type
+
+        - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
 
   - `CreatedAt string`
 
@@ -204,6 +323,14 @@ Create a new environment with the specified configuration.
   - `UpdatedAt string`
 
     RFC 3339 timestamp when environment was last updated
+
+  - `Scope BetaEnvironmentScope`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"`
+
+    - `const BetaEnvironmentScopeAccount BetaEnvironmentScope = "account"`
 
 ### Example
 

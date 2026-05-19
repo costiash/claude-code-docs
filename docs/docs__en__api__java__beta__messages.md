@@ -68,6 +68,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
   - `long maxTokens`
 
     The maximum number of tokens to generate before stopping.
@@ -2968,6 +2970,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
+  - `Optional<BetaDiagnosticsParam> diagnostics`
+
+    Request-level diagnostics. Currently carries the previous response
+    id for prompt-cache divergence reporting.
+
   - `Optional<String> inferenceGeo`
 
     Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -5859,6 +5866,67 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `CLEAR_THINKING_20251015("clear_thinking_20251015")`
 
+  - `Optional<BetaDiagnostics> diagnostics`
+
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
+
+    - `Optional<CacheMissReason> cacheMissReason`
+
+      Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+      - `class BetaCacheMissModelChanged:`
+
+        - `long cacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `JsonValue; type "model_changed"constant`
+
+          - `MODEL_CHANGED("model_changed")`
+
+      - `class BetaCacheMissSystemChanged:`
+
+        - `long cacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `JsonValue; type "system_changed"constant`
+
+          - `SYSTEM_CHANGED("system_changed")`
+
+      - `class BetaCacheMissToolsChanged:`
+
+        - `long cacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `JsonValue; type "tools_changed"constant`
+
+          - `TOOLS_CHANGED("tools_changed")`
+
+      - `class BetaCacheMissMessagesChanged:`
+
+        - `long cacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `JsonValue; type "messages_changed"constant`
+
+          - `MESSAGES_CHANGED("messages_changed")`
+
+      - `class BetaCacheMissPreviousMessageNotFound:`
+
+        - `JsonValue; type "previous_message_not_found"constant`
+
+          - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+
+      - `class BetaCacheMissUnavailable:`
+
+        - `JsonValue; type "unavailable"constant`
+
+          - `UNAVAILABLE("unavailable")`
+
   - `Model model`
 
     The model that will complete your prompt.
@@ -6376,6 +6444,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
   - `List<BetaMessageParam> messages`
 
@@ -11879,6 +11949,70 @@ public final class Main {
   - `long ephemeral5mInputTokens`
 
     The number of input tokens used to create the 5 minute cache entry.
+
+### Beta Cache Miss Messages Changed
+
+- `class BetaCacheMissMessagesChanged:`
+
+  - `long cacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `JsonValue; type "messages_changed"constant`
+
+    - `MESSAGES_CHANGED("messages_changed")`
+
+### Beta Cache Miss Model Changed
+
+- `class BetaCacheMissModelChanged:`
+
+  - `long cacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `JsonValue; type "model_changed"constant`
+
+    - `MODEL_CHANGED("model_changed")`
+
+### Beta Cache Miss Previous Message Not Found
+
+- `class BetaCacheMissPreviousMessageNotFound:`
+
+  - `JsonValue; type "previous_message_not_found"constant`
+
+    - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+
+### Beta Cache Miss System Changed
+
+- `class BetaCacheMissSystemChanged:`
+
+  - `long cacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `JsonValue; type "system_changed"constant`
+
+    - `SYSTEM_CHANGED("system_changed")`
+
+### Beta Cache Miss Tools Changed
+
+- `class BetaCacheMissToolsChanged:`
+
+  - `long cacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `JsonValue; type "tools_changed"constant`
+
+    - `TOOLS_CHANGED("tools_changed")`
+
+### Beta Cache Miss Unavailable
+
+- `class BetaCacheMissUnavailable:`
+
+  - `JsonValue; type "unavailable"constant`
+
+    - `UNAVAILABLE("unavailable")`
 
 ### Beta Citation Char Location
 
@@ -17494,6 +17628,80 @@ public final class Main {
 
     The original token count before context management was applied
 
+### Beta Diagnostics
+
+- `class BetaDiagnostics:`
+
+  Response envelope for request-level diagnostics. Present (possibly
+  null) whenever the caller supplied `diagnostics` on the request.
+
+  - `Optional<CacheMissReason> cacheMissReason`
+
+    Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+    - `class BetaCacheMissModelChanged:`
+
+      - `long cacheMissedInputTokens`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `JsonValue; type "model_changed"constant`
+
+        - `MODEL_CHANGED("model_changed")`
+
+    - `class BetaCacheMissSystemChanged:`
+
+      - `long cacheMissedInputTokens`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `JsonValue; type "system_changed"constant`
+
+        - `SYSTEM_CHANGED("system_changed")`
+
+    - `class BetaCacheMissToolsChanged:`
+
+      - `long cacheMissedInputTokens`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `JsonValue; type "tools_changed"constant`
+
+        - `TOOLS_CHANGED("tools_changed")`
+
+    - `class BetaCacheMissMessagesChanged:`
+
+      - `long cacheMissedInputTokens`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `JsonValue; type "messages_changed"constant`
+
+        - `MESSAGES_CHANGED("messages_changed")`
+
+    - `class BetaCacheMissPreviousMessageNotFound:`
+
+      - `JsonValue; type "previous_message_not_found"constant`
+
+        - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+
+    - `class BetaCacheMissUnavailable:`
+
+      - `JsonValue; type "unavailable"constant`
+
+        - `UNAVAILABLE("unavailable")`
+
+### Beta Diagnostics Param
+
+- `class BetaDiagnosticsParam:`
+
+  Request-level diagnostics. Currently carries the previous response
+  id for prompt-cache divergence reporting.
+
+  - `Optional<String> previousMessageId`
+
+    The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 ### Beta Direct Caller
 
 - `class BetaDirectCaller:`
@@ -19293,6 +19501,67 @@ public final class Main {
           The type of context management edit applied.
 
           - `CLEAR_THINKING_20251015("clear_thinking_20251015")`
+
+  - `Optional<BetaDiagnostics> diagnostics`
+
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
+
+    - `Optional<CacheMissReason> cacheMissReason`
+
+      Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+      - `class BetaCacheMissModelChanged:`
+
+        - `long cacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `JsonValue; type "model_changed"constant`
+
+          - `MODEL_CHANGED("model_changed")`
+
+      - `class BetaCacheMissSystemChanged:`
+
+        - `long cacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `JsonValue; type "system_changed"constant`
+
+          - `SYSTEM_CHANGED("system_changed")`
+
+      - `class BetaCacheMissToolsChanged:`
+
+        - `long cacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `JsonValue; type "tools_changed"constant`
+
+          - `TOOLS_CHANGED("tools_changed")`
+
+      - `class BetaCacheMissMessagesChanged:`
+
+        - `long cacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `JsonValue; type "messages_changed"constant`
+
+          - `MESSAGES_CHANGED("messages_changed")`
+
+      - `class BetaCacheMissPreviousMessageNotFound:`
+
+        - `JsonValue; type "previous_message_not_found"constant`
+
+          - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+
+      - `class BetaCacheMissUnavailable:`
+
+        - `JsonValue; type "unavailable"constant`
+
+          - `UNAVAILABLE("unavailable")`
 
   - `Model model`
 
@@ -25523,6 +25792,67 @@ public final class Main {
 
             - `CLEAR_THINKING_20251015("clear_thinking_20251015")`
 
+    - `Optional<BetaDiagnostics> diagnostics`
+
+      Response envelope for request-level diagnostics. Present (possibly
+      null) whenever the caller supplied `diagnostics` on the request.
+
+      - `Optional<CacheMissReason> cacheMissReason`
+
+        Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+        - `class BetaCacheMissModelChanged:`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `JsonValue; type "model_changed"constant`
+
+            - `MODEL_CHANGED("model_changed")`
+
+        - `class BetaCacheMissSystemChanged:`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `JsonValue; type "system_changed"constant`
+
+            - `SYSTEM_CHANGED("system_changed")`
+
+        - `class BetaCacheMissToolsChanged:`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `JsonValue; type "tools_changed"constant`
+
+            - `TOOLS_CHANGED("tools_changed")`
+
+        - `class BetaCacheMissMessagesChanged:`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `JsonValue; type "messages_changed"constant`
+
+            - `MESSAGES_CHANGED("messages_changed")`
+
+        - `class BetaCacheMissPreviousMessageNotFound:`
+
+          - `JsonValue; type "previous_message_not_found"constant`
+
+            - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+
+        - `class BetaCacheMissUnavailable:`
+
+          - `JsonValue; type "unavailable"constant`
+
+            - `UNAVAILABLE("unavailable")`
+
     - `Model model`
 
       The model that will complete your prompt.
@@ -26980,6 +27310,67 @@ public final class Main {
               The type of context management edit applied.
 
               - `CLEAR_THINKING_20251015("clear_thinking_20251015")`
+
+      - `Optional<BetaDiagnostics> diagnostics`
+
+        Response envelope for request-level diagnostics. Present (possibly
+        null) whenever the caller supplied `diagnostics` on the request.
+
+        - `Optional<CacheMissReason> cacheMissReason`
+
+          Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+          - `class BetaCacheMissModelChanged:`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `JsonValue; type "model_changed"constant`
+
+              - `MODEL_CHANGED("model_changed")`
+
+          - `class BetaCacheMissSystemChanged:`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `JsonValue; type "system_changed"constant`
+
+              - `SYSTEM_CHANGED("system_changed")`
+
+          - `class BetaCacheMissToolsChanged:`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `JsonValue; type "tools_changed"constant`
+
+              - `TOOLS_CHANGED("tools_changed")`
+
+          - `class BetaCacheMissMessagesChanged:`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `JsonValue; type "messages_changed"constant`
+
+              - `MESSAGES_CHANGED("messages_changed")`
+
+          - `class BetaCacheMissPreviousMessageNotFound:`
+
+            - `JsonValue; type "previous_message_not_found"constant`
+
+              - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+
+          - `class BetaCacheMissUnavailable:`
+
+            - `JsonValue; type "unavailable"constant`
+
+              - `UNAVAILABLE("unavailable")`
 
       - `Model model`
 
@@ -36512,6 +36903,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
   - `List<Request> requests`
 
     List of requests for prompt completion. Each is an individual request to create a Message.
@@ -39631,6 +40024,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `long value`
 
+      - `Optional<BetaDiagnosticsParam> diagnostics`
+
+        Request-level diagnostics. Currently carries the previous response
+        id for prompt-cache divergence reporting.
+
+        - `Optional<String> previousMessageId`
+
+          The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
       - `Optional<String> inferenceGeo`
 
         Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -41855,6 +42257,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -42046,6 +42450,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -42228,6 +42634,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
 ### Returns
 
@@ -42412,6 +42820,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -42520,6 +42930,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
 ### Returns
 
@@ -43557,6 +43969,67 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 The type of context management edit applied.
 
                 - `CLEAR_THINKING_20251015("clear_thinking_20251015")`
+
+        - `Optional<BetaDiagnostics> diagnostics`
+
+          Response envelope for request-level diagnostics. Present (possibly
+          null) whenever the caller supplied `diagnostics` on the request.
+
+          - `Optional<CacheMissReason> cacheMissReason`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class BetaCacheMissModelChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "model_changed"constant`
+
+                - `MODEL_CHANGED("model_changed")`
+
+            - `class BetaCacheMissSystemChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "system_changed"constant`
+
+                - `SYSTEM_CHANGED("system_changed")`
+
+            - `class BetaCacheMissToolsChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "tools_changed"constant`
+
+                - `TOOLS_CHANGED("tools_changed")`
+
+            - `class BetaCacheMissMessagesChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "messages_changed"constant`
+
+                - `MESSAGES_CHANGED("messages_changed")`
+
+            - `class BetaCacheMissPreviousMessageNotFound:`
+
+              - `JsonValue; type "previous_message_not_found"constant`
+
+                - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+
+            - `class BetaCacheMissUnavailable:`
+
+              - `JsonValue; type "unavailable"constant`
+
+                - `UNAVAILABLE("unavailable")`
 
         - `Model model`
 
@@ -45358,6 +45831,67 @@ public final class Main {
 
                 - `CLEAR_THINKING_20251015("clear_thinking_20251015")`
 
+        - `Optional<BetaDiagnostics> diagnostics`
+
+          Response envelope for request-level diagnostics. Present (possibly
+          null) whenever the caller supplied `diagnostics` on the request.
+
+          - `Optional<CacheMissReason> cacheMissReason`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class BetaCacheMissModelChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "model_changed"constant`
+
+                - `MODEL_CHANGED("model_changed")`
+
+            - `class BetaCacheMissSystemChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "system_changed"constant`
+
+                - `SYSTEM_CHANGED("system_changed")`
+
+            - `class BetaCacheMissToolsChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "tools_changed"constant`
+
+                - `TOOLS_CHANGED("tools_changed")`
+
+            - `class BetaCacheMissMessagesChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "messages_changed"constant`
+
+                - `MESSAGES_CHANGED("messages_changed")`
+
+            - `class BetaCacheMissPreviousMessageNotFound:`
+
+              - `JsonValue; type "previous_message_not_found"constant`
+
+                - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+
+            - `class BetaCacheMissUnavailable:`
+
+              - `JsonValue; type "unavailable"constant`
+
+                - `UNAVAILABLE("unavailable")`
+
         - `Model model`
 
           The model that will complete your prompt.
@@ -46944,6 +47478,67 @@ public final class Main {
 
               - `CLEAR_THINKING_20251015("clear_thinking_20251015")`
 
+      - `Optional<BetaDiagnostics> diagnostics`
+
+        Response envelope for request-level diagnostics. Present (possibly
+        null) whenever the caller supplied `diagnostics` on the request.
+
+        - `Optional<CacheMissReason> cacheMissReason`
+
+          Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+          - `class BetaCacheMissModelChanged:`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `JsonValue; type "model_changed"constant`
+
+              - `MODEL_CHANGED("model_changed")`
+
+          - `class BetaCacheMissSystemChanged:`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `JsonValue; type "system_changed"constant`
+
+              - `SYSTEM_CHANGED("system_changed")`
+
+          - `class BetaCacheMissToolsChanged:`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `JsonValue; type "tools_changed"constant`
+
+              - `TOOLS_CHANGED("tools_changed")`
+
+          - `class BetaCacheMissMessagesChanged:`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `JsonValue; type "messages_changed"constant`
+
+              - `MESSAGES_CHANGED("messages_changed")`
+
+          - `class BetaCacheMissPreviousMessageNotFound:`
+
+            - `JsonValue; type "previous_message_not_found"constant`
+
+              - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+
+          - `class BetaCacheMissUnavailable:`
+
+            - `JsonValue; type "unavailable"constant`
+
+              - `UNAVAILABLE("unavailable")`
+
       - `Model model`
 
         The model that will complete your prompt.
@@ -48491,6 +49086,67 @@ public final class Main {
             The type of context management edit applied.
 
             - `CLEAR_THINKING_20251015("clear_thinking_20251015")`
+
+    - `Optional<BetaDiagnostics> diagnostics`
+
+      Response envelope for request-level diagnostics. Present (possibly
+      null) whenever the caller supplied `diagnostics` on the request.
+
+      - `Optional<CacheMissReason> cacheMissReason`
+
+        Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+        - `class BetaCacheMissModelChanged:`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `JsonValue; type "model_changed"constant`
+
+            - `MODEL_CHANGED("model_changed")`
+
+        - `class BetaCacheMissSystemChanged:`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `JsonValue; type "system_changed"constant`
+
+            - `SYSTEM_CHANGED("system_changed")`
+
+        - `class BetaCacheMissToolsChanged:`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `JsonValue; type "tools_changed"constant`
+
+            - `TOOLS_CHANGED("tools_changed")`
+
+        - `class BetaCacheMissMessagesChanged:`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `JsonValue; type "messages_changed"constant`
+
+            - `MESSAGES_CHANGED("messages_changed")`
+
+        - `class BetaCacheMissPreviousMessageNotFound:`
+
+          - `JsonValue; type "previous_message_not_found"constant`
+
+            - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+
+        - `class BetaCacheMissUnavailable:`
+
+          - `JsonValue; type "unavailable"constant`
+
+            - `UNAVAILABLE("unavailable")`
 
     - `Model model`
 

@@ -16,7 +16,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -66,6 +66,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `:"managed-agents-2026-04-01"`
 
+    - `:"cache-diagnosis-2026-04-07"`
+
 ### Returns
 
 - `class BetaEnvironment`
@@ -80,85 +82,99 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `config: BetaCloudConfig`
+  - `config: BetaCloudConfig | BetaSelfHostedConfig`
 
-    `cloud` environment configuration.
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
+    - `class BetaCloudConfig`
 
-      Network configuration policy.
+      `cloud` environment configuration.
 
-      - `class BetaUnrestrictedNetwork`
+      - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
 
-        Unrestricted network access.
+        Network configuration policy.
 
-        - `type: :unrestricted`
+        - `class BetaUnrestrictedNetwork`
 
-          Network policy type
+          Unrestricted network access.
 
-          - `:unrestricted`
+          - `type: :unrestricted`
 
-      - `class BetaLimitedNetwork`
+            Network policy type
 
-        Limited network access.
+            - `:unrestricted`
 
-        - `allow_mcp_servers: bool`
+        - `class BetaLimitedNetwork`
 
-          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+          Limited network access.
 
-        - `allow_package_managers: bool`
+          - `allow_mcp_servers: bool`
 
-          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-        - `allowed_hosts: Array[String]`
+          - `allow_package_managers: bool`
 
-          Specifies domains the container can reach.
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-        - `type: :limited`
+          - `allowed_hosts: Array[String]`
 
-          Network policy type
+            Specifies domains the container can reach.
 
-          - `:limited`
+          - `type: :limited`
 
-    - `packages: BetaPackages`
+            Network policy type
 
-      Package manager configuration.
+            - `:limited`
 
-      - `apt: Array[String]`
+      - `packages: BetaPackages`
 
-        Ubuntu/Debian packages to install
+        Package manager configuration.
 
-      - `cargo: Array[String]`
+        - `apt: Array[String]`
 
-        Rust packages to install
+          Ubuntu/Debian packages to install
 
-      - `gem_: Array[String]`
+        - `cargo: Array[String]`
 
-        Ruby packages to install
+          Rust packages to install
 
-      - `go: Array[String]`
+        - `gem_: Array[String]`
 
-        Go packages to install
+          Ruby packages to install
 
-      - `npm: Array[String]`
+        - `go: Array[String]`
 
-        Node.js packages to install
+          Go packages to install
 
-      - `pip: Array[String]`
+        - `npm: Array[String]`
 
-        Python packages to install
+          Node.js packages to install
 
-      - `type: :packages`
+        - `pip: Array[String]`
 
-        Package configuration type
+          Python packages to install
 
-        - `:packages`
+        - `type: :packages`
 
-    - `type: :cloud`
+          Package configuration type
 
-      Environment type
+          - `:packages`
 
-      - `:cloud`
+      - `type: :cloud`
+
+        Environment type
+
+        - `:cloud`
+
+    - `class BetaSelfHostedConfig`
+
+      Configuration for self-hosted environments.
+
+      - `type: :self_hosted`
+
+        Environment type
+
+        - `:self_hosted`
 
   - `created_at: String`
 
@@ -185,6 +201,14 @@ Archive an environment by ID. Archived environments cannot be used to create new
   - `updated_at: String`
 
     RFC 3339 timestamp when environment was last updated
+
+  - `scope: :organization | :account`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `:organization`
+
+    - `:account`
 
 ### Example
 

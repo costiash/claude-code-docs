@@ -68,6 +68,8 @@ Create Skill Version
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
   - `Optional<List<String>> files`
 
     Files to upload for the skill.

@@ -14,12 +14,99 @@ Update an existing environment's configuration.
 
     Path param
 
-  - `BetaCloudConfigParams? config`
+  - `Config? config`
 
-    Body param: Request params for `cloud` environment configuration.
+    Body param: Updated environment configuration
 
-    Fields default to null; on update, omitted fields preserve the
-    existing value.
+    - `class BetaCloudConfigParams:`
+
+      Request params for `cloud` environment configuration.
+
+      Fields default to null; on update, omitted fields preserve the
+      existing value.
+
+      - `JsonElement Type "cloud"constant`
+
+        Environment type
+
+      - `Networking? Networking`
+
+        Network configuration policy. Omit on update to preserve the existing value.
+
+        - `class BetaUnrestrictedNetwork:`
+
+          Unrestricted network access.
+
+          - `JsonElement Type "unrestricted"constant`
+
+            Network policy type
+
+        - `class BetaLimitedNetworkParams:`
+
+          Limited network request params.
+
+          Fields default to null; on update, omitted fields preserve the
+          existing value.
+
+          - `JsonElement Type "limited"constant`
+
+            Network policy type
+
+          - `Boolean? AllowMcpServers`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+          - `Boolean? AllowPackageManagers`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+          - `IReadOnlyList<string>? AllowedHosts`
+
+            Specifies domains the container can reach.
+
+      - `BetaPackagesParams? Packages`
+
+        Specify packages (and optionally their versions) available in this environment.
+
+        When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+        - `IReadOnlyList<string>? Apt`
+
+          Ubuntu/Debian packages to install
+
+        - `IReadOnlyList<string>? Cargo`
+
+          Rust packages to install
+
+        - `IReadOnlyList<string>? Gem`
+
+          Ruby packages to install
+
+        - `IReadOnlyList<string>? Go`
+
+          Go packages to install
+
+        - `IReadOnlyList<string>? Npm`
+
+          Node.js packages to install
+
+        - `IReadOnlyList<string>? Pip`
+
+          Python packages to install
+
+        - `Type Type`
+
+          Package configuration type
+
+          - `"packages"Packages`
+
+    - `class BetaSelfHostedConfigParams:`
+
+      Request params for `self_hosted` environment configuration.
+
+      - `JsonElement Type "self_hosted"constant`
+
+        Environment type
 
   - `string? description`
 
@@ -32,6 +119,14 @@ Update an existing environment's configuration.
   - `string? name`
 
     Body param: Updated name for the environment
+
+  - `Scope? scope`
+
+    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
+
+    - `"organization"Organization`
+
+    - `"account"Account`
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -85,6 +180,8 @@ Update an existing environment's configuration.
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
+    - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -99,79 +196,91 @@ Update an existing environment's configuration.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required BetaCloudConfig Config`
+  - `required Config Config`
 
-    `cloud` environment configuration.
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `required Networking Networking`
+    - `class BetaCloudConfig:`
 
-      Network configuration policy.
+      `cloud` environment configuration.
 
-      - `class BetaUnrestrictedNetwork:`
+      - `required Networking Networking`
 
-        Unrestricted network access.
+        Network configuration policy.
 
-        - `JsonElement Type "unrestricted"constant`
+        - `class BetaUnrestrictedNetwork:`
 
-          Network policy type
+          Unrestricted network access.
 
-      - `class BetaLimitedNetwork:`
+          - `JsonElement Type "unrestricted"constant`
 
-        Limited network access.
+            Network policy type
 
-        - `required Boolean AllowMcpServers`
+        - `class BetaLimitedNetwork:`
 
-          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+          Limited network access.
 
-        - `required Boolean AllowPackageManagers`
+          - `required Boolean AllowMcpServers`
 
-          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-        - `required IReadOnlyList<string> AllowedHosts`
+          - `required Boolean AllowPackageManagers`
 
-          Specifies domains the container can reach.
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-        - `JsonElement Type "limited"constant`
+          - `required IReadOnlyList<string> AllowedHosts`
 
-          Network policy type
+            Specifies domains the container can reach.
 
-    - `required BetaPackages Packages`
+          - `JsonElement Type "limited"constant`
 
-      Package manager configuration.
+            Network policy type
 
-      - `required IReadOnlyList<string> Apt`
+      - `required BetaPackages Packages`
 
-        Ubuntu/Debian packages to install
+        Package manager configuration.
 
-      - `required IReadOnlyList<string> Cargo`
+        - `required IReadOnlyList<string> Apt`
 
-        Rust packages to install
+          Ubuntu/Debian packages to install
 
-      - `required IReadOnlyList<string> Gem`
+        - `required IReadOnlyList<string> Cargo`
 
-        Ruby packages to install
+          Rust packages to install
 
-      - `required IReadOnlyList<string> Go`
+        - `required IReadOnlyList<string> Gem`
 
-        Go packages to install
+          Ruby packages to install
 
-      - `required IReadOnlyList<string> Npm`
+        - `required IReadOnlyList<string> Go`
 
-        Node.js packages to install
+          Go packages to install
 
-      - `required IReadOnlyList<string> Pip`
+        - `required IReadOnlyList<string> Npm`
 
-        Python packages to install
+          Node.js packages to install
 
-      - `Type Type`
+        - `required IReadOnlyList<string> Pip`
 
-        Package configuration type
+          Python packages to install
 
-        - `"packages"Packages`
+        - `Type Type`
 
-    - `JsonElement Type "cloud"constant`
+          Package configuration type
 
-      Environment type
+          - `"packages"Packages`
+
+      - `JsonElement Type "cloud"constant`
+
+        Environment type
+
+    - `class BetaSelfHostedConfig:`
+
+      Configuration for self-hosted environments.
+
+      - `JsonElement Type "self_hosted"constant`
+
+        Environment type
 
   - `required string CreatedAt`
 
@@ -196,6 +305,14 @@ Update an existing environment's configuration.
   - `required string UpdatedAt`
 
     RFC 3339 timestamp when environment was last updated
+
+  - `Scope Scope`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `"organization"Organization`
+
+    - `"account"Account`
 
 ### Example
 

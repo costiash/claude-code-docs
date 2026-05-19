@@ -18,7 +18,7 @@ Retrieve a specific environment by ID.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -68,6 +68,8 @@ Retrieve a specific environment by ID.
 
       - `"managed-agents-2026-04-01"`
 
+      - `"cache-diagnosis-2026-04-07"`
+
 ### Returns
 
 - `BetaEnvironment`
@@ -82,85 +84,99 @@ Retrieve a specific environment by ID.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `config: BetaCloudConfig`
+  - `config: BetaCloudConfig | BetaSelfHostedConfig`
 
-    `cloud` environment configuration.
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
+    - `BetaCloudConfig`
 
-      Network configuration policy.
+      `cloud` environment configuration.
 
-      - `BetaUnrestrictedNetwork`
+      - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
 
-        Unrestricted network access.
+        Network configuration policy.
 
-        - `type: "unrestricted"`
+        - `BetaUnrestrictedNetwork`
 
-          Network policy type
+          Unrestricted network access.
 
-          - `"unrestricted"`
+          - `type: "unrestricted"`
 
-      - `BetaLimitedNetwork`
+            Network policy type
 
-        Limited network access.
+            - `"unrestricted"`
 
-        - `allow_mcp_servers: boolean`
+        - `BetaLimitedNetwork`
 
-          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+          Limited network access.
 
-        - `allow_package_managers: boolean`
+          - `allow_mcp_servers: boolean`
 
-          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-        - `allowed_hosts: Array<string>`
+          - `allow_package_managers: boolean`
 
-          Specifies domains the container can reach.
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-        - `type: "limited"`
+          - `allowed_hosts: Array<string>`
 
-          Network policy type
+            Specifies domains the container can reach.
 
-          - `"limited"`
+          - `type: "limited"`
 
-    - `packages: BetaPackages`
+            Network policy type
 
-      Package manager configuration.
+            - `"limited"`
 
-      - `apt: Array<string>`
+      - `packages: BetaPackages`
 
-        Ubuntu/Debian packages to install
+        Package manager configuration.
 
-      - `cargo: Array<string>`
+        - `apt: Array<string>`
 
-        Rust packages to install
+          Ubuntu/Debian packages to install
 
-      - `gem: Array<string>`
+        - `cargo: Array<string>`
 
-        Ruby packages to install
+          Rust packages to install
 
-      - `go: Array<string>`
+        - `gem: Array<string>`
 
-        Go packages to install
+          Ruby packages to install
 
-      - `npm: Array<string>`
+        - `go: Array<string>`
 
-        Node.js packages to install
+          Go packages to install
 
-      - `pip: Array<string>`
+        - `npm: Array<string>`
 
-        Python packages to install
+          Node.js packages to install
 
-      - `type?: "packages"`
+        - `pip: Array<string>`
 
-        Package configuration type
+          Python packages to install
 
-        - `"packages"`
+        - `type?: "packages"`
 
-    - `type: "cloud"`
+          Package configuration type
 
-      Environment type
+          - `"packages"`
 
-      - `"cloud"`
+      - `type: "cloud"`
+
+        Environment type
+
+        - `"cloud"`
+
+    - `BetaSelfHostedConfig`
+
+      Configuration for self-hosted environments.
+
+      - `type: "self_hosted"`
+
+        Environment type
+
+        - `"self_hosted"`
 
   - `created_at: string`
 
@@ -187,6 +203,14 @@ Retrieve a specific environment by ID.
   - `updated_at: string`
 
     RFC 3339 timestamp when environment was last updated
+
+  - `scope?: "organization" | "account"`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `"organization"`
+
+    - `"account"`
 
 ### Example
 

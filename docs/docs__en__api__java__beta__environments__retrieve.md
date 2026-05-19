@@ -64,6 +64,8 @@ Retrieve a specific environment by ID.
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -78,85 +80,99 @@ Retrieve a specific environment by ID.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `BetaCloudConfig config`
+  - `Config config`
 
-    `cloud` environment configuration.
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `Networking networking`
+    - `class BetaCloudConfig:`
 
-      Network configuration policy.
+      `cloud` environment configuration.
 
-      - `class BetaUnrestrictedNetwork:`
+      - `Networking networking`
 
-        Unrestricted network access.
+        Network configuration policy.
 
-        - `JsonValue; type "unrestricted"constant`
+        - `class BetaUnrestrictedNetwork:`
 
-          Network policy type
+          Unrestricted network access.
 
-          - `UNRESTRICTED("unrestricted")`
+          - `JsonValue; type "unrestricted"constant`
 
-      - `class BetaLimitedNetwork:`
+            Network policy type
 
-        Limited network access.
+            - `UNRESTRICTED("unrestricted")`
 
-        - `boolean allowMcpServers`
+        - `class BetaLimitedNetwork:`
 
-          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+          Limited network access.
 
-        - `boolean allowPackageManagers`
+          - `boolean allowMcpServers`
 
-          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-        - `List<String> allowedHosts`
+          - `boolean allowPackageManagers`
 
-          Specifies domains the container can reach.
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-        - `JsonValue; type "limited"constant`
+          - `List<String> allowedHosts`
 
-          Network policy type
+            Specifies domains the container can reach.
 
-          - `LIMITED("limited")`
+          - `JsonValue; type "limited"constant`
 
-    - `BetaPackages packages`
+            Network policy type
 
-      Package manager configuration.
+            - `LIMITED("limited")`
 
-      - `List<String> apt`
+      - `BetaPackages packages`
 
-        Ubuntu/Debian packages to install
+        Package manager configuration.
 
-      - `List<String> cargo`
+        - `List<String> apt`
 
-        Rust packages to install
+          Ubuntu/Debian packages to install
 
-      - `List<String> gem`
+        - `List<String> cargo`
 
-        Ruby packages to install
+          Rust packages to install
 
-      - `List<String> go`
+        - `List<String> gem`
 
-        Go packages to install
+          Ruby packages to install
 
-      - `List<String> npm`
+        - `List<String> go`
 
-        Node.js packages to install
+          Go packages to install
 
-      - `List<String> pip`
+        - `List<String> npm`
 
-        Python packages to install
+          Node.js packages to install
 
-      - `Optional<Type> type`
+        - `List<String> pip`
 
-        Package configuration type
+          Python packages to install
 
-        - `PACKAGES("packages")`
+        - `Optional<Type> type`
 
-    - `JsonValue; type "cloud"constant`
+          Package configuration type
 
-      Environment type
+          - `PACKAGES("packages")`
 
-      - `CLOUD("cloud")`
+      - `JsonValue; type "cloud"constant`
+
+        Environment type
+
+        - `CLOUD("cloud")`
+
+    - `class BetaSelfHostedConfig:`
+
+      Configuration for self-hosted environments.
+
+      - `JsonValue; type "self_hosted"constant`
+
+        Environment type
+
+        - `SELF_HOSTED("self_hosted")`
 
   - `String createdAt`
 
@@ -183,6 +199,14 @@ Retrieve a specific environment by ID.
   - `String updatedAt`
 
     RFC 3339 timestamp when environment was last updated
+
+  - `Optional<Scope> scope`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `ORGANIZATION("organization")`
+
+    - `ACCOUNT("account")`
 
 ### Example
 

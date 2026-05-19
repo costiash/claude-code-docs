@@ -70,6 +70,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
+    - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
 ### Returns
 
 - `class BetaMessageBatchIndividualResponse:`
@@ -970,6 +972,55 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `JsonElement Type "clear_thinking_20251015"constant`
 
                 The type of context management edit applied.
+
+        - `required BetaDiagnostics? Diagnostics`
+
+          Response envelope for request-level diagnostics. Present (possibly
+          null) whenever the caller supplied `diagnostics` on the request.
+
+          - `required CacheMissReason? CacheMissReason`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class BetaCacheMissModelChanged:`
+
+              - `required Long CacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonElement Type "model_changed"constant`
+
+            - `class BetaCacheMissSystemChanged:`
+
+              - `required Long CacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonElement Type "system_changed"constant`
+
+            - `class BetaCacheMissToolsChanged:`
+
+              - `required Long CacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonElement Type "tools_changed"constant`
+
+            - `class BetaCacheMissMessagesChanged:`
+
+              - `required Long CacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonElement Type "messages_changed"constant`
+
+            - `class BetaCacheMissPreviousMessageNotFound:`
+
+              - `JsonElement Type "previous_message_not_found"constant`
+
+            - `class BetaCacheMissUnavailable:`
+
+              - `JsonElement Type "unavailable"constant`
 
         - `required Model Model`
 

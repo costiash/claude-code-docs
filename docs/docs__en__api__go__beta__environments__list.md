@@ -78,6 +78,8 @@ List environments with pagination support.
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
 ### Returns
 
 - `type BetaEnvironment struct{…}`
@@ -92,85 +94,99 @@ List environments with pagination support.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `Config BetaCloudConfig`
+  - `Config BetaEnvironmentConfigUnion`
 
-    `cloud` environment configuration.
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `Networking BetaCloudConfigNetworkingUnion`
+    - `type BetaCloudConfig struct{…}`
 
-      Network configuration policy.
+      `cloud` environment configuration.
 
-      - `type BetaUnrestrictedNetwork struct{…}`
+      - `Networking BetaCloudConfigNetworkingUnion`
 
-        Unrestricted network access.
+        Network configuration policy.
 
-        - `Type Unrestricted`
+        - `type BetaUnrestrictedNetwork struct{…}`
 
-          Network policy type
+          Unrestricted network access.
 
-          - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
+          - `Type Unrestricted`
 
-      - `type BetaLimitedNetwork struct{…}`
+            Network policy type
 
-        Limited network access.
+            - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
 
-        - `AllowMCPServers bool`
+        - `type BetaLimitedNetwork struct{…}`
 
-          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+          Limited network access.
 
-        - `AllowPackageManagers bool`
+          - `AllowMCPServers bool`
 
-          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-        - `AllowedHosts []string`
+          - `AllowPackageManagers bool`
 
-          Specifies domains the container can reach.
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-        - `Type Limited`
+          - `AllowedHosts []string`
 
-          Network policy type
+            Specifies domains the container can reach.
 
-          - `const LimitedLimited Limited = "limited"`
+          - `Type Limited`
 
-    - `Packages BetaPackages`
+            Network policy type
 
-      Package manager configuration.
+            - `const LimitedLimited Limited = "limited"`
 
-      - `Apt []string`
+      - `Packages BetaPackages`
 
-        Ubuntu/Debian packages to install
+        Package manager configuration.
 
-      - `Cargo []string`
+        - `Apt []string`
 
-        Rust packages to install
+          Ubuntu/Debian packages to install
 
-      - `Gem []string`
+        - `Cargo []string`
 
-        Ruby packages to install
+          Rust packages to install
 
-      - `Go []string`
+        - `Gem []string`
 
-        Go packages to install
+          Ruby packages to install
 
-      - `Npm []string`
+        - `Go []string`
 
-        Node.js packages to install
+          Go packages to install
 
-      - `Pip []string`
+        - `Npm []string`
 
-        Python packages to install
+          Node.js packages to install
 
-      - `Type BetaPackagesType`
+        - `Pip []string`
 
-        Package configuration type
+          Python packages to install
 
-        - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
+        - `Type BetaPackagesType`
 
-    - `Type Cloud`
+          Package configuration type
 
-      Environment type
+          - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
 
-      - `const CloudCloud Cloud = "cloud"`
+      - `Type Cloud`
+
+        Environment type
+
+        - `const CloudCloud Cloud = "cloud"`
+
+    - `type BetaSelfHostedConfig struct{…}`
+
+      Configuration for self-hosted environments.
+
+      - `Type SelfHosted`
+
+        Environment type
+
+        - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
 
   - `CreatedAt string`
 
@@ -197,6 +213,14 @@ List environments with pagination support.
   - `UpdatedAt string`
 
     RFC 3339 timestamp when environment was last updated
+
+  - `Scope BetaEnvironmentScope`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"`
+
+    - `const BetaEnvironmentScopeAccount BetaEnvironmentScope = "account"`
 
 ### Example
 

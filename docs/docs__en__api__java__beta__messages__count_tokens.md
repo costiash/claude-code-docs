@@ -66,6 +66,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
   - `List<BetaMessageParam> messages`
 
     Input messages.

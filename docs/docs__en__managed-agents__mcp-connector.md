@@ -231,7 +231,59 @@ agent = client.beta.agents.create(
 The MCP toolset defaults to a permission policy of `always_ask`, which requires user approval before each tool call. See [permission policies](/docs/en/managed-agents/permission-policies) to configure this behavior.
 </Tip>
 
-## Provide auth at session creation
+### `mcp_servers` field reference
+
+Each entry in the `mcp_servers` array defines one connection.
+
+| Field | Description |
+| --- | --- |
+| `type` | Required. Must be `"url"`. |
+| `name` | Required. A unique name for this server within the agent (1–255 characters). Used as the `mcp_server_name` in the `tools` array and surfaced on MCP tool events in the [session event stream](/docs/en/managed-agents/events-and-streaming). |
+| `url` | Required. The endpoint of the remote MCP server (up to 2048 characters). |
+
+Constraints:
+
+- An agent can declare up to 20 MCP servers. Server names must be unique within the array.
+- Every `mcp_servers` entry must be referenced by an `mcp_toolset` in the `tools` array, and every `mcp_toolset` must reference a declared server. The API rejects agent definitions with unreferenced servers or dangling toolsets.
+
+## Configure which MCP tools are available
+
+The `mcp_toolset` entry supports the same `default_config` and `configs` shape as the built-in agent toolset, applied to the tools the MCP server exposes. The `name` in each `configs` entry is the bare tool name as reported by the server.
+
+By default all tools exposed by the MCP server are enabled. To enable only specific tools, set `default_config.enabled` to `false` and explicitly enable the tools you want:
+
+```json
+{
+  "type": "mcp_toolset",
+  "mcp_server_name": "github",
+  "default_config": { "enabled": false },
+  "configs": [
+    { "name": "get_issue", "enabled": true },
+    { "name": "list_issues", "enabled": true },
+    { "name": "add_issue_comment", "enabled": true }
+  ]
+}
+```
+
+This pattern is useful when a server exposes many tools but the agent only needs a few, or when you want tools added by the server operator to stay off until you review them.
+
+To disable specific tools while keeping the rest enabled, omit `default_config` and set `enabled: false` on individual entries:
+
+```json
+{
+  "type": "mcp_toolset",
+  "mcp_server_name": "github",
+  "configs": [{ "name": "delete_repository", "enabled": false }]
+}
+```
+
+See [configuring the toolset](/docs/en/managed-agents/tools#configuring-the-toolset) for the general `default_config` / `configs` pattern, and [MCP toolset permissions](/docs/en/managed-agents/permission-policies#mcp-toolset-permissions) for setting `permission_policy` on MCP tools and handling confirmation requests.
+
+### MCP tool output handling
+
+When an MCP tool output exceeds 100k tokens, it is automatically written to a file in the sandbox. The model receives a truncated preview with the file path and can read the full content from there.
+
+## Provide authentication at session creation
 
 When starting a session, pass `vault_ids` to provide credentials for your MCP servers. Vaults are collections of credentials that you register once and reference by ID. See [Authenticate with vaults](/docs/en/managed-agents/vaults) for how to create vaults and manage credentials.
 
@@ -334,10 +386,21 @@ session = client.beta.sessions.create(
 
 </CodeGroup>
 
-If the authorization credentials supplied in the vault are invalid, session creation will succeed and interaction is still possible. A `session.error` event is emitted describing the MCP auth failure. You can decide whether to block further interactions on this error, trigger a credential update, or allow the session to continue without the MCP. Authentication retries will happen on the following `session.status_idle` to `session.status_running` transition. See [Session event stream](/docs/en/managed-agents/events-and-streaming) for details on consuming `session.error` and other events.
+Credentials are matched by URL, so the vault must contain a credential whose `mcp_server_url` exactly matches the `url` declared in `mcp_servers`; if none matches, the connection is attempted unauthenticated. See [Add a credential](/docs/en/managed-agents/vaults#add-a-credential) for the `static_bearer` and `mcp_oauth` credential types.
+
+### Handle connection and authentication failures
+
+Session creation does not validate MCP connectivity or credentials. If an MCP server is unreachable or rejects the supplied credential, the session still starts and interaction remains possible. A `session.error` event is emitted with the `mcp_server_name` of the affected server and a `retry_status`:
+
+| Error type | Meaning |
+| --- | --- |
+| `mcp_connection_failed_error` | The MCP server could not be reached (network error, timeout, or non-authentication HTTP failure). |
+| `mcp_authentication_failed_error` | The MCP server was reached but rejected the credential from the attached vault. |
+
+You can decide whether to block further interaction on this error, trigger a credential rotation, or let the session continue without the affected server's tools. The connection is retried on the next `session.status_idle` to `session.status_running` transition. See [Session event stream](/docs/en/managed-agents/events-and-streaming) for details on consuming `session.error` and other events.
 
 ## Supported MCP server types
 
-Claude Managed Agents connects to [remote MCP servers](/docs/en/agents-and-tools/remote-mcp-servers) that expose an HTTP endpoint. The server must support the MCP protocol's streamable HTTP transport.
+Claude Managed Agents connects to [remote MCP servers](/docs/en/agents-and-tools/remote-mcp-servers) that expose an HTTP endpoint, or to private MCP servers through [MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview). The server must support the MCP protocol's streamable HTTP transport.
 
 For more information on MCP and building MCP servers, see the [MCP documentation](https://modelcontextprotocol.io).

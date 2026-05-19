@@ -3141,6 +3141,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `value: int`
 
+- `diagnostics: Optional[BetaDiagnosticsParam]`
+
+  Request-level diagnostics. Currently carries the previous response
+  id for prompt-cache divergence reporting.
+
+  - `previous_message_id: Optional[str]`
+
+    The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 - `inference_geo: Optional[str]`
 
   Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -5207,7 +5216,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -5256,6 +5265,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -6275,6 +6286,67 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           The type of context management edit applied.
 
           - `"clear_thinking_20251015"`
+
+  - `diagnostics: Optional[BetaDiagnostics]`
+
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
+
+    - `cache_miss_reason: Optional[CacheMissReason]`
+
+      Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+      - `class BetaCacheMissModelChanged: …`
+
+        - `cache_missed_input_tokens: int`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: Literal["model_changed"]`
+
+          - `"model_changed"`
+
+      - `class BetaCacheMissSystemChanged: …`
+
+        - `cache_missed_input_tokens: int`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: Literal["system_changed"]`
+
+          - `"system_changed"`
+
+      - `class BetaCacheMissToolsChanged: …`
+
+        - `cache_missed_input_tokens: int`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: Literal["tools_changed"]`
+
+          - `"tools_changed"`
+
+      - `class BetaCacheMissMessagesChanged: …`
+
+        - `cache_missed_input_tokens: int`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: Literal["messages_changed"]`
+
+          - `"messages_changed"`
+
+      - `class BetaCacheMissPreviousMessageNotFound: …`
+
+        - `type: Literal["previous_message_not_found"]`
+
+          - `"previous_message_not_found"`
+
+      - `class BetaCacheMissUnavailable: …`
+
+        - `type: Literal["unavailable"]`
+
+          - `"unavailable"`
 
   - `model: Model`
 

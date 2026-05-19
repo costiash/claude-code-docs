@@ -70,6 +70,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
 ### Returns
 
 - `class BetaMessageBatchIndividualResponse:`
@@ -1106,6 +1108,67 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 The type of context management edit applied.
 
                 - `CLEAR_THINKING_20251015("clear_thinking_20251015")`
+
+        - `Optional<BetaDiagnostics> diagnostics`
+
+          Response envelope for request-level diagnostics. Present (possibly
+          null) whenever the caller supplied `diagnostics` on the request.
+
+          - `Optional<CacheMissReason> cacheMissReason`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class BetaCacheMissModelChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "model_changed"constant`
+
+                - `MODEL_CHANGED("model_changed")`
+
+            - `class BetaCacheMissSystemChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "system_changed"constant`
+
+                - `SYSTEM_CHANGED("system_changed")`
+
+            - `class BetaCacheMissToolsChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "tools_changed"constant`
+
+                - `TOOLS_CHANGED("tools_changed")`
+
+            - `class BetaCacheMissMessagesChanged:`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `JsonValue; type "messages_changed"constant`
+
+                - `MESSAGES_CHANGED("messages_changed")`
+
+            - `class BetaCacheMissPreviousMessageNotFound:`
+
+              - `JsonValue; type "previous_message_not_found"constant`
+
+                - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+
+            - `class BetaCacheMissUnavailable:`
+
+              - `JsonValue; type "unavailable"constant`
+
+                - `UNAVAILABLE("unavailable")`
 
         - `Model model`
 

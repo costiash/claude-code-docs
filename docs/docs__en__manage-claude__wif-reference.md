@@ -124,6 +124,7 @@ The `oauth_scope` you set on a federation rule determines which Claude API endpo
 | Scope | Grants access to |
 | :--- | :--- |
 | `workspace:developer` | All non-administrative Claude API endpoints in the rule's workspace: [Messages](/docs/en/api/messages) (including streaming and token counting), [Models](/docs/en/api/models-list), [Managed Agents](/docs/en/managed-agents/overview) and their sessions, [Files](/docs/en/build-with-claude/files), and [Skills](/docs/en/build-with-claude/skills-guide). This matches the access an API key issued for the same workspace has. |
+| `org:manage_tunnels` | The [MCP tunnels API](/docs/en/agents-and-tools/mcp-tunnels/reference#tunnels-api): list and get tunnels, register and archive CA certificates, reveal and rotate the tunnel token, and archive tunnels. The Console's create-tunnel modal locks this scope when you create a rule from it. |
 
 A request to an endpoint outside the token's scope returns HTTP 403. Finer-grained scopes (per resource, or read versus write) are not currently available.
 

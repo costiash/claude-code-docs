@@ -1320,7 +1320,7 @@ The `diagnostics` field on the response `Message` has four possible states:
 | --- | --- |
 | field absent | The request did not include `diagnostics`, or the beta header was missing. |
 | `null` | Either `previous_message_id` was `null` (first turn, nothing to compare), or a comparison ran and found no divergence. |
-| `{"cache_miss_reason": null}` | The comparison was still running when the response was serialized. This can happen when prefill is very fast. Treat it as inconclusive and check the next turn. |
+| `{"cache_miss_reason": null}` | The comparison was still running when the response was serialized. This can happen when the response starts very quickly. Treat it as inconclusive and check the next turn. |
 | `{"cache_miss_reason": {...}}` | A `cache_miss_reason` is attached. For `*_changed` types this identifies the first divergence point; `previous_message_not_found` and `unavailable` are cases where no comparison was produced. |
 
 When `cache_miss_reason` is non-null, it looks like this:
