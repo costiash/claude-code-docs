@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-19T01:08:49Z",
+  "generated_at": "2026-05-19T04:43:26Z",
   "indexed_files": 1276,
   "index": {
     "/changelog": {
@@ -964,23 +964,23 @@
         "security",
         "commands",
         "permission",
+        "trust",
         "approval",
         "access",
+        "when",
         "bash",
         "mcp",
         "before",
         "anthropic",
-        "trust",
         "permissions",
-        "when",
         "network",
         "user",
         "users",
         "control",
         "working",
-        "web"
+        "directory"
       ],
-      "word_count": 1269,
+      "word_count": 1325,
       "file_path": "docs/claude-code__security.md"
     },
     "/claude-code/settings": {

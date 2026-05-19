@@ -7203,8 +7203,8 @@
     "claude-code__security.md": {
       "original_url": "https://platform.claude.com/docs/en/security",
       "original_md_url": "https://platform.claude.com/docs/en/security.md",
-      "hash": "06cbb60c87fdfe16a471aec48417c7029665ad89e5b62e13b4c9902006aac95f",
-      "last_updated": "2026-05-12T21:45:40.572269"
+      "hash": "eb2a1c81108dd890084187946ff961f733d9ad82589eb9b96f93630f498bfae5",
+      "last_updated": "2026-05-19T04:43:11.950024"
     },
     "claude-code__settings.md": {
       "original_url": "https://platform.claude.com/docs/en/settings",
@@ -7275,8 +7275,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2026-05-19T01:08:46.694315",
-    "fetch_duration_seconds": 908.564281,
+    "last_fetch_completed": "2026-05-19T04:43:23.580041",
+    "fetch_duration_seconds": 915.761553,
     "total_pages_discovered": 1547,
     "pages_fetched_successfully": 1212,
     "pages_failed": 336,
@@ -7623,7 +7623,7 @@
     "total_files": 1212,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2026-05-19T01:08:46.694337",
+  "last_updated": "2026-05-19T04:43:23.580065",
   "base_url": "https://raw.githubusercontent.com/costiash/claude-code-docs/main/docs/",
   "github_repository": "costiash/claude-code-docs",
   "github_ref": "main",
