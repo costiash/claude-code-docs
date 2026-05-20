@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-20T16:13:35.152545Z",
-    "total_paths": 1675,
+    "generated_at": "2026-05-20T18:52:36.062816Z",
+    "total_paths": 1679,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-20T16:13:35.152550Z"
+    "last_regenerated": "2026-05-20T18:52:36.062822Z"
   },
   "categories": {
     "core_documentation": [
@@ -164,11 +164,13 @@
       "/docs/en/permissions",
       "/docs/en/platforms",
       "/docs/en/plugin-dependencies",
+      "/docs/en/plugin-hints",
       "/docs/en/prompt-caching",
       "/docs/en/remote-control",
       "/docs/en/routines",
       "/docs/en/scheduled-tasks",
       "/docs/en/server-managed-settings",
+      "/docs/en/sessions",
       "/docs/en/slack",
       "/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals",
       "/docs/en/tools-reference",
@@ -207,6 +209,7 @@
       "/docs/en/agent-sdk/python",
       "/docs/en/agent-sdk/quickstart",
       "/docs/en/agent-sdk/secure-deployment",
+      "/docs/en/agent-sdk/session-storage",
       "/docs/en/agent-sdk/sessions",
       "/docs/en/agent-sdk/skills",
       "/docs/en/agent-sdk/slash-commands",
@@ -1686,6 +1689,9 @@
       "/docs/en/third-party-integrations",
       "/docs/en/troubleshooting",
       "/docs/en/vs-code"
+    ],
+    "uncategorized": [
+      "/docs/en/prompt-library"
     ]
   }
 }
