@@ -139,6 +139,48 @@ You can provide concrete examples of valid tool inputs to help Claude understand
 Add an optional `input_examples` field to your tool definition with an array of example input objects. Each example must be valid according to the tool's `input_schema`:
 
 <CodeGroup>
+```bash cURL
+curl -sS https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d @- <<'EOF'
+{
+  "model": "claude-opus-4-7",
+  "max_tokens": 1024,
+  "tools": [
+    {
+      "name": "get_weather",
+      "description": "Get the current weather in a given location",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "description": "The city and state, e.g. San Francisco, CA"
+          },
+          "unit": {
+            "type": "string",
+            "enum": ["celsius", "fahrenheit"],
+            "description": "The unit of temperature"
+          }
+        },
+        "required": ["location"]
+      },
+      "input_examples": [
+        {"location": "San Francisco, CA", "unit": "fahrenheit"},
+        {"location": "Tokyo, Japan", "unit": "celsius"},
+        {"location": "New York, NY"}
+      ]
+    }
+  ],
+  "messages": [
+    {"role": "user", "content": "What's the weather like in San Francisco?"}
+  ]
+}
+EOF
+```
+
 ```bash CLI
 ant messages create <<'YAML'
 model: claude-opus-4-7

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-19T21:49:15Z",
+  "generated_at": "2026-05-20T01:10:18Z",
   "indexed_files": 1382,
   "index": {
     "/changelog": {
@@ -1326,25 +1326,25 @@
         "skills",
         "claude",
         "create",
+        "agent",
         "api",
         "codegroup",
-        "agent",
         "card",
-        "skill",
         "code",
-        "presentation",
+        "skill",
         "file",
-        "powerpoint",
         "title",
         "icon",
         "href",
         "learn",
         "documents",
+        "powerpoint",
+        "presentation",
         "pdf",
         "note",
         "docs"
       ],
-      "word_count": 1776,
+      "word_count": 4074,
       "file_path": "docs/docs__en__agents-and-tools__agent-skills__quickstart.md"
     },
     "/docs/en/agents-and-tools/mcp-connector": {
@@ -1680,7 +1680,7 @@
         "access",
         "using"
       ],
-      "word_count": 1662,
+      "word_count": 1935,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__bash-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent": {
@@ -1736,35 +1736,35 @@
         "operations",
         "using"
       ],
-      "word_count": 5530,
+      "word_count": 5532,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__code-execution-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/computer-use-tool": {
       "title": "Computer use tool",
       "content_preview": "# Computer use tool  ---  Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interac...",
       "keywords": [
+        "tab",
+        "title",
         "claude",
         "computer",
         "tool",
-        "actions",
-        "click",
-        "title",
-        "section",
-        "prompt",
-        "step",
-        "tools",
-        "environment",
-        "screenshot",
-        "opus",
-        "when",
+        "tabs",
+        "info",
         "api",
+        "see",
+        "actions",
+        "section",
+        "step",
+        "request",
+        "screenshot",
+        "application",
         "screenshots",
-        "note",
-        "coordinates",
-        "model",
-        "user"
+        "when",
+        "prompt",
+        "tools",
+        "note"
       ],
-      "word_count": 5403,
+      "word_count": 9338,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__computer-use-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/define-tools": {
@@ -1792,7 +1792,7 @@
         "more",
         "must"
       ],
-      "word_count": 2763,
+      "word_count": 2876,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__define-tools.md"
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
@@ -1948,6 +1948,7 @@
         "opus",
         "anthropic",
         "model",
+        "api",
         "card",
         "works",
         "call",
@@ -1957,10 +1958,9 @@
         "prompt",
         "sonnet",
         "additional",
-        "api",
         "where"
       ],
-      "word_count": 1061,
+      "word_count": 1062,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__overview.md"
     },
     "/docs/en/agents-and-tools/tool-use/parallel-tool-use": {
@@ -2296,7 +2296,7 @@
         "url",
         "citations"
       ],
-      "word_count": 2526,
+      "word_count": 2528,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {
@@ -2324,7 +2324,7 @@
         "when",
         "must"
       ],
-      "word_count": 2241,
+      "word_count": 2243,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-search-tool.md"
     },
     "/docs/en/api/admin": {
@@ -34370,7 +34370,7 @@
         "field",
         "manual"
       ],
-      "word_count": 3946,
+      "word_count": 3943,
       "file_path": "docs/docs__en__build-with-claude__adaptive-thinking.md"
     },
     "/docs/en/build-with-claude/batch-processing": {
@@ -34462,12 +34462,13 @@
       "content_preview": "# Claude in Amazon Bedrock  Access Claude models through Amazon Bedrock with AWS-native authentication, billing, and security boundaries.  ---  This guide walks you through setting up and making API c...",
       "keywords": [
         "tab",
+        "claude",
         "global",
         "bedrock",
-        "claude",
         "aws",
         "title",
         "amazon",
+        "model",
         "region",
         "role",
         "step",
@@ -34475,14 +34476,13 @@
         "access",
         "api",
         "anthropic",
-        "model",
         "asia",
         "pacific",
         "available",
         "support",
         "europe"
       ],
-      "word_count": 1735,
+      "word_count": 1788,
       "file_path": "docs/docs__en__build-with-claude__claude-in-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-in-microsoft-foundry": {
@@ -34496,8 +34496,8 @@
         "api",
         "title",
         "resource",
-        "microsoft",
         "model",
+        "microsoft",
         "deployment",
         "note",
         "access",
@@ -34510,7 +34510,7 @@
         "sdks",
         "support"
       ],
-      "word_count": 2417,
+      "word_count": 2470,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -34549,12 +34549,12 @@
         "vertex",
         "endpoints",
         "tab",
+        "model",
         "opus",
         "sonnet",
         "anthropic",
         "region",
         "codegroup",
-        "model",
         "pricing",
         "models",
         "note",
@@ -34566,7 +34566,7 @@
         "multi",
         "availability"
       ],
-      "word_count": 2434,
+      "word_count": 2487,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/claude-platform-on-aws": {
@@ -34579,8 +34579,8 @@
         "api",
         "console",
         "anthropic",
-        "workspace",
         "see",
+        "workspace",
         "bedrock",
         "iam",
         "account",
@@ -34594,7 +34594,7 @@
         "authentication",
         "first"
       ],
-      "word_count": 6417,
+      "word_count": 6470,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -34762,7 +34762,7 @@
         "see",
         "token"
       ],
-      "word_count": 14522,
+      "word_count": 14519,
       "file_path": "docs/docs__en__build-with-claude__extended-thinking.md"
     },
     "/docs/en/build-with-claude/fast-mode": {
@@ -34818,7 +34818,7 @@
         "blocks",
         "block"
       ],
-      "word_count": 2735,
+      "word_count": 2750,
       "file_path": "docs/docs__en__build-with-claude__files.md"
     },
     "/docs/en/build-with-claude/handling-stop-reasons": {
@@ -35243,30 +35243,30 @@
     },
     "/docs/en/intro": {
       "title": "Intro to Claude",
-      "content_preview": "# Intro to Claude  Claude is a highly performant, trustworthy, and intelligent AI platform built by Anthropic. Claude excels at tasks involving language, reasoning, analysis, coding, and more.  ---  <...",
+      "content_preview": "# Intro to Claude  Claude is a highly performant, trustworthy, and intelligent AI platform built by Anthropic. Claude excels at tasks involving language, reasoning, analysis, coding, and more.  ---  <Tip>  The latest generation of Claude models:  **Claude Opus 4.7** - Anthropic's most capable model",
       "keywords": [
         "claude",
         "card",
         "title",
         "step",
         "api",
-        "more",
         "icon",
         "href",
-        "learn",
         "cardgroup",
         "text",
+        "anthropic",
         "docs",
         "code",
-        "anthropic",
+        "more",
         "model",
+        "read",
         "build",
         "messages",
         "overview",
         "built",
         "tasks"
       ],
-      "word_count": 454,
+      "word_count": 467,
       "file_path": "docs/docs__en__intro.md"
     },
     "/docs/en/manage-claude/admin-api": {

@@ -75,6 +75,144 @@ response = client.messages.create(
 
 print(response)
 ```
+
+```typescript TypeScript
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const response = await client.messages.create({
+  model: "claude-opus-4-7",
+  max_tokens: 1024,
+  tools: [{ type: "bash_20250124", name: "bash" }],
+  messages: [
+    {
+      role: "user",
+      content: "List all Python files in the current directory."
+    }
+  ]
+});
+
+console.log(response);
+```
+
+```csharp C#
+using Anthropic;
+using Anthropic.Models.Messages;
+
+var client = new AnthropicClient();
+
+var response = await client.Messages.Create(
+    new()
+    {
+        Model = Model.ClaudeOpus4_7,
+        MaxTokens = 1024,
+        Tools = [new ToolBash20250124()],
+        Messages =
+        [
+            new()
+            {
+                Role = Role.User,
+                Content = "List all Python files in the current directory.",
+            },
+        ],
+    }
+);
+
+Console.WriteLine(response);
+```
+
+```go Go hidelines={1..10,-1}
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+	client := anthropic.NewClient()
+
+	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus4_7,
+		MaxTokens: 1024,
+		Tools: []anthropic.ToolUnionParam{
+			{OfBashTool20250124: &anthropic.ToolBash20250124Param{}},
+		},
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("List all Python files in the current directory.")),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
+}
+```
+
+```java Java
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.messages.Message;
+import com.anthropic.models.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
+import com.anthropic.models.messages.ToolBash20250124;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    Message response = client.messages().create(
+        MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_4_7)
+            .maxTokens(1024)
+            .addTool(ToolBash20250124.builder().build())
+            .addUserMessage("List all Python files in the current directory.")
+            .build()
+    );
+
+    IO.println(response);
+}
+```
+
+```php PHP hidelines={1}
+<?php
+
+use Anthropic\Client;
+use Anthropic\Messages\ToolBash20250124;
+
+$client = new Client();
+
+$response = $client->messages->create(
+    model: 'claude-opus-4-7',
+    maxTokens: 1024,
+    tools: [new ToolBash20250124()],
+    messages: [
+        ['role' => 'user', 'content' => 'List all Python files in the current directory.'],
+    ],
+);
+
+echo $response;
+```
+
+```ruby Ruby
+require "anthropic"
+
+client = Anthropic::Client.new
+
+response = client.messages.create(
+  model: "claude-opus-4-7",
+  max_tokens: 1024,
+  tools: [{type: "bash_20250124", name: "bash"}],
+  messages: [
+    {role: "user", content: "List all Python files in the current directory."}
+  ]
+)
+
+puts response
+```
 </CodeGroup>
 
 ## How it works

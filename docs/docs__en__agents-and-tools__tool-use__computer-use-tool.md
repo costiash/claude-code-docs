@@ -20,12 +20,12 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
 
 Computer use is a beta feature that enables Claude to interact with desktop environments. This tool provides:
 
-- **Screenshot capture**: See what's currently displayed on screen
-- **Mouse control**: Click, drag, and move the cursor
-- **Keyboard input**: Type text and use keyboard shortcuts
-- **Desktop automation**: Interact with any application or interface
+- **Screenshot capture:** See what's currently displayed on screen
+- **Mouse control:** Click, drag, and move the cursor
+- **Keyboard input:** Type text and use keyboard shortcuts
+- **Desktop automation:** Interact with any application or interface
 
-While computer use can be augmented with other tools like bash and text editor for more comprehensive automation workflows, computer use specifically refers to the computer use tool's capability to see and control desktop environments.
+While computer use can be augmented with other tools such as bash and text editor for more comprehensive automation workflows, computer use specifically refers to the computer use tool's capability to see and control desktop environments.
 
 For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
@@ -39,12 +39,12 @@ To minimize risks, consider taking precautions such as:
 1. Using a dedicated virtual machine or container with minimal privileges to prevent direct system attacks or accidents.
 2. Avoiding giving the model access to sensitive data, such as account login information, to prevent information theft.
 3. Limiting internet access to an allowlist of domains to reduce exposure to malicious content.
-4. Asking a human to confirm decisions that may result in meaningful real-world consequences as well as any tasks requiring affirmative consent, such as accepting cookies, executing financial transactions, or agreeing to terms of service.
+4. Asking a human to confirm decisions that might result in meaningful real-world consequences and any tasks requiring affirmative consent, such as accepting cookies, completing financial transactions, or agreeing to terms of service.
 </Warning>
 
-In some circumstances, Claude will follow commands found in content even if it conflicts with the user's instructions. For example, Claude instructions on webpages or contained in images may override instructions or cause Claude to make mistakes. Take precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
+In some circumstances, Claude will follow commands found in content even if it conflicts with the user's instructions. For example, Claude instructions on webpages or contained in images might override instructions or cause Claude to make mistakes. Take precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
 
-The model has been trained to resist these prompt injections, and an extra layer of defense has been added. If you use the computer use tools, classifiers will automatically run on your prompts to flag potential instances of prompt injections. When these classifiers identify potential prompt injections in screenshots, they will automatically steer the model to ask for user confirmation before proceeding with the next action. This extra protection won't be ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, please [contact support](https://support.claude.com/en/).
+Anthropic has trained the model to resist these prompt injections and has added an extra layer of defense. If you use the computer use tools, classifiers will automatically run on your prompts to flag potential instances of prompt injections. When these classifiers identify potential prompt injections in screenshots, they will automatically steer the model to ask for user confirmation before proceeding with the next action. This extra protection won't be ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, [contact support](https://support.claude.com/en/).
 
 These precautions remain important even with the classifier defense layer in place.
 
@@ -56,7 +56,7 @@ Inform end users of relevant risks and obtain their consent prior to enabling co
   href="https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo"
 >
 
-Get started quickly with the computer use reference implementation that includes a web interface, Docker container, example tool implementations, and an agent loop.
+Get started with the computer use reference implementation that includes a web interface, Docker container, example tool implementations, and an agent loop.
 
 </Card>
 
@@ -214,7 +214,7 @@ var response = await client.Beta.Messages.Create(parameters);
 Console.WriteLine(response);
 ```
 
-```go Go nocheck hidelines={1..11,-1}
+```go Go hidelines={1..11,-1}
 package main
 
 import (
@@ -244,7 +244,7 @@ func main() {
 			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Save a picture of a cat to my desktop.")),
 		},
 		Betas: []anthropic.AnthropicBeta{
-			anthropic.AnthropicBetaComputerUse2025_11_24,
+			"computer-use-2025-11-24", // typed constant pending in the Go SDK
 		},
 	})
 	if err != nil {
@@ -254,7 +254,7 @@ func main() {
 }
 ```
 
-```java Java hidelines={1..3,7..10,-2..}
+```java Java hidelines={1..2}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.messages.BetaMessage;
@@ -263,27 +263,25 @@ import com.anthropic.models.beta.messages.BetaToolComputerUse20251124;
 import com.anthropic.models.beta.messages.BetaToolTextEditor20250728;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 
-public class ComputerUseExample {
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model("claude-opus-4-7")
-            .maxTokens(1024L)
-            .addTool(BetaToolComputerUse20251124.builder()
-                .displayWidthPx(1024L)
-                .displayHeightPx(768L)
-                .displayNumber(1L)
-                .build())
-            .addTool(BetaToolTextEditor20250728.builder().build())
-            .addTool(BetaToolBash20250124.builder().build())
-            .addUserMessage("Save a picture of a cat to my desktop.")
-            .addBeta("computer-use-2025-11-24")
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model("claude-opus-4-7")
+        .maxTokens(1024L)
+        .addTool(BetaToolComputerUse20251124.builder()
+            .displayWidthPx(1024L)
+            .displayHeightPx(768L)
+            .displayNumber(1L)
+            .build())
+        .addTool(BetaToolTextEditor20250728.builder().build())
+        .addTool(BetaToolBash20250124.builder().build())
+        .addUserMessage("Save a picture of a cat to my desktop.")
+        .addBeta("computer-use-2025-11-24")
+        .build();
 
-        BetaMessage response = client.beta().messages().create(params);
-        System.out.println(response);
-    }
+    BetaMessage response = client.beta().messages().create(params);
+    IO.println(response);
 }
 ```
 
@@ -376,17 +374,17 @@ The preceding example shows all three tools being used together, which requires 
     - Add the computer use tool (and optionally other tools) to your API request.
     - Include a user prompt that requires desktop interaction, for example, "Save a picture of a cat to my desktop."
   </Step>
-  <Step title="Claude decides to use the computer use tool" icon="wrench">
+  <Step title="Claude selects the computer use tool" icon="wrench">
     - Claude assesses if the computer use tool can help with the user's query.
     - If yes, Claude constructs a properly formatted tool use request.
-    - The API response has a `stop_reason` of `tool_use`, signaling Claude's intent.
+    - The API response has a `stop_reason` of `tool_use`, signaling a tool use request.
   </Step>
   <Step
     title="Extract tool input, evaluate the tool on a computer, and return results"
     icon="computer"
   >
     - On your end, extract the tool name and input from Claude's request.
-    - Use the tool on a container or Virtual Machine.
+    - Use the tool on a container or virtual machine.
     - Continue the conversation with a new `user` message containing a `tool_result` content block.
   </Step>
   <Step
@@ -394,7 +392,7 @@ The preceding example shows all three tools being used together, which requires 
     icon="arrows-clockwise"
   >
     - Claude analyzes the tool results to determine if more tool use is needed or the task has been completed.
-    - If Claude decides it needs another tool, it responds with another `tool_use` `stop_reason` and you should return to step 3.
+    - If Claude determines another tool is needed, it responds with another `tool_use` `stop_reason` and you should return to step 3.
     - Otherwise, it crafts a text response to the user.
   </Step>
 </Steps>
@@ -405,21 +403,21 @@ The repetition of steps 3 and 4 without user input is referred to as the "agent 
 
 Computer use requires a sandboxed computing environment where Claude can safely interact with applications and the web. This environment includes:
 
-1. **Virtual display**: A virtual X11 display server (using Xvfb) that renders the desktop interface Claude will see through screenshots and control with mouse/keyboard actions.
+1. **Virtual display:** A virtual X11 display server (using Xvfb) that renders the desktop interface Claude will see through screenshots and control with mouse/keyboard actions.
 
-2. **Desktop environment**: A lightweight UI with window manager (Mutter) and panel (Tint2) running on Linux, which provides a consistent graphical interface for Claude to interact with.
+2. **Desktop environment:** A lightweight UI with window manager (Mutter) and panel (Tint2) running on Linux, which provides a consistent graphical interface for Claude to interact with.
 
-3. **Applications**: Pre-installed Linux applications like Firefox, LibreOffice, text editors, and file managers that Claude can use to complete tasks.
+3. **Applications:** Pre-installed Linux applications such as Firefox, LibreOffice, text editors, and file managers that Claude can use to complete tasks.
 
-4. **Tool implementations**: Integration code that translates Claude's abstract tool requests (like "move mouse" or "take screenshot") into actual operations in the virtual environment.
+4. **Tool implementations:** Integration code that translates Claude's abstract tool requests (such as "move mouse" or "take screenshot") into actual operations in the virtual environment.
 
-5. **Agent loop**: A program that handles communication between Claude and the environment, sending Claude's actions to the environment and returning the results (screenshots, command outputs) back to Claude.
+5. **Agent loop:** A program that handles communication between Claude and the environment, sending Claude's actions to the environment and returning the results (screenshots, command outputs) back to Claude.
 
 When you use computer use, Claude doesn't directly connect to this environment. Instead, your application:
 
 1. Receives Claude's tool use requests
 2. Translates them into actions in your computing environment
-3. Captures the results (screenshots, command outputs, etc.)
+3. Captures the results (such as screenshots and command outputs)
 4. Returns these results to Claude
 
 For security and isolation, the reference implementation runs all of this inside a Docker container with appropriate port mappings for viewing and interacting with the environment.
@@ -430,95 +428,306 @@ For security and isolation, the reference implementation runs all of this inside
 
 ### Start with the reference implementation
 
-A [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is available that includes everything you need to get started quickly with computer use:
+A [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is available that includes everything you need to get started with computer use:
 
 - A [containerized environment](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/Dockerfile) suitable for computer use with Claude
 - Implementations of [the computer use tools](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo/computer_use_demo/tools)
-- An [agent loop](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py) that interacts with the Claude API and executes the computer use tools
+- An [agent loop](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py) that interacts with the Claude API and runs the computer use tools
 - A web interface to interact with the container, agent loop, and tools.
 
 ### Understanding the agentic loop
 
-The core of computer use is the "agent loop" - a cycle where Claude requests tool actions, your application executes them, and returns results to Claude. Here's a simplified example:
+The core of computer use is the "agent loop": a cycle where Claude requests tool actions, your application runs them, and returns results to Claude. Here's a simplified example:
 
-```python hidelines={1}
-from anthropic import Anthropic
+<Tabs>
+<Tab title="cURL">
+<Info>
+The agent loop is a stateful, multi-turn pattern that doesn't translate to a one-off shell command. See the SDK tabs for the implementation.
+</Info>
+</Tab>
 
+<Tab title="CLI">
+<Info>
+The agent loop is a stateful, multi-turn pattern that doesn't translate to a one-off shell command. See the SDK tabs for the implementation.
+</Info>
+</Tab>
 
-async def sampling_loop(
-    *,
-    model: str,
-    messages: list[dict],
-    api_key: str,
-    max_tokens: int = 4096,
-    tool_version: str,
-    max_iterations: int = 10,  # Add iteration limit to prevent infinite loops
-):
+<Tab title="Python">
+
+````python
+def sampling_loop(model, messages, max_iterations=10):
     """
-    A simple agent loop for Claude computer use interactions.
-
-    This function handles the back-and-forth between:
-    1. Sending user messages to Claude
-    2. Claude requesting to use tools
-    3. Your app executing those tools
-    4. Sending tool results back to Claude
+    Run the computer-use agent loop until Claude stops requesting tools
+    or the iteration limit is reached.
     """
-    # Set up tools and API parameters
-    client = Anthropic(api_key=api_key)
-    beta_flag = (
-        "computer-use-2025-11-24"
-        if "20251124" in tool_version
-        else "computer-use-2025-01-24"
-    )
-    # Configure tools - you should already have these initialized elsewhere
-    tools = [
-        {
-            "type": f"computer_{tool_version}",
-            "name": "computer",
-            "display_width_px": 1024,
-            "display_height_px": 768,
-        },
-        {"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"},
-        {"type": "bash_20250124", "name": "bash"},
-    ]
-
-    # Main agent loop (with iteration limit to prevent runaway API costs)
-    iterations = 0
-    while True and iterations < max_iterations:
-        iterations += 1
-        # Call the Claude API
+    for _ in range(max_iterations):
         response = client.beta.messages.create(
             model=model,
-            max_tokens=max_tokens,
+            max_tokens=4096,
             messages=messages,
-            tools=tools,
-            betas=[beta_flag],
+            tools=TOOLS,
+            betas=["computer-use-2025-11-24"],
         )
 
         # Add Claude's response to the conversation history
-        response_content = response.content
-        messages.append({"role": "assistant", "content": response_content})
+        messages.append({"role": "assistant", "content": response.content})
 
-        # Check if Claude used any tools
-        tool_results = []
-        for block in response_content:
-            if block.type == "tool_use":
-                # In a real app, you would execute the tool here
-                # For example: result = run_tool(block.name, block.input)
-                result = {"result": "Tool executed successfully"}
-
-                # Format the result for Claude
-                tool_results.append(
-                    {"type": "tool_result", "tool_use_id": block.id, "content": result}
-                )
-
-        # If no tools were used, Claude is done - return the final messages
+        # Run any tools Claude requested and collect results
+        tool_results = process_tool_calls(response)
         if not tool_results:
-            return messages
+            return messages  # No more tool use; task complete
 
-        # Add tool results to messages for the next iteration with Claude
+        # Send tool results back to Claude for the next iteration
         messages.append({"role": "user", "content": tool_results})
-```
+
+    return messages
+````
+
+</Tab>
+
+<Tab title="TypeScript">
+
+````typescript
+async function samplingLoop(
+  model: string,
+  messages: Anthropic.Beta.BetaMessageParam[],
+  maxIterations = 10,
+): Promise<Anthropic.Beta.BetaMessageParam[]> {
+  // Run the computer-use agent loop until Claude stops requesting tools
+  // or the iteration limit is reached.
+  for (let i = 0; i < maxIterations; i++) {
+    const response = await client.beta.messages.create({
+      model,
+      max_tokens: 4096,
+      messages,
+      tools,
+      betas: ["computer-use-2025-11-24"],
+    });
+
+    // Add Claude's response to the conversation history
+    messages.push({ role: "assistant", content: response.content });
+
+    // Run any tools Claude requested and collect results
+    const toolResults = processToolCalls(response);
+    if (toolResults.length === 0) {
+      return messages; // No more tool use; task complete
+    }
+
+    // Send tool results back to Claude for the next iteration
+    messages.push({ role: "user", content: toolResults });
+  }
+
+  return messages;
+}
+````
+
+</Tab>
+
+<Tab title="C#">
+
+````csharp
+async Task<List<BetaMessageParam>> SamplingLoop(
+    Model model,
+    List<BetaMessageParam> messages,
+    int maxIterations = 10
+)
+{
+    // Run the computer-use agent loop until Claude stops requesting tools
+    // or the iteration limit is reached.
+    for (var i = 0; i < maxIterations; i++)
+    {
+        var response = await client.Beta.Messages.Create(
+            new MessageCreateParams
+            {
+                Model = model,
+                MaxTokens = 4096,
+                Messages = messages,
+                Tools = tools,
+                Betas = ["computer-use-2025-11-24"],
+            }
+        );
+
+        // Add Claude's response to the conversation history
+        messages.Add(
+            new()
+            {
+                Role = Role.Assistant,
+                Content = response
+                    .Content.Select(block => new BetaContentBlockParam(block.Json))
+                    .ToList(),
+            }
+        );
+
+        // Run any tools Claude requested and collect results
+        var toolResults = ProcessToolCalls(response);
+        if (toolResults.Count == 0)
+        {
+            return messages; // No more tool use; task complete
+        }
+
+        // Send tool results back to Claude for the next iteration
+        messages.Add(new() { Role = Role.User, Content = toolResults });
+    }
+
+    return messages;
+}
+````
+
+</Tab>
+
+<Tab title="Go">
+
+````go
+// samplingLoop runs the computer-use agent loop until Claude stops
+// requesting tools or the iteration limit is reached.
+func samplingLoop(ctx context.Context, model anthropic.Model, messages []anthropic.BetaMessageParam, maxIterations int) ([]anthropic.BetaMessageParam, error) {
+	for range maxIterations {
+		response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
+			Model:     model,
+			MaxTokens: 4096,
+			Messages:  messages,
+			Tools:     tools,
+			Betas:     []anthropic.AnthropicBeta{"computer-use-2025-11-24"},
+		})
+		if err != nil {
+			return nil, err
+		}
+
+		// Add Claude's response to the conversation history
+		messages = append(messages, response.ToParam())
+
+		// Run any tools Claude requested and collect results
+		toolResults := processToolCalls(response)
+		if len(toolResults) == 0 {
+			return messages, nil // No more tool use; task complete
+		}
+
+		// Send tool results back to Claude for the next iteration
+		messages = append(messages, anthropic.BetaMessageParam{
+			Role:    anthropic.BetaMessageParamRoleUser,
+			Content: toolResults,
+		})
+	}
+	return messages, nil
+}
+
+````
+
+</Tab>
+
+<Tab title="Java">
+
+````java
+/**
+ * Run the computer-use agent loop until Claude stops requesting tools
+ * or the iteration limit is reached.
+ */
+List<BetaMessageParam> samplingLoop(Model model, List<BetaMessageParam> messages, int maxIterations) {
+    for (int i = 0; i < maxIterations; i++) {
+        BetaMessage response = client.beta().messages().create(MessageCreateParams.builder()
+                .model(model)
+                .maxTokens(4096)
+                .messages(messages)
+                .addTool(COMPUTER_TOOL)
+                .addBeta("computer-use-2025-11-24")
+                .build());
+
+        // Add Claude's response to the conversation history
+        messages.add(BetaMessageParam.builder()
+                .role(BetaMessageParam.Role.ASSISTANT)
+                .contentOfBetaContentBlockParams(
+                        response.content().stream().map(BetaContentBlock::toParam).toList())
+                .build());
+
+        // Run any tools Claude requested and collect results
+        List<BetaContentBlockParam> toolResults = processToolCalls(response);
+        if (toolResults.isEmpty()) {
+            return messages; // No more tool use; task complete
+        }
+
+        // Send tool results back to Claude for the next iteration
+        messages.add(BetaMessageParam.builder()
+                .role(BetaMessageParam.Role.USER)
+                .contentOfBetaContentBlockParams(toolResults)
+                .build());
+    }
+    return messages;
+}
+````
+
+</Tab>
+
+<Tab title="PHP">
+
+````php
+/**
+ * Run the computer-use agent loop until Claude stops requesting tools
+ * or the iteration limit is reached.
+ */
+function samplingLoop(string $model, array $messages, int $maxIterations = 10): array
+{
+    global $client, $tools;
+
+    for ($i = 0; $i < $maxIterations; $i++) {
+        $response = $client->beta->messages->create(
+            model: $model,
+            maxTokens: 4096,
+            messages: $messages,
+            tools: $tools,
+            betas: ['computer-use-2025-11-24'],
+        );
+
+        // Add Claude's response to the conversation history
+        $messages[] = BetaMessageParam::with(role: Role::ASSISTANT, content: $response->content);
+
+        // Run any tools Claude requested and collect results
+        $toolResults = processToolCalls($response);
+        if ($toolResults === []) {
+            return $messages; // No more tool use; task complete
+        }
+
+        // Send tool results back to Claude for the next iteration
+        $messages[] = BetaMessageParam::with(role: Role::USER, content: $toolResults);
+    }
+
+    return $messages;
+}
+````
+
+</Tab>
+
+<Tab title="Ruby">
+
+````ruby
+# Run the computer-use agent loop until Claude stops requesting tools
+# or the iteration limit is reached.
+def sampling_loop(model, messages, max_iterations: 10)
+  max_iterations.times do
+    response = CLIENT.beta.messages.create(
+      model: model,
+      max_tokens: 4096,
+      messages: messages,
+      tools: TOOLS,
+      betas: ["computer-use-2025-11-24"]
+    )
+
+    # Add Claude's response to the conversation history
+    messages << {role: "assistant", content: response.content}
+
+    # Run any tools Claude requested and collect results
+    tool_results = process_tool_calls(response)
+    return messages if tool_results.empty? # No more tool use; task complete
+
+    # Send tool results back to Claude for the next iteration
+    messages << {role: "user", content: tool_results}
+  end
+
+  messages
+end
+````
+
+</Tab>
+</Tabs>
 
 The loop continues until either Claude responds without requesting any tools (task completion) or the maximum iteration limit is reached. This safeguard prevents potential infinite loops that could result in unexpected API costs.
 
@@ -530,9 +739,9 @@ Here are some tips on how to get the best quality outputs:
 
 1. Specify simple, well-defined tasks and provide explicit instructions for each step.
 2. Claude sometimes assumes outcomes of its actions without explicitly checking their results. To prevent this you can prompt Claude with `After each step, take a screenshot and carefully evaluate if you have achieved the right outcome. Explicitly show your thinking: "I have evaluated step X..." If not correct, try again. Only when you confirm a step was executed correctly should you move on to the next one.`
-3. Some UI elements (like dropdowns and scrollbars) might be tricky for Claude to manipulate using mouse movements. If you experience this, try prompting the model to use keyboard shortcuts.
+3. Some UI elements (such as dropdowns and scrollbars) might be tricky for Claude to manipulate using mouse movements. If you experience this, try prompting the model to use keyboard shortcuts.
 4. For repeatable tasks or UI interactions, include example screenshots and tool calls of successful outcomes in your prompt.
-5. If you need the model to log in, provide it with the username and password in your prompt inside XML tags like `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Review the [guide on mitigating prompt injections](/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) before providing the model with login credentials.
+5. If you need the model to log in, provide it with the username and password in your prompt inside XML tags such as `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Review [Mitigate jailbreaks and prompt injections](/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) before providing the model with login credentials.
 6. When constructing a user turn's `content` array, place the instruction text *before* the screenshot image. Providing the target description before the image is processed improves click accuracy.
 
 <Tip>
@@ -551,7 +760,7 @@ Here are some tips on how to get the best quality outputs:
 
 ### System prompts
 
-When one of the Anthropic-schema tools is requested via the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](/docs/en/agents-and-tools/tool-use/define-tools#tool-use-system-prompt) but starts with:
+When one of the Anthropic-schema tools is requested through the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](/docs/en/agents-and-tools/tool-use/define-tools#tool-use-system-prompt) but starts with:
 
 > You have access to a set of functions you can use to answer the user's question. This includes access to a sandboxed computing environment. You do NOT currently have the ability to inspect files or interact with external resources, except by invoking the below functions.
 
@@ -562,26 +771,26 @@ As with regular tool use, the user-provided `system_prompt` field is still respe
 The computer use tool supports these actions:
 
 **Basic actions (all versions)**
-- **screenshot** - Capture the current display
-- **left_click** - Click at coordinates `[x, y]`
-- **type** - Type text string
-- **key** - Press key or key combination (for example, "ctrl+s")
-- **mouse_move** - Move cursor to coordinates
+- **screenshot:** Capture the current display
+- **left_click:** Click at coordinates `[x, y]`
+- **type:** Type text string
+- **key:** Press key or key combination (for example, "ctrl+s")
+- **mouse_move:** Move cursor to coordinates
 
 **Enhanced actions (`computer_20250124`)**
 Available on all models that support computer use:
-- **scroll** - Scroll in any direction with amount control
-- **left_click_drag** - Click and drag between coordinates
-- **right_click**, **middle_click** - Additional mouse buttons
-- **double_click**, **triple_click** - Multiple clicks
-- **left_mouse_down**, **left_mouse_up** - Fine-grained click control
-- **hold_key** - Hold down a key for a specified duration (in seconds)
-- **wait** - Pause between actions
+- **scroll:** Scroll in any direction with amount control
+- **left_click_drag:** Click and drag between coordinates
+- **right_click**, **middle_click:** Additional mouse buttons
+- **double_click**, **triple_click:** Multiple clicks
+- **left_mouse_down**, **left_mouse_up:** Fine-grained click control
+- **hold_key:** Hold down a key for a specified duration (in seconds)
+- **wait:** Pause between actions
 
 **Enhanced actions (`computer_20251124`)**
 Available in Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5:
 - All actions from `computer_20250124`
-- **zoom** - View a specific region of the screen at full resolution. Requires `enable_zoom: true` in tool definition. Takes a `region` parameter with coordinates `[x1, y1, x2, y2]` defining top-left and bottom-right corners of the area to inspect.
+- **zoom:** View a specific region of the screen at full resolution. Requires `enable_zoom: true` in tool definition. Takes a `region` parameter with coordinates `[x1, y1, x2, y2]` defining top-left and bottom-right corners of the area to inspect.
 
 <section title="Example actions">
 
@@ -622,7 +831,7 @@ Scroll down:
 }
 ```
 
-Zoom to view region in detail (Opus 4.7, Opus 4.6, Sonnet 4.6, Opus 4.5):
+Zoom to view region in detail (Opus 4.7, Opus 4.6, Sonnet 4.6, and Opus 4.5):
 
 ```json
 {
@@ -635,9 +844,9 @@ Zoom to view region in detail (Opus 4.7, Opus 4.6, Sonnet 4.6, Opus 4.5):
 
 <section title="Modifier keys with click and scroll actions">
 
-To hold modifier keys (like Shift, Ctrl, or Alt) while performing click or scroll actions, use the `text` parameter on those actions. This is different from `hold_key`, which simply holds a key for a duration without performing other actions.
+To hold modifier keys (such as Shift, Ctrl, or Alt) while performing click or scroll actions, use the `text` parameter on those actions. This is different from `hold_key`, which holds a key for a duration without performing other actions.
 
-Shift+click (e.g., for selecting a range of items):
+Shift+click (for example, to select a range of items):
 
 ```json
 {
@@ -647,7 +856,7 @@ Shift+click (e.g., for selecting a range of items):
 }
 ```
 
-Ctrl+click (e.g., for multi-select on Windows/Linux):
+Ctrl+click (for example, to multi-select on Windows/Linux):
 
 ```json
 {
@@ -657,7 +866,7 @@ Ctrl+click (e.g., for multi-select on Windows/Linux):
 }
 ```
 
-Cmd+click (e.g., for multi-select on macOS):
+Cmd+click (for example, to multi-select on macOS):
 
 ```json
 {
@@ -667,7 +876,7 @@ Cmd+click (e.g., for multi-select on macOS):
 }
 ```
 
-Shift+scroll (e.g., for horizontal scrolling):
+Shift+scroll (for example, to scroll horizontally):
 
 ```json
 {
@@ -679,7 +888,7 @@ Shift+scroll (e.g., for horizontal scrolling):
 }
 ```
 
-The `text` parameter in click/scroll actions accepts modifier keys like `shift`, `ctrl`, `alt`, and `super` (for the Command/Windows key).
+The `text` parameter in click/scroll actions accepts modifier keys such as `shift`, `ctrl`, `alt`, and `super` (for the Command/Windows key).
 
 </section>
 
@@ -695,7 +904,7 @@ The `text` parameter in click/scroll actions accepts modifier keys like `shift`,
 | `enable_zoom` | No | Enable zoom action (`computer_20251124` only). Set to `true` to allow Claude to zoom into specific screen regions. Default: `false` |
 
 <Note>
-**Important:** The computer use tool must be explicitly executed by your application - Claude cannot execute it directly. You are responsible for implementing the screenshot capture, mouse movements, keyboard inputs, and other actions based on Claude's requests.
+**Important:** Your application must explicitly run the computer use tool; Claude cannot run it directly. You are responsible for implementing the screenshot capture, mouse movements, keyboard inputs, and other actions based on Claude's requests.
 </Note>
 
 ### Combining with extended thinking
@@ -719,7 +928,7 @@ The [reference implementation](https://github.com/anthropics/anthropic-quickstar
 
 - A virtualized or containerized environment suitable for computer use with Claude
 - An implementation of at least one of the Anthropic-schema computer use tools
-- An agent loop that interacts with the Claude API and executes the `tool_use` results using your tool implementations
+- An agent loop that interacts with the Claude API and runs the `tool_use` results using your tool implementations
 - An API or UI that allows user input to start the agent loop
 
 #### Implement the computer use tool
@@ -732,94 +941,710 @@ The computer use tool is implemented as a schema-less tool. When using this tool
   </Step>
   <Step title="Implement action handlers">
     Create functions to handle each action type that Claude might request:
-    ```python hidelines={1..3}
-    def capture_screenshot(): ...
-    def click_at(x, y): ...
-    def type_text(text): ...
-    def handle_computer_action(action_type, params):
-        if action_type == "screenshot":
-            return capture_screenshot()
-        elif action_type == "left_click":
-            x, y = params["coordinate"]
-            return click_at(x, y)
-        elif action_type == "type":
-            return type_text(params["text"])
-        # ... handle other actions
-    ```
+    <Tabs>
+    <Tab title="cURL">
+    <Info>
+    This is application-side helper code with no API request. See the SDK tabs for the pattern.
+    </Info>
+    </Tab>
+
+    <Tab title="CLI">
+    <Info>
+    This is application-side helper code with no API request. See the SDK tabs for the pattern.
+    </Info>
+    </Tab>
+
+    <Tab title="Python">
+    
+````python
+def capture_screenshot():
+    return "<screenshot data>"
+
+
+def click_at(x, y):
+    return f"clicked at ({x}, {y})"
+
+
+def type_text(text):
+    return f"typed: {text}"
+
+
+def handle_computer_action(action_type, params):
+    if action_type == "screenshot":
+        return capture_screenshot()
+    elif action_type == "left_click":
+        x, y = params["coordinate"]
+        return click_at(x, y)
+    elif action_type == "type":
+        return type_text(params["text"])
+    # Handle other actions as needed
+    return f"unhandled action: {action_type}"
+````
+
+    </Tab>
+
+    <Tab title="TypeScript">
+    
+````typescript
+function captureScreenshot(): string {
+  return "<screenshot data>";
+}
+
+function clickAt(x: number, y: number): string {
+  return `clicked at (${x}, ${y})`;
+}
+
+function typeText(text: string): string {
+  return `typed: ${text}`;
+}
+
+function handleComputerAction(
+  actionType: string,
+  params: Record<string, unknown>,
+): string {
+  if (actionType === "screenshot") {
+    return captureScreenshot();
+  } else if (actionType === "left_click") {
+    const [x, y] = params.coordinate as [number, number];
+    return clickAt(x, y);
+  } else if (actionType === "type") {
+    return typeText(params.text as string);
+  }
+  // Handle other actions as needed
+  return `unhandled action: ${actionType}`;
+}
+````
+
+    </Tab>
+
+    <Tab title="C#">
+    
+````csharp
+string CaptureScreenshot() => "<screenshot data>";
+
+string ClickAt(int x, int y) => $"clicked at ({x}, {y})";
+
+string TypeText(string text) => $"typed: {text}";
+
+string HandleComputerAction(string actionType, IReadOnlyDictionary<string, JsonElement> input) =>
+    actionType switch
+    {
+        "screenshot" => CaptureScreenshot(),
+        "left_click" => ClickAt(
+            input["coordinate"][0].GetInt32(),
+            input["coordinate"][1].GetInt32()
+        ),
+        "type" => TypeText(input["text"].GetString()!),
+        // Handle other actions as needed
+        _ => $"unhandled action: {actionType}",
+    };
+````
+
+    </Tab>
+
+    <Tab title="Go">
+    
+````go
+func captureScreenshot() string {
+	return "<screenshot data>"
+}
+
+func clickAt(x, y int) string {
+	return fmt.Sprintf("clicked at (%d, %d)", x, y)
+}
+
+func typeText(text string) string {
+	return fmt.Sprintf("typed: %s", text)
+}
+
+func handleComputerAction(actionType string, params map[string]any) string {
+	switch actionType {
+	case "screenshot":
+		return captureScreenshot()
+	case "left_click":
+		coord := params["coordinate"].([]any)
+		return clickAt(int(coord[0].(float64)), int(coord[1].(float64)))
+	case "type":
+		return typeText(params["text"].(string))
+	// Handle other actions as needed
+	default:
+		return fmt.Sprintf("unhandled action: %s", actionType)
+	}
+}
+
+````
+
+    </Tab>
+
+    <Tab title="Java">
+    
+````java
+String captureScreenshot() {
+    return "<screenshot data>";
+}
+
+String clickAt(long x, long y) {
+    return "clicked at (" + x + ", " + y + ")";
+}
+
+String typeText(String text) {
+    return "typed: " + text;
+}
+
+String handleComputerAction(String actionType, Map<String, JsonValue> params) {
+    return switch (actionType) {
+        case "screenshot" -> captureScreenshot();
+        case "left_click" -> {
+            List<JsonValue> coordinate = (List<JsonValue>) params.get("coordinate").asArray().get();
+            long x = ((Number) coordinate.get(0).asNumber().get()).longValue();
+            long y = ((Number) coordinate.get(1).asNumber().get()).longValue();
+            yield clickAt(x, y);
+        }
+        case "type" -> typeText(params.get("text").asStringOrThrow());
+        // Handle other actions as needed
+        default -> "unhandled action: " + actionType;
+    };
+}
+````
+
+    </Tab>
+
+    <Tab title="PHP">
+    
+````php
+function captureScreenshot(): string
+{
+    return '<screenshot data>';
+}
+
+function clickAt(int $x, int $y): string
+{
+    return "clicked at ({$x}, {$y})";
+}
+
+function typeText(string $text): string
+{
+    return "typed: {$text}";
+}
+
+function handleComputerAction(string $actionType, array $params): string
+{
+    return match ($actionType) {
+        'screenshot' => captureScreenshot(),
+        'left_click' => clickAt(...$params['coordinate']),
+        'type' => typeText($params['text']),
+        // Handle other actions as needed
+        default => "unhandled action: {$actionType}",
+    };
+}
+````
+
+    </Tab>
+
+    <Tab title="Ruby">
+    
+````ruby
+def capture_screenshot
+  "<screenshot data>"
+end
+
+def click_at(x, y)
+  "clicked at (#{x}, #{y})"
+end
+
+def type_text(text)
+  "typed: #{text}"
+end
+
+def handle_computer_action(action_type, params)
+  case action_type
+  when "screenshot"
+    capture_screenshot
+  when "left_click"
+    x, y = params[:coordinate]
+    click_at(x, y)
+  when "type"
+    type_text(params[:text])
+  # Handle other actions as needed
+  else
+    "unhandled action: #{action_type}"
+  end
+end
+````
+
+    </Tab>
+    </Tabs>
   </Step>
   <Step title="Process Claude's tool calls">
-    Extract and execute tool calls from Claude's responses:
-    ```python hidelines={1..11}
-    from types import SimpleNamespace as _SN
+    Extract and run tool calls from Claude's responses:
+    <Tabs>
+    <Tab title="cURL">
+    <Info>
+    This is application-side helper code with no API request. See the SDK tabs for the pattern.
+    </Info>
+    </Tab>
 
-    response = _SN(
-        content=[_SN(type="tool_use", input={"action": "screenshot"}, id="toolu_01")]
-    )
+    <Tab title="CLI">
+    <Info>
+    This is application-side helper code with no API request. See the SDK tabs for the pattern.
+    </Info>
+    </Tab>
 
+    <Tab title="Python">
+    
+````python
+def process_tool_calls(response):
+    tool_results = []
+    for block in response.content:
+        if block.type == "tool_use":
+            action = block.input["action"]
+            result = handle_computer_action(action, block.input)
+            tool_results.append(
+                {
+                    "type": "tool_result",
+                    "tool_use_id": block.id,
+                    "content": result,
+                }
+            )
+    return tool_results
+````
 
-    def handle_computer_action(a, p):
-        return "ok"
+    </Tab>
 
+    <Tab title="TypeScript">
+    
+````typescript
+function processToolCalls(
+  response: Anthropic.Beta.BetaMessage,
+): Anthropic.Beta.BetaToolResultBlockParam[] {
+  const toolResults: Anthropic.Beta.BetaToolResultBlockParam[] = [];
+  for (const block of response.content) {
+    if (block.type === "tool_use") {
+      const input = block.input as Record<string, unknown>;
+      const action = input.action as string;
+      const result = handleComputerAction(action, input);
+      toolResults.push({
+        type: "tool_result",
+        tool_use_id: block.id,
+        content: result,
+      });
+    }
+  }
+  return toolResults;
+}
+````
 
-    for content in response.content:
-        if content.type == "tool_use":
-            action = content.input["action"]
-            result = handle_computer_action(action, content.input)
+    </Tab>
 
-            # Return result to Claude
-            tool_result = {
-                "type": "tool_result",
-                "tool_use_id": content.id,
-                "content": result,
-            }
-    ```
+    <Tab title="C#">
+    
+````csharp
+List<BetaContentBlockParam> ProcessToolCalls(BetaMessage response)
+{
+    List<BetaContentBlockParam> toolResults = [];
+    foreach (var block in response.Content)
+    {
+        if (block.TryPickToolUse(out var toolUse))
+        {
+            var action = toolUse.Input["action"].GetString()!;
+            var result = HandleComputerAction(action, toolUse.Input);
+            toolResults.Add(new BetaToolResultBlockParam(toolUse.ID) { Content = result });
+        }
+    }
+    return toolResults;
+}
+````
+
+    </Tab>
+
+    <Tab title="Go">
+    
+````go
+func processToolCalls(response *anthropic.BetaMessage) []anthropic.BetaContentBlockParamUnion {
+	var toolResults []anthropic.BetaContentBlockParamUnion
+	for _, block := range response.Content {
+		switch variant := block.AsAny().(type) {
+		case anthropic.BetaToolUseBlock:
+			input := variant.Input.(map[string]any)
+			action := input["action"].(string)
+			result := handleComputerAction(action, input)
+			toolResults = append(toolResults, anthropic.NewBetaToolResultBlock(variant.ID, result, false))
+		}
+	}
+	return toolResults
+}
+
+````
+
+    </Tab>
+
+    <Tab title="Java">
+    
+````java
+List<BetaContentBlockParam> processToolCalls(BetaMessage response) {
+    List<BetaContentBlockParam> toolResults = new ArrayList<>();
+    for (BetaContentBlock block : response.content()) {
+        if (block.isToolUse()) {
+            BetaToolUseBlock toolUse = block.asToolUse();
+            Map<String, JsonValue> input =
+                    (Map<String, JsonValue>) toolUse._input().asObject().get();
+            String action = input.get("action").asStringOrThrow();
+            String result = handleComputerAction(action, input);
+            toolResults.add(BetaContentBlockParam.ofToolResult(
+                    BetaToolResultBlockParam.builder()
+                            .toolUseId(toolUse.id())
+                            .content(result)
+                            .build()));
+        }
+    }
+    return toolResults;
+}
+````
+
+    </Tab>
+
+    <Tab title="PHP">
+    
+````php
+function processToolCalls(BetaMessage $response): array
+{
+    $toolResults = [];
+    foreach ($response->content as $block) {
+        if ($block instanceof BetaToolUseBlock) {
+            $action = $block->input['action'];
+            $result = handleComputerAction($action, $block->input);
+            $toolResults[] = BetaToolResultBlockParam::with(
+                toolUseID: $block->id,
+                content: $result,
+            );
+        }
+    }
+    return $toolResults;
+}
+````
+
+    </Tab>
+
+    <Tab title="Ruby">
+    
+````ruby
+def process_tool_calls(response)
+  tool_results = []
+  response.content.each do |block|
+    next unless block.type == :tool_use
+
+    action = block.input[:action]
+    result = handle_computer_action(action, block.input)
+    tool_results << {
+      type: "tool_result",
+      tool_use_id: block.id,
+      content: result
+    }
+  end
+  tool_results
+end
+````
+
+    </Tab>
+    </Tabs>
   </Step>
   <Step title="Implement the agent loop">
     Create a loop that continues until Claude completes the task:
-    ```python hidelines={1..18}
-    import anthropic
+    <Tabs>
+    <Tab title="cURL">
+    <Info>
+    The agent loop is a stateful, multi-turn pattern that doesn't translate to a one-off shell command. See the SDK tabs for the implementation.
+    </Info>
+    </Tab>
 
-    client = anthropic.Anthropic()
-    messages = [{"role": "user", "content": "Take a screenshot"}]
-    tools = [
-        {
-            "type": "computer_20251124",
-            "name": "computer",
-            "display_width_px": 1024,
-            "display_height_px": 768,
-        }
-    ]
+    <Tab title="CLI">
+    <Info>
+    The agent loop is a stateful, multi-turn pattern that doesn't translate to a one-off shell command. See the SDK tabs for the implementation.
+    </Info>
+    </Tab>
 
-
-    def process_tool_calls(r):
-        return []
-
-
-    while True:
+    <Tab title="Python">
+    
+````python
+def sampling_loop(model, messages, max_iterations=10):
+    """
+    Run the computer-use agent loop until Claude stops requesting tools
+    or the iteration limit is reached.
+    """
+    for _ in range(max_iterations):
         response = client.beta.messages.create(
-            model="claude-opus-4-7",
+            model=model,
             max_tokens=4096,
             messages=messages,
-            tools=tools,
+            tools=TOOLS,
             betas=["computer-use-2025-11-24"],
         )
 
-        # Check if Claude used any tools
+        # Add Claude's response to the conversation history
+        messages.append({"role": "assistant", "content": response.content})
+
+        # Run any tools Claude requested and collect results
         tool_results = process_tool_calls(response)
-
         if not tool_results:
-            # No more tool use, task complete
-            break
+            return messages  # No more tool use; task complete
 
-        # Continue conversation with tool results
+        # Send tool results back to Claude for the next iteration
         messages.append({"role": "user", "content": tool_results})
-    ```
+
+    return messages
+````
+
+    </Tab>
+
+    <Tab title="TypeScript">
+    
+````typescript
+async function samplingLoop(
+  model: string,
+  messages: Anthropic.Beta.BetaMessageParam[],
+  maxIterations = 10,
+): Promise<Anthropic.Beta.BetaMessageParam[]> {
+  // Run the computer-use agent loop until Claude stops requesting tools
+  // or the iteration limit is reached.
+  for (let i = 0; i < maxIterations; i++) {
+    const response = await client.beta.messages.create({
+      model,
+      max_tokens: 4096,
+      messages,
+      tools,
+      betas: ["computer-use-2025-11-24"],
+    });
+
+    // Add Claude's response to the conversation history
+    messages.push({ role: "assistant", content: response.content });
+
+    // Run any tools Claude requested and collect results
+    const toolResults = processToolCalls(response);
+    if (toolResults.length === 0) {
+      return messages; // No more tool use; task complete
+    }
+
+    // Send tool results back to Claude for the next iteration
+    messages.push({ role: "user", content: toolResults });
+  }
+
+  return messages;
+}
+````
+
+    </Tab>
+
+    <Tab title="C#">
+    
+````csharp
+async Task<List<BetaMessageParam>> SamplingLoop(
+    Model model,
+    List<BetaMessageParam> messages,
+    int maxIterations = 10
+)
+{
+    // Run the computer-use agent loop until Claude stops requesting tools
+    // or the iteration limit is reached.
+    for (var i = 0; i < maxIterations; i++)
+    {
+        var response = await client.Beta.Messages.Create(
+            new MessageCreateParams
+            {
+                Model = model,
+                MaxTokens = 4096,
+                Messages = messages,
+                Tools = tools,
+                Betas = ["computer-use-2025-11-24"],
+            }
+        );
+
+        // Add Claude's response to the conversation history
+        messages.Add(
+            new()
+            {
+                Role = Role.Assistant,
+                Content = response
+                    .Content.Select(block => new BetaContentBlockParam(block.Json))
+                    .ToList(),
+            }
+        );
+
+        // Run any tools Claude requested and collect results
+        var toolResults = ProcessToolCalls(response);
+        if (toolResults.Count == 0)
+        {
+            return messages; // No more tool use; task complete
+        }
+
+        // Send tool results back to Claude for the next iteration
+        messages.Add(new() { Role = Role.User, Content = toolResults });
+    }
+
+    return messages;
+}
+````
+
+    </Tab>
+
+    <Tab title="Go">
+    
+````go
+// samplingLoop runs the computer-use agent loop until Claude stops
+// requesting tools or the iteration limit is reached.
+func samplingLoop(ctx context.Context, model anthropic.Model, messages []anthropic.BetaMessageParam, maxIterations int) ([]anthropic.BetaMessageParam, error) {
+	for range maxIterations {
+		response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
+			Model:     model,
+			MaxTokens: 4096,
+			Messages:  messages,
+			Tools:     tools,
+			Betas:     []anthropic.AnthropicBeta{"computer-use-2025-11-24"},
+		})
+		if err != nil {
+			return nil, err
+		}
+
+		// Add Claude's response to the conversation history
+		messages = append(messages, response.ToParam())
+
+		// Run any tools Claude requested and collect results
+		toolResults := processToolCalls(response)
+		if len(toolResults) == 0 {
+			return messages, nil // No more tool use; task complete
+		}
+
+		// Send tool results back to Claude for the next iteration
+		messages = append(messages, anthropic.BetaMessageParam{
+			Role:    anthropic.BetaMessageParamRoleUser,
+			Content: toolResults,
+		})
+	}
+	return messages, nil
+}
+
+````
+
+    </Tab>
+
+    <Tab title="Java">
+    
+````java
+/**
+ * Run the computer-use agent loop until Claude stops requesting tools
+ * or the iteration limit is reached.
+ */
+List<BetaMessageParam> samplingLoop(Model model, List<BetaMessageParam> messages, int maxIterations) {
+    for (int i = 0; i < maxIterations; i++) {
+        BetaMessage response = client.beta().messages().create(MessageCreateParams.builder()
+                .model(model)
+                .maxTokens(4096)
+                .messages(messages)
+                .addTool(COMPUTER_TOOL)
+                .addBeta("computer-use-2025-11-24")
+                .build());
+
+        // Add Claude's response to the conversation history
+        messages.add(BetaMessageParam.builder()
+                .role(BetaMessageParam.Role.ASSISTANT)
+                .contentOfBetaContentBlockParams(
+                        response.content().stream().map(BetaContentBlock::toParam).toList())
+                .build());
+
+        // Run any tools Claude requested and collect results
+        List<BetaContentBlockParam> toolResults = processToolCalls(response);
+        if (toolResults.isEmpty()) {
+            return messages; // No more tool use; task complete
+        }
+
+        // Send tool results back to Claude for the next iteration
+        messages.add(BetaMessageParam.builder()
+                .role(BetaMessageParam.Role.USER)
+                .contentOfBetaContentBlockParams(toolResults)
+                .build());
+    }
+    return messages;
+}
+````
+
+    </Tab>
+
+    <Tab title="PHP">
+    
+````php
+/**
+ * Run the computer-use agent loop until Claude stops requesting tools
+ * or the iteration limit is reached.
+ */
+function samplingLoop(string $model, array $messages, int $maxIterations = 10): array
+{
+    global $client, $tools;
+
+    for ($i = 0; $i < $maxIterations; $i++) {
+        $response = $client->beta->messages->create(
+            model: $model,
+            maxTokens: 4096,
+            messages: $messages,
+            tools: $tools,
+            betas: ['computer-use-2025-11-24'],
+        );
+
+        // Add Claude's response to the conversation history
+        $messages[] = BetaMessageParam::with(role: Role::ASSISTANT, content: $response->content);
+
+        // Run any tools Claude requested and collect results
+        $toolResults = processToolCalls($response);
+        if ($toolResults === []) {
+            return $messages; // No more tool use; task complete
+        }
+
+        // Send tool results back to Claude for the next iteration
+        $messages[] = BetaMessageParam::with(role: Role::USER, content: $toolResults);
+    }
+
+    return $messages;
+}
+````
+
+    </Tab>
+
+    <Tab title="Ruby">
+    
+````ruby
+# Run the computer-use agent loop until Claude stops requesting tools
+# or the iteration limit is reached.
+def sampling_loop(model, messages, max_iterations: 10)
+  max_iterations.times do
+    response = CLIENT.beta.messages.create(
+      model: model,
+      max_tokens: 4096,
+      messages: messages,
+      tools: TOOLS,
+      betas: ["computer-use-2025-11-24"]
+    )
+
+    # Add Claude's response to the conversation history
+    messages << {role: "assistant", content: response.content}
+
+    # Run any tools Claude requested and collect results
+    tool_results = process_tool_calls(response)
+    return messages if tool_results.empty? # No more tool use; task complete
+
+    # Send tool results back to Claude for the next iteration
+    messages << {role: "user", content: tool_results}
+  end
+
+  messages
+end
+````
+
+    </Tab>
+    </Tabs>
   </Step>
 </Steps>
 
 #### Handle errors
 
-When implementing the computer use tool, various errors may occur. Here's how to handle them:
+When implementing the computer use tool, various errors might occur. Here's how to handle them:
 
 <section title="Screenshot capture failure">
 
@@ -863,7 +1688,7 @@ If Claude provides coordinates outside the display bounds:
 
 <section title="Action execution failure">
 
-If an action fails to execute:
+If an action fails to run:
 
 ```json
 {
@@ -887,14 +1712,27 @@ If an action fails to execute:
 Claude Opus 4.7 supports up to 2576 pixels on the long edge, and its coordinates are 1\:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance that follows applies to earlier models.
 </Note>
 
-The API constrains images to a maximum of 1568 pixels on the longest edge and approximately 1.15 megapixels total (see [image resizing](/docs/en/build-with-claude/vision#evaluate-image-size) for details). For example, a 1512x982 screen gets downsampled to approximately 1330x864. Claude analyzes this smaller image and returns coordinates in that space, but your tool executes clicks in the original screen space.
+The API constrains images to a maximum of 1568 pixels on the longest edge and approximately 1.15 megapixels total (see [image resizing](/docs/en/build-with-claude/vision#evaluate-image-size) for details). For example, a 1512x982 screen gets downsampled to approximately 1330x864. Claude analyzes this smaller image and returns coordinates in that space, but your tool performs clicks in the original screen space.
 
 This can cause Claude's click coordinates to miss their targets unless you handle the coordinate transformation.
 
 To fix this, resize screenshots yourself and scale Claude's coordinates back up:
 
-<CodeGroup>
-```python Python hidelines={1..7}
+<Tabs>
+<Tab title="cURL">
+<Info>
+Coordinate scaling and screenshot resizing happen in your application code, not in the API request. See the SDK tabs for the helper pattern.
+</Info>
+</Tab>
+
+<Tab title="CLI">
+<Info>
+Coordinate scaling and screenshot resizing happen in your application code, not in the API request. See the SDK tabs for the helper pattern.
+</Info>
+</Tab>
+
+<Tab title="Python">
+```python hidelines={1..7,-2..}
 screen_width, screen_height = 1512, 982
 
 
@@ -930,9 +1768,14 @@ def execute_click(x, y):
     screen_x = x / scale
     screen_y = y / scale
     perform_click(screen_x, screen_y)
-```
 
-```typescript TypeScript hidelines={1..6}
+
+print(f"scale={scale:.6f} scaled={scaled_width}x{scaled_height}")
+```
+</Tab>
+
+<Tab title="TypeScript">
+```typescript hidelines={1..6,-2..}
 const screenWidth = 1512;
 const screenHeight = 982;
 function captureAndResize(w: number, h: number): string {
@@ -966,8 +1809,187 @@ function executeClick(x: number, y: number): void {
   const screenY = y / scale;
   performClick(screenX, screenY);
 }
+
+console.log(`scale=${scale.toFixed(6)} scaled=${scaledWidth}x${scaledHeight}`);
 ```
-</CodeGroup>
+</Tab>
+
+<Tab title="C#">
+```csharp hidelines={1..5,-2..}
+int screenWidth = 1512, screenHeight = 982;
+
+object? CaptureAndResize(int w, int h) => null;
+void PerformClick(double x, double y) { }
+
+double GetScaleFactor(int width, int height)
+{
+    // Calculate scale factor to meet API constraints.
+    int longEdge = Math.Max(width, height);
+    int totalPixels = width * height;
+
+    double longEdgeScale = 1568.0 / longEdge;
+    double totalPixelsScale = Math.Sqrt(1_150_000.0 / totalPixels);
+
+    return Math.Min(1.0, Math.Min(longEdgeScale, totalPixelsScale));
+}
+
+// When capturing screenshot
+double scale = GetScaleFactor(screenWidth, screenHeight);
+int scaledWidth = (int)(screenWidth * scale);
+int scaledHeight = (int)(screenHeight * scale);
+
+// Resize image to scaled dimensions before sending to Claude
+var screenshot = CaptureAndResize(scaledWidth, scaledHeight);
+
+// When handling Claude's coordinates, scale them back up
+void ExecuteClick(int x, int y)
+{
+    double screenX = x / scale;
+    double screenY = y / scale;
+    PerformClick(screenX, screenY);
+}
+
+Console.WriteLine($"scale={scale:F6} scaled={scaledWidth}x{scaledHeight}");
+```
+</Tab>
+
+<Tab title="Go">
+```go hidelines={1..10,17..19,-4..}
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func captureAndResize(w, h int) any { return nil }
+func performClick(x, y float64)     {}
+
+func getScaleFactor(width, height int) float64 {
+	longest := float64(max(width, height))
+	area := float64(width * height)
+	return min(1.0, 1568/longest, math.Sqrt(1_150_000/area))
+}
+
+func main() {
+	screenWidth, screenHeight := 1512, 982
+
+	// When capturing screenshot
+	scale := getScaleFactor(screenWidth, screenHeight)
+	scaledWidth := int(float64(screenWidth) * scale)
+	scaledHeight := int(float64(screenHeight) * scale)
+
+	// Resize image to scaled dimensions before sending to Claude
+	screenshot := captureAndResize(scaledWidth, scaledHeight)
+
+	// When handling Claude's coordinates, scale them back up
+	executeClick := func(x, y int) {
+		performClick(float64(x)/scale, float64(y)/scale)
+	}
+
+	_, _ = screenshot, executeClick
+	fmt.Printf("scale=%.6f scaled=%dx%d\n", scale, scaledWidth, scaledHeight)
+}
+```
+</Tab>
+
+<Tab title="Java">
+```java hidelines={1..5,17..18,30..31}
+import java.util.function.BiConsumer;
+
+static Object captureAndResize(int w, int h) { return null; }
+static void performClick(double x, double y) {}
+
+static double getScaleFactor(int width, int height) {
+    return Math.min(
+        1.0,
+        Math.min(
+            1568.0 / Math.max(width, height),
+            Math.sqrt(1_150_000.0 / (width * height))
+        )
+    );
+}
+
+void main() {
+    int screenWidth = 1512, screenHeight = 982;
+
+    // When capturing screenshot
+    double scale = getScaleFactor(screenWidth, screenHeight);
+    int scaledWidth = (int)(screenWidth * scale);
+    int scaledHeight = (int)(screenHeight * scale);
+
+    // Resize image to scaled dimensions before sending to Claude
+    var screenshot = captureAndResize(scaledWidth, scaledHeight);
+
+    // When handling Claude's coordinates, scale them back up
+    BiConsumer<Integer, Integer> executeClick =
+        (x, y) -> performClick(x / scale, y / scale);
+
+    IO.println("scale=%.6f scaled=%dx%d".formatted(scale, scaledWidth, scaledHeight));
+}
+```
+</Tab>
+
+<Tab title="PHP">
+```php hidelines={1..5,14..17,-2..}
+<?php
+
+function captureAndResize(int $w, int $h): mixed { return null; }
+function performClick(float $x, float $y): void {}
+
+function getScaleFactor(int $width, int $height): float
+{
+    return min(
+        1.0,
+        1568 / max($width, $height),
+        sqrt(1_150_000 / ($width * $height)),
+    );
+}
+
+$screenWidth = 1512;
+$screenHeight = 982;
+
+// When capturing screenshot
+$scale = getScaleFactor($screenWidth, $screenHeight);
+$scaledWidth = (int)($screenWidth * $scale);
+$scaledHeight = (int)($screenHeight * $scale);
+
+// Resize image to scaled dimensions before sending to Claude
+$screenshot = captureAndResize($scaledWidth, $scaledHeight);
+
+// When handling Claude's coordinates, scale them back up
+$executeClick = fn(int $x, int $y) => performClick($x / $scale, $y / $scale);
+
+printf("scale=%.6f scaled=%dx%d\n", $scale, $scaledWidth, $scaledHeight);
+```
+</Tab>
+
+<Tab title="Ruby">
+```ruby hidelines={1..3,7..9,-2..}
+def capture_and_resize(w, h) = nil
+def perform_click(x, y) = nil
+
+def get_scale_factor(width, height)
+  [1.0, 1568.0 / [width, height].max, Math.sqrt(1_150_000.0 / (width * height))].min
+end
+
+screen_width, screen_height = 1512, 982
+
+# When capturing screenshot
+scale = get_scale_factor(screen_width, screen_height)
+scaled_width = (screen_width * scale).to_i
+scaled_height = (screen_height * scale).to_i
+
+# Resize image to scaled dimensions before sending to Claude
+screenshot = capture_and_resize(scaled_width, scaled_height)
+
+# When handling Claude's coordinates, scale them back up
+execute_click = ->(x, y) { perform_click(x / scale, y / scale) }
+
+puts format("scale=%.6f scaled=%dx%d", scale, scaled_width, scaled_height)
+```
+</Tab>
+</Tabs>
 
 <Note>
 **macOS Retina displays** capture screenshots at a device pixel ratio of 2, so the image is twice the resolution of the logical screen coordinates. Either downscale the screenshot by 2x before sending, or halve the coordinates Claude returns before issuing the click.
@@ -1004,23 +2026,37 @@ Set display dimensions that match your use case while staying within recommended
 When returning screenshots to Claude:
 - Encode screenshots as base64 PNG or JPEG
 - Consider compressing large screenshots to improve performance
-- Include relevant metadata like timestamp or display state
+- Include relevant metadata such as timestamp or display state
 - If using higher resolutions, ensure coordinates are accurately scaled
 
 </section>
 
 <section title="Manage screenshot history for prompt caching">
 
-Long agent loops accumulate screenshots quickly (roughly 1,000–1,800 input tokens each). To keep [prompt caching](/docs/en/build-with-claude/prompt-caching) effective while bounding context:
+Long agent loops accumulate screenshots quickly (roughly 1,000–1,800 input tokens each). To keep [Prompt caching](/docs/en/build-with-claude/prompt-caching) effective while bounding context:
 - Place one `cache_control` breakpoint after the system prompt and tool definitions, and up to three more on the most recent `tool_result` blocks, advancing them each turn.
-- Prune old screenshots in *batches*, not one each turn. Dropping a screenshot every turn changes the prefix every turn and invalidates the cache. A reasonable default is to keep the last 3 screenshots and prune every 25 turns, so the prefix stays byte-identical between prune events.
+- Prune old screenshots in *batches*, not one each turn. Dropping a screenshot every turn changes the prefix every turn and invalidates the cache. A reasonable default is to keep the last three screenshots and prune every 25 turns, so the prefix stays byte-identical between prune events.
 
 </section>
 
 <section title="Add action delays">
 
 Some applications need time to respond to actions:
-```python hidelines={1..4}
+<Tabs>
+<Tab title="cURL">
+<Info>
+This is application-side helper code with no API request. See the SDK tabs for the pattern.
+</Info>
+</Tab>
+
+<Tab title="CLI">
+<Info>
+This is application-side helper code with no API request. See the SDK tabs for the pattern.
+</Info>
+</Tab>
+
+<Tab title="Python">
+```python hidelines={1..4,-3..}
 import time
 
 
@@ -1028,14 +2064,138 @@ def click_at(x, y): ...
 def click_and_wait(x, y, wait_time=0.5):
     click_at(x, y)
     time.sleep(wait_time)  # Allow UI to update
+
+
+print("ok")
 ```
+</Tab>
+
+<Tab title="TypeScript">
+```typescript hidelines={1..4,-3..}
+import { setTimeout } from "node:timers/promises";
+
+function clickAt(x: number, y: number): void {}
+
+async function clickAndWait(x: number, y: number, waitMs = 500): Promise<void> {
+  clickAt(x, y);
+  await setTimeout(waitMs); // Allow UI to update
+}
+
+await clickAndWait(100, 200);
+console.log("ok");
+```
+</Tab>
+
+<Tab title="C#">
+```csharp hidelines={1..5}
+ClickAndWait(100, 200);
+Console.WriteLine("ok");
+
+static void ClickAt(int x, int y) { }
+
+static void ClickAndWait(int x, int y, double waitSeconds = 0.5)
+{
+    ClickAt(x, y);
+    Thread.Sleep(TimeSpan.FromSeconds(waitSeconds));  // Allow UI to update
+}
+```
+</Tab>
+
+<Tab title="Go">
+```go hidelines={1..9,-4..}
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func clickAt(x, y int) {}
+
+func clickAndWaitFor(x, y int, wait time.Duration) {
+	clickAt(x, y)
+	time.Sleep(wait) // Allow UI to update
+}
+
+func clickAndWait(x, y int) {
+	clickAndWaitFor(x, y, 500*time.Millisecond)
+}
+
+func main() {
+	fmt.Println("ok")
+}
+```
+</Tab>
+
+<Tab title="Java">
+```java hidelines={1..2,-4..}
+void clickAt(int x, int y) {}
+
+void clickAndWait(int x, int y) throws InterruptedException {
+    clickAndWait(x, y, 500);
+}
+
+void clickAndWait(int x, int y, long waitTimeMillis) throws InterruptedException {
+    clickAt(x, y);
+    Thread.sleep(waitTimeMillis);  // Allow UI to update
+}
+
+void main() {
+    IO.println("ok");
+}
+```
+</Tab>
+
+<Tab title="PHP">
+```php hidelines={1..4,-2..}
+<?php
+
+function clickAt(int $x, int $y): void {}
+
+function clickAndWait(int $x, int $y, float $waitSeconds = 0.5): void
+{
+    clickAt($x, $y);
+    usleep((int) ($waitSeconds * 1_000_000));  // Allow UI to update
+}
+
+echo "ok\n";
+```
+</Tab>
+
+<Tab title="Ruby">
+```ruby hidelines={1..2,-2..}
+def click_at(x, y) = nil
+
+def click_and_wait(x, y, wait_time: 0.5)
+  click_at(x, y)
+  sleep(wait_time) # Allow UI to update
+end
+
+puts "ok"
+```
+</Tab>
+</Tabs>
 
 </section>
 
-<section title="Validate actions before execution">
+<section title="Validate actions before running them">
 
 Check that requested actions are safe and valid:
-```python hidelines={1}
+<Tabs>
+<Tab title="cURL">
+<Info>
+This is application-side helper code with no API request. See the SDK tabs for the pattern.
+</Info>
+</Tab>
+
+<Tab title="CLI">
+<Info>
+This is application-side helper code with no API request. See the SDK tabs for the pattern.
+</Info>
+</Tab>
+
+<Tab title="Python">
+```python hidelines={1,-3..}
 display_width, display_height = 1024, 768
 
 
@@ -1045,20 +2205,287 @@ def validate_action(action_type, params):
         if not (0 <= x < display_width and 0 <= y < display_height):
             return False, "Coordinates out of bounds"
     return True, None
+
+
+print(validate_action("left_click", {"coordinate": (2000, 100)}))
 ```
+</Tab>
+
+<Tab title="TypeScript">
+```typescript hidelines={1..3,-2..}
+const displayWidth = 1024;
+const displayHeight = 768;
+
+interface ActionParams {
+  coordinate?: [number, number];
+}
+
+function validateAction(actionType: string, params: ActionParams): [boolean, string | null] {
+  if (actionType === "left_click") {
+    const [x, y] = params.coordinate ?? [0, 0];
+    if (!(x >= 0 && x < displayWidth && y >= 0 && y < displayHeight)) {
+      return [false, "Coordinates out of bounds"];
+    }
+  }
+  return [true, null];
+}
+
+console.log(validateAction("left_click", { coordinate: [2000, 100] }));
+```
+</Tab>
+
+<Tab title="C#">
+```csharp hidelines={1..2,5..7}
+using System.Text.Json;
+
+const int DisplayWidth = 1024;
+const int DisplayHeight = 768;
+
+Console.WriteLine(ValidateAction("left_click", new Dictionary<string, JsonElement> { ["coordinate"] = JsonSerializer.SerializeToElement(new[] { 2000, 100 }) }));
+
+static (bool IsValid, string? Error) ValidateAction(string actionType, IReadOnlyDictionary<string, JsonElement> parameters)
+{
+    if (actionType == "left_click")
+    {
+        int x = parameters["coordinate"][0].GetInt32();
+        int y = parameters["coordinate"][1].GetInt32();
+        if (x is < 0 or >= DisplayWidth || y is < 0 or >= DisplayHeight)
+        {
+            return (false, "Coordinates out of bounds");
+        }
+    }
+    return (true, null);
+}
+```
+</Tab>
+
+<Tab title="Go">
+```go hidelines={1..4,-5..}
+package main
+
+import "fmt"
+
+const (
+	displayWidth  = 1024
+	displayHeight = 768
+)
+
+func validateAction(actionType string, params map[string]any) (bool, string) {
+	if actionType == "left_click" {
+		coord, ok := params["coordinate"].([]any)
+		if !ok || len(coord) != 2 {
+			return false, "Invalid coordinate"
+		}
+		x, y := int(coord[0].(float64)), int(coord[1].(float64))
+		if !(0 <= x && x < displayWidth && 0 <= y && y < displayHeight) {
+			return false, "Coordinates out of bounds"
+		}
+	}
+	return true, ""
+}
+
+func main() {
+	ok, msg := validateAction("left_click", map[string]any{"coordinate": []any{2000.0, 100.0}})
+	fmt.Println(ok, msg)
+}
+```
+</Tab>
+
+<Tab title="Java">
+```java hidelines={1..2,-4..}
+import com.anthropic.core.JsonValue;
+
+static final int DISPLAY_WIDTH = 1024;
+static final int DISPLAY_HEIGHT = 768;
+
+record Validation(boolean valid, String error) {}
+
+Validation validateAction(String actionType, Map<String, JsonValue> params) {
+    if (actionType.equals("left_click")) {
+        List<JsonValue> coord = (List<JsonValue>) params.get("coordinate").asArray().get();
+        long x = ((Number) coord.get(0).asNumber().get()).longValue();
+        long y = ((Number) coord.get(1).asNumber().get()).longValue();
+        if (!(0 <= x && x < DISPLAY_WIDTH && 0 <= y && y < DISPLAY_HEIGHT)) {
+            return new Validation(false, "Coordinates out of bounds");
+        }
+    }
+    return new Validation(true, null);
+}
+
+void main() {
+    IO.println(validateAction("left_click", Map.of("coordinate", JsonValue.from(List.of(2000, 100)))));
+}
+```
+</Tab>
+
+<Tab title="PHP">
+```php hidelines={1..2,-3..}
+<?php
+
+const DISPLAY_WIDTH = 1024;
+const DISPLAY_HEIGHT = 768;
+
+/** @return array{bool, ?string} */
+function validateAction(string $actionType, array $params): array
+{
+    if ($actionType === 'left_click') {
+        [$x, $y] = $params['coordinate'] ?? [0, 0];
+        if (!(0 <= $x && $x < DISPLAY_WIDTH && 0 <= $y && $y < DISPLAY_HEIGHT)) {
+            return [false, 'Coordinates out of bounds'];
+        }
+    }
+    return [true, null];
+}
+
+[$valid, $error] = validateAction('left_click', ['coordinate' => [2000, 100]]);
+echo ($valid ? 'true' : 'false') . ' ' . $error . "\n";
+```
+</Tab>
+
+<Tab title="Ruby">
+```ruby hidelines={-2..}
+DISPLAY_WIDTH = 1024
+DISPLAY_HEIGHT = 768
+
+def validate_action(action_type, params)
+  if action_type == "left_click"
+    x, y = params.fetch(:coordinate, [0, 0])
+    unless (0...DISPLAY_WIDTH).cover?(x) && (0...DISPLAY_HEIGHT).cover?(y)
+      return [false, "Coordinates out of bounds"]
+    end
+  end
+  [true, nil]
+end
+
+p validate_action("left_click", {coordinate: [2000, 100]})
+```
+</Tab>
+</Tabs>
 
 </section>
 
 <section title="Log actions for debugging">
 
 Keep a log of all actions for troubleshooting:
-```python
+<Tabs>
+<Tab title="cURL">
+<Info>
+This is application-side helper code with no API request. See the SDK tabs for the pattern.
+</Info>
+</Tab>
+
+<Tab title="CLI">
+<Info>
+This is application-side helper code with no API request. See the SDK tabs for the pattern.
+</Info>
+</Tab>
+
+<Tab title="Python">
+```python hidelines={-3..}
 import logging
 
 
 def log_action(action_type, params, result):
     logging.info(f"Action: {action_type}, Params: {params}, Result: {result}")
+
+
+print("ok")
 ```
+</Tab>
+
+<Tab title="TypeScript">
+```typescript hidelines={-2..}
+function logAction(actionType: string, params: unknown, result: unknown): void {
+  console.error(
+    `Action: ${actionType}, Params: ${JSON.stringify(params)}, Result: ${JSON.stringify(
+      result
+    )}`
+  );
+}
+
+console.log("ok");
+```
+</Tab>
+
+<Tab title="C#">
+```csharp hidelines={1..3}
+LogAction("screenshot", null, "<image data>");
+Console.WriteLine("ok");
+
+static void LogAction(string actionType, object? parameters, object? result)
+{
+    Console.Error.WriteLine($"Action: {actionType}, Params: {parameters}, Result: {result}");
+}
+```
+</Tab>
+
+<Tab title="Go">
+```go hidelines={1..7,-4..}
+package main
+
+import (
+	"fmt"
+	"log"
+)
+
+func logAction(actionType string, params map[string]any, result any) {
+	log.Printf("Action: %s, Params: %v, Result: %v", actionType, params, result)
+}
+
+func main() {
+	fmt.Println("ok")
+}
+```
+</Tab>
+
+<Tab title="Java">
+```java hidelines={-4..}
+import static java.lang.System.Logger.Level.INFO;
+
+static final System.Logger LOGGER = System.getLogger("computer-use");
+
+void logAction(String actionType, Object params, Object result) {
+    LOGGER.log(INFO, "Action: {0}, Params: {1}, Result: {2}", actionType, params, result);
+}
+
+void main() {
+    IO.println("ok");
+}
+```
+</Tab>
+
+<Tab title="PHP">
+```php hidelines={1..2,-2..}
+<?php
+
+function logAction(string $actionType, array $params, mixed $result): void
+{
+    error_log(sprintf(
+        'Action: %s, Params: %s, Result: %s',
+        $actionType,
+        json_encode($params),
+        json_encode($result),
+    ));
+}
+
+echo "ok\n";
+```
+</Tab>
+
+<Tab title="Ruby">
+```ruby hidelines={-2..}
+require "logger"
+
+LOGGER = Logger.new($stderr)
+
+def log_action(action_type, params, result)
+  LOGGER.info("Action: #{action_type}, Params: #{params}, Result: #{result}")
+end
+
+puts "ok"
+```
+</Tab>
+</Tabs>
 
 </section>
 
@@ -1066,19 +2493,19 @@ def log_action(action_type, params, result):
 
 ## Understand computer use limitations
 
-The computer use functionality is in beta. While Claude's capabilities are cutting edge, developers should be aware of its limitations:
+The computer use functionality is in beta. While Claude's capabilities are state of the art, developers should be aware of its limitations:
 
-1. **Latency**: the current computer use latency for human-AI interactions may be too slow compared to regular human-directed computer actions. Focus on use cases where speed isn't critical (for example, background information gathering, automated software testing) in trusted environments.
-2. **Computer vision accuracy and reliability**: Claude may make mistakes or hallucinate when outputting specific coordinates while generating actions. Extended thinking can help you understand the model's reasoning and identify potential issues.
-3. **Tool selection accuracy and reliability**: Claude may make mistakes or hallucinate when selecting tools while generating actions or take unexpected actions to solve problems. Additionally, reliability may be lower when interacting with niche applications or multiple applications at once. Prompt the model carefully when requesting complex tasks.
-4. **Scrolling reliability**: The scroll action supports direction control (up, down, left, right) and a specified amount. In applications where scrolling doesn't take effect, keyboard alternatives such as Page Down can help.
-5. **Spreadsheet interaction**: Use the fine-grained mouse control actions (`left_mouse_down`, `left_mouse_up`) and modifier-key combinations to select individual cells. Complex spreadsheet operations may still require multiple attempts.
-6. **Account creation and content generation on social and communications platforms**: While Claude will visit websites, Claude's ability to create accounts or generate and share content or otherwise engage in human impersonation across social media websites and platforms is limited. This capability may be updated in the future.
-7. **Vulnerabilities**: Vulnerabilities like jailbreaking or prompt injection may persist across frontier AI systems, including the beta computer use API. In some circumstances, Claude will follow commands found in content, sometimes even in conflict with the user's instructions. For example, Claude instructions on webpages or contained in images may override instructions or cause Claude to make mistakes. Consider the following:
+1. **Latency:** The current computer use latency for human-AI interactions might be too slow compared to regular human-directed computer actions. Focus on use cases where speed isn't critical (for example, background information gathering, automated software testing) in trusted environments.
+2. **Computer vision accuracy and reliability:** Claude might make mistakes or hallucinate when outputting specific coordinates while generating actions. Extended thinking can help you understand the model's reasoning and identify potential issues.
+3. **Tool selection accuracy and reliability:** Claude might make mistakes or hallucinate when selecting tools while generating actions or take unexpected actions to solve problems. Additionally, reliability might be lower when interacting with niche applications or multiple applications at once. Prompt the model carefully when requesting complex tasks.
+4. **Scrolling reliability:** The scroll action supports direction control (up, down, left, right) and a specified amount. In applications where scrolling doesn't take effect, keyboard alternatives such as Page Down can help.
+5. **Spreadsheet interaction:** Use the fine-grained mouse control actions (`left_mouse_down`, `left_mouse_up`) and modifier-key combinations to select individual cells. Complex spreadsheet operations might still require multiple attempts.
+6. **Account creation and content generation on social and communications platforms:** While Claude will visit websites, Claude's ability to create accounts or generate and share content or otherwise engage in human impersonation across social media websites and platforms is limited. This capability might be updated in the future.
+7. **Vulnerabilities:** Vulnerabilities such as jailbreaking or prompt injection might persist across frontier AI systems, including the beta computer use API. In some circumstances, Claude will follow commands found in content, sometimes even in conflict with the user's instructions. For example, Claude instructions on webpages or contained in images might override instructions or cause Claude to make mistakes. Consider the following:
    a. Limiting computer use to trusted environments such as virtual machines or containers with minimal privileges
    b. Avoiding giving computer use access to sensitive accounts or data without strict oversight
    c. Informing end users of relevant risks and obtaining their consent before enabling or requesting permissions necessary for computer use features in your applications
-8. **Inappropriate or illegal actions**: Per Anthropic's terms of service, you must not employ computer use to violate any laws or the Acceptable Use Policy.
+8. **Inappropriate or illegal actions:** Under Anthropic's Terms of Service, you must not employ computer use to violate any laws or the Acceptable Use Policy.
 
 Always carefully review and verify Claude's computer use actions and logs. Do not use Claude for tasks requiring perfect precision or sensitive user information without human oversight.
 
@@ -1115,7 +2542,7 @@ If you're also using bash or text editor tools alongside computer use, those too
     icon="github-logo"
     href="https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo"
   >
-    Get started quickly with the complete Docker-based implementation
+    Get started with the complete Docker-based implementation
   </Card>
   <Card
     title="Tool documentation"
