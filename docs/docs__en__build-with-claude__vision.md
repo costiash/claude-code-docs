@@ -118,6 +118,10 @@ The following examples demonstrate how to use Claude's vision capabilities using
 2. As a URL reference to an image hosted online
 3. Using the Files API (upload once, use multiple times)
 
+<Note>
+On Amazon Bedrock and Vertex AI, only base64-encoded sources are currently available.
+</Note>
+
 The base64 example prompts use these variables:
 
 <CodeGroup>

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-20T19:08:45Z",
+  "generated_at": "2026-05-20T21:52:11Z",
   "indexed_files": 1383,
   "index": {
     "/changelog": {
@@ -34398,7 +34398,7 @@
         "workspace",
         "result"
       ],
-      "word_count": 7221,
+      "word_count": 7222,
       "file_path": "docs/docs__en__build-with-claude__batch-processing.md"
     },
     "/docs/en/build-with-claude/cache-diagnostics": {
@@ -34465,24 +34465,24 @@
         "claude",
         "global",
         "bedrock",
-        "aws",
         "title",
+        "aws",
         "amazon",
-        "model",
         "region",
+        "model",
         "role",
         "step",
         "only",
         "access",
         "api",
-        "anthropic",
         "asia",
         "pacific",
-        "available",
-        "support",
-        "europe"
+        "anthropic",
+        "see",
+        "europe",
+        "support"
       ],
-      "word_count": 1788,
+      "word_count": 1800,
       "file_path": "docs/docs__en__build-with-claude__claude-in-amazon-bedrock.md"
     },
     "/docs/en/build-with-claude/claude-in-microsoft-foundry": {
@@ -34510,7 +34510,7 @@
         "sdks",
         "support"
       ],
-      "word_count": 2470,
+      "word_count": 2464,
       "file_path": "docs/docs__en__build-with-claude__claude-in-microsoft-foundry.md"
     },
     "/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy": {
@@ -34527,23 +34527,23 @@
         "model",
         "note",
         "opus",
-        "codegroup",
+        "api",
         "amazon",
+        "codegroup",
         "endpoints",
         "models",
-        "api",
         "regional",
         "pricing",
         "see",
         "available",
         "title"
       ],
-      "word_count": 2959,
+      "word_count": 3045,
       "file_path": "docs/docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md"
     },
     "/docs/en/build-with-claude/claude-on-vertex-ai": {
       "title": "Claude on Vertex AI",
-      "content_preview": "# Claude on Vertex AI  Anthropic's Claude models are available through [Vertex AI](https://cloud.google.com/vertex-ai).  ---  The Vertex API for accessing Claude is nearly-identical to the [Messages A...",
+      "content_preview": "# Claude on Vertex AI  Anthropic's Claude models are available through [Vertex AI](https://cloud.google.com/vertex-ai).  ---  The Vertex API for accessing Claude is nearly identical to the [Messages A...",
       "keywords": [
         "claude",
         "vertex",
@@ -34555,18 +34555,18 @@
         "anthropic",
         "region",
         "codegroup",
-        "pricing",
         "models",
+        "pricing",
         "note",
         "small",
+        "data",
         "regional",
+        "api",
         "title",
-        "deprecated",
-        "global",
-        "multi",
-        "availability"
+        "availability",
+        "deprecated"
       ],
-      "word_count": 2487,
+      "word_count": 2594,
       "file_path": "docs/docs__en__build-with-claude__claude-on-vertex-ai.md"
     },
     "/docs/en/build-with-claude/claude-platform-on-aws": {
@@ -34594,7 +34594,7 @@
         "authentication",
         "first"
       ],
-      "word_count": 6470,
+      "word_count": 6469,
       "file_path": "docs/docs__en__build-with-claude__claude-platform-on-aws.md"
     },
     "/docs/en/build-with-claude/compaction": {
@@ -34790,7 +34790,7 @@
         "card",
         "model"
       ],
-      "word_count": 2411,
+      "word_count": 2412,
       "file_path": "docs/docs__en__build-with-claude__fast-mode.md"
     },
     "/docs/en/build-with-claude/files": {
@@ -34888,8 +34888,8 @@
         "azureaibeta",
         "claudeapi",
         "claudeplatformaws",
-        "vertexai",
         "bedrock",
+        "vertexai",
         "api",
         "tool",
         "feature",
@@ -34902,7 +34902,7 @@
         "features",
         "capabilities"
       ],
-      "word_count": 1639,
+      "word_count": 1638,
       "file_path": "docs/docs__en__build-with-claude__overview.md"
     },
     "/docs/en/build-with-claude/pdf-support": {
@@ -34918,11 +34918,11 @@
         "page",
         "visual",
         "support",
+        "note",
         "when",
         "citations",
         "codegroup",
         "processing",
-        "note",
         "files",
         "converse",
         "charts",
@@ -34930,7 +34930,7 @@
         "image",
         "analysis"
       ],
-      "word_count": 3373,
+      "word_count": 3387,
       "file_path": "docs/docs__en__build-with-claude__pdf-support.md"
     },
     "/docs/en/build-with-claude/prompt-caching": {
@@ -34958,7 +34958,7 @@
         "input",
         "breakpoints"
       ],
-      "word_count": 15270,
+      "word_count": 15267,
       "file_path": "docs/docs__en__build-with-claude__prompt-caching.md"
     },
     "/docs/en/build-with-claude/search-results": {
@@ -35145,16 +35145,16 @@
         "using",
         "text",
         "tab",
+        "base",
         "when",
         "before",
         "size",
         "tokens",
-        "base",
         "examples",
         "multiple",
         "prompt"
       ],
-      "word_count": 5010,
+      "word_count": 5024,
       "file_path": "docs/docs__en__build-with-claude__vision.md"
     },
     "/docs/en/build-with-claude/working-with-messages": {
@@ -35312,9 +35312,9 @@
         "tool",
         "section",
         "anthropic",
+        "status",
         "readiness",
         "organization",
-        "status",
         "retention",
         "see",
         "code",
@@ -35322,7 +35322,7 @@
         "sup",
         "phi"
       ],
-      "word_count": 2901,
+      "word_count": 2962,
       "file_path": "docs/docs__en__manage-claude__api-and-data-retention.md"
     },
     "/docs/en/manage-claude/authentication": {
@@ -36311,26 +36311,26 @@
       "keywords": [
         "claude",
         "managed",
-        "agent",
         "agents",
+        "agent",
         "step",
         "infrastructure",
+        "api",
         "code",
         "title",
+        "sessions",
+        "running",
         "access",
         "tools",
         "built",
-        "running",
-        "api",
         "own",
         "tool",
         "execution",
         "environment",
         "session",
-        "create",
-        "sessions"
+        "create"
       ],
-      "word_count": 817,
+      "word_count": 893,
       "file_path": "docs/docs__en__managed-agents__overview.md"
     },
     "/docs/en/managed-agents/permission-policies": {
@@ -36442,7 +36442,7 @@
         "when",
         "work"
       ],
-      "word_count": 4451,
+      "word_count": 4464,
       "file_path": "docs/docs__en__managed-agents__self-hosted-sandboxes.md"
     },
     "/docs/en/managed-agents/sessions": {

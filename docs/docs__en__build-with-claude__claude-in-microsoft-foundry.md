@@ -500,10 +500,10 @@ Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context
 
 ### Features not supported
 
-- Admin API (`/v1/organizations/*` endpoints)
-- Compliance API (`/v1/compliance/*` endpoints)
-- Models API (`/v1/models`)
-- Message Batches API (`/v1/messages/batches`)
+- Admin API
+- Compliance API
+- Models API
+- Message Batches API
 
 ## API responses
 

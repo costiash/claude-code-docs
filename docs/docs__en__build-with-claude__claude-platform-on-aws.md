@@ -26,9 +26,9 @@ Both offerings let you use Claude through AWS, but they differ significantly in 
 | :--- | :--- | :--- | :--- |
 | **Who operates the stack** | Anthropic | AWS | AWS |
 | **API surface** | Claude API (`/v1/{endpoint}`) | Messages API at `/anthropic/v1/messages` | Bedrock Converse / InvokeModel |
-| **Feature availability** | Typically same-day as Claude API (see [feature limitations](#features-not-currently-available)) | Per Amazon Bedrock release schedule | Per Amazon Bedrock release schedule |
+| **Feature availability** | Typically same-day as Claude API (see [feature limitations](#features-not-supported)) | Per Amazon Bedrock release schedule | Per Amazon Bedrock release schedule |
 | **Agent Skills** | Available (beta) | Not available (requires code execution) | Not available |
-| **Beta features** | Pass through with `anthropic-beta` headers (see [feature limitations](#features-not-currently-available)) | `anthropic-beta` header not supported | `anthropic-beta` header not supported |
+| **Beta features** | Pass through with `anthropic-beta` headers (see [feature limitations](#features-not-supported)) | `anthropic-beta` header not supported | `anthropic-beta` header not supported |
 | **Authentication** | AWS IAM / SigV4 or API key | AWS IAM / SigV4 | AWS IAM / SigV4 or bearer token (C#, Go, and Java SDKs only) |
 | **Billing** | AWS Marketplace | AWS (native service) | AWS (native service) |
 | **Base URL** | `aws-external-anthropic.{region}.api.aws` | `bedrock-mantle.{region}.api.aws` | `bedrock-runtime.{region}.amazonaws.com` |
@@ -495,9 +495,9 @@ Context-window sizes on Claude Platform on AWS are identical to the first-party 
 
 ## Feature support
 
-Claude Platform on AWS uses Claude API endpoints directly, which means you get full feature parity with the first-party Claude API (except where noted in the [feature limitations](#features-not-currently-available)):
+Claude Platform on AWS uses Claude API endpoints directly, which means you get full feature parity with the first-party Claude API (except where noted in the [feature limitations](#features-not-supported)):
 
-- **Feature access:** Because Anthropic operates both platforms, most new features and beta headers become available on Claude Platform on AWS without a separate integration step. See [feature limitations](#features-not-currently-available) for exceptions.
+- **Feature access:** Because Anthropic operates both platforms, most new features and beta headers become available on Claude Platform on AWS without a separate integration step. See [feature limitations](#features-not-supported) for exceptions.
 - **Beta features:** Pass the standard `anthropic-beta` header to access beta features, just as you would with the Claude API.
 - **Agent Skills:** Use pre-built and custom [Agent Skills](/docs/en/agents-and-tools/agent-skills/overview) with the same `container.skills` parameter and beta headers as the Claude API. All pre-built Skills (PowerPoint, Excel, Word, PDF) work out of the box.
 - **Code execution:** Run code in Anthropic's managed sandbox using the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool).
@@ -518,7 +518,7 @@ Session behavior on Claude Platform on AWS differs from first-party Claude Manag
 
 - **Autonomous-session reauthentication:** A session can run autonomously, without any [user events](/docs/en/managed-agents/events-and-streaming#event-types), for up to 6 hours. After 6 hours, the session requires reauthentication before it continues. To reauthenticate, send any user-role event to the session (see [Events and streaming](/docs/en/managed-agents/events-and-streaming)). First-party Claude Managed Agents has no autonomous-session runtime limit.
 
-### Features not currently available
+### Features not supported
 
 The following capabilities are not currently available on Claude Platform on AWS:
 
@@ -980,10 +980,10 @@ If you're on the current Bedrock integration, the request body format is already
 
 ### What you gain
 
-- Typically same-day access to new models and features (see [feature limitations](#features-not-currently-available))
+- Typically same-day access to new models and features (see [feature limitations](#features-not-supported))
 - Agent Skills for document generation (PowerPoint, Excel, Word, PDF)
 - Code execution in Anthropic's managed sandbox
-- Beta features through the `anthropic-beta` header (see [feature limitations](#features-not-currently-available))
+- Beta features through the `anthropic-beta` header (see [feature limitations](#features-not-supported))
 - Claude Console for quota visibility and usage analytics
 - Direct Anthropic support
 - API key authentication as an alternative to SigV4 (see [API key authentication](#api-key-authentication))
