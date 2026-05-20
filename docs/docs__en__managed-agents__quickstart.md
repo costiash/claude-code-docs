@@ -248,8 +248,7 @@ func main() {
 	agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 		Name: "Coding Assistant",
 		Model: anthropic.BetaManagedAgentsModelConfigParams{
-			ID:   anthropic.BetaManagedAgentsModelClaudeOpus4_7,
-			Type: anthropic.BetaManagedAgentsModelConfigParamsTypeModelConfig,
+			ID: anthropic.BetaManagedAgentsModelClaudeOpus4_7,
 		},
 		System: anthropic.String("You are a helpful coding assistant. Write clean, well-documented code."),
 		Tools: []anthropic.BetaAgentNewParamsToolUnion{{
@@ -273,11 +272,11 @@ import com.anthropic.models.beta.agents.BetaManagedAgentsAgentToolset20260401Par
 import com.anthropic.models.beta.agents.BetaManagedAgentsModel;
 import com.anthropic.models.beta.environments.BetaCloudConfigParams;
 import com.anthropic.models.beta.environments.EnvironmentCreateParams;
-import com.anthropic.models.beta.environments.UnrestrictedNetwork;
+import com.anthropic.models.beta.environments.BetaUnrestrictedNetwork;
 import com.anthropic.models.beta.sessions.SessionCreateParams;
 import com.anthropic.models.beta.sessions.events.BetaManagedAgentsUserMessageEventParams;
 import com.anthropic.models.beta.sessions.events.EventSendParams;
-import com.anthropic.models.beta.sessions.events.StreamEvents;
+import com.anthropic.models.beta.sessions.events.BetaManagedAgentsStreamSessionEvents;
 
 void main() {
     var client = AnthropicOkHttpClient.fromEnv();
@@ -402,7 +401,7 @@ console.log(`Environment ID: ${environment.id}`);
 var environment = await client.Beta.Environments.Create(new()
 {
     Name = "quickstart-env",
-    Config = new() { Networking = new UnrestrictedNetwork() },
+    Config = new BetaCloudConfigParams { Networking = new BetaUnrestrictedNetwork() },
 });
 
 Console.WriteLine($"Environment ID: {environment.ID}");
@@ -412,9 +411,11 @@ Console.WriteLine($"Environment ID: {environment.ID}");
 ````go
 environment, err := client.Beta.Environments.New(ctx, anthropic.BetaEnvironmentNewParams{
 	Name: "quickstart-env",
-	Config: anthropic.BetaCloudConfigParams{
-		Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
-			OfUnrestricted: &anthropic.UnrestrictedNetworkParam{},
+	Config: anthropic.BetaEnvironmentNewParamsConfigUnion{
+		OfCloud: &anthropic.BetaCloudConfigParams{
+			Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
+				OfUnrestricted: &anthropic.BetaUnrestrictedNetworkParam{},
+			},
 		},
 	},
 })
@@ -430,7 +431,7 @@ fmt.Printf("Environment ID: %s\n", environment.ID)
 var environment = client.beta().environments().create(EnvironmentCreateParams.builder()
     .name("quickstart-env")
     .config(BetaCloudConfigParams.builder()
-        .networking(UnrestrictedNetwork.builder().build())
+        .networking(BetaUnrestrictedNetwork.builder().build())
         .build())
     .build());
 
@@ -748,7 +749,7 @@ await foreach (var ev in stream)
 
 	// Send the user message after the stream opens
 	_, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
-		Events: []anthropic.SendEventsParamsUnion{{
+		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
 				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
@@ -796,7 +797,7 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
         .build());
 
     // Process streaming events
-    for (var event : (Iterable<StreamEvents>) stream.stream()::iterator) {
+    for (var event : (Iterable<BetaManagedAgentsStreamSessionEvents>) stream.stream()::iterator) {
         if (event.isAgentMessage()) {
             event.asAgentMessage().content().forEach(block -> IO.print(block.text()));
         } else if (event.isAgentToolUse()) {

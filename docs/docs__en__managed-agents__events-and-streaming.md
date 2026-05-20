@@ -613,7 +613,7 @@ await foreach (var streamEvent in stream.Enumerate())
 	defer stream.Close()
 
 	if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
-		Events: []anthropic.SendEventsParamsUnion{{
+		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
 				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
@@ -661,7 +661,7 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
             .build()
     );
 
-    for (var event : (Iterable<StreamEvents>) stream.stream()::iterator) {
+    for (var event : (Iterable<BetaManagedAgentsStreamSessionEvents>) stream.stream()::iterator) {
         if (event.isAgentMessage()) {
             event.asAgentMessage().content().forEach(block -> IO.print(block.text()));
         } else if (event.isSessionStatusIdle()) {
@@ -925,7 +925,7 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
     }
 
     // Tail live events, skipping anything already seen
-    for (var event : (Iterable<StreamEvents>) stream.stream()::iterator) {
+    for (var event : (Iterable<BetaManagedAgentsStreamSessionEvents>) stream.stream()::iterator) {
         Optional<Map<String, JsonValue>> obj = event._json().orElseThrow().asObject();
         if (!seenEventIds.add(obj.orElseThrow().get("id").asStringOrThrow())) continue;
         if (event.isAgentMessage()) {
@@ -1397,7 +1397,7 @@ loop:
   
 ````java
 try (var stream = client.beta().sessions().events().streamStreaming(session.id())) {
-    for (var event : (Iterable<StreamEvents>) stream.stream()::iterator) {
+    for (var event : (Iterable<BetaManagedAgentsStreamSessionEvents>) stream.stream()::iterator) {
         if (!event.isSessionStatusIdle()) continue;
         var stopReason = event.asSessionStatusIdle().stopReason().orElseThrow();
         if (stopReason.isRequiresAction()) {
@@ -1661,7 +1661,7 @@ loop:
   
 ````java
 try (var stream = client.beta().sessions().events().streamStreaming(session.id())) {
-    for (var event : (Iterable<StreamEvents>) stream.stream()::iterator) {
+    for (var event : (Iterable<BetaManagedAgentsStreamSessionEvents>) stream.stream()::iterator) {
         if (!event.isSessionStatusIdle()) continue;
         var stopReason = event.asSessionStatusIdle().stopReason().orElseThrow();
         if (stopReason.isRequiresAction()) {

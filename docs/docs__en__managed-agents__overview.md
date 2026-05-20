@@ -90,7 +90,7 @@ To get started, you need:
 2. The `managed-agents-2026-04-01` beta header on all requests
 3. Access to Claude Managed Agents (enabled by default for all API accounts)
 
-Certain features ([outcomes](/docs/en/managed-agents/define-outcomes) and [multiagent](/docs/en/managed-agents/multi-agent)) are in beta (research preview). [Request access](https://claude.com/form/claude-managed-agents) to try them.
+Certain features ([MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview) and [dreaming](/docs/en/managed-agents/dreams)) are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
 ## Rate limits
 

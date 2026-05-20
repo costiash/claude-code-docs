@@ -4,7 +4,7 @@ Coordinate multiple agents within a single session.
 
 ---
 
-Multi-agent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel with their own isolated context, which helps improve output quality and can also improve time to completion.
+Multiagent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel with their own isolated context, which helps improve output quality and can also improve time to completion.
 
 <Note>
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets this beta header automatically.
@@ -12,21 +12,21 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## How it works
 
-All agents share the same container and filesystem, but each agent runs in its own **session thread**, a context-isolated event stream with its own conversation history. The coordinator reports activity in the **primary thread** (which is the same as the session-level [event stream](/docs/en/managed-agents/events-and-streaming)); additional threads are spawned at runtime when the coordinator decides to delegate.
+All agents share the same container, filesystem, and [vault credentials](/docs/en/managed-agents/vaults), but each agent runs in its own **session thread**, a context-isolated event stream with its own conversation history. The coordinator reports activity in the **primary thread** (which is the same as the session-level [event stream](/docs/en/managed-agents/events-and-streaming)); additional threads are spawned at runtime when the coordinator delegates work.
 
 Threads are persistent: the coordinator can send a follow-up to an agent it called earlier, and that agent retains everything from its previous turns.
 
-Each agent uses its own configuration (model, system prompt, tools, MCP servers, and skills) as defined when that agent was created. Tools and context are not shared.
+Each agent uses its own configuration (model, system prompt, tools, MCP servers, and skills) as defined when that agent was created. Tools, MCP servers, and context are not shared.
 
 ### What to delegate
 
-Multiagent coordination is best-suited for complex tasks that either require work across a variety of surfaces, or where multiple well-scoped tasks contribute to an overall goal.
+Multiagent coordination is best suited for complex tasks that either require work across a variety of surfaces, or where multiple well-scoped tasks contribute to an overall goal.
 
 Patterns that work well:
 
 - **Parallelization:** Fan out independent subtasks simultaneously (searching multiple sources, analyzing separate files) and have the coordinator synthesize the results.
 - **Specialization:** Route to agents with domain-focused system prompts and tools, such as a security agent or a documentation agent, rather than loading a single agent with every capability.
-- **Escalation:** Consult a more capable agent / model for a subset of complex subtasks.
+- **Escalation:** Consult a more capable agent or model for a subset of complex subtasks.
 
 ## Configure the coordinator
 
@@ -131,14 +131,10 @@ var coordinator = await client.Beta.Agents.Create(new()
             Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
         },
     ],
-    Multiagent = new BetaManagedAgentsMultiagentCoordinatorParams
+    Multiagent = new BetaManagedAgentsMultiagentParams
     {
-        Type = BetaManagedAgentsMultiagentCoordinatorParamsType.Coordinator,
-        Agents =
-        [
-            new BetaManagedAgentsRosterAgentParams { Type = "agent", ID = reviewerAgent.ID },
-            new BetaManagedAgentsRosterAgentParams { Type = "agent", ID = testWriterAgent.ID },
-        ],
+        Type = BetaManagedAgentsMultiagentParamsType.Coordinator,
+        Agents = [reviewerAgent.ID, testWriterAgent.ID],
     },
 });
 ````
@@ -154,13 +150,11 @@ coordinator, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
 		},
 	}},
-	Multiagent: anthropic.BetaAgentNewParamsMultiagentUnion{
-		OfCoordinator: &anthropic.BetaManagedAgentsMultiagentCoordinatorParams{
-			Type: "coordinator",
-			Agents: []anthropic.BetaManagedAgentsRosterEntryUnion{
-				{OfAgent: &anthropic.BetaManagedAgentsRosterAgentParams{Type: "agent", ID: reviewerAgent.ID}},
-				{OfAgent: &anthropic.BetaManagedAgentsRosterAgentParams{Type: "agent", ID: testWriterAgent.ID}},
-			},
+	Multiagent: anthropic.BetaManagedAgentsMultiagentParams{
+		Type: anthropic.BetaManagedAgentsMultiagentParamsTypeCoordinator,
+		Agents: []anthropic.BetaManagedAgentsMultiagentRosterEntryParamsUnion{
+			{OfString: anthropic.String(reviewerAgent.ID)},
+			{OfString: anthropic.String(testWriterAgent.ID)},
 		},
 	},
 })
@@ -181,14 +175,14 @@ var coordinator = client.beta().agents().create(
                 .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
                 .build()
         )
-        .multiagent(BetaManagedAgentsMultiagentCoordinatorParams.builder()
-            .type(BetaManagedAgentsMultiagentCoordinatorParams.Type.COORDINATOR)
-            .addAgent(BetaManagedAgentsRosterAgentParams.builder()
-                .type("agent")
+        .multiagent(BetaManagedAgentsMultiagentParams.builder()
+            .type(BetaManagedAgentsMultiagentParams.Type.COORDINATOR)
+            .addAgent(BetaManagedAgentsAgentParams.builder()
+                .type(BetaManagedAgentsAgentParams.Type.AGENT)
                 .id(reviewerAgent.id())
                 .build())
-            .addAgent(BetaManagedAgentsRosterAgentParams.builder()
-                .type("agent")
+            .addAgent(BetaManagedAgentsAgentParams.builder()
+                .type(BetaManagedAgentsAgentParams.Type.AGENT)
                 .id(testWriterAgent.id())
                 .build())
             .build())
@@ -239,13 +233,13 @@ coordinator = client.beta.agents.create(
 `multiagent.agents` can accept any of the following:
 * `{"type": "agent", "id": agent.id}` references a previously created `agent` by ID. Defaults to pinning the latest agent version if no `version` is specified.
 * `{"type": "agent", "id": agent.id, "version": agent.version}` pins a specific agent version.
-* `{"type": "self"}`: allows the coordinator to spawn copies of itself.
+* `{"type": "self"}` allows the coordinator to spawn copies of itself.
 
 The coordinator can only delegate to one level of agents; depth > 1 is ignored. A maximum of 20 unique agents can be listed in `multiagent.agents`, but the coordinator can call multiple copies of each agent.
 
 ## Create the session
 
-Create a session referencing the coordinator. The coordinator will delegate to the agents in its roster as needed.
+Create a session referencing the coordinator. The coordinator delegates to the agents in its roster as needed.
 
 <CodeGroup>
   
@@ -336,13 +330,386 @@ session = client.beta.sessions.create(
 
 </CodeGroup>
 
+## Connect agents to MCP servers
+
+MCP servers are agent-scoped (each agent definition declares its own servers and tools), while vault credentials are session-scoped (`vault_ids` passed at session creation apply to every thread). Two implications for your integration:
+- To authenticate MCP servers, include a vault credential for every MCP server used across all agents.
+- To limit an agent's access, declare only the servers it needs in its agent definition.
+
+<CodeGroup>
+  
+````bash
+research_agent_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data @- <<'EOF' | jq -er '.id'
+{
+  "name": "researcher",
+  "model": "claude-haiku-4-5",
+  "mcp_servers": [{"type": "url", "name": "github", "url": "https://api.githubcopilot.com/mcp/"}],
+  "tools": [{"type": "mcp_toolset", "mcp_server_name": "github"}]
+}
+EOF
+)
+
+coordinator_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data @- <<EOF | jq -er '.id'
+{
+  "name": "coordinator",
+  "model": "claude-opus-4-7",
+  "tools": [{"type": "agent_toolset_20260401"}],
+  "multiagent": {
+    "type": "coordinator",
+    "agents": [{"type": "agent", "id": "$research_agent_id"}]
+  }
+}
+EOF
+)
+
+session_id=$(curl --fail-with-body -sS "$BASE/v1/sessions" "${H[@]}" --data @- <<EOF | jq -er '.id'
+{
+  "agent": "$coordinator_id",
+  "environment_id": "$environment_id",
+  "vault_ids": ["$vault_id"]
+}
+EOF
+)
+echo "$session_id"
+````
+
+  
+````bash
+research_agent_id=$(ant beta:agents create --transform id --raw-output <<YAML
+name: researcher
+model: claude-haiku-4-5
+mcp_servers:
+  - type: url
+    name: github
+    url: https://api.githubcopilot.com/mcp/
+tools:
+  - type: mcp_toolset
+    mcp_server_name: github
+YAML
+)
+
+coordinator_id=$(ant beta:agents create --transform id --raw-output <<YAML
+name: coordinator
+model: claude-opus-4-7
+tools:
+  - type: agent_toolset_20260401
+multiagent:
+  type: coordinator
+  agents:
+    - type: agent
+      id: $research_agent_id
+YAML
+)
+
+session_id=$(ant beta:sessions create \
+  --agent "$coordinator_id" \
+  --environment-id "$environment_id" \
+  --vault-id "$vault_id" \
+  --transform id --raw-output)
+echo "$session_id"
+````
+
+  
+````python
+research_agent = client.beta.agents.create(
+    name="researcher",
+    model="claude-haiku-4-5",
+    mcp_servers=[
+        {"type": "url", "name": "github", "url": "https://api.githubcopilot.com/mcp/"},
+    ],
+    tools=[{"type": "mcp_toolset", "mcp_server_name": "github"}],
+)
+
+coordinator = client.beta.agents.create(
+    name="coordinator",
+    model="claude-opus-4-7",
+    tools=[{"type": "agent_toolset_20260401"}],
+    multiagent={
+        "type": "coordinator",
+        "agents": [{"type": "agent", "id": research_agent.id}],
+    },
+)
+
+session = client.beta.sessions.create(
+    agent=coordinator.id,
+    environment_id=environment.id,
+    vault_ids=[vault.id],
+)
+print(session.id)
+````
+
+  
+````typescript
+const researchAgent = await client.beta.agents.create({
+  name: "researcher",
+  model: "claude-haiku-4-5",
+  mcp_servers: [
+    { type: "url", name: "github", url: "https://api.githubcopilot.com/mcp/" },
+  ],
+  tools: [{ type: "mcp_toolset", mcp_server_name: "github" }],
+});
+
+const coordinator = await client.beta.agents.create({
+  name: "coordinator",
+  model: "claude-opus-4-7",
+  tools: [{ type: "agent_toolset_20260401" }],
+  multiagent: {
+    type: "coordinator",
+    agents: [{ type: "agent", id: researchAgent.id }],
+  },
+});
+
+const session = await client.beta.sessions.create({
+  agent: coordinator.id,
+  environment_id: environment.id,
+  vault_ids: [vault.id],
+});
+console.log(session.id);
+````
+
+  
+````csharp
+var researchAgent = await client.Beta.Agents.Create(new()
+{
+    Name = "researcher",
+    Model = BetaManagedAgentsModel.ClaudeHaiku4_5,
+    McpServers =
+    [
+        new()
+        {
+            Type = BetaManagedAgentsUrlMcpServerParamsType.Url,
+            Name = "github",
+            Url = "https://api.githubcopilot.com/mcp/",
+        },
+    ],
+    Tools =
+    [
+        new BetaManagedAgentsMcpToolsetParams
+        {
+            Type = BetaManagedAgentsMcpToolsetParamsType.McpToolset,
+            McpServerName = "github",
+        },
+    ],
+});
+
+var coordinator = await client.Beta.Agents.Create(new()
+{
+    Name = "coordinator",
+    Model = BetaManagedAgentsModel.ClaudeOpus4_7,
+    Tools =
+    [
+        new BetaManagedAgentsAgentToolset20260401Params
+        {
+            Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
+        },
+    ],
+    Multiagent = new()
+    {
+        Type = BetaManagedAgentsMultiagentParamsType.Coordinator,
+        Agents =
+        [
+            new BetaManagedAgentsAgentParams
+            {
+                Type = Anthropic.Models.Beta.Sessions.Type.Agent,
+                ID = researchAgent.ID,
+            },
+        ],
+    },
+});
+
+var session = await client.Beta.Sessions.Create(new()
+{
+    Agent = coordinator.ID,
+    EnvironmentID = environment.ID,
+    VaultIds = [vault.ID],
+});
+Console.WriteLine(session.ID);
+````
+
+  
+````go
+researcher, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
+	Name:  "researcher",
+	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeHaiku4_5},
+	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
+		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
+		Name: "github",
+		URL:  "https://api.githubcopilot.com/mcp/",
+	}},
+	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
+		OfMCPToolset: &anthropic.BetaManagedAgentsMCPToolsetParams{
+			Type:          anthropic.BetaManagedAgentsMCPToolsetParamsTypeMCPToolset,
+			MCPServerName: "github",
+		},
+	}},
+})
+if err != nil {
+	panic(err)
+}
+
+coordinator, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
+	Name:  "coordinator",
+	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus4_7},
+	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
+		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
+			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
+		},
+	}},
+	Multiagent: anthropic.BetaManagedAgentsMultiagentParams{
+		Type: anthropic.BetaManagedAgentsMultiagentParamsTypeCoordinator,
+		Agents: []anthropic.BetaManagedAgentsMultiagentRosterEntryParamsUnion{{
+			OfBetaManagedAgentsAgents: &anthropic.BetaManagedAgentsAgentParams{
+				Type: anthropic.BetaManagedAgentsAgentParamsTypeAgent,
+				ID:   researcher.ID,
+			},
+		}},
+	},
+})
+if err != nil {
+	panic(err)
+}
+
+session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
+	Agent: anthropic.BetaSessionNewParamsAgentUnion{
+		OfString: anthropic.String(coordinator.ID),
+	},
+	EnvironmentID: environment.ID,
+	VaultIDs:      []string{vault.ID},
+})
+if err != nil {
+	panic(err)
+}
+fmt.Println(session.ID)
+````
+
+  
+````java
+var researcher = client.beta().agents().create(
+    AgentCreateParams.builder()
+        .name("researcher")
+        .model(BetaManagedAgentsModel.CLAUDE_HAIKU_4_5)
+        .addMcpServer(BetaManagedAgentsUrlMcpServerParams.builder()
+            .name("github")
+            .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
+            .url("https://api.githubcopilot.com/mcp/")
+            .build())
+        .addTool(BetaManagedAgentsMcpToolsetParams.builder()
+            .type(BetaManagedAgentsMcpToolsetParams.Type.MCP_TOOLSET)
+            .mcpServerName("github")
+            .build())
+        .build()
+);
+
+var coordinator = client.beta().agents().create(
+    AgentCreateParams.builder()
+        .name("coordinator")
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
+        .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
+            .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
+            .build())
+        .multiagent(BetaManagedAgentsMultiagentParams.builder()
+            .type(BetaManagedAgentsMultiagentParams.Type.COORDINATOR)
+            .addAgent(BetaManagedAgentsAgentParams.builder()
+                .type(BetaManagedAgentsAgentParams.Type.AGENT)
+                .id(researcher.id())
+                .build())
+            .build())
+        .build()
+);
+
+var session = client.beta().sessions().create(SessionCreateParams.builder()
+    .agent(coordinator.id())
+    .environmentId(environment.id())
+    .vaultIds(List.of(vault.id()))
+    .build());
+IO.println(session.id());
+````
+
+  
+````php
+$researchAgent = $client->beta->agents->create(
+    name: 'researcher',
+    model: 'claude-haiku-4-5',
+    mcpServers: [
+        ['type' => 'url', 'name' => 'github', 'url' => 'https://api.githubcopilot.com/mcp/'],
+    ],
+    tools: [
+        ['type' => 'mcp_toolset', 'mcp_server_name' => 'github'],
+    ],
+);
+
+$coordinator = $client->beta->agents->create(
+    name: 'coordinator',
+    model: 'claude-opus-4-7',
+    tools: [
+        ['type' => 'agent_toolset_20260401'],
+    ],
+    multiagent: [
+        'type' => 'coordinator',
+        'agents' => [
+            ['type' => 'agent', 'id' => $researchAgent->id],
+        ],
+    ],
+);
+
+$session = $client->beta->sessions->create(
+    agent: $coordinator->id,
+    environmentID: $environment->id,
+    vaultIDs: [$vault->id],
+);
+echo "{$session->id}\n";
+````
+
+  
+````ruby
+research_agent = client.beta.agents.create(
+  name: "researcher",
+  model: "claude-haiku-4-5",
+  mcp_servers: [
+    {type: "url", name: "github", url: "https://api.githubcopilot.com/mcp/"}
+  ],
+  tools: [
+    {type: "mcp_toolset", mcp_server_name: "github"}
+  ]
+)
+
+coordinator = client.beta.agents.create(
+  name: "coordinator",
+  model: "claude-opus-4-7",
+  tools: [
+    {type: "agent_toolset_20260401"}
+  ],
+  multiagent: {
+    type: "coordinator",
+    agents: [
+      {type: "agent", id: research_agent.id}
+    ]
+  }
+)
+
+session = client.beta.sessions.create(
+  agent: coordinator.id,
+  environment_id: environment.id,
+  vault_ids: [vault.id]
+)
+puts session.id
+````
+
+</CodeGroup>
+
+In this example, only the researcher declares the GitHub MCP server, so the coordinator does not have access. The session's `vault_ids` supply the GitHub credential to the researcher's thread.
+
+<Tip>
+If an agent's MCP calls fail to authenticate after you declare the server, confirm the credential's `mcp_server_url` matches the agent's `mcp_servers[].url` exactly, including scheme and trailing slash.
+</Tip>
+
 ## Threads
 
-The **session-level event stream** (`/v1/sessions/:id/events/stream`) is considered the **primary thread**, containing a condensed view of all activity across all threads. You won't see the full activity from non-coordinator agents, but you will see the start and end of their work, as well as blocking events like tool permission requests.
+The **session-level event stream** (`/v1/sessions/:id/events/stream`) is considered the **primary thread**, containing a condensed view of all activity across all threads. You won't see the full activity from subagents, but you will see the start and end of their work, and blocking events such as tool permission requests.
 
 **Session threads** are where you drill into a specific agent's activity.
 
-The session `status` is an aggregation of all agent activity; if at least one thread is `running`, then the overall session status will be `running` as well.
+The session `status` is an aggregation of all agent activity; if at least one thread is `running`, then the overall session status is `running` as well.
 
 <Note>
 A maximum of 25 concurrent threads are supported. The coordinator can call multiple copies of a single agent in the roster, creating multiple threads associated with one `agent`.
@@ -422,7 +789,7 @@ end
 
 </CodeGroup>
 
-The full list includes the primary thread. `parent_thread_id` will be null for the primary thread.
+The full list includes the primary thread. `parent_thread_id` is null for the primary thread.
   </Tab>
 
   <Tab title="Interrupt a session thread">
@@ -526,7 +893,7 @@ Against a child thread blocked on `requires_action`, the interrupt marks each pe
   </Tab>
 
   <Tab title="Archive a session thread">
-Optionally archive a session thread when it has finished its work. This frees up a thread against the 25 thread limit.
+Optionally archive a session thread when it has completed its work. This frees up a thread against the 25-thread limit.
 
 <CodeGroup>
   
@@ -746,7 +1113,7 @@ These events surface multiagent activity on the primary thread at `/v1/sessions/
 | `agent.thread_message_sent` | The coordinator sent a follow-up to another agent. Includes `to_session_thread_id`, `to_agent_name`, and `content`. |
 
 ### Session thread events
-Critical events are proxied to the primary thread. However, you may still want to investigate a specific agent's reasoning and tool calls. To do so, stream or list the events from the associated session thread.
+Critical events are proxied to the primary thread. However, you might still want to investigate a specific agent's reasoning and tool calls. To do so, stream or list the events from the associated session thread.
 
 <Tabs>
   <Tab title="Stream session thread events">
@@ -864,9 +1231,9 @@ loop:
 ````java
 try (var streamResponse = client.beta().sessions().threads().events().streamStreaming(
     thread.id(),
-    ThreadStreamParams.builder().sessionId(session.id()).build()
+    EventStreamParams.builder().sessionId(session.id()).build()
 )) {
-    for (var event : (Iterable<StreamEvents>) streamResponse.stream()::iterator) {
+    for (var event : (Iterable<BetaManagedAgentsStreamSessionThreadEvents>) streamResponse.stream()::iterator) {
         if (event.isAgentMessage()) {
             for (var block : event.asAgentMessage().content()) {
                 IO.print(block.text());
@@ -982,7 +1349,12 @@ for (var event : client.beta().sessions().threads().events().list(
         thread.id(),
         EventListParams.builder().sessionId(session.id()).build()
     ).autoPager()) {
-    IO.println("[" + event.type() + "] " + event.processedAt());
+    var json = (Map<String, JsonValue>) event._json().orElseThrow().asObject().orElseThrow();
+    var type = json.get("type").asStringOrThrow();
+    var processedAt = json.containsKey("processed_at")
+        ? json.get("processed_at").asStringOrThrow()
+        : "pending";
+    IO.println("[" + type + "] " + processedAt);
 }
 ````
 
@@ -1014,7 +1386,7 @@ end
 
 ### Tool permissions and custom tools
 
-If a non-coordinator agent needs something from your client, such as [permission](/docs/en/managed-agents/events-and-streaming#tool-confirmation) to run an `always_ask` tool, or the [result of a custom tool](/docs/en/managed-agents/events-and-streaming#handling-custom-tool-calls), the event is cross-posted to the **primary thread** with `session_thread_id` identifying the originating session thread.
+If a subagent needs something from your client, such as [permission](/docs/en/managed-agents/events-and-streaming#tool-confirmation) to run an `always_ask` tool, or the [result of a custom tool](/docs/en/managed-agents/events-and-streaming#handling-custom-tool-calls), the event is cross-posted to the **primary thread** with `session_thread_id` identifying the originating session thread.
 
 ```json
 {
@@ -1031,7 +1403,7 @@ If a non-coordinator agent needs something from your client, such as [permission
 
 Post `user.tool_confirmation` (with `tool_use_id`) or `user.custom_tool_result` (with `custom_tool_use_id`); the server routes the response to the correct thread automatically.
 
-The example below extends the [tool confirmation handler](/docs/en/managed-agents/events-and-streaming#tool-confirmation) to route replies. The same pattern applies to `user.custom_tool_result`.
+The following example extends the [tool confirmation handler](/docs/en/managed-agents/events-and-streaming#tool-confirmation) to route replies. The same pattern applies to `user.custom_tool_result`.
 
 <CodeGroup>
   

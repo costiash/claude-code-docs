@@ -11,10 +11,25 @@ Workspaces provide a way to organize your API usage within an organization. Use 
 Every organization has a **Default Workspace** that cannot be renamed, archived, or deleted. When you create additional workspaces, you can assign API keys, members, and resource limits to each one.
 
 Key characteristics:
-- **Workspace identifiers** use the `wrkspc_` prefix (e.g., `wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ`)
+- **Workspace identifiers** use the `wrkspc_` prefix (for example, `wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ`)
 - **Maximum 100 workspaces** per organization (archived workspaces don't count)
 - **Default Workspace** has no ID and doesn't appear in list endpoints
 - **API keys** are scoped to a single workspace and can only access resources within that workspace
+
+### Claude Code workspace
+
+When a member of your organization first signs in to [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) with their Claude Console account, Anthropic automatically creates a **Claude Code** workspace in the organization and adds that member to it. Every subsequent member who signs in to Claude Code is added the same way.
+
+The Claude Code workspace keeps Claude Code traffic separate from your other API workloads:
+
+- Claude Code mints a per-user API key in this workspace at sign-in. You cannot create keys in it manually from the Console.
+- A Claude Code key stops working if its owner is removed from the workspace or organization, unlike standard workspace keys.
+- Claude Code usage is rate-limited separately, and admins can cap its share of the organization's limits under [Settings > Workspaces](/settings/workspaces).
+- It is the only workspace that supports per-user monthly spend limits.
+
+<Warning>
+Archiving the Claude Code workspace disables Claude Code sign-in through Console billing for the whole organization.
+</Warning>
 
 ## Workspace roles and permissions
 
@@ -110,7 +125,7 @@ To archive a workspace, click the ellipsis menu (**...**) and select **Archive**
 - Cannot be undone
 
 <Warning>
-Archiving a workspace immediately revokes all API keys in that workspace. This action cannot be undone.
+Archiving a workspace immediately revokes all API keys in that workspace. This action cannot be undone. If you archive the [Claude Code workspace](#claude-code-workspace), members of your organization can no longer sign in to Claude Code through Console billing.
 </Warning>
 
 ### Using the Admin API
@@ -257,7 +272,7 @@ Create workspaces for specific projects or products to track usage and costs sep
     Consider how you'll organize workspaces before creating them. Think about billing, access control, and usage tracking needs.
   </Step>
   <Step title="Use meaningful names">
-    Name workspaces clearly to indicate their purpose (e.g., "Production - Customer Chatbot", "Dev - Internal Tools").
+    Name workspaces clearly to indicate their purpose (for example, "Production - Customer Chatbot", "Dev - Internal Tools").
   </Step>
   <Step title="Set appropriate limits">
     Configure spend and rate limits to prevent unexpected costs and ensure fair resource distribution.
@@ -278,9 +293,15 @@ Every organization has a "Default Workspace" that cannot be edited, renamed, or 
 
 </section>
 
+<section title="What's the Claude Code workspace?">
+
+Anthropic creates the Claude Code workspace automatically the first time a member of your organization signs in to Claude Code with their Console account. It isolates Claude Code's API keys, usage, and rate limits from your other workloads. See [Claude Code workspace](#claude-code-workspace) for details.
+
+</section>
+
 <section title="Are there limits on workspaces?">
 
-Yes, you can have a maximum of 100 workspaces per organization. Archived workspaces do not count towards this limit.
+Yes, you can have a maximum of 100 workspaces per organization. Archived workspaces do not count toward this limit.
 
 </section>
 
@@ -310,7 +331,7 @@ If an organization admin or billing member is demoted to user or developer, they
 
 <section title="What happens to API keys when a user is removed from a workspace?">
 
-API keys persist in their current state as they are scoped to the organization and workspace, not to individual users.
+API keys persist in their current state as they are scoped to the organization and workspace, not to individual users. The exception is the [Claude Code workspace](#claude-code-workspace), where each key is bound to the member who created it and stops working when that member is removed.
 
 </section>
 

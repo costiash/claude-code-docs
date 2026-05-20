@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-20T16:28:50Z",
-  "indexed_files": 1382,
+  "generated_at": "2026-05-20T19:08:45Z",
+  "indexed_files": 1383,
   "index": {
     "/changelog": {
       "title": "Claude Code Changelog",
@@ -35950,23 +35950,23 @@
         "api",
         "workspaces",
         "limits",
+        "claude",
+        "billing",
+        "code",
         "admin",
         "access",
-        "billing",
         "step",
+        "keys",
         "members",
         "title",
-        "role",
-        "keys",
-        "note",
         "section",
+        "role",
         "create",
-        "cannot",
-        "roles",
+        "note",
         "usage",
-        "rate"
+        "cannot"
       ],
-      "word_count": 1718,
+      "word_count": 1979,
       "file_path": "docs/docs__en__manage-claude__workspaces.md"
     },
     "/docs/en/managed-agents/agent-setup": {
@@ -35994,7 +35994,7 @@
         "mcp",
         "skills"
       ],
-      "word_count": 1486,
+      "word_count": 1484,
       "file_path": "docs/docs__en__managed-agents__agent-setup.md"
     },
     "/docs/en/managed-agents/cloud-containers": {
@@ -36106,7 +36106,7 @@
         "package",
         "mcp"
       ],
-      "word_count": 1736,
+      "word_count": 1750,
       "file_path": "docs/docs__en__managed-agents__environments.md"
     },
     "/docs/en/managed-agents/events-and-streaming": {
@@ -36162,7 +36162,7 @@
         "automatically",
         "path"
       ],
-      "word_count": 1763,
+      "word_count": 1779,
       "file_path": "docs/docs__en__managed-agents__files.md"
     },
     "/docs/en/managed-agents/github": {
@@ -36190,7 +36190,7 @@
         "note",
         "api"
       ],
-      "word_count": 1972,
+      "word_count": 1982,
       "file_path": "docs/docs__en__managed-agents__github.md"
     },
     "/docs/en/managed-agents/mcp-connector": {
@@ -36218,7 +36218,7 @@
         "http",
         "access"
       ],
-      "word_count": 1374,
+      "word_count": 1372,
       "file_path": "docs/docs__en__managed-agents__mcp-connector.md"
     },
     "/docs/en/managed-agents/memory": {
@@ -36246,35 +36246,35 @@
         "schema",
         "version"
       ],
-      "word_count": 3722,
+      "word_count": 3748,
       "file_path": "docs/docs__en__managed-agents__memory.md"
     },
     "/docs/en/managed-agents/multi-agent": {
       "title": "Multiagent sessions",
-      "content_preview": "# Multiagent sessions  Coordinate multiple agents within a single session.  ---  Multi-agent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel wi...",
+      "content_preview": "# Multiagent sessions  Coordinate multiple agents within a single session.  ---  Multiagent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel wit...",
       "keywords": [
-        "agent",
         "thread",
-        "session",
-        "coordinator",
-        "codegroup",
+        "agent",
         "agents",
-        "threads",
-        "activity",
-        "events",
-        "tool",
-        "primary",
-        "tab",
+        "session",
+        "codegroup",
+        "servers",
+        "coordinator",
+        "mcp",
         "multiagent",
-        "multiple",
-        "work",
-        "stream",
         "own",
-        "note",
-        "event",
-        "when"
+        "work",
+        "vault",
+        "primary",
+        "tools",
+        "events",
+        "tab",
+        "status",
+        "tool",
+        "sessions",
+        "multiple"
       ],
-      "word_count": 3032,
+      "word_count": 3823,
       "file_path": "docs/docs__en__managed-agents__multi-agent.md"
     },
     "/docs/en/managed-agents/onboarding": {
@@ -36319,7 +36319,6 @@
         "title",
         "access",
         "tools",
-        "beta",
         "built",
         "running",
         "api",
@@ -36328,7 +36327,8 @@
         "execution",
         "environment",
         "session",
-        "create"
+        "create",
+        "sessions"
       ],
       "word_count": 817,
       "file_path": "docs/docs__en__managed-agents__overview.md"
@@ -36358,7 +36358,7 @@
         "execute",
         "automatically"
       ],
-      "word_count": 1992,
+      "word_count": 1994,
       "file_path": "docs/docs__en__managed-agents__permission-policies.md"
     },
     "/docs/en/managed-agents/quickstart": {
@@ -36386,7 +36386,7 @@
         "icon",
         "href"
       ],
-      "word_count": 2359,
+      "word_count": 2361,
       "file_path": "docs/docs__en__managed-agents__quickstart.md"
     },
     "/docs/en/managed-agents/self-hosted-sandboxes-security": {
@@ -36498,7 +36498,7 @@
         "best",
         "practices"
       ],
-      "word_count": 625,
+      "word_count": 627,
       "file_path": "docs/docs__en__managed-agents__skills.md"
     },
     "/docs/en/managed-agents/tools": {
@@ -36526,7 +36526,7 @@
         "web",
         "full"
       ],
-      "word_count": 1480,
+      "word_count": 1482,
       "file_path": "docs/docs__en__managed-agents__tools.md"
     },
     "/docs/en/managed-agents/vaults": {
@@ -36538,23 +36538,23 @@
         "server",
         "credentials",
         "refresh",
+        "mcp",
         "vaults",
         "user",
+        "sessions",
         "codegroup",
         "token",
         "when",
-        "sessions",
         "session",
         "secret",
+        "agent",
         "note",
-        "mcp",
         "error",
         "archived",
         "them",
-        "end",
-        "agent"
+        "own"
       ],
-      "word_count": 2221,
+      "word_count": 2252,
       "file_path": "docs/docs__en__managed-agents__vaults.md"
     },
     "/docs/en/managed-agents/webhooks": {
@@ -36584,6 +36584,34 @@
       ],
       "word_count": 1371,
       "file_path": "docs/docs__en__managed-agents__webhooks.md"
+    },
+    "/docs/en/prompt-library": {
+      "title": "Prompting best practices",
+      "content_preview": "# Prompting best practices  Comprehensive guide to prompt engineering techniques for Claude's latest models, covering clarity, examples, XML structuring, thinking, and agentic systems.  ---  This is t...",
+      "keywords": [
+        "claude",
+        "thinking",
+        "opus",
+        "more",
+        "models",
+        "model",
+        "effort",
+        "context",
+        "prompt",
+        "when",
+        "than",
+        "tool",
+        "like",
+        "section",
+        "output",
+        "may",
+        "coding",
+        "behavior",
+        "using",
+        "prompts"
+      ],
+      "word_count": 8793,
+      "file_path": "docs/docs__en__prompt-library.md"
     },
     "/docs/en/resources/prompt-library/adaptive-editor": {
       "title": "Adaptive editor",
