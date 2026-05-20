@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-20T13:14:26Z",
+  "generated_at": "2026-05-20T16:28:50Z",
   "indexed_files": 1382,
   "index": {
     "/changelog": {
@@ -97,22 +97,22 @@
         "claude",
         "session",
         "changes",
+        "rewind",
         "message",
         "file",
         "checkpoints",
-        "rewind",
         "keeping",
         "here",
         "summary",
         "selected",
         "before",
-        "point",
-        "restore",
-        "while",
-        "compress",
-        "intact"
+        "prompt",
+        "after",
+        "input",
+        "history",
+        "point"
       ],
-      "word_count": 776,
+      "word_count": 816,
       "file_path": "docs/claude-code__checkpointing.md"
     },
     "/claude-code/claude-code-on-the-web": {
@@ -485,26 +485,26 @@
       "keywords": [
         "claude",
         "line",
+        "code",
         "mode",
         "command",
-        "code",
+        "input",
         "commands",
         "press",
-        "input",
+        "prompt",
         "history",
         "terminal",
-        "prompt",
         "background",
         "session",
         "cursor",
+        "text",
+        "when",
         "conversation",
         "search",
-        "text",
         "previous",
-        "word",
-        "normal"
+        "word"
       ],
-      "word_count": 3266,
+      "word_count": 3315,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -827,20 +827,20 @@
         "code",
         "marketplaces",
         "see",
+        "directory",
         "claude",
         "add",
         "url",
-        "directory",
-        "paths",
         "version",
+        "paths",
         "github",
         "repository",
-        "users",
-        "seed",
         "when",
-        "sources"
+        "users",
+        "path",
+        "seed"
       ],
-      "word_count": 6032,
+      "word_count": 6096,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
