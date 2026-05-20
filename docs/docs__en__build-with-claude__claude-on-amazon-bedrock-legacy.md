@@ -54,14 +54,14 @@ go get github.com/anthropics/anthropic-sdk-go/bedrock
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-bedrock:2.32.0")
+implementation("com.anthropic:anthropic-java-bedrock:2.33.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.32.0</version>
+    <version>2.33.0</version>
 </dependency>
 ```
 
@@ -148,7 +148,7 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/
 | Claude Haiku 4.5 | anthropic.claude-haiku-4-5-20251001-v1:0 | Yes | Yes | Yes | No | No |
 | Claude Haiku 3.5 <br /><small>Deprecated. Retiring June 19, 2026.</small> | anthropic.claude-3-5-haiku-20241022-v1:0 | No | Yes | No | No | No |
 
-For more information about regional vs global model IDs, see the [Global vs regional endpoints](#global-vs-regional-endpoints) section below.
+For more information about regional vs global model IDs, see the [Global vs regional endpoints](#global-vs-regional-endpoints) section.
 
 ### List available models
 
@@ -636,7 +636,7 @@ client.messages().create(params).content().stream()
 
 Bedrock provides an [invocation logging service](https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html) that allows customers to log the prompts and completions associated with your usage.
 
-Anthropic recommends that you log your activity on at least a 30-day rolling basis in order to understand your activity and investigate any potential misuse.
+Anthropic recommends that you log your activity on at least a 30-day rolling basis to understand your activity and investigate any potential misuse.
 
 <Note>
 Turning on this service does not give AWS or Anthropic any access to your content.

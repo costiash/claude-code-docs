@@ -327,7 +327,7 @@ main().catch(console.error);
             }
 
             dependencies {
-                implementation("com.anthropic:anthropic-java:2.32.0")
+                implementation("com.anthropic:anthropic-java:2.33.0")
             }
 
             application {
@@ -352,7 +352,7 @@ main().catch(console.error);
                 <dependency>
                   <groupId>com.anthropic</groupId>
                   <artifactId>anthropic-java</artifactId>
-                  <version>2.32.0</version>
+                  <version>2.33.0</version>
                 </dependency>
               </dependencies>
             </project>
