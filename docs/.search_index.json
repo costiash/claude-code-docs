@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-20T21:52:11Z",
+  "generated_at": "2026-05-21T01:10:55Z",
   "indexed_files": 1383,
   "index": {
     "/changelog": {
@@ -280,7 +280,7 @@
         "see",
         "available"
       ],
-      "word_count": 8439,
+      "word_count": 8478,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -476,7 +476,7 @@
         "prompt",
         "context"
       ],
-      "word_count": 20060,
+      "word_count": 20061,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -1472,10 +1472,10 @@
         "proxy",
         "network",
         "cloudflare",
+        "api",
         "certificate",
         "agents",
         "servers",
-        "api",
         "transport",
         "tools",
         "request",
@@ -1484,7 +1484,7 @@
         "icon",
         "href"
       ],
-      "word_count": 1470,
+      "word_count": 1468,
       "file_path": "docs/docs__en__agents-and-tools__mcp-tunnels__overview.md"
     },
     "/docs/en/agents-and-tools/mcp-tunnels/quickstart": {
@@ -2287,16 +2287,16 @@
         "when",
         "tools",
         "fetched",
-        "only",
+        "available",
         "documents",
         "dynamic",
-        "available",
+        "only",
         "data",
         "results",
         "url",
         "citations"
       ],
-      "word_count": 2528,
+      "word_count": 2529,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__web-fetch-tool.md"
     },
     "/docs/en/agents-and-tools/tool-use/web-search-tool": {

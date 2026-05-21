@@ -7,8 +7,10 @@ Securely connect Claude to MCP servers running in your private network without o
 MCP tunnels let you connect Claude to Model Context Protocol (MCP) servers that run inside your private network. Traffic flows over an outbound-only connection, so you don't need to open inbound firewall ports, expose services to the public internet, or allowlist Anthropic's IP ranges on your origin.
 
 <Note>
-  MCP tunnels is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it. It is provided "as-is" without any uptime, support, or continuity commitment, and it depends on a third-party network provider (Cloudflare) that makes no availability commitment for the underlying transport. Anthropic may modify or discontinue MCP tunnels at any time.
+  MCP tunnels are in beta (research preview). [Request access](https://claude.com/form/claude-managed-agents) to try them. They are provided "as-is" without any uptime, support, or continuity commitment, and they depend on a third-party network provider (Cloudflare) that makes no availability commitment for the underlying transport. Anthropic may modify or discontinue MCP tunnels at any time.
 </Note>
+
+For Zero Data Retention and HIPAA BAA eligibility, see [API and data retention](/docs/en/manage-claude/api-and-data-retention#feature-eligibility).
 
 ## How it works
 
@@ -78,7 +80,7 @@ Cloudflare provides the outbound transport. It cannot read MCP request or respon
 - connection timing and byte-volume
 - the `*.tunnel.anthropic.com` subdomain assigned to your tunnel
 
-Anthropic's agreement with Cloudflare restricts Cloudflare's use of this telemetry. Cloudflare acts as a subprocessor for this Research Preview and will be listed as a subprocessor in the event this service becomes generally available.
+Anthropic's agreement with Cloudflare restricts Cloudflare's use of this telemetry. Cloudflare acts as a subprocessor for this research preview.
 
 ## Deploy a tunnel
 
