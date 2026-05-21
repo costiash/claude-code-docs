@@ -684,10 +684,7 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
   
 ````php
 // Open the stream first, then send the user message
-$stream = $client->beta->sessions->events->streamStream(
-    $session->id,
-    requestOptions: ['transporter' => $streamingClient],
-);
+$stream = $client->beta->sessions->events->streamStream($session->id);
 $client->beta->sessions->events->send(
     $session->id,
     events: [
@@ -939,10 +936,7 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
 
   
 ````php
-$stream = $client->beta->sessions->events->streamStream(
-    $session->id,
-    requestOptions: ['transporter' => $streamingClient],
-);
+$stream = $client->beta->sessions->events->streamStream($session->id);
 
 // Stream is open and buffering. List history before tailing live.
 $seenEventIds = [];
@@ -1425,10 +1419,7 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
 
   
 ````php
-$stream = $client->beta->sessions->events->streamStream(
-    $session->id,
-    requestOptions: ['transporter' => $streamingClient],
-);
+$stream = $client->beta->sessions->events->streamStream($session->id);
 
 foreach ($stream as $event) {
     if ($event->type === 'session.status_idle' && $event->stopReason) {
@@ -1686,10 +1677,7 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
 
   
 ````php
-$stream = $client->beta->sessions->events->streamStream(
-    $session->id,
-    requestOptions: ['transporter' => $streamingClient],
-);
+$stream = $client->beta->sessions->events->streamStream($session->id);
 
 foreach ($stream as $event) {
     if ($event->type === 'session.status_idle' && $event->stopReason) {

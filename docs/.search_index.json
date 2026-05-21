@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-21T01:10:55Z",
+  "generated_at": "2026-05-21T04:48:46Z",
   "indexed_files": 1383,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "file",
         "terminal"
       ],
-      "word_count": 47215,
+      "word_count": 47460,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -439,16 +439,16 @@
         "file",
         "json",
         "call",
+        "permission",
         "run",
         "example",
-        "permission",
         "input",
-        "script",
         "only",
+        "script",
         "exit",
         "settings"
       ],
-      "word_count": 6382,
+      "word_count": 6409,
       "file_path": "docs/claude-code__hooks-guide.md"
     },
     "/claude-code/hooks": {
@@ -465,18 +465,18 @@
         "input",
         "json",
         "fields",
-        "file",
         "only",
+        "file",
         "session",
         "event",
-        "command",
         "output",
+        "command",
+        "prompt",
         "user",
         "runs",
-        "prompt",
         "context"
       ],
-      "word_count": 20061,
+      "word_count": 20295,
       "file_path": "docs/claude-code__hooks.md"
     },
     "/claude-code/interactive-mode": {
@@ -1008,7 +1008,7 @@
         "repo",
         "com"
       ],
-      "word_count": 9727,
+      "word_count": 10021,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1797,30 +1797,30 @@
     },
     "/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming": {
       "title": "Fine-grained tool streaming",
-      "content_preview": "# Fine-grained tool streaming  Stream tool inputs character-by-character for latency-sensitive applications.  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this",
+      "content_preview": "# Fine-grained tool streaming  Stream tool inputs without server-side JSON buffering for latency-sensitive applications.  ---  <Note> This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/...",
       "keywords": [
         "tool",
         "streaming",
+        "json",
         "fine",
         "grained",
-        "json",
-        "stream",
         "when",
         "invalid",
+        "stream",
+        "without",
         "note",
+        "example",
+        "input",
         "string",
         "card",
+        "buffering",
         "parameter",
-        "without",
         "may",
+        "block",
         "object",
-        "warning",
-        "claude",
-        "example",
-        "codegroup",
-        "block"
+        "warning"
       ],
-      "word_count": 1318,
+      "word_count": 2745,
       "file_path": "docs/docs__en__agents-and-tools__tool-use__fine-grained-tool-streaming.md"
     },
     "/docs/en/agents-and-tools/tool-use/handle-tool-calls": {
@@ -36134,7 +36134,7 @@
         "only",
         "result"
       ],
-      "word_count": 5353,
+      "word_count": 5329,
       "file_path": "docs/docs__en__managed-agents__events-and-streaming.md"
     },
     "/docs/en/managed-agents/files": {
