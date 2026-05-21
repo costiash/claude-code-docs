@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-05-21T18:42:27.866802Z",
-    "total_paths": 1679,
+    "generated_at": "2026-05-21T21:34:17.366241Z",
+    "total_paths": 1680,
     "source": "sitemap_discovery",
-    "last_regenerated": "2026-05-21T18:42:27.866809Z"
+    "last_regenerated": "2026-05-21T21:34:17.366249Z"
   },
   "categories": {
     "core_documentation": [
@@ -160,6 +160,7 @@
       "/docs/en/managed-agents/tools",
       "/docs/en/managed-agents/vaults",
       "/docs/en/managed-agents/webhooks",
+      "/docs/en/managed-mcp",
       "/docs/en/permission-modes",
       "/docs/en/permissions",
       "/docs/en/platforms",

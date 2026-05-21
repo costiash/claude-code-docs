@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-21T18:59:26Z",
+  "generated_at": "2026-05-21T21:50:04Z",
   "indexed_files": 1383,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "file",
         "terminal"
       ],
-      "word_count": 47460,
+      "word_count": 47865,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -280,7 +280,7 @@
         "see",
         "available"
       ],
-      "word_count": 8478,
+      "word_count": 8461,
       "file_path": "docs/claude-code__desktop.md"
     },
     "/claude-code/devcontainer": {
@@ -597,26 +597,26 @@
       "keywords": [
         "server",
         "mcp",
-        "servers",
         "claude",
+        "servers",
         "code",
-        "when",
         "step",
         "tools",
-        "command",
+        "when",
         "tool",
         "title",
-        "add",
-        "name",
-        "url",
         "plugin",
         "environment",
         "project",
-        "example",
+        "add",
         "configuration",
-        "any"
+        "steps",
+        "set",
+        "available",
+        "same",
+        "variable"
       ],
-      "word_count": 7426,
+      "word_count": 6244,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
