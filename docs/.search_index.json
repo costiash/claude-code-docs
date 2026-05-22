@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-22T01:08:24Z",
+  "generated_at": "2026-05-22T04:45:05Z",
   "indexed_files": 1383,
   "index": {
     "/changelog": {
@@ -28,7 +28,7 @@
         "file",
         "terminal"
       ],
-      "word_count": 47834,
+      "word_count": 47856,
       "file_path": "docs/changelog.md"
     },
     "/claude-code/amazon-bedrock": {
@@ -498,13 +498,13 @@
         "session",
         "cursor",
         "text",
+        "previous",
         "when",
         "conversation",
         "search",
-        "previous",
         "word"
       ],
-      "word_count": 3315,
+      "word_count": 3337,
       "file_path": "docs/claude-code__interactive-mode.md"
     },
     "/claude-code/jetbrains": {
@@ -602,21 +602,21 @@
         "code",
         "step",
         "tools",
-        "when",
         "tool",
+        "when",
         "title",
-        "plugin",
         "environment",
+        "plugin",
         "project",
         "add",
         "configuration",
-        "steps",
         "set",
-        "available",
-        "same",
-        "variable"
+        "only",
+        "steps",
+        "variable",
+        "available"
       ],
-      "word_count": 6244,
+      "word_count": 6335,
       "file_path": "docs/claude-code__mcp.md"
     },
     "/claude-code/memory": {
@@ -680,8 +680,8 @@
       "content_preview": "> ## Documentation Index > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt > Use this file to discover all available pages before exploring further.  # Model configura...",
       "keywords": [
         "model",
-        "when",
         "set",
+        "when",
         "opus",
         "claude",
         "code",
@@ -700,7 +700,7 @@
         "session",
         "which"
       ],
-      "word_count": 3814,
+      "word_count": 3825,
       "file_path": "docs/claude-code__model-config.md"
     },
     "/claude-code/monitoring-usage": {
@@ -840,7 +840,7 @@
         "path",
         "seed"
       ],
-      "word_count": 6096,
+      "word_count": 6099,
       "file_path": "docs/claude-code__plugin-marketplaces.md"
     },
     "/claude-code/plugins-reference": {
@@ -1008,7 +1008,7 @@
         "repo",
         "com"
       ],
-      "word_count": 10021,
+      "word_count": 10072,
       "file_path": "docs/claude-code__settings.md"
     },
     "/claude-code/setup": {
@@ -1022,21 +1022,21 @@
         "title",
         "install",
         "powershell",
-        "run",
         "linux",
-        "wsl",
         "tabs",
-        "installation",
+        "run",
         "version",
         "see",
+        "wsl",
         "package",
+        "installation",
         "updates",
-        "native",
-        "git",
         "step",
-        "channel"
+        "channel",
+        "native",
+        "upgrade"
       ],
-      "word_count": 3001,
+      "word_count": 2977,
       "file_path": "docs/claude-code__setup.md"
     },
     "/claude-code/skills": {
